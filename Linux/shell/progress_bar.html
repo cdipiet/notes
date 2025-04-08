@@ -5,7 +5,7 @@
         <meta name="generator" content="markdown-it" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
         <meta name="author" content="runner" />
-        <meta name="dcterms.date" content="2025-04-08 13:38:19.862" />
+        <meta name="dcterms.date" content="2025-04-08 13:44:53.203" />
         <title>progress_bar</title>
         <style type="text/css">
             code {
@@ -238,7 +238,7 @@
     <body></body>
 </html>
 <h1 id="progress_bar" tabindex="-1">progress_bar <a class="header-anchor" href="#progress_bar" aria-hidden="true">🔗</a></h1>
-<p class="code">2025-04-08 13:38:19.862</p>
+<p class="code">2025-04-08 13:44:53.203</p>
 <nav class="table-of-contents"><ol><li><a href="#progress-bars-processing-with-awk-(and-stdbuf)">Progress bars processing with awk (and stdbuf) </a><ol><li><a href="#processing-single-line-progress-outputs">Processing single-line progress outputs </a></li><li><a href="#working-around-the-buffering">Working around the buffering </a></li><li><a href="#streams-processing">Streams processing </a></li><li><a href="#putting-things-together">Putting things together </a></li></ol></li></ol></nav><h1 id="progress-bar" tabindex="-1">Progress Bar <a class="header-anchor" href="#progress-bar" aria-hidden="true">🔗</a></h1>
 <pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">p</span></span>(){ c=$(($(tput cols)-<span class="hljs-number">3</span>));j=$((<span class="hljs-variable">$1</span>*c/<span class="hljs-number">100</span>)); tput sc;<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;[<span class="hljs-subst">$(for((k=0;k&lt;j;k++)</span>);do printf &quot;</span>=<span class="hljs-string">&quot;;done;)&gt;&quot;</span>;tput cuf $((c-j));<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;]&quot;</span>;tput rc; };<span class="hljs-keyword">for</span>((i=<span class="hljs-number">0</span>; i&lt;=<span class="hljs-number">100</span>; i++));<span class="hljs-keyword">do</span> p i;<span class="hljs-keyword">done</span>;<span class="hljs-built_in">echo</span>
 </code></pre>
