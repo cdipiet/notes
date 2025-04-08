@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.134" />
+        <title>pamac</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pamac" tabindex="-1">pamac <a class="header-anchor" href="#pamac" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.134</p>
+<nav class="table-of-contents"><ol><li><a href="#upgrade">Upgrade </a></li><li><a href="#search">Search </a><ol><li><a href="#ricerca-generica-nei-repository-manjaro">Ricerca generica nei repository Manjaro </a></li><li><a href="#ricerca-anche-nei-repository-aur">Ricerca anche nei repository AUR </a></li><li><a href="#ricerca-tramite-file">Ricerca tramite file </a></li></ol></li><li><a href="#install---remove---build">Install - Remove - Build </a></li><li><a href="#info">Info </a></li><li><a href="#fallimento-di-una-build-a-causa-del-pkgbuild-nel-repository-che-contiene-un-checksum-non-aggiornato">Fallimento di una build a causa del PKGBUILD nel repository che contiene un checksum non aggiornato </a><ol><li><a href="#l'installazione-va-in-errore">L&#39;installazione va in errore </a></li><li><a href="#dove-si-trova-la-directory-di-build">Dove si trova la directory di build </a></li><li><a href="#calcolare-il-checksum-corretto">Calcolare il checksum corretto </a></li><li><a href="#correggere-il-checksum-con-sed">Correggere il checksum con sed </a></li><li><a href="#rieseguire-la-build">Rieseguire la build </a></li></ol></li><li><a href="#errore-chiave-pgp">Errore chiave PGP </a></li><li><a href="#errore-unacceptable-tls-certificate">Errore Unacceptable TLS certificate </a></li><li><a href="#abilitare-snap-e-flatpak">Abilitare Snap e Flatpak </a></li></ol></nav><h1 id="pamac---installa-anche-da-repository-aur" tabindex="-1">pamac - installa anche da repository AUR <a class="header-anchor" href="#pamac---installa-anche-da-repository-aur" aria-hidden="true">🔗</a></h1>
+<p>E' un package manager più evoluto di pacman ed è proprietario di Manjaro.</p>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/Pamac#Locating_and_Installing_Packages">https://wiki.manjaro.org/index.php/Pamac#Locating_and_Installing_Packages</a></li>
+</ul>
+<p>E' il package manager di Manjaro:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Reset DB dei pacchetti</span>
+pacman
+-u, --sysupgrade     aggiorna i pacchetti installati (-uu abilita i downgrade)
+-y --refresh        scarica il database aggiornato dei pacchetti dal server
+                    (-yy per forzare un aggiornamento anche se il database è già aggiornato)
+<span class="hljs-built_in">sudo</span>
+ -E, --preserve-env
+               Indicates to the security policy that the user wishes to preserve their existing environment variables.
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/lib/pacman/sync
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/lib/pacman/db.lck
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/tmp/pamac/dbs/sync/*
+$ pamac update -a
+$ pamac clean --no-confirm
+$ <span class="hljs-built_in">sudo</span> -E pacman -Syyu
+
+$ <span class="hljs-built_in">alias</span> pu=<span class="hljs-string">&#x27;sudo bash -c &quot;yes s |  pamac update -a --no-confirm &amp;&amp; pamac clean --no-confirm&quot;&#x27;</span>
+
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm pamac-gtk
+$ man pamac
+        pamac build [options] [package(s)]
+           --builddir &lt;<span class="hljs-built_in">dir</span>&gt;
+               build directory, <span class="hljs-keyword">if</span> no directory is given the one specified <span class="hljs-keyword">in</span> pamac.conf file is used
+$ man pamac.conf
+$ grep BuildDirectory /etc/pamac.conf
+    BuildDirectory = /var/tmp
+<span class="hljs-comment"># La BuildDirectory serve se si deve aggiornare il checksum PKGBUILD, cosa che succede spesso</span>
+</code></pre>
+<h2 id="upgrade" tabindex="-1">Upgrade <a class="header-anchor" href="#upgrade" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Upgrade del Sistema</span>
+$ pamac update -a
+$ pamac clean --no-confirm
+$ <span class="hljs-built_in">sudo</span> -E pacman -Syyu
+<span class="hljs-comment"># Upgrade pacchetti AUR</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;yes s | pamac upgrade -a&quot;</span>                   <span class="hljs-comment"># aggiorna il sistema, locale italiano</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;yes | LC_ALL=en_US.UTF-8 pamac upgrade -a&quot;</span>  <span class="hljs-comment"># aggiorna il sistema, locale inglese</span>
+<span class="hljs-comment"># Clean the Cache</span>
+$ <span class="hljs-built_in">sudo</span> pamac clean      <span class="hljs-comment"># pulisce la cache</span>
+
+
+$ pamac checkupdates -a <span class="hljs-comment"># controllo aggiornamenti</span>
+$ pamac search -a amdgpu-pro-oglp
+<span class="hljs-comment"># Installazione</span>
+$ pamac build amdgpu-pro-oglp
+<span class="hljs-comment"># Aggiornamento</span>
+$ pamac upgrade amdgpu-pro-oglp
+</code></pre>
+<h2 id="search" tabindex="-1">Search <a class="header-anchor" href="#search" aria-hidden="true">🔗</a></h2>
+<pre><code>--installed, -i only search for installed packages
+--repos, -r     only search for packages in repositories
+--aur, -a       also search in AUR
+--files, -f     search for packages which own the given filenames (filenames can be partial)
+</code></pre>
+<h3 id="ricerca-generica-nei-repository-manjaro" tabindex="-1">Ricerca generica nei repository Manjaro <a class="header-anchor" href="#ricerca-generica-nei-repository-manjaro" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ pamac search ipython                  <span class="hljs-comment"># aggiungendo -a cerca anche in AUR</span>
+</code></pre>
+<h3 id="ricerca-anche-nei-repository-aur" tabindex="-1">Ricerca anche nei repository AUR <a class="header-anchor" href="#ricerca-anche-nei-repository-aur" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ pamac search -a visual-studio-code-bin
+$ pamac info -a visual-studio-code-bin  <span class="hljs-comment"># -a per i pacchetti AUR</span>
+</code></pre>
+<h3 id="ricerca-tramite-file" tabindex="-1">Ricerca tramite file <a class="header-anchor" href="#ricerca-tramite-file" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ pamac search -f <span class="hljs-string">&quot;/usr/bin/trust&quot;</span>
+/usr/bin/trust è di proprietà di p11-kit
+$ pamac search -f /usr/bin/python       <span class="hljs-comment"># cerca il pacchetto dal file</span>
+</code></pre>
+<h2 id="install---remove---build" tabindex="-1">Install - Remove - Build <a class="header-anchor" href="#install---remove---build" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Install</span>
+$ pamac install ipython       <span class="hljs-comment"># installa dai repository Manjaro</span>
+<span class="hljs-comment"># Remove</span>
+$ pamac remove ipython
+<span class="hljs-comment"># Remove orfani</span>
+$ pamac remove -o
+<span class="hljs-comment"># Build</span>
+$ pamac build &lt;pacchettoAUR&gt;  <span class="hljs-comment"># installa da repository AUR</span>
+</code></pre>
+<h2 id="info" tabindex="-1">Info <a class="header-anchor" href="#info" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pamac info ipython
+$ pamac info -a visual-studio-code-bin  <span class="hljs-comment"># -a per i pacchetti AUR</span>
+$ pamac list -f mc                      <span class="hljs-comment"># Elenco dei file contenuti in un pacchetto</span>
+$ pamac list -i                         <span class="hljs-comment"># pacchetti installati</span>
+<span class="hljs-comment"># Pacchetti orfani</span>
+$ pamac list -o                   
+$ pamac remove -o
+</code></pre>
+<h2 id="fallimento-di-una-build-a-causa-del-pkgbuild-nel-repository-che-contiene-un-checksum-non-aggiornato" tabindex="-1">Fallimento di una build a causa del PKGBUILD nel repository che contiene un checksum non aggiornato <a class="header-anchor" href="#fallimento-di-una-build-a-causa-del-pkgbuild-nel-repository-che-contiene-un-checksum-non-aggiornato" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/makepkg">https://wiki.archlinux.org/title/makepkg</a></li>
+<li><a href="https://wiki.archlinux.org/title/PKGBUILD">https://wiki.archlinux.org/title/PKGBUILD</a></li>
+<li><a href="https://aur.archlinux.org/packages/virtualbox-ext-oracle">https://aur.archlinux.org/packages/virtualbox-ext-oracle</a></li>
+<li><a href="https://download.virtualbox.org/virtualbox/7.0.6/Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack">https://download.virtualbox.org/virtualbox/7.0.6/Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack</a></li>
+<li><a href="https://download.virtualbox.org/virtualbox/7.0.6/SHA256SUMS">https://download.virtualbox.org/virtualbox/7.0.6/SHA256SUMS</a></li>
+</ul>
+<p>Installando il pacchetto si capisce che la build fallisce a causa del checksum non aggiornato:</p>
+<h3 id="l'installazione-va-in-errore" tabindex="-1">L'installazione va in errore <a class="header-anchor" href="#l'installazione-va-in-errore" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ pamac build virtualbox-ext-oracle
+==&gt; Download dei sorgenti <span class="hljs-keyword">in</span> corso...
+  -&gt; Download di Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack <span class="hljs-keyword">in</span> corso...
+==&gt; Validazione di <span class="hljs-built_in">source</span> file con sha256sums...
+    Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack ... NON RIUSCITO
+==&gt; ERRORE: Uno o più file non hanno superato il controllo di validità!
+</code></pre>
+<h3 id="dove-si-trova-la-directory-di-build" tabindex="-1">Dove si trova la directory di build <a class="header-anchor" href="#dove-si-trova-la-directory-di-build" aria-hidden="true">🔗</a></h3>
+<p>Non c'e' bisogno di scaricare il file per calcolarne il checksum, basta andare nella directory di build:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># pamac build [options] [package(s)]</span>
+<span class="hljs-comment">#     --builddir &lt;dir&gt;</span>
+<span class="hljs-comment">#         build directory, if no directory is given the one specified in pamac.conf file is used</span>
+$ grep BuildDirectory /etc/pamac.conf
+    BuildDirectory = /var/tmp
+<span class="hljs-comment"># La BuildDirectory serve se si deve aggiornare il checksum PKGBUILD, cosa che succede spesso</span>
+</code></pre>
+<h3 id="calcolare-il-checksum-corretto" tabindex="-1">Calcolare il checksum corretto <a class="header-anchor" href="#calcolare-il-checksum-corretto" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> /var/tmp/pamac-build-<span class="hljs-variable">$USER</span>/virtualbox-ext-oracle
+$ <span class="hljs-built_in">sha256sum</span> Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack
+    292961aa8723b54f96f89f6d8abf7d8e29259d94b7de831dbffb9ae15d346434  Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack
+<span class="hljs-comment"># Oppure:</span>
+$ makepkg -g
+==&gt; Download dei sorgenti <span class="hljs-keyword">in</span> corso...
+  -&gt; È stato trovato Oracle_VM_VirtualBox_Extension_Pack-7.0.6.vbox-extpack
+==&gt; Generazione dei controlli dell<span class="hljs-string">&#x27;integrità dei sorgenti in corso...
+sha256sums=(&#x27;</span>292961aa8723b54f96f89f6d8abf7d8e29259d94b7de831dbffb9ae15d346434<span class="hljs-string">&#x27;)
+</span></code></pre>
+<h3 id="correggere-il-checksum-con-sed" tabindex="-1">Correggere il checksum con sed <a class="header-anchor" href="#correggere-il-checksum-con-sed" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Per testare l&#x27;espressione regolare:</span>
+$ <span class="hljs-built_in">cat</span> PKGBUILD | sed <span class="hljs-string">&quot;s/^sha256sums=.*$/<span class="hljs-variable">$sums</span>/&quot;</span>
+$ <span class="hljs-built_in">cat</span> PKGBUILD | sed <span class="hljs-string">&quot;s/^sha256sums=.*$/<span class="hljs-variable">$sums</span>/&quot;</span> &gt; PKGBUILD.<span class="hljs-built_in">test</span>
+$ code -d PKGBUILD PKGBUILD.<span class="hljs-built_in">test</span>
+
+<span class="hljs-function"><span class="hljs-title">mg</span></span>() {
+        <span class="hljs-keyword">if</span> [ ! -f ./PKGBUILD ]; <span class="hljs-keyword">then</span>
+                <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;No PKGBUILD in `pwd`&quot;</span>
+                <span class="hljs-built_in">return</span> 1
+        <span class="hljs-keyword">fi</span>
+
+        <span class="hljs-built_in">local</span> sums
+        <span class="hljs-comment"># calculate new checksums</span>
+        sums=$(makepkg -g)
+        <span class="hljs-comment"># replace them in-place</span>
+        sed -i <span class="hljs-string">&quot;s/^sha256sums=.*$/<span class="hljs-variable">$sums</span>/&quot;</span> PKGBUILD
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;PKGBUILD updated&quot;</span>
+}
+
+</code></pre>
+<h3 id="rieseguire-la-build" tabindex="-1">Rieseguire la build <a class="header-anchor" href="#rieseguire-la-build" aria-hidden="true">🔗</a></h3>
+<p>Rieseguiamo la build con il checksum corretto:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Ora correggiamo il checksum e riprendiamo la build</span>
+$ code PKGBUILD
+    <span class="hljs-comment"># Variables for FREE edition</span>
+    <span class="hljs-comment">#    ...</span>
+    <span class="hljs-comment">#	sha256sums=(&#x27;292961aa8723b54f96f89f6d8abf7d8e29259d94b7de831dbffb9ae15d346434&#x27;)</span>
+$ makepkg -si
+</code></pre>
+<h2 id="errore-chiave-pgp" tabindex="-1">Errore chiave PGP <a class="header-anchor" href="#errore-chiave-pgp" aria-hidden="true">🔗</a></h2>
+<p>Se si riceve un errore di firma PGP importare la chiave manualmente: <code>gpg --recv-key</code></p>
+<pre><code class="language-bash">$ pamac install balena-etcher
+==&gt; ERRORE: Una o più firme PGP non possono essere verificate!
+Errore: Impossibile costruire python2
+
+<span class="hljs-comment"># Soluzione: importare la chiave gpg</span>
+$ gpg --recv-key 04C367C218ADD4FF
+gpg: chiave 04C367C218ADD4FF: chiave pubblica <span class="hljs-string">&quot;Benjamin Peterson &lt;bp@benjamin.pe&gt;&quot;</span> importata
+gpg: Numero totale esaminato: 1
+gpg:              importate: 1
+$ pamac install balena-etcher
+</code></pre>
+<h2 id="errore-unacceptable-tls-certificate" tabindex="-1">Errore Unacceptable TLS certificate <a class="header-anchor" href="#errore-unacceptable-tls-certificate" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pamac upgrade -a
+Preparazione...
+Sincronizzazione database dei pacchetti...
+https://aur.manjaro.org/packages-meta-ext-v1.json.gz: Certificato TLS inammissibile
+</code></pre>
+<p>Soluzione:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman-mirrors -f &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syyu
+
+pacman-mirrors --country-list
+==&gt; Italy
+<span class="hljs-built_in">sudo</span> pacman-mirrors --geoip &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syu
+
+<span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm ca-certificates
+<span class="hljs-built_in">ls</span> -l /etc/ssl/certs
+<span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm ca-certificates-mozilla
+</code></pre>
+<h2 id="abilitare-snap-e-flatpak" tabindex="-1">Abilitare Snap e Flatpak <a class="header-anchor" href="#abilitare-snap-e-flatpak" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/Flatpak">https://wiki.manjaro.org/index.php/Flatpak</a></li>
+<li><a href="https://wiki.manjaro.org/index.php/Snap">https://wiki.manjaro.org/index.php/Snap</a></li>
+<li><a href="https://flathub.org/it">https://flathub.org/it</a></li>
+<li><a href="https://snapcraft.io/store">https://snapcraft.io/store</a></li>
+</ul>
+<pre><code class="language-bash">pamac install flatpak libpamac-flatpak-plugin
+flatpak search vlc
+flatpak install org.videolan.VLC
+flatpak info org.videolan.VLC
+flatpak list
+flatpak upgrade
+<span class="hljs-comment"># Remove Flatpak</span>
+flatpak uninstall org.videolan.VLC
+pamac remove flatpak
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -r /var/lib/flatpak
+<span class="hljs-built_in">rm</span> -r ~/.local/share/flatpak
+
+pamac install snapd libpamac-snap-plugin
+<span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now snapd.socket
+<span class="hljs-built_in">ln</span> -s /var/lib/snapd/snap /snap
+snap search vlc
+snap install vlc
+snap info vlc
+snap list
+snap remove vlc
+<span class="hljs-comment"># Remove Snap:</span>
+pamac list -i
+pamac install gnome-software
+pamac remove snapd
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -r /var/lib/snapd
+
+
+
+</code></pre>
+</body></html>

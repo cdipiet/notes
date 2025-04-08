@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.460" />
+        <title>events</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="events" tabindex="-1">events <a class="header-anchor" href="#events" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.460</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22events%22description%3A-%22the-events-command-description-and-usage%22keywords%3A-%22events%2C-container%2C-report%22">title: &quot;events&quot;description: &quot;The events command description and usage&quot;keywords: &quot;events, container, report&quot; </a></li><li><a href="#description">Description </a><ol><li><a href="#object-types">Object types </a><ol><li><a href="#containers">Containers </a></li><li><a href="#images">Images </a></li><li><a href="#plugins">Plugins </a></li><li><a href="#volumes">Volumes </a></li><li><a href="#networks">Networks </a></li><li><a href="#daemons">Daemons </a></li><li><a href="#services">Services </a></li><li><a href="#nodes">Nodes </a></li><li><a href="#secrets">Secrets </a></li><li><a href="#configs">Configs </a></li></ol></li><li><a href="#limiting%2C-filtering%2C-and-formatting-the-output">Limiting, filtering, and formatting the output </a><ol><li><a href="#limit-events-by-time">Limit events by time </a></li><li><a href="#filtering">Filtering </a></li><li><a href="#format">Format </a></li></ol></li></ol></li><li><a href="#examples">Examples </a><ol><li><a href="#basic-example">Basic example </a></li><li><a href="#filter-events-by-time">Filter events by time </a></li><li><a href="#filter-events-by-criteria">Filter events by criteria </a></li><li><a href="#format-the-output">Format the output </a><ol><li><a href="#format-as-json">Format as JSON </a></li></ol></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22events%22description%3A-%22the-events-command-description-and-usage%22keywords%3A-%22events%2C-container%2C-report%22" tabindex="-1">title: &quot;events&quot;
+description: &quot;The events command description and usage&quot;
+keywords: &quot;events, container, report&quot; <a class="header-anchor" href="#title%3A-%22events%22description%3A-%22the-events-command-description-and-usage%22keywords%3A-%22events%2C-container%2C-report%22" aria-hidden="true">🔗</a></h2>
+<h1 id="events-1" tabindex="-1">events <a class="header-anchor" href="#events-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker events [OPTIONS]
+
+Get real time events from the server
+
+Options:
+  -f, --filter value   Filter output based on conditions provided (default [])
+<span class="hljs-code">      --format string  Format the output using the given Go template
+      --help           Print usage
+      --since string   Show all events created since timestamp
+      --until string   Stream events until this timestamp
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Use <code>docker events</code> to get real-time events from the server. These events differ
+per Docker object type. Different event types have different scopes. Local
+scoped events are only seen on the node they take place on, and swarm scoped
+events are seen on all managers.</p>
+<p>Only the last 1000 log events are returned. You can use filters to further limit
+the number of events returned.</p>
+<h3 id="object-types" tabindex="-1">Object types <a class="header-anchor" href="#object-types" aria-hidden="true">🔗</a></h3>
+<h4 id="containers" tabindex="-1">Containers <a class="header-anchor" href="#containers" aria-hidden="true">🔗</a></h4>
+<p>Docker containers report the following events:</p>
+<ul>
+<li><code>attach</code></li>
+<li><code>commit</code></li>
+<li><code>copy</code></li>
+<li><code>create</code></li>
+<li><code>destroy</code></li>
+<li><code>detach</code></li>
+<li><code>die</code></li>
+<li><code>exec_create</code></li>
+<li><code>exec_detach</code></li>
+<li><code>exec_die</code></li>
+<li><code>exec_start</code></li>
+<li><code>export</code></li>
+<li><code>health_status</code></li>
+<li><code>kill</code></li>
+<li><code>oom</code></li>
+<li><code>pause</code></li>
+<li><code>rename</code></li>
+<li><code>resize</code></li>
+<li><code>restart</code></li>
+<li><code>start</code></li>
+<li><code>stop</code></li>
+<li><code>top</code></li>
+<li><code>unpause</code></li>
+<li><code>update</code></li>
+</ul>
+<h4 id="images" tabindex="-1">Images <a class="header-anchor" href="#images" aria-hidden="true">🔗</a></h4>
+<p>Docker images report the following events:</p>
+<ul>
+<li><code>delete</code></li>
+<li><code>import</code></li>
+<li><code>load</code></li>
+<li><code>pull</code></li>
+<li><code>push</code></li>
+<li><code>save</code></li>
+<li><code>tag</code></li>
+<li><code>untag</code></li>
+</ul>
+<h4 id="plugins" tabindex="-1">Plugins <a class="header-anchor" href="#plugins" aria-hidden="true">🔗</a></h4>
+<p>Docker plugins report the following events:</p>
+<ul>
+<li><code>enable</code></li>
+<li><code>disable</code></li>
+<li><code>install</code></li>
+<li><code>remove</code></li>
+</ul>
+<h4 id="volumes" tabindex="-1">Volumes <a class="header-anchor" href="#volumes" aria-hidden="true">🔗</a></h4>
+<p>Docker volumes report the following events:</p>
+<ul>
+<li><code>create</code></li>
+<li><code>destroy</code></li>
+<li><code>mount</code></li>
+<li><code>unmount</code></li>
+</ul>
+<h4 id="networks" tabindex="-1">Networks <a class="header-anchor" href="#networks" aria-hidden="true">🔗</a></h4>
+<p>Docker networks report the following events:</p>
+<ul>
+<li><code>create</code></li>
+<li><code>connect</code></li>
+<li><code>destroy</code></li>
+<li><code>disconnect</code></li>
+<li><code>remove</code></li>
+</ul>
+<h4 id="daemons" tabindex="-1">Daemons <a class="header-anchor" href="#daemons" aria-hidden="true">🔗</a></h4>
+<p>Docker daemons report the following events:</p>
+<ul>
+<li><code>reload</code></li>
+</ul>
+<h4 id="services" tabindex="-1">Services <a class="header-anchor" href="#services" aria-hidden="true">🔗</a></h4>
+<p>Docker services report the following events:</p>
+<ul>
+<li><code>create</code></li>
+<li><code>remove</code></li>
+<li><code>update</code></li>
+</ul>
+<h4 id="nodes" tabindex="-1">Nodes <a class="header-anchor" href="#nodes" aria-hidden="true">🔗</a></h4>
+<p>Docker nodes report the following events:</p>
+<ul>
+<li><code>create</code></li>
+<li><code>remove</code></li>
+<li><code>update</code></li>
+</ul>
+<h4 id="secrets" tabindex="-1">Secrets <a class="header-anchor" href="#secrets" aria-hidden="true">🔗</a></h4>
+<p>Docker secrets report the following events:</p>
+<ul>
+<li><code>create</code></li>
+<li><code>remove</code></li>
+<li><code>update</code></li>
+</ul>
+<h4 id="configs" tabindex="-1">Configs <a class="header-anchor" href="#configs" aria-hidden="true">🔗</a></h4>
+<p>Docker configs report the following events:</p>
+<ul>
+<li><code>create</code></li>
+<li><code>remove</code></li>
+<li><code>update</code></li>
+</ul>
+<h3 id="limiting%2C-filtering%2C-and-formatting-the-output" tabindex="-1">Limiting, filtering, and formatting the output <a class="header-anchor" href="#limiting%2C-filtering%2C-and-formatting-the-output" aria-hidden="true">🔗</a></h3>
+<h4 id="limit-events-by-time" tabindex="-1">Limit events by time <a class="header-anchor" href="#limit-events-by-time" aria-hidden="true">🔗</a></h4>
+<p>The <code>--since</code> and <code>--until</code> parameters can be Unix timestamps, date formatted
+timestamps, or Go duration strings (e.g. <code>10m</code>, <code>1h30m</code>) computed
+relative to the client machine’s time. If you do not provide the <code>--since</code> option,
+the command returns only new and/or live events.  Supported formats for date
+formatted time stamps include RFC3339Nano, RFC3339, <code>2006-01-02T15:04:05</code>,
+<code>2006-01-02T15:04:05.999999999</code>, <code>2006-01-02Z07:00</code>, and <code>2006-01-02</code>. The local
+timezone on the client will be used if you do not provide either a <code>Z</code> or a
+<code>+-00:00</code> timezone offset at the end of the timestamp.  When providing Unix
+timestamps enter seconds[.nanoseconds], where seconds is the number of seconds
+that have elapsed since January 1, 1970 (midnight UTC/GMT), not counting leap
+seconds (aka Unix epoch or Unix time), and the optional .nanoseconds field is a
+fraction of a second no more than nine digits long.</p>
+<p>Only the last 1000 log events are returned. You can use filters to further limit
+the number of events returned.</p>
+<h4 id="filtering" tabindex="-1">Filtering <a class="header-anchor" href="#filtering" aria-hidden="true">🔗</a></h4>
+<p>The filtering flag (<code>-f</code> or <code>--filter</code>) format is of &quot;key=value&quot;. If you would
+like to use multiple filters, pass multiple flags (e.g.,
+<code>--filter &quot;foo=bar&quot; --filter &quot;bif=baz&quot;</code>)</p>
+<p>Using the same filter multiple times will be handled as a <em>OR</em>; for example
+<code>--filter container=588a23dac085 --filter container=a8f7720b8c22</code> will display
+events for container 588a23dac085 <em>OR</em> container a8f7720b8c22</p>
+<p>Using multiple filters will be handled as a <em>AND</em>; for example
+<code>--filter container=588a23dac085 --filter event=start</code> will display events for
+container container 588a23dac085 <em>AND</em> the event type is <em>start</em></p>
+<p>The currently supported filters are:</p>
+<ul>
+<li>config (<code>config=&lt;name or id&gt;</code>)</li>
+<li>container (<code>container=&lt;name or id&gt;</code>)</li>
+<li>daemon (<code>daemon=&lt;name or id&gt;</code>)</li>
+<li>event (<code>event=&lt;event action&gt;</code>)</li>
+<li>image (<code>image=&lt;repository or tag&gt;</code>)</li>
+<li>label (<code>label=&lt;key&gt;</code> or <code>label=&lt;key&gt;=&lt;value&gt;</code>)</li>
+<li>network (<code>network=&lt;name or id&gt;</code>)</li>
+<li>node (<code>node=&lt;id&gt;</code>)</li>
+<li>plugin (<code>plugin=&lt;name or id&gt;</code>)</li>
+<li>scope (<code>scope=&lt;local or swarm&gt;</code>)</li>
+<li>secret (<code>secret=&lt;name or id&gt;</code>)</li>
+<li>service (<code>service=&lt;name or id&gt;</code>)</li>
+<li>type (<code>type=&lt;container or image or volume or network or daemon or plugin or service or node or secret or config&gt;</code>)</li>
+<li>volume (<code>volume=&lt;name&gt;</code>)</li>
+</ul>
+<h4 id="format" tabindex="-1">Format <a class="header-anchor" href="#format" aria-hidden="true">🔗</a></h4>
+<p>If a format (<code>--format</code>) is specified, the given template will be executed
+instead of the default
+format. Go's <a href="https://golang.org/pkg/text/template/">text/template</a> package
+describes all the details of the format.</p>
+<p>If a format is set to <code>{{json .}}</code>, the events are streamed as valid JSON
+Lines. For information about JSON Lines, please refer to <a href="https://jsonlines.org/">https://jsonlines.org/</a>.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="basic-example" tabindex="-1">Basic example <a class="header-anchor" href="#basic-example" aria-hidden="true">🔗</a></h3>
+<p>You'll need two shells for this example.</p>
+<p><strong>Shell 1: Listening for events:</strong></p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker events</span>
+</code></pre>
+<p><strong>Shell 2: Start and Stop containers:</strong></p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create --name <span class="hljs-built_in">test</span> alpine:latest top</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker start <span class="hljs-built_in">test</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stop <span class="hljs-built_in">test</span></span>
+</code></pre>
+<p><strong>Shell 1: (Again .. now showing events):</strong></p>
+<pre><code class="language-console">2017-01-05T00:35:58.859401177+08:00 container create 0fdb48addc82871eb34eb23a847cfd033dedd1a0a37bef2e6d9eb3870fc7ff37 (image=alpine:latest, name=test)
+2017-01-05T00:36:04.703631903+08:00 network connect e2e1f5ceda09d4300f3a846f0acfaa9a8bb0d89e775eb744c5acecd60e0529e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:36:09.830268747+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=15)
+2017-01-05T00:36:09.840186338+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
+2017-01-05T00:36:09.880113663+08:00 network disconnect e2e...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+</code></pre>
+<p>To exit the <code>docker events</code> command, use <code>CTRL+C</code>.</p>
+<h3 id="filter-events-by-time" tabindex="-1">Filter events by time <a class="header-anchor" href="#filter-events-by-time" aria-hidden="true">🔗</a></h3>
+<p>You can filter the output by an absolute timestamp or relative time on the host
+machine, using the following different time syntaxes:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker events --since 1483283804</span>
+2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
+2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
+2017-01-05T00:36:04.703631903+08:00 network connect e2e1...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:36:09.830268747+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=15)
+2017-01-05T00:36:09.840186338+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
+2017-01-05T00:36:09.880113663+08:00 network disconnect e2e...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --since <span class="hljs-string">&#x27;2017-01-05&#x27;</span></span>
+2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
+2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
+2017-01-05T00:36:04.703631903+08:00 network connect e2e1...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:36:09.830268747+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=15)
+2017-01-05T00:36:09.840186338+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
+2017-01-05T00:36:09.880113663+08:00 network disconnect e2e...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --since <span class="hljs-string">&#x27;2013-09-03T15:49:29&#x27;</span></span>
+2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
+2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
+2017-01-05T00:36:04.703631903+08:00 network connect e2e1...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:36:09.830268747+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=15)
+2017-01-05T00:36:09.840186338+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
+2017-01-05T00:36:09.880113663+08:00 network disconnect e2e...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --since <span class="hljs-string">&#x27;10m&#x27;</span></span>
+2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
+2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
+2017-01-05T00:36:04.703631903+08:00 network connect e2e1...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:36:09.830268747+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=15)
+2017-01-05T00:36:09.840186338+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
+2017-01-05T00:36:09.880113663+08:00 network disconnect e2e...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:09.890214053+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --since <span class="hljs-string">&#x27;2017-01-05T00:35:30&#x27;</span> --<span class="hljs-keyword">until</span> <span class="hljs-string">&#x27;2017-01-05T00:36:05&#x27;</span></span>
+2017-01-05T00:35:41.241772953+08:00 volume create testVol (driver=local)
+2017-01-05T00:35:58.859401177+08:00 container create d9cd...4d70 (image=alpine:latest, name=test)
+2017-01-05T00:36:04.703631903+08:00 network connect e2e1...29e2 (container=0fdb...ff37, name=bridge, type=bridge)
+2017-01-05T00:36:04.795031609+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+</code></pre>
+<h3 id="filter-events-by-criteria" tabindex="-1">Filter events by criteria <a class="header-anchor" href="#filter-events-by-criteria" aria-hidden="true">🔗</a></h3>
+<p>The following commands show several different ways to filter the <code>docker event</code>
+output.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;event=stop&#x27;</span></span>
+
+2017-01-05T00:40:22.880175420+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:41:17.888104182+08:00 container stop 2a8f...4e78 (image=alpine, name=kickass_brattain)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;image=alpine&#x27;</span></span>
+
+2017-01-05T00:41:55.784240236+08:00 container create d9cd...4d70 (image=alpine, name=happy_meitner)
+2017-01-05T00:41:55.913156783+08:00 container start d9cd...4d70 (image=alpine, name=happy_meitner)
+2017-01-05T00:42:01.106875249+08:00 container kill d9cd...4d70 (image=alpine, name=happy_meitner, signal=15)
+2017-01-05T00:42:11.111934041+08:00 container kill d9cd...4d70 (image=alpine, name=happy_meitner, signal=9)
+2017-01-05T00:42:11.119578204+08:00 container die d9cd...4d70 (exitCode=137, image=alpine, name=happy_meitner)
+2017-01-05T00:42:11.173276611+08:00 container stop d9cd...4d70 (image=alpine, name=happy_meitner)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;container=test&#x27;</span></span>
+
+2017-01-05T00:43:00.139719934+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:43:09.259951086+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=15)
+2017-01-05T00:43:09.270102715+08:00 container die 0fdb...ff37 (exitCode=143, image=alpine:latest, name=test)
+2017-01-05T00:43:09.312556440+08:00 container stop 0fdb...ff37 (image=alpine:latest, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;container=test&#x27;</span> --filter <span class="hljs-string">&#x27;container=d9cdb1525ea8&#x27;</span></span>
+
+2017-01-05T00:44:11.517071981+08:00 container start 0fdb...ff37 (image=alpine:latest, name=test)
+2017-01-05T00:44:17.685870901+08:00 container start d9cd...4d70 (image=alpine, name=happy_meitner)
+2017-01-05T00:44:29.757658470+08:00 container kill 0fdb...ff37 (image=alpine:latest, name=test, signal=9)
+2017-01-05T00:44:29.767718510+08:00 container die 0fdb...ff37 (exitCode=137, image=alpine:latest, name=test)
+2017-01-05T00:44:29.815798344+08:00 container destroy 0fdb...ff37 (image=alpine:latest, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;container=test&#x27;</span> --filter <span class="hljs-string">&#x27;event=stop&#x27;</span></span>
+
+2017-01-05T00:46:13.664099505+08:00 container stop a9d1...e130 (image=alpine, name=test)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;type=volume&#x27;</span></span>
+
+2015-12-23T21:05:28.136212689Z volume create test-event-volume-local (driver=local)
+2015-12-23T21:05:28.383462717Z volume mount test-event-volume-local (read/write=true, container=562f...5025, destination=/foo, driver=local, propagation=rprivate)
+2015-12-23T21:05:28.650314265Z volume unmount test-event-volume-local (container=562f...5025, driver=local)
+2015-12-23T21:05:28.716218405Z volume destroy test-event-volume-local (driver=local)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;type=network&#x27;</span></span>
+
+2015-12-23T21:38:24.705709133Z network create 8b11...2c5b (name=test-event-network-local, type=bridge)
+2015-12-23T21:38:25.119625123Z network connect 8b11...2c5b (name=test-event-network-local, container=b4be...c54e, type=bridge)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;container=container_1&#x27;</span> --filter <span class="hljs-string">&#x27;container=container_2&#x27;</span></span>
+
+2014-09-03T15:49:29.999999999Z07:00 container die 4386fb97867d (image=ubuntu-1:14.04)
+2014-05-10T17:42:14.999999999Z07:00 container stop 4386fb97867d (image=ubuntu-1:14.04)
+2014-05-10T17:42:14.999999999Z07:00 container die 7805c1d35632 (imager=redis:2.8)
+2014-09-03T15:49:29.999999999Z07:00 container stop 7805c1d35632 (image=redis:2.8)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;type=volume&#x27;</span></span>
+
+2015-12-23T21:05:28.136212689Z volume create test-event-volume-local (driver=local)
+2015-12-23T21:05:28.383462717Z volume mount test-event-volume-local (read/write=true, container=562fe10671e9273da25eed36cdce26159085ac7ee6707105fd534866340a5025, destination=/foo, driver=local, propagation=rprivate)
+2015-12-23T21:05:28.650314265Z volume unmount test-event-volume-local (container=562fe10671e9273da25eed36cdce26159085ac7ee6707105fd534866340a5025, driver=local)
+2015-12-23T21:05:28.716218405Z volume destroy test-event-volume-local (driver=local)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;type=network&#x27;</span></span>
+
+2015-12-23T21:38:24.705709133Z network create 8b111217944ba0ba844a65b13efcd57dc494932ee2527577758f939315ba2c5b (name=test-event-network-local, type=bridge)
+2015-12-23T21:38:25.119625123Z network connect 8b111217944ba0ba844a65b13efcd57dc494932ee2527577758f939315ba2c5b (name=test-event-network-local, container=b4be644031a3d90b400f88ab3d4bdf4dc23adb250e696b6328b85441abe2c54e, type=bridge)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;type=plugin&#x27;</span></span>
+
+2016-07-25T17:30:14.825557616Z plugin pull ec7b87f2ce84330fe076e666f17dfc049d2d7ae0b8190763de94e1f2d105993f (name=tiborvass/sample-volume-plugin:latest)
+2016-07-25T17:30:14.888127370Z plugin enable ec7b87f2ce84330fe076e666f17dfc049d2d7ae0b8190763de94e1f2d105993f (name=tiborvass/sample-volume-plugin:latest)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events -f <span class="hljs-built_in">type</span>=service</span>
+
+2017-07-12T06:34:07.999446625Z service create wj64st89fzgchxnhiqpn8p4oj (name=reverent_albattani)
+2017-07-12T06:34:21.405496207Z service remove wj64st89fzgchxnhiqpn8p4oj (name=reverent_albattani)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events -f <span class="hljs-built_in">type</span>=node</span>
+
+2017-07-12T06:21:51.951586759Z node update 3xyz5ttp1a253q74z1thwywk9 (name=ip-172-31-23-42, state.new=ready, state.old=unknown)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events -f <span class="hljs-built_in">type</span>=secret</span>
+
+2017-07-12T06:32:13.915704367Z secret create s8o6tmlnndrgzbmdilyy5ymju (name=new_secret)
+2017-07-12T06:32:37.052647783Z secret remove s8o6tmlnndrgzbmdilyy5ymju (name=new_secret)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"> docker events -f <span class="hljs-built_in">type</span>=config</span>
+2017-07-12T06:44:13.349037127Z config create u96zlvzdfsyb9sg4mhyxfh3rl (name=abc)
+2017-07-12T06:44:36.327694184Z config remove u96zlvzdfsyb9sg4mhyxfh3rl (name=abc)
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;scope=swarm&#x27;</span></span>
+
+2017-07-10T07:46:50.250024503Z service create m8qcxu8081woyof7w3jaax6gk (name=affectionate_wilson)
+2017-07-10T07:47:31.093797134Z secret create 6g5pufzsv438p9tbvl9j94od4 (name=new_secret)
+</code></pre>
+<h3 id="format-the-output" tabindex="-1">Format the output <a class="header-anchor" href="#format-the-output" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker events --filter <span class="hljs-string">&#x27;type=container&#x27;</span> --format <span class="hljs-string">&#x27;Type={{.Type}}  Status={{.Status}}  ID={{.ID}}&#x27;</span></span>
+
+Type=container  Status=create  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
+Type=container  Status=attach  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
+Type=container  Status=start  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
+Type=container  Status=resize  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
+Type=container  Status=die  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
+Type=container  Status=destroy  ID=2ee349dac409e97974ce8d01b70d250b85e0ba8189299c126a87812311951e26
+</code></pre>
+<h4 id="format-as-json" tabindex="-1">Format as JSON <a class="header-anchor" href="#format-as-json" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker events --format <span class="hljs-string">&#x27;{{json .}}&#x27;</span></span>
+
+{&quot;status&quot;:&quot;create&quot;,&quot;id&quot;:&quot;196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+{&quot;status&quot;:&quot;attach&quot;,&quot;id&quot;:&quot;196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+{&quot;Type&quot;:&quot;network&quot;,&quot;Action&quot;:&quot;connect&quot;,&quot;Actor&quot;:{&quot;ID&quot;:&quot;1b50a5bf755f6021dfa78e..
+{&quot;status&quot;:&quot;start&quot;,&quot;id&quot;:&quot;196016a57679bf42424484918746a9474cd905dd993c4d0f42..
+{&quot;status&quot;:&quot;resize&quot;,&quot;id&quot;:&quot;196016a57679bf42424484918746a9474cd905dd993c4d0f4..
+</code></pre>
+</body></html>

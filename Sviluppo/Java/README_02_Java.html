@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.840" />
+        <title>README_02_Java</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="readme_02_java" tabindex="-1">README_02_Java <a class="header-anchor" href="#readme_02_java" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.840</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-in-manjaro">Installazione in Manjaro </a></li><li><a href="#installazione-java-in-mint">Installazione Java in Mint </a></li><li><a href="#ant">ANT </a></li><li><a href="#maven">Maven </a></li><li><a href="#librerie-comuni">Librerie Comuni </a><ol><li><a href="#javautil">JavaUtil </a><ol><li><a href="#build">Build </a></li></ol></li><li><a href="#log4jdbc-log4j2">log4jdbc-log4j2 </a></li><li><a href="#sunioutil">SUNIOUtil </a><ol><li><a href="#db2driver-con-jdk-1.8">DB2Driver con JDK 1.8 </a></li></ol></li><li><a href="#tomcat">tomcat </a></li></ol></li><li><a href="#da-java-9-il-javax.xml.bind-non-%C3%A8-pi%C3%B9-presente-nella-standard-edition">Da Java 9 il javax.xml.bind non è più presente nella standard edition </a></li><li><a href="#jaxb-con-java-9">JAXB con Java 9 </a></li><li><a href="#problema-conflitto-parsers-xml">Problema conflitto parsers XML </a></li><li><a href="#comparing-resource_local-and-jta-persistence-contexts">Comparing RESOURCE_LOCAL and JTA persistence contexts </a></li></ol></nav><h1 id="main" class="main_header" style="color:DodgerBlue" tabindex="-1">Java <a class="header-anchor" href="#main" aria-hidden="true">🔗</a></h1>
+<p><a href="http://www.oracle.com/technetwork/java/javase/overview/index.html">http://www.oracle.com/technetwork/java/javase/overview/index.html</a></p>
+<p><img src="../../inc/img/java/java.png" alt="" style="display:block; margin: 0 auto; width:30%"></p>
+<h2 id="installazione-in-manjaro" tabindex="-1">Installazione in Manjaro <a class="header-anchor" href="#installazione-in-manjaro" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">
+</code></pre>
+<h2 id="installazione-java-in-mint" tabindex="-1">Installazione Java in Mint <a class="header-anchor" href="#installazione-java-in-mint" aria-hidden="true">🔗</a></h2>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">http://www.oracle.com/technetwork/java/javase/downloads/index.html</a></p>
+<p>Installare in:</p>
+<p><a href="file:///c:%5C%5Cjdk">file:///c:\\jdk</a></p>
+<pre><code class="language-bash">apt install openjdk-14-jdk galternatives
+
+man update-alternatives
+<span class="hljs-built_in">sudo</span> update-alternatives --display java
+<span class="hljs-built_in">sudo</span> update-alternatives --config java
+<span class="hljs-built_in">sudo</span> update-alternatives --config javac
+<span class="hljs-built_in">sudo</span> update-alternatives --install <span class="hljs-string">&quot;/usr/bin/java&quot;</span> <span class="hljs-string">&quot;java&quot;</span> <span class="hljs-string">&quot;/opt/java/jdk1.7.0_25/bin/java&quot;</span> 1
+<span class="hljs-built_in">sudo</span> update-alternatives --<span class="hljs-built_in">set</span> java /opt/java/jdk1.7.0_25/bin/java
+</code></pre>
+<h2 id="ant" tabindex="-1">ANT <a class="header-anchor" href="#ant" aria-hidden="true">🔗</a></h2>
+<p><a href="README_04_ANT.html">README_04_ANT.html</a></p>
+<h2 id="maven" tabindex="-1">Maven <a class="header-anchor" href="#maven" aria-hidden="true">🔗</a></h2>
+<p><a href="README_04_Maven.html">README_04_Maven.html</a></p>
+<h2 id="librerie-comuni" tabindex="-1">Librerie Comuni <a class="header-anchor" href="#librerie-comuni" aria-hidden="true">🔗</a></h2>
+<p>Le librerie comuni sono a disposizione dello sviluppo delle applicazioni Desktop e Web</p>
+<h3 id="javautil" tabindex="-1">JavaUtil <a class="header-anchor" href="#javautil" aria-hidden="true">🔗</a></h3>
+<p>La libreria <span class="mbb">JavaUtil</span> contiene funzioni di utilità generiche per i vari aspetti,
+essa è contenua nel progetto Eclipse:</p>
+<p><a href="file:///D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil">file:///D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil</a></p>
+<p>Il progetto Eclipse JavaUtil può essere utilizzato come dipendenza di altri progetti Eclipse,
+in questo modo funge da punto unico di installazione dei jar delle librerie comuni, contenuti nella directory:</p>
+<p><a href="file:///D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil/lib">file:///D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil/lib</a></p>
+<p>mentre la relativa documentazione delle librerie comuni, collegabile dagli altri progetti Eclipse è contenuta in:</p>
+<p><a href="file:///D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil/lib-doc">file:///D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil/lib-doc</a></p>
+<h4 id="build" tabindex="-1">Build <a class="header-anchor" href="#build" aria-hidden="true">🔗</a></h4>
+<p><a href="file:///d:%5C%5CDati%5C%5CProfili%5C%5C$USER%5C%5Cworkspace%5C%5CJavaWorkspace%5C%5CJavaUtil%5C%5CJavaUtil%5C%5Cpom.xml">file:///d:\\Dati\\Profili\\$USER\\workspace\\JavaWorkspace\\JavaUtil\\JavaUtil\\pom.xml</a></p>
+<p>Per vedere se ci sono aggiornamenti delle librerie:</p>
+<pre><code id="mvn_install" class="dosbat numberLines" startFrom="1">mvn versions:display-dependency-updates # per vedere le librerie di progetto aggiornabili
+mvn versions:display-plugin-updates     # per vedere i plugin aggiornabili
+C:\&gt; cd d:\Dati\Profili\$USER\workspace\JavaWorkspace\JavaUtil\JavaUtil
+C:\&gt; mvn install
+</code></pre>
+<p>Il jar prodotto:
+<a href="file:///d:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5CJavaUtil%5CJavaUtil%5Ctarget%5Cjavautil-1.0.jar">javautil-1.0.jar</a>
+Può essere utilizzato ad esempio nelle webapp</p>
+<h3 id="log4jdbc-log4j2" tabindex="-1">log4jdbc-log4j2 <a class="header-anchor" href="#log4jdbc-log4j2" aria-hidden="true">🔗</a></h3>
+<p><a href="http://log4jdbc.brunorozendo.com/">http://log4jdbc.brunorozendo.com/</a></p>
+<p><a href="file:///d:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clog4jdbc-log4j2">file:///d:\Dati\Profili\$USER\workspace\JavaWorkspace\log4jdbc-log4j2</a></p>
+<p>Il progetto è stato ricompilato da sorgenti con Java 10:</p>
+<pre><code>C:\&gt; cd d:\Dati\Profili\$USER\workspace\JavaWorkspace\log4jdbc-log4j2
+C:\&gt; mvn install
+</code></pre>
+<p>Si ottiene il jar:</p>
+<p><a href="d:%5CDati%5CProfili$USER%5Cworkspace%5CJavaWorkspace%5Clog4jdbc-log4j2%5Clog4jdbc-log4j2-jdbc4.1%5Ctarget%5Clog4jdbc-log4j2-jdbc4.1-1.17-SNAPSHOT.jar">log4jdbc-log4j2-jdbc4.1-1.17-SNAPSHOT.jar</a></p>
+<h3 id="sunioutil" tabindex="-1">SUNIOUtil <a class="header-anchor" href="#sunioutil" aria-hidden="true">🔗</a></h3>
+<h4 id="db2driver-con-jdk-1.8" tabindex="-1">DB2Driver con JDK 1.8 <a class="header-anchor" href="#db2driver-con-jdk-1.8" aria-hidden="true">🔗</a></h4>
+<p>We will be migrating to JRE1.8 soon we use <code>db2jcc.jar</code> and <code>db2jcc_license_cisuz.jar</code>
+to connect to DB2 which internally uses <code>sun/io/ByteToCharConverter</code>
+which is deprecated in JRE 1.7 and is removed in JRE 1.8.</p>
+<p>Il package <a href="http://sun.io">sun.io</a> è stato da me &quot;riesumato&quot;, estraendone i sorgenti dal vecchio JDK,
+per permettere al driver DB2 db2cc.jar <code>com.ibm.db2.jcc.DB2Driver</code>
+di funzionare anche con il JRE 8.0.
+Nel JDK 1.8 infatti il package <a href="http://sun.io">sun.io</a> è stato rimosso ed a runtime il driver DB2 non funzionerebbe.</p>
+<p>La libreria <code>sunioutil.jar</code> deve essere messa nel classpath dei progetti che richiedono il driver db2cc.jar.</p>
+<p>ByteToCharConverter, CharToByteConverter and ConversionBufferFullException
+from the <a href="http://sun.io">sun.io</a> package.
+These were deprecated in favour of java.nio.charset, and have been removed from JRE 1.8.0</p>
+<h3 id="tomcat" tabindex="-1">tomcat <a class="header-anchor" href="#tomcat" aria-hidden="true">🔗</a></h3>
+<p>Il server è installato in:</p>
+<pre><code>%USERPROFILE%\app\apache-tomcat-9.0.10
+</code></pre>
+<p>ad esso corrisponde in eclipse un runtime da associare ad una webapp dinamica nel Build Path</p>
+<h1 id="api-standard-java-per-xml" tabindex="-1">API Standard Java per XML <a class="header-anchor" href="#api-standard-java-per-xml" aria-hidden="true">🔗</a></h1>
+<h2 id="da-java-9-il-javax.xml.bind-non-%C3%A8-pi%C3%B9-presente-nella-standard-edition" tabindex="-1">Da Java 9 il javax.xml.bind non è più presente nella standard edition <a class="header-anchor" href="#da-java-9-il-javax.xml.bind-non-%C3%A8-pi%C3%B9-presente-nella-standard-edition" aria-hidden="true">🔗</a></h2>
+<p>Da Java 9 i moduli EE come JAXB non fanno più parte del JDK:</p>
+<ul>
+<li><a href="http://openjdk.java.net/jeps/320">http://openjdk.java.net/jeps/320</a> - <span class="mrb">JEP 320: Remove the Java EE and CORBA Modules</span></li>
+<li><a href="https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdeffounderror-javax-xml-bind-jaxbexception-in-j/46455026">https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdeffounderror-javax-xml-bind-jaxbexception-in-j/46455026</a></li>
+<li><a href="http://mail.openjdk.java.net/pipermail/jdk9-dev/2016-May/004309.html">http://mail.openjdk.java.net/pipermail/jdk9-dev/2016-May/004309.html</a></li>
+</ul>
+<p>In Java9 è stato rimosso jaxb che va ora scaricato a parte:</p>
+<ul>
+<li><a href="file:///d:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clib%5Cjavax.xml">file:///d:\Dati\Profili\$USER\workspace\JavaWorkspace\lib\javax.xml</a></li>
+<li><a href="file:///d:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clib%5Cjavaee-web-api">file:///d:\Dati\Profili\$USER\workspace\JavaWorkspace\lib\javaee-web-api</a></li>
+</ul>
+<p>I seguenti jar devono ora essere ora esplicitamente scaricati ed aggiunti al classpath.</p>
+<ul>
+<li>jaxb-api-2.3.0.jar</li>
+<li>jaxb-core-2.3.0.jar</li>
+<li>jaxb-runtime-2.3.0.jar</li>
+<li>jaxws-api-2.3.0.jar</li>
+<li>javax.activation-api-1.2.0.jar</li>
+<li>javax.xml.soap-api-1.4.0.jar</li>
+<li>jsr181-api-1.0-MR1.jar</li>
+<li>stax-ex-1.7.8.jar</li>
+</ul>
+<p><a href="file:///D:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clib%5CXML_JAXB">Download con Maven</a></p>
+<pre><code class="language-xml">		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.xml.bind<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jaxb-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.3.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.glassfish.jaxb<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jaxb-runtime<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.3.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>runtime<span class="hljs-tag">&lt;/<span class="hljs-name">scope</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.activation<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>javax.activation-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.2.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+			<span class="hljs-comment">&lt;!-- https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22javax.xml.ws%22 --&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.xml.ws<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jaxws-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>2.3.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+			<span class="hljs-comment">&lt;!-- https://search.maven.org/#search%7Cga%7C1%7Cg%3A%22javax.xml.soap%22%20AND%20a%3A%22javax.xml.soap-api%22 --&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.xml.soap<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>javax.xml.soap-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.4.0<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+		<span class="hljs-comment">&lt;!-- https://mvnrepository.com/artifact/javax.jws/jsr181-api --&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>javax.jws<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>jsr181-api<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0-MR1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<p>Passando a Java 9 i seguenti package non vengono più trovati:</p>
+<ul>
+<li>javax.xml.bind</li>
+<li><a href="http://javax.xml.ws">javax.xml.ws</a></li>
+<li>javax.xml.soap</li>
+</ul>
+<p>Da Java 9 javax.xml.bind non è più visibile di default:
+java.corba and EE modules not resolved by default
+<a href="http://mail.openjdk.java.net/pipermail/jdk9-dev/2016-May/004309.html">http://mail.openjdk.java.net/pipermail/jdk9-dev/2016-May/004309.html</a></p>
+<ul>
+<li><a href="http://openjdk.java.net/jeps/261">http://openjdk.java.net/jeps/261</a> - JEP 261: Module System</li>
+<li><a href="https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdeffounderror-javax-xml-bind-jaxbexception-in-j/46455026">https://stackoverflow.com/questions/43574426/how-to-resolve-java-lang-noclassdeffounderror-javax-xml-bind-jaxbexception-in-j/46455026</a></li>
+</ul>
+<p>The JAXB APIs are considered to be Java EE APIs, and therefore are no longer contained on the default class path
+in Java SE 9. In Java 11 they are completely removed from the JDK.</p>
+<p>The JAXB APIs are considered to be Java EE APIs, and therefore are no longer contained on the default class path in Java SE 9.
+In Java 11 they are completely removed from the JDK.
+Java 9 introduces the concepts of modules, and by default the <a href="http://java.se">java.se</a> aggregate module is available on the class path (or rather, module path). As the name implies,
+the <a href="http://java.se">java.se</a> aggregate module does not include the Java EE APIs that have been traditionally bundled with Java 6/7/8.
+Fortunately, these Java EE APIs that were provided in JDK 6/7/8 are still in the JDK, but they just aren't on the class path by default.
+The extra Java EE APIs are provided in the following modules:</p>
+<ul>
+<li>java.activation</li>
+<li>java.corba</li>
+<li>java.transaction</li>
+<li>java.xml.bind  &lt;&lt; This one contains the JAXB APIs</li>
+<li><a href="http://java.xml.ws">java.xml.ws</a></li>
+<li>java.xml.ws.annotation</li>
+</ul>
+<p>Quick and dirty solution: (JDK 9/10 only)
+To make the JAXB APIs available at runtime, specify the following command-line option:</p>
+<pre><code>--add-modules java.xml.bind
+</code></pre>
+<p>Es.</p>
+<pre><code>java --add-modules java.se.ee -jar myapp.jar
+</code></pre>
+<p>Oppure ancora meglio:</p>
+<pre><code>--add-modules java.se.ee
+</code></pre>
+<p>The <a href="http://java.se.ee">java.se.ee</a> module is an aggregate module that includes <a href="http://java.se.ee">java.se.ee</a> as well as the above Java EE API modules.</p>
+<p>Tuttavia in Java 11 questi moduli verranno completamente rimossi dal JDK:</p>
+<p><a href="http://openjdk.java.net/jeps/320">http://openjdk.java.net/jeps/320</a></p>
+<p>conviene allora da ora in poi scaricarli con Maven.</p>
+<p>Proper long-term solution: (All JDK versions)
+<span class="y">The Java EE API modules listed above are all marked @Deprecated(forRemoval=true), so they will probably be removed in Java 11.</span>
+So the <code>--add-module</code> approach will no longer work in Java 11 out of the box.
+What you will need to do in Java 11 and forward is include your own copy of the Java EE APIs on the class path or module path.
+For example, you can add the JAX-B APIs as a maven dependency like this:</p>
+<h2 id="jaxb-con-java-9" tabindex="-1">JAXB con Java 9 <a class="header-anchor" href="#jaxb-con-java-9" aria-hidden="true">🔗</a></h2>
+<p><a href="https://dzone.com/articles/java-19-reflection-and-package-access-changes">https://dzone.com/articles/java-19-reflection-and-package-access-changes</a></p>
+<pre><code>WARNING: An illegal reflective access operation has occurred
+WARNING: Illegal reflective access by com.sun.xml.bind.v2.runtime.reflect.opt.Injector (file:/D:/Dati/Profili/$USER/workspace/JavaWorkspace/JavaUtil/JavaUtil/lib/jaxb/jaxb-runtime-2.3.0.jar) to method java.lang.ClassLoader.defineClass(java.lang.String,byte[],int,int)
+WARNING: Please consider reporting this to the maintainers of com.sun.xml.bind.v2.runtime.reflect.opt.Injector
+WARNING: Use --illegal-access=warn to enable warnings of further illegal reflective access operations
+WARNING: All illegal access operations will be denied in a future release
+</code></pre>
+<h2 id="problema-conflitto-parsers-xml" tabindex="-1">Problema conflitto parsers XML <a class="header-anchor" href="#problema-conflitto-parsers-xml" aria-hidden="true">🔗</a></h2>
+<pre><code>it.bi.vig.util.xml.XMLUtils.setJDKXMLFactories()
+</code></pre>
+<p>Il jar JDBC Oracle <code>xmlparserv2-12.1.0.2.0.jar</code> che contiene il package oracle.xml
+se inserito nel classpath genera un errore tipo(esempio di utilizzo di log4j2):</p>
+<pre><code>ERROR StatusLogger Error parsing D:\Dati\Profili\$USER\workspace\JavaWorkspace\ExamplesWorkbench\JDBC\TestConnections\target\classes\log4j2.xml
+ javax.xml.parsers.ParserConfigurationException
+	at oracle.xml.jaxp.JXDocumentBuilderFactory.setFeature(JXDocumentBuilderFactory.java:223)
+	at org.apache.logging.log4j.core.config.xml.XmlConfiguration.setFeature(XmlConfiguration.java:213)
+</code></pre>
+<p>Per ripristinare l'utilizzo delle factory del jdk, prima di istanziare il primo logger di log4j2
+bisogna impostare le seguenti property:</p>
+<pre><code id="xml_properties" class="java numberLines" startFrom="1">System.setProperty(&quot;javax.xml.parsers.DocumentBuilderFactory&quot;,&quot;com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl&quot;);
+System.setProperty(&quot;javax.xml.parsers.SAXParserFactory&quot;,&quot;com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl&quot;);
+System.setProperty(&quot;javax.xml.transform.TransformerFactory&quot;,&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl&quot;);
+System.setProperty(&quot;javax.xml.datatype.DatatypeFactory&quot;,&quot;com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl&quot;);
+</code></pre>
+<pre><code class="language-java"># NOTA: queste impostazioni risolvono il problema del conflitto tra parser XML del jdk e di oracle jdbc
+# https:<span class="hljs-comment">//stackoverflow.com/questions/3316644/how-to-force-use-of-specific-xml-parser</span>
+javax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl
+javax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl
+javax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl
+javax.xml.datatype.DatatypeFactory=com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl
+</code></pre>
+<p>Vedere <a href="file:///d:%5CDati%5CProfili$USER%5Cworkspace%5CJavaWorkspace%5CJavaUtil%5CJavaUtil%5Csrc%5Cmain%5Cjava%5Cit%5Cbi%5Cvig%5Cutil%5Cxml%5CXMLUtils.java">it.bi.vig.util.xml.XMLUtils</a></p>
+<p>Nel caso di utilizzo di Oracle XMLDB tramite JDBC, debbono essere inseriti nel classpath i due jar <code>xbd6.jar</code> e <code>xmlparserv2.jar</code>.
+Ciò crea un conflittto di utilizzo delle Factory XML nel caso si utilizzi nello stesso progetto anche JAXB:</p>
+<pre><code>	ago 05, 2015 12:14:05 PM com.sun.xml.internal.bind.v2.util.XmlFactory createParserFactory
+	org.xml.sax.SAXNotRecognizedException: http://javax.xml.XMLConstants/feature/secure-processing
+		at oracle.xml.jaxp.JXSAXParserFactory.setFeature(JXSAXParserFactory.java:129)
+		at com.sun.xml.internal.bind.v2.util.XmlFactory.createParserFactory(XmlFactory.java:121)
+
+	Caso parsing configurazione Log4j2:
+	ERROR StatusLogger Error parsing D:\Dati\Profili\$USER\workspace\JavaWorkspace\Hibernate5_JPA21\Hibernate5_JPA21\classes\log4j2.xml
+	 javax.xml.parsers.ParserConfigurationException
+		at oracle.xml.jaxp.JXDocumentBuilderFactory.setFeature(JXDocumentBuilderFactory.java:223)
+		at org.apache.logging.log4j.core.config.xml.XmlConfiguration.setFeature(XmlConfiguration.java:213)
+</code></pre>
+<p>questo perchè l'inclusione del xmlparserv2.jar, a causa della configurazione del ServiceLoader in esso contenuta,
+altera le factory XML impostando quelle di Oracle, che però non funzionano con l'implementazione di JAXB contenuta nel JDK1.8.0:</p>
+<p>SAXParserFactory newInstance():</p>
+<ol>
+<li>
+<p>Use the javax.xml.parsers.SAXParserFactory system property.</p>
+</li>
+<li>
+<p>Use the Services API (as detailed in the JAR specification), if available, to determine the classname.
+The Services API will look for a classname in the file
+<code>META-INF/services/javax.xml.parsers.SAXParserFactory</code>
+in jars available to the runtime.</p>
+<p>Configurazione del ServiceLoader introdotta tramite il xmlparserv2.jar:
+xmlparserv2.jar.zip\META-INF\services\javax.xml.parsers.DocumentBuilderFactory
+oracle.xml.jaxp.JXDocumentBuilderFactory
+xmlparserv2.jar.zip\META-INF\services\javax.xml.parsers.SAXParserFactory
+oracle.xml.jaxp.JXSAXParserFactory
+xmlparserv2.jar.zip\META-INF\services\javax.xml.transform.TransformerFactory
+oracle.xml.jaxp.JXSAXTransformerFactory</p>
+</li>
+</ol>
+<p>Per risolvere il problema, impostiamo le property di configurazione delle factory XML, che hanno la priorità rispetto
+alla configurazione del ServiceLoader, in modo che puntino alle factory XML orginali del JDK1.8.0:</p>
+<pre><code class="language-java">System.setProperty(<span class="hljs-string">&quot;javax.xml.parsers.DocumentBuilderFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl&quot;</span>);
+System.setProperty(<span class="hljs-string">&quot;javax.xml.parsers.SAXParserFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl&quot;</span>);
+System.setProperty(<span class="hljs-string">&quot;javax.xml.transform.TransformerFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl&quot;</span>);
+System.setProperty(<span class="hljs-string">&quot;javax.xml.datatype.DatatypeFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl&quot;</span>);
+</code></pre>
+<p>You should add the following properties to <code>TOMCAT_HOME/conf/catalina.properties</code>:</p>
+<pre><code class="language-java">javax.xml.parsers.DocumentBuilderFactory=com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl
+javax.xml.parsers.SAXParserFactory=com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl
+javax.xml.transform.TransformerFactory=com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl
+javax.xml.datatype.DatatypeFactory=com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl
+System.setProperty(<span class="hljs-string">&quot;jaxp.debug&quot;</span>, <span class="hljs-string">&quot;1&quot;</span>);
+</code></pre>
+<h1 id="api-standard-java-per-json" tabindex="-1">API Standard Java per JSON <a class="header-anchor" href="#api-standard-java-per-json" aria-hidden="true">🔗</a></h1>
+<p>Java contiene ora una api standard per JSON.</p>
+<p>This projects contains API and Reference Implementation (RI) of <span class="mrb">JSR-374</span>.
+The Java API for JSON Processing provides portable APIs to parse, generate, transform, and query JSON documents.</p>
+<p>JSON Processing (JSON-P) is a Java API to process (for e.g. parse, generate,
+transform and query) JSON messages. It produces and consumes JSON text in a streaming fashion
+(similar to StAX API for XML) and allows to build a Java object model for JSON text using API classes (similar to DOM API for XML).</p>
+<ul>
+<li>
+<p><a href="https://github.com/eclipse-ee4j/jsonp">https://github.com/eclipse-ee4j/jsonp</a></p>
+</li>
+<li>
+<p><a href="https://javaee.github.io/jsonp/getting-started.html">https://javaee.github.io/jsonp/getting-started.html</a></p>
+</li>
+<li>
+<p><a href="http://www.oracle.com/technetwork/articles/java/json-1973242.html">http://www.oracle.com/technetwork/articles/java/json-1973242.html</a></p>
+</li>
+<li>
+<p><a href="https://jcp.org/en/jsr/detail?id=374">https://jcp.org/en/jsr/detail?id=374</a></p>
+</li>
+<li>
+<p><a href="file:///d:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5CExamplesWorkbench%5Cjavax.json%5C">file:///d:\Dati\Profili\$USER\workspace\JavaWorkspace\ExamplesWorkbench\javax.json\</a></p>
+</li>
+<li>
+<p><a href="file:///d:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5CJavaUtil%5CJavaUtil%5Clib-doc%5Cjson%5C">file:///d:\Dati\Profili\$USER\workspace\JavaWorkspace\JavaUtil\JavaUtil\lib-doc\json\</a></p>
+</li>
+</ul>
+<h1 id="verifica-versione-.class" tabindex="-1">Verifica versione .class <a class="header-anchor" href="#verifica-versione-.class" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bat"><span class="hljs-function">c:\<span class="hljs-title">jdk</span>\<span class="hljs-title">bin</span>\<span class="hljs-title">javap</span> -<span class="hljs-title">verbose</span> <span class="hljs-title">MiaClasse.class</span> | <span class="hljs-title">findstr</span> <span class="hljs-title">major</span>   
+</span></code></pre>
+<p>Java Version    Class Version</p>
+<hr>
+<p>Java 1.2	    46
+Java 1.3	    47
+Java 1.4	    48
+Java 5	        49
+Java 6	        50
+Java 7	        51
+Java 8	        52
+Java 9	        53
+Java 10	        54</p>
+<h1 id="jpa-2.2" tabindex="-1">JPA 2.2 <a class="header-anchor" href="#jpa-2.2" aria-hidden="true">🔗</a></h1>
+<h2 id="comparing-resource_local-and-jta-persistence-contexts" tabindex="-1">Comparing RESOURCE_LOCAL and JTA persistence contexts <a class="header-anchor" href="#comparing-resource_local-and-jta-persistence-contexts" aria-hidden="true">🔗</a></h2>
+<p>With <code>&lt;persistence-unit transaction-type=&quot;RESOURCE_LOCAL&quot;&gt;</code> you are responsible for EntityManager (PersistenceContext/Cache) creating and tracking...</p>
+<ul>
+<li>You must use the EntityManagerFactory to get an EntityManager</li>
+<li>The resulting EntityManager instance is a PersistenceContext/Cache</li>
+<li>An EntityManagerFactory can be injected via the <code>@PersistenceUnit</code> annotation only (not <code>@PersistenceContext</code>)</li>
+<li>You are not allowed to use <code>@PersistenceContext</code> to refer to a unit of type <code>RESOURCE_LOCAL</code></li>
+<li>You must use the EntityTransaction API to begin/commit around every call to your EntityManger</li>
+<li>Calling <code>entityManagerFactory.createEntityManager()</code> twice results in two separate EntityManager instances and therefor two separate PersistenceContexts/Caches.</li>
+<li>It is almost never a good idea to have more than one instance of an EntityManager in use (don't create a second one unless you've destroyed the first)</li>
+</ul>
+<p>With <code>&lt;persistence-unit transaction-type=&quot;JTA&quot;&gt;</code> the container will do EntityManager (PersistenceContext/Cache) creating and tracking...</p>
+<ul>
+<li>You cannot use the EntityManagerFactory to get an EntityManager</li>
+<li>You can only get an EntityManager supplied by the container</li>
+<li>An EntityManager can be injected via the <code>@PersistenceContext</code> annotation only (not <code>@PersistenceUnit</code>)</li>
+<li>You are not allowed to use <code>@PersistenceUnit</code> to refer to a unit of type JTA</li>
+<li>The EntityManager given by the container is a reference to the PersistenceContext/Cache associated with a JTA Transaction.</li>
+<li>If no JTA transaction is in progress, the EntityManager cannot be used because there is no PersistenceContext/Cache.</li>
+<li>Everyone with an EntityManager reference to the same unit in the same transaction will automatically have a reference to the same PersistenceContext/Cache</li>
+<li>The PersistenceContext/Cache is flushed and cleared at JTA commit time</li>
+</ul>
+</body></html>

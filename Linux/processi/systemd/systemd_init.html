@@ -1,0 +1,1401 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.936" />
+        <title>systemd_init</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="systemd_init" tabindex="-1">systemd_init <a class="header-anchor" href="#systemd_init" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.936</p>
+<nav class="table-of-contents"><ol><li><a href="#systemd---system-v-init---upstart">Systemd - System V Init - Upstart </a></li><li><a href="#man">man </a></li><li><a href="#eliminare-un-servizio">Eliminare un servizio </a></li><li><a href="#service">service </a></li><li><a href="#systemd-timers">Systemd Timers </a><ol><li><a href="#timer-units">Timer units </a></li><li><a href="#service-unit">Service unit </a></li><li><a href="#management">Management </a></li><li><a href="#examples">Examples </a><ol><li><a href="#monotonic-timer">Monotonic timer </a></li><li><a href="#realtime-timer">Realtime timer </a></li><li><a href="#tip">Tip </a></li></ol></li><li><a href="#transient-.timer-units">Transient .timer units </a></li><li><a href="#as-a-cron-replacement">As a cron replacement </a></li><li><a href="#benefits">Benefits </a><ol><li><a href="#caveats">Caveats </a></li><li><a href="#mailto">MAILTO </a></li></ol></li><li><a href="#usare-systemd-timers-al-posto-di-cron">Usare systemd timers al posto di cron </a></li></ol></li><li><a href="#analisi-della-gestione-della-directory-%2Ftmp">Analisi della gestione della directory /tmp </a></li><li><a href="#autopartenza-con-systemd-user">Autopartenza con systemd User </a></li><li><a href="#creazione-di-un-timer-utente-systemd-per-esecuzione-di-un-backup-con-rsync">Creazione di un Timer Utente Systemd per esecuzione di un Backup con Rsync </a><ol><li><a href="#configurazione-systemd-utente">Configurazione Systemd utente </a></li><li><a href="#applicazione-per-il-backup">Applicazione per il Backup </a></li><li><a href="#servizio-systemd">Servizio Systemd </a></li><li><a href="#timer-systemd">Timer Systemd </a></li><li><a href="#attivazione">Attivazione </a></li></ol></li><li><a href="#aggiungere-un-servizio-systemd">Aggiungere un servizio systemd </a></li><li><a href="#running-services-after-the-network-is-up">Running Services After the Network is up </a></li><li><a href="#how-to-i-figure-out-which-service-a-process-belongs-to%3F">How to I figure out which service a process belongs to? </a></li><li><a href="#pythonunbuffered-e-systemd">PYTHONUNBUFFERED e systemd </a></li><li><a href="#systemd-analyze">systemd-analyze </a></li><li><a href="#inotify">inotify </a></li><li><a href="#simple-vs-oneshot">simple vs oneshot </a><ol><li><a href="#esempio-servizio-simple">Esempio servizio simple </a></li><li><a href="#esempio-servizio-oneshot">Esempio servizio oneshot </a></li></ol></li><li><a href="#specifiers">Specifiers </a></li><li><a href="#validate-service">validate service </a></li><li><a href="#https%3A%2F%2Fwww.shubhamdipt.com%2Fblog%2Fhow-to-create-a-systemd-service-in-linux%2F">https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/ </a></li><li><a href="#https%3A%2F%2Flinuxhandbook.com%2Fcreate-systemd-services%2F">https://linuxhandbook.com/create-systemd-services/ </a><ol><li><a href="#esempio-servizio-utente">Esempio servizio utente </a></li><li><a href="#esempio-servizio-root">Esempio servizio root </a></li></ol></li><li><a href="#stop-di-un-servizio">Stop di un Servizio </a></li><li><a href="#enable">enable </a></li></ol></nav><h1 id="init-e-systemd" tabindex="-1">Init e Systemd <a class="header-anchor" href="#init-e-systemd" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/systemd">https://wiki.archlinux.org/title/systemd</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Systemd/Timers">https://wiki.archlinux.org/title/Systemd/Timers</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Systemd/User">https://wiki.archlinux.org/title/Systemd/User</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente">https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/systemd.unit.5">https://man.archlinux.org/man/systemd.unit.5</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/systemd.target.5">https://man.archlinux.org/man/systemd.target.5</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/wiki/Software/systemd/">https://www.freedesktop.org/wiki/Software/systemd/</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/">https://www.freedesktop.org/software/systemd/man/</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">https://www.freedesktop.org/software/systemd/man/systemd.unit.html</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.service.html">https://www.freedesktop.org/software/systemd/man/systemd.service.html</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.special.html">https://www.freedesktop.org/software/systemd/man/systemd.special.html</a></p>
+</li>
+<li>
+<p><a href="https://github.com/systemd/systemd/blob/main/NEWS">https://github.com/systemd/systemd/blob/main/NEWS</a></p>
+</li>
+<li>
+<p><a href="https://systemd.io/">https://systemd.io/</a></p>
+</li>
+<li>
+<p><a href="https://systemd.io/DESKTOP_ENVIRONMENTS/#xdg-autostart-integration">https://systemd.io/DESKTOP_ENVIRONMENTS/#xdg-autostart-integration</a></p>
+</li>
+<li>
+<p><a href="https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal">https://www.digitalocean.com/community/tutorials/systemd-essentials-working-with-services-units-and-the-journal</a></p>
+</li>
+</ul>
+<h2 id="systemd---system-v-init---upstart" tabindex="-1">Systemd - System V Init - Upstart <a class="header-anchor" href="#systemd---system-v-init---upstart" aria-hidden="true">🔗</a></h2>
+<p>Per vedere quale sistema è in utilizzo</p>
+<p>Al processo <code>init</code> è sempre assegnato il <code>PID 1</code></p>
+<ul>
+<li>systemd systemctl  Systemd</li>
+<li>upstart start/stop Upstart</li>
+<li>init    service    System V Init</li>
+</ul>
+<pre><code class="language-bash">$ ps -p 1 -o <span class="hljs-built_in">comm</span>=
+$ ps --no-headers -o <span class="hljs-built_in">comm</span> 1 <span class="hljs-comment"># verifica che il sistema utilizza systemd e non upstart</span>
+systemd
+</code></pre>
+<h2 id="man" tabindex="-1">man <a class="header-anchor" href="#man" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man systemd.unit
+  System Unit Search Path
+    /etc/systemd/system/     System units created by the administrator
+    /run/systemd/system/     Runtime units
+    /usr/lib/systemd/system/ System units installed by the distribution package manager
+  User Unit Search Path0
+    ~/.config/systemd/user/
+    /etc/systemd/user/
+    /run/systemd/user/
+
+  man systemd
+  man systemd.index
+  man systemd.directives
+
+  man systemd.service
+  man systemd.target
+  man systemd.exec
+  man systemd-user.conf
+
+  man systemd.timer
+  man systemd.time
+  man systemd.special
+  
+  man systemctl
+  man journalctl
+    
+$ man systemd.service|less -p <span class="hljs-string">&quot;oneshot&quot;</span>
+</code></pre>
+<pre><code class="language-bash">    $ systemctl                      <span class="hljs-comment"># stato dei servizi</span>
+    $ systemctl --user --no-pager    <span class="hljs-comment"># stato dei servizi utente</span>
+    $ systemctl status
+    $ systemctl --user status --no-pager
+    $ systemctl list-units --user --no-pager
+    $ systemctl list-units --<span class="hljs-built_in">type</span>=target --no-pager
+    $ systemctl <span class="hljs-built_in">cat</span> nginx.service
+    $ systemctl list-dependencies nginx.service
+    $ systemctl show nginx.service
+    $ systemctl --user -p TimersCalendar show backup_256.timer
+    $ <span class="hljs-built_in">sudo</span> systemctl edit --full nginx.service
+    $ <span class="hljs-built_in">sudo</span> systemctl daemon-reload
+    $ <span class="hljs-built_in">sudo</span> systemctl --user daemon-reload
+    $ journalctl -b <span class="hljs-comment"># Per vedere i messaggi dal boot</span>
+    $ journalctl --since=today --no-pager <span class="hljs-comment"># per vedere i messaggi di oggi</span>
+    $ journalctl -f <span class="hljs-comment"># seguire i messaggi</span>
+    $ journalctl --user-unit dnsmonitor --no-pager   <span class="hljs-comment"># mostrare i messaggi di una specifica unita utente</span>
+    $ journalctl --user -u dnsmonitor --no-pager     <span class="hljs-comment"># mostrare i messaggi di una specifica unita utente</span>
+    $ journalctl --user -b -u dnsmonitor --no-pager  <span class="hljs-comment"># mostrare i messaggi di una specifica unita utente emessi dall&#x27;ultimo boot</span>
+
+    <span class="hljs-comment"># Cercare tra tutti i servizi, anche tra quelli disabilitati:</span>
+    $ systemctl --state=<span class="hljs-built_in">help</span>
+    $ systemctl list-unit-files --no-pager <span class="hljs-string">&#x27;*[Nn]et*&#x27;</span>
+
+</code></pre>
+<h2 id="eliminare-un-servizio" tabindex="-1">Eliminare un servizio <a class="header-anchor" href="#eliminare-un-servizio" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Ricerca di un servizio vmware anche tra quelli disabilitati</span>
+$ systemctl list-unit-files --no-pager <span class="hljs-string">&#x27;*[Vv]m*&#x27;</span> <span class="hljs-comment"># nessun risultato non c&#x27;e&#x27; tra i file</span>
+$ systemctl --all --no-pager |grep -i vm         <span class="hljs-comment"># qui invece risulta, a causa di un link simbolico morto ma non cancellato</span>
+UNIT                     LOAD      ACTIVE   SUB       DESCRIPTION                                                                               
+vmware-networks.service  not-found inactive dead      vmware-networks.service
+$ systemctl --state=not-found --all
+  UNIT                    LOAD      ACTIVE   SUB  DESCRIPTION            
+● vmware-networks.service not-found inactive dead vmware-networks.service
+$ locate vmware-networks.service
+/etc/systemd/system/multi-user.target.wants/vmware-networks.service
+<span class="hljs-comment"># E&#x27; un link morto</span>
+$ ll /etc/systemd/system/multi-user.target.wants/vmware-networks.service
+lrwxrwxrwx 1 root root 47  2 ago 18.11 /etc/systemd/system/multi-user.target.wants/vmware-networks.service -&gt; /usr/lib/systemd/system/vmware-networks.service
+$ <span class="hljs-built_in">cd</span> /etc/systemd/system/multi-user.target.wants/
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> vmware-networks.service
+$ <span class="hljs-built_in">sudo</span> systemctl reset-failed vmware-networks.service
+$ <span class="hljs-built_in">sudo</span> systemctl daemon-reload
+$ systemctl --state=not-found --all
+
+<span class="hljs-comment"># https://superuser.com/questions/513159/how-to-remove-systemd-services</span>
+$ systemctl stop [servicename]
+$ systemctl <span class="hljs-built_in">disable</span> [servicename]
+$ <span class="hljs-built_in">rm</span> /etc/systemd/system/[servicename]
+$ <span class="hljs-built_in">rm</span> /etc/systemd/system/[servicename] <span class="hljs-comment"># and symlinks that might be related</span>
+$ <span class="hljs-built_in">rm</span> /usr/lib/systemd/system/[servicename] 
+$ <span class="hljs-built_in">rm</span> /usr/lib/systemd/system/[servicename] <span class="hljs-comment"># and symlinks that might be related</span>
+$ <span class="hljs-built_in">sudo</span> systemctl daemon-reload
+$ <span class="hljs-built_in">sudo</span> systemctl reset-failed
+</code></pre>
+<h2 id="service" tabindex="-1">service <a class="header-anchor" href="#service" aria-hidden="true">🔗</a></h2>
+<p><a href="http://guide.debianizzati.org/index.php/Gestione_e_creazione_di_servizi_in_Debian">http://guide.debianizzati.org/index.php/Gestione_e_creazione_di_servizi_in_Debian</a></p>
+<p>È possibile inoltre utilizzare il comando <code>service</code>, che si occuperà di invocare <code>systemctl</code> se systemd è attivo oppure di invocare lo script in <code>/etc/init.d/</code> in un ambiente pulito.</p>
+<h2 id="systemd-timers" tabindex="-1">Systemd Timers <a class="header-anchor" href="#systemd-timers" aria-hidden="true">🔗</a></h2>
+<p><a href="https://wiki.archlinux.org/index.php/Systemd/Timers">https://wiki.archlinux.org/index.php/Systemd/Timers</a></p>
+<p>Timers are systemd unit files whose name ends in <code>.timer</code> that control <code>.service</code> files or events.<br>
+Timers can be used as <a href="#as-a-cron-replacement"><strong>an alternative to cron</strong></a> . Timers have built-in support for calendar time events, monotonic time events, and can be run asynchronously.</p>
+<h3 id="timer-units" tabindex="-1">Timer units <a class="header-anchor" href="#timer-units" aria-hidden="true">🔗</a></h3>
+<p>Timers are systemd unit files with a suffix of <code>.timer</code>. Timers are like other unit configuration files and are loaded from the same paths but include a <code>[Timer]</code> section which defines when and how the timer activates. Timers are defined as one of two types:</p>
+<ul>
+<li>Realtime timers (a.k.a. wallclock timers) activate on a calendar event, the same way that cronjobs do. The option <code>OnCalendar=</code> is used to define them.</li>
+<li>Monotonic timers activate after a time span relative to a varying starting point. They stop if the computer is temporarily suspended or shut down. There are number of different monotonic timers but all have the form: <code>OnTypeSec=</code>. Common monotonic timers include <code>OnBootSec</code> and <code>OnUnitActiveSec</code>.</li>
+</ul>
+<p>For a full explanation of timer options, see the <code>systemd.timer(5)</code>. The argument syntax for calendar events and time spans is defined in <code>systemd.time(7)</code>.
+Note: systemd offers the target timers.target which sets up all timers that should be active after boot (see <code>systemd.special(7)</code> for details). To use it, add <code>WantedBy=timers.target</code> to the <code>[Install]</code> section of your timer and enable the timer unit.</p>
+<h3 id="service-unit" tabindex="-1">Service unit <a class="header-anchor" href="#service-unit" aria-hidden="true">🔗</a></h3>
+<p>For each <code>.timer</code> file, a matching <code>.service</code> file exists (e.g. <code>foo.timer</code> and <code>foo.service</code>). The <code>.timer</code> file activates and controls the <code>.service</code> file. The <code>.service</code> does not require an <code>[Install]</code> section as it is the timer units that are enabled.<br>
+If necessary, it is possible to control a differently-named unit using the <mark><strong><code>Unit=</code></strong></mark> option in the timer's <code>[Timer]</code> section.</p>
+<h3 id="management" tabindex="-1">Management <a class="header-anchor" href="#management" aria-hidden="true">🔗</a></h3>
+<p>To use a timer unit enable and start it like any other unit (remember to add the <code>.timer</code> suffix). To view all started timers, run:</p>
+<pre><code class="language-bash">$ systemctl list-timers
+
+NEXT                          LEFT        LAST                          PASSED     UNIT                         ACTIVATES
+Thu 2014-07-10 19:37:03 CEST  11h left    Wed 2014-07-09 19:37:03 CEST  12h ago    systemd-tmpfiles-clean.timer systemd-tmpfiles-clean.service
+Fri 2014-07-11 00:00:00 CEST  15h left    Thu 2014-07-10 00:00:13 CEST  8h ago     logrotate.timer              logrotate.service
+</code></pre>
+<p>Note:</p>
+<ul>
+<li>To list all timers (including inactive), use <code>systemctl list-timers --all</code>.</li>
+<li>The status of a service started by a timer will likely be inactive unless it is currently being triggered.</li>
+<li>If a timer gets out of sync, it may help to delete its <code>stamp-*</code> file in <code>/var/lib/systemd/timers</code> (or <code>~/.local/share/systemd/</code> in case of user timers). These are zero length files which mark the last time each timer was run. If deleted, they will be reconstructed on the next start of their timer.</li>
+</ul>
+<h3 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h3>
+<p>A service unit file can be scheduled with a timer out-of-the-box. The following examples schedule <code>foo.service</code> to be run with a corresponding timer called <code>foo.timer</code>.</p>
+<h4 id="monotonic-timer" tabindex="-1">Monotonic timer <a class="header-anchor" href="#monotonic-timer" aria-hidden="true">🔗</a></h4>
+<p>A timer which will start 15 minutes after boot and again every week while the system is running.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># /etc/systemd/system/foo.timer</span>
+
+[Unit]
+Description=Run foo weekly and on boot
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=1w
+
+[Install]
+WantedBy=timers.target
+</code></pre>
+<h4 id="realtime-timer" tabindex="-1">Realtime timer <a class="header-anchor" href="#realtime-timer" aria-hidden="true">🔗</a></h4>
+<p>A timer which starts once a week (at 12:00am on Monday). When activated, it triggers the service immediately if it missed the last start time (option <code>Persistent=true</code>), for example due to the system being powered off:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># /etc/systemd/system/foo.timer</span>
+
+[Unit]
+Description=Run foo weekly
+
+[Timer]
+OnCalendar=weekly
+Persistent=<span class="hljs-literal">true</span>
+
+[Install]
+WantedBy=timers.target
+</code></pre>
+<p>When more specific dates and times are required, <code>OnCalendar</code> events uses the following format:</p>
+<pre><code>DayOfWeek Year-Month-Day Hour:Minute:Second
+</code></pre>
+<p>An asterisk may be used to specify any value and commas may be used to list possible values. Two values separated by <code>..</code> indicate a contiguous range.<br>
+In the below example the service is run the first four days of each month at <code>12:00 PM</code>, but only if that day is a <code>Monday</code> or a <code>Tuesday</code>.</p>
+<pre><code>OnCalendar=Mon,Tue *-*-01..04 12:00:00
+</code></pre>
+<p>To run a service on the first Saturday of every month, use:</p>
+<pre><code>OnCalendar=Sat *-*-1..7 18:00:00
+</code></pre>
+<p>When using the <code>DayOfWeek</code> part, at least one weekday has to be specified. If you want something to run every day at <code>4am</code>, use:</p>
+<pre><code>OnCalendar=*-*-* 4:00:00
+</code></pre>
+<p>To run a service at different times, <code>OnCalendar</code> may be specified more than once. In the example below, the service runs at <code>22:30</code> on weekdays and at <code>20:00</code> on weekends.</p>
+<pre><code>OnCalendar=Mon..Fri 22:30
+OnCalendar=Sat,Sun 20:00
+</code></pre>
+<p>More information is available in <code>systemd.time(7)</code>.</p>
+<pre><code class="language-bash">man systemd.time
+</code></pre>
+<h4 id="tip" tabindex="-1">Tip <a class="header-anchor" href="#tip" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><code>OnCalendar</code> time specifications can be tested in order to verify their validity and to calculate the next time the condition would elapse when used on a timer unit file with the <code>calendar</code> option of the <code>systemd-analyze</code> utility. For example, one can use <code>systemd-analyze calendar weekly</code> or <code>systemd-analyze calendar &quot;Mon,Tue *-*-01..04 12:00:00&quot;</code>.</li>
+<li>The <code>faketime</code> command is especially useful to test various scenarios with the above command; it comes with the libfaketime package.</li>
+<li>Special event expressions like <code>daily</code> and <code>weekly</code> refer to specific start times and thus any timers sharing such calendar events will start simultaneously. Timers sharing start events can cause poor system performance if the timers' services compete for system resources. The <code>RandomizedDelaySec</code> option in the <code>[Timer]</code> section avoids this problem by randomly staggering the start time of each timer. See <code>systemd.timer(5)</code>.</li>
+<li>Add the option <code>AccuracySec=1us</code> to the <code>[Timer]</code> section, to avoid the inaccuracy of the <code>1m</code> default value of AccuracySec. Also see <code>systemd.timer(5)</code>.</li>
+</ul>
+<h3 id="transient-.timer-units" tabindex="-1">Transient .timer units <a class="header-anchor" href="#transient-.timer-units" aria-hidden="true">🔗</a></h3>
+<p>One can use <code>systemd-run</code> to create transient <code>.timer</code> units. That is, one can set a command to run at a specified time without having a service file. For example the following command touches a file after 30 seconds:</p>
+<pre><code>systemd-run --on-active=30 /bin/touch /tmp/foo
+</code></pre>
+<p>One can also specify a pre-existing service file that does not have a timer file. For example, the following starts the systemd unit named someunit.service after 12.5 hours have elapsed:</p>
+<pre><code>systemd-run --on-active=&quot;12h 30m&quot; --unit someunit.service
+</code></pre>
+<p>See <code>systemd-run(1)</code> for more information and examples.</p>
+<h3 id="as-a-cron-replacement" tabindex="-1">As a cron replacement <a class="header-anchor" href="#as-a-cron-replacement" aria-hidden="true">🔗</a></h3>
+<p>Although cron is arguably the most well-known job scheduler, systemd timers can be an alternative.</p>
+<h3 id="benefits" tabindex="-1">Benefits <a class="header-anchor" href="#benefits" aria-hidden="true">🔗</a></h3>
+<p>The main benefits of using timers come from each job having its own systemd service. Some of these benefits are:</p>
+<ul>
+<li>Jobs can be easily started independently of their timers. This simplifies debugging.</li>
+<li>Each job can be configured to run in a specific environment (see systemd.exec(5)).</li>
+<li>Jobs can be attached to cgroups.</li>
+<li>Jobs can be set up to depend on other systemd units.</li>
+<li>Jobs are logged in the systemd journal for easy debugging.</li>
+</ul>
+<h4 id="caveats" tabindex="-1">Caveats <a class="header-anchor" href="#caveats" aria-hidden="true">🔗</a></h4>
+<p>Some things that are easy to do with cron are difficult to do with timer units alone:</p>
+<ul>
+<li>Creation: to set up a timed job with systemd you need to create two files and run <code>systemctl</code> commands, compared to adding a single line to a crontab.</li>
+<li>Emails: there is no built-in equivalent to cron's <code>MAILTO</code> for sending emails on job failure. See the next section for an example of setting up a similar functionality using OnFailure=.</li>
+</ul>
+<p>Also note that user timer units will only run during an active user login session by default. However, lingering can enable services to run at boot even when the user has no active login session.</p>
+<h4 id="mailto" tabindex="-1">MAILTO <a class="header-anchor" href="#mailto" aria-hidden="true">🔗</a></h4>
+<p>You can set up systemd to send an e-mail when a unit fails. Cron sends mail to <code>MAILTO</code> if the job outputs to stdout or stderr, but many jobs are setup to only output on error. First you need two files: an executable for sending the mail and a .service for starting the executable. For this example, the executable is just a shell script using <code>sendmail</code>, which is in packages that provide <code>smtp-forwarder</code>.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># /usr/local/bin/systemd-email</span>
+
+<span class="hljs-comment">#!/bin/sh</span>
+
+/usr/bin/sendmail -t &lt;&lt;<span class="hljs-string">ERRMAIL
+To: $1
+From: systemd &lt;root@$HOSTNAME&gt;
+Subject: $2
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset=UTF-8
+
+$(systemctl status --full &quot;$2&quot;)
+ERRMAIL</span>
+</code></pre>
+<p>Whatever executable you use, it should probably take at least two arguments as this shell script does: the address to send to and the unit file to get the status of. The .service we create will pass these arguments:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># /etc/systemd/system/status_email_user@.service</span>
+
+[Unit]
+Description=status email <span class="hljs-keyword">for</span> %i to user
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/systemd-email address %i
+User=nobody
+Group=systemd-journal
+</code></pre>
+<p>Where <code>user</code> is the user being emailed and <code>address</code> is that user's email address. Although the recipient is hard-coded, the unit file to report on is passed as an instance parameter, so this one service can send email for many other units. At this point you can <code>start status_email_user@dbus.service</code> to verify that you can receive the emails.</p>
+<p>Then simply edit the service you want emails for and add <code>OnFailure=status_email_user@%n.service</code> to the <code>[Unit]</code> section. <code>%n</code> passes the unit's name to the template.</p>
+<p>Note:</p>
+<ul>
+<li>If you set up SSMTP security according to SSMTP#Security the user <code>nobody</code> will not have access to <code>/etc/ssmtp/ssmtp.conf</code>, and the <code>systemctl start status_email_user@dbus.service</code> command will fail. One solution is to use <code>root</code> as the User in the <code>status_email_user@.service</code> unit.</li>
+<li>If you try to use <code>mail -s somelogs address</code> in your email script, <code>mail</code> will fork and systemd will kill the mail process when it sees your script exit. Make the mail non-forking by doing <code>mail -Ssendwait -s somelogs address</code>.</li>
+</ul>
+<h3 id="usare-systemd-timers-al-posto-di-cron" tabindex="-1">Usare systemd timers al posto di cron <a class="header-anchor" href="#usare-systemd-timers-al-posto-di-cron" aria-hidden="true">🔗</a></h3>
+<pre><code>/etc/systemd/system/baz-cleanup.service:
+    [Unit]
+    Description=Baz Periodic Cleanup
+    [Service]
+    Type=simple
+    ExecStart=/usr/bin/python /opt/baz/cleanup.py
+    StandardError=journal
+</code></pre>
+<p>We dont provide an <code>[Install]</code> section, since this service is not meant to be enabled on its own (<strong>will be triggered by an enabled timer instead</strong>).</p>
+<pre><code>/opt/baz/cleanup.py could be something like:
+    #!/usr/bin/python
+    import logging
+    logging.basicConfig(level=logging.INFO)
+    logging.info(&quot;baz-cleanup: Running periodic cleanup for Baz ...&quot;)
+
+/etc/systemd/system/baz-cleanup.timer:
+    [Unit]
+    Description=Timer for Baz Cleanup
+    [Timer]
+    # Define target unit (in case the name part is the same, can be omitted)
+    Unit=baz-cleanup.service
+    ## Activate target unit based on monotonic timers
+    # Time to wait after booting before we run first time
+    #OnBootSec=10min
+    # Time between running each consecutive time
+    #OnUnitActiveSec=30min
+    OnUnitActiveSec=1h
+    ## or ..
+    ## Activate target based on wallclock time (calendar event)
+    # Define a calendar event (see `man systemd.time`)
+    #OnCalendar=*-*-* 12:13:00
+    [Install]
+    WantedBy=multi-user.target
+</code></pre>
+<p>Start/Enable the timer<br>
+Start the timer. Inspect the journal to verify that the perioric task is actually triggered.<br>
+Controllare il log di systemd, aprire un terminale separato:</p>
+<pre><code># journalctl -f
+</code></pre>
+<p>Ricaricare systemd, controllo per nuove o modificate unità:</p>
+<pre><code># systemctl daemon-reload
+</code></pre>
+<p>Partenza del timer</p>
+<pre><code># systemctl start baz-cleanup.timer
+</code></pre>
+<p>Impostare la partenza del timer al boot</p>
+<pre><code># systemctl enable baz-cleanup.timer
+</code></pre>
+<h2 id="analisi-della-gestione-della-directory-%2Ftmp" tabindex="-1">Analisi della gestione della directory <code>/tmp</code> <a class="header-anchor" href="#analisi-della-gestione-della-directory-%2Ftmp" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd_(Italiano)">https://wiki.archlinux.org/index.php/Systemd_(Italiano)</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd_(Italiano)#File_temporanei">https://wiki.archlinux.org/index.php/Systemd_(Italiano)#File_temporanei</a></li>
+</ul>
+<p>La directory <code>/tmp</code> viene cancellata al boot mediante <code>systemd</code>.</p>
+<p>Vogliamo capire come viene svuotata la directory <code>/tmp</code>, sospettiamo che avvenga al boot mediante una unit systemd,
+cerchiamo una unit systemd che contenga la stringa &quot;tmp&quot;:</p>
+<pre><code class="language-bash"><span class="hljs-variable">$USER</span>@cdplinux:/etc$ systemctl list-units|grep tmp
+  systemd-tmpfiles-setup-dev.service                  loaded active exited    Create Static Device Nodes <span class="hljs-keyword">in</span> /dev    
+  systemd-tmpfiles-setup.service                      loaded active exited    Create Volatile Files and Directories 
+  systemd-update-utmp.service                         loaded active exited    Update UTMP about System Boot/Shutdown
+  systemd-tmpfiles-clean.timer                        loaded active waiting   Daily Cleanup of Temporary Directories
+</code></pre>
+<p>Si vede che la unit che ci interessa è <code>systemd-tmpfiles-clean.timer</code>.</p>
+<pre><code class="language-bash">$ systemctl list-timers
+NEXT                         LEFT           LAST                         PASSED       UNIT                                   ACTIVATES                               
+Sat 2020-08-22 12:33:04 CEST 13min left     Sat 2020-08-22 11:35:00 CEST 45min ago    anacron.timer                          anacron.service                         
+Sun 2020-08-23 00:00:00 CEST 11h left       Sat 2020-08-22 08:54:51 CEST 3h 25min ago logrotate.timer                        logrotate.service                       
+Sun 2020-08-23 10:37:00 CEST 22h left       Sat 2020-08-22 10:37:00 CEST 1h 43min ago systemd-tmpfiles-clean.timer           systemd-tmpfiles-clean.service  
+</code></pre>
+<p>Vediamo di ricavare un pò di informazioni relative ad esso:</p>
+<pre><code class="language-bash">$ systemctl status systemd-tmpfiles-clean.timer
+
+● systemd-tmpfiles-clean.timer - Daily Cleanup of Temporary Directories
+     Loaded: loaded (/lib/systemd/system/systemd-tmpfiles-clean.timer; static; vendor preset: enabled)
+     Active: active (waiting) since Sat 2020-08-22 10:21:30 CEST; 1h 8min ago
+    Trigger: Sun 2020-08-23 10:37:00 CEST; 23h left
+   Triggers: ● systemd-tmpfiles-clean.service
+       Docs: man:tmpfiles.d(5)
+             man:systemd-tmpfiles(8)
+
+ago 22 10:21:30 cdplinux systemd[1]: Started Daily Cleanup of Temporary Directories.
+</code></pre>
+<p>Dal quale si vede che è possibile accedere alla documentazione:</p>
+<pre><code class="language-bash">man systemd-tmpfiles
+man tmpfiles.d
+systemctl <span class="hljs-built_in">help</span> systemd-tmpfiles-clean.timer
+man systemd.time
+</code></pre>
+<p>Il comando <code>systemd-tmpfiles</code> cancella le directory temporanee in base ai file di configurazione elencati in <code>man tmpfiles.d</code>.</p>
+<p>Cerchiamo la posizione dei file <code>.conf</code> di <code>systemd-tmpfiles</code>:</p>
+<pre><code class="language-bash">man tmpfiles.d
+locate tmpfiles.d
+<span class="hljs-built_in">cd</span> /usr/lib/tmpfiles.d <span class="hljs-comment"># &lt;-- nel nostro sistema questa è la directory che contiene i file .conf</span>
+$ <span class="hljs-built_in">cat</span> tmp.conf
+<span class="hljs-comment">#  This file is part of systemd.</span>
+<span class="hljs-comment"># See tmpfiles.d(5) for details</span>
+<span class="hljs-comment"># Clear tmp directories separately, to make them easier to override</span>
+D /tmp 1777 root root -
+<span class="hljs-comment">#q /var/tmp 1777 root root 30d</span>
+</code></pre>
+<p>Ora cerchiamo la posizione degli script systemd che lanciano <code>systemd-tmpfiles</code>:</p>
+<pre><code class="language-bash">locate tmpfiles
+/usr/lib/systemd/user/systemd-tmpfiles-clean.service
+/usr/lib/systemd/user/systemd-tmpfiles-clean.timer
+/usr/lib/systemd/user/systemd-tmpfiles-setup.service
+
+<span class="hljs-built_in">cd</span> /usr/lib/systemd/user/
+
+$ ll *tmpfiles*
+-rw-r--r-- 1 root root 657 apr  1 19:23 systemd-tmpfiles-clean.service
+-rw-r--r-- 1 root root 533 apr  1 19:23 systemd-tmpfiles-clean.timer
+-rw-r--r-- 1 root root 720 apr  1 19:23 systemd-tmpfiles-setup.service
+
+$ <span class="hljs-built_in">cat</span> systemd-tmpfiles-setup.service
+<span class="hljs-comment">#  This file is part of systemd.</span>
+
+[Unit]
+Description=Create User<span class="hljs-string">&#x27;s Volatile Files and Directories
+Documentation=man:tmpfiles.d(5) man:systemd-tmpfiles(8)
+DefaultDependencies=no
+Conflicts=shutdown.target
+Before=basic.target shutdown.target
+RefuseManualStop=yes
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=systemd-tmpfiles --user --create --remove --boot
+SuccessExitStatus=DATAERR
+
+[Install]
+WantedBy=basic.target
+
+</span></code></pre>
+<h2 id="autopartenza-con-systemd-user" tabindex="-1">Autopartenza con systemd User <a class="header-anchor" href="#autopartenza-con-systemd-user" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente">https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente</a></li>
+</ul>
+<p>systemd offre agli utenti la possibilità di gestire i servizi <strong>sotto il controllo dell'utente</strong> tramite una istanza di systemd per singolo utente, che consente agli stessi di avviare, fermare, abilitare e disabilitare le proprie unità. Questa caratteristica è utile per demoni e altre operazioni automatiche come lo scaricamento della posta.
+Secondo la configurazione di default in <code>/etc/pam.d/system-login</code>, il modulo pam_systemd avvia automaticamente una istanza di <code>systemd --user</code> al primo login dell'utente. Tale processo rimarrà in esecuzione fin tanto che l'utente sarà coneesso, e verrà terminato quando l'utente effettua il logout.</p>
+<p><strong>I servizi systemd user vengono eseguiti in una login shell</strong> sono quindi configurabili con <code>~/.bash_profile</code></p>
+<pre><code class="language-bash">man systemd.special
+man systemd.exec
+man environment.d
+    ~/.config/environment.d/*.conf
+systemctl --user show-environment
+</code></pre>
+<p><a href="https://wiki.archlinux.org/title/systemd/User#Environment_variables">https://wiki.archlinux.org/title/systemd/User#Environment_variables</a></p>
+<p>i servizi utente risiedono nelle directory:</p>
+<ul>
+<li><code>/usr/lib/systemd/user/</code> directory per i servizi forniti dai pacchetti.</li>
+<li><code>/etc/systemd/user/</code> directory per i servizi definiti dall'amministratore di sistema.</li>
+<li><strong><code>~/.config/systemd/user/</code></strong> directory per i servizi utente.</li>
+</ul>
+<pre><code class="language-bash">ps -ef|grep <span class="hljs-string">&#x27;systemd --user&#x27;</span>|grep -v grep
+<span class="hljs-built_in">sudo</span> systemctl list-unit-files --<span class="hljs-built_in">type</span>=service
+<span class="hljs-built_in">sudo</span> systemctl is-enabled mysql
+<span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> mysql
+
+<span class="hljs-built_in">mkdir</span> -p ~/.config/systemd/user
+</code></pre>
+<p>All'avvio di una istanza utente di systemd, viene caricato il target <code>default.target</code>;<br>
+è ora possibile controllare manualmente i servizi utente tramite <code>systemctl --user</code>.</p>
+<p>Tutti i servizi utente devono essere inseriti in <code>~/.config/systemd/user</code>.<br>
+Se si vuole avviare une servizio automaticamente al login, si esegua <code>systemctl --user enable servizio</code> per ogni servizio.</p>
+<p>L'istanza utente di systemd non eredita le variabili d'ambiente definite in <code>.bashrc</code>,<br>
+Per gli utenti che abbiano una propria home directory, si possono specificare delle variabili di ambiente mediante l'opzione <code>DefaultEnvironment</code> in <code>~/.config/systemd/user.conf</code>.</p>
+<p>Esempio:</p>
+<pre><code>DefaultEnvironment=&quot;VAR1=word1 word2&quot; VAR2=word3 &quot;VAR3=word 5 6&quot;
+</code></pre>
+<pre><code class="language-bash">man systemd-user.conf
+
+<span class="hljs-built_in">cp</span> /etc/systemd/user.conf ~/.config/systemd/ <span class="hljs-comment"># non utilizzato, non permette di ereditare il PATH</span>
+
+<span class="hljs-comment"># Questa soluzione invece si</span>
+<span class="hljs-built_in">cat</span> &gt;&gt; ~/.bash_profile &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+systemctl --user import-environment PATH
+systemctl --user import-environment SHELL
+systemctl --user import-environment LANG
+systemctl --user import-environment USER
+EOF
+
+<span class="hljs-built_in">cat</span> &gt; ~/.config/systemd/user/autostart_example.service &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=Esempio di script <span class="hljs-keyword">in</span> autostart con systemd <span class="hljs-keyword">in</span> modalità user
+
+[Service]
+ExecStart=/usr/bin/env bash -c <span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>/workspaces/shell/autostart_example/autostart_example.sh&quot;</span>
+
+[Install]
+WantedBy=default.target
+EOF
+
+systemctl --user list-unit-files --<span class="hljs-built_in">type</span>=service
+systemctl --user start autostart_example
+systemctl --user <span class="hljs-built_in">enable</span> autostart_example
+systemctl --user status autostart_example
+journalctl --no-pager --user-unit autostart_example
+
+</code></pre>
+<h2 id="creazione-di-un-timer-utente-systemd-per-esecuzione-di-un-backup-con-rsync" tabindex="-1">Creazione di un Timer Utente Systemd per esecuzione di un Backup con Rsync <a class="header-anchor" href="#creazione-di-un-timer-utente-systemd-per-esecuzione-di-un-backup-con-rsync" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente">https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd/Timers">https://wiki.archlinux.org/index.php/Systemd/Timers</a></li>
+<li><a href="https://wiki.archlinux.org/title/Systemd/User">https://wiki.archlinux.org/title/Systemd/User</a></li>
+<li><a href="https://man.archlinux.org/man/systemd.special.7#UNITS_MANAGED_BY_THE_USER_SERVICE_MANAGER">https://man.archlinux.org/man/systemd.special.7#UNITS_MANAGED_BY_THE_USER_SERVICE_MANAGER</a></li>
+<li><a href="https://man.archlinux.org/man/systemd.unit.5">https://man.archlinux.org/man/systemd.unit.5</a></li>
+</ul>
+<p>Creiamo una applicazione script shell Bash richiamata ad ogni ora mediante Systemd.</p>
+<p>L'applicazione di compone dei seguenti files:</p>
+<ul>
+<li><a href="file:///home/$USER/bin/sync_to_CDPBackup256.js">file:///home/$USER/bin/sync_to_CDPBackup256.js</a></li>
+<li><a href="file://~/workspaces/Nodejs/Applications/DirSync/etc/rsync_exclude_list.txt">file://~/workspaces/Nodejs/Applications/DirSync/etc/rsync_exclude_list.txt</a></li>
+<li><a href="file:///home/$USER/.config/systemd/user">file:///home/$USER/.config/systemd/user</a></li>
+<li><a href="file:///home/$USER/.config/systemd/user/backup_256.service">file:///home/$USER/.config/systemd/user/backup_256.service</a></li>
+<li><a href="file:///home/$USER/.config/systemd/user/backup_256.timer">file:///home/$USER/.config/systemd/user/backup_256.timer</a></li>
+</ul>
+<p>Il servizio di backup si attiva con:</p>
+<pre><code class="language-bash">systemctl --user <span class="hljs-built_in">enable</span> backup_256.timer
+systemctl --user daemon-reload <span class="hljs-comment"># serve quando di cambiano i files</span>
+</code></pre>
+<p>si abilita solo il timer, è il timer che esegue il backup_256.service, che dunque non deve essere abilitato</p>
+<p>Comandi utili:</p>
+<pre><code class="language-bash">    systemctl --user <span class="hljs-built_in">enable</span> backup_256.timer
+    systemctl --user -p TimersCalendar show backup_256.timer
+    systemctl --user list-timers
+
+    systemctl --user start backup_256
+    systemctl --user status backup_256
+    journalctl --no-pager --user-unit backup_256
+
+<span class="hljs-comment"># Ricaricare systemd, controllo per nuove o modificate unità:</span>
+
+    systemctl --user daemon-reload <span class="hljs-comment"># serve quando di cambiano i files</span>
+
+man systemd
+man sysctl
+systemctl --user list-unit-files --<span class="hljs-built_in">type</span>=service
+systemctl --user is-enabled backup_256.timer
+ps -ef|grep <span class="hljs-string">&#x27;systemd --user&#x27;</span>|grep -v grep
+<span class="hljs-comment"># comandi per testare la sintassi dei timer</span>
+systemd-analyze calendar <span class="hljs-string">&quot;Mon,Tue *-*-01..04 12:00:00&quot;</span>
+systemd-analyze calendar <span class="hljs-string">&quot;*-*-* *:00:00&quot;</span>
+systemd-analyze timespan <span class="hljs-string">&quot;1h&quot;</span>
+</code></pre>
+<h3 id="configurazione-systemd-utente" tabindex="-1">Configurazione Systemd utente <a class="header-anchor" href="#configurazione-systemd-utente" aria-hidden="true">🔗</a></h3>
+<p>Utilizziamo Systemd in ambiente utente invece che al livello di sistema,<br>
+per comodità eseguiamo una configurazione che permetterà allo script shell eseguito mediante systemd di poter utilizzare <br>
+alcune varibili di ambiente, non altrimenti disponibili(l'ambiente di esecuzione di default mediante systemd è vuoto).</p>
+<p>i servizi systemd utente non vedono le variabili di ambiente utente(<code>~/.bashrc</code>),
+per cui bisogna passargliele, ci sono due modi:</p>
+<ol>
+<li>Usare il valore <code>Environment=&quot;PATH=...</code> nel .service (<strong>Soluzione consigliata</strong>)</li>
+<li>definire un <code>~/.bash_profile</code> che esegue le <code>systemctl --user import-environment</code></li>
+</ol>
+<p><strong>NOTA</strong>
+E' possibile evitare il seguente <code>~/.bash_profile</code> se nel .service si utilizza <code>Environment=&quot;PATH=...</code></p>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> -p ~/.config/systemd/user
+<span class="hljs-built_in">cp</span> /etc/systemd/user.conf ~/.config/systemd/ <span class="hljs-comment"># attualmente non utilizzato</span>
+
+<span class="hljs-comment"># Permette di definire per i servizi systemd utente alcune variabili di ambiente non altrimenti disponibili</span>
+<span class="hljs-built_in">cat</span> &gt;&gt; ~/.bash_profile &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+systemctl --user import-environment PATH
+systemctl --user import-environment SHELL
+systemctl --user import-environment LANG
+systemctl --user import-environment USER
+EOF
+<span class="hljs-comment"># .bash_profile viene richiamato da bash per le shell di login</span>
+</code></pre>
+<h3 id="applicazione-per-il-backup" tabindex="-1">Applicazione per il Backup <a class="header-anchor" href="#applicazione-per-il-backup" aria-hidden="true">🔗</a></h3>
+<p>L'applicazione si compone di uno script Bash e di un file di testo di configurazione:</p>
+<ul>
+<li><code>~/bin/sync_to_CDPBackup256.js</code></li>
+<li><code>~/bin/rsync_exclude_list.txt</code></li>
+</ul>
+<pre><code class="language-javascript">cat &gt;&gt; ~<span class="hljs-regexp">/bin/</span>sync_to_CDPBackup256.<span class="hljs-property">js</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+#!<span class="hljs-regexp">/usr/</span>bin/env node
+<span class="hljs-keyword">const</span> os = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;os&#x27;</span>);
+<span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">const</span> sync = <span class="hljs-built_in">require</span>(path.<span class="hljs-title function_">join</span>(os.<span class="hljs-title function_">homedir</span>(), <span class="hljs-string">&#x27;workspaces/Nodejs/Applications/DirSync&#x27;</span>));
+
+<span class="hljs-title function_">sync</span>([ [<span class="hljs-string">&#x27;~&#x27;</span>, <span class="hljs-string">&#x27;/mnt/CDPBackup256/&#x27;</span>] ], path.<span class="hljs-title function_">join</span>(os.<span class="hljs-title function_">homedir</span>(), <span class="hljs-string">&#x27;log&#x27;</span>));
+
+<span class="hljs-comment">/*
+    Script per il backup del sistema, utilizzato dal service systemd utente da me creato in:
+
+    ~/.config/systemd/user/backup_256.service
+    ~/.config/systemd/user/backup_256.timer
+    ~/workspaces/Nodejs/Applications/DirSync/etc/rsync_exclude_list.txt
+
+    ed installato con:
+
+    systemctl --user enable backup_256.timer
+    systemctl --user -p TimersCalendar show backup_256.timer
+    systemctl --user list-timers
+
+    systemctl --user start backup_256
+    systemctl --user status backup_256
+    journalctl --no-pager --user-unit backup_256
+
+Ricaricare systemd, controllo per nuove o modificate unità:
+
+    systemctl --user daemon-reload # serve quando di cambiano i files
+
+
+*/</span>
+<span class="hljs-variable constant_">EOF</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt;&gt; ~/bin/sync_to_CDPBackup256.sh &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># ~/bin/sync_to_CDPBackup256.sh</span>
+<span class="hljs-comment"># ~/bin/rsync_exclude_list.txt</span>
+<span class="hljs-comment"># Script per il backup del sistema, utilizzato dal service systemd utente da me creato in:</span>
+<span class="hljs-comment"># ~/.config/systemd/user/backup_256.service</span>
+<span class="hljs-comment"># ~/.config/systemd/user/backup_256.timer</span>
+<span class="hljs-comment"># ed installato con:</span>
+<span class="hljs-comment"># systemctl --user enable backup_256.timer</span>
+DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$( cd <span class="hljs-string">&quot;<span class="hljs-subst">$( dirname <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span> )</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd )</span>&quot;</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$DIR</span>
+<span class="hljs-built_in">readonly</span> LOG_FILE=~/backup_to_256.<span class="hljs-built_in">log</span>
+<span class="hljs-comment"># Creazione del file di log globale dello script, stdout e stderr vengono redirezionati nel file di log</span>
+<span class="hljs-built_in">touch</span> <span class="hljs-variable">$LOG_FILE</span>
+<span class="hljs-comment"># Apre stdout in scrittura su `$LOG_FILE`.</span>
+<span class="hljs-built_in">exec</span> 1&gt;<span class="hljs-variable">$LOG_FILE</span>
+<span class="hljs-comment"># Redireziona standard error su standard output </span>
+<span class="hljs-built_in">exec</span> 2&gt;&amp;1
+<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%F %T.%N&quot;</span>
+<span class="hljs-comment">#echo &quot;DIR:$DIR&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;LOG_FILE:<span class="hljs-variable">$LOG_FILE</span>&quot;</span>  
+<span class="hljs-comment">#echo &quot;File Descriptor Aperti: $(ls -l /proc/$$/fd|cut -d &#x27; &#x27; -f9-)&quot;</span>
+<span class="hljs-built_in">echo</span> ==============================================================
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;rsync ~ /mnt/CDPBackup256/&quot;</span>
+rsync -i -a --delete --delete-excluded --exclude-from=<span class="hljs-string">&#x27;rsync_exclude_list.txt&#x27;</span> ~ /mnt/CDPBackup256/
+<span class="hljs-comment">#read -p &quot;Press any key to continue&quot; x</span>
+<span class="hljs-comment">#systemctl --user -p TimersCalendar show backup_256.timer</span>
+EOF
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt;&gt; ~/bin/rsync_exclude_list.txt &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+/<span class="hljs-variable">$USER</span>/.adobe
+/<span class="hljs-variable">$USER</span>/.android
+/<span class="hljs-variable">$USER</span>/.Android*
+/<span class="hljs-variable">$USER</span>/.aptitude
+/<span class="hljs-variable">$USER</span>/.audacity-data
+/<span class="hljs-variable">$USER</span>/.bash_history
+/<span class="hljs-variable">$USER</span>/.cache
+/<span class="hljs-variable">$USER</span>/.cinnamon
+/<span class="hljs-variable">$USER</span>/.config
+/<span class="hljs-variable">$USER</span>/.cups
+/<span class="hljs-variable">$USER</span>/.dbus
+/<span class="hljs-variable">$USER</span>/.eclipse
+/<span class="hljs-variable">$USER</span>/.gnome
+/<span class="hljs-variable">$USER</span>/.gnome2/accels/nemo
+/<span class="hljs-variable">$USER</span>/.gnupg
+/<span class="hljs-variable">$USER</span>/.gphoto*
+/<span class="hljs-variable">$USER</span>/.gradle*
+/<span class="hljs-variable">$USER</span>/.hardinfo
+/<span class="hljs-variable">$USER</span>/.hplip
+/<span class="hljs-variable">$USER</span>/.java
+/<span class="hljs-variable">$USER</span>/.kde
+/<span class="hljs-variable">$USER</span>/.lesshst
+/<span class="hljs-variable">$USER</span>/.local/share
+/<span class="hljs-variable">$USER</span>/.macromedia
+/<span class="hljs-variable">$USER</span>/.m2
+/<span class="hljs-variable">$USER</span>/.mono
+/<span class="hljs-variable">$USER</span>/.mozilla
+/<span class="hljs-variable">$USER</span>/.node_repl_history
+/<span class="hljs-variable">$USER</span>/.npm
+/<span class="hljs-variable">$USER</span>/.PyCharm*
+/<span class="hljs-variable">$USER</span>/.recoll
+/<span class="hljs-variable">$USER</span>/.sane
+/<span class="hljs-variable">$USER</span>/.steam
+/<span class="hljs-variable">$USER</span>/.thunderbird
+/<span class="hljs-variable">$USER</span>/.vscode
+/<span class="hljs-variable">$USER</span>/.wine
+/<span class="hljs-variable">$USER</span>/.X*
+/<span class="hljs-variable">$USER</span>/.xs*
+/<span class="hljs-variable">$USER</span>/Android
+/<span class="hljs-variable">$USER</span>/.npm-global
+EOF
+</code></pre>
+<h3 id="servizio-systemd" tabindex="-1">Servizio Systemd <a class="header-anchor" href="#servizio-systemd" aria-hidden="true">🔗</a></h3>
+<p>Nel servizio che richiama l'applicazione, non è presente la sezione <code>[Install] - WantedBy</code> perchè il servizio
+verrà richiamato da un timer e non da un evento di sistema.</p>
+<ul>
+<li><a href="https://freedesktop.org/software/systemd/man/systemd.service.html">https://freedesktop.org/software/systemd/man/systemd.service.html</a></li>
+<li><a href="https://freedesktop.org/software/systemd/man/systemd.exec.html">https://freedesktop.org/software/systemd/man/systemd.exec.html</a></li>
+</ul>
+<pre><code class="language-bash">man systemd.service <span class="hljs-comment"># per la documentazione sulla sintassi del file .service</span>
+man systemd.exec    <span class="hljs-comment"># per la documentazione sulla sintassi del file .service</span>
+</code></pre>
+<p><code>systemctl --user cat --no-pager backup_256</code></p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; ~/.config/systemd/user/backup_256.service &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=Backup mediante rsync dell<span class="hljs-string">&#x27;ambiente su SSD 256
+[Service]
+Type=oneshot
+ExecStart=/home/$USER/bin/sync_to_CDPBackup256
+Environment=&quot;PATH=/home/$USER/app/nodejs/node-v16.2.0-linux-x64/bin:/home/$USER/bin:/home/$USER/.npm-global/bin:/home/$USER/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/bin&quot;
+# ~/bin/sync_to_CDPBackup256
+# ~/workspaces/Nodejs/Applications/DirSync/etc/rsync_exclude_list.txt
+# Script per il backup del sistema, utilizzato dal service systemd utente da me creato in:
+# ~/.config/systemd/user/backup_256.service
+# ~/.config/systemd/user/backup_256.timer
+# Installazione:
+# systemctl --user enable backup_256.timer
+# systemctl --user daemon-reload # serve quando di cambiano i files
+# Stato:
+# systemctl --user status backup_256
+# journalctl --no-pager --user-unit backup_256
+# systemctl --user -p TimersCalendar show backup_256.timer
+# systemctl --user cat --no-pager backup_256.timer
+# systemctl --user cat --no-pager backup_256
+# Documentazione:
+# man systemd.special # per la documentazione su timers.target
+# man systemd.timer   # per la documentazioe sulla sintassi del file .timer
+# man systemd.time    # per la documentazione del formato orario
+# man systemd.service # per la documentazione sulla sintassi del file .service
+# man systemd.exec    # per la documentazione sulla sintassi del file .service
+EOF
+</span></code></pre>
+<h3 id="timer-systemd" tabindex="-1">Timer Systemd <a class="header-anchor" href="#timer-systemd" aria-hidden="true">🔗</a></h3>
+<p>Il timer si deve chiamare come il servizio per semplicità ed evitare una configurazione apposita.</p>
+<pre><code class="language-bash">man systemd.special <span class="hljs-comment"># per la documentazione su timers.target</span>
+man systemd.timer   <span class="hljs-comment"># per la documentazioe sulla sintassi del file .timer</span>
+man systemd.time    <span class="hljs-comment"># per la documentazione del formato orario</span>
+</code></pre>
+<p><code>systemctl --user cat --no-pager backup_256.timer</code></p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; ~/.config/systemd/user/backup_256.timer &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=Run backup_256 hourly
+[Timer]
+OnCalendar=hourly
+Persistent=<span class="hljs-literal">true</span>
+AccuracySec=1us
+[Install]
+WantedBy=timers.target
+<span class="hljs-comment"># ~/bin/sync_to_CDPBackup256</span>
+<span class="hljs-comment"># ~/workspaces/Nodejs/Applications/DirSync/etc/rsync_exclude_list.txt</span>
+<span class="hljs-comment"># Script per il backup del sistema, utilizzato dal service systemd utente da me creato in:</span>
+<span class="hljs-comment"># ~/.config/systemd/user/backup_256.service</span>
+<span class="hljs-comment"># ~/.config/systemd/user/backup_256.timer</span>
+<span class="hljs-comment"># Installazione:</span>
+<span class="hljs-comment"># systemctl --user enable backup_256.timer</span>
+<span class="hljs-comment"># systemctl --user daemon-reload # serve quando di cambiano i files</span>
+<span class="hljs-comment"># Stato:</span>
+<span class="hljs-comment"># systemctl --user status backup_256</span>
+<span class="hljs-comment"># journalctl --no-pager --user-unit backup_256</span>
+<span class="hljs-comment"># systemctl --user -p TimersCalendar show backup_256.timer</span>
+<span class="hljs-comment"># systemctl --user cat --no-pager backup_256.timer</span>
+<span class="hljs-comment"># systemctl --user cat --no-pager backup_256</span>
+<span class="hljs-comment"># Documentazione:</span>
+<span class="hljs-comment"># man systemd.special # per la documentazione su timers.target</span>
+<span class="hljs-comment"># man systemd.timer   # per la documentazioe sulla sintassi del file .timer</span>
+<span class="hljs-comment"># man systemd.time    # per la documentazione del formato orario</span>
+<span class="hljs-comment"># man systemd.service # per la documentazione sulla sintassi del file .service</span>
+<span class="hljs-comment"># man systemd.exec    # per la documentazione sulla sintassi del file .service</span>
+EOF
+</code></pre>
+<h3 id="attivazione" tabindex="-1">Attivazione <a class="header-anchor" href="#attivazione" aria-hidden="true">🔗</a></h3>
+<p>Una volta definiti servizio e timer bisogna abilitare il timer.</p>
+<pre><code class="language-bash">systemctl --user <span class="hljs-built_in">enable</span> backup_256.timer
+systemctl --user daemon-reload <span class="hljs-comment"># serve quando di cambiano i files</span>
+systemctl --user --no-pager|grep backup
+systemctl --user <span class="hljs-built_in">cat</span> backup_256.service <span class="hljs-comment"># per verificare il contenuto del file .service attualmente caricato</span>
+<span class="hljs-comment">#rm ~/.local/share/systemd/timers/*</span>
+<span class="hljs-comment">#systemd-analyze calendar minutely</span>
+<span class="hljs-comment">#systemd-analyze calendar hourly</span>
+<span class="hljs-comment"># Created symlink /home/$USER/.config/systemd/user/timers.target.wants/backup_256.timer → /home/$USER/.config/systemd/user/backup_256.timer.</span>
+systemctl --user list-timers --all
+systemctl --user -p TimersCalendar show backup_256.timer
+systemctl --user start backup_256
+systemctl --user status backup_256.timer
+journalctl --no-pager --user-unit backup_256
+</code></pre>
+<h2 id="aggiungere-un-servizio-systemd" tabindex="-1">Aggiungere un servizio systemd <a class="header-anchor" href="#aggiungere-un-servizio-systemd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> /etc/systemd/system
+</code></pre>
+<p>Create a file named <code>your-service.service</code> and include the following:</p>
+<pre><code>[Unit]
+Description=&lt;description about this service&gt;
+
+[Service]
+User=&lt;user e.g. root&gt;
+WorkingDirectory=&lt;directory_of_script e.g. /root&gt;
+ExecStart=&lt;script which needs to be executed&gt;
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>For Python specific projects which include virtual environment:</p>
+<pre><code>[Unit]
+Description=&lt;project description&gt;
+
+[Service]
+User=&lt;user e.g. root&gt;
+WorkingDirectory=&lt;path to your project directory containing your python script&gt;
+ExecStart=/home/user/.virtualenv/bin/python main.py
+Restart=always
+# replace /home/user/.virtualenv/bin/python with your virtualenv and main.py with your script
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>OR</p>
+<pre><code>[Unit]
+Description=&lt;project description&gt;
+
+[Service]
+User=&lt;user e.g. root&gt;
+WorkingDirectory=&lt;path to your project directory&gt;
+ExecStart=/bin/bash -c 'cd /home/ubuntu/project/ &amp;&amp; source venv/bin/activate &amp;&amp; python test.py'
+
+[Install]
+WantedBy=multi-user.target
+</code></pre>
+<p>Reload the service files to include the new service.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> systemctl daemon-reload
+</code></pre>
+<p>Start your service</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> systemctl start your-service.service
+</code></pre>
+<p>To check the status of your service</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> systemctl status example.service
+</code></pre>
+<p>To enable your service on every reboot</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> example.service
+</code></pre>
+<p>To disable your service on every reboot</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> example.service
+</code></pre>
+<h2 id="running-services-after-the-network-is-up" tabindex="-1">Running Services After the Network is up <a class="header-anchor" href="#running-services-after-the-network-is-up" aria-hidden="true">🔗</a></h2>
+<p><code>network-online.target</code> is a target that actively waits until the nework is &quot;up&quot;</p>
+<pre><code class="language-bash">man systemd.special
+man systemd.unit
+</code></pre>
+<ul>
+<li>
+<p><a href="https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/">https://www.freedesktop.org/wiki/Software/systemd/NetworkTarget/</a></p>
+<pre><code>  [Unit]
+  Wants=network-online.target
+  After=network-online.target
+</code></pre>
+<p>Verify that the right service is enabled (usually only one should be):</p>
+<pre><code class="language-bash">$ systemctl is-enabled NetworkManager-wait-online.service systemd-networkd-wait-online.service
+disabled
+enabled
+</code></pre>
+</li>
+<li>
+<p><a href="https://unix.stackexchange.com/questions/126009/cause-a-script-to-execute-after-networking-has-started">https://unix.stackexchange.com/questions/126009/cause-a-script-to-execute-after-networking-has-started</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.special.html#network-online.target">https://www.freedesktop.org/software/systemd/man/systemd.special.html#network-online.target</a>
+Units that strictly require a configured network connection should pull in network-online.target (via a Wants= type dependency) and order themselves after it.</p>
+</li>
+</ul>
+<p><code>Wants=</code> A weaker version of <code>Requires=</code>. Configures (weak) requirement dependencies on other units. Units listed in this option will be started if the configuring unit is. However, if the listed units fail to start or cannot be added to the transaction, this has no impact on the validity of the transaction as a whole, and this unit will still be started.</p>
+<p><code>After=</code> Those two settings configure ordering dependencies between units. After= ensures that the listed unit is fully started up before the configured unit is started.</p>
+<h2 id="how-to-i-figure-out-which-service-a-process-belongs-to%3F" tabindex="-1">How to I figure out which service a process belongs to? <a class="header-anchor" href="#how-to-i-figure-out-which-service-a-process-belongs-to%3F" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">alias</span> psc=<span class="hljs-string">&#x27;ps xawf -eo pid,user,cgroup:200,args&#x27;</span>
+psc
+</code></pre>
+<h2 id="pythonunbuffered-e-systemd" tabindex="-1">PYTHONUNBUFFERED e systemd <a class="header-anchor" href="#pythonunbuffered-e-systemd" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://sourcery.ai/blog/python-docker/">https://sourcery.ai/blog/python-docker/</a></p>
+</li>
+<li>
+<p><a href="https://docs.python.org/3/using/cmdline.html#envvar-PYTHONUNBUFFERED">https://docs.python.org/3/using/cmdline.html#envvar-PYTHONUNBUFFERED</a></p>
+</li>
+<li>
+<p><a href="https://serverfault.com/questions/886704/journalctl-only-refreshing-after-restarting-systemd-service">https://serverfault.com/questions/886704/journalctl-only-refreshing-after-restarting-systemd-service</a></p>
+<p>Environment=PYTHONUNBUFFERED=1</p>
+</li>
+</ul>
+<p>Systemd override:</p>
+<ul>
+<li><a href="https://askubuntu.com/questions/659267/how-do-i-override-or-configure-systemd-services">https://askubuntu.com/questions/659267/how-do-i-override-or-configure-systemd-services</a></li>
+</ul>
+<h2 id="systemd-analyze" tabindex="-1">systemd-analyze <a class="header-anchor" href="#systemd-analyze" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ systemd-analyze cat-config sysctl.d | grep fs.inotify.max_user_watches
+~/.config/systemd/user]$ systemd-analyze --user verify ./backup.service 
+/home/<span class="hljs-variable">$USER</span>/.config/systemd/user/./backup.service:2: Unknown key name <span class="hljs-string">&#x27;De scription&#x27;</span> <span class="hljs-keyword">in</span> section <span class="hljs-string">&#x27;Unit&#x27;</span>, ignoring.
+<span class="hljs-comment"># il problema di verify è che ritorna sempre un exit code 0, bisogna analizzare l&#x27;output per rilevare un errore</span>
+<span class="hljs-comment"># Per rilevare il successo/errore:</span>
+$ systemd-analyze --user verify ./backup.service 2&gt;&amp;1 | <span class="hljs-built_in">wc</span> -c
+0
+$ systemd-analyze --user verify ./backup.service 2&gt;&amp;1 | <span class="hljs-built_in">wc</span> -c
+116
+/home/<span class="hljs-variable">$USER</span>/.config/systemd/user/backup.service
+</code></pre>
+<h2 id="inotify" tabindex="-1">inotify <a class="header-anchor" href="#inotify" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.freedesktop.org/software/systemd/man/systemd.path.html">https://www.freedesktop.org/software/systemd/man/systemd.path.html</a></li>
+<li><a href="https://www.linux.com/topic/desktop/systemd-services-monitoring-files-and-directories/">https://www.linux.com/topic/desktop/systemd-services-monitoring-files-and-directories/</a></li>
+<li><a href="https://www.redhat.com/sysadmin/introduction-path-units">https://www.redhat.com/sysadmin/introduction-path-units</a></li>
+</ul>
+<h2 id="simple-vs-oneshot" tabindex="-1">simple vs oneshot <a class="header-anchor" href="#simple-vs-oneshot" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://trstringer.com/simple-vs-oneshot-systemd-service/">https://trstringer.com/simple-vs-oneshot-systemd-service/</a></li>
+</ul>
+<pre><code class="language-bash">$ man systemd.service|less -p <span class="hljs-string">&quot;oneshot&quot;</span>
+</code></pre>
+<p>Se un servizio è <code>[Service] Type=simple</code> i servizi che da esso dipendono partono subito senza attendere che esso termini:</p>
+<p><img src="../../../../inc/img/systemd/oneshot-simple-1.png" alt="Simple" style="display:block; margin: 0 auto; width:60%"></p>
+<p>Se un servizio è <code>[Service] Type=oneshot</code> i servizi che da esso dipendono partono solamente dopo che esso è terminato:</p>
+<p><img src="../../../../inc/img/systemd/oneshot-simple-2.png" alt="One Shot" style="display:block; margin: 0 auto; width:60%"></p>
+<h3 id="esempio-servizio-simple" tabindex="-1">Esempio servizio simple <a class="header-anchor" href="#esempio-servizio-simple" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-ini"><span class="hljs-comment"># simple-test.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Simple service test
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">ExecStart</span>=/bin/bash -c <span class="hljs-string">&quot;echo Simple service - start &amp;&amp; sleep 60 &amp;&amp; echo Simple service - end&quot;</span>
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-comment"># dep-simple-test.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Dependent service
+<span class="hljs-attr">After</span>=simple-test.service
+<span class="hljs-attr">Requires</span>=simple-test.service
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">ExecStart</span>=/bin/bash -c <span class="hljs-string">&quot;echo Dependent service - running&quot;</span>
+</code></pre>
+<p>Starting <code>dep-simple-test.service</code> will start <code>simple-test.service</code> first (because of the After/Requires directives), and the logging shows:</p>
+<pre><code>Jun 19 20:28:16 thstring20200619162314 systemd[1]: Started Simple service test.
+Jun 19 20:28:16 thstring20200619162314 systemd[1]: Started Dependent service.
+Jun 19 20:28:16 thstring20200619162314 bash[1238]: Simple service - start
+Jun 19 20:28:16 thstring20200619162314 bash[1239]: Dependent service - running
+Jun 19 20:28:16 thstring20200619162314 systemd[1]: dep-simple-test.service: Succeeded.
+Jun 19 20:29:16 thstring20200619162314 bash[1238]: Simple service - end
+Jun 19 20:29:16 thstring20200619162314 systemd[1]: simple-test.service: Succeeded.
+</code></pre>
+<h3 id="esempio-servizio-oneshot" tabindex="-1">Esempio servizio oneshot <a class="header-anchor" href="#esempio-servizio-oneshot" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-ini"><span class="hljs-comment"># oneshot-test.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=<span class="hljs-literal">On</span>eshot service test
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot
+<span class="hljs-attr">ExecStart</span>=/bin/bash -c <span class="hljs-string">&quot;echo Oneshot service - start &amp;&amp; sleep 60 &amp;&amp; echo Oneshot service - end&quot;</span>
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-comment"># dep-oneshot-test.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Dependent service
+<span class="hljs-attr">After</span>=<span class="hljs-literal">on</span>eshot-test.service
+<span class="hljs-attr">Requires</span>=<span class="hljs-literal">on</span>eshot-test.service
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">ExecStart</span>=/bin/bash -c <span class="hljs-string">&quot;echo Dependent service - running&quot;</span>
+</code></pre>
+<p>The logging for these two units (after having started <code>dep-oneshot-test.service</code>) shows the difference:</p>
+<pre><code>Jun 19 20:31:46 thstring20200619162314 systemd[1]: Starting Oneshot service test...
+Jun 19 20:31:46 thstring20200619162314 bash[1420]: Oneshot service - start
+Jun 19 20:32:46 thstring20200619162314 bash[1420]: Oneshot service - end
+Jun 19 20:32:46 thstring20200619162314 systemd[1]: oneshot-test.service: Succeeded.
+Jun 19 20:32:46 thstring20200619162314 systemd[1]: Started Oneshot service test.
+Jun 19 20:32:46 thstring20200619162314 systemd[1]: Started Dependent service.
+Jun 19 20:32:46 thstring20200619162314 bash[1440]: Dependent service - running
+Jun 19 20:32:46 thstring20200619162314 systemd[1]: dep-oneshot-test.service: Succeeded.
+</code></pre>
+<p>You can see that the Dependent service doesn’t start until the Oneshot service has completed.</p>
+<h2 id="specifiers" tabindex="-1">Specifiers <a class="header-anchor" href="#specifiers" aria-hidden="true">🔗</a></h2>
+<p>E' possibile utilizzare dei tag nei file .service come <code>%h</code> per la home directory.</p>
+<ul>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers">https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Specifiers</a></p>
+<ul>
+<li><code>%h</code> User home directory This is the home directory of the user running the service manager instance.</li>
+<li><code>%u</code> User name This is the name of the user running the service manager instance.</li>
+<li><code>%T</code> Directory for temporary files</li>
+<li><code>%%</code> Single percent sign Use <code>%%</code> in place of <code>%</code> to specify a single percent sign.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/40532499/how-to-escape-a-systemd-specifier-to-pass-to-the-command-in-execstart">https://stackoverflow.com/questions/40532499/how-to-escape-a-systemd-specifier-to-pass-to-the-command-in-execstart</a></p>
+</li>
+<li>
+<p><a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html#User%20Unit%20Search%20Path">https://www.freedesktop.org/software/systemd/man/systemd.unit.html#User Unit Search Path</a></p>
+</li>
+<li>
+<p><a href="https://github.com/systemd/systemd/issues/12389">https://github.com/systemd/systemd/issues/12389</a> %h and %u esempio</p>
+</li>
+</ul>
+<p>se c'e' bisogno di utilizzare il <code>%</code> nel comando definito nel servizio, oltre a quotarlo con <code>%%</code>
+c'e' anche la possibilità di utilizzare un file <code>.environment</code> associato, il file <code>.environment</code>
+non interpreta i caratteri speciali del <code>.service</code>:</p>
+<p><code>tcpdumpd.service</code></p>
+<pre><code class="language-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=TCPDumpd
+<span class="hljs-attr">After</span>=multi-user.target network.target
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">EnvironmentFile</span>=tcpdumpd.environment
+<span class="hljs-attr">ExecStart</span>=/usr/sbin/tcpdump -pni eth0 -s65535 -G <span class="hljs-number">3600</span> -w <span class="hljs-string">&#x27;/var/log/tcpdump/trace_%%Y-%%m-%%d_%%H:%%M:%%S.pcap&#x27;</span> -z gzip
+<span class="hljs-attr">Restart</span>=<span class="hljs-literal">on</span>-abort
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<p>Alternativa con file .environment:</p>
+<p><code>tcpdumpd.environment</code></p>
+<pre><code class="language-ini"><span class="hljs-attr">TCPDUMP_FORMAT</span>=%Y-%m-%d_%H:%M:%S
+</code></pre>
+<p><code>tcpdumpd.service</code></p>
+<pre><code class="language-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=TCPDumpd
+<span class="hljs-attr">After</span>=multi-user.target network.target
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">EnvironmentFile</span>=tcpdumpd.environment
+<span class="hljs-attr">ExecStart</span>=/usr/sbin/tcpdump -pni eth0 -s65535 -G <span class="hljs-number">3600</span> -w <span class="hljs-string">&#x27;/var/log/tcpdump/trace_${TCPDUMP_FORMAT}.pcap&#x27;</span> -z gzip
+<span class="hljs-attr">Restart</span>=<span class="hljs-literal">on</span>-abort
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<h2 id="validate-service" tabindex="-1">validate service <a class="header-anchor" href="#validate-service" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># validate_systemd_service</span>
+RES=$(systemd-analyze --user verify <span class="hljs-variable">$1</span> 2&gt;&amp;1 | <span class="hljs-built_in">wc</span> -c)
+<span class="hljs-keyword">if</span> (( <span class="hljs-variable">$RES</span> &gt; <span class="hljs-number">0</span> )) 
+<span class="hljs-keyword">then</span>
+    systemd-analyze --user verify <span class="hljs-variable">$1</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">exit</span> <span class="hljs-variable">$RES</span>
+</code></pre>
+<h2 id="https%3A%2F%2Fwww.shubhamdipt.com%2Fblog%2Fhow-to-create-a-systemd-service-in-linux%2F" tabindex="-1"><a href="https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/">https://www.shubhamdipt.com/blog/how-to-create-a-systemd-service-in-linux/</a> <a class="header-anchor" href="#https%3A%2F%2Fwww.shubhamdipt.com%2Fblog%2Fhow-to-create-a-systemd-service-in-linux%2F" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ vim /etc/systemd/system/pyhton-service.service
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=&lt;project description&gt;
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">User</span>=&lt;user e.g. root&gt;
+<span class="hljs-attr">WorkingDirectory</span>=&lt;path to your project directory containing your python script&gt;
+<span class="hljs-attr">ExecStart</span>=/home/user/.virtualenv/bin/python main.py
+<span class="hljs-attr">Restart</span>=always
+<span class="hljs-comment"># replace /home/user/.virtualenv/bin/python with your virtualenv and main.py with your script</span>
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=&lt;project description&gt;
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">User</span>=&lt;user e.g. root&gt;
+<span class="hljs-attr">WorkingDirectory</span>=&lt;path to your project directory&gt;
+<span class="hljs-attr">ExecStart</span>=/bin/bash -c <span class="hljs-string">&#x27;cd /home/ubuntu/project/ &amp;&amp; source venv/bin/activate &amp;&amp; python test.py&#x27;</span>
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl daemon-reload
+$ <span class="hljs-built_in">sudo</span> systemctl start your-service.service
+$ <span class="hljs-built_in">sudo</span> systemctl status example.service
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> example.service
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> example.service
+</code></pre>
+<h2 id="https%3A%2F%2Flinuxhandbook.com%2Fcreate-systemd-services%2F" tabindex="-1"><a href="https://linuxhandbook.com/create-systemd-services/">https://linuxhandbook.com/create-systemd-services/</a> <a class="header-anchor" href="#https%3A%2F%2Flinuxhandbook.com%2Fcreate-systemd-services%2F" aria-hidden="true">🔗</a></h2>
+<h3 id="esempio-servizio-utente" tabindex="-1">Esempio servizio utente <a class="header-anchor" href="#esempio-servizio-utente" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">vim /home/pratham/.scripts/big-uptime.sh
+    <span class="hljs-comment">#!/usr/bin/env bash</span>
+    <span class="hljs-built_in">uptime</span> | <span class="hljs-built_in">tee</span> -a /home/pratham/logs/uptime.log
+
+<span class="hljs-built_in">mkdir</span> -p ~/.config/systemd/user
+vim ~/.config/systemd/user/scoreboard.service
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-comment"># ~/.config/systemd/user/scoreboard.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Log uptime in scoreboard
+<span class="hljs-attr">DefaultDependencies</span>=<span class="hljs-literal">no</span>
+<span class="hljs-attr">Before</span>=shutdown.target
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=<span class="hljs-literal">on</span>eshot
+<span class="hljs-attr">ExecStart</span>=/usr/bin/bash /home/pratham/.scripts/big-uptime.sh
+<span class="hljs-attr">TimeoutStartSec</span>=<span class="hljs-number">0</span>
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=shutdown.target
+</code></pre>
+<pre><code class="language-bash">$ systemctl --user daemon-reload
+$ systemctl --user <span class="hljs-built_in">enable</span> scoreboard.service
+$ systemctl --user is-enabled scoreboard.service
+</code></pre>
+<h3 id="esempio-servizio-root" tabindex="-1">Esempio servizio root <a class="header-anchor" href="#esempio-servizio-root" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &gt; /root/.scripts/sys-update.sh &lt;z <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># /root/.scripts/sys-update.sh</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">${EUID}</span> -ne 0 ]
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">exit</span> 1 <span class="hljs-comment"># this is meant to be run as root</span>
+<span class="hljs-keyword">fi</span>
+apt-get update 1&gt;/dev/null 2&gt;&gt;/root/logs/sys-update.log
+EOF
+
+$ <span class="hljs-built_in">cat</span> &gt; /etc/systemd/system/update-on-boot.service &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=Keeping my sources fresher than Arch Linux
+After=multi-user.target
+[Service]
+ExecStart=/usr/bin/bash /root/.scripts/sys-update.sh
+Type=simple
+[Install]
+WantedBy=multi-user.target
+EOF
+
+$ <span class="hljs-built_in">sudo</span> systemctl daemon-reload
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> update-on-boot.service
+$ <span class="hljs-built_in">sudo</span> systemctl is-enabled update-on-boot.service
+</code></pre>
+<h2 id="stop-di-un-servizio" tabindex="-1">Stop di un Servizio <a class="header-anchor" href="#stop-di-un-servizio" aria-hidden="true">🔗</a></h2>
+<p>Se l'applicazione possiede un comando di stop questo viene inserito nell'opzione <code>ExecStop=</code> del <code>.service</code>.<br>
+In assenza dell'opzione <code>ExecStop=</code>, per effettuare lo stop del processo systemd invia un <code>SIGTERM</code>.</p>
+<ul>
+<li><a href="https://man.archlinux.org/man/systemd.service.5.en">https://man.archlinux.org/man/systemd.service.5.en</a>
+<ul>
+<li><code>ExecStart=</code> Commands with their arguments that are executed when this service is started.</li>
+<li><code>ExecStop=</code> Commands to execute to stop the service started via <code>ExecStart=</code> If this option is not specified, the process is terminated by sending the signal specified in <code>KillSignal=</code>.</li>
+</ul>
+</li>
+<li><a href="https://man.archlinux.org/man/systemd.kill.5.en">https://man.archlinux.org/man/systemd.kill.5.en</a> Ulteriori parametri di configurazione di un servizio.\
+<ul>
+<li><code>KillMode=</code> Specifies how processes of this unit shall be killed. One of control-group, mixed, <code>process</code>, none.</li>
+<li><strong><code>KillSignal=</code></strong> Specifies which signal to use when stopping a service. This controls the signal that is sent as first step of shutting down a unit (see above), and is usually followed by <code>SIGKILL</code> (see above and below). For a list of valid signals, see <code>signal(7)</code>.\</li>
+<li><strong>Defaults to <code>SIGTERM</code></strong>. Note that, right after sending the signal specified in this setting, systemd will always send <code>SIGCONT</code>, to ensure that even suspended tasks can be terminated cleanly.</li>
+</ul>
+</li>
+<li><a href="https://man.archlinux.org/man/signal.7.en">https://man.archlinux.org/man/signal.7.en</a></li>
+</ul>
+<p><a href="https://unix.stackexchange.com/questions/426042/systemd-define-a-service-without-execstop-and-be-able-to-stop-it-without-fail">https://unix.stackexchange.com/questions/426042/systemd-define-a-service-without-execstop-and-be-able-to-stop-it-without-fail</a></p>
+<p>to start Kafka standalone producer (File Connector) as a service. The command is:<br>
+<code>/opt/kafka/bin/connect-standalone.sh /opt/kafka/config/connect-standalone.properties /opt/kafka/config/connect-file-source.properties</code><br>
+it has no stop command. Normally, I just hit <code>Ctrl+C</code> to stop it as a foreground process.
+Anyway to manipulate a service without ExecStop command?</p>
+<p>If you normally stop the process with <code>CTRL+C</code> from your shell, a <code>SIGINT</code> (interrupt signal) is sent to the process. see <a href="https://man.archlinux.org/man/signal.7.en">man signal</a></p>
+<p>When systemd tries to stop a process without <code>ExecStop=</code> it sends a <code>KillSignal=</code> which defaults to <code>SIGTERM</code> (terminate signal), waits for a response from the process, and if it fails to stop within a deadline, systemd sends a <code>SIGKILL</code> which simply forcefully ends the process. systemd's behaviour can be modified with <code>KillSignal=</code> see <a href="https://man.archlinux.org/man/systemd.kill.5">man systemd.kill</a>.</p>
+<p>In your case, I would try adding <code>KillSignal=SIGINT</code> to emulate the <code>CTRL+C</code> you usually use in the shell. You know your process catches and responds to this signal, but we don't know how it responds to <code>SIGTERM</code>.</p>
+<pre><code>[Service]
+Type=simple
+ExecStart=/opt/kafka/bin/connect-standalone.sh /opt/kafka/config/connect-standalone.properties /opt/kafka/config/connect-file-source.properties
+KillSignal=SIGINT
+Restart=on-abort
+</code></pre>
+<h2 id="enable" tabindex="-1">enable <a class="header-anchor" href="#enable" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man systemd.unit
+  System Unit Search Path
+    /etc/systemd/system/     System units created by the administrator
+    /run/systemd/system/     Runtime units
+    /usr/lib/systemd/system/ System units installed by the distribution package manager
+  User Unit Search Path0
+    ~/.config/systemd/user/
+    /etc/systemd/user/
+    /run/systemd/user/
+
+<span class="hljs-comment"># /etc/systemd/system/multi-user.target.wants</span>
+<span class="hljs-comment"># /usr/lib/systemd/system/</span>
+$ grep WantedBy /usr/lib/systemd/system/sshd.service 
+  WantedBy=multi-user.target
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> sshd
+  Created symlink /etc/systemd/system/multi-user.target.wants/sshd.service → /usr/lib/systemd/system/sshd.service.
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> sshd
+  Removed <span class="hljs-string">&quot;/etc/systemd/system/multi-user.target.wants/sshd.service&quot;</span>.
+</code></pre>
+</body></html>

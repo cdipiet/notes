@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.298" />
+        <title>mc</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../inc/js/hljs/styles/default.css" />
+        <script src="../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="mc" tabindex="-1">mc <a class="header-anchor" href="#mc" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.298</p>
+<nav class="table-of-contents"><ol><li><a href="#estrazione-setup">Estrazione setup </a></li><li><a href="#exit-to-current-directory">Exit to current directory </a></li><li><a href="#sostituzione-tasto-%22canc%22%2F%22delete%22-ad-f8">Sostituzione tasto &quot;Canc&quot;/&quot;Delete&quot; ad F8 </a></li><li><a href="#keyboard-shortcuts">Keyboard Shortcuts </a></li><li><a href="#disabilitare-il-tasto-f10-in-gnome-terminal">Disabilitare il tasto F10 in GNOME-Terminal </a></li><li><a href="#start">Start </a></li><li><a href="#file-group-management">File Group Management </a></li><li><a href="#f2-user-menu">F2 User Menu </a><ol><li><a href="#diffs-in-color">Diffs in Color </a></li></ol></li></ol></nav><h1 id="midnight-commander" tabindex="-1">Midnight Commander <a class="header-anchor" href="#midnight-commander" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="http://klimer.eu/2015/05/01/use-midnight-commander-like-a-pro/">http://klimer.eu/2015/05/01/use-midnight-commander-like-a-pro/</a></li>
+</ul>
+<h2 id="estrazione-setup" tabindex="-1">Estrazione setup <a class="header-anchor" href="#estrazione-setup" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-variable">$USER</span>@cdplinux:~/Scaricati$ file tcmd951x64.exe
+tcmd951x64.exe: PE32+ executable (GUI) x86-64, <span class="hljs-keyword">for</span> MS Windows, InstallShield self-extracting archive
+
+cabextract tcmd951x64.exe
+</code></pre>
+<h2 id="exit-to-current-directory" tabindex="-1">Exit to current directory <a class="header-anchor" href="#exit-to-current-directory" aria-hidden="true">🔗</a></h2>
+<p>Abilitando il wrapper installato con mc è possibile ottenere che uscendo da mc
+la nuova directory corrente della shell sia quella che era stata impostata in mc.</p>
+<pre><code class="language-bash">locate mc-wrapper.sh
+vim ~/.bash_aliases
+    <span class="hljs-built_in">alias</span> lnn=<span class="hljs-string">&#x27;ln -s ~/workspaces/npm/node_modules&#x27;</span>
+    <span class="hljs-built_in">alias</span> mc=<span class="hljs-string">&#x27;. /usr/share/mc/bin/mc-wrapper.sh&#x27;</span> <span class="hljs-comment"># mint</span>
+    <span class="hljs-built_in">alias</span> mc=<span class="hljs-string">&#x27;. /usr/lib/mc/mc-wrapper.sh&#x27;</span> <span class="hljs-comment"># manjaro</span>
+</code></pre>
+<h2 id="sostituzione-tasto-%22canc%22%2F%22delete%22-ad-f8" tabindex="-1">Sostituzione tasto &quot;Canc&quot;/&quot;Delete&quot; ad <code>F8</code> <a class="header-anchor" href="#sostituzione-tasto-%22canc%22%2F%22delete%22-ad-f8" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cp</span> /etc/mc/mc.keymap ~/.config/mc/
+$ vim ~/.config/mc/mc.keymap
+        Delete = delete
+        <span class="hljs-comment">#Delete = f8</span>
+</code></pre>
+<h2 id="keyboard-shortcuts" tabindex="-1">Keyboard Shortcuts <a class="header-anchor" href="#keyboard-shortcuts" aria-hidden="true">🔗</a></h2>
+<p>In the world of Windows Systems the most popular two-panel file manager is Total Commander.
+Apart from almost identical functionality, TC and MC enjoy different keyboard shortcuts.
+The table below shows comparison of the two groups.</p>
+<table class="table"><thead>
+<tr>
+<th>Functions</th>
+<th>Midnight Commander</th>
+<th>Total Commander</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Open directory menu</td>
+<td><span class="k">CTRL</span> + <span class="k">\</span></td>
+<td>CTRL + D</td>
+</tr>
+<tr>
+<td>Allinea directory</td>
+<td><span class="k">ALT</span>+<span class="k">i</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Quick cd</td>
+<td><span class="k">ALT</span>+<span class="k">c</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Hidden Files</td>
+<td><span class="k">ALT</span>+<span class="k">.</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Incremental Search</td>
+<td><span class="k">ALT</span>+<span class="k">s</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Compare Files</td>
+<td><span class="k">CTRL</span>-<span class="k">x</span> + <span class="k">CTRL</span><span class="k">d</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Quick view(On/Off)</td>
+<td><span class="k">CTRL</span>-<span class="k">x</span> + <span class="k">q</span></td>
+<td>CTRL+Q</td>
+</tr>
+<tr>
+<td>Show Directory Size</td>
+<td><span class="k">CTRL</span>+<span class="k">SPACE</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Compare Directories</td>
+<td><span class="k">CTRL</span>-<span class="k">x</span> +<span class="k">d</span></td>
+<td>SHIFT + F2</td>
+</tr>
+<tr>
+<td>Seleziona Tutto</td>
+<td><span class="k">ALT</span> + <span class="k">SHIFT</span> + <span class="k">+</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Find file</td>
+<td><span class="k">ALT</span> + <span class="k">SHIFT</span> + <span class="k">?</span></td>
+<td>ALT + F7</td>
+</tr>
+<tr>
+<td>Mostra directory</td>
+<td><span class="k">ALT</span>+<span class="k">o</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Rescan(refresh panel)</td>
+<td><span class="k">CTRL</span> + <span class="k">R</span></td>
+<td>F2</td>
+</tr>
+<tr>
+<td>Hide panels</td>
+<td><span class="k">CTRL</span> + <em class="k">O</em></td>
+<td>SHIFT + ESC</td>
+</tr>
+<tr>
+<td>Reverse selection</td>
+<td><span class="k">ALT</span> + <span class="k">*</span></td>
+<td>NUM *</td>
+</tr>
+<tr>
+<td>chmod</td>
+<td><span class="k">CTRL</span>-<span class="k">x</span> + <span class="k">c</span></td>
+<td></td>
+</tr>
+<tr>
+<td>chown</td>
+<td><span class="k">CTRL</span>-<span class="k">x</span> + <span class="k">o</span></td>
+<td></td>
+</tr>
+<tr>
+<td>Make symlink</td>
+<td><span class="k">CTRL</span>-<span class="k">x</span> + <span class="k">s</span></td>
+<td>SHIFT+CTRL+F5</td>
+</tr>
+</tbody>
+</table>
+<p><code>CTRL+SPACE</code> se fatto sulla dir <code>/..</code> mostra la dimensione di tutte le sottodirectory
+<code>ALT+o</code> If the currently selected file is a directory, load that directory on the other panel and moves the selection to the next file.
+<code>ALT+s</code> (Disattivando il prompt dei comandi l'incremental search diviene
+<code>CTRL-X + D</code> sequence must be issued by pressing together CTRL and X, and then D button - like in Emacs editor.
+A shortcut which should be mentioned here is <code>ESC+0,1,2?9</code>
+which replaces all function keys F1 to F10. It is indispensable in terminals which do not support F1-F10 buttons.</p>
+<ul>
+<li>C-<code>&lt;chr&gt;</code> - Means to hold the Control (Ctrl) key while typing the character <code>&lt;chr&gt;</code>. Example: <code>C-x</code></li>
+<li>M-<code>&lt;chr&gt;</code> - Means to hold the Meta, or Alt, key while typing the character <code>&lt;chr&gt;</code>. Example:<code>M-x</code></li>
+<li>S-<code>&lt;chr&gt;</code> - Means to hold the Shift key while typing the character <code>&lt;chr&gt;</code>. Example: <code>S-x</code></li>
+<li>C-<code>&lt;chr&gt;</code> <code>&lt;chr2&gt;</code> - Means to hold the Control (Ctrl) key while typing the character <code>&lt;chr&gt;</code>, release the <code>Ctrl</code> and <code>&lt;chr&gt;</code> keys, and then press the last character <code>&lt;chr2&gt;</code>. Example: <code>C-x d</code></li>
+</ul>
+<h2 id="disabilitare-il-tasto-f10-in-gnome-terminal" tabindex="-1">Disabilitare il tasto F10 in GNOME-Terminal <a class="header-anchor" href="#disabilitare-il-tasto-f10-in-gnome-terminal" aria-hidden="true">🔗</a></h2>
+<p><strong>Conflitto con Midnight-Commander sul tasto di uscita F10</strong></p>
+<p>In Midnight Commander in Gnome Terminal e Gnome2, bisognava utilizzare la combinazione Windows+F10per uscire.
+Questo perchè di default GnomeTerminal utilizza il tasto <code>F10</code> per aprire il suo menù.</p>
+<p>In Gnome Shell, F10 è utilizzato da Gnome Terminal, ed anche <code>Windows+F10</code> è utilizzato da Gnome Shell!
+Per risolvere il problema è sufficiente eliminare l'utilizzo di F10 in Gnome Terminal:</p>
+<p>Cerchiamo la chiave da cambiare con gsettings:(và bene anche dconf-editor)</p>
+<pre><code>[cdp@manjaro ~]$ gsettings list-schemas|grep Terminal
+org.gnome.Terminal.Legacy.Settings
+[cdp@manjaro ~]$ gsettings list-keysorg.gnome.Terminal.Legacy.Settings
+menu-accelerator-enabled
+[cdp@manjaro ~]$ gsettings get org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled
+true
+[cdp@manjaro ~]$ gsettings set org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled false
+</code></pre>
+<h2 id="start" tabindex="-1">Start <a class="header-anchor" href="#start" aria-hidden="true">🔗</a></h2>
+<p>You can run MC in terminal issuing mccommand.
+MC can be run in command line environment with additional parameters like:</p>
+<ul>
+<li>-b force black and white display,</li>
+<li>-c force color mode,</li>
+<li>-v <code>&lt;path to a file&gt;</code> start the internal viewer to view the specified file,</li>
+<li>-e <code>&lt;path to a file&gt;</code> start the internal editor.</li>
+</ul>
+<p>There is a possibility to run MC editor alone. You have to issue a mceditcommand adding a file name with its path, e.g. mcedit <code>/etc/fstab</code>.</p>
+<h2 id="file-group-management" tabindex="-1">File Group Management <a class="header-anchor" href="#file-group-management" aria-hidden="true">🔗</a></h2>
+<p>To select a file you have to focus cursor on its name and press Insert.
+To mark a group of files you can make use of meta characters.
+To select a group choose the &quot;select Group&quot; option from menu File or reach for <code>[ALT-+]</code> shortcut. You will have to enter then a regular expression in a displayed window.
+For example <code>*.odt</code> will mark all the files with the odt extension, shortcut <code>[ALT-\]</code> will cancel selection,
+and <code>[ALT-*]</code> will reverse selection (e.g. MC will select all the files without the odt extension).</p>
+<p>A selected group can be deleted, moved or copied but not only. You can perform any operation. To do that you have to open User menu (pressing <code>F2</code> or User Menu from File option). Next, choose &quot;Do something on the tagged files&quot; (shortcut: &quot;@&quot;) and enter a command you want to run against the selected files.</p>
+<p>There is a possibility to display files with features defined by a user. Please choose from main menu the right or the left option, then the &quot;Filter&quot; option and at the end enter a filtering expression. For example <code>*.pdf</code> entry will the MC to show only the files which have pdf extension. Apart from that MC will show directories and symlinks.</p>
+<h2 id="f2-user-menu" tabindex="-1">F2 User Menu <a class="header-anchor" href="#f2-user-menu" aria-hidden="true">🔗</a></h2>
+<p>The user menu is a menu of useful actions that can be customized by the user.
+When you access the user menu, the file .mc.menu from the current directory is used if it exists,
+but only if it is owned by user or root and is not world-writable. If no such file found,
+<code>~/.mc/menu</code> is tried in the same way, and otherwise mc uses the default system-wide menu <code>/etc/mc/mc.menu</code></p>
+<p>The format of the menu file is very simple. Lines that start with anything but space or tab are considered entries for the menu (in order to be able to use it like a hot key, the first character should be a letter). All the lines that start with a space or a tab are the commands that will be executed when the entry is selected.</p>
+<p>When an option is selected all the command lines of the option are copied to a temporary file in the temporary directory (usually <code>/usr/tmp</code>) and then that file is executed. This allows the user to put normal shell constructs in the menus. Also simple macro substitution takes place before executing the menu code. For more information, see macro substitution.</p>
+<p>Here is a sample mc.menu file:</p>
+<p>A Dump the currently selected file</p>
+<pre><code>od -c %f
+</code></pre>
+<p>B Edit a bug report and send it to root</p>
+<pre><code>vi /tmp/mail.$$
+mail -s &quot;Midnight Commander bug&quot; root &lt; /tmp/mail.$$
+</code></pre>
+<p>M Read mail</p>
+<pre><code>emacs -f rmail
+</code></pre>
+<p>N Read Usenet news</p>
+<pre><code>emacs -f gnus
+</code></pre>
+<p>H Call the info hypertext browser</p>
+<pre><code>info
+</code></pre>
+<p>J Copy current directory to other panel recursively</p>
+<pre><code>tar cf - . | (cd %D &amp;&amp; tar xvpf -)
+</code></pre>
+<p>K Make a release of the current subdirectory</p>
+<pre><code>echo -n &quot;Name of distribution file: &quot;
+read tar
+ln -s %d `dirname %d`/$tar
+cd ..
+tar cvhf ${tar}.tar $tar
+
+= f *.tar.gz | f *.tgz &amp; t n
+</code></pre>
+<p>X Extract the contents of a compressed tar file</p>
+<pre><code>tar xzvf %f
+</code></pre>
+<p>Default Conditions</p>
+<p>Each menu entry may be preceded by a condition. The condition must start from the first column with a = character. If the condition is true, the menu entry will be the default entry.</p>
+<p>Condition syntax:</p>
+<pre><code>&lt;cond&gt; = &lt;sub-cond&gt;
+or: = &lt;cond&gt; | &lt;cond&gt; ...
+or: = &lt;cond&gt; &amp; &lt;cond&gt; ...
+</code></pre>
+<p>Sub-condition is one of following:</p>
+<pre><code>f &lt;pattern&gt; current file matching pattern
+F &lt;pattern&gt; other file matching pattern
+d &lt;pattern&gt; current directory matching pattern
+D &lt;pattern&gt; other directory matching pattern
+t &lt;type&gt; current file of type
+T &lt;type&gt; other file of type
+! &lt;sub-cond&gt; negate the result of sub-condition
+</code></pre>
+<p>Pattern is a normal shell pattern or a regular expression, according to the shell patterns option. You can override the global value of the shell patterns option by writing shell_patterns=x on the first line of the menu file (where &quot;x&quot; is either 0 or 1).</p>
+<p>Type is one or more of the following characters:</p>
+<ul>
+<li>n not directory</li>
+<li>r regular file</li>
+<li>d directory</li>
+<li>l link</li>
+<li>c char special</li>
+<li>b block special</li>
+<li>f fifo</li>
+<li>s socket</li>
+<li>x executable</li>
+<li>t tagged</li>
+</ul>
+<p>For example rlf means either regular file, link or fifo. The t type is a little special because it acts on the panel instead of the file. The condition =t t is true if there are tagged files in the current panel and false if not.</p>
+<p>If the condition starts with =? instead of = a debug trace will be shown whenever the value of the condition is calculated.</p>
+<p>The conditions are calculated from left to right. This means</p>
+<pre><code>= f *.tar.gz | f *.tgz &amp; t n
+</code></pre>
+<p>is calculated as</p>
+<pre><code>( (f *.tar.gz) | (f *.tgz) ) &amp; (t n)
+</code></pre>
+<p>Here is a sample of the use of conditions:</p>
+<pre><code>= f *.tar.gz | f *.tgz &amp; t n
+L List the contents of a compressed tar-archive
+gzip -cd %f | tar xvf -
+</code></pre>
+<p>Addition Conditions</p>
+<p>If the condition begins with <code>+</code> (or <code>+?</code>) instead of <code>=</code> (or <code>=?</code>) it is an addition condition. If the condition is true the menu entry will be included in the menu. If the condition is false the menu entry will not be included in the menu.</p>
+<p>You can combine default and addition conditions by starting condition with <code>+=</code> or <code>=+</code> (or <code>+=?</code> or <code>=+?</code> if you want debug trace). If you want to use two different conditions, one for adding and another for defaulting, you can precede a menu entry with two condition lines, one starting with <code>+</code> and another starting with <code>=</code>.</p>
+<p>Comments are started with <code>#'. The additional comment lines must start with </code>#<code>, </code>space<code>or</code>tab`.</p>
+<h3 id="diffs-in-color" tabindex="-1">Diffs in Color <a class="header-anchor" href="#diffs-in-color" aria-hidden="true">🔗</a></h3>
+<pre><code>+ t r &amp; ! t t
+d Diff against file of same name in other directory
+if [ &quot;%d&quot; = &quot;%D&quot; ]; then
+echo &quot;The two directores must be different&quot;
+exit 1
+fi
+if [ -f %D/%f ]; then # if two of them, then
+diff -up %f %D/%f | sed -e 's/\(^-.*\)/\x1b[1;31m\1\x1b[0m/g' \
+-e 's/\(^\+.*\)/\x1b[1;32m\1\x1b[0m/g' \
+-e 's/\(^@.*\)/\x1b[36m\1\x1b[0m/g' | less -R
+else
+echo %f: No copy in %D/%f
+fi
+
+D Diff current directory against other directory
+if [ &quot;%d&quot; = &quot;%D&quot; ]; then
+echo &quot;The two directores must be different&quot;
+exit 1
+fi
+diff -up %d %D | sed -e 's/\(^-.*\)/\x1b[1;31m\1\x1b[0m/g' \
+-e 's/\(^\+.*\)/\x1b[1;32m\1\x1b[0m/g' \
+-e 's/\(^@.*\)/\x1b[36m\1\x1b[0m/g' | less -R
+fi
+</code></pre>
+</body></html>

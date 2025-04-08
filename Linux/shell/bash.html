@@ -1,0 +1,1229 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.783" />
+        <title>bash</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="bash" tabindex="-1">bash <a class="header-anchor" href="#bash" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.783</p>
+<nav class="table-of-contents"><ol><li><a href="#introduction">Introduction </a></li><li><a href="#debug">Debug </a></li><li><a href="#shell-di-login">Shell di login </a></li><li><a href="#example">Example </a></li><li><a href="#variables">Variables </a></li><li><a href="#string-quotes">String quotes </a></li><li><a href="#shell-execution">Shell execution </a></li><li><a href="#conditional-execution">Conditional execution </a></li><li><a href="#functions">Functions </a></li><li><a href="#conditions">Conditions </a></li><li><a href="#strict-mode">Strict mode </a></li><li><a href="#brace-expansion">Brace expansion </a></li><li><a href="#parameter-expansions">Parameter expansions </a><ol><li><a href="#basics">Basics </a></li><li><a href="#substitution">Substitution </a></li><li><a href="#comments">Comments </a></li><li><a href="#substrings">Substrings </a></li><li><a href="#length">Length </a></li><li><a href="#manipulation">Manipulation </a></li><li><a href="#default-values">Default values </a></li></ol></li><li><a href="#loops">Loops </a><ol><li><a href="#basic-for-loop">Basic for loop </a></li><li><a href="#c-like-for-loop">C-like for loop </a></li><li><a href="#ranges">Ranges </a></li><li><a href="#with-step-size">With step size </a></li><li><a href="#reading-lines">Reading lines </a></li><li><a href="#forever">Forever </a></li></ol></li><li><a href="#functions-1">Functions </a><ol><li><a href="#defining-functions">Defining functions </a></li><li><a href="#returning-values">Returning values </a></li><li><a href="#raising-errors">Raising errors </a></li><li><a href="#arguments">Arguments </a></li></ol></li><li><a href="#conditionals">Conditionals </a><ol><li><a href="#condition-table">Condition Table </a></li><li><a href="#more-conditions">More conditions </a></li><li><a href="#file-conditions">File conditions </a></li><li><a href="#examples">Examples </a></li></ol></li><li><a href="#arrays">Arrays </a><ol><li><a href="#defining-arrays">Defining arrays </a></li><li><a href="#working-with-arrays">Working with arrays </a></li><li><a href="#operations">Operations </a></li><li><a href="#iteration">Iteration </a></li></ol></li><li><a href="#dictionaries">Dictionaries </a><ol><li><a href="#defining">Defining </a></li><li><a href="#working-with-dictionaries">Working with dictionaries </a></li><li><a href="#iteration-1">Iteration </a><ol><li><a href="#iterate-over-values">Iterate over values </a></li><li><a href="#iterate-over-keys">Iterate over keys </a></li></ol></li></ol></li><li><a href="#options">Options </a><ol><li><a href="#option-set">Option set </a></li><li><a href="#glob-options">Glob options </a></li></ol></li><li><a href="#history">History </a><ol><li><a href="#commands">Commands </a></li><li><a href="#expansions">Expansions </a></li><li><a href="#history-operations">History Operations </a></li><li><a href="#slices">Slices </a></li></ol></li><li><a href="#numeric-calculations">Numeric calculations </a></li><li><a href="#subshells">Subshells </a></li><li><a href="#redirection">Redirection </a></li><li><a href="#inspecting-commands">Inspecting commands </a></li><li><a href="#trap-errors">Trap errors </a></li><li><a href="#case%2Fswitch">Case/switch </a></li><li><a href="#source-relative">Source relative </a></li><li><a href="#printf">printf </a></li><li><a href="#directory-of-script">Directory of script </a></li><li><a href="#getting-options">Getting options </a></li><li><a href="#heredoc">Heredoc </a><ol><li><a href="#heredoc-concatenati-con-rimozione-dell'ultimo-newline-del-primo-heredoc">heredoc concatenati con rimozione dell&#39;ultimo newline del primo heredoc </a></li></ol></li><li><a href="#heredoc-che-scrivono-in-directory-che-richiedono-sudo">heredoc che scrivono in directory che richiedono sudo </a></li><li><a href="#reading-input">Reading input </a></li><li><a href="#special-variables">Special variables </a></li><li><a href="#go-to-previous-directory">Go to previous directory </a></li><li><a href="#check-for-command's-result">Check for command&#39;s result </a></li><li><a href="#grep-check">Grep check </a></li><li><a href="#also-see">Also see </a></li></ol></nav><h1 id="getting-started" tabindex="-1">Getting started <a class="header-anchor" href="#getting-started" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://learnxinyminutes.com/docs/bash/">https://learnxinyminutes.com/docs/bash/</a></li>
+<li><a href="https://devhints.io/bash">https://devhints.io/bash</a> Bash scripting cheatsheet</li>
+<li><a href="https://github.com/rstacruz/cheatsheets">https://github.com/rstacruz/cheatsheets</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/">https://www.gnu.org/software/bash/manual/</a></li>
+<li><a href="https://tldp.org/LDP/abs/html/">https://tldp.org/LDP/abs/html/</a> Advanced Bash-Scripting Guide</li>
+<li><a href="https://wiki.bash-hackers.org/">https://wiki.bash-hackers.org/</a></li>
+<li><a href="https://wiki.bash-hackers.org/syntax/shellvars">https://wiki.bash-hackers.org/syntax/shellvars</a></li>
+</ul>
+<h2 id="introduction" tabindex="-1">Introduction <a class="header-anchor" href="#introduction" aria-hidden="true">🔗</a></h2>
+<p><code>/bin/bash</code> e <code>/usr/bin/bash</code></p>
+<p>sono la stessa cosa perchè <code>/bin</code> è un link simbolico a <code>/usr/bin</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">ls</span> -la /
+bin -&gt; usr/bin/
+</code></pre>
+<p>This is a quick reference to getting started with Bash scripting.</p>
+<ul>
+<li><a href="https://learnxinyminutes.com/docs/bash/">Learn bash in y minutes</a> <em>(<a href="http://learnxinyminutes.com">learnxinyminutes.com</a>)</em></li>
+<li><a href="http://mywiki.wooledge.org/BashGuide">Bash Guide</a> <em>(<a href="http://mywiki.wooledge.org">mywiki.wooledge.org</a>)</em></li>
+</ul>
+<pre><code class="language-bash">$ man bash
+</code></pre>
+<h2 id="debug" tabindex="-1">Debug <a class="header-anchor" href="#debug" aria-hidden="true">🔗</a></h2>
+<p><a href="debug.html">Bash Debug</a></p>
+<p>Eseguire uno script stampando tutte le istruzioni eseguite.</p>
+<pre><code class="language-bash">$ bash -x ./git-reset.sh
+</code></pre>
+<p><a href="https://www.tecmint.com/trace-shell-script-execution-in-linux/">https://www.tecmint.com/trace-shell-script-execution-in-linux/</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -x sys_info.sh <span class="hljs-comment"># debug</span>
+$ <span class="hljs-built_in">sudo</span> bash -n sys_info.sh <span class="hljs-comment"># controllo sintattico</span>
+</code></pre>
+<h2 id="shell-di-login" tabindex="-1">Shell di login <a class="header-anchor" href="#shell-di-login" aria-hidden="true">🔗</a></h2>
+<p>Una shell di login è il primo processo che viene eseguito con il tuo ID utente quando accedi per una sessione interattiva. Il processo di login dice alla shell di comportarsi come una shell di login con una convenzione: passare l'argomento <code>0</code>, che normalmente è il nome dell'eseguibile della shell, con un carattere <code>-</code> anteposto (ad es. <code>-bash</code>
+Mentre normalmente sarebbe <code>bash</code>.
+Quando si accede a una console di testo, tramite SSH o con <code>su -</code>, si ottiene una shell di login interattiva.
+Quando si accede in modalità grafica (su un display manager X ),
+non si ottiene una shell di accesso, ma si ottiene un gestore sessioni o un gestore finestre.</p>
+<p>Una shell di login è quella in cui il cui primo carattere dell'argomento zero è un <code>-</code>, o una che venga avviata con l'opzione <code>--login</code>.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Per vedere se la shell corrente è di login</span>
+<span class="hljs-built_in">shopt</span> login_shell
+<span class="hljs-comment"># Oppure:</span>
+prompt&gt; <span class="hljs-built_in">echo</span> <span class="hljs-variable">$0</span>
+-bash <span class="hljs-comment"># &quot;-&quot; is the first character. Therefore, this is a login shell.</span>
+prompt&gt; <span class="hljs-built_in">echo</span> <span class="hljs-variable">$0</span>
+bash <span class="hljs-comment"># &quot;-&quot; is NOT the first character. This is NOT a login shell.</span>
+
+<span class="hljs-comment"># Verifica se la shell corrente è interattiva:</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">tty</span> -s; <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;This is interactive shell.&#x27;</span>; <span class="hljs-keyword">else</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;This is non-interactive shell.&#x27;</span>; <span class="hljs-keyword">fi</span>
+</code></pre>
+<p>Quando  bash  è invocata come una shell di login, prima legge ed esegue comandi dal file <code>/etc/profile</code>,\ 
+se quel file esiste. Dopo aver letto quel file, cerca:</p>
+<ol>
+<li><code>~/.bash_profile</code></li>
+<li><code>~/.bash_login</code></li>
+<li><code>~/.profile</code></li>
+<li></li>
+</ol>
+<p>in quest'ordine, e legge ed  esegue  comandi <strong>dal primo file che trova</strong> e che è leggibile.</p>
+<p>Quando una shell interattiva che non è una shell di login è avviata, bash legge ed esegue comandi da <code>~/.bashrc</code>.
+Quando si apre un terminale, questo fà partire bash in modo interattivo <em>non</em> di login,
+eseguendo così <code>~/.bashrc</code> ma non <code>~/.bash_profile</code>.</p>
+<h2 id="example" tabindex="-1">Example <a class="header-anchor" href="#example" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+NAME=<span class="hljs-string">&quot;John&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hello <span class="hljs-variable">$NAME</span>!&quot;</span>
+</code></pre>
+<h2 id="variables" tabindex="-1">Variables <a class="header-anchor" href="#variables" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">NAME=<span class="hljs-string">&quot;John&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$NAME</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$NAME</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${NAME}</span>!&quot;</span>
+</code></pre>
+<h2 id="string-quotes" tabindex="-1">String quotes <a class="header-anchor" href="#string-quotes" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">NAME=<span class="hljs-string">&quot;John&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Hi <span class="hljs-variable">$NAME</span>&quot;</span>  <span class="hljs-comment">#=&gt; Hi John</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Hi $NAME&#x27;</span>  <span class="hljs-comment">#=&gt; Hi $NAME</span>
+</code></pre>
+<h2 id="shell-execution" tabindex="-1">Shell execution <a class="header-anchor" href="#shell-execution" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;I&#x27;m in <span class="hljs-subst">$(pwd)</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;I&#x27;m in `pwd`&quot;</span>
+<span class="hljs-comment"># Same</span>
+</code></pre>
+<p>See <a href="http://wiki.bash-hackers.org/syntax/expansion/cmdsubst">Command substitution</a></p>
+<h2 id="conditional-execution" tabindex="-1">Conditional execution <a class="header-anchor" href="#conditional-execution" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">git commit &amp;&amp; git push
+git commit || <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Commit failed&quot;</span>
+</code></pre>
+<h2 id="functions" tabindex="-1">Functions <a class="header-anchor" href="#functions" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">get_name</span></span>() {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;John&quot;</span>
+}
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;You are <span class="hljs-subst">$(get_name)</span>&quot;</span>
+</code></pre>
+<p>See: <a href="#functions">Functions</a></p>
+<h2 id="conditions" tabindex="-1">Conditions <a class="header-anchor" href="#conditions" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;String is empty&quot;</span>
+<span class="hljs-keyword">elif</span> [[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;String is not empty&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>See: <a href="#conditionals">Conditionals</a></p>
+<h2 id="strict-mode" tabindex="-1">Strict mode <a class="header-anchor" href="#strict-mode" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -euo pipefail
+IFS=$<span class="hljs-string">&#x27;\n\t&#x27;</span>
+</code></pre>
+<p>See: <a href="http://redsymbol.net/articles/unofficial-bash-strict-mode/">Unofficial bash strict mode</a></p>
+<h2 id="brace-expansion" tabindex="-1">Brace expansion <a class="header-anchor" href="#brace-expansion" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> {A,B}.js
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{A,B}</code></td>
+<td>Same as <code>A B</code></td>
+</tr>
+<tr>
+<td><code>{A,B}.js</code></td>
+<td>Same as <code>A.js B.js</code></td>
+</tr>
+<tr>
+<td><code>{1..5}</code></td>
+<td>Same as <code>1 2 3 4 5</code></td>
+</tr>
+</tbody>
+</table>
+<p>See: <a href="http://wiki.bash-hackers.org/syntax/expansion/brace">Brace expansion</a></p>
+<h2 id="parameter-expansions" tabindex="-1">Parameter expansions <a class="header-anchor" href="#parameter-expansions" aria-hidden="true">🔗</a></h2>
+<h3 id="basics" tabindex="-1">Basics <a class="header-anchor" href="#basics" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">name=<span class="hljs-string">&quot;John&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name}</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name/J/j}</span>    <span class="hljs-comment">#=&gt; &quot;john&quot; (substitution)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name:0:2}</span>    <span class="hljs-comment">#=&gt; &quot;Jo&quot; (slicing)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name::2}</span>     <span class="hljs-comment">#=&gt; &quot;Jo&quot; (slicing)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name::-1}</span>    <span class="hljs-comment">#=&gt; &quot;Joh&quot; (slicing)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name:(-1)}</span>   <span class="hljs-comment">#=&gt; &quot;n&quot; (slicing from right)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name:(-2):1}</span> <span class="hljs-comment">#=&gt; &quot;h&quot; (slicing from right)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${food:-Cake}</span>  <span class="hljs-comment">#=&gt; $food or &quot;Cake&quot;</span>
+</code></pre>
+<pre><code class="language-bash">length=2
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${name:0:length}</span>  <span class="hljs-comment">#=&gt; &quot;Jo&quot;</span>
+</code></pre>
+<p>See: <a href="http://wiki.bash-hackers.org/syntax/pe">Parameter expansion</a></p>
+<pre><code class="language-bash">STR=<span class="hljs-string">&quot;/path/to/foo.cpp&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR%.cpp}</span>    <span class="hljs-comment"># /path/to/foo</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR%.cpp}</span>.o  <span class="hljs-comment"># /path/to/foo.o</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR%/*}</span>      <span class="hljs-comment"># /path/to</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR##*.}</span>     <span class="hljs-comment"># cpp (extension)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR##*/}</span>     <span class="hljs-comment"># foo.cpp (basepath)</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR#*/}</span>      <span class="hljs-comment"># path/to/foo.cpp</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR##*/}</span>     <span class="hljs-comment"># foo.cpp</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR/foo/bar}</span> <span class="hljs-comment"># /path/to/bar.cpp</span>
+</code></pre>
+<pre><code class="language-bash">STR=<span class="hljs-string">&quot;Hello world&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR:6:5}</span>   <span class="hljs-comment"># &quot;world&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR: -5:5}</span>  <span class="hljs-comment"># &quot;world&quot;</span>
+</code></pre>
+<pre><code class="language-bash">SRC=<span class="hljs-string">&quot;/path/to/foo.cpp&quot;</span>
+BASE=<span class="hljs-variable">${SRC##*/}</span>   <span class="hljs-comment">#=&gt; &quot;foo.cpp&quot; (basepath)</span>
+DIR=<span class="hljs-variable">${SRC%$BASE}</span>  <span class="hljs-comment">#=&gt; &quot;/path/to/&quot; (dirpath)</span>
+</code></pre>
+<h3 id="substitution" tabindex="-1">Substitution <a class="header-anchor" href="#substitution" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${FOO%suffix}</code></td>
+<td>Remove suffix</td>
+</tr>
+<tr>
+<td><code>${FOO#prefix}</code></td>
+<td>Remove prefix</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>${FOO%%suffix}</code></td>
+<td>Remove long suffix</td>
+</tr>
+<tr>
+<td><code>${FOO##prefix}</code></td>
+<td>Remove long prefix</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>${FOO/from/to}</code></td>
+<td>Replace first match</td>
+</tr>
+<tr>
+<td><code>${FOO//from/to}</code></td>
+<td>Replace all</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>${FOO/%from/to}</code></td>
+<td>Replace suffix</td>
+</tr>
+<tr>
+<td><code>${FOO/#from/to}</code></td>
+<td>Replace prefix</td>
+</tr>
+</tbody>
+</table>
+<h3 id="comments" tabindex="-1">Comments <a class="header-anchor" href="#comments" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Single line comment</span>
+</code></pre>
+<pre><code class="language-bash">: <span class="hljs-string">&#x27;
+This is a
+multi line
+comment
+&#x27;</span>
+</code></pre>
+<h3 id="substrings" tabindex="-1">Substrings <a class="header-anchor" href="#substrings" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${FOO:0:3}</code></td>
+<td>Substring <em>(position, length)</em></td>
+</tr>
+<tr>
+<td><code>${FOO:(-3):3}</code></td>
+<td>Substring from the right</td>
+</tr>
+</tbody>
+</table>
+<h3 id="length" tabindex="-1">Length <a class="header-anchor" href="#length" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${#FOO}</code></td>
+<td>Length of <code>$FOO</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="manipulation" tabindex="-1">Manipulation <a class="header-anchor" href="#manipulation" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">STR=<span class="hljs-string">&quot;HELLO WORLD!&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR,}</span>   <span class="hljs-comment">#=&gt; &quot;hELLO WORLD!&quot; (lowercase 1st letter)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR,,}</span>  <span class="hljs-comment">#=&gt; &quot;hello world!&quot; (all lowercase)</span>
+
+STR=<span class="hljs-string">&quot;hello world!&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR^}</span>   <span class="hljs-comment">#=&gt; &quot;Hello world!&quot; (uppercase 1st letter)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${STR^^}</span>  <span class="hljs-comment">#=&gt; &quot;HELLO WORLD!&quot; (all uppercase)</span>
+</code></pre>
+<h3 id="default-values" tabindex="-1">Default values <a class="header-anchor" href="#default-values" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>${FOO:-val}</code></td>
+<td><code>$FOO</code>, or <code>val</code> if unset (or null)</td>
+</tr>
+<tr>
+<td><code>${FOO:=val}</code></td>
+<td>Set <code>$FOO</code> to <code>val</code> if unset (or null)</td>
+</tr>
+<tr>
+<td><code>${FOO:+val}</code></td>
+<td><code>val</code> if <code>$FOO</code> is set (and not null)</td>
+</tr>
+<tr>
+<td><code>${FOO:?message}</code></td>
+<td>Show error message and exit if <code>$FOO</code> is unset (or null)</td>
+</tr>
+</tbody>
+</table>
+<p><mark>Omitting the <code>:</code> removes the (non)nullity checks</mark>, e.g. <code>${FOO-val}</code> expands to <code>val</code> if unset otherwise <code>$FOO</code>.</p>
+<h2 id="loops" tabindex="-1">Loops <a class="header-anchor" href="#loops" aria-hidden="true">🔗</a></h2>
+<h3 id="basic-for-loop" tabindex="-1">Basic for loop <a class="header-anchor" href="#basic-for-loop" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> /etc/rc.*; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="c-like-for-loop" tabindex="-1">C-like for loop <a class="header-anchor" href="#c-like-for-loop" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> ((i = <span class="hljs-number">0</span> ; i &lt; <span class="hljs-number">100</span> ; i++)); <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="ranges" tabindex="-1">Ranges <a class="header-anchor" href="#ranges" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {1..5}; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Welcome <span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="with-step-size" tabindex="-1">With step size <a class="header-anchor" href="#with-step-size" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {5..50..5}; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Welcome <span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="reading-lines" tabindex="-1">Reading lines <a class="header-anchor" href="#reading-lines" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> file.txt | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> line; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$line</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="forever" tabindex="-1">Forever <a class="header-anchor" href="#forever" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+  ···
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="functions-1" tabindex="-1">Functions <a class="header-anchor" href="#functions-1" aria-hidden="true">🔗</a></h2>
+<h3 id="defining-functions" tabindex="-1">Defining functions <a class="header-anchor" href="#defining-functions" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">myfunc</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello <span class="hljs-variable">$1</span>&quot;</span>
+}
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Same as above (alternate syntax)</span>
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">myfunc</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;hello <span class="hljs-variable">$1</span>&quot;</span>
+}
+</code></pre>
+<pre><code class="language-bash">myfunc <span class="hljs-string">&quot;John&quot;</span>
+</code></pre>
+<h3 id="returning-values" tabindex="-1">Returning values <a class="header-anchor" href="#returning-values" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">myfunc</span></span>() {
+    <span class="hljs-built_in">local</span> myresult=<span class="hljs-string">&#x27;some value&#x27;</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$myresult</span>
+}
+</code></pre>
+<pre><code class="language-bash">result=<span class="hljs-string">&quot;<span class="hljs-subst">$(myfunc)</span>&quot;</span>
+</code></pre>
+<h3 id="raising-errors" tabindex="-1">Raising errors <a class="header-anchor" href="#raising-errors" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">myfunc</span></span>() {
+  <span class="hljs-built_in">return</span> 1
+}
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> myfunc; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;success&quot;</span>
+<span class="hljs-keyword">else</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;failure&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h3 id="arguments" tabindex="-1">Arguments <a class="header-anchor" href="#arguments" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$#</code></td>
+<td>Number of arguments</td>
+</tr>
+<tr>
+<td><code>$*</code></td>
+<td>All arguments</td>
+</tr>
+<tr>
+<td><code>$@</code></td>
+<td>All arguments, starting from first</td>
+</tr>
+<tr>
+<td><code>$1</code></td>
+<td>First argument</td>
+</tr>
+<tr>
+<td><code>$_</code></td>
+<td>Last argument of the previous command</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="http://wiki.bash-hackers.org/syntax/shellvars#special_parameters_and_shell_variables">Special parameters</a>.</p>
+<h2 id="conditionals" tabindex="-1">Conditionals <a class="header-anchor" href="#conditionals" aria-hidden="true">🔗</a></h2>
+<h3 id="condition-table" tabindex="-1">Condition Table <a class="header-anchor" href="#condition-table" aria-hidden="true">🔗</a></h3>
+<p>Note that <code>[[</code> is actually a command/program that returns either <code>0</code> (true) or <code>1</code> (false). Any program that obeys the same logic (like all base utils, such as <code>grep(1)</code> or <code>ping(1)</code>) can be used as condition, see examples.</p>
+<table class="table"><thead>
+<tr>
+<th>Condition</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[[ -z STRING ]]</code></td>
+<td>Empty string</td>
+</tr>
+<tr>
+<td><code>[[ -n STRING ]]</code></td>
+<td>Not empty string</td>
+</tr>
+<tr>
+<td><code>[[ STRING == STRING ]]</code></td>
+<td>Equal</td>
+</tr>
+<tr>
+<td><code>[[ STRING != STRING ]]</code></td>
+<td>Not Equal</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>[[ NUM -eq NUM ]]</code></td>
+<td>Equal</td>
+</tr>
+<tr>
+<td><code>[[ NUM -ne NUM ]]</code></td>
+<td>Not equal</td>
+</tr>
+<tr>
+<td><code>[[ NUM -lt NUM ]]</code></td>
+<td>Less than</td>
+</tr>
+<tr>
+<td><code>[[ NUM -le NUM ]]</code></td>
+<td>Less than or equal</td>
+</tr>
+<tr>
+<td><code>[[ NUM -gt NUM ]]</code></td>
+<td>Greater than</td>
+</tr>
+<tr>
+<td><code>[[ NUM -ge NUM ]]</code></td>
+<td>Greater than or equal</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>[[ STRING =~ STRING ]]</code></td>
+<td>Regexp</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>(( NUM &lt; NUM ))</code></td>
+<td>Numeric conditions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="more-conditions" tabindex="-1">More conditions <a class="header-anchor" href="#more-conditions" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Condition</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[[ -o noclobber ]]</code></td>
+<td>If OPTIONNAME is enabled</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>[[ ! EXPR ]]</code></td>
+<td>Not</td>
+</tr>
+<tr>
+<td><code>[[ X &amp;&amp; Y ]]</code></td>
+<td>And</td>
+</tr>
+<tr>
+<td><code>[[ X || Y ]]</code></td>
+<td>Or</td>
+</tr>
+</tbody>
+</table>
+<h3 id="file-conditions" tabindex="-1">File conditions <a class="header-anchor" href="#file-conditions" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Condition</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[[ -e FILE ]]</code></td>
+<td>Exists</td>
+</tr>
+<tr>
+<td><code>[[ -r FILE ]]</code></td>
+<td>Readable</td>
+</tr>
+<tr>
+<td><code>[[ -h FILE ]]</code></td>
+<td>Symlink</td>
+</tr>
+<tr>
+<td><code>[[ -d FILE ]]</code></td>
+<td>Directory</td>
+</tr>
+<tr>
+<td><code>[[ -w FILE ]]</code></td>
+<td>Writable</td>
+</tr>
+<tr>
+<td><code>[[ -s FILE ]]</code></td>
+<td>Size is &gt; 0 bytes</td>
+</tr>
+<tr>
+<td><code>[[ -f FILE ]]</code></td>
+<td>File</td>
+</tr>
+<tr>
+<td><code>[[ -x FILE ]]</code></td>
+<td>Executable</td>
+</tr>
+<tr>
+<td>---</td>
+<td>---</td>
+</tr>
+<tr>
+<td><code>[[ FILE1 -nt FILE2 ]]</code></td>
+<td>1 is more recent than 2</td>
+</tr>
+<tr>
+<td><code>[[ FILE1 -ot FILE2 ]]</code></td>
+<td>2 is more recent than 1</td>
+</tr>
+<tr>
+<td><code>[[ FILE1 -ef FILE2 ]]</code></td>
+<td>Same files</td>
+</tr>
+</tbody>
+</table>
+<h3 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># String</span>
+<span class="hljs-keyword">if</span> [[ -z <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;String is empty&quot;</span>
+<span class="hljs-keyword">elif</span> [[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;String is not empty&quot;</span>
+<span class="hljs-keyword">else</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;This never happens&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Combinations</span>
+<span class="hljs-keyword">if</span> [[ X &amp;&amp; Y ]]; <span class="hljs-keyword">then</span>
+  ...
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Equal</span>
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$A</span>&quot;</span> == <span class="hljs-string">&quot;<span class="hljs-variable">$B</span>&quot;</span> ]]
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Regex</span>
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;A&quot;</span> =~ . ]]
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> (( <span class="hljs-variable">$a</span> &lt; <span class="hljs-variable">$b</span> )); <span class="hljs-keyword">then</span>
+   <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> is smaller than <span class="hljs-variable">$b</span>&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> [[ -e <span class="hljs-string">&quot;file.txt&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;file exists&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="arrays" tabindex="-1">Arrays <a class="header-anchor" href="#arrays" aria-hidden="true">🔗</a></h2>
+<h3 id="defining-arrays" tabindex="-1">Defining arrays <a class="header-anchor" href="#defining-arrays" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">Fruits=(<span class="hljs-string">&#x27;Apple&#x27;</span> <span class="hljs-string">&#x27;Banana&#x27;</span> <span class="hljs-string">&#x27;Orange&#x27;</span>)
+</code></pre>
+<pre><code class="language-bash">Fruits[0]=<span class="hljs-string">&quot;Apple&quot;</span>
+Fruits[1]=<span class="hljs-string">&quot;Banana&quot;</span>
+Fruits[2]=<span class="hljs-string">&quot;Orange&quot;</span>
+</code></pre>
+<h3 id="working-with-arrays" tabindex="-1">Working with arrays <a class="header-anchor" href="#working-with-arrays" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">${Fruits[0]}</span>           <span class="hljs-comment"># Element #0</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${Fruits[-1]}</span>          <span class="hljs-comment"># Last element</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${Fruits[@]}</span>           <span class="hljs-comment"># All elements, space-separated</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#Fruits[@]}</span>          <span class="hljs-comment"># Number of elements</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#Fruits}</span>             <span class="hljs-comment"># String length of the 1st element</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#Fruits[3]}</span>          <span class="hljs-comment"># String length of the Nth element</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${Fruits[@]:3:2}</span>       <span class="hljs-comment"># Range (from position 3, length 2)</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${!Fruits[@]}</span>          <span class="hljs-comment"># Keys of all elements, space-separated</span>
+</code></pre>
+<h3 id="operations" tabindex="-1">Operations <a class="header-anchor" href="#operations" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">Fruits=(<span class="hljs-string">&quot;<span class="hljs-variable">${Fruits[@]}</span>&quot;</span> <span class="hljs-string">&quot;Watermelon&quot;</span>)    <span class="hljs-comment"># Push</span>
+Fruits+=(<span class="hljs-string">&#x27;Watermelon&#x27;</span>)                  <span class="hljs-comment"># Also Push</span>
+Fruits=( <span class="hljs-variable">${Fruits[@]/Ap*/}</span> )            <span class="hljs-comment"># Remove by regex match</span>
+<span class="hljs-built_in">unset</span> Fruits[2]                         <span class="hljs-comment"># Remove one item</span>
+Fruits=(<span class="hljs-string">&quot;<span class="hljs-variable">${Fruits[@]}</span>&quot;</span>)                 <span class="hljs-comment"># Duplicate</span>
+Fruits=(<span class="hljs-string">&quot;<span class="hljs-variable">${Fruits[@]}</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${Veggies[@]}</span>&quot;</span>) <span class="hljs-comment"># Concatenate</span>
+lines=(`<span class="hljs-built_in">cat</span> <span class="hljs-string">&quot;logfile&quot;</span>`)                 <span class="hljs-comment"># Read from file</span>
+</code></pre>
+<h3 id="iteration" tabindex="-1">Iteration <a class="header-anchor" href="#iteration" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${arrayName[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="dictionaries" tabindex="-1">Dictionaries <a class="header-anchor" href="#dictionaries" aria-hidden="true">🔗</a></h2>
+<h3 id="defining" tabindex="-1">Defining <a class="header-anchor" href="#defining" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">declare</span> -A sounds
+</code></pre>
+<pre><code class="language-bash">sounds[dog]=<span class="hljs-string">&quot;bark&quot;</span>
+sounds[cow]=<span class="hljs-string">&quot;moo&quot;</span>
+sounds[bird]=<span class="hljs-string">&quot;tweet&quot;</span>
+sounds[wolf]=<span class="hljs-string">&quot;howl&quot;</span>
+</code></pre>
+<p>Declares <code>sound</code> as a Dictionary object (aka associative array).</p>
+<h3 id="working-with-dictionaries" tabindex="-1">Working with dictionaries <a class="header-anchor" href="#working-with-dictionaries" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-variable">${sounds[dog]}</span> <span class="hljs-comment"># Dog&#x27;s sound</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${sounds[@]}</span>   <span class="hljs-comment"># All values</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${!sounds[@]}</span>  <span class="hljs-comment"># All keys</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#sounds[@]}</span>  <span class="hljs-comment"># Number of elements</span>
+<span class="hljs-built_in">unset</span> sounds[dog]   <span class="hljs-comment"># Delete dog</span>
+</code></pre>
+<h3 id="iteration-1" tabindex="-1">Iteration <a class="header-anchor" href="#iteration-1" aria-hidden="true">🔗</a></h3>
+<h4 id="iterate-over-values" tabindex="-1">Iterate over values <a class="header-anchor" href="#iterate-over-values" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> val <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${sounds[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$val</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h4 id="iterate-over-keys" tabindex="-1">Iterate over keys <a class="header-anchor" href="#iterate-over-keys" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${!sounds[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-variable">$key</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="options" tabindex="-1">Options <a class="header-anchor" href="#options" aria-hidden="true">🔗</a></h2>
+<h3 id="option-set" tabindex="-1">Option set <a class="header-anchor" href="#option-set" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -o noclobber  <span class="hljs-comment"># Avoid overlay files (echo &quot;hi&quot; &gt; foo)</span>
+<span class="hljs-built_in">set</span> -o errexit    <span class="hljs-comment"># Used to exit upon error, avoiding cascading errors</span>
+<span class="hljs-built_in">set</span> -o pipefail   <span class="hljs-comment"># Unveils hidden failures</span>
+<span class="hljs-built_in">set</span> -o nounset    <span class="hljs-comment"># Exposes unset variables</span>
+</code></pre>
+<h3 id="glob-options" tabindex="-1">Glob options <a class="header-anchor" href="#glob-options" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">shopt</span> -s nullglob    <span class="hljs-comment"># Non-matching globs are removed  (&#x27;*.foo&#x27; =&gt; &#x27;&#x27;)</span>
+<span class="hljs-built_in">shopt</span> -s failglob    <span class="hljs-comment"># Non-matching globs throw errors</span>
+<span class="hljs-built_in">shopt</span> -s nocaseglob  <span class="hljs-comment"># Case insensitive globs</span>
+<span class="hljs-built_in">shopt</span> -s dotglob     <span class="hljs-comment"># Wildcards match dotfiles (&quot;*.sh&quot; =&gt; &quot;.foo.sh&quot;)</span>
+<span class="hljs-built_in">shopt</span> -s globstar    <span class="hljs-comment"># Allow ** for recursive matches (&#x27;lib/**/*.rb&#x27; =&gt; &#x27;lib/a/b/c.rb&#x27;)</span>
+</code></pre>
+<p>Set <code>GLOBIGNORE</code> as a colon-separated list of patterns to be removed from glob
+matches.</p>
+<h2 id="history" tabindex="-1">History <a class="header-anchor" href="#history" aria-hidden="true">🔗</a></h2>
+<h3 id="commands" tabindex="-1">Commands <a class="header-anchor" href="#commands" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Command</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>history</code></td>
+<td>Show history</td>
+</tr>
+<tr>
+<td><code>shopt -s histverify</code></td>
+<td>Don't execute expanded result immediately</td>
+</tr>
+</tbody>
+</table>
+<h3 id="expansions" tabindex="-1">Expansions <a class="header-anchor" href="#expansions" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!$</code></td>
+<td>Expand last parameter of most recent command</td>
+</tr>
+<tr>
+<td><code>!*</code></td>
+<td>Expand all parameters of most recent command</td>
+</tr>
+<tr>
+<td><code>!-n</code></td>
+<td>Expand <code>n</code>th most recent command</td>
+</tr>
+<tr>
+<td><code>!n</code></td>
+<td>Expand <code>n</code>th command in history</td>
+</tr>
+<tr>
+<td><code>!&lt;command&gt;</code></td>
+<td>Expand most recent invocation of command <code>&lt;command&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="history-operations" tabindex="-1">History Operations <a class="header-anchor" href="#history-operations" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!!</code></td>
+<td>Execute last command again</td>
+</tr>
+<tr>
+<td><code>!!:s/&lt;FROM&gt;/&lt;TO&gt;/</code></td>
+<td>Replace first occurrence of <code>&lt;FROM&gt;</code> to <code>&lt;TO&gt;</code> in most recent command</td>
+</tr>
+<tr>
+<td><code>!!:gs/&lt;FROM&gt;/&lt;TO&gt;/</code></td>
+<td>Replace all occurrences of <code>&lt;FROM&gt;</code> to <code>&lt;TO&gt;</code> in most recent command</td>
+</tr>
+<tr>
+<td><code>!$:t</code></td>
+<td>Expand only basename from last parameter of most recent command</td>
+</tr>
+<tr>
+<td><code>!$:h</code></td>
+<td>Expand only directory from last parameter of most recent command</td>
+</tr>
+</tbody>
+</table>
+<p><code>!!</code> and <code>!$</code> can be replaced with any valid expansion.</p>
+<h3 id="slices" tabindex="-1">Slices <a class="header-anchor" href="#slices" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Code</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>!!:n</code></td>
+<td>Expand only <code>n</code>th token from most recent command (command is <code>0</code>; first argument is <code>1</code>)</td>
+</tr>
+<tr>
+<td><code>!^</code></td>
+<td>Expand first argument from most recent command</td>
+</tr>
+<tr>
+<td><code>!$</code></td>
+<td>Expand last token from most recent command</td>
+</tr>
+<tr>
+<td><code>!!:n-m</code></td>
+<td>Expand range of tokens from most recent command</td>
+</tr>
+<tr>
+<td><code>!!:n-$</code></td>
+<td>Expand <code>n</code>th token to last from most recent command</td>
+</tr>
+</tbody>
+</table>
+<p><code>!!</code> can be replaced with any valid expansion i.e. <code>!cat</code>, <code>!-2</code>, <code>!42</code>, etc.</p>
+<h2 id="numeric-calculations" tabindex="-1">Numeric calculations <a class="header-anchor" href="#numeric-calculations" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$((a + <span class="hljs-number">200</span>))      <span class="hljs-comment"># Add 200 to $a</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> $((<span class="hljs-variable">$RANDOM</span>%<span class="hljs-number">200</span>))  <span class="hljs-comment"># Random number 0..199</span>
+</code></pre>
+<h2 id="subshells" tabindex="-1">Subshells <a class="header-anchor" href="#subshells" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="subshells.html">Sub Shells</a></li>
+</ul>
+<pre><code class="language-bash">(<span class="hljs-built_in">cd</span> somedir; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;I&#x27;m now in <span class="hljs-variable">$PWD</span>&quot;</span>)
+<span class="hljs-built_in">pwd</span> <span class="hljs-comment"># still in first directory</span>
+
+(<span class="hljs-built_in">head</span> -1; <span class="hljs-built_in">tail</span> -1) &lt; <span class="hljs-built_in">log</span> <span class="hljs-comment"># legge prima ed ultima riga di un file</span>
+</code></pre>
+<h2 id="redirection" tabindex="-1">Redirection <a class="header-anchor" href="#redirection" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/Redirections.html">https://www.gnu.org/software/bash/manual/html_node/Redirections.html</a></li>
+</ul>
+<p>stdin  0
+stdout 1
+stderr 2</p>
+<ul>
+<li>[file descriptor]<code>&gt;</code>[file_name], redireziona un file descriptor su un file, il default è <code>1</code> <code>stdout</code></li>
+<li>[file_descriptor]<code>&gt;&amp;</code>[file_descriptor], redireziona un file descriptor su un altro file descriptor</li>
+<li><code>&amp;&gt;</code> [file_name] redireziona <code>stdout</code> e <code>stderr</code> su un file, corrisponde a <code>&gt;file_name 2&gt;&amp;1</code></li>
+</ul>
+<pre><code class="language-bash">$ python hello.py &gt; output.txt   <span class="hljs-comment"># stdout to (file)</span>
+$ python hello.py &gt;&gt; output.txt  <span class="hljs-comment"># stdout to (file), append</span>
+$ python hello.py 2&gt; error.log   <span class="hljs-comment"># stderr to (file)</span>
+$ python hello.py 2&gt;&amp;1           <span class="hljs-comment"># stderr to stdout</span>
+$ python hello.py 2&gt;/dev/null    <span class="hljs-comment"># stderr to (null)</span>
+$ python hello.py &amp;&gt;/dev/null    <span class="hljs-comment"># stdout and stderr to (null)</span>
+</code></pre>
+<pre><code class="language-bash">python hello.py &lt; foo.txt      <span class="hljs-comment"># feed foo.txt to stdin for python</span>
+</code></pre>
+<h2 id="inspecting-commands" tabindex="-1">Inspecting commands <a class="header-anchor" href="#inspecting-commands" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">command</span> -V <span class="hljs-built_in">cd</span>
+<span class="hljs-comment">#=&gt; &quot;cd is a function/alias/whatever&quot;</span>
+</code></pre>
+<h2 id="trap-errors" tabindex="-1">Trap errors <a class="header-anchor" href="#trap-errors" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">trap</span> <span class="hljs-string">&#x27;echo Error at about $LINENO&#x27;</span> ERR
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">traperr</span></span>() {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ERROR: <span class="hljs-variable">${BASH_SOURCE[1]}</span> at about <span class="hljs-variable">${BASH_LINENO[0]}</span>&quot;</span>
+}
+
+<span class="hljs-built_in">set</span> -o errtrace
+<span class="hljs-built_in">trap</span> traperr ERR
+</code></pre>
+<h2 id="case%2Fswitch" tabindex="-1">Case/switch <a class="header-anchor" href="#case%2Fswitch" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">case</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> <span class="hljs-keyword">in</span>
+  start | up)
+    vagrant up
+    ;;
+
+  *)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> {start|stop|ssh}&quot;</span>
+    ;;
+<span class="hljs-keyword">esac</span>
+</code></pre>
+<h2 id="source-relative" tabindex="-1">Source relative <a class="header-anchor" href="#source-relative" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">source</span> <span class="hljs-string">&quot;<span class="hljs-variable">${0%/*}</span>/../share/foo.sh&quot;</span>
+</code></pre>
+<h2 id="printf" tabindex="-1">printf <a class="header-anchor" href="#printf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;Hello %s, I&#x27;m %s&quot;</span> Sven Olga
+<span class="hljs-comment">#=&gt; &quot;Hello Sven, I&#x27;m Olga</span>
+
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;1 + 1 = %d&quot;</span> 2
+<span class="hljs-comment">#=&gt; &quot;1 + 1 = 2&quot;</span>
+
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;This is how you print a float: %f&quot;</span> 2
+<span class="hljs-comment">#=&gt; &quot;This is how you print a float: 2.000000&quot;</span>
+</code></pre>
+<h2 id="directory-of-script" tabindex="-1">Directory of script <a class="header-anchor" href="#directory-of-script" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">DIR=<span class="hljs-string">&quot;<span class="hljs-variable">${0%/*}</span>&quot;</span>
+</code></pre>
+<h2 id="getting-options" tabindex="-1">Getting options <a class="header-anchor" href="#getting-options" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">while</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> =~ ^- &amp;&amp; ! <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> == <span class="hljs-string">&quot;--&quot;</span> ]]; <span class="hljs-keyword">do</span> <span class="hljs-keyword">case</span> <span class="hljs-variable">$1</span> <span class="hljs-keyword">in</span>
+  -V | --version )
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$version</span>
+    <span class="hljs-built_in">exit</span>
+    ;;
+  -s | --string )
+    <span class="hljs-built_in">shift</span>; string=<span class="hljs-variable">$1</span>
+    ;;
+  -f | --flag )
+    flag=1
+    ;;
+<span class="hljs-keyword">esac</span>; <span class="hljs-built_in">shift</span>; <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> == <span class="hljs-string">&#x27;--&#x27;</span> ]]; <span class="hljs-keyword">then</span> <span class="hljs-built_in">shift</span>; <span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="heredoc" tabindex="-1">Heredoc <a class="header-anchor" href="#heredoc" aria-hidden="true">🔗</a></h2>
+<p>Con sostituzione dei parametri, $USER viene sostituito</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">END
+hello world $USER
+END</span>
+</code></pre>
+<p>Senza sostituzione dei parametri, $USER NON viene sostituito</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;END&#x27;</span>
+hello world <span class="hljs-variable">$USER</span>
+END
+</code></pre>
+<h3 id="heredoc-concatenati-con-rimozione-dell'ultimo-newline-del-primo-heredoc" tabindex="-1">heredoc concatenati con rimozione dell'ultimo newline del primo heredoc <a class="header-anchor" href="#heredoc-concatenati-con-rimozione-dell'ultimo-newline-del-primo-heredoc" aria-hidden="true">🔗</a></h3>
+<p>Avendo necessità di creare un heredoc dove solo la variabile <code>$DST</code>
+viene sostituita, e non le altre come ad es. <code>$PATH</code>,
+spezziamo in due parti l'heredoc,
+dopodichè utilizzando il comando <code>head</code> eliminiamo <strong>l'ultimo newline del primo heredoc</strong>.</p>
+<pre><code class="language-bash">DST=/opt/python
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF| head -c -1 &gt;&gt; ~/.bashrc
+# Python
+export PATH=$DST/bin:
+EOF</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt;&gt; ~/.bashrc
+<span class="hljs-variable">$PATH</span>
+EOF
+</code></pre>
+<p>Risultato:</p>
+<pre><code># Python
+export PATH=/opt/python/bin:$PATH
+</code></pre>
+<h2 id="heredoc-che-scrivono-in-directory-che-richiedono-sudo" tabindex="-1">heredoc che scrivono in directory che richiedono sudo <a class="header-anchor" href="#heredoc-che-scrivono-in-directory-che-richiedono-sudo" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/4412029/generate-script-in-bash-and-save-it-to-location-requiring-sudo">https://stackoverflow.com/questions/4412029/generate-script-in-bash-and-save-it-to-location-requiring-sudo</a></li>
+</ul>
+<p>Se <code>cat</code> deve scrive in una directory che richiede <code>sudo</code>, non si può <br>
+semplicemente anteporre sudo a cat:</p>
+<p><strong>NO</strong></p>
+<pre><code class="language-bash"><span class="hljs-comment"># NON funziona</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> &gt; /etc/fstab &lt;&lt; <span class="hljs-string">EOF
+/mnt/bl/dislocker-file /mnt/bitlocker auto nofail 0 0
+EOF</span>
+</code></pre>
+<p>Non funziona perchè <code>&gt; /etc/fstab</code> cerca di aprire il file in scrittura con il processo shell corrente che non è sotto <code>sudo</code>.
+Il file deve essere aperto in una sotto shell attivata con sudo, si può fare con <code>sudo bash -c</code>:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/nginx/sites-available/sec504wiki.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+server {
+    listen       127.0.0.1:9001;
+    server_name  wiki;
+    location / {
+        root   /mnt/CDPBackup/wiki;
+        index  index.html index.htm;
+        add_header Last-Modified <span class="hljs-variable">$date_gmt</span>;
+        add_header Cache-Control <span class="hljs-string">&#x27;no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0&#x27;</span>;
+        if_modified_since off;
+        expires off;
+        etag off;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+EOF
+</code></pre>
+<h2 id="reading-input" tabindex="-1">Reading input <a class="header-anchor" href="#reading-input" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;Proceed? [y/n]: &quot;</span>
+<span class="hljs-built_in">read</span> ans
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$ans</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">read</span> -n 1 ans    <span class="hljs-comment"># Just one character</span>
+</code></pre>
+<h2 id="special-variables" tabindex="-1">Special variables <a class="header-anchor" href="#special-variables" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$?</code></td>
+<td>Exit status of last task</td>
+</tr>
+<tr>
+<td><code>$!</code></td>
+<td>PID of last background task</td>
+</tr>
+<tr>
+<td><code>$$</code></td>
+<td>PID of shell</td>
+</tr>
+<tr>
+<td><code>$0</code></td>
+<td>Filename of the shell script</td>
+</tr>
+</tbody>
+</table>
+<p>See <a href="http://wiki.bash-hackers.org/syntax/shellvars#special_parameters_and_shell_variables">Special parameters</a>.</p>
+<h2 id="go-to-previous-directory" tabindex="-1">Go to previous directory <a class="header-anchor" href="#go-to-previous-directory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">pwd</span> <span class="hljs-comment"># /home/user/foo</span>
+<span class="hljs-built_in">cd</span> bar/
+<span class="hljs-built_in">pwd</span> <span class="hljs-comment"># /home/user/foo/bar</span>
+<span class="hljs-built_in">cd</span> -
+<span class="hljs-built_in">pwd</span> <span class="hljs-comment"># /home/user/foo</span>
+</code></pre>
+<h2 id="check-for-command's-result" tabindex="-1">Check for command's result <a class="header-anchor" href="#check-for-command's-result" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> ping -c 1 google.com; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;It appears you have a working internet connection&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="grep-check" tabindex="-1">Grep check <a class="header-anchor" href="#grep-check" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> grep -q <span class="hljs-string">&#x27;foo&#x27;</span> ~/.bash_history; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;You appear to have typed &#x27;foo&#x27; in the past&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="also-see" tabindex="-1">Also see <a class="header-anchor" href="#also-see" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://wiki.bash-hackers.org/">Bash-hackers wiki</a> <em>(<a href="http://bash-hackers.org">bash-hackers.org</a>)</em></li>
+<li><a href="http://wiki.bash-hackers.org/syntax/shellvars">Shell vars</a> <em>(<a href="http://bash-hackers.org">bash-hackers.org</a>)</em></li>
+<li><a href="https://learnxinyminutes.com/docs/bash/">Learn bash in y minutes</a> <em>(<a href="http://learnxinyminutes.com">learnxinyminutes.com</a>)</em></li>
+<li><a href="http://mywiki.wooledge.org/BashGuide">Bash Guide</a> <em>(<a href="http://mywiki.wooledge.org">mywiki.wooledge.org</a>)</em></li>
+<li><a href="https://www.shellcheck.net/">ShellCheck</a> <em>(<a href="http://shellcheck.net">shellcheck.net</a>)</em></li>
+</ul>
+</body></html>

@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.029" />
+        <title>samba</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="samba" tabindex="-1">samba <a class="header-anchor" href="#samba" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.029</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-in-manjaro">Installazione in Manjaro </a></li><li><a href="#configurazione">Configurazione </a><ol><li><a href="#configurazione-per-connessione-dal-laptop-del-lavoro-(192.168.1.4)">Configurazione per connessione dal laptop del lavoro (192.168.1.4) </a></li><li><a href="#configurazione-firewall-per-connessioni-samba-dal-laptop-del-lavoro-(192.168.1.4)">Configurazione firewall per connessioni samba dal laptop del lavoro (192.168.1.4) </a></li></ol></li><li><a href="#installazione-mint">Installazione Mint </a></li><li><a href="#rpcclient">rpcclient </a><ol><li><a href="#esempio-smb.conf-da-git">Esempio smb.conf da git </a></li></ol></li><li><a href="#%2Fetc%2Fsamba%2Fsmb.conf">/etc/samba/smb.conf </a></li></ol></nav><h1 id="samba-1" tabindex="-1">Samba <a class="header-anchor" href="#samba-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Samba">https://wiki.archlinux.org/title/Samba</a></p>
+</li>
+<li>
+<p><a href="https://guide.debianizzati.org/index.php/SAMBA:_configurazione_lato_server">https://guide.debianizzati.org/index.php/SAMBA:_configurazione_lato_server</a></p>
+</li>
+<li>
+<p><a href="../distribuzioni/manjaro/manjaro.html">Samba</a></p>
+</li>
+<li>
+<p><a href="https://www.samba.org/samba/docs/server_security.html">https://www.samba.org/samba/docs/server_security.html</a></p>
+<p>Pf you are setting up a firewall then you need to know what TCP and UDP ports to allow and block. Samba uses the following:</p>
+<pre><code>  UDP/137    - used by nmbd
+  UDP/138    - used by nmbd
+  TCP/139    - used by smbd
+  TCP/445    - used by smbd
+</code></pre>
+</li>
+</ul>
+<p>Server Message Block (<strong>SMB</strong>), aka Common Internet File System (<strong>CIFS</strong>).<br>
+NetBIOSProvides: Name Service (Port 137/UDP) + Datagram Service (Port 138/UDP) + Session Service (Port 139/TCP)</p>
+<ul>
+<li><strong>Port 139</strong>: SMB originally ran on top of NetBIOS using port 139. NetBIOS is an older transport layer that allows Windows computers to talk to each other on the same network.</li>
+<li><strong>Port 445</strong>: Later versions of SMB (after Windows 2000) began to use port 445 on top of a TCP stack. Using TCP allows SMB to work over the internet.</li>
+</ul>
+<p>Per CIFS e NetBIOS vanno aperte le seguenti porte nel firewall:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Porta</th>
+<th style="text-align:left">Tipo</th>
+<th style="text-align:left">Protocollo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">137</td>
+<td style="text-align:left">UDP</td>
+<td style="text-align:left">NetBIOS</td>
+</tr>
+<tr>
+<td style="text-align:left">138</td>
+<td style="text-align:left">UDP</td>
+<td style="text-align:left">NetBIOS</td>
+</tr>
+<tr>
+<td style="text-align:left">139</td>
+<td style="text-align:left">TCP</td>
+<td style="text-align:left">NetBIOS</td>
+</tr>
+<tr>
+<td style="text-align:left">445</td>
+<td style="text-align:left">TCP</td>
+<td style="text-align:left">CIFS</td>
+</tr>
+</tbody>
+</table>
+<h2 id="installazione-in-manjaro" tabindex="-1">Installazione in Manjaro <a class="header-anchor" href="#installazione-in-manjaro" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed install samba manjaro-settings-samba net-tools
+</code></pre>
+<h2 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Samba#Enable_Usershares">https://wiki.archlinux.org/title/Samba#Enable_Usershares</a></li>
+</ul>
+<h3 id="configurazione-per-connessione-dal-laptop-del-lavoro-(192.168.1.4)" tabindex="-1">Configurazione per connessione dal laptop del lavoro (192.168.1.4) <a class="header-anchor" href="#configurazione-per-connessione-dal-laptop-del-lavoro-(192.168.1.4)" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ man smb.conf
+$ man smbpasswd
+
+<span class="hljs-comment"># In Windows per vedere i parametri di rete</span>
+<span class="hljs-comment"># net config workstation</span>
+
+$ <span class="hljs-built_in">cat</span> /etc/samba/smb.conf 
+
+    <span class="hljs-comment">#map to guest = Bad Password</span>
+    map to guest = Never
+    <span class="hljs-comment"># usershare allow guests = yes</span>
+    usershare allow guests = no
+
+    [Public Files]
+    path = /home/<span class="hljs-variable">$USER</span>/Public
+    force user = <span class="hljs-variable">$USER</span>
+    force group = <span class="hljs-variable">$USER</span>
+    create mask = 0664
+    force create mode = 0664
+    directory mask = 0775
+    force directory mode = 0775
+    public = <span class="hljs-built_in">yes</span>
+    writable = <span class="hljs-built_in">yes</span>
+
+<span class="hljs-comment"># Verifica del smb.conf</span>
+$ <span class="hljs-built_in">sudo</span> testparm
+<span class="hljs-comment"># Rilettura del smb.conf</span>
+$ <span class="hljs-built_in">sudo</span> systemctl restart smb.service
+$ <span class="hljs-built_in">sudo</span> smbcontrol smbd reload-config
+
+
+<span class="hljs-comment"># Crea l&#x27;utente samba</span>
+$ <span class="hljs-built_in">sudo</span> smbpasswd -a <span class="hljs-variable">$USER</span>
+$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;<span class="hljs-variable">$pass</span>\n<span class="hljs-variable">$pass</span>\n&quot;</span> | smbpasswd -a -s <span class="hljs-variable">$user</span>
+$ <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;<span class="hljs-variable">$pass</span>\n<span class="hljs-variable">$pass</span>\n&quot;</span>  | smbpasswd -a -s <span class="hljs-variable">$user</span>
+$ pdbedit -w -L
+$ <span class="hljs-built_in">sudo</span> pdbedit -L -v <span class="hljs-comment"># list</span>
+<span class="hljs-comment"># smbpasswd samba_user # per cambiare la password</span>
+$ smbclient -L localhost -U% <span class="hljs-comment"># list shares</span>
+$ smbclient -L localhost
+$ smbclient <span class="hljs-string">&#x27;\\localhost\Share&#x27;</span> userpassword
+$ smbclient <span class="hljs-string">&#x27;\\localhost\Share&#x27;</span> -c <span class="hljs-string">&quot;dir&quot;</span> userpassword
+$ smbclient //localhost/Share --user=<span class="hljs-variable">$USER</span>%mypassword -c <span class="hljs-string">&quot;dir&quot;</span>
+
+<span class="hljs-comment">#    -U|--user=username[%password]</span>
+<span class="hljs-comment">#           Sets the SMB username or username and password.</span>
+
+</code></pre>
+<h3 id="configurazione-firewall-per-connessioni-samba-dal-laptop-del-lavoro-(192.168.1.4)" tabindex="-1">Configurazione firewall per connessioni samba dal laptop del lavoro (192.168.1.4) <a class="header-anchor" href="#configurazione-firewall-per-connessioni-samba-dal-laptop-del-lavoro-(192.168.1.4)" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="../sicurezza/firewall/ufw.html">UFW</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed ufw ufw-extras gufw
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> ufw.service
+$ <span class="hljs-built_in">sudo</span> ufw <span class="hljs-built_in">enable</span>
+$ <span class="hljs-built_in">sudo</span> systemctl start ufw
+$ <span class="hljs-built_in">sudo</span> ufw default deny
+$ <span class="hljs-built_in">sudo</span> ufw allow from 192.168.1.4 to any app CIFS
+</code></pre>
+<h2 id="installazione-mint" tabindex="-1">Installazione Mint <a class="header-anchor" href="#installazione-mint" aria-hidden="true">🔗</a></h2>
+<pre><code>apt install samba nemo-share --install-recommends
+</code></pre>
+<p>Definizione della password utente per Samba</p>
+<pre><code>sudo smbpasswd -a
+    fadcdp
+</code></pre>
+<p>Sito Web Stampante:</p>
+<p><a href="http://192.168.1.190/hp/device/set_config_folderAddNew.html?tab=Scan&amp;amp;menu=ScantoCfg">http://192.168.1.190/hp/device/set_config_folderAddNew.html?tab=Scan&amp;amp;menu=ScantoCfg</a></p>
+<pre><code>smb://cdplinux/pdf
+\\cdplinux\pdf
+</code></pre>
+<p>Cercare le share definite nel pc</p>
+<pre><code>$USER@cdplinux:/etc/samba$ smbclient -L localhost
+
+Enter WORKGROUP\$USER's password:
+
+    Sharename       Type      Comment
+    ---------       ----      -------
+    print$          Disk      Printer Drivers
+    IPC$            IPC       IPC Service (cdplinux server (Samba, Ubuntu))
+    HP_ColorLaserJet_MFP_M282-M285_fax Printer   HP_ColorLaserJet_MFP_M282-M285_fax
+    CUPS-PDF-Printer Printer   Generic CUPS-PDF Printer
+    HP_ColorLaserJet_MFP_M282-M285 Printer   HP_ColorLaserJet_MFP_M282-M285
+    PDF             Disk      Cartella per scansioni
+
+smbclient //localhost/pdf
+hostname
+smbclient //cdplinux/pdf
+</code></pre>
+<h2 id="rpcclient" tabindex="-1">rpcclient <a class="header-anchor" href="#rpcclient" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ rpcclient -U ksmith 192.168.99.10
+rpcclient $&gt; enumdomusers
+rpcclient $&gt; srvinfo
+rpcclient $&gt; enumalsgroups domain
+
+Enumerate Shares with smbclient
+$ smbclient -L 10.10.0.1 -U sec504
+
+Enumerate Target Information with rpcclient
+$ rpcclient 10.10.0.1 -U sec504
+rpcclient $&gt; enum&lt;TabTab&gt;
+rpcclient $&gt; enumdomusers
+rpcclient $&gt; <span class="hljs-built_in">help</span>
+
+Enumerate Server Info and Groups with rpcclient
+rpcclient $&gt; srvinfo
+rpcclient $&gt; enumalsgroups domain
+rpcclient $&gt; enumalsgroups <span class="hljs-built_in">builtin</span>
+
+Looking Up SIDs
+rpcclient $&gt; lookupnames sec504
+rpcclient $&gt; lookupnames administrator
+rpcclient $&gt; lookupnames administrators
+
+Enumerate Admin Account Details
+rpcclient $&gt; queryuser 500
+
+Disconnect SMB Sessions
+C:\Windows\system32&gt; net session        <span class="hljs-comment"># connessioni in ingresso alla nostra macchina</span>
+C:\&gt; net session \\10.10.75.1 /del      <span class="hljs-comment"># chiusura della connessione non desiderata</span>
+
+$ rpcclient localhost -U%
+rpcclient $&gt; netshareenum
+rpcclient $&gt; netshareenumall
+netname: <span class="hljs-built_in">print</span>$
+    remark: Printer Drivers
+    path: C:\var\lib\samba\printers
+    password: 
+netname: IPC$
+    remark: IPC Service (Samba 4.14.6)
+    path: C:\tmp
+    password: 
+rpcclient $&gt; quit
+
+[<span class="hljs-variable">$USER</span>@12:14:00 /opt/nessus]$ rpcclient localhost -U%
+rpcclient $&gt; enumdomusers
+rpcclient $&gt; srvinfo
+ LINUX          Wk Sv PrQ Unx NT SNT Samba 4.14.5
+ platform_id     : 500
+ os version      : 6.1
+ server <span class="hljs-built_in">type</span>     : 0x809a03
+rpcclient $&gt; enumalsgroups domain
+rpcclient $&gt; enumalsgroups <span class="hljs-built_in">builtin</span>
+rpcclient $&gt; lookupnames <span class="hljs-variable">$USER</span>
+<span class="hljs-variable">$USER</span> S-1-22-1-1000 (User: 1)
+rpcclient $&gt; lookupnames administrator
+result was NT_STATUS_NONE_MAPPED
+rpcclient $&gt; lookupnames administrators
+administrators S-1-5-32-544 (Local Group: 4)
+rpcclient $&gt; queryuser 500
+result was NT_STATUS_NO_SUCH_USER
+rpcclient $&gt; queryuser 1000
+result was NT_STATUS_NO_SUCH_USER
+rpcclient $&gt; quit
+</code></pre>
+<h3 id="esempio-smb.conf-da-git" tabindex="-1">Esempio smb.conf da git <a class="header-anchor" href="#esempio-smb.conf-da-git" aria-hidden="true">🔗</a></h3>
+<p>Configurazione di esempio: <br>
+<code>smb.conf.default</code></p>
+<ul>
+<li><a href="https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD">https://git.samba.org/samba.git/?p=samba.git;a=blob_plain;f=examples/smb.conf.default;hb=HEAD</a></li>
+</ul>
+<pre><code class="language-ini"><span class="hljs-comment"># This is the main Samba configuration file. You should read the</span>
+<span class="hljs-comment"># smb.conf(5) manual page in order to understand the options listed</span>
+<span class="hljs-comment"># here. Samba has a huge number of configurable options (perhaps too</span>
+<span class="hljs-comment"># many!) most of which are not shown in this example</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># For a step to step guide on installing, configuring and using samba, </span>
+<span class="hljs-comment"># read the Samba-HOWTO-Collection. This may be obtained from:</span>
+<span class="hljs-comment">#  http://www.samba.org/samba/docs/Samba-HOWTO-Collection.pdf</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Many working examples of smb.conf files can be found in the </span>
+<span class="hljs-comment"># Samba-Guide which is generated daily and can be downloaded from: </span>
+<span class="hljs-comment">#  http://www.samba.org/samba/docs/Samba-Guide.pdf</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Any line which starts with a ; (semi-colon) or a # (hash) </span>
+<span class="hljs-comment"># is a comment and is ignored. In this example we will use a #</span>
+<span class="hljs-comment"># for commentry and a ; for parts of the config file that you</span>
+<span class="hljs-comment"># may wish to enable</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> Whenever you modify this file you should run the command &quot;testparm&quot;</span>
+<span class="hljs-comment"># to check that you have not made any basic syntactic errors. </span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">#======================= Global Settings =====================================</span>
+<span class="hljs-section">[global]</span>
+
+<span class="hljs-comment"># workgroup = NT-Domain-Name or Workgroup-Name, eg: MIDEARTH</span>
+   <span class="hljs-attr">workgroup</span> = MYGROUP
+
+<span class="hljs-comment"># server string is the equivalent of the NT Description field</span>
+   server <span class="hljs-attr">string</span> = Samba Server
+
+<span class="hljs-comment"># Server role. Defines in which mode Samba will operate. Possible</span>
+<span class="hljs-comment"># values are &quot;standalone server&quot;, &quot;member server&quot;, &quot;classic primary</span>
+<span class="hljs-comment"># domain controller&quot;, &quot;classic backup domain controller&quot;, &quot;active</span>
+<span class="hljs-comment"># directory domain controller&quot;.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Most people will want &quot;standalone server&quot; or &quot;member server&quot;.</span>
+<span class="hljs-comment"># Running as &quot;active directory domain controller&quot; will require first</span>
+<span class="hljs-comment"># running &quot;samba-tool domain provision&quot; to wipe databases and create a</span>
+<span class="hljs-comment"># new domain.</span>
+   server <span class="hljs-attr">role</span> = standalone server
+
+<span class="hljs-comment"># This option is important for security. It allows you to restrict</span>
+<span class="hljs-comment"># connections to machines which are on your local network. The</span>
+<span class="hljs-comment"># following example restricts access to two C class networks and</span>
+<span class="hljs-comment"># the &quot;loopback&quot; interface. For more examples of the syntax see</span>
+<span class="hljs-comment"># the smb.conf man page</span>
+<span class="hljs-comment">;   hosts allow = 192.168.1. 192.168.2. 127.</span>
+
+<span class="hljs-comment"># Uncomment this if you want a guest account, you must add this to /etc/passwd</span>
+<span class="hljs-comment"># otherwise the user &quot;nobody&quot; is used</span>
+<span class="hljs-comment">;  guest account = pcguest</span>
+
+<span class="hljs-comment"># this tells Samba to use a separate log file for each machine</span>
+<span class="hljs-comment"># that connects</span>
+   log <span class="hljs-attr">file</span> = /usr/local/samba/var/log.%m
+
+<span class="hljs-comment"># Put a capping on the size of the log files (in Kb).</span>
+   max log <span class="hljs-attr">size</span> = <span class="hljs-number">50</span>
+
+<span class="hljs-comment"># Specifies the Kerberos or Active Directory realm the host is part of</span>
+<span class="hljs-comment">;   realm = MY_REALM</span>
+
+<span class="hljs-comment"># Backend to store user information in. New installations should </span>
+<span class="hljs-comment"># use either tdbsam or ldapsam. smbpasswd is available for backwards </span>
+<span class="hljs-comment"># compatibility. tdbsam requires no further configuration.</span>
+<span class="hljs-comment">;   passdb backend = tdbsam</span>
+
+<span class="hljs-comment"># Using the following line enables you to customise your configuration</span>
+<span class="hljs-comment"># on a per machine basis. The %m gets replaced with the netbios name</span>
+<span class="hljs-comment"># of the machine that is connecting.</span>
+<span class="hljs-comment"># <span class="hljs-doctag">Note:</span> Consider carefully the location in the configuration file of</span>
+<span class="hljs-comment">#       this line.  The included file is read at that point.</span>
+<span class="hljs-comment">;   include = /usr/local/samba/lib/smb.conf.%m</span>
+
+<span class="hljs-comment"># Configure Samba to use multiple interfaces</span>
+<span class="hljs-comment"># If you have multiple network interfaces then you must list them</span>
+<span class="hljs-comment"># here. See the man page for details.</span>
+<span class="hljs-comment">;   interfaces = 192.168.12.2/24 192.168.13.2/24 </span>
+
+<span class="hljs-comment"># Where to store roving profiles (only for Win95 and WinNT)</span>
+<span class="hljs-comment">#        %L substitutes for this servers netbios name, %U is username</span>
+<span class="hljs-comment">#        You must uncomment the [Profiles] share below</span>
+<span class="hljs-comment">;   logon path = \\%L\Profiles\%U</span>
+
+<span class="hljs-comment"># Windows Internet Name Serving Support Section:</span>
+<span class="hljs-comment"># WINS Support - Tells the NMBD component of Samba to enable it&#x27;s WINS Server</span>
+<span class="hljs-comment">;   wins support = yes</span>
+
+<span class="hljs-comment"># WINS Server - Tells the NMBD components of Samba to be a WINS Client</span>
+<span class="hljs-comment">#	<span class="hljs-doctag">Note:</span> Samba can be either a WINS Server, or a WINS Client, but NOT both</span>
+<span class="hljs-comment">;   wins server = w.x.y.z</span>
+
+<span class="hljs-comment"># WINS Proxy - Tells Samba to answer name resolution queries on</span>
+<span class="hljs-comment"># behalf of a non WINS capable client, for this to work there must be</span>
+<span class="hljs-comment"># at least one	WINS Server on the network. The default is NO.</span>
+<span class="hljs-comment">;   wins proxy = yes</span>
+
+<span class="hljs-comment"># DNS Proxy - tells Samba whether or not to try to resolve NetBIOS names</span>
+<span class="hljs-comment"># via DNS nslookups. The default is NO.</span>
+   dns <span class="hljs-attr">proxy</span> = <span class="hljs-literal">no</span> 
+
+<span class="hljs-comment"># These scripts are used on a domain controller or stand-alone </span>
+<span class="hljs-comment"># machine to add or delete corresponding unix accounts</span>
+<span class="hljs-comment">;  add user script = /usr/sbin/useradd %u</span>
+<span class="hljs-comment">;  add group script = /usr/sbin/groupadd %g</span>
+<span class="hljs-comment">;  add machine script = /usr/sbin/useradd -n -g machines -c Machine -d /dev/null -s /bin/false %u</span>
+<span class="hljs-comment">;  delete user script = /usr/sbin/userdel %u</span>
+<span class="hljs-comment">;  delete user from group script = /usr/sbin/deluser %u %g</span>
+<span class="hljs-comment">;  delete group script = /usr/sbin/groupdel %g</span>
+
+
+<span class="hljs-comment">#============================ Share Definitions ==============================</span>
+<span class="hljs-section">[homes]</span>
+   <span class="hljs-attr">comment</span> = Home Directories
+   <span class="hljs-attr">browseable</span> = <span class="hljs-literal">no</span>
+   <span class="hljs-attr">writable</span> = <span class="hljs-literal">yes</span>
+
+<span class="hljs-comment"># Un-comment the following and create the netlogon directory for Domain Logons</span>
+<span class="hljs-comment">; [netlogon]</span>
+<span class="hljs-comment">;   comment = Network Logon Service</span>
+<span class="hljs-comment">;   path = /usr/local/samba/lib/netlogon</span>
+<span class="hljs-comment">;   guest ok = yes</span>
+<span class="hljs-comment">;   writable = no</span>
+<span class="hljs-comment">;   share modes = no</span>
+
+
+<span class="hljs-comment"># Un-comment the following to provide a specific roving profile share</span>
+<span class="hljs-comment"># the default is to use the user&#x27;s home directory</span>
+<span class="hljs-comment">;[Profiles]</span>
+<span class="hljs-comment">;    path = /usr/local/samba/profiles</span>
+<span class="hljs-comment">;    browseable = no</span>
+<span class="hljs-comment">;    guest ok = yes</span>
+
+
+<span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> If you have a BSD-style print system there is no need to </span>
+<span class="hljs-comment"># specifically define each individual printer</span>
+<span class="hljs-section">[printers]</span>
+   <span class="hljs-attr">comment</span> = All Printers
+   <span class="hljs-attr">path</span> = /usr/spool/samba
+   <span class="hljs-attr">browseable</span> = <span class="hljs-literal">no</span>
+<span class="hljs-comment"># Set public = yes to allow user &#x27;guest account&#x27; to print</span>
+   guest <span class="hljs-attr">ok</span> = <span class="hljs-literal">no</span>
+   <span class="hljs-attr">writable</span> = <span class="hljs-literal">no</span>
+   <span class="hljs-attr">printable</span> = <span class="hljs-literal">yes</span>
+
+<span class="hljs-comment"># This one is useful for people to share files</span>
+<span class="hljs-comment">;[tmp]</span>
+<span class="hljs-comment">;   comment = Temporary file space</span>
+<span class="hljs-comment">;   path = /tmp</span>
+<span class="hljs-comment">;   read only = no</span>
+<span class="hljs-comment">;   public = yes</span>
+
+<span class="hljs-comment"># A publicly accessible directory, but read only, except for people in</span>
+<span class="hljs-comment"># the &quot;staff&quot; group</span>
+<span class="hljs-comment">;[public]</span>
+<span class="hljs-comment">;   comment = Public Stuff</span>
+<span class="hljs-comment">;   path = /home/samba</span>
+<span class="hljs-comment">;   public = yes</span>
+<span class="hljs-comment">;   writable = no</span>
+<span class="hljs-comment">;   printable = no</span>
+<span class="hljs-comment">;   write list = @staff</span>
+
+<span class="hljs-comment"># Other examples. </span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># A private printer, usable only by fred. Spool data will be placed in fred&#x27;s</span>
+<span class="hljs-comment"># home directory. Note that fred must have write access to the spool directory,</span>
+<span class="hljs-comment"># wherever it is.</span>
+<span class="hljs-comment">;[fredsprn]</span>
+<span class="hljs-comment">;   comment = Fred&#x27;s Printer</span>
+<span class="hljs-comment">;   valid users = fred</span>
+<span class="hljs-comment">;   path = /homes/fred</span>
+<span class="hljs-comment">;   printer = freds_printer</span>
+<span class="hljs-comment">;   public = no</span>
+<span class="hljs-comment">;   writable = no</span>
+<span class="hljs-comment">;   printable = yes</span>
+
+<span class="hljs-comment"># A private directory, usable only by fred. Note that fred requires write</span>
+<span class="hljs-comment"># access to the directory.</span>
+<span class="hljs-comment">;[fredsdir]</span>
+<span class="hljs-comment">;   comment = Fred&#x27;s Service</span>
+<span class="hljs-comment">;   path = /usr/somewhere/private</span>
+<span class="hljs-comment">;   valid users = fred</span>
+<span class="hljs-comment">;   public = no</span>
+<span class="hljs-comment">;   writable = yes</span>
+<span class="hljs-comment">;   printable = no</span>
+
+<span class="hljs-comment"># a service which has a different directory for each machine that connects</span>
+<span class="hljs-comment"># this allows you to tailor configurations to incoming machines. You could</span>
+<span class="hljs-comment"># also use the %U option to tailor it by user name.</span>
+<span class="hljs-comment"># The %m gets replaced with the machine name that is connecting.</span>
+<span class="hljs-comment">;[pchome]</span>
+<span class="hljs-comment">;  comment = PC Directories</span>
+<span class="hljs-comment">;  path = /usr/pc/%m</span>
+<span class="hljs-comment">;  public = no</span>
+<span class="hljs-comment">;  writable = yes</span>
+
+<span class="hljs-comment"># A publicly accessible directory, read/write to all users. Note that all files</span>
+<span class="hljs-comment"># created in the directory by users will be owned by the default user, so</span>
+<span class="hljs-comment"># any user with access can delete any other user&#x27;s files. Obviously this</span>
+<span class="hljs-comment"># directory must be writable by the default user. Another user could of course</span>
+<span class="hljs-comment"># be specified, in which case all files would be owned by that user instead.</span>
+<span class="hljs-comment">;[public]</span>
+<span class="hljs-comment">;   path = /usr/somewhere/else/public</span>
+<span class="hljs-comment">;   public = yes</span>
+<span class="hljs-comment">;   only guest = yes</span>
+<span class="hljs-comment">;   writable = yes</span>
+<span class="hljs-comment">;   printable = no</span>
+
+<span class="hljs-comment"># The following two entries demonstrate how to share a directory so that two</span>
+<span class="hljs-comment"># users can place files there that will be owned by the specific users. In this</span>
+<span class="hljs-comment"># setup, the directory should be writable by both users and should have the</span>
+<span class="hljs-comment"># sticky bit set on it to prevent abuse. Obviously this could be extended to</span>
+<span class="hljs-comment"># as many users as required.</span>
+<span class="hljs-comment">;[myshare]</span>
+<span class="hljs-comment">;   comment = Mary&#x27;s and Fred&#x27;s stuff</span>
+<span class="hljs-comment">;   path = /usr/somewhere/shared</span>
+<span class="hljs-comment">;   valid users = mary fred</span>
+<span class="hljs-comment">;   public = no</span>
+<span class="hljs-comment">;   writable = yes</span>
+<span class="hljs-comment">;   printable = no</span>
+<span class="hljs-comment">;   create mask = 0765</span>
+
+</code></pre>
+<h2 id="%2Fetc%2Fsamba%2Fsmb.conf" tabindex="-1">/etc/samba/smb.conf <a class="header-anchor" href="#%2Fetc%2Fsamba%2Fsmb.conf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-ini"><span class="hljs-section">[global]</span>
+   <span class="hljs-comment">#workgroup = WORKGROUP</span>
+   dns <span class="hljs-attr">proxy</span> = <span class="hljs-literal">no</span>
+   log <span class="hljs-attr">file</span> = /var/log/samba/%m.log
+   max log <span class="hljs-attr">size</span> = <span class="hljs-number">1000</span>
+   client min <span class="hljs-attr">protocol</span> = SMB2
+   server <span class="hljs-attr">role</span> = standalone server
+   passdb <span class="hljs-attr">backend</span> = tdbsam
+   obey pam <span class="hljs-attr">restrictions</span> = <span class="hljs-literal">yes</span>
+   unix password <span class="hljs-attr">sync</span> = <span class="hljs-literal">yes</span>
+   passwd <span class="hljs-attr">program</span> = /usr/bin/passwd %u
+   passwd <span class="hljs-attr">chat</span> = *New*UNIX*password* %n\n *ReType*new*UNIX*password* %n\n *passwd:*all*authentication*tokens*updated*successfully*
+   pam password <span class="hljs-attr">change</span> = <span class="hljs-literal">yes</span>
+   <span class="hljs-comment"># map to guest = Bad Password</span>
+   map to <span class="hljs-attr">guest</span> = Never
+   <span class="hljs-comment"># usershare allow guests = yes</span>
+   usershare allow <span class="hljs-attr">guests</span> = <span class="hljs-literal">no</span>
+   name resolve <span class="hljs-attr">order</span> = lmhosts bcast host wins
+   <span class="hljs-attr">security</span> = user
+   guest <span class="hljs-attr">account</span> = nobody
+   usershare <span class="hljs-attr">path</span> = /var/lib/samba/usershare
+   usershare max <span class="hljs-attr">shares</span> = <span class="hljs-number">100</span>
+   usershare owner <span class="hljs-attr">only</span> = <span class="hljs-literal">yes</span>
+   force create <span class="hljs-attr">mode</span> = <span class="hljs-number">0070</span>
+   force directory <span class="hljs-attr">mode</span> = <span class="hljs-number">0070</span>
+
+<span class="hljs-section">[homes]</span>
+   <span class="hljs-attr">comment</span> = Home Directories
+   <span class="hljs-attr">browseable</span> = <span class="hljs-literal">no</span>
+   read <span class="hljs-attr">only</span> = <span class="hljs-literal">yes</span>
+   create <span class="hljs-attr">mask</span> = <span class="hljs-number">0700</span>
+   directory <span class="hljs-attr">mask</span> = <span class="hljs-number">0700</span>
+   valid <span class="hljs-attr">users</span> = %S
+
+<span class="hljs-comment">#[printers]</span>
+<span class="hljs-comment">#   comment = All Printers</span>
+<span class="hljs-comment">#   browseable = no</span>
+<span class="hljs-comment">#   path = /var/spool/samba</span>
+<span class="hljs-comment">#   printable = yes</span>
+<span class="hljs-comment">#   guest ok = no</span>
+<span class="hljs-comment">#   read only = yes</span>
+<span class="hljs-comment">#   create mask = 0700</span>
+
+<span class="hljs-comment">#[print$]</span>
+<span class="hljs-comment">#   comment = Printer Drivers</span>
+<span class="hljs-comment">#   path = /var/lib/samba/printers</span>
+<span class="hljs-comment">#   browseable = yes</span>
+<span class="hljs-comment">#   read only = yes</span>
+<span class="hljs-comment">#   guest ok = no</span>
+
+
+<span class="hljs-comment"># A private directory, usable only by $USER. Note that $USER requires write</span>
+<span class="hljs-comment"># access to the directory.</span>
+<span class="hljs-section">[Share]</span>
+   <span class="hljs-attr">comment</span> = <span class="hljs-variable">$USER</span><span class="hljs-string">&#x27;s Service
+   path = /home/$USER/Share
+   valid users = $USER
+   hosts allow = 192.168.1.4 127.0.0.1 localhost 192.168.122.10
+   public = no
+   writable = yes
+   printable = no
+
+</span></code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /srv/samba
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> nobody:nogroup /srv/samba
+</code></pre>
+<pre><code class="language-ini">    <span class="hljs-section">[shared]</span>
+    <span class="hljs-attr">comment</span> = username and password required
+    <span class="hljs-attr">path</span> = /srv/samba
+    <span class="hljs-attr">browseable</span> = <span class="hljs-literal">yes</span>
+    guest <span class="hljs-attr">ok</span> = <span class="hljs-literal">yes</span>
+    <span class="hljs-attr">writable</span> = <span class="hljs-literal">yes</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Per accedere alla share Ubuntu dalla VM Windows: \\192.168.122.2</span>
+$ <span class="hljs-built_in">sudo</span> systemctl status smbd
+$ smbclient -L localhost -U user%password <span class="hljs-comment"># list shares</span>
+$ <span class="hljs-built_in">sudo</span> smbstatus --shares
+</code></pre>
+<p>da gnome files:</p>
+<pre><code>smb://192.168.122.2/
+</code></pre>
+<p>In Windows 10:
+tasto destro su &quot;questo PC&quot;, aggiungi percorso di rete:</p>
+<pre><code>\\192.168.1.2\Share
+</code></pre>
+</body></html>

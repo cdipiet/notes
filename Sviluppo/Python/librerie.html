@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.615" />
+        <title>librerie</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="librerie" tabindex="-1">librerie <a class="header-anchor" href="#librerie" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.615</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-pacchetti">Installazione Pacchetti </a></li><li><a href="#pacchetti-importanti">Pacchetti Importanti </a><ol><li><a href="#scientific-packages">Scientific Packages </a></li><li><a href="#keepass---leggere-il-db-da-python">Keepass - leggere il DB da Python </a><ol><li><a href="#windows">Windows </a></li><li><a href="#linux">Linux </a></li></ol></li><li><a href="#altri-moduli">Altri moduli </a></li><li><a href="#pyqt5">PyQt5 </a></li><li><a href="#cx_freeze">cx_Freeze </a><ol><li><a href="#cx_freeze-e-python-3.7.1">cx_freeze e Python 3.7.1 </a></li></ol></li><li><a href="#sphinx">Sphinx </a></li><li><a href="#markdown">Markdown </a></li><li><a href="#pandoc">Pandoc </a></li><li><a href="#showdownjs">Showdownjs </a></li><li><a href="#python-markdown">Python Markdown </a></li><li><a href="#lxml">LXML </a></li><li><a href="#pdf---pypdf4">PDF - PyPDF4 </a></li><li><a href="#pdf---pdf-miner-3k---per-leggere-form-pdf-anche-in-formato-xfa">PDF - PDF Miner 3K - Per leggere Form PDF anche in formato XFA </a></li><li><a href="#cx_oracle">cx_Oracle </a><ol><li><a href="#solo-durante-lo-sviluppo">Solo durante lo sviluppo </a></li></ol></li><li><a href="#sftp---paramiko---pysocks">SFTP - Paramiko - PySocks </a></li><li><a href="#ldap3">LDAP3 </a></li><li><a href="#pyaes">PyAES </a></li><li><a href="#openpyxl-%3A-.xlsx">OpenPyXL : .xlsx </a></li><li><a href="#pandas">Pandas </a><ol><li><a href="#pandas-e-dipendenze-utili">Pandas e dipendenze utili </a></li></ol></li><li><a href="#numpy">Numpy </a></li><li><a href="#scipy">SciPy </a></li><li><a href="#pytables">PyTables </a></li><li><a href="#bottleneck">Bottleneck </a></li><li><a href="#seaborn">Seaborn </a></li><li><a href="#sqlalchemy">SQLAlchemy </a><ol><li><a href="#problema-pip%2Fsqlqlchemy-di-installazione-su-windows-10">Problema PIP/SQLQlchemy di installazione su Windows 10 </a></li></ol></li><li><a href="#psutil">PsUtil </a></li><li><a href="#prettytable">PrettyTable </a></li><li><a href="#python-magic">Python Magic </a></li><li><a href="#matplotlib">Matplotlib </a></li><li><a href="#requests">Requests </a></li><li><a href="#exchangelib">Exchangelib </a></li><li><a href="#ast-unparse%2Fast-viewer">AST Unparse/AST Viewer </a></li><li><a href="#pdf-reportlab---per-generare-pdf">PDF Reportlab - per generare PDF </a></li><li><a href="#ipython">IPython </a></li><li><a href="#chardet">CharDet </a></li><li><a href="#pygame(sdl)">PyGame(SDL) </a></li><li><a href="#pi3d">Pi3D </a></li><li><a href="#wxpython(wxwidgets)">WxPython(WxWidgets) </a><ol><li><a href="#installazione">Installazione </a></li><li><a href="#sito">Sito </a></li><li><a href="#demo-e-documentazione">Demo e Documentazione </a></li><li><a href="#sorgenti">Sorgenti </a></li><li><a href="#wxformbuilder">WxFormBuilder </a></li></ol></li></ol></li><li><a href="#install-from-source---windows-(msys2)">Install From Source - Windows (MSYS2) </a></li><li><a href="#compilazione-a-32-bit">Compilazione a 32 bit </a></li><li><a href="#compilazione-a-64-bit---non-funziona">Compilazione a 64 bit - NON FUNZIONA </a><ol><li><a href="#pygobject(gtk3)">PyGObject(GTK3) </a><ol><li><a href="#conversione-automatica-gtk2---%3E-gkt3">Conversione automatica GTK2 --&gt; GKT3 </a></li><li><a href="#conversione-automatica-python2---%3E-python-3">Conversione automatica Python2 --&gt; Python 3 </a></li><li><a href="#pygobject(gtk3)-msys2">PyGObject(GTK3)-MSYS2 </a></li></ol></li><li><a href="#proxy-pacman">PROXY PACMAN </a></li><li><a href="#installazione%2Faggiornamento-python2-e-python3-in-msys2">Installazione/Aggiornamento Python2 e Python3 in MSYS2 </a><ol><li><a href="#aggiornamento-msys2">Aggiornamento MSYS2 </a></li><li><a href="#installazione-componenti-python">Installazione componenti Python </a></li></ol></li></ol></li><li><a href="#pycharm-python-packaging-tools-not-found">PyCharm Python Packaging Tools Not Found </a><ol><li><a href="#glade">GLADE </a></li></ol></li><li><a href="#progetti-pycharm">Progetti PyCharm </a></li><li><a href="#cython">Cython </a></li><li><a href="#debug-profiling">Debug-Profiling </a></li><li><a href="#command-line-parsing">Command Line Parsing </a></li><li><a href="#python-imaging-library%3A-pillow">Python Imaging Library: Pillow </a></li><li><a href="#pyfiglet">PyFiglet </a></li><li><a href="#django">Django </a></li></ol></nav><h1 id="librerie-1" tabindex="-1">librerie <a class="header-anchor" href="#librerie-1" aria-hidden="true">🔗</a></h1>
+<h2 id="installazione-pacchetti" tabindex="-1">Installazione Pacchetti <a class="header-anchor" href="#installazione-pacchetti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">pip install -U virtualenv ipython jupyter pyreadline sphinx pypdf4 markdown pygments pymdown-extensions cx_oracle pyqt5 pyqt5-tools lxml openpyxl pyaes ldap3 pyasn1 paramiko pysocks psutil ptable reportlab requests sqlalchemy sqlalchemy-utils wxPython comtypes pdfminer3k exchangelib astunparse chardet pygame pi3d pyglet objgraph xdot snakeviz pillow antlr4-python3-runtime
+pip install -U astviewer
+pip install -U cx_Freeze-<span class="hljs-number">5</span>.<span class="hljs-number">1</span>.<span class="hljs-number">1</span>-cp37-cp37m-win_amd64.whl Bottleneck-<span class="hljs-number">1</span>.<span class="hljs-number">2</span>.<span class="hljs-number">1</span>-cp37-cp37m-win_amd64.whl
+pip install -U numpy scipy tables pandas matplotlib xlrd python-dateutil pytz numexpr xarray bs4 cython patsy seaborn
+pip install -U pycryptodome colorama nose python-dateutil easypysmb
+pip install -U --no-deps libkeepass
+pip install -U --no-deps pykeepass
+pip install -U pyfiglet
+</code></pre>
+<p>NOTA1: cx_freeze ancora non c'e' su pypi: <a href="https://pypi.org/project/cx_Freeze/#files">https://pypi.org/project/cx_Freeze/#files</a> per cui è stato scaricato da gohlke:
+<a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#cx_freeze">https://www.lfd.uci.edu/~gohlke/pythonlibs/#cx_freeze</a></p>
+<p>NOTA2: astviewer và installato DOPO le pyqt5</p>
+<h2 id="pacchetti-importanti" tabindex="-1">Pacchetti Importanti <a class="header-anchor" href="#pacchetti-importanti" aria-hidden="true">🔗</a></h2>
+<h3 id="scientific-packages" tabindex="-1">Scientific Packages <a class="header-anchor" href="#scientific-packages" aria-hidden="true">🔗</a></h3>
+<p>Quando i pacchetti non sono disponibili in pip li si può cercare nel sito gohlke ed installarli come whl.</p>
+<ul>
+<li><a href="https://packaging.python.org/guides/installing-scientific-packages/">https://packaging.python.org/guides/installing-scientific-packages/</a></li>
+<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/">http://www.lfd.uci.edu/~gohlke/pythonlibs/</a></li>
+<li><a href="https://www.anaconda.com/download/">https://www.anaconda.com/download/</a></li>
+</ul>
+<!-- end of list -->
+<!-- trucco pandoc per comunicare il termine di una lista e non far considerare il blocco seguente come secondo paragrafo dell'ultimo elemento della lista -->
+<p>pip install -U  numpy scipy  tables bottleneck pandas matplotlib xlrd  python-dateutil pytz numexpr xarray bs4 cython patsy seaborn</p>
+<p>oppure con i pacchetti scaricati da gohlke:</p>
+<p>for %f in (<em>.whl) do echo %f
+for %f in (</em>.whl) do (pip install &quot;%f&quot;)
+pip install &quot;E:\BackupDVDRW\app\Sviluppo\Python\Python\whl\numpy-1.14.0+mkl-cp36-cp36m-win_amd64.whl&quot;
+pip install &quot;E:\BackupDVDRW\app\Sviluppo\Python\Python\whl\scipy-1.0.0-cp36-cp36m-win_amd64.whl&quot;
+pip install &quot;E:\BackupDVDRW\app\Sviluppo\Python\Python\whl\tables-3.4.2-cp36-cp36m-win_amd64.whl&quot;
+pip install &quot;E:\BackupDVDRW\app\Sviluppo\Python\Python\whl\Bottleneck-1.2.1-cp36-cp36m-win_amd64.whl&quot;</p>
+<p>pip install -U pandas matplotlib pyqt5 xlrd openpyxl python-dateutil pytz numexpr sqlalchemy xarray bs4 cython patsy seaborn</p>
+<h3 id="keepass---leggere-il-db-da-python" tabindex="-1">Keepass - leggere il DB da Python <a class="header-anchor" href="#keepass---leggere-il-db-da-python" aria-hidden="true">🔗</a></h3>
+<p><a href="https://keepass.info">https://keepass.info</a></p>
+<h4 id="windows" tabindex="-1">Windows <a class="header-anchor" href="#windows" aria-hidden="true">🔗</a></h4>
+<p>C:&gt; pip install -U pycryptodome colorama lxml nose python-dateutil easypysmb
+C:&gt; pip install -U --no-deps libkeepass
+C:&gt; pip install -U --no-deps pykeepass</p>
+<h4 id="linux" tabindex="-1">Linux <a class="header-anchor" href="#linux" aria-hidden="true">🔗</a></h4>
+<pre><code>sudo pip install -U pykeepass
+</code></pre>
+<h3 id="altri-moduli" tabindex="-1">Altri moduli <a class="header-anchor" href="#altri-moduli" aria-hidden="true">🔗</a></h3>
+<p>pip install -U pylint mutagen colorlog parsedatetime exrex</p>
+<h3 id="pyqt5" tabindex="-1">PyQt5 <a class="header-anchor" href="#pyqt5" aria-hidden="true">🔗</a></h3>
+<pre><code>-  pip install -U pyqt5        --&gt; C:\Python\Lib\site-packages\PyQt5
+    pip install QScintilla
+   pip install -U pyqt5-tools  --&gt; C:\Python\Lib\site-packages\pyqt5-tools
+
+Per lanciare il QtDesigner con i plugin utente serve ancora la distribuzione Anaconda
+pyqt5-tools NON rendono Anaconda/QtDesigner non più necessario
+--------------------------------------------------------------
+In particolare pyqt5-tools serve per il comando *qcollectiongenerator.exe*,
+che deve trovarsi nel PATH prima della versione presente anche in MSYS2:
+set PATH=c:\Python\Lib\site-packages\pyqt5-tools;...;%USERPROFILE%\app\msys64\mingw64\bin
+
+Serve la distribuzione Anaconda per avere a disposizione
+il QtDesigner 5.6, ultima versione funzionante con l'estensibilità tramite pyqt5.dll:
+
+qtdesigner.bat
+--------------
+set LANG=en_US.UTF-8
+@rem set CURRDIR=%~dp0
+set CURRDIR=D:\Dati\Profili\$USER\workspace\PythonWorkspace\PyQt\Applicazioni
+set PYTHONPATH=%CURRDIR%\QtDesigner\widgets
+set PYQTDESIGNERPATH=%CURRDIR%\QtDesigner\plugins
+@rem la versione pyqt5-tools NON funziona con i plugin utente:
+@rem start C:\Python\Lib\site-packages\pyqt5-tools\designer.exe %*
+@rem la versione 5.6.2 di anaconda FUNZIONA con i plugin utente:
+set PATH=%USERPROFILE%\app\Anaconda3\Library\bin;%PATH%
+start %USERPROFILE%\app\Anaconda3\Library\bin\designer.exe %*
+</code></pre>
+<h3 id="cx_freeze" tabindex="-1">cx_Freeze <a class="header-anchor" href="#cx_freeze" aria-hidden="true">🔗</a></h3>
+<h4 id="cx_freeze-e-python-3.7.1" tabindex="-1">cx_freeze e Python 3.7.1 <a class="header-anchor" href="#cx_freeze-e-python-3.7.1" aria-hidden="true">🔗</a></h4>
+<p>cx_freeze ancora non c'e' su pypi: <a href="https://pypi.org/project/cx_Freeze/#files">https://pypi.org/project/cx_Freeze/#files</a> per cui è stato scaricato da gohlke</p>
+<p>Per installare cx_freeze si è dovuta utilizzare la versione gohlke:</p>
+<p><a href="https://www.lfd.uci.edu/~gohlke/pythonlibs/#cx_freeze">https://www.lfd.uci.edu/~gohlke/pythonlibs/#cx_freeze</a></p>
+<p>Per ora non utilizzare:</p>
+<p>pip install cx_freeze</p>
+<p>Ma:
+C:\WINDOWS\system32&gt;pip install c:\Users$USER\Downloads\cx_Freeze-5.1.1-cp37-cp37m-win_amd64.whl</p>
+<p>python C:\Users$USER\app\Anaconda3\Scripts\cxfreeze-quickstart sphinx
+python <a href="http://setup.py">setup.py</a> build</p>
+<p>copiare nella build il file qt.conf e la directory &quot;C:\Users$USER\app\Anaconda3\Library\plugins&quot;</p>
+<p>pip install -U cx_freeze</p>
+<h3 id="sphinx" tabindex="-1">Sphinx <a class="header-anchor" href="#sphinx" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="http://www.sphinx-doc.org">http://www.sphinx-doc.org</a></p>
+</li>
+<li>
+<p><a href="https://github.com/rst2pdf/rst2pdf">https://github.com/rst2pdf/rst2pdf</a></p>
+<p>pip install -U sphinx
+pip install -U rst2pdf
+pip search sphinx</p>
+</li>
+</ul>
+<h3 id="markdown" tabindex="-1">Markdown <a class="header-anchor" href="#markdown" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://daringfireball.net/projects/markdown/syntax">https://daringfireball.net/projects/markdown/syntax</a></li>
+<li><a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet">https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet</a></li>
+<li><a href="https://help.github.com/categories/writing-on-github/">https://help.github.com/categories/writing-on-github/</a></li>
+</ul>
+<h3 id="pandoc" tabindex="-1">Pandoc <a class="header-anchor" href="#pandoc" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://pandoc.org/installing.html">http://pandoc.org/installing.html</a></li>
+<li><a href="http://pandoc.org/MANUAL.html">http://pandoc.org/MANUAL.html</a></li>
+<li><a href="http://pandoc.org/demos.html#examples">http://pandoc.org/demos.html#examples</a></li>
+</ul>
+<p>Per convertire markdown(.md) in .html</p>
+<p>%USERPROFILE%\app\pandoc</p>
+<p>mkdir &quot;%TEMP%\pandoc&quot;
+start /wait msiexec.exe /a pandoc-1.19.1-windows.msi /qn targetdir=&quot;%TEMP%\pandoc&quot;
+copy /y &quot;%TEMP%\pandoc\pandoc.exe&quot; C:\Utils\Console<br>
+copy /y &quot;%TEMP%\pandoc\pandoc-citeproc.exe&quot; C:\Utils\Console<br>
+rmdir /s /q &quot;%TEMP%\pandoc&quot;</p>
+<p>%USERPROFILE%\workspace\PythonWorkspace\PythonWorkbench\Sphinx_rst_markdown\EsempiMarkdown\pandoc</p>
+<p>pandoc --from=markdown+smart --to=html5 --css=PythonWorkbench\Sphinx_rst_markdown\EsempiMarkdown\github.css --highlight-style=haddock --self-contained --output=PyCharm.html <a href="http://PyCharm.md">PyCharm.md</a></p>
+<h3 id="showdownjs" tabindex="-1">Showdownjs <a class="header-anchor" href="#showdownjs" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/showdownjs/showdown/wiki/CLI-tool">https://github.com/showdownjs/showdown/wiki/CLI-tool</a></li>
+</ul>
+<p>set PATH=%PATH%;C:\Users$USER\app\nodejs
+npm install showdown -g</p>
+<p>showdown makehtml --flavor=&quot;github&quot; -i <a href="http://README.md">README.md</a> -o README.html
+I css vanno aggiunti manualmente editando il file README.html:</p>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../css/github.css">
+  </head>
+ In questo dunque pandoc risulta superiore.
+<h3 id="python-markdown" tabindex="-1">Python Markdown <a class="header-anchor" href="#python-markdown" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://pythonhosted.org/Markdown/">https://pythonhosted.org/Markdown/</a></li>
+<li><a href="https://pythonhosted.org/Markdown/extensions/index.html">https://pythonhosted.org/Markdown/extensions/index.html</a></li>
+<li><a href="https://github.com/Python-Markdown/markdown/wiki/Third-Party-Extensions">https://github.com/Python-Markdown/markdown/wiki/Third-Party-Extensions</a></li>
+<li><a href="https://facelessuser.github.io/pymdown-extensions/">https://facelessuser.github.io/pymdown-extensions/</a>
+<ul>
+<li><a href="https://facelessuser.github.io/pymdown-extensions/extensions/github/">https://facelessuser.github.io/pymdown-extensions/extensions/github/</a></li>
+</ul>
+</li>
+</ul>
+<p>pip install -U markdown pygments pymdown-extensions</p>
+<p>python -m markdown --help</p>
+<p>python -m markdown -x codehilite -x markdown.extensions.extra -x markdown.extensions.nl2br <a href="http://PyCharm.md">PyCharm.md</a> &gt; PyCharm_PythonMarkdown.html
+python -m markdown -x pymdownx.highlight -x pymdownx.github <a href="http://PyCharm.md">PyCharm.md</a> &gt; PyCharm_PythonMarkdown.html</p>
+<p>pygmentize -S default -f html &gt; codehilite.css</p>
+<p>I css vanno aggiunti manualmente editando il file README.html:</p>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="../css/github.css">
+  <link rel="stylesheet" type="text/css" href="codehilite.css">
+  </head>
+<h3 id="lxml" tabindex="-1">LXML <a class="header-anchor" href="#lxml" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="http://lxml.de/">http://lxml.de/</a></p>
+<p>pip install -U lxml</p>
+<blockquote>
+<p>python -c &quot;from lxml import etree; print(etree.LXML_VERSION)&quot;</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="pdf---pypdf4" tabindex="-1">PDF - PyPDF4 <a class="header-anchor" href="#pdf---pypdf4" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://pypi.org/project/PyPDF4/">https://pypi.org/project/PyPDF4/</a></li>
+<li><a href="https://github.com/claird/PyPDF4">https://github.com/claird/PyPDF4</a></li>
+</ul>
+<pre><code class="language-bash">pip install -U pypdf4
+python -m unittest Tests.tests
+</code></pre>
+<h3 id="pdf---pdf-miner-3k---per-leggere-form-pdf-anche-in-formato-xfa" tabindex="-1">PDF - PDF Miner 3K - Per leggere Form PDF anche in formato XFA <a class="header-anchor" href="#pdf---pdf-miner-3k---per-leggere-form-pdf-anche-in-formato-xfa" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://pypi.python.org/pypi/pdfminer3k">https://pypi.python.org/pypi/pdfminer3k</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jaepil/pdfminer3k">https://github.com/jaepil/pdfminer3k</a></p>
+<p>pdfminer3k is a Python 3 port of pdfminer. PDFMiner is a tool for extracting information from PDF documents.</p>
+</li>
+<li>
+<p><a href="https://github.com/nmbooker/xfa-tools">https://github.com/nmbooker/xfa-tools</a></p>
+<p>xfa-tools is a Tool to extract XFA data from a PDF.
+pip install -U pdfminer3k</p>
+</li>
+</ul>
+<h3 id="cx_oracle" tabindex="-1">cx_Oracle <a class="header-anchor" href="#cx_oracle" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://oracle.github.io/python-cx_Oracle/">https://oracle.github.io/python-cx_Oracle/</a></p>
+</li>
+<li>
+<p><a href="https://cx-oracle.readthedocs.io/en/latest/">https://cx-oracle.readthedocs.io/en/latest/</a></p>
+</li>
+<li>
+<p><a href="https://pypi.python.org/pypi/cx_Oracle/">https://pypi.python.org/pypi/cx_Oracle/</a></p>
+<p>20170816 - ora c'e' la versione 6.0 direttamente in pypi</p>
+<pre><code>      pip install -U cx_oracle
+      Test:
+          &gt; python -c &quot;import cx_Oracle; print(cx_Oracle.__version__)&quot;
+
+      Non serve più la versione gohlke:
+          http://www.lfd.uci.edu/~gohlke/pythonlibs/#cx_oracle
+          pip install &quot;cx_Oracle-5.3+oci12c-cp36-cp36m-win_amd64.whl&quot;
+</code></pre>
+</li>
+</ul>
+<h4 id="solo-durante-lo-sviluppo" tabindex="-1">Solo durante lo sviluppo <a class="header-anchor" href="#solo-durante-lo-sviluppo" aria-hidden="true">🔗</a></h4>
+<pre><code>pt = os.environ[&quot;USERPROFILE&quot;]+&quot;\\app\instantclient-x64\instantclient_12_1&quot;
+sys.path.insert(0, pt)
+print(pt)
+</code></pre>
+<p>Impostare le variabili di ambiente affinchè vengano trovare le librerie Oracle a 64 bit:
+&quot;C:\Windows\system32\rundll32.exe&quot; sysdm.cpl,EditEnvironmentVariables
+set PATH=%USERPROFILE%\app\instantclient-x64\instantclient_12_1;%PATH%
+set ORACLE_HOME=%USERPROFILE%\app\instantclient-x64\instantclient_12_1</p>
+<p>Non più utilizzata:
+set TNS_ADMIN=C:\oracle\app\product\11.2.0\client_1\NETWORK\ADMIN
+perchè ora la connessione viene creata utilizzando direttamente la stringa espansa(presente nel tnsnames.ora).
+In questo modo l'applicazione generata con PyInstaller e poi installata,
+non necessiterà della presenza dell'Oracle Client
+e della definizione della variabile di ambiente TNS_ADMIN</p>
+<h3 id="sftp---paramiko---pysocks" tabindex="-1">SFTP - Paramiko - PySocks <a class="header-anchor" href="#sftp---paramiko---pysocks" aria-hidden="true">🔗</a></h3>
+<pre><code>pip install -U paramiko pysocks
+</code></pre>
+<ul>
+<li><a href="http://www.paramiko.org/">http://www.paramiko.org/</a></li>
+<li><a href="http://docs.paramiko.org/en/2.1/">http://docs.paramiko.org/en/2.1/</a></li>
+<li><a href="https://pypi.python.org/pypi/paramiko/">https://pypi.python.org/pypi/paramiko/</a></li>
+</ul>
+<p>conda install paramiko
+pip install paramiko</p>
+<p>Proxy SOCK5 da utilizzare con Paramiko:</p>
+<ul>
+<li><a href="https://github.com/Anorov/PySocks">https://github.com/Anorov/PySocks</a></li>
+<li><a href="https://pypi.python.org/pypi/PySocks">https://pypi.python.org/pypi/PySocks</a></li>
+<li><a href="https://github.com/Anorov/PySocks/blob/master/socks.py">https://github.com/Anorov/PySocks/blob/master/socks.py</a></li>
+<li><a href="https://github.com/Anorov/PySocks/blob/master/sockshandler.py">https://github.com/Anorov/PySocks/blob/master/sockshandler.py</a></li>
+</ul>
+<h3 id="ldap3" tabindex="-1">LDAP3 <a class="header-anchor" href="#ldap3" aria-hidden="true">🔗</a></h3>
+<p>Aggiornato da pip, non da conda.</p>
+<p>pip install -U ldap3 pyasn1</p>
+<blockquote>
+<p>python -c &quot;import ldap3; print(ldap3.<strong>version</strong>)&quot;
+pip search ldap3</p>
+</blockquote>
+<h3 id="pyaes" tabindex="-1">PyAES <a class="header-anchor" href="#pyaes" aria-hidden="true">🔗</a></h3>
+<p>Aggiornato da pip, non da conda.</p>
+<ul>
+<li><a href="https://github.com/ricmoo/pyaes">https://github.com/ricmoo/pyaes</a></li>
+<li><a href="https://pypi.python.org/pypi/pyaes/">https://pypi.python.org/pypi/pyaes/</a></li>
+</ul>
+<p>pip install -U pyaes</p>
+<blockquote>
+<p>python -c &quot;import pyaes; print(pyaes.VERSION)&quot;
+pip search pyaes</p>
+</blockquote>
+<h3 id="openpyxl-%3A-.xlsx" tabindex="-1">OpenPyXL : .xlsx <a class="header-anchor" href="#openpyxl-%3A-.xlsx" aria-hidden="true">🔗</a></h3>
+<p>Aggiornato da pip, contiene una versione più recente di conda.
+A Python library to read/write Excel 2010 xlsx/xlsm files</p>
+<ul>
+<li><a href="https://openpyxl.readthedocs.io/en/default/">https://openpyxl.readthedocs.io/en/default/</a></li>
+<li><a href="https://pypi.python.org/pypi/openpyxl">https://pypi.python.org/pypi/openpyxl</a></li>
+</ul>
+<p>La libreria attualmente migliore per editare file .xslx.</p>
+<p>pip install -U openpyxl</p>
+<blockquote>
+<p>python -c &quot;import openpyxl; print(openpyxl.<strong>version</strong>)&quot;</p>
+</blockquote>
+<h3 id="pandas" tabindex="-1">Pandas <a class="header-anchor" href="#pandas" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://pandas.pydata.org/">http://pandas.pydata.org/</a></li>
+<li><a href="http://pandas.pydata.org/pandas-docs/stable/">http://pandas.pydata.org/pandas-docs/stable/</a></li>
+<li><a href="https://github.com/jvns/pandas-cookbook">https://github.com/jvns/pandas-cookbook</a></li>
+<li><a href="https://bitbucket.org/hrojas/learn-pandas">https://bitbucket.org/hrojas/learn-pandas</a></li>
+<li><a href="https://github.com/guipsamora/pandas_exercises">https://github.com/guipsamora/pandas_exercises</a></li>
+</ul>
+<p>Rispettare l'ordine di installazione per soddisfare correttamente le dipendenze</p>
+<h4 id="pandas-e-dipendenze-utili" tabindex="-1">Pandas e dipendenze utili <a class="header-anchor" href="#pandas-e-dipendenze-utili" aria-hidden="true">🔗</a></h4>
+<p>pip install pandas matplotlib pyqt5 xlrd openpyxl python-dateutil pytz numexpr sqlalchemy xarray bs4 cython patsy seaborn</p>
+<pre><code>import pandas as pd
+pd.show_versions()
+pd.test()
+</code></pre>
+<h3 id="numpy" tabindex="-1">Numpy <a class="header-anchor" href="#numpy" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy">http://www.lfd.uci.edu/~gohlke/pythonlibs/#numpy</a></li>
+</ul>
+<p>Numpy+MKL is linked to the Intel® Math Kernel Library and includes required DLLs in the numpy.core directory.</p>
+<p>pip install numpy-1.13.1+mkl-cp36-cp36m-win_amd64.whl</p>
+<h3 id="scipy" tabindex="-1">SciPy <a class="header-anchor" href="#scipy" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy">http://www.lfd.uci.edu/~gohlke/pythonlibs/#scipy</a></li>
+</ul>
+<p>Install numpy+mkl before installing scipy.
+pip install scipy-0.19.1-cp36-cp36m-win_amd64.whl</p>
+<h3 id="pytables" tabindex="-1">PyTables <a class="header-anchor" href="#pytables" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://www.pytables.org/">http://www.pytables.org/</a></li>
+<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#pytables">http://www.lfd.uci.edu/~gohlke/pythonlibs/#pytables</a></li>
+</ul>
+<p>pip install tables-3.4.2-cp36-cp36m-win_amd64.whl</p>
+<h3 id="bottleneck" tabindex="-1">Bottleneck <a class="header-anchor" href="#bottleneck" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/#bottleneck">http://www.lfd.uci.edu/~gohlke/pythonlibs/#bottleneck</a></li>
+</ul>
+<p>pip install Bottleneck-1.2.1-cp36-cp36m-win_amd64.whl</p>
+<h3 id="seaborn" tabindex="-1">Seaborn <a class="header-anchor" href="#seaborn" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://seaborn.pydata.org/">https://seaborn.pydata.org/</a> Statistical Data Visualization</p>
+<p>pip install seaborn</p>
+</li>
+</ul>
+<h3 id="sqlalchemy" tabindex="-1">SQLAlchemy <a class="header-anchor" href="#sqlalchemy" aria-hidden="true">🔗</a></h3>
+<p>Aggiornato da pip che ne ha una versione più recente, non da conda.</p>
+<ul>
+<li><a href="http://www.sqlalchemy.org/">http://www.sqlalchemy.org/</a></li>
+<li><a href="https://github.com/zzzeek/sqlalchemy/">https://github.com/zzzeek/sqlalchemy/</a></li>
+<li><a href="http://docs.sqlalchemy.org/en/latest/changelog/migration_12.html">http://docs.sqlalchemy.org/en/latest/changelog/migration_12.html</a></li>
+</ul>
+<p>pip install -U sqlalchemy
+pip install sqlalchemy-utils</p>
+<pre><code>pip install --pre sqlalchemy
+</code></pre>
+<p>pip install -I sqlalchemy
+Il -I forza la reinstallazione
+pip search sqlalchemy</p>
+<blockquote>
+<p>python -c &quot;import sqlalchemy; print(sqlalchemy.<strong>version</strong>)&quot;
+pip show sqlalchemy</p>
+</blockquote>
+<p>alembic è un tool per il versioning/migrazione di un database:
+pip install alembic</p>
+<ul>
+<li>
+<p><a href="http://alembic.zzzcomputing.com/en/latest/index.html">http://alembic.zzzcomputing.com/en/latest/index.html</a></p>
+</li>
+<li>
+<p><a href="http://alembic.zzzcomputing.com/en/latest/tutorial.html">http://alembic.zzzcomputing.com/en/latest/tutorial.html</a></p>
+</li>
+<li>
+<p><a href="https://www.compose.com/articles/schema-migrations-with-alembic-python-and-postgresql/">https://www.compose.com/articles/schema-migrations-with-alembic-python-and-postgresql/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/zzzeek/alembic">https://github.com/zzzeek/alembic</a></p>
+<p>git clone <a href="https://github.com/zzzeek/alembic.git">https://github.com/zzzeek/alembic.git</a></p>
+</li>
+</ul>
+<h4 id="problema-pip%2Fsqlqlchemy-di-installazione-su-windows-10" tabindex="-1">Problema PIP/SQLQlchemy di installazione su Windows 10 <a class="header-anchor" href="#problema-pip%2Fsqlqlchemy-di-installazione-su-windows-10" aria-hidden="true">🔗</a></h4>
+<pre><code>Pip soffre di un piccolo bug di encoding con la shell di windows 10
+bug che si verifica installando sqlalchemy, la soluzione è apportare una fix a pip:
+
+pip install -U sqlalchemy
+su windows 10 dava errore UnicodeDecodeError
+E' un problema di pip, l'ho corretto:
+con &quot;chcp&quot; si può vedere la codepage utilizzata dalla console windows:
+C:\Users\$USER&gt;chcp
+Tabella codici attiva: 850
+--&gt;C:\Python\Lib\site-packages\pip\compat\__init__.py
+    if sys.version_info &gt;= (3,):
+        def console_to_str(s):
+            try:
+                return s.decode(sys.__stdout__.encoding)
+            except UnicodeDecodeError:
+                # C:\Users\$USER&gt;chcp
+                # Tabella codici attiva: 850
+                return s.decode('cp850')        # &lt;-- modifica apportata da me
+                #return s.decode('utf_8')
+</code></pre>
+<p>sqlalchemy/sqlite/esempio_sqlite_decimal_patch.py mostra una patch per la gestione dei Decimal con SQLite.</p>
+<h3 id="psutil" tabindex="-1">PsUtil <a class="header-anchor" href="#psutil" aria-hidden="true">🔗</a></h3>
+<p>pip install -U psutil
+conda update psutil</p>
+<blockquote>
+<p>python -c &quot;import psutil; print(psutil.<strong>version</strong>)&quot;</p>
+</blockquote>
+<h3 id="prettytable" tabindex="-1">PrettyTable <a class="header-anchor" href="#prettytable" aria-hidden="true">🔗</a></h3>
+<p>pip install -U ptable
+pip show ptable
+pip install ptable</p>
+<blockquote>
+<p>python -c &quot;import prettytable; print(prettytable.<strong>version</strong>)&quot;</p>
+</blockquote>
+<h3 id="python-magic" tabindex="-1">Python Magic <a class="header-anchor" href="#python-magic" aria-hidden="true">🔗</a></h3>
+<p>python-magic is a Python interface to the libmagic file type identification library.</p>
+<ul>
+<li><a href="https://pypi.org/project/python-magic/">https://pypi.org/project/python-magic/</a></li>
+<li><a href="https://github.com/ahupp/python-magic">https://github.com/ahupp/python-magic</a></li>
+</ul>
+<pre><code class="language-bash">pip install -U python-magic
+</code></pre>
+<h3 id="matplotlib" tabindex="-1">Matplotlib <a class="header-anchor" href="#matplotlib" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://matplotlib.org/">https://matplotlib.org/</a></p>
+<p>pip install -U matplotlib</p>
+<pre><code>  # Make sure that we are using QT5
+  # This call to matplotlib.use() has no effect because the backend has already
+  # been chosen; matplotlib.use() must be called *before* pylab, matplotlib.pyplot,
+  # or matplotlib.backends is imported for the first time.
+  import matplotlib
+  matplotlib.use('Qt5Agg')
+</code></pre>
+</li>
+</ul>
+<h3 id="requests" tabindex="-1">Requests <a class="header-anchor" href="#requests" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://requests.readthedocs.io/en/master/">http://requests.readthedocs.io/en/master/</a></li>
+</ul>
+<p>E' la migliore libreria HTTP per Python, alternativa a urllib
+La versione pip è più aggiornata della versione Python</p>
+<p>pip install -U requests
+serve il -U perchè requests è già installato di default con conda</p>
+<p>python -c &quot;import requests; print(requests.<strong>version</strong>)&quot;</p>
+<h3 id="exchangelib" tabindex="-1">Exchangelib <a class="header-anchor" href="#exchangelib" aria-hidden="true">🔗</a></h3>
+<pre><code>Per inviare email tramite server di posta Microsoft Exchange
+
+Exchange Web Services client library
+This module provides an well-performing, well-behaving, platform-independent and simple interface
+for communicating with a Microsoft Exchange 2007-2016 Server or Office365 using Exchange Web Services (EWS).
+It currently implements autodiscover, and functions for searching, creating, updating, deleting, exporting and uploading
+calendar, mailbox, task and contact items.
+</code></pre>
+<ul>
+<li>
+<p><a href="https://pypi.python.org/pypi/exchangelib/">https://pypi.python.org/pypi/exchangelib/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ecederstrand/exchangelib">https://github.com/ecederstrand/exchangelib</a></p>
+<p>pip install -U exchangelib</p>
+</li>
+</ul>
+<h3 id="ast-unparse%2Fast-viewer" tabindex="-1">AST Unparse/AST Viewer <a class="header-anchor" href="#ast-unparse%2Fast-viewer" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://pypi.python.org/pypi/astunparse">https://pypi.python.org/pypi/astunparse</a></p>
+<p>pip install astunparse astviewer</p>
+</li>
+</ul>
+<p>NOTA: astviewer và installato DOPO le pyqt5</p>
+<h3 id="pdf-reportlab---per-generare-pdf" tabindex="-1">PDF Reportlab - per generare PDF <a class="header-anchor" href="#pdf-reportlab---per-generare-pdf" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="http://www.reportlab.com/">http://www.reportlab.com/</a></p>
+<p>pip install -U reportlab</p>
+</li>
+</ul>
+<h3 id="ipython" tabindex="-1">IPython <a class="header-anchor" href="#ipython" aria-hidden="true">🔗</a></h3>
+<p>pip install -U ipython jupyter
+python -c &quot;import IPython; print(IPython.<strong>version</strong>)&quot;</p>
+<p>jupyter notebook
+jupyter console</p>
+<h3 id="chardet" tabindex="-1">CharDet <a class="header-anchor" href="#chardet" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://chardet.github.io/">https://chardet.github.io/</a></p>
+</li>
+<li>
+<p><a href="https://pypi.python.org/pypi/chardet">https://pypi.python.org/pypi/chardet</a></p>
+</li>
+<li>
+<p><a href="https://github.com/chardet/chardet">https://github.com/chardet/chardet</a></p>
+</li>
+<li>
+<p><a href="https://chardet.readthedocs.io/en/latest/">https://chardet.readthedocs.io/en/latest/</a></p>
+<p>Chardet is a Python port of the C++ universal character encoding detector from Mozilla.
+Chardet was originally ported from C++ by Mark Pilgrim.</p>
+<p>pip install -U chardet</p>
+</li>
+</ul>
+<h3 id="pygame(sdl)" tabindex="-1">PyGame(SDL) <a class="header-anchor" href="#pygame(sdl)" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://www.pygame.org">https://www.pygame.org</a></p>
+</li>
+<li>
+<p><a href="https://pypi.python.org/pypi/Pygame">https://pypi.python.org/pypi/Pygame</a></p>
+</li>
+<li>
+<p><a href="http://www.pyglet.org">http://www.pyglet.org</a></p>
+</li>
+<li>
+<p><a href="http://python.cocos2d.org/">http://python.cocos2d.org/</a></p>
+<p>pip install -U pygame pyglet</p>
+</li>
+</ul>
+<h3 id="pi3d" tabindex="-1">Pi3D <a class="header-anchor" href="#pi3d" aria-hidden="true">🔗</a></h3>
+<pre><code>pip install pi3d
+LinuxPro n.153 p.14 Pi3D
+</code></pre>
+<ul>
+<li><a href="https://pi3d.github.io/html/">https://pi3d.github.io/html/</a></li>
+<li><a href="https://github.com/tipam/pi3d">https://github.com/tipam/pi3d</a></li>
+<li><a href="https://github.com/pi3d/pi3d_demos">https://github.com/pi3d/pi3d_demos</a></li>
+</ul>
+<h3 id="wxpython(wxwidgets)" tabindex="-1">WxPython(WxWidgets) <a class="header-anchor" href="#wxpython(wxwidgets)" aria-hidden="true">🔗</a></h3>
+<h4 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h4>
+<pre><code>pip install -U wxPython comtypes
+&gt; python -c &quot;import wx; print(wx.version())&quot;
+</code></pre>
+<h4 id="sito" tabindex="-1">Sito <a class="header-anchor" href="#sito" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="http://www.wxpython.org">http://www.wxpython.org</a></li>
+<li><a href="https://docs.wxpython.org/">https://docs.wxpython.org/</a></li>
+<li><a href="https://docs.wxpython.org/MigrationGuide.html">https://docs.wxpython.org/MigrationGuide.html</a></li>
+</ul>
+<h4 id="demo-e-documentazione" tabindex="-1">Demo e Documentazione <a class="header-anchor" href="#demo-e-documentazione" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://extras.wxpython.org/wxPython4/extras">https://extras.wxpython.org/wxPython4/extras</a>  Contiene la Demo e i Doc</li>
+<li><a href="https://extras.wxpython.org/wxPython4/extras/4.01/wxPython-demo-4.0.1.tar.gz">https://extras.wxpython.org/wxPython4/extras/4.01/wxPython-demo-4.0.1.tar.gz</a></li>
+<li><a href="https://extras.wxpython.org/wxPython4/extras/4.01/wxPython-docs-4.0.1.tar.gz">https://extras.wxpython.org/wxPython4/extras/4.01/wxPython-docs-4.0.1.tar.gz</a></li>
+</ul>
+<h4 id="sorgenti" tabindex="-1">Sorgenti <a class="header-anchor" href="#sorgenti" aria-hidden="true">🔗</a></h4>
+<pre><code>https://github.com/wxWidgets/Phoenix
+</code></pre>
+<h4 id="wxformbuilder" tabindex="-1">WxFormBuilder <a class="header-anchor" href="#wxformbuilder" aria-hidden="true">🔗</a></h4>
+<p><a href="https://github.com/wxFormBuilder/wxFormBuilder">https://github.com/wxFormBuilder/wxFormBuilder</a></p>
+<h2 id="install-from-source---windows-(msys2)" tabindex="-1">Install From Source - Windows (MSYS2) <a class="header-anchor" href="#install-from-source---windows-(msys2)" aria-hidden="true">🔗</a></h2>
+<h2 id="compilazione-a-32-bit" tabindex="-1">Compilazione a 32 bit <a class="header-anchor" href="#compilazione-a-32-bit" aria-hidden="true">🔗</a></h2>
+<p>Install MSYS2(msys2.txt) and run the following inside a MinGW 32 bit shell:</p>
+<p>call %USERPROFILE%\app\msys64\msys2_shell.cmd -here -mingw32
+pacman -Syu --needed mingw-w64-i686-wxWidgets git make mingw-w64-i686-binutils mingw-w64-i686-gcc mingw-w64-i686-boost
+git clone --recursive --depth=1 <a href="https://github.com/wxFormBuilder/wxFormBuilder">https://github.com/wxFormBuilder/wxFormBuilder</a>
+cd wxFormBuilder
+cmd.exe /C &quot;create_build_files4.bat --wx-root=/mingw32/bin --force-wx-config --disable-mediactrl&quot;
+ln -s /mingw32/include/binutils/bfd.h /mingw32/include/bfd.h
+ln -s /mingw32/include/binutils/symcat.h /mingw32/include/symcat.h
+ln -s /mingw32/lib/binutils/libbfd.a /mingw32/lib/libbfd.a
+ln -s /mingw32/lib/binutils/libiberty.a /mingw32/lib/libiberty.a
+cd build/3.0/gmake
+sed 's!$(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)!$(LIBS) $(LDFLAGS) $(RESOURCES) $(ARCH)!g' *.make -i
+sed 's!-lbfd!-lbfd -lz!g' *.make -i
+make config=release</p>
+<p>Run:</p>
+<p>cd ../../../output/
+./wxFormBuilder.exe</p>
+<h2 id="compilazione-a-64-bit---non-funziona" tabindex="-1">Compilazione a 64 bit - NON FUNZIONA <a class="header-anchor" href="#compilazione-a-64-bit---non-funziona" aria-hidden="true">🔗</a></h2>
+<p>call %USERPROFILE%\app\msys64\msys2_shell.cmd -here -mingw64</p>
+<p>pacman -Syu --needed git make mingw-w64-x86_64-wxWidgets mingw-w64-x86_64-binutils mingw-w64-x86_64-gcc mingw-w64-x86_64-boost</p>
+<p>cd /D/Dati/Profili/$USER/workspace/PythonWorkspace/OtherGUIs/WxPython
+mkdir WxFormBuilder</p>
+<p>Se funziona git:
+<a href="https://github.com/wxFormBuilder/wxFormBuilder.git">https://github.com/wxFormBuilder/wxFormBuilder.git</a>
+git clone --recursive --depth=1 <a href="https://github.com/wxFormBuilder/wxFormBuilder">https://github.com/wxFormBuilder/wxFormBuilder</a>
+cd wxFormBuilder
+Altrimenti scaricare i repository wxFormVuilder-master.zip e ticpp-master.zip
+1- wxFormVuilder-master.zip --&gt; wxFormBuilder
+2- ticpp-master.zip --&gt; wxFormBuilder/sdk/tinyxml</p>
+<ul>
+<li>Ho copiato il contenuto di ticpp-master nella directory sdk/tinyxml</li>
+</ul>
+<p>cmd.exe /C &quot;create_build_files4.bat --wx-root=/mingw64/bin --force-wx-config --disable-mediactrl&quot;</p>
+<p>ln -s /mingw64/include/binutils/bfd.h /mingw64/include/bfd.h
+ln -s /mingw64/include/binutils/symcat.h /mingw64/include/symcat.h
+ln -s /mingw64/lib/binutils/libbfd.a /mingw64/lib/libbfd.a
+ln -s /mingw64/lib/binutils/libiberty.a /mingw64/lib/libiberty.a</p>
+<p>cd build/3.0/gmake
+sed 's!$(LDFLAGS) $(RESOURCES) $(ARCH) $(LIBS)!$(LIBS) $(LDFLAGS) $(RESOURCES) $(ARCH)!g' *.make -i
+sed 's!-lbfd!-lbfd -lz!g' *.make -i
+make config=release</p>
+<p>Run:</p>
+<p>cd ../../../output/
+./wxFormBuilder.exe</p>
+<h3 id="pygobject(gtk3)" tabindex="-1">PyGObject(GTK3) <a class="header-anchor" href="#pygobject(gtk3)" aria-hidden="true">🔗</a></h3>
+<p>da:</p>
+<ul>
+<li>Python 2.7.11 - PyGTK 2.24.0 Gtk+ 2.24.10 &quot;C:\Users$USER\app\Python27_32_Keepnote\python.exe&quot;
+oppure:</li>
+<li>Python 2.7.14 - PyGTK 2.24.0 Gtk+ 2.24.31 &quot;%USERPROFILE%\app\msys64\mingw64\bin\python.exe&quot;</li>
+</ul>
+<p>a:</p>
+<ul>
+<li>Python 3.6.3 - PyGObject
+C:\Python
+&quot;%USERPROFILE%\app\msys64\mingw64\bin\python3.exe&quot;</li>
+</ul>
+<h4 id="conversione-automatica-gtk2---%3E-gkt3" tabindex="-1">Conversione automatica GTK2 --&gt; GKT3 <a class="header-anchor" href="#conversione-automatica-gtk2---%3E-gkt3" aria-hidden="true">🔗</a></h4>
+<p>Uno script che effettua una conversione iniziale-parziale dei sorgenti da GTK2 a PyGObject è <a href="http://pygi-convert.sh">pygi-convert.sh</a>:</p>
+<p>Per poter utilizzare lo script di conversione GTK2-&gt;GTK3 <a href="http://pygi-convert.sh">pygi-convert.sh</a>
+Ho inserito il perl di MSYS2 nel PATH:
+set PATH=%USERPROFILE%\app\msys64\usr\bin;%PATH%</p>
+<p>perl <a href="http://pygi-convert.sh">pygi-convert.sh</a> clock_ex3.py</p>
+<p>1- copy <a href="http://pygi-convert.sh">pygi-convert.sh</a> --&gt; &quot;C:\Users$USER\app\msys64\home$USER\bin&quot;
+2- &quot;C:\Users$USER\app\msys64\home$USER.bashrc&quot;:
+export PATH=<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>P</mi><mi>A</mi><mi>T</mi><mi>H</mi><mo>:</mo></mrow><annotation encoding="application/x-tex">PATH:</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal" style="margin-right:0.13889em;">P</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">:</span></span></span></span>HOME/bin
+3- call %USERPROFILE%\app\msys64\msys2_shell.cmd -here -msys</p>
+<h4 id="conversione-automatica-python2---%3E-python-3" tabindex="-1">Conversione automatica Python2 --&gt; Python 3 <a class="header-anchor" href="#conversione-automatica-python2---%3E-python-3" aria-hidden="true">🔗</a></h4>
+<p>Uno script che effettua una conversione iniziale-parziale dei sorgenti da Python2 a Python3
+è C:\Python\Tools\scripts\2to3.py</p>
+<h4 id="pygobject(gtk3)-msys2" tabindex="-1">PyGObject(GTK3)-MSYS2 <a class="header-anchor" href="#pygobject(gtk3)-msys2" aria-hidden="true">🔗</a></h4>
+<p>Per gli ambienti Python2-GTK2 e Python3-GTK3 utilizziamo la distribuzione MYS2</p>
+<h3 id="proxy-pacman" tabindex="-1">PROXY PACMAN <a class="header-anchor" href="#proxy-pacman" aria-hidden="true">🔗</a></h3>
+<p>ho editato il &quot;%USERPROFILE%\app\msys64\home$USER.bashrc&quot; aggiungendo in fondo la riga:
+export http_proxy=$USER:password@proxy.it:8080</p>
+<h3 id="installazione%2Faggiornamento-python2-e-python3-in-msys2" tabindex="-1">Installazione/Aggiornamento Python2 e Python3 in MSYS2 <a class="header-anchor" href="#installazione%2Faggiornamento-python2-e-python3-in-msys2" aria-hidden="true">🔗</a></h3>
+<h4 id="aggiornamento-msys2" tabindex="-1">Aggiornamento MSYS2 <a class="header-anchor" href="#aggiornamento-msys2" aria-hidden="true">🔗</a></h4>
+<p>Da Shell MINGW64:</p>
+<p>C:&gt;\cmd.exe
+call %USERPROFILE%\app\msys64\msys2_shell.cmd -here -mingw64
+pacman -Syu</p>
+<h4 id="installazione-componenti-python" tabindex="-1">Installazione componenti Python <a class="header-anchor" href="#installazione-componenti-python" aria-hidden="true">🔗</a></h4>
+<p>C:&gt; call %USERPROFILE%\app\msys64\msys2_shell.cmd -here -msys</p>
+<blockquote>
+<p>pip3 install sip ipython
+pacman -Syu --needed python3 mingw-w64-x86_64-python3-pip  mingw-w64-x86_64-gtk3 python-colorlog mingw-w64-x86_64-gtk3 mingw-w64-x86_64-python3-gobject mingw-w64-x86_64-webkitgtk3</p>
+</blockquote>
+<h2 id="pycharm-python-packaging-tools-not-found" tabindex="-1">PyCharm Python Packaging Tools Not Found <a class="header-anchor" href="#pycharm-python-packaging-tools-not-found" aria-hidden="true">🔗</a></h2>
+<blockquote>
+<p>pacman -S mingw-w64-x86_64-python2-setuptools mingw-w64-x86_64-python3-setuptools python2-setuptools python3-setuptools
+pacman -S mingw-w64-x86_64-python3-lxml</p>
+</blockquote>
+<h3 id="glade" tabindex="-1">GLADE <a class="header-anchor" href="#glade" aria-hidden="true">🔗</a></h3>
+<blockquote>
+<p>pacman -S mingw-w64-x86_64-libxml2 mingw-w64-x86_64-glade</p>
+</blockquote>
+<p>cd %USERPROFILE%\app\Python27_32_Keepnote
+C:&gt; python -c &quot;import pygtk;pygtk.require('2.0');import gtk;print(&quot;PyGTK %d.%d.%d Gtk+ %d.%d.%d&quot; % (gtk.pygtk_version + gtk.gtk_version))&quot;
+PyGTK 2.24.0 Gtk+ 2.24.10</p>
+<p>C:&gt;\cmd.exe
+call %USERPROFILE%\app\msys64\msys2_shell.cmd -here -mingw64
+$ python3 --version
+Python 3.6.3
+$ python --version
+Python 2.7.14
+$ python -c &quot;import pygtk;pygtk.require('2.0');import gtk;print(&quot;PyGTK %d.%d.%d Gtk+ %d.%d.%d&quot; % (gtk.pygtk_version + gtk.gtk_version))&quot;
+PyGTK 2.24.0 Gtk+ 2.24.31
+oppure:
+C:&gt; %USERPROFILE%\app\msys64\mingw64\bin\python.exe -c &quot;import pygtk;pygtk.require('2.0');import gtk;print(&quot;PyGTK %d.%d.%d Gtk+ %d.%d.%d&quot; % (gtk.pygtk_version + gtk.gtk_version))&quot;</p>
+<p>$ python3 -c &quot;import gi;gi.require_version('Gtk', '3.0');from gi.repository import GObject;print(&quot;PyGObject:\t{}&quot;.format(GObject.pygobject_version))&quot;
+PyGObject:      (3, 26, 1)</p>
+<p>$ gtk3-demo</p>
+<p>hello_gtk3.py:</p>
+<h1 id="d%3A%5Cdati%5Cprofili%24user%5Cworkspace%5Cpythonworkspace%5Cotherguis%5Cpygobject%5Cesempi%5Chello_gtk3.py" tabindex="-1">D:\Dati\Profili$USER\workspace\PythonWorkspace\OtherGUIs\PyGObject\Esempi\hello_gtk3.py <a class="header-anchor" href="#d%3A%5Cdati%5Cprofili%24user%5Cworkspace%5Cpythonworkspace%5Cotherguis%5Cpygobject%5Cesempi%5Chello_gtk3.py" aria-hidden="true">🔗</a></h1>
+<p>import gi
+gi.require_version(&quot;Gtk&quot;, &quot;3.0&quot;)
+from gi.repository import Gtk</p>
+<p>window = Gtk.Window(title=&quot;Hello World&quot;)
+window.show()
+window.connect(&quot;delete-event&quot;, Gtk.main_quit)
+Gtk.main()</p>
+<blockquote>
+<p>python3 /D/Dati/Profili/$USER/workspace/PythonWorkspace/OtherGUIs/PyGObject/Esempi/hello_gtk3.py</p>
+</blockquote>
+<p>$ glade
+set LANG=en_US.UTF-8
+start %USERPROFILE%\app\msys64\mingw64\bin\glade.exe</p>
+<h4 id="progetti-pycharm" tabindex="-1">Progetti PyCharm <a class="header-anchor" href="#progetti-pycharm" aria-hidden="true">🔗</a></h4>
+<p>Ho definito in PyCharm un nuovo progetto PyGObject avente come interprete:
+&quot;%USERPROFILE%\app\msys64\mingw64\bin\python3.exe&quot;</p>
+<p>Ho definito in PyCharm un nuovo progetto PyGObject avente come interprete:
+&quot;%USERPROFILE%\app\msys64\mingw64\bin\python.exe&quot;</p>
+<pre><code>Per la versione Python3 si utilizzano la versione di Python3 e PyGObject presenti in MSYS2:
+    &quot;%USERPROFILE%\app\msys64\mingw64\bin\python3.exe&quot;
+</code></pre>
+<p>Perchè a partire dalla versione di Python 3.5 per Windows l'installer di PyGObject non è più disponibile per Windows,
+volendo utilizzare Python &gt;= 3.5 si è costretti ad utilizzare la versione di Python-PyGObject presente in MSYS2</p>
+<p>( Una alternativa limitante può essere quella di installare Python 3.4 per Windows e l'ultima versione di PyGObject
+presente in <a href="https://sourceforge.net/projects/pygobjectwin32/files/">https://sourceforge.net/projects/pygobjectwin32/files/</a> )</p>
+<p>Manjaro:
+<a href="https://wiki.gnome.org/Projects/DeveloperTools/Installation/ArchLinux">https://wiki.gnome.org/Projects/DeveloperTools/Installation/ArchLinux</a></p>
+<p>sudo pacman -S python-gobject glade gtk3</p>
+<h3 id="cython" tabindex="-1">Cython <a class="header-anchor" href="#cython" aria-hidden="true">🔗</a></h3>
+<p>pip install cython</p>
+<h3 id="debug-profiling" tabindex="-1">Debug-Profiling <a class="header-anchor" href="#debug-profiling" aria-hidden="true">🔗</a></h3>
+<p><a href="https://jiffyclub.github.io/snakeviz/">https://jiffyclub.github.io/snakeviz/</a></p>
+<p>SnakeViz is a browser based graphical viewer for the output of Python’s cProfile module</p>
+<p><a href="https://mg.pov.lt/objgraph/">https://mg.pov.lt/objgraph/</a></p>
+<p>objgraph is a module that lets you visually explore Python object graphs.
+objgraph necessita del modulo python xdot e di graphviz nel PATH:</p>
+<p><a href="https://github.com/jrfonseca/xdot.py">https://github.com/jrfonseca/xdot.py</a></p>
+<p><a href="http://xdot.py">xdot.py</a> is an interactive viewer for graphs written in Graphviz's dot language.
+It uses internally the GraphViz's xdot output format as an intermediate format</p>
+<p><a href="http://www.graphviz.org/Download_windows.php">http://www.graphviz.org/Download_windows.php</a> - serve a objgraph
+<a href="http://www.graphviz.org/pub/graphviz/stable/windows/graphviz-2.38.zip">http://www.graphviz.org/pub/graphviz/stable/windows/graphviz-2.38.zip</a></p>
+<p>Bisogna mettere dot nel PATH altrimenti objgraph non riesce a produrre i file .png
+SET PATH = %PATH%;%USERPROFILE%\app\graphviz\bin
+pip install -U objgraph xdot snakeviz</p>
+<h3 id="command-line-parsing" tabindex="-1">Command Line Parsing <a class="header-anchor" href="#command-line-parsing" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://docs.python.org/3/library/argparse.html">https://docs.python.org/3/library/argparse.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.python.org/3/howto/argparse.html">https://docs.python.org/3/howto/argparse.html</a></p>
+</li>
+<li>
+<p><a href="https://click.pocoo.org/">https://click.pocoo.org/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/docopt/docopt">https://github.com/docopt/docopt</a></p>
+</li>
+<li>
+<p><a href="http://www.pyinvoke.org">http://www.pyinvoke.org</a></p>
+</li>
+<li>
+<p><a href="https://realpython.com/blog/python/comparing-python-command-line-parsing-libraries-argparse-docopt-click/">https://realpython.com/blog/python/comparing-python-command-line-parsing-libraries-argparse-docopt-click/</a></p>
+<p>pip install -U schema docopt click invoke</p>
+</li>
+</ul>
+<h3 id="python-imaging-library%3A-pillow" tabindex="-1">Python Imaging Library: Pillow <a class="header-anchor" href="#python-imaging-library%3A-pillow" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://pillow.readthedocs.io/en/latest/">https://pillow.readthedocs.io/en/latest/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/python-pillow/Pillow">https://github.com/python-pillow/Pillow</a></p>
+</li>
+<li>
+<p><a href="https://pypi.python.org/pypi/Pillow">https://pypi.python.org/pypi/Pillow</a></p>
+<p>pip install -U pillow</p>
+</li>
+</ul>
+<h3 id="pyfiglet" tabindex="-1">PyFiglet <a class="header-anchor" href="#pyfiglet" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="http://www.figlet.org">http://www.figlet.org</a></p>
+</li>
+<li>
+<p><a href="https://github.com/pwaller/pyfiglet">https://github.com/pwaller/pyfiglet</a></p>
+</li>
+<li>
+<p><a href="https://github.com/pwaller/pyfiglet/tree/master/pyfiglet/fonts">https://github.com/pwaller/pyfiglet/tree/master/pyfiglet/fonts</a></p>
+<p>pip install -U pyfiglet</p>
+<p>pyfiglet.print_figlet('Angular CLI', font=&quot;big&quot;)</p>
+<p>pyfiglet --list_fonts</p>
+</li>
+</ul>
+<h2 id="django" tabindex="-1">Django <a class="header-anchor" href="#django" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://www.djangoproject.com/start/">https://www.djangoproject.com/start/</a></p>
+<pre><code class="language-bash">pip install django
+
+import django
+<span class="hljs-built_in">print</span>(django.get_version())
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.djangoproject.com/en/2.1/intro/tutorial01/">https://docs.djangoproject.com/en/2.1/intro/tutorial01/</a></p>
+</li>
+</ul>
+<pre><code class="language-bash">$ python -m django --version
+$ django-admin startproject mysite
+$ python manage.py runserver
+$ python manage.py runserver 0:8080
+$ python manage.py startapp polls
+</code></pre>
+</body></html>

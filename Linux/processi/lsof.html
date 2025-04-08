@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.911" />
+        <title>lsof</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="lsof" tabindex="-1">lsof <a class="header-anchor" href="#lsof" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.911</p>
+<nav class="table-of-contents"><ol><li><a href="#lsof-port-scanning">lsof port scanning </a></li><li><a href="#mostra-tutti-i-processi-che-stanno-utilizzando-la-porta-22">Mostra tutti i processi che stanno utilizzando la porta 22 </a></li><li><a href="#file-aperti-dal-processo-3324">File aperti dal processo 3324 </a></li><li><a href="#processi-che-hanno-aperto-il-file-%2Fvar%2Flog%2Fxorg.0.log">Processi che hanno aperto il file /var/log/Xorg.0.log </a></li><li><a href="#cups">CUPS </a></li><li><a href="#killare-i-processi-di-un-utente">killare i processi di un utente </a></li><li><a href="#open-file-descriptors">Open File Descriptors </a></li><li><a href="#heredoc-and-temporary-files">heredoc and temporary files </a></li><li><a href="#chi-sta-utilizzando-la-porta-45331%3F">Chi sta utilizzando la porta 45331? </a></li></ol></nav><h1 id="lsof-1" tabindex="-1">lsof <a class="header-anchor" href="#lsof-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://github.com/lsof-org/lsof">https://github.com/lsof-org/lsof</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed lsof
+
+
+<span class="hljs-comment"># https://stackoverflow.com/questions/27428150/linux-how-to-track-all-files-accessed-by-a-process</span>
+$ php foo.php &amp; _pid=$!
+$ lsof -r1 -p <span class="hljs-variable">$_pid</span>
+$ <span class="hljs-built_in">kill</span> %1 <span class="hljs-comment"># if you want to kill php script</span>
+</code></pre>
+<h3 id="lsof-port-scanning" tabindex="-1">lsof port scanning <a class="header-anchor" href="#lsof-port-scanning" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">    $ lsof -i
+    $ <span class="hljs-built_in">sudo</span> lsof -i| grep nessus
+</code></pre>
+<h3 id="mostra-tutti-i-processi-che-stanno-utilizzando-la-porta-22" tabindex="-1">Mostra tutti i processi che stanno utilizzando la porta 22 <a class="header-anchor" href="#mostra-tutti-i-processi-che-stanno-utilizzando-la-porta-22" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">    lsof -i:22
+    lsof -i tcp:5019
+</code></pre>
+<h3 id="file-aperti-dal-processo-3324" tabindex="-1">File aperti dal processo 3324 <a class="header-anchor" href="#file-aperti-dal-processo-3324" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">    lsof -p 3324
+</code></pre>
+<h3 id="processi-che-hanno-aperto-il-file-%2Fvar%2Flog%2Fxorg.0.log" tabindex="-1">Processi che hanno aperto il file <code>/var/log/Xorg.0.log</code> <a class="header-anchor" href="#processi-che-hanno-aperto-il-file-%2Fvar%2Flog%2Fxorg.0.log" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">    lsof /var/log/Xorg.0.<span class="hljs-built_in">log</span>
+</code></pre>
+<h2 id="cups" tabindex="-1">CUPS <a class="header-anchor" href="#cups" aria-hidden="true">🔗</a></h2>
+<p><a href="http://localhost:631">http://localhost:631</a></p>
+<pre><code class="language-bash">apt-get install cups cups-pdf hplip*
+<span class="hljs-built_in">sudo</span> lsof -i -n -P | grep cupsd <span class="hljs-comment"># per verificare se il demone cups è attivo</span>
+</code></pre>
+<h2 id="killare-i-processi-di-un-utente" tabindex="-1">killare i processi di un utente <a class="header-anchor" href="#killare-i-processi-di-un-utente" aria-hidden="true">🔗</a></h2>
+<p>Il comando seguente termina tutti i processi dell’utente ‘ciromattia’, usando
+l’ID di processo, e dovrebbe essere usato solo se assolutamente necessario:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">kill</span> -9 `lsof -t -u ciromattia`
+</code></pre>
+<h2 id="open-file-descriptors" tabindex="-1">Open File Descriptors <a class="header-anchor" href="#open-file-descriptors" aria-hidden="true">🔗</a></h2>
+<p>We knew the answer to this question once, back when the world was young and full of truth. Without hesitation, we'd have spouted &quot;Just take the output of <code>lsof | wc -l!</code>&quot; And it's true enough, in a general sort of way. But if you asked me the same question now, my answer would be: &quot;Why do you want to know?&quot;</p>
+<p>Are you, for instance, attempting to determine whether the number of open files is exceeding the limit set in the kernel? Then the output of lsof will be practically useless.</p>
+<p>Let's back up...</p>
+<p>On *nix systems, there is a limit set in the kernel on how many open file descriptors are allowed on the system. This may be compiled in, or it may be tunable on the fly. <strong>In Linux, the value of this parameter can be read from and written to the proc filesystem</strong>.</p>
+<pre><code class="language-bash">[root@srv-4 proc]# <span class="hljs-built_in">cat</span> /proc/sys/fs/file-max
+52427
+</code></pre>
+<p>On this system 52,427 open file descriptors are permitted. We are unlikely to run out. If we wanted to change it, we'd do something like this:</p>
+<pre><code class="language-bash">[root@srv-4 proc]# <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;104854&quot;</span> &gt; /proc/sys/fs/file-max
+[root@srv-4 proc]# <span class="hljs-built_in">cat</span> /proc/sys/fs/file-max
+104854
+</code></pre>
+<p>(Warning, change kernel parameters on the fly only with great caution and good cause)</p>
+<p>But how do we know how many file descriptors are being used?</p>
+<p class="m">[root@srv-4 proc]# cat /proc/sys/fs/file-nr<br>
+<span class="r">3391</span> 969 52427<br>
+<span class="r">|</span>    |   |<br>
+<span class="r">|</span>    |   |<br>
+<span class="r">|</span>    |   `-maximum open file descriptors<br>
+<span class="r">|</span>    `-total free allocated file descriptors<br>
+<span class="r">`-total allocated file descriptors</span><br>
+(the number of file descriptors allocated since boot)</p>
+<p>The number of open file descriptors is column 1 - column 2; 2325 in this case. (Note: we have read contradictory definitions of the second column in newsgroups. Some people say it is the number of used allocated file descriptors - just the opposite of what we've stated here. Luckily, we can prove that the second number is free descriptors. Just launch an xterm or any new process and watch the second number go down.)</p>
+<p>What about the method we mentioned earlier, running lsof to get the number of open files?</p>
+<pre><code class="language-bash">[root@srv-4 proc]# lsof | <span class="hljs-built_in">wc</span> -l
+4140
+</code></pre>
+<p>Oh my. There is quite a discrepancy here. The lsof utility reports 4140 open files, while /proc/sys/fs/file-nr says, if our math is correct, 2325. So how many open files are there?</p>
+<p>What is an open file?</p>
+<p>Is an open file a file that is being used, or is it an open file descriptor? A file descriptor is a data structure used by a program to get a handle on a file, the most well know being 0,1,2 for standard in, standard out, and standard error. The file-max kernel parameter refers to open file descriptors, and file-nr gives us the current number of open file descriptors. But lsof lists all open files, including files which are not using file descriptors - such as current working directories, memory mapped library files, and executable text files. To illustrate, let's examine the difference between the output of lsof for a given pid and the file descriptors listed for that pid in /proc.</p>
+<p>Pick a PID, any PID</p>
+<p>Let's look at this process:</p>
+<pre><code class="language-bash">usr-4 2381 0.0 0.5 5168 2748 pts/14 S 14:42 0:01 vim openfiles.html
+[root@srv-4 usr-4]# lsof | grep 2381
+vim 2381 usr-4 cwd DIR 3,8 4096 2621517 /n
+vim 2381 usr-4 rtd DIR 3,5 4096 2 /
+vim 2381 usr-4 txt REG 3,2 2160520 34239 /usr/bin/vim
+vim 2381 usr-4 mem REG 3,5 85420 144496 /lib/ld-2.2.5.so
+vim 2381 usr-4 mem REG 3,2 371 20974 /usr/lib/locale/LC_IDENTIFICATION
+vim 2381 usr-4 mem REG 3,2 20666 192622 /usr/lib/gconv/gconv-modules.cache
+vim 2381 usr-4 mem REG 3,2 29 20975 /usr/lib/locale/LC_MEASUREMENT
+vim 2381 usr-4 mem REG 3,2 65 20979 /usr/lib/locale/LC_TELEPHONE
+vim 2381 usr-4 mem REG 3,2 161 19742 /usr/lib/locale/LC_ADDRESS
+vim 2381 usr-4 mem REG 3,2 83 20977 /usr/lib/locale/LC_NAME
+vim 2381 usr-4 mem REG 3,2 40 20978 /usr/lib/locale/LC_PAPER
+vim 2381 usr-4 mem REG 3,2 58 51851 /usr/lib/locale/LC_MESSAGES/SYSL
+vim 2381 usr-4 mem REG 3,2 292 20976 /usr/lib/locale/LC_MONETARY
+vim 2381 usr-4 mem REG 3,2 22592 99819 /usr/lib/locale/LC_COLLATE
+vim 2381 usr-4 mem REG 3,2 2457 20980 /usr/lib/locale/LC_TIME
+vim 2381 usr-4 mem REG 3,2 60 35062 /usr/lib/locale/LC_NUMERIC
+vim 2381 usr-4 mem REG 3,2 290511 64237 /usr/lib/libncurses.so.5.2
+vim 2381 usr-4 mem REG 3,2 24565 64273 /usr/lib/libgpm.so.1.18.0
+vim 2381 usr-4 mem REG 3,5 11728 144511 /lib/libdl-2.2.5.so
+vim 2381 usr-4 mem REG 3,5 22645 144299 /lib/libcrypt-2.2.5.so
+vim 2381 usr-4 mem REG 3,5 10982 144339 /lib/libutil-2.2.5.so
+vim 2381 usr-4 mem REG 3,5 105945 144516 /lib/libpthread-0.9.so
+vim 2381 usr-4 mem REG 3,5 169581 144512 /lib/libm-2.2.5.so
+vim 2381 usr-4 mem REG 3,5 1344152 144297 /lib/libc-2.2.5.so
+vim 2381 usr-4 mem REG 3,2 173680 112269 /usr/lib/locale/LC_CTYPE
+vim 2381 usr-4 mem REG 3,5 42897 144321 /lib/libnss_files-2.2.5.so
+vim 2381 usr-4 0u CHR 136,14 16 /dev/pts/14
+vim 2381 usr-4 1u CHR 136,14 16 /dev/pts/14
+vim 2381 usr-4 2u CHR 136,14 16 /dev/pts/14
+vim 2381 usr-4 4u REG 3,8 12288 2621444 /n/.openfiles.html.swp
+[root@srv-4 usr-4]# lsof | grep 2381 | <span class="hljs-built_in">wc</span> -l
+30
+[root@srv-4 fd]# <span class="hljs-built_in">ls</span> -l /proc/2381/fd/
+total 0
+lrwx------ 1 usr-4 usr-4 64 Jul 30 15:16 0 -&gt; /dev/pts/14
+lrwx------ 1 usr-4 usr-4 64 Jul 30 15:16 1 -&gt; /dev/pts/14
+lrwx------ 1 usr-4 usr-4 64 Jul 30 15:16 2 -&gt; /dev/pts/14
+lrwx------ 1 usr-4 usr-4 64 Jul 30 15:16 4 -&gt; /n/.openfiles.html.swp
+</code></pre>
+<p>Quite a difference. This process has only four open file descriptors, but there are thirty open files associated with it. Some of the open files which are not using file descriptors: library files, the program itself (executable text), and so on as listed above. These files are accounted for elsewhere in the kernel data structures (<code>cat /proc/PID/maps</code> to see the libraries, for instance), but they are not using file descriptors and therefore do not exhaust the kernel's file descriptor maximum.</p>
+<h2 id="heredoc-and-temporary-files" tabindex="-1">heredoc and temporary files <a class="header-anchor" href="#heredoc-and-temporary-files" aria-hidden="true">🔗</a></h2>
+<p>Here documents create temporary files, but these files are deleted after opening and are not accessible to any other process.</p>
+<pre><code class="language-bash">$ $ bash -c <span class="hljs-string">&#x27;lsof -a -p $$ -d0&#x27;</span> &lt;&lt; <span class="hljs-string">EOF
+EOF</span>
+COMMAND    PID    USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+lsof    228839 <span class="hljs-variable">$USER</span>    0r   CHR    1,3      0t0    4 /dev/null
+</code></pre>
+<h2 id="chi-sta-utilizzando-la-porta-45331%3F" tabindex="-1">Chi sta utilizzando la porta 45331? <a class="header-anchor" href="#chi-sta-utilizzando-la-porta-45331%3F" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> lsof -iTCP -sTCP:LISTEN -P -n
+COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+container  608 root   13u  IPv4  20756      0t0  TCP 127.0.0.1:45331 (LISTEN)
+smbd      4739 root   48u  IPv6  24580      0t0  TCP *:445 (LISTEN)
+smbd      4739 root   49u  IPv6  24581      0t0  TCP *:139 (LISTEN)
+smbd      4739 root   50u  IPv4  24582      0t0  TCP *:445 (LISTEN)
+smbd      4739 root   51u  IPv4  24583      0t0  TCP *:139 (LISTEN)
+docker-pr 4942 root    4u  IPv4  18232      0t0  TCP *:8000 (LISTEN)
+docker-pr 4950 root    4u  IPv6  16322      0t0  TCP *:8000 (LISTEN)
+
+$ <span class="hljs-built_in">sudo</span> netstat -ltnp | grep -w <span class="hljs-string">&#x27;45331&#x27;</span> 
+tcp        0      0 127.0.0.1:45331         0.0.0.0:*               LISTEN      608/containerd     
+
+l – tells netstat to only show listening sockets.
+t – tells it to display tcp connections.
+n – instructs it show numerical addresses.
+p – enables showing of the process ID and the process name.
+
+$ <span class="hljs-built_in">sudo</span> lsof -i :45331
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+container 608 root   13u  IPv4  20756      0t0  TCP localhost:45331 (LISTEN)
+
+$ <span class="hljs-built_in">sudo</span> fuser 45331/tcp
+45331/tcp:             608
+$ ps -wwf -p 608
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         608  0.2  0.2 1714840 45132 ?       Ssl  15:38   0:23 /usr/bin/containerd
+
+</code></pre>
+</body></html>

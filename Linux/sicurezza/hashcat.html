@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.728" />
+        <title>hashcat</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="hashcat" tabindex="-1">hashcat <a class="header-anchor" href="#hashcat" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.728</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-in-manjaro">Installazione in Manjaro </a><ol><li><a href="#hashcat-doesn%E2%80%99t-detect-amd-cpus-(solved)">Hashcat doesn’t detect AMD CPUs (SOLVED) </a></li></ol></li><li><a href="#hash-type">Hash Type </a><ol><li><a href="#%2Fetc%2Fshadow">/etc/shadow </a></li></ol></li><li><a href="#attack-mode">Attack Mode </a></li><li><a href="#utilizzo">Utilizzo </a></li></ol></nav><h1 id="hashcat-1" tabindex="-1">hashcat <a class="header-anchor" href="#hashcat-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://hashcat.net/hashcat/">https://hashcat.net/hashcat/</a></li>
+</ul>
+<h2 id="installazione-in-manjaro" tabindex="-1">Installazione in Manjaro <a class="header-anchor" href="#installazione-in-manjaro" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm install hashcat
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm linux-firmware intel-compute-runtime pocl <span class="hljs-comment"># Serve per le CPU AMD, Portable OpenCL</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm clinfo <span class="hljs-comment"># Serve per OpenCL della scheda grafica AMD Radeon RX 580</span>
+$ <span class="hljs-built_in">sudo</span> pamac install opencl-amd  <span class="hljs-comment"># in AUR - Serve per OpenCL della scheda grafica AMD Radeon RX 580</span>
+$ clinfo
+$ hashcat -I
+$ grep -A 18 ENCRYPT_METHOD /etc/login.defs
+$ man 5 crypt
+$ hashcat -h
+</code></pre>
+<h3 id="hashcat-doesn%E2%80%99t-detect-amd-cpus-(solved)" tabindex="-1">Hashcat doesn’t detect AMD CPUs (SOLVED) <a class="header-anchor" href="#hashcat-doesn%E2%80%99t-detect-amd-cpus-(solved)" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://miloserdov.org/?p=6507">https://miloserdov.org/?p=6507</a> Hashcat doesn’t detect AMD CPUs (SOLVED)</li>
+</ul>
+<p>If Hashcat does not see your AMD CPU, then you need to install “Intel CPU Runtime for OpenCL Applications for Windows* OS”. Yes, this is not a joke – to work with AMD processors as with OpenCL devices, you need Intel software.</p>
+<p><code>hashcat -I</code> non mostra la CPU AMD, hashcat non funziona non trovando processori OpenCL</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Soluzione - </span>
+$ <span class="hljs-built_in">sudo</span> pacman -S linux-firmware intel-compute-runtime pocl
+$ hashcat -I
+hashcat (v6.2.2) starting <span class="hljs-keyword">in</span> backend information mode...
+
+OpenCL Info:
+============
+
+OpenCL Platform ID <span class="hljs-comment">#1</span>
+  Vendor..: The pocl project
+  Name....: Portable Computing Language
+  Version.: OpenCL 2.0 pocl 1.7, Release, LLVM 12.0.0, RELOC, SLEEF, DISTRO, POCL_DEBUG
+
+  Backend Device ID <span class="hljs-comment">#1</span>
+    Type...........: CPU
+    Vendor.ID......: 1
+    Vendor.........: AuthenticAMD
+    Name...........: pthread-AMD Ryzen 9 5900X 12-Core Processor
+    Version........: OpenCL 1.2 pocl HSTR: pthread-x86_64-pc-linux-gnu-znver3
+    Processor(s)...: 24
+    Clock..........: 4950
+    Memory.Total...: 62169 MB (limited to 16384 MB allocatable <span class="hljs-keyword">in</span> one block)
+    Memory.Free....: 62105 MB
+    OpenCL.Version.: OpenCL C 1.2 pocl
+    Driver.Version.: 1.7
+</code></pre>
+<h2 id="hash-type" tabindex="-1">Hash Type <a class="header-anchor" href="#hash-type" aria-hidden="true">🔗</a></h2>
+<p>-m, --hash-type</p>
+<table class="table"><thead>
+<tr>
+<th>Hash Type</th>
+<th>Alghorithm</th>
+<th>Class</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>MD5</td>
+<td>Raw Hash</td>
+</tr>
+<tr>
+<td>500</td>
+<td>md5crypt, MD5 (Unix), Cisco-IOS <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>1</mn></mrow><annotation encoding="application/x-tex">1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">1</span></span></span></span> (MD5)</td>
+<td>Operating System</td>
+</tr>
+<tr>
+<td>1000</td>
+<td>NTLM</td>
+<td>Operating System</td>
+</tr>
+<tr>
+<td>3000</td>
+<td>LM(LANMAN</td>
+<td>Operating System</td>
+</tr>
+<tr>
+<td>7400</td>
+<td>sha256crypt <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>5</mn></mrow><annotation encoding="application/x-tex">5</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">5</span></span></span></span>, SHA256 (Unix)</td>
+<td>Operating System</td>
+</tr>
+<tr>
+<td>1800</td>
+<td>sha512crypt <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>6</mn></mrow><annotation encoding="application/x-tex">6</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">6</span></span></span></span>, SHA512 (Unix)</td>
+<td>Operating System</td>
+</tr>
+</tbody>
+</table>
+<p><code>SHA512</code> Crypt: <code>-m 1800</code>
+<code>$6</code> in <code>/etc/shadow</code> corrisponde a <code>1800</code> in hashcat:</p>
+<pre><code class="language-bash">$ grep -A 18 ENCRYPT_METHOD /etc/login.defs 
+$ hashcat -h|grep <span class="hljs-string">&#x27;\$6\$&#x27;</span>
+   1800 | sha512crypt $6$, SHA512 (Unix)                      | Operating System
+</code></pre>
+<h3 id="%2Fetc%2Fshadow" tabindex="-1">/etc/shadow <a class="header-anchor" href="#%2Fetc%2Fshadow" aria-hidden="true">🔗</a></h3>
+<pre><code>mark:$6$.n.:17736:0:99999:7:::
+[--] [----] [---] - [---] ----
+|      |      |   |   |   |||+-----------&gt; 9. Unused
+|      |      |   |   |   ||+------------&gt; 8. Expiration date
+|      |      |   |   |   |+-------------&gt; 7. Inactivity period
+|      |      |   |   |   +--------------&gt; 6. Warning period
+|      |      |   |   +------------------&gt; 5. Maximum password age
+|      |      |   +----------------------&gt; 4. Minimum password age
+|      |      +--------------------------&gt; 3. Last password change
+|      +---------------------------------&gt; 2. Encrypted Password
++----------------------------------------&gt; 1. Username
+</code></pre>
+<p>Encrypted Password (Password crittografata). La password utilizza il formato <code>$type$salt$hashed</code>. <code>$type</code> è l'algoritmo di crittografia hash del metodo e può avere i seguenti valori:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Type</th>
+<th style="text-align:left">Alghorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>$1$</code></td>
+<td style="text-align:left">MD5</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$2a$</code></td>
+<td style="text-align:left">Blowfish</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$2y$</code></td>
+<td style="text-align:left">Eksblowfish</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$5$</code></td>
+<td style="text-align:left">SHA-256</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$6$</code></td>
+<td style="text-align:left">SHA-512</td>
+</tr>
+</tbody>
+</table>
+<p>Per una descrizione esaustiva dei tipi di hash utilizzabili:</p>
+<pre><code class="language-bash">man 5 crypt
+</code></pre>
+<p>Se il campo password contiene un asterisco (*) o un punto esclamativo (!), l'utente non sarà in grado di accedere al sistema utilizzando l'autenticazione con password.</p>
+<p>un <code>!</code> al posto della password significa che la password e' bloccata</p>
+<h2 id="attack-mode" tabindex="-1">Attack Mode <a class="header-anchor" href="#attack-mode" aria-hidden="true">🔗</a></h2>
+<pre><code>-a, --attack-mode
+# | Mode
+===+======
+0 | Straight
+1 | Combination
+3 | Brute-force
+6 | Hybrid Wordlist + Mask
+7 | Hybrid Mask + Wordlist
+9 | Association
+
+-a 3 = Brute-force 
+-1, --custom-charset1
+- [ Built-in Charsets ] -
+? | Charset
+===+=========
+l | abcdefghijklmnopqrstuvwxyz [a-z]
+u | ABCDEFGHIJKLMNOPQRSTUVWXYZ [A-Z]
+d | 0123456789                 [0-9]
+h | 0123456789abcdef           [0-9a-f]
+H | 0123456789ABCDEF           [0-9A-F]
+s |  !&quot;#$%&amp;'()*+,-./:;&lt;=&gt;?@[\]^_`{|}~
+a | ?l?u?d?s
+b | 0x00 - 0xff
+</code></pre>
+<h2 id="utilizzo" tabindex="-1">Utilizzo <a class="header-anchor" href="#utilizzo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> /tmp
+<span class="hljs-comment"># i campi di /etc/shadow sono separati dal colon(:)</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /etc/shadow|grep <span class="hljs-variable">$USER</span>| <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27;:&#x27;</span> -f 2 &gt; tocrack.hash
+$6<span class="hljs-variable">$xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>.
+$ wget https://github.com/danielmiessler/SecLists/raw/master/Passwords/Common-Credentials/10-million-password-list-top-1000000.txt
+/home/<span class="hljs-variable">$USER</span>/Scaricati/10-million-password-list-top-1000000.txt
+</code></pre>
+<p>Esempi di esecuzione di Hashcat:</p>
+<pre><code class="language-bash">$ hashcat -D 1,2 -m 1800 -a 0 -o found1.txt tocrack.hash /home/<span class="hljs-variable">$USER</span>/Scaricati/10-million-password-list-top-1000000.txt
+<span class="hljs-built_in">cat</span> found1.txt
+</code></pre>
+<pre><code class="language-bash">$ hashcat -m 1000 -a 0 hashes.txt words.txt
+$ <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;SANS\nsans\nSTI\nsti\ndog\ncat&quot;</span> &gt; words2.txt
+$ hashcat -m 1000 -a 1 hashes.txt words.txt words2.txt
+$ hashcat -m 1000 -a 3 hashes.txt ?u?l?l?l?l?l?d?d  
+$ hashcat -m 1000 -a 6 hashes.txt words.txt ?s?d
+$ hashcat -m 1000 -a 7 hashes.txt ?d?d?d?d words.txt
+$ hashcat -m 1000 -a 0 ./smart-hashdump.txt words.txt -r best64.rule
+$ hashcat -m 3000 -a 3 customer.ntds --potfile-path hashcat.potfile -1 ?u?d?s --increment ?1?1?1?1?1?1?1
+$ hashcat -m 1000 -a 0 customer.ntds wordlist.txt --potfile-path ./hashcat.potfile
+C:\&gt; hashcat64.exe -a 0 -m 0 -r rules\Incisive-leetspeak.rule md5.txt password.lst
+<span class="hljs-comment"># Crack di una password MD5 ($1)</span>
+<span class="hljs-comment"># a differenza di john per hashcat si crea un file contenente solamente gli hash:</span>
+$ <span class="hljs-built_in">cat</span> hashes.txt 
+    $1<span class="hljs-variable">$a5i6x</span>/uH<span class="hljs-variable">$gI</span>.zL.wOfKoeMnqm3Q8wF.
+<span class="hljs-comment"># Le password md5 sono quelle marcate con $1</span>
+$ john --format=md5crypt -wordlist=/usr/share/dict/rockyou.txt combined
+$ hashcat -m 500 -a 0 hashes.txt /usr/share/dict/rockyou.txt
+$ hashcat -m 500 -a 3 hashes.txt ?a?a?a?a?a?a
+</code></pre>
+</body></html>

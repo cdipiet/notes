@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.013" />
+        <title>nginx</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nginx" tabindex="-1">nginx <a class="header-anchor" href="#nginx" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.013</p>
+<nav class="table-of-contents"><ol><li><a href="#esempio-server-di-contenuto-statico">Esempio server di contenuto statico </a></li><li><a href="#root-directory-di-un-sito-nella-home-di-un-utente%3A-errore-di-accesso-di-nginx-alla-directory-root">root directory di un sito nella home di un utente: Errore di accesso di nginx alla directory root </a></li><li><a href="#esempio-docker">Esempio Docker </a></li><li><a href="#docker-nginx-image">Docker Nginx Image </a><ol><li><a href="#estrarre-la-configurazione-di-default-dall'immagine">Estrarre la configurazione di default dall&#39;immagine </a></li></ol></li></ol></nav><h1 id="nginx-1" tabindex="-1">nginx <a class="header-anchor" href="#nginx-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/nginx">https://wiki.archlinux.org/title/nginx</a></li>
+<li><a href="https://www.digitalocean.com/community/tools/nginx">https://www.digitalocean.com/community/tools/nginx</a></li>
+</ul>
+<p><a href="http://nginx.org/">http://nginx.org/</a>
+<a href="https://nginx.org/en/docs/">https://nginx.org/en/docs/</a>
+<a href="https://nginx.org/en/docs/beginners_guide.html">https://nginx.org/en/docs/beginners_guide.html</a>
+<a href="https://www.nginx.com/resources/wiki/start/">https://www.nginx.com/resources/wiki/start/</a></p>
+<p>PHP-Wordpress</p>
+<p><a href="https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/">https://www.nginx.com/resources/wiki/start/topics/examples/phpfcgi/</a>
+<a href="https://www.nginx.com/resources/wiki/start/topics/recipes/wordpress/">https://www.nginx.com/resources/wiki/start/topics/recipes/wordpress/</a>
+<a href="https://www.digitalocean.com/community/tools/nginx?domains.0.php.wordPressRules=true">https://www.digitalocean.com/community/tools/nginx?domains.0.php.wordPressRules=true</a>
+<a href="https://www.digitalocean.com/community/tutorials/php-fpm-nginx">https://www.digitalocean.com/community/tutorials/php-fpm-nginx</a>
+<a href="https://www.tecmint.com/install-nginx-php-mysql-with-mariadb-engine-and-phpmyadmin-in-arch-linux/">https://www.tecmint.com/install-nginx-php-mysql-with-mariadb-engine-and-phpmyadmin-in-arch-linux/</a></p>
+<p><a href="https://www.binarytides.com/install-nginx-php-fpm-mariadb-debian/">https://www.binarytides.com/install-nginx-php-fpm-mariadb-debian/</a>
+<a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Nginx-PHP-FPM-config-example">https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/Nginx-PHP-FPM-config-example</a>
+<a href="https://www.ionos.com/digitalguide/hosting/blogs/wordpress-nginx/">https://www.ionos.com/digitalguide/hosting/blogs/wordpress-nginx/</a></p>
+<p>Configurazioni di Esempio:</p>
+<ul>
+<li><a href="https://nginx.org/en/docs/beginners_guide.html">https://nginx.org/en/docs/beginners_guide.html</a></li>
+<li><a href="https://www.nginx.com/resources/wiki/start/">https://www.nginx.com/resources/wiki/start/</a></li>
+<li><a href="https://www.digitalocean.com/community/tools/nginx">https://www.digitalocean.com/community/tools/nginx</a></li>
+<li><a href="https://github.com/docker/awesome-compose">https://github.com/docker/awesome-compose</a></li>
+</ul>
+<p>Docker:</p>
+<ul>
+<li><a href="https://hub.docker.com/_/nginx">https://hub.docker.com/_/nginx</a></li>
+<li><a href="https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/">https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/</a></li>
+<li><a href="https://www.baeldung.com/linux/nginx-docker-container">https://www.baeldung.com/linux/nginx-docker-container</a></li>
+</ul>
+<h2 id="esempio-server-di-contenuto-statico" tabindex="-1">Esempio server di contenuto statico <a class="header-anchor" href="#esempio-server-di-contenuto-statico" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># 1-Installazione</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu                  <span class="hljs-comment"># Aggiornamento pacchetti</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm nginx              <span class="hljs-comment"># Installazione ngnix</span>
+$ pacman -Ql nginx                  <span class="hljs-comment"># Visualizzazione contenuto pacchetto ngnix</span>
+$ systemctl status nginx            <span class="hljs-comment"># Stato del servizio systemd</span>
+$ systemctl <span class="hljs-built_in">cat</span> nginx --no-pager    <span class="hljs-comment"># Definizione del servizio systemd</span>
+$ systemctl show nginx --no-pager   <span class="hljs-comment"># Visualizzazione proprietà servizio systemd</span>
+$ systemctl list-unit-files --<span class="hljs-built_in">type</span>=service --state=enabled     
+<span class="hljs-comment"># 2-Configurazione - definizione di un nuovo sito</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /etc/nginx/sites-available
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /etc/nginx/sites-enabled
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/nginx/sites-available/sec504wiki.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+server {
+    listen       127.0.0.1:9001;
+    server_name  wiki;
+    location / {
+        root   /home/<span class="hljs-variable">$USER</span>/Documenti/BI/Corso_SANS_504/wiki/wiki;
+        index  index.html index.htm;
+        add_header Last-Modified <span class="hljs-variable">$date_gmt</span>;
+        add_header Cache-Control <span class="hljs-string">&#x27;no-store, no-cache, must-revalidate, proxy-revalidate, max-age=0&#x27;</span>;
+        if_modified_since off;
+        expires off;
+        etag off;
+    }
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   html;
+    }
+}
+EOF
+$ <span class="hljs-built_in">cat</span> /etc/nginx/sites-available/sec504wiki.conf
+<span class="hljs-comment"># Tramite un link simbolico si aggiunge all&#x27;elenco dei siti attivi un sito &quot;disponibile&quot;</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">ln</span> -s /etc/nginx/sites-available/sec504wiki.conf /etc/nginx/sites-enabled/sec504wiki.conf
+<span class="hljs-comment"># Il fil di configurazione principale include i link simbolici presenti nell&#x27;elenco dei siti attivi</span>
+$ <span class="hljs-built_in">sudo</span> vim /etc/nginx/nginx.conf 
+<span class="hljs-comment"># 1. Commentare il server di esempio</span>
+<span class="hljs-comment"># 2. Aggiungere prima della chiusura } del blocco http: </span>
+<span class="hljs-comment">#        include sites-enabled/*;</span>
+
+<span class="hljs-comment"># La root del sito /home/$USER/Documenti/BI/Corso_SANS_504/wiki/wiki è contenuta nella home dell&#x27;utente $USER che non è accessibile all&#x27;utente http</span>
+$ <span class="hljs-built_in">sudo</span> gpasswd -a http <span class="hljs-variable">$USER</span>      <span class="hljs-comment"># L&#x27;utente http viene aggiunto al gruppo $USER</span>
+$ <span class="hljs-built_in">chmod</span> g+xr <span class="hljs-variable">$USER</span> /home/<span class="hljs-variable">$USER</span>    <span class="hljs-comment"># Viene concesso al gruppo $USER di accedere a /home/$USER</span>
+
+<span class="hljs-comment"># 3-Start/Stop</span>
+$ <span class="hljs-built_in">sudo</span> systemctl start nginx
+$ xdg-open <span class="hljs-string">&quot;http://localhost:80&quot;</span>
+$ <span class="hljs-built_in">sudo</span> systemctl stop nginx
+<span class="hljs-comment"># $ sudo systemctl enable nginx # non abilitiamo la partenza all&#x27;avvio per non avere sempre il webserver attivo</span>
+
+<span class="hljs-comment"># Visualizzazione dei log</span>
+$ journalctl -b -u nginx
+$ journalctl --since=today --no-pager -u nginx
+$ journalctl --since <span class="hljs-string">&quot;20 min ago&quot;</span> --no-pager -u nginx
+$ journalctl --since=<span class="hljs-string">&quot;2012-10-30 18:17:16&quot;</span> --no-pager -u nginx 
+$ journalctl -xeu nginx.service <span class="hljs-comment"># per vedere l&#x27;ultimo errore</span>
+
+<span class="hljs-comment"># Svuotare i log</span>
+<span class="hljs-comment">#    /var/log/journal/</span>
+$ journalctl --disk-usage
+$ <span class="hljs-built_in">rm</span> -rf /var/log/journal/* <span class="hljs-comment"># pulizia &quot;manuale&quot;</span>
+$ <span class="hljs-built_in">sudo</span> journalctl --vacuum-time=2d <span class="hljs-comment"># rimozione di tutto l&#x27;antecedente due giorni</span>
+$ journalctl --vacuum-size=500M <span class="hljs-comment"># rimozione mantenendo gli ultimi 500MB</span>
+</code></pre>
+<h2 id="root-directory-di-un-sito-nella-home-di-un-utente%3A-errore-di-accesso-di-nginx-alla-directory-root" tabindex="-1">root directory di un sito nella home di un utente: Errore di accesso di nginx alla directory root <a class="header-anchor" href="#root-directory-di-un-sito-nella-home-di-un-utente%3A-errore-di-accesso-di-nginx-alla-directory-root" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ journalctl |grep nginx
+$ journalctl -xe
+</code></pre>
+<pre><code>lug 19 14:39:20 linux systemd[1]: Started A high performance web server and a reverse proxy server.
+lug 19 14:39:27 linux nginx[69418]: 2021/07/19 14:39:27 [error] 69418#69418: *1 &quot;/home/$USER/Documenti/BI/Corso_SANS_504/wiki/wiki/index.html&quot; is forbidden (13: Permission denied), client: 127.0.0.1, server: wiki, request: &quot;GET / HTTP/1.1&quot;, host: &quot;127.0.0.1:9001&quot;
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># il processo worker nginx lavora con l&#x27;utenza http(che è l&#x27;utenza di default in Manjaro)</span>
+$ ps -elf | grep nginx
+$ grep user /etc/nginx/nginx.conf
+<span class="hljs-comment">#user http;</span>
+<span class="hljs-comment"># Bisogna dare accesso all&#x27;user http alle directory root</span>
+</code></pre>
+<p>Per verificare che l'utente http non riesce ad accedere:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> -u http <span class="hljs-built_in">stat</span> /home/<span class="hljs-variable">$USER</span>/Documenti/BI/Corso_SANS_504/wiki/wiki
+<span class="hljs-built_in">stat</span>: cannot statx <span class="hljs-string">&#x27;/home/$USER/Documenti/BI/Corso_SANS_504/wiki/wiki&#x27;</span>: Permesso negato
+</code></pre>
+<p>Soluzione: aggiungo l'utente <code>http</code> al gruppo dell'utente la cui home contiene la root</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> gpasswd -a http <span class="hljs-variable">$USER</span>
+$ <span class="hljs-built_in">chmod</span> g+xr <span class="hljs-variable">$USER</span> /home/<span class="hljs-variable">$USER</span>
+$ <span class="hljs-built_in">sudo</span> -u http bash
+$ journalctl -f -u nginx
+$ <span class="hljs-built_in">sudo</span> systemctl restart nginx
+$ xdg-open <span class="hljs-string">&quot;http://localhost:9001&quot;</span> 
+</code></pre>
+<h2 id="esempio-docker" tabindex="-1">Esempio Docker <a class="header-anchor" href="#esempio-docker" aria-hidden="true">🔗</a></h2>
+<p><code>docker-compose.yml</code></p>
+<pre><code class="language-yml">  <span class="hljs-comment"># Nginx webserver</span>
+  <span class="hljs-attr">mysite-web:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">mysite-web:${mysite_WEB_COMMIT}</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">mysite-web</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">mysite-api</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">unless-stopped</span>
+    <span class="hljs-attr">build:</span>
+      <span class="hljs-comment"># Context directory from where the requirements are loaded when building the image</span>
+      <span class="hljs-attr">context:</span> <span class="hljs-string">${mysite_WEB_BASEDIR}</span>
+      <span class="hljs-attr">dockerfile:</span> <span class="hljs-string">Dockerfile</span>
+      <span class="hljs-attr">labels:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;vcs-ref=${mysite_WEB_COMMIT}&quot;</span>
+      <span class="hljs-comment"># Environment variables to pass to the container at build-time; their values read from the host (.env file).</span>
+      <span class="hljs-attr">args:</span>
+        <span class="hljs-bullet">-</span> <span class="hljs-string">mysite_API_ENDPOINT</span>
+    <span class="hljs-comment"># Environment variables to pass to the running container; their values read from the host (.env file) or defined here.</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">NGINX_PORT</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">NGINX_PORT_TLS</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">NGINX_NAME</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">mysite_NETWORK</span>
+    <span class="hljs-comment"># Nginx configuration is built from a template by this command run when container is run (Nginx is not able to replace variables).</span>
+    <span class="hljs-attr">command:</span> <span class="hljs-string">/bin/bash</span> <span class="hljs-string">-c</span> <span class="hljs-string">&quot;envsubst &#x27;$${NGINX_PORT} $${NGINX_PORT_TLS} $${NGINX_NAME} $${mysite_NETWORK}&#x27; &lt; /etc/nginx/mysite.conf.tpl &gt; /etc/nginx/conf.d/mysite.conf &amp;&amp; nginx -g &#x27;daemon off;&#x27;&quot;</span>
+    <span class="hljs-attr">read_only:</span> <span class="hljs-literal">True</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-comment"># The certificates directory is bind-mounted into the container, so that certificates can be modified from the outside.</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">${NGINX_SECRETS}:/etc/nginx/certs</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">nginx-conf:/etc/nginx/conf.d</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">nginx-cache:/var/cache</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">nginx-run:/run/nginx</span>
+
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># =========================================================</span>
+<span class="hljs-comment"># Stage 1: build the web project using a builder container</span>
+<span class="hljs-comment"># =========================================================</span>
+<span class="hljs-keyword">FROM</span> node:<span class="hljs-number">16.14</span>.<span class="hljs-number">2</span>-buster AS mysite-web-builder
+
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; \
+    npm <span class="hljs-built_in">rm</span> -g gulp &amp;&amp; \
+    npm install -g gulp-cli</span>
+
+<span class="hljs-comment"># Prefer to install and build project as unprivileged user &#x27;node&#x27;</span>
+<span class="hljs-keyword">USER</span> node
+
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">mkdir</span> /home/node/mysite-web</span>
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /home/node/mysite-web</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> --<span class="hljs-built_in">chown</span>=node:node package.json ./</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> npm install</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> --<span class="hljs-built_in">chown</span>=node:node src src</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> --<span class="hljs-built_in">chown</span>=node:node Gulpfile.esm.js ./</span>
+
+<span class="hljs-keyword">ARG</span> mysite_API_ENDPOINT
+<span class="hljs-keyword">RUN</span><span class="language-bash"> gulp clean &amp;&amp; gulp build</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> find build -<span class="hljs-built_in">type</span> f -size +1500c \( -name \*.css -o -name \*.js -o -name \*.svg -o -name \*.ttf -o -name \*.eot \) -<span class="hljs-built_in">exec</span> gzip -fvk {} +</span>
+
+<span class="hljs-comment">### Workaround to let the file copy from this container to the target work:</span>
+<span class="hljs-comment">### Switch to root and change file ownership</span>
+<span class="hljs-keyword">USER</span> root
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chown</span> -R root:root ./build</span>
+
+<span class="hljs-comment"># =========================================================</span>
+<span class="hljs-comment"># Stage 2: build the web server container,</span>
+<span class="hljs-comment">#          copy the built artifacts from the builder container into the web document root</span>
+<span class="hljs-comment"># =========================================================</span>
+<span class="hljs-keyword">FROM</span> nginx:<span class="hljs-number">1.18</span>.<span class="hljs-number">0</span>
+
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">mkdir</span> /run/nginx &amp;&amp; \
+    <span class="hljs-built_in">chown</span> nginx /run/nginx &amp;&amp; \
+    <span class="hljs-built_in">rm</span> -rf /etc/nginx/conf.d/*</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> docker/nginx/* /etc/nginx/</span>
+
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">chown</span> -R nginx /etc/nginx/* &amp;&amp; \
+    <span class="hljs-built_in">chown</span> -R nginx /var/cache/nginx &amp;&amp; \
+    <span class="hljs-built_in">mkdir</span> /srv/mysite-web</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> --from=mysite-web-builder /home/node/mysite-web/build/ /srv/mysite-web/</span>
+
+<span class="hljs-keyword">USER</span> nginx
+</code></pre>
+<p><code>nginx.conf</code></p>
+<pre><code class="language-nginx"><span class="hljs-attribute">include</span> conf.d/<span class="hljs-regexp">*.conf</span>;
+</code></pre>
+<p><code>mysite.conf.tpl</code></p>
+<pre><code class="language-nginx"><span class="hljs-attribute">worker_processes</span>  <span class="hljs-number">1</span>;
+
+<span class="hljs-attribute">error_log</span>  /dev/stderr  <span class="hljs-literal">warn</span>;
+<span class="hljs-attribute">pid</span>  /run/nginx/nginx.pid;
+
+<span class="hljs-section">events</span> {
+    <span class="hljs-attribute">worker_connections</span>  <span class="hljs-number">1024</span>;
+}
+<span class="hljs-attribute">worker_rlimit_nofile</span> <span class="hljs-number">2048</span>;
+
+<span class="hljs-section">http</span> {
+    <span class="hljs-attribute">include</span>       /etc/nginx/mime.types;
+    <span class="hljs-attribute">default_type</span>  application/octet-stream;
+
+    <span class="hljs-attribute">log_format</span>  main  <span class="hljs-string">&#x27;<span class="hljs-variable">$http_x_forwarded_for</span> [<span class="hljs-variable">$time_iso8601</span>] &quot;<span class="hljs-variable">$request</span>&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;<span class="hljs-variable">$status</span> <span class="hljs-variable">$body_bytes_sent</span> &quot;<span class="hljs-variable">$http_referer</span>&quot; &quot;<span class="hljs-variable">$http_user_agent</span>&quot;&#x27;</span>;
+
+    <span class="hljs-attribute">log_format</span>  full  <span class="hljs-string">&#x27;<span class="hljs-variable">$http_x_forwarded_for</span> [<span class="hljs-variable">$time_iso8601</span>] &quot;<span class="hljs-variable">$request</span>&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;<span class="hljs-variable">$status</span> <span class="hljs-variable">$body_bytes_sent</span> &quot;<span class="hljs-variable">$http_referer</span>&quot; &quot;<span class="hljs-variable">$http_user_agent</span>&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;<span class="hljs-variable">$remote_addr</span>&#x27;</span>;
+
+    <span class="hljs-attribute">access_log</span>  /dev/stdout  main;
+
+    <span class="hljs-attribute">server_tokens</span> <span class="hljs-literal">off</span>;
+
+    <span class="hljs-attribute">keepalive_timeout</span>  <span class="hljs-number">15s</span>;
+    <span class="hljs-attribute">sendfile</span>       <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">tcp_nopush</span>     <span class="hljs-literal">on</span>;
+
+    <span class="hljs-attribute">gzip_static</span>       <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">gzip_vary</span>         <span class="hljs-literal">on</span>;
+    <span class="hljs-attribute">gzip_http_version</span> <span class="hljs-number">1</span>.<span class="hljs-number">0</span>;
+
+
+    <span class="hljs-section">upstream</span> mysite-api {
+        ip_hash;
+        <span class="hljs-attribute">server</span> mysite-api:<span class="hljs-number">5000</span>;
+    }
+
+
+    <span class="hljs-section">server</span> {
+        <span class="hljs-attribute">listen</span> <span class="hljs-variable">${NGINX_PORT_TLS}</span> ssl;
+        <span class="hljs-attribute">server_name</span> <span class="hljs-variable">${NGINX_NAME}</span>;
+
+        <span class="hljs-attribute">root</span>   /srv/mysite-web;
+        <span class="hljs-attribute">index</span>  index.html;
+        <span class="hljs-attribute">autoindex</span> <span class="hljs-literal">off</span>;
+
+
+        <span class="hljs-attribute">ssl_certificate</span>             /etc/nginx/certs/<span class="hljs-variable">${NGINX_NAME}</span>.crt;
+        <span class="hljs-attribute">ssl_certificate_key</span>         /etc/nginx/certs/<span class="hljs-variable">${NGINX_NAME}</span>.key;
+
+        <span class="hljs-attribute">ssl_protocols</span>               TLSv1.<span class="hljs-number">1</span> TLSv1.<span class="hljs-number">2</span>;
+        <span class="hljs-attribute">ssl_ciphers</span>                 HIGH:MEDIUM:!SSLv3:!kRSA;
+        <span class="hljs-attribute">ssl_prefer_server_ciphers</span>   <span class="hljs-literal">on</span>;
+        <span class="hljs-attribute">ssl_session_cache</span>           shared:SSL:<span class="hljs-number">5m</span>;
+        <span class="hljs-attribute">ssl_session_timeout</span>         <span class="hljs-number">1h</span>;
+        <span class="hljs-attribute">ssl_session_tickets</span>         <span class="hljs-literal">off</span>;
+        <span class="hljs-attribute">ssl_buffer_size</span>             <span class="hljs-number">16k</span>;
+
+
+        <span class="hljs-section">location</span> <span class="hljs-regexp">~* \.(html)$</span> {
+            <span class="hljs-attribute">add_header</span> Cache-Control <span class="hljs-string">&quot;no-cache&quot;</span>;
+        }
+
+        <span class="hljs-section">location</span> <span class="hljs-regexp">~* \.(css|js|map)$</span> {
+            <span class="hljs-attribute">log_not_found</span> <span class="hljs-literal">off</span>;
+            <span class="hljs-attribute">access_log</span> <span class="hljs-literal">off</span>;
+            <span class="hljs-attribute">expires</span> <span class="hljs-number">1h</span>;
+        }
+
+        <span class="hljs-section">location</span> <span class="hljs-regexp">~* \.(png|svg|jpg|jpeg|gif|ico|woff|woff2|otf|ttf|eot)$</span> {
+            <span class="hljs-attribute">log_not_found</span> <span class="hljs-literal">off</span>;
+            <span class="hljs-attribute">access_log</span> <span class="hljs-literal">off</span>;
+            <span class="hljs-attribute">expires</span> <span class="hljs-number">7d</span>;
+        }
+
+        <span class="hljs-section">location</span> /api/ {
+            <span class="hljs-attribute">add_header</span> Cache-Control <span class="hljs-string">&quot;no-store&quot;</span>;
+            <span class="hljs-attribute">proxy_pass</span>  http://mysite-api;
+
+            <span class="hljs-section">location</span> = /api/config {
+                <span class="hljs-attribute">deny</span> all;
+            }
+
+            <span class="hljs-section">location</span> = /api/health {
+                <span class="hljs-attribute">access_log</span> <span class="hljs-literal">off</span>;
+                <span class="hljs-attribute">deny</span> all;
+            }
+        }
+    }
+
+
+    <span class="hljs-section">server</span> {
+        <span class="hljs-attribute">listen</span> <span class="hljs-variable">${NGINX_PORT}</span>;
+        <span class="hljs-attribute">server_name</span> <span class="hljs-variable">${NGINX_NAME}</span>;
+
+        <span class="hljs-section">location</span> = /api/config {
+            <span class="hljs-attribute">expires</span> epoch;
+            <span class="hljs-attribute">allow</span>   <span class="hljs-variable">${mysite_NETWORK}</span>;
+            <span class="hljs-attribute">deny</span>    all;
+            <span class="hljs-attribute">proxy_pass</span>  http://mysite-api;
+        }
+
+        <span class="hljs-section">location</span> = /api/health {
+            <span class="hljs-attribute">expires</span> epoch;
+            <span class="hljs-attribute">access_log</span> <span class="hljs-literal">off</span>;
+            <span class="hljs-attribute">proxy_pass</span>  http://mysite-api;
+        }
+
+        <span class="hljs-section">location</span> / {
+            <span class="hljs-attribute">return</span> <span class="hljs-number">301</span> https://<span class="hljs-variable">$server_name</span><span class="hljs-variable">$request_uri</span>;
+        }
+    }
+
+}
+
+</code></pre>
+<h2 id="docker-nginx-image" tabindex="-1">Docker Nginx Image <a class="header-anchor" href="#docker-nginx-image" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><code>listen 80</code></p>
+</li>
+<li>
+<p>root <code>/usr/share/nginx/html</code></p>
+</li>
+<li>
+<p><code>/etc/nginx/templates/default.conf.template</code></p>
+</li>
+<li>
+<p><code>NGINX_ENVSUBST_TEMPLATE_DIR</code> = <code>/etc/nginx/templates</code></p>
+</li>
+<li>
+<p><code>NGINX_ENVSUBST_TEMPLATE_SUFFIX</code> = <code>.template</code></p>
+</li>
+<li>
+<p><code>NGINX_ENVSUBST_OUTPUT_DIR</code> = <code>/etc/nginx/conf.d</code></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/nginx">https://hub.docker.com/_/nginx</a></p>
+<p>Nginx (pronounced &quot;engine-x&quot;) is an open source reverse proxy server for HTTP, HTTPS, SMTP, POP3, and IMAP protocols, as well as a load balancer, HTTP cache, and a web server.\</p>
+<pre><code class="language-bash">$ docker run --name some-nginx -p 8080:80 -v /some/content:/usr/share/nginx/html:ro -d nginx
+
+</code></pre>
+<p>per prelevare dal container nginx la configurazione corrente:</p>
+<pre><code class="language-bash">$ docker <span class="hljs-built_in">cp</span> tmp-nginx-container:/etc/nginx/nginx.conf /host/path/nginx.conf
+</code></pre>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">FROM</span> nginx
+<span class="hljs-keyword">COPY</span><span class="language-bash"> nginx.conf /etc/nginx/nginx.conf</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> static-html-directory /usr/share/nginx/html</span>
+<span class="hljs-comment"># If you add a custom CMD in the Dockerfile, be sure to include -g daemon off; in the CMD in order for nginx to stay in the foreground, so that Docker can track the process properly (otherwise your container will stop immediately after starting)!</span>
+</code></pre>
+<pre><code class="language-bash">$ docker build -t custom-nginx .
+$ docker run --name some-nginx -p 8080:80 -d some-content-nginx
+<span class="hljs-comment"># http://localhost:8080 or http://host-ip:8080</span>
+</code></pre>
+<p>Variabili di ambiente e template:<br>
+<a href="https://github.com/nginxinc/docker-nginx/blob/master/mainline/debian/20-envsubst-on-templates.sh">https://github.com/nginxinc/docker-nginx/blob/master/mainline/debian/20-envsubst-on-templates.sh</a><br>
+questa immagine esegue <code>envsubst</code> sui file presenti in <code>/etc/nginx/templates/*.template</code> e scrive il risultato nella directory <code>/etc/nginx/conf.d</code>:</p>
+<p><code>compose.yml</code></p>
+<pre><code class="language-yml"><span class="hljs-attr">web:</span>
+  <span class="hljs-attr">image:</span> <span class="hljs-string">nginx</span>
+  <span class="hljs-attr">volumes:</span>
+   <span class="hljs-bullet">-</span> <span class="hljs-string">./templates:/etc/nginx/templates</span>
+  <span class="hljs-attr">ports:</span>
+   <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;8080:80&quot;</span>
+  <span class="hljs-attr">environment:</span>
+   <span class="hljs-bullet">-</span> <span class="hljs-string">NGINX_HOST=foobar.com</span>
+   <span class="hljs-bullet">-</span> <span class="hljs-string">NGINX_PORT=80</span>
+</code></pre>
+<p>Per esempio, creando il file <code>/etc/nginx/templates/default.conf.template</code> che contiene la seguente variabile di ambiente:</p>
+<pre><code>  listen       ${NGINX_PORT};
+</code></pre>
+<p>viene prodotto il file <code>/etc/nginx/conf.d/default.conf</code> con il seguente contenuto:</p>
+<pre><code>  listen       80;
+</code></pre>
+<p>L'elaborazione dei template può essere modificata mediante le variabili di ambiente:</p>
+<ul>
+<li><code>NGINX_ENVSUBST_TEMPLATE_DIR</code> = <code>/etc/nginx/templates</code></li>
+<li><code>NGINX_ENVSUBST_TEMPLATE_SUFFIX</code> = <code>.template</code></li>
+<li><code>NGINX_ENVSUBST_OUTPUT_DIR</code> = <code>/etc/nginx/conf.d</code></li>
+</ul>
+<p>Esecuzione readonly: nginx scrive solo in <code>/var/cache</code> e <code>/var/run</code> per cui basta montarle come volumi:</p>
+<pre><code class="language-bash">$ docker run -d -p 80:80 --read-only -v $(<span class="hljs-built_in">pwd</span>)/nginx-cache:/var/cache/nginx -v $(<span class="hljs-built_in">pwd</span>)/nginx-pid:/var/run nginx
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/">https://www.docker.com/blog/how-to-use-the-official-nginx-docker-image/</a></p>
+<pre><code class="language-bash">$ docker run -it --<span class="hljs-built_in">rm</span> -d -p 8080:80 --name web nginx <span class="hljs-comment"># http://localhost:8080</span>
+$ docker stop web
+$ <span class="hljs-built_in">mkdir</span> ~/site-content
+$ <span class="hljs-built_in">cat</span> &gt; ~/site-content/index.html &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+&lt;!doctype html&gt;
+&lt;html lang=<span class="hljs-string">&quot;en&quot;</span>&gt;
+&lt;<span class="hljs-built_in">head</span>&gt;
+    &lt;meta charset=<span class="hljs-string">&quot;utf-8&quot;</span>&gt;
+    &lt;title&gt;Docker Nginx&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Hello from Nginx container&lt;/h2&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+$ docker run -it --<span class="hljs-built_in">rm</span> -d -p 8080:80 --name web -v ~/site-content:/usr/share/nginx/html nginx
+
+$ <span class="hljs-built_in">cat</span> &gt; Dockerfile &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+FROM nginx:latest
+COPY ./index.html /usr/share/nginx/html/index.html
+EOF
+$ docker build -t webserver .
+$ docker run -it --<span class="hljs-built_in">rm</span> -d -p 8080:80 --name web webserver
+
+$ git <span class="hljs-built_in">clone</span> https://github.com/pmckeetx/docker-nginx.git
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.baeldung.com/linux/nginx-docker-container">https://www.baeldung.com/linux/nginx-docker-container</a></p>
+<pre><code>  nginx.conf
+
+  server {
+      listen 80 default_server;
+      listen [::]:80 default_server;
+      
+      root /usr/share/nginx/html;
+      index index.html index.htm;
+
+      server_name _;
+      location / {
+          try_files $uri $uri/ =404;
+      }
+  }
+
+  Dockerfile:
+
+  Pull the minimal Ubuntu image
+  FROM ubuntu
+  # Install Nginx
+  RUN apt-get -y update &amp;&amp; apt-get -y install nginx
+  # Copy the Nginx config
+  COPY default /etc/nginx/sites-available/default
+  # Expose the port for access
+  EXPOSE 80/tcp
+  # Run the Nginx server
+  CMD [&quot;/usr/sbin/nginx&quot;, &quot;-g&quot;, &quot;daemon off;&quot;]
+
+
+  $ docker build . -t haidar/server
+  $ docker run -d -p 80:80 haidar/server
+</code></pre>
+</li>
+</ul>
+<h3 id="estrarre-la-configurazione-di-default-dall'immagine" tabindex="-1">Estrarre la configurazione di default dall'immagine <a class="header-anchor" href="#estrarre-la-configurazione-di-default-dall'immagine" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ docker compose run --<span class="hljs-built_in">rm</span> -v /opt/elastic_search_pwned:/home/node/app/elastic_search_pwned --entrypoint bash loader
+ 
+$ docker run -it --<span class="hljs-built_in">rm</span> --entrypoint /bin/bash nginx -c <span class="hljs-string">&#x27;ls -lah /etc/nginx/conf.d&#x27;</span>
+
+$ docker run -it --<span class="hljs-built_in">rm</span> --entrypoint /bin/bash nginx -c <span class="hljs-string">&#x27;cat /etc/nginx/nginx.conf&#x27;</span>
+
+user  nginx;
+worker_processes  auto;
+
+error_log  /var/log/nginx/error.log notice;
+pid        /var/run/nginx.pid;
+
+
+events {
+    worker_connections  1024;
+}
+
+
+http {
+    include       /etc/nginx/mime.types;
+    default_type  application/octet-stream;
+
+    log_format  main  <span class="hljs-string">&#x27;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;$status $body_bytes_sent &quot;$http_referer&quot; &#x27;</span>
+                      <span class="hljs-string">&#x27;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#x27;</span>;
+
+    access_log  /var/log/nginx/access.log  main;
+
+    sendfile        on;
+    <span class="hljs-comment">#tcp_nopush     on;</span>
+
+    keepalive_timeout  65;
+
+    <span class="hljs-comment">#gzip  on;</span>
+
+    include /etc/nginx/conf.d/*.conf;
+}
+
+
+$ docker run -it --<span class="hljs-built_in">rm</span> --entrypoint /bin/bash nginx -c <span class="hljs-string">&#x27;cat /etc/nginx/conf.d/default.conf&#x27;</span>
+server {
+    listen       80;
+    server_name  localhost;
+
+    <span class="hljs-comment">#access_log  /var/log/nginx/host.access.log  main;</span>
+
+    location / {
+        root   /usr/share/nginx/html;
+        index  index.html index.htm;
+    }
+
+    <span class="hljs-comment">#error_page  404              /404.html;</span>
+
+    <span class="hljs-comment"># redirect server error pages to the static page /50x.html</span>
+    <span class="hljs-comment">#</span>
+    error_page   500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html;
+    }
+
+    <span class="hljs-comment"># proxy the PHP scripts to Apache listening on 127.0.0.1:80</span>
+    <span class="hljs-comment">#</span>
+    <span class="hljs-comment">#location ~ \.php$ {</span>
+    <span class="hljs-comment">#    proxy_pass   http://127.0.0.1;</span>
+    <span class="hljs-comment">#}</span>
+
+    <span class="hljs-comment"># pass the PHP scripts to FastCGI server listening on 127.0.0.1:9000</span>
+    <span class="hljs-comment">#</span>
+    <span class="hljs-comment">#location ~ \.php$ {</span>
+    <span class="hljs-comment">#    root           html;</span>
+    <span class="hljs-comment">#    fastcgi_pass   127.0.0.1:9000;</span>
+    <span class="hljs-comment">#    fastcgi_index  index.php;</span>
+    <span class="hljs-comment">#    fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;</span>
+    <span class="hljs-comment">#    include        fastcgi_params;</span>
+    <span class="hljs-comment">#}</span>
+
+    <span class="hljs-comment"># deny access to .htaccess files, if Apache&#x27;s document root</span>
+    <span class="hljs-comment"># concurs with nginx&#x27;s one</span>
+    <span class="hljs-comment">#</span>
+    <span class="hljs-comment">#location ~ /\.ht {</span>
+    <span class="hljs-comment">#    deny  all;</span>
+    <span class="hljs-comment">#}</span>
+}
+
+</code></pre>
+</body></html>

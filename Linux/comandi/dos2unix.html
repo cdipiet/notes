@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.160" />
+        <title>dos2unix</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="dos2unix" tabindex="-1">dos2unix <a class="header-anchor" href="#dos2unix" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.160</p>
+<nav class="table-of-contents"><ol><li><a href="#esecuzione-ricorsiva">Esecuzione ricorsiva </a></li><li><a href="#come-eliminare-i-ctrl%2Bm-dai-file-di-testo">Come eliminare i CTRL+M dai file di testo </a></li><li><a href="#visualizzare-i-caratteri-non-stampabili">Visualizzare i caratteri non stampabili </a></li><li><a href="#windows-(%5Cr%5Cn)-to-unix-(%5Cn)">Windows (\r\n) to Unix (\n) </a></li><li><a href="#mac-(%5Cr)-to-unix-(%5Cn)">Mac (\r) to Unix (\n) </a></li><li><a href="#cercare-file-msdos-contenenti-i-newline-crlf">Cercare file MSDOS contenenti i newline CRLF </a></li></ol></nav><h1 id="dos2unix-1" tabindex="-1">dos2unix <a class="header-anchor" href="#dos2unix-1" aria-hidden="true">🔗</a></h1>
+<h2 id="esecuzione-ricorsiva" tabindex="-1">Esecuzione ricorsiva <a class="header-anchor" href="#esecuzione-ricorsiva" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Conversione ricorsiva di tutti i file contenenti CRLF in file LF</span>
+find . -not -<span class="hljs-built_in">type</span> d -print0 | xargs -0 dos2unix -ic0 | xargs -0 dos2unix
+</code></pre>
+<h2 id="come-eliminare-i-ctrl%2Bm-dai-file-di-testo" tabindex="-1">Come eliminare i CTRL+M dai file di testo <a class="header-anchor" href="#come-eliminare-i-ctrl%2Bm-dai-file-di-testo" aria-hidden="true">🔗</a></h2>
+<p>I carriage return <code>\r</code> (<code>chr(13)</code>) utilizzato nei file di testo windows che utilizzano i newline <code>\r\n</code> (<code>chr(13)chr(10)</code>)
+viene visualizzato nei file di testo Unix come <code>^M</code> (<code>CTRL+M</code>).<br>
+Per trasformare un file di testo Windows, che utilizza <code>\r\n</code> come newline in un file di testo Unix,
+che utilizza <code>\n</code> come newline, bisogna eliminare i <code>\r</code>(<code>^M</code>)</p>
+<h2 id="visualizzare-i-caratteri-non-stampabili" tabindex="-1">Visualizzare i caratteri non stampabili <a class="header-anchor" href="#visualizzare-i-caratteri-non-stampabili" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> -A file
+<span class="hljs-built_in">od</span> -c file
+<span class="hljs-built_in">cat</span> file | hexdump -c
+
+<span class="hljs-comment"># SP  &#x27; &#x27;  0x20 = · U+00B7 Middle Dot</span>
+<span class="hljs-comment"># TAB &#x27;\t&#x27; 0x09 = ￫ U+FFEB Halfwidth Rightwards Arrow</span>
+<span class="hljs-comment"># CR  &#x27;\r&#x27; 0x0D = § U+00A7 Section Sign (⏎ U+23CE also works fine)</span>
+<span class="hljs-comment"># LF  &#x27;\n&#x27; 0x0A = ¶ U+00B6 Pilcrow Sign (was &quot;Paragraph Sign&quot;)</span>
+<span class="hljs-built_in">alias</span> whitespace=<span class="hljs-string">&quot;sed &#x27;s/ /·/g;s/\t/￫/g;s/\r/§/g;s/$/¶/g&#x27;&quot;</span>
+<span class="hljs-comment"># bash --help|whitespace</span>
+</code></pre>
+<ul>
+<li><a href="../shell/eliminare_i_%5EM_newline.html">Visualizzare caratteri non stampabili</a></li>
+</ul>
+<h2 id="windows-(%5Cr%5Cn)-to-unix-(%5Cn)" tabindex="-1">Windows (\r\n) to Unix (\n) <a class="header-anchor" href="#windows-(%5Cr%5Cn)-to-unix-(%5Cn)" aria-hidden="true">🔗</a></h2>
+<p>Windows line endings use carriage return followed by line feed, so to convert Microsoft text files line endings to Unix use the following:</p>
+<pre><code class="language-bash">    <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27;\r&#x27;</span> &lt; DC_Metrorail_Ridership.windows.csv &gt; DC_Metrorail_Ridership.unix.csv
+    dos2unix -n DC_Metrorail_Ridership.windows.csv DC_Metrorail_Ridership.unix.csv
+</code></pre>
+<h2 id="mac-(%5Cr)-to-unix-(%5Cn)" tabindex="-1">Mac (\r) to Unix (\n) <a class="header-anchor" href="#mac-(%5Cr)-to-unix-(%5Cn)" aria-hidden="true">🔗</a></h2>
+<p>To replace those <code>^M</code>'s with Unix line endings, use the <code>tr</code> utility:</p>
+<pre><code class="language-bash">    <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;\r&#x27;</span> <span class="hljs-string">&#x27;\n&#x27;</span> &lt; DC_Metrorail_Ridership.mac.csv &gt; DC_Metrorail_Ridership.unix.csv
+</code></pre>
+<p>This will replace all carriage returns with line feeds.</p>
+<h2 id="cercare-file-msdos-contenenti-i-newline-crlf" tabindex="-1">Cercare file MSDOS contenenti i newline CRLF <a class="header-anchor" href="#cercare-file-msdos-contenenti-i-newline-crlf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find -name <span class="hljs-string">&#x27;*.txt&#x27;</span> -print0 | xargs -0 dos2unix -ic
+find . -<span class="hljs-built_in">exec</span> file {} \; |grep CRLF
+</code></pre>
+</body></html>

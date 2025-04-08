@@ -1,0 +1,1071 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.223" />
+        <title>batchfile</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../inc/js/hljs/styles/default.css" />
+        <script src="../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="batchfile" tabindex="-1">batchfile <a class="header-anchor" href="#batchfile" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.223</p>
+<nav class="table-of-contents"><ol><li><a href="#variable-substitution">Variable Substitution </a></li><li><a href="#batch-parameters">Batch parameters </a><ol><li><a href="#checking-if-a-parameter-was-passed">Checking if a parameter was passed </a></li><li><a href="#if-you-need-to-access-more-than-9-arguments-you-have-to-use-the-command-shift.">If you need to access more than 9 arguments you have to use the command SHIFT. </a></li><li><a href="#sostituzioni">Sostituzioni </a></li></ol></li><li><a href="#where-is-this-script%3F">Where is this script? </a></li><li><a href="#creare-e-visualizzare-hard-link">Creare e visualizzare Hard Link </a></li><li><a href="#cancellare-tutte-le-directory-target">Cancellare tutte le directory target </a></li><li><a href="#usare-il-percento-%25">Usare il percento % </a><ol><li><a href="#summary">SUMMARY </a></li><li><a href="#more-information">MORE INFORMATION </a></li></ol></li><li><a href="#eseguire-un-comando-su-tutti-i-file-di-una-sottodirectory">Eseguire un comando su tutti i file di una sottodirectory </a></li><li><a href="#cercare-files">Cercare files </a></li><li><a href="#verificare-esistenza-directory---abspath">Verificare esistenza directory - abspath </a></li><li><a href="#imagemagick">imagemagick </a></li><li><a href="#cancellare-tutti-i-file-di-log">Cancellare tutti i file di log </a></li><li><a href="#cancellare-tutte-le-directory-avente-un-nome">Cancellare tutte le directory avente un nome </a></li><li><a href="#appiattire-una-directory">Appiattire una directory </a></li><li><a href="#directory-corrente-e-ripassaggio-di-tutti-i-parametri">Directory corrente e ripassaggio di tutti i parametri </a></li><li><a href="#iterare-i-files-di-una-directory">Iterare i files di una directory </a></li><li><a href="#eseguire-un-comando-sulle-sottodirectory">Eseguire un comando sulle sottodirectory </a></li><li><a href="#ricerca-di-stringhe-all'interno-di-una-alberatura-di-directory-per-tipo-di-file">Ricerca di stringhe all&#39;interno di una alberatura di directory per tipo di file </a></li><li><a href="#conversione-encoding-sorgenti-in-msdos">Conversione Encoding Sorgenti in MSDOS </a></li><li><a href="#eseguire-batch-file">Eseguire batch file </a></li><li><a href="#pause">PAUSE </a></li><li><a href="#percent-signs-stripped-from-batch-file-text">Percent Signs Stripped from Batch File Text </a></li><li><a href="#findstr-with-regular-expression-support">Findstr with regular expression support </a></li><li><a href="#assegnare-l'output-dell'esecuzione-di-un-comando-ad-una-variabile">Assegnare l&#39;output dell&#39;esecuzione di un comando ad una variabile </a></li><li><a href="#misurare-il-tempo-di-esecuzione-di-un-comando">Misurare il tempo di esecuzione di un comando </a></li><li><a href="#aprire-explorer-nella-directory-corrente">Aprire Explorer nella directory corrente </a></li><li><a href="#creare-un-file-di-testo">Creare un file di testo </a></li><li><a href="#commenti">Commenti </a></li><li><a href="#redirezionamento">Redirezionamento </a></li><li><a href="#pause-for-10-seconds">Pause for 10 seconds </a></li><li><a href="#kill-the-notepad.exe-window-with-the-title-readme.txt">Kill the notepad.exe window with the title Readme.txt </a></li><li><a href="#delayed-expansion-of-variables-(with-substrings-thrown-in-for-good-measure)">Delayed expansion of variables (with substrings thrown in for good measure) </a></li><li><a href="#time-stamping">Time stamping </a></li><li><a href="#variable-substrings">Variable substrings </a></li><li><a href="#data-in-formato-iso">Data in formato ISO </a></li><li><a href="#search-and-replace-when-setting-environment-variables">Search and replace when setting environment variables </a></li><li><a href="#integer-arithmetic">Integer arithmetic </a></li><li><a href="#command-separators">Command separators </a></li><li><a href="#line-continuation">Line continuation </a></li><li><a href="#realizzare-subroutine-con-scope-locali">Realizzare subroutine con scope locali </a></li><li><a href="#escaping%3A-%5E">Escaping: ^ </a></li><li><a href="#being-able-to-run-commands-and-process-the-output-(like-backticks-of-'%24()'-in-bash)">Being able to run commands and process the output (like backticks of &#39;$()&#39; in bash) </a></li><li><a href="#creare-un-file-vuoto">Creare un file vuoto </a></li><li><a href="#comando-for">Comando FOR </a></li><li><a href="#sovrascrivere-tutti-i-file-con-lo-stesso-nome-con-uno-nuovo">Sovrascrivere tutti i file con lo stesso nome con uno nuovo </a></li><li><a href="#enableextensions">ENABLEEXTENSIONS </a></li><li><a href="#echo">echo </a></li><li><a href="#case">case </a></li><li><a href="#timecmd">timecmd </a></li><li><a href="#environment-variables">Environment Variables </a><ol><li><a href="#set-and-setx">set and setx </a></li><li><a href="#environment-variables-in-the-registry">Environment variables in the registry </a></li></ol></li><li><a href="#postgresql-start-on-windows">PostgreSQL Start on Windows </a></li><li><a href="#eseguire-un-comando-e-salvarne-l'output-in-una-variabile">Eseguire un comando e salvarne l&#39;output in una variabile </a></li><li><a href="#file-modificati-oggi">File modificati oggi </a></li><li><a href="#robocopy">Robocopy </a></li></ol></nav><h1 id="programmazione-ms-dos" tabindex="-1">Programmazione MS-DOS <a class="header-anchor" href="#programmazione-ms-dos" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bat"><span class="hljs-built_in">help</span> <span class="hljs-keyword">call</span>
+<span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span>
+</code></pre>
+<h2 id="variable-substitution" tabindex="-1">Variable Substitution <a class="header-anchor" href="#variable-substitution" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/473117/pass-path-with-spaces-as-parameter-to-bat-file">https://stackoverflow.com/questions/473117/pass-path-with-spaces-as-parameter-to-bat-file</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/call">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/call</a></li>
+</ul>
+<h2 id="batch-parameters" tabindex="-1">Batch parameters <a class="header-anchor" href="#batch-parameters" aria-hidden="true">🔗</a></h2>
+<p><a href="https://stackoverflow.com/questions/14286457/using-parameters-in-batch-files-at-windows-command-line">https://stackoverflow.com/questions/14286457/using-parameters-in-batch-files-at-windows-command-line</a></p>
+<ul>
+<li>parameters passed through the command line can be accessed in batch files with the notation <code>%1</code> to <code>%9</code>.</li>
+<li><code>%0</code> is the executable (batch file) name as specified in the command line.</li>
+<li><code>%*</code> is all parameters specified in the command line -- this is very useful if you want to forward the parameters to another program.</li>
+</ul>
+<h3 id="checking-if-a-parameter-was-passed" tabindex="-1">Checking if a parameter was passed <a class="header-anchor" href="#checking-if-a-parameter-was-passed" aria-hidden="true">🔗</a></h3>
+<p>This is done with constructs like <code>IF &quot;%~1&quot;==&quot;&quot;</code>, which is true if and only if no arguments were passed at all.<br>
+Note the <strong>tilde</strong> character which <strong>causes any surrounding quotes to be removed</strong> from the value of <code>%1</code>;<br>
+without a tilde you will get unexpected results if that value includes double quotes, including the possibility of syntax errors.</p>
+<h3 id="if-you-need-to-access-more-than-9-arguments-you-have-to-use-the-command-shift." tabindex="-1">If you need to access more than 9 arguments you have to use the command SHIFT. <a class="header-anchor" href="#if-you-need-to-access-more-than-9-arguments-you-have-to-use-the-command-shift." aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat">:parse
+<span class="hljs-keyword">IF</span> &quot;%~<span class="hljs-number">1</span>&quot;==&quot;&quot; <span class="hljs-keyword">GOTO</span> endparse
+<span class="hljs-keyword">IF</span> &quot;%~<span class="hljs-number">1</span>&quot;==&quot;-a&quot; <span class="hljs-built_in">REM</span> <span class="hljs-keyword">do</span> something
+<span class="hljs-keyword">IF</span> &quot;%~<span class="hljs-number">1</span>&quot;==&quot;-b&quot; <span class="hljs-built_in">REM</span> <span class="hljs-keyword">do</span> something <span class="hljs-keyword">else</span>
+<span class="hljs-built_in">SHIFT</span>
+<span class="hljs-keyword">GOTO</span> parse
+:endparse
+<span class="hljs-comment">REM ready for action!</span>
+</code></pre>
+<h3 id="sostituzioni" tabindex="-1">Sostituzioni <a class="header-anchor" href="#sostituzioni" aria-hidden="true">🔗</a></h3>
+<p><code>%~</code></p>
+<p>The batch script argument references (<strong>%0</strong>, <strong>%1</strong>, ...) are listed in the following tables.</p>
+<p>Using the <strong>%*</strong> value in a batch script refers to all the arguments (for example, <strong>%1</strong>, <strong>%2</strong>, <strong>%3</strong>...).</p>
+<p>You can use the following optional syntaxes as substitutions for batch parameters (<strong>%I</strong>):</p>
+<p>In the above examples, <strong>%I</strong> and PATH can be replaced by other valid values. The <code>%~</code> syntax is terminated by a valid argument number. The <code>%~</code> modifiers cannot be used with <strong><code>%*</code></strong>.</p>
+<ul>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/for">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/for</a></li>
+</ul>
+<table class="table"><thead>
+<tr>
+<th>Variable with modifier</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%~I</code></td>
+<td>Expands <code>%I</code> which removes any surrounding quotation marks.</td>
+</tr>
+<tr>
+<td><code>%~fI</code></td>
+<td>Expands <code>%I</code> to a fully qualified path name.</td>
+</tr>
+<tr>
+<td><code>%~dI</code></td>
+<td>Expands <code>%I</code> to a drive letter only.</td>
+</tr>
+<tr>
+<td><code>%~pI</code></td>
+<td>Expands <code>%I</code> to a path only.</td>
+</tr>
+<tr>
+<td><code>%~nI</code></td>
+<td>Expands <code>%I</code> to a file name only.</td>
+</tr>
+<tr>
+<td><code>%~xI</code></td>
+<td>Expands <code>%I</code> to a file name extension only.</td>
+</tr>
+<tr>
+<td><code>%~sI</code></td>
+<td>Expands path to contain short names only.</td>
+</tr>
+<tr>
+<td><code>%~aI</code></td>
+<td>Expands <code>%I</code> to the file attributes of file.</td>
+</tr>
+<tr>
+<td><code>%~tI</code></td>
+<td>Expands <code>%I</code> to the date and time of file.</td>
+</tr>
+<tr>
+<td><code>%~zI</code></td>
+<td>Expands <code>%I</code> to the size of the file.</td>
+</tr>
+<tr>
+<td><code>%~$PATH:I</code></td>
+<td>Searches the directories listed in the PATH environment variable and expands <code>%I</code> to the fully qualified name of the first directory found.</td>
+</tr>
+</tbody>
+</table>
+<p>Per <code>%~$PATH:1</code> inoltre, If the environment variable name is not defined or the file is not found by the search, then this modifier expands to the empty string.</p>
+<p>The following table lists modifier combinations that you can use to get compound results.</p>
+<table class="table"><thead>
+<tr>
+<th>Variable with combined modifiers</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%~dpI</code></td>
+<td>Expands <code>%I</code> to a drive letter and path only.</td>
+</tr>
+<tr>
+<td><code>%~nxI</code></td>
+<td>Expands <code>%I</code> to a file name and extension only.</td>
+</tr>
+<tr>
+<td><code>%~fsI</code></td>
+<td>Expands <code>%I</code> to a full path name with short names only.</td>
+</tr>
+<tr>
+<td><code>%~dp$PATH:I</code></td>
+<td>Searches the directories that are listed in the PATH environment variable for <code>%I</code> and expands to the drive letter and path of the first one found.</td>
+</tr>
+<tr>
+<td><code>%~ftzaI</code></td>
+<td>Expands <code>%I</code> to an output line that is like <strong>dir</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>In the above examples, you can replace <code>%I</code> and PATH with other valid values. A valid <strong>for</strong> variable name ends the <strong>%~</strong> syntax.</p>
+<p>By using uppercase variable names such as <code>%I</code>, you can make your code more readable and avoid confusion with the modifiers, which are not case sensitive.</p>
+<h2 id="where-is-this-script%3F" tabindex="-1">Where is this script? <a class="header-anchor" href="#where-is-this-script%3F" aria-hidden="true">🔗</a></h2>
+<p>Sometimes your script will need to know where it is. Say test.bat is at C:\Users\mike\Desktop\test.bat and contains the following</p>
+<pre><code class="language-bat"><span class="hljs-built_in">set</span> whereAmI=%~dp0
+</code></pre>
+<p>When you run test.bat, the variable whereAmI will contain <code>C:\Users\mike\Desktop\</code></p>
+<p>The <code>%~dp0</code> piece was mentioned already, but there is actually more to it: the character(s) after the <code>~</code> define the information that is extracted.
+No letter result in the return of the patch file name</p>
+<table class="table"><thead>
+<tr>
+<th>param</th>
+<th>returned value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>d</code></td>
+<td>returns the drive letter</td>
+</tr>
+<tr>
+<td><code>p</code></td>
+<td>returns the path</td>
+</tr>
+<tr>
+<td><code>s</code></td>
+<td>returns the short path</td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td>returns the file extension</td>
+</tr>
+</tbody>
+</table>
+<p>So if you execute the script test.bat below from the c:\Temp\long dir name\ folder,</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">echo</span> %<span class="hljs-number">0</span>
+<span class="hljs-built_in">echo</span> %~d0
+<span class="hljs-built_in">echo</span> %~p0
+<span class="hljs-built_in">echo</span> %~dp0
+<span class="hljs-built_in">echo</span> %~x0
+<span class="hljs-built_in">echo</span> %~s0
+<span class="hljs-built_in">echo</span> %~sp0
+</code></pre>
+<p>you get the following output</p>
+<pre><code>test
+c:
+\Temp\long dir name\
+c:\Temp\long dir name\
+.bat
+c:\Temp\LONGDI~1\test.bat
+\Temp\LONGDI~1\
+</code></pre>
+<p>And if a parameter is passed into your script as in test <code>c:\temp\mysrc\test.cpp</code>
+the same manipulations can be done with the <code>%1</code> variable.</p>
+<p>But the result of the expansion of %0 depends on the location!
+At the &quot;top level&quot; of the batch it expands to the current batch filename.
+In a function (call), it expands to the function name.</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">echo</span> %<span class="hljs-number">0</span>
+<span class="hljs-keyword">call</span> :test
+<span class="hljs-keyword">goto</span> :eof
+
+:test
+<span class="hljs-built_in">echo</span> %<span class="hljs-number">0</span>
+<span class="hljs-built_in">echo</span> %~<span class="hljs-number">0</span>
+<span class="hljs-built_in">echo</span> %~n0
+</code></pre>
+<p>The output is (the batchfile is started with myBatch.bat )</p>
+<pre><code class="language-bat">myBatch.bat
+:test
+:test
+myBatch
+</code></pre>
+<h2 id="creare-e-visualizzare-hard-link" tabindex="-1">Creare e visualizzare Hard Link <a class="header-anchor" href="#creare-e-visualizzare-hard-link" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">mklink /h readme.txt D:\tmp\readme.txt
+<span class="hljs-keyword">for</span> /F &quot;usebackq tokens=<span class="hljs-number">2</span>* delims=:&quot; %G <span class="hljs-keyword">in</span> (`forfiles /s /c &quot;<span class="hljs-built_in">cmd</span> /c fsutil hardlink list @<span class="hljs-built_in">path</span> | <span class="hljs-built_in">findstr</span> /n .* | <span class="hljs-built_in">findstr</span> /b /v <span class="hljs-number">1</span>&quot;`) <span class="hljs-keyword">do</span> @fsutil hardlink list &quot;%G&quot; &amp; <span class="hljs-built_in">echo</span>.
+</code></pre>
+<h2 id="cancellare-tutte-le-directory-target" tabindex="-1">Cancellare tutte le directory target <a class="header-anchor" href="#cancellare-tutte-le-directory-target" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">:: da riga di comando, percento non doppi
+<span class="hljs-keyword">for</span> /f &quot;tokens=*&quot; %F <span class="hljs-keyword">IN</span> (&#x27;<span class="hljs-built_in">dir</span> /S /B /A:D &quot;target&quot;&#x27;) <span class="hljs-keyword">Do</span> (
+<span class="hljs-built_in">rmdir</span> /Q /S &quot;%F&quot; 
+)
+</code></pre>
+<pre><code class="language-bat">:: da file deltarget.bat, percento doppi
+<span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b /a:d target&#x27;) <span class="hljs-keyword">do</span> (
+<span class="hljs-built_in">rd</span> /s /q &quot;<span class="hljs-variable">%%i</span>&quot;
+)
+</code></pre>
+<h2 id="usare-il-percento-%25" tabindex="-1">Usare il percento % <a class="header-anchor" href="#usare-il-percento-%25" aria-hidden="true">🔗</a></h2>
+<p>Regole del percento in msdos:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/14509652/what-is-the-difference-between-and-in-a-cmd-file">https://stackoverflow.com/questions/14509652/what-is-the-difference-between-and-in-a-cmd-file</a></li>
+</ul>
+<ol>
+<li>Il percento viene utilizzato nei batch file per indicare i parametri della riga di comando %1, %2, ... , %9</li>
+<li>Due segni di percento contenenti del testo vengono interpretati come una variabile, es. <code>echo %myvar%</code></li>
+<li>Due segni di percento non contenenti alcun carattere tra di loro, vengono interpretati <strong>in un batch file</strong> come un unico segno di percento, es. <code>%%f</code></li>
+</ol>
+<p>Motivo:</p>
+<p>Eseguendo la seguente riga di comando:</p>
+<pre><code class="language-bat">:: Eseguito da riga di comando
+<span class="hljs-keyword">FOR</span> /f %f <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /b .&#x27;) <span class="hljs-keyword">DO</span> somecommand %f
+</code></pre>
+<p>In un batch file, la regola 2 cercherebbe di interpretare la porzione contenuta tra i due <code>%</code>:</p>
+<pre><code class="language-bat">%f <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /b .&#x27;) <span class="hljs-keyword">DO</span> somecommand %
+</code></pre>
+<p>come un nome di variabile! Per evitare ciò si utilizza la regola 3 per effettuare l'escape del <code>%</code> aggiungendone un secondo:</p>
+<pre><code class="language-bat">:: contenuto <span class="hljs-built_in">del</span> file miobatch.bat, i percento sono raddoppiati:
+<span class="hljs-keyword">FOR</span> /f <span class="hljs-variable">%%f</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /b .&#x27;) <span class="hljs-keyword">DO</span> somecommand <span class="hljs-variable">%%f</span>
+</code></pre>
+<h3 id="summary" tabindex="-1">SUMMARY <a class="header-anchor" href="#summary" aria-hidden="true">🔗</a></h3>
+<p>Using a percent sign (%) in a batch file requires that two percent signs (%%) be
+specified.</p>
+<p>For example, the command to display &quot;5%&quot; from a batch file would be :</p>
+<pre><code class="language-bat">  <span class="hljs-built_in">ECHO</span> <span class="hljs-number">5</span><span class="hljs-variable">%%
+</span></code></pre>
+<h3 id="more-information" tabindex="-1">MORE INFORMATION <a class="header-anchor" href="#more-information" aria-hidden="true">🔗</a></h3>
+<p>MS-DOS uses %1, %2, ... %9 as replaceable command line parameters. For example,
+before executing the command ECHO %1, %1 will be replaced with the first
+parameter passed to the batch file. %0 is replaced with the command used to
+execute the batch file.</p>
+<p>A single percent sign on a line is treated as a &quot;nul&quot; character in a batch file.
+For example:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">ECHO</span> %     is processed as <span class="hljs-built_in">ECHO</span>
+<span class="hljs-built_in">ECHO</span> a%b   is processed as <span class="hljs-built_in">ECHO</span> ab
+</code></pre>
+<p>If a command contains two percent signs, MS-DOS will treat any characters between
+them as an environment variable to be expanded. For example, if the SET command
+shows that the current environment variables are</p>
+<pre><code class="language-bat">COMSPEC=C:\COMMAND.COM
+<span class="hljs-built_in">PATH</span>=C:\DOS
+PROMPT=$P$G
+B=C
+</code></pre>
+<p>then</p>
+<pre><code class="language-bat"><span class="hljs-built_in">ECHO</span> <span class="hljs-variable">%PATH%</span>     is processed as <span class="hljs-built_in">ECHO</span> C:\DOS
+<span class="hljs-built_in">ECHO</span> a<span class="hljs-variable">%b%</span>       is processed as <span class="hljs-built_in">ECHO</span> aC
+<span class="hljs-built_in">ECHO</span> a%b b%a    is processed as <span class="hljs-built_in">ECHO</span> aa
+</code></pre>
+<p>If there are no characters between the two percent signs, one percent sign is
+stripped off and the other will remain. This is why a FOR command that echos the
+name of each file with a .COM extension would be</p>
+<pre><code class="language-bat"><span class="hljs-keyword">FOR</span> %V <span class="hljs-keyword">IN</span> (*.COM) <span class="hljs-keyword">DO</span> <span class="hljs-built_in">ECHO</span> %V
+</code></pre>
+<p>but if the same command is placed in a batch file, the following is required:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">FOR</span> <span class="hljs-variable">%%V</span> <span class="hljs-keyword">IN</span> (*.COM) <span class="hljs-keyword">DO</span> <span class="hljs-built_in">ECHO</span> <span class="hljs-variable">%%V</span>
+</code></pre>
+<p>Reference(s):</p>
+<p>&quot;Microsoft MS-DOS Batch File Quick Reference,&quot; Microsoft Press.</p>
+<h2 id="eseguire-un-comando-su-tutti-i-file-di-una-sottodirectory" tabindex="-1">Eseguire un comando su tutti i file di una sottodirectory <a class="header-anchor" href="#eseguire-un-comando-su-tutti-i-file-di-una-sottodirectory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">do_tests.bat:
+<span class="hljs-title">for</span> %%<span class="hljs-title">i</span> <span class="hljs-title">in</span> (<span class="hljs-title">test_files</span>\*) <span class="hljs-title">do</span> <span class="hljs-title">python</span> ../<span class="hljs-title">bin</span>/<span class="hljs-title">pygrun.py</span> -<span class="hljs-title">p</span> <span class="hljs-title">rules</span> <span class="hljs-title">RuleSetGrammar</span> <span class="hljs-title">rule_set</span> --<span class="hljs-title">tree</span> %%~<span class="hljs-title">fi</span>
+</span></code></pre>
+<p>Il percento và raddoppiato per quotarlo ed impedire che tutto il testo
+compreso tra <code>%i</code> e <code>%~fi</code> venga interpretato come un nome di variabile.</p>
+<h2 id="cercare-files" tabindex="-1">Cercare files <a class="header-anchor" href="#cercare-files" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"> <span class="hljs-built_in">dir</span> /s miofile.txt
+ <span class="hljs-keyword">for</span> /f &quot;tokens=*&quot; %F <span class="hljs-keyword">IN</span> (&#x27;<span class="hljs-built_in">dir</span> /S /B /A:-D &quot;<span class="hljs-variable">%MAVEN_HOME%</span>\org\apache\poi\*<span class="hljs-number">3</span>.<span class="hljs-number">17</span>*.jar&quot;&#x27;) <span class="hljs-keyword">Do</span> (
+@<span class="hljs-built_in">echo</span> &quot;%F&quot; 
+ )
+</code></pre>
+<p><code>dir /B</code> : produce solamente i nomi dei files trovati
+<code>dir /A:-D</code> : ignora le directory, stampando solamente i files
+<code>dir /S</code> : Mostra file della directory e delle relative sottodirectory.</p>
+<p><code>for /F</code>: permette di interpretare la stringa come un comando da eseguire
+e di separare tramite spazio le stringhe da processare nel corpo del for.</p>
+<p><code>D:\&gt;help for</code>
+<code>FOR /F [&quot;opzioni&quot;] %variabile IN (</code>comando<code>) DO comando [parametri-comando]</code></p>
+<p>È possibile utilizzare il comando FOR /F per analizzare l'output di un comando.
+Tale stringa verrà trattata come una riga di comando passata a un
+file CMD.EXE figlio e l'output verrà acquisito in memoria e analizzato</p>
+<h2 id="verificare-esistenza-directory---abspath" tabindex="-1">Verificare esistenza directory - abspath <a class="header-anchor" href="#verificare-esistenza-directory---abspath" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-comment"> @REM D:\Dati\Profili\$USER\workspace\JavaWorkspace\JavaUtil\JavaUtil\lib\eclipse_jdt</span>
+ @<span class="hljs-built_in">ECHO</span> OFF
+ <span class="hljs-built_in">set</span> <span class="hljs-built_in">path</span>=<span class="hljs-variable">%USERPROFILE%</span>\app\jdk1.<span class="hljs-number">8</span>.<span class="hljs-number">0</span>\bin;<span class="hljs-variable">%path%</span>
+ <span class="hljs-built_in">set</span> JAVAUTIL_HOME=%~dp0..\..\..\..\..\..\workspace\JavaWorkspace\JavaUtil\JavaUtil
+ <span class="hljs-built_in">set</span> CLASSPATH=<span class="hljs-variable">%JAVAUTIL_HOME%</span>\lib\eclipse_jdt\jdtCompilerAdapter.jar;<span class="hljs-variable">%JAVAUTIL_HOME%</span>\lib\eclipse_jdt\org.eclipse.jdt.core_3.<span class="hljs-number">10</span>.<span class="hljs-number">2</span>.v20150120-<span class="hljs-number">1634</span>.jar
+
+ @<span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXIST</span> <span class="hljs-variable">%JAVAUTIL_HOME%</span> (
+<span class="hljs-built_in">ECHO</span>.
+<span class="hljs-keyword">FOR</span> /F <span class="hljs-variable">%%i</span> <span class="hljs-keyword">IN</span> (&quot;<span class="hljs-variable">%JAVAUTIL_HOME%</span>&quot;) <span class="hljs-keyword">DO</span> @<span class="hljs-built_in">ECHO</span> Directory: <span class="hljs-variable">%%~</span>fi Esistente
+<span class="hljs-built_in">ECHO</span>.
+<span class="hljs-comment">@rem %USERPROFILE%\app\apache-ant-1.9.3\bin\ant.bat %1</span>
+ ) <span class="hljs-keyword">ELSE</span> (
+<span class="hljs-built_in">ECHO</span>.
+<span class="hljs-keyword">FOR</span> /F <span class="hljs-variable">%%i</span> <span class="hljs-keyword">IN</span> (&quot;<span class="hljs-variable">%JAVAUTIL_HOME%</span>&quot;) <span class="hljs-keyword">DO</span> @<span class="hljs-built_in">ECHO</span> Directory: <span class="hljs-variable">%%~</span>fi Non esistente
+<span class="hljs-built_in">ECHO</span>. 
+ )
+</code></pre>
+<h2 id="imagemagick" tabindex="-1">imagemagick <a class="header-anchor" href="#imagemagick" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> %f <span class="hljs-keyword">in</span> (*) <span class="hljs-keyword">do</span> identify &quot;%f&quot;
+  <span class="hljs-keyword">call</span> <span class="hljs-variable">%USERPROFILE%</span>\app\imagemagick\magick.exe %*
+</code></pre>
+<p><code>delpycache.bat</code></p>
+<p>Da batch serve un doppio percento <code>%%</code> per indicare le variabili</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-comment">rem msdos string substitution:</span>
+<span class="hljs-comment">rem %0 è il nome del presente file</span>
+<span class="hljs-comment">rem ~ string substitution</span>
+<span class="hljs-comment">rem d: drive letter</span>
+<span class="hljs-comment">rem p full file path</span>
+<span class="hljs-built_in">cd</span> %~dp0
+<span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b /a:d __pycache__&#x27;) <span class="hljs-keyword">do</span> (
+<span class="hljs-built_in">rd</span> /s /q &quot;<span class="hljs-variable">%%i</span>&quot;
+)
+<span class="hljs-built_in">pause</span>
+</code></pre>
+<p>oppure:</p>
+<pre><code class="language-bat"> <span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b *.pyc&#x27;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">del</span> /s /q /f &quot;<span class="hljs-variable">%%i</span>&quot;
+</code></pre>
+<h2 id="cancellare-tutti-i-file-di-log" tabindex="-1">Cancellare tutti i file di log <a class="header-anchor" href="#cancellare-tutti-i-file-di-log" aria-hidden="true">🔗</a></h2>
+<p>Per visualizzarli:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">dir</span> /s /b *.log
+</code></pre>
+<p>Per cancellarli da riga di comando:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /F &quot;tokens=* delims=&quot; %i <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b *.pyc&#x27;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">del</span> /s /q /f &quot;%i&quot;
+</code></pre>
+<p>Per cancellarli da batch file:</p>
+<pre><code class="language-bat"><span class="hljs-function">dellog.bat:<span class="hljs-title">for</span> /<span class="hljs-title">f</span> &quot;<span class="hljs-title">tokens</span>=* <span class="hljs-title">delims</span>=&quot; %%<span class="hljs-title">i</span> <span class="hljs-title">in</span> (&#x27;<span class="hljs-title">dir</span> /<span class="hljs-title">s</span> /<span class="hljs-title">b</span> *.<span class="hljs-title">pyc</span>&#x27;) <span class="hljs-title">do</span> <span class="hljs-title">del</span> /<span class="hljs-title">s</span> /<span class="hljs-title">q</span> /<span class="hljs-title">f</span> &quot;%%<span class="hljs-title">i</span>&quot;
+</span></code></pre>
+<h2 id="cancellare-tutte-le-directory-avente-un-nome" tabindex="-1">Cancellare tutte le directory avente un nome <a class="header-anchor" href="#cancellare-tutte-le-directory-avente-un-nome" aria-hidden="true">🔗</a></h2>
+<p>Per visualizzarle:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">dir</span> /s /b __pycache__
+</code></pre>
+<p>per cancellarle da riga di comando:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; %i <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b /a:d __pycache__&#x27;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">rd</span> /s /q &quot;%i&quot;
+</code></pre>
+<p>Per cancellarle da batch file:</p>
+<p><code>delpycache.bat</code></p>
+<p>Da batch serve un doppio percento <code>%%</code> per indicare le variabili</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-comment">rem msdos string substitution:</span>
+<span class="hljs-comment">rem %0 è il nome del presente file</span>
+<span class="hljs-comment">rem ~ string substitution</span>
+<span class="hljs-comment">rem d: drive letter</span>
+<span class="hljs-comment">rem p full file path</span>
+<span class="hljs-built_in">cd</span> %~dp0
+<span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b /a:d __pycache__&#x27;) <span class="hljs-keyword">do</span> (
+<span class="hljs-built_in">rd</span> /s /q &quot;<span class="hljs-variable">%%i</span>&quot;
+)
+<span class="hljs-built_in">pause</span>
+</code></pre>
+<h2 id="appiattire-una-directory" tabindex="-1">Appiattire una directory <a class="header-anchor" href="#appiattire-una-directory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+ <span class="hljs-built_in">set</span> source=&quot;D:\tmp1&quot;
+ <span class="hljs-built_in">set</span> destination=&quot;D:\tmp2&quot;
+ <span class="hljs-keyword">for</span> <span class="hljs-variable">%%F</span> <span class="hljs-keyword">in</span> (<span class="hljs-variable">%destination%</span>) <span class="hljs-keyword">do</span> <span class="hljs-built_in">set</span> destination=&quot;<span class="hljs-variable">%%~</span>fF&quot;
+ <span class="hljs-keyword">for</span> /r <span class="hljs-variable">%source%</span> <span class="hljs-variable">%%F</span> <span class="hljs-keyword">in</span> (.) <span class="hljs-keyword">do</span> <span class="hljs-keyword">if</span> &quot;<span class="hljs-variable">%%~</span>fF&quot; <span class="hljs-keyword">neq</span> <span class="hljs-variable">%destination%</span> ROBOCOPY &quot;<span class="hljs-variable">%%F</span>&quot; <span class="hljs-variable">%destination%</span> /R:<span class="hljs-number">0</span>
+</code></pre>
+<h2 id="directory-corrente-e-ripassaggio-di-tutti-i-parametri" tabindex="-1">Directory corrente e ripassaggio di tutti i parametri <a class="header-anchor" href="#directory-corrente-e-ripassaggio-di-tutti-i-parametri" aria-hidden="true">🔗</a></h2>
+<p><code>2to3.bat</code></p>
+<pre><code class="language-bat">python %~dp0Tools\Scripts\<span class="hljs-number">2</span>to3.py %*
+</code></pre>
+<h2 id="iterare-i-files-di-una-directory" tabindex="-1">Iterare i files di una directory <a class="header-anchor" href="#iterare-i-files-di-una-directory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> %f <span class="hljs-keyword">in</span> (*) <span class="hljs-keyword">do</span> identify &quot;%f&quot;
+<span class="hljs-keyword">for</span> %f <span class="hljs-keyword">in</span> (*.py) <span class="hljs-keyword">do</span> (<span class="hljs-number">2</span>to3 -w %f)
+</code></pre>
+<p>(se in un .bat i percentuale raddoppiano <code>%%</code>)</p>
+<h2 id="eseguire-un-comando-sulle-sottodirectory" tabindex="-1">Eseguire un comando sulle sottodirectory <a class="header-anchor" href="#eseguire-un-comando-sulle-sottodirectory" aria-hidden="true">🔗</a></h2>
+<p>da riga di comando:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /d %X <span class="hljs-keyword">in</span> (*) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> &quot;%X&quot;
+<span class="hljs-keyword">for</span> /d %X <span class="hljs-keyword">in</span> (*) <span class="hljs-keyword">do</span> <span class="hljs-number">7</span>z.exe a &quot;<span class="hljs-variable">%%X</span>.<span class="hljs-number">7</span>z&quot; &quot;<span class="hljs-variable">%%X</span>&quot;
+</code></pre>
+<p>da dentro un file .bat i <code>%</code> vanno raddopiati:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /d <span class="hljs-variable">%%X</span> <span class="hljs-keyword">in</span> (*) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> &quot;<span class="hljs-variable">%%X</span>&quot;
+<span class="hljs-keyword">for</span> /d <span class="hljs-variable">%%X</span> <span class="hljs-keyword">in</span> (*) <span class="hljs-keyword">do</span> <span class="hljs-number">7</span>z.exe a &quot;<span class="hljs-variable">%%X</span>.<span class="hljs-number">7</span>z&quot; &quot;<span class="hljs-variable">%%X</span>&quot;
+</code></pre>
+<h2 id="ricerca-di-stringhe-all'interno-di-una-alberatura-di-directory-per-tipo-di-file" tabindex="-1">Ricerca di stringhe all'interno di una alberatura di directory per tipo di file <a class="header-anchor" href="#ricerca-di-stringhe-all'interno-di-una-alberatura-di-directory-per-tipo-di-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">findstr</span> /s /i /n KeyCode.ESCAPE *.java
+<span class="hljs-built_in">help</span> <span class="hljs-keyword">call</span>
+</code></pre>
+<h2 id="conversione-encoding-sorgenti-in-msdos" tabindex="-1">Conversione Encoding Sorgenti in MSDOS <a class="header-anchor" href="#conversione-encoding-sorgenti-in-msdos" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f %x <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /b *.java&#x27;) <span class="hljs-keyword">do</span> recode ISO-<span class="hljs-number">8859</span>-<span class="hljs-number">1</span>..UTF-<span class="hljs-number">8</span> %x
+
+<span class="hljs-built_in">mkdir</span> new
+<span class="hljs-keyword">for</span> /f %x <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /b *.java&#x27;) <span class="hljs-keyword">do</span> d:\app\Git\bin\iconv.exe -f ISO-<span class="hljs-number">8859</span>-<span class="hljs-number">1</span> -t UTF-<span class="hljs-number">8</span> %x &gt; new/%x
+<span class="hljs-built_in">move</span> new/*.* .
+<span class="hljs-built_in">rmdir</span> new
+</code></pre>
+<h2 id="eseguire-batch-file" tabindex="-1">Eseguire batch file <a class="header-anchor" href="#eseguire-batch-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">cmd</span>.exe /K &quot;<span class="hljs-built_in">cd</span> izpack &amp; <span class="hljs-keyword">call</span> runizpack.bat&quot;
+</code></pre>
+<p>Da ANT:</p>
+<pre><code class="language-xml">    <span class="hljs-tag">&lt;<span class="hljs-name">exec</span> <span class="hljs-attr">executable</span>=<span class="hljs-string">&quot;cmd.exe&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;/c <span class="hljs-symbol">&amp;quot;</span>cd izpack <span class="hljs-symbol">&amp;amp;</span> call runizpack.bat<span class="hljs-symbol">&amp;quot;</span>&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">exec</span>&gt;</span>
+</code></pre>
+<h2 id="pause" tabindex="-1">PAUSE <a class="header-anchor" href="#pause" aria-hidden="true">🔗</a></h2>
+<p>Stops execution and displays the following prompt:
+Press any key to continue . . .</p>
+<p>Utile per impedire alla finestra DOS di chiudersi al termine dell'esecuzione.</p>
+<h2 id="percent-signs-stripped-from-batch-file-text" tabindex="-1">Percent Signs Stripped from Batch File Text <a class="header-anchor" href="#percent-signs-stripped-from-batch-file-text" aria-hidden="true">🔗</a></h2>
+<p>In un batch file(quindi non per comandi dati direttamente al prompt):- un singolo <code>%</code> viene eliminato</p>
+<ul>
+<li>due simboli <code>%</code> consecutivi, ovvero <code>%%</code>, vengono trasformati in un singolo <code>%</code></li>
+<li>due simboli <code>%%</code> che contengono al loro interno dei caratteri, vengono considerati un accesso a variabile</li>
+</ul>
+<p>SUMMARY
+Using a percent sign (<code>%</code>) in a batch file requires that two percent signs (<code>%%</code>) be specified.
+For example, the command to display &quot;<code>5%</code>&quot; from a batch file would be :
+<code>ECHO 5%%</code>
+MORE INFORMATION
+MS-DOS uses <code>%1</code>, <code>%2</code>, ... <code>%9</code> as replaceable command line parameters. For example, before executing the command ECHO <code>%1</code>, <code>%1</code> will be replaced with the first parameter passed to the batch file.</p>
+<p><code>%0</code> is replaced with the command used to execute the batch file.</p>
+<p>A single percent sign on a line is treated as a &quot;<code>nul</code>&quot; character in a batch file. For example:</p>
+<p><code>ECHO %</code> is processed as ECHO</p>
+<p><code>ECHO a%b</code> is processed as ECHO ab</p>
+<p>If a command contains two percent signs, MS-DOS will treat any characters between them as an environment variable to be expanded.For example, if the SET command shows that the current environment variables are</p>
+<pre><code class="language-bat">COMSPEC=C:\COMMAND.COM
+<span class="hljs-built_in">PATH</span>=C:\DOS
+PROMPT=$P$G
+B=C
+then
+<span class="hljs-built_in">ECHO</span> <span class="hljs-variable">%PATH%</span> is processed as <span class="hljs-built_in">ECHO</span> C:\DOS
+<span class="hljs-built_in">ECHO</span> a<span class="hljs-variable">%b%</span> is processed asECHO aC
+<span class="hljs-built_in">ECHO</span> a%b b%a is processed as <span class="hljs-built_in">ECHO</span> aa
+</code></pre>
+<p>If there are no characters between the two percent signs, one percent sign is stripped off and the other will remain.
+This is why a FOR command that echos the name of each file with a .COM extension would be</p>
+<p><code>FOR %V IN (*.COM) DO ECHO %V</code></p>
+<p>but if the same command is placed in a batch file, the following is required:</p>
+<p><code>FOR %%V IN (*.COM) DO ECHO %%V</code></p>
+<p>Here how to build a CLASSPATH by scanning a given directory.</p>
+<pre><code class="language-bat"><span class="hljs-built_in">setlocal</span> ENABLEDELAYEDEXPANSION
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">defined</span> CLASSPATH (<span class="hljs-built_in">set</span> CLASSPATH=<span class="hljs-variable">%CLASSPATH%</span>;.) <span class="hljs-keyword">else</span> (<span class="hljs-built_in">set</span> CLASSPATH=.)
+<span class="hljs-keyword">FOR</span> /R .\lib <span class="hljs-variable">%%G</span> <span class="hljs-keyword">IN</span> (*.jar) <span class="hljs-keyword">DO</span> <span class="hljs-built_in">set</span> CLASSPATH=<span class="hljs-variable">!CLASSPATH!</span>;<span class="hljs-variable">%%G</span>
+<span class="hljs-built_in">Echo</span> The Classpath definition is <span class="hljs-variable">%CLASSPATH%</span>
+</code></pre>
+<h2 id="findstr-with-regular-expression-support" tabindex="-1">Findstr with regular expression support <a class="header-anchor" href="#findstr-with-regular-expression-support" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">findstr</span> &quot;^[<span class="hljs-number">0</span>-<span class="hljs-number">9</span>].*&quot; c:\windows\system32\drivers\etc\hosts
+<span class="hljs-built_in">dir</span> /b *.* | <span class="hljs-built_in">findstr</span> /f:/ &quot;thepattern&quot;
+</code></pre>
+<p>forfiles is very useful, for instance, to recursive delete all files older than two days</p>
+<pre><code class="language-bat">forfiles /D -<span class="hljs-number">2</span> /P &quot;C:\Temp&quot; /S /C &quot;<span class="hljs-built_in">cmd</span> /c <span class="hljs-built_in">del</span> @<span class="hljs-built_in">path</span>&quot;
+</code></pre>
+<h2 id="assegnare-l'output-dell'esecuzione-di-un-comando-ad-una-variabile" tabindex="-1">Assegnare l'output dell'esecuzione di un comando ad una variabile <a class="header-anchor" href="#assegnare-l'output-dell'esecuzione-di-un-comando-ad-una-variabile" aria-hidden="true">🔗</a></h2>
+<p>Da dentro un file batch(utilizzare <code>%%</code> per le variabili):</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f &quot;delims=&quot; <span class="hljs-variable">%%a</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">ver</span>&#x27;) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">set</span> foobar=<span class="hljs-variable">%%a</span>
+</code></pre>
+<p>Da riga di comando(utilizzare <code>%</code> per le variabili):</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f &quot;delims=&quot; %a <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">ver</span>&#x27;) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">set</span> foobar=%a
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">%ver%</span>
+</code></pre>
+<h2 id="misurare-il-tempo-di-esecuzione-di-un-comando" tabindex="-1">Misurare il tempo di esecuzione di un comando <a class="header-anchor" href="#misurare-il-tempo-di-esecuzione-di-un-comando" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">cmd</span> /v:on /c &quot;<span class="hljs-built_in">echo</span> <span class="hljs-variable">!TIME!</span> &amp; <span class="hljs-built_in">dir</span> &amp; <span class="hljs-built_in">echo</span> <span class="hljs-variable">!TIME!</span>&quot;
+</code></pre>
+<h2 id="aprire-explorer-nella-directory-corrente" tabindex="-1">Aprire Explorer nella directory corrente <a class="header-anchor" href="#aprire-explorer-nella-directory-corrente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">&gt; <span class="hljs-built_in">start</span> .
+</code></pre>
+<p>This will open up Windows Explorer in the &quot;some_directory&quot; folder.</p>
+<h2 id="creare-un-file-di-testo" tabindex="-1">Creare un file di testo <a class="header-anchor" href="#creare-un-file-di-testo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">copy</span> <span class="hljs-built_in">con</span> test.bat
+</code></pre>
+<p>Just type away the commands, press enter for a new line.
+Press <code>Ctrl-Z</code> andEnter to close the file.</p>
+<h2 id="commenti" tabindex="-1">Commenti <a class="header-anchor" href="#commenti" aria-hidden="true">🔗</a></h2>
+<p><code>REM</code> This is a comment
+<code>::</code> This is a comment too...but different. Might be faster.</p>
+<p>Rather than litter a script with <code>REM</code> or <code>::</code> lines, I do the following at the top of each script:</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> OFF
+<span class="hljs-keyword">goto</span> :<span class="hljs-built_in">START</span>
+Description of the script.
+<span class="hljs-function">Usage:
+<span class="hljs-title">myscript</span> -<span class="hljs-title">parm1</span>|<span class="hljs-title">parm2</span> &gt; <span class="hljs-title">result.txt</span>
+:<span class="hljs-title">START</span>
+</span></code></pre>
+<p>Note how you can use the pipe and redirection characters without escaping them.</p>
+<pre><code class="language-bat"><span class="hljs-keyword">If</span> &quot;<span class="hljs-variable">%foo%</span>&quot;==&quot;bar&quot; (
+<span class="hljs-comment">REM Do stuff</span>
+<span class="hljs-comment"> REM Do more stuff</span>
+)
+<span class="hljs-keyword">else</span> (
+<span class="hljs-comment">REM Do different stuff</span>
+)
+
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">exist</span> {insert file name here} (
+<span class="hljs-comment"> rem file exists</span>
+) <span class="hljs-keyword">else</span> (
+<span class="hljs-comment"> rem file doesn&#x27;t exist</span>
+)
+
+ <span class="hljs-keyword">if</span> <span class="hljs-keyword">exist</span> c:\autoexec.bat notepad c:\autoexec.bat
+
+ ::Echoing and piping output
+ ::To get a newline <span class="hljs-keyword">in</span> echoed output, chain commands together with &amp;&amp;
+<span class="hljs-built_in">echo</span> hello &amp;&amp; <span class="hljs-built_in">echo</span> world
+:: gives
+ :: hello
+ :: world
+</code></pre>
+<h2 id="redirezionamento" tabindex="-1">Redirezionamento <a class="header-anchor" href="#redirezionamento" aria-hidden="true">🔗</a></h2>
+<p>To pipe output to a file use <code>&gt;</code> or <code>&gt;&gt;</code> The construct <code>2&gt;&amp;1</code> ensures that you get both standard output and standard error in your file</p>
+<pre><code class="language-bat"><span class="hljs-comment">REM &gt; Clobbers log.txt, overwriting anything you already have in it</span>
+&quot;C:\SomeProgram.exe&quot; &gt;C:\log.txt <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>
+<span class="hljs-comment">
+ REM &gt;&gt; concatenates output of SomeProgram.exe to log.txt</span>
+&quot;C:\SomeProgram.exe&quot; &gt;&gt; C:\log.txt <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>
+
+To hide all output from a command redirect to &gt;<span class="hljs-built_in">nul</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>
+&gt; PSKILL NOTEPAD &gt;<span class="hljs-built_in">nul</span> <span class="hljs-number">2</span>&gt;&amp;<span class="hljs-number">1</span>
+</code></pre>
+<h2 id="pause-for-10-seconds" tabindex="-1">Pause for 10 seconds <a class="header-anchor" href="#pause-for-10-seconds" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">TIMEOUT /T <span class="hljs-number">10</span>
+</code></pre>
+<h2 id="kill-the-notepad.exe-window-with-the-title-readme.txt" tabindex="-1">Kill the notepad.exe window with the title Readme.txt <a class="header-anchor" href="#kill-the-notepad.exe-window-with-the-title-readme.txt" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">taskkill</span> /f /im notepad.exe /fi &quot;WINDOWTITLE eq Readme.txt&quot;
+</code></pre>
+<h2 id="delayed-expansion-of-variables-(with-substrings-thrown-in-for-good-measure)" tabindex="-1">Delayed expansion of variables (with substrings thrown in for good measure) <a class="header-anchor" href="#delayed-expansion-of-variables-(with-substrings-thrown-in-for-good-measure)" aria-hidden="true">🔗</a></h2>
+<p>Con l'espansione ritardata le variabili vengono espanse a runtime e non un unica volta alla partenza dello script</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">setlocal</span> enableextensions enabledelayedexpansion
+<span class="hljs-built_in">set</span> full=/u01/users/pax
+ :loop1
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> &quot;<span class="hljs-variable">!full:~-1!</span>&quot; == &quot;/&quot; (
+<span class="hljs-built_in">set</span> full2=<span class="hljs-variable">!full:~-1!</span><span class="hljs-variable">!full2!</span>
+<span class="hljs-built_in">set</span> full=<span class="hljs-variable">!full:~,-1!</span>
+<span class="hljs-keyword">goto</span> :loop1
+)
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">!full!</span>
+<span class="hljs-built_in">endlocal</span>
+</code></pre>
+<h2 id="time-stamping" tabindex="-1">Time stamping <a class="header-anchor" href="#time-stamping" aria-hidden="true">🔗</a></h2>
+<p>The variable <code>%time%</code> expands to the current time which leads you to do something like the following to create time stamps between the execution of commands.</p>
+<pre><code class="language-bat"><span class="hljs-built_in">echo</span> <span class="hljs-variable">%time%</span>
+timeout /t <span class="hljs-number">1</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">%time%</span>
+This works fine unless your code is <span class="hljs-keyword">in</span> a block (i.e. surrounded by brackets), as it might be <span class="hljs-keyword">if</span> it is part of an <span class="hljs-keyword">if</span>-statement <span class="hljs-keyword">for</span> example:
+(
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">%time%</span>
+ timeout /t <span class="hljs-number">1</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">%time%</span>
+)
+</code></pre>
+<p>If you do this, the echoed time will be identical in both cases because the <code>%time%</code> entries get parsed at the beginning of the code block.
+This is almost certainly not what you want.</p>
+<pre><code class="language-bat"><span class="hljs-built_in">Setlocal</span> EnableDelayedExpansion
+ (
+ <span class="hljs-built_in">echo</span> <span class="hljs-variable">!time!</span>
+ timeout /t <span class="hljs-number">1</span>
+ <span class="hljs-built_in">echo</span> <span class="hljs-variable">!time!</span>
+)
+</code></pre>
+<p>Now we get the type of behaviour we expect.</p>
+<h2 id="variable-substrings" tabindex="-1">Variable substrings <a class="header-anchor" href="#variable-substrings" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">&gt; <span class="hljs-built_in">set</span> str=<span class="hljs-number">0123456789</span>
+&gt; <span class="hljs-built_in">echo</span> <span class="hljs-variable">%str:~0,5%</span>
+<span class="hljs-number">01234</span>
+&gt; <span class="hljs-built_in">echo</span> <span class="hljs-variable">%str:~-5,5%</span>
+<span class="hljs-number">56789</span>
+&gt; <span class="hljs-built_in">echo</span> <span class="hljs-variable">%str:~3,-3%</span>
+<span class="hljs-number">3456</span>
+
+::example of string subtraction on <span class="hljs-built_in">date</span> and <span class="hljs-built_in">time</span> to get file named &quot;YYYY-MM-DD HH:MM:SS.txt&quot;
+<span class="hljs-built_in">echo</span> test &gt; &quot;<span class="hljs-variable">%date:~6,4%</span>-<span class="hljs-variable">%date:~3,2%</span>-<span class="hljs-variable">%date:~0,2%</span> <span class="hljs-variable">%time:~0,2%</span>_<span class="hljs-variable">%time:~3,2%</span>_<span class="hljs-variable">%time:~6,2%</span>.txt&quot;
+</code></pre>
+<h2 id="data-in-formato-iso" tabindex="-1">Data in formato ISO <a class="header-anchor" href="#data-in-formato-iso" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f &quot;tokens=<span class="hljs-number">1</span>-<span class="hljs-number">3</span> delims=/- &quot; %a <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">DATE</span>/T&#x27;) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> <span class="hljs-variable">%c%</span>b%a
+</code></pre>
+<h2 id="search-and-replace-when-setting-environment-variables" tabindex="-1">Search and replace when setting environment variables <a class="header-anchor" href="#search-and-replace-when-setting-environment-variables" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">&gt; @<span class="hljs-built_in">set</span> fname=<span class="hljs-variable">%date:/=%</span>
+...removes the &quot;/&quot; from a <span class="hljs-built_in">date</span> <span class="hljs-keyword">for</span> use <span class="hljs-keyword">in</span> timestamped file names.
+</code></pre>
+<h2 id="integer-arithmetic" tabindex="-1">Integer arithmetic <a class="header-anchor" href="#integer-arithmetic" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">&gt; <span class="hljs-built_in">SET</span> /A result=<span class="hljs-number">10</span>/<span class="hljs-number">3</span> + <span class="hljs-number">1</span>
+<span class="hljs-number">4</span>
+</code></pre>
+<h2 id="command-separators" tabindex="-1">Command separators <a class="header-anchor" href="#command-separators" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">cls</span>&amp; <span class="hljs-built_in">dir</span>
+<span class="hljs-built_in">copy</span> a b &amp;&amp; <span class="hljs-built_in">echo</span> Success
+<span class="hljs-built_in">copy</span> a b ||<span class="hljs-built_in">echo</span> Failure
+
+<span class="hljs-built_in">At</span> the <span class="hljs-number">2</span>nd line, the command after &amp;&amp; only runs <span class="hljs-keyword">if</span> the first command is successful.
+<span class="hljs-built_in">At</span> the <span class="hljs-number">3</span><span class="hljs-built_in">rd</span> line, the command after || only runs <span class="hljs-keyword">if</span> the first command failed.
+</code></pre>
+<h2 id="line-continuation" tabindex="-1">Line continuation <a class="header-anchor" href="#line-continuation" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">call</span> C:\WINDOWS\system32\ntbackup.exe^
+backup ^
+/V:yes ^
+/R:no ^
+/RS:no ^
+/HC:off ^
+/M normal ^
+/L:s ^
+@daily.bks ^
+/F daily.bkf
+</code></pre>
+<p>The <code>^</code> is really a quote char. Using it, you can quote <code>&lt;</code> and <code>&gt;</code> so that they do not redirect output. The <code>^</code> at the end of a line also allows line continuation</p>
+<h2 id="realizzare-subroutine-con-scope-locali" tabindex="-1">Realizzare subroutine con scope locali <a class="header-anchor" href="#realizzare-subroutine-con-scope-locali" aria-hidden="true">🔗</a></h2>
+<p>By using <code>CALL</code>, <code>EXIT /B</code>, <code>SETLOCAL</code> &amp; <code>ENDLOCAL</code> you can implement subroutines with local variables.
+example:</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">set</span> x=xxxxx
+<span class="hljs-keyword">call</span> :sub <span class="hljs-number">10</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">%x%</span>
+<span class="hljs-keyword">exit</span> /b
+
+:sub
+<span class="hljs-built_in">setlocal</span>
+<span class="hljs-built_in">set</span> /a x=%<span class="hljs-number">1</span> + <span class="hljs-number">1</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">%x%</span>
+<span class="hljs-built_in">endlocal</span>
+<span class="hljs-keyword">exit</span> /b
+
+This will <span class="hljs-built_in">print</span>
+<span class="hljs-number">11</span>
+xxxxx
+</code></pre>
+<p>even though <code>:sub</code> modifies x.</p>
+<h2 id="escaping%3A-%5E" tabindex="-1">Escaping: <code>^</code> <a class="header-anchor" href="#escaping%3A-%5E" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">echo</span> ^| ^&lt; ^&gt; ^&amp; ^\ ^^
+</code></pre>
+<p>that'd explain why it's the line continuation operator as well <code>--</code> it escapes the newline, just like <code>\</code> in bash</p>
+<h2 id="being-able-to-run-commands-and-process-the-output-(like-backticks-of-'%24()'-in-bash)" tabindex="-1">Being able to run commands and process the output (like backticks of <code>'$()'</code> in bash) <a class="header-anchor" href="#being-able-to-run-commands-and-process-the-output-(like-backticks-of-'%24()'-in-bash)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f &quot;tokens=*&quot; %i <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /on /b *.jpg&#x27;) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> --^&gt; %i
+</code></pre>
+<h2 id="creare-un-file-vuoto" tabindex="-1">Creare un file vuoto <a class="header-anchor" href="#creare-un-file-vuoto" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">&gt; <span class="hljs-built_in">copy</span> <span class="hljs-built_in">nul</span> filename.ext
+</code></pre>
+<h2 id="comando-for" tabindex="-1">Comando FOR <a class="header-anchor" href="#comando-for" aria-hidden="true">🔗</a></h2>
+<p><code>help for</code></p>
+<pre><code class="language-bat"><span class="hljs-keyword">FOR</span> /F &quot;eol=; tokens=<span class="hljs-number">2</span>,<span class="hljs-number">3</span>* delims=, &quot; %i <span class="hljs-keyword">in</span> (myfile.txt) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> %i %j %k
+</code></pre>
+<p>would parse each line in myfile.txt, ignoring lines that begin with a semicolon,
+passing the 2nd and 3rd token from each line to the for body, with tokens delimited by commas and/or spaces.
+Notice the for body statements reference <code>%i</code> to get the 2nd token, <code>%j</code> to get the 3rd token, and %k to get all remaining tokens after the 3rd.
+You can also use this to iterate over directories, directory contents, etc...</p>
+<h2 id="sovrascrivere-tutti-i-file-con-lo-stesso-nome-con-uno-nuovo" tabindex="-1">Sovrascrivere tutti i file con lo stesso nome con uno nuovo <a class="header-anchor" href="#sovrascrivere-tutti-i-file-con-lo-stesso-nome-con-uno-nuovo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /R %iin (log4j.properties) <span class="hljs-keyword">do</span> <span class="hljs-built_in">copy</span> /YC:\Users\cdipiet\workspace\JavaWorkspace\Hibernate\log4j.properties %i
+</code></pre>
+<h2 id="enableextensions" tabindex="-1">ENABLEEXTENSIONS <a class="header-anchor" href="#enableextensions" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">echo</span> Database username and password will be taken from liquibase.properties file....
+<span class="hljs-built_in">setlocal</span> ENABLEEXTENSIONS:: Abilita le estensioni dei comandi
+<span class="hljs-keyword">for</span> /f &quot;tokens=<span class="hljs-number">1</span>* delims==&quot; <span class="hljs-variable">%%a</span> <span class="hljs-keyword">in</span> (liquibase.properties) <span class="hljs-keyword">do</span> (
+<span class="hljs-keyword">if</span> &quot;<span class="hljs-variable">%%a</span>&quot;==&quot;username&quot; <span class="hljs-built_in">set</span> dbuser=<span class="hljs-variable">%%b</span>
+<span class="hljs-keyword">if</span> &quot;<span class="hljs-variable">%%a</span>&quot;==&quot;password&quot; <span class="hljs-built_in">set</span> dbpwd=<span class="hljs-variable">%%b</span>
+<span class="hljs-keyword">if</span> &quot;<span class="hljs-variable">%%a</span>&quot;==&quot;url&quot; <span class="hljs-built_in">set</span> dburl=<span class="hljs-variable">%%b</span>
+)
+</code></pre>
+<h2 id="echo" tabindex="-1">echo <a class="header-anchor" href="#echo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">echo</span> UserName is:=<span class="hljs-variable">%dbuser%</span>
+<span class="hljs-built_in">echo</span> PassWord is:=<span class="hljs-variable">%dbpwd%</span>
+<span class="hljs-built_in">echo</span> URL is:=<span class="hljs-variable">%dburl%</span>
+
+<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> <span class="hljs-variable">%errorlevel%</span>==<span class="hljs-number">0</span> <span class="hljs-keyword">goto</span> ON_FILE_READ_ERROR
+</code></pre>
+<h2 id="case" tabindex="-1">case <a class="header-anchor" href="#case" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">echo</span> Database username and password will be taken from liquibase.properties file...
+FILE=&quot;liquibase.properties&quot;
+<span class="hljs-built_in">FS</span>=&quot;=&quot;
+<span class="hljs-keyword">errorlevel</span>=<span class="hljs-number">0</span>
+while read line
+<span class="hljs-keyword">do</span>
+    #F1=$(<span class="hljs-built_in">echo</span> $line | sed &#x27;s/==/=/&#x27; | cut -d $<span class="hljs-built_in">FS</span> -f1)
+    #F2=$(<span class="hljs-built_in">echo</span> $line | sed &#x27;s/==/=/&#x27; | cut -d $<span class="hljs-built_in">FS</span> -f2)
+    F1=$(<span class="hljs-built_in">echo</span> $line | cut -d $<span class="hljs-built_in">FS</span> -f2)
+    F2=$(<span class="hljs-built_in">echo</span> $line | cut -d $<span class="hljs-built_in">FS</span> -f3)
+    case $F1 <span class="hljs-keyword">in</span>
+        username) dbuser=$F2 ;;
+        password) dbpassword=$F2 ;;
+        url) url=$F2 ;;
+        *) <span class="hljs-keyword">errorlevel</span>=<span class="hljs-number">1</span>;;
+    esac
+done &lt; $FILE
+<span class="hljs-built_in">echo</span> UserName is: $dbuser
+<span class="hljs-built_in">echo</span> Password is: $dbpassword
+<span class="hljs-built_in">echo</span> Url is : $url
+<span class="hljs-keyword">if</span> [ $<span class="hljs-keyword">errorlevel</span> != &quot;<span class="hljs-number">0</span>&quot; ] ; then <span class="hljs-built_in">echo</span> &quot;error&quot;
+fi 
+</code></pre>
+<p>Esempio di liquibase.properties:</p>
+<pre><code>driver=com.mysql.jdbc.Driver
+classpath=
+changeLogFile=src/changelogs/mysql/root.changelog.xml
+url=&quot;jdbc:mysql://localhost/liquibase&quot;
+username=liquibase
+password=liquibase
+</code></pre>
+<h2 id="timecmd" tabindex="-1">timecmd <a class="header-anchor" href="#timecmd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">::Usage
+::<span class="hljs-keyword">If</span> you put timecmd.bat <span class="hljs-keyword">in</span> a directory <span class="hljs-keyword">in</span> your <span class="hljs-built_in">path</span>, you can <span class="hljs-keyword">call</span> it from anywhere like this:
+::timecmd [your command]
+::e.g.
+::C:\&gt;timecmd <span class="hljs-built_in">pause</span>
+::Press any key to continue . . .
+::command took <span class="hljs-number">0</span>:<span class="hljs-number">0</span>:<span class="hljs-number">1</span>.<span class="hljs-number">18</span>
+::<span class="hljs-keyword">If</span> you want to <span class="hljs-keyword">do</span> output redirection, you can quote the command like this:
+::timecmd &quot;<span class="hljs-built_in">dir</span> c:\windows /s &gt; <span class="hljs-built_in">nul</span>&quot;
+
+@<span class="hljs-built_in">echo</span> off
+@<span class="hljs-built_in">setlocal</span> 
+
+<span class="hljs-built_in">set</span> <span class="hljs-built_in">start</span>=<span class="hljs-variable">%time%</span>
+
+:: runs your command
+<span class="hljs-built_in">cmd</span> /c %*
+
+<span class="hljs-built_in">set</span> end=<span class="hljs-variable">%time%</span>
+<span class="hljs-built_in">set</span> options=&quot;tokens=<span class="hljs-number">1</span>-<span class="hljs-number">4</span> delims=:.&quot;
+<span class="hljs-keyword">for</span> /f <span class="hljs-variable">%options%</span> <span class="hljs-variable">%%a</span> <span class="hljs-keyword">in</span> (&quot;<span class="hljs-variable">%start%</span>&quot;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">set</span> start_h=<span class="hljs-variable">%%a</span>&amp;<span class="hljs-built_in">set</span> /a start_m=<span class="hljs-number">100</span><span class="hljs-variable">%%b</span> %% <span class="hljs-number">100</span>&amp;<span class="hljs-built_in">set</span> /a start_s=<span class="hljs-number">100</span><span class="hljs-variable">%%c</span> %% <span class="hljs-number">100</span>&amp;<span class="hljs-built_in">set</span> /a start_ms=<span class="hljs-number">100</span><span class="hljs-variable">%%d</span> %% <span class="hljs-number">100</span>
+<span class="hljs-keyword">for</span> /f <span class="hljs-variable">%options%</span> <span class="hljs-variable">%%a</span> <span class="hljs-keyword">in</span> (&quot;<span class="hljs-variable">%end%</span>&quot;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">set</span> end_h=<span class="hljs-variable">%%a</span>&amp;<span class="hljs-built_in">set</span> /a end_m=<span class="hljs-number">100</span><span class="hljs-variable">%%b</span> %% <span class="hljs-number">100</span>&amp;<span class="hljs-built_in">set</span> /a end_s=<span class="hljs-number">100</span><span class="hljs-variable">%%c</span> %% <span class="hljs-number">100</span>&amp;<span class="hljs-built_in">set</span> /a end_ms=<span class="hljs-number">100</span><span class="hljs-variable">%%d</span> %% <span class="hljs-number">100</span>
+
+<span class="hljs-built_in">set</span> /a hours=<span class="hljs-variable">%end_h%</span>-<span class="hljs-variable">%start_h%</span>
+<span class="hljs-built_in">set</span> /a mins=<span class="hljs-variable">%end_m%</span>-<span class="hljs-variable">%start_m%</span>
+<span class="hljs-built_in">set</span> /a secs=<span class="hljs-variable">%end_s%</span>-<span class="hljs-variable">%start_s%</span>
+<span class="hljs-built_in">set</span> /a ms=<span class="hljs-variable">%end_ms%</span>-<span class="hljs-variable">%start_ms%</span>
+<span class="hljs-keyword">if</span> <span class="hljs-variable">%hours%</span> <span class="hljs-keyword">lss</span> <span class="hljs-number">0</span> <span class="hljs-built_in">set</span> /a hours = <span class="hljs-number">24</span><span class="hljs-variable">%hours%</span>
+<span class="hljs-keyword">if</span> <span class="hljs-variable">%mins%</span> <span class="hljs-keyword">lss</span> <span class="hljs-number">0</span> <span class="hljs-built_in">set</span> /a hours = <span class="hljs-variable">%hours%</span> - <span class="hljs-number">1</span> &amp; <span class="hljs-built_in">set</span> /a mins = <span class="hljs-number">60</span><span class="hljs-variable">%mins%</span>
+<span class="hljs-keyword">if</span> <span class="hljs-variable">%secs%</span> <span class="hljs-keyword">lss</span> <span class="hljs-number">0</span> <span class="hljs-built_in">set</span> /a mins = <span class="hljs-variable">%mins%</span> - <span class="hljs-number">1</span> &amp; <span class="hljs-built_in">set</span> /a secs = <span class="hljs-number">60</span><span class="hljs-variable">%secs%</span>
+<span class="hljs-keyword">if</span> <span class="hljs-variable">%ms%</span> <span class="hljs-keyword">lss</span> <span class="hljs-number">0</span> <span class="hljs-built_in">set</span> /a secs = <span class="hljs-variable">%secs%</span> - <span class="hljs-number">1</span> &amp; <span class="hljs-built_in">set</span> /a ms = <span class="hljs-number">100</span><span class="hljs-variable">%ms%</span>
+<span class="hljs-keyword">if</span> <span class="hljs-number">1</span><span class="hljs-variable">%ms%</span> <span class="hljs-keyword">lss</span> <span class="hljs-number">100</span> <span class="hljs-built_in">set</span> ms=<span class="hljs-number">0</span><span class="hljs-variable">%ms%</span>
+
+:: mission accomplished
+<span class="hljs-built_in">set</span> /a totalsecs = <span class="hljs-variable">%hours%</span>*<span class="hljs-number">3600</span> + <span class="hljs-variable">%mins%</span>*<span class="hljs-number">60</span> + <span class="hljs-variable">%secs%</span> 
+<span class="hljs-built_in">echo</span> command took <span class="hljs-variable">%hours%</span>:<span class="hljs-variable">%mins%</span>:<span class="hljs-variable">%secs%</span>.<span class="hljs-variable">%ms%</span> (<span class="hljs-variable">%totalsecs%</span>.<span class="hljs-variable">%ms%</span>s total)
+</code></pre>
+<h2 id="environment-variables" tabindex="-1">Environment Variables <a class="header-anchor" href="#environment-variables" aria-hidden="true">🔗</a></h2>
+<h3 id="set-and-setx" tabindex="-1">set and setx <a class="header-anchor" href="#set-and-setx" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>set</code> – sets variable immediately in the current context only.  So, variable will be lost when you close cmd.exe.</li>
+<li><code>setx</code> – sets variable permanently but won’t be valid until you start a new context (i.e. open a new cmd.exe)</li>
+</ul>
+<p>List all environment variables defined in current session using the set command</p>
+<p><code>set</code></p>
+<p>To check if the environment variable FOO is defined
+<code>if defined FOO ( echo &quot;FOO is defined and is set to %FOO%&quot; )</code>
+To permanently set the system windows environment variable FOO, use <code>setx /m</code></p>
+<p><code>setx FOO /m &quot;someValue&quot;</code></p>
+<p>To permanently unset the windows environment variable FOO, set it to an empty value
+<code>setx FOO &quot;&quot;</code></p>
+<p>A reboot may be necessary. Strictly speaking this does not remove the variable since it will still be in the registry
+and will still be visible from Control Panel-&gt;System-&gt;Advanced System Settings-&gt;Environment variables.
+However, the variable will not be listed when you perform asetcommand and defined FOOwill return false.<br>
+To remove all trace of the variable, delete it from the registry.</p>
+<h3 id="environment-variables-in-the-registry" tabindex="-1">Environment variables in the registry <a class="header-anchor" href="#environment-variables-in-the-registry" aria-hidden="true">🔗</a></h3>
+<p>On Windows 7:</p>
+<p>System environment variables are at <code>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Environment</code>
+User environment variables are at <code>HKEY_CURRENT_USER\Environment</code></p>
+<p>If you change environment variables using the registry,
+you will need to reboot for them to take effect.</p>
+<h2 id="postgresql-start-on-windows" tabindex="-1">PostgreSQL Start on Windows <a class="header-anchor" href="#postgresql-start-on-windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">@<span class="hljs-built_in">ECHO</span> ON
+<span class="hljs-comment"> REM The script sets environment variables helpful for PostgreSQL</span>
+ @<span class="hljs-built_in">SET</span> <span class="hljs-built_in">PATH</span>=&quot;<span class="hljs-variable">%~dp0\bin&quot;;%</span><span class="hljs-built_in">PATH</span>%
+ @<span class="hljs-built_in">SET</span> PGDATA=%~dp0\data
+ @<span class="hljs-built_in">SET</span> PGDATABASE=postgres
+ @<span class="hljs-built_in">SET</span> PGUSER=postgres
+ @<span class="hljs-built_in">SET</span> PGPORT=<span class="hljs-number">5439</span>
+ @<span class="hljs-built_in">SET</span> PGLOCALEDIR=%~dp0\share\locale
+<span class="hljs-comment"> REM &quot;%~dp0\bin\initdb&quot; -U postgres -A trust</span>
+ &quot;%~dp0\bin\pg_ctl&quot; -D &quot;%~dp0/data&quot; -l logfile <span class="hljs-built_in">start</span>
+ <span class="hljs-built_in">ECHO</span> &quot;Click enter to stop&quot;
+ <span class="hljs-built_in">pause</span>
+ &quot;%~dp0\bin\pg_ctl&quot; -D &quot;%~dp0/data&quot; stop
+</code></pre>
+<h2 id="eseguire-un-comando-e-salvarne-l'output-in-una-variabile" tabindex="-1">Eseguire un comando e salvarne l'output in una variabile <a class="header-anchor" href="#eseguire-un-comando-e-salvarne-l'output-in-una-variabile" aria-hidden="true">🔗</a></h2>
+<p>Assegnare l'output di un comando, es. <code>cd</code> che  invocato senza parametri stampa la directory corrente ad una variabile:</p>
+<p>Da script <code>.bat</code>, bisogna utilizzare un <strong>doppio percento</strong> <code>%%</code> per riferire le variabili:</p>
+<pre><code class="language-bat"><span class="hljs-comment">rem come memorizzare in una variabile l&#x27;output di un comando</span>
+<span class="hljs-comment">rem FOR /F &quot;tokens=* USEBACKQ&quot; %%F IN (`echo Test`) DO (</span>
+<span class="hljs-comment">rem for /?</span>
+<span class="hljs-keyword">FOR</span> /F &quot;tokens=* USEBACKQ&quot; <span class="hljs-variable">%%F</span> <span class="hljs-keyword">IN</span> (`<span class="hljs-built_in">cd</span>`) <span class="hljs-keyword">DO</span> (
+<span class="hljs-built_in">SET</span> var=<span class="hljs-variable">%%F</span>
+)
+<span class="hljs-built_in">ECHO</span> <span class="hljs-variable">%var%</span>
+</code></pre>
+<p>Direttamente da riga di comando, utilizzare un unico <code>%</code> per riferire le variabili:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">FOR</span> /F &quot;tokens=* USEBACKQ&quot; %F <span class="hljs-keyword">IN</span> (`<span class="hljs-built_in">cd</span>`) <span class="hljs-keyword">DO</span> (
+<span class="hljs-built_in">SET</span> var=%F
+)
+<span class="hljs-built_in">ECHO</span> <span class="hljs-variable">%var%</span>
+</code></pre>
+<h2 id="file-modificati-oggi" tabindex="-1">File modificati oggi <a class="header-anchor" href="#file-modificati-oggi" aria-hidden="true">🔗</a></h2>
+<p>The <code>/d +0</code> will pick the date of today (<code>today - 0</code>) and select the files with date greater or equal (<code>+</code>) to the picked date, so, the files selected are those changed today.</p>
+<pre><code class="language-bat">:: lastmodified.bat
+<span class="hljs-built_in">cd</span> /d %~dp0\..
+forfiles /s /m *.<span class="hljs-built_in">md</span> /d <span class="hljs-number">0</span> /c &quot;<span class="hljs-built_in">cmd</span> /c <span class="hljs-built_in">echo</span> @relpath&quot;
+</code></pre>
+<h2 id="robocopy" tabindex="-1">Robocopy <a class="header-anchor" href="#robocopy" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">set</span> day=<span class="hljs-variable">%date:~0,2%</span>
+<span class="hljs-built_in">set</span> month=<span class="hljs-variable">%date:~3,2%</span>
+<span class="hljs-built_in">set</span> year=<span class="hljs-variable">%date:~6,4%</span>
+
+
+@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">echo</span> robocopy %<span class="hljs-number">1</span> %<span class="hljs-number">2</span>
+<span class="hljs-comment">
+REM If the passed argument has quotes around it, %1 includes the quotes. Where as, %~1 provides the argument value with quotes removed.</span>
+<span class="hljs-keyword">IF</span> &quot;%~<span class="hljs-number">1</span>&quot;==&quot;&quot; <span class="hljs-keyword">GOTO</span> No1
+<span class="hljs-keyword">IF</span> &quot;%~<span class="hljs-number">2</span>&quot;==&quot;&quot; <span class="hljs-keyword">GOTO</span> No2
+
+robocopy %<span class="hljs-number">1</span> %<span class="hljs-number">2</span> /mir /r:<span class="hljs-number">3</span> /mt:<span class="hljs-number">4</span> /NC /NS /NFL /NDL
+
+<span class="hljs-keyword">GOTO</span> End1
+
+:No1
+  <span class="hljs-built_in">ECHO</span> No Source <span class="hljs-built_in">Dir</span>
+<span class="hljs-keyword">GOTO</span> End1
+:No2
+  <span class="hljs-built_in">ECHO</span> No Dest <span class="hljs-built_in">Dir</span>
+<span class="hljs-keyword">GOTO</span> End1
+
+:End1
+
+</code></pre>
+</body></html>

@@ -1,0 +1,1066 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.033" />
+        <title>iptables</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="iptables" tabindex="-1">iptables <a class="header-anchor" href="#iptables" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.033</p>
+<nav class="table-of-contents"><ol><li><a href="#abilitare-iptables-in-manjaro">Abilitare iptables in Manjaro </a></li><li><a href="#router-firewall-con-iptables">router firewall con iptables </a></li><li><a href="#come-trasferire-il-nat-dall'ethernet-al-bridge-e-consentire-cosi-al-bridge-l'accesso-ad-internet">Come trasferire il NAT dall&#39;ethernet al  bridge e consentire cosi al bridge l&#39;accesso ad internet </a></li><li><a href="#iptables-tutorial">Iptables Tutorial </a><ol><li><a href="#info">Info </a></li><li><a href="#save-%26-load">Save &amp; Load </a></li><li><a href="#reset">Reset </a></li><li><a href="#logs">Logs </a></li><li><a href="#limitare-il-logging">Limitare il logging </a></li><li><a href="#rules">rules </a></li><li><a href="#perch%C3%A8-il-target-si-chiama-target-a-non-action">Perchè il target si chiama target a non action </a></li><li><a href="#tabelle">Tabelle </a></li><li><a href="#sequenza-di-esecuzione-delle-chain-e-tabelle">Sequenza di esecuzione delle Chain e Tabelle </a></li><li><a href="#altro">Altro </a></li></ol></li></ol></nav><h1 id="iptables-1" tabindex="-1">IPTables <a class="header-anchor" href="#iptables-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Iptables">https://wiki.archlinux.org/title/Iptables</a></li>
+<li><a href="https://wiki.archlinux.org/title/Simple_stateful_firewall">https://wiki.archlinux.org/title/Simple_stateful_firewall</a></li>
+<li><a href="https://unix.stackexchange.com/questions/171447/iptable-forward-interfaces-for-gateway-machine">https://unix.stackexchange.com/questions/171447/iptable-forward-interfaces-for-gateway-machine</a></li>
+<li><a href="https://www.ionos.it/digitalguide/server/tools-o-strumenti/tutorial-di-iptables-regole-e-filtri-per-i-pacchetti/">https://www.ionos.it/digitalguide/server/tools-o-strumenti/tutorial-di-iptables-regole-e-filtri-per-i-pacchetti/</a></li>
+<li><a href="https://phoenixnap.com/kb/iptables-tutorial-linux-firewall">https://phoenixnap.com/kb/iptables-tutorial-linux-firewall</a></li>
+</ul>
+<h2 id="abilitare-iptables-in-manjaro" tabindex="-1">Abilitare iptables in Manjaro <a class="header-anchor" href="#abilitare-iptables-in-manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://forum.manjaro-it.org/index.php?topic=114.0">http://forum.manjaro-it.org/index.php?topic=114.0</a></li>
+</ul>
+<p>Script da eseguire una sola volta</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot; ABILITO IL FIREWALL PER PROTEGGERTI QUANDO ACCEDI AD INTERNET&quot;</span>
+$ <span class="hljs-built_in">sleep</span> 5
+$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot; LA CONFIGURAZIONE VERRÀ RIPRISTINATA AD OGNI AVVIO DEL SISTEMA&quot;</span>
+$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span>
+$ iptables -P INPUT DROP &amp;&amp; iptables -P FORWARD DROP &amp;&amp; iptables -A INPUT -i lo -j ACCEPT
+$ iptables -A INPUT -m state --state ESTABLISHED,RELATED -j ACCEPT
+$ iptables-save &gt; /etc/iptables/iptables.rules &amp;&amp; iptables-restore &lt; /etc/iptables/iptables.rules
+$ systemctl <span class="hljs-built_in">enable</span> iptables.service
+$ ip6tables -P INPUT DROP &amp;&amp; ip6tables -P FORWARD DROP
+$ ip6tables-save &gt; /etc/iptables/ip6tables.rules &amp;&amp; ip6tables-restore &lt; /etc/iptables/ip6tables.rules
+$ systemctl <span class="hljs-built_in">enable</span> ip6tables.service
+$ <span class="hljs-built_in">sleep</span> 5
+$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot; OK, IMPOSTAZIONI SALVATE, DIGITARE &quot;</span> <span class="hljs-built_in">exit</span> <span class="hljs-string">&quot; PER USCIRE DA ROOT ..&quot;</span>
+$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;\n&quot;</span>
+$ <span class="hljs-built_in">exit</span> 0
+</code></pre>
+<h2 id="router-firewall-con-iptables" tabindex="-1">router firewall con iptables <a class="header-anchor" href="#router-firewall-con-iptables" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://www.robertopasini.com/index.php/tips-italian/2-uncategorised/303-linux-router-firewall-con-iptables">http://www.robertopasini.com/index.php/tips-italian/2-uncategorised/303-linux-router-firewall-con-iptables</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># INPUT       - pacchetti che escono dal router-firewall</span>
+<span class="hljs-comment"># OUTPUT      - pacchetti che escono dal router-firewall</span>
+<span class="hljs-comment"># FORWARD     - pacchetti che transitano da un&#x27;interfaccia all&#x27;altra del router-firewall</span>
+<span class="hljs-comment"># POSTROUTING - pacchetti modificati appena prima di lasciare il router ( si usa per il nat )</span>
+<span class="hljs-comment"># PREROUTING  - pacchetti modificati in ingresso prima che vengano inoltrati ( si usa per il port forwarding e il proxy trasparente )</span>
+<span class="hljs-comment"># -t filter   - catena predefinita di iptables</span>
+<span class="hljs-comment"># -t nat      - specifica la catena per il nat</span>
+<span class="hljs-comment"># -m modulo   - carica un modulo aggiuntivo ( ex. limit, state )</span>
+<span class="hljs-comment"># -j LOG      - azione che effettua il log della regola in kern.info ( controllare syslog.conf per sapre dove logga kern.info )</span>
+<span class="hljs-comment"># -j LOG --log-prefix &quot;Messaggio inserito nel log file&quot;    inserisce un messaggio specifico nel file di log</span>
+
+<span class="hljs-comment"># iptables -I INPUT 3 regola         inserisce nella posiizone 3 la regola specificata</span>
+<span class="hljs-comment"># iptables -D INPUT regola         cancella la regola specificata</span>
+<span class="hljs-comment"># iptables -D INPUT 2             cancella la regola numero 2 nella catena di output</span>
+
+<span class="hljs-comment"># iptables -N miacatena           crea una nuova catena personalizzata</span>
+<span class="hljs-comment"># iptables -A INPUT -j miacatena     assegna ad INPUT lanuova catena personalizzata</span>
+<span class="hljs-comment"># iptables -X miacatena           cancella la catena personalizzata</span>
+<span class="hljs-comment"># iptables -X                    cancella le catene personalizzate</span>
+<span class="hljs-comment"># iptables -F miacatena           svuota la catena personalizzata ( da usare prima dell&#x27;opzione -X )</span>
+
+<span class="hljs-comment"># iptables -v -L INPUT            mostra le statistiche della catena INPUT</span>
+<span class="hljs-comment"># iptables -Z INPUT              azzera i contatori delle statistiche della catena INPUT</span>
+
+<span class="hljs-comment"># iptables --line-numbers -L        visualizza la lista delle regole numerando le linee</span>
+<span class="hljs-comment"># iptables -t nat -L            visualizza le regole della catena nat</span>
+
+
+<span class="hljs-comment"># FUNZIONAMENTO COME ROUTER</span>
+<span class="hljs-built_in">echo</span> 1 &gt; /proc/sys/net/ipv4/ip_forward
+iptables -F
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
+iptables -P FORWARD DROP
+<span class="hljs-comment"># permette a tutto il traffico diretto alla rete locale di entrare</span>
+<span class="hljs-comment"># eth1 e&#x27; la scheda di rete del server dove ho collegato il router wifi</span>
+<span class="hljs-comment"># che permette ai client wifi di navigare in internet</span>
+iptables -A FORWARD -o eth1 -j ACCEPT
+<span class="hljs-comment"># permette a tutto il traffico diretto all&#x27;esterno di uscire</span>
+<span class="hljs-comment"># eth0 e&#x27; la scheda di rete del server direttamente collegata ad internet</span>
+iptables -A FORWARD -o eth0 -j ACCEPT
+<span class="hljs-comment"># effettua il masquerade di tutto il traffico in uscita</span>
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+<span class="hljs-comment">##iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE</span>
+<span class="hljs-comment">##iptables -A FORWARD -i eth0 -o eth1 -m state --state RELATED,ESTABLISHED -j ACCEPT</span>
+<span class="hljs-comment">##iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT</span>
+
+
+<span class="hljs-comment"># PORT FORWARDING E TRANSPARENT PROXY</span>
+
+<span class="hljs-comment"># tutte le richieste che arrivano al router dall&#x27;esterno ( wlan0 ) sulla porta 22</span>
+<span class="hljs-comment"># vengono dirottate all&#x27;host della lan interna ( eth0 ) con ip 192.168.1.40</span>
+<span class="hljs-comment"># iptables -t nat -A PREROUTING -p tcp --dport 22 -i wlan0 -j DNAT --to 192.168.1.40</span>
+
+<span class="hljs-comment"># tutte le richieste che arrivano dalla lan interna ( eth0 ) al router sulla porta 80</span>
+<span class="hljs-comment"># vengono dirottate sulla porta 8080 dell&#x27;host interno 192.168.1.20 ( transparent proxy )</span>
+<span class="hljs-comment"># iptables -t nat -A PREROUTING -p tcp --dport 80 -i eth0 -j DNAT --to-destination 192.168.1.20:8080</span>
+
+<span class="hljs-comment"># tutte le richieste che arrivano dalla lan interna ( eth0 ) al router sulla porta 80</span>
+<span class="hljs-comment"># vengono dirottate sulla porta 8080 del router stesso ( transparent proxy )</span>
+<span class="hljs-comment"># iptables -t nat -A PREROUTING -p tcp --dport 80 -i eth0 -j REDIRECT --to-port 8080</span>
+
+<span class="hljs-comment"># FUNZIONAMENTO COME FIREWALL</span>
+
+<span class="hljs-comment"># iptables -P INPUT DROP</span>
+<span class="hljs-comment"># iptables -P OUTPUT ACCEPT</span>
+<span class="hljs-comment"># iptables -P FORWARD DROP</span>
+
+<span class="hljs-comment"># se ho specificato come regola predefinita di INPUT: DROP eseguiro&#x27; anche questi comandi</span>
+
+<span class="hljs-comment"># consento alla rete locale di dialogare con il router-firewall</span>
+<span class="hljs-comment"># iptables -A INPUT -i eth0 -j ACCEPT</span>
+
+<span class="hljs-comment"># abilito le interfaccie di loopback in ingresos e uscita</span>
+<span class="hljs-comment"># iptables -I INPUT -i lo -j ACCEPT</span>
+<span class="hljs-comment"># iptables -I OUTPUT -o lo -j ACCEPT</span>
+
+
+<span class="hljs-comment"># CATENA INPUT</span>
+
+<span class="hljs-comment"># accetta in ingesso le nuove connessioni ssh e web ( o quelle che preferisco )</span>
+<span class="hljs-comment"># iptables -A INPUT -p tcp --dport 22 -m state --state NEW -j ACCEPT</span>
+<span class="hljs-comment"># iptables -A INPUT -p tcp --dport 80 -m state --state NEW -j ACCEPT</span>
+
+<span class="hljs-comment"># disabilita lo spoofing di indirizzi privati provenienti dall&#x27;esterno</span>
+<span class="hljs-comment"># iptables -A INPUT -s 10.0.0.0/8 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A FORWARD -s 10.0.0.0/8 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 172.16.0.0/12 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A FORWARD -s 172.16.0.0/12 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 192.168.0.0/16 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A FORWARD -s 192.168.0.0/16 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 224.0.0.0/3 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A FORWARD -s 224.0.0.0/3 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 127.0.0.1 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A FORWARD -s 127.0.0.1 -i wlan0 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 255.0.0.0/8 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 0.0.0.0/8 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s 127.0.0.0/8 -j DROP</span>
+<span class="hljs-comment"># iptables -A INPUT -s ipdelfirewall -j DROP</span>
+
+<span class="hljs-comment"># abilito in ingresso la comunicazione su porte superiori, in modo che i client</span>
+<span class="hljs-comment"># che navigano in internet, possano ricevere risposte su tali porte ( serve ?? )</span>
+<span class="hljs-comment"># iptables -A INPUT -i wlan0 -p tcp --dport 1024:65535 -J ACCEPT</span>
+<span class="hljs-comment"># iptables -A INPUT -i wlan0 -p udp --dport 1024:65535 -J ACCEPT</span>
+
+<span class="hljs-comment"># evito che vengano attivate connessioni ( syn ) iniziate e provenienti dall&#x27;esterno</span>
+<span class="hljs-comment"># iptables -A INPUT -i wlan0 -p tcp --syn -j DROP</span>
+
+<span class="hljs-comment"># scarto tutte le connessioni per le quali il primo pacchetto non e&#x27; syn per evitare</span>
+<span class="hljs-comment"># attacchi di tipo stealth</span>
+<span class="hljs-comment"># iptables -A INPUT -p tcp ! --syn -m state --state NEW -j DROP</span>
+
+<span class="hljs-comment"># permetto di attraversare la catena INPUT solo a pacchetti che fanno parte di connesisoni</span>
+<span class="hljs-comment"># gia&#x27; stabilite ( ESTABILISHED ) o che abbiano relaizoni con questa sessione ( RELATED ), per</span>
+<span class="hljs-comment"># esempio una segnalazione di errore sul flusso tcp tramite protocollo icmp</span>
+<span class="hljs-comment"># iptables -A INPUT -m state --state ESTABILISHED,RELATED -j ACCEPT</span>
+
+<span class="hljs-comment"># evito flood ping ddos accettando 2 pacchetti/sec ping e scartando tutto il resto</span>
+<span class="hljs-comment"># iptables -A INPUT -p icmp --icmp-type echo-request -m limit --limit 2/s -j ACCEPT</span>
+<span class="hljs-comment"># iptables -A INPUT -p icmp --icmp-type echo-request -j DROP</span>
+
+
+<span class="hljs-comment"># CATENA FORWARD</span>
+
+<span class="hljs-comment"># se FORWARD e&#x27; DROP, permettiamo il transito solo di pacchetti autorizzati da nuove connessioni</span>
+<span class="hljs-comment"># provenienti dall&#x27;interno, e permettiamo il transito dall&#x27;interno all&#x27;esterno di tutto</span>
+<span class="hljs-comment"># iptables -A FORWARD -i wlan0 -o eth0 -m state ESTABILISHED,RELATED -j ACCEPT</span>
+<span class="hljs-comment"># iptables -A FORWARD -i eth0 -o wlan0 -j ACCEPT</span>
+<span class="hljs-comment"># quest&#x27;ultima regola la posso anche indicare con il parametro --state NEW</span>
+<span class="hljs-comment"># iptables -A FORWARD -m state --state NEW -i eth0 -o wlan0 -j ACCEPT</span>
+
+<span class="hljs-comment"># permetto a nuove connesisoni verso un web server e smtp server di essere stabilite</span>
+<span class="hljs-comment"># ovviamente, sul firewall, non devono essere attivi questi servizi</span>
+<span class="hljs-comment"># iptables -A FORWARD -m state --state NEW -p tcp -d 192.168.1.20 --dport 80 -j ACCEPT</span>
+<span class="hljs-comment"># iptables -A FORWARD -m state --state NEW -p tcp -d 192.168.1.20 --dport 25 -j ACCEPT</span>
+
+
+<span class="hljs-comment"># ABILITAZIONE DI INDIRIZZI MAC</span>
+
+<span class="hljs-comment"># esempio di come abilitare un particolare indirizzo mac</span>
+<span class="hljs-comment"># iptables -A FORWARD -m state --state NEW -m mac --mac-source 00:DE:AD:BE:EF:00 -j ACCEPT</span>
+<span class="hljs-comment"># per modificare il proprio mac address usare:</span>
+<span class="hljs-comment"># ifconfig eth0 hw ether nuovomacaddress</span>
+
+
+<span class="hljs-comment"># CATENA OUTPUT</span>
+
+<span class="hljs-comment"># nel caso avessimo impostato una politica di OUTPUT come questa:</span>
+<span class="hljs-comment"># iptables -P OUTPUT ACCEPT</span>
+<span class="hljs-comment"># inseriamo le seguenti regole</span>
+
+<span class="hljs-comment"># se fa parte di una connesisone gia&#x27; approvata la accetto</span>
+<span class="hljs-comment"># iptables -I OUTPUT 1 -m state --state RELATED,ESTABILISHED -j ACCEPT</span>
+
+<span class="hljs-comment"># consente il ping verso l&#x27;esterno</span>
+<span class="hljs-comment"># iptables -A OUTPUT -p icmp --icmp-type echo-request -j ACCEPT</span>
+
+<span class="hljs-comment"># consento interrogazioni dns verso l&#x27;esterno</span>
+<span class="hljs-comment"># iptables -A OUTPUT -p udp --dport 53 -m state --state NEW -j ACCEPT</span>
+
+<span class="hljs-comment"># questa regola va messa per ultima e serve a registrare tutto quello che non e&#x27; stato accettato</span>
+<span class="hljs-comment"># iptables -A INPUT -j LOG --log-prefix &quot;Scartato di default:&quot;</span>
+<span class="hljs-comment"># iptables -A OUTPUT -j LOG --log-prefix &quot;Scartato di default:&quot;</span>
+</code></pre>
+<h2 id="come-trasferire-il-nat-dall'ethernet-al-bridge-e-consentire-cosi-al-bridge-l'accesso-ad-internet" tabindex="-1">Come trasferire il NAT dall'ethernet al  bridge e consentire cosi al bridge l'accesso ad internet <a class="header-anchor" href="#come-trasferire-il-nat-dall'ethernet-al-bridge-e-consentire-cosi-al-bridge-l'accesso-ad-internet" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://bbs.archlinux.org/viewtopic.php?id=114020">https://bbs.archlinux.org/viewtopic.php?id=114020</a> NAT from ethernet to bridge, is it possible?</li>
+<li><a href="https://unix.stackexchange.com/questions/248504/bridged-interfaces-do-not-have-internet-access">https://unix.stackexchange.com/questions/248504/bridged-interfaces-do-not-have-internet-access</a></li>
+</ul>
+<pre><code class="language-bash">$ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+$ iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$ iptables -A FORWARD -i br0 -o eth0 -j ACCEPT
+<span class="hljs-comment"># Per verificare:</span>
+$ iptables -nvL
+$ iptables -t nat -nvL
+$ tcpdump -lnn -i eth1 port 80 and tcp-syn
+</code></pre>
+<h2 id="iptables-tutorial" tabindex="-1">Iptables Tutorial <a class="header-anchor" href="#iptables-tutorial" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/iptables">https://wiki.archlinux.org/title/iptables</a></li>
+<li><a href="https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#TRAVERSINGOFTABLES">https://www.frozentux.net/iptables-tutorial/iptables-tutorial.html#TRAVERSINGOFTABLES</a></li>
+<li><a href="https://iximiuz.com/en/posts/laymans-iptables-101/">https://iximiuz.com/en/posts/laymans-iptables-101/</a>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands">https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules">https://www.digitalocean.com/community/tutorials/how-to-list-and-delete-iptables-firewall-rules</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-the-iptables-firewall-works">https://www.digitalocean.com/community/tutorials/how-the-iptables-firewall-works</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-migrate-iptables-firewall-rules-to-a-new-server">https://www.digitalocean.com/community/tutorials/how-to-migrate-iptables-firewall-rules-to-a-new-server</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture">https://www.digitalocean.com/community/tutorials/a-deep-dive-into-iptables-and-netfilter-architecture</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04">https://www.digitalocean.com/community/tutorials/how-to-set-up-a-firewall-using-iptables-on-ubuntu-14-04</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-forward-ports-through-a-linux-gateway-with-iptables">https://www.digitalocean.com/community/tutorials/how-to-forward-ports-through-a-linux-gateway-with-iptables</a></li>
+</ul>
+</li>
+</ul>
+<pre><code>                               XXXXXXXXXXXXXXXXXX
+                             XXX     Network    XXX
+                               XXXXXXXXXXXXXXXXXX
+                                       +
+                                       |
+                                       v
++-------------+               +------------------+
+|table: filter|  &lt;---+        | table: nat       |
+|chain: INPUT |      |        | chain: PREROUTING|
++-----+-------+      |        +--------+---------+
+       |             |                 |
+       v             |                 v
+[local process]      |           ****************          +--------------+
+       |             +---------+ Routing decision +------&gt; |table: filter |
+       v                         ****************          |chain: FORWARD|
+****************                                           +------+-------+
+Routing decision                                                  |
+****************                                                  |
+       |                                                          |
+       v                        ****************                  |
++-------------+       +------&gt;  Routing decision  &lt;---------------+
+|table: nat   |       |         ****************
+|chain: OUTPUT|       |               +
++-----+-------+       |               |
+      |               |               v
+      v               |      +-------------------+
++--------------+      |      | table: nat        |
+|table: filter | +----+      | chain: POSTROUTING|
+|chain: OUTPUT |             +--------+----------+
++--------------+                      |
+                                      v
+                               XXXXXXXXXXXXXXXXXX
+                             XXX    Network     XXX
+                               XXXXXXXXXXXXXXXXXX
+</code></pre>
+<p>In Arch/Manjaro iptables è un servizio systemd: <code>iptables.service</code> che carica la sua configurazione di iptables da <code>/etc/iptables/iptables.rules</code></p>
+<pre><code class="language-bash">$ systemctl <span class="hljs-built_in">cat</span> iptables
+$ systemctl show iptables
+    ExecStart={ path=/usr/bin/iptables-restore ; argv[]=/usr/bin/iptables-restore /etc/iptables/iptables.rules
+    ExecStop={ path=/usr/lib/systemd/scripts/iptables-flush
+<span class="hljs-comment"># iptables-flush esegue iptables-restore di tutti i file /usr/share/iptables/empty-$table.rules</span>
+$ systemctl status iptables
+$ systemctl is-enabled iptables
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> iptables
+$ <span class="hljs-built_in">sudo</span> systemctl start iptables
+$ systemctl status iptables
+$ <span class="hljs-built_in">sudo</span> iptables -nvL
+</code></pre>
+<h3 id="info" tabindex="-1">Info <a class="header-anchor" href="#info" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ man iptables
+$ <span class="hljs-built_in">sudo</span> iptables --list-rules
+$ <span class="hljs-built_in">sudo</span> iptables -S
+$ <span class="hljs-built_in">sudo</span> iptables -L
+$ <span class="hljs-built_in">sudo</span> iptables -nvL <span class="hljs-comment"># mostra il numero di esecuzioni di ciascuna regola</span>
+
+$ <span class="hljs-built_in">ls</span> -l --time-style=long-iso /etc/iptables/
+lrwxrwxrwx 1 root root  36 2021-01-20 22:31 empty.rules -&gt; ../../usr/share/iptables/empty.rules
+-rw-r--r-- 1 root root 105 2021-01-20 22:31 ip6tables.rules
+-rw-r--r-- 1 root root 105 2021-01-20 22:31 iptables.rules
+lrwxrwxrwx 1 root root  46 2021-01-20 22:31 simple_firewall.rules -&gt; ../../usr/share/iptables/simple_firewall.rules
+
+$ <span class="hljs-built_in">cat</span> /etc/iptables/iptables.rules 
+<span class="hljs-comment"># Empty iptables rule file</span>
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+COMMIT
+
+$ <span class="hljs-built_in">cat</span> /etc/iptables/empty.rules 
+<span class="hljs-comment"># Empty iptables rule file</span>
+*filter
+:INPUT ACCEPT [0:0]
+:FORWARD ACCEPT [0:0]
+:OUTPUT ACCEPT [0:0]
+COMMIT
+
+$ <span class="hljs-built_in">cat</span> /etc/iptables/simple_firewall.rules 
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -p icmp -j ACCEPT 
+-A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT 
+-A INPUT -i lo -j ACCEPT 
+-A INPUT -p tcp -j REJECT --reject-with tcp-reset 
+-A INPUT -p udp -j REJECT --reject-with icmp-port-unreachable 
+-A INPUT -j REJECT --reject-with icmp-proto-unreachable 
+COMMIT
+</code></pre>
+<h3 id="save-%26-load" tabindex="-1">Save &amp; Load <a class="header-anchor" href="#save-%26-load" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Ogni volta che si modificano le rules per renderle persistenti:</span>
+$ <span class="hljs-built_in">sudo</span> iptables-save -f /etc/iptables/iptables.rules
+<span class="hljs-comment"># Per caricare le regole:</span>
+$ <span class="hljs-built_in">sudo</span> iptables-restore /etc/iptables/iptables.rules
+</code></pre>
+<h3 id="reset" tabindex="-1">Reset <a class="header-anchor" href="#reset" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># You can flush and reset iptables to default using these commands:</span>
+<span class="hljs-comment"># The -F command with no arguments flushes all the chains in its current table. Similarly, </span>
+<span class="hljs-comment"># -X deletes all empty non-default chains in a table. </span>
+$ iptables -F
+$ iptables -X
+$ iptables -t nat -F
+$ iptables -t nat -X
+$ iptables -t mangle -F
+$ iptables -t mangle -X
+$ iptables -t raw -F
+$ iptables -t raw -X
+$ iptables -t security -F
+$ iptables -t security -X
+$ iptables -P INPUT ACCEPT
+$ iptables -P FORWARD ACCEPT
+$ iptables -P OUTPUT ACCEPT
+$ <span class="hljs-built_in">sudo</span> iptables -S
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+</code></pre>
+<h3 id="logs" tabindex="-1">Logs <a class="header-anchor" href="#logs" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ journalctl -k --grep=<span class="hljs-string">&quot;IN=.*OUT=.*&quot;</span>
+$ journalctl -k -f <span class="hljs-comment"># mostra il log kernel in continuo rimandendo in attesa di nuovi messaggi (tail -f)</span>
+$ journalctl -u iptables --no-pager
+$ <span class="hljs-built_in">sudo</span> iptables -nvL
+</code></pre>
+<h3 id="limitare-il-logging" tabindex="-1">Limitare il logging <a class="header-anchor" href="#limitare-il-logging" aria-hidden="true">🔗</a></h3>
+<p>Per risparmiare le risorse è possibile utilizzare il modulo limit, e creare una nuova chain da richiamare
+al post del target che vogliamo loggare.</p>
+<p>Supponiamo di voler effettuare log ad ogni drop, invece di aggiungere delle regole LOG subito dopo i drop,
+creiamo una catena che limita il logging e la richiamiamo al posto dei target DROP.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Creazione della catena che effettua un log limitato prima di un drop</span>
+$ iptables -N logdrop
+$ iptables -A logdrop -m <span class="hljs-built_in">limit</span> --<span class="hljs-built_in">limit</span> 5/m --limit-burst 10 -j LOG <span class="hljs-comment"># i primi 10 pacchetti consecutivi vengono loggati, dopodichè solo 5 pacchetti al minuto verranno loggati, il limit-burst count viene resettato ogni volta che il limit rate non viene superato.</span>
+$ iptables -A logdrop -j DROP
+
+<span class="hljs-comment"># Esempio di utilizzo, effettua il log limitato e poi il drop</span>
+$ iptables -A INPUT -m conntrack --ctstate INVALID -j logdrop
+</code></pre>
+<h3 id="rules" tabindex="-1">rules <a class="header-anchor" href="#rules" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># L&#x27;ordine delle regole è importante, con queste due prima il pacchetto viene loggato poi viene droppato</span>
+<span class="hljs-comment"># add rule &quot;LOG every packet&quot; to chain INPUT</span>
+$ iptables --append INPUT --jump LOG
+<span class="hljs-comment"># add rule &quot;DROP every packet&quot; to chain INPUT</span>
+$ iptables --append INPUT --jump DROP
+
+<span class="hljs-comment"># block packets with source IP 46.36.222.157</span>
+<span class="hljs-comment"># -A is a shortcut for --append</span>
+<span class="hljs-comment"># -j is a shortcut for --jump</span>
+$ iptables -A INPUT -s 46.36.222.157 -j DROP
+
+<span class="hljs-comment"># block outgoing SSH connections</span>
+$ iptables -A OUTPUT -p tcp --dport 22 -j DROP
+
+<span class="hljs-comment"># allow all incoming HTTP(S) connections</span>
+$ iptables -A INPUT  -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+$ iptables -A OUTPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate ESTABLISHED     -j ACCEPT
+
+<span class="hljs-comment"># check the default policies</span>
+$ <span class="hljs-built_in">sudo</span> iptables --list-rules  <span class="hljs-comment"># or -S</span>
+    -P INPUT ACCEPT
+    -P FORWARD ACCEPT
+    -P OUTPUT ACCEPT
+
+<span class="hljs-comment"># change policy for chain FORWARD to target DROP, la policy è l&#x27;azione(target) di default</span>
+<span class="hljs-comment"># che viene eseguita quando nella catena non è stato eseguito uno dei target terminali come ACCEPT o DROP.</span>
+$ iptables --policy FORWARD DROP  <span class="hljs-comment"># or -P</span>
+</code></pre>
+<h3 id="perch%C3%A8-il-target-si-chiama-target-a-non-action" tabindex="-1">Perchè il target si chiama target a non action <a class="header-anchor" href="#perch%C3%A8-il-target-si-chiama-target-a-non-action" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ man iptables
+-j, --jump target
+    Obiettivo della regola, cosa fare quando il pacchetto verifica la regola
+    il target può essere una chain user-defind, un target <span class="hljs-built_in">builtin</span> che decide cosa fare del pacchetto immediatamente,
+    oppure una estensione.
+
+<span class="hljs-comment"># Esempio di chain definita dall&#x27;utente(è una sorta di funzione, ma non può avere policy-azioni di default):</span>
+$ iptables -P INPUT ACCEPT
+<span class="hljs-comment"># drop all forwards by default</span>
+$ iptables -P FORWARD DROP
+$ iptables -P OUTPUT ACCEPT
+<span class="hljs-comment"># create a new chain</span>
+$ iptables -N DOCKER  <span class="hljs-comment"># or --new-chain</span>
+<span class="hljs-comment"># if outgoing interface is docker0, jump to DOCKER chain</span>
+$ iptables -A FORWARD -o docker0 -j DOCKER
+<span class="hljs-comment"># add some specific to Docker rules to the user-defined chain</span>
+$ iptables -A DOCKER ...
+$ iptables -A DOCKER ...
+$ iptables -A DOCKER ...
+<span class="hljs-comment"># jump back to the caller (i.e. FORWARD) chain</span>
+$ iptables -A DOCKER -j RETURN
+</code></pre>
+<h3 id="tabelle" tabindex="-1">Tabelle <a class="header-anchor" href="#tabelle" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>filter</code>, tabella di default se non si specifica l'opzione <code>-t</code>, contiene le chain <code>INPUT</code>, <code>OUTPUT</code>, <code>FORWARD</code></li>
+<li><code>nat</code>, consultata quando un pacchetto crea una nuova connessione, contiene le chain <code>PREROUTING</code>, per alterare i pacchetti in ingresso,
+OUTPUT, per alterare i pacchetti generati localmente prima del routing, e <code>POSTROUTING</code>, per alterare i pacchetti prima dell'uscita.</li>
+<li><code>mangle</code>: tabella per l'aterazione specializzata dei pacchetti, contiene le chain PREROUTING, OUTPUT, INPUT, FORWARD</li>
+<li><code>raw</code>, tabella con priorità sulle altre utilizzata per le esclusioni dal connection tracking(-j NOTRACK)</li>
+<li><code>security</code>, utilizzata per il Mandatory Access Control (MAC) (SECMARK e CONNSECMARK)</li>
+</ul>
+<h3 id="sequenza-di-esecuzione-delle-chain-e-tabelle" tabindex="-1">Sequenza di esecuzione delle Chain e Tabelle <a class="header-anchor" href="#sequenza-di-esecuzione-delle-chain-e-tabelle" aria-hidden="true">🔗</a></h3>
+<p>Per vedere la sequenza di lavoro delle chain delle varie tabelle, invece di creare una VM e fare un ping dalla VM,<br>
+utilizziamo i namespace, creeremo una shell ed una coppia di interfacce veth che siano in un namespace guest dal quale faremo il ping.<br>
+<strong>I namespace e le interfacce veth possono essere utilizzati al posto delle VM per fare esperimenti di rete.</strong><br>
+Nella shell, che avrà il proprio stack di rete, potremo effettuare delle impostazioni di log su iptables senza &quot;sporcare&quot; la configurazione di rete dell'Host.</p>
+<pre><code class="language-bash">$ man network_namespaces
+    Network namespaces provide isolation of the system resources associated with networking: network devices, IPv4 and IPv6 protocol stacks, IP routing tables, fire‐wall rules, 
+    A virtual network (veth(4)) device pair provides a pipe-like abstraction that can be used to create tunnels between network namespaces, and can be used to create
+    a bridge to a physical network device <span class="hljs-keyword">in</span> another namespace.
+
+$ man ip-netns
+    A network namespace is logically another copy of the network stack, with its own routes, firewall rules, and network devices.
+    ip netns list - This <span class="hljs-built_in">command</span> displays all of the network namespaces <span class="hljs-keyword">in</span> /var/run/netns
+    ip netns add NAME - If NAME is available <span class="hljs-keyword">in</span> /var/run/netns this <span class="hljs-built_in">command</span> creates a new network namespace and assigns NAME.
+    ip netns attach NAME PID - If NAME is available <span class="hljs-keyword">in</span> /var/run/netns this <span class="hljs-built_in">command</span> attaches the network namespace of the process PID to NAME as <span class="hljs-keyword">if</span> it were created with ip netns.
+    ip [-all] netns delete [ NAME ] - delete the name of a network namespace(s)
+    ip netns identify [PID] - Report network namespaces names <span class="hljs-keyword">for</span> process
+    ip netns pids NAME - Report processes <span class="hljs-keyword">in</span> the named network namespace
+    ip [-all] netns <span class="hljs-built_in">exec</span> [ NAME ] cmd ... - Run cmd <span class="hljs-keyword">in</span> the named network namespace
+
+$ man unshare
+    unshare - run program <span class="hljs-keyword">in</span> new namespaces
+    a new namespace persists only as long as it has member processes.
+    network namespace The process will have independent IPv4 and IPv6 stacks, IP routing tables, firewall rules, the /proc/net and /sys/class/net directory trees, sockets, etc.
+    -n, --net[=file] Unshare the network namespace
+    -r, --map-root-user
+            Run the program only after the current effective user and group IDs have been mapped to the superuser UID and GID <span class="hljs-keyword">in</span> the newly created user namespace. This
+            makes it possible to conveniently gain capabilities needed to manage various aspects of the newly created namespaces (such as configuring interfaces <span class="hljs-keyword">in</span> the
+            network namespace or mounting filesystems <span class="hljs-keyword">in</span> the mount namespace) even when run unprivileged.
+
+$ man veth
+    The  veth  devices  are  virtual Ethernet devices.  They can act as tunnels between network namespaces to create a bridge to a physical network device <span class="hljs-keyword">in</span> another namespace, but can also be used as standalone network devices.
+    veth devices are always created <span class="hljs-keyword">in</span> interconnected pairs.  A pair can be created using the <span class="hljs-built_in">command</span>:
+    <span class="hljs-comment"># ip link add &lt;p1-name&gt; type veth peer name &lt;p2-name&gt;</span>
+    Packets transmitted on one device <span class="hljs-keyword">in</span> the pair are immediately received on the other device.  
+    A particularly interesting use <span class="hljs-keyword">case</span>  is  to  place one  end  of  a veth pair <span class="hljs-keyword">in</span> one network namespace and the other end <span class="hljs-keyword">in</span> another network namespace, thus allowing communication between network namespaces.
+    <span class="hljs-comment"># ip link add &lt;p1-name&gt; netns &lt;p1-ns&gt; type veth peer &lt;p2-name&gt; netns &lt;p2-ns&gt;</span>
+
+$ man ip-link
+    ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> { DEVICE }
+        netns NETNSNAME | PID
+                move the device to the network namespace associated with name NETNSNAME or process PID.
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST:</span>
+$ unshare -r --net bash                 <span class="hljs-comment"># creiamo un processo bash che è una sorta di VM con il proprio autonomo stack di rete</span>
+<span class="hljs-comment"># Guest: </span>
+<span class="hljs-comment"># namespace (same terminal session) Ora siamo nel GUEST - NAMESPACE 2979</span>
+$ <span class="hljs-built_in">echo</span> $$
+2979                                    <span class="hljs-comment"># annotiamo questo PID, perchè vi associeremo un endpoint veth appartenente ad un nuovo namespace di rete</span>
+
+<span class="hljs-comment"># HOST:</span>
+$ <span class="hljs-built_in">sudo</span> -i
+<span class="hljs-comment"># create a veth interface</span>
+$ ip <span class="hljs-built_in">link</span> add vGUEST <span class="hljs-built_in">type</span> veth peer name vHOST
+<span class="hljs-comment"># move one of its peers to network namespace</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST netns 2979  <span class="hljs-comment"># sposta il device vGUEST nel network namespace del processo bash sopra creato</span>
+<span class="hljs-comment"># create linux bridge</span>
+$ ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge
+<span class="hljs-comment"># wire vHOST to br0</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST master br0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 master br0
+<span class="hljs-comment"># set IP addresses and bring devices up</span>
+$ ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+$ ip addr flush dev enp5s0 
+$ ip route flush dev br0
+$ ip addr add 192.168.1.2/24 dev br0
+$ ip route add default via 192.168.1.1 dev br0    
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST up
+$ ip addr
+<span class="hljs-comment"># turn the host into a virtual router</span>
+$ <span class="hljs-comment"># iptables -t nat -A POSTROUTING -o enp5s0 -j MASQUERADE</span>
+$ <span class="hljs-comment"># echo 1 &gt; /proc/sys/net/ipv4/ip_forward</span>
+<span class="hljs-comment"># Enable netfilter logs in namespaces</span>
+$ <span class="hljs-built_in">echo</span> 1 &gt; /proc/sys/net/netfilter/nf_log_all_netns
+$ <span class="hljs-comment"># sudo bash -c &quot;echo 1 &gt; /proc/sys/net/netfilter/nf_log_all_netns&quot;</span>
+$ ping 8.8.8.8 <span class="hljs-comment"># per verificare che l&#x27;accesso ad internet tramite br0 funzioni</span>
+$ ip route
+  default via 192.168.1.1 dev br0 
+  192.168.1.0/24 dev br0 proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.2 
+
+<span class="hljs-comment"># GUEST - NAMESPACE 2979</span>
+<span class="hljs-comment"># bring devices up</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST up
+<span class="hljs-comment"># configure IP address</span>
+$ ip addr add 192.168.1.13/24 dev vGUEST
+$ ip addr
+<span class="hljs-comment"># set default route via br0</span>
+$ ip route add default via 192.168.1.1 dev vGUEST <span class="hljs-comment"># il gateway deve essere lo stesso del NIC fisico dell&#x27;Host, NON l&#x27;Host(192.168.1.2)</span>
+$ ip route
+    default via 192.168.1.1 dev vGUEST 
+    192.168.1.0/24 dev vGUEST proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.13 
+$ iptables -S -t filter
+    -P INPUT ACCEPT
+    -P FORWARD ACCEPT
+    -P OUTPUT ACCEPT
+$ iptables -S -t nat
+    -P PREROUTING ACCEPT
+    -P INPUT ACCEPT
+    -P OUTPUT ACCEPT
+    -P POSTROUTING ACCEPT
+$ iptables -S -t mangle
+    -P PREROUTING ACCEPT
+    -P INPUT ACCEPT
+    -P FORWARD ACCEPT
+    -P OUTPUT ACCEPT
+    -P POSTROUTING ACCEPT
+$ iptables -S -t raw
+    -P PREROUTING ACCEPT
+    -P OUTPUT ACCEPT
+$ iptables -t filter -A INPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_FILTER_INPUT &quot;</span>
+$ iptables -t filter -A FORWARD -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_FILTER_FORWARD &quot;</span>
+$ iptables -t filter -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_FILTER_OUTPUT &quot;</span>
+$ iptables -t nat -A PREROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_NAT_PREROUTE &quot;</span>
+$ iptables -t nat -A INPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_NAT_INPUT &quot;</span>
+$ iptables -t nat -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_NAT_OUTPUT &quot;</span>
+$ iptables -t nat -A POSTROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_NAT_POSTROUTE &quot;</span>
+$ iptables -t mangle -A PREROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_MANGLE_PREROUTE &quot;</span>
+$ iptables -t mangle -A INPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_MANGLE_INPUT &quot;</span>
+$ iptables -t mangle -A FORWARD -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_MANGLE_FORWARD &quot;</span>
+$ iptables -t mangle -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_MANGLE_OUTPUT &quot;</span>
+$ iptables -t mangle -A POSTROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_MANGLE_POSTROUTE &quot;</span>
+$ iptables -t raw -A PREROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_RAW_PREROUTE &quot;</span>
+$ iptables -t raw -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_NETNS_RAW_OUTPUT &quot;</span>
+    
+<span class="hljs-comment"># HOST:</span>
+$ iptables -S -t filter
+    -P INPUT ACCEPT
+    -P FORWARD ACCEPT
+    -P OUTPUT ACCEPT
+$ iptables -S -t nat
+    -P PREROUTING ACCEPT
+    -P INPUT ACCEPT
+    -P OUTPUT ACCEPT
+    -P POSTROUTING ACCEPT
+    -A POSTROUTING -o eth0 -j MASQUERADE
+$ iptables -S -t mangle
+    -P PREROUTING ACCEPT
+    -P INPUT ACCEPT
+    -P FORWARD ACCEPT
+    -P OUTPUT ACCEPT
+    -P POSTROUTING ACCEPT
+$ iptables -S -t raw
+    -P PREROUTING ACCEPT
+    -P OUTPUT ACCEPT       
+$ iptables -t filter -A INPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_FILTER_INPUT &quot;</span>
+$ iptables -t filter -A FORWARD -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_FILTER_FORWARD &quot;</span>
+$ iptables -t filter -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_FILTER_OUTPUT &quot;</span>
+$ iptables -t nat -A PREROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_NAT_PREROUTE &quot;</span>
+$ iptables -t nat -A INPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_NAT_INPUT &quot;</span>
+$ iptables -t nat -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_NAT_OUTPUT &quot;</span>
+$ iptables -t nat -A POSTROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_NAT_POSTROUTE &quot;</span>
+$ iptables -t mangle -A PREROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_MANGLE_PREROUTE &quot;</span>
+$ iptables -t mangle -A INPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_MANGLE_INPUT &quot;</span>
+$ iptables -t mangle -A FORWARD -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_MANGLE_FORWARD &quot;</span>
+$ iptables -t mangle -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_MANGLE_OUTPUT &quot;</span>
+$ iptables -t mangle -A POSTROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_MANGLE_POSTROUTE &quot;</span>
+$ iptables -t raw -A PREROUTING -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_RAW_PREROUTE &quot;</span>
+$ iptables -t raw -A OUTPUT -j LOG --log-prefix <span class="hljs-string">&quot;IPT_HOST_RAW_OUTPUT &quot;</span>
+$ journalctl -k --grep=<span class="hljs-string">&quot;IN=.*OUT=.*&quot;</span>
+$ journalctl -k --grep=<span class="hljs-string">&quot;.*IPT_.*&quot;</span>
+$ journalctl -k -f --grep=<span class="hljs-string">&quot;IN=.*OUT=.*&quot;</span>
+
+<span class="hljs-comment"># GUEST - Test di connessione ad internet</span>
+$ ping 8.8.8.8 <span class="hljs-comment"># non funziona se non inserisco il NIC fisico nel bridge e sposto la sua configurazione di ip e routing sul bridge,</span>
+               <span class="hljs-comment"># e se non imposto come gateway del GUEST lo stesso gawteway del NIC fisico nell&#x27;Host              </span>
+$ ping 192.168.1.2 <span class="hljs-comment"># funziona sermpre perchè non deve uscire da enp5s0</span>
+</code></pre>
+<p>Sequenza delle chain visibile dal log:</p>
+<pre><code>NETNS_RAW_OUTPUT
+NETNS_MANGLE_OUTPUT
+NETNS_FILTER_OUTPUT
+NETNS_MANGLE_POSTROUTE
+
+HOST_RAW_PREROUTE
+HOST_MANGLE_PREROUTE
+HOST_MANGLE_FORWARD
+HOST_FILTER_FORWARD
+HOST_MANGLE_POSTROUTE
+HOST_RAW_PREROUTE
+HOST_MANGLE_PREROUTE
+HOST_MANGLE_FORWARD
+HOST_FILTER_FORWARD
+HOST_MANGLE_POSTROUTE
+
+NETNS_RAW_PREROUTE
+NETNS_MANGLE_PREROUTE
+NETNS_MANGLE_INPUT
+NETNS_FILTER_INPUT
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST: Ripristinare il NIC fisico</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap1
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap2
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap3
+<span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+<span class="hljs-built_in">sudo</span> ip route flush dev enp5s0
+<span class="hljs-comment"># nmcli con up Cavo</span>
+<span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/24 dev enp5s0
+<span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev enp5s0
+</code></pre>
+<h3 id="altro" tabindex="-1">Altro <a class="header-anchor" href="#altro" aria-hidden="true">🔗</a></h3>
+<pre><code>Router:
+
+    sysctl -w net.ipv4.ip_forward=1
+    echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+    iptables -A FORWARD -i eth1 -j ACCEPT
+    iptables -A FORWARD -o eth1 -j ACCEPT
+
+Questa regola conferisce ai sistemi situati dietro un firewall/gateway, 
+la possibilità di accedere alla rete interna. 
+Il gateway direziona i pacchetti da un nodo LAN alla sua destinazione prevista, 
+passando tutti i pacchetti attraverso il proprio dispositivo eth1
+
+Accettando i pacchetti inoltrati tramite il dispositivo IP interno, si abilita la comunicazione tra i nodi LAN; 
+tuttavia essi non sono ancora abilitati a comunicare esternamente con Internet. 
+Per abilitare i nodi LAN con indirizzi IP privati alla comunicazione con le reti pubbliche esterne, 
+configurate il firewall per l'IP masquerading, il quale maschera le richieste provenienti dai nodi LAN 
+con l'indirizzo IP dei dispositivi esterni del firewall (in questo caso, eth0):
+
+    iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+
+Il target -j MASQUERADE viene specificato in modo da poter mascherare l'indirizzo IP privato di un nodo, con l'indirizzo IP esterno del firewall/gateway. 
+
+
+
+https://www.areanetworking.it/nat-in-ambiente-linux-con-iptables.html
+https://www.netfilter.org/documentation/HOWTO/it/NAT-HOWTO-6.html
+
+## DNAT
+Il Destination NAT o DNAT viene particolarmente utilizzato quando si hanno più server in DMZ con indirizzamento privato 
+del tipo 10.0.0.x ed un solo server firewall dotato di IP pubblico è quindi visibile da Internet. 
+Ricordiamo sempre che il DNAT avviene nella chain di PREROUTING ossia prima della routing decision. 
+Il DNAT sarà utilissimo in quanto ci permetterà di proteggere i server pubblici in DMZ filtrando il traffico a loro destinato dal firewall 
+che farà NAT solamente per i servizi HTTP e MAIL
+
+    IL DNAT PERMETTE AI SERVER NELLA LAN INTERNA DI ESSERE VISTI DALL'ESTERNO
+
+    iptables -t nat -A PREROUTING -p {tcp | udp | icmp}
+
+    -s (source address)
+    --source-port &lt;Â­porta&gt;
+    -d (destination address)
+
+    --destination-port &lt;Â­porta&gt;
+    -j DNAT
+
+    --to-destination (destination address)
+
+
+Con i seguenti comandi abilitiamo il DNAT:
+
+$ iptables -t nat -A PREROUTING -p tcp -d 80.182.53.192 -dport 80 -j DNAT -to-destination 10.0.0.2:80
+$ iptables -t nat -A PREROUTING -p tcp -d 80.182.53.192 -dport 110 -j DNAT -to-destination 10.0.0.3:110
+$ iptables -t filter -P FORWARD ACCEPT
+$ echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+Si può notare che le richieste HTTP arrivate al firewall da internet (80.182.53.192) sono nattate 
+tramite l’interfaccia 10.0.0.1 del firewall verso 10.0.0.2 sul server adibito, 
+mentre le richieste pop3 sono nattate su 10.0.0.3.
+Abbiamo poi abilitato il forward dei pacchetti sia tramite iptables 
+(iptables -t filter -P FORWARD -j ACCEPT) 
+che a livello kernel (echo 1 &gt; /proc/sys/net/ipv4/ip_forward).
+
+Per esporre su internet una macchina con server HTTP della LAN:
+    
+    $ iptables -A FORWARD -i eth0 -p tcp --dport 80 -d 172.31.0.23 -j ACCEPT # Se siete in possesso di una policy DROP di default all'interno della vostra catena FORWAR
+    $ iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j DNAT --to 172.31.0.23:80
+
+Questa regola specifica che la tabella NAT utilizza la catena interna PREROUTING, 
+per inoltrare esclusivamente all'indirizzo IP 172.31.0.23 di destinazione elencato, le richieste HTTP in entrata.
+
+## MASQUERADING
+
+Il masquerading è ampiamente usato per permettere ad una rete interna con indirizzamento privato come 10.0.0.x 
+e quindi non routabile all’esterno, di uscire su internet con il solo IP pubblico del dispositivo(router, firewall) 
+sul quale è in funzione un’implementazione di questa tecnica. 
+E’ molto usato in aziende medio-piccole, anche in questo caso, con lo scopo di risparmiare IP pubblici e “nascondere”, 
+come già detto (vedere osservazioni precedenti), la rete locale.
+
+    IL MASQUERADING NON PERMETTE AI SERVER DELLA LAN DI ESSERE VISTI DALL'ESTERNO, MA DI POTER ACCEDERE ALL'ESTERNO TUTTI CON LO STESSO IP
+
+
+    iptables -t nat -A POSTROUTING -o (interfaccia sulla extranet) -s (intranet/mask) --source-address
+
+    $ iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+    $ iptables -t filter -P FORWARD ACCEPT
+    $ echo 1 &gt; /proc/sys/net/ipv4/ip_forward
+
+
+https://www.netfilter.org/documentation/HOWTO/it/NAT-HOWTO-5.html
+    Le tre catene sono chiamate PREROUTING (per il Destination NAT sui pacchetti in arrivo), 
+    POSTROUTING (per il Source NAT sui pacchetti in uscita), 
+    e OUTPUT (per il Destination NAT sui pacchetti generati localmente).
+
+## SNAT
+
+Il Source NAT, come si può intuire, modifica nell’header del pacchetto l’indirizzo ip sorgente. 
+Si può quindi far credere ad un server remoto che il pacchetto non arrivi dal proprio firewall ma da un IP diverso. 
+Il server remoto dunque risponderà al nuovo IP sorgente specificato nel pacchetto.
+
+
+    –to-source (source address modificato)
+
+    $ iptables -t nat -A POSTROUTING -o ppp0 -j SNAT -to-source 150.92.48.25
+
+Se il PC 10.0.0.7 manda un pacchetto verso internet, il firewall inserirà come indirizzo di provenienza 150.92.48.25, di conseguenza la risposta a quel pacchetto verrà mandata al nuovo IP 150.92.48.25.
+E’ simile al masquerading ma con la differenza che ci è permesso specificare un indirizzo IP di sorgenza che deve essere presente nel pacchetto.
+
+## REDIRECT
+
+Il (port)REDIRECT consente di mutare la porta di destinazione di un pacchetto. Anche questa operazione si svolge nella chain di PREROUTING.
+
+    –destination-port (porta di destinazione nell’header)
+    -j REDIRECT -to-port (nuova porta di destinazione)
+
+    $ iptables -t nat -A PREROUTING -d 192.168.1.1 destination-port 80 -j REDIRECT -to-port 10000
+
+
+
+$ iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+
+
+https://www.digitalocean.com/community/tutorials/iptables-essentials-common-firewall-rules-and-commands
+
+Regole utili:
+
+Abilitare l'interfaccia di loopback, fondamentale per poter utilizzare localhost   
+    $ sudo iptables -A INPUT -i lo -j ACCEPT
+    $ sudo iptables -A OUTPUT -o lo -j ACCEPT
+
+Abilitare l'ingresso di connessioni stabilite ( si suppone -P INPUT DROP,  -P OUTUPT ACCEPT)
+    $ sudo iptables -A INPUT -m conntrack --ctstate ESTABLISHED,RELATED -j ACCEPT
+Normalmente il server esegue delle richieste perchè è consentita l'uscita, però per poter ricevere le risposte serve una regola
+Questa regola che utilizza lo stato evita di scrivere tante regole tanti quanti sono i possibili input ricevuti a seguito delle richieste in uscita effettuate.
+
+Abilitare l'uscita delle risposte alle richieste ricevute
+    $ sudo iptables -A OUTPUT -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+Bloccare le connessioni da un IP:
+    $ sudo iptables -A INPUT -s 203.0.113.51 -j DROP
+
+Bloccare le connessioni da un IP su una interfaccia:
+    $ iptables -A INPUT -i eth0 -s 203.0.113.51 -j DROP
+
+
+Consentire  connessioni SSH in ingresso:
+    $ sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+    # Serve solo se -P OUTPUT DROP:
+    $ sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+Consentire  connessioni SSH in ingresso solo da una certa subnet:
+$ sudo iptables -A INPUT -p tcp -s 203.0.113.0/24 --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+$ sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+Consentire connessioni SSH in uscita:
+$ sudo iptables -A OUTPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+# Se la policy di OUTPUT non è ACCEPT:
+$ sudo iptables -A INPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+Consentire tutte le connessioni HTTP in ingresso(e risposte in uscita nel caso in cui non sia -P OUTPUT ACCEPT):
+$ sudo iptables -A INPUT -p tcp --dport 80 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+$ sudo iptables -A OUTPUT -p tcp --sport 80 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+$ sudo iptables -A INPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+$ sudo iptables -A OUTPUT -p tcp -m multiport --dports 80,443 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+Consentire il traffico SMTP in ingresso
+    $ sudo iptables -A INPUT -p tcp --dport 25 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+    $ sudo iptables -A OUTPUT -p tcp --sport 25 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+
+Cancellare una regola:
+
+$ sudo iptables -L --line-numbers
+$ sudo iptables -D INPUT 3
+
+    Prove da fare:
+        ip link set tap0 up promisc on
+        iptables -t nat -A POSTROUTING -o wlan0 -j MASQUERADE
+        iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+        iptables -A FORWARD -i tap0 -o wlan0 -j ACCEPT
+        ip link set dev $eth promisc on
+        $ nmcli connection add type bridge ifname br0 stp no
+        $ nmcli connection add type bridge-slave ifname enp30s0 master br0
+
+- &lt;https://unix.stackexchange.com/questions/248504/bridged-interfaces-do-not-have-internet-access&gt;
+
+    ```bash
+    $ iptables -t nat -A POSTROUTING -o envmw -j MASQUERADE
+    $ iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+    $ iptables -A FORWARD -i virbr0 -o envmw -j ACCEPT
+    ```
+</code></pre>
+</body></html>

@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.514" />
+        <title>network_connect</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="network_connect" tabindex="-1">network_connect <a class="header-anchor" href="#network_connect" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.514</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22network-connect%22description%3A-%22the-network-connect-command-description-and-usage%22keywords%3A-%22network%2C-connect%2C-user-defined%22">title: &quot;network connect&quot;description: &quot;The network connect command description and usage&quot;keywords: &quot;network, connect, user-defined&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#connect-a-running-container-to-a-network">Connect a running container to a network </a></li><li><a href="#connect-a-container-to-a-network-when-it-starts">Connect a container to a network when it starts </a></li><li><a href="#specify-the-ip-address-a-container-will-use-on-a-given-network">Specify the IP address a container will use on a given network </a></li><li><a href="#use-the-legacy---link-option">Use the legacy --link option </a></li><li><a href="#create-a-network-alias-for-a-container">Create a network alias for a container </a></li><li><a href="#network-implications-of-stopping%2C-pausing%2C-or-restarting-containers">Network implications of stopping, pausing, or restarting containers </a></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22network-connect%22description%3A-%22the-network-connect-command-description-and-usage%22keywords%3A-%22network%2C-connect%2C-user-defined%22" tabindex="-1">title: &quot;network connect&quot;
+description: &quot;The network connect command description and usage&quot;
+keywords: &quot;network, connect, user-defined&quot; <a class="header-anchor" href="#title%3A-%22network-connect%22description%3A-%22the-network-connect-command-description-and-usage%22keywords%3A-%22network%2C-connect%2C-user-defined%22" aria-hidden="true">🔗</a></h2>
+<h1 id="network-connect" tabindex="-1">network connect <a class="header-anchor" href="#network-connect" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker network connect [OPTIONS] NETWORK CONTAINER
+
+Connect a container to a network
+
+Options:
+<span class="hljs-code">      --alias value           Add network-scoped alias for the container (default [])
+      --help                  Print usage
+      --ip string             IPv4 address (e.g., 172.30.100.104)
+      --ip6 string            IPv6 address (e.g., 2001:db8::33)
+      --link value            Add link to another container (default [])
+      --link-local-ip value   Add a link-local address for the container (default [])
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Connects a container to a network. You can connect a container by name
+or by ID. Once connected, the container can communicate with other containers in
+the same network.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="connect-a-running-container-to-a-network" tabindex="-1">Connect a running container to a network <a class="header-anchor" href="#connect-a-running-container-to-a-network" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network connect multi-host-network container1</span>
+</code></pre>
+<h3 id="connect-a-container-to-a-network-when-it-starts" tabindex="-1">Connect a container to a network when it starts <a class="header-anchor" href="#connect-a-container-to-a-network-when-it-starts" aria-hidden="true">🔗</a></h3>
+<p>You can also use the <code>docker run --network=&lt;network-name&gt;</code> option to start a container and immediately connect it to a network.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -itd --network=multi-host-network busybox</span>
+</code></pre>
+<h3 id="specify-the-ip-address-a-container-will-use-on-a-given-network" tabindex="-1">Specify the IP address a container will use on a given network <a class="header-anchor" href="#specify-the-ip-address-a-container-will-use-on-a-given-network" aria-hidden="true">🔗</a></h3>
+<p>You can specify the IP address you want to be assigned to the container's interface.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network connect --ip 10.10.36.122 multi-host-network container2</span>
+</code></pre>
+<h3 id="use-the-legacy---link-option" tabindex="-1">Use the legacy <code>--link</code> option <a class="header-anchor" href="#use-the-legacy---link-option" aria-hidden="true">🔗</a></h3>
+<p>You can use <code>--link</code> option to link another container with a preferred alias</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network connect --<span class="hljs-built_in">link</span> container1:c1 multi-host-network container2</span>
+</code></pre>
+<h3 id="create-a-network-alias-for-a-container" tabindex="-1">Create a network alias for a container <a class="header-anchor" href="#create-a-network-alias-for-a-container" aria-hidden="true">🔗</a></h3>
+<p><code>--alias</code> option can be used to resolve the container by another name in the network
+being connected to.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network connect --<span class="hljs-built_in">alias</span> db --<span class="hljs-built_in">alias</span> mysql multi-host-network container2</span>
+</code></pre>
+<h3 id="network-implications-of-stopping%2C-pausing%2C-or-restarting-containers" tabindex="-1">Network implications of stopping, pausing, or restarting containers <a class="header-anchor" href="#network-implications-of-stopping%2C-pausing%2C-or-restarting-containers" aria-hidden="true">🔗</a></h3>
+<p>You can pause, restart, and stop containers that are connected to a network.
+A container connects to its configured networks when it runs.</p>
+<p>If specified, the container's IP address(es) is reapplied when a stopped
+container is restarted. If the IP address is no longer available, the container
+fails to start. One way to guarantee that the IP address is available is
+to specify an <code>--ip-range</code> when creating the network, and choose the static IP
+address(es) from outside that range. This ensures that the IP address is not
+given to another container while this container is not on the network.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create --subnet 172.20.0.0/16 --ip-range 172.20.240.0/20 multi-host-network</span>
+</code></pre>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network connect --ip 172.20.128.2 multi-host-network container2</span>
+</code></pre>
+<p>To verify the container is connected, use the <code>docker network inspect</code> command. Use <code>docker network disconnect</code> to remove a container from the network.</p>
+<p>Once connected in network, containers can communicate using only another
+container's IP address or name. For <code>overlay</code> networks or custom plugins that
+support multi-host connectivity, containers connected to the same multi-host
+network but launched from different Engines can also communicate in this way.</p>
+<p>You can connect a container to one or more networks. The networks need not be the same type. For example, you can connect a single container bridge and overlay networks.</p>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="network_inspect.html">network inspect</a></li>
+<li><a href="network_create.html">network create</a></li>
+<li><a href="network_disconnect.html">network disconnect</a></li>
+<li><a href="network_ls.html">network ls</a></li>
+<li><a href="network_rm.html">network rm</a></li>
+<li><a href="network_prune.html">network prune</a></li>
+<li><a href="https://docs.docker.com/network/">Understand Docker container networks</a></li>
+<li><a href="https://docs.docker.com/network/bridge/">Work with networks</a></li>
+</ul>
+</body></html>

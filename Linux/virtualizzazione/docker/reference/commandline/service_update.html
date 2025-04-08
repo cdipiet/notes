@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.643" />
+        <title>service_update</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="service_update" tabindex="-1">service_update <a class="header-anchor" href="#service_update" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.643</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22service-update%22description%3A-%22the-service-update-command-description-and-usage%22keywords%3A-%22service%2C-update%22">title: &quot;service update&quot;description: &quot;The service update command description and usage&quot;keywords: &quot;service, update&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#update-a-service">Update a service </a></li><li><a href="#perform-a-rolling-restart-with-no-parameter-changes">Perform a rolling restart with no parameter changes </a></li><li><a href="#add-or-remove-mounts">Add or remove mounts </a></li><li><a href="#add-or-remove-published-service-ports">Add or remove published service ports </a></li><li><a href="#add-or-remove-network">Add or remove network </a></li><li><a href="#roll-back-to-the-previous-version-of-a-service">Roll back to the previous version of a service </a></li><li><a href="#add-or-remove-secrets">Add or remove secrets </a></li><li><a href="#update-services-using-templates">Update services using templates </a></li><li><a href="#specify-isolation-mode-(windows)">Specify isolation mode (Windows) </a></li><li><a href="#updating-jobs">Updating Jobs </a></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22service-update%22description%3A-%22the-service-update-command-description-and-usage%22keywords%3A-%22service%2C-update%22" tabindex="-1">title: &quot;service update&quot;
+description: &quot;The service update command description and usage&quot;
+keywords: &quot;service, update&quot; <a class="header-anchor" href="#title%3A-%22service-update%22description%3A-%22the-service-update-command-description-and-usage%22keywords%3A-%22service%2C-update%22" aria-hidden="true">🔗</a></h2>
+<h1 id="service-update" tabindex="-1">service update <a class="header-anchor" href="#service-update" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-Markdown">Usage:  docker service update [OPTIONS] SERVICE
+
+Update a service
+
+Options:
+<span class="hljs-code">      --args command                       Service command args
+      --cap-add list                       Add Linux capabilities
+      --cap-drop list                      Drop Linux capabilities
+      --config-add config                  Add or update a config file on a service
+      --config-rm list                     Remove a configuration file
+      --constraint-add list                Add or update a placement constraint
+      --constraint-rm list                 Remove a constraint
+      --container-label-add list           Add or update a container label
+      --container-label-rm list            Remove a container label by its key
+      --credential-spec credential-spec    Credential spec for managed service account (Windows only)
+  -d, --detach                             Exit immediately instead of waiting for the service to converge (default true)
+      --dns-add list                       Add or update a custom DNS server
+      --dns-option-add list                Add or update a DNS option
+      --dns-option-rm list                 Remove a DNS option
+      --dns-rm list                        Remove a custom DNS server
+      --dns-search-add list                Add or update a custom DNS search domain
+      --dns-search-rm list                 Remove a DNS search domain
+      --endpoint-mode string               Endpoint mode (vip or dnsrr)
+      --entrypoint command                 Overwrite the default ENTRYPOINT of the image
+      --env-add list                       Add or update an environment variable
+      --env-rm list                        Remove an environment variable
+      --force                              Force update even if no changes require it
+      --generic-resource-add list          Add an additional generic resource to the service&#x27;s resources requirements
+      --generic-resource-rm list           Remove a previously added generic resource to the service&#x27;s resources requirements
+      --group-add list                     Add an additional supplementary user group to the container
+      --group-rm list                      Remove a previously added supplementary user group from the container
+      --health-cmd string                  Command to run to check health
+      --health-interval duration           Time between running the check (ms|s|m|h)
+      --health-retries int                 Consecutive failures needed to report unhealthy
+      --health-start-period duration       Start period for the container to initialize before counting retries towards unstable (ms|s|m|h)
+      --health-timeout duration            Maximum time to allow one check to run (ms|s|m|h)
+      --help                               Print usage
+      --host-add list                      Add a custom host-to-IP mapping (host:ip)
+      --host-rm list                       Remove a custom host-to-IP mapping (host:ip)
+      --hostname string                    Container hostname
+      --init bool                          Use an init inside each service container to forward signals and reap processes
+      --image string                       Service image tag
+      --isolation string                   Service container isolation mode
+      --label-add list                     Add or update a service label
+      --label-rm list                      Remove a label by its key
+      --limit-cpu decimal                  Limit CPUs
+      --limit-memory bytes                 Limit Memory
+      --limit-pids int                     Limit maximum number of processes (default 0 = unlimited)
+      --log-driver string                  Logging driver for service
+      --log-opt list                       Logging driver options
+      --max-concurrent                     Number of job tasks to run at once (default equal to --replicas)
+      --mount-add mount                    Add or update a mount on a service
+      --mount-rm list                      Remove a mount by its target path
+      --network-add network                Add a network
+      --network-rm list                    Remove a network
+      --no-healthcheck                     Disable any container-specified HEALTHCHECK
+      --no-resolve-image                   Do not query the registry to resolve image digest and supported platforms
+      --placement-pref-add pref            Add a placement preference
+      --placement-pref-rm pref             Remove a placement preference
+      --publish-add port                   Add or update a published port
+      --publish-rm port                    Remove a published port by its target port
+  -q, --quiet                              Suppress progress output
+      --read-only                          Mount the container&#x27;s root filesystem as read only
+      --replicas uint                      Number of tasks
+      --reserve-cpu decimal                Reserve CPUs
+      --reserve-memory bytes               Reserve Memory
+      --restart-condition string           Restart when condition is met (&quot;none&quot;|&quot;on-failure&quot;|&quot;any&quot;)
+      --restart-delay duration             Delay between restart attempts (ns|us|ms|s|m|h)
+      --restart-max-attempts uint          Maximum number of restarts before giving up
+      --restart-window duration            Window used to evaluate the restart policy (ns|us|ms|s|m|h)
+      --rollback                           Rollback to previous specification
+      --rollback-delay duration            Delay between task rollbacks (ns|us|ms|s|m|h)
+      --rollback-failure-action string     Action on rollback failure (&quot;pause&quot;|&quot;continue&quot;)
+      --rollback-max-failure-ratio float   Failure rate to tolerate during a rollback
+      --rollback-monitor duration          Duration after each task rollback to monitor for failure (ns|us|ms|s|m|h)
+      --rollback-order string              Rollback order (&quot;start-first&quot;|&quot;stop-first&quot;)
+      --rollback-parallelism uint          Maximum number of tasks rolled back simultaneously (0 to roll back all at once)
+      --secret-add secret                  Add or update a secret on a service
+      --secret-rm list                     Remove a secret
+      --stop-grace-period duration         Time to wait before force killing a container (ns|us|ms|s|m|h)
+      --stop-signal string                 Signal to stop the container
+      --sysctl-add list                    Add or update a Sysctl option
+      --sysctl-rm list                     Remove a Sysctl option
+  -t, --tty                                Allocate a pseudo-TTY
+      --ulimit-add ulimit                  Add or update a ulimit option (default [])
+      --ulimit-rm list                     Remove a ulimit option
+      --update-delay duration              Delay between updates (ns|us|ms|s|m|h)
+      --update-failure-action string       Action on update failure (&quot;pause&quot;|&quot;continue&quot;|&quot;rollback&quot;)
+      --update-max-failure-ratio float     Failure rate to tolerate during an update
+      --update-monitor duration            Duration after each task update to monitor for failure (ns|us|ms|s|m|h)
+      --update-order string                Update order (&quot;start-first&quot;|&quot;stop-first&quot;)
+      --update-parallelism uint            Maximum number of tasks updated simultaneously (0 to update all at once)
+  -u, --user string                        Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
+      --with-registry-auth                 Send registry authentication details to swarm agents
+  -w, --workdir string                     Working directory inside the container
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Updates a service as described by the specified parameters. The parameters are
+the same as <a href="service_create.html"><code>docker service create</code></a>. Refer to the description
+there for further information.</p>
+<p>Normally, updating a service will only cause the service's tasks to be replaced with new ones if a change to the
+service requires recreating the tasks for it to take effect. For example, only changing the
+<code>--update-parallelism</code> setting will not recreate the tasks, because the individual tasks are not affected by this
+setting. However, the <code>--force</code> flag will cause the tasks to be recreated anyway. This can be used to perform a
+rolling restart without any changes to the service parameters.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>This is a cluster management command, and must be executed on a swarm
+manager node. To learn about managers and workers, refer to the
+<a href="https://docs.docker.com/engine/swarm/">Swarm mode section</a> in the
+documentation.</p>
+</blockquote>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="update-a-service" tabindex="-1">Update a service <a class="header-anchor" href="#update-a-service" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update --limit-cpu 2 redis</span>
+</code></pre>
+<h3 id="perform-a-rolling-restart-with-no-parameter-changes" tabindex="-1">Perform a rolling restart with no parameter changes <a class="header-anchor" href="#perform-a-rolling-restart-with-no-parameter-changes" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update --force --update-parallelism 1 --update-delay 30s redis</span>
+</code></pre>
+<p>In this example, the <code>--force</code> flag causes the service's tasks to be shut down
+and replaced with new ones even though none of the other parameters would
+normally cause that to happen. The <code>--update-parallelism 1</code> setting ensures
+that only one task is replaced at a time (this is the default behavior). The
+<code>--update-delay 30s</code> setting introduces a 30 second delay between tasks, so
+that the rolling restart happens gradually.</p>
+<h3 id="add-or-remove-mounts" tabindex="-1">Add or remove mounts <a class="header-anchor" href="#add-or-remove-mounts" aria-hidden="true">🔗</a></h3>
+<p>Use the <code>--mount-add</code> or <code>--mount-rm</code> options add or remove a service's bind mounts
+or volumes.</p>
+<p>The following example creates a service which mounts the <code>test-data</code> volume to
+<code>/somewhere</code>. The next step updates the service to also mount the <code>other-volume</code>
+volume to <code>/somewhere-else</code>volume, The last step unmounts the <code>/somewhere</code> mount
+point, effectively removing the <code>test-data</code> volume. Each command returns the
+service name.</p>
+<ul>
+<li>
+<p>The <code>--mount-add</code> flag takes the same parameters as the <code>--mount</code> flag on
+<code>service create</code>. Refer to the <a href="service_create.md#add-bind-mounts-volumes-or-memory-filesystems">volumes and bind mounts</a>
+section in the <code>service create</code> reference for details.</p>
+</li>
+<li>
+<p>The <code>--mount-rm</code> flag takes the <code>target</code> path of the mount.</p>
+</li>
+</ul>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service create \
+    --name=myservice \
+    --mount <span class="hljs-built_in">type</span>=volume,<span class="hljs-built_in">source</span>=test-data,target=/somewhere \
+    nginx:alpine</span>
+
+myservice
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker service update \
+    --mount-add <span class="hljs-built_in">type</span>=volume,<span class="hljs-built_in">source</span>=other-volume,target=/somewhere-else \
+    myservice</span>
+
+myservice
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker service update --mount-rm /somewhere myservice</span>
+
+myservice
+</code></pre>
+<h3 id="add-or-remove-published-service-ports" tabindex="-1">Add or remove published service ports <a class="header-anchor" href="#add-or-remove-published-service-ports" aria-hidden="true">🔗</a></h3>
+<p>Use the <code>--publish-add</code> or <code>--publish-rm</code> flags to add or remove a published
+port for a service. You can use the short or long syntax discussed in the
+<a href="service_create.md#publish-service-ports-externally-to-the-swarm--p---publish">docker service create</a>
+reference.</p>
+<p>The following example adds a published service port to an existing service.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update \
+  --publish-add published=8080,target=80 \
+  myservice</span>
+</code></pre>
+<h3 id="add-or-remove-network" tabindex="-1">Add or remove network <a class="header-anchor" href="#add-or-remove-network" aria-hidden="true">🔗</a></h3>
+<p>Use the <code>--network-add</code> or <code>--network-rm</code> flags to add or remove a network for
+a service. You can use the short or long syntax discussed in the
+<a href="service_create.md#attach-a-service-to-an-existing-network---network">docker service create</a>
+reference.</p>
+<p>The following example adds a new alias name to an existing service already connected to network my-network:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update \
+  --network-rm my-network \
+  --network-add name=my-network,<span class="hljs-built_in">alias</span>=web1 \
+  myservice</span>
+</code></pre>
+<h3 id="roll-back-to-the-previous-version-of-a-service" tabindex="-1">Roll back to the previous version of a service <a class="header-anchor" href="#roll-back-to-the-previous-version-of-a-service" aria-hidden="true">🔗</a></h3>
+<p>Use the <code>--rollback</code> option to roll back to the previous version of the service.</p>
+<p>This will revert the service to the configuration that was in place before the most recent <code>docker service update</code> command.</p>
+<p>The following example updates the number of replicas for the service from 4 to 5, and then rolls back to the previous configuration.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update --replicas=5 web</span>
+
+web
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker service <span class="hljs-built_in">ls</span></span>
+
+ID            NAME  MODE        REPLICAS  IMAGE
+80bvrzp6vxf3  web   replicated  0/5       nginx:alpine
+
+</code></pre>
+<p>Roll back the <code>web</code> service...</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update --rollback web</span>
+
+web
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker service <span class="hljs-built_in">ls</span></span>
+
+ID            NAME  MODE        REPLICAS  IMAGE
+80bvrzp6vxf3  web   replicated  0/4       nginx:alpine
+
+</code></pre>
+<p>Other options can be combined with <code>--rollback</code> as well, for example, <code>--update-delay 0s</code> to execute the rollback without a delay between tasks:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update \
+  --rollback \
+  --update-delay 0s</span>
+  web
+
+web
+
+</code></pre>
+<p>Services can also be set up to roll back to the previous version automatically
+when an update fails. To set up a service for automatic rollback, use
+<code>--update-failure-action=rollback</code>. A rollback will be triggered if the fraction
+of the tasks which failed to update successfully exceeds the value given with
+<code>--update-max-failure-ratio</code>.</p>
+<p>The rate, parallelism, and other parameters of a rollback operation are
+determined by the values passed with the following flags:</p>
+<ul>
+<li><code>--rollback-delay</code></li>
+<li><code>--rollback-failure-action</code></li>
+<li><code>--rollback-max-failure-ratio</code></li>
+<li><code>--rollback-monitor</code></li>
+<li><code>--rollback-parallelism</code></li>
+</ul>
+<p>For example, a service set up with <code>--update-parallelism 1 --rollback-parallelism 3</code>
+will update one task at a time during a normal update, but during a rollback, 3
+tasks at a time will get rolled back. These rollback parameters are respected both
+during automatic rollbacks and for rollbacks initiated manually using <code>--rollback</code>.</p>
+<h3 id="add-or-remove-secrets" tabindex="-1">Add or remove secrets <a class="header-anchor" href="#add-or-remove-secrets" aria-hidden="true">🔗</a></h3>
+<p>Use the <code>--secret-add</code> or <code>--secret-rm</code> options add or remove a service's
+secrets.</p>
+<p>The following example adds a secret named <code>ssh-2</code> and removes <code>ssh-1</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker service update \
+    --secret-add <span class="hljs-built_in">source</span>=ssh-2,target=ssh-2 \
+    --secret-rm ssh-1 \
+    myservice</span>
+</code></pre>
+<h3 id="update-services-using-templates" tabindex="-1">Update services using templates <a class="header-anchor" href="#update-services-using-templates" aria-hidden="true">🔗</a></h3>
+<p>Some flags of <code>service update</code> support the use of templating.
+See <a href="service_create.md#create-services-using-templates"><code>service create</code></a> for the reference.</p>
+<h3 id="specify-isolation-mode-(windows)" tabindex="-1">Specify isolation mode (Windows) <a class="header-anchor" href="#specify-isolation-mode-(windows)" aria-hidden="true">🔗</a></h3>
+<p><code>service update</code> supports the same <code>--isolation</code> flag as <code>service create</code>
+See <a href="service_create.html"><code>service create</code></a> for the reference.</p>
+<h3 id="updating-jobs" tabindex="-1">Updating Jobs <a class="header-anchor" href="#updating-jobs" aria-hidden="true">🔗</a></h3>
+<p>When a service is created as a job, by setting its mode to <code>replicated-job</code> or
+to <code>global-job</code> when doing <code>service create</code>, options for updating it are
+limited.</p>
+<p>Updating a Job immediately stops any Tasks that are in progress. The operation
+creates a new set of Tasks for the job and effectively resets its completion
+status. If any Tasks were running before the update, they are stopped, and new
+Tasks are created.</p>
+<p>Jobs cannot be rolled out or rolled back. None of the flags for configuring
+update or rollback settings are valid with job modes.</p>
+<p>To run a job again with the same parameters that it was run previously, it can
+be force updated with the <code>--force</code> flag.</p>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="service_create.html">service create</a></li>
+<li><a href="service_inspect.html">service inspect</a></li>
+<li><a href="service_logs.html">service logs</a></li>
+<li><a href="service_ls.html">service ls</a></li>
+<li><a href="service_ps.html">service ps</a></li>
+<li><a href="service_rm.html">service rm</a></li>
+<li><a href="service_rollback.html">service rollback</a></li>
+<li><a href="service_scale.html">service scale</a></li>
+</ul>
+</body></html>

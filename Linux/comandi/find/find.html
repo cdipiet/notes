@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.207" />
+        <title>find</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="find" tabindex="-1">find <a class="header-anchor" href="#find" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.207</p>
+<nav class="table-of-contents"><ol><li><a href="#esempio-di-exec">Esempio di exec </a><ol><li><a href="#prima-soluzione%2C-con-find">Prima soluzione, con find </a></li><li><a href="#seconda-soluzione%2C-con-ls">Seconda soluzione, con ls </a></li></ol></li><li><a href="#file-modificati-negli-ultimi-2-giorni">File modificati negli ultimi 2 giorni </a></li><li><a href="#riparazione-dei-nomi-dei-file-windows">Riparazione dei nomi dei file windows </a></li><li><a href="#cercare-e-cancellare-files">Cercare e cancellare files </a></li><li><a href="#exec-ed-il-terminatore-%3B">exec ed il terminatore ; </a></li><li><a href="#exec-ed-il-terminatore-%2B">exec ed il terminatore + </a></li><li><a href="#trovare-file-duplicati">Trovare file duplicati </a></li><li><a href="#search-and-delete-broken-symbolic-links">Search and delete Broken Symbolic Links </a></li><li><a href="#cercare-file-msdos-con-crlf">Cercare file MSDOS con CRLF </a></li><li><a href="#eliminazione-file-aventi-dimensione-0">Eliminazione file aventi dimensione 0 </a></li><li><a href="#rimuove-il-permesso-di-scrittura-a-others-sui-soli-file-che-lo-hanno-impostato">Rimuove il permesso di scrittura a others sui soli file che lo hanno impostato </a></li><li><a href="#file-modificati-oggi">File modificati oggi </a></li><li><a href="#assegnare-all'utente-i-file-che-non-gli-appartengono">Assegnare all&#39;utente i file che non gli appartengono </a></li><li><a href="#elimina-tutti-i-file-tranne-i-.gz">Elimina tutti i file tranne i .gz </a></li><li><a href="#impostazione-dei-diritti-di-esecuzione-dopo-un-checkout">Impostazione dei diritti di esecuzione dopo un checkout </a></li><li><a href="#cercare-tutti-i-file-eseguibili-per-l'utente-o-il-gruppo-o-gli-altri-e-renderli-eseguibili-per-tutti">Cercare tutti i file eseguibili per l&#39;utente o il gruppo o gli altri e renderli eseguibili per tutti </a></li><li><a href="#cercare-file-evitando-che-lo-shell-expansion-di-%22ls-*%22-superi-la-dimensione-della-riga-di-comando">Cercare file evitando che lo shell expansion di &quot;ls *&quot; superi la dimensione della riga di comando </a></li><li><a href="#esempi-di-operatori-booleani">Esempi di operatori booleani </a></li><li><a href="#broken-symbolic-links-with-corresponding-pointed-files">Broken Symbolic links with corresponding pointed files </a></li><li><a href="#broken-symbolic-links-list">Broken Symbolic links List </a></li><li><a href="#how-do-i-find-the-symbolic-links-to-a-file-in-linux">How do I find the symbolic links to a file in linux </a></li><li><a href="#find-files-ignoring-.svn-and-its-decendents">find files ignoring .svn and its decendents </a></li><li><a href="#lavorare-con-nomi-di-file-che-contengono-spazi">Lavorare con nomi di file che contengono spazi </a><ol><li><a href="#dollar-single-quoted-string">Dollar Single Quoted String </a></li></ol></li><li><a href="#ricerca-all'interno-di-file">Ricerca all&#39;interno di file </a></li><li><a href="#riprodurre-una-struttura-di-directory-vuote">Riprodurre una struttura di directory vuote </a></li><li><a href="#ordinare-un-insieme-di-files-per-dimensione">Ordinare un insieme di files per dimensione </a></li><li><a href="#search-%26-replace-in-files">Search &amp; Replace in files </a><ol><li><a href="#cercare-tutti-i-file-.py-e-.properties-e-sostituirvi-all'interno-ogni-occorrenza-di-rb_host-con-rb_host%40prmlx006">Cercare tutti i file .py e .properties e sostituirvi all&#39;interno ogni occorrenza di RB_HOST con RB_HOST@prmlx006 </a></li></ol></li><li><a href="#esempi-di-find">Esempi di find </a></li><li><a href="#delete-pycache">delete pycache </a></li></ol></nav><h1 id="find-1" tabindex="-1">Find <a class="header-anchor" href="#find-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://man.archlinux.org/man/find.1">https://man.archlinux.org/man/find.1</a></li>
+</ul>
+<p><code>-exec command</code></p>
+<p>Execute command; true if 0 status is returned. All following arguments to find are taken to be arguments to the command until an argument consisting of <code>;</code> is encountered. The string <code>{}</code> is replaced by the current file name being processed.</p>
+<ul>
+<li>The specified command is run once for each matched file.</li>
+<li>The command is executed in the starting directory.</li>
+<li><code>{}</code> <code>;</code>  might need to be escaped (with a <code>\</code>) or quoted to protect them from expansion by the shell.</li>
+</ul>
+<p><code>-exec command {} +</code></p>
+<p>the command line is built by appending each selected file name at the end; the total number of invocations of the command will be much less than the number of matched files.</p>
+<h2 id="esempio-di-exec" tabindex="-1">Esempio di exec <a class="header-anchor" href="#esempio-di-exec" aria-hidden="true">🔗</a></h2>
+<p>Vogliamo copiare e rinominare i files che si trovano in una directory senza scendere nelle sottodirectory,<br>
+e potendo processare i nomi dei file trovati prima della copia.</p>
+<h3 id="prima-soluzione%2C-con-find" tabindex="-1">Prima soluzione, con find <a class="header-anchor" href="#prima-soluzione%2C-con-find" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">find /tmp/source -maxdepth 1 -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">exec</span> bash -c <span class="hljs-string">&#x27;
+  cp $0 /tmp/dest/$(basename ${0%.src})
+&#x27;</span> {} \;
+</code></pre>
+<p>il file corrente <code>{}</code> viene passato a <code>exec bash</code> che per la sintassi di <code>-c</code> viene passato come parametro posizionale <code>$0</code></p>
+<h3 id="seconda-soluzione%2C-con-ls" tabindex="-1">Seconda soluzione, con ls <a class="header-anchor" href="#seconda-soluzione%2C-con-ls" aria-hidden="true">🔗</a></h3>
+<p>Equivalente con <code>ls</code>:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">ls</span> -1Ap /tmp/source | grep -v <span class="hljs-string">&#x27;/$&#x27;</span>); <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">cp</span> /tmp/source/<span class="hljs-variable">$f</span> /tmp/dest/$(<span class="hljs-built_in">basename</span> <span class="hljs-variable">${f%.src}</span>)
+<span class="hljs-keyword">done</span>
+</code></pre>
+<ul>
+<li><code>-1</code> divide la lista dei files con <code>\n</code></li>
+<li><code>-A</code> non produce <code>.</code> e <code>..</code></li>
+<li><code>-p</code> appende <code>/</code> ai nomi delle directory</li>
+</ul>
+<h2 id="file-modificati-negli-ultimi-2-giorni" tabindex="-1">File modificati negli ultimi 2 giorni <a class="header-anchor" href="#file-modificati-negli-ultimi-2-giorni" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> f -mtime -3 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -la {} \;
+</code></pre>
+<h2 id="riparazione-dei-nomi-dei-file-windows" tabindex="-1">Riparazione dei nomi dei file windows <a class="header-anchor" href="#riparazione-dei-nomi-dei-file-windows" aria-hidden="true">🔗</a></h2>
+<p>E' possibile da Linux o anche da Windows creare in un file system NTFS
+file nel cui nome è presente un carattere non consentito da explorer,
+per riparare tali nomi sostituendo tali caratteri non consentiti con un underscore:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+find . -name <span class="hljs-string">&quot;*[&lt;&gt;:\\|?*]*&quot;</span> <span class="hljs-comment"># Per la sola visualizzazione</span>
+find . -name <span class="hljs-string">&quot;*[&lt;&gt;:\\|?*]*&quot;</span> -<span class="hljs-built_in">exec</span> bash -c <span class="hljs-string">&#x27;x=&quot;{}&quot;; y=&quot;$(sed &quot;s/[&lt;&gt;:\\|?*]\+/-/g&quot; &lt;&lt;&lt; &quot;$x&quot;)&quot; &amp;&amp; mv &quot;$x&quot; &quot;$y&quot; &#x27;</span> \; <span class="hljs-comment"># Per eseguire la riparazione dei nomi</span>
+
+<span class="hljs-comment">#find &quot;$1&quot; -depth -print0 | while IFS= read -r -d &#x27;&#x27; file; do</span>
+<span class="hljs-comment">#  d=&quot;$( dirname &quot;$file&quot; )&quot;</span>
+<span class="hljs-comment">#  f=&quot;$( basename &quot;$file&quot; )&quot;</span>
+<span class="hljs-comment">#  new=&quot;${f//[^a-zA-Z0-9\/\._\-]/}&quot;</span>
+<span class="hljs-comment">#  if [ &quot;$f&quot; != &quot;$new&quot; ]      # if equal, name is already clean, so leave alone</span>
+<span class="hljs-comment">#  then</span>
+<span class="hljs-comment">#    if [ -e &quot;$d/$new&quot; ]</span>
+<span class="hljs-comment">#    then</span>
+<span class="hljs-comment">#      echo &quot;Notice: \&quot;$new\&quot; and \&quot;$f\&quot; both exist in &quot;$d&quot;:&quot;</span>
+<span class="hljs-comment">#      ls -ld &quot;$d/$new&quot; &quot;$d/$f&quot;</span>
+<span class="hljs-comment">#    else</span>
+<span class="hljs-comment">#      echo mv &quot;$file&quot; &quot;$d/$new&quot;      # remove &quot;echo&quot; to actually rename things</span>
+<span class="hljs-comment">#    fi</span>
+<span class="hljs-comment">#  fi</span>
+<span class="hljs-comment">#done</span>
+<span class="hljs-comment"># find . -type f -name &quot;*:*&quot; -exec rename -n &#x27;s/:/-/&#x27; {} \;</span>
+<span class="hljs-comment"># You may change the regex by using new=&quot;${f//[\\\/\:\*\?\&quot;&lt;&gt;|]/}&quot; if you want to replace anything that Windows cannot handle.</span>
+<span class="hljs-comment"># Save this script as rename.sh, make it executable with chmod +x rename.sh. Then, call it like rename.sh /some/path.</span>
+<span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Press any key to continue&quot;</span> x
+</code></pre>
+<h2 id="cercare-e-cancellare-files" tabindex="-1">Cercare e cancellare files <a class="header-anchor" href="#cercare-e-cancellare-files" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find . -iname <span class="hljs-string">&quot;*.mht&quot;</span> -delete <span class="hljs-comment"># è molto veloce perchè non esegue lo spawn di un processo per ogni delete</span>
+</code></pre>
+<pre><code class="language-bash">find . -iname <span class="hljs-string">&quot;*.mht&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> {} \; <span class="hljs-comment"># è meno veloce perchè la exec crea un processo per ogni delete, tuttavia è più portabile perche l&#x27;opzione -delete non c&#x27;e&#x27; in tutte le versioni di find.</span>
+</code></pre>
+<pre><code class="language-bash">find . -iname <span class="hljs-string">&quot;*.mht&quot;</span> -print0 | xargs -0 <span class="hljs-built_in">rm</span> <span class="hljs-comment"># Questa versione è OK perchè evita lo spawn dei processi grazie alla pipe, tuttavia anche -print0 può essere non presente in tutte le versioni di find. Viene creato un solo processo per il comando xargs invece di un processo per ogni comando rm eseguito.</span>
+</code></pre>
+<h2 id="exec-ed-il-terminatore-%3B" tabindex="-1">exec ed il terminatore <code>;</code> <a class="header-anchor" href="#exec-ed-il-terminatore-%3B" aria-hidden="true">🔗</a></h2>
+<p>Il <code>;</code> fa parte della sintassi dell'opzione exec, tuttavia essendo il <code>;</code> anche
+un carattere speciale della shell, al fine di evitare che venga 'consumato'
+dalla shell durante il processo di parsing, e farlo arrivare &quot;intero&quot; al comando find-exec,
+bisogna quotarlo: <code>\;</code></p>
+<p><code>-exec command ;</code></p>
+<p>Execute command; true if 0 status is returned. All following arguments to find are taken to be arguments to the command until
+an argument consisting of '<code>;</code>' is encountered. The string '<code>{}</code>' is replaced by the current file name being processed everywhere it occurs in the arguments to the command, not just in arguments
+where it is alone, as in some versions of find. Both of these constructions <strong>might need to be escaped (with a '<code>\</code>') or quoted to protect them from expansion by the shell</strong>. See the EXAMPLES section for examples of the use of the '-exec' option. The specified command is run once for each matched file. The command is executed in the starting directory. There are unavoidable security problems surrounding use of the -exec option; you should use the <code>-execdir</code> option instead.</p>
+<h2 id="exec-ed-il-terminatore-%2B" tabindex="-1">exec ed il terminatore <code>+</code> <a class="header-anchor" href="#exec-ed-il-terminatore-%2B" aria-hidden="true">🔗</a></h2>
+<p>Nelle recenti versioni di find si può utilizzare il <code>+</code> al termine di exec <code>-exec rm {} +</code> <br>
+per consumare in un unica esecuzione si exec assieme tutti i file trovati,<br>
+evitando così lo spawn di processo che avviene per l'exec di ciascun file trovato.</p>
+<h2 id="trovare-file-duplicati" tabindex="-1">Trovare file duplicati <a class="header-anchor" href="#trovare-file-duplicati" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find /home/cdp/images -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">md5sum</span> <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span> | <span class="hljs-built_in">sort</span> | <span class="hljs-built_in">uniq</span> --all-repeated=separate -w 15 &gt; duplicati.txt
+</code></pre>
+<h2 id="search-and-delete-broken-symbolic-links" tabindex="-1">Search and delete Broken Symbolic Links <a class="header-anchor" href="#search-and-delete-broken-symbolic-links" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> $(find . -<span class="hljs-built_in">type</span> l); <span class="hljs-keyword">do</span> <span class="hljs-keyword">if</span> [ ! -e <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-built_in">rm</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>; <span class="hljs-keyword">fi</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="cercare-file-msdos-con-crlf" tabindex="-1">Cercare file MSDOS con CRLF <a class="header-anchor" href="#cercare-file-msdos-con-crlf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">exec</span> file {} \; |grep CRLF
+</code></pre>
+<h2 id="eliminazione-file-aventi-dimensione-0" tabindex="-1">Eliminazione file aventi dimensione 0 <a class="header-anchor" href="#eliminazione-file-aventi-dimensione-0" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find /opt/oracle/product/10.2.0/db_1/lib/ -size 0 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> {} \;
+</code></pre>
+<h2 id="rimuove-il-permesso-di-scrittura-a-others-sui-soli-file-che-lo-hanno-impostato" tabindex="-1">Rimuove il permesso di scrittura a others sui soli file che lo hanno impostato <a class="header-anchor" href="#rimuove-il-permesso-di-scrittura-a-others-sui-soli-file-che-lo-hanno-impostato" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> d -perm -o=w -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> o-w {} \;
+</code></pre>
+<h2 id="file-modificati-oggi" tabindex="-1">File modificati oggi <a class="header-anchor" href="#file-modificati-oggi" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> f -mtime 0 <span class="hljs-comment"># find conta le ore dalla mezzanotte, un eta 0 vuol dire &quot;oggi&quot;</span>
+</code></pre>
+<p>find lavora per periodi di 24 ore, considerando la sola parte intera della divisione 24/n (con n=&lt;24 nel nostro caso). Quindi per n=[0..23] ovvero per il primo giorno, la parte intera della divisione è 0.</p>
+<h2 id="assegnare-all'utente-i-file-che-non-gli-appartengono" tabindex="-1">Assegnare all'utente i file che non gli appartengono <a class="header-anchor" href="#assegnare-all'utente-i-file-che-non-gli-appartengono" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find ~ ! -user <span class="hljs-variable">${USER}</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> <span class="hljs-variable">${USER}</span>: <span class="hljs-string">&quot;{}&quot;</span> \;
+</code></pre>
+<h2 id="elimina-tutti-i-file-tranne-i-.gz" tabindex="-1">Elimina tutti i file tranne i .gz <a class="header-anchor" href="#elimina-tutti-i-file-tranne-i-.gz" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . | grep -v .gz | xargs <span class="hljs-built_in">rm</span> -rf
+</code></pre>
+<h2 id="impostazione-dei-diritti-di-esecuzione-dopo-un-checkout" tabindex="-1">Impostazione dei diritti di esecuzione dopo un checkout <a class="header-anchor" href="#impostazione-dei-diritti-di-esecuzione-dopo-un-checkout" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -name <span class="hljs-string">&quot;configure&quot;</span> | xargs -l1 <span class="hljs-built_in">chmod</span> +x
+$ find . -name <span class="hljs-string">&quot;jvmstarter&quot;</span> | xargs -l1 <span class="hljs-built_in">chmod</span> +x
+$ find . -name <span class="hljs-string">&quot;*.sh&quot;</span> | xargs -l1 <span class="hljs-built_in">chmod</span> +x
+</code></pre>
+<h2 id="cercare-tutti-i-file-eseguibili-per-l'utente-o-il-gruppo-o-gli-altri-e-renderli-eseguibili-per-tutti" tabindex="-1">Cercare tutti i file eseguibili per l'utente o il gruppo o gli altri e renderli eseguibili per tutti <a class="header-anchor" href="#cercare-tutti-i-file-eseguibili-per-l'utente-o-il-gruppo-o-gli-altri-e-renderli-eseguibili-per-tutti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -perm +111 -print0|xargs -0l1 <span class="hljs-built_in">chmod</span> ugo+x
+$ find . -perm +x | xargs -l1 <span class="hljs-built_in">chmod</span> a+x
+</code></pre>
+<h2 id="cercare-file-evitando-che-lo-shell-expansion-di-%22ls-*%22-superi-la-dimensione-della-riga-di-comando" tabindex="-1">Cercare file evitando che lo shell expansion di &quot;ls *&quot; superi la dimensione della riga di comando <a class="header-anchor" href="#cercare-file-evitando-che-lo-shell-expansion-di-%22ls-*%22-superi-la-dimensione-della-riga-di-comando" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -name <span class="hljs-string">&quot;*.txt&quot;</span> -<span class="hljs-built_in">exec</span> grep -q terminale {} \; -<span class="hljs-built_in">print</span>
+$ find . -name <span class="hljs-string">&quot;*.txt&quot;</span> -<span class="hljs-built_in">exec</span> grep -q terminale {} \; -<span class="hljs-built_in">ls</span>
+$ locate somefile | xargs <span class="hljs-built_in">ls</span> -lsh
+</code></pre>
+<h2 id="esempi-di-operatori-booleani" tabindex="-1">Esempi di operatori booleani <a class="header-anchor" href="#esempi-di-operatori-booleani" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find /usr1/user/3p/system -name <span class="hljs-string">&quot;makefile&quot;</span> -o -name <span class="hljs-string">&quot;*.mk&quot;</span> -<span class="hljs-built_in">exec</span> grep -l <span class="hljs-string">&quot;\-g&quot;</span> {} \;
+$ find /usr1/user/denver_src/ -<span class="hljs-built_in">exec</span> grep -l <span class="hljs-string">&quot;\-g &quot;</span> {} \;
+$ find /usr1/user/denver_src/ ! -name <span class="hljs-string">&quot;*.o&quot;</span> -<span class="hljs-built_in">exec</span> grep -l <span class="hljs-string">&quot;\-g &quot;</span> {} \;
+$ find /usr1/user/threshold_src/tbs ! -name <span class="hljs-string">&quot;*.o&quot;</span> -<span class="hljs-built_in">exec</span> grep -l <span class="hljs-string">&quot;\-g &quot;</span> {} \;
+</code></pre>
+<p>Tecnica alternativa ad xargs -L1 per elaborare il risultato di find</p>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> l | (<span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> FN ; <span class="hljs-keyword">do</span> <span class="hljs-built_in">test</span> -e <span class="hljs-string">&quot;<span class="hljs-variable">$FN</span>&quot;</span> || <span class="hljs-built_in">ls</span> -ld <span class="hljs-string">&quot;<span class="hljs-variable">$FN</span>&quot;</span>; <span class="hljs-keyword">done</span>)
+</code></pre>
+<h2 id="broken-symbolic-links-with-corresponding-pointed-files" tabindex="-1">Broken Symbolic links with corresponding pointed files <a class="header-anchor" href="#broken-symbolic-links-with-corresponding-pointed-files" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> l | (<span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> FN ; <span class="hljs-keyword">do</span> <span class="hljs-built_in">test</span> -e <span class="hljs-string">&quot;<span class="hljs-variable">$FN</span>&quot;</span> || <span class="hljs-built_in">ls</span> -ld <span class="hljs-string">&quot;<span class="hljs-variable">$FN</span>&quot;</span>; <span class="hljs-keyword">done</span>)
+</code></pre>
+<h2 id="broken-symbolic-links-list" tabindex="-1">Broken Symbolic links List <a class="header-anchor" href="#broken-symbolic-links-list" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> $(find /usr/local/bin -<span class="hljs-built_in">type</span> l); <span class="hljs-keyword">do</span> <span class="hljs-keyword">if</span> [ ! -e <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>; <span class="hljs-keyword">fi</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="how-do-i-find-the-symbolic-links-to-a-file-in-linux" tabindex="-1">How do I find the symbolic links to a file in linux <a class="header-anchor" href="#how-do-i-find-the-symbolic-links-to-a-file-in-linux" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> / ; find . -<span class="hljs-built_in">type</span> l | xargs <span class="hljs-built_in">ls</span> -l | grep &lt;your_file_name&gt;
+</code></pre>
+<h2 id="find-files-ignoring-.svn-and-its-decendents" tabindex="-1">find files ignoring .svn and its decendents <a class="header-anchor" href="#find-files-ignoring-.svn-and-its-decendents" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> d -name .svn -prune -o -<span class="hljs-built_in">type</span> f -print0 | xargs -r0 ...
+$ find . -<span class="hljs-built_in">type</span> f ! -iwholename \*.svn\* -print0 [ | xargs -0 ]
+</code></pre>
+<h2 id="lavorare-con-nomi-di-file-che-contengono-spazi" tabindex="-1">Lavorare con nomi di file che contengono spazi <a class="header-anchor" href="#lavorare-con-nomi-di-file-che-contengono-spazi" aria-hidden="true">🔗</a></h2>
+<p>Bisogna sostituire il normale separatore dei nomi di file in elenco <strong>spazio</strong> con il carattere ASCII <code>0</code>.</p>
+<pre><code class="language-bash">$ find . -print0 | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> -d $<span class="hljs-string">&#x27;\0&#x27;</span> file
+<span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> -v <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="dollar-single-quoted-string" tabindex="-1">Dollar Single Quoted String <a class="header-anchor" href="#dollar-single-quoted-string" aria-hidden="true">🔗</a></h3>
+<p>La sintassi del dollaro <code>$</code> davanti alla stringa single quoted <code>'\0'</code> serve ad abilitare l'interpretazione dei codici escape(<a href="https://stackoverflow.com/questions/11966312/how-does-the-leading-dollar-sign-affect-single-quotes-in-bash">https://stackoverflow.com/questions/11966312/how-does-the-leading-dollar-sign-affect-single-quotes-in-bash</a>).</p>
+<p>Altro modo con <strong>IFS</strong>:</p>
+<pre><code class="language-bash">find . -print0 | <span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r -d <span class="hljs-string">&#x27;&#x27;</span> file; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>; <span class="hljs-keyword">done</span>
+find . -print0 | <span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r -d $<span class="hljs-string">&#x27;\0&#x27;</span> file; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>; <span class="hljs-keyword">done</span>
+<span class="hljs-comment"># IFS= permette di trattare nomi di file contenenti spazi tab e newline, impostando IFS alla stringa nulla si evita il trim degli spazi </span>
+<span class="hljs-comment"># -r    impedisce l&#x27;interpretazione dei codisci escape \.</span>
+<span class="hljs-comment"># -d &#x27;&#x27; stringa vuota come separatore di fine linea, equivale al carattere \0</span>
+<span class="hljs-comment"># IFS=$&#x27; \t\n&#x27; valore di default di IFS</span>
+</code></pre>
+<p>Se impostassimo <code>IFS=$'\0'</code></p>
+<p>Con xargs:</p>
+<pre><code class="language-bash">find . -<span class="hljs-built_in">type</span> f -print0 | xargs -0 -I{} <span class="hljs-built_in">echo</span> {}
+</code></pre>
+<h2 id="ricerca-all'interno-di-file" tabindex="-1">Ricerca all'interno di file <a class="header-anchor" href="#ricerca-all'interno-di-file" aria-hidden="true">🔗</a></h2>
+<p>Cerca i file XML contenenti parole inizianti per &quot;Local&quot;</p>
+<pre><code class="language-bash">$ find . -name <span class="hljs-string">&quot;*.xml&quot;</span> | xargs -l1 grep -E <span class="hljs-string">&#x27;\&quot;Local.+&#x27;</span>
+$ find . -name <span class="hljs-string">&quot;*.xml&quot;</span> -<span class="hljs-built_in">exec</span> grep -E <span class="hljs-string">&#x27;\&quot;Local.+&#x27;</span> {} \;
+$ find . -name <span class="hljs-string">&quot;*.risql&quot;</span> |xargs -l1 grep -H -E <span class="hljs-string">&#x27;Code\W*smallint\W*not\W*null&#x27;</span>
+$ find . -name <span class="hljs-string">&quot;*.risql&quot;</span> -print0 | xargs -r0 -l1 grep -H -i -n yyyymmdd
+</code></pre>
+<h2 id="riprodurre-una-struttura-di-directory-vuote" tabindex="-1">Riprodurre una struttura di directory vuote <a class="header-anchor" href="#riprodurre-una-struttura-di-directory-vuote" aria-hidden="true">🔗</a></h2>
+<p>Copiare la struttura di directory corrente a partire da /usr/project</p>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">mkdir</span> /usr/project/{} \; <span class="hljs-comment"># Se la versione di find accetta {} non separato da spazi</span>
+$ find . -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">print</span> | sed <span class="hljs-string">&#x27;s@^@/usr/project/@&#x27;</span> | xargs <span class="hljs-built_in">mkdir</span>
+$ find . -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">print</span> | sed <span class="hljs-string">&#x27;s@^@mkdir @&#x27;</span> | (<span class="hljs-built_in">cd</span> /usr/project; sh) <span class="hljs-comment"># Si crea una subshell</span>
+</code></pre>
+<h2 id="ordinare-un-insieme-di-files-per-dimensione" tabindex="-1">Ordinare un insieme di files per dimensione <a class="header-anchor" href="#ordinare-un-insieme-di-files-per-dimensione" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -name <span class="hljs-string">&quot;*_ATC_*.sxw&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -l {} \; | <span class="hljs-built_in">tr</span> -s <span class="hljs-string">&#x27; &#x27;</span> &gt; lista.txt
+$ <span class="hljs-built_in">sort</span> -k 5,5n lista.txt | less <span class="hljs-comment"># Oppure:</span>
+
+$ find . -name <span class="hljs-string">&quot;*_ATC_*.sxw&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -l {} \; | <span class="hljs-built_in">sort</span> -b -k5,5n | less
+$ <span class="hljs-built_in">ls</span> -al --<span class="hljs-built_in">sort</span>=size /usr/bin |<span class="hljs-built_in">tr</span> -s <span class="hljs-string">&#x27; &#x27;</span>|<span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27; &#x27;</span> -f5,9
+</code></pre>
+<h2 id="search-%26-replace-in-files" tabindex="-1">Search &amp; Replace in files <a class="header-anchor" href="#search-%26-replace-in-files" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -name <span class="hljs-string">&quot;*.htm*&quot;</span> -print0 | xargs -r0 -l1 sed <span class="hljs-string">&#x27;s/.WMF/.png/g&#x27;</span> -i
+<span class="hljs-comment"># oppure</span>
+$ find . -name <span class="hljs-string">&quot;*.htm&quot;</span> |awk <span class="hljs-string">&#x27;{print &quot;sed \47s/.WMF/.png/g\47 &quot;$1&quot;&gt;&quot;$1&quot;.new;mv &quot;$1&quot;.new &quot; $1}&#x27;</span>&gt; dorename.sh
+$ find . -name <span class="hljs-string">&#x27;.#*&#x27;</span> -print0 | xargs -0r <span class="hljs-built_in">rm</span> -f
+$ find /tmp -user <span class="hljs-variable">$LOGNAME</span> -<span class="hljs-built_in">type</span> f -print0 | xargs -0 -r <span class="hljs-built_in">rm</span> -f
+$ find . -depth -name <span class="hljs-string">&quot;CVS&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> -rf {} \;
+$ find . -depth -name <span class="hljs-string">&quot;CVS&quot;</span> -print0 | <span class="hljs-built_in">od</span> -c
+$ find . -depth -name <span class="hljs-string">&quot;CVS&quot;</span> -print0 | <span class="hljs-built_in">rm</span> -f elimina le directory CVS
+$ find . -<span class="hljs-built_in">type</span> f | grep -v CVS | xargs <span class="hljs-built_in">rm</span> elimina tutti i file <span class="hljs-keyword">in</span> una directory tranne il contenuto delle directory CVS
+</code></pre>
+<h3 id="cercare-tutti-i-file-.py-e-.properties-e-sostituirvi-all'interno-ogni-occorrenza-di-rb_host-con-rb_host%40prmlx006" tabindex="-1">Cercare tutti i file .py e .properties e sostituirvi all'interno ogni occorrenza di RB_HOST con RB_HOST@prmlx006 <a class="header-anchor" href="#cercare-tutti-i-file-.py-e-.properties-e-sostituirvi-all'interno-ogni-occorrenza-di-rb_host-con-rb_host%40prmlx006" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ find . -name <span class="hljs-string">&quot;*.py&quot;</span> -o -name <span class="hljs-string">&quot;*.properties&quot;</span>| awk <span class="hljs-string">&#x27;{print &quot;sed \47s/RB_HOST/RBHOST\100prmlx006/g\47 &quot;$1&quot;&gt;&quot;$1&quot;.new;mv &quot;$1&quot;.new &quot; $1}&#x27;</span>&gt; dorename.sh
+<span class="hljs-comment">#(\47 e&#x27; il codice ottale dell&#x27;apice: &#x27;</span>
+<span class="hljs-comment">#\100 e&#x27; il codice ottale della chiocciola:@</span>
+<span class="hljs-comment">#)</span>
+</code></pre>
+<h2 id="esempi-di-find" tabindex="-1">Esempi di find <a class="header-anchor" href="#esempi-di-find" aria-hidden="true">🔗</a></h2>
+<p>Esempi (utili) di utilizzo del comando find</p>
+<pre><code class="language-bash">$ find / -<span class="hljs-built_in">type</span> f -name *.jpg  -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">cp</span> {} . \;
+$ find . -<span class="hljs-built_in">type</span> f -size +10000 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> -al {} \;
+$ find . -atime +1 -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">mv</span> {} TMP \; <span class="hljs-comment"># mv files older then 1 day to dir TMP</span>
+$ find . -name <span class="hljs-string">&quot;-F&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> {} \;   <span class="hljs-comment"># a script error created a file called -F</span>
+$ find . -<span class="hljs-built_in">exec</span> grep -i <span class="hljs-string">&quot;vds admin&quot;</span> {} \;
+$ find . \! -name <span class="hljs-string">&quot;*.Z&quot;</span> -<span class="hljs-built_in">exec</span> compress -f {} \;
+$ find . -<span class="hljs-built_in">type</span> f \! -name <span class="hljs-string">&quot;*.Z&quot;</span> \! -name <span class="hljs-string">&quot;.comment&quot;</span> -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/list
+$ find . -name *.ini
+$ find . -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chmod</span> 775 {} \;
+$ find . -user xuser1 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chown</span> -R user2 {} \;
+$ find . -name ebtcom*
+$ find . -name mkbook
+$ find . -<span class="hljs-built_in">exec</span> grep PW0 {} \;
+$ find . -<span class="hljs-built_in">exec</span> grep -i <span class="hljs-string">&quot;pw0&quot;</span> {} \;
+$ find . -atime +6
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> ll | more
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> ll | more \;
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> ll \;
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> \;
+$ find . -atime +30 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> \;
+$ find . -atime +30 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> \; | <span class="hljs-built_in">wc</span> -l
+$ find . -name auth*
+$ find . -<span class="hljs-built_in">exec</span> grep -i plotme10 {};
+$ find . -<span class="hljs-built_in">exec</span> grep -i plotme10 {} \;
+$ find . -<span class="hljs-built_in">ls</span> -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&#x27;PLOT_FORMAT 22&#x27;</span> {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&#x27;PLOT_FORMAT 22&#x27;</span> {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&#x27;PLOT_FORMAT&#x27;</span> {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&#x27;PLOT_FORMAT&#x27;</span> {} \;
+$ find ./machbook -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">chown</span> 184 {} \;
+$ find . \! -name <span class="hljs-string">&#x27;*.Z&#x27;</span> -<span class="hljs-built_in">exec</span> compress {} \;
+$ find . \! -name <span class="hljs-string">&quot;*.Z&quot;</span> -<span class="hljs-built_in">exec</span> compress -f {} \;
+$ find /raid/03c/ecn -xdev -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">print</span>
+$ find /raid/03c/ecn -xdev -path -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">print</span>
+$ find / -name .ssh* -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a ssh-stuff
+$ find . -name <span class="hljs-string">&quot;*font*&quot;</span>
+$ find . -name hpmcad*
+$ find . -name *fnt*
+$ find . -name hp_mcad* -<span class="hljs-built_in">print</span>
+$ find . -grep Pld {} \;
+$ find . -<span class="hljs-built_in">exec</span> grep Pld {} \;
+$ find . -<span class="hljs-built_in">exec</span> grep Pld {} \;
+$ find . -<span class="hljs-built_in">exec</span> grep PENWIDTH {} \; | more
+$ find . -name config.pro
+$ find . -name config.pro
+$ find /raid -<span class="hljs-built_in">type</span> d <span class="hljs-string">&quot;.local_sd_customize&quot;</span> -<span class="hljs-built_in">print</span>
+$ find /raid -<span class="hljs-built_in">type</span> d -name <span class="hljs-string">&quot;.local_sd_customize&quot;</span> -<span class="hljs-built_in">print</span>
+$ find /raid -<span class="hljs-built_in">type</span> d -name <span class="hljs-string">&quot;.local_sd_customize&quot;</span> -ok <span class="hljs-built_in">cp</span> /raid/04d/MCAD-apps/I_Custom/SD_custom/site_sd_customize/user_filer_project_dirs {} \;
+$ find /raid -<span class="hljs-built_in">type</span> d -name <span class="hljs-string">&quot;.local_sd_customize&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">cp</span> /raid/04d/MCAD-apps/I_Custom/SD_custom/site_sd_customize/user_filer_project_dirs {} \;
+$ find . -name xeroxrelease
+$ find . -<span class="hljs-built_in">exec</span> grep xeroxrelease {} \;
+$ find . -name xeroxrelease
+$ find . -name xeroxrelease* -<span class="hljs-built_in">print</span> 2&gt;/dev/null
+$ find . -name <span class="hljs-string">&quot;*release*&quot;</span> 2&gt;/dev/null
+$ find / -name <span class="hljs-string">&quot;*xerox*&quot;</span> 2&gt;/dev/null
+$ find . -<span class="hljs-built_in">exec</span> grep -i xeroxrelease {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep -i xeroxrelease {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep -i xeroxrelease {} \; &gt; xeroxrel.lis
+$ find . -<span class="hljs-built_in">exec</span> grep -i xeroxrel {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep -i xeroxrel {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep -i xeroxrel {} \; | more
+$ find /raid/03c/inwork -xdev -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">print</span> &gt;&gt; /raid/04d/user_scripts/prt_list.tmp
+$ find . -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&#x27;31.53&#x27;</span> {} \;
+$ find . -<span class="hljs-built_in">ls</span> -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&quot;31/.53&quot;</span> {} \; &gt; this.lis
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep <span class="hljs-string">&quot;31/.53&quot;</span> {} \; &gt; this.lis
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep 31.53 {} \; &gt; this.lis
+$ find . -<span class="hljs-built_in">exec</span> grep -i pen {} /;
+$ find . -<span class="hljs-built_in">exec</span> grep -i pen {} \;
+$ find . -<span class="hljs-built_in">print</span> -<span class="hljs-built_in">exec</span> grep -i pen {} \; | more
+$ find . -<span class="hljs-built_in">exec</span> grep -i pen {} \;
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> ll | more \;
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> ll \;
+$ find . -atime +6 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> \;
+$ find . -atime +30 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> \;
+$ find . -atime +30 -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> \; | <span class="hljs-built_in">wc</span> -l
+$ find . \! -name <span class="hljs-string">&#x27;*.Z&#x27;</span> -<span class="hljs-built_in">exec</span> compress -f {} \;
+$ find . -name <span class="hljs-string">&#x27;cache*&#x27;</span> -depth -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> {} \;
+$ find . -name <span class="hljs-string">&#x27;cache*&#x27;</span> -depth -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/cachefiles
+$ find . -name <span class="hljs-string">&#x27;cache[0-9][0-9]*&#x27;</span> -depth -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/cachefiles
+$ find . -name <span class="hljs-string">&#x27;hp_catfile&#x27;</span> <span class="hljs-string">&#x27;hp_catlock&#x27;</span> -depth -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/hp.cats
+$ find . -name <span class="hljs-string">&#x27;hp_catfile&#x27;</span> -name <span class="hljs-string">&#x27;hp_catlock&#x27;</span> -depth -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/hp.cats
+$ find . -name <span class="hljs-string">&#x27;hp_cat*&#x27;</span> -depth -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/hp.cats
+$ find . -name <span class="hljs-string">&#x27;hp_cat[fl]*&#x27;</span> -depth -<span class="hljs-built_in">print</span> | <span class="hljs-built_in">tee</span> -a /tmp/hp.cats
+$ find /raid -name <span class="hljs-string">&#x27;hp_cat[fl]*&#x27;</span> -depth -<span class="hljs-built_in">print</span>
+$ find . \! -name <span class="hljs-string">&#x27;*.Z&#x27;</span> -<span class="hljs-built_in">exec</span> compress -f {} \;
+$ find . -name <span class="hljs-string">&#x27;*&#x27;</span> -<span class="hljs-built_in">exec</span> compress -f {} \;
+$ find . -xdev -name <span class="hljs-string">&quot;wshp1*&quot;</span> -<span class="hljs-built_in">print</span>
+$ find . -xdev -name <span class="hljs-string">&quot;wagoneer*&quot;</span> -<span class="hljs-built_in">print</span>
+$ find . -name <span class="hljs-string">&quot;xcmd&quot;</span> -depth -<span class="hljs-built_in">print</span>
+$ find /usr/contrib/src -name <span class="hljs-string">&quot;xcmd&quot;</span> -depth -<span class="hljs-built_in">print</span>
+$ find /raid -<span class="hljs-built_in">type</span> d -name <span class="hljs-string">&quot;.local_sd_customize&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">ls</span> {} \;
+$ find /raid -<span class="hljs-built_in">type</span> d -name <span class="hljs-string">&quot;.local_sd_customize&quot;</span> \
+  -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">cp</span> /raid/04d/MCAD-apps/I_Custom/SD_custom/site_sd_customize/user_filer_project_dirs {} \;
+</code></pre>
+<h2 id="delete-pycache" tabindex="-1">delete <strong>pycache</strong> <a class="header-anchor" href="#delete-pycache" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> d -name __pycache__ -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> -r {} \+
+</code></pre>
+<p>il <code>+</code> fa eseguire un unica rm su tutte le directory trovate.</p>
+</body></html>

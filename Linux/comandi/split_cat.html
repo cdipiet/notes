@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.194" />
+        <title>split_cat</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="split_cat" tabindex="-1">split_cat <a class="header-anchor" href="#split_cat" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.194</p>
+<nav class="table-of-contents"><ol><li><a href="#dividere-un-file-degli-oid-eliminando-quelli-processati(uso-del-file-lastoid-del-bdp-qd)">Dividere un file degli OID eliminando quelli processati(uso del file lastoid del BDP-QD) </a></li><li><a href="#il-comando-per-dividere-un-file">Il comando per dividere un file </a></li><li><a href="#split-e-cat-per-dividere-e-riunire-file-di-grandi-dimensioni">split e cat per dividere e riunire file di grandi dimensioni </a></li><li><a href="#split-di-file">Split di file </a></li><li><a href="#split-di-directory">Split di directory </a></li></ol></nav><h1 id="split-e-cat" tabindex="-1">split e cat <a class="header-anchor" href="#split-e-cat" aria-hidden="true">🔗</a></h1>
+<h2 id="dividere-un-file-degli-oid-eliminando-quelli-processati(uso-del-file-lastoid-del-bdp-qd)" tabindex="-1">Dividere un file degli OID eliminando quelli processati(uso del file lastoid del BDP-QD) <a class="header-anchor" href="#dividere-un-file-degli-oid-eliminando-quelli-processati(uso-del-file-lastoid-del-bdp-qd)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    grep -n City BDP-20051220-142238.xml | <span class="hljs-built_in">head</span> -n 2 (trovo la riga 3085082)
+    <span class="hljs-built_in">split</span> -l 3085082 BDP-20051220-142238.xml
+</code></pre>
+<h2 id="il-comando-per-dividere-un-file" tabindex="-1">Il comando per dividere un file <a class="header-anchor" href="#il-comando-per-dividere-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    $ <span class="hljs-built_in">split</span> -d -b N FileDiInput FileDiOutput
+</code></pre>
+<ul>
+<li>
+<p><code>-d</code> serve per indicare a split di utilizzare suffissi numerici come 00, 01, 02, etc al posto di suffissi alfabetici come aa, ab, ac, etc</p>
+</li>
+<li>
+<p><code>-b N</code> sarebbe la grandezza che dovranno avere i singoli pezzi del file diviso. Al posto di N dovrete inserire un intero che indicherà i bytes. Se non volete ragionare in bytes potrete indicare l'unità di misura ad esempio KB, MB o GB</p>
+</li>
+<li>
+<p><code>FileDiInput</code> è il nome del file che volete dividere in pezzi</p>
+</li>
+<li>
+<p><code>FileDiOutput</code> è il nome che avranno i file divisi senza contare il suffisso numerico o alfabetico che sia, se omesso i file prodotti verranno chiamati x, quindi, tenendo conto dei suffissi, ammesso che essi siano numerici ci ritroveremo dei file chiamati x00, x01, x02, etc. Nel nostro esempio teorico non abbiamo omesso nulla e quindi otteremo dei file chiamati FileDiOutput00, FileDiOutput01...</p>
+</li>
+</ul>
+<p>Tenendo conto di quello appena scritto facciamo un esempio pratico, immaginiamo di dover dividere un file di testo chiamato Prova, grosso 400 MB, in parti da 100 MB che dovranno avere nomi file che iniziano con la stringa Output:</p>
+<pre><code class="language-bash">    $ <span class="hljs-built_in">split</span> -d -b 100MB Prova Output
+</code></pre>
+<p>In questo modo ci ritroveremo quattro file chiamati rispettivamente Output00, Output01, Output02 e Output04</p>
+<p>Per riunire un file la sintassi è altrettanto semplice, noi utilizziamo cat:</p>
+<pre><code class="language-bash">    $ <span class="hljs-built_in">cat</span> Pezzo00 Pezzo01 &gt; FileCompleto
+</code></pre>
+<p>Di conseguenza, per riunire i file dell'esempio pratico di prima utilizziamo la sintassi:</p>
+<pre><code class="language-bash">    $ <span class="hljs-built_in">cat</span> Output00 Output01 Output02 Output04 &gt; Test
+</code></pre>
+<p>Sappiate che il nome del file riunito non deve essere per forza uguale a quello che aveva il file originale, per quello nell'esempio abbiamo riunito i nostri quattro file in uno chiamato Test e non Prova.</p>
+<h2 id="split-e-cat-per-dividere-e-riunire-file-di-grandi-dimensioni" tabindex="-1">split e cat per dividere e riunire file di grandi dimensioni <a class="header-anchor" href="#split-e-cat-per-dividere-e-riunire-file-di-grandi-dimensioni" aria-hidden="true">🔗</a></h2>
+<p>What if you don't want to leave the copied images on another hard drive? If the images you've created are small enough, you can burn them to CD; if they're larger, burn them to DVD. If an image is too big for that, use the split command to break the file into sections and burn each section to disk. If you ever need to join the sections again, copy each section from your disk(s) and use the cat command to rejoin them (you can avoid this scenario by backing up to external hard drives).</p>
+<p>To break up a 10GB gzipped tar file (named hda1_bak.tar.gz in this example) into two smaller files suitable for burning onto two DVDs, you'd use the following:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">split</span> --bytes=4000m --verbose hda1_bak.tar.gz hda1_bak
+</code></pre>
+<p>This command produces three files: hda1_bakaa, hda1_bakab, and hda1_bakac. The first two are 4GB each, and the last one is 2GB (all that's left of the 10 GB original). Burn them onto DVDs and you're good to go.</p>
+<p>When it's time to rejoin what you've burned onto DVD, copy the three files from the DVDs and onto a hard drive, and then run the following:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> hda1_bak* &gt; hda1_bak.tar.gz
+</code></pre>
+<h2 id="split-di-file" tabindex="-1">Split di file <a class="header-anchor" href="#split-di-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">split</span> --bytes=1m /path/to/large/file /path/to/output/file/prefix
+</code></pre>
+<p>To restore the original file, you can use cat command.
+To join all the smaller file to restore the original file type:-</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> prefix* &gt; NEWFILENAME
+</code></pre>
+<h2 id="split-di-directory" tabindex="-1">Split di directory <a class="header-anchor" href="#split-di-directory" aria-hidden="true">🔗</a></h2>
+<p>il pacchetto <code>genisoimage</code> contiene il comando(programma Perl) <code>dirsplit</code>(utile anche per mkisofs)</p>
+<pre><code class="language-bash">dirsplit -H
+dirsplit [options] [advanced options] &lt; directory &gt;
+-n|--no-act Only <span class="hljs-built_in">print</span> the commands, no action (implies -v)
+-s|--size NUMBER - Size of the medium (default: 4488M)
+-m|--move Move files to target <span class="hljs-built_in">dirs</span> (default: create mkisofs catalogs)
+-l|--symlink similar to -m but just creates symlinks <span class="hljs-keyword">in</span> the target <span class="hljs-built_in">dirs</span>
+-p|--prefix STRING - first part of catalog/directory name (default: vol_)
+-f|--filter EXPR - Filter expression, see examples below and perlre manpage
+-e|--expmode NUMBER, special exploration modes, used with directory argument
+1: (default) native exploration of the specified directory, but file sizes are rounded up to 2048 blocks plus estimated overhead <span class="hljs-keyword">for</span> filenames (see -o option)
+2: like 1, but all files <span class="hljs-keyword">in</span> directory are put together (as <span class="hljs-string">&quot;atom&quot;</span>) onto the same medium. This does not apply to subdirectories, however.
+4: like 2, but the max. size of the atoms is limited to 4488M (storing the rest on another medium)
+File sizes are expected to be <span class="hljs-keyword">in</span> bytes, append modifier letters to multiply
+with a <span class="hljs-built_in">factor</span>, eg 200M (b,k,K,m,M,g,G <span class="hljs-keyword">for</span> Bytes, Kb, KiB, Mb, MiB, Gb, GiB).
+</code></pre>
+<p>Examples:</p>
+<pre><code class="language-bash">dirsplit -m -s 120M -e4 largedirwithdata/ -p /zipmedia/backup_ <span class="hljs-comment">#move stuff into splitted backup dirs</span>
+dirsplit -s 700M -e2 music/ <span class="hljs-comment"># make mkisofs catalogs to burn all music to 700M CDRs, keep single files in each dir together</span>
+dirsplit -s 700M -e2 -f <span class="hljs-string">&#x27;/other\/Soundtracks/&#x27;</span> music/ <span class="hljs-comment"># like above, only take files from other/Soundtracks</span>
+dirsplit -s 700M -e2 -f <span class="hljs-string">&#x27;!/Thumbs.db|Desktop.ini|\.m3u$/i&#x27;</span> <span class="hljs-comment"># like above, ignore some junk files and playlists, both letter cases</span>
+dirsplit -n -l -s 2Kb -e4 /home/cdipiet/cdp/Projects/Perl -p /home/cdipiet/tmp/backup_
+</code></pre>
+<p>Comando utile per avere una lista di file contenuti in una struttura di directory con relative dimensioni in bytes</p>
+<pre><code class="language-bash">find . -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s %p \n&quot;</span>|<span class="hljs-built_in">sort</span> -n
+</code></pre>
+</body></html>

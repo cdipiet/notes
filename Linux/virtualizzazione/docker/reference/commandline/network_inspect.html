@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.520" />
+        <title>network_inspect</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="network_inspect" tabindex="-1">network_inspect <a class="header-anchor" href="#network_inspect" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.520</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22network-inspect%22description%3A-%22the-network-inspect-command-description-and-usage%22keywords%3A-%22network%2C-inspect%2C-user-defined%22">title: &quot;network inspect&quot;description: &quot;The network inspect command description and usage&quot;keywords: &quot;network, inspect, user-defined&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a></li><li><a href="#inspect-the-bridge-network">Inspect the bridge network </a><ol><li><a href="#inspect-a-user-defined-network">Inspect a user-defined network </a></li><li><a href="#inspect-the-ingress-network">Inspect the ingress network </a></li><li><a href="#using-verbose-option-for-network-inspect">Using verbose option for network inspect </a></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22network-inspect%22description%3A-%22the-network-inspect-command-description-and-usage%22keywords%3A-%22network%2C-inspect%2C-user-defined%22" tabindex="-1">title: &quot;network inspect&quot;
+description: &quot;The network inspect command description and usage&quot;
+keywords: &quot;network, inspect, user-defined&quot; <a class="header-anchor" href="#title%3A-%22network-inspect%22description%3A-%22the-network-inspect-command-description-and-usage%22keywords%3A-%22network%2C-inspect%2C-user-defined%22" aria-hidden="true">🔗</a></h2>
+<h1 id="network-inspect" tabindex="-1">network inspect <a class="header-anchor" href="#network-inspect" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker network inspect [OPTIONS] NETWORK [NETWORK...]
+
+Display detailed information on one or more networks
+
+Options:
+  -f, --format string   Format the output using the given Go template
+<span class="hljs-code">      --help            Print usage
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Returns information about one or more networks. By default, this command renders
+all results in a JSON object.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h2 id="inspect-the-bridge-network" tabindex="-1">Inspect the <code>bridge</code> network <a class="header-anchor" href="#inspect-the-bridge-network" aria-hidden="true">🔗</a></h2>
+<p>Connect two containers to the default <code>bridge</code> network:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker run -itd --name=container1 busybox</span>
+f2870c98fd504370fb86e59f32cd0753b1ac9b69b7d80566ffc7192a82b3ed27
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker run -itd --name=container2 busybox</span>
+bda12f8922785d1f160be70736f26c1e331ab8aaf8ed8d56728508f2e2fd4727
+</code></pre>
+<p>The <code>network inspect</code> command shows the containers, by id, in its
+results. For networks backed by multi-host network driver, such as Overlay,
+this command also shows the container endpoints in other hosts in the
+cluster. These endpoints are represented as &quot;ep-{endpoint-id}&quot; in the output.
+However, for swarm mode networks, only the endpoints that are local to the
+node are shown.</p>
+<p>You can specify an alternate format to execute a given
+template for each result. Go's
+<a href="https://golang.org/pkg/text/template/">text/template</a> package describes all the
+details of the format.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> docker network inspect bridge</span>
+</code></pre>
+<p>The output is in JSON format, for example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bridge&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;b2b1a2cba717161d984383fd68218cf70bbbd17d328496885f7c921333228b0f&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Created&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2016-10-19T04:33:30.360899459Z&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;local&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bridge&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;IPAM&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;Subnet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.17.42.1/16&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;Gateway&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.17.42.1&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Internal&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Containers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;bda12f8922785d1f160be70736f26c1e331ab8aaf8ed8d56728508f2e2fd4727&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;container2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0aebb8fcd2b282abe1365979536f21ee4ceaf3ed56177c628eae9f706e00e019&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;MacAddress&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;02:42:ac:11:00:02&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv4Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.17.0.2/16&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv6Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;f2870c98fd504370fb86e59f32cd0753b1ac9b69b7d80566ffc7192a82b3ed27&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;container1&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;a00676d9c91a96bbe5bcfb34f705387a33d7cc365bac1a29e4e9728df92d10ad&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;MacAddress&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;02:42:ac:11:00:01&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv4Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.17.0.1/16&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv6Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;com.docker.network.bridge.default_bridge&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;com.docker.network.bridge.enable_icc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;com.docker.network.bridge.enable_ip_masquerade&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;com.docker.network.bridge.host_binding_ipv4&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.0.0.0&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;com.docker.network.bridge.name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;docker0&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;com.docker.network.driver.mtu&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;1500&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</code></pre>
+<h3 id="inspect-a-user-defined-network" tabindex="-1">Inspect a user-defined network <a class="header-anchor" href="#inspect-a-user-defined-network" aria-hidden="true">🔗</a></h3>
+<p>Create and inspect a user-defined network:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create simple-network</span>
+
+69568e6336d8c96bbf57869030919f7c69524f71183b44d80948bd3927c87f6a
+</code></pre>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network inspect simple-network</span>
+</code></pre>
+<p>The output is in JSON format, for example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;simple-network&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;69568e6336d8c96bbf57869030919f7c69524f71183b44d80948bd3927c87f6a&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Created&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2016-10-19T04:33:30.360899459Z&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;local&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;bridge&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;IPAM&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;Subnet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.22.0.0/16&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;Gateway&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.22.0.1&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Containers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</code></pre>
+<h3 id="inspect-the-ingress-network" tabindex="-1">Inspect the <code>ingress</code> network <a class="header-anchor" href="#inspect-the-ingress-network" aria-hidden="true">🔗</a></h3>
+<p>For swarm mode overlay networks <code>network inspect</code> also shows the IP address and node name
+of the peers. Peers are the nodes in the swarm cluster which have at least one task attached
+to the network. Node name is of the format <code>&lt;hostname&gt;-&lt;unique ID&gt;</code>.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network inspect ingress</span>
+</code></pre>
+<p>The output is in JSON format, for example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ingress&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;j0izitrut30h975vk4m1u5kk3&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Created&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2016-11-08T06:49:59.803387552Z&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;swarm&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;overlay&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;EnableIPv6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;IPAM&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;Subnet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.255.0.0/16&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;Gateway&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.255.0.1&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Internal&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Attachable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Containers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;ingress-sbox&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ingress-endpoint&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;40e002d27b7e5d75f60bc72199d8cae3344e1896abec5eddae9743755fe09115&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;MacAddress&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;02:42:0a:ff:00:03&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv4Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.255.0.3/16&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv6Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;com.docker.network.driver.overlay.vxlanid_list&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;256&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Peers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;net-1-1d22adfe4d5c&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.11&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;net-2-d55d838b34af&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.12&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;net-3-8473f8140bd9&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.13&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</code></pre>
+<h3 id="using-verbose-option-for-network-inspect" tabindex="-1">Using <code>verbose</code> option for <code>network inspect</code> <a class="header-anchor" href="#using-verbose-option-for-network-inspect" aria-hidden="true">🔗</a></h3>
+<p><code>docker network inspect --verbose</code> for swarm mode overlay networks shows service-specific
+details such as the service's VIP and port mappings. It also shows IPs of service tasks,
+and the IPs of the nodes where the tasks are running.</p>
+<p>Following is an example output for an overlay network <code>ov1</code> that has one service <code>s1</code>
+attached to. service <code>s1</code> in this case has three replicas.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network inspect --verbose ov1</span>
+</code></pre>
+<p>The output is in JSON format, for example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ov1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Id&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ybmyjvao9vtzy3oorxbssj13b&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Created&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2017-03-13T17:04:39.776106792Z&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Scope&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;swarm&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;overlay&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;EnableIPv6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;IPAM&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;Driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">null</span></span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Config&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">&quot;Subnet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.0/24&quot;</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">&quot;Gateway&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.1&quot;</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Internal&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Attachable&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Containers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;020403bd88a15f60747fd25d1ad5fa1272eb740e8a97fc547d8ad07b2f721c5e&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s1.1.pjn2ik0sfgkfzed3h0s00gs9o&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ad16946f416562d658f3bb30b9830d73ad91ccf6feae44411269cd0ff674714e&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;MacAddress&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;02:42:0a:00:00:04&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv4Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.4/24&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IPv6Address&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;com.docker.network.driver.overlay.vxlanid_list&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;4097&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Peers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;net-3-5d3cfd30a58c&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.13&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;net-1-6ecbc0040a73&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.11&quot;</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;net-2-fb80208efd75&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.12&quot;</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;Services&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;s1&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;VIP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.2&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;Ports&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;LocalLBIndex&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">257</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;Tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+          <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s1.2.q4hcq2aiiml25ubtrtg4q1txt&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;040879b027e55fb658e8b60ae3b87c6cdac7d291e86a190a3b5ac6567b26511a&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;EndpointIP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.5&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;Info&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+              <span class="hljs-attr">&quot;Host IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.11&quot;</span>
+            <span class="hljs-punctuation">}</span>
+          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s1.3.yawl4cgkp7imkfx469kn9j6lm&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;106edff9f120efe44068b834e1cddb5b39dd4a3af70211378b2f7a9e562bbad8&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;EndpointIP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.3&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;Info&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+              <span class="hljs-attr">&quot;Host IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.12&quot;</span>
+            <span class="hljs-punctuation">}</span>
+          <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;s1.1.pjn2ik0sfgkfzed3h0s00gs9o&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;EndpointID&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ad16946f416562d658f3bb30b9830d73ad91ccf6feae44411269cd0ff674714e&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;EndpointIP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10.0.0.4&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;Info&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+              <span class="hljs-attr">&quot;Host IP&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;192.168.33.13&quot;</span>
+            <span class="hljs-punctuation">}</span>
+          <span class="hljs-punctuation">}</span>
+        <span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</code></pre>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="network_disconnect.html">network disconnect </a></li>
+<li><a href="network_connect.html">network connect</a></li>
+<li><a href="network_create.html">network create</a></li>
+<li><a href="network_ls.html">network ls</a></li>
+<li><a href="network_rm.html">network rm</a></li>
+<li><a href="network_prune.html">network prune</a></li>
+<li><a href="https://docs.docker.com/engine/userguide/networking/">Understand Docker container networks</a></li>
+</ul>
+</body></html>

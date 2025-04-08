@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.593" />
+        <title>Python</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="python" tabindex="-1">Python <a class="header-anchor" href="#python" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.593</p>
+<nav class="table-of-contents"><ol><li><a href="#riferimenti">Riferimenti </a></li><li><a href="#pyenv-e-poetry-in-manjaro">pyenv e poetry in Manjaro </a></li><li><a href="#installazione-pip">Installazione pip </a></li><li><a href="#reset-workspace-e-virtualenvs">Reset workspace e virtualenvs </a></li><li><a href="#comandi-utili">Comandi utili </a></li><li><a href="#compilazione-python-da-sorgenti-in-manjaro">Compilazione Python da sorgenti in Manjaro </a></li><li><a href="#compilazione-python-da-sorgenti-in-linux-mint">Compilazione Python da sorgenti in Linux Mint </a></li><li><a href="#pycharm">PyCharm </a></li><li><a href="#delete-pycache">delete pycache </a></li><li><a href="#debug">Debug </a></li><li><a href="#docstrings">docstrings </a></li></ol></nav><h1 id="python-1" tabindex="-1">Python <a class="header-anchor" href="#python-1" aria-hidden="true">🔗</a></h1>
+<h2 id="riferimenti" tabindex="-1">Riferimenti <a class="header-anchor" href="#riferimenti" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://docs.python.org/3/whatsnew/changelog.html">https://docs.python.org/3/whatsnew/changelog.html</a></p>
+</li>
+<li>
+<p><a href="https://portingguide.readthedocs.io/en/latest/index.html">https://portingguide.readthedocs.io/en/latest/index.html</a></p>
+</li>
+<li>
+<p><a href="https://github.com/fedora-python/portingguide">https://github.com/fedora-python/portingguide</a></p>
+</li>
+<li>
+<p><a href="poetry.html">poetry</a></p>
+</li>
+<li>
+<p><a href="setuptools.html">setuptools</a></p>
+</li>
+<li>
+<p><a href="pip.html">pip</a></p>
+</li>
+<li>
+<p><a href="pipenv.html">Pipenv</a></p>
+</li>
+<li>
+<p><a href="PyCharm.html">PyCharm</a></p>
+</li>
+<li>
+<p><a href="librerie.html">Librerie</a></p>
+</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Global site-packages</span>
+$ python -m site
+$ python -c <span class="hljs-string">&quot;import site; print(site.getsitepackages())&quot;</span>
+
+<span class="hljs-comment"># per user site-packages directory (PEP 370)</span>
+$ python -m site --user-base
+$ python -m site --user-site
+$ python -c <span class="hljs-string">&quot;import site;print(&quot;</span>site.USER_BASE<span class="hljs-string">&quot;)&quot;</span>
+$ python -c <span class="hljs-string">&quot;import site;print(&quot;</span>site.USER_SITE<span class="hljs-string">&quot;)&quot;</span>
+
+$ pip list
+$ pip list --user
+</code></pre>
+<h2 id="pyenv-e-poetry-in-manjaro" tabindex="-1">pyenv e poetry in Manjaro <a class="header-anchor" href="#pyenv-e-poetry-in-manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://github.com/pyenv/pyenv?tab=readme-ov-file#install-additional-python-versions">https://github.com/pyenv/pyenv?tab=readme-ov-file#install-additional-python-versions</a></li>
+<li><a href="https://python-poetry.org/docs/managing-environments/">https://python-poetry.org/docs/managing-environments/</a></li>
+</ul>
+<pre><code class="language-bash">$ pamac install pyenv tk
+$ <span class="hljs-built_in">export</span> CPPFLAGS=<span class="hljs-string">&quot;<span class="hljs-subst">$(pkg-config --cflags openssl)</span> -I/usr/include&quot;</span>
+$ <span class="hljs-built_in">export</span> LDFLAGS=<span class="hljs-string">&quot;<span class="hljs-subst">$(pkg-config --libs openssl)</span> -L/usr/lib64 -ltcl8.6 -ltk8.6&quot;</span>
+$ pyenv install 3.12
+$ pyenv global 3.12
+$ poetry install
+
+Aggiungere <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(pyenv init -)</span>&quot;</span> al .bashrc
+</code></pre>
+<p>import _tkinter # If this fails your Python may not be configured for Tk
+^^^^^^^^^^^^^^^
+ModuleNotFoundError: No module named '_tkinter'
+WARNING: The Python tkinter extension was not compiled and GUI subsystem has been detected. Missing the Tk toolkit?</p>
+<p><a href="https://stackoverflow.com/questions/76878713/tkinter-extension-was-not-compiled-and-gui-subsystem-has-been-detected-missing">https://stackoverflow.com/questions/76878713/tkinter-extension-was-not-compiled-and-gui-subsystem-has-been-detected-missing</a>
+<a href="https://stackoverflow.com/questions/60469202/unable-to-install-tkinter-with-pyenv-pythons-on-macos">https://stackoverflow.com/questions/60469202/unable-to-install-tkinter-with-pyenv-pythons-on-macos</a></p>
+<p>pyenv versions
+pyenv uninstall 3.12.9
+/path/to/python/3.11.4/bin/python3 -m tkinter
+pamac install tk
+export CPPFLAGS=&quot;<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mi>p</mi><mi>k</mi><mi>g</mi><mo>−</mo><mi>c</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi>i</mi><mi>g</mi><mo>−</mo><mo>−</mo><mi>c</mi><mi>f</mi><mi>l</mi><mi>a</mi><mi>g</mi><mi>s</mi><mi>o</mi><mi>p</mi><mi>e</mi><mi>n</mi><mi>s</mi><mi>s</mi><mi>l</mi><mo stretchy="false">)</mo><mo>−</mo><mi>I</mi><mi mathvariant="normal">/</mi><mi>u</mi><mi>s</mi><mi>r</mi><mi mathvariant="normal">/</mi><mi>i</mi><mi>n</mi><mi>c</mi><mi>l</mi><mi>u</mi><mi>d</mi><mi>e</mi><mi mathvariant="normal">&quot;</mi><mi>e</mi><mi>x</mi><mi>p</mi><mi>o</mi><mi>r</mi><mi>t</mi><mi>L</mi><mi>D</mi><mi>F</mi><mi>L</mi><mi>A</mi><mi>G</mi><mi>S</mi><mo>=</mo><mi mathvariant="normal">&quot;</mi></mrow><annotation encoding="application/x-tex">(pkg-config --cflags openssl) -I/usr/include&quot;
+  export LDFLAGS=&quot;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.03148em;">k</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">g</span><span class="mord mathnormal">so</span><span class="mord mathnormal">p</span><span class="mord mathnormal">e</span><span class="mord mathnormal">n</span><span class="mord mathnormal">ss</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord">/</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.02778em;">sr</span><span class="mord">/</span><span class="mord mathnormal">in</span><span class="mord mathnormal">c</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">u</span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord">&quot;</span><span class="mord mathnormal">e</span><span class="mord mathnormal">x</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">or</span><span class="mord mathnormal">t</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.02778em;">D</span><span class="mord mathnormal" style="margin-right:0.13889em;">F</span><span class="mord mathnormal">L</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.05764em;">GS</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord">&quot;</span></span></span></span>(pkg-config --libs openssl) -L/usr/lib64 -ltcl8.6 -ltk8.6&quot;
+$ pyenv install 3.12</p>
+<h2 id="installazione-pip" tabindex="-1">Installazione pip <a class="header-anchor" href="#installazione-pip" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione pip con python</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm python
+$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+$ python get-pip.py --user
+
+<span class="hljs-comment"># Installazione pip con pacman</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm python
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm python-pip
+</code></pre>
+<h2 id="reset-workspace-e-virtualenvs" tabindex="-1">Reset workspace e virtualenvs <a class="header-anchor" href="#reset-workspace-e-virtualenvs" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="pipenv.html">Pipenv</a></li>
+<li>Linux: <code>~/.local/share/virtualenvs</code></li>
+</ul>
+<p>Cancellazione dei virtualenvs</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">rm</span> -rf ~/.local/share/virtualenvs/*
+$ <span class="hljs-built_in">rm</span> -rf /home/<span class="hljs-variable">$USER</span>/.local/lib/*
+$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Scc
+$ <span class="hljs-comment">#sudo pacman -S --needed --noconfirm python-setuptools</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm python-pip
+$ pip install --user pipenv <span class="hljs-comment"># come utente</span>
+$ <span class="hljs-comment"># pip install --user setuptools # come utente</span>
+$ <span class="hljs-built_in">cd</span> ~/workspaces/Python
+$ pipenv install
+</code></pre>
+<h2 id="comandi-utili" tabindex="-1">Comandi utili <a class="header-anchor" href="#comandi-utili" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ python -m pip install --upgrade pip
+$ pip config list -v
+
+$ python -m venv myvenv
+. ./venv/Scripts/activate
+
+$ python -m pip freeze &gt; requirements.txt
+$ pip install -r requirements.txt
+</code></pre>
+<h2 id="compilazione-python-da-sorgenti-in-manjaro" tabindex="-1">Compilazione Python da sorgenti in Manjaro <a class="header-anchor" href="#compilazione-python-da-sorgenti-in-manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.python.org/downloads/source/">https://www.python.org/downloads/source/</a></li>
+<li><a href="https://devguide.python.org/#status-of-python-branches">https://devguide.python.org/#status-of-python-branches</a></li>
+</ul>
+<p>Installazione in <code>/opt/python</code></p>
+<p><code>~/bin/install_python.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+VERSION=3.9.6
+EXT=tgz
+PYTHONFTP=https://www.python.org/ftp/python
+PYTHONTAR=Python-<span class="hljs-variable">$VERSION</span>.<span class="hljs-variable">$EXT</span>
+PYTHONDIR=<span class="hljs-variable">${PYTHONTAR%.$EXT}</span>
+CHM=python<span class="hljs-variable">${VERSION//\./}</span>.chm
+DST=/opt/python
+WORKDIR=~/workspaces/Python/python/
+COMPILE=<span class="hljs-literal">true</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf <span class="hljs-variable">$DST</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$DST</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R <span class="hljs-variable">$USER</span>:<span class="hljs-variable">$USER</span> <span class="hljs-variable">$DST</span>
+<span class="hljs-comment"># https://stackoverflow.com/questions/2953646/how-can-i-declare-and-use-boolean-variables-in-a-shell-script</span>
+<span class="hljs-comment"># https://stackoverflow.com/questions/2953646/how-can-i-declare-and-use-boolean-variables-in-a-shell-script/21210966#21210966</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$COMPILE</span>&quot;</span> = <span class="hljs-literal">true</span> ]; <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">rm</span> -rf <span class="hljs-variable">$WORKDIR</span>
+        <span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$WORKDIR</span>
+        <span class="hljs-built_in">cd</span> <span class="hljs-variable">$WORKDIR</span>
+        <span class="hljs-built_in">sudo</span> pacman -Syu --needed base-devel
+        wget <span class="hljs-variable">$PYTHONFTP</span>/<span class="hljs-variable">$VERSION</span>/<span class="hljs-variable">$PYTHONTAR</span>
+        wget <span class="hljs-variable">$PYTHONFTP</span>/<span class="hljs-variable">$VERSION</span>/<span class="hljs-variable">$CHM</span>
+        tar xvfz <span class="hljs-variable">$PYTHONTAR</span>
+        <span class="hljs-built_in">cd</span> <span class="hljs-variable">$PYTHONDIR</span>
+        <span class="hljs-comment">#./configure --help # per avere le opzioni di compilazione</span>
+        ./configure --enable-optimizations --prefix <span class="hljs-variable">$DST</span>
+        make -j <span class="hljs-comment"># If the -j option is given without an argument, make will not limit the number of jobs that can run simultaneously.</span>
+        <span class="hljs-comment"># make -j$(nproc) # nproc ritorna il numero dei core</span>
+        <span class="hljs-comment"># make test</span>
+<span class="hljs-keyword">else</span>
+        <span class="hljs-built_in">cd</span> <span class="hljs-variable">$WORKDIR</span>/<span class="hljs-variable">$PYTHONDIR</span>
+<span class="hljs-keyword">fi</span>
+make install
+<span class="hljs-comment"># Creazione link python e pip che verranno posti in cima al PATH</span>
+<span class="hljs-built_in">ln</span> -s <span class="hljs-variable">$DST</span>/bin/python3.9 <span class="hljs-variable">$DST</span>/bin/python
+<span class="hljs-built_in">ln</span> -s <span class="hljs-variable">$DST</span>/bin/pip3 <span class="hljs-variable">$DST</span>/bin/pip
+<span class="hljs-comment"># Aggiunta del nuovo python in cima al PATH mediante .bashrc</span>
+<span class="hljs-comment"># head -c -1 elimina l&#x27;ultimo newline</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF| head -c -1 &gt;&gt; ~/.bashrc
+# Python
+export PATH=$DST/bin:
+EOF</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt;&gt; ~/.bashrc
+<span class="hljs-variable">$PATH</span>
+EOF
+<span class="hljs-built_in">cd</span>
+. ~/.bashrc
+<span class="hljs-built_in">which</span> python
+python --version
+pip install pip install jupyterlab ipython
+</code></pre>
+<p>Installazione PyGobjet, utilizzato dalle applicazioni GNOME</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -S python cairo pkgconf gobject-introspection gtk3
+$ pip install pycairo
+$ pip install PyGObject
+$ pip install jupyterlab ipython
+$ jupyter-lab
+</code></pre>
+<h2 id="compilazione-python-da-sorgenti-in-linux-mint" tabindex="-1">Compilazione Python da sorgenti in Linux Mint <a class="header-anchor" href="#compilazione-python-da-sorgenti-in-linux-mint" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> apt-get install build-essential checkinstall
+$ <span class="hljs-built_in">sudo</span> apt-get install libreadline-gplv2-dev libncursesw5-dev libssl-dev \
+    libsqlite3-dev tk-dev libgdbm-dev libc6-dev libbz2-dev libffi-dev zlib1g-dev
+$ <span class="hljs-built_in">cd</span> /usr/src
+$ <span class="hljs-built_in">sudo</span> wget https://www.python.org/ftp/python/3.7.4/Python-3.7.4.tgz
+$ <span class="hljs-built_in">sudo</span> tar xzf Python-3.7.4.tgz
+$ <span class="hljs-built_in">cd</span> Python-3.7.4
+$ <span class="hljs-built_in">sudo</span> ./configure --enable-optimizations
+$ <span class="hljs-built_in">sudo</span> make altinstall
+$ python3.7 -V
+</code></pre>
+<h2 id="pycharm" tabindex="-1">PyCharm <a class="header-anchor" href="#pycharm" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="PyCharm.html">PyCharm</a></li>
+<li><a href="https://www.jetbrains.com/pycharm/download/#section=linux">https://www.jetbrains.com/pycharm/download/#section=linux</a></li>
+</ul>
+<pre><code class="language-bash">~/bin/pycharm_install.sh
+~/bin/pycharm_make_launcher.sh
+</code></pre>
+<p>il file <code>.desktop</code> puo essere copiato in:</p>
+<p><code>~/.config/autostart</code></p>
+<p>per avere l'autopartenza</p>
+<h2 id="delete-pycache" tabindex="-1">delete <strong>pycache</strong> <a class="header-anchor" href="#delete-pycache" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find . -<span class="hljs-built_in">type</span> d -name __pycache__ -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">rm</span> -r {} \+
+</code></pre>
+<p>il <code>+</code> fa eseguire un unica rm su tutte le directory trovate.</p>
+<h2 id="debug" tabindex="-1">Debug <a class="header-anchor" href="#debug" aria-hidden="true">🔗</a></h2>
+<p><code>-X dev</code>: enable CPython's &quot;development mode&quot;</p>
+<h2 id="docstrings" tabindex="-1">docstrings <a class="header-anchor" href="#docstrings" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://realpython.com/documenting-python-code/">https://realpython.com/documenting-python-code/</a></li>
+<li><a href="https://peps.python.org/pep-0257/">https://peps.python.org/pep-0257/</a> Docstring Conventions</li>
+<li><code>__doc__</code> <a href="https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy">https://docs.python.org/3/reference/datamodel.html#the-standard-type-hierarchy</a>
+The function’s documentation string, or None if unavailable; not inherited by subclasses.</li>
+</ul>
+</body></html>

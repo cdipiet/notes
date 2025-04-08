@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.538" />
+        <title>vim_conf_vimrc_esempio</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vim_conf_vimrc_esempio" tabindex="-1">vim_conf_vimrc_esempio <a class="header-anchor" href="#vim_conf_vimrc_esempio" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.538</p>
+<nav class="table-of-contents"><ol></ol></nav><h1 id="~%2F.vimrc" tabindex="-1">~/.vimrc <a class="header-anchor" href="#~%2F.vimrc" aria-hidden="true">🔗</a></h1>
+<pre><code>set nocompatible
+&quot;set mouse=a commentato perchè dà fastidio al copy/paste con la clipboard
+set modeline
+set modelines=5
+set number
+set encoding=utf-8
+set hlsearch
+set expandtab
+set tabstop=4
+set shiftwidth=4
+set autoindent
+set nosmartindent
+&quot; utili per il comando find, cerca in tutte le sottodirectory della directory corrente:
+set path+=**
+set wildmenu
+
+&quot; Plugins will be downloaded under the specified directory.
+call plug#begin('~/.vim/plugged')
+&quot; Declare the list of plugins.
+Plug 'tpope/vim-sensible'
+Plug 'junegunn/vim-easy-align'
+Plug 'preservim/nerdtree'
+Plug 'frazrepo/vim-rainbow'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
+&quot; post install (npm install) then load plugin only for editing supported files
+&quot; When installed via vim-plug, a default prettier executable is installed inside vim-prettier.
+Plug 'prettier/vim-prettier', { 'do': 'npm install' }
+Plug 'dense-analysis/ale'
+Plug 'sheerun/vim-polyglot'
+&quot; sudo apt install fzf ripgrep
+Plug 'junegunn/fzf', { 'do': { -&gt; fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+&quot; List ends here. Plugins become visible to Vim after this call.
+call plug#end()
+
+&quot; Esecuzione del file corrente
+nnoremap &lt;F9&gt; :!%:p
+&quot; CTRL+Q per andare all'ultima posizione modificata
+&quot; in ~/.bashrc serve:
+&quot; stty start undef
+&quot; per impedire al terminale di intercettare CTRL+Q prima di VIM(utilizzato
+&quot; altrimenti dal terminale per riprendere lo scrolling dopo averlo messo in
+&quot; pausa con CTRL+S
+map &lt;C-Q&gt; `.
+imap &lt;C-Q&gt; &lt;ESC&gt;`.i
+&quot; CTRL+W CTRL+N per aprire una nuova finestra in verticale
+map &lt;C-W&gt;&lt;C-N&gt; :vne&lt;CR&gt;
+
+&quot; https://github.com/itchyny/lightline.vim
+set laststatus=2
+let g:lightline = {
+\ 'colorscheme':'one',
+\ 'active' : {
+  \ 'left': [ [ 'mode', 'paste' ],
+  \           [ 'readonly', 'absolutepath', 'modified' ] ],
+  \ 'right': [ [ 'lineinfo' ],
+  \            [ 'percent' ],
+  \            [ 'fileformat', 'fileencoding', 'filetype' ] ] 
+  \}
+\}
+
+&quot; https://github.com/junegunn/vim-easy-align
+&quot; Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga &lt;Plug&gt;(EasyAlign)
+&quot; Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga &lt;Plug&gt;(EasyAlign)
+
+&quot; https://github.com/preservim/nerdtree
+&quot; NerdTree - per aprirlo quando si lancia vim senza un file da aprire
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 &amp;&amp; !exists(&quot;s:std_in&quot;) | NERDTree | endif
+
+&quot; attivazione vim-rainbow per tutti i tipi di file
+let g:rainbow_active = 1
+
+&quot; Prettier
+&quot; number of spaces per indentation level: a number or 'auto' (use
+&quot; softtabstop)
+&quot; default: 'auto'
+let g:prettier#config#tab_width = 4
+&quot; use tabs instead of spaces: true, false, or auto (use the expandtab setting).
+&quot; default: 'auto'
+let g:prettier#config#use_tabs = 'false'
+let g:prettier#config#single_quote = 'true'
+
+&quot; Configurazione per https://github.com/neoclide/coc.nvim
+&quot; TextEdit might fail if hidden is not set.
+set hidden
+&quot; Some servers have issues with backup files, see #649.
+set nobackup
+set nowritebackup
+&quot; Give more space for displaying messages.
+set cmdheight=2
+&quot; Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+&quot; delays and poor user experience.
+set updatetime=300
+&quot; Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+&quot; Always show the signcolumn, otherwise it would shift the text each time
+&quot; diagnostics appear/become resolved.
+if has(&quot;patch-8.1.1564&quot;)
+  &quot; Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
+&quot; Use tab for trigger completion with characters ahead and navigate.
+&quot; NOTE: Use command ':verbose imap &lt;tab&gt;' to make sure tab is not mapped by
+&quot; other plugin before putting this into your config.
+inoremap &lt;silent&gt;&lt;expr&gt; &lt;TAB&gt;
+      \ pumvisible() ? &quot;\&lt;C-n&gt;&quot; :
+      \ &lt;SID&gt;check_back_space() ? &quot;\&lt;TAB&gt;&quot; :
+      \ coc#refresh()
+inoremap &lt;expr&gt;&lt;S-TAB&gt; pumvisible() ? &quot;\&lt;C-p&gt;&quot; : &quot;\&lt;C-h&gt;&quot;
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+&quot; Use &lt;c-space&gt; to trigger completion.
+if has('nvim')
+  inoremap &lt;silent&gt;&lt;expr&gt; &lt;c-space&gt; coc#refresh()
+else
+  inoremap &lt;silent&gt;&lt;expr&gt; &lt;c-@&gt; coc#refresh()
+endif
+&quot; Make &lt;CR&gt; auto-select the first completion item and notify coc.nvim to
+&quot; format on enter, &lt;cr&gt; could be remapped by other vim plugin
+inoremap &lt;silent&gt;&lt;expr&gt; &lt;cr&gt; pumvisible() ? coc#_select_confirm()
+                              \: &quot;\&lt;C-g&gt;u\&lt;CR&gt;\&lt;c-r&gt;=coc#on_enter()\&lt;CR&gt;&quot;
+&quot; Use `[g` and `]g` to navigate diagnostics
+&quot; Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap &lt;silent&gt; [g &lt;Plug&gt;(coc-diagnostic-prev)
+nmap &lt;silent&gt; ]g &lt;Plug&gt;(coc-diagnostic-next)
+&quot; GoTo code navigation.
+nmap &lt;silent&gt; gd &lt;Plug&gt;(coc-definition)
+nmap &lt;silent&gt; gy &lt;Plug&gt;(coc-type-definition)
+nmap &lt;silent&gt; gi &lt;Plug&gt;(coc-implementation)
+nmap &lt;silent&gt; gr &lt;Plug&gt;(coc-references)
+&quot; Use K to show documentation in preview window.
+nnoremap &lt;silent&gt; K :call &lt;SID&gt;show_documentation()&lt;CR&gt;
+function! s:show_documentation()
+  if (index(['vim','help'], &amp;filetype) &gt;= 0)
+    execute 'h '.expand('&lt;cword&gt;')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &amp;keywordprg . &quot; &quot; . expand('&lt;cword&gt;')
+  endif
+endfunction
+&quot; Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
+&quot; Symbol renaming.
+nmap &lt;leader&gt;rn &lt;Plug&gt;(coc-rename)
+&quot; Formatting selected code.
+xmap &lt;leader&gt;f  &lt;Plug&gt;(coc-format-selected)
+nmap &lt;leader&gt;f  &lt;Plug&gt;(coc-format-selected)
+augroup mygroup
+  autocmd!
+  &quot; Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  &quot; Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+&quot; Applying codeAction to the selected region.
+&quot; Example: `&lt;leader&gt;aap` for current paragraph
+xmap &lt;leader&gt;a  &lt;Plug&gt;(coc-codeaction-selected)
+nmap &lt;leader&gt;a  &lt;Plug&gt;(coc-codeaction-selected)
+&quot; Remap keys for applying codeAction to the current buffer.
+nmap &lt;leader&gt;ac  &lt;Plug&gt;(coc-codeaction)
+&quot; Apply AutoFix to problem on the current line.
+nmap &lt;leader&gt;qf  &lt;Plug&gt;(coc-fix-current)
+&quot; Map function and class text objects
+&quot; NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if &lt;Plug&gt;(coc-funcobj-i)
+omap if &lt;Plug&gt;(coc-funcobj-i)
+xmap af &lt;Plug&gt;(coc-funcobj-a)
+omap af &lt;Plug&gt;(coc-funcobj-a)
+xmap ic &lt;Plug&gt;(coc-classobj-i)
+omap ic &lt;Plug&gt;(coc-classobj-i)
+xmap ac &lt;Plug&gt;(coc-classobj-a)
+omap ac &lt;Plug&gt;(coc-classobj-a)
+&quot; Remap &lt;C-f&gt; and &lt;C-b&gt; for scroll float windows/popups.
+&quot; Note coc#float#scroll works on neovim &gt;= 0.4.0 or vim &gt;= 8.2.0750
+nnoremap &lt;nowait&gt;&lt;expr&gt; &lt;C-f&gt; coc#float#has_scroll() ? coc#float#scroll(1) : &quot;\&lt;C-f&gt;&quot;
+nnoremap &lt;nowait&gt;&lt;expr&gt; &lt;C-b&gt; coc#float#has_scroll() ? coc#float#scroll(0) : &quot;\&lt;C-b&gt;&quot;
+inoremap &lt;nowait&gt;&lt;expr&gt; &lt;C-f&gt; coc#float#has_scroll() ? &quot;\&lt;c-r&gt;=coc#float#scroll(1)\&lt;cr&gt;&quot; : &quot;\&lt;Right&gt;&quot;
+inoremap &lt;nowait&gt;&lt;expr&gt; &lt;C-b&gt; coc#float#has_scroll() ? &quot;\&lt;c-r&gt;=coc#float#scroll(0)\&lt;cr&gt;&quot; : &quot;\&lt;Left&gt;&quot;
+&quot; NeoVim-only mapping for visual mode scroll
+&quot; Useful on signatureHelp after jump placeholder of snippet expansion
+if has('nvim')
+  vnoremap &lt;nowait&gt;&lt;expr&gt; &lt;C-f&gt; coc#float#has_scroll() ? coc#float#nvim_scroll(1, 1) : &quot;\&lt;C-f&gt;&quot;
+  vnoremap &lt;nowait&gt;&lt;expr&gt; &lt;C-b&gt; coc#float#has_scroll() ? coc#float#nvim_scroll(0, 1) : &quot;\&lt;C-b&gt;&quot;
+endif
+&quot; Use CTRL-S for selections ranges.
+&quot; Requires 'textDocument/selectionRange' support of language server.
+nmap &lt;silent&gt; &lt;C-s&gt; &lt;Plug&gt;(coc-range-select)
+xmap &lt;silent&gt; &lt;C-s&gt; &lt;Plug&gt;(coc-range-select)
+&quot; Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+&quot; Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', &lt;f-args&gt;)
+&quot; Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+&quot; Add (Neo)Vim's native statusline support.
+&quot; NOTE: Please see `:h coc-status` for integrations with external plugins that
+&quot; provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+&quot; Mappings for CoCList
+&quot; Show all diagnostics.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;a  :&lt;C-u&gt;CocList diagnostics&lt;cr&gt;
+&quot; Manage extensions.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;e  :&lt;C-u&gt;CocList extensions&lt;cr&gt;
+&quot; Show commands.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;c  :&lt;C-u&gt;CocList commands&lt;cr&gt;
+&quot; Find symbol of current document.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;o  :&lt;C-u&gt;CocList outline&lt;cr&gt;
+&quot; Search workspace symbols.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;s  :&lt;C-u&gt;CocList -I symbols&lt;cr&gt;
+&quot; Do default action for next item.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;j  :&lt;C-u&gt;CocNext&lt;CR&gt;
+&quot; Do default action for previous item.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;k  :&lt;C-u&gt;CocPrev&lt;CR&gt;
+&quot; Resume latest coc list.
+nnoremap &lt;silent&gt;&lt;nowait&gt; &lt;space&gt;p  :&lt;C-u&gt;CocListResume&lt;CR&gt;
+
+&quot; \ml per appendere la configurazione corrente come modeline
+&quot; Append modeline after last line in buffer.
+&quot; Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+&quot; files.
+function! AppendModeline()
+  let l:modeline = printf(&quot; vim: set ts=%d sw=%d tw=%d %set :&quot;,
+        \ &amp;tabstop, &amp;shiftwidth, &amp;textwidth, &amp;expandtab ? '' : 'no')
+  let l:modeline = substitute(&amp;commentstring, &quot;%s&quot;, l:modeline, &quot;&quot;)
+  call append(line(&quot;$&quot;), l:modeline)
+endfunction
+nnoremap &lt;silent&gt; &lt;Leader&gt;ml :call AppendModeline()&lt;CR&gt;
+
+
+&quot; Funzione prelevata da $VIMRUNTIME/defaults.vim
+&quot; Convenient command to see the difference between the current buffer and the
+&quot; file it was loaded from, thus the changes you made.
+&quot; Only define it when not defined already.
+&quot; Revert with: &quot;:delcommand DiffOrig&quot;.
+if !exists(&quot;:DiffOrig&quot;)
+  command DiffOrig vert new | set bt=nofile | r ++edit # | 0d_ | diffthis
+		  \ | wincmd p | diffthis
+endif
+</code></pre>
+</body></html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.072" />
+        <title>file_system</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="file_system" tabindex="-1">file_system <a class="header-anchor" href="#file_system" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.072</p>
+<nav class="table-of-contents"><ol><li><a href="#informazioni-sui-filesystem">Informazioni sui filesystem </a></li><li><a href="#info-su-un-file">Info su un file </a></li><li><a href="#comandi-per-i-path">Comandi per i path </a></li><li><a href="#path-completo-di-un-file">Path completo di un file </a></li><li><a href="#file-immutabili-non-cancellabili">File immutabili non cancellabili </a></li><li><a href="#creare-un-file-random-di-2048-bytes">Creare un file random di 2048 bytes </a></li><li><a href="#forzare-il-check-del-filesystem-root-al-reboot">Forzare il check del filesystem root al reboot </a></li><li><a href="#creare-un-file-system-su-file">Creare un file system su file </a></li><li><a href="#rc-file">rc file </a></li><li><a href="#diminuire-lo-swappiness">Diminuire lo swappiness </a></li><li><a href="#move-%2Ftmp-to-ram">Move /tmp to RAM </a></li><li><a href="#disk-usage-of-all-subdirectories-and-files-including-hidden-files-within-the-current-directory-(sorted-by-filesize)">Disk usage of all subdirectories and files including hidden files within the current directory (sorted by filesize) </a></li><li><a href="#per-seguire-l'ouput-di-un-processo">Per seguire l&#39;ouput di un processo </a></li><li><a href="#to-watch-the-contents-of-a-directory-change%2C-you-could-use">To watch the contents of a directory change, you could use </a></li><li><a href="#difference-between-change-time-and-modification-time">Difference between Change Time and Modification Time </a></li><li><a href="#incrementare-il-numero-di-file-controllabili-da-inotify">Incrementare il numero di file controllabili da inotify </a></li><li><a href="#permissions">Permissions </a></li></ol></nav><h1 id="file-system" tabindex="-1">File System <a class="header-anchor" href="#file-system" aria-hidden="true">🔗</a></h1>
+<h2 id="informazioni-sui-filesystem" tabindex="-1">Informazioni sui filesystem <a class="header-anchor" href="#informazioni-sui-filesystem" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ inxi -D
+$ inxi -pl
+$ <span class="hljs-built_in">sudo</span> fdisk -l
+$ findmnt
+$ lsblk -f
+$ lsblk -S
+$ <span class="hljs-built_in">df</span> -h
+
+$ lsblk -o NAME,TYPE,PTTYPE,SIZE,FSTYPE,FSUSE%,LABEL,UUID,RO,MOUNTPOINT
+$ lsblk -o NAME,TYPE,PTTYPE,SIZE,FSTYPE,FSUSE%,LABEL,UUID,RO,MOUNTPOINT /dev/sdc
+$ <span class="hljs-built_in">sudo</span> hdparm -I /dev/sdc
+$ <span class="hljs-built_in">sudo</span> blkid
+$ <span class="hljs-built_in">sudo</span> fdisk -l  elenco partizioni per hard disk MBR
+$ <span class="hljs-built_in">sudo</span> parted -l elenco partizioni per hard disk UEFI/tabella partizione GPT
+$ <span class="hljs-built_in">cat</span> /proc/partitions
+$ <span class="hljs-built_in">ls</span> -hal /dev/disk/by-path/
+$ <span class="hljs-built_in">ls</span> /dev/disk/by-id -lah
+$ <span class="hljs-built_in">ls</span> -hal /dev/disk/by-uuid/
+$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda6|grep UUID
+$ <span class="hljs-built_in">sudo</span> blkid -s UUID
+</code></pre>
+<h2 id="info-su-un-file" tabindex="-1">Info su un file <a class="header-anchor" href="#info-su-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    <span class="hljs-built_in">stat</span> ~/.bashrc
+</code></pre>
+<h2 id="comandi-per-i-path" tabindex="-1">Comandi per i path <a class="header-anchor" href="#comandi-per-i-path" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://stackoverflow.com/questions/284662/how-do-you-normalize-a-file-path-in-bash">https://stackoverflow.com/questions/284662/how-do-you-normalize-a-file-path-in-bash</a></li>
+<li><a href="https://stackoverflow.com/questions/2564634/convert-absolute-path-into-relative-path-given-a-current-directory-using-bash">https://stackoverflow.com/questions/2564634/convert-absolute-path-into-relative-path-given-a-current-directory-using-bash</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">dirname</span> /foo/bar/baz 
+<span class="hljs-comment"># /foo/bar </span>
+$ <span class="hljs-built_in">basename</span> /foo/bar/baz
+<span class="hljs-comment"># baz</span>
+$ <span class="hljs-built_in">dirname</span> $( <span class="hljs-built_in">dirname</span>  /foo/bar/baz  ) 
+<span class="hljs-comment"># /foo </span>
+$ <span class="hljs-built_in">realpath</span> ../foo
+<span class="hljs-comment"># ../foo: No such file or directory</span>
+$ <span class="hljs-built_in">realpath</span> /tmp/../tmp/../tmp
+<span class="hljs-comment"># /tmp</span>
+
+<span class="hljs-comment"># Come creare un path relativo, si utilizza sempre realpath:</span>
+$ <span class="hljs-built_in">realpath</span> --relative-to=<span class="hljs-string">&quot;<span class="hljs-variable">$file1</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file2</span>&quot;</span>
+$ <span class="hljs-built_in">realpath</span> --relative-to=/usr/bin/nmap /tmp/testing
+../../../tmp/testing
+</code></pre>
+<h2 id="path-completo-di-un-file" tabindex="-1">Path completo di un file <a class="header-anchor" href="#path-completo-di-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">realpath</span> nomefile     <span class="hljs-comment"># modo preferito</span>
+$ <span class="hljs-built_in">readlink</span> -f nomefile
+</code></pre>
+<h2 id="file-immutabili-non-cancellabili" tabindex="-1">File immutabili non cancellabili <a class="header-anchor" href="#file-immutabili-non-cancellabili" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ chattr +i myfile.txt
+</code></pre>
+<p>as root will make that file virtually indestructable no matter what user you are.
+If you want to remove the shield of steel, use <code>-i</code> rather than <code>+i</code>.</p>
+<pre><code class="language-bash">$ chattr -i myfile.txt
+$ <span class="hljs-built_in">rm</span> myfile.txt
+</code></pre>
+<p>Con <code>chattr +i</code> nemmeno root puo cancellare il file</p>
+<h2 id="creare-un-file-random-di-2048-bytes" tabindex="-1">Creare un file random di 2048 bytes <a class="header-anchor" href="#creare-un-file-random-di-2048-bytes" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/urandom of=secretkey bs=512 count=4
+</code></pre>
+<h2 id="forzare-il-check-del-filesystem-root-al-reboot" tabindex="-1">Forzare il check del filesystem root al reboot <a class="header-anchor" href="#forzare-il-check-del-filesystem-root-al-reboot" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda3|grep -E <span class="hljs-string">&#x27;Max|Last&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda3|grep Mount
+$ <span class="hljs-built_in">sudo</span> tune2fs -C 40 /dev/sda3 <span class="hljs-comment"># (impostare un numero superiore al Mount count attuale)</span>
+</code></pre>
+<h2 id="creare-un-file-system-su-file" tabindex="-1">Creare un file system su file <a class="header-anchor" href="#creare-un-file-system-su-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># creazione di un file</span>
+$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=miofilesystem.dd bs=1024 count=10000
+<span class="hljs-comment"># creazione di un file system ext4 nel file</span>
+$ mkfs -f -t ext4 miofilesystem.dd
+<span class="hljs-comment"># mount del file formattato come dispositivo di loopback in una directory</span>
+$ <span class="hljs-built_in">mkdir</span> <span class="hljs-built_in">test</span>
+$ mount -o loop miofilesystem.dd <span class="hljs-built_in">test</span>/
+<span class="hljs-comment"># lettura del file</span>
+$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=miofilesystem.dd bs=512 count=2 skip=1|hexdump -C
+</code></pre>
+<h2 id="rc-file" tabindex="-1">rc file <a class="header-anchor" href="#rc-file" aria-hidden="true">🔗</a></h2>
+<p>The &quot;rc&quot; naming convention of &quot;rc files&quot; was inspired by the <strong>&quot;runcom&quot;</strong> facility mentioned above and does not stand for &quot;resource configuration&quot;or &quot;runtime configuration&quot;as is often wrongly guessed
+[Unix: from <strong>runcom</strong> files on the <strong>CTSS system 1962-63(Compatible Time-Sharing System)</strong>,
+via the startup script <strong>/etc/rc</strong>] Script file containing startup instructions for an application program (or an entire operating system), usually a text file containing commands of the sort that might have been invoked manually once the system was running but are to be executed automatically each time the system starts up.</p>
+<h2 id="diminuire-lo-swappiness" tabindex="-1">Diminuire lo swappiness <a class="header-anchor" href="#diminuire-lo-swappiness" aria-hidden="true">🔗</a></h2>
+<p>I valori più vicini allo zero usano più RAM prima di passare allo swap.</p>
+<p>Aggiungere <code>vm.swappiness=10</code> alla fine del file <code>/etc/sysctl.d/99-sysctl.conf</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> sysctl vm.swappiness=10; <span class="hljs-built_in">cat</span> /proc/sys/vm/swappiness
+$ <span class="hljs-built_in">sudo</span> sysctl --system
+$ <span class="hljs-built_in">sudo</span> sysctl -a
+</code></pre>
+<h2 id="move-%2Ftmp-to-ram" tabindex="-1">Move /tmp to RAM <a class="header-anchor" href="#move-%2Ftmp-to-ram" aria-hidden="true">🔗</a></h2>
+<p>Aggiungere ad <code>/etc/fstab</code> :</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Move /tmp to RAM</span>
+$ tmpfs /tmp tmpfs defaults,noexec,nosuid 0 0
+$ <span class="hljs-built_in">sudo</span> mount -a
+</code></pre>
+<h2 id="disk-usage-of-all-subdirectories-and-files-including-hidden-files-within-the-current-directory-(sorted-by-filesize)" tabindex="-1">Disk usage of all subdirectories and files including hidden files within the current directory (sorted by filesize) <a class="header-anchor" href="#disk-usage-of-all-subdirectories-and-files-including-hidden-files-within-the-current-directory-(sorted-by-filesize)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">du</span> -sk .[!.]* *|<span class="hljs-built_in">sort</span> -n
+</code></pre>
+<pre><code class="language-bash">    <span class="hljs-built_in">du</span> -sk * | <span class="hljs-built_in">sort</span> -nr | awk <span class="hljs-string">&#x27;
+    BEGIN {
+    split(&quot;KB,MB,GB,TB&quot;, Units, &quot;,&quot;);
+    }
+    {
+    u = 1;
+    while ($1 &gt;= 1024) {
+    $1 = $1 / 1024;
+    u += 1
+    }
+    $1 = sprintf(&quot;%.1f %s&quot;, $1, Units[u]);
+    print $0;
+    }
+    &#x27;</span>
+    <span class="hljs-built_in">cd</span> /
+    <span class="hljs-built_in">du</span> -ckx |<span class="hljs-built_in">sort</span> -n
+    <span class="hljs-built_in">cd</span> ~
+    <span class="hljs-built_in">du</span> -ck |<span class="hljs-built_in">sort</span> -n
+</code></pre>
+<h2 id="per-seguire-l'ouput-di-un-processo" tabindex="-1">Per seguire l'ouput di un processo <a class="header-anchor" href="#per-seguire-l'ouput-di-un-processo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ watch dmesg
+$ dmesg -w
+$ <span class="hljs-built_in">tail</span> -f nomefile
+</code></pre>
+<h2 id="to-watch-the-contents-of-a-directory-change%2C-you-could-use" tabindex="-1">To watch the contents of a directory change, you could use <a class="header-anchor" href="#to-watch-the-contents-of-a-directory-change%2C-you-could-use" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ watch -d <span class="hljs-built_in">ls</span> -l nomedir
+</code></pre>
+<h2 id="difference-between-change-time-and-modification-time" tabindex="-1">Difference between Change Time and Modification Time <a class="header-anchor" href="#difference-between-change-time-and-modification-time" aria-hidden="true">🔗</a></h2>
+<p>The difference between a change and a modification is the difference between altering the label on a package and altering its contents.<br>
+If someone says <code>chmod a-w myfile</code>, that is a <mark>change</mark>;<br>
+if someone says <code>echo foo &gt;&gt; myfile</code>, that is a <mark>modification</mark>.</p>
+<p>A change modifies the file's inode; a modification modifies the contents of the file itself.</p>
+<p>A file's modification time is also called the timestamp.</p>
+<h2 id="incrementare-il-numero-di-file-controllabili-da-inotify" tabindex="-1">Incrementare il numero di file controllabili da inotify <a class="header-anchor" href="#incrementare-il-numero-di-file-controllabili-da-inotify" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit">https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit</a></li>
+<li><a href="../kernel/sysctl.html">sysctl</a></li>
+</ul>
+<pre><code class="language-bash">    [manjaro cdp]#sysctl -a|grep fs.inotify.max_user_watches
+    fs.inotify.max_user_watches = 8192
+    <span class="hljs-built_in">sudo</span> vim /etc/sysctl.d/pycharm.conf
+            fs.inotify.max_user_watches = 524288
+    <span class="hljs-built_in">sudo</span> sysctl -p --system
+        * Applying /usr/lib/sysctl.d/50-coredump.conf...
+        kernel.core_pattern = |/usr/lib/systemd/systemd-coredump %P %u %g %s %t %c %e
+        * Applying /usr/lib/sysctl.d/50-default.conf...
+        kernel.sysrq = 16
+        kernel.core_uses_pid = 1
+        net.ipv4.conf.default.rp_filter = 1
+        net.ipv4.conf.all.rp_filter = 1
+        net.ipv4.conf.default.accept_source_route = 0
+        net.ipv4.conf.all.accept_source_route = 0
+        net.ipv4.conf.default.promote_secondaries = 1
+        net.ipv4.conf.all.promote_secondaries = 1
+        net.core.default_qdisc = fq_codel
+        fs.protected_hardlinks = 1
+        fs.protected_symlinks = 1
+        * Applying /etc/sysctl.d/pycharm.conf...
+        fs.inotify.max_user_watches = 524288
+</code></pre>
+<h2 id="permissions" tabindex="-1">Permissions <a class="header-anchor" href="#permissions" aria-hidden="true">🔗</a></h2>
+<p><img src="../../../inc/img/file_bits/file_permissions.jpg" alt="Permessi" style="display:block; margin: 0 auto; width:50%"></p>
+<p><img src="../../../inc/img/file_bits/find_suid.png" alt="Cercare file con SUID" style="display:block; margin: 0 auto; width:50%"></p>
+<p><img src="../../../inc/img/file_bits/suid.gif" alt="SUID" style="display:block; margin: 0 auto; width:50%"></p>
+<p><img src="../../../inc/img/file_bits/suid_sgid_bits.png" alt="SUID SGID" style="display:block; margin: 0 auto; width:50%"></p>
+</body></html>

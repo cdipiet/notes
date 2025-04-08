@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.159" />
+        <title>openvswitch</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="openvswitch" tabindex="-1">openvswitch <a class="header-anchor" href="#openvswitch" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.159</p>
+<nav class="table-of-contents"><ol><li><a href="#schede-host-only">Schede Host Only </a></li><li><a href="#configurazione-switch">Configurazione switch </a></li></ol></nav><h1 id="open-vswitch" tabindex="-1">Open vSwitch <a class="header-anchor" href="#open-vswitch" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Open_vSwitch">https://wiki.archlinux.org/title/Open_vSwitch</a></li>
+<li><a href="https://archlinux.org/packages/?name=openvswitch">https://archlinux.org/packages/?name=openvswitch</a></li>
+<li><a href="https://docs.openvswitch.org/en/latest/faq/configuration/">https://docs.openvswitch.org/en/latest/faq/configuration/</a></li>
+<li><a href="https://docs.openvswitch.org/en/latest/howto/vlan/">https://docs.openvswitch.org/en/latest/howto/vlan/</a></li>
+<li><a href="https://docs.openvswitch.org/en/latest/faq/vlan/">https://docs.openvswitch.org/en/latest/faq/vlan/</a></li>
+<li><a href="https://medium.com/@joatmon08/making-it-easier-docker-containers-on-open-vswitch-4ed757619af9">https://medium.com/@joatmon08/making-it-easier-docker-containers-on-open-vswitch-4ed757619af9</a></li>
+<li><a href="https://viky.co.in/2016/08/21/getting-started-with-openvswitch/">https://viky.co.in/2016/08/21/getting-started-with-openvswitch/</a></li>
+<li><a href="http://networkstatic.net/open-vswitch-on-virtualbox/">http://networkstatic.net/open-vswitch-on-virtualbox/</a></li>
+<li><a href="https://sites.google.com/a/orabuntu-lxc.com/brandydandyoracle/openvswitch-ovs/configuring-virtualbox-vms-for-openvswitch-networking">https://sites.google.com/a/orabuntu-lxc.com/brandydandyoracle/openvswitch-ovs/configuring-virtualbox-vms-for-openvswitch-networking</a></li>
+<li><a href="https://stackoverflow.com/questions/53404050/ovs-tap-internal-vs-tuntap-tap">https://stackoverflow.com/questions/53404050/ovs-tap-internal-vs-tuntap-tap</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm openvswitch
+$ systemctl <span class="hljs-built_in">enable</span> ovs-vswitchd
+$ systemctl start ovs-vswitchd
+$ systemctl status ovs-vswitchd
+</code></pre>
+<h2 id="schede-host-only" tabindex="-1">Schede Host Only <a class="header-anchor" href="#schede-host-only" aria-hidden="true">🔗</a></h2>
+<p>A differenza del bridged crea delle NIC virtuali nell'host.</p>
+<p>Il tipo di scheda delle VM deve essere Host Only, questo tipo permette la selezione di una delle reti create dal gestore di VirtualBox.</p>
+<p><a href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">https://www.virtualbox.org/manual/ch06.html#network_hostonly</a></p>
+<p>When host-only networking is used, Oracle VM VirtualBox creates a new software interface on the host which then appears next to your existing network interfaces.
+On Linux, Mac OS X and Solaris Oracle VM VirtualBox will only allow IP addresses
+in <code>192.168.56.0/21</code> range.
+to be assigned to host-only adapters. For IPv6 only link-local addresses are allowed. If other ranges are desired, they can be enabled by creating /etc/vbox/networks.conf and specifying allowed ranges there. For example, to allow 10.0.0.0/8
+and 192.168.0.0/16 IPv4 ranges as well as 2001::/64 range put the following lines into <code>/etc/vbox/networks.conf</code>:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/vbox/networks.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+* 192.168.0.0/16
+EOF
+</code></pre>
+<p>Oppure per abilitare l'assegnazione di un qualunque IP:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/vbox/networks.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+* 0.0.0.0/0 ::/0
+EOF
+</code></pre>
+<h2 id="configurazione-switch" tabindex="-1">Configurazione switch <a class="header-anchor" href="#configurazione-switch" aria-hidden="true">🔗</a></h2>
+<p>VirtualBox/File/Gestore di rete dell Host/Crea
+vboxnet0
+nessun DHCP
+192.168.1.100 255.255.255.0
+Associarla come sheda Host Only alla VM Alpine_1</p>
+<pre><code>vboxnet1
+nessun DHCP
+192.168.57.1 255.255.255.0
+Associarla come sheda Host Only alla VM Alpine_2
+
+vboxnet2
+nessun DHCP
+192.168.58.1 255.255.255.0
+Associarla come sheda Host Only alla VM Alpine_3
+
+vboxnet3
+nessun DHCP
+192.168.59.1 255.255.255.0
+Associarla come sheda Host Only alla VM Alpine_4
+</code></pre>
+<pre><code class="language-bash">$ ip a
+38: vboxnet0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    <span class="hljs-built_in">link</span>/ether 0a:00:27:00:00:00 brd ff:ff:ff:ff:ff:ff
+39: vboxnet1: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    <span class="hljs-built_in">link</span>/ether 0a:00:27:00:00:01 brd ff:ff:ff:ff:ff:ff
+40: vboxnet2: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    <span class="hljs-built_in">link</span>/ether 0a:00:27:00:00:02 brd ff:ff:ff:ff:ff:ff
+41: vboxnet3: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state DOWN group default qlen 1000
+    <span class="hljs-built_in">link</span>/ether 0a:00:27:00:00:03 brd ff:ff:ff:ff:ff:ff
+
+l ip compare solo quando la VM è attiva
+
+ovs-vsctl add-br br0
+
+<span class="hljs-comment"># By default, all OVS ports are VLAN trunks, so vnet0 will pass all VLANs</span>
+
+ovs-vsctl add-port br0 vnet0
+ovs-vsctl add-port br0 vnet1
+ovs-vsctl add-port br0 vnet2
+ovs-vsctl add-port br0 vnet3
+ovs-vsctl add-port br0 vnet4
+ovs-vsctl add-port br0 vnet5
+
+ifconfig br0 up
+ovs-vsctl <span class="hljs-built_in">set</span> bridge br0 protocols=OpenFlow13
+
+ovs-vsctl set-controller br0 tcp:10.10.80.50:6633
+
+</code></pre>
+</body></html>

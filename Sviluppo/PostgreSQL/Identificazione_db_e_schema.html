@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.711" />
+        <title>Identificazione_db_e_schema</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="identificazione_db_e_schema" tabindex="-1">Identificazione_db_e_schema <a class="header-anchor" href="#identificazione_db_e_schema" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.711</p>
+<nav class="table-of-contents"><ol><li><a href="#connessione">Connessione </a></li><li><a href="#individuazione-del-db-e-dello-schema">Individuazione del db e dello schema </a><ol><li><a href="#analisi-del-processo">Analisi del processo </a></li><li><a href="#analisi-della-configurazione-di-postgresql">Analisi della configurazione di PostgreSQL </a></li><li><a href="#esempio-di-sessione-psql">Esempio di sessione psql </a></li><li><a href="#analisi-configurazione-utenze">Analisi configurazione Utenze </a></li><li><a href="#analisi-del-db-my_db">Analisi del db my_db </a></li></ol></li></ol></nav><h1 id="identificazione-db-e-schema-postgresql-di-interesse" tabindex="-1">Identificazione DB e schema PostgreSQL di interesse <a class="header-anchor" href="#identificazione-db-e-schema-postgresql-di-interesse" aria-hidden="true">🔗</a></h1>
+<p>Analisi per l'indentificazione del database e dello schema di interesse.
+Nel server PostgreSQL sono definiti diversi DB ciascuno con i propri schemi,
+occorre identificare i DB e gli schemi nei quali sono contenute le informazioni di interesse del server SOAR.</p>
+<h2 id="connessione" tabindex="-1">Connessione <a class="header-anchor" href="#connessione" aria-hidden="true">🔗</a></h2>
+<p>Per poter creare una utenza DB di sola lettura per evitare di alterare i dati per errore,
+conviene identificare i database e gli schemi di interesse accedendo direttamente
+come root sulla macchina PostgreSQL:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 <span class="hljs-title">root</span>@<span class="hljs-title">posgresql_host</span>
+</span></code></pre>
+<p>Entrati nella macchina dove è installato PostgreSQL si utilizza l'utenza <code>postgres</code>
+per entrare nel DB come amministratore, tale utenza ha normalmente il ruolo <code>superuser</code>.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -Hiu postgres psql
+$ <span class="hljs-built_in">sudo</span> -Hiu postgres
+</code></pre>
+<h2 id="individuazione-del-db-e-dello-schema" tabindex="-1">Individuazione del db e dello schema <a class="header-anchor" href="#individuazione-del-db-e-dello-schema" aria-hidden="true">🔗</a></h2>
+<h3 id="analisi-del-processo" tabindex="-1">Analisi del processo <a class="header-anchor" href="#analisi-del-processo" aria-hidden="true">🔗</a></h3>
+<p>Con i seguenti comandi si vede che l'utenza unix <code>postgres</code> <br>
+esegue il processo <code>postmaster</code> con directory di lavoro <code>/var/lib/pgsql/12/data/</code>. <br>
+Si vede già inoltre che il db <code>my_db</code> è attivo con l'utenza owner postgresql <code>mondbo</code>.</p>
+<pre><code class="language-sh"><span class="hljs-comment"># Visualizzazione del processo</span>
+[root@postgresql_host ~]# ps -ef|grep postgres
+    postgres  1569     1  0 Feb14 ?        00:02:01 /usr/pgsql-12/bin/postmaster -D /var/lib/pgsql/12/data/
+    postgres  3198  1569  0 14:02 ?        00:00:00 postgres: mondbo my_db 127.0.0.1(50304) idle
+    postgres  5096  1569  0 14:09 ?        00:00:00 postgres: apps apps 127.0.0.1(51180) idle
+
+<span class="hljs-comment"># Ricerca del servizio systemd postgresql</span>
+$ systemctl list-units --<span class="hljs-built_in">type</span>=service --state=running | sed -n -e <span class="hljs-string">&#x27;1p&#x27;</span> -e <span class="hljs-string">&#x27;/postgres/p&#x27;</span>
+UNIT                                    LOAD   ACTIVE SUB     DESCRIPTION
+postgresql-12.service                   loaded active running PostgreSQL 12 database server
+
+<span class="hljs-comment"># Visualizzazione della definizione del servizio systemd</span>
+$ systemctl <span class="hljs-built_in">cat</span> --no-pager postgresql-12.service
+    <span class="hljs-comment"># /usr/lib/systemd/system/postgresql-12.service</span>
+    <span class="hljs-comment"># It&#x27;s not recommended to modify this file in-place, because it will be</span>
+    <span class="hljs-comment"># overwritten during package upgrades.  It is recommended to use systemd</span>
+    <span class="hljs-comment"># &quot;dropin&quot; feature;  i.e. create file with suffix .conf under</span>
+    <span class="hljs-comment"># /etc/systemd/system/postgresql-12.service.d directory overriding the</span>
+    <span class="hljs-comment"># unit&#x27;s defaults. You can also use &quot;systemctl edit postgresql-12&quot;</span>
+    <span class="hljs-comment"># Look at systemd.unit(5) manual page for more info.</span>
+    <span class="hljs-comment"># Note: changing PGDATA will typically require adjusting SELinux</span>
+    <span class="hljs-comment"># configuration as well.</span>
+    <span class="hljs-comment"># Note: do not use a PGDATA pathname containing spaces, or you will</span>
+    <span class="hljs-comment"># break postgresql-setup.</span>
+    [Unit]
+    Description=PostgreSQL 12 database server
+    Documentation=https://www.postgresql.org/docs/12/static/
+    After=syslog.target
+    After=network.target
+    [Service]
+    Type=notify
+    User=postgres
+    Group=postgres
+    <span class="hljs-comment"># Note: avoid inserting whitespace in these Environment= lines, or you may</span>
+    <span class="hljs-comment"># break postgresql-setup.</span>
+    <span class="hljs-comment"># Location of database directory</span>
+    Environment=PGDATA=/var/lib/pgsql/12/data/
+    <span class="hljs-comment"># Where to send early-startup messages from the server (before the logging</span>
+    <span class="hljs-comment"># options of postgresql.conf take effect)</span>
+    <span class="hljs-comment"># This is normally controlled by the global default set by systemd</span>
+    <span class="hljs-comment"># StandardOutput=syslog</span>
+    <span class="hljs-comment"># Disable OOM kill on the postmaster</span>
+    OOMScoreAdjust=-1000
+    Environment=PG_OOM_ADJUST_FILE=/proc/self/oom_score_adj
+    Environment=PG_OOM_ADJUST_VALUE=0
+    ExecStartPre=/usr/pgsql-12/bin/postgresql-12-check-db-dir <span class="hljs-variable">${PGDATA}</span>
+    ExecStart=/usr/pgsql-12/bin/postmaster -D <span class="hljs-variable">${PGDATA}</span>
+    ExecReload=/bin/kill -HUP <span class="hljs-variable">$MAINPID</span>
+    KillMode=mixed
+    KillSignal=SIGINT
+    <span class="hljs-comment"># Do not set any timeout value, so that systemd will not kill postmaster</span>
+    <span class="hljs-comment"># during crash recovery.</span>
+    TimeoutSec=0
+    [Install]
+    WantedBy=multi-user.target
+</code></pre>
+<p>Si vede già che il db di interesse è <code>my_db</code></p>
+<h3 id="analisi-della-configurazione-di-postgresql" tabindex="-1">Analisi della configurazione di PostgreSQL <a class="header-anchor" href="#analisi-della-configurazione-di-postgresql" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-sh">[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SHOW config_file&quot;</span>
+              config_file
+----------------------------------------
+ /var/lib/pgsql/12/data/postgresql.conf
+(1 row)
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SHOW ALL&quot;</span>
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SELECT * FROM pg_settings&quot;</span>
+
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SHOW data_directory&quot;</span>
+     data_directory
+------------------------
+ /var/lib/pgsql/12/data
+(1 row)
+
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SHOW listen_addresses&quot;</span>
+ listen_addresses
+------------------
+ localhost
+(1 row)
+Specifies the TCP/IP address(es) on <span class="hljs-built_in">which</span> the server is to listen <span class="hljs-keyword">for</span> connections from client applications.
+a comma-separated list of host names and/or numeric IP addresses. 
+The special entry * corresponds to all available IP interfaces. 
+The entry 0.0.0.0 allows listening <span class="hljs-keyword">for</span> all IPv4 addresses 
+and :: allows listening <span class="hljs-keyword">for</span> all IPv6 addresses.
+
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SHOW port&quot;</span>
+ port
+------
+ 5432
+(1 row)
+
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SELECT version();&quot;</span>
+PostgreSQL 12.8 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SHOW config_file&quot;</span>
+/var/lib/pgsql/12/data/postgresql.conf
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SHOW hba_file&quot;</span> <span class="hljs-comment"># host-based authentication file</span>
+/var/lib/pgsql/12/data/pg_hba.conf
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SHOW ident_file&quot;</span> <span class="hljs-comment">#  This file controls PostgreSQL user name mapping.  It maps external user names to their corresponding PostgreSQL user names. </span>
+ /var/lib/pgsql/12/data/pg_ident.conf
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SHOW data_directory&quot;</span>
+/var/lib/pgsql/12/data
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SHOW listen_addresses&quot;</span>
+localhost
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SHOW port&quot;</span>
+5432
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;\d pg_settings&quot;</span>
+ name            | text    |           |          |
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SELECT name,setting,vartype FROM pg_settings WHERE name=&#x27;config_file&#x27;;&quot;</span>
+    name     |                setting                 | vartype
+-------------+----------------------------------------+---------
+ config_file | /var/lib/pgsql/12/data/postgresql.conf | string
+
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SELECT CURRENT_USER;&quot;</span>
+postgres
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SELECT CURRENT_ROLE;&quot;</span>
+postgres
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;SELECT CURRENT_DATABASE();&quot;</span>
+postgres
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -tc <span class="hljs-string">&quot;\c&quot;</span>
+You are now connected to database <span class="hljs-string">&quot;postgres&quot;</span> as user <span class="hljs-string">&quot;postgres&quot;</span>.
+
+
+$ <span class="hljs-built_in">cat</span> /var/lib/pgsql/12/data/pg_hba.conf
+listen_addresses = <span class="hljs-string">&#x27;localhost&#x27;</span>          <span class="hljs-comment"># what IP address(es) to listen on;</span>
+<span class="hljs-comment">#port = 5432                            # (change requires restart)</span>
+</code></pre>
+<h3 id="esempio-di-sessione-psql" tabindex="-1">Esempio di sessione psql <a class="header-anchor" href="#esempio-di-sessione-psql" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -Hiu postgres
+
+-bash-4.2$ psql
+psql (12.8)
+Type <span class="hljs-string">&quot;help&quot;</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>.
+postgres=#
+<span class="hljs-comment"># il cancelletto indica che si è un db superuser, il nome del db di default è quello dell&#x27;utente: postgres</span>
+
+<span class="hljs-comment"># Vediamo la versione del DB:</span>
+postgres=# SELECT version();
+                                                 version
+--------------------------------------------------------------------------------------------------
+PostgreSQL 12.8 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit
+(1 row)
+
+$ <span class="hljs-built_in">sudo</span> -Hiu postgres psql --pset=<span class="hljs-string">&quot;footer=off&quot;</span> -c <span class="hljs-string">&quot;SELECT version();&quot;</span>
+                                                 version
+---------------------------------------------------------------------------------------------------------
+ PostgreSQL 12.8 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit
+
+$ <span class="hljs-built_in">sudo</span> -Hiu postgres psql -t -c <span class="hljs-string">&quot;SELECT version();&quot;</span>
+ PostgreSQL 12.8 on x86_64-pc-linux-gnu, compiled by gcc (GCC) 4.8.5 20150623 (Red Hat 4.8.5-44), 64-bit
+
+postgres=# SELECT current_date;
+ current_date
+--------------
+ 2024-03-12
+(1 row)
+
+postgres=# \q
+
+</code></pre>
+<h3 id="analisi-configurazione-utenze" tabindex="-1">Analisi configurazione Utenze <a class="header-anchor" href="#analisi-configurazione-utenze" aria-hidden="true">🔗</a></h3>
+<p>host-based authentication file</p>
+<p><a href="https://www.postgresql.org/docs/current/auth-pg-hba-conf.html">https://www.postgresql.org/docs/current/auth-pg-hba-conf.html</a></p>
+<p>Da questa analisi risulta che l'utente <code>postgres</code> è un <code>superuser</code>,
+che effettua l'autenticazione in modalità <code>peer</code>,
+(ovvero si usa l'utenza Unix per accedere)
+e che ci interessano il db <code>my_db</code> ed il suo utente owner <code>mondbo</code>.</p>
+<pre><code class="language-sh">[root@ data]# <span class="hljs-built_in">pwd</span>
+/var/lib/pgsql/12/data
+[root@ data]# <span class="hljs-built_in">cat</span> pg_hba.conf
+<span class="hljs-comment"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+<span class="hljs-built_in">local</span>   all             postgres                                peer
+host    all             mondbo,apps      127.0.0.1/32           md5
+host    all             mondbo,apps      ::1/128                md5
+</code></pre>
+<p><a href="https://www.postgresql.org/docs/current/auth-peer.html">https://www.postgresql.org/docs/current/auth-peer.html</a></p>
+<p>The peer authentication method works by obtaining the client's operating system user name from the kernel
+and using it as the allowed database user name (with optional user name mapping).
+This method is only supported on local connections.</p>
+<p><a href="https://www.postgresql.org/docs/current/auth-password.html">https://www.postgresql.org/docs/current/auth-password.html</a></p>
+<p><a href="https://www.postgresql.org/docs/current/auth-pam.html">https://www.postgresql.org/docs/current/auth-pam.html</a></p>
+<pre><code class="language-sh"><span class="hljs-comment"># Allow any user on the local system to connect to any database with</span>
+<span class="hljs-comment"># any database user name using Unix-domain sockets (the default for local</span>
+<span class="hljs-comment"># connections).</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># TYPE  DATABASE        USER            ADDRESS                 METHOD</span>
+<span class="hljs-built_in">local</span>   all             all                                     trust
+</code></pre>
+<pre><code class="language-sh">[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;\du+&quot;</span>
+                                          List of roles
+ Role name |                         Attributes                         | Member of | Description
+-----------+------------------------------------------------------------+-----------+-------------
+ apps      |                                                            | {}        |
+ mondbo    |                                                            | {}        |
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}        |
+
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;\l+&quot;</span>
+                                                                    List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   |  Size   | Tablespace |                Description
+-----------+----------+----------+-------------+-------------+-----------------------+---------+------------+--------------------------------------------
+ apps      | apps     | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 9769 kB | apps       |
+ my_db       | mondbo   | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 1526 MB | my_db        |
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 8345 kB | pg_default | default administrative connection database
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +| 8089 kB | pg_default | unmodifiable empty database
+           |          |          |             |             | postgres=CTc/postgres |         |            |
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | postgres=CTc/postgres+| 8201 kB | pg_default | default template <span class="hljs-keyword">for</span> new databases
+           |          |          |             |             | =c/postgres           |         |            |
+(5 rows)
+
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SELECT * FROM pg_catalog.pg_user&quot;</span>
+ usename  | usesysid | usecreatedb | usesuper | userepl | usebypassrls |  passwd  | valuntil | useconfig
+----------+----------+-------------+----------+---------+--------------+----------+----------+-----------
+ postgres |       10 | t           | t        | t       | t            | ******** |          |
+ mondbo   |    16384 | f           | f        | f       | f            | ******** |          |
+ apps     |    25778 | f           | f        | f       | f            | ******** |          |
+(3 rows)
+
+$ <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SELECT schema_name, schema_owner FROM information_schema.schemata;&quot;</span>
+
+SELECT 
+  c.relname, 
+  t.spcname 
+FROM 
+  pg_class c 
+    JOIN pg_tablespace t ON c.reltablespace = t.oid 
+WHERE 
+  t.spcname = <span class="hljs-string">&#x27;my_db&#x27;</span>;
+  
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql
+psql (12.8)
+Type <span class="hljs-string">&quot;help&quot;</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>.
+postgres=# \c my_db
+You are now connected to database <span class="hljs-string">&quot;my_db&quot;</span> as user <span class="hljs-string">&quot;postgres&quot;</span>.
+my_db=# \dt+
+Did not find any relations.
+my_db=# SELECT current_user, session_user;
+ current_user | session_user
+--------------+--------------
+ postgres     | postgres
+(1 row)
+my_db=# <span class="hljs-built_in">set</span> role mondbo;
+SET
+my_db=&gt; \dt+
+Did not find any relations.
+my_db=&gt; \db
+                 List of tablespaces
+    Name    |  Owner   |          Location
+------------+----------+-----------------------------
+ apps       | apps     | /crypt/app-manager-database
+ my_db        | mondbo   | /crypt/database
+ pg_default | postgres |
+ pg_global  | postgres |
+(4 rows)
+my_db=&gt; SELECT * FROM pg_tablespace;
+  oid  |  spcname   | spcowner | spcacl | spcoptions
+-------+------------+----------+--------+------------
+  1663 | pg_default |       10 |        |
+  1664 | pg_global  |       10 |        |
+ 16437 | my_db        |    16384 |        |
+ 16438 | apps       |    25778 |        |
+(4 rows)
+
+
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db
+psql (12.8)
+Type <span class="hljs-string">&quot;help&quot;</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">help</span>.
+
+my_db=# \dt+
+Did not find any relations.
+my_db=# \dl+
+        Large objects
+  ID   | Owner  | Description
+-------+--------+-------------
+ 26880 | mondbo |
+ 26881 | mondbo |
+ 26882 | mondbo |
+
+
+<span class="hljs-comment"># List Users</span>
+PostgreSQL represents user accounts as roles.
+When you create a role, it is valid <span class="hljs-keyword">in</span> all databases within the database server (or cluster).
+Roles that can <span class="hljs-built_in">log</span> <span class="hljs-keyword">in</span> are called login roles or <span class="hljs-built_in">users</span>. 
+Roles that contain other roles are called group roles.
+<span class="hljs-comment"># the concepts of “users” and “groups” have been unified into “roles”,</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql --pset=<span class="hljs-string">&quot;footer=off&quot;</span> -c <span class="hljs-string">&quot;\du&quot;</span>
+                                   List of roles
+ Role name |                         Attributes                         | Member of
+-----------+------------------------------------------------------------+-----------
+ apps      |                                                            | {}
+ mondbo    |                                                            | {}
+ postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
+
+<span class="hljs-comment"># List Users</span>
+<span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;
+SELECT usename AS role_name,
+  CASE 
+     WHEN usesuper AND usecreatedb THEN 
+	   CAST(&#x27;superuser, create database&#x27; AS pg_catalog.text)
+     WHEN usesuper THEN 
+	    CAST(&#x27;superuser&#x27; AS pg_catalog.text)
+     WHEN usecreatedb THEN 
+	    CAST(&#x27;create database&#x27; AS pg_catalog.text)
+     ELSE 
+	    CAST(&#x27;&#x27; AS pg_catalog.text)
+  END role_attributes
+ FROM pg_catalog.pg_user
+ ORDER BY role_name desc;
+&quot;</span>
+
+ role_name |      role_attributes
+-----------+----------------------------
+ postgres  | superuser, create database
+ mondbo    |
+ apps      |
+
+<span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;SELECT rolname FROM pg_roles;&quot;</span>
+          rolname
+---------------------------
+ pg_monitor
+ pg_read_all_settings
+ pg_read_all_stats
+ pg_stat_scan_tables
+ pg_read_server_files
+ pg_write_server_files
+ pg_execute_server_program
+ pg_signal_backend
+ postgres
+ mondbo
+ apps
+</code></pre>
+<h3 id="analisi-del-db-my_db" tabindex="-1">Analisi del db my_db <a class="header-anchor" href="#analisi-del-db-my_db" aria-hidden="true">🔗</a></h3>
+<p>L'utente <code>postgres</code> è un <code>superuser</code>.</p>
+<p>Tablespace del db <code>my_db</code>:</p>
+<pre><code class="language-sh">[root@postgresql_host ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -t -q -c <span class="hljs-string">&quot;select pg_tablespace_location(oid) from pg_tablespace where spcname=&#x27;my_db&#x27;;&quot;</span>
+    /crypt/database
+<span class="hljs-comment"># il -Hi evita l&#x27;errore could not change directory to &quot;/root&quot;: Permission denied</span>
+<span class="hljs-comment"># che si ottiene diventando utente postgres trovandoci però nella directory /root</span>
+<span class="hljs-comment"># -c command</span>
+<span class="hljs-comment"># -d dbname</span>
+<span class="hljs-comment"># -q --quiet</span>
+<span class="hljs-comment"># -t --tuples-only</span>
+<span class="hljs-comment"># -s --single-step</span>
+
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres
+
+-bash-4.2$ psql -c <span class="hljs-string">&quot;\db&quot;</span>
+                 List of tablespaces
+    Name    |  Owner   |          Location
+------------+----------+-----------------------------
+ apps       | apps     | /crypt/app-manager-database
+ my_db        | mondbo   | /crypt/database
+ pg_default | postgres |
+ pg_global  | postgres |
+(4 rows)
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;select pg_tablespace_location(oid) from pg_tablespace;&quot;</span>
+[root@ data]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -c <span class="hljs-string">&quot;select d.rolname, spcname, pg_tablespace_location(t.oid) from pg_tablespace t join pg_authid d on(t.spcowner=d.oid);&quot;</span>
+ rolname  |  spcname   |   pg_tablespace_location
+----------+------------+-----------------------------
+ postgres | pg_global  |
+ postgres | pg_default |
+ mondbo   | my_db        | /crypt/database
+ apps     | apps       | /crypt/app-manager-database
+(4 rows)
+
+
+
+<span class="hljs-comment"># Lista dei DB</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql -l
+                                  List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges
+-----------+----------+----------+-------------+-------------+-----------------------
+ apps      | apps     | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ my_db       | mondbo   | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +
+           |          |          |             |             | postgres=CTc/postgres
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | postgres=CTc/postgres+
+           |          |          |             |             | =c/postgres
+
+<span class="hljs-comment"># Lista dei DB</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -c <span class="hljs-string">&quot;\l+&quot;</span>
+                                                                    List of databases
+   Name    |  Owner   | Encoding |   Collate   |    Ctype    |   Access privileges   |  Size   | Tablespace |                Description
+-----------+----------+----------+-------------+-------------+-----------------------+---------+------------+--------------------------------------------
+ apps      | apps     | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 9769 kB | apps       |
+ my_db       | mondbo   | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 1529 MB | my_db        |
+ postgres  | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 |                       | 8345 kB | pg_default | default administrative connection database
+ template0 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | =c/postgres          +| 8089 kB | pg_default | unmodifiable empty database
+           |          |          |             |             | postgres=CTc/postgres |         |            |
+ template1 | postgres | UTF8     | en_US.UTF-8 | en_US.UTF-8 | postgres=CTc/postgres+| 8201 kB | pg_default | default template <span class="hljs-keyword">for</span> new databases
+
+<span class="hljs-comment"># Lista dei DB</span>
+<span class="hljs-comment"># https://www.postgresqltutorial.com/postgresql-administration/postgresql-show-databases/</span>
+<span class="hljs-comment"># https://www.postgresql.org/docs/current/catalog-pg-authid.html</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -c <span class="hljs-string">&quot;SELECT d.datname, u.rolname FROM pg_catalog.pg_database d join pg_authid u on(d.datdba=u.oid);&quot;</span>
+  datname  | rolname
+-----------+----------
+ template0 | postgres
+ template1 | postgres
+ apps      | apps
+ my_db       | mondbo
+ postgres  | postgres
+
+<span class="hljs-comment"># Lista schemas</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -c <span class="hljs-string">&quot;\dn+&quot;</span>
+                          List of schemas
+  Name  |  Owner   |  Access privileges   |      Description
+--------+----------+----------------------+------------------------
+ my_schema | mondbo   |                      |
+ public | postgres | postgres=UC/postgres+| standard public schema
+        |          | =UC/postgres         |
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -c <span class="hljs-string">&quot;SELECT schema_name, schema_owner FROM information_schema.schemata;&quot;</span>
+    schema_name     | schema_owner
+--------------------+--------------
+ pg_toast           | postgres
+ pg_temp_1          | postgres
+ pg_toast_temp_1    | postgres
+ pg_catalog         | postgres
+ public             | postgres
+ information_schema | postgres
+ my_schema             | mondbo
+
+<span class="hljs-comment"># Lista dei Tablespace</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -c <span class="hljs-string">&quot;\db+&quot;</span>
+                                            List of tablespaces
+    Name    |  Owner   |          Location           | Access privileges | Options |  Size   | Description
+------------+----------+-----------------------------+-------------------+---------+---------+-------------
+ apps       | apps     | /crypt/app-manager-database |                   |         | 9781 kB |
+ my_db        | mondbo   | /crypt/database             |                   |         | 1529 MB |
+ pg_default | postgres |                             |                   |         | 24 MB   |
+ pg_global  | postgres |                             |                   |         | 991 kB  |
+
+<span class="hljs-comment"># Privilegi di accesso</span>
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -c <span class="hljs-string">&quot;\dp my_schema.*&quot;</span>
+                                                       Access privileges
+ Schema |                          Name                           |   Type   | Access privileges | Column privileges | Policies
+--------+---------------------------------------------------------+----------+-------------------+-------------------+----------
+ my_schema | access_roles                                            | table    |                   |                   |
+ my_schema | access_roles_ar_id_seq                                  | sequence |                   |                   |
+
+<span class="hljs-comment"># Lista Tabelle</span>
+
+```bash   
+$ <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db -p 5432 -h localhost -U user_reader
+my_db=&gt;    SELECT * FROM pg_catalog.pg_tables WHERE schemaname NOT IN(<span class="hljs-string">&#x27;pg_catalog&#x27;</span>, <span class="hljs-string">&#x27;information_schema&#x27;</span>);
+my_db=&gt;    SELECT schema_name, schema_owner FROM information_schema.schemata;
+
+[root@ ~]# <span class="hljs-built_in">sudo</span> -Hiu postgres psql my_db --pset=<span class="hljs-string">&quot;pager=off&quot;</span> --pset=<span class="hljs-string">&quot;footer=off&quot;</span> -c <span class="hljs-string">&quot;\dt my_schema.*&quot;</span>
+</code></pre>
+</body></html>

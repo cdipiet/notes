@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.187" />
+        <title>qemu-kvm</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="qemu-kvm" tabindex="-1">qemu-kvm <a class="header-anchor" href="#qemu-kvm" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.187</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione">Installazione </a></li><li><a href="#abilitazione-vm-annidate-in-kvm">Abilitazione VM annidate in KVM </a></li><li><a href="#esempio-di-conversione-hd-virtualbox(vdi)---%3E-qemu(qcow2)">Esempio di conversione HD VirtualBox(vdi) --&gt; QEMU(qcow2) </a></li><li><a href="#hd-overlay">HD Overlay </a></li><li><a href="#utilizzo">Utilizzo </a></li><li><a href="#networking">Networking </a><ol><li><a href="#mac-address">Mac Address </a></li><li><a href="#abbreviazione--nic">Abbreviazione -nic </a></li><li><a href="#legacy-syntax---the-legacy--net-nic-option">Legacy Syntax - The legacy -net nic option </a></li><li><a href="#rete-tramite-tap">Rete tramite TAP </a></li><li><a href="#generatore-random">Generatore Random </a></li></ol></li><li><a href="#qemu-con-tuntap">QEMU con tuntap </a><ol><li><a href="#esempio-bridge-e-tuntap">Esempio bridge e tuntap </a></li><li><a href="#qemu%2C-interfacce-tuntap-e-networkmanager">QEMU, interfacce tuntap e NetworkManager </a></li><li><a href="#bridge">Bridge </a></li></ol></li><li><a href="#vm-windows-10">VM Windows 10 </a><ol><li><a href="#installazione-windows-10">Installazione Windows 10 </a></li><li><a href="#partenza-windows-10-ed-installazione-virtio-win">Partenza Windows 10 ed installazione virtio-win </a></li><li><a href="#built-in-smb-server">Built in SMB server </a></li><li><a href="#post-installazione-windows-10">Post installazione Windows 10 </a></li><li><a href="#spice">SPICE </a></li><li><a href="#partenza-definitiva-con-driver-qxl-e-virt-viewer">Partenza Definitiva con driver QXL e virt-viewer </a></li></ol></li></ol></nav><h1 id="qemu-kvm-1" tabindex="-1">QEMU-KVM <a class="header-anchor" href="#qemu-kvm-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="../distribuzioni/alpine/alpine_qemu.html">Alpine Linux</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/QEMU">https://wiki.archlinux.org/title/QEMU</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/KVM">https://wiki.archlinux.org/title/KVM</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Libvirt">https://wiki.archlinux.org/title/Libvirt</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/guestfs-faq.1.en">https://man.archlinux.org/man/guestfs-faq.1.en</a></p>
+</li>
+<li>
+<p><a href="https://www.qemu.org/docs/master/">https://www.qemu.org/docs/master/</a></p>
+</li>
+<li>
+<p><a href="http://www.linux-kvm.org/page/Main_Page">http://www.linux-kvm.org/page/Main_Page</a></p>
+</li>
+<li>
+<p><a href="../net/net_bridge_vlan.html">Bridge</a></p>
+</li>
+<li>
+<p><a href="../net/firewall/iptables.html">IPTables</a></p>
+<p><code>CTRL+ALT+G</code> Per rilasciare l'input</p>
+<p>-display sdl,gl=on
+-nic tap,ifname=tap3,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:59</p>
+</li>
+</ul>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/">https://computingforgeeks.com/install-kvm-qemu-virt-manager-arch-manjar/</a></li>
+<li><a href="https://www.christitus.com/vm-setup-in-linux">https://www.christitus.com/vm-setup-in-linux</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Raccolta info sulle estensioni alla virtualizzazione della CPU</span>
+$ LC_ALL=C lscpu | grep Virtualization
+    Virtualization:                  AMD-V
+<span class="hljs-comment"># If the output is zero then go to bios settings and enable VT-x (Virtualization Technology Extension) for Intel processor and AMD-V for AMD processor.</span>
+$ egrep -c <span class="hljs-string">&#x27;(vmx|svm)&#x27;</span> /proc/cpuinfo
+    24
+$ grep -E --color=auto <span class="hljs-string">&#x27;vmx|svm|0xc0f&#x27;</span> /proc/cpuinfo
+    svm_lock
+<span class="hljs-comment"># kvm_amd or kvm_intel</span>
+$ zgrep CONFIG_KVM /proc/config.gz
+$ lsmod | grep kvm
+    kvm_amd               139264  0
+    kvm                  1036288  1 kvm_amd
+    irqbypass              16384  1 kvm
+    ccp                   118784  1 kvm_amd
+<span class="hljs-comment"># Use the following command to check if the VIRTIO modules are available in the kernel inside the virtual machine:</span>
+$ zgrep VIRTIO /proc/config.gz
+$ lsmod | grep virtio
+
+
+<span class="hljs-comment"># Install KVM and libguestfs</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu
+$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Syu --needed qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables libguestfs
+    :: openbsd-netcat e gnu-netcat vanno <span class="hljs-keyword">in</span> conflitto. Vuoi rimuovere gnu-netcat? [s/N] s
+    :: iptables-nft e iptables vanno <span class="hljs-keyword">in</span> conflitto. Vuoi rimuovere iptables? [s/N] s
+
+$ <span class="hljs-built_in">sudo</span> virt-host-validate
+
+<span class="hljs-comment"># Start KVM libvirt service</span>
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> libvirtd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start libvirtd.service
+$ <span class="hljs-built_in">sudo</span> systemctl status libvirtd.service
+
+<span class="hljs-comment"># Enable normal user account to use KVM</span>
+<span class="hljs-comment"># grep unix_sock /etc/libvirt/libvirtd.conf</span>
+<span class="hljs-comment"># sed -n &#x27;/unix_sock_group/s/^#//gp&#x27; /tmp/libvirtd.conf</span>
+$ sed -i <span class="hljs-string">&#x27;/unix_sock_group/s/^#//g&#x27;</span> /tmp/libvirtd.conf
+$ sed -i <span class="hljs-string">&#x27;/unix_sock_rw_perms/s/^#//g&#x27;</span> /tmp/libvirtd.conf
+<span class="hljs-comment"># $ sudo vim /etc/libvirt/libvirtd.conf</span>
+<span class="hljs-comment"># Set the UNIX domain socket group ownership to libvirt, (around line 81)</span>
+<span class="hljs-comment"># unix_sock_group = &quot;libvirt&quot;</span>
+<span class="hljs-comment"># Set the UNIX socket permissions for the R/W socket (around line 104)</span>
+<span class="hljs-comment"># unix_sock_rw_perms = &quot;0770&quot;</span>
+<span class="hljs-comment"># Risultato finale:</span>
+$ grep unix_sock /etc/libvirt/libvirtd.conf
+    /etc/libvirt/libvirtd.conf:unix_sock_group = <span class="hljs-string">&quot;libvirt&quot;</span>
+    /etc/libvirt/libvirtd.conf:#unix_sock_ro_perms = <span class="hljs-string">&quot;0777&quot;</span>
+    /etc/libvirt/libvirtd.conf:unix_sock_rw_perms = <span class="hljs-string">&quot;0770&quot;</span>
+    /etc/libvirt/libvirtd.conf:#unix_sock_admin_perms = <span class="hljs-string">&quot;0700&quot;</span>
+    /etc/libvirt/libvirtd.conf:#unix_sock_dir = <span class="hljs-string">&quot;/run/libvirt&quot;</span>
+
+$ <span class="hljs-built_in">sudo</span> usermod -aG kvm <span class="hljs-variable">${USER}</span>
+$ <span class="hljs-built_in">sudo</span> usermod -aG libvirt <span class="hljs-variable">${USER}</span>
+
+<span class="hljs-comment"># Add your user account to libvirt group.</span>
+$ <span class="hljs-built_in">sudo</span> usermod -a -G libvirt $(<span class="hljs-built_in">whoami</span>) <span class="hljs-comment"># $USER</span>
+$ newgrp libvirt
+<span class="hljs-comment"># Restart libvirt daemon.</span>
+$ <span class="hljs-built_in">sudo</span> systemctl restart libvirtd.service
+
+<span class="hljs-comment"># Enable Nested Virtualization (Optional) - Nested Virtualization feature enables you to run Virtual Machines inside a VM.</span>
+<span class="hljs-comment"># Per AMD</span>
+$ <span class="hljs-built_in">sudo</span> modprobe -r kvm_intel
+$ <span class="hljs-built_in">sudo</span> modprobe -r kvm_amd
+$ <span class="hljs-built_in">sudo</span> modprobe kvm_amd nested=1
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;options kvm_amd nested=1&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/modprobe.d/kvm-amd.conf
+$ <span class="hljs-built_in">cat</span> /sys/module/kvm_amd/parameters/nested
+1
+<span class="hljs-comment"># Per Intel</span>
+<span class="hljs-comment"># sudo modprobe -r kvm_intel</span>
+<span class="hljs-comment"># sudo modprobe kvm_intel nested=1</span>
+<span class="hljs-comment"># To make this configuration persistent,run:</span>
+<span class="hljs-comment"># echo &quot;options kvm-intel nested=1&quot; | sudo tee /etc/modprobe.d/kvm-intel.conf</span>
+<span class="hljs-comment"># $ systool -m kvm_intel -v | grep nested</span>
+<span class="hljs-comment"># $ cat /sys/module/kvm_intel/parameters/nested</span>
+</code></pre>
+<h2 id="abilitazione-vm-annidate-in-kvm" tabindex="-1">Abilitazione VM annidate in KVM <a class="header-anchor" href="#abilitazione-vm-annidate-in-kvm" aria-hidden="true">🔗</a></h2>
+<p><a href="https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/">https://docs.fedoraproject.org/en-US/quick-docs/using-nested-virtualization-in-kvm/</a></p>
+<pre><code class="language-bash"><span class="hljs-comment"># Enable Nested Virtualization (Optional) - Nested Virtualization feature enables you to run Virtual Machines inside a VM.</span>
+<span class="hljs-comment"># Per AMD</span>
+$ <span class="hljs-built_in">sudo</span> modprobe -r kvm_intel
+$ <span class="hljs-built_in">sudo</span> modprobe -r kvm_amd
+$ <span class="hljs-built_in">sudo</span> modprobe kvm_amd nested=1
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;options kvm_amd nested=1&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/modprobe.d/kvm-amd.conf
+$ <span class="hljs-built_in">cat</span> /sys/module/kvm_amd/parameters/nested
+$ <span class="hljs-built_in">cat</span> /etc/modprobe.d/kvm-amd.conf
+options kvm_amd nested=1
+</code></pre>
+<p><a href="https://libvirt.org/manpages/virt-host-validate.html">https://libvirt.org/manpages/virt-host-validate.html</a></p>
+<p>Testing nested virtualization</p>
+<pre><code>Start the virtual machine.
+
+On the virtual machine, run:
+
+Verify that the virtual machine has virtualization correctly set up:
+
+sudo virt-host-validate
+</code></pre>
+<h2 id="esempio-di-conversione-hd-virtualbox(vdi)---%3E-qemu(qcow2)" tabindex="-1">Esempio di conversione HD VirtualBox(vdi) --&gt; QEMU(qcow2) <a class="header-anchor" href="#esempio-di-conversione-hd-virtualbox(vdi)---%3E-qemu(qcow2)" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://www.qemu.org/docs/master/tools/qemu-img.html#cmdoption-qemu-img-commands-arg-convert">https://www.qemu.org/docs/master/tools/qemu-img.html#cmdoption-qemu-img-commands-arg-convert</a></p>
+</li>
+<li>
+<p><a href="https://www.qemu.org/docs/master/system/images.html">https://www.qemu.org/docs/master/system/images.html</a></p>
+<p><code>qcow2</code> QEMU image format, the most versatile format. Use it to have smaller images and support of multiple VM snapshots.</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ qemu-img --<span class="hljs-built_in">help</span> <span class="hljs-comment"># per vedere i formati disponibili</span>
+$ vboxmanage list hdds <span class="hljs-comment"># per vedere gli hd virtualbox disponibili nel sistema</span>
+<span class="hljs-comment"># Primo modo di convertire un hd vdi in qcow2</span>
+$ <span class="hljs-built_in">cd</span> /opt/vm/Alpine_0
+$ vboxmanage clonemedium --format RAW ./Alpine_0.vdi ./Alpine_0.img
+$ qemu-img convert -f raw ./Alpine_0.img -O qcow2 Alpine_0.qcow2
+$ <span class="hljs-built_in">rm</span> Alpine_0.img
+
+<span class="hljs-comment"># Secondo modo di convertire un hd vdi in qcow2</span>
+$ <span class="hljs-built_in">sudo</span> qemu-img convert -f vdi -O qcow2 ./Alpine_0.vdi Alpine_0_2.qcow2
+</code></pre>
+<h2 id="hd-overlay" tabindex="-1">HD Overlay <a class="header-anchor" href="#hd-overlay" aria-hidden="true">🔗</a></h2>
+<p>Partendo da una immagine base(backing image) se ne possono creare diverse altre(overlay) che come spazio occupano solamente i dati modificati rispetto all'immagine base.
+L'overlay image contiene solamente i dati che sono variati rispetto alla backing image.
+La backing image non subirà mai modifiche.</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/QEMU#Overlay_storage_images">https://wiki.archlinux.org/title/QEMU#Overlay_storage_images</a></li>
+</ul>
+<p>To create an overlay image, issue a command like:</p>
+<pre><code class="language-bash">    $ qemu-img create -o backing_file=img1.raw,backing_fmt=raw -f qcow2 img1.qcow2
+</code></pre>
+<p>L'immagine di partenza <code>img1.raw</code> rimarrà immutata, solo le variazioni veranno salvate nell'immagine di overlay <code>img1.qcow2</code></p>
+<h2 id="utilizzo" tabindex="-1">Utilizzo <a class="header-anchor" href="#utilizzo" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.qemu.org/docs/master/system/invocation.html">https://www.qemu.org/docs/master/system/invocation.html</a></li>
+<li><a href="https://wiki.gentoo.org/wiki/QEMU/Options">https://wiki.gentoo.org/wiki/QEMU/Options</a></li>
+<li><a href="https://www.qemu.org/docs/master/tools/qemu-img.html">https://www.qemu.org/docs/master/tools/qemu-img.html</a></li>
+<li><a href="https://qemu-project.gitlab.io/qemu/system/qemu-cpu-models.html">https://qemu-project.gitlab.io/qemu/system/qemu-cpu-models.html</a>
+<ul>
+<li>The argument <code>accel=kvm</code> of the <code>-machine</code> option is equivalent to the <code>-enable-kvm</code> or the <code>-accel kvm</code> option.</li>
+<li>CPU model <code>host</code> requires KVM</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">$ qemu-img --<span class="hljs-built_in">help</span> <span class="hljs-comment"># per vedere i formati disponibili</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">help</span>|grep default
+$ qemu-system-x86_64 -vga <span class="hljs-built_in">help</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">help</span>
+$ qemu-system-x86_64 -device <span class="hljs-built_in">help</span>
+$ qemu-system-x86_64 -cpu <span class="hljs-built_in">help</span>
+
+<span class="hljs-comment"># Creazione HD mediante conversione da VDI</span>
+$ qemu-img convert -f vdi -O qcow2 Alpine_0.vdi Alpine_0.qcow2
+<span class="hljs-comment"># Oppure da creaimo un HD vuoto</span>
+$ qemu-img create -f qcow2 Alpine_0.qcow2 4G
+
+<span class="hljs-comment"># Installazione del SO</span>
+$ wget https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-virt-3.15.0-x86_64.iso
+$ qemu-img create -f qcow2 Alpine_0.qcow2 4G
+<span class="hljs-comment"># -boot order: c (first hard disk), d (first CD-ROM), </span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56 -boot order=d -cdrom alpine-virt-3.15.0-x86_64.iso -hda ./Alpine_0.qcow2
+
+<span class="hljs-comment"># Partenza della VM</span>
+$ <span class="hljs-comment"># qemu-system-x86_64 -enable-kvm -device intel-iommu -machine q35 -m 2G -cpu host -smp 2 -vga virtio -drive file=./Alpine_0.qcow2,format=qcow2,media=disk</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56 -hda ./Alpine_0.qcow2
+</code></pre>
+<h2 id="networking" tabindex="-1">Networking <a class="header-anchor" href="#networking" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.qemu.org/Documentation/Networking">https://wiki.qemu.org/Documentation/Networking</a></li>
+<li><a href="https://wiki.archlinux.org/title/QEMU#Creating_bridge_manually">https://wiki.archlinux.org/title/QEMU#Creating_bridge_manually</a></li>
+<li><a href="https://www.linux-kvm.org/page/Networking">https://www.linux-kvm.org/page/Networking</a></li>
+<li><a href="https://www.qemu.org/docs/master/system/devices/net.html">https://www.qemu.org/docs/master/system/devices/net.html</a></li>
+<li><a href="https://en.wikibooks.org/wiki/QEMU/Networking">https://en.wikibooks.org/wiki/QEMU/Networking</a></li>
+<li><a href="https://gist.github.com/extremecoders-re/e8fd8a67a515fee0c873dcafc81d811c">https://gist.github.com/extremecoders-re/e8fd8a67a515fee0c873dcafc81d811c</a> Setting up Qemu with a tap interface</li>
+</ul>
+<pre><code class="language-bash">$ qemu-system-x86_64 -device <span class="hljs-built_in">help</span>|less
+$ qemu-system-x86_64 -netdev <span class="hljs-built_in">help</span>
+$ qemu-system-x86_64 -nic model=<span class="hljs-built_in">help</span>
+</code></pre>
+<p>VM’s qemu command-line. Each VM must have a different tap interface and mac adress:<br>
+la configurazione di rete di una VM QEMU si compone di due parti:\</p>
+<ul>
+<li><strong>Host</strong>: <code>-netdev</code> è il network backend che inserisce i pacchetti nella rete host\</li>
+<li><strong>Guest</strong>: <code>-device</code> è il nic che viene reso disponibile nel guest. <code>virtio-net-pci</code>, <code>e1000</code></li>
+</ul>
+<h3 id="mac-address" tabindex="-1">Mac Address <a class="header-anchor" href="#mac-address" aria-hidden="true">🔗</a></h3>
+<p>QEMU di default assegna il mac address <code>52:54:00:12:34:56</code><br>
+Bisogna assicurare che le VM in rete abbiano sempre un MAC Address diverso, ciascuno dei quali deve sempre iniziare per <code>52:54:00</code>.</p>
+<p><code>52:54:00</code> common QEMU MAC address prefix<br>
+<strong>Locally administered addresses (LAA)</strong>: the address is assigned to a device by a network administrator, overriding the burned-in address. It's also be a randomized MAC. Media Access Control (MAC)</p>
+<pre><code class="language-bash"><span class="hljs-built_in">printf</span> -v macaddr <span class="hljs-string">&quot;52:54:00x:%02x:%02x:%02x&quot;</span> $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff )) $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff)) $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff ))
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$macaddr</span>&quot;</span>
+
+<span class="hljs-comment"># 1st:</span>
+    -netdev tap,<span class="hljs-built_in">id</span>=net0,ifname=tap0,script=no,downscript=no  \     <span class="hljs-comment"># HOST  crea un network backend net0 di tipo tap</span>
+    -device virtio-net-pci,netdev=net0,mac=52:54:00:21:34:56       <span class="hljs-comment"># GUEST crea un NIC e lo connette al backend net0</span>
+<span class="hljs-comment"># 2st:</span>
+    -netdev tap,<span class="hljs-built_in">id</span>=net0,ifname=tap1,script=no,downscript=no  \     <span class="hljs-comment"># HOST  crea un network backend net0 di tipo tap</span>
+    -device virtio-net-pci,netdev=net0,mac=52:54:00:21:34:57       <span class="hljs-comment"># GUEST crea un NIC e lo connette al backend net0</span>
+
+-netdev bridge,<span class="hljs-built_in">id</span>=str[,br=bridge][,helper=helper]
+            configure a host TAP network backend with ID <span class="hljs-string">&#x27;str&#x27;</span> that is
+            connected to a bridge (default=br0)
+            using the program <span class="hljs-string">&#x27;helper (default=/usr/lib/qemu/qemu-bridge-helper)
+</span></code></pre>
+<ul>
+<li><code>e1000</code> emulates an Intel NIC, rtl8139 emulates a Realtek NIC, and <code>virtio-net-pci</code> is a para-virtualized driver,<br>
+i.e. it &quot;knows&quot; it's operating in a VM and basically just passes the network traffic between the VM<br>
+and the host in the most straightforward way possible.</li>
+<li><code>script=no,downscript=no</code> disabilita gli script <code>/etc/qemu-ifup</code> e <code>/etc/qemu-ifdown</code> dato che non sono necessari.
+Specifying <code>script=no</code> tells QEMU to just use the tap device without calling the scripts - we do this so that QEMU can be run as a regular user, not root.
+<a href="https://en.wikibooks.org/wiki/QEMU/Networking">https://en.wikibooks.org/wiki/QEMU/Networking</a></li>
+</ul>
+<h3 id="abbreviazione--nic" tabindex="-1">Abbreviazione <code>-nic</code> <a class="header-anchor" href="#abbreviazione--nic" aria-hidden="true">🔗</a></h3>
+<p><a href="https://www.qemu.org/2018/05/31/nic-parameter/">https://www.qemu.org/2018/05/31/nic-parameter/</a></p>
+<p>the new <code>-nic</code> option kicks in: this option can be used to configure both the guest’s NIC hardware and the host back-end in one go.<br>
+<code>-nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56</code></p>
+<p><a href="https://wiki.qemu.org/Documentation/Networking#The_-nic_option">https://wiki.qemu.org/Documentation/Networking#The_-nic_option</a></p>
+<p>You can use the <code>-nic</code> argument to combine <code>-netdev</code> and <code>-device</code> together, so that, for example, these arguments:</p>
+<p><code>-netdev tap,id=network0,ifname=tap0,script=no,downscript=no,vhost=on -device virtio-net-pci,netdev=network0</code></p>
+<p>become:</p>
+<p><code>-nic tap,script=no,downscript=no,vhost=on,model=virtio-net-pci</code></p>
+<p>Notice <em>the lack of network IDs</em>, and that the device was created with <code>model=</code>.<br>
+<strong>The first half of the <code>-nic</code> parameters are <code>-netdev</code> parameters, whereas the second half (after <code>model=</code>) are related with the device.</strong></p>
+<h3 id="legacy-syntax---the-legacy--net-nic-option" tabindex="-1">Legacy Syntax - The legacy <code>-net nic</code> option <a class="header-anchor" href="#legacy-syntax---the-legacy--net-nic-option" aria-hidden="true">🔗</a></h3>
+<p>QEMU previously used the <code>-net nic</code> option instead of <code>-device DEVNAME</code> and <code>-net TYPE</code> instead of <code>-netdev TYPE</code>.<br>
+This is considered obsolete since QEMU 0.12, although it continues to work. The legacy syntax to create virtual network devices is:</p>
+<p>-<code>net nic,model=MODEL</code></p>
+<p>you can replace</p>
+<p><code>-netdev user,id=n1 -device virtio-net-pci,netdev=n1</code></p>
+<p>with:</p>
+<p><code>-nic user,model=virtio-net-pci</code></p>
+<p>The new syntax:</p>
+<p><code>-netdev tap,id=net0 -device e1000,netdev=net0,mac=52:54:00:12:34:56</code></p>
+<p>is about the same as old:</p>
+<p><code>-net tap,vlan=0 -net nic,vlan=0,model=e1000,macaddr=52:54:00:12:34:56</code></p>
+<h3 id="rete-tramite-tap" tabindex="-1">Rete tramite TAP <a class="header-anchor" href="#rete-tramite-tap" aria-hidden="true">🔗</a></h3>
+<pre><code>-nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56
+</code></pre>
+<h3 id="generatore-random" tabindex="-1">Generatore Random <a class="header-anchor" href="#generatore-random" aria-hidden="true">🔗</a></h3>
+<pre><code>-object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0
+</code></pre>
+<h2 id="qemu-con-tuntap" tabindex="-1">QEMU con tuntap <a class="header-anchor" href="#qemu-con-tuntap" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://blog.stefan-koch.name/2020/10/25/qemu-public-ip-vm-with-tap">https://blog.stefan-koch.name/2020/10/25/qemu-public-ip-vm-with-tap</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/QEMU#Networking">https://wiki.archlinux.org/title/QEMU#Networking</a></p>
+<pre><code>            |
+            | physical link
+            |
+            o br0
+           / \
+          /   \
+  enp5s0 o     o tap0
+               |
+   - - - - - - - - - - - - - - - Host / VM boundary
+               |
+               o eth0 (inside VM)
+</code></pre>
+</li>
+</ul>
+<p>Inserendo un NIC fisico in un bridge assieme a delle altre interfacce virtuali come ad es. tap,
+bisogna annotarsi ip e gateway del NIC fisico.
+All'inserimento nel bridge l'ip del NIC fisico deve essere rimosso ed i suoi ip e routing al gateway
+devono essere impostati nel bridge, in questo modo la connessione ad internet dell'host non verrà perduta.</p>
+<h3 id="esempio-bridge-e-tuntap" tabindex="-1">Esempio bridge e tuntap <a class="header-anchor" href="#esempio-bridge-e-tuntap" aria-hidden="true">🔗</a></h3>
+<p>La configurazione di partenza di QEMU vuole che venga specificato un MAC Address(altrimenti viene impostato quello di default generando conflitti se si utilizza più di una VM), i MAC Address di QEMU devono iniziare per 52:54:00, eccome come generare uno:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">printf</span> -v macaddr <span class="hljs-string">&quot;52:54:00x:%02x:%02x:%02x&quot;</span> $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff )) $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff)) $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff ))
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$macaddr</span>&quot;</span>
+</code></pre>
+<pre><code class="language-bash">$ nmcli conn modify Cavo connection.autoconnect no  <span class="hljs-comment"># Si disabilita la connessione NetworkManager del NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge                  <span class="hljs-comment"># Creazione del bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user &lt;utente&gt;# creazione dell<span class="hljs-string">&#x27;interfaccia virtuale tap(livello 2)
+$ sudo ip link set dev tap0 up                      # i NIC da inserire nel bridge devono essere attivi
+$ sudo ip link set dev enp5s0 up 
+$ sudo ip link set dev tap0 master br0              # Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)
+$ sudo ip link set dev enp5s0 master br0            # Spostando il NIC fisico nel bridge vengono rimossi i sui ip e routing, viene perduta la connessione ad internet
+$ sudo ip addr flush dev enp5s0                     # rimozione dell&#x27;</span>IP dal NIC fisico
+$ <span class="hljs-built_in">sudo</span> dhclient -v br0                              <span class="hljs-comment"># si usa il dhcp per assegnare un IP ed il routing al bridge</span>
+                                                    <span class="hljs-comment"># oppure si possono assegnare manualmente ip e route al default gateway</span>
+$ <span class="hljs-built_in">exit</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56 -drive file=./Alpine_0.qcow2
+
+    root/pwroot
+
+<span class="hljs-comment"># Stop del bridge</span>
+<span class="hljs-comment"># Ripristino al NIC fisico senza cancellazione dei NIC virtuali</span>
+$ <span class="hljs-comment"># ip link delete tap0</span>
+$ <span class="hljs-comment"># ip link del br0 type bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 down                     <span class="hljs-comment"># il bridge viene disattivao</span>
+$ nmcli conn modify Cavo connection.autoconnect <span class="hljs-built_in">yes</span> <span class="hljs-comment"># si ripristina la connessione tramite NIC fisico</span>
+$ <span class="hljs-built_in">sudo</span> dhclient -v enp5s0                           <span class="hljs-comment"># assegna al NIC fisico ip e gateway</span>
+$ <span class="hljs-comment">#nmcli con up Cavo</span>
+
+<span class="hljs-comment"># Per non perdere la connessione ad internet la configurazione del NIC fisico enp5s0 viene spostata sul bridge</span>
+<span class="hljs-comment"># Partenza del bridge</span>
+$ nmcli conn modify Cavo connection.autoconnect no  <span class="hljs-comment"># Si disabilita la connessione tramite NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0                     <span class="hljs-comment"># si rimuove l&#x27;ip del NIC fisico come anche dalla tabella di routing</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># si riattiva il bridge</span>
+<span class="hljs-comment"># Impostazioni ip e routing per il bridge</span>
+$ <span class="hljs-built_in">sudo</span> dhclient -v br0 <span class="hljs-comment"># ottiene l&#x27;ip ed imposta il routing verso il gateway, oppure manualmente:</span>
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/25 dev br0
+$ <span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+$ bridge <span class="hljs-built_in">link</span> show
+
+<span class="hljs-comment"># Addendum: Routing corretto con il bridge attivo _gateway è il gateway, nel nostro esempio 192.168.1.1:</span>
+$ ip route
+default via 192.168.1.1 dev br0 
+192.168.1.0/24 dev br0 proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.14 
+$ route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         _gateway        0.0.0.0         UG    0      0        0 br0
+192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 br0
+</code></pre>
+<h3 id="qemu%2C-interfacce-tuntap-e-networkmanager" tabindex="-1">QEMU, interfacce tuntap e NetworkManager <a class="header-anchor" href="#qemu%2C-interfacce-tuntap-e-networkmanager" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Rendere la configurazione persistente con NetworkManager</span>
+<span class="hljs-comment"># https://networkmanager.dev/docs/man-pages/</span>
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap0 mode tap owner `<span class="hljs-built_in">id</span> -u` con-name tap0
+$ nmcli conn add <span class="hljs-built_in">type</span> bridge ifname br0 con-name br0 ip4 192.168.1.1/24 gw4 192.168.1.1 autoconnect <span class="hljs-built_in">yes</span>
+$ <span class="hljs-comment"># nmcli conn modify br0 ipv4.addresses &#x27;192.168.1.1/24&#x27;</span>
+$ <span class="hljs-comment"># nmcli conn modify br0 ipv4.gateway &#x27;192.168.1.1&#x27; # Set IPv4 Gateway</span>
+$ <span class="hljs-comment"># nmcli conn modify br0 ipv4.dns &#x27;192.168.1.1&#x27;</span>
+$ ( nmcli dev list || nmcli dev show ) 2&gt;/dev/null | grep DNS <span class="hljs-comment"># per vedere i server dns attuali, cat /etc/resolve.conf, dig www.google.it</span>
+$ nmcli con mod br0 +ipv4.dns <span class="hljs-string">&quot;8.8.8.8 8.8.4.4&quot;</span>
+$ nmcli conn modify br0 ipv4.method manual <span class="hljs-comment"># nessun dhcp, IPv4 address configured statically</span>
+$ nmcli conn modify br0 connection.autoconnect <span class="hljs-built_in">yes</span>
+$ nmcli connection modify br0 connection.autoconnect-slaves 1
+$ nmcli conn add <span class="hljs-built_in">type</span> bridge-slave ifname enp5s0 master br0 con-name br0-enp5s0
+$ nmcli conn add <span class="hljs-built_in">type</span> bridge-slave ifname tap0 master br0 con-name br0-tap0
+$ nmcli conn modify Cavo connection.autoconnect no
+$ nmcli conn down Cavo
+$ nmcli conn up br0
+$ nmcli conn reload
+<span class="hljs-comment"># /etc/NetworkManager/system-connections/</span>
+$ man nm-settings
+$ man nmcli-examples
+</code></pre>
+<h3 id="bridge" tabindex="-1">Bridge <a class="header-anchor" href="#bridge" aria-hidden="true">🔗</a></h3>
+<p>con il tipo bridge il dispositivo tap viene creato e distrutto automaticamente da qemu</p>
+<pre><code>-nic bridge,br=$bridge_name
+</code></pre>
+<h2 id="vm-windows-10" tabindex="-1">VM Windows 10 <a class="header-anchor" href="#vm-windows-10" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/</a></li>
+<li><a href="https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe">https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe</a></li>
+</ul>
+<p>Bisogna installare sia i driver <strong>virtio</strong> sia i driver <strong>SPICE</strong> per avere i driver video <code>qxl</code>.</p>
+<h3 id="installazione-windows-10" tabindex="-1">Installazione Windows 10 <a class="header-anchor" href="#installazione-windows-10" aria-hidden="true">🔗</a></h3>
+<p>L'installazione la facciamo con il driver video <code>vga virtio</code>.</p>
+<pre><code class="language-bash">$ qemu-img create -f qcow2 Windows10.qcow2 40G
+$ <span class="hljs-built_in">sudo</span> qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 16G -cpu host -smp 8 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic user,model=virtio-net-pci,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 -cdrom Win10_21H2_Italian_x64.iso -boot order=d
+</code></pre>
+<h3 id="partenza-windows-10-ed-installazione-virtio-win" tabindex="-1">Partenza Windows 10 ed installazione virtio-win <a class="header-anchor" href="#partenza-windows-10-ed-installazione-virtio-win" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/virtio-win/virtio-win-pkg-scripts">https://github.com/virtio-win/virtio-win-pkg-scripts</a></li>
+<li><a href="https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/">https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/</a></li>
+<li><a href="https://aur.archlinux.org/packages/virtio-win">https://aur.archlinux.org/packages/virtio-win</a></li>
+</ul>
+<p>La prima partenza e l'installazione dei driver virtio la facciamo con il driver video <code>vga virtio</code>.</p>
+<pre><code class="language-bash">$ wget https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win.iso
+
+<span class="hljs-comment"># qemu-img create -f qcow2 Windows10.qcow2 40G</span>
+<span class="hljs-comment"># sudo qemu-system-x86_64 -machine type=q35,accel=kvm -m 16G -cpu host -smp 8 -vga virtio -object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic user,model=virtio-net-pci,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 -cdrom Win10_21H2_Italian_x64.iso -boot order=d</span>
+<span class="hljs-comment"># sudo qemu-system-x86_64 -machine type=q35,accel=kvm -m 16G -cpu host -smp 8 -vga virtio -object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic user,model=virtio-net-pci,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 -cdrom virtio-win-0.1.215.iso -boot order=c</span>
+<span class="hljs-comment"># sudo qemu-system-x86_64 -machine type=q35,accel=kvm -m 16G -cpu host -smp 8 -object rng-random,id=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic user,model=virtio-net-pci,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 -vga virtio</span>
+
+<span class="hljs-comment"># virt-viewer viene richiamato automaticamente dall&#x27;opzione -display spice-app</span>
+<span class="hljs-comment"># Share disponibile in Windows 10: \\10.0.2.4\qemu</span>
+<span class="hljs-comment"># slmgr /xpr</span>
+<span class="hljs-comment"># slmgr /dlv</span>
+
+qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 16G -cpu host -smp 8 -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic user,model=virtio-net-pci,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 \
+-vga qxl -device virtio-serial-pci -spice port=5930,disable-ticketing=on -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,<span class="hljs-built_in">id</span>=spicechannel0,name=vdagent -display spice-app
+</code></pre>
+<p>Da windows attivare la gestione dispositivi ed aggiornare i driver di scheda di rete e video con i driver presenti nel cdrom.</p>
+<h3 id="built-in-smb-server" tabindex="-1">Built in SMB server <a class="header-anchor" href="#built-in-smb-server" aria-hidden="true">🔗</a></h3>
+<p><a href="https://wiki.archlinux.org/title/QEMU#QEMU's_built-in_SMB_server">https://wiki.archlinux.org/title/QEMU#QEMU's_built-in_SMB_server</a></p>
+<pre><code>-net nic -net user,hostname=windowsvm,smb=/opt/vm/Share
+\\10.0.2.4\qemu
+</code></pre>
+<h3 id="post-installazione-windows-10" tabindex="-1">Post installazione Windows 10 <a class="header-anchor" href="#post-installazione-windows-10" aria-hidden="true">🔗</a></h3>
+<p>L'installazione di windows 10 prende 20G, l'hard disk deve essere almeno di 40GB,<br>
+per liberare spazio:</p>
+<ol>
+<li>bisogna disabilitare l'ibernazione, By default, the size of the hidden protected OS <code>C:\hiberfil.sys&quot; file is </code>40%<code>of the total amount of RAM installed on your computer.\ </code>powercfg -h off`</li>
+<li>cleanmgr.exe</li>
+</ol>
+<p>Info Attivazione Windows 10</p>
+<pre><code>```bat
+C:\&gt; slmgr /xpr
+C:\&gt; slmgr /dlv
+```
+</code></pre>
+<h3 id="spice" tabindex="-1">SPICE <a class="header-anchor" href="#spice" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/QEMU#SPICE">https://wiki.archlinux.org/title/QEMU#SPICE</a></li>
+<li><a href="https://www.spice-space.org/download.html">https://www.spice-space.org/download.html</a>
+<ul>
+<li><a href="https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe">https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe</a></li>
+</ul>
+</li>
+</ul>
+<ol>
+<li>
+<p>Nell'host Linux deve essere installato il virt-viewer:</p>
+<pre><code class="language-bash">$ pacman -Ss virt-manager <span class="hljs-comment"># contiene virt-viewer per potersi connettere alla VM QEMU</span>
+</code></pre>
+</li>
+<li>
+<p>In windows bisogna installare gli SPICE guest tools per poter utilizzare il driver <code>qxl</code>, per installare SPICE bisogna far partire windows ancora con <code>-vga virtio</code>:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Partenza di Windows ancora con il driver vga virtio</span>
+$ <span class="hljs-built_in">sudo</span> qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 16G -cpu host -smp 8 -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -net nic -net user,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 -vga virtio
+</code></pre>
+<p>In windows installare i driver SPICE <code>spice-guest-tools-latest.exe</code>, ho utilizzato la share SMB <code>\\10.0.2.4\qemu</code> per prendere l'exe scaricato da Linux.</p>
+</li>
+<li>
+<p>Partenza con i driver <code>qxl</code>. Una volta installato SPICE in Windows, si puo sostituire <code>-vga virtio</code> con:</p>
+<pre><code> -vga qxl -device virtio-serial-pci -spice port=5930,disable-ticketing=on -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,id=spicechannel0,name=vdagent -display spice-app
+</code></pre>
+<p>Se <code>-display spice-app</code> non funziona, connettersi alla VM dall'host con virt manager:</p>
+<pre><code class="language-bash">$ virt-viewer
+</code></pre>
+</li>
+</ol>
+<h3 id="partenza-definitiva-con-driver-qxl-e-virt-viewer" tabindex="-1">Partenza Definitiva con driver QXL e virt-viewer <a class="header-anchor" href="#partenza-definitiva-con-driver-qxl-e-virt-viewer" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># virt-viewer viene richiamato automaticamente dall&#x27;opzione -display spice-app</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 16G -cpu host -smp 8 -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic user,model=virtio-net-pci,hostname=windowsvm,smb=/opt/vm/Share -hda ./Windows10.qcow2 \
+-vga qxl -device virtio-serial-pci -spice port=5930,disable-ticketing=on -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 -chardev spicevmc,<span class="hljs-built_in">id</span>=spicechannel0,name=vdagent -display spice-app
+
+</code></pre>
+</body></html>

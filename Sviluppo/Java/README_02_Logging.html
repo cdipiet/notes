@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.847" />
+        <title>README_02_Logging</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="readme_02_logging" tabindex="-1">README_02_Logging <a class="header-anchor" href="#readme_02_logging" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.847</p>
+<nav class="table-of-contents"><ol><li><a href="#per-entrambe-le-applicazioni-desktop-e-web">Per entrambe le applicazioni Desktop e Web </a></li><li><a href="#per-la-applicazioni-desktop">Per la applicazioni desktop </a></li><li><a href="#per-le-applicazioni-web">Per le applicazioni web </a></li></ol></nav><h1 id="log4j2" tabindex="-1">Log4j2 <a class="header-anchor" href="#log4j2" aria-hidden="true">🔗</a></h1>
+<p><a href="https://logging.apache.org/log4j/2.0/manual/webapp.html">https://logging.apache.org/log4j/2.0/manual/webapp.html</a></p>
+<p>installazione
+configurazione
+log4jdbc
+deploy dei jar in una webapp</p>
+<h1 id="gwt-logging" tabindex="-1">GWT Logging <a class="header-anchor" href="#gwt-logging" aria-hidden="true">🔗</a></h1>
+<p>emulazione java.util.logging
+servlet gwt-log4j2
+configurazione lato client gwt-log4j2
+configurazione lato server log4j2</p>
+<h1 id="log4j2-log4jdbc" tabindex="-1">LOG4J2-LOG4JDBC <a class="header-anchor" href="#log4j2-log4jdbc" aria-hidden="true">🔗</a></h1>
+<p><a href="https://logging.apache.org/log4j/2.0/manual/logsep.html">https://logging.apache.org/log4j/2.0/manual/logsep.html</a></p>
+<p><a href="http://log4jdbc.brunorozendo.com/">http://log4jdbc.brunorozendo.com/</a></p>
+<pre><code>import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+private static final Logger logger = LogManager.getLogger();
+</code></pre>
+<h2 id="per-entrambe-le-applicazioni-desktop-e-web" tabindex="-1">Per entrambe le applicazioni Desktop e Web <a class="header-anchor" href="#per-entrambe-le-applicazioni-desktop-e-web" aria-hidden="true">🔗</a></h2>
+<pre><code>Ponendo status = &quot;TRACE&quot; si può effettuare il debug della configurazione
+Ponendo status = &quot;WARN&quot; si possono disabilitare i dettagli di configurazione di log4j2
+Una alternativa per vedere i dettagli di configurazione: System.setProperty(&quot;log4j2.debug&quot;,	&quot;true&quot;);
+
+status
+		The level of internal Log4j events that should be logged to the console. Valid values for this attribute are
+			&quot;trace&quot;, &quot;debug&quot;, &quot;info&quot;, &quot;warn&quot;, &quot;error&quot; and &quot;fatal&quot;.
+		Log4j will log details about initialization, rollover and other internal actions to the status logger. Setting status=&quot;trace&quot; is one of the first tools available to you if you need to troubleshoot log4j.
+		(Alternatively, setting system property log4j2.debug will also print internal Log4j2 logging to the console, including internal logging that took place before the configuration file was found.)
+
+System.setProperty(&quot;log4j2.debug&quot;, &quot;&quot;); per abilitare il debug
+
+/classes/log4jdbc.log4j2.properties:
+	# http://log4jdbc.brunorozendo.com/
+	# Questo file è fondamentale per le webapp con log4jdbc dove:
+	# - i log4j-*.jar possono essere inseriti nella lib di Tomcat
+	# - il log4jdbc-log4j2-jdbc4.1-1.17-SNAPSHOT.jar deve necessariamente essere inserito in WEB-INF/lib
+	# - il presente file deve essere inserito in WEB-INF/classes/log4jdbc.log4j2.properties
+	log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.log4j2.Log4j2SpyLogDelegator
+
+
+${catalina.home}/lib_ext:
+	log4j-api-2.11.0.jar
+	log4j-core-2.11.0.jar
+	log4j-web-2.11.0.jar
+WEB-INF/lib:
+	log4jdbc-log4j2-jdbc4.1-1.17-SNAPSHOT.jar
+WEB-INF/classes:
+	log4jdbc.log4j2.properties
+	log4j2.xml
+</code></pre>
+<h2 id="per-la-applicazioni-desktop" tabindex="-1">Per la applicazioni desktop <a class="header-anchor" href="#per-la-applicazioni-desktop" aria-hidden="true">🔗</a></h2>
+<pre><code>- La Java System Property 'application.home'viene valorizzata dall'applicazione alla sua partenza
+  da it.bi.vig.util.Application.setApplicationName(String appname)
+- ${application.home}/log è la directory nella quale vengono creati i file di log.
+- packages=&quot;it.bi.vig.util.log4j.swing&quot; è il package java che contiene il plugin 'TextPaneAppender'
+</code></pre>
+<h2 id="per-le-applicazioni-web" tabindex="-1">Per le applicazioni web <a class="header-anchor" href="#per-le-applicazioni-web" aria-hidden="true">🔗</a></h2>
+<pre><code>Per avere log4j2 installato solo in tomcat e non in ogni webapp, con un log4j2 diverso per ciascuna webapp:
+
+	1- $CATALINA_HOME/conf/catalina.properties: Aggiungere una directory lib_ext contenente i jar Log4J2 comuni a tutte le webapp
+			common.loader=&quot;${catalina.home}/lib&quot;,&quot;${catalina.home}/lib/*.jar&quot;, ... ,&quot;${catalina.home}/lib_ext/*.jar&quot;
+			log4j2.debug=
+	2- Jar di logging da inserire in lib_ext:
+		${catalina.home}/lib_ext/log4j-api-2.11.0.jar 
+		${catalina.home}/lib_ext/log4j-core-2.11.0.jar 
+		${catalina.home}/lib_ext/log4j-web-2.11.0.jar
+		
+	3- Il jar di log4jdbc-log4j2 deve invece andare nella webapp non in lib_ext:
+		WEB-INF/lib/log4jdbc-log4j2-jdbc4.1-1.17-SNAPSHOT.jar
+
+	3- Put the new Log4j2 config file (log4j2.xml) in each /war/WEB-INF/classes/log4j2.xml
+	4- Put the new log4j2.properties in each /war/WEB-INF/classes/log4jdbc.log4j2.properties:
+		log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.log4j2.Log4j2SpyLogDelegator
+
+	4- /war/WEB-INF/web.xml :
+		&lt;context-param&gt;
+			&lt;param-name&gt;log4jConfiguration&lt;/param-name&gt;
+			&lt;param-value&gt;log4j2.xml&lt;/param-value&gt;
+		&lt;/context-param&gt;
+</code></pre>
+<p>Per avere un unico log4j2.xml ed i jar di log4j2 in tomcat per tutte le webapps:
+Come sopra tranne che:
+1- <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mi>A</mi><mi>T</mi><mi>A</mi><mi>L</mi><mi>I</mi><mi>N</mi><msub><mi>A</mi><mi>H</mi></msub><mi>O</mi><mi>M</mi><mi>E</mi><mi mathvariant="normal">/</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi mathvariant="normal">/</mi><mi>c</mi><mi>a</mi><mi>t</mi><mi>a</mi><mi>l</mi><mi>i</mi><mi>n</mi><mi>a</mi><mi mathvariant="normal">.</mi><mi>p</mi><mi>r</mi><mi>o</mi><mi>p</mi><mi>e</mi><mi>r</mi><mi>t</mi><mi>i</mi><mi>e</mi><mi>s</mi><mi>c</mi><mi>o</mi><mi>m</mi><mi>m</mi><mi>o</mi><mi>n</mi><mi mathvariant="normal">.</mi><mi>l</mi><mi>o</mi><mi>a</mi><mi>d</mi><mi>e</mi><mi>r</mi><mo>=</mo><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mi mathvariant="normal">.</mi><mo separator="true">,</mo><mi mathvariant="normal">&quot;</mi></mrow><annotation encoding="application/x-tex">CATALINA_HOME/conf/catalina.properties
+		common.loader= ... ,&quot;</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal" style="margin-right:0.07153em;">C</span><span class="mord mathnormal">A</span><span class="mord mathnormal" style="margin-right:0.13889em;">T</span><span class="mord mathnormal">A</span><span class="mord mathnormal">L</span><span class="mord mathnormal" style="margin-right:0.07847em;">I</span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord"><span class="mord mathnormal">A</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.3283em;"><span style="top:-2.55em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight" style="margin-right:0.08125em;">H</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.05764em;">OME</span><span class="mord">/</span><span class="mord mathnormal">co</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord">/</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">ina</span><span class="mord">.</span><span class="mord mathnormal">p</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">p</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal">esco</span><span class="mord mathnormal">mm</span><span class="mord mathnormal">o</span><span class="mord mathnormal">n</span><span class="mord">.</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">o</span><span class="mord mathnormal">a</span><span class="mord mathnormal">d</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8889em;vertical-align:-0.1944em;"></span><span class="mord">...</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">&quot;</span></span></span></span>{catalina.home}/lib_ext/*.jar&quot;
+log4j2.debug=
+# This will create a single LoggerContext using a single configuration that will be shared across all applications:
+log4j2.contextSelector=org.apache.logging.log4j.core.selector.BasicContextSelector
+3- Put the new log4j2 config file (log4j2.xml) in $CATALINA_HOME/lib/log4j2.xml</p>
+<p><a href="https://logging.apache.org/log4j/2.0/manual/api.html#LambdaSupport">https://logging.apache.org/log4j/2.0/manual/api.html#LambdaSupport</a></p>
+<pre><code>Logger con nome automatico come private static final Logger logger = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
+	private static final Logger logger = LogManager.getLogger();
+</code></pre>
+<pre><code class="language-java">	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LogManager.getLogger();
+	logger.debug(<span class="hljs-string">&quot;Opening connection to {}...&quot;</span>, someDataSource);
+	logger.printf(Level.INFO, <span class="hljs-string">&quot;Logging in user %1$s with birthday %2$tm %2$te,%2$tY&quot;</span>, user.getName(), user.getBirthdayCalendar());
+
+	<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-type">Logger</span> <span class="hljs-variable">logger</span> <span class="hljs-operator">=</span> LogManager.getFormatterLogger();
+	logger.debug(<span class="hljs-string">&quot;Logging in user %s with birthday %s&quot;</span>, user.getName(), user.getBirthdayCalendar());
+	logger.debug(<span class="hljs-string">&quot;Logging in user %1$s with birthday %2$tm %2$te,%2$tY&quot;</span>, user.getName(), user.getBirthdayCalendar());
+	logger.debug(<span class="hljs-string">&quot;Integer.MAX_VALUE = %,d&quot;</span>, Integer.MAX_VALUE);
+</code></pre>
+<p>Avendo inserito i jar di log4j2 in tomcat_lib_ext, l'applicazione deve essere configurata per log4j2.
+Questa configurazione minimale permette di visualizzare i messaggi di log
+si di Weld(Context Dependency Injection per JSF 2.3) che dell'applicazione.</p>
+<p><a href="https://logging.apache.org/log4j/2.0/manual/layouts.html#PatternLayout">https://logging.apache.org/log4j/2.0/manual/layouts.html#PatternLayout</a>
+<a href="https://logging.apache.org/log4j/2.0/log4j-core/apidocs/org/apache/logging/log4j/core/lookup/StrSubstitutor.html">https://logging.apache.org/log4j/2.0/log4j-core/apidocs/org/apache/logging/log4j/core/lookup/StrSubstitutor.html</a>
+This class takes a piece of text and substitutes all the variables within it. The default definition of a variable is ${variableName}.
+<a href="https://commons.apache.org/proper/commons-text/javadocs/api-release/org/apache/commons/text/StringSubstitutor.html">https://commons.apache.org/proper/commons-text/javadocs/api-release/org/apache/commons/text/StringSubstitutor.html</a></p>
+<p><a href="https://logging.apache.org/log4j/2.0/faq.html#troubleshooting">https://logging.apache.org/log4j/2.0/faq.html#troubleshooting</a>
+system property log4j2.debug</p>
+<p web:rootDir=""><a href="https://logging.apache.org/log4j/2.x/manual/webapp.html">https://logging.apache.org/log4j/2.x/manual/webapp.html</a>
+<a href="https://logging.apache.org/log4j/2.x/manual/lookups.html#WebLookup">https://logging.apache.org/log4j/2.x/manual/lookups.html#WebLookup</a>
+Es.: $</p>
+<p>Nelle web applications, inoltre invece di utilizzare:
+${sys:logDir:-log}
+dove ad esempio un ContextListener dovrebbe valorizzare la system property 'logDir'
+Si utilizza:
+${web:rootDir:-log}
+dove il parametro rootDir è messo a disposizione da log4j2 e corrisponde al ServletContext.getRealPath(&quot;/&quot;)
+<a href="https://tomcat.apache.org/tomcat-8.5-doc/servletapi/javax/servlet/ServletContext.html#getRealPath(java.lang.String)">https://tomcat.apache.org/tomcat-8.5-doc/servletapi/javax/servlet/ServletContext.html#getRealPath(java.lang.String)</a>
+<a href="https://logging.apache.org/log4j/2.0/manual/lookups.html#WebLookup">https://logging.apache.org/log4j/2.0/manual/lookups.html#WebLookup</a>
+rootDir 	Returns the result of calling getRealPath with a value of &quot;/&quot;.</p>
+<p>Per evitare il problema che si crea aggiungendo al classpath xbd6.jar e xmlparserv2.jar:
+ERROR StatusLogger Error parsing ...\classes\log4j2.xml
+javax.xml.parsers.ParserConfigurationException
+at oracle.xml.jaxp.JXDocumentBuilderFactory.setFeature(JXDocumentBuilderFactory.java:223)
+at org.apache.logging.log4j.core.config.xml.XmlConfiguration.setFeature(XmlConfiguration.java:213)
+Vengono configurati i parser XML corretti, quelli interni al JDK:</p>
+<pre><code class="language-java">System.setProperty(<span class="hljs-string">&quot;javax.xml.parsers.DocumentBuilderFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xerces.internal.jaxp.DocumentBuilderFactoryImpl&quot;</span>);
+System.setProperty(<span class="hljs-string">&quot;javax.xml.parsers.SAXParserFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xerces.internal.jaxp.SAXParserFactoryImpl&quot;</span>);
+System.setProperty(<span class="hljs-string">&quot;javax.xml.transform.TransformerFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xalan.internal.xsltc.trax.TransformerFactoryImpl&quot;</span>);
+System.setProperty(<span class="hljs-string">&quot;javax.xml.datatype.DatatypeFactory&quot;</span>,<span class="hljs-string">&quot;com.sun.org.apache.xerces.internal.jaxp.datatype.DatatypeFactoryImpl&quot;</span>);
+</code></pre>
+<pre><code class="language-xml">log4j2.xml
+<span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Configuration</span>	<span class="hljs-attr">status</span>=<span class="hljs-string">&quot;WARN&quot;</span>
+				<span class="hljs-attr">strict</span>=<span class="hljs-string">&quot;true&quot;</span>
+				<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Log4J2CONFIG&quot;</span>
+				<span class="hljs-attr">packages</span>=<span class="hljs-string">&quot;it.bi.vig.util.log4j.swing&quot;</span>
+				&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Properties</span>&gt;</span>
+		<span class="hljs-comment">&lt;!--
+			Per le webapp:
+		Property name=&quot;debug_layout&quot; value=&quot;$${web:contextPath} %date{DEFAULT} [%thread] %-5level %logger{1}.%method \(%file:%line\) - %message%n&quot;/--&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;debug_layout&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;%date{DEFAULT} [%thread] %-5level %logger{1}.%method \(%file:%line\) - %message%n&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;default_layout&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;%date{DEFAULT} %-5level %logger{1} - %message%n&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sql_layout&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;%date{DEFAULT} - %message%n&quot;</span>/&gt;</span>
+		<span class="hljs-comment">&lt;!-- Property name=&quot;logDir&quot; value=&quot;${sys:application.home}log&quot;/&gt;--&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;logDir&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${sys:user.dir}\log&quot;</span>/&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Properties</span>&gt;</span>
+
+	<span class="hljs-tag">&lt;<span class="hljs-name">Appenders</span>&gt;</span>
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Appender</span> 	<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;STDOUT&quot;</span>
+					<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Console&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Layout</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;PatternLayout&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;${debug_layout}&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">MarkerFilter</span> <span class="hljs-attr">marker</span>=<span class="hljs-string">&quot;PROPERTY_MARKER&quot;</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">&quot;DENY&quot;</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">&quot;ACCEPT&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Appender</span>&gt;</span>
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Appender</span> 		<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;TEXTPANE_APPENDER&quot;</span>
+						<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;TextPaneAppender&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Layout</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;PatternLayout&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;${debug_layout}&quot;</span>/&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">MarkerFilter</span> <span class="hljs-attr">marker</span>=<span class="hljs-string">&quot;PROPERTY_MARKER&quot;</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">&quot;DENY&quot;</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">&quot;ACCEPT&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Appender</span>&gt;</span>
+
+		<span class="hljs-comment">&lt;!-- Per le webapp:
+			Appender name=&quot;AUTH_FILTER_APPENDER&quot;	type=&quot;RollingFile&quot; filePattern = &quot;${web:rootDir}log/auth_%d{yyyy-MM-dd-HH-mm-ss}_%i.txt&quot;
+			Tuttavia l&#x27;applicazione alla sua partenza deve valorizzare la system property logDir.
+		--&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Appender</span> 		<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;APP_APPENDER&quot;</span>
+						<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;RollingFile&quot;</span>
+						<span class="hljs-attr">filePattern</span> = <span class="hljs-string">&quot;${logDir:-log}/log_%d{yyyy-MM-dd-HH-mm-ss}_%i.txt&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Policy</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;SizeBasedTriggeringPolicy&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;10 MB&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Strategy</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;DirectWriteRolloverStrategy&quot;</span> <span class="hljs-attr">maxFiles</span>=<span class="hljs-string">&quot;5&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Strategy</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Layout</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;PatternLayout&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;${debug_layout}&quot;</span>/&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">MarkerFilter</span> <span class="hljs-attr">marker</span>=<span class="hljs-string">&quot;PROPERTY_MARKER&quot;</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">&quot;DENY&quot;</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">&quot;ACCEPT&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Appender</span>&gt;</span>
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Appender</span> 		<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PROPERTIES_APPENDER&quot;</span>
+						<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;RollingFile&quot;</span>
+						<span class="hljs-attr">filePattern</span> = <span class="hljs-string">&quot;${logDir:-log}/properties_access_%d{yyyy-MM-dd-HH-mm-ss}_%i.txt&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Policy</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;SizeBasedTriggeringPolicy&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;10 MB&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Strategy</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;DirectWriteRolloverStrategy&quot;</span> <span class="hljs-attr">maxFiles</span>=<span class="hljs-string">&quot;5&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Strategy</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Layout</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;PatternLayout&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;${debug_layout}&quot;</span>/&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">MarkerFilter</span> <span class="hljs-attr">marker</span>=<span class="hljs-string">&quot;PROPERTY_MARKER&quot;</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">&quot;ACCEPT&quot;</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">&quot;NEUTRAL&quot;</span>/&gt;</span>
+			<span class="hljs-comment">&lt;!-- ThresholdFilter level=&quot;INFO&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/--&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Appender</span>&gt;</span>
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Appender</span> 		<span class="hljs-attr">name</span>=<span class="hljs-string">&quot;LOG4JDBC_APPENDER&quot;</span>
+						<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;RollingFile&quot;</span>
+						<span class="hljs-attr">filePattern</span> = <span class="hljs-string">&quot;${logDir}/log4jdbc_%d{yyyy-MM-dd-HH-mm-ss}_%i.txt&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Policy</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;SizeBasedTriggeringPolicy&quot;</span> <span class="hljs-attr">size</span>=<span class="hljs-string">&quot;10 MB&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Strategy</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;DirectWriteRolloverStrategy&quot;</span> <span class="hljs-attr">maxFiles</span>=<span class="hljs-string">&quot;5&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Strategy</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Layout</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;PatternLayout&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;${sql_layout}&quot;</span>/&gt;</span>
+			<span class="hljs-comment">&lt;!-- &lt;MarkerFilter marker=&quot;LOG4JDBC_SQL&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/&gt; --&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Appender</span>&gt;</span>
+
+		<span class="hljs-comment">&lt;!--
+		&lt;Appender 		name=&quot;LOG4JDBC_RESULTSET_APPENDER&quot;
+						type=&quot;RollingFile&quot;
+						filePattern = &quot;${logDir}/log4jdbc_rset_%d{yyyy-MM-dd-HH-mm-ss}_%i.txt&quot;&gt;
+			&lt;Policy type=&quot;SizeBasedTriggeringPolicy&quot; size=&quot;10 MB&quot; /&gt;
+			&lt;Strategy type=&quot;DirectWriteRolloverStrategy&quot; maxFiles=&quot;5&quot;&gt;&lt;/Strategy&gt;
+			&lt;Layout type=&quot;PatternLayout&quot; pattern=&quot;${sql_layout}&quot;/&gt;
+			&lt;MarkerFilter marker=&quot;LOG4JDBC_RESULTSETTABLE&quot; onMatch=&quot;ACCEPT&quot; onMismatch=&quot;DENY&quot;/&gt;
+		&lt;/Appender&gt;
+		--&gt;</span>
+
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Appenders</span>&gt;</span>
+
+	<span class="hljs-tag">&lt;<span class="hljs-name">Loggers</span>&gt;</span>
+
+		<span class="hljs-comment">&lt;!-- Tip: Una configurazione senza MarkerFilter permette di vedere tutti marker utilizzati
+			 per poi eventualmente applicarli come filtro
+		--&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;log4jdbc.log4j2&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;info&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span>
+				<span class="hljs-comment">&lt;!--
+				http://log4jdbc.brunorozendo.com/
+				Questo è il marker utile ad avere tutte le info rilevanti in un unico file
+				This configuration will log all relevant information (SQL statements, Connection calls, Exceptions thrown), as well as result sets as tables (log4jdbc-remix feature):
+				--&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">MarkerFilter</span> <span class="hljs-attr">marker</span>=<span class="hljs-string">&quot;LOG4JDBC_JDBC&quot;</span> <span class="hljs-attr">onMatch</span>=<span class="hljs-string">&quot;DENY&quot;</span> <span class="hljs-attr">onMismatch</span>=<span class="hljs-string">&quot;NEUTRAL&quot;</span>/&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+	    	<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;LOG4JDBC_APPENDER&quot;</span>/&gt;</span>
+	    	<span class="hljs-comment">&lt;!-- &lt;AppenderRef ref=&quot;LOG4JDBC_RESULTSET_APPENDER&quot;/&gt; --&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">logger</span>&gt;</span>
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;it.bi.vig&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;INFO&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;APP_APPENDER&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;TEXTPANE_APPENDER&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;it.cdp&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;DEBUG&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;APP_APPENDER&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;it.bi.vig.util.jdbc.JDBCUtil&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;ERROR&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;APP_APPENDER&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;it.bi.vig.util.jdbc.JDBCOracleUtil&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;ERROR&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;APP_APPENDER&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+
+		<span class="hljs-comment">&lt;!--  Serve ad eliminare il noioso WARNING:
+			2015-07-03 13:15:51,854 [main      ] WARN  FluentPropertyBeanIntrospector ertyBeanIntrospector.java:146) Error when creating PropertyDescriptor for public final void org.apache.commons.configuration2.AbstractConfiguration.setProperty(java.lang.String,java.lang.Object)! Ignoring this property.
+			java.beans.IntrospectionException: bad write method arg count: public final void org.apache.commons.configuration2.AbstractConfiguration.setProperty(java.lang.String,java.lang.Object)
+				at java.beans.PropertyDescriptor.findPropertyType(PropertyDescriptor.java:655) ~[na:1.8.0_45]
+				at java.beans.PropertyDescriptor.setWriteMethod(PropertyDescriptor.java:326) ~[na:1.8.0_45]
+				at java.beans.PropertyDescriptor.&lt;init&gt;(PropertyDescriptor.java:138) ~[na:1.8.0_45]
+
+			commons-configuration2 dipende da commons-logging-1.2.jar
+			per redirezionare i messaggi generati da commons-logging su log4j2
+			bisogna aggiungere al classpath il log4j-jcl-2.11.0.jar
+		 --&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Logger</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;org.apache.commons.beanutils&quot;</span> <span class="hljs-attr">additivity</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;ERROR&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Logger</span>&gt;</span>
+
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Root</span> <span class="hljs-attr">level</span>=<span class="hljs-string">&quot;ERROR&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;STDOUT&quot;</span> /&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">AppenderRef</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">&quot;APP_APPENDER&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Root</span>&gt;</span>
+
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Loggers</span>&gt;</span>
+
+<span class="hljs-tag">&lt;/<span class="hljs-name">Configuration</span>&gt;</span>
+</code></pre>
+</body></html>

@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.729" />
+        <title>Nodejs</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nodejs" tabindex="-1">Nodejs <a class="header-anchor" href="#nodejs" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.729</p>
+<nav class="table-of-contents"><ol><li><a href="#node.js-installazione-in-manjaro">Node.js installazione in Manjaro </a></li><li><a href="#node.js-installazione-da-binari-in-manjaro">Node.js installazione da binari in Manjaro </a></li><li><a href="#npm">npm </a><ol><li><a href="#npm-non-v%C3%A0-usato-con-sudo-ma-nel-progetto-locale-come-utente">npm non và usato con sudo ma nel progetto locale come utente </a></li><li><a href="#semantic-versioning">Semantic Versioning </a></li><li><a href="#package-versions">Package versions </a></li><li><a href="#aggiornare-npm">Aggiornare npm </a></li><li><a href="#aggiornare-tutti-i-pacchetti">Aggiornare tutti i pacchetti </a></li><li><a href="#comandi-utili">Comandi Utili </a></li><li><a href="#ricerca-pacchetti">Ricerca Pacchetti </a></li><li><a href="#installazione-pacchetti">Installazione Pacchetti </a></li><li><a href="#start">Start </a></li><li><a href="#npx">npx </a></li></ol></li><li><a href="#trasformare-uno-script-.js-in-un-eseguibile">Trasformare uno script .js in un eseguibile </a><ol><li><a href="#linux">linux </a></li><li><a href="#windows">Windows </a></li></ol></li><li><a href="#moduli">Moduli </a></li><li><a href="#problemi-e-soluzioni">Problemi e Soluzioni </a><ol><li><a href="#repository-is-not-clean">Repository is not clean </a><ol><li><a href="#problema">Problema </a></li><li><a href="#soluzione">Soluzione </a></li></ol></li><li><a href="#maximum-call-stack-size-exceeded-on-npm-install">Maximum call stack size exceeded on npm install </a></li></ol></li><li><a href="#debug">Debug </a></li><li><a href="#visual-studio-code">Visual Studio Code </a></li><li><a href="#import-di-package.json">Import di package.json </a></li></ol></nav><h1 id="nodejs-1" tabindex="-1">Nodejs <a class="header-anchor" href="#nodejs-1" aria-hidden="true">🔗</a></h1>
+<p><a href="https://nodejs.dev/learn"><img src="../../inc/img/javascript/Node.js.png" alt="Node.js" style="display:block; margin: 0 auto; width:30%"></a></p>
+<p>Node.js è un runtime JavaScript costruito sul motore <a href="https://v8.dev/">JavaScript V8 di Chrome</a>.</p>
+<p>L'ecosistema dei pacchetti di Node.js, <code>npm</code>, è il più grande ecosistema di librerie open source al mondo.</p>
+<p>Release corrente:</p>
+<ul>
+<li><a href="https://nodejs.org/it/">https://nodejs.org/it/</a></li>
+<li><a href="https://nodejs.org/it/about/releases/">https://nodejs.org/it/about/releases/</a></li>
+<li><a href="https://github.com/nodesource/distributions">https://github.com/nodesource/distributions</a></li>
+<li><a href="https://github.com/nodejs/Release">https://github.com/nodejs/Release</a></li>
+<li><a href="https://github.com/nodejs/node/blob/master/CHANGELOG.md">https://github.com/nodejs/node/blob/master/CHANGELOG.md</a></li>
+</ul>
+<p>Node.js 10 End Of Life Aprile 2021</p>
+<ul>
+<li><a href="https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V10.md#2018-10-30-version-10130-dubnium-lts-mylesborins">https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V10.md#2018-10-30-version-10130-dubnium-lts-mylesborins</a></li>
+<li><a href="https://twitter.com/nodejs/status/1388116425361874945">https://twitter.com/nodejs/status/1388116425361874945</a></li>
+</ul>
+<p>Informazioni sui pacchetti:</p>
+<ul>
+<li><a href="https://www.npmtrends.com/">https://www.npmtrends.com/</a></li>
+<li><a href="https://npmcompare.com/">https://npmcompare.com/</a></li>
+<li><a href="https://www.npmjs.com/">https://www.npmjs.com/</a></li>
+<li><a href="https://www.npmjs.com/browse/depended">https://www.npmjs.com/browse/depended</a></li>
+</ul>
+<p>Elementi ECMAScript implementati nella libreria V8 attuale:</p>
+<ul>
+<li><a href="https://node.green/">https://node.green/</a></li>
+<li><code>node -p process.versions.v8</code> versione di v8</li>
+<li><code>node --v8-options | grep &quot;in progress&quot;</code></li>
+</ul>
+<p>Documentazione Node.js</p>
+<ul>
+<li>
+<p><a href="https://nodejs.org/api/">https://nodejs.org/api/</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.org/en/docs/guides/">https://nodejs.org/en/docs/guides/</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.dev/learn">https://nodejs.dev/learn</a></p>
+</li>
+<li>
+<p><a href="https://github.com/nodejs/nodejs.dev/tree/master/src/documentation">https://github.com/nodejs/nodejs.dev/tree/master/src/documentation</a></p>
+</li>
+<li>
+<p><a href="https://nodejs.org/en/docs/">https://nodejs.org/en/docs/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/nodejs/nodejs.org/tree/master/locale/en/docs/guides">https://github.com/nodejs/nodejs.org/tree/master/locale/en/docs/guides</a></p>
+</li>
+<li>
+<p><a href="https://github.com/nodejs/nodejs.org/tree/master/locale/en/knowledge">https://github.com/nodejs/nodejs.org/tree/master/locale/en/knowledge</a></p>
+</li>
+</ul>
+<p>Documentazione NPM</p>
+<ul>
+<li><a href="https://docs.npmjs.com/cli/v8/configuring-npm/package-json">https://docs.npmjs.com/cli/v8/configuring-npm/package-json</a></li>
+<li><a href="https://github.com/npm/node-semver#versions">https://github.com/npm/node-semver#versions</a></li>
+<li><a href="https://nodejs.dev/learn/the-package-json-guide">https://nodejs.dev/learn/the-package-json-guide</a></li>
+</ul>
+<p>Informazioni su v8:</p>
+<ul>
+<li><a href="https://v8.dev/">https://v8.dev/</a></li>
+<li><a href="https://tc39.es/ecma262/">https://tc39.es/ecma262/</a></li>
+<li><a href="http://www.ecma-international.org/publications/standards/Ecma-262.htm">http://www.ecma-international.org/publications/standards/Ecma-262.htm</a></li>
+</ul>
+<p>Event Loop</p>
+<ul>
+<li><a href="doc/blocking-vs-non-blocking.html">blocking-vs-non-blocking</a></li>
+<li><a href="doc/dont-block-the-event-loop.html">dont-block-the-event-loop</a></li>
+<li><a href="doc/timers-in-node.html">timers-in-node</a></li>
+<li><a href="doc/event-loop-timers-and-nexttick.html">event-loop-timers-and-nexttick</a></li>
+</ul>
+<p>Javascript</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">https://developer.mozilla.org/en-US/docs/Web/JavaScript</a>
+Contiene le informazioni sullo stato di implementazione in node di ECMASCript</li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Resources</a></li>
+<li><a href="https://www.ecma-international.org/ecma-262/5.1/">https://www.ecma-international.org/ecma-262/5.1/</a> 5.1 Edition / June 2011</li>
+<li><a href="https://www.ecma-international.org/ecma-262/6.0/index.html">https://www.ecma-international.org/ecma-262/6.0/index.html</a> 6th Edition / June 2015</li>
+</ul>
+<h2 id="node.js-installazione-in-manjaro" tabindex="-1">Node.js installazione in Manjaro <a class="header-anchor" href="#node.js-installazione-in-manjaro" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">rm</span> -rf ~/.npm/* ~/.npm-global/*
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed nodejs npm
+$ <span class="hljs-built_in">cd</span>
+$ <span class="hljs-built_in">rm</span> -rf ~/.npm ~/.npm-global
+$ <span class="hljs-built_in">mkdir</span> -p ~/.npm-global
+$ <span class="hljs-built_in">cat</span> &gt; ~/.npmrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+prefix=~/.npm-global
+EOF
+<span class="hljs-built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment"># Nodejs</span>
+<span class="hljs-built_in">export</span> PATH=~/.npm-global/bin:<span class="hljs-variable">$PATH</span>
+EOF
+$ npm install -g npm
+$ npm install -g npm-check-updates
+</code></pre>
+<pre><code class="language-bash">$ node --version
+$ node --v8-options | grep <span class="hljs-string">&quot;in progress&quot;</span>
+$ node -p process.versions.v8
+</code></pre>
+<h2 id="node.js-installazione-da-binari-in-manjaro" tabindex="-1">Node.js installazione da binari in Manjaro <a class="header-anchor" href="#node.js-installazione-da-binari-in-manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://nodejs.org/it/download/current/">https://nodejs.org/it/download/current/</a></li>
+<li><a href="https://nodejs.org/en/download/package-manager/#arch-linux">https://nodejs.org/en/download/package-manager/#arch-linux</a></li>
+<li><a href="https://github.com/nodejs/help/wiki/Installation">https://github.com/nodejs/help/wiki/Installation</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">rm</span> -rf ~/.npm/* ~/.npm-global/*
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># ~/bin/install_nodejs.sh</span>
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+VERSION=v16.4.2
+DISTRO=linux-x64
+APP=/opt/nodejs 
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf <span class="hljs-variable">$APP</span>
+<span class="hljs-built_in">cd</span> /tmp
+wget https://nodejs.org/dist/latest/node-<span class="hljs-variable">$VERSION</span>-<span class="hljs-variable">$DISTRO</span>.tar.xz
+tar -xJvf node-<span class="hljs-variable">$VERSION</span>-<span class="hljs-variable">$DISTRO</span>.tar.xz
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> node-<span class="hljs-variable">$VERSION</span>-<span class="hljs-variable">$DISTRO</span> <span class="hljs-variable">$APP</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R <span class="hljs-variable">$USER</span>:<span class="hljs-variable">$USER</span> <span class="hljs-variable">$APP</span>
+<span class="hljs-built_in">cd</span>
+<span class="hljs-built_in">rm</span> -rf ~/.npm ~/.npm-global
+<span class="hljs-built_in">mkdir</span> -p ~/.npm-global
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.npmrc
+prefix=~/.npm-global
+EOF
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt;&gt; ~/.bashrc
+<span class="hljs-comment"># Nodejs</span>
+<span class="hljs-built_in">export</span> PATH=/opt/nodejs/bin:~/.npm-global/bin:<span class="hljs-variable">$PATH</span>
+EOF
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># ~/.bashrc</span>
+NODE_VERSION=v16.2.0
+NODE_DISTRO=linux-x64
+<span class="hljs-built_in">export</span> PATH=~/app/nodejs/node-<span class="hljs-variable">$NODE_VERSION</span>-<span class="hljs-variable">$NODE_DISTRO</span>/bin:~/.npm-global/bin:<span class="hljs-variable">$PATH</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> -p ~/.npm-global
+<span class="hljs-comment"># ~/.npmrc</span>
+    prefix=~/.npm-global
+</code></pre>
+<pre><code class="language-bash">$ node -v
+$ npm version
+$ npx -v
+</code></pre>
+<h2 id="npm" tabindex="-1">npm <a class="header-anchor" href="#npm" aria-hidden="true">🔗</a></h2>
+<p>Con il file <code>~/.npmrc</code> contenente la riga <code>prefix=~/.npm-global</code>.<br>
+<strong>npm installerà i pacchetti globali nella directory <code>~/.npm-global/lib/node_modules</code></strong></p>
+<h3 id="npm-non-v%C3%A0-usato-con-sudo-ma-nel-progetto-locale-come-utente" tabindex="-1"><mark>npm non và usato con sudo ma nel progetto locale come utente</mark> <a class="header-anchor" href="#npm-non-v%C3%A0-usato-con-sudo-ma-nel-progetto-locale-come-utente" aria-hidden="true">🔗</a></h3>
+<p><strong>Non usare <code>npm</code> con <code>sudo</code></strong> facendolo vengono creati file dell'utente root nella home dell'utente con conseguenti problemi di accesso.</p>
+<p>Inoltre lo spirito dell'utilizzo di npm è nell'utilizzo locale per progetto, oppure globale a livello utente, e non di systema, vedi <code>npx</code> <a href="https://www.npmjs.com/package/npx">https://www.npmjs.com/package/npx</a>. (Esegue comandi nella directory <code>node_modules/.bin</code> locale).</p>
+<p>It's worth mentioning that you should not install global npm modules with <code>sudo</code>. Please have a look at the <a href="https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally">https://docs.npmjs.com/resolving-eacces-permissions-errors-when-installing-packages-globally</a></p>
+<h3 id="semantic-versioning" tabindex="-1">Semantic Versioning <a class="header-anchor" href="#semantic-versioning" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/npm/node-semver#versions">https://github.com/npm/node-semver#versions</a></li>
+<li><a href="https://nodejs.dev/learn/semantic-versioning-using-npm">https://nodejs.dev/learn/semantic-versioning-using-npm</a></li>
+<li><a href="https://semver.org/lang/it/">https://semver.org/lang/it/</a></li>
+<li><a href="https://semver.npmjs.com/">https://semver.npmjs.com/</a></li>
+<li><a href="https://docs.npmjs.com/about-semantic-versioning">https://docs.npmjs.com/about-semantic-versioning</a></li>
+</ul>
+<p>Dato un numero di versione <code>MAJOR.MINOR.PATCH</code>, incrementate la:</p>
+<ul>
+<li>versione <code>MAJOR</code> quando modificate l’API in modo <strong>non retrocompatibile</strong>,</li>
+<li>versione <code>MINOR</code> quando aggiungete funzionalità in modo <strong>retrocompatibile</strong></li>
+<li>versione <code>PATCH</code> quando correggete bug in modo <strong>retrocompatibile</strong>.</li>
+</ul>
+<p>include everything greater than a particular version in the same major range use the carat (aka hat) symbol, <strong><code>^</code></strong>:</p>
+<p class="m"><span class="b r">^</span>2.2.1</p>
+<p>include everything greater than a particular version in the same minor range use the tilde symbol, <strong><code>~</code></strong>:</p>
+<p class="m"><span class="b r">~</span>2.2.0</p>
+<p>specify a range of stable versions use <code>&gt;</code>, <code>&lt;</code>, <code>=</code>, <code>&gt;=</code> or <code>&lt;=</code> for comparisons, or <code>-</code> to specify an <strong>inclusive range</strong>:</p>
+<ul>
+<li class="m"><span class="b r">&gt;</span>2.1</li>
+<li class="m">1.0.0 <span class="b r">-</span> 1.2.0 </li>
+</ul>
+<p>Note: there must be spaces on either side of hyphens</p>
+<p>include multiple sets of versions use <code>||</code> to combine:</p>
+<p><code>^</code>2 <code>&lt;</code>2.2 <code>|| &gt;</code> 2.3</p>
+<h3 id="package-versions" tabindex="-1">Package versions <a class="header-anchor" href="#package-versions" aria-hidden="true">🔗</a></h3>
+<p>You have seen in the description above version numbers like these: <code>~3.0.0</code> or <code>^0.13.0</code>. What do they mean, and which other version specifiers can you use?</p>
+<p>That symbol specifies which updates your package accepts, from that dependency.</p>
+<p>Given that using semver (semantic versioning) all versions have 3 digits, the first being the major release, the second the minor release and the third is the patch release, you have these rules:</p>
+<ul>
+<li><code>~</code>: if you write <code>~0.13.0</code>, you want to only update patch releases: <code>0.13.1</code> is ok, but <code>0.14.0</code> is not.</li>
+<li><code>^</code>: if you write <code>^0.13.0</code>, you want to update patch and minor releases: <code>0.13.1</code>, <code>0.14.0</code> and so on.</li>
+<li><code>*</code>: if you write <code>*</code>, that means you accept all updates, including major version upgrades.</li>
+<li><code>&gt;</code>: you accept any version higher than the one you specify</li>
+<li><code>&gt;=</code>: you accept any version equal to or higher than the one you specify</li>
+<li><code>&lt;=</code>: you accept any version equal or lower to the one you specify</li>
+<li><code>&lt;</code>: you accept any version lower to the one you specify</li>
+</ul>
+<p>There are other rules, too:</p>
+<ul>
+<li>no symbol: you accept only that specific version you specify</li>
+<li><code>latest</code>: you want to use the latest version available</li>
+</ul>
+<p>and you can combine most of the above in ranges, like this: <code>1.0.0 || &gt;=1.1.0 &lt;1.2.0</code>, to either use 1.0.0 or one release from 1.1.0 up, but lower than 1.2.0.</p>
+<h3 id="aggiornare-npm" tabindex="-1">Aggiornare npm <a class="header-anchor" href="#aggiornare-npm" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ npm install -g npm
+</code></pre>
+<h3 id="aggiornare-tutti-i-pacchetti" tabindex="-1">Aggiornare tutti i pacchetti <a class="header-anchor" href="#aggiornare-tutti-i-pacchetti" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ npm install -g npm-check-updates depcheck npm-check
+<span class="hljs-comment"># Controllo e report</span>
+$ ncu
+<span class="hljs-comment"># Aggiorna il package.json</span>
+$ ncu -u
+<span class="hljs-comment"># Aggiorna la node_modules con il package.json</span>
+$ npm install
+<span class="hljs-comment"># Report aggiornamenti package globali</span>
+$ ncu -g
+<span class="hljs-comment"># Aggiornamento package globali</span>
+<span class="hljs-comment"># con npm -g install ...</span>
+</code></pre>
+<pre><code class="language-json">  <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;ncu&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx ncu&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;dc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx depcheck --ignores=&#x27;linkify-it,eslint,npm-check&#x27; --ignore-patterns=&#x27;old,md_html&#x27;&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;lintinit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx eslint --init&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;lint&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx eslint ./js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;check_prettier_eslint_conflicts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx eslint-config-prettier ./js/*.js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;format&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx prettier --write ./js&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node ./js/tohtml.js md_html/md md_html/html&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;browser&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx browser-sync md_html/html/ --directory -b firefox&quot;</span>
+  <span class="hljs-punctuation">}</span>
+</code></pre>
+<h3 id="comandi-utili" tabindex="-1">Comandi Utili <a class="header-anchor" href="#comandi-utili" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Per vedere le dipendenze dei pacchetti</span>
+$ npm <span class="hljs-built_in">ls</span> --depth 1 <span class="hljs-comment"># il default di depth è 0</span>
+<span class="hljs-comment"># Per vedere tutti i pacchetti installati</span>
+$ <span class="hljs-built_in">ls</span> node_modules 
+<span class="hljs-comment"># Per vedere la catena di importazione di un pacchetto, serve anche a vedere se un pacchetto è utilizzato anche indirettamente</span>
+$ npm explain lodash
+
+$ node -p <span class="hljs-string">&quot;process.versions&quot;</span>
+$ node -p <span class="hljs-string">&quot;require.resolve(&#x27;shelljs&#x27;)&quot;</span>
+/home/<span class="hljs-variable">$USER</span>/workspaces/Nodejs/Examples/node_modules/shelljs/shell.js
+
+$ node -c or --check script.js
+$ node -p <span class="hljs-string">&quot;process.env&quot;</span>
+
+$ npm view markdown-it
+$ npm view markdown-it version
+$ npm view markdown-it versions
+
+$ npm search npm-check <span class="hljs-comment"># esempio di ricerca di un pacchetto</span>
+
+$ npm outdated
+$ npm update --save <span class="hljs-comment"># non aggiorna le major perchè rappresentano dei breaking changes</span>
+
+$ npm <span class="hljs-built_in">ls</span>
+$ npm list
+$ npm list markdown-it
+$ npm <span class="hljs-built_in">ls</span> -g
+$ npm <span class="hljs-built_in">ls</span> -depth 0
+</code></pre>
+<h3 id="ricerca-pacchetti" tabindex="-1">Ricerca Pacchetti <a class="header-anchor" href="#ricerca-pacchetti" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://www.npmjs.com/search?q=STRINGA_DI_RICERCA">https://www.npmjs.com/search?q=STRINGA_DI_RICERCA</a></li>
+<li><a href="https://www.npmtrends.com/">https://www.npmtrends.com/</a></li>
+<li><a href="https://npmcompare.com/">https://npmcompare.com/</a></li>
+<li><a href="https://www.npmjs.com/">https://www.npmjs.com/</a></li>
+</ul>
+<pre><code class="language-bash">$ npm search npm-check <span class="hljs-comment"># esempio di ricerca di un pacchetto</span>
+</code></pre>
+<h3 id="installazione-pacchetti" tabindex="-1">Installazione Pacchetti <a class="header-anchor" href="#installazione-pacchetti" aria-hidden="true">🔗</a></h3>
+<p><a href="https://docs.npmjs.com/using-npm-packages-in-your-projects">https://docs.npmjs.com/using-npm-packages-in-your-projects</a></p>
+<ul>
+<li>For scoped packages, run <code>npm install &lt;@scope/package_name&gt;</code></li>
+<li>For unscoped packages, run <code>npm install &lt;package_name&gt;</code></li>
+</ul>
+<p>Installare come dipendenza di sviluppo:</p>
+<pre><code class="language-bash">$ npm install -D eslint
+</code></pre>
+<h3 id="start" tabindex="-1">Start <a class="header-anchor" href="#start" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://docs.npmjs.com/cli/v8/configuring-npm/folders">https://docs.npmjs.com/cli/v8/configuring-npm/folders</a></li>
+<li><a href="https://nodejs.dev/learn/how-to-use-or-execute-a-package-installed-using-npm">https://nodejs.dev/learn/how-to-use-or-execute-a-package-installed-using-npm</a></li>
+<li><a href="https://dev.to/paulasantamaria/mastering-npm-scripts-2chd">https://dev.to/paulasantamaria/mastering-npm-scripts-2chd</a></li>
+</ul>
+<pre><code class="language-bash">$ npm run-script start
+$ npm run start
+$ npm start
+
+$ npm run-script <span class="hljs-built_in">test</span>
+$ npm run <span class="hljs-built_in">test</span>
+$ npm <span class="hljs-built_in">test</span>
+$ npm t
+</code></pre>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;scripts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node app.js&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;test&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;jest ./test&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;hello-world&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo \&quot;Hello World\&quot;&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>This runs an arbitrary command specified in the package's &quot;<strong>start</strong>&quot; property of its &quot;<strong>scripts</strong>&quot; object.<br>
+If no &quot;<strong>start</strong>&quot; property is specified on the &quot;<strong>scripts</strong>&quot; object, it will run <code>node server.js</code>.</p>
+<pre><code class="language-bash">$ npm <span class="hljs-built_in">help</span> start
+$ man npm-start
+$ npm <span class="hljs-built_in">help</span> run
+$ npm <span class="hljs-built_in">help</span> scripts
+</code></pre>
+<h3 id="npx" tabindex="-1">npx <a class="header-anchor" href="#npx" aria-hidden="true">🔗</a></h3>
+<p><code>npx</code> <a href="https://www.npmjs.com/package/npx">https://www.npmjs.com/package/npx</a>. (Esegue comandi nella directory <code>node_modules/.bin</code> locale).</p>
+<p>Spesso conviene installare una utilità di build come development dependency dell'applicazione, invece che come pacchetto globale, es. Electron:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># il comando electron viene installato in node_modules/.bin/</span>
+$ npm install electron --save-dev
+</code></pre>
+<p>Poi nel package.json:</p>
+<pre><code class="language-json"><span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npx electron .&quot;</span>
+</code></pre>
+<p>senza npx:</p>
+<pre><code class="language-json"><span class="hljs-attr">&quot;start&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node_modules/.bin/electron .&quot;</span><span class="hljs-punctuation">,</span>
+</code></pre>
+<h2 id="trasformare-uno-script-.js-in-un-eseguibile" tabindex="-1">Trasformare uno script .js in un eseguibile <a class="header-anchor" href="#trasformare-uno-script-.js-in-un-eseguibile" aria-hidden="true">🔗</a></h2>
+<h3 id="linux" tabindex="-1">linux <a class="header-anchor" href="#linux" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>
+<p>Aggiungere in testa allo script:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env node</span>
+</code></pre>
+</li>
+<li>
+<p><code>chmod +x script.js</code></p>
+</li>
+<li>
+<p>Node.js esegue i <code>.js</code> come moduli <strong>CommonJS</strong>, se il modulo da eseguire è un modulo <strong>ESM</strong> allora o lo si nomina in <code>.mjs</code> oppure lo si importa dinamicamente con una funzione asincrona dal modulo CommonJS principale:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> os = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;os&#x27;</span>);
+<span class="hljs-keyword">const</span> {<span class="hljs-attr">join</span>:_} = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+
+<span class="hljs-comment">/**
+* Modo per importare un modulo ESM da un modulo CommonJS
+*/</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">importESM_from_CommonJS</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> {sync, user, home} = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span> (<span class="hljs-title function_">_</span>(<span class="hljs-string">&#x27;file:///D:&#x27;</span>, <span class="hljs-string">&#x27;workspaces&#x27;</span>, <span class="hljs-string">&#x27;Nodejs&#x27;</span>, <span class="hljs-string">&#x27;Applications&#x27;</span>, <span class="hljs-string">&#x27;DirSync&#x27;</span>, <span class="hljs-string">&#x27;index.js&#x27;</span>) );
+    <span class="hljs-keyword">const</span> <span class="hljs-variable constant_">LOGDIR</span> = <span class="hljs-title function_">_</span>(<span class="hljs-string">&#x27;D:&#x27;</span>, <span class="hljs-string">&#x27;Dati&#x27;</span>, <span class="hljs-string">&#x27;Profili&#x27;</span>, user, <span class="hljs-string">&#x27;log&#x27;</span>);
+    <span class="hljs-title function_">sync</span>([
+        [<span class="hljs-title function_">_</span>(<span class="hljs-variable constant_">SOURCE_DIR_USER</span>, <span class="hljs-string">&#x27;Documenti&#x27;</span>, <span class="hljs-string">&#x27;per&#x27;</span>),  <span class="hljs-title function_">_</span>(<span class="hljs-variable constant_">DEST_DIR_USER</span>, <span class="hljs-string">&#x27;Documents&#x27;</span>, <span class="hljs-string">&#x27;per&#x27;</span>)]
+    ], <span class="hljs-variable constant_">LOGDIR</span>);
+}
+<span class="hljs-title function_">importESM_from_CommonJS</span>();    
+</code></pre>
+</li>
+</ol>
+<h3 id="windows" tabindex="-1">Windows <a class="header-anchor" href="#windows" aria-hidden="true">🔗</a></h3>
+<p>Tecnica per trasformare un .bat in un eseguibile Node.js</p>
+<p><code>%~f0</code> è il nome del presente file con il path completo<br>
+L'intestazione rem=` trasforma il presente .bat in un file eseguibile Node.js.<br>
+Di seguito la sequenza delle operazioni:</p>
+<ol>
+<li>la prima riga <code>rem=` </code> viene ignorata da <code>cmd.exe</code> in quanto un commento</li>
+<li>la seconda riga <code>node &quot;%~f0&quot; %*</code> richiama questo stesso file ma con l'interprete <code>node</code></li>
+<li>node interpreta la riga <code>rem=` </code> fino alla riga del successivo ` come l'assegnazione alla variabile rem di una stringa template multiriga,
+viene così ignorato da 'node' l'insieme delle istruzioni eseguibili del .bat<br>
+Ciò è possibile perchè non essendo in strict mode l'assegnazione <code>rem=` </code> non necessita di <code>let</code> o <code>var</code></li>
+<li>node continua ad intepretare a questo punto tutte le istruzioni javascript seguenti il secondo `</li>
+</ol>
+<pre><code class="language-bat"><span class="hljs-comment">rem=`</span>
+<span class="hljs-comment">rem node --inspect-brk &quot;%~f0&quot; %*</span>
+<span class="hljs-comment">rem set PATH=F:\app\node;%PATH%</span>
+<span class="hljs-built_in">net</span> use \\<span class="hljs-number">192</span>.<span class="hljs-number">168</span>.<span class="hljs-number">1</span>.<span class="hljs-number">2</span> /user:YYYYYY XXXXXXX
+node &quot;%~f0&quot; %*
+<span class="hljs-built_in">pause</span> :: blocco <span class="hljs-built_in">del</span> terminale a scopo di visualizzazione
+<span class="hljs-keyword">exit</span> /b <span class="hljs-variable">%errorlevel%</span>	:: Uscita dal batch file
+`
+/*
+<span class="hljs-function">	https://<span class="hljs-title">nodejs.org</span>/<span class="hljs-title">api</span>/<span class="hljs-title">debugger.html</span>
+	<span class="hljs-title">chrome</span>://<span class="hljs-title">inspect</span>/
+	<span class="hljs-title">usare</span> &#x27;<span class="hljs-title">node</span> --<span class="hljs-title">inspect</span>-<span class="hljs-title">brk</span>&#x27; <span class="hljs-title">per</span> <span class="hljs-title">debug</span> <span class="hljs-title">con</span> <span class="hljs-title">client</span> <span class="hljs-title">chrome</span>
+	<span class="hljs-title">usare</span> &#x27;<span class="hljs-title">debugger</span>;&#x27; <span class="hljs-title">nel</span> <span class="hljs-title">codice</span> .<span class="hljs-title">js</span> <span class="hljs-title">per</span> <span class="hljs-title">inserire</span> <span class="hljs-title">un</span> <span class="hljs-title">breakpoint</span>
+	<span class="hljs-title">usare</span> &#x27;<span class="hljs-title">node</span> <span class="hljs-title">inspect</span>&#x27; <span class="hljs-title">per</span> <span class="hljs-title">effettuare</span> <span class="hljs-title">il</span> <span class="hljs-title">debug</span> <span class="hljs-title">da</span> <span class="hljs-title">commandline</span>
+*/
+
+<span class="hljs-title">const</span> <span class="hljs-title">os</span> = <span class="hljs-title">require</span>(&#x27;<span class="hljs-title">os</span>&#x27;);
+<span class="hljs-title">const</span> {<span class="hljs-title">join:_</span>} = <span class="hljs-title">require</span>(&#x27;<span class="hljs-title">path</span>&#x27;);
+
+/**
+ * <span class="hljs-title">Modo</span> <span class="hljs-title">per</span> <span class="hljs-title">importare</span> <span class="hljs-title">un</span> <span class="hljs-title">modulo</span> <span class="hljs-title">ESM</span> <span class="hljs-title">da</span> <span class="hljs-title">un</span> <span class="hljs-title">modulo</span> <span class="hljs-title">CommonJS</span>
+ */
+<span class="hljs-title">async</span> <span class="hljs-title">function</span> <span class="hljs-title">importESM_from_CommonJS</span>() {
+    <span class="hljs-title">const</span> {<span class="hljs-title">sync</span>, <span class="hljs-title">user</span>, <span class="hljs-title">home</span>} = <span class="hljs-title">await</span> <span class="hljs-title">import</span> (<span class="hljs-title">_</span>(&#x27;<span class="hljs-title">file</span>:///<span class="hljs-title">D</span>:&#x27;, &#x27;<span class="hljs-title">workspaces</span>&#x27;, &#x27;<span class="hljs-title">Nodejs</span>&#x27;, &#x27;<span class="hljs-title">Applications</span>&#x27;, &#x27;<span class="hljs-title">DirSync</span>&#x27;, &#x27;<span class="hljs-title">index.js</span>&#x27;) );
+    <span class="hljs-title">const</span> <span class="hljs-title">LOGDIR</span> = <span class="hljs-title">_</span>(&#x27;<span class="hljs-title">D</span>:&#x27;, &#x27;<span class="hljs-title">Dati</span>&#x27;, &#x27;<span class="hljs-title">Profili</span>&#x27;, <span class="hljs-title">user</span>, &#x27;<span class="hljs-title">log</span>&#x27;);
+    // <span class="hljs-title">https</span>://<span class="hljs-title">stackoverflow.com</span>/<span class="hljs-title">questions</span>/61416857/<span class="hljs-title">why</span>-<span class="hljs-title">cant</span>-<span class="hljs-title">string</span>-<span class="hljs-title">raw</span>-<span class="hljs-title">end</span>-<span class="hljs-title">with</span>-<span class="hljs-title">a</span>-<span class="hljs-title">backslash</span>
+    <span class="hljs-title">const</span> <span class="hljs-title">SOURCE_DRIVE</span>        = &#x27;\\\\192.168.1.2&#x27;;
+    <span class="hljs-title">const</span> <span class="hljs-title">SOURCE_DIR_USER</span>     = <span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DRIVE</span>, &#x27;$<span class="hljs-title">USER</span>&#x27;);
+    <span class="hljs-title">const</span> <span class="hljs-title">SOURCE_DIR_WS</span>       = <span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_USER</span>, &#x27;<span class="hljs-title">workspaces</span>&#x27;);
+    <span class="hljs-title">const</span> <span class="hljs-title">DEST_DRIVE</span>          = &#x27;<span class="hljs-title">D</span>:&#x27;;
+    <span class="hljs-title">const</span> <span class="hljs-title">DEST_DIR_WS</span>         = <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DRIVE</span>, &#x27;<span class="hljs-title">workspaces</span>&#x27;);
+    <span class="hljs-title">const</span> <span class="hljs-title">DEST_DIR_USER</span>       = <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DRIVE</span>, &#x27;<span class="hljs-title">Dati</span>&#x27;, &#x27;<span class="hljs-title">Profili</span>&#x27;, <span class="hljs-title">user</span>);
+
+    <span class="hljs-title">sync</span>([
+        [<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_USER</span>, &#x27;<span class="hljs-title">Documenti</span>&#x27;, &#x27;<span class="hljs-title">per</span>&#x27;),  <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_USER</span>, &#x27;<span class="hljs-title">Documents</span>&#x27;, &#x27;<span class="hljs-title">per</span>&#x27;)],
+        [<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_WS</span>, &#x27;<span class="hljs-title">Python</span>&#x27;),              <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_WS</span>, &#x27;<span class="hljs-title">Python</span>&#x27;), &#x27;/<span class="hljs-title">XD</span> &quot;<span class="hljs-title">target</span>&quot; /<span class="hljs-title">XD</span> &quot;<span class="hljs-title">node_modules</span>&quot; /<span class="hljs-title">XF</span> &quot;*.<span class="hljs-title">pyc</span>&quot;&#x27;],
+        [<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_WS</span>, &#x27;<span class="hljs-title">Nodejs</span>&#x27;), <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_WS</span>, &#x27;<span class="hljs-title">Nodejs</span>&#x27;), &#x27;/<span class="hljs-title">XD</span> &quot;<span class="hljs-title">node_modules</span>&quot;&#x27;],
+        //[<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_WS</span>, &#x27;<span class="hljs-title">Nodejs</span>&#x27;, &#x27;<span class="hljs-title">Applications</span>&#x27;, &#x27;<span class="hljs-title">Notes</span>&#x27;), <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_WS</span>, &#x27;<span class="hljs-title">Nodejs</span>&#x27;, &#x27;<span class="hljs-title">Applications</span>&#x27;, &#x27;<span class="hljs-title">Notes</span>&#x27;), &#x27;/<span class="hljs-title">XD</span> &quot;<span class="hljs-title">node_modules</span>&quot;&#x27;],
+        //[<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_WS</span>, &#x27;<span class="hljs-title">Nodejs</span>&#x27;, &#x27;<span class="hljs-title">Applications</span>&#x27;), <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_WS</span>, &#x27;<span class="hljs-title">Nodejs</span>&#x27;, &#x27;<span class="hljs-title">Applications</span>&#x27;), &#x27;/<span class="hljs-title">XD</span> &quot;<span class="hljs-title">node_modules</span>&quot;&#x27;],
+        [<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_WS</span>, &#x27;<span class="hljs-title">configuration</span>&#x27;, &#x27;<span class="hljs-title">Manjaro_Install</span>&#x27;), <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_WS</span>, &#x27;<span class="hljs-title">Manjaro_Install</span>&#x27;)],
+        [<span class="hljs-title">_</span>(<span class="hljs-title">SOURCE_DIR_USER</span>, &#x27;<span class="hljs-title">Musica</span>&#x27;, &#x27;<span class="hljs-title">Music</span>&#x27;),   <span class="hljs-title">_</span>(<span class="hljs-title">DEST_DIR_USER</span>, &#x27;<span class="hljs-title">Music</span>&#x27;)]
+    ], <span class="hljs-title">LOGDIR</span>);
+}
+<span class="hljs-title">importESM_from_CommonJS</span>();
+</span></code></pre>
+<h2 id="moduli" tabindex="-1">Moduli <a class="header-anchor" href="#moduli" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://nodejs.org/api/modules.html">https://nodejs.org/api/modules.html</a></li>
+<li><a href="https://nodejs.org/api/modules.html#modules_folders_as_modules">https://nodejs.org/api/modules.html#modules_folders_as_modules</a></li>
+</ul>
+<h2 id="problemi-e-soluzioni" tabindex="-1">Problemi e Soluzioni <a class="header-anchor" href="#problemi-e-soluzioni" aria-hidden="true">🔗</a></h2>
+<h3 id="repository-is-not-clean" tabindex="-1">Repository is not clean <a class="header-anchor" href="#repository-is-not-clean" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/56773528/repository-is-not-clean-please-commit-or-stash-any-changes-before-updating-in-a">https://stackoverflow.com/questions/56773528/repository-is-not-clean-please-commit-or-stash-any-changes-before-updating-in-a</a></li>
+<li><a href="https://github.com/angular/angular-cli/issues/14600">https://github.com/angular/angular-cli/issues/14600</a></li>
+</ul>
+<h4 id="problema" tabindex="-1">Problema <a class="header-anchor" href="#problema" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ ng update
+  PS D:\app-test&gt; ng update @angular/cdk
+                Repository is not clean.  Please commit or stash any changes before updating.
+
+$ npm cache verify
+</code></pre>
+<h4 id="soluzione" tabindex="-1">Soluzione <a class="header-anchor" href="#soluzione" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ git add .
+$ git commit
+<span class="hljs-comment"># oppure:</span>
+$ ng update @angular/cli @angular/core --allow-dirty
+</code></pre>
+<h3 id="maximum-call-stack-size-exceeded-on-npm-install" tabindex="-1">Maximum call stack size exceeded on npm install <a class="header-anchor" href="#maximum-call-stack-size-exceeded-on-npm-install" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/40566348/maximum-call-stack-size-exceeded-on-npm-install">https://stackoverflow.com/questions/40566348/maximum-call-stack-size-exceeded-on-npm-install</a></li>
+</ul>
+<pre><code class="language-bat">$ npm install
+$ npm ERR! Maximum <span class="hljs-keyword">call</span> stack size exceeded
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># La mia soluzione:</span>
+$ <span class="hljs-built_in">rm</span> package-lock.json
+
+<span class="hljs-comment"># Altre</span>
+$ npm cache clean --force
+$ npm rebuild -g
+$ <span class="hljs-built_in">rm</span> -r node_modules
+</code></pre>
+<h2 id="debug" tabindex="-1">Debug <a class="header-anchor" href="#debug" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://nodejs.org/api/debugger.html">https://nodejs.org/api/debugger.html</a></li>
+<li><a href="https://github.com/nodejs/nodejs.org/blob/master/locale/en/docs/guides/debugging-getting-started.md">https://github.com/nodejs/nodejs.org/blob/master/locale/en/docs/guides/debugging-getting-started.md</a></li>
+<li><a href="https://github.com/nodejs/node-inspect">https://github.com/nodejs/node-inspect</a></li>
+</ul>
+<pre><code class="language-bash">$ node inspect app.js <span class="hljs-comment"># è possibile inserire l&#x27;istruzione debug nel codice js per impostare un breakpoint</span>
+</code></pre>
+<p><code>chrome://inspect/</code><br>
+usare <code>node --inspect-brk</code> per debug con client chrome<br>
+usare <code>debugger;</code> nel codice <code>.js</code> per inserire un breakpoint<br>
+usare <code>node inspect</code> per effettuare il debug da commandline.</p>
+<pre><code class="language-bat"><span class="hljs-comment">rem node --inspect-brk &quot;%~f0&quot; %*</span>
+<span class="hljs-comment">rem set PATH=F:\app\node;%PATH%</span>
+</code></pre>
+<h2 id="visual-studio-code" tabindex="-1">Visual Studio Code <a class="header-anchor" href="#visual-studio-code" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/nodejs/nodejs-tutorial">https://code.visualstudio.com/docs/nodejs/nodejs-tutorial</a></li>
+<li><a href="https://code.visualstudio.com/docs/nodejs/working-with-javascript">https://code.visualstudio.com/docs/nodejs/working-with-javascript</a></li>
+</ul>
+<h2 id="import-di-package.json" tabindex="-1">Import di package.json <a class="header-anchor" href="#import-di-package.json" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/">https://www.stefanjudis.com/snippets/how-to-import-json-files-in-es-modules-node-js/</a></li>
+<li><a href="https://nodejs.org/docs/latest-v17.x/api/esm.html#import-assertions">https://nodejs.org/docs/latest-v17.x/api/esm.html#import-assertions</a></li>
+</ul>
+<pre><code class="language-js"><span class="hljs-comment">// Added in: v17.1.0</span>
+<span class="hljs-keyword">import</span> fooData <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./foo.json&#x27;</span> assert { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;json&#x27;</span> };
+<span class="hljs-keyword">const</span> { <span class="hljs-attr">default</span>: barData } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./bar.json&#x27;</span>, { <span class="hljs-attr">assert</span>: { <span class="hljs-attr">type</span>: <span class="hljs-string">&#x27;json&#x27;</span> } });
+
+<span class="hljs-comment">/* 
+  Experimental JSON import is supported since Node.js 17.5
+  $ node index.mjs
+*/</span>
+
+<span class="hljs-comment">// An import assertion in a static import</span>
+<span class="hljs-keyword">import</span> info <span class="hljs-keyword">from</span> <span class="hljs-string">`./package.json`</span> assert { <span class="hljs-attr">type</span>: <span class="hljs-string">`json`</span> };
+
+<span class="hljs-comment">// An import assertion in a dynamic import</span>
+<span class="hljs-keyword">const</span> { <span class="hljs-attr">default</span>: info } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;./package.json&quot;</span>, {
+  <span class="hljs-attr">assert</span>: {
+    <span class="hljs-attr">type</span>: <span class="hljs-string">&quot;json&quot;</span>,
+  },
+});
+</code></pre>
+<pre><code class="language-js"><span class="hljs-comment">// Questa è la maniera migliore, la più chiara.</span>
+<span class="hljs-keyword">import</span> { readFile } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fs/promises&#x27;</span>;
+<span class="hljs-keyword">const</span> json = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(
+  <span class="hljs-keyword">await</span> <span class="hljs-title function_">readFile</span>(
+    <span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(<span class="hljs-string">&#x27;./some-file.json&#x27;</span>, <span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>)
+  )
+);
+</code></pre>
+<pre><code class="language-js"><span class="hljs-comment">// Oppure si continua ad utilizzare la require come in CommonJS</span>
+<span class="hljs-keyword">import</span> { createRequire } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;module&quot;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">require</span> = <span class="hljs-title function_">createRequire</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>);
+<span class="hljs-keyword">const</span> data = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;./data.json&quot;</span>);
+</code></pre>
+</body></html>

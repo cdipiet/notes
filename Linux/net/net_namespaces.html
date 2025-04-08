@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.990" />
+        <title>net_namespaces</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="net_namespaces" tabindex="-1">net_namespaces <a class="header-anchor" href="#net_namespaces" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.990</p>
+<nav class="table-of-contents"><ol></ol></nav><h1 id="linux-network-namespaces" tabindex="-1">Linux Network Namespaces <a class="header-anchor" href="#linux-network-namespaces" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="net_bridge_vlan.html">Bridge e VLAN</a></li>
+</ul>
+<pre><code class="language-bash">$ man network_namespaces
+    Network namespaces provide isolation of the system resources associated with networking: network devices, IPv4 and IPv6 protocol stacks, IP routing tables, fire‐wall rules, 
+    A virtual network (veth(4)) device pair provides a pipe-like abstraction that can be used to create tunnels between network namespaces, and can be used to create
+    a bridge to a physical network device <span class="hljs-keyword">in</span> another namespace.
+
+$ man ip-netns
+    A network namespace is logically another copy of the network stack, with its own routes, firewall rules, and network devices.
+    ip netns list - This <span class="hljs-built_in">command</span> displays all of the network namespaces <span class="hljs-keyword">in</span> /var/run/netns
+    ip netns add NAME - If NAME is available <span class="hljs-keyword">in</span> /var/run/netns this <span class="hljs-built_in">command</span> creates a new network namespace and assigns NAME.
+    ip netns attach NAME PID - If NAME is available <span class="hljs-keyword">in</span> /var/run/netns this <span class="hljs-built_in">command</span> attaches the network namespace of the process PID to NAME as <span class="hljs-keyword">if</span> it were created with ip netns.
+    ip [-all] netns delete [ NAME ] - delete the name of a network namespace(s)
+    ip netns identify [PID] - Report network namespaces names <span class="hljs-keyword">for</span> process
+    ip netns pids NAME - Report processes <span class="hljs-keyword">in</span> the named network namespace
+    ip [-all] netns <span class="hljs-built_in">exec</span> [ NAME ] cmd ... - Run cmd <span class="hljs-keyword">in</span> the named network namespace
+
+$ man unshare
+    unshare - run program <span class="hljs-keyword">in</span> new namespaces
+    a new namespace persists only as long as it has member processes.
+    network namespace The process will have independent IPv4 and IPv6 stacks, IP routing tables, firewall rules, the /proc/net and /sys/class/net directory trees, sockets, etc.
+    -n, --net[=file] Unshare the network namespace
+    -r, --map-root-user
+            Run the program only after the current effective user and group IDs have been mapped to the superuser UID and GID <span class="hljs-keyword">in</span> the newly created user namespace. This
+            makes it possible to conveniently gain capabilities needed to manage various aspects of the newly created namespaces (such as configuring interfaces <span class="hljs-keyword">in</span> the
+            network namespace or mounting filesystems <span class="hljs-keyword">in</span> the mount namespace) even when run unprivileged.
+
+$ man veth
+    The  veth  devices  are  virtual Ethernet devices.  They can act as tunnels between network namespaces to create a bridge to a physical network device <span class="hljs-keyword">in</span> another namespace, but can also be used as standalone network devices.
+    veth devices are always created <span class="hljs-keyword">in</span> interconnected pairs.  A pair can be created using the <span class="hljs-built_in">command</span>:
+    <span class="hljs-comment"># ip link add &lt;p1-name&gt; type veth peer name &lt;p2-name&gt;</span>
+    Packets transmitted on one device <span class="hljs-keyword">in</span> the pair are immediately received on the other device.  
+    A particularly interesting use <span class="hljs-keyword">case</span>  is  to  place one  end  of  a veth pair <span class="hljs-keyword">in</span> one network namespace and the other end <span class="hljs-keyword">in</span> another network namespace, thus allowing communication between network namespaces.
+    <span class="hljs-comment"># ip link add &lt;p1-name&gt; netns &lt;p1-ns&gt; type veth peer &lt;p2-name&gt; netns &lt;p2-ns&gt;</span>
+
+$ man ip-link
+    ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> { DEVICE }
+        netns NETNSNAME | PID
+                move the device to the network namespace associated with name NETNSNAME or process PID.
+
+$ man ip
+    -n, -netns &lt;NETNS&gt;
+                switches ip to the specified network namespace NETNS.  Actually it just simplifies executing of:
+
+                ip netns <span class="hljs-built_in">exec</span> NETNS ip [ OPTIONS ] OBJECT { COMMAND | <span class="hljs-built_in">help</span> }
+
+                to
+
+                ip -n[etns] NETNS [ OPTIONS ] OBJECT { COMMAND | <span class="hljs-built_in">help</span> }
+</code></pre>
+<pre><code class="language-bash">$ ip netns identify &lt;pid&gt;
+$ ip netns
+
+<span class="hljs-comment"># Esempio di creazione e cancellazione di un network namespace</span>
+$ ip netns add net0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev eth0 netns net0
+$ ip netns <span class="hljs-built_in">exec</span> net0 SOME_PROCESS_IN_BACKGROUND
+$ <span class="hljs-comment"># ip netns del net0</span>
+<span class="hljs-comment"># and eth0 will appear in the default netns only after SOME_PROCESS_IN_BACKGROUND will exit or will be killed. </span>
+<span class="hljs-comment"># To prevent this the processes running in net0 should be killed before deleting the netns:</span>
+$ ip netns pids net0 | xargs <span class="hljs-built_in">kill</span>
+$ ip netns del net0
+
+<span class="hljs-comment"># Esempio di namespace con una interfaccia veth</span>
+$ <span class="hljs-built_in">sudo</span> -i
+$ ip <span class="hljs-built_in">link</span> add veth0 <span class="hljs-built_in">type</span> veth peer name veth1 <span class="hljs-comment"># create the pair of veth interfaces named, veth0 and veth1</span>
+$ ip <span class="hljs-built_in">link</span> show veth0                          <span class="hljs-comment"># confirm that veth0 is created</span>
+$ ip <span class="hljs-built_in">link</span> show veth1                          <span class="hljs-comment"># confirm that veth1 is created</span>
+$ ip netns add vnet0                          <span class="hljs-comment"># create the vnet0 network namespace</span>
+$ ip netns                                    <span class="hljs-comment"># per avere l&#x27;elenco dei namespace</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> veth0 netns vnet0               <span class="hljs-comment"># assign the veth0 interface to the vnet0 network namespace</span>
+$ ip -n vnet0 addr add 10.0.1.0/24 dev veth0  <span class="hljs-comment"># assign the 10.0.1.0/24 IP address range to the veth0 interface</span>
+$ ip -n vnet0 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> veth0 up               <span class="hljs-comment"># bring up the veth0 interface</span>
+$ ip -n vnet0 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up                  <span class="hljs-comment"># bring up the lo interface, because packets destined for 10.0.1.0/24 (like ping) goes through the &quot;local&quot; route table</span>
+$ ip -n vnet0 addr show                       <span class="hljs-comment"># confirm that the interfaces are up</span>
+$ ip <span class="hljs-built_in">link</span> show veth0                          <span class="hljs-comment"># veth0 no longer appears in the host network namespace    </span>
+    Device <span class="hljs-string">&quot;veth0&quot;</span> does not exist.
+$ ping -c5 10.0.1.0                          <span class="hljs-comment"># ping doesn&#x27;t work from the host network namespace</span>
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 ping -c5 10.0.1.0          
+$ ip netns add vnet1                          <span class="hljs-comment"># create the vnet1 network namespace</span>
+$ ip netns
+$ <span class="hljs-built_in">ls</span> -la /var/run/netns/                      <span class="hljs-comment"># altro modo per effettuare il list dei namespaces</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> veth1 netns vnet1               <span class="hljs-comment"># assign the veth1 interface to the vnet1 network namespace</span>
+$ ip -n vnet1 addr add 10.0.2.0/24 dev veth1  <span class="hljs-comment"># assign the 10.0.2.0/24 IP address range to the veth1 interface</span>
+$ ip -n vnet1 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> veth1 up               <span class="hljs-comment"># bring up the veth1 interface</span>
+$ ip -n vnet1 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up                  <span class="hljs-comment"># bring up the lo interface, because packets destined for 10.0.2.0/24 (like ping) goes through the &quot;local&quot; route table</span>
+$ ip -n vnet1 addr show                       <span class="hljs-comment"># confirm that the interfaces are up</span>
+<span class="hljs-comment"># Note that we deliberately use a different subnet IP range for veth1, to set up a route debugging session later.</span>
+$ ip <span class="hljs-built_in">link</span> show veth1                          <span class="hljs-comment"># veth1 no longer appears in the host network namespace</span>
+    Device <span class="hljs-string">&quot;veth1&quot;</span> does not exist.
+$ ping -c5 10.0.2.0                          <span class="hljs-comment"># ping doesn&#x27;t work from the host network namespace</span>
+$ ip netns <span class="hljs-built_in">exec</span> vnet1 ping -c5 10.0.2.0      <span class="hljs-comment"># ping works from inside the vnet1 network namespace</span>
+<span class="hljs-comment"># Non solo l&#x27;host non raggiunge i due network namespace, ma i namespace non si vedono tra loro se i due peer veth sono in subnet diverse:</span>
+$ ip netns <span class="hljs-built_in">exec</span> vnet1 ping -c5 10.0.1.0
+    connect: Network is unreachable
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 ping -c5 10.0.2.0
+    connect: Network is unreachable
+<span class="hljs-comment"># Vediamo come effettuare debugging, è possibile vedere il percorso che un pacchetto prenderà con il comando &#x27;ip route get&#x27;:</span>
+$ ip -n vnet0 route get 10.0.2.0                  <span class="hljs-comment"># dal namespace vnet0 non si raggiunge l&#x27;ip 10.0.2.0</span>
+    RTNETLINK answers: Network is unreachable
+$ ip -n vnet1 route get 10.0.1.0                  <span class="hljs-comment"># dal namespace vnet1 non si raggiunge l&#x27;ip 10.0.1.0</span>
+    RTNETLINK answers: Network is unreachable
+<span class="hljs-comment"># Vediamo allora come sono configurate le tabelle di routing in entrami i namespace:</span>
+$ ip -n vnet0 route          <span class="hljs-comment"># c&#x27;e&#x27; la route solo per la subnet del namespace vnet0, manca la route verso altre subnet                                         </span>
+    10.0.1.0/24 dev veth0  proto kernel  scope <span class="hljs-built_in">link</span>  src 10.0.1.0
+$ ip -n vnet1 route          <span class="hljs-comment"># c&#x27;e&#x27; la route solo per la subnet del namespace vnet1, manca la route verso altre subnet</span>
+    10.0.2.0/24 dev veth1  proto kernel  scope <span class="hljs-built_in">link</span>  src 10.0.2.0
+$ ip -n vnet0 route add 10.0.2.0/24 dev veth0 <span class="hljs-comment"># update the vnet0 route table by adding a route to 10.0.2.0/24</span>
+$ ip -n vnet0 route get 10.0.2.0              <span class="hljs-comment"># confirm that packets destined for 10.0.2.0/24 is routed to veth0</span>
+    10.0.2.0 dev veth0  src 10.0.1.0
+$ ip -n vnet1 route add 10.0.1.0/24 dev veth1 <span class="hljs-comment"># update the vnet1 route table by adding a route to 10.0.1.0/24</span>
+$ ip -n vnet1 route get 10.0.1.0              <span class="hljs-comment"># confirm that packets destined for 10.0.1.0/24 is routed to veth1</span>
+    10.0.1.0 dev veth1  src 10.0.2.0
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 ping -c5 10.0.2.0      <span class="hljs-comment"># OK</span>
+$ ip netns <span class="hljs-built_in">exec</span> vnet1 ping -c5 10.0.1.0      <span class="hljs-comment"># OK</span>
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 tcpdump -i veth0 icmp -l  <span class="hljs-comment"># capture the packets transmitted between the two network namespaces</span>
+
+                            ip netns <span class="hljs-built_in">exec</span> vnet0 ping -c5 8.8.8.8
+                                ping: connect: La rete non è raggiungibile
+                            ip -n vnet0 route add default dev veth0
+                            iptables -t nat -A POSTROUTING -s 10.0.0.1/24 -d 0.0.0.0/0 -j MASQUERADE
+                            ip -n vnet0 route add 192.168.1.0/24 dev veth0
+                            ip -n vnet0 route add default via 192.168.1.1 dev veth0
+
+
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 nc -l 10.0.1.0 7096 -v    <span class="hljs-comment"># start nc to listen at port 7096 in vnet0</span>
+    Listening on [10.0.1.0] (family 0, port 7096)
+$ ip netns <span class="hljs-built_in">exec</span> vnet1 nc -4t 10.0.1.0 7096 -v   <span class="hljs-comment"># use nc to initiate a TCP handshake from vnet1</span>
+    Connection to 10.0.1.0 7096 port [tcp/*] succeeded!
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 nc -l 10.0.1.0 7096 -v    <span class="hljs-comment"># confirm that the connection is established successfully</span>
+    Listening on [10.0.1.0] (family 0, port 7096)
+    Connection from [10.0.2.0] port 7096 [tcp/*] accepted (family 2, sport 34004)
+$ ip netns <span class="hljs-built_in">exec</span> vnet1 nc -4t 10.0.1.0 7096 -v 
+    Connection to 10.0.1.0 7096 port [tcp/*] succeeded!
+    this is a <span class="hljs-built_in">test</span> message <span class="hljs-comment"># manually type this in</span>
+<span class="hljs-comment"># the data will appear in vnet0</span>
+$ ip netns <span class="hljs-built_in">exec</span> vnet0 <span class="hljs-built_in">sudo</span> nc -l 10.0.1.0 7096 -v                                                  
+    Listening on [10.0.1.0] (family 0, port 7096)
+    Connection from [10.0.2.0] port 7096 [tcp/*] accepted (family 2, sport 34004)
+this is a <span class="hljs-built_in">test</span> message <span class="hljs-comment"># this shows up immediately upon hitting &#x27;enter&#x27; on the client side</span>
+<span class="hljs-comment"># tcpdump will also pick up all the packets that are transmitted between the two network namespaces:</span>
+$  ip netns <span class="hljs-built_in">exec</span> vnet0 tcpdump -X -i veth0 -n tcp -l    
+</code></pre>
+<pre><code class="language-bash">$ unshare -r --net bash <span class="hljs-comment"># il namespace corrispondente al pid del processo bash non ha nome</span>
+    <span class="hljs-built_in">echo</span> $$
+    851562
+$ ip netns                      <span class="hljs-comment"># il namespace non risulta</span>
+$ <span class="hljs-built_in">ls</span> -la /var/run/netns/        <span class="hljs-comment"># il namespace non risulta</span>
+$ ip netns attach nsbash 851562 <span class="hljs-comment"># si assegna al namespace del pid 851862 il nome nsbash</span>
+$ ip netns
+    nsbash
+$ <span class="hljs-built_in">ls</span> -la /var/run/netns/ 
+-r--r--r--  1 root root   0 11 feb 17.50 nsbash
+$ ip netns identify 851562
+    nsbash
+$ ip netns pids nsbash
+    851562
+</code></pre>
+</body></html>

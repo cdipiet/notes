@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.532" />
+        <title>node_ls</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="node_ls" tabindex="-1">node_ls <a class="header-anchor" href="#node_ls" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.532</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22node-ls%22description%3A-%22the-node-ls-command-description-and-usage%22keywords%3A-%22node%2C-list%22">title: &quot;node ls&quot;description: &quot;The node ls command description and usage&quot;keywords: &quot;node, list&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#filtering">Filtering </a><ol><li><a href="#id">id </a></li><li><a href="#label">label </a></li><li><a href="#node.label">node.label </a></li><li><a href="#membership">membership </a></li><li><a href="#name">name </a></li><li><a href="#role">role </a></li></ol></li><li><a href="#formatting">Formatting </a></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22node-ls%22description%3A-%22the-node-ls-command-description-and-usage%22keywords%3A-%22node%2C-list%22" tabindex="-1">title: &quot;node ls&quot;
+description: &quot;The node ls command description and usage&quot;
+keywords: &quot;node, list&quot; <a class="header-anchor" href="#title%3A-%22node-ls%22description%3A-%22the-node-ls-command-description-and-usage%22keywords%3A-%22node%2C-list%22" aria-hidden="true">🔗</a></h2>
+<h1 id="node-ls" tabindex="-1">node ls <a class="header-anchor" href="#node-ls" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker node ls [OPTIONS]
+
+List nodes in the swarm
+
+Aliases:
+  ls, list
+
+Options:
+  -f, --filter filter   Filter output based on conditions provided
+<span class="hljs-code">      --format string   Pretty-print nodes using a Go template
+      --help            Print usage
+  -q, --quiet           Only display IDs
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Lists all the nodes that the Docker Swarm manager knows about. You can filter
+using the <code>-f</code> or <code>--filter</code> flag. Refer to the <a href="#filtering">filtering</a> section
+for more information about available filter options.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>This is a cluster management command, and must be executed on a swarm
+manager node. To learn about managers and workers, refer to the
+<a href="https://docs.docker.com/engine/swarm/">Swarm mode section</a> in the
+documentation.</p>
+</blockquote>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span></span>
+
+ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
+1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready   Active
+38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active
+e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
+</code></pre>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>In the above example output, there is a hidden column of <code>.Self</code> that indicates
+if the node is the same node as the current docker daemon. A <code>*</code> (e.g.,
+<code>e216jshn25ckzbvmwlnh5jr3g *</code>) means this node is the current docker daemon.</p>
+</blockquote>
+<h3 id="filtering" tabindex="-1">Filtering <a class="header-anchor" href="#filtering" aria-hidden="true">🔗</a></h3>
+<p>The filtering flag (<code>-f</code> or <code>--filter</code>) format is of &quot;key=value&quot;. If there is more
+than one filter, then pass multiple flags (e.g., <code>--filter &quot;foo=bar&quot; --filter &quot;bif=baz&quot;</code>)</p>
+<p>The currently supported filters are:</p>
+<ul>
+<li><a href="#id">id</a></li>
+<li><a href="#label">label</a></li>
+<li><a href="#nodelabel">node.label</a></li>
+<li><a href="#membership">membership</a></li>
+<li><a href="#name">name</a></li>
+<li><a href="#role">role</a></li>
+</ul>
+<h4 id="id" tabindex="-1">id <a class="header-anchor" href="#id" aria-hidden="true">🔗</a></h4>
+<p>The <code>id</code> filter matches all or part of a node's id.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> -f <span class="hljs-built_in">id</span>=1</span>
+
+ID                         HOSTNAME       STATUS  AVAILABILITY  MANAGER STATUS
+1bcef6utixb0l0ca7gxuivsj0  swarm-worker2  Ready   Active
+</code></pre>
+<h4 id="label" tabindex="-1">label <a class="header-anchor" href="#label" aria-hidden="true">🔗</a></h4>
+<p>The <code>label</code> filter matches nodes based on engine labels and on the presence of a
+<code>label</code> alone or a <code>label</code> and a value. Engine labels are configured in
+the <a href="dockerd.md#daemon-configuration-file">daemon configuration</a>. To filter on
+Swarm <code>node</code> labels, use <a href="#nodelabel"><code>node.label</code> instead</a>.</p>
+<p>The following filter matches nodes with the <code>foo</code> label regardless of its value.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> -f <span class="hljs-string">&quot;label=foo&quot;</span></span>
+
+ID                         HOSTNAME       STATUS  AVAILABILITY  MANAGER STATUS
+1bcef6utixb0l0ca7gxuivsj0  swarm-worker2  Ready   Active
+</code></pre>
+<h4 id="node.label" tabindex="-1">node.label <a class="header-anchor" href="#node.label" aria-hidden="true">🔗</a></h4>
+<p>The <code>node.label</code> filter matches nodes based on node labels and on the presence
+of a <code>node.label</code> alone or a <code>node.label</code> and a value.</p>
+<p>The following filter updates nodes to have a <code>region</code> node label:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node update --label-add region=region-a swarm-test-01</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node update --label-add region=region-a swarm-test-02</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node update --label-add region=region-b swarm-test-03</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node update --label-add region=region-b swarm-test-04</span>
+</code></pre>
+<p>Show all nodes that have a <code>region</code> node label set:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> --filter node.label=region</span>
+
+ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+hc0pu7ntc7s4uvj4pv7z7pz15     swarm-test-03   Ready     Active         Reachable        20.10.2
+n41b2cijmhifxxvz56vwrs12q     swarm-test-04   Ready     Active                          20.10.2
+</code></pre>
+<p>Show all nodes that have a <code>region</code> node label, with value <code>region-a</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> --filter node.label=region=region-a</span>
+
+ID                            HOSTNAME        STATUS    AVAILABILITY   MANAGER STATUS   ENGINE VERSION
+yg550ettvsjn6g6t840iaiwgb *   swarm-test-01   Ready     Active         Leader           20.10.2
+2lm9w9kbepgvkzkkeyku40e65     swarm-test-02   Ready     Active         Reachable        20.10.2
+</code></pre>
+<h4 id="membership" tabindex="-1">membership <a class="header-anchor" href="#membership" aria-hidden="true">🔗</a></h4>
+<p>The <code>membership</code> filter matches nodes based on the presence of a <code>membership</code> and a value
+<code>accepted</code> or <code>pending</code>.</p>
+<p>The following filter matches nodes with the <code>membership</code> of <code>accepted</code>.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> -f <span class="hljs-string">&quot;membership=accepted&quot;</span></span>
+
+ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
+1bcef6utixb0l0ca7gxuivsj0    swarm-worker2   Ready   Active
+38ciaotwjuritcdtn9npbnkuz    swarm-worker1   Ready   Active
+</code></pre>
+<h4 id="name" tabindex="-1">name <a class="header-anchor" href="#name" aria-hidden="true">🔗</a></h4>
+<p>The <code>name</code> filter matches on all or part of a node hostname.</p>
+<p>The following filter matches the nodes with a name equal to <code>swarm-master</code> string.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> -f name=swarm-manager1</span>
+
+ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
+e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
+</code></pre>
+<h4 id="role" tabindex="-1">role <a class="header-anchor" href="#role" aria-hidden="true">🔗</a></h4>
+<p>The <code>role</code> filter matches nodes based on the presence of a <code>role</code> and a value <code>worker</code> or <code>manager</code>.</p>
+<p>The following filter matches nodes with the <code>manager</code> role.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> -f <span class="hljs-string">&quot;role=manager&quot;</span></span>
+
+ID                           HOSTNAME        STATUS  AVAILABILITY  MANAGER STATUS
+e216jshn25ckzbvmwlnh5jr3g *  swarm-manager1  Ready   Active        Leader
+</code></pre>
+<h3 id="formatting" tabindex="-1">Formatting <a class="header-anchor" href="#formatting" aria-hidden="true">🔗</a></h3>
+<p>The formatting options (<code>--format</code>) pretty-prints nodes output
+using a Go template.</p>
+<p>Valid placeholders for the Go template are listed below:</p>
+<table class="table"><thead>
+<tr>
+<th>Placeholder</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.ID</code></td>
+<td>Node ID</td>
+</tr>
+<tr>
+<td><code>.Self</code></td>
+<td>Node of the daemon (<code>true/false</code>, <code>true</code>indicates that the node is the same as current docker daemon)</td>
+</tr>
+<tr>
+<td><code>.Hostname</code></td>
+<td>Node hostname</td>
+</tr>
+<tr>
+<td><code>.Status</code></td>
+<td>Node status</td>
+</tr>
+<tr>
+<td><code>.Availability</code></td>
+<td>Node availability (&quot;active&quot;, &quot;pause&quot;, or &quot;drain&quot;)</td>
+</tr>
+<tr>
+<td><code>.ManagerStatus</code></td>
+<td>Manager status of the node</td>
+</tr>
+<tr>
+<td><code>.TLSStatus</code></td>
+<td>TLS status of the node (&quot;Ready&quot;, or &quot;Needs Rotation&quot; has TLS certificate signed by an old CA)</td>
+</tr>
+<tr>
+<td><code>.EngineVersion</code></td>
+<td>Engine version</td>
+</tr>
+</tbody>
+</table>
+<p>When using the <code>--format</code> option, the <code>node ls</code> command will either
+output the data exactly as the template declares or, when using the
+<code>table</code> directive, includes column headers as well.</p>
+<p>The following example uses a template without headers and outputs the
+<code>ID</code>, <code>Hostname</code>, and <code>TLS Status</code> entries separated by a colon (<code>:</code>) for all
+nodes:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker node <span class="hljs-built_in">ls</span> --format <span class="hljs-string">&quot;{{.ID}}: {{.Hostname}} {{.TLSStatus}}&quot;</span></span>
+
+e216jshn25ckzbvmwlnh5jr3g: swarm-manager1 Ready
+35o6tiywb700jesrt3dmllaza: swarm-worker1 Needs Rotation
+</code></pre>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="node_demote.html">node demote</a></li>
+<li><a href="node_inspect.html">node inspect</a></li>
+<li><a href="node_promote.html">node promote</a></li>
+<li><a href="node_ps.html">node ps</a></li>
+<li><a href="node_rm.html">node rm</a></li>
+<li><a href="node_update.html">node update</a></li>
+</ul>
+</body></html>

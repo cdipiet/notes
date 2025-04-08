@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.143" />
+        <title>Pandoc</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../inc/js/hljs/styles/default.css" />
+        <script src="../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pandoc" tabindex="-1">Pandoc <a class="header-anchor" href="#pandoc" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.143</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione">Installazione </a></li><li><a href="#utilizzo">Utilizzo </a></li><li><a href="#build-di-tutti-i-file-.md-da-riga-di-comando">Build di tutti i file .md da riga di comando </a><ol><li><a href="#script-ant-primario">Script ANT primario </a></li><li><a href="#lo-script-make_pandoc_all.cmd-compila-tutti-i-file-.md-producendo-i-file-.html-nella-cartella-.%2Fhtml.">Lo script make_pandoc_all.cmd compila tutti i file .md producendo i file .html nella cartella ./html. </a></li></ol></li><li><a href="#build-di-un-file-.md-da-notepad%2B%2B">Build di un file .md da Notepad++ </a></li><li><a href="#esempio-di-stile-custom-'codey'">Esempio di stile custom &#39;codey&#39; </a></li><li><a href="#estensioni-utilizzate-di-default">Estensioni utilizzate di default </a></li><li><a href="#inserimento-di-caratteri-tramite-codice">Inserimento di caratteri tramite codice </a><ol><li><a href="#la-tilde">La tilde </a></li><li><a href="#il-grave-accent%2C-backtick">Il grave accent, backtick </a></li></ol></li><li><a href="#aggiunta-di-nuovi-linguaggi-al-syntax-highlighter">Aggiunta di nuovi linguaggi al syntax highlighter </a></li><li><a href="#esempi-di-tabelle">Esempi di tabelle </a></li><li><a href="#second-row-5.0-here's-another-one.-notethe-blank-line-betweenrows.">Second    row                 5.0 Here&#39;s another one. Notethe blank line betweenrows. </a></li><li><a href="#esempi-di-liste">Esempi di liste </a><ol><li><a href="#non-numerica">Non numerica </a></li><li><a href="#numerica">Numerica </a></li></ol></li></ol></nav><h1 id="pandoc-1" tabindex="-1">Pandoc <a class="header-anchor" href="#pandoc-1" aria-hidden="true">🔗</a></h1>
+<p><a href="https://pandoc.org">https://pandoc.org</a></p>
+<p><img src="../inc/img/markdown.png" alt="" style="display:block; margin: 0 auto; width:30%"></p>
+<p>Tool utilizzato per la conversione dei file <strong>.md</strong> in <strong>.html</strong></p>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<pre><code id="installazione" class="dosbat numberLines" startFrom="1">set PATH=%USERPROFILE%\app\pandoc;%PATH%
+E:\BackupDVDRW\app\Sviluppo\Tools\Markdown\pandoc-2.2.1-windows-x86_64.zip
+==&gt;
+C:\Users\$USER\app\pandoc
+</code></pre>
+<h2 id="utilizzo" tabindex="-1">Utilizzo <a class="header-anchor" href="#utilizzo" aria-hidden="true">🔗</a></h2>
+<p>Per conoscere i linguaggi disponibili per la formattazione del codice:</p>
+<pre><code>C:\&gt;%USERPROFILE%\app\pandoc\pandoc --list-highlight-languages
+</code></pre>
+<p>Per conoscere gli stili disponibili per la formattazione del codice:</p>
+<pre><code>C:\&gt;%USERPROFILE%\app\pandoc\pandoc --list-highlight-styles
+</code></pre>
+<p>Per vedere il template utilizzato per la generazione dell'HTML:</p>
+<pre><code>C:\&gt;%USERPROFILE%\app\pandoc\pandoc -D html
+</code></pre>
+<p><a href="https://pandoc.org/MANUAL.html#extension-pandoc_title_block">https://pandoc.org/MANUAL.html#extension-pandoc_title_block</a></p>
+<p>Le cartelle:</p>
+<ul>
+<li><span class="mbb">html</span></li>
+<li><span class="mbb">html/img </span></li>
+<li><span class="mbb">html/css</span></li>
+</ul>
+<p>sono state create manualmente.</p>
+<h2 id="build-di-tutti-i-file-.md-da-riga-di-comando" tabindex="-1">Build di tutti i file .md da riga di comando <a class="header-anchor" href="#build-di-tutti-i-file-.md-da-riga-di-comando" aria-hidden="true">🔗</a></h2>
+<h3 id="script-ant-primario" tabindex="-1">Script ANT primario <a class="header-anchor" href="#script-ant-primario" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span> standalone=<span class="hljs-string">&quot;no&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">project</span>
+        <span class="hljs-attr">xmlns:if</span>=<span class="hljs-string">&quot;ant:if&quot;</span>
+        <span class="hljs-attr">xmlns:unless</span>=<span class="hljs-string">&quot;ant:unless&quot;</span>
+        <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PRJDOC&quot;</span>
+	    <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;deploy&quot;</span>
+	    <span class="hljs-attr">basedir</span>=<span class="hljs-string">&quot;.&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">description</span>&gt;</span>
+		Deploy dell&#x27;applicazione prjdoc su host74.
+		Questo progetto
+		produce poi il .war, viene trasferito su host74 nella cartella di autodeploy tramite le condivisioni SAMBA.
+	<span class="hljs-tag">&lt;/<span class="hljs-name">description</span>&gt;</span>
+	<span class="hljs-comment">&lt;!-- Legge le variabili di ambiente e le imposta come property ANT --&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">environment</span>=<span class="hljs-string">&quot;env&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;property.file&quot;</span> <span class="hljs-attr">location</span>=<span class="hljs-string">&quot;${basedir}/build.properties&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span> /&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;JAVA_HOME&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${env.JAVA_HOME}&quot;</span>/&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">record</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;${log.file}&quot;</span> /&gt;</span>
+    <span class="hljs-comment">&lt;!--
+    https://ant.apache.org/manual/Tasks/copy.html
+    https://ant.apache.org/manual/Tasks/propertyfile.html
+    https://ant.apache.org/manual/Tasks/replace.html
+    https://ant.apache.org/manual/Tasks/macrodef.html
+    https://stackoverflow.com/questions/1431315/build-numbers-major-minor-revision
+    --&gt;</span>
+    <span class="hljs-comment">&lt;!-- Impostare a true per incrementare
+         E&#x27; possibile anche fornire le property dalla commandline:
+
+            -Dincrement.major=true
+            -Dincrement.minor=true
+            -Dincrement.build=true
+
+        siccome le property non possono essere ridefinite, le impostazioni seguenti
+        non hanno effetto nel caso siano state passate nella commandline.
+
+        Es.
+            D:\\ant_replace_test&gt;ant
+            Buildfile: D:\ant_replace_test\build.xml
+                 [echo] increment.major: false
+                 [echo] increment.minor: false
+                 [echo] increment.build: true
+
+            D:\ant_replace_test&gt;ant -Dincrement.major=true
+            Buildfile: D:\ant_replace_test\build.xml
+                 [echo] increment.major: true
+                 [echo] increment.minor: false
+                 [echo] increment.build: true
+    --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;increment.major&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;increment.minor&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;increment.build&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>  /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">echoproperties</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;inc.build&quot;</span> <span class="hljs-attr">if:true</span>=<span class="hljs-string">&quot;increment.build&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Incrementa il numero della build nel file di stato&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">propertyfile</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;major&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;=&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;minor&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;=&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;build&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;+&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">propertyfile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;inc.minor&quot;</span> <span class="hljs-attr">if:true</span>=<span class="hljs-string">&quot;increment.minor&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Incrementa il numero della minor nel file di stato&quot;</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Incrementando la minor, la build viene azzerata --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">propertyfile</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;major&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;=&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;minor&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;+&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;build&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;0&quot;</span>   <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;=&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">propertyfile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;inc.major&quot;</span> <span class="hljs-attr">if:true</span>=<span class="hljs-string">&quot;increment.major&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Incrementa il numero della major nel file di stato&quot;</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Incrementando la major, minor e build vengono azzerate --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">propertyfile</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;major&quot;</span> <span class="hljs-attr">default</span>=<span class="hljs-string">&quot;1&quot;</span> <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;+&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;minor&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;0&quot;</span>   <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;=&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;build&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;0&quot;</span>   <span class="hljs-attr">operation</span>=<span class="hljs-string">&quot;=&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;int&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">propertyfile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;update.version.info&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Aggiorna la property last_run&quot;</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Da richiamare con antcall target=&quot;update.version.info&quot; inheritAll=&quot;false&quot;
+           per ignorare le property attualmente caricate.
+
+           Le property ANT sono immutabili e vengono lette da file/assegnate solamente la prima volta,
+           se si cerca di riutilizzare &quot;property file&quot; una seconda volta le property non verranno rilette.
+           Ma noi abbiamo bisogno di rileggere il file di property dopo averlo modificato con il task propertyfile,
+           per riuscirci richiamiamo questo task con &quot;antcall inheritAll=false&quot; in modo da creare un nuvoo ambiente
+           di esecuzione e poter rileggere in file di property precedentemente modificato.
+           --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">property</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">checksum</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;sha1.number&quot;</span> <span class="hljs-attr">algorithm</span>=<span class="hljs-string">&quot;SHA&quot;</span> <span class="hljs-attr">format</span>=<span class="hljs-string">&quot;CHECKSUM&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">echo</span>&gt;</span>Version: ${major}.${minor}.${build} - ${now}<span class="hljs-tag">&lt;/<span class="hljs-name">echo</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">echo</span>&gt;</span>SHA1: ${sha1.number}<span class="hljs-tag">&lt;/<span class="hljs-name">echo</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">propertyfile</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${property.file}&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">entry</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;last_run&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${major}.${minor}.${build} - ${now}&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">propertyfile</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-comment">&lt;!--
+	   Esempio di utilizzo:
+	   &lt;pandoc-convert input=&quot;README.md&quot; output=&quot;readme.html&quot; /&gt;
+
+	   @for %%f in (*.md) do
+	   pandoc  &amp;minus;-from=markdown-tex_math_dollars
+	           &amp;minus;-to=html5
+	           &amp;minus;-syntax-definition=syntax\dosbat.xml
+	           &amp;minus;-highlight-style=kate
+	           &amp;minus;-css=css/cdp.css
+	           &amp;minus;-css=css/bootstrap.css
+	           &amp;minus;-standalone
+	           &amp;minus;-table-of-contents
+	           &amp;minus;-number-sections
+	           -Mdate=%DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%
+	           -Mtitle=%%~nf
+	           &amp;minus;-output=%%~dpf..\war\%%~nf.html
+	           %%~nf.md metadata.yaml
+
+        https://ant.apache.org/manual/Tasks/exec.html
+        https://ant.apache.org/manual/Tasks/apply.html
+        https://ant.apache.org/manual/Types/mapper.html
+        https://ant.apache.org/manual/properties.html#built-in-props ==&gt; basedir
+        https://ant.apache.org/manual/Tasks/property.html
+	--&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">path</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;build.classpath&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${server.lib.dir}&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;**/*.jar&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">fileset</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${web.lib.dir}&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;**/*.jar&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">fileset</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">path</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;test_markdown2&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">tstamp</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">format</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;now&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;yyyy-MM-dd_HH:mm:ss&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">tstamp</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">apply</span> <span class="hljs-attr">executable</span>=<span class="hljs-string">&quot;pandoc.exe&quot;</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${basedir}\markdown&quot;</span>  <span class="hljs-attr">dest</span>=<span class="hljs-string">&quot;${basedir}\war&quot;</span> <span class="hljs-attr">force</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">env</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;PATH&quot;</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;${env.PATH};${env.USERPROFILE}/app/pandoc&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--from=markdown-tex_math_dollars&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--to=html5&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--syntax-definition=file:///${basedir}\markdown\syntax\dosbat.xml&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--highlight-style=kate&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--css=css/cdp.css&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--css=css/bootstrap.css&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--standalone&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--table-of-contents&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;--number-sections&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;-Mdate=${now}&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;-Mtitle=${targetfile}&quot;</span> /&gt;</span><span class="hljs-comment">&lt;!-- DEVO ANCORA TROVARE UN MODO PER RICAVARE IL TITLE DAL FILE --&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;-o&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">targetfile</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">srcfile</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;metadata.yaml&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${basedir}/markdown&quot;</span> <span class="hljs-attr">includes</span>=<span class="hljs-string">&quot;*.md&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">chainedmapper</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">flattenmapper</span> /&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">globmapper</span> <span class="hljs-attr">from</span>=<span class="hljs-string">&quot;*.md&quot;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;*.html&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">chainedmapper</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">apply</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;test_apply&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">apply</span> <span class="hljs-attr">executable</span>=<span class="hljs-string">&quot;cmd&quot;</span> <span class="hljs-attr">addsourcefile</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">dest</span>=<span class="hljs-string">&quot;${basedir}\war&quot;</span> <span class="hljs-attr">force</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">env</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;PATH&quot;</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;${env.PATH};${env.USERPROFILE}/app/pandoc&quot;</span> /&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/c&quot;</span>/&gt;</span>
+		    <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;${basedir}/markdown/test_npp_exec.cmd&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">targetfile</span>/&gt;</span>
+			<span class="hljs-comment">&lt;!--srcfile/--&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${basedir}/markdown&quot;</span> <span class="hljs-attr">includes</span>=<span class="hljs-string">&quot;*.md&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">chainedmapper</span>&gt;</span>
+            	<span class="hljs-tag">&lt;<span class="hljs-name">flattenmapper</span> /&gt;</span>
+            	<span class="hljs-comment">&lt;!--filtermapper&gt;
+            	  &lt;replacestring from=&quot;.md&quot; to=&quot;.html&quot;/&gt;
+            	&lt;/filtermapper--&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">globmapper</span> <span class="hljs-attr">from</span>=<span class="hljs-string">&quot;*.md&quot;</span> <span class="hljs-attr">to</span>=<span class="hljs-string">&quot;*.html&quot;</span>/&gt;</span>
+                <span class="hljs-comment">&lt;!--regexpmapper from=&quot;(.*)\.md&quot; to=&quot;${basedir}/war/\1.html&quot; casesensitive=&quot;no&quot;/--&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">chainedmapper</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">apply</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;chkOS&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Imposta le property dipendenti dal Sistema Operativo nel quale ANT è in esecuzione&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;==========================================&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;ANT Version: ${ant.version}               &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Base Dir: ${basedir}                      &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;OS Name: ${os.name}                       &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Java Home: ${env.JAVA_HOME}               &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Ant Java version: ${ant.java.version}     &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Java vendor: ${java.vendor}               &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Java Version: ${java.version}             &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;==========================================&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Java Compiler: ${build.compiler}          &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Java Compiler Target: ${target}           &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Java Compiler Source: ${source}           &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;==========================================&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;WAR: ${build.war}                          &quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;generate.markdown: ${generate.markdown}    &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;build.dir: ${build.dir}                    &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;build.webapp.dir: ${build.webapp.dir}      &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;build.classes.dir: ${build.classes.dir}    &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;src.dir: ${src.dir}                        &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;src.war.dir: ${src.war.dir}                &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;src.lib.dir: ${src.lib.dir}                &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;debug: ${debug}                            &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;debuglevel: ${debuglevel}                  &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;CLASSPATH: ${toString:build.classpath}     &quot;</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-comment">&lt;!--  Target responsible for cleaning up --&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;clean&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;chkOS&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Elimina la directory di destinazione del deploy&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">tstamp</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">format</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;now&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">tstamp</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;===========================================&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Creating new build: ${now}&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;                                        &quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">delete</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${build.dir}&quot;</span> <span class="hljs-attr">quiet</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-comment">&lt;!-- Target creates required directories. --&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;init&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;clean&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Elimina la directory di build e la ricrea&quot;</span>&gt;</span>
+		<span class="hljs-comment">&lt;!-- Creates a directory. Also non-existent parent directories are created, when necessary. Does nothing if the directory already exist. --&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">mkdir</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${build.classes.dir}&quot;</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-comment">&lt;!--
+        Target responsible for compiling all java sources except the client package.
+
+        Eclipse JDT
+        ==========
+
+        http://ant.apache.org/manual/Tasks/javac.html
+
+        Questa build utilizza il compilatore Eclipse JDT(property build.compiler)
+           Bisogna dunque eseguire questo script inserendo nel classpath del tool ANT:
+
+            - /lib/eclipse-jdt/ecj-3.13.102.jar
+
+            prelevato tramite Maven:
+
+            pom.xml:
+            &lt;dependency&gt;
+                &lt;groupId&gt;org.eclipse.jdt&lt;/groupId&gt;
+                &lt;artifactId&gt;ecj&lt;/artifactId&gt;
+                &lt;version&gt;3.13.102&lt;/version&gt;
+            &lt;/dependency&gt;
+            call mvn -f pom.xml dependency:resolve
+            call mvn -f pom.xml dependency:copy-dependencies
+
+            Se non si include questo jar si può vedere, eseguendo ANT con il parametro -v:
+            \build\build.xml:227: Class not found: org.eclipse.jdt.core.JDTCompilerAdapter
+
+        ANT utilizza la variabile &quot;build.compiler&quot; per selezionare il compilatore Java.
+        #   Si utilizza il compilatore Java di Eclipse, scaricato con Maven:
+        #   ecj-3.13.102.jar
+        #   che deve essere aggiunto al classpath di esecuzione di ANT in Eclipse
+        build.compiler=org.eclipse.jdt.core.JDTCompilerAdapter
+    --&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;markdown&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;init&quot;</span> <span class="hljs-attr">if</span>=<span class="hljs-string">&quot;${generate.markdown}&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Compilazione Markdown in HTML&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">exec</span> <span class="hljs-attr">executable</span>=<span class="hljs-string">&quot;cmd.exe&quot;</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${basedir}\markdown&quot;</span> &gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">env</span> <span class="hljs-attr">key</span>=<span class="hljs-string">&quot;PATH&quot;</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;${env.PATH};${env.USERPROFILE}/app/pandoc&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;/c&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">arg</span> <span class="hljs-attr">line</span>=<span class="hljs-string">&quot;${basedir}/markdown/make_pandoc_all.cmd&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">exec</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;copy_resources&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;markdown&quot;</span> &gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Copia della struttura della Web Application nella directory ${build.webapp.dir}&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">copy</span> <span class="hljs-attr">todir</span>=<span class="hljs-string">&quot;${build.webapp.dir}&quot;</span> <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${src.war.dir}&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;index.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_01_CambioPassword.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_01_ComandiUtili.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_01_Env.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_01_Notepad.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_01_Totcmd.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_12_MSYS2.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_14_PyCharm.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_14_Python.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_16_GWT.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_04_Gradle.html&quot;</span>/&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">exclude</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;README_05_Tomcat.html&quot;</span>/&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">fileset</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">copy</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Copia dei file di risorse&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">copy</span> <span class="hljs-attr">todir</span>=<span class="hljs-string">&quot;${build.classes.dir}&quot;</span> <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${src.dir}/resources&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">include</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;**/*&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">fileset</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">copy</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;increment_version&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;copy_resources, inc.build&quot;</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Generazione del numero di versione  e sostituzione nel web.xml --&gt;</span>
+        <span class="hljs-comment">&lt;!-- Replace eseguiti sul file web.xml copiato precedentemente all&#x27;interno della directory di build, le properties di versione sono state definite ed incrementate precedentemente all&#x27;interno del file di properties --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">replace</span> <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${build.webapp.dir}/WEB-INF/web.xml&quot;</span> <span class="hljs-attr">propertyFile</span>=<span class="hljs-string">&quot;${property.file}&quot;</span> <span class="hljs-attr">summary</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">replacefilter</span> <span class="hljs-attr">token</span>=<span class="hljs-string">&quot;@major@&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;major&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">replacefilter</span> <span class="hljs-attr">token</span>=<span class="hljs-string">&quot;@minor@&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;minor&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">replacefilter</span> <span class="hljs-attr">token</span>=<span class="hljs-string">&quot;@build@&quot;</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;build&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">replacefilter</span> <span class="hljs-attr">token</span>=<span class="hljs-string">&quot;@date@&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${now}&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">replace</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">antcall</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;update.version.info&quot;</span> <span class="hljs-attr">inheritAll</span>=<span class="hljs-string">&quot;false&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">param</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;now&quot;</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;${now}&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">antcall</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;compile&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;increment_version&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Compilazione Java&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Compilazione con Java ${target} debuglevel=${debuglevel}&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">javac</span> <span class="hljs-attr">srcdir</span>=<span class="hljs-string">&quot;${src.dir}/java&quot;</span> <span class="hljs-attr">destdir</span>=<span class="hljs-string">&quot;${build.classes.dir}&quot;</span> <span class="hljs-attr">source</span>=<span class="hljs-string">&quot;${source}&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;${target}&quot;</span> <span class="hljs-attr">classpathref</span>=<span class="hljs-string">&quot;build.classpath&quot;</span> <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">debug</span>=<span class="hljs-string">&quot;${debug}&quot;</span> <span class="hljs-attr">debuglevel</span>=<span class="hljs-string">&quot;${debuglevel}&quot;</span> <span class="hljs-attr">deprecation</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">encoding</span>=<span class="hljs-string">&quot;UTF-8&quot;</span> <span class="hljs-attr">includeantruntime</span>=<span class="hljs-string">&quot;false&quot;</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">target</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;deploy&quot;</span> <span class="hljs-attr">depends</span>=<span class="hljs-string">&quot;compile&quot;</span> <span class="hljs-attr">description</span>=<span class="hljs-string">&quot;Crea il war ${build.war} della cartella di build, effettua il deploy su host74&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;Creazione file WAR in ${build.war}&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">jar</span> <span class="hljs-attr">destfile</span>=<span class="hljs-string">&quot;${build.war}&quot;</span> <span class="hljs-attr">filesetmanifest</span>=<span class="hljs-string">&quot;mergewithoutmain&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">fileset</span> <span class="hljs-attr">dir</span>=<span class="hljs-string">&quot;${build.webapp.dir}&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">jar</span>&gt;</span>
+        <span class="hljs-comment">&lt;!-- Autodeploy su host74 --&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">copy</span>   <span class="hljs-attr">file</span>=<span class="hljs-string">&quot;${build.war}&quot;</span>
+                <span class="hljs-attr">todir</span>=<span class="hljs-string">&quot;${deploy.host74.dir}&quot;</span>
+                <span class="hljs-attr">verbose</span>=<span class="hljs-string">&quot;true&quot;</span>
+        /&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">tstamp</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">format</span> <span class="hljs-attr">property</span>=<span class="hljs-string">&quot;now2&quot;</span> <span class="hljs-attr">pattern</span>=<span class="hljs-string">&quot;yyyy-MM-dd HH:mm:ss&quot;</span> /&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">tstamp</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">echo</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;End Build: ${now2}&quot;</span> /&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">target</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">project</span>&gt;</span>
+</code></pre>
+<h3 id="lo-script-make_pandoc_all.cmd-compila-tutti-i-file-.md-producendo-i-file-.html-nella-cartella-.%2Fhtml." tabindex="-1">Lo script <code>make_pandoc_all.cmd</code> compila tutti i file .md producendo i file .html nella cartella ./html. <a class="header-anchor" href="#lo-script-make_pandoc_all.cmd-compila-tutti-i-file-.md-producendo-i-file-.html-nella-cartella-.%2Fhtml." aria-hidden="true">🔗</a></h3>
+<p>Per eseguire la build:</p>
+<pre><code class="language-bat">make_pandoc_all.<span class="hljs-built_in">cmd</span>
+<span class="hljs-comment">@rem https://pandoc.org/MANUAL.html#extension-pandoc_title_block</span>
+<span class="hljs-comment">@rem pandoc --from=markdown+smart --to=html5 --css=github.css --highlight-style=haddock --self-contained --output=01_java.html 01_java.md</span>
+<span class="hljs-comment">@rem for %%f in (*.md) do @echo %%~dpnf full path del file senza estensione</span>
+<span class="hljs-comment">@rem for %%f in (*.md) do @echo %%~nf  nome del file senza estensione</span>
+<span class="hljs-comment">@rem for %%f in (*.md) do @echo %%~dpf full path della directory che contiene il file</span>
+@<span class="hljs-keyword">for</span> <span class="hljs-variable">%%f</span> <span class="hljs-keyword">in</span> (*.<span class="hljs-built_in">md</span>) <span class="hljs-keyword">do</span> <span class="hljs-variable">%USERPROFILE%</span>\app\pandoc\pandoc --from=markdown-tex_math_dollars --to=html5 --syntax-definition=syntax\dosbat.xml --highlight-style=kate --css=css/cdp.css --css=css/bootstrap.css --standalone --table-of-contents --number-sections -Mdate=<span class="hljs-variable">%DATE:~6,4%</span>-<span class="hljs-variable">%DATE:~3,2%</span>-<span class="hljs-variable">%DATE:~0,2%</span> -Mtitle=<span class="hljs-variable">%%~</span>nf --output=<span class="hljs-variable">%%~</span>dpf..\src\main\webapp\<span class="hljs-variable">%%~</span>nf.html <span class="hljs-variable">%%~</span>nf.<span class="hljs-built_in">md</span> metadata.yaml
+@<span class="hljs-built_in">pause</span>
+</code></pre>
+<p>Note MSDOS:
+dove <span style="color:red">%%f</span> è la variabile definita dal ciclo for:</p>
+<pre><code class="language-bat"><span class="hljs-variable">%%~</span>nf  nome <span class="hljs-built_in">del</span> file senza estensione
+<span class="hljs-variable">%%~</span>dpf full <span class="hljs-built_in">path</span> della directory che contiene il file
+<span class="hljs-variable">%%~</span>dpnf full <span class="hljs-built_in">path</span> <span class="hljs-built_in">del</span> file senza estensione
+</code></pre>
+<h2 id="build-di-un-file-.md-da-notepad%2B%2B" tabindex="-1">Build di un file .md da Notepad++ <a class="header-anchor" href="#build-di-un-file-.md-da-notepad%2B%2B" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>Batch DOS per la compilazione di un unico file .md</li>
+</ol>
+<pre><code class="language-bat">make_pandoc.<span class="hljs-built_in">cmd</span>
+:: Richiamato da notepad++ <span class="hljs-built_in">con</span> NPPExec dal seguente script:
+::
+:: <span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+:: D:\Dati\Profili\$USER\workspaceBI\WebWorkspaceBI\prjdoc\markdown\make_pandoc.<span class="hljs-built_in">cmd</span> $(FULL_CURRENT_PATH)
+:: <span class="hljs-built_in">echo</span> creato il file $(CURRENT_DIRECTORY)\html\$(NAME_PART).html
+:: &quot;C:\Program Files (x86)\Mozilla Firefox\firefox.exe&quot; $(CURRENT_DIRECTORY)\html\$(NAME_PART).html
+::
+<span class="hljs-variable">%USERPROFILE%</span>\app\pandoc\pandoc --from=markdown-tex_math_dollars --to=html5 --syntax-definition=syntax\dosbat.xml --highlight-style=kate --css=css\cdp.css --css=css\bootstrap.css --standalone --table-of-contents --number-sections -Mdate=<span class="hljs-variable">%DATE:~6,4%</span>-<span class="hljs-variable">%DATE:~3,2%</span>-<span class="hljs-variable">%DATE:~0,2%</span> -Mtitle=%~n1 --output=<span class="hljs-variable">%~dp1..\src\main\webapp\%</span>~n1.html %<span class="hljs-number">1</span> metadata.yaml
+::@<span class="hljs-built_in">pause</span>
+</code></pre>
+<ol start="2">
+<li>Script Notepad++ NPPExec che richiama il Batch DOS</li>
+</ol>
+<p><code>Plugins/NppExec/Execute...</code></p>
+<pre><code class="language-bat"><span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+<span class="hljs-function">D:\<span class="hljs-title">Dati</span>\<span class="hljs-title">Profili</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">workspaceBI</span>\<span class="hljs-title">WebWorkspaceBI</span>\<span class="hljs-title">prjdoc</span>\<span class="hljs-title">markdown</span>\<span class="hljs-title">make_pandoc.cmd</span> $(<span class="hljs-title">FULL_CURRENT_PATH</span>)	
+<span class="hljs-title">echo</span> <span class="hljs-title">creato</span> <span class="hljs-title">il</span> <span class="hljs-title">file</span> $(<span class="hljs-title">CURRENT_DIRECTORY</span>)\..\<span class="hljs-title">src</span>\<span class="hljs-title">main</span>\<span class="hljs-title">webapp</span>\$(<span class="hljs-title">NAME_PART</span>).<span class="hljs-title">html</span>
+&quot;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">Mozilla</span> <span class="hljs-title">Firefox</span>\<span class="hljs-title">firefox.exe</span>&quot; $(<span class="hljs-title">CURRENT_DIRECTORY</span>)\..\<span class="hljs-title">src</span>\<span class="hljs-title">main</span>\<span class="hljs-title">webapp</span>\$(<span class="hljs-title">NAME_PART</span>).<span class="hljs-title">html</span>
+</span></code></pre>
+<pre><code class="language-bat"><span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+<span class="hljs-function">C:\<span class="hljs-title">Users</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">workspaceBI</span>\<span class="hljs-title">WebWorkspaceBI</span>\<span class="hljs-title">prjdoc</span>\<span class="hljs-title">markdown</span>\<span class="hljs-title">make_pandoc.cmd</span> $(<span class="hljs-title">FULL_CURRENT_PATH</span>)	
+<span class="hljs-title">echo</span> <span class="hljs-title">creato</span> <span class="hljs-title">il</span> <span class="hljs-title">file</span> $(<span class="hljs-title">CURRENT_DIRECTORY</span>)\..\<span class="hljs-title">src</span>\<span class="hljs-title">main</span>\<span class="hljs-title">webapp</span>\$(<span class="hljs-title">NAME_PART</span>).<span class="hljs-title">html</span>
+&quot;<span class="hljs-title">c</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">Mozilla</span> <span class="hljs-title">Firefox</span>\<span class="hljs-title">firefox.exe</span>&quot; $(<span class="hljs-title">CURRENT_DIRECTORY</span>)\..\<span class="hljs-title">src</span>\<span class="hljs-title">main</span>\<span class="hljs-title">webapp</span>\$(<span class="hljs-title">NAME_PART</span>).<span class="hljs-title">html</span>
+</span></code></pre>
+<h1 id="note-pandoc" tabindex="-1">Note Pandoc <a class="header-anchor" href="#note-pandoc" aria-hidden="true">🔗</a></h1>
+<h2 id="esempio-di-stile-custom-'codey'" tabindex="-1">Esempio di stile custom 'codey' <a class="header-anchor" href="#esempio-di-stile-custom-'codey'" aria-hidden="true">🔗</a></h2>
+<p>:::{.codey}
+--from=markdown-tex_math_dollars Disabilitare l'estensione tex_math_dollars per non far interpretare il contenuto tra due $\</p>
+<ul>
+<li>markdown: <a href="https://pandoc.org/MANUAL.html#pandocs-markdown%5C">https://pandoc.org/MANUAL.html#pandocs-markdown\</a></li>
+<li>gfm: <a href="https://help.github.com/articles/github-flavored-markdown%5C">https://help.github.com/articles/github-flavored-markdown\</a>
+-tex_math_dollars<br>
+--to=html5<br>
+--css=<span style="color:green;font-weight:bold">css\cdp.css</span><br>
+--highlight-style=kate<br>
+--standalone<br>
+--table-of-contents<br>
+--number-sections<br>
+--output=%%~dpfhtml\%%~nf.html %%~nf.md<br>
+:::</li>
+</ul>
+<h2 id="estensioni-utilizzate-di-default" tabindex="-1">Estensioni utilizzate di default <a class="header-anchor" href="#estensioni-utilizzate-di-default" aria-hidden="true">🔗</a></h2>
+<pre><code>header_attributes
+implicit_header_references
+backtick_code_blocks
+fenced divs
+fenced_code_blocks
+fenced_code_attributes
+bracketed_spans
+simple_tables
+multiline_tables
+</code></pre>
+<h2 id="inserimento-di-caratteri-tramite-codice" tabindex="-1">Inserimento di caratteri tramite codice <a class="header-anchor" href="#inserimento-di-caratteri-tramite-codice" aria-hidden="true">🔗</a></h2>
+<p>Caratteri utili per il copia/incolla: ` ~</p>
+<p>Nota: <span class="mrb">Ricordarsi di utilizzare solo il tastierino numerico e di avere BlocNum attivo</span></p>
+<h3 id="la-tilde" tabindex="-1">La tilde <a class="header-anchor" href="#la-tilde" aria-hidden="true">🔗</a></h3>
+<p>SO       Tasti          Carattere</p>
+<hr>
+<p>Windows  <code>ALT+126</code>    <span class="big_code">~</span>
+Linux    <code>AltGr+ì</code>    <span class="big_code">~</span></p>
+<h3 id="il-grave-accent%2C-backtick" tabindex="-1">Il grave accent, backtick <a class="header-anchor" href="#il-grave-accent%2C-backtick" aria-hidden="true">🔗</a></h3>
+<p>SO       Tasti         Carattere</p>
+<hr>
+<p>Windows  <code>ALT+96</code>     <span class="big_code">`</span>
+Linux    <code>AltGr+'</code>    <span class="big_code">`</span></p>
+<h2 id="aggiunta-di-nuovi-linguaggi-al-syntax-highlighter" tabindex="-1">Aggiunta di nuovi linguaggi al syntax highlighter <a class="header-anchor" href="#aggiunta-di-nuovi-linguaggi-al-syntax-highlighter" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://pandoc.org/MANUAL.html#syntax-highlighting">https://pandoc.org/MANUAL.html#syntax-highlighting</a></p>
+</li>
+<li>
+<p><a href="http://kate.kde.org/doc/hlhowto.php">http://kate.kde.org/doc/hlhowto.php</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jgm/pandoc/issues/3334">Allow dynamic loading of syntax definitions and styles for highlighting</a></p>
+<p>C:&gt;pandoc --list-highlight-languages</p>
+<p>--syntax-definition=FILE
+Instructs pandoc to load a KDE XML syntax definition file, which will be used for syntax highlighting
+of appropriately marked code blocks. This can be used to add support for new languages
+or to use altered syntax definitions for existing languages.</p>
+</li>
+<li>
+<p><a href="https://github.com/KDE/syntax-highlighting/tree/master/data/syntax">https://github.com/KDE/syntax-highlighting/tree/master/data/syntax</a></p>
+</li>
+<li>
+<p><a href="https://github.com/KDE/syntax-highlighting/blob/master/data/syntax/dosbat.xml">https://github.com/KDE/syntax-highlighting/blob/master/data/syntax/dosbat.xml</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jgm/highlighting-kate/blob/master/xml/language.dtd">https://github.com/jgm/highlighting-kate/blob/master/xml/language.dtd</a></p>
+</li>
+</ul>
+<p>language.dtd: è riferito dal dosbat.xml ed è necessario
+ho scoperto in:</p>
+<blockquote>
+<p><a href="https://hackage.haskell.org/package/skylighting-0.5.0.1/changelog">https://hackage.haskell.org/package/skylighting-0.5.0.1/changelog</a>&gt;
+che in realtà si può anche solamente rimuoverne il riferimento da dosbat.xml</p>
+</blockquote>
+<h2 id="esempi-di-tabelle" tabindex="-1">Esempi di tabelle <a class="header-anchor" href="#esempi-di-tabelle" aria-hidden="true">🔗</a></h2>
+<p>Right     Left     Center     Default</p>
+<hr>
+<pre><code> 12     12        12            12
+123     123       123          123
+  1     1          1             1
+</code></pre>
+<p>Table:  Demonstration of multiline table syntax.</p>
+<hr>
+<p>Centered   Default           Right Left
+Header    Aligned         Aligned Aligned</p>
+<hr>
+<p>First    row                12.0 Example of a row that
+spans multiple lines.</p>
+<h2 id="second-row-5.0-here's-another-one.-notethe-blank-line-betweenrows." tabindex="-1">Second    row                 5.0 Here's another one. Note
+the blank line between
+rows. <a class="header-anchor" href="#second-row-5.0-here's-another-one.-notethe-blank-line-betweenrows." aria-hidden="true">🔗</a></h2>
+<p>Table: Here's the caption. It, too, may span
+multiple lines.</p>
+<p>Attenzione: nelle multiline tables:</p>
+<ul>
+<li>le righe debbono essere separate da una riga vuota</li>
+<li>debbono iniziare e terminare con una linea intera di caratteri -</li>
+</ul>
+<h2 id="esempi-di-liste" tabindex="-1">Esempi di liste <a class="header-anchor" href="#esempi-di-liste" aria-hidden="true">🔗</a></h2>
+<h3 id="non-numerica" tabindex="-1">Non numerica <a class="header-anchor" href="#non-numerica" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>uno</li>
+<li>due</li>
+<li>tre</li>
+</ul>
+<h3 id="numerica" tabindex="-1">Numerica <a class="header-anchor" href="#numerica" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>uno</li>
+<li>due</li>
+<li>tre</li>
+</ol>
+</body></html>

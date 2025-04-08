@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.007" />
+        <title>YAMLSyntax</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="yamlsyntax" tabindex="-1">YAMLSyntax <a class="header-anchor" href="#yamlsyntax" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.007</p>
+<nav class="table-of-contents"><ol><li><a href="#yaml-basics">YAML Basics </a></li><li><a href="#gotchas">Gotchas </a></li><li><a href="#liste-di-dizionari---compact-nested-mapping">Liste di dizionari - Compact Nested Mapping </a></li><li><a href="#quotes">Quotes </a><ol><li><a href="#maniera-migliore-per-suddividere-una-linea%2C-quotare-con-%22-tutta-la-riga-e-usare-%5C-per-quotare-i-newline">Maniera migliore per suddividere una linea, quotare con &quot; tutta la riga e usare \ per quotare i newline </a></li></ol></li></ol></nav><h1 id="yaml-syntax" tabindex="-1">YAML Syntax <a class="header-anchor" href="#yaml-syntax" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/3/reference_appendices/YAMLSyntax.html">https://docs.ansible.com/ansible/3/reference_appendices/YAMLSyntax.html</a></li>
+<li><a href="https://yaml.org/">https://yaml.org/</a></li>
+<li><a href="https://yaml.org/spec/1.2/spec.html">https://yaml.org/spec/1.2/spec.html</a></li>
+<li><a href="https://github.com/yaml/www.yaml.org">https://github.com/yaml/www.yaml.org</a></li>
+<li><a href="https://github.com/adrienverge/yamllint">https://github.com/adrienverge/yamllint</a></li>
+<li><a href="https://yamllint.readthedocs.io/en/stable/">https://yamllint.readthedocs.io/en/stable/</a></li>
+</ul>
+<p>This page provides a basic overview of correct YAML syntax, which is how Ansible playbooks (our configuration management language) are expressed.</p>
+<p>We use YAML because it is easier for humans to read and write than other common data formats like XML or JSON. Further, there are libraries available in most programming languages for working with YAML.</p>
+<p>You may also wish to read working_with_playbooks at the same time to see how this is used in practice.</p>
+<h2 id="yaml-basics" tabindex="-1">YAML Basics <a class="header-anchor" href="#yaml-basics" aria-hidden="true">🔗</a></h2>
+<p>For Ansible, nearly every YAML file starts with a list. Each item in the list is a list of key/value pairs, commonly called a &quot;hash&quot; or a &quot;dictionary&quot;. So, we need to know how to write lists and dictionaries in YAML.</p>
+<p>There's another small quirk to YAML. All YAML files (regardless of their association with Ansible or not) can optionally begin with <code>---</code> and end with <code>...</code>. This is part of the YAML format and indicates the start and end of a document.</p>
+<p>All members of a list are lines beginning at the same indentation level starting with a <code>&quot;- &quot;</code> (a dash and a space):</p>
+<pre><code class="language-yaml">    <span class="hljs-string">---</span>
+    <span class="hljs-comment"># A list of tasty fruits</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">Apple</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">Orange</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">Strawberry</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">Mango</span>
+    <span class="hljs-string">...</span>
+</code></pre>
+<p>A dictionary is represented in a simple <code>key: value</code> form (the colon must be followed by a space):</p>
+<pre><code class="language-yaml">    <span class="hljs-comment"># An employee record</span>
+    <span class="hljs-attr">martin:</span>
+      <span class="hljs-attr">name:</span> <span class="hljs-string">Martin</span> <span class="hljs-string">D&#x27;vloper</span>
+      <span class="hljs-attr">job:</span> <span class="hljs-string">Developer</span>
+      <span class="hljs-attr">skill:</span> <span class="hljs-string">Elite</span>
+</code></pre>
+<p>More complicated data structures are possible, such as lists of dictionaries, dictionaries whose values are lists or a mix of both:</p>
+<pre><code class="language-yaml">    <span class="hljs-comment"># Employee records</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">martin:</span>
+        <span class="hljs-attr">name:</span> <span class="hljs-string">Martin</span> <span class="hljs-string">D&#x27;vloper</span>
+        <span class="hljs-attr">job:</span> <span class="hljs-string">Developer</span>
+        <span class="hljs-attr">skills:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">python</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">perl</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">pascal</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-attr">tabitha:</span>
+        <span class="hljs-attr">name:</span> <span class="hljs-string">Tabitha</span> <span class="hljs-string">Bitumen</span>
+        <span class="hljs-attr">job:</span> <span class="hljs-string">Developer</span>
+        <span class="hljs-attr">skills:</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">lisp</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">fortran</span>
+          <span class="hljs-bullet">-</span> <span class="hljs-string">erlang</span>
+</code></pre>
+<p>Dictionaries and lists can also be represented in an abbreviated form if you really want to:</p>
+<pre><code class="language-yaml">   <span class="hljs-string">---</span>
+    <span class="hljs-attr">martin:</span> {<span class="hljs-attr">name:</span> <span class="hljs-string">Martin</span> <span class="hljs-string">D&#x27;vloper</span>, <span class="hljs-attr">job:</span> <span class="hljs-string">Developer</span>, <span class="hljs-attr">skill:</span> <span class="hljs-string">Elite</span>}
+    <span class="hljs-attr">fruits:</span> [<span class="hljs-string">&#x27;Apple&#x27;</span>, <span class="hljs-string">&#x27;Orange&#x27;</span>, <span class="hljs-string">&#x27;Strawberry&#x27;</span>, <span class="hljs-string">&#x27;Mango&#x27;</span>]
+</code></pre>
+<p>These are called &quot;Flow collections&quot;.</p>
+<p>Ansible doesn't really use these too much, but you can also specify a boolean value (true/false) in several forms:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">create_key:</span> <span class="hljs-literal">yes</span>
+    <span class="hljs-attr">needs_agent:</span> <span class="hljs-literal">no</span>
+    <span class="hljs-attr">knows_oop:</span> <span class="hljs-literal">True</span>
+    <span class="hljs-attr">likes_emacs:</span> <span class="hljs-literal">TRUE</span>
+    <span class="hljs-attr">uses_cvs:</span> <span class="hljs-literal">false</span>
+</code></pre>
+<p>Use lowercase <code>true</code> or <code>false</code> for boolean values in dictionaries if you want to be compatible with default yamllint options.</p>
+<p><a href="https://yaml.org/spec/1.2/spec.html#id2760844">https://yaml.org/spec/1.2/spec.html#id2760844</a>
+<strong>The pipe symbol at the end of a line</strong> in YAML signifies that any indented text that follows should be interpreted as a multi-line scalar value.</p>
+<p>Values can span multiple lines using <code>|</code> or <code>&gt;</code>. Spanning multiple lines using a &quot;Literal Block Scalar&quot; <code>|</code> will include the newlines and any trailing spaces. Using a &quot;Folded Block Scalar&quot; <code>&gt;</code> will fold newlines to spaces; it's used to make what would otherwise be a very long line easier to read and edit. In either case the indentation will be ignored. Examples are:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">include_newlines:</span> <span class="hljs-string">|
+                exactly as you see
+                will appear these three
+                lines of poetry
+</span>
+    <span class="hljs-attr">fold_newlines:</span> <span class="hljs-string">&gt;
+                this is really a
+                single line of text
+                despite appearances
+</span></code></pre>
+<p>While in the above <code>&gt;</code> example all newlines are folded into spaces, there are two ways to enforce a newline to be kept:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">fold_some_newlines:</span> <span class="hljs-string">&gt;
+        a
+        b
+</span>
+        <span class="hljs-string">c</span>
+        <span class="hljs-string">d</span>
+          <span class="hljs-string">e</span>
+        <span class="hljs-string">f</span>
+    <span class="hljs-attr">same_as:</span> <span class="hljs-string">&quot;a b\nc d\n  e\nf\n&quot;</span>
+</code></pre>
+<p>Let's combine what we learned so far in an arbitrary YAML example. This really has nothing to do with Ansible, but will give you a feel for the format:</p>
+<pre><code class="language-yaml">    <span class="hljs-string">---</span>
+    <span class="hljs-comment"># An employee record</span>
+    <span class="hljs-attr">name:</span> <span class="hljs-string">Martin</span> <span class="hljs-string">D&#x27;vloper</span>
+    <span class="hljs-attr">job:</span> <span class="hljs-string">Developer</span>
+    <span class="hljs-attr">skill:</span> <span class="hljs-string">Elite</span>
+    <span class="hljs-attr">employed:</span> <span class="hljs-literal">True</span>
+    <span class="hljs-attr">foods:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">Apple</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">Orange</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">Strawberry</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">Mango</span>
+    <span class="hljs-attr">languages:</span>
+      <span class="hljs-attr">perl:</span> <span class="hljs-string">Elite</span>
+      <span class="hljs-attr">python:</span> <span class="hljs-string">Elite</span>
+      <span class="hljs-attr">pascal:</span> <span class="hljs-string">Lame</span>
+    <span class="hljs-attr">education:</span> <span class="hljs-string">|
+      4 GCSEs
+      3 A-Levels
+      BSc in the Internet of Things
+</span></code></pre>
+<p>That's all you really need to know about YAML to start writing Ansible playbooks.</p>
+<h2 id="gotchas" tabindex="-1">Gotchas <a class="header-anchor" href="#gotchas" aria-hidden="true">🔗</a></h2>
+<p>While you can put just about anything into an unquoted scalar, there are some exceptions.</p>
+<ul>
+<li>A colon followed by a space (or newline) <code>: </code> is an indicator for a mapping.</li>
+<li>A space followed by the pound sign <code> #</code> starts a comment.</li>
+</ul>
+<p>Because of this, the following is going to result in a YAML syntax error:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo: somebody said I should put a colon here:</span> <span class="hljs-string">so</span> <span class="hljs-string">I</span> <span class="hljs-string">did</span>
+
+    <span class="hljs-attr">windows_drive: c:</span>
+</code></pre>
+<p>...but this will work:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">windows_path:</span> <span class="hljs-string">c:\windows</span>
+</code></pre>
+<p>You will want to <strong>quote</strong> hash values using colons followed by a space or the end of the line:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo:</span> <span class="hljs-string">&#x27;somebody said I should put a colon here: so I did&#x27;</span>
+
+    <span class="hljs-attr">windows_drive:</span> <span class="hljs-string">&#x27;c:&#x27;</span>
+</code></pre>
+<p>...and then the colon will be preserved.</p>
+<p>Alternatively, you can use double quotes:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo:</span> <span class="hljs-string">&quot;somebody said I should put a colon here: so I did&quot;</span>
+
+    <span class="hljs-attr">windows_drive:</span> <span class="hljs-string">&quot;c:&quot;</span>
+</code></pre>
+<p>The difference between single quotes and double quotes is that in double quotes you can use escapes:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo:</span> <span class="hljs-string">&quot;a \t TAB and a \n NEWLINE&quot;</span>
+</code></pre>
+<p>The list of allowed escapes can be found in the YAML Specification under &quot;Escape Sequences&quot; (YAML 1.1) or &quot;Escape Characters&quot; (YAML 1.2).</p>
+<p>The following is invalid YAML:</p>
+<pre><code class="language-yaml"><span class="hljs-attr">foo:</span> <span class="hljs-string">&quot;an escaped \&#x27; single quote&quot;</span>
+</code></pre>
+<p>Further, Ansible uses <code>{{ var }}</code> for variables. If a value after a colon starts with a <code>{</code>, <strong>YAML will think it is a dictionary</strong>, so <strong>you must quote it</strong>, like so:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ variable }}</span>&quot;</span>
+</code></pre>
+<p><strong>If your value starts with a quote the entire value must be quoted</strong>, not just part of it. Here are some additional examples of how to properly quote things:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ variable }}</span>/additional/string/literal&quot;</span>
+    <span class="hljs-attr">foo2:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ variable }}</span>\\backslashes\\are\\also\\special\\characters&quot;</span>
+    <span class="hljs-attr">foo3:</span> <span class="hljs-string">&quot;even if it&#x27;s just a string literal it must all be quoted&quot;</span>
+</code></pre>
+<p>Not valid:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">foo:</span> <span class="hljs-string">&quot;E:\\path\\&quot;</span><span class="hljs-string">rest\\of\\path</span>
+</code></pre>
+<p>In addition to <code>'</code> and <code>&quot;</code> there are a number of characters that are special (or reserved) and cannot be used as the first character of an unquoted scalar: <code>[] {} &gt; | * &amp; ! % # ` @ ,</code>.</p>
+<p>You should also be aware of <code>? : -</code>. In YAML, they are allowed at the beginning of a string if a non-space character follows, but YAML processor implementations differ, so it's better to use quotes.</p>
+<p>In Flow Collections, the rules are a bit more strict:</p>
+<pre><code>a scalar in block mapping: this } is [ all , valid
+
+flow mapping: { key: &quot;you { should [ use , quotes here&quot; }
+</code></pre>
+<p><strong>Boolean conversion</strong> is helpful, but this can be a problem when you want a literal yes or other boolean values as a string. In these cases just use quotes:</p>
+<pre><code>non_boolean: &quot;yes&quot;
+other_string: &quot;False&quot;
+</code></pre>
+<p>YAML converts certain strings into floating-point values, such as the string 1.0. If you need to specify a version number (in a requirements.yml file, for example), you will need to quote the value if it looks like a floating-point value:</p>
+<pre><code>version: &quot;1.0&quot;
+</code></pre>
+<h2 id="liste-di-dizionari---compact-nested-mapping" tabindex="-1">Liste di dizionari - Compact Nested Mapping <a class="header-anchor" href="#liste-di-dizionari---compact-nested-mapping" aria-hidden="true">🔗</a></h2>
+<p>Da <a href="https://yaml.org/spec/1.2/spec.html">https://yaml.org/spec/1.2/spec.html</a> :</p>
+<p><a href="https://yaml.org/spec/1.2/spec.html#id2759963">https://yaml.org/spec/1.2/spec.html#id2759963</a></p>
+<ul>
+<li>YAML’s <strong>block collections</strong> use <strong>indentation</strong> for scope and <em>begin each entry on its own line</em>.</li>
+<li>Block <strong>sequences</strong> indicate each entry with a dash and space ( <strong><code>- </code></strong>).</li>
+<li><strong>Mappings</strong> use a colon and space (<strong><code>: </code></strong>) to mark each key: value pair.</li>
+<li><strong>Comments</strong> begin with an octothorpe (also called a “hash”, “sharp”, “pound”, or “number sign” - <strong><code>#</code></strong>).</li>
+</ul>
+<p>Example 2.4.  Sequence of Mappings
+(players’ statistics)</p>
+<p>come si vede in rispetto alla sintassi di base il primo campo del dizionario è dopo un newline</p>
+<pre><code class="language-yml"><span class="hljs-bullet">-</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">Mark</span> <span class="hljs-string">McGwire</span>
+  <span class="hljs-attr">hr:</span>   <span class="hljs-number">65</span>
+  <span class="hljs-attr">avg:</span>  <span class="hljs-number">0.278</span>
+<span class="hljs-bullet">-</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">Sammy</span> <span class="hljs-string">Sosa</span>
+  <span class="hljs-attr">hr:</span>   <span class="hljs-number">63</span>
+  <span class="hljs-attr">avg:</span>  <span class="hljs-number">0.288</span>
+</code></pre>
+<p><a href="https://yaml.org/spec/1.2/spec.html#id2760395">https://yaml.org/spec/1.2/spec.html#id2760395</a></p>
+<p>Within a block collection, key: value <strong>pairs can start immediately following</strong> the dash, colon, or question mark.</p>
+<p>Example 2.12. Compact Nested Mapping</p>
+<p>come si vede è possibile evitare di andare a capo inserendo nella stessa riga dell'elemento lista la prima coppia del dizionario</p>
+<pre><code class="language-yml"><span class="hljs-meta">---</span>
+<span class="hljs-comment"># Products purchased</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">item    :</span> <span class="hljs-string">Super</span> <span class="hljs-string">Hoop</span>
+  <span class="hljs-attr">quantity:</span> <span class="hljs-number">1</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">item    :</span> <span class="hljs-string">Basketball</span>
+  <span class="hljs-attr">quantity:</span> <span class="hljs-number">4</span>
+<span class="hljs-bullet">-</span> <span class="hljs-attr">item    :</span> <span class="hljs-string">Big</span> <span class="hljs-string">Shoes</span>
+  <span class="hljs-attr">quantity:</span> <span class="hljs-number">1</span>
+</code></pre>
+<h2 id="quotes" tabindex="-1">Quotes <a class="header-anchor" href="#quotes" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://blogs.perl.org/users/tinita/2018/03/strings-in-yaml---to-quote-or-not-to-quote.html">https://blogs.perl.org/users/tinita/2018/03/strings-in-yaml---to-quote-or-not-to-quote.html</a></li>
+<li><a href="https://yaml-multiline.info/">https://yaml-multiline.info/</a></li>
+</ul>
+<pre><code class="language-yaml">    <span class="hljs-comment"># Single Quoted (gli \n sono dimostrativi non fanno parte del testo indicano solo che c&#x27;e&#x27; un newline)</span>
+    <span class="hljs-string">&#x27;Several lines of text,\n
+    ··containing &#x27;</span><span class="hljs-string">&#x27;single quotes&#x27;</span><span class="hljs-string">&#x27;. Escapes (like \n) don&#x27;</span><span class="hljs-string">&#x27;t do anything.\n
+    ··\n
+    ··Newlines can be added by leaving a blank line.\n
+    ····Leading whitespace on lines is ignored.&#x27;</span><span class="hljs-string">\n</span>
+
+    <span class="hljs-comment"># Double Quoted - questo è utilissimo per spezzare una linea lunga, si quotano i newline con il backslash</span>
+    <span class="hljs-string">&quot;Several lines of text,
+    ··containing \&quot;double quotes\&quot;. Escapes (like \\n) work.\nIn addition,
+    ··newlines can be esc\
+    ··aped to prevent them from being converted to a space.
+    ··
+    ··Newlines can also be added by leaving a blank line.
+    ····Leading whitespace on lines is ignored.&quot;</span>
+
+
+    <span class="hljs-attr">a string:</span> <span class="hljs-string">&#x27;with one single &#x27;</span><span class="hljs-string">&#x27; quote&#x27;</span>
+    <span class="hljs-string">&quot;invalid \&#x27; escape&quot;</span>
+
+
+    <span class="hljs-attr">ansible.builtin.command:</span> <span class="hljs-string">&quot;gsettings set org.gnome.desktop.wm.keybindings close \&quot;[&#x27;&lt;Alt&gt;F4&#x27;]\&quot;&quot;</span>
+
+    <span class="hljs-attr">plain scalars:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">a</span> <span class="hljs-string">string</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">a</span> <span class="hljs-string">string</span> <span class="hljs-string">with</span> <span class="hljs-string">a</span> <span class="hljs-string">\</span> <span class="hljs-string">backslash</span> <span class="hljs-string">that</span> <span class="hljs-string">doesn&#x27;t</span> <span class="hljs-string">need</span> <span class="hljs-string">to</span> <span class="hljs-string">be</span> <span class="hljs-string">escaped</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">can</span> <span class="hljs-string">also</span> <span class="hljs-string">use</span> <span class="hljs-string">&quot; quotes &#x27; and $ a % lot /&amp;?+ of other {} [] stuff
+
+    single quoted:
+    - &#x27;&amp; starts with a special character, needs quotes&#x27;
+    - &#x27;this \ backslash also does not need to be escaped&#x27;
+    - &#x27;just like the &quot;</span> <span class="hljs-string">double</span> <span class="hljs-string">quote&#x27;</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">&#x27;to express one single quote, use &#x27;</span><span class="hljs-string">&#x27; two of them&#x27;</span>
+
+    <span class="hljs-attr">double quoted:</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;here we can use predefined escape sequences like \t \n \b&quot;</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;or generic escape sequences \x0b \u0041 \U00000041&quot;</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;the double quote \&quot; needs to be escaped&quot;</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;just like the \\ backslash&quot;</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;the single quote &#x27; and other characters must not be escaped&quot;</span>
+
+    <span class="hljs-attr">literal block scalar:</span> <span class="hljs-string">|
+    a multiline text
+    line 2
+    line 3
+</span>
+    <span class="hljs-attr">folded block scalar:</span> <span class="hljs-string">&gt;
+    a long line split into
+    several short
+    lines for readability
+</span>
+</code></pre>
+<h3 id="maniera-migliore-per-suddividere-una-linea%2C-quotare-con-%22-tutta-la-riga-e-usare-%5C-per-quotare-i-newline" tabindex="-1">Maniera migliore per suddividere una linea, quotare con &quot; tutta la riga e usare \ per quotare i newline <a class="header-anchor" href="#maniera-migliore-per-suddividere-una-linea%2C-quotare-con-%22-tutta-la-riga-e-usare-%5C-per-quotare-i-newline" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/71649227/line-too-long-ansible-lint">https://stackoverflow.com/questions/71649227/line-too-long-ansible-lint</a></li>
+</ul>
+<p>The best solution here is to use a <strong>double quoted flow scalar</strong> where you can <strong>escape new lines</strong> so that they <strong>are not converted to white spaces</strong>, e.g.:</p>
+<pre><code class="language-yaml">    <span class="hljs-attr">url:</span> <span class="hljs-string">&quot;https://<span class="hljs-template-variable">{{ vertex_region }}</span>-aiplatform.googleapis.com/v1/projects/\
+         <span class="hljs-template-variable">{{ project }}</span>/locations/<span class="hljs-template-variable">{{ vertex_region }}</span>/datasets/<span class="hljs-template-variable">{{ dataset_id }}</span>/dataItems&quot;</span>
+</code></pre>
+<ul>
+<li><a href="https://stackoverflow.com/questions/3790454/how-do-i-break-a-string-in-yaml-over-multiple-lines">https://stackoverflow.com/questions/3790454/how-do-i-break-a-string-in-yaml-over-multiple-lines</a></li>
+<li><a href="https://yaml-multiline.info/">https://yaml-multiline.info/</a></li>
+</ul>
+</body></html>

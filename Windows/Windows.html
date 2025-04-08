@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.151" />
+        <title>Windows</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../inc/js/hljs/styles/default.css" />
+        <script src="../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="windows" tabindex="-1">Windows <a class="header-anchor" href="#windows" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.151</p>
+<nav class="table-of-contents"><ol><li><a href="#controllare-un-disco-anche-montato-con-bitlocker">Controllare un disco anche montato con bitlocker </a></li><li><a href="#robocopy">Robocopy </a><ol><li><a href="#sincronizzare-due-directory-con-esclusioni-di-directories-e-files">Sincronizzare due directory con esclusioni di directories e files </a></li><li><a href="#differenza-tra-directory">Differenza tra directory </a></li><li><a href="#copia-struttura-directory">Copia struttura directory </a></li><li><a href="#copia-selettiva">Copia selettiva </a></li><li><a href="#eliminare-directory-contenenti-nomi-troppo-lunghi">Eliminare directory contenenti nomi troppo lunghi </a></li><li><a href="#appiattire-una-directory">Appiattire una directory </a></li></ol></li><li><a href="#file-modificati-oggi">File modificati oggi </a></li><li><a href="#lente-d'ingrandimento(zoom)">Lente d&#39;ingrandimento(Zoom) </a></li><li><a href="#aprire-cmd-da-amministratore-da-commandline">Aprire cmd da amministratore da commandline </a></li><li><a href="#disinstallare-una-applicazione">Disinstallare una applicazione </a></li><li><a href="#scadenza-attivazione-di-windows">Scadenza attivazione di windows </a></li><li><a href="#info-attivazione">Info Attivazione </a></li><li><a href="#verifica-se-il-pc-supporta-il-wifi-a-5ghz">Verifica se il pc supporta il WiFi a 5GHz </a></li><li><a href="#strumenti-di-cattura---screenshot---snip-%26-sketch">Strumenti di cattura - Screenshot - Snip &amp; Sketch </a><ol><li><a href="#crea-un-collegamento-sul-desktop-per-snip-snip-%26-sketch">Crea un collegamento sul desktop per snip Snip &amp; Sketch </a></li><li><a href="#apri-snip-%26-sketch-snip-dalla-casella-di-comando-esegui">Apri Snip &amp; Sketch snip dalla casella di comando Esegui </a></li></ol></li><li><a href="#strumenti-di-cattura---screenshot---snippingtool">Strumenti di cattura - Screenshot - SnippingTool </a></li><li><a href="#vedere-le-variabili-di-ambiente">Vedere le variabili di ambiente </a></li><li><a href="#impostare-le-variabili-di-ambiente">Impostare le variabili di ambiente </a></li><li><a href="#vlc-3-hidpi-in-windows-10">VLC 3 HiDPI in Windows 10 </a></li><li><a href="#7-zip">7-Zip </a></li><li><a href="#percorso-link-taskbar">Percorso link taskbar </a></li><li><a href="#inserimento-di-caratteri-tramite-codice">Inserimento di caratteri tramite codice </a><ol><li><a href="#inserimento-in-windows-di-caratteri-tramite-codice-unicode-esadecimale">Inserimento in windows di caratteri tramite codice unicode esadecimale </a></li><li><a href="#la-tilde">La tilde </a></li><li><a href="#il-grave-accent%2C-backtick">Il grave accent, backtick </a></li><li><a href="#caratteri-speciali-su-tastiera-del-portatile-senza-numpad">Caratteri speciali su tastiera del portatile senza numpad </a></li></ol></li><li><a href="#cambiare-il-font-di-gestione-risorse">Cambiare il Font di Gestione Risorse </a></li><li><a href="#associare-icona-ad-un-drive-rimovibile">Associare icona ad un drive rimovibile </a></li><li><a href="#riaggiungere-l'opzione-%22apri-finestra-di-comando-da-qui%22">Riaggiungere l&#39;opzione &quot;Apri finestra di comando da qui&quot; </a></li><li><a href="#shutdown">Shutdown </a></li><li><a href="#logout">logout </a></li><li><a href="#cmd.exe-come-amministratore">cmd.exe come amministratore </a></li><li><a href="#ricerca-active-directory">Ricerca Active Directory </a></li><li><a href="#pulizia-sistema">Pulizia Sistema </a></li><li><a href="#attivare-il-servizio-webclient">Attivare il servizio Webclient </a></li><li><a href="#eliminare-directory-con-nomi-troppo-lunghi">Eliminare directory con nomi troppo lunghi </a></li><li><a href="#eliminare-file-contenenti-caratteri-invalidi">Eliminare file contenenti caratteri invalidi </a><ol><li><a href="#eliminare-dir-contenenti-nomi-troppo-lunghi">Eliminare dir contenenti nomi troppo lunghi </a></li></ol></li><li><a href="#opzioni-di-indicizzazione">Opzioni di indicizzazione </a></li><li><a href="#conversione-di-un-unita-da-fat32-ad-ntfs">Conversione di un unita da FAT32 ad NTFS </a></li><li><a href="#microsoft-file-checksum-integrity-verifier">Microsoft File Checksum Integrity Verifier </a></li><li><a href="#cambiare-font-di-gestione-risorse">Cambiare Font di Gestione Risorse </a></li><li><a href="#odbc-administrator-su-windows-64bit">ODBC Administrator su Windows 64bit </a></li><li><a href="#associazione-di-tipi-di-file-con-passaggio-di-parametri">Associazione di tipi di file con passaggio di parametri </a><ol><li><a href="#gestione-stampante">Gestione Stampante </a></li></ol></li><li><a href="#architettura">Architettura </a></li><li><a href="#lettera-non-assegnata-all'hard-disk-esterno-dopo-la-connessione-usb">Lettera non assegnata all&#39;hard disk esterno dopo la connessione USB </a></li><li><a href="#decomprimere-file-.msi">Decomprimere file .msi </a></li><li><a href="#eseguire-programmi-come-amministratore-locale">Eseguire programmi come amministratore locale </a></li><li><a href="#info">Info </a><ol><li><a href="#informazioni-sul-sistema">Informazioni sul sistema </a></li><li><a href="#da-quanto-tempo-e'-acceso-il-computer">Da quanto tempo e&#39; acceso il computer </a></li></ol></li><li><a href="#rimuovere-un-programma-dalla-lista-delle-applicazioni">Rimuovere un programma dalla lista delle applicazioni </a></li><li><a href="#windows-10-spotlight">Windows 10 Spotlight </a></li><li><a href="#vedere-i-gruppi-active-directory-di-un-utente">vedere i gruppi Active Directory di un utente </a></li><li><a href="#scaricare-un-sito-con-wget">Scaricare un sito con wget </a><ol><li><a href="#download-entire-website">Download Entire Website </a></li><li><a href="#some-sites-check-on-user-agent.">Some sites check on user agent. </a></li></ol></li><li><a href="#cercare-la-directory-node_modules">Cercare la directory node_modules </a></li><li><a href="#cancellare-tutte-le-sottodirectory-con-un-certo-nome">Cancellare tutte le sottodirectory con un certo nome </a></li><li><a href="#disinstallare-una-applicazione-1">Disinstallare una applicazione </a></li><li><a href="#net">net </a></li><li><a href="#directory-junctions">Directory Junctions </a><ol><li><a href="#creation-of-symbolic-links-requires-the-secreatesymboliclinkprivilege-(%E2%80%9Ccreate-symbolic-links%E2%80%9D)">Creation of symbolic links requires the SeCreateSymbolicLinkPrivilege (“Create symbolic links”) </a></li><li><a href="#comprimere-una-directory-saltando-le-joint-directory">Comprimere una directory saltando le joint directory </a></li><li><a href="#trovare-tutte-le-junctions">Trovare tutte le junctions </a></li></ol></li></ol></nav><h1 id="comandi-windows" tabindex="-1">Comandi Windows <a class="header-anchor" href="#comandi-windows" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bat"><span class="hljs-variable">%COMPUTERNAME%</span>
+    xxxxxxxxx
+<span class="hljs-variable">%USERNAME%</span>
+    xxxxxxxxx
+<span class="hljs-variable">%USERPROFILE%</span>
+<span class="hljs-function">    C:\<span class="hljs-title">Users</span>\%<span class="hljs-title">USERNAME</span>%
+%<span class="hljs-title">APPDATA</span>%
+    %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">AppData</span>\<span class="hljs-title">Roaming</span>
+%<span class="hljs-title">LOCALAPPDATA</span>%
+    %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">AppData</span>\<span class="hljs-title">Local</span>
+%<span class="hljs-title">PROGRAMFILES</span>%
+    <span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>
+%<span class="hljs-title">ProgramFiles</span>(<span class="hljs-title">x86</span>)%
+    <span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)
+%<span class="hljs-title">WINDIR</span>%
+    <span class="hljs-title">C</span>:\<span class="hljs-title">WINDOWS</span>
+%<span class="hljs-title">TEMP</span>%
+    %<span class="hljs-title">LOCALAPPDATA</span>%\<span class="hljs-title">Temp</span>\1
+%<span class="hljs-title">TMP</span>%
+    %<span class="hljs-title">LOCALAPPDATA</span>%\<span class="hljs-title">Temp</span>\1
+%<span class="hljs-title">HTTPS_PROXY</span>%
+    <span class="hljs-title">http</span>://%<span class="hljs-title">USERNAME</span>%:<span class="hljs-title">xxxxxx</span>@<span class="hljs-title">myserver.it</span>:8080
+%<span class="hljs-title">HTTP_PROXY</span>%
+    <span class="hljs-title">http</span>://%<span class="hljs-title">USERNAME</span>%:<span class="hljs-title">xxxxxxx</span>@<span class="hljs-title">myserver.it</span>:8080
+
+%<span class="hljs-title">WINDIR</span>%\<span class="hljs-title">system32</span>
+</span></code></pre>
+<h2 id="controllare-un-disco-anche-montato-con-bitlocker" tabindex="-1">Controllare un disco anche montato con bitlocker <a class="header-anchor" href="#controllare-un-disco-anche-montato-con-bitlocker" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-comment">rem msdos string substitution:</span>
+<span class="hljs-comment">rem %0 è il nome del presente file</span>
+<span class="hljs-comment">rem ~ string substitution</span>
+<span class="hljs-comment">rem d: drive letter</span>
+<span class="hljs-comment">rem p full file path</span>
+<span class="hljs-built_in">cd</span> /d %~dp0
+<span class="hljs-comment">REM for %%I in (..) do set ParentDir=%%~dfI</span>
+<span class="hljs-comment">REM echo &quot;Parent Directory:&quot; %ParentDir%</span>
+<span class="hljs-comment">rem Ripara F: senza essere amministratore</span>
+<span class="hljs-built_in">chkdsk</span> f: /r
+</code></pre>
+<h2 id="robocopy" tabindex="-1">Robocopy <a class="header-anchor" href="#robocopy" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.microsoft.com/it-it/windows-server/administration/windows-commands/robocopy">https://docs.microsoft.com/it-it/windows-server/administration/windows-commands/robocopy</a></li>
+<li><a href="https://ss64.com/nt/robocopy-exit.html">https://ss64.com/nt/robocopy-exit.html</a></li>
+<li><a href="https://adamtheautomator.com/robocopy/">https://adamtheautomator.com/robocopy/</a></li>
+</ul>
+<h3 id="sincronizzare-due-directory-con-esclusioni-di-directories-e-files" tabindex="-1">Sincronizzare due directory con esclusioni di directories e files <a class="header-anchor" href="#sincronizzare-due-directory-con-esclusioni-di-directories-e-files" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">robocopy</span> &lt;<span class="hljs-title">host</span>&gt; <span class="hljs-title">bak</span> /<span class="hljs-title">MIR</span> /<span class="hljs-title">XJD</span> /<span class="hljs-title">R</span>:3 /<span class="hljs-title">MT</span>:4 /<span class="hljs-title">NS</span> /<span class="hljs-title">NC</span> /<span class="hljs-title">NFL</span> /<span class="hljs-title">NDL</span> /<span class="hljs-title">NP</span> /<span class="hljs-title">NJH</span> /<span class="hljs-title">NJS</span> /<span class="hljs-title">XD</span> &quot;<span class="hljs-title">node_modules</span>&quot; /<span class="hljs-title">XD</span> &quot;.<span class="hljs-title">git</span>&quot; /<span class="hljs-title">XD</span> &quot;<span class="hljs-title">build</span>&quot; /<span class="hljs-title">XF</span> &quot;*.<span class="hljs-title">pyc</span>&quot;
+</span></code></pre>
+<h3 id="differenza-tra-directory" tabindex="-1">Differenza tra directory <a class="header-anchor" href="#differenza-tra-directory" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">robocopy</span> <span class="hljs-title">dir_a</span> <span class="hljs-title">dir_b</span> /<span class="hljs-title">L</span> /<span class="hljs-title">E</span> /<span class="hljs-title">FP</span> /<span class="hljs-title">NJH</span> /<span class="hljs-title">NJS</span> /<span class="hljs-title">NS</span> /<span class="hljs-title">NC</span> /<span class="hljs-title">NDL</span>
+</span></code></pre>
+<h3 id="copia-struttura-directory" tabindex="-1">Copia struttura directory <a class="header-anchor" href="#copia-struttura-directory" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat">robocopy G:\cdp D:\Dati\Profili\username\Documents\app\Backup_HD\ExternalHardDisk\cdp /e /xf * /xd &quot;G:\cdp\C&quot; &quot;G:\cdp\D\Dati\Profili\username&quot; &quot;G:\cdp\D\workspaces&quot; &quot;DirSync&quot;
+<span class="hljs-comment">rem /e copia anche le directory vuote</span>
+<span class="hljs-comment">rem /xf * esclude i files</span>
+<span class="hljs-built_in">pause</span>
+</code></pre>
+<h3 id="copia-selettiva" tabindex="-1">Copia selettiva <a class="header-anchor" href="#copia-selettiva" aria-hidden="true">🔗</a></h3>
+<p>Copiare tutti i file <code>pom.xml</code> a qualunque livello di annidamento riproducendo la struttura delle directory</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">robocopy</span> <span class="hljs-title">ProjectDir1</span> <span class="hljs-title">ProjectDir2</span> /<span class="hljs-title">MIR</span> /<span class="hljs-title">S</span> <span class="hljs-title">pom.xml</span>
+
+/<span class="hljs-title">S</span> :: <span class="hljs-title">copia</span> <span class="hljs-title">solamente</span> <span class="hljs-title">le</span> <span class="hljs-title">sottodirectory</span> <span class="hljs-title">non</span> <span class="hljs-title">vuote</span>.
+/<span class="hljs-title">MIR</span> :: <span class="hljs-title">esegue</span> <span class="hljs-title">il</span> <span class="hljs-title">mirroring</span> <span class="hljs-title">di</span> <span class="hljs-title">un</span> <span class="hljs-title">albero</span> <span class="hljs-title">di</span> <span class="hljs-title">directory</span> (<span class="hljs-title">equivale</span> <span class="hljs-title">a</span> /<span class="hljs-title">E</span> <span class="hljs-title">pi</span>ù /<span class="hljs-title">PURGE</span>).
+
+/<span class="hljs-title">E</span> :: <span class="hljs-title">copia</span> <span class="hljs-title">le</span> <span class="hljs-title">sottodirectory</span>, <span class="hljs-title">incluse</span> <span class="hljs-title">quelle</span> <span class="hljs-title">vuote</span>.
+/<span class="hljs-title">PURGE</span> :: <span class="hljs-title">elimina</span> <span class="hljs-title">i</span> <span class="hljs-title">file</span> <span class="hljs-title">e</span> <span class="hljs-title">le</span> <span class="hljs-title">directory</span> <span class="hljs-title">di</span> <span class="hljs-title">destinazione</span> <span class="hljs-title">non</span> <span class="hljs-title">pi</span>ù <span class="hljs-title">esistenti</span> <span class="hljs-title">nell</span>&#x27;<span class="hljs-title">origine</span>.
+</span></code></pre>
+<h3 id="eliminare-directory-contenenti-nomi-troppo-lunghi" tabindex="-1">Eliminare directory contenenti nomi troppo lunghi <a class="header-anchor" href="#eliminare-directory-contenenti-nomi-troppo-lunghi" aria-hidden="true">🔗</a></h3>
+<p>Si sfrutta il fatto che robocopy riesce ad eliminare i files con nomi troppo lunghi,
+creando una directory vuota e chiedendo a robocopy di replicarla nella directory che si desidera cancellare.</p>
+<p>Supponiamo che RemoteSystemsTempFiles contenga files con nomi troppo lunghi da poter essere cancellati da windows:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">mkdir</span> empty
+robocopy empty RemoteSystemsTempFiles /mir
+<span class="hljs-built_in">rmdir</span> RemoteSystemsTempFiles
+<span class="hljs-built_in">rmdir</span> empty
+</code></pre>
+<h3 id="appiattire-una-directory" tabindex="-1">Appiattire una directory <a class="header-anchor" href="#appiattire-una-directory" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+ <span class="hljs-built_in">set</span> source=&quot;D:\tmp1&quot;
+ <span class="hljs-built_in">set</span> destination=&quot;D:\tmp2&quot;
+ <span class="hljs-keyword">for</span> <span class="hljs-variable">%%F</span> <span class="hljs-keyword">in</span> (<span class="hljs-variable">%destination%</span>) <span class="hljs-keyword">do</span> <span class="hljs-built_in">set</span> destination=&quot;<span class="hljs-variable">%%~</span>fF&quot;
+ <span class="hljs-keyword">for</span> /r <span class="hljs-variable">%source%</span> <span class="hljs-variable">%%F</span> <span class="hljs-keyword">in</span> (.) <span class="hljs-keyword">do</span> <span class="hljs-keyword">if</span> &quot;<span class="hljs-variable">%%~</span>fF&quot; <span class="hljs-keyword">neq</span> <span class="hljs-variable">%destination%</span> robocopy &quot;<span class="hljs-variable">%%F</span>&quot; <span class="hljs-variable">%destination%</span> /R:<span class="hljs-number">0</span>
+</code></pre>
+<h2 id="file-modificati-oggi" tabindex="-1">File modificati oggi <a class="header-anchor" href="#file-modificati-oggi" aria-hidden="true">🔗</a></h2>
+<p>The <code>/d +0</code> will pick the date of today (<code>today - 0</code>) and select the files with date greater or equal (<code>+</code>) to the picked date, so, the files selected are those changed today.</p>
+<pre><code class="language-bat">:: lastmodified.bat
+<span class="hljs-built_in">cd</span> /d %~dp0\..
+forfiles /s /m *.<span class="hljs-built_in">md</span> /d <span class="hljs-number">0</span> /c &quot;<span class="hljs-built_in">cmd</span> /c <span class="hljs-built_in">echo</span> @relpath&quot;
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">forfiles</span> /<span class="hljs-title">s</span> /<span class="hljs-title">m</span> *.<span class="hljs-title">md</span> /<span class="hljs-title">d</span> 0 /<span class="hljs-title">c</span> &quot;<span class="hljs-title">cmd</span> /<span class="hljs-title">c</span> <span class="hljs-title">echo</span> @<span class="hljs-title">relpath</span>&quot;
+</span></code></pre>
+<h2 id="lente-d'ingrandimento(zoom)" tabindex="-1">Lente d'ingrandimento(Zoom) <a class="header-anchor" href="#lente-d'ingrandimento(zoom)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">    <span class="hljs-variable">%windir%</span>\system32\magnify.exe
+</code></pre>
+<p>To quickly turn on Magnifier, press the <code>Windows logo key</code> + Plus sign <code>+</code>.<br>
+To turn off Magnifier, press the <code>Windows logo key</code> + <code>Esc</code>.</p>
+<h2 id="aprire-cmd-da-amministratore-da-commandline" tabindex="-1">Aprire cmd da amministratore da commandline <a class="header-anchor" href="#aprire-cmd-da-amministratore-da-commandline" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">powershell -Command &quot;<span class="hljs-built_in">Start</span>-Process <span class="hljs-built_in">cmd</span> -Verb RunAs&quot;
+</code></pre>
+<h2 id="disinstallare-una-applicazione" tabindex="-1">Disinstallare una applicazione <a class="header-anchor" href="#disinstallare-una-applicazione" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">runas /u:administrator <span class="hljs-built_in">cmd</span>.exe
+wmic product get name | <span class="hljs-built_in">findstr</span> Python
+wmic product where name=&quot;Python <span class="hljs-number">3</span>.<span class="hljs-number">8</span>.<span class="hljs-number">2</span> Tcl/Tk Support (<span class="hljs-number">32</span>-bit)&quot; <span class="hljs-keyword">call</span> uninstall /nointeractive
+</code></pre>
+<h2 id="scadenza-attivazione-di-windows" tabindex="-1">Scadenza attivazione di windows <a class="header-anchor" href="#scadenza-attivazione-di-windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">slmgr /xpr
+</code></pre>
+<h2 id="info-attivazione" tabindex="-1">Info Attivazione <a class="header-anchor" href="#info-attivazione" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">slmgr /dlv
+</code></pre>
+<h2 id="verifica-se-il-pc-supporta-il-wifi-a-5ghz" tabindex="-1">Verifica se il pc supporta il WiFi a 5GHz <a class="header-anchor" href="#verifica-se-il-pc-supporta-il-wifi-a-5ghz" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">netsh wlan show drivers
+</code></pre>
+<p>Se dice che la scheda di rete supporta le modalità di rete 802.11g e 802.11n, significa che il computer ha solo la capacità di rete a 2,4 GHz.</p>
+<p>Se dice che l’adattatore supporta le modalità di rete <strong>802.11a</strong> e 802.11g e 802.11n, significa che il computer ha una capacità di rete di 2,4 GHz e 5 GHz.</p>
+<p>Se indica le modalità di rete 802.11n 802.11g e 802.11b, significa che il computer ha solo la capacità di rete a 2,4 GHz.</p>
+<h2 id="strumenti-di-cattura---screenshot---snip-%26-sketch" tabindex="-1">Strumenti di cattura - Screenshot - Snip &amp; Sketch <a class="header-anchor" href="#strumenti-di-cattura---screenshot---snip-%26-sketch" aria-hidden="true">🔗</a></h2>
+<p>Sostituisce lo Snipping Tool:</p>
+<p><strong><code>Windows + Shift + S</code></strong></p>
+<ul>
+<li><a href="https://it.athowto.com/tips-tricks-snip-sketch-windows-10">https://it.athowto.com/tips-tricks-snip-sketch-windows-10</a></li>
+</ul>
+<p>Impostazioni &gt; Facilità di accesso &gt; Tastiera e attivare Usa il pulsante PrtScn per aprire l' opzione di snipping dello schermo</p>
+<h3 id="crea-un-collegamento-sul-desktop-per-snip-snip-%26-sketch" tabindex="-1">Crea un collegamento sul desktop per snip Snip &amp; Sketch <a class="header-anchor" href="#crea-un-collegamento-sul-desktop-per-snip-snip-%26-sketch" aria-hidden="true">🔗</a></h3>
+<p>Questo suggerimento è per gli utenti che usano il mouse più della tastiera! La creazione di un collegamento sul desktop per l'applicazione Snip &amp; Sketch non è utile in quanto non ti aiuterà a lanciare rapidamente lo snip Snip &amp; Sketch. È necessario creare un collegamento sul desktop per Snip Snip &amp; Sketch anziché l'app. Fare quello:</p>
+<ul>
+<li>
+<p>Passaggio 1: fare clic con il tasto destro del mouse sul desktop&gt; fare clic su Nuovo&gt; fare clic su Collegamento.</p>
+</li>
+<li>
+<p>Passaggio 2: digitare il seguente percorso nel campo posizione. Fare clic su Avanti.</p>
+<pre><code>  `explorer.exe ms-screenclip:`
+</code></pre>
+</li>
+<li>
+<p>Passaggio 3: immettere un nome per il collegamento. Fare clic sul pulsante Fine per creare il collegamento sul desktop.</p>
+</li>
+</ul>
+<h3 id="apri-snip-%26-sketch-snip-dalla-casella-di-comando-esegui" tabindex="-1">Apri Snip &amp; Sketch snip dalla casella di comando Esegui <a class="header-anchor" href="#apri-snip-%26-sketch-snip-dalla-casella-di-comando-esegui" aria-hidden="true">🔗</a></h3>
+<p><code>ms-screenclip:?source = QuickActions</code></p>
+<h2 id="strumenti-di-cattura---screenshot---snippingtool" tabindex="-1">Strumenti di cattura - Screenshot - SnippingTool <a class="header-anchor" href="#strumenti-di-cattura---screenshot---snippingtool" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">    <span class="hljs-variable">%windir%</span>\system32\SnippingTool.exe
+</code></pre>
+<p>Per riuscire a catturare anche menu contestuali:</p>
+<ol>
+<li>una volta avviato premere <code>ESC</code> per uscire dallo snipping mode</li>
+<li>impostare lo schermo, ad esempio anche premendo il tasto destro del mouse su una finestra per far apparire un menu contestuale</li>
+<li>premere <code>CTRL + STAMP</code> per eseguire la cattura</li>
+</ol>
+<p><code>ALT+PrtScr</code>     (Singola Finestra)
+<code>PrtScr</code>        (Tutto lo schermo)</p>
+<h2 id="vedere-le-variabili-di-ambiente" tabindex="-1">Vedere le variabili di ambiente <a class="header-anchor" href="#vedere-le-variabili-di-ambiente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">set</span>
+</code></pre>
+<h2 id="impostare-le-variabili-di-ambiente" tabindex="-1">Impostare le variabili di ambiente <a class="header-anchor" href="#impostare-le-variabili-di-ambiente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">sysdm.cpl,<span class="hljs-number">3</span>
+&quot;C:\Windows\system32\rundll32.exe&quot; sysdm.cpl,EditEnvironmentVariables 
+<span class="hljs-function">C:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">sysdm.cpl</span>&quot;         <span class="hljs-title">Impostazione</span> <span class="hljs-title">variabili</span> <span class="hljs-title">di</span> <span class="hljs-title">ambiente</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">system32</span>\<span class="hljs-title">rundll32.exe</span> <span class="hljs-title">sysdm.cpl</span>,<span class="hljs-title">EditEnvironmentVariables</span>&quot;
+</span></code></pre>
+<h2 id="vlc-3-hidpi-in-windows-10" tabindex="-1">VLC 3 HiDPI in Windows 10 <a class="header-anchor" href="#vlc-3-hidpi-in-windows-10" aria-hidden="true">🔗</a></h2>
+<p>Essendo realizzato con le QT per ingrandire l'interfaccia impostare le seguenti variabili di ambiente utente:</p>
+<pre><code class="language-bat">
+&quot;C:\Windows\system32\rundll32.exe&quot; sysdm.cpl,EditEnvironmentVariables 
+
+QT_AUTO_SCREEN_SCALE_FACTOR=<span class="hljs-number">0</span> 
+QT_SCREEN_SCALE_FACTORS=<span class="hljs-number">2</span>
+
+</code></pre>
+<h2 id="7-zip" tabindex="-1">7-Zip <a class="header-anchor" href="#7-zip" aria-hidden="true">🔗</a></h2>
+<p>Per cancellare la history di estrazione:</p>
+<pre><code>regedit
+</code></pre>
+<p>cancellare la chiave:</p>
+<pre><code>HKEY_CURRENT_USER\Software\7-Zip\FM\CopyHistory
+</code></pre>
+<h2 id="percorso-link-taskbar" tabindex="-1">Percorso link taskbar <a class="header-anchor" href="#percorso-link-taskbar" aria-hidden="true">🔗</a></h2>
+<pre><code>C:\Users\$USER\AppData\Roaming\Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar
+</code></pre>
+<h2 id="inserimento-di-caratteri-tramite-codice" tabindex="-1">Inserimento di caratteri tramite codice <a class="header-anchor" href="#inserimento-di-caratteri-tramite-codice" aria-hidden="true">🔗</a></h2>
+<p>Nota: <span class="mrb">Ricordarsi di utilizzare solo il tastierino numerico e di avere BlocNum attivo</span></p>
+<h3 id="inserimento-in-windows-di-caratteri-tramite-codice-unicode-esadecimale" tabindex="-1">Inserimento in windows di caratteri tramite codice unicode esadecimale <a class="header-anchor" href="#inserimento-in-windows-di-caratteri-tramite-codice-unicode-esadecimale" aria-hidden="true">🔗</a></h3>
+<p>Per far funzionare l'inserimento di un codice unicode esadecimale con <span class="k">ALT</span> + (il + del tastierino numerico):</p>
+<ol>
+<li><code>regedit</code></li>
+</ol>
+<pre><code class="language-ini"><span class="hljs-section">[HKEY_CURRENT_USER\Control Panel\Input Method]</span>
+<span class="hljs-attr">&quot;EnableHexNumpad&quot;</span>=<span class="hljs-string">&quot;1&quot;</span>
+</code></pre>
+<p>Esempio:
+<span class="k">ALT</span><code>+</code>2300
+<code>⌀</code></p>
+<p><a href="https://en.wikipedia.org/wiki/List_of_Unicode_characters">https://en.wikipedia.org/wiki/List_of_Unicode_characters</a></p>
+<h3 id="la-tilde" tabindex="-1">La tilde <a class="header-anchor" href="#la-tilde" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>SO</th>
+<th>Tasti</th>
+<th>Carattere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>ALT+126</code></td>
+<td><em class="big_code">~</em></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>AltGr+ì</code></td>
+<td><em class="big_code">~</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="il-grave-accent%2C-backtick" tabindex="-1">Il grave accent, backtick <a class="header-anchor" href="#il-grave-accent%2C-backtick" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>SO</th>
+<th>Tasti</th>
+<th>Carattere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>ALT+96</code></td>
+<td><em class="big_code">`</em></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>AltGr+'</code></td>
+<td><em class="big_code">`</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="caratteri-speciali-su-tastiera-del-portatile-senza-numpad" tabindex="-1">Caratteri speciali su tastiera del portatile senza numpad <a class="header-anchor" href="#caratteri-speciali-su-tastiera-del-portatile-senza-numpad" aria-hidden="true">🔗</a></h3>
+<p>Non si possono inserire i codici <code>ALT</code> se non c'e' il numpad sulla tastiera.</p>
+<p>Soluzione:</p>
+<ul>
+<li>Installare la tastiera inglese /Impostazioni/Data ora e lingua</li>
+<li>Utilizzare i tasti <span class="k">WIN</span> + <span class="k">SPACE</span> per commutare la tastiera italiano/inglese</li>
+</ul>
+<h2 id="cambiare-il-font-di-gestione-risorse" tabindex="-1">Cambiare il Font di Gestione Risorse <a class="header-anchor" href="#cambiare-il-font-di-gestione-risorse" aria-hidden="true">🔗</a></h2>
+<pre><code>&quot;Colore e aspetto finestre&quot;
+&quot;Modifica colori e metriche delle finestre&quot;
+</code></pre>
+<pre><code class="language-bat">    desk.cpl ,<span class="hljs-number">5</span>
+    oppure :
+    <span class="hljs-variable">%windir%</span>\System32\rundll32.exe shell32.dll,Control_RunDLL desk.cpl,Advanced,@Advanced
+</code></pre>
+<pre><code>Elemento &quot;Icona&quot;, font &quot;Consolas,11&quot;
+
+Il default è: Segoe UI Dimensione: 11
+</code></pre>
+<h2 id="associare-icona-ad-un-drive-rimovibile" tabindex="-1">Associare icona ad un drive rimovibile <a class="header-anchor" href="#associare-icona-ad-un-drive-rimovibile" aria-hidden="true">🔗</a></h2>
+<p>Creare il file autorun.inf:</p>
+<pre><code>; https://docs.microsoft.com/en-us/windows-hardware/drivers/install/inf-files
+; https://msdn.microsoft.com/en-us/library/windows/desktop/cc144200(v=vs.85).aspx
+[Autorun]
+Icon=wd.ico
+Label=CDP_Work_1_TB
+</code></pre>
+<h2 id="riaggiungere-l'opzione-%22apri-finestra-di-comando-da-qui%22" tabindex="-1">Riaggiungere l'opzione &quot;Apri finestra di comando da qui&quot; <a class="header-anchor" href="#riaggiungere-l'opzione-%22apri-finestra-di-comando-da-qui%22" aria-hidden="true">🔗</a></h2>
+<p>In Windows 10 hanno lasciato solo la possibilità di aprire la powershell da gestione risorse, eccome come riabilitare la possibilità di aprire il cmd.exe.</p>
+<ul>
+<li>Win+R regedit</li>
+<li>HKEY_CLASSES_ROOT\Directory\shell\cmd tasto destro sul folder cmd, selezionare Permissions</li>
+<li>Pusante Advanced poi Advanced Security Settings e Change poi Owner ed impostare l'account come proprietario. Check the Replace owner on subcontainers and objects option.</li>
+<li>On &quot;Permissions,&quot; select the Administrators group</li>
+<li>Under &quot;Permissions for Administrators,&quot; select Allow for the Full Control option.</li>
+<li>Inside the cmd (folder) key, right-click the HideBasedOnVelocityId DWORD, and click Rename.</li>
+<li>Change the DWORD name from HideBasedOnVelocityId to ShowBasedOnVelocityId, and press Enter.</li>
+<li>Once you completed the steps, using the Shift + Right-click combo will now display the &quot;Open command window here&quot; option. Ma funzionerà solo cliccando su una cartella, non sullo spazio bianco.</li>
+</ul>
+<h2 id="shutdown" tabindex="-1">Shutdown <a class="header-anchor" href="#shutdown" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">    <span class="hljs-variable">%windir%</span>\System32\shutdown.exe /s /t <span class="hljs-number">0</span>
+</code></pre>
+<h2 id="logout" tabindex="-1">logout <a class="header-anchor" href="#logout" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">    <span class="hljs-variable">%windir%</span>\System32\shutdown.exe /l /t <span class="hljs-number">0</span>
+</code></pre>
+<h2 id="cmd.exe-come-amministratore" tabindex="-1">cmd.exe come amministratore <a class="header-anchor" href="#cmd.exe-come-amministratore" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>cercare cmd con il tasto <em class="k">WIN</em></li>
+<li>selezionarlo con <em class="k">CTRL</em>+<em class="k">SHIFT</em>+<em class="k">ENTER</em></li>
+</ol>
+<p>essenziale per eseguire pip</p>
+<h2 id="ricerca-active-directory" tabindex="-1">Ricerca Active Directory <a class="header-anchor" href="#ricerca-active-directory" aria-hidden="true">🔗</a></h2>
+<pre><code>&quot;C:\Windows\System32\rundll32.exe&quot; dsquery.dll,OpenQueryWindow
+</code></pre>
+<h2 id="pulizia-sistema" tabindex="-1">Pulizia Sistema <a class="header-anchor" href="#pulizia-sistema" aria-hidden="true">🔗</a></h2>
+<pre><code>runas /u:administrator &quot;cleanmgr.exe&quot;
+</code></pre>
+<h2 id="attivare-il-servizio-webclient" tabindex="-1">Attivare il servizio Webclient <a class="header-anchor" href="#attivare-il-servizio-webclient" aria-hidden="true">🔗</a></h2>
+<p>Il servizio Webclient serve come client webdav a gestione risorse per esplorare siti sharepoint</p>
+<pre><code>runas /u:administrator &quot;mmc.exe \&quot;services.msc\&quot;&quot;
+</code></pre>
+<p>oppure</p>
+<pre><code>runas /u:administrator &quot;sc config webclient start= auto\&quot;
+</code></pre>
+<h2 id="eliminare-directory-con-nomi-troppo-lunghi" tabindex="-1">Eliminare directory con nomi troppo lunghi <a class="header-anchor" href="#eliminare-directory-con-nomi-troppo-lunghi" aria-hidden="true">🔗</a></h2>
+<p>Si sfrutta il fatto che robocopy riesce ad eliminare i files con nomi troppo lunghi,
+creando una directory vuota e chiedendo a robocopy di replicarla nella directory che si desidera cancellare.</p>
+<p>Supponiamo che RemoteSystemsTempFiles contenga files con nomi troppo lunghi da poter essere cancellati da windows:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">mkdir</span> empty
+robocopy empty RemoteSystemsTempFiles /mir
+<span class="hljs-built_in">rmdir</span> RemoteSystemsTempFiles
+<span class="hljs-built_in">rmdir</span> empty
+</code></pre>
+<h2 id="eliminare-file-contenenti-caratteri-invalidi" tabindex="-1">Eliminare file contenenti caratteri invalidi <a class="header-anchor" href="#eliminare-file-contenenti-caratteri-invalidi" aria-hidden="true">🔗</a></h2>
+<p>A volte copiando i file da Linux, è possibile avere in NTFS file contenenti ad esempio il carattere colon <code>:</code>
+che rende il file inutilizzabile in Windows, anche per la cancellazione.</p>
+<p>Soluzione:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">chkdsk</span> F: /R
+</code></pre>
+<p>Analizzando il disco, cancellerà anche i file aventi nomi invalidi.</p>
+<p>La sintassi <code>del \\?\F:\myfile:dd.txt</code> non funziona piu.</p>
+<h3 id="eliminare-dir-contenenti-nomi-troppo-lunghi" tabindex="-1">Eliminare dir contenenti nomi troppo lunghi <a class="header-anchor" href="#eliminare-dir-contenenti-nomi-troppo-lunghi" aria-hidden="true">🔗</a></h3>
+<p>Si sfrutta il fatto che robocopy riesce ad eliminare i files con nomi troppo lunghi,
+creando una directory vuota e chiedendo a robocopy di replicarla nella directory che si desidera cancellare.</p>
+<p>Supponiamo che RemoteSystemsTempFiles contenga files con nomi troppo lunghi da poter essere cancellati da windows:</p>
+<pre><code class="language-bat"><span class="hljs-built_in">mkdir</span> empty
+robocopy empty RemoteSystemsTempFiles /mir
+<span class="hljs-built_in">rmdir</span> RemoteSystemsTempFiles
+<span class="hljs-built_in">rmdir</span> empty
+</code></pre>
+<h2 id="opzioni-di-indicizzazione" tabindex="-1">Opzioni di indicizzazione <a class="header-anchor" href="#opzioni-di-indicizzazione" aria-hidden="true">🔗</a></h2>
+<pre><code>runas /u:administrator &quot;rundll32.exe shell32.dll,Control_RunDLL srchadmin.dll&quot;
+
+PDFFilter64Setup.msi
+</code></pre>
+<h2 id="conversione-di-un-unita-da-fat32-ad-ntfs" tabindex="-1">Conversione di un unita da FAT32 ad NTFS <a class="header-anchor" href="#conversione-di-un-unita-da-fat32-ad-ntfs" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">convert</span>.exe
+</code></pre>
+<h2 id="microsoft-file-checksum-integrity-verifier" tabindex="-1">Microsoft File Checksum Integrity Verifier <a class="header-anchor" href="#microsoft-file-checksum-integrity-verifier" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">fciv.exe -add E:\BackupDVDRW -r -wp -sha1 -xml E:\hashdb.xml
+fciv -v -sha1 -xml E:\hashdb.xml
+</code></pre>
+<p>utile per verificare copie effettuate con robocopy</p>
+<h2 id="cambiare-font-di-gestione-risorse" tabindex="-1">Cambiare Font di Gestione Risorse <a class="header-anchor" href="#cambiare-font-di-gestione-risorse" aria-hidden="true">🔗</a></h2>
+<p>&quot;Colore e aspetto finestre&quot;
+&quot;Modifica colori e metriche delle finestre&quot;</p>
+<pre><code class="language-bat">desk.cpl ,<span class="hljs-number">5</span>
+oppure :
+<span class="hljs-variable">%windir%</span>\System32\rundll32.exe shell32.dll,Control_RunDLL desk.cpl,Advanced,@Advanced
+</code></pre>
+<p>Elemento &quot;Icona&quot;, font &quot;Consolas,11&quot;</p>
+<h2 id="odbc-administrator-su-windows-64bit" tabindex="-1">ODBC Administrator su Windows 64bit <a class="header-anchor" href="#odbc-administrator-su-windows-64bit" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://support.microsoft.com/it-it/kb/942976">https://support.microsoft.com/it-it/kb/942976</a></li>
+</ul>
+<p>Utilizzare:</p>
+<pre><code class="language-bat"><span class="hljs-variable">%systemdrive%</span>\Windows\SysWoW64\Odbcad32.exe
+</code></pre>
+<p>NON Utilizzare :</p>
+<pre><code class="language-bat">    <span class="hljs-variable">%systemdrive%</span>\Windows\System32\Odbcad32.exe
+</code></pre>
+<p>che non mostra tutti i DSN di sistema</p>
+<h2 id="associazione-di-tipi-di-file-con-passaggio-di-parametri" tabindex="-1">Associazione di tipi di file con passaggio di parametri <a class="header-anchor" href="#associazione-di-tipi-di-file-con-passaggio-di-parametri" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">runas /u:administrator <span class="hljs-built_in">cmd</span>.exe
+<span class="hljs-built_in">ftype</span> jarfile=&quot;D:\app\jdk1.<span class="hljs-number">8</span>.<span class="hljs-number">0</span>\bin\javaw.exe&quot; -jar &quot;%<span class="hljs-number">1</span>&quot; %*
+<span class="hljs-built_in">assoc</span> .jar=jarfile
+regsvr32 /i shell32.dll
+</code></pre>
+<h3 id="gestione-stampante" tabindex="-1">Gestione Stampante <a class="header-anchor" href="#gestione-stampante" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat">runas /u:administrator <span class="hljs-built_in">cmd</span>.exe
+<span class="hljs-built_in">net</span> view &lt;host&gt; #Visualizzazione delle stampanti di rete configurate
+wmic printer list brief #Visualizzazione delle stampanti locali configurate
+
+<span class="hljs-variable">%windir%</span>\system32\rundll32.exe printui.dll,PrintUIEntry /?
+<span class="hljs-variable">%windir%</span>\system32\rundll32.exe printui.dll,PrintUIEntry /il #Installazione guidata
+
+rundll32 printui.dll,PrintUIEntry /dl /n&quot;\\&lt;host&gt;\Kyocera <span class="hljs-built_in">FS</span>-C5350DN KX Stanza&quot; /q #Eliminazione di una stampante USB di rete
+rundll32 printui.dll,PrintUIEntry /dl /n&quot;Kyocera <span class="hljs-built_in">FS</span>-C5350DN KX - Stanza&quot; /q #Eliminazione di una stampante USB locale
+</code></pre>
+<h2 id="architettura" tabindex="-1">Architettura <a class="header-anchor" href="#architettura" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">wmic os get osarchitecture
+</code></pre>
+<h2 id="lettera-non-assegnata-all'hard-disk-esterno-dopo-la-connessione-usb" tabindex="-1">Lettera non assegnata all'hard disk esterno dopo la connessione USB <a class="header-anchor" href="#lettera-non-assegnata-all'hard-disk-esterno-dopo-la-connessione-usb" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> <span class="hljs-title">cmd</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">diskpart</span>
+<span class="hljs-title">DISKPART</span>&gt;<span class="hljs-title">list</span> <span class="hljs-title">volume</span>
+<span class="hljs-title">DISKPART</span>&gt;<span class="hljs-title">select</span> <span class="hljs-title">volume</span> 8
+<span class="hljs-title">DISKPART</span>&gt;<span class="hljs-title">assign</span>
+<span class="hljs-title">DISKPART</span>&gt;<span class="hljs-title">ATTRIBUTES</span> <span class="hljs-title">VOLUME</span> <span class="hljs-title">CLEAR</span> <span class="hljs-title">HIDDEN</span>
+<span class="hljs-title">DISKPART</span>&gt;<span class="hljs-title">exit</span>
+
+<span class="hljs-title">c</span>:\<span class="hljs-title">Documents</span> <span class="hljs-title">and</span> <span class="hljs-title">Settings</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">AppData</span>\<span class="hljs-title">Roaming</span>\<span class="hljs-title">Microsoft</span>\<span class="hljs-title">Windows</span>\<span class="hljs-title">Start</span> <span class="hljs-title">Menu</span>\<span class="hljs-title">Programs</span>\<span class="hljs-title">Startup</span>\
+</span></code></pre>
+<h2 id="decomprimere-file-.msi" tabindex="-1">Decomprimere file .msi <a class="header-anchor" href="#decomprimere-file-.msi" aria-hidden="true">🔗</a></h2>
+<p><a href="https://superuser.com/questions/307678/how-do-i-extract-files-from-an-msi-package">https://superuser.com/questions/307678/how-do-i-extract-files-from-an-msi-package</a></p>
+<pre><code class="language-bat"><span class="hljs-built_in">mkdir</span> D:\dati\Profili\$USER\Downloads\tmp
+<span class="hljs-built_in">cd</span> /d D:\dati\Profili\$USER\Downloads\
+<span class="hljs-function">D:\<span class="hljs-title">Dati</span>\<span class="hljs-title">Profili</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">Downloads</span>&gt;<span class="hljs-title">msiexec</span> /<span class="hljs-title">a</span> <span class="hljs-title">mongodb</span>-<span class="hljs-title">windows</span>-<span class="hljs-title">x86_64</span>-4.4.2-<span class="hljs-title">signed.msi</span> /<span class="hljs-title">qb</span> <span class="hljs-title">TARGETDIR</span>=<span class="hljs-title">d</span>:\<span class="hljs-title">dati</span>\<span class="hljs-title">Profili</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">Downloads</span>\<span class="hljs-title">tmp</span>
+
+<span class="hljs-title">d</span>:\<span class="hljs-title">Dati</span>\<span class="hljs-title">Profili</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">Downloads</span>&gt;<span class="hljs-title">msiexec</span> /<span class="hljs-title">a</span> 7<span class="hljs-title">z920</span>-<span class="hljs-title">x64.msi</span> /<span class="hljs-title">qb</span> <span class="hljs-title">TARGETDIR</span>=<span class="hljs-title">d</span>:\<span class="hljs-title">Dati</span>\<span class="hljs-title">Profili</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">Downloads</span>\7<span class="hljs-title">zip</span>
+
+<span class="hljs-title">mkdir</span> &quot;%<span class="hljs-title">TEMP</span>%\<span class="hljs-title">pandoc</span>\&quot;
+<span class="hljs-title">start</span> /<span class="hljs-title">wait</span> <span class="hljs-title">msiexec.exe</span> /<span class="hljs-title">a</span> <span class="hljs-title">pandoc</span>-1.19.1-<span class="hljs-title">windows.msi</span> /<span class="hljs-title">qn</span> <span class="hljs-title">targetdir</span>=&quot;%<span class="hljs-title">TEMP</span>%\<span class="hljs-title">pandoc</span>\&quot;
+<span class="hljs-title">copy</span> /<span class="hljs-title">y</span> &quot;%<span class="hljs-title">TEMP</span>%\<span class="hljs-title">pandoc</span>\<span class="hljs-title">pandoc.exe</span>&quot; <span class="hljs-title">C</span>:\<span class="hljs-title">Utils</span>\<span class="hljs-title">Console</span>\
+<span class="hljs-title">copy</span> /<span class="hljs-title">y</span> &quot;%<span class="hljs-title">TEMP</span>%\<span class="hljs-title">pandoc</span>\<span class="hljs-title">pandoc</span>-<span class="hljs-title">citeproc.exe</span>&quot; <span class="hljs-title">C</span>:\<span class="hljs-title">Utils</span>\<span class="hljs-title">Console</span>\
+<span class="hljs-title">rmdir</span> /<span class="hljs-title">s</span> /<span class="hljs-title">q</span> &quot;%<span class="hljs-title">TEMP</span>%\<span class="hljs-title">pandoc</span>\&quot;
+
+<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> <span class="hljs-title">mioinstall.msi</span> 
+<span class="hljs-title">mioinstall.msi</span> <span class="hljs-title">non</span> <span class="hljs-title">si</span> <span class="hljs-title">deve</span> <span class="hljs-title">trovare</span> <span class="hljs-title">sotto</span> <span class="hljs-title">D</span>:\<span class="hljs-title">Dati</span>\... <span class="hljs-title">perche</span> <span class="hljs-title">l</span>&#x27;<span class="hljs-title">utente</span> <span class="hljs-title">locale</span> <span class="hljs-title">administrator</span> <span class="hljs-title">non</span> <span class="hljs-title">vi</span> <span class="hljs-title">puo</span> <span class="hljs-title">accedere</span>, <span class="hljs-title">copiare</span> <span class="hljs-title">il</span> .<span class="hljs-title">msi</span> <span class="hljs-title">ad</span> <span class="hljs-title">es</span>. <span class="hljs-title">in</span> <span class="hljs-title">D</span>:\ <span class="hljs-title">per</span> <span class="hljs-title">poterlo</span> <span class="hljs-title">lanciare</span>
+</span></code></pre>
+<h2 id="eseguire-programmi-come-amministratore-locale" tabindex="-1">Eseguire programmi come amministratore locale <a class="header-anchor" href="#eseguire-programmi-come-amministratore-locale" aria-hidden="true">🔗</a></h2>
+<p>Problema su Windows 7 64 bit: Runas Error 193: *.msc is not a valid Win32 application</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">env</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">compmgmt.msc</span> /<span class="hljs-title">s</span>&quot;
+193: <span class="hljs-title">compmgmt.msc</span> /<span class="hljs-title">s</span> <span class="hljs-title">non</span> è <span class="hljs-title">un</span>&#x27;<span class="hljs-title">applicazione</span> <span class="hljs-title">di</span> <span class="hljs-title">Win32</span> <span class="hljs-title">valida</span>.
+<span class="hljs-title">Luckily</span>, <span class="hljs-title">it</span> <span class="hljs-title">has</span> <span class="hljs-title">an</span> <span class="hljs-title">easy</span> <span class="hljs-title">solution</span>. <span class="hljs-title">For</span> <span class="hljs-title">all</span> <span class="hljs-title">MMC</span> (<span class="hljs-title">Microsoft</span> <span class="hljs-title">Management</span> <span class="hljs-title">Console</span>) <span class="hljs-title">snap</span>-<span class="hljs-title">ins</span> (<span class="hljs-title">Computer</span> <span class="hljs-title">Management</span> <span class="hljs-title">is</span> <span class="hljs-title">a</span> <span class="hljs-title">MMC</span> <span class="hljs-title">snap</span>-<span class="hljs-title">in</span>), <span class="hljs-title">you</span> <span class="hljs-title">have</span> <span class="hljs-title">to</span> <span class="hljs-title">enter</span> <span class="hljs-title">type</span> &quot;<span class="hljs-title">mmc</span>&quot; <span class="hljs-title">before</span> <span class="hljs-title">the</span> <span class="hljs-title">snap</span>-<span class="hljs-title">in</span> <span class="hljs-title">name</span>, <span class="hljs-title">for</span> <span class="hljs-title">instance</span>:
+<span class="hljs-title">runas</span> /<span class="hljs-title">user:domain</span>\<span class="hljs-title">username</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">compmgmt.msc</span>&quot;
+<span class="hljs-title">By</span> <span class="hljs-title">adding</span> <span class="hljs-title">mmc</span> <span class="hljs-title">before</span> <span class="hljs-title">the</span> <span class="hljs-title">snap</span>-<span class="hljs-title">in</span> <span class="hljs-title">name</span>, <span class="hljs-title">Windows</span> <span class="hljs-title">will</span> <span class="hljs-title">detect</span> <span class="hljs-title">that</span> <span class="hljs-title">this</span> <span class="hljs-title">is</span> <span class="hljs-title">a</span> <span class="hljs-title">MMC</span> <span class="hljs-title">snap</span>-<span class="hljs-title">in</span> <span class="hljs-title">module</span> <span class="hljs-title">instead</span> <span class="hljs-title">of</span> <span class="hljs-title">a</span> <span class="hljs-title">normal</span> <span class="hljs-title">Win32</span> .<span class="hljs-title">exe</span> <span class="hljs-title">application</span> <span class="hljs-title">and</span> <span class="hljs-title">you</span> <span class="hljs-title">will</span> <span class="hljs-title">avoid</span> <span class="hljs-title">the</span> &quot;<span class="hljs-title">this</span> <span class="hljs-title">is</span> <span class="hljs-title">not</span> <span class="hljs-title">a</span> <span class="hljs-title">valid</span> <span class="hljs-title">Win32</span> <span class="hljs-title">application</span>&quot;.
+
+
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">cmd</span> /<span class="hljs-title">c</span> <span class="hljs-title">reg</span> <span class="hljs-title">add</span> \&quot;<span class="hljs-title">HKLM</span>\<span class="hljs-title">SOFTWARE</span>\<span class="hljs-title">JavaSoft</span>\<span class="hljs-title">Java</span> <span class="hljs-title">Runtime</span> <span class="hljs-title">Environment</span>\&quot; /<span class="hljs-title">t</span> <span class="hljs-title">REG_SZ</span> /<span class="hljs-title">v</span> <span class="hljs-title">CurrentVersion</span> /<span class="hljs-title">d</span> 1.7 /<span class="hljs-title">f</span>&quot;
+<span class="hljs-title">Le</span> <span class="hljs-title">doppie</span> <span class="hljs-title">virgolette</span> <span class="hljs-title">esterne</span> <span class="hljs-title">chiudono</span> <span class="hljs-title">il</span> <span class="hljs-title">comando</span>,
+<span class="hljs-title">le</span> <span class="hljs-title">doppie</span> <span class="hljs-title">virgolette</span> <span class="hljs-title">interne</span> <span class="hljs-title">sono</span> <span class="hljs-title">quotate</span> <span class="hljs-title">da</span> <span class="hljs-title">backslash</span>
+
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc.exe</span> \&quot;<span class="hljs-title">services.msc</span>\&quot;&quot;   <span class="hljs-title">Impostazione</span> <span class="hljs-title">dei</span> <span class="hljs-title">servizi</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">diskmgmt.msc</span>&quot;           <span class="hljs-title">Disk</span> <span class="hljs-title">Management</span>, <span class="hljs-title">su</span> <span class="hljs-title">Windows</span> 7 64 <span class="hljs-title">bit</span> <span class="hljs-title">mmc</span> è <span class="hljs-title">necessario</span> <span class="hljs-title">a</span> <span class="hljs-title">far</span> <span class="hljs-title">capire</span> <span class="hljs-title">che</span> <span class="hljs-title">diskmgmt.msc</span> <span class="hljs-title">non</span> è
+                                                        <span class="hljs-title">una</span> <span class="hljs-title">applicazione</span> <span class="hljs-title">win32</span> <span class="hljs-title">ma</span> <span class="hljs-title">uno</span> <span class="hljs-title">snap</span> <span class="hljs-title">in</span> <span class="hljs-title">della</span> <span class="hljs-title">Microsoft</span> <span class="hljs-title">Management</span> <span class="hljs-title">Console</span>
+<span class="hljs-title">D</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">env</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">compmgmt.msc</span> /<span class="hljs-title">s</span>&quot;    <span class="hljs-title">Computer</span> <span class="hljs-title">Management</span>
+<span class="hljs-title">D</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">env</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">devmgmt.msc</span>&quot;
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">env</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">eventvwr.msc</span>&quot;    <span class="hljs-title">Event</span> <span class="hljs-title">Viewer</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">env</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">perfmon.msc</span>&quot;
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">env</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">printmanagement.msc</span>&quot;
+
+<span class="hljs-title">D</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> <span class="hljs-title">SetupApp.msi</span>                <span class="hljs-title">Installazione</span> <span class="hljs-title">applicazione</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">appwiz.cpl</span>&quot;        <span class="hljs-title">Installazione</span>/<span class="hljs-title">Disinstallazione</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">sysdm.cpl</span>&quot;         <span class="hljs-title">Impostazione</span> <span class="hljs-title">variabili</span> <span class="hljs-title">di</span> <span class="hljs-title">ambiente</span>
+
+
+<span class="hljs-title">C</span>:\<span class="hljs-title">Users</span>\$<span class="hljs-title">USER</span>&gt;<span class="hljs-title">where</span> <span class="hljs-title">cmd</span>
+<span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">System32</span>\<span class="hljs-title">cmd.exe</span>
+<span class="hljs-title">C</span>:\<span class="hljs-title">Users</span>\$<span class="hljs-title">USER</span>&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> <span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">System32</span>\<span class="hljs-title">cmd.exe</span>
+<span class="hljs-title">Immettere</span> <span class="hljs-title">la</span> <span class="hljs-title">password</span> <span class="hljs-title">per</span> <span class="hljs-title">administrator</span>:
+<span class="hljs-title">Tentativo</span> <span class="hljs-title">di</span> <span class="hljs-title">avvio</span> <span class="hljs-title">di</span> <span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">System32</span>\<span class="hljs-title">cmd.exe</span> <span class="hljs-title">come</span> <span class="hljs-title">utente</span> &quot;&lt;<span class="hljs-title">host</span>&gt;\<span class="hljs-title">administra</span>
+<span class="hljs-title">tor</span>&quot; ...
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">hdwwiz.cpl</span>&quot;        <span class="hljs-title">Add</span> <span class="hljs-title">Hardware</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">desk.cpl</span>&quot;        <span class="hljs-title">Display</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">inetcpl.cpl</span>&quot;    <span class="hljs-title">Internet</span> <span class="hljs-title">Options</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">ncpa.cpl</span>&quot;        <span class="hljs-title">Network</span> <span class="hljs-title">Connections</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">admintools</span>&quot;
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">nusrmgr.cpl</span>&quot;    <span class="hljs-title">User</span> <span class="hljs-title">Accounts</span>
+<span class="hljs-title">D</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:Administrator</span> &quot;<span class="hljs-title">control</span> <span class="hljs-title">printers</span>&quot;
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">mmc</span> <span class="hljs-title">services.msc</span>&quot;
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">msiexec</span> /<span class="hljs-title">i</span> <span class="hljs-title">c</span>:\<span class="hljs-title">path</span>\<span class="hljs-title">to</span>\<span class="hljs-title">file.msi</span>&quot;
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">rundll32.exe</span> <span class="hljs-title">shell32.dll</span>,<span class="hljs-title">Control_RunDLL</span> <span class="hljs-title">srchadmin.dll</span>&quot; <span class="hljs-title">Indicizzazione</span>
+</span></code></pre>
+<h2 id="info" tabindex="-1">Info <a class="header-anchor" href="#info" aria-hidden="true">🔗</a></h2>
+<h3 id="informazioni-sul-sistema" tabindex="-1">Informazioni sul sistema <a class="header-anchor" href="#informazioni-sul-sistema" aria-hidden="true">🔗</a></h3>
+<pre><code>systeminfo.exe
+msinfo32.exe
+</code></pre>
+<h3 id="da-quanto-tempo-e'-acceso-il-computer" tabindex="-1">Da quanto tempo e' acceso il computer <a class="header-anchor" href="#da-quanto-tempo-e'-acceso-il-computer" aria-hidden="true">🔗</a></h3>
+<pre><code>systeminfo|find &quot;Up Time&quot;
+systeminfo|find &quot;Tempo&quot;
+
+net statistics server
+net stats srv
+</code></pre>
+<h2 id="rimuovere-un-programma-dalla-lista-delle-applicazioni" tabindex="-1">Rimuovere un programma dalla lista delle applicazioni <a class="header-anchor" href="#rimuovere-un-programma-dalla-lista-delle-applicazioni" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://support.microsoft.com/en-us/help/247501/how-to-manually-remove-programs-from-the-add-remove-programs-list">https://support.microsoft.com/en-us/help/247501/how-to-manually-remove-programs-from-the-add-remove-programs-list</a></li>
+</ul>
+<p>Se una applicazione è stata disinstallata ma compare ancora nell'elenco applicazioni, rimuovere la chiave corrispondente in:</p>
+<pre><code>HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Uninstall
+
+HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Uninstall
+</code></pre>
+<h2 id="windows-10-spotlight" tabindex="-1">Windows 10 Spotlight <a class="header-anchor" href="#windows-10-spotlight" aria-hidden="true">🔗</a></h2>
+<p>Come resettarlo:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\<span class="hljs-title">Users</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">AppData</span>\<span class="hljs-title">Local</span>\<span class="hljs-title">Packages</span>\<span class="hljs-title">Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy</span>\<span class="hljs-title">Settings</span>
+</span></code></pre>
+<p>eliminare se la schermata di login è fissa</p>
+<p>Svuotare anche la cartella</p>
+<pre><code class="language-bat"><span class="hljs-variable">%USERPROFILE%</span>/AppData\Local\Packages\Microsoft.Windows.ContentDeliveryManager_cw5n1h2txyewy\LocalState\Assets
+</code></pre>
+<h2 id="vedere-i-gruppi-active-directory-di-un-utente" tabindex="-1">vedere i gruppi Active Directory di un utente <a class="header-anchor" href="#vedere-i-gruppi-active-directory-di-un-utente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">net</span> user /domain $USER | <span class="hljs-built_in">find</span> &quot;UAC&quot;
+</code></pre>
+<h2 id="scaricare-un-sito-con-wget" tabindex="-1">Scaricare un sito con wget <a class="header-anchor" href="#scaricare-un-sito-con-wget" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://xahlee.info/linux/wget_curl_tutorial.html">http://xahlee.info/linux/wget_curl_tutorial.html</a></li>
+<li><a href="https://eternallybored.org/misc/wget/">https://eternallybored.org/misc/wget/</a></li>
+<li><a href="https://eternallybored.org/misc/wget/releases/wget-1.20.3-win64.zip">https://eternallybored.org/misc/wget/releases/wget-1.20.3-win64.zip</a></li>
+</ul>
+<h3 id="download-entire-website" tabindex="-1">Download Entire Website <a class="header-anchor" href="#download-entire-website" aria-hidden="true">🔗</a></h3>
+<p>download website, 2 levels deep, wait 9 sec per page</p>
+<pre><code>wget --wait=9 --recursive --level=3 https://git-books.gitlab.io/angular-workshop-authentication/
+</code></pre>
+<h3 id="some-sites-check-on-user-agent." tabindex="-1">Some sites check on user agent. <a class="header-anchor" href="#some-sites-check-on-user-agent." aria-hidden="true">🔗</a></h3>
+<p>(user agent basically means browser). so you might add this option “--user-agent=”.</p>
+<pre><code>wget http://example.org/ --user-agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.96 Safari/537.36'
+</code></pre>
+<h2 id="cercare-la-directory-node_modules" tabindex="-1">Cercare la directory node_modules <a class="header-anchor" href="#cercare-la-directory-node_modules" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-built_in">dir</span> node_modules /S /A:D /B
+</code></pre>
+<h2 id="cancellare-tutte-le-sottodirectory-con-un-certo-nome" tabindex="-1">Cancellare tutte le sottodirectory con un certo nome <a class="header-anchor" href="#cancellare-tutte-le-sottodirectory-con-un-certo-nome" aria-hidden="true">🔗</a></h2>
+<p>Da batch serve un doppio percento <code>%%</code> per indicare le variabili</p>
+<pre><code class="language-bat">:: delpycache.bat
+@<span class="hljs-built_in">echo</span> off
+<span class="hljs-comment">rem msdos string substitution:</span>
+<span class="hljs-comment">rem %0 è il nome del presente file</span>
+<span class="hljs-comment">rem ~ string substitution</span>
+<span class="hljs-comment">rem d: drive letter</span>
+<span class="hljs-comment">rem p full file path</span>
+<span class="hljs-built_in">cd</span> %~dp0
+<span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b /a:d __pycache__&#x27;) <span class="hljs-keyword">do</span> (
+<span class="hljs-built_in">rd</span> /s /q &quot;<span class="hljs-variable">%%i</span>&quot;
+)
+<span class="hljs-built_in">pause</span>
+</code></pre>
+<pre><code class="language-bat">:: Oppure:
+ <span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b *.pyc&#x27;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">del</span> /s /q /f &quot;<span class="hljs-variable">%%i</span>&quot;
+</code></pre>
+<p>Da riga di comando diretta(percento <code>%</code> singolo):</p>
+<pre><code class="language-bat">:: delpycache.bat
+<span class="hljs-keyword">for</span> /f &quot;tokens=* delims=&quot; %i <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /s /b /a:d .<span class="hljs-built_in">md</span>&#x27;) <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> &quot;%i&quot;
+</code></pre>
+<h2 id="disinstallare-una-applicazione-1" tabindex="-1">Disinstallare una applicazione <a class="header-anchor" href="#disinstallare-una-applicazione-1" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">C:&gt; <span class="hljs-title">wmic</span>
+&gt; <span class="hljs-title">product</span> <span class="hljs-title">get</span> <span class="hljs-title">name</span>
+&gt; <span class="hljs-title">product</span> <span class="hljs-title">where</span> <span class="hljs-title">name</span>=&quot;...&quot; <span class="hljs-title">call</span> <span class="hljs-title">uninstall</span> /<span class="hljs-title">nointeractive</span>
+</span></code></pre>
+<h2 id="net" tabindex="-1">net <a class="header-anchor" href="#net" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-comment">rem Verifica se il pc supporta il WiFi a 5GHz</span>
+netsh wlan show drivers
+
+<span class="hljs-built_in">net</span> view &lt;host&gt; #Visualizzazione delle stampanti di rete configurate
+
+<span class="hljs-built_in">net</span> statistics server
+<span class="hljs-built_in">net</span> stats srv
+<span class="hljs-comment">
+rem vedere i gruppi Active Directory di un utente</span>
+<span class="hljs-built_in">net</span> user /domain $USER | <span class="hljs-built_in">find</span> &quot;UAC&quot;
+
+<span class="hljs-built_in">net</span> use x: \\vboxsvr\share
+
+netsh interface <span class="hljs-built_in">set</span> interface Wi-Fi enable
+netsh interface <span class="hljs-built_in">set</span> interface Wi-Fi disable
+
+</code></pre>
+<p>Attivazione rete</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">ECHO</span> OFF
+<span class="hljs-built_in">ECHO</span> Resetting IP Address and Subnet Mask <span class="hljs-keyword">For</span> DHCP
+netsh int ip <span class="hljs-built_in">set</span> address name = &quot;Ethernet0&quot; source = dhcp
+<span class="hljs-built_in">ECHO</span> Resetting DNS <span class="hljs-keyword">For</span> DHCP
+netsh int ip <span class="hljs-built_in">set</span> dns name = &quot;Ethernet0&quot; source = dhcp
+<span class="hljs-built_in">ECHO</span> Resetting Windows Internet Name Service (WINS) <span class="hljs-keyword">For</span> DHCP
+netsh int ip <span class="hljs-built_in">set</span> wins name = &quot;Ethernet0&quot; source = dhcp
+netsh advfirewall <span class="hljs-built_in">set</span> allprofiles state off
+<span class="hljs-built_in">pause</span>
+</code></pre>
+<p>Disattivazione rete</p>
+<pre><code class="language-bat">@<span class="hljs-built_in">ECHO</span> OFF
+<span class="hljs-built_in">ECHO</span> Resetting IP Address and Subnet Mask <span class="hljs-keyword">For</span> Static Lab Use
+netsh int ip <span class="hljs-built_in">set</span> address &quot;Ethernet0&quot; static <span class="hljs-number">10</span>.<span class="hljs-number">10</span>.<span class="hljs-number">0</span>.<span class="hljs-number">1</span> <span class="hljs-number">255</span>.<span class="hljs-number">255</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span>.<span class="hljs-number">0</span> <span class="hljs-number">1</span>
+netsh interface ipv4 delete dnsserver &quot;Ethernet0&quot; all
+netsh advfirewall <span class="hljs-built_in">set</span> allprofiles state off
+netsh interface ipv4 show config &quot;Ethernet0&quot;
+<span class="hljs-built_in">pause</span>
+</code></pre>
+<h2 id="directory-junctions" tabindex="-1">Directory Junctions <a class="header-anchor" href="#directory-junctions" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.microsoft.com/it-it/windows-server/administration/windows-commands/mklink">https://docs.microsoft.com/it-it/windows-server/administration/windows-commands/mklink</a></li>
+</ul>
+<p>Normalmente per creare link simbolici di directory si dovrebbe utilizzare il parametro <code>/D</code>, <br>
+che a causa di restrizioni di sicurezza non è consentito ad utenti non amministratori. <br>
+Si crea invece una giunzione di directory, che presenta alcune limitazioni rispetto al link simbolico,
+ma che non ha problemi di sicurezza.</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">mklink</span> /<span class="hljs-title">j</span> &lt;<span class="hljs-title">Link</span>&gt; &lt;<span class="hljs-title">Path</span> <span class="hljs-title">Directory</span>&gt;
+</span></code></pre>
+<ul>
+<li><a href="https://superuser.com/questions/124679/how-do-i-create-a-link-in-windows-7-home-premium-as-a-regular-user">https://superuser.com/questions/124679/how-do-i-create-a-link-in-windows-7-home-premium-as-a-regular-user</a></li>
+</ul>
+<h3 id="creation-of-symbolic-links-requires-the-secreatesymboliclinkprivilege-(%E2%80%9Ccreate-symbolic-links%E2%80%9D)" tabindex="-1">Creation of symbolic links requires the SeCreateSymbolicLinkPrivilege (“Create symbolic links”) <a class="header-anchor" href="#creation-of-symbolic-links-requires-the-secreatesymboliclinkprivilege-(%E2%80%9Ccreate-symbolic-links%E2%80%9D)" aria-hidden="true">🔗</a></h3>
+<p>which is granted only to administrators by default (but you can change that using security policy).</p>
+<p>To change the policies:</p>
+<ol>
+<li>Right click on <code>Start→Run</code> and launch <code>secpol.msc</code>.</li>
+<li>Open <code>Security Settings → Local Policies → User Rights Assignment</code> and select <code>Create symbolic links</code> (that represents <code>SeCreateSymbolicLinkPrivilege</code>).</li>
+<li>Double-click on the item and add yourself (or the whole Users group) to the list.</li>
+</ol>
+<p>The changes will apply when you log out and log in again.</p>
+<h3 id="comprimere-una-directory-saltando-le-joint-directory" tabindex="-1">Comprimere una directory saltando le joint directory <a class="header-anchor" href="#comprimere-una-directory-saltando-le-joint-directory" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; 7<span class="hljs-title">z</span> <span class="hljs-title">a</span> <span class="hljs-title">Script.zip</span> <span class="hljs-title">Script</span>\ -<span class="hljs-title">xr</span>!<span class="hljs-title">node_modules</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">dir</span> /<span class="hljs-title">AL</span> /<span class="hljs-title">S</span> /<span class="hljs-title">B</span> <span class="hljs-title">folder</span> &gt; <span class="hljs-title">exclude.txt</span>
+<span class="hljs-title">C</span>:\&gt; 7<span class="hljs-title">z</span> <span class="hljs-title">a</span> <span class="hljs-title">archive</span>.7<span class="hljs-title">z</span> <span class="hljs-title">folder</span>\ -<span class="hljs-title">xr</span>@<span class="hljs-title">exclude.txt</span>
+</span></code></pre>
+<h3 id="trovare-tutte-le-junctions" tabindex="-1">Trovare tutte le junctions <a class="header-anchor" href="#trovare-tutte-le-junctions" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat"><span class="hljs-built_in">dir</span> /al /s
+<span class="hljs-built_in">dir</span> /al /s | <span class="hljs-built_in">findstr</span> &quot;&lt;JUNCTION&gt;&quot;
+</code></pre>
+</body></html>

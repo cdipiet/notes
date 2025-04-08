@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.142" />
+        <title>alpine_qemu</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="alpine_qemu" tabindex="-1">alpine_qemu <a class="header-anchor" href="#alpine_qemu" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.142</p>
+<nav class="table-of-contents"><ol><li><a href="#host---creazione-dei-device-di-rete-virtuali-tap-e-bridge---senza-vlan">Host - Creazione dei device di rete virtuali TAP e Bridge - senza VLAN </a></li><li><a href="#host---creazione-dei-device-di-rete-virtuali-tap-e-bridge---con-vlan">Host - Creazione dei device di rete virtuali TAP e Bridge - con VLAN </a></li><li><a href="#host---creazione-prima-vm">Host - Creazione prima VM </a><ol><li><a href="#host---download-iso-di-alpine">Host - Download ISO di Alpine </a></li><li><a href="#host---creazione-dell'immagine-base-del-primo-hard-disk-alpine_0">Host - Creazione dell&#39;immagine base del primo hard disk Alpine_0 </a></li><li><a href="#host---creazione-della-vm-qemu-di-base-alpine_0">Host - Creazione della VM QEMU di base Alpine_0 </a></li><li><a href="#guest---configurazione-della-vm-qemu-di-base-alpine_0">Guest - Configurazione della VM QEMU di base Alpine_0 </a></li></ol></li><li><a href="#host---alternativa-1---creazione-delle-vm-tramite-immagini-di-overlay">Host - Alternativa 1 - Creazione delle VM tramite immagini di overlay </a></li><li><a href="#host---alternativa-2---creazione-delle-vm-tramite-copia-dell'immagine-di-base">Host - Alternativa 2 - Creazione delle VM tramite copia dell&#39;immagine di base </a></li><li><a href="#guest---configurazione-delle-immagini-delle-rimanenti-vm">Guest - configurazione delle immagini delle rimanenti VM </a></li><li><a href="#script-di-avvio">Script di avvio </a><ol><li><a href="#avvio-rete">Avvio rete </a></li><li><a href="#avvio-rete-con-vlan">Avvio rete con VLAN </a></li><li><a href="#avvio-vm">Avvio VM </a></li><li><a href="#stop-rete">Stop rete </a></li></ol></li></ol></nav><h1 id="alpine-linux-con-qemu-kvm-libvirt" tabindex="-1">Alpine Linux con QEMU-KVM-Libvirt <a class="header-anchor" href="#alpine-linux-con-qemu-kvm-libvirt" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="../../virtualizzazione/qemu-libvirt.html#installazione">Installazione QEMU</a></li>
+<li><a href="../../net/net_bridge_vlan.html">VLAN</a></li>
+</ul>
+<p>Creeremo 4 macchine virtuali Alpine, ciascuna con il proprio indirizzo ip statico,
+creeremo altrettante interfacce virtuali TAP che assegneremo una per ciascuna VM.
+Assegneremo le 4 VM, due a due in due VLAN,
+assegneremo l'Host alla prima VLAN in modo che possa vedere in rete almeno due VM.
+Per realizzare ciò creeremo un bridge con funzionalità di VLAN, e vi inseriremo il NIC fisico oltre alle 4 interfacce virtuali TAP,
+assegnandole alle due VLAN come segue:</p>
+<table class="table"><thead>
+<tr>
+<th>Macchina</th>
+<th>IP</th>
+<th>NIC</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td>192.168.1.14</td>
+<td>br0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VM Alpine_0</td>
+<td>192.168.1.10</td>
+<td>TAP0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VM Alpine_1</td>
+<td>192.168.1.11</td>
+<td>TAP1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>VM Alpine_2</td>
+<td>192.168.1.12</td>
+<td>TAP2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VM Alpine_3</td>
+<td>192.168.1.13</td>
+<td>TAP3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="host---creazione-dei-device-di-rete-virtuali-tap-e-bridge---senza-vlan" tabindex="-1">Host - Creazione dei device di rete virtuali TAP e Bridge - senza VLAN <a class="header-anchor" href="#host---creazione-dei-device-di-rete-virtuali-tap-e-bridge---senza-vlan" aria-hidden="true">🔗</a></h2>
+<p>Queste configurazioni di rete non sono permanenti e vengono perdute al reboot, utilizzare NetworkManager o systemd per renderle permanenti.</p>
+<p>Nell'host creeremo un bridge sul quale imposteremo le configurazioni di rete del NIC fisico che è in grado di accedere ad internet.
+Poi sposteremo il NIC fisico e le interfacce virtuali TAP create(una per ogni VM che creeremo) all'interno del bridge.</p>
+<p>Non essendoci VLAN ed essendo tutte le macchine nella stessa subnet, <strong>ogni macchina vedrà tutte le altre</strong>.</p>
+<pre><code>              |
+              | physical link
+              |
+              o br0
+             / \
+            /   \
+    enp5s0 o     o tap0
+                 |
+     - - - - - - - - - - - - - - - Host / VM boundary
+                 |
+                 o eth0 (inside VM)
+</code></pre>
+<p>Inserendo un NIC fisico in un bridge assieme a delle altre interfacce virtuali come ad es. tap,
+bisogna annotarsi ip e gateway del NIC fisico.
+All'inserimento del NIC fisico nel bridge, l'ip del NIC fisico deve essere rimosso ed i suoi ip e gateway
+devono essere impostati nel bridge, in questo modo la connessione ad internet dell'host non verrà perduta.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ <span class="hljs-comment"># nmcli conn modify Cavo connection.autoconnect no  # Si disabilita la connessione NetworkManager del NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge                  <span class="hljs-comment"># Creazione del bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># creazione dell&#x27;interfaccia virtuale tap(livello 2)</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap1 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap2 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap3 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+$ ip tuntap list
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 up                      <span class="hljs-comment"># i NIC da inserire nel bridge devono essere attivi</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 up                      <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 up                      <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 up                      <span class="hljs-comment"># </span>
+$ <span class="hljs-comment"># sudo ip link set dev enp5s0 up </span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 master br0              <span class="hljs-comment"># Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 master br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 master br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 master br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev enp5s0 master br0            <span class="hljs-comment"># Spostando il NIC fisico nel bridge vengono rimossi i sui ip e routing, viene perduta la connessione ad internet</span>
+<span class="hljs-comment"># Per non perdere la connessione ad internet la configurazione del NIC fisico enp5s0 viene spostata sul bridge</span>
+$ <span class="hljs-comment"># sudo dhclient -v br0                            # si usa il dhcp per assegnare un IP ed il routing al bridge</span>
+                                                    <span class="hljs-comment"># oppure si possono assegnare manualmente ip e route al default gateway:</span>
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+$ <span class="hljs-built_in">sudo</span> ip route flush dev br0
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.14/24 dev br0
+$ <span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+$ bridge <span class="hljs-built_in">link</span> show
+</code></pre>
+<h2 id="host---creazione-dei-device-di-rete-virtuali-tap-e-bridge---con-vlan" tabindex="-1">Host - Creazione dei device di rete virtuali TAP e Bridge - con VLAN <a class="header-anchor" href="#host---creazione-dei-device-di-rete-virtuali-tap-e-bridge---con-vlan" aria-hidden="true">🔗</a></h2>
+<p>Queste configurazioni di rete non sono permanenti e vengono perdute al reboot, utilizzare NetworkManager o systemd per renderle permanenti.</p>
+<p>Nell'host creeremo un bridge sul quale imposteremo le configurazioni di rete del NIC fisico che è in grado di accedere ad internet.
+Poi sposteremo il NIC fisico e le interfacce virtuali TAP create(una per ogni VM che creeremo) all'interno del bridge.</p>
+<p>Essendoci due VLAN, pur essendo tutte le macchine nella stessa subnet, <strong>ogni macchina vedrà solamente le altre nella stessa VLAN</strong>.</p>
+<p>Creiamo i dispositivi di rete virtuali partizionandoli in due VLAN come segue:</p>
+<table class="table"><thead>
+<tr>
+<th>Macchina</th>
+<th>IP</th>
+<th>NIC</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Host</td>
+<td>192.168.1.14</td>
+<td>br0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VM Alpine_0</td>
+<td>192.168.1.10</td>
+<td>TAP0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VM Alpine_1</td>
+<td>192.168.1.11</td>
+<td>TAP1</td>
+<td>2</td>
+</tr>
+<tr>
+<td>VM Alpine_2</td>
+<td>192.168.1.12</td>
+<td>TAP2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>VM Alpine_3</td>
+<td>192.168.1.13</td>
+<td>TAP3</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>Senza un router, solamente le macchine all'interno della stessa VLAN potranno vedersi tra loro.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ <span class="hljs-comment"># nmcli conn modify Cavo connection.autoconnect no  # Si disabilita la connessione NetworkManager del NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1 <span class="hljs-comment"># Creazione del bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># creazione dell&#x27;interfaccia virtuale tap(livello 2)</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap1 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># l&#x27;utente è quello che utilizzerà il NIC TAP, ad esempio quello che lancerà la VM che utilizza il tap0.</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap2 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap3 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+$ ip tuntap list
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 up                      <span class="hljs-comment"># i NIC da inserire nel bridge devono essere attivi</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 up                      <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 up                      <span class="hljs-comment"># </span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 up                      <span class="hljs-comment"># </span>
+$ <span class="hljs-comment"># sudo ip link set dev enp5s0 up </span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 master br0              <span class="hljs-comment"># Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 master br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 master br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 master br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev enp5s0 master br0 
+$ <span class="hljs-comment"># sudo dhclient -v br0                            # si usa il dhcp per assegnare un IP ed il routing al bridge</span>
+                                                    <span class="hljs-comment"># oppure si possono assegnare manualmente ip e route al default gateway:</span>
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+$ <span class="hljs-built_in">sudo</span> ip route flush dev br0
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.14/24 dev br0
+$ <span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+$ bridge <span class="hljs-built_in">link</span> show
+$ <span class="hljs-built_in">sudo</span> bridge vlan show
+<span class="hljs-comment"># By default only the port VID (PVID) is allowed to ingress through any bridge port.</span>
+<span class="hljs-comment"># the Egress Untagged flag causes packets going out of the bridge port with VID of PVID to be untagged at egress.</span>
+<span class="hljs-comment"># The PVID flag indicates that VLAN 1 is the PVID VLAN, which means that any untagged packet coming through this bridge port gets tagged with VID 1.</span>
+<span class="hljs-comment"># pvid     the vlan specified is to be considered a PVID at ingress.  Any untagged frames will be assigned to this VLAN.</span>
+<span class="hljs-comment"># untagged the vlan specified is to be treated as untagged on egress.</span>
+$ <span class="hljs-built_in">sudo</span> bridge vlan show dev tap0
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev enp5s0 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev enp5s0
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev tap0 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev tap0
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev tap1 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev tap1
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev tap2 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev tap2
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev tap3 untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev tap3
+<span class="hljs-comment"># Note that the bridge&#x27;s self implicit port is still using VID 1,</span>
+<span class="hljs-comment"># so assigning an IP directly on the bridge as is done on some settings will now fail to communicate properly.</span>
+<span class="hljs-comment"># If such configuration is really needed, you can set the bridge&#x27;s self port in VLAN 5 too,</span>
+<span class="hljs-comment"># with a slightly different syntax (self) because it&#x27;s the bridge itself:</span>
+$ bridge vlan del dev br0 vid 1 self
+$ bridge vlan add dev br0 vid 1 pvid untagged self
+$ <span class="hljs-built_in">sudo</span> bridge vlan show
+</code></pre>
+<h2 id="host---creazione-prima-vm" tabindex="-1">Host - Creazione prima VM <a class="header-anchor" href="#host---creazione-prima-vm" aria-hidden="true">🔗</a></h2>
+<p>Dobbiamo creare 4 VM.<br>
+L'immagine base può essere utilizzata come base per creare 4 immagini di overlay oppure come prima VM da clonare per creare le rimanenti 3.</p>
+<h3 id="host---download-iso-di-alpine" tabindex="-1">Host - Download ISO di Alpine <a class="header-anchor" href="#host---download-iso-di-alpine" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p /opt/vm/Alpine
+$ <span class="hljs-built_in">cd</span> /opt/vm/Alpine
+$ wget https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-virt-3.15.0-x86_64.iso
+</code></pre>
+<h3 id="host---creazione-dell'immagine-base-del-primo-hard-disk-alpine_0" tabindex="-1">Host - Creazione dell'immagine base del primo hard disk Alpine_0 <a class="header-anchor" href="#host---creazione-dell'immagine-base-del-primo-hard-disk-alpine_0" aria-hidden="true">🔗</a></h3>
+<p>Creeremo una prima immagine di base per la <code>VM Alpine_0</code>,
+le altre tre immagini le creeremo come copia da questa, però solo dopo averla installata.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> /opt/vm/Alpine
+$ qemu-img create -f qcow2 Alpine_0.qcow2 4G
+</code></pre>
+<h3 id="host---creazione-della-vm-qemu-di-base-alpine_0" tabindex="-1">Host - Creazione della VM QEMU di base Alpine_0 <a class="header-anchor" href="#host---creazione-della-vm-qemu-di-base-alpine_0" aria-hidden="true">🔗</a></h3>
+<p>La configurazione di partenza di QEMU vuole che venga specificato un MAC Address(altrimenti viene impostato quello di default generando conflitti se si utilizza più di una VM), i MAC Address di QEMU devono iniziare per 52:54:00, eccome come generare uno:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">printf</span> -v macaddr <span class="hljs-string">&quot;52:54:00x:%02x:%02x:%02x&quot;</span> $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff )) $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff)) $(( <span class="hljs-variable">$RANDOM</span> &amp; <span class="hljs-number">0</span>xff ))
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$macaddr</span>&quot;</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+<span class="hljs-comment"># Installazione del SO</span>
+<span class="hljs-comment"># -boot order: c (first hard disk), d (first CD-ROM), </span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56 -boot order=d -cdrom alpine-virt-3.15.0-x86_64.iso -hda ./Alpine_0.qcow2
+<span class="hljs-comment"># login come root, nessuna password</span>
+</code></pre>
+<h3 id="guest---configurazione-della-vm-qemu-di-base-alpine_0" tabindex="-1">Guest - Configurazione della VM QEMU di base Alpine_0 <a class="header-anchor" href="#guest---configurazione-della-vm-qemu-di-base-alpine_0" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html#_full_setup_alpine">https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html#_full_setup_alpine</a></li>
+</ul>
+<p>Creeremo un bridge ed una interfaccia tap(ethernet - livello 2) sull'host,
+che corrisponderà al NIC <code>eth0</code> della macchina guest Alpine.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Guest: Alpine_0</span>
+root login: `root` (nessuna password)
+<span class="hljs-comment"># Configurazione iniziale</span>
+$ setup-alpine
+    it
+    it
+    alpine0
+    eth0        <span class="hljs-comment"># NIC1 NAT di VirtualBox, da utilizzare per l&#x27;aggiornamento dei pacchetti</span>
+    192.168.1.10
+    255.255.255.0
+    192.168.1.1                 <span class="hljs-comment"># Gateway</span>
+    homenet.telecomitalia.it
+    192.168.1.1                 <span class="hljs-comment"># DNS</span>
+    New password: pwroot
+    timezone: Europe/Rome
+    none
+    none
+    [1]
+    openssh
+    sda
+    sys
+    y
+$ reboot <span class="hljs-comment"># le rimanenti impostazioni devono essere fatte dopo il reboot altrimenti non sono persistenti</span>
+<span class="hljs-comment"># Al reboot va rimosso il CD-ROM dai parametri di partenza di QEMU</span>
+</code></pre>
+<p>Reboot, il CDROM viene prima rimosso.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56 -hda ./Alpine_0.qcow2 
+
+Guest: $ apk add shadow <span class="hljs-comment"># contiene il comando useradd</span>
+Guest: $ useradd -m -s /bin/bash -G wheel <span class="hljs-variable">$USER</span> <span class="hljs-comment"># pwroot - ora è possibile connettersi in SSH</span>
+Guest: $ su - <span class="hljs-variable">$USER</span>
+Guest: $ passwd <span class="hljs-comment"># impostarla come root per semplicità: pwroot</span>
+Guest: $ CTRL+D
+</code></pre>
+<p><a href="../kernel/sysctl.html">sysctl</a></p>
+<p>Ora è possibile gestire la VM accedendovi da SSH:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ ssh 192.168.1.10 <span class="hljs-comment"># conviene connettersi in SSH dall&#x27;Host per poter condividere la clipboard del Giest</span>
+<span class="hljs-comment"># Guest: Alpine_0</span>
+$ su -
+$ apk add vim
+<span class="hljs-comment"># Installazione dei pacchetti</span>
+$ vim /etc/apk/repositories <span class="hljs-comment"># e scommentare il community, oppure:</span>
+    <span class="hljs-built_in">cat</span> &gt; /etc/apk/repositories &lt;&lt; <span class="hljs-string">EOF; $(echo)
+    http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d&#x27;.&#x27; -f1,2)/main
+    http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d&#x27;.&#x27; -f1,2)/community
+    http://dl-cdn.alpinelinux.org/alpine/edge/testing
+    EOF</span>
+$ apk update
+$ apk upgrade
+$ apk add mc less neovim
+$ apk add util-linux pciutils usbutils coreutils binutils findutils grep iproute2
+$ apk add bash bash-doc bash-completion
+$ vim /etc/passwd <span class="hljs-comment"># per impostare la bash nell&#x27;utente root e per l&#x27;utente $USER</span>
+$ bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/99-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+$ poweroff
+</code></pre>
+<h2 id="host---alternativa-1---creazione-delle-vm-tramite-immagini-di-overlay" tabindex="-1">Host - Alternativa 1 - Creazione delle VM tramite immagini di overlay <a class="header-anchor" href="#host---alternativa-1---creazione-delle-vm-tramite-immagini-di-overlay" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="qemu-libvirt.html#hd-overlay">Creazione immagine per overlay</a></li>
+</ul>
+<p>Utilizziamo <code>Alpine_0</code> come immagine di base sulla quale creare 4 immagini di overlay:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mv</span> Alpine_0.qcow2 Alpine_Base.qcow2
+$ qemu-img create -o backing_file=Alpine_Base.qcow2,backing_fmt=qcow2 -f qcow2 Alpine_0.qcow2
+$ qemu-img create -o backing_file=Alpine_Base.qcow2,backing_fmt=qcow2 -f qcow2 Alpine_1.qcow2
+$ qemu-img create -o backing_file=Alpine_Base.qcow2,backing_fmt=qcow2 -f qcow2 Alpine_2.qcow2
+$ qemu-img create -o backing_file=Alpine_Base.qcow2,backing_fmt=qcow2 -f qcow2 Alpine_3.qcow2
+</code></pre>
+<p>In un esempio dove le immagini sono estremamente simili con la tecnica delle immagini di overlay si risparmia molto spazio su disco.</p>
+<h2 id="host---alternativa-2---creazione-delle-vm-tramite-copia-dell'immagine-di-base" tabindex="-1">Host - Alternativa 2 - Creazione delle VM tramite copia dell'immagine di base <a class="header-anchor" href="#host---alternativa-2---creazione-delle-vm-tramite-copia-dell'immagine-di-base" aria-hidden="true">🔗</a></h2>
+<p>Avendo installato e configurato <code>Alpine_0</code> creiamo le altre 3 immagini come <strong>clone</strong> di questa,
+in ciascuna cambieranno solamente hostname ed ip.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ <span class="hljs-built_in">cd</span> /opt/vm/Alpine
+$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=Alpine_0.qcow2 of=Alpine_1.qcow2
+$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=Alpine_0.qcow2 of=Alpine_2.qcow2
+$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=Alpine_0.qcow2 of=Alpine_3.qcow2
+</code></pre>
+<h2 id="guest---configurazione-delle-immagini-delle-rimanenti-vm" tabindex="-1">Guest - configurazione delle immagini delle rimanenti VM <a class="header-anchor" href="#guest---configurazione-delle-immagini-delle-rimanenti-vm" aria-hidden="true">🔗</a></h2>
+<p><code>Alpine_0</code> è già correttamente configurata.<br>
+Comunque si siano create le immagini Alpine_{0..3}, tramite clone o tramite overlay<br>
+bisogna far partire ognuna VM delle 3 VM Alpine_{1..3}, e variare l'hostname e l'indirizzo ip:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host </span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap1,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:57 -hda ./Alpine_1.qcow2 
+$ setup-hostname alpine1
+$ <span class="hljs-comment"># setup-interfaces</span>
+$ sed -i <span class="hljs-string">&#x27;s/192.168.1.10/192.168.1.11/g&#x27;</span> /etc/network/interfaces
+$ poweroff
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap2,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:58 -hda ./Alpine_2.qcow2 
+$ setup-hostname alpine2
+$ <span class="hljs-comment"># setup-interfaces</span>
+$ sed -i <span class="hljs-string">&#x27;s/192.168.1.10/192.168.1.12/g&#x27;</span> /etc/network/interfaces
+$ poweroff
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap3,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:59 -hda ./Alpine_3.qcow2 
+$ setup-hostname alpine3
+$ <span class="hljs-comment"># setup-interfaces</span>
+$ sed -i <span class="hljs-string">&#x27;s/192.168.1.10/192.168.1.13/g&#x27;</span> /etc/network/interfaces
+$ poweroff
+</code></pre>
+<h2 id="script-di-avvio" tabindex="-1">Script di avvio <a class="header-anchor" href="#script-di-avvio" aria-hidden="true">🔗</a></h2>
+<h3 id="avvio-rete" tabindex="-1">Avvio rete <a class="header-anchor" href="#avvio-rete" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># startnet.sh</span>
+nmcli con down Cavo
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge                  <span class="hljs-comment"># Creazione del bridge</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># creazione dell&#x27;interfaccia virtuale tap(livello 2)</span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap1 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap2 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap3 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 up                      <span class="hljs-comment"># i NIC da inserire nel bridge devono essere attivi</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 up                      <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 up                      <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 up                      <span class="hljs-comment"># </span>
+<span class="hljs-comment"># sudo ip link set dev enp5s0 up </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 master br0              <span class="hljs-comment"># Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 master br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 master br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 master br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev enp5s0 master br0 
+<span class="hljs-comment"># sudo dhclient -v br0                            # si usa il dhcp per assegnare un IP ed il routing al bridge</span>
+                                                  <span class="hljs-comment"># oppure si possono assegnare manualmente ip e route al default gateway:</span>
+<span class="hljs-built_in">sudo</span> ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+<span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+<span class="hljs-built_in">sudo</span> ip route flush dev br0
+<span class="hljs-built_in">sudo</span> ip addr add 192.168.1.14/24 dev br0
+<span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+</code></pre>
+<h3 id="avvio-rete-con-vlan" tabindex="-1">Avvio rete con VLAN <a class="header-anchor" href="#avvio-rete-con-vlan" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># startnet_vlan.sh</span>
+nmcli con down Cavo
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1 <span class="hljs-comment"># Creazione del bridge, rimuovere vlan_filtering se non si vogliono le VLAN</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># creazione dell&#x27;interfaccia virtuale tap(livello 2)</span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap1 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap2 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip tuntap add dev tap3 mode tap user <span class="hljs-variable">$USER</span>   <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 up                      <span class="hljs-comment"># i NIC da inserire nel bridge devono essere attivi</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 up                      <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 up                      <span class="hljs-comment"># </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 up                      <span class="hljs-comment"># </span>
+<span class="hljs-comment"># sudo ip link set dev enp5s0 up </span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 master br0              <span class="hljs-comment"># Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap1 master br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap2 master br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap3 master br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev enp5s0 master br0 
+<span class="hljs-comment"># sudo dhclient -v br0                            # si usa il dhcp per assegnare un IP ed il routing al bridge</span>
+                                                  <span class="hljs-comment"># oppure si possono assegnare manualmente ip e route al default gateway:</span>
+<span class="hljs-built_in">sudo</span> ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+<span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+<span class="hljs-built_in">sudo</span> ip route flush dev br0
+<span class="hljs-built_in">sudo</span> ip addr add 192.168.1.14/24 dev br0
+<span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+
+<span class="hljs-comment"># Creazione delle VLAN</span>
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev enp5s0 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev enp5s0
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev tap0 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev tap0
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev tap1 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev tap1
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev tap2 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev tap2
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev tap3 untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev tap3
+<span class="hljs-built_in">sudo</span> bridge vlan del dev br0 vid 1 self
+<span class="hljs-built_in">sudo</span> bridge vlan add dev br0 vid 1 pvid untagged self
+</code></pre>
+<h3 id="avvio-vm" tabindex="-1">Avvio VM <a class="header-anchor" href="#avvio-vm" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># startvms.sh</span>
+qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap0,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:56 -hda ./Alpine_0.qcow2 &amp;
+qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap1,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:57 -hda ./Alpine_1.qcow2 &amp;
+qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap2,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:58 -hda ./Alpine_2.qcow2 &amp;
+qemu-system-x86_64 -machine <span class="hljs-built_in">type</span>=q35,accel=kvm -m 2G -cpu host -smp 2 -vga virtio -object rng-random,<span class="hljs-built_in">id</span>=rng0,filename=/dev/urandom -device virtio-rng-pci,rng=rng0 -nic tap,ifname=tap3,script=no,downscript=no,model=virtio-net-pci,mac=52:54:00:21:34:59 -hda ./Alpine_3.qcow2 &amp;
+</code></pre>
+<h3 id="stop-rete" tabindex="-1">Stop rete <a class="header-anchor" href="#stop-rete" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># stopnet.sh</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap1
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap2
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap3
+<span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+<span class="hljs-built_in">sudo</span> ip route flush dev enp5s0
+<span class="hljs-comment"># nmcli con up Cavo</span>
+<span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/24 dev enp5s0
+<span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev enp5s0
+</code></pre>
+</body></html>

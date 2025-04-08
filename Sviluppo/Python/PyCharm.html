@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.580" />
+        <title>PyCharm</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pycharm" tabindex="-1">PyCharm <a class="header-anchor" href="#pycharm" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.580</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione">Installazione </a></li><li><a href="#desktop-launcher-per-pycharm">Desktop launcher per PyCharm </a></li><li><a href="#keyboard-shortcuts">Keyboard Shortcuts </a><ol><li><a href="#cursori-multipli">Cursori multipli </a></li><li><a href="#column-mode">Column Mode </a></li><li><a href="#standard">Standard </a></li><li><a href="#configurati-da-me">Configurati da me </a></li></ol></li><li><a href="#configurazione-pycharm">Configurazione PyCharm </a><ol><li><a href="#java-vm-options">Java VM Options </a></li><li><a href="#template">Template </a></li><li><a href="#proxy">Proxy </a></li></ol></li><li><a href="#plugin-utilizzati">Plugin Utilizzati </a></li><li><a href="#tool-windows-utili-per-lo-sviluppo">Tool Windows utili per lo sviluppo </a><ol><li><a href="#caratteri-speciali">Caratteri Speciali </a></li><li><a href="#strumenti-di-cattura---screenshot---snippingtool">Strumenti di cattura - Screenshot - SnippingTool </a></li><li><a href="#cmd.exe-come-amministratore">cmd.exe come amministratore </a></li><li><a href="#problemi">Problemi </a></li><li><a href="#problema%3A-pycharm-esegue-lo-script-come-unit-test-anche-se-non-lo-%C3%A8">Problema: PyCharm esegue lo script come Unit Test anche se non lo è </a></li><li><a href="#problema%3A-errore-%22python-version-2.7-does-not-support-a-'f'-prefix%22">Problema: Errore &quot;Python version 2.7 does not support a &#39;F&#39; prefix&quot; </a></li><li><a href="#problema%3A-pycharm%2Fintellijidea-segnala-che-non-riesce-a-monitorare-tutti-i-file-del-workspace">Problema: PyCharm/IntelliJIdea segnala che non riesce a monitorare tutti i file del workspace </a></li></ol></li><li><a href="#pulizia-della-cache%2Freset">Pulizia della cache/reset </a><ol><li><a href="#windows">Windows </a></li><li><a href="#directories">Directories </a></li></ol></li><li><a href="#disabilitazione-update-automatici-in-windows">Disabilitazione update automatici in Windows </a></li><li><a href="#tools%2Fpython-external-documentation">Tools/Python External Documentation </a><ol><li><a href="#openpyxl">OpenPyXL </a></li><li><a href="#pyside6">PySide6 </a></li><li><a href="#matplotlib">Matplotlib </a></li><li><a href="#numpy">numpy </a></li><li><a href="#wxpython">WxPython </a></li><li><a href="#pygobject">PyGObject </a></li></ol></li><li><a href="#external-tools">External Tools </a></li></ol></nav><h1 id="pycharm-1" tabindex="-1">PyCharm <a class="header-anchor" href="#pycharm-1" aria-hidden="true">🔗</a></h1>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.jetbrains.com/pycharm/download/#section=linux">https://www.jetbrains.com/pycharm/download/#section=linux</a></li>
+</ul>
+<pre><code class="language-bash">~/bin/pycharm_install.sh
+~/bin/pycharm_make_launcher.sh
+</code></pre>
+<p><code>~/bin/pycharm_install.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+VERSION=2021.1.3
+EXT=tar.gz
+FILE=pycharm-community-<span class="hljs-variable">$VERSION</span>
+TARFILE=<span class="hljs-variable">$FILE</span>.<span class="hljs-variable">$EXT</span>
+URL=https://download.jetbrains.com/python/<span class="hljs-variable">$TARFILE</span>
+DST=/opt/pycharm
+<span class="hljs-built_in">cd</span> /tmp
+wget <span class="hljs-variable">$URL</span>
+tar xfz <span class="hljs-variable">$TARFILE</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf <span class="hljs-variable">$DST</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> <span class="hljs-variable">$FILE</span> <span class="hljs-variable">$DST</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R <span class="hljs-variable">$USER</span>:<span class="hljs-variable">$USER</span> <span class="hljs-variable">$DST</span>
+<span class="hljs-built_in">rm</span> -rf /tmp/<span class="hljs-variable">$FILE</span>*
+</code></pre>
+<h2 id="desktop-launcher-per-pycharm" tabindex="-1">Desktop launcher per PyCharm <a class="header-anchor" href="#desktop-launcher-per-pycharm" aria-hidden="true">🔗</a></h2>
+<p><code>~/bin/make_pycharm_launcher.sh</code></p>
+<p>il file <code>.desktop</code> puo essere copiato in <code>~/.config/autostart</code> per avere una autopartenza</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.local/share/applications/jetbrains-pycharm-ce.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=PyCharm Community Edition
+Comment=Python IDE
+TryExec=/opt/pycharm/bin/pycharm.sh
+Exec=<span class="hljs-string">&quot;/opt/pycharm/bin/pycharm.sh&quot;</span> %f
+Icon=/opt/pycharm/bin/pycharm.svg
+Keywords=IDE;Python;PyCharm;
+Encoding=UTF-8
+NoDisplay=<span class="hljs-literal">false</span>
+Categories=Development;IDE;TextEditor;
+StartupWMClass=jetbrains-pycharm-ce
+StartupNotify=<span class="hljs-literal">false</span>
+Terminal=<span class="hljs-literal">false</span>
+EOF
+<span class="hljs-comment"># https://specifications.freedesktop.org/desktop-entry-spec/latest/index.html</span>
+</code></pre>
+<h2 id="keyboard-shortcuts" tabindex="-1">Keyboard Shortcuts <a class="header-anchor" href="#keyboard-shortcuts" aria-hidden="true">🔗</a></h2>
+<h3 id="cursori-multipli" tabindex="-1">Cursori multipli <a class="header-anchor" href="#cursori-multipli" aria-hidden="true">🔗</a></h3>
+<p><a href="https://www.jetbrains.com/help/pycharm/2022.3/multicursor.html">https://www.jetbrains.com/help/pycharm/2022.3/multicursor.html</a></p>
+<ul>
+<li><code>ALT+CLICK</code> at the target location to add another caret.</li>
+<li>Press <code>Ctrl</code> <strong>twice</strong>, and then without releasing it, press up or down arrow keys.</li>
+</ul>
+<h3 id="column-mode" tabindex="-1">Column Mode <a class="header-anchor" href="#column-mode" aria-hidden="true">🔗</a></h3>
+<p><a href="https://www.jetbrains.com/help/pycharm/2022.3/multicursor.html#column_selection">https://www.jetbrains.com/help/pycharm/2022.3/multicursor.html#column_selection</a></p>
+<p><code>ALT+SHIFT+INSERT</code></p>
+<h3 id="standard" tabindex="-1"><span style='color:blue'>Standard</span> <a class="header-anchor" href="#standard" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Info</th>
+<th style="text-align:center">Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Search Everywhere</td>
+<td style="text-align:center"><code>SHIFT e SHIFT</code></td>
+</tr>
+<tr>
+<td style="text-align:left">List available Intent Actions</td>
+<td style="text-align:center"><code>ALT+ENTER</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/View/Quick Definition</td>
+<td style="text-align:center"><code>CTRL+SHIFT+I</code></td>
+</tr>
+<tr>
+<td style="text-align:left">View recent files</td>
+<td style="text-align:center"><code>CTRL+E</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td style="text-align:left">Search &amp; Replace</td>
+<td style="text-align:center">Keys</td>
+</tr>
+<tr>
+<td style="text-align:left">:---------------------------------------</td>
+<td style="text-align:center">:---------------------:</td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/Find in Path</td>
+<td style="text-align:center"><code>CTRL+H</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/<strong>Replace in Files</strong></td>
+<td style="text-align:center"><code>CTRL+SHIFT+R</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/Find Word at Caret</td>
+<td style="text-align:center"><code>CTRL+F12</code> --&gt; <code>CTRL+K</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/Highlight Usages</td>
+<td style="text-align:center"><code>ALT+SHIFT+O</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/Find Usages</td>
+<td style="text-align:center"><code>CTRL+G</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/Find Usages in File</td>
+<td style="text-align:center"><code>CTRL+SHIFT+G</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Find/Find Next</td>
+<td style="text-align:center"><code>F3</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td style="text-align:left">Navigate</td>
+<td style="text-align:center">Keys</td>
+</tr>
+<tr>
+<td style="text-align:left">:--------------------------------------------</td>
+<td style="text-align:center">:--------:</td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/Select In</td>
+<td style="text-align:center"><code>ALT+F1</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/Declaration</td>
+<td style="text-align:center"><code>F3</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/File Structure</td>
+<td style="text-align:center"><code>CTRL+O</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/Goto Line</td>
+<td style="text-align:center"><code>CTRL+L</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/<strong>Next Highlighted Error</strong></td>
+<td style="text-align:center"><code>F2</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main menu/Navigate/Next Occurrence</td>
+<td style="text-align:center"><code>CTRL+.</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main menu/Navigate/Previous Occurrence</td>
+<td style="text-align:center"><code>CTRL+,</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/Goto Line</td>
+<td style="text-align:center"><code>CTRL+L</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Visualizza Outline</strong></td>
+<td style="text-align:center"><code>CTRL+F12</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Tool Windows/<strong>Commit</strong></td>
+<td style="text-align:center"><code>ALT+0</code></td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td style="text-align:left">Editor</td>
+<td style="text-align:center">Keys</td>
+</tr>
+<tr>
+<td style="text-align:left">:------------------------------------</td>
+<td style="text-align:center">:------------------------------------------:</td>
+</tr>
+<tr>
+<td style="text-align:left">Other/Show Intentions Actions</td>
+<td style="text-align:center"><code>ALT+ENTER</code> (Aggiungere una import mancante)</td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Code/Optimize Imports</td>
+<td style="text-align:center"><code>CTRL+SHIFT+O</code> oppure <code>CTRL+ALT+O</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Editor Actions/Toggle Case</td>
+<td style="text-align:center"><code>CTRL+SHIFT+U</code> <code>CTRL+SHIFT+X</code> <code>CTRL+SHIFT+Y</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Editor Actions/Join Lines</td>
+<td style="text-align:center"><code>CTRL+SHIFT+J</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Code/Reformat Code</td>
+<td style="text-align:center"><code>CTRL+SHIFT+F</code> oppure <code>CTRL+ALT+L</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/View/Compare files</td>
+<td style="text-align:center"><code>CTRL+D</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Refactor/Rename</td>
+<td style="text-align:center"><code>CTRL+R</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Extend Selection</td>
+<td style="text-align:center"><code>ALT+SHIFT+SU</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Shrink Selection</td>
+<td style="text-align:center"><code>ALT+SHIFT+GIU</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Column Selection Mode</td>
+<td style="text-align:center"><code>ALT+SHIFT+INS</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Edit/Column Selection Mode+</td>
+<td style="text-align:center"><code>ALT+CTRL+SHIFT+MOUSE_BUTTON1</code> sel.multipla</td>
+</tr>
+<tr>
+<td style="text-align:left">Editor Actions/Add or Remove Caret</td>
+<td style="text-align:center"><code>ALT+MOUSE_BUTTON1</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="configurati-da-me" tabindex="-1">Configurati da me <a class="header-anchor" href="#configurati-da-me" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Function</th>
+<th style="text-align:center">Keys</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Other/<strong>Run</strong> context configuration</td>
+<td style="text-align:center"><code>F5</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Other/Close Active Editor</td>
+<td style="text-align:center"><code>CTRL+W</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Editor Actions/Move caret to Matching Brace</td>
+<td style="text-align:center"><code>CTRL+SHIFT+P</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Code/<strong>Comment</strong> with Line Comment</td>
+<td style="text-align:center"><span style='color:red;background-color:yellow'><code>CTRL+SHIFT+7</code></span></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Navigate/<strong>Last Edit Location</strong></td>
+<td style="text-align:center"><code>CTRL+Q</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/View/Quick Documentation</td>
+<td style="text-align:center"><code>CTRL+SHIFT+SPACE</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/View/Code Editor View Action/<strong>External Documentation</strong></td>
+<td style="text-align:center"><code>CTRL+1</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/View/<strong>Open in Browser</strong></td>
+<td style="text-align:center"><code>ALT+B</code></td>
+</tr>
+<tr>
+<td style="text-align:left">Main Menu/Tools/External Tools/File Manager</td>
+<td style="text-align:center"><code>F10</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="configurazione-pycharm" tabindex="-1">Configurazione PyCharm <a class="header-anchor" href="#configurazione-pycharm" aria-hidden="true">🔗</a></h2>
+<h3 id="java-vm-options" tabindex="-1">Java VM Options <a class="header-anchor" href="#java-vm-options" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://www.jetbrains.com/help/pycharm/tuning-the-ide.html">https://www.jetbrains.com/help/pycharm/tuning-the-ide.html</a></li>
+</ul>
+<p><strong>Non</strong> configurare a mano il file <code>&lt;IDE_HOME&gt;\bin\pycharm64.exe.vmoptions</code>
+ma nell'Help menu, click Edit Custom VM Options.</p>
+<p>-Xmx2048m
+-XX:NewRatio=1</p>
+<h3 id="template" tabindex="-1">Template <a class="header-anchor" href="#template" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://www.jetbrains.com/help/pycharm/using-file-and-code-templates.html#syntax">https://www.jetbrains.com/help/pycharm/using-file-and-code-templates.html#syntax</a>
+File templates use the <a href="http://velocity.apache.org/">Velocity Template Language (VTL)</a></li>
+<li><a href="http://velocity.apache.org/engine/2.0/vtl-reference.html">http://velocity.apache.org/engine/2.0/vtl-reference.html</a></li>
+<li><a href="https://www.jetbrains.com/help/pycharm/file-template-variables.html#custom_template_variables">https://www.jetbrains.com/help/pycharm/file-template-variables.html#custom_template_variables</a></li>
+</ul>
+<p>File da configurare in PyCharm <code>/File/Settings/Editor/File</code> e <br>
+<code>Code Templates/Python Script</code> : \</p>
+<pre><code>~/workspaces/Python/PythonWorkbench/Workbench/new_template.py
+
+
+__description__ = 'Script Python'
+__author__ = '$USER'
+__version__ = '0.0.1'
+__date__ = '${YEAR}-${MONTH}-${DAY} ${HOUR}:${MINUTE}:${SECOND}'
+
+
+#set( $MyName = &quot;John Smith&quot; )
+${USER} Login name of the current user
+${FILE_NAME} Name of the new file
+${DATE} Current system date
+${TIME} Current system time
+${YEAR} Current year
+${MONTH} Current month
+${DAY} Current day of the month
+${HOUR} Current hour
+${MINUTE} Current minute
+${SECOND} Current second
+</code></pre>
+<h3 id="proxy" tabindex="-1">Proxy <a class="header-anchor" href="#proxy" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/python-poetry/poetry/issues/3748">https://github.com/python-poetry/poetry/issues/3748</a> Using Poetry behind a company proxy</p>
+<pre><code>Per utilizzare il proxy con poetry e pycharm:
+
+- impostata la variabile di ambiente windows HTTPS_PROXY : http://&lt;user&gt;:&lt;pass&gt;@&lt;server&gt;:&lt;port&gt;
+- configurato il proxy in pycharm
+
+    ```bash
+    Proxy : proxy.it
+    Proxy Port:8080
+    ```
+</code></pre>
+<pre><code class="language-bash">    <span class="hljs-built_in">export</span> HTTP_PROXY=<span class="hljs-string">&quot;http://&lt;user&gt;:&lt;pass&gt;@&lt;server&gt;:&lt;port&gt;&quot;</span>
+    <span class="hljs-built_in">export</span> HTTPS_PROXY=<span class="hljs-string">&quot;http://&lt;user&gt;:&lt;pass&gt;@&lt;server&gt;:&lt;port&gt;&quot;</span>
+</code></pre>
+<h2 id="plugin-utilizzati" tabindex="-1">Plugin Utilizzati <a class="header-anchor" href="#plugin-utilizzati" aria-hidden="true">🔗</a></h2>
+<p><a href="https://plugins.jetbrains.com">https://plugins.jetbrains.com</a></p>
+<ul>
+<li><a href="https://plugins.jetbrains.com/plugin/7495--ignore">https://plugins.jetbrains.com/plugin/7495--ignore</a></li>
+<li><a href="https://plugins.jetbrains.com/plugin/9707-ansi-highlighter">https://plugins.jetbrains.com/plugin/9707-ansi-highlighter</a></li>
+<li><a href="https://plugins.jetbrains.com/plugin/15148-kite-ai-code-autocomplete-python-java-javascript-html-css-go-c-c-c-">https://plugins.jetbrains.com/plugin/15148-kite-ai-code-autocomplete-python-java-javascript-html-css-go-c-c-c-</a></li>
+<li><a href="https://plugins.jetbrains.com/plugin/7973-sonarlint">https://plugins.jetbrains.com/plugin/7973-sonarlint</a></li>
+<li><a href="https://plugins.jetbrains.com/plugin/2162-string-manipulation">https://plugins.jetbrains.com/plugin/2162-string-manipulation</a></li>
+<li><a href="https://plugins.jetbrains.com/plugin/14683-gfma">https://plugins.jetbrains.com/plugin/14683-gfma</a></li>
+</ul>
+<h2 id="tool-windows-utili-per-lo-sviluppo" tabindex="-1">Tool Windows utili per lo sviluppo <a class="header-anchor" href="#tool-windows-utili-per-lo-sviluppo" aria-hidden="true">🔗</a></h2>
+<h3 id="caratteri-speciali" tabindex="-1">Caratteri Speciali <a class="header-anchor" href="#caratteri-speciali" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Tasti</th>
+<th style="text-align:center">Carattere</th>
+<th style="text-align:center">SO</th>
+<th style="text-align:center">Nome</th>
+<th style="text-align:center">Python</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ALT+126</code></td>
+<td style="text-align:center"><strong>~</strong></td>
+<td style="text-align:center">Windows</td>
+<td style="text-align:center">Tilde</td>
+<td style="text-align:center"><code>u&quot;\u007E&quot;</code></td>
+<td><a href="https://www.fileformat.info/info/unicode/char/007e/index.htm">https://www.fileformat.info/info/unicode/char/007e/index.htm</a></td>
+</tr>
+<tr>
+<td><code>Alt Gr+ì</code></td>
+<td style="text-align:center"><strong>~</strong></td>
+<td style="text-align:center">Linux</td>
+<td style="text-align:center">Tilde</td>
+<td style="text-align:center"><code>u&quot;\u007E&quot;</code></td>
+<td><a href="https://www.fileformat.info/info/unicode/char/007e/index.htm">https://www.fileformat.info/info/unicode/char/007e/index.htm</a></td>
+</tr>
+<tr>
+<td><code>ALT+96</code></td>
+<td style="text-align:center"><strong>`</strong></td>
+<td style="text-align:center">Windows</td>
+<td style="text-align:center">Grave Accent</td>
+<td style="text-align:center"><code>u&quot;\u0060&quot;</code></td>
+<td><a href="https://www.fileformat.info/info/unicode/char/0060/index.htm">https://www.fileformat.info/info/unicode/char/0060/index.htm</a></td>
+</tr>
+<tr>
+<td><code>Alt Gr+'</code></td>
+<td style="text-align:center"><strong>`</strong></td>
+<td style="text-align:center">Linux</td>
+<td style="text-align:center">Grave Accent</td>
+<td style="text-align:center"><code>u&quot;\u0060&quot;</code></td>
+<td><a href="https://www.fileformat.info/info/unicode/char/0060/index.htm">https://www.fileformat.info/info/unicode/char/0060/index.htm</a></td>
+</tr>
+</tbody>
+</table>
+<p>in Windows per generare il backtick ` si puo commutare la tastiera a quella inglese: <code>SPACE</code> + <code>WINDOWS</code>.</p>
+<h3 id="strumenti-di-cattura---screenshot---snippingtool" tabindex="-1">Strumenti di cattura - Screenshot - SnippingTool <a class="header-anchor" href="#strumenti-di-cattura---screenshot---snippingtool" aria-hidden="true">🔗</a></h3>
+<p><code>%windir%\system32\SnippingTool.exe</code></p>
+<p>Per riuscire a catturare anche menu contestuali:</p>
+<ol>
+<li>una volta avviato premere <code>ESC</code> per uscire dallo snipping mode</li>
+<li>impostare lo schermo, ad esempio anche premendo il tasto destro del mouse su una finestra per far apparire un menu contestuale</li>
+<li>premere <code>CTRL + STAMP</code> per eseguire la cattura</li>
+</ol>
+<p><code>ALT+PrtScr</code>  (Singola Finestra)
+<code>PrtScr</code>  (Tutto lo schermo)</p>
+<h3 id="cmd.exe-come-amministratore" tabindex="-1">cmd.exe come amministratore <a class="header-anchor" href="#cmd.exe-come-amministratore" aria-hidden="true">🔗</a></h3>
+<p>(essenziale per eseguire pip)</p>
+<ol>
+<li>cercare <code>cmd</code> con il tasto <code>WIN</code></li>
+<li>selezionarlo con <code>CTRL+SHIFT+ENTER</code></li>
+</ol>
+<h3 id="problemi" tabindex="-1">Problemi <a class="header-anchor" href="#problemi" aria-hidden="true">🔗</a></h3>
+<h3 id="problema%3A-pycharm-esegue-lo-script-come-unit-test-anche-se-non-lo-%C3%A8" tabindex="-1">Problema: PyCharm esegue lo script come Unit Test anche se non lo è <a class="header-anchor" href="#problema%3A-pycharm-esegue-lo-script-come-unit-test-anche-se-non-lo-%C3%A8" aria-hidden="true">🔗</a></h3>
+<p>se il file contiene una funzione il cui nome inizia per test_ non si riesce
+ad eseguire il file se non come Unit Test:</p>
+<p><a href="https://intellij-support.jetbrains.com/hc/en-us/community/posts/207709345-Run-script-not-non-existant-unit-tests">https://intellij-support.jetbrains.com/hc/en-us/community/posts/207709345-Run-script-not-non-existant-unit-tests</a>
+<a href="https://youtrack.jetbrains.com/issue/PY-20521">https://youtrack.jetbrains.com/issue/PY-20521</a></p>
+<p>PY-20521 Improve test runner detection
+Soluzione: usare la combinazione di tasti CTRL+SHIFT+F10 definita da me o l'originale ALT+SHIFT+F10
+--&gt; Run Choose and run Configuration</p>
+<h3 id="problema%3A-errore-%22python-version-2.7-does-not-support-a-'f'-prefix%22" tabindex="-1">Problema: Errore &quot;Python version 2.7 does not support a 'F' prefix&quot; <a class="header-anchor" href="#problema%3A-errore-%22python-version-2.7-does-not-support-a-'f'-prefix%22" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://youtrack.jetbrains.com/issue/PY-31537">Support future-fstrings https://github.com/asottile/future-fstrings</a></li>
+<li><a href="https://youtrack.jetbrains.com/issue/PY-31532">Python version 2.7 does not support a 'F' prefix&quot; error</a></li>
+</ul>
+<p>Bug ancora aperto, il l'ho risolto eliminando e ridefinendo l'interprete Python del progetto,
+in particolare <strong>non</strong> cambiando il nome dell'interprete, lasciando inalterato quello che definisce l'IDE.</p>
+<h3 id="problema%3A-pycharm%2Fintellijidea-segnala-che-non-riesce-a-monitorare-tutti-i-file-del-workspace" tabindex="-1">Problema: PyCharm/IntelliJIdea segnala che non riesce a monitorare tutti i file del workspace <a class="header-anchor" href="#problema%3A-pycharm%2Fintellijidea-segnala-che-non-riesce-a-monitorare-tutti-i-file-del-workspace" aria-hidden="true">🔗</a></h3>
+<p><a href="../../Linux/kernel/sysctl.html">sysctl</a></p>
+<p>Soluzione:</p>
+<ul>
+<li><a href="https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit">https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit</a></li>
+</ul>
+<p>Bisogna incrementare il numero di file controllabili da inotify:</p>
+<p>Incrementare il numero di file controllabili da inotify</p>
+<p>Utile ad esempio per <strong>PyCharm</strong> ed AndroidStudio</p>
+<pre><code class="language-bash">$ systemd-analyze cat-config sysctl.d
+$ man sysctl
+$ man sysctl.d
+
+$ <span class="hljs-built_in">sudo</span> sysctl -a|grep fs.inotify.max_user_watches
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/max_user_watches.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+fs.inotify.max_user_watches = 524288
+EOF
+<span class="hljs-built_in">sudo</span> sysctl -p --system <span class="hljs-comment"># ricaricare la configurazione</span>
+</code></pre>
+<p>And don't forget to restart your IDE.</p>
+<h2 id="pulizia-della-cache%2Freset" tabindex="-1">Pulizia della cache/reset <a class="header-anchor" href="#pulizia-della-cache%2Freset" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/cleaning-system-cache.html">https://www.jetbrains.com/help/pycharm/cleaning-system-cache.html</a></p>
+<p>Select <code>File | Invalidate Caches/Restart</code> from the main menu.</p>
+</li>
+</ul>
+<h3 id="windows" tabindex="-1">Windows <a class="header-anchor" href="#windows" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat"><span class="hljs-built_in">RD</span> /S /Q <span class="hljs-variable">%LOCALAPPDATA%</span>\JetBrains
+<span class="hljs-built_in">RD</span> /S /Q <span class="hljs-variable">%APPDATA%</span>\JetBrains
+<span class="hljs-built_in">RD</span> /S /Q <span class="hljs-variable">%LOCALAPPDATA%</span>\pypoetry
+<span class="hljs-function">
+C:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">config</span> --<span class="hljs-title">list</span>
+<span class="hljs-title">cache</span>-<span class="hljs-title">dir</span> = &quot;%<span class="hljs-title">LOCALAPPDATA</span>%\\<span class="hljs-title">pypoetry</span>\\<span class="hljs-title">Cache</span>&quot;
+<span class="hljs-title">virtualenvs.path</span> = &quot;{<span class="hljs-title">cache</span>-<span class="hljs-title">dir</span>}\\<span class="hljs-title">virtualenvs</span>&quot;  # %<span class="hljs-title">LOCALAPPDATA</span>%\<span class="hljs-title">pypoetry</span>\<span class="hljs-title">Cache</span>\<span class="hljs-title">virtualenvs</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">config</span> <span class="hljs-title">virtualenvs.path</span>
+%<span class="hljs-title">LOCALAPPDATA</span>%\<span class="hljs-title">pypoetry</span>\<span class="hljs-title">Cache</span>\<span class="hljs-title">virtualenvs</span>
+</span></code></pre>
+<pre><code class="language-sh">  ~/.cache/JetBrains/PyCharm*
+  ~/.local/share/JetBrains/PyCharm*
+</code></pre>
+<h3 id="directories" tabindex="-1">Directories <a class="header-anchor" href="#directories" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#config-directory">https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#config-directory</a>
+The PyCharm configuration directory contains user-defined IDE settings, such as keymaps, color schemes, custom VM options, platform properties,
+%APPDATA%\JetBrains&lt;product&gt;<version>
+Example
+C:\Users\JohnS\AppData\Roaming\JetBrains\PyCharm2021.1
+~/.config/JetBrains/<product><version>
+Example
+~/.config/JetBrains/PyCharm2021.1</p>
+</li>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#system-directory">https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#system-directory</a>
+The PyCharm system directory contains caches and local history files.
+%LOCALAPPDATA%\JetBrains&lt;product&gt;<version>
+Example
+C:\Users\JohnS\AppData\Local\JetBrains\PyCharm2021.1
+~/.cache/JetBrains/<product><version>
+Example
+~/.cache/JetBrains/PyCharm2021.1</p>
+</li>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#plugins-directory">https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#plugins-directory</a>
+The PyCharm plugins directory contains user-installed plugins.
+%APPDATA%\JetBrains&lt;product&gt;<version>\plugins
+Example
+C:\Users\JohnS\AppData\Roaming\JetBrains\PyCharm2021.1\plugins
+~/.local/share/JetBrains/<product><version>
+Example
+~/.local/share/JetBrains/PyCharm2021.1</p>
+</li>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#logs-directory">https://www.jetbrains.com/help/pycharm/2021.1/directories-used-by-the-ide-to-store-settings-caches-plugins-and-logs.html#logs-directory</a>
+The PyCharm logs directory contains product logs and thread dumps.
+%LOCALAPPDATA%\JetBrains&lt;product&gt;<version>\log
+Example
+C:\Users\JohnS\AppData\Local\JetBrains\PyCharm2021.1\log
+~/.cache/JetBrains/<product><version>/log
+Example
+~/.cache/JetBrains/PyCharm2021.1/log</p>
+</li>
+</ul>
+<h2 id="disabilitazione-update-automatici-in-windows" tabindex="-1">Disabilitazione update automatici in Windows <a class="header-anchor" href="#disabilitazione-update-automatici-in-windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">    pycharm64.exe.vmoptions
+<span class="hljs-function">    Aggiungere:
+    -<span class="hljs-title">Dide.no.platform.update</span>=<span class="hljs-title">Administrator</span>
+
+    <span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">JetBrains</span>\<span class="hljs-title">PyCharm</span> <span class="hljs-title">Community</span> <span class="hljs-title">Edition</span> 2023.1.3\<span class="hljs-title">bin</span>\<span class="hljs-title">pycharm64.exe.vmoptions</span>
+    %<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">JetBrains</span>\<span class="hljs-title">PyCharmCE2023</span>.3\<span class="hljs-title">pycharm64.exe.vmoptions</span>
+
+    <span class="hljs-title">runas</span> /<span class="hljs-title">user:Administrator</span> <span class="hljs-title">cmd.exe</span>
+    <span class="hljs-title">cd</span> <span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">JetBrains</span>\<span class="hljs-title">PyCharm</span> <span class="hljs-title">Community</span> <span class="hljs-title">Edition</span> 2023.1.3\<span class="hljs-title">bin</span>
+    &quot;<span class="hljs-title">c</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">Notepad</span>++\<span class="hljs-title">notepad</span>++.<span class="hljs-title">exe</span>&quot; <span class="hljs-title">pycharm64.exe.vmoptions</span>
+</span></code></pre>
+<h2 id="tools%2Fpython-external-documentation" tabindex="-1">Tools/Python External Documentation <a class="header-anchor" href="#tools%2Fpython-external-documentation" aria-hidden="true">🔗</a></h2>
+<p><a href="https://www.jetbrains.com/help/pycharm/settings-tools-python-external-documentation.html">https://www.jetbrains.com/help/pycharm/settings-tools-python-external-documentation.html</a></p>
+<p><code>File | Settings | Tools | External Documentation</code></p>
+<h3 id="openpyxl" tabindex="-1">OpenPyXL <a class="header-anchor" href="#openpyxl" aria-hidden="true">🔗</a></h3>
+<p>Module Name: <code>openpyxl</code>
+URL Pattern: <code>https://openpyxl.readthedocs.io/en/stable/api/{module.name}.html#{element.qname}</code></p>
+<p>Esempio</p>
+<p><a href="https://openpyxl.readthedocs.io/en/stable/api/openpyxl.cell.cell.html#openpyxl.cell.cell.Cell.check_string">https://openpyxl.readthedocs.io/en/stable/api/openpyxl.cell.cell.html#openpyxl.cell.cell.Cell.check_string</a>
+&lt;&gt;</p>
+<h3 id="pyside6" tabindex="-1">PySide6 <a class="header-anchor" href="#pyside6" aria-hidden="true">🔗</a></h3>
+<p>Module Name: <code>PySide6</code>
+URL Pattern: <code>https://doc.qt.io/qtforpython/{module.name.slashes}/{class.name}.html#{module.name}.{element.qname}</code></p>
+<p>Esempio:</p>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget.setGeometry">https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget.setGeometry</a></p>
+<h3 id="matplotlib" tabindex="-1">Matplotlib <a class="header-anchor" href="#matplotlib" aria-hidden="true">🔗</a></h3>
+<p>Module Name: <code>matplotlib</code>
+URL Pattern: <code>http://matplotlib.org/api/{module.basename}_api.html#{element.qname}</code></p>
+<p>Esempio:</p>
+<p><a href="https://matplotlib.org/stable/api/dates_api.html#matplotlib.dates.YearLocator">https://matplotlib.org/stable/api/dates_api.html#matplotlib.dates.YearLocator</a></p>
+<h3 id="numpy" tabindex="-1">numpy <a class="header-anchor" href="#numpy" aria-hidden="true">🔗</a></h3>
+<p><a href="http://docs.scipy.org/doc/numpy/reference/generated/%7Bmodule.name%7D.%7Belement.name%7D.html">http://docs.scipy.org/doc/numpy/reference/generated/{module.name}.{element.name}.html</a></p>
+<p>Esempio:</p>
+<p><a href="https://numpy.org/doc/stable/reference/generated/numpy.arange.html">https://numpy.org/doc/stable/reference/generated/numpy.arange.html</a></p>
+<h3 id="wxpython" tabindex="-1">WxPython <a class="header-anchor" href="#wxpython" aria-hidden="true">🔗</a></h3>
+<p><a href="http://www.wxpython.org/docs/api/%7Bmodule.name%7D.%7Bclass.name%7D-class.html#%7Bfunction.name%7D">http://www.wxpython.org/docs/api/{module.name}.{class.name}-class.html#{function.name}</a></p>
+<h3 id="pygobject" tabindex="-1">PyGObject <a class="header-anchor" href="#pygobject" aria-hidden="true">🔗</a></h3>
+<p><a href="http://library.gnome.org/devel/pygtk/stable/class-gtk%7Bclass.name.lower%7D.html#method-gtk%7Bclass.name.lower%7D--%7Bfunction.name.dashes%7D">http://library.gnome.org/devel/pygtk/stable/class-gtk{class.name.lower}.html#method-gtk{class.name.lower}--{function.name.dashes}</a></p>
+<h2 id="external-tools" tabindex="-1">External Tools <a class="header-anchor" href="#external-tools" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/2022.3/configuring-third-party-tools.html">https://www.jetbrains.com/help/pycharm/2022.3/configuring-third-party-tools.html</a></p>
+</li>
+<li>
+<p><a href="https://www.jetbrains.com/help/pycharm/2022.3/built-in-macros.html">https://www.jetbrains.com/help/pycharm/2022.3/built-in-macros.html</a></p>
+</li>
+<li>
+<p>Name: File Manager</p>
+<pre><code class="language-bash">    Description: nautilus
+    Program: nautilus
+    Arguments: $FileDir$
+    Working Directory: $ProjectFileDir$
+</code></pre>
+</li>
+<li>
+<p>Name: QtDesigner</p>
+<pre><code class="language-bash">    Description: Designer GUI per produzione file .ui e .qrc
+    Program: poetry
+    Arguments: run pyside6-designer
+    Working Directory: $FileDir$
+</code></pre>
+</li>
+<li>
+<p>Name: Start MS-DOS</p>
+<pre><code class="language-bash">    Description: Apre una shell nella directory dove è presente il file corrente
+    Program: C:\windows\system32\cmd.exe
+    Arguments: /K <span class="hljs-string">&quot;cd /D $FileDir$&quot;</span>
+    Working Directory: $FileDir$
+</code></pre>
+</li>
+<li>
+<p>Name: Qt5Compiler</p>
+</li>
+</ul>
+<pre><code class="language-bash">    Description: Compilazione dei file di risorse di tipo .ui e .qrc
+    Program: C:\Python\python.exe
+    Parameters: <span class="hljs-string">&quot;$ProjectFileDir$\PyQt\Applicazioni\UICompiler\mkpyqt.py&quot;</span> --verbose --force <span class="hljs-string">&quot;$FileDir$&quot;</span>
+    Working Directory: $FileDir$
+</code></pre>
+<ul>
+<li>
+<p>Name: 2to3</p>
+<pre><code class="language-bash">    Description: Conversione codice da Python2 a Python3
+    Program: C:\Python\python.exe
+    Parameters: <span class="hljs-string">&quot;C:\Python\Tools\scripts\2to3.py&quot;</span> -w $FileName$
+    Working Directory: $FileDir$
+</code></pre>
+</li>
+</ul>
+</body></html>

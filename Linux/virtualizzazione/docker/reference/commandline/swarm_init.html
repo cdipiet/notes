@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.657" />
+        <title>swarm_init</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="swarm_init" tabindex="-1">swarm_init <a class="header-anchor" href="#swarm_init" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.657</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22swarm-init%22description%3A-%22the-swarm-init-command-description-and-usage%22keywords%3A-%22swarm%2C-init%22">title: &quot;swarm init&quot;description: &quot;The swarm init command description and usage&quot;keywords: &quot;swarm, init&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#--autolock">--autolock </a></li><li><a href="#--cert-expiry">--cert-expiry </a></li><li><a href="#--dispatcher-heartbeat">--dispatcher-heartbeat </a></li><li><a href="#--external-ca">--external-ca </a></li><li><a href="#--force-new-cluster">--force-new-cluster </a></li><li><a href="#--listen-addr">--listen-addr </a></li><li><a href="#--advertise-addr">--advertise-addr </a></li><li><a href="#--data-path-addr">--data-path-addr </a></li><li><a href="#--data-path-port">--data-path-port </a></li><li><a href="#--default-addr-pool">--default-addr-pool </a></li><li><a href="#--default-addr-pool-mask-length">--default-addr-pool-mask-length </a></li><li><a href="#--task-history-limit">--task-history-limit </a></li><li><a href="#--max-snapshots">--max-snapshots </a></li><li><a href="#--snapshot-interval">--snapshot-interval </a></li><li><a href="#--availability">--availability </a></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22swarm-init%22description%3A-%22the-swarm-init-command-description-and-usage%22keywords%3A-%22swarm%2C-init%22" tabindex="-1">title: &quot;swarm init&quot;
+description: &quot;The swarm init command description and usage&quot;
+keywords: &quot;swarm, init&quot; <a class="header-anchor" href="#title%3A-%22swarm-init%22description%3A-%22the-swarm-init-command-description-and-usage%22keywords%3A-%22swarm%2C-init%22" aria-hidden="true">🔗</a></h2>
+<h1 id="swarm-init" tabindex="-1">swarm init <a class="header-anchor" href="#swarm-init" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker swarm init [OPTIONS]
+
+Initialize a swarm
+
+Options:
+<span class="hljs-code">      --advertise-addr string           Advertised address (format: &lt;ip|interface&gt;[:port])
+      --autolock                        Enable manager autolocking (requiring an unlock key to start a stopped manager)
+      --availability string             Availability of the node (&quot;active&quot;|&quot;pause&quot;|&quot;drain&quot;) (default &quot;active&quot;)
+      --cert-expiry duration            Validity period for node certificates (ns|us|ms|s|m|h) (default 2160h0m0s)
+      --data-path-addr string           Address or interface to use for data path traffic (format: &lt;ip|interface&gt;)
+      --data-path-port uint32           Port number to use for data path traffic (1024 - 49151). If no value is set or is set to 0, the default port (4789) is used.
+      --default-addr-pool IPnet         List of default address pool (format: &lt;cidr&gt;)
+      --default-addr-pool-mask-length   Subnet mask length for default address pool (default 24)
+      --dispatcher-heartbeat duration   Dispatcher heartbeat period (ns|us|ms|s|m|h) (default 5s)
+      --external-ca external-ca         Specifications of one or more certificate signing endpoints
+      --force-new-cluster               Force create a new cluster from current state
+      --help                            Print usage
+      --listen-addr node-addr           Listen address (format: &lt;ip|interface&gt;[:port]) (default 0.0.0.0:2377)
+      --max-snapshots uint              Number of additional Raft snapshots to retain
+      --snapshot-interval uint          Number of log entries between Raft snapshots (default 10000)
+      --task-history-limit int          Task history retention limit (default 5)
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Initialize a swarm. The docker engine targeted by this command becomes a manager
+in the newly created single-node swarm.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker swarm init --advertise-addr 192.168.99.121</span>
+
+Swarm initialized: current node (bvz81updecsj6wjz393c09vti) is now a manager.
+
+To add a worker to this swarm, run the following command:
+
+    docker swarm join \
+    --token SWMTKN-1-3pu6hszjas19xyp7ghgosyx9k8atbfcr8p2is99znpy26u2lkl-1awxwuwd3z9j1z3puu7rcgdbx \
+    172.17.0.2:2377
+
+To add a manager to this swarm, run &#x27;docker swarm join-token manager&#x27; and follow the instructions.
+</code></pre>
+<p><code>docker swarm init</code> generates two random tokens, a worker token and a manager token. When you join
+a new node to the swarm, the node joins as a worker or manager node based upon the token you pass
+to <a href="swarm_join.html">swarm join</a>.</p>
+<p>After you create the swarm, you can display or rotate the token using
+<a href="swarm_join-token.html">swarm join-token</a>.</p>
+<h3 id="--autolock" tabindex="-1"><code>--autolock</code> <a class="header-anchor" href="#--autolock" aria-hidden="true">🔗</a></h3>
+<p>This flag enables automatic locking of managers with an encryption key. The
+private keys and data stored by all managers will be protected by the
+encryption key printed in the output, and will not be accessible without it.
+Thus, it is very important to store this key in order to activate a manager
+after it restarts. The key can be passed to <code>docker swarm unlock</code> to reactivate
+the manager. Autolock can be disabled by running
+<code>docker swarm update --autolock=false</code>. After disabling it, the encryption key
+is no longer required to start the manager, and it will start up on its own
+without user intervention.</p>
+<h3 id="--cert-expiry" tabindex="-1"><code>--cert-expiry</code> <a class="header-anchor" href="#--cert-expiry" aria-hidden="true">🔗</a></h3>
+<p>This flag sets the validity period for node certificates.</p>
+<h3 id="--dispatcher-heartbeat" tabindex="-1"><code>--dispatcher-heartbeat</code> <a class="header-anchor" href="#--dispatcher-heartbeat" aria-hidden="true">🔗</a></h3>
+<p>This flag sets the frequency with which nodes are told to use as a
+period to report their health.</p>
+<h3 id="--external-ca" tabindex="-1"><code>--external-ca</code> <a class="header-anchor" href="#--external-ca" aria-hidden="true">🔗</a></h3>
+<p>This flag sets up the swarm to use an external CA to issue node certificates. The value takes
+the form <code>protocol=X,url=Y</code>. The value for <code>protocol</code> specifies what protocol should be used
+to send signing requests to the external CA. Currently, the only supported value is <code>cfssl</code>.
+The URL specifies the endpoint where signing requests should be submitted.</p>
+<h3 id="--force-new-cluster" tabindex="-1"><code>--force-new-cluster</code> <a class="header-anchor" href="#--force-new-cluster" aria-hidden="true">🔗</a></h3>
+<p>This flag forces an existing node that was part of a quorum that was lost to restart as a single node Manager without losing its data.</p>
+<h3 id="--listen-addr" tabindex="-1"><code>--listen-addr</code> <a class="header-anchor" href="#--listen-addr" aria-hidden="true">🔗</a></h3>
+<p>The node listens for inbound swarm manager traffic on this address. The default is to listen on
+0.0.0.0:2377. It is also possible to specify a network interface to listen on that interface's
+address; for example <code>--listen-addr eth0:2377</code>.</p>
+<p>Specifying a port is optional. If the value is a bare IP address or interface
+name, the default port 2377 will be used.</p>
+<h3 id="--advertise-addr" tabindex="-1"><code>--advertise-addr</code> <a class="header-anchor" href="#--advertise-addr" aria-hidden="true">🔗</a></h3>
+<p>This flag specifies the address that will be advertised to other members of the
+swarm for API access and overlay networking. If unspecified, Docker will check
+if the system has a single IP address, and use that IP address with the
+listening port (see <code>--listen-addr</code>). If the system has multiple IP addresses,
+<code>--advertise-addr</code> must be specified so that the correct address is chosen for
+inter-manager communication and overlay networking.</p>
+<p>It is also possible to specify a network interface to advertise that interface's address;
+for example <code>--advertise-addr eth0:2377</code>.</p>
+<p>Specifying a port is optional. If the value is a bare IP address or interface
+name, the default port 2377 will be used.</p>
+<h3 id="--data-path-addr" tabindex="-1"><code>--data-path-addr</code> <a class="header-anchor" href="#--data-path-addr" aria-hidden="true">🔗</a></h3>
+<p>This flag specifies the address that global scope network drivers will publish towards
+other nodes in order to reach the containers running on this node.
+Using this parameter it is then possible to separate the container's data traffic from the
+management traffic of the cluster.
+If unspecified, Docker will use the same IP address or interface that is used for the
+advertise address.</p>
+<h3 id="--data-path-port" tabindex="-1"><code>--data-path-port</code> <a class="header-anchor" href="#--data-path-port" aria-hidden="true">🔗</a></h3>
+<p>This flag allows you to configure the UDP port number to use for data path
+traffic. The provided port number must be within the 1024 - 49151 range. If
+this flag is not set or is set to 0, the default port number 4789 is used.
+The data path port can only be configured when initializing the swarm, and
+applies to all nodes that join the swarm.
+The following example initializes a new Swarm, and configures the data path
+port to UDP port 7777;</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker swarm init --data-path-port=7777</span>
+</code></pre>
+<p>After the swarm is initialized, use the <code>docker info</code> command to verify that
+the port is configured:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker info</span>
+&lt;...&gt;
+ClusterID: 9vs5ygs0gguyyec4iqf2314c0
+Managers: 1
+Nodes: 1
+Data Path Port: 7777
+&lt;...&gt;
+</code></pre>
+<h3 id="--default-addr-pool" tabindex="-1"><code>--default-addr-pool</code> <a class="header-anchor" href="#--default-addr-pool" aria-hidden="true">🔗</a></h3>
+<p>This flag specifies default subnet pools for global scope networks.
+Format example is <code>--default-addr-pool 30.30.0.0/16 --default-addr-pool 40.40.0.0/16</code></p>
+<h3 id="--default-addr-pool-mask-length" tabindex="-1"><code>--default-addr-pool-mask-length</code> <a class="header-anchor" href="#--default-addr-pool-mask-length" aria-hidden="true">🔗</a></h3>
+<p>This flag specifies default subnet pools mask length for default-addr-pool.
+Format example is <code>--default-addr-pool-mask-length 24</code></p>
+<h3 id="--task-history-limit" tabindex="-1"><code>--task-history-limit</code> <a class="header-anchor" href="#--task-history-limit" aria-hidden="true">🔗</a></h3>
+<p>This flag sets up task history retention limit.</p>
+<h3 id="--max-snapshots" tabindex="-1"><code>--max-snapshots</code> <a class="header-anchor" href="#--max-snapshots" aria-hidden="true">🔗</a></h3>
+<p>This flag sets the number of old Raft snapshots to retain in addition to the
+current Raft snapshots. By default, no old snapshots are retained. This option
+may be used for debugging, or to store old snapshots of the swarm state for
+disaster recovery purposes.</p>
+<h3 id="--snapshot-interval" tabindex="-1"><code>--snapshot-interval</code> <a class="header-anchor" href="#--snapshot-interval" aria-hidden="true">🔗</a></h3>
+<p>This flag specifies how many log entries to allow in between Raft snapshots.
+Setting this to a higher number will trigger snapshots less frequently.
+Snapshots compact the Raft log and allow for more efficient transfer of the
+state to new managers. However, there is a performance cost to taking snapshots
+frequently.</p>
+<h3 id="--availability" tabindex="-1"><code>--availability</code> <a class="header-anchor" href="#--availability" aria-hidden="true">🔗</a></h3>
+<p>This flag specifies the availability of the node at the time the node joins a master.
+Possible availability values are <code>active</code>, <code>pause</code>, or <code>drain</code>.</p>
+<p>This flag is useful in certain situations. For example, a cluster may want to have
+dedicated manager nodes that are not served as worker nodes. This could be achieved
+by passing <code>--availability=drain</code> to <code>docker swarm init</code>.</p>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="swarm_ca.html">swarm ca</a></li>
+<li><a href="swarm_join.html">swarm join</a></li>
+<li><a href="swarm_join-token.html">swarm join-token</a></li>
+<li><a href="swarm_leave.html">swarm leave</a></li>
+<li><a href="swarm_unlock.html">swarm unlock</a></li>
+<li><a href="swarm_unlock-key.html">swarm unlock-key</a></li>
+<li><a href="swarm_update.html">swarm update</a></li>
+</ul>
+</body></html>

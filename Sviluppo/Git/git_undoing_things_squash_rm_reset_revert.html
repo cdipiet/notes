@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.999" />
+        <title>git_undoing_things_squash_rm_reset_revert</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="git_undoing_things_squash_rm_reset_revert" tabindex="-1">git_undoing_things_squash_rm_reset_revert <a class="header-anchor" href="#git_undoing_things_squash_rm_reset_revert" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.999</p>
+<nav class="table-of-contents"><ol><li><a href="#amend---correggere-l'ultimo-commit">amend - correggere l&#39;ultimo commit </a></li><li><a href="#cancellazione-di-un-file-dal-repository">Cancellazione di un file dal repository </a><ol><li><a href="#terminare-il-tracciamento-di-un-file-senza-cancellarlo---rm---cached-e-.gitignore">Terminare il tracciamento di un file senza cancellarlo - rm --cached e .gitignore </a></li></ol></li><li><a href="#spostare%2Fridenominare-un-file">Spostare/Ridenominare un file </a></li><li><a href="#unstaging-a-staged-file">Unstaging a Staged File </a></li><li><a href="#unmodifying-a-modified-file">Unmodifying a Modified File </a><ol><li><a href="#salvare-i-file-modificati-in-un-nuovo-branch">Salvare i file modificati in un nuovo branch </a></li></ol></li><li><a href="#creare-un-nuovo-commit-riportando-il-repository-ad-un-commit-precedente">Creare un nuovo commit riportando il repository ad un commit precedente </a></li><li><a href="#checkout-vs-reset">checkout vs reset </a><ol><li><a href="#eseguiti-su-un-file">Eseguiti su un file </a></li><li><a href="#eseguiti-su-riferimenti-a-commit">Eseguiti su riferimenti a commit </a></li></ol></li><li><a href="#annullare-l'ultimo-commit---git-reset---hard">Annullare l&#39;ultimo commit - git reset --hard </a></li><li><a href="#annullare-l'ultimo-commit---git-reset---soft---squash">Annullare l&#39;ultimo commit - git reset --soft - squash </a></li><li><a href="#ripristinare-un-file-precedentemente-cancellato">Ripristinare un file precedentemente cancellato </a><ol><li><a href="#recuperare-un-file-cancellato-ma-non-committato">Recuperare un file cancellato ma non committato </a></li><li><a href="#recuperare-un-file-cancellato-e-committato">Recuperare un file cancellato e committato </a></li></ol></li><li><a href="#annullare-le-modifiche-ad-un-file">Annullare le modifiche ad un file </a><ol><li><a href="#not-added-nor-committed">not added nor committed </a></li><li><a href="#added-not-committed">added not committed </a></li><li><a href="#ripristinare-il-file-utilizzando-un-repository-remoto">Ripristinare il file utilizzando un repository remoto </a></li></ol></li><li><a href="#caricare-nel-repository-remoto-le-modifiche-locali">Caricare nel repository remoto le modifiche locali </a></li><li><a href="#aggiornare-la-versione-in-locale-da-un-repository-remoto">Aggiornare la versione in locale da un repository remoto </a><ol><li><a href="#se-non-ci-sono-modifiche-locali(metodo-veloce)">Se non ci sono modifiche locali(metodo veloce) </a></li><li><a href="#se-ci-sono-modifiche-locali-e-vogliamo-annullarle">Se ci sono modifiche locali e vogliamo annullarle </a></li><li><a href="#se-ci-sono-modifiche-locali-e-vogliamo-mantenerle">Se ci sono modifiche locali e vogliamo mantenerle </a></li></ol></li><li><a href="#squash---comprimere-piu-commit-in-uno-solo-con-il-soft-reset">Squash - Comprimere piu commit in uno solo con il soft reset </a></li><li><a href="#tornare-all'head">Tornare all&#39;HEAD </a></li></ol></nav><h1 id="undoing-things" tabindex="-1">Undoing Things <a class="header-anchor" href="#undoing-things" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things">https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified">https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History">https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History</a></li>
+<li><a href="./git_reset.html">git reset</a></li>
+<li><a href="./git_revert.html">Approfondimento git revert</a></li>
+</ul>
+<h2 id="amend---correggere-l'ultimo-commit" tabindex="-1">amend - correggere l'ultimo commit <a class="header-anchor" href="#amend---correggere-l'ultimo-commit" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things">https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things</a></li>
+<li><a href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---amend">https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---amend</a></li>
+<li><a href="https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---no-edit">https://git-scm.com/docs/git-commit#Documentation/git-commit.txt---no-edit</a></li>
+<li><a href="https://stackoverflow.com/questions/10237071/how-to-amend-a-commit-without-changing-commit-message-reusing-the-previous-one">https://stackoverflow.com/questions/10237071/how-to-amend-a-commit-without-changing-commit-message-reusing-the-previous-one</a></li>
+</ul>
+<pre><code class="language-bash">$ git config --global alias.amend <span class="hljs-string">&#x27;commit --amend --no-edit&#x27;</span>
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">mkdir</span> <span class="hljs-title">new_project</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">cd</span> <span class="hljs-title">new_project</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">init</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">type</span> <span class="hljs-title">nul</span> &gt;&gt; <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">add</span> .
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Initial</span> <span class="hljs-title">Commit</span>&quot;
+<span class="hljs-title">REM</span> <span class="hljs-title">Se</span> <span class="hljs-title">il</span> <span class="hljs-title">commit</span> è <span class="hljs-title">stato</span> <span class="hljs-title">fatto</span> <span class="hljs-title">troppo</span> <span class="hljs-title">presto</span> è <span class="hljs-title">possibile</span> <span class="hljs-title">aggiungere</span> <span class="hljs-title">modifiche</span> <span class="hljs-title">e</span> <span class="hljs-title">correggerlo</span> <span class="hljs-title">senza</span> <span class="hljs-title">fare</span> <span class="hljs-title">un</span> <span class="hljs-title">altro</span> <span class="hljs-title">commit</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">type</span> <span class="hljs-title">nul</span> &gt;&gt; <span class="hljs-title">new_file_2.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">add</span> .
+<span class="hljs-comment">
+REM Per utilizzare il messaggio del primo commit:</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> --<span class="hljs-title">amend</span> --<span class="hljs-title">no</span>-<span class="hljs-title">edit</span>
+<span class="hljs-comment">
+REM Per aggiornare il messaggio del primo commit</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> --<span class="hljs-title">amend</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">an</span> <span class="hljs-title">updated</span> <span class="hljs-title">commit</span> <span class="hljs-title">message</span>&quot;
+</span></code></pre>
+<h2 id="cancellazione-di-un-file-dal-repository" tabindex="-1">Cancellazione di un file dal repository <a class="header-anchor" href="#cancellazione-di-un-file-dal-repository" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_removing_files">https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_removing_files</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># If you modified the file or had already added it to the staging area, you must force the removal with the -f option</span>
+$ git <span class="hljs-built_in">rm</span> -f PROJECTS.md
+$ git commit -m <span class="hljs-string">&quot;Rimosso file PROJECTS.md&quot;</span>
+
+<span class="hljs-comment"># to keep the file in your working tree but remove it from your staging area</span>
+$ git <span class="hljs-built_in">rm</span> --cached README
+$ git commit -m <span class="hljs-string">&quot;Rimosso file README&quot;</span>
+</code></pre>
+<h3 id="terminare-il-tracciamento-di-un-file-senza-cancellarlo---rm---cached-e-.gitignore" tabindex="-1">Terminare il tracciamento di un file senza cancellarlo - rm --cached e .gitignore <a class="header-anchor" href="#terminare-il-tracciamento-di-un-file-senza-cancellarlo---rm---cached-e-.gitignore" aria-hidden="true">🔗</a></h3>
+<p>Per interrompere il controllo di versione su un file senza cancellarlo:</p>
+<ol>
+<li>
+<p>Rimuovere il file/directory dal repository al prossimo commit,<br>
+Rimuove il file dalla staging area mantenendolo nella directory locale:</p>
+<pre><code class="language-bash">git <span class="hljs-built_in">rm</span> --cached &lt;file_path&gt;&amp;&amp; git commit -m <span class="hljs-string">&quot;rimosso dal tracking&quot;</span> <span class="hljs-comment"># Per i file</span>
+git <span class="hljs-built_in">rm</span> --cached -r &lt;<span class="hljs-built_in">dir</span>&gt;&amp;&amp; git commit -m <span class="hljs-string">&quot;rimosso dal tracking&quot;</span>    <span class="hljs-comment"># Per le directory</span>
+</code></pre>
+<p>Questi comandi rimuovono il file/directory dal repository.
+In questo modo però anche gli altri utenti perderanno il versioning sul file.</p>
+</li>
+<li>
+<p>Utilizzando <code>.gitignore</code></p>
+<p>Funziona solo per file non già in tracciamento,<br>
+per cui se un file è già tracciato <strong>bisogna prima rimuoverlo dal tracciamento</strong> con:</p>
+<pre><code class="language-bash">git <span class="hljs-built_in">rm</span> --cached &lt;file_path&gt;&amp;&amp; git commit -m <span class="hljs-string">&quot;rimosso dal tracking&quot;</span>
+</code></pre>
+<p>e <strong>solo dopo</strong> inserirlo nel <code>.gitignore</code>.</p>
+</li>
+<li>
+<p>Per non rilevare più le modifiche del file solo per l'utente:</p>
+<pre><code class="language-bash">git update-index --assume-unchanged &lt;file_path&gt;
+</code></pre>
+</li>
+</ol>
+<h2 id="spostare%2Fridenominare-un-file" tabindex="-1">Spostare/Ridenominare un file <a class="header-anchor" href="#spostare%2Fridenominare-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> (project-directory)
+$ git <span class="hljs-built_in">mv</span> README.md README
+<span class="hljs-comment"># $ mv README.md README</span>
+<span class="hljs-comment"># $ git rm README.md</span>
+<span class="hljs-comment"># $ git add README</span>
+$ git commit -a -m <span class="hljs-string">&#x27;Second commit&#x27;</span>
+</code></pre>
+<h2 id="unstaging-a-staged-file" tabindex="-1">Unstaging a Staged File <a class="header-anchor" href="#unstaging-a-staged-file" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things#_unstaging">https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things#_unstaging</a></li>
+<li><a href="https://git-scm.com/docs/git-reset">https://git-scm.com/docs/git-reset</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_git_reset">https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_git_reset</a></li>
+<li><a href="https://git-scm.com/docs/git-restore">https://git-scm.com/docs/git-restore</a></li>
+</ul>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">mkdir</span> <span class="hljs-title">new_project</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">cd</span> <span class="hljs-title">new_project</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">init</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">type</span> <span class="hljs-title">nul</span> &gt;&gt; <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">type</span> <span class="hljs-title">nul</span> &gt;&gt; <span class="hljs-title">new_file_2.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">add</span> <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Initial</span> <span class="hljs-title">Commit</span>&quot;
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">add</span> <span class="hljs-title">new_file_2.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+    <span class="hljs-title">On</span> <span class="hljs-title">branch</span> <span class="hljs-title">main</span>
+    <span class="hljs-title">Changes</span> <span class="hljs-title">to</span> <span class="hljs-title">be</span> <span class="hljs-title">committed</span>:
+    (<span class="hljs-title">use</span> &quot;<span class="hljs-title">git</span> <span class="hljs-title">restore</span> --<span class="hljs-title">staged</span> &lt;<span class="hljs-title">file</span>&gt;...&quot; <span class="hljs-title">to</span> <span class="hljs-title">unstage</span>)
+            <span class="hljs-title">new</span> <span class="hljs-title">file</span>:   <span class="hljs-title">new_file_2.txt</span>
+
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">reset</span> <span class="hljs-title">HEAD</span> <span class="hljs-title">new_file_2.txt</span>
+<span class="hljs-title">REM</span> <span class="hljs-title">Oppure</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">restore</span> --<span class="hljs-title">staged</span> <span class="hljs-title">new_file_2.txt</span>
+
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+<span class="hljs-title">On</span> <span class="hljs-title">branch</span> <span class="hljs-title">main</span>
+<span class="hljs-title">Untracked</span> <span class="hljs-title">files</span>:
+  (<span class="hljs-title">use</span> &quot;<span class="hljs-title">git</span> <span class="hljs-title">add</span> &lt;<span class="hljs-title">file</span>&gt;...&quot; <span class="hljs-title">to</span> <span class="hljs-title">include</span> <span class="hljs-title">in</span> <span class="hljs-title">what</span> <span class="hljs-title">will</span> <span class="hljs-title">be</span> <span class="hljs-title">committed</span>)
+        <span class="hljs-title">new_file_2.txt</span>
+</span></code></pre>
+<h2 id="unmodifying-a-modified-file" tabindex="-1">Unmodifying a Modified File <a class="header-anchor" href="#unmodifying-a-modified-file" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things#_unmodifying_a_modified_file">https://git-scm.com/book/en/v2/Git-Basics-Undoing-Things#_unmodifying_a_modified_file</a></li>
+<li><a href="https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt---">https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt---</a></li>
+</ul>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">mkdir</span> <span class="hljs-title">new_project</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">cd</span> <span class="hljs-title">new_project</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">init</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">type</span> <span class="hljs-title">nul</span> &gt;&gt; <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">add</span> <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Initial</span> <span class="hljs-title">Commit</span>&quot;
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">notepad</span>++ <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+    <span class="hljs-title">On</span> <span class="hljs-title">branch</span> <span class="hljs-title">main</span>
+    <span class="hljs-title">Changes</span> <span class="hljs-title">not</span> <span class="hljs-title">staged</span> <span class="hljs-title">for</span> <span class="hljs-title">commit</span>:
+    (<span class="hljs-title">use</span> &quot;<span class="hljs-title">git</span> <span class="hljs-title">add</span> &lt;<span class="hljs-title">file</span>&gt;...&quot; <span class="hljs-title">to</span> <span class="hljs-title">update</span> <span class="hljs-title">what</span> <span class="hljs-title">will</span> <span class="hljs-title">be</span> <span class="hljs-title">committed</span>)
+    (<span class="hljs-title">use</span> &quot;<span class="hljs-title">git</span> <span class="hljs-title">restore</span> &lt;<span class="hljs-title">file</span>&gt;...&quot; <span class="hljs-title">to</span> <span class="hljs-title">discard</span> <span class="hljs-title">changes</span> <span class="hljs-title">in</span> <span class="hljs-title">working</span> <span class="hljs-title">directory</span>)
+            <span class="hljs-title">modified</span>:   <span class="hljs-title">new_file.txt</span>
+    <span class="hljs-title">no</span> <span class="hljs-title">changes</span> <span class="hljs-title">added</span> <span class="hljs-title">to</span> <span class="hljs-title">commit</span> (<span class="hljs-title">use</span> &quot;<span class="hljs-title">git</span> <span class="hljs-title">add</span>&quot; <span class="hljs-title">and</span>/<span class="hljs-title">or</span> &quot;<span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">a</span>&quot;)
+<span class="hljs-comment">
+REM Vecchia maniera:</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">checkout</span> -- <span class="hljs-title">new_file.txt</span>
+<span class="hljs-title">REM</span> <span class="hljs-title">Oppure</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">restore</span> <span class="hljs-title">new_file.txt</span>
+
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+<span class="hljs-title">On</span> <span class="hljs-title">branch</span> <span class="hljs-title">main</span>
+<span class="hljs-title">nothing</span> <span class="hljs-title">to</span> <span class="hljs-title">commit</span>, <span class="hljs-title">working</span> <span class="hljs-title">tree</span> <span class="hljs-title">clean</span>
+</span></code></pre>
+<h3 id="salvare-i-file-modificati-in-un-nuovo-branch" tabindex="-1">Salvare i file modificati in un nuovo branch <a class="header-anchor" href="#salvare-i-file-modificati-in-un-nuovo-branch" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--bltnew-branchgt">https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--bltnew-branchgt</a></li>
+<li><a href="https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--f">https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--f</a></li>
+<li><a href="https://git-scm.com/docs/git-switch#Documentation/git-switch.txt--cltnew-branchgt">https://git-scm.com/docs/git-switch#Documentation/git-switch.txt--cltnew-branchgt</a></li>
+<li><a href="https://stackoverflow.com/questions/2569459/git-create-a-branch-from-unstaged-uncommitted-changes-on-master">https://stackoverflow.com/questions/2569459/git-create-a-branch-from-unstaged-uncommitted-changes-on-master</a></li>
+</ul>
+<p>Se non si vogliono perdere i file modificati, invece di annullare le modifiche è possibile salvare tutti i file
+correntemente modificati in un nuovo branch, questa cosa è facile da fare perchè <strong>il <code>checkout</code> mantiene i file modificati, non li sovrascrive con la versione del branch</strong>.
+Questa è una <a href="./git_stash.html"><strong>alternativa allo stash</strong></a>.</p>
+<pre><code class="language-bash">$ git checkout -b new_branch_name
+<span class="hljs-comment"># does not touch your local changes. It just creates the branch from the current HEAD and sets the HEAD there.</span>
+<span class="hljs-comment"># Oppure:</span>
+$ git switch -c new_branch_name
+<span class="hljs-comment"># If you really want to discard the local changes, you have to force the checkout with -f.</span>
+<span class="hljs-comment"># $ git checkout -b new_branch_name -f</span>
+
+$ git commit -a -m <span class="hljs-string">&quot;edited&quot;</span>
+</code></pre>
+<h2 id="creare-un-nuovo-commit-riportando-il-repository-ad-un-commit-precedente" tabindex="-1">Creare un nuovo commit riportando il repository ad un commit precedente <a class="header-anchor" href="#creare-un-nuovo-commit-riportando-il-repository-ad-un-commit-precedente" aria-hidden="true">🔗</a></h2>
+<p>Quando si vuole riportare lo stato del repository, ad un commit del passato,
+se il repository non consente il push di un hard reset, si può procedere in maniera non distruttiva,
+creando un nuovo commit che ripristini lo stato desiderato a quello del commit passato.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># visualizza i commit per vedere l&#x27;hash del commit al quale vogliamo riportare l&#x27;HEAD</span>
+$ git <span class="hljs-built_in">log</span> --oneline
+<span class="hljs-comment"># checkout con un path come il punto non pone l&#x27;HEAD in detached mode ma riporta i files allo stato del commit mantenendo l&#x27;HEAD</span>
+<span class="hljs-comment"># Imposta index e work tree allo stato del checkout 7ed4r3a senza cambiare l&#x27;HEAD</span>
+$ git checkout 7ed4r3a .
+$ git commit -m <span class="hljs-string">&quot;Revert to 7ed4r3a&quot;</span>
+
+<span class="hljs-comment"># Un altro modo</span>
+$ git revert --no-commit 0766c053..HEAD
+$ git commit -m <span class="hljs-string">&quot;Revert to 0766c053&quot;</span>
+
+<span class="hljs-comment"># Un altro modo</span>
+$ git checkout -b old-state 0d1d7fc32
+</code></pre>
+<h2 id="checkout-vs-reset" tabindex="-1">checkout vs reset <a class="header-anchor" href="#checkout-vs-reset" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://git-scm.com/docs/git-reset">https://git-scm.com/docs/git-reset</a> <strong>Reset</strong> current <code>HEAD</code> to the specified state</p>
+<ul>
+<li>se invocato su <strong>file</strong> altera l'<strong>index</strong></li>
+<li>se invocato su <strong>commit</strong> rende <strong>orfani</strong> i commit successivi</li>
+</ul>
+</li>
+</ul>
+<h3 id="eseguiti-su-un-file" tabindex="-1">Eseguiti su un file <a class="header-anchor" href="#eseguiti-su-un-file" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>git checkout</code> lavora sulla <strong>working directory</strong>.</li>
+<li><code>git reset</code> lavora sull'<strong>index</strong>.</li>
+</ul>
+<table class="table"><thead>
+<tr>
+<th>Command</th>
+<th>Scope</th>
+<th>Common use cases</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git reset</code></td>
+<td>Commit-level</td>
+<td>Discard commits in a private branch or throw away uncommited changes</td>
+</tr>
+<tr>
+<td><code>git reset</code></td>
+<td>File-level</td>
+<td>Unstage a <strong>file</strong></td>
+</tr>
+<tr>
+<td><code>git checkout</code></td>
+<td>Commit-level</td>
+<td>Switch between branches or inspect old snapshots</td>
+</tr>
+<tr>
+<td><code>git checkout</code></td>
+<td>File-level</td>
+<td>Discard changes in the <strong>working directory</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="eseguiti-su-riferimenti-a-commit" tabindex="-1">Eseguiti su riferimenti a commit <a class="header-anchor" href="#eseguiti-su-riferimenti-a-commit" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>git reset</code>: lavora sui commit.</li>
+</ul>
+<p><code>--mixed</code> è il default.</p>
+<table class="table"><thead>
+<tr>
+<th>Command</th>
+<th>Modifica lo stato di</th>
+<th>Non modifica lo stato di</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>git reset</code></td>
+<td>HEAD, index</td>
+<td>working directory</td>
+</tr>
+<tr>
+<td><code>git reset --mixed</code></td>
+<td>HEAD, index</td>
+<td>working directory</td>
+</tr>
+<tr>
+<td><code>git reset --soft</code></td>
+<td>HEAD</td>
+<td>index, working directory</td>
+</tr>
+<tr>
+<td><code>git reset --hard</code></td>
+<td>HEAD, index, working directory</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="annullare-l'ultimo-commit---git-reset---hard" tabindex="-1">Annullare l'ultimo commit - git reset --hard <a class="header-anchor" href="#annullare-l'ultimo-commit---git-reset---hard" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://devconnected.com/how-to-undo-last-git-commit/">https://devconnected.com/how-to-undo-last-git-commit/</a></li>
+</ul>
+<p>Per annullare l'ultimo commit perdendo anche eventuali modifiche effettuate successivamente:</p>
+<pre><code class="language-bash">git reset --hard HEAD~1
+</code></pre>
+<h2 id="annullare-l'ultimo-commit---git-reset---soft---squash" tabindex="-1">Annullare l'ultimo commit - git reset --soft - squash <a class="header-anchor" href="#annullare-l'ultimo-commit---git-reset---soft---squash" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/docs/git-reset">https://git-scm.com/docs/git-reset</a></li>
+<li><a href="https://git-scm.com/docs/gitrevisions">https://git-scm.com/docs/gitrevisions</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified">https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified</a></li>
+</ul>
+<p><code>--soft</code> permette di preservare lo stato della working directory e le modifiche aggiunte all'<code>index</code> non ancora committate, <br>
+utilizzando <code>--hard</code> le modifiche locali vengono perdute, sia index che working directory.</p>
+<p>Con il reset soft si torna indietro annullando i commit ma mantenendo lo stato della working directory e dell'index,
+in questo modo non si perde alcuno stato delle modifiche e si può decidere cosa fare nell'index e nella working directory in modo selettivo.</p>
+<p>Con <code>~1</code> si indica il primo ancestor del commit <code>HEAD</code>.</p>
+<pre><code class="language-bash">$ man git-reset
+<span class="hljs-comment"># Comandi equivalenti:</span>
+$ git reset --soft HEAD~
+$ git reset --soft HEAD~1
+</code></pre>
+<p>la cosa funzione anche con un numero di ancestors superiore ad 1.</p>
+<p>Ora che l'HEAD è stato riportato indietro, i commit seguenti sono diventati orfani e saranno eliminati,
+tuttavia grazie al <code>--soft</code> la working directory contiene ancora i file allo stato in qui erano prima del reset,
+si può decidere di effettuare uno squash, facendo subito commit e dunque di fatto sostituendo tutti i commit orfani con un unico nuovo commit ,oppure fare altro.</p>
+<h2 id="ripristinare-un-file-precedentemente-cancellato" tabindex="-1">Ripristinare un file precedentemente cancellato <a class="header-anchor" href="#ripristinare-un-file-precedentemente-cancellato" aria-hidden="true">🔗</a></h2>
+<h3 id="recuperare-un-file-cancellato-ma-non-committato" tabindex="-1">Recuperare un file cancellato ma non committato <a class="header-anchor" href="#recuperare-un-file-cancellato-ma-non-committato" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ git ls-files --deleted
+    gen_config_bi.py
+$ git checkout -- gen_config_bi.py
+</code></pre>
+<h3 id="recuperare-un-file-cancellato-e-committato" tabindex="-1">Recuperare un file cancellato e committato <a class="header-anchor" href="#recuperare-un-file-cancellato-e-committato" aria-hidden="true">🔗</a></h3>
+<p>In case you are looking for the path of the file to recover, the following command will display a summary of all deleted files.</p>
+<pre><code class="language-bash">git <span class="hljs-built_in">log</span> --diff-filter=D --summary
+</code></pre>
+<p>If the deletion has been committed, find the commit where it happened, then recover the file from this commit.</p>
+<pre><code class="language-bash">$ git rev-list -n 1 HEAD -- &lt;file&gt;
+$ git checkout &lt;commit&gt;^ -- &lt;file&gt; <span class="hljs-comment"># usare il caret ^, che rappresenta il parent del commit con il quale si è rimosso il file</span>
+
+<span class="hljs-comment"># Or in one command, if $file is the file in question.</span>
+$ git checkout $(git rev-list -n 1 HEAD -- <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>)^ -- <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>
+</code></pre>
+<p>Significato del caret <strong><mark><code>^</code></mark></strong></p>
+<pre><code class="language-bash">git rev-parse --<span class="hljs-built_in">help</span>
+</code></pre>
+<pre><code>&lt;rev&gt;^[&lt;n&gt;], e.g. HEAD^, v1.5.1^0
+       A suffix ^ to a revision parameter means the first parent of that commit object.  ^&lt;n&gt; means the &lt;n&gt;th parent (i.e.  &lt;rev&gt;^ is equivalent to &lt;rev&gt;^1). As a special rule,
+       &lt;rev&gt;^0 means the commit itself and is used when &lt;rev&gt; is the object name of a tag object that refers to a commit object.
+</code></pre>
+<h2 id="annullare-le-modifiche-ad-un-file" tabindex="-1">Annullare le modifiche ad un file <a class="header-anchor" href="#annullare-le-modifiche-ad-un-file" aria-hidden="true">🔗</a></h2>
+<h3 id="not-added-nor-committed" tabindex="-1">not added nor committed <a class="header-anchor" href="#not-added-nor-committed" aria-hidden="true">🔗</a></h3>
+<p>Assuming you did not commit the file, or add it to the index, then:</p>
+<pre><code class="language-bash">git checkout -- filename <span class="hljs-comment"># annulla lo stato del file nella working directory ripristinandolo dal repository</span>
+</code></pre>
+<h3 id="added-not-committed" tabindex="-1">added not committed <a class="header-anchor" href="#added-not-committed" aria-hidden="true">🔗</a></h3>
+<p>Assuming you added it to the index, but did not commit it, then:</p>
+<pre><code class="language-bash">git reset HEAD filename  <span class="hljs-comment"># rimuove il file dall&#x27;index</span>
+git checkout -- filename <span class="hljs-comment"># annulla lo stato del file nella working directory ripristinandolo dal repository</span>
+</code></pre>
+<h3 id="ripristinare-il-file-utilizzando-un-repository-remoto" tabindex="-1">Ripristinare il file utilizzando un repository remoto <a class="header-anchor" href="#ripristinare-il-file-utilizzando-un-repository-remoto" aria-hidden="true">🔗</a></h3>
+<p>Nel caso in cui il file sia stato committato in locale:</p>
+<pre><code class="language-bash">git checkout origin/master filename
+</code></pre>
+<p>Distruzione totale dello stato in locale:</p>
+<pre><code class="language-bash">git reset --hard origin/master
+</code></pre>
+<h2 id="caricare-nel-repository-remoto-le-modifiche-locali" tabindex="-1">Caricare nel repository remoto le modifiche locali <a class="header-anchor" href="#caricare-nel-repository-remoto-le-modifiche-locali" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    $ git push -u origin master
+    <span class="hljs-comment"># Pushes the changes in your local repository up to the remote repository you specified as the origin</span>
+    <span class="hljs-comment"># -u si usa solo la prima volta per impostare il repository remoto di default</span>
+</code></pre>
+<h2 id="aggiornare-la-versione-in-locale-da-un-repository-remoto" tabindex="-1">Aggiornare la versione in locale da un repository remoto <a class="header-anchor" href="#aggiornare-la-versione-in-locale-da-un-repository-remoto" aria-hidden="true">🔗</a></h2>
+<h3 id="se-non-ci-sono-modifiche-locali(metodo-veloce)" tabindex="-1">Se non ci sono modifiche locali(metodo veloce) <a class="header-anchor" href="#se-non-ci-sono-modifiche-locali(metodo-veloce)" aria-hidden="true">🔗</a></h3>
+<p>particolarmente utile se non si effettuano modifiche locali:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># $ git reset --hard &lt;remote:es. origin/branch_name: es. main&gt; per eliminare le modifiche locali</span>
+$ git pull
+</code></pre>
+<h3 id="se-ci-sono-modifiche-locali-e-vogliamo-annullarle" tabindex="-1">Se ci sono modifiche locali e vogliamo annullarle <a class="header-anchor" href="#se-ci-sono-modifiche-locali-e-vogliamo-annullarle" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">git pull
+git reset --hard
+</code></pre>
+<h3 id="se-ci-sono-modifiche-locali-e-vogliamo-mantenerle" tabindex="-1">Se ci sono modifiche locali e vogliamo mantenerle <a class="header-anchor" href="#se-ci-sono-modifiche-locali-e-vogliamo-mantenerle" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ git stash           <span class="hljs-comment"># Salva i file modificati</span>
+$ git pull            <span class="hljs-comment"># Prende i file dal repository remoto</span>
+$ git stash show -p   <span class="hljs-comment"># Per vedere la diff tra la nuova versione scaricata del repository e quanto di trova nello stash</span>
+<span class="hljs-comment"># git stash drop      # Se si decide di non ripristinare il contenuto dello stash</span>
+$ git stash pop       <span class="hljs-comment"># Ripristina i file precedentemente salvati</span>
+</code></pre>
+<h2 id="squash---comprimere-piu-commit-in-uno-solo-con-il-soft-reset" tabindex="-1">Squash - Comprimere piu commit in uno solo con il soft reset <a class="header-anchor" href="#squash---comprimere-piu-commit-in-uno-solo-con-il-soft-reset" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_squashing_2">https://git-scm.com/book/en/v2/Git-Tools-Reset-Demystified#_squashing_2</a></p>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing">https://git-scm.com/book/en/v2/Git-Tools-Rewriting-History#_squashing</a></li>
+<li><a href="https://www.geeksforgeeks.org/git-squash/">https://www.geeksforgeeks.org/git-squash/</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://git-scm.com/docs/git-reset">https://git-scm.com/docs/git-reset</a></p>
+</li>
+<li>
+<p><a href="https://devconnected.com/how-to-git-reset-to-head/">https://devconnected.com/how-to-git-reset-to-head/</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/5667884/how-to-squash-commits-in-git-after-they-have-been-pushed">https://stackoverflow.com/questions/5667884/how-to-squash-commits-in-git-after-they-have-been-pushed</a></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/docs/git-push#Documentation/git-push.txt---force">https://git-scm.com/docs/git-push#Documentation/git-push.txt---force</a>
+Invece di utilizzare <code>git push --force</code> che effettua l'invio di tutte le references,<br>
+è meglio aggiungere un <code>+</code> davanti al branch remoto in modo da forzare il push solo di quel ramo.</p>
+</li>
+</ul>
+<p>Altra applicazione del soft reset, grazie al fatto che la working directory viene mantenuta si può tornare indietro
+di n commit ed effettuare un nuovo commit che ricomprende tutte le modifiche effettuate.</p>
+<p>Quando si vogliono eliminare una serie di commit intermedi non significativi sostituendoli con un unico commit,
+si può utilizzare il soft reset, che non elimina lo stato dell'index e della directory di lavoro:</p>
+<pre><code class="language-bash">$ man git-reset
+
+<span class="hljs-comment"># Creiamo un branch ed eseguiamo alcuni commit:</span>
+$ git checkout -b my_branch
+$ git status
+$ git commit -a -m <span class="hljs-string">&quot;Commit pending changes&quot;</span>
+$ git push -u origin my_branch
+
+<span class="hljs-comment"># Si vogliono accorpare tutti i commit del nuovo ramo in un solo commit e reinviare al server:</span>
+
+<span class="hljs-comment"># Cerchiamo l&#x27;ultimo commit prima della creazione del branch</span>
+$ git reflog <span class="hljs-comment"># serve a trovare il commit antecedente al primo commit effettuato sul nuovo ramo</span>
+<span class="hljs-comment"># Oppure:</span>
+$ git <span class="hljs-built_in">log</span> -g
+<span class="hljs-comment"># Supponiamo che l&#x27;ultimo commit prima della creazione del branch sia HEAD~5</span>
+$ git rev-parse --short HEAD~5 <span class="hljs-comment"># ricaviamo l&#x27;SHA-1 del commit</span>
+xxxx
+$ git show xxxx
+$ git reset --soft HEAD~4 <span class="hljs-comment"># si sposta l&#x27;HEAD alla reference del commit precedente alla creazione del ramo, senza toccare index e </span>
+$ git status
+$ git commit -a -m <span class="hljs-string">&quot;Combining commits using git reset&quot;</span>
+$ git <span class="hljs-built_in">log</span> --oneline --graph
+$ git push origin +my_branch <span class="hljs-comment"># si invia al server solamente il nuovo ramo, sintassi + al posto di --force</span>
+</code></pre>
+<p>Altro esempio con i tag:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Creazione di un nuovo ramo, modifiche e push sul server</span>
+git checkout -b 1.5
+git status
+git commit -a -m <span class="hljs-string">&quot;I nostri servizi&quot;</span>
+git tag -a 1.5.1 -m <span class="hljs-string">&quot;I nostri servizi&quot;</span>
+git push -u origin 1.5
+git push -f --tags
+
+<span class="hljs-comment"># Si vogliono accorpare tutti i commit del nuovo ramo in un solo commit e reinviare al server:</span>
+
+$ git reflog <span class="hljs-comment"># serve a trovare il commit antecedente al primo commit effettuato sul nuovo ramo</span>
+$ git reset --soft HEAD@{6} <span class="hljs-comment"># si sposta l&#x27;HEAD alla reference del commit precedente alla creazione del ramo, senza toccare index e working directory (--soft), reset su commit rende orfani i commit seguenti alla nuova posizione dell&#x27;head</span>
+$ git commit -a -m <span class="hljs-string">&quot;Aggiornamento I nostri servizi&quot;</span> <span class="hljs-comment"># si crea un nuovo commit che accorpa tutti i commit precedenti del ramo (resi orfani da reset --soft), che vengono poi eliminati dal garbage collector di git</span>
+$ git tag -fa 1.5.1 -m <span class="hljs-string">&quot;Aggiornamento I nostri servizi&quot;</span> <span class="hljs-comment"># si sposta il tag sul nuovo commit</span>
+$ git push origin +1.5 <span class="hljs-comment"># si invia al server solamente il nuovo ramo, sintassi + al posto di --force</span>
+$ git push -f --tags   <span class="hljs-comment"># si invia il tag spostato al server</span>
+$ git <span class="hljs-built_in">log</span> --oneline --graph --decorate
+</code></pre>
+<h2 id="tornare-all'head" tabindex="-1">Tornare all'HEAD <a class="header-anchor" href="#tornare-all'head" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">git checkout main
+</code></pre>
+</body></html>

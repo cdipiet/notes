@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.758" />
+        <title>openssl</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="openssl" tabindex="-1">openssl <a class="header-anchor" href="#openssl" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.758</p>
+<nav class="table-of-contents"><ol><li><a href="#man">man </a></li><li><a href="#generate-openssl-rsa-key-pair-from-the-command-line">Generate OpenSSL RSA Key Pair from the Command Line </a></li><li><a href="#creare-una-certification-authority-locale">Creare una Certification Authority Locale </a></li><li><a href="#rimuovere-una-certification-autority-dal-trust-store-in-manjaro%2Farch">Rimuovere una Certification Autority dal Trust Store in Manjaro/Arch </a></li><li><a href="#aggiungere-una-certification-autority-al-trust-store-in-manjaro%2Farch">Aggiungere una Certification Autority al Trust Store in Manjaro/Arch </a><ol><li><a href="#creare-una-ca-con-mkcert">Creare una CA con mkcert </a></li></ol></li><li><a href="#certificato-self-signed">Certificato Self Signed </a></li><li><a href="#test-connessione-e-certificati">Test Connessione e certificati </a></li><li><a href="#p7m-der-pem">p7m der pem </a><ol><li><a href="#cades">CAdES </a><ol><li><a href="#ess-signingcertificate">ESS signingCertificate </a></li></ol></li><li><a href="#file-.der-e-.pem">file .der e .pem </a></li><li><a href="#p7m">p7m </a></li><li><a href="#firmare-un-file-in-.p7m">Firmare un file in .p7m </a></li><li><a href="#estrarre-file-p7m">Estrarre file p7m </a></li></ol></li><li><a href="#tutorial-su-openssl">Tutorial su OpenSSL </a></li><li><a href="#subshell-al-posto-dei-parametri--config--extfile--key">subshell al posto dei parametri -config -extfile -key </a></li><li><a href="#check-the-modulus-of-an-ssl-certificate-and-key-with-openssl">Check the modulus of an SSL certificate and key with openssl </a></li><li><a href="#symmetic-encryption---encrypt-%26-decrypt-files-with-password">Symmetic encryption - Encrypt &amp; Decrypt Files With Password </a></li><li><a href="#public-key-encryption---encrypt-%26-decrypt-files-with-public-key">Public-key encryption - Encrypt &amp; Decrypt Files With Public Key </a></li></ol></nav><h1 id="openssl-1" tabindex="-1">openssl <a class="header-anchor" href="#openssl-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl.1ssl">https://man.archlinux.org/man/openssl.1ssl</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-format-options.1ssl.en">https://man.archlinux.org/man/openssl-format-options.1ssl.en</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/core/openssl/openssl-genrsa.1ssl.en">https://man.archlinux.org/man/core/openssl/openssl-genrsa.1ssl.en</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-rsa.1ssl">https://man.archlinux.org/man/openssl-rsa.1ssl</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-req.1ssl">https://man.archlinux.org/man/openssl-req.1ssl</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-cms.1ssl.en">https://man.archlinux.org/man/openssl-cms.1ssl.en</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-smime.1ssl.en">https://man.archlinux.org/man/openssl-smime.1ssl.en</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-enc.1ssl">https://man.archlinux.org/man/openssl-enc.1ssl</a></p>
+</li>
+<li>
+<p><a href="https://github.com/glv2/bruteforce-salted-openssl">https://github.com/glv2/bruteforce-salted-openssl</a></p>
+</li>
+</ul>
+<h2 id="man" tabindex="-1">man <a class="header-anchor" href="#man" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/core/openssl/config.5ssl.en">https://man.archlinux.org/man/core/openssl/config.5ssl.en</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-format-options.1ssl.en">https://man.archlinux.org/man/openssl-format-options.1ssl.en</a></p>
+<ul>
+<li><code>DER</code> A binary format, encoded or parsed according to Distinguished Encoding Rules (DER) of the ASN.1 data language.</li>
+<li><code>P12</code> A <code>DER</code>-encoded file containing a <code>PKCS#12</code> object. It might be necessary to provide a decryption password to retrieve the private key.</li>
+<li><code>PEM</code> A text format defined in IETF RFC 1421 and IETF RFC 7468. Briefly, this is a block of base-64 encoding (defined in IETF RFC 4648).</li>
+<li><code>SMIME</code> An <code>S/MIME</code> object as described in IETF RFC 8551. Earlier versions were known as <code>CMS</code> and are compatible. Note that the parsing is simple and might fail to parse some legal data.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/core/openssl/openssl-genrsa.1ssl.en">https://man.archlinux.org/man/core/openssl/openssl-genrsa.1ssl.en</a> <strong>Deprecato in favore di <code>genpkey</code></strong></p>
+<p><code>openssl-genrsa [numbits]</code> generate an RSA private key</p>
+<ul>
+<li><code>-out filename</code> Output the key to the specified file. If this argument is not specified then standard output is used.</li>
+<li><code>-passout arg</code> The output file password source.</li>
+<li><code>-aes128, -aes192, -aes256, -aria128, -aria192, -aria256, -camellia128, -camellia192, -camellia256, -des, -des3, -idea</code>
+These options <strong>encrypt the private key</strong> with specified cipher before outputting it. If none of these options is specified no encryption is used. If encryption is used a pass phrase is prompted for if it is not supplied via the -passout argument.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-genpkey.1ssl.en">https://man.archlinux.org/man/openssl-genpkey.1ssl.en</a> <strong>sostituisce <code>genrsa</code></strong></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-rsa.1ssl">https://man.archlinux.org/man/openssl-rsa.1ssl</a> <code>openssl rsa</code> RSA key processing command</p>
+<ul>
+<li><code>-inform DER|PEM|P12|ENGINE</code> The key input format; unspecified by default. See <code>openssl-format-options</code> for details.</li>
+<li><code>-outform DER|PEM</code> The key output format; <mark><strong>the default is <code>PEM</code></strong></mark>. See <code>openssl-format-options</code> for details.</li>
+<li><code>-in filename|uri</code> This specifies the input to read a key from or standard input if this option is not specified. If the key is encrypted a pass phrase will be prompted for.</li>
+<li><code>-aes128, -aes192, -aes256, -aria128, -aria192, -aria256, -camellia128, -camellia192, -camellia256, -des, -des3, -idea</code>
+These options <strong>encrypt the private key</strong> with the specified cipher before outputting it. A pass phrase is prompted for. If none of these options is specified the key is written in plain text. This means that <strong>this command can be used to remove the pass phrase from a key by not giving any encryption option is given</strong>, or to add or change the pass phrase by setting them. These options can only be used with PEM format output files.</li>
+<li><code>-text</code> Prints out the various public or private key components in plain text in addition to the encoded version.</li>
+<li><code>-noout</code> This option prevents output of the encoded version of the key.</li>
+<li><code>-pubin</code> By default a private key is read from the input file: <strong>with this option a public key is read</strong> instead.</li>
+<li><code>-pubout</code>  By default a private key is output: with this option <strong>a public key will be output</strong> instead. This option is automatically set if the input is a public key.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-req.1ssl">https://man.archlinux.org/man/openssl-req.1ssl</a> PKCS#10 <strong>certificate request and certificate generating</strong> command<br>
+This command primarily creates and processes certificate requests (CSRs) in PKCS#10 format.<br>
+<strong>It can additionally create self-signed certificates for use as root CAs</strong></p>
+<ul>
+<li><code>-new</code> This option generates a new certificate request.</li>
+<li><code>-key filename|uri</code> This option provides the private key for signing a new certificate or certificate request.</li>
+<li><code>-x509</code> This option <strong>outputs a certificate instead of a certificate request</strong>. This is typically used to generate test certificates.</li>
+<li><code>-days n</code> When <code>-x509</code> is in use this specifies the number of days to certify the certificate for, otherwise it is ignored. n should be a positive integer. The default is 30 days.</li>
+<li><code>-noenc</code> If this option is specified then if a private key is created it will not be encrypted.</li>
+<li><code>-nodes</code> This option is deprecated since OpenSSL 3.0; <strong>use <code>-noenc</code> instead</strong>.</li>
+<li><code>-noout</code> This option prevents output of the encoded version of the certificate request.</li>
+<li><code>-out filename</code> This specifies the output filename to write to or standard output by default.</li>
+<li><code>-subj arg</code> Sets subject name for new request or supersedes the subject name when processing a certificate request.<br>
+The arg must be formatted as <code>/type0=value0/type1=value1/type2=...</code>. Special characters may be escaped by <code>\</code> (backslash), whitespace is retained. Empty values are permitted, but the corresponding type will not be included in the request. Giving a single <code>/</code> will lead to an empty sequence of RDNs (a NULL-DN). Multi-valued RDNs can be formed by placing a <code>+</code> character instead of a <code>/</code> between the AttributeValueAssertions (AVAs) that specify the members of the set. Example:<br>
+<code>&quot;/DC=org/DC=OpenSSL/DC=users/UID=123456+CN=John Doe&quot;</code></li>
+<li><code>-[digest]</code> this specifies the <strong>message digest to sign the request with</strong> (such as <code>-md5</code>, <code>-sha1</code>, <code>-sha256</code>). This overrides the digest algorithm specified in the configuration file.<br>
+Per vedere i digest disponibili:\</li>
+</ul>
+<pre><code class="language-bash">$ openssl list --digest-commands
+    blake2b512        blake2s256        md5               rmd160            
+    sha1              sha224            sha256            sha3-224          
+    sha3-256          sha3-384          sha3-512          sha384            
+    sha512            sha512-224        sha512-256        shake128          
+    shake256          sm3 
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.openssl.org/docs/manmaster/man1/openssl-cms.html">https://www.openssl.org/docs/manmaster/man1/openssl-cms.html</a> <a href="https://man.archlinux.org/man/openssl-cms.1ssl.en">https://man.archlinux.org/man/openssl-cms.1ssl.en</a> <strong><code>Per gestire file .p7m</code></strong> handles data in CMS format such as<code> S/MIME v3.1</code> email messages. It can encrypt, decrypt, sign, verify, compress, uncompress, and print messages.</p>
+<ul>
+<li><code>-inkey filename|uri</code> The private key to use when signing or decrypting. This must match the corresponding certificate. If this option is not specified then the private key must be included in the certificate file specified with the -recip or -signer file. When signing this option can be used multiple times to specify successive keys.</li>
+<li><code>-outform DER|PEM|SMIME</code> The output format of the CMS structure (if one is being written); the default is SMIME.</li>
+<li><code>-stream, -indef</code>
+The -stream and -indef options are equivalent and enable streaming I/O for encoding operations. This permits single pass processing of data without the need to hold the entire contents in memory, potentially supporting very large files.</li>
+<li><code>-md digest</code> Digest algorithm to use when signing or resigning. (<code>openssl list --digest-commands</code>)</li>
+<li><code>-nodetach</code> When signing a message use opaque signing: this form is more resistant to translation by mail relays but it cannot be read by mail agents that do not support S/MIME. Without this option cleartext signing with the MIME type multipart/signed is used.</li>
+<li><code>-sign</code> Sign data using the supplied certificate and private key. Input file is the message to be signed. The <code>S/MIME</code> signed data in MIME format is written to the output file.</li>
+<li><code>-signer</code> file A signing certificate.</li>
+<li><code>-cades</code> When used with -verify, require and check signer certificate digest. NOTE that the <code>-cades</code> option applies to the <code>-sign</code> or <code>-verify</code> operations.</li>
+<li><code>-nosmimecap</code> Exclude the list of supported algorithms from signed attributes, other options such as signing time and content type are still included.</li>
+<li><code>-binary</code> Normally the input message is converted to &quot;canonical&quot; format which is effectively using CR and LF as end of line: as required by the S/MIME specification. When this option is present no translation occurs. This is useful when handling binary data which may not be in MIME format.</li>
+</ul>
+</li>
+</ul>
+<h2 id="generate-openssl-rsa-key-pair-from-the-command-line" tabindex="-1">Generate OpenSSL RSA Key Pair from the Command Line <a class="header-anchor" href="#generate-openssl-rsa-key-pair-from-the-command-line" aria-hidden="true">🔗</a></h2>
+<p>The <code>-des3</code> option specifies <strong>how the private key is encrypted with a password</strong>.<br>
+<strong>Without a cipher option, the private key is not encrypted</strong>, and no password is required.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Creazione di una chiave privata senza password</span>
+$ openssl genrsa -out private-key.pem 2048
+<span class="hljs-comment"># Creazione di una chiave privata con password e cifrata con des3</span>
+$ openssl genrsa -des3 -out private-key.pem 2048 <span class="hljs-comment"># con cifratura della chiave</span>
+$ openssl rsa -<span class="hljs-keyword">in</span> private-key.pem -noout -text <span class="hljs-comment"># stampa di verifica</span>
+
+<span class="hljs-comment"># Creazione della chiave pubblica a partire dalla chiave privata</span>
+$ openssl rsa -<span class="hljs-keyword">in</span> private-key.pem -outform PEM -pubout -out public-key.pem <span class="hljs-comment"># The -pubout flag is really important. Be sure to include it.</span>
+$ openssl rsa -<span class="hljs-keyword">in</span> public-key.pem -pubin -noout -text <span class="hljs-comment"># stampa di verifica</span>
+
+<span class="hljs-comment"># Rimozione della password sulla chiave privata(assenza delle opzioni des3, aes128 etc)</span>
+$ openssl rsa -<span class="hljs-keyword">in</span> private-key.pem -outform PEM -out private-key_unencrypted.pem
+
+<span class="hljs-comment"># Creazione di un certificato self-signed</span>
+$ openssl req -new -x509 -sha256 -key private-key.pem -days 360 -subj <span class="hljs-string">&quot;/C=IT/ST=IT/O=CDP/OU=CDP.S/CN=0.0.0.0&quot;</span> -out self-signed-cert.pem 
+$ openssl x509 -<span class="hljs-keyword">in</span> self-signed-cert.pem -noout -text <span class="hljs-comment"># Visualizzazione del certificato</span>
+
+<span class="hljs-comment"># optional: convert pem to pfx (formato dei certificati di Windows)</span>
+$ openssl pkcs12 -<span class="hljs-built_in">export</span> -inkey private-key.pem -<span class="hljs-keyword">in</span> self-signed-cert.pem -out self-signed-cert.pfx
+</code></pre>
+<p>Da notare come <strong>la chiave pubblica venga creata a partire dalla chiave privata</strong>.</p>
+<h2 id="creare-una-certification-authority-locale" tabindex="-1">Creare una Certification Authority Locale <a class="header-anchor" href="#creare-una-certification-authority-locale" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.openssl.org/docs/man1.1.1/man1/openssl-genrsa.html">https://www.openssl.org/docs/man1.1.1/man1/openssl-genrsa.html</a></li>
+<li><a href="https://man.archlinux.org/man/openssl-genrsa.1ssl">https://man.archlinux.org/man/openssl-genrsa.1ssl</a> generate an RSA private key</li>
+<li><a href="https://man.archlinux.org/man/openssl-rsa.1ssl">https://man.archlinux.org/man/openssl-rsa.1ssl</a> This command processes RSA keys. They can be converted between various forms and their components printed out.</li>
+<li><a href="https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html#ownca">https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html#ownca</a></li>
+</ul>
+<p>(Vedere anche ~/workspaces/Docker/DNSMonitor, ~/workspaces/Python/Ansible/Manjaro_LAMP)</p>
+<p>Creare:</p>
+<ol>
+<li>file di certificato e chiave privata di una nuova Certification Authority</li>
+<li>file di certificato e chiave privata per un server HTTPS</li>
+</ol>
+<p>ed installare il certificato della CA come root CA di sistema (cosa che evita l'utilizzo dei certificati self-signed)
+I certificati self signed generano errori o warning, installare una CA root nel sistema permette di generare
+certificati per i server che non danno errori in fase di verifica.</p>
+<p><strong>Privacy Enhanced Mail</strong>: file <code>.pem</code> = <code>.cer</code> = <code>.crt</code> = <code>.key</code> certificato DER codificato Base64
+Questo tipo di formato è il più comune per i certificati <code>X.509</code>, che sono il formato standard usato per certificati a chiave pubblica
+.cer o .crt per i certificati, oppure .key per le chiavi pubbliche o private</p>
+<p><a href="https://www.ssl.com/it/guida/codifiche-e-conversioni-pem-der-crt-e-cer-x-509/">https://www.ssl.com/it/guida/codifiche-e-conversioni-pem-der-crt-e-cer-x-509/</a></p>
+<p>PEM (originariamente &quot;Privacy Enhanced Mail&quot;) è il formato più comune per certificati X.509, CSRs e chiavi crittografiche. Un file PEM è un file di testo contenente uno o più elementi nella codifica ASCII Base64, ciascuno con intestazioni e piè di pagina in testo normale (ad es. <code>-----BEGIN CERTIFICATE-----</code> e <code>-----END CERTIFICATE-----</code>). Un singolo file PEM può contenere un certificato dell'entità finale, una chiave privata o più certificati che formano una catena di fiducia completa.</p>
+<p><code>DER</code> (Distinguished Encoding Rules) è una codifica binaria per <code>X.509</code> certificati e chiavi private. A differenza di <code>PEM</code>, i file con codifica <code>DER</code> non contengono istruzioni di testo normale.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># makeca</span>
+<span class="hljs-comment"># Popola la directory ../lamp/files/ssl con i certificati del server Apache e della Certification Authority </span>
+<span class="hljs-comment"># ed installa i certificati CA come root nell&#x27;Host, nel container docker sarà invece lo script Ansible ad installarli</span>
+SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$( cd <span class="hljs-string">&quot;<span class="hljs-subst">$( dirname <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span> )</span>&quot;</span> &amp;&gt; /dev/null &amp;&amp; pwd )</span>&quot;</span>
+<span class="hljs-built_in">mkdir</span> -p <span class="hljs-variable">$SCRIPT_DIR</span>/../ssl
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$SCRIPT_DIR</span>/../lamp/files/ssl
+<span class="hljs-built_in">rm</span> -f {*.pem, *.csr, *.srl}
+
+<span class="hljs-comment">###########################</span>
+<span class="hljs-comment">## Root CA - Private Key ##</span>
+<span class="hljs-comment">###########################</span>
+<span class="hljs-comment"># Generate the RSA Private Key of the root CA (PEM formatted, non è cifrata essendo assenti parametri come -des3 o -aes256):</span>
+<span class="hljs-comment"># openssl genrsa -out rootCAKey.pem 2048</span>
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform PEM -quiet -out rootCAKey.pem
+openssl rsa -<span class="hljs-keyword">in</span> rootCAKey.pem -noout -text <span class="hljs-comment"># stampa della chiave</span>
+
+<span class="hljs-comment">#######################################</span>
+<span class="hljs-comment">## Root CA - Self Signed Certificate ##</span>
+<span class="hljs-comment">#######################################</span>
+<span class="hljs-comment"># Generate the self-signed root CA certificate - (X509 structure) with the RSA key you just created (output will be PEM formatted):</span>
+<span class="hljs-comment">#  -noenc If this option is specified then if a private key is created it will not be encrypted.</span>
+<span class="hljs-comment">#  -nodes This option is deprecated since OpenSSL 3.0; use -noenc instead.</span>
+<span class="hljs-comment"># This signs the server CSR and results in a rootCACert.pem file.</span>
+openssl req -x509 -sha256 -new -nodes -key rootCAKey.pem -days 3650 -subj <span class="hljs-string">&quot;/C=IT/ST=IT/O=CDP/OU=CDP.S/CN=0.0.0.0&quot;</span> -out rootCACert.pem
+openssl x509 -<span class="hljs-keyword">in</span> rootCACert.pem -text <span class="hljs-comment"># stampa del certificato</span>
+
+<span class="hljs-comment">##########################</span>
+<span class="hljs-comment">## Server - Private Key ##</span>
+<span class="hljs-comment">##########################</span>
+<span class="hljs-comment"># Generate Server Key</span>
+<span class="hljs-comment"># openssl genrsa -out localhostKey.pem 2048</span>
+openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -outform PEM -quiet -out localhostKey.pem
+<span class="hljs-comment"># Create the Server certificate signing request (CSR) file:</span>
+openssl req -new -key localhostKey.pem -sha256 -out localhostCert.csr -config &lt;(<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;[req]\nreq_extensions = v3_req\ndistinguished_name = dn\nprompt = no\n[dn]\nCN = 0.0.0.0\nC = IT\nL = Rome\nO = CDP\nOU = CDP.S\n[v3_req]\nsubjectAltName = DNS:0.0.0.0&quot;</span>)
+openssl req -<span class="hljs-keyword">in</span> localhostCert.csr -noout -text <span class="hljs-comment"># stampa della chiave</span>
+
+<span class="hljs-comment">#################################</span>
+<span class="hljs-comment">## Server - Signed Certificate ##</span>
+<span class="hljs-comment">#################################</span>
+<span class="hljs-comment"># Create the signed certificate for the Server from the CSR:</span>
+openssl x509 -req -sha256 -<span class="hljs-keyword">in</span> localhostCert.csr -CA rootCACert.pem -CAkey rootCAKey.pem -CAcreateserial -out localhostCert.pem -days 365 -extfile &lt;( \
+   <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;subjectAltName = DNS:localhost, IP:127.0.0.1, IP:0:0:0:0:0:0:0:1, IP:0.0.0.0&quot;</span>)
+openssl x509 -<span class="hljs-keyword">in</span> localhostCert.pem -text <span class="hljs-comment"># stampa del certificato</span>
+
+<span class="hljs-comment">###################################</span>
+<span class="hljs-comment">## Root CA - Install Certificate ##</span>
+<span class="hljs-comment">###################################</span>
+<span class="hljs-comment"># Import della root CA nel sistema Host - Funziona in Manjaro ma non in Debian</span>
+<span class="hljs-comment"># Il certificato della Root CA deve essere installato nel sistema che origina la connessione HTTPS,</span>
+<span class="hljs-comment"># permette a Firefox e curl di verificare il certificato ricevuto dal server Apache che si trova nel container Docker.</span>
+<span class="hljs-built_in">sudo</span> trust anchor --store rootCACert.pem
+<span class="hljs-comment"># sudo trust anchor --remove rootCACert.pem</span>
+trust list --filter=ca-anchors|grep -B 3 -A 2 -i 0.0.0.0
+<span class="hljs-comment"># sudo trust anchor --remove &quot;pkcs11:id=...;type=cert&quot;</span>
+<span class="hljs-comment"># Per debian(ad es. per una immagine docker basata su Debian):</span>
+<span class="hljs-comment"># cp ssl/rootCACert.crt /usr/local/share/ca-certificates/ &amp;&amp; update-ca-certificates</span>
+<span class="hljs-comment"># COPY ./ssl/rootCACert.pem ./ssl/rootCACert.crt</span>
+<span class="hljs-comment"># RUN cp ssl/rootCACert.crt /usr/local/share/ca-certificates/ &amp;&amp; update-ca-certificates</span>
+<span class="hljs-built_in">mv</span> localhostCert.pem server.crt <span class="hljs-comment"># nome di default per /etc/httpd/conf/extra/httpd-ssl.conf SSLCertificateFile &quot;/etc/httpd/conf/server.crt&quot;</span>
+<span class="hljs-built_in">mv</span> localhostKey.pem server.key  <span class="hljs-comment"># nome di default per /etc/httpd/conf/extra/httpd-ssl.conf SSLCertificateKeyFile &quot;/etc/httpd/conf/server.key&quot;</span>
+</code></pre>
+<p>Alternativa multiriga con backslash:</p>
+<pre><code class="language-bash">$ openssl req -new -sha256 -key localhostKey.pem -out localhostCert.csr -config &lt;( \
+   <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;[req]\nreq_extensions = v3_req\ndistinguished_name = dn\nprompt = no\n[dn]\nCN = 0.0.0.0\nC = IT\nL = Rome\nO = CDP\nOU = CDP.S\n[v3_req]\nsubjectAltName = DNS:0.0.0.0&quot;</span>)
+<span class="hljs-comment"># Create the signed certificate for the Server from the CSR:</span>
+$ openssl x509 -req -sha256 -<span class="hljs-keyword">in</span> localhostCert.csr -CA rootCACert.pem -CAkey rootCAKey.pem -CAcreateserial -out localhostCert.pem -days 365 -extfile &lt;( \
+   <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;subjectAltName = DNS:localhost, IP:127.0.0.1, IP:0:0:0:0:0:0:0:1, IP:0.0.0.0&quot;</span>)
+</code></pre>
+<h2 id="rimuovere-una-certification-autority-dal-trust-store-in-manjaro%2Farch" tabindex="-1">Rimuovere una Certification Autority dal Trust Store in Manjaro/Arch <a class="header-anchor" href="#rimuovere-una-certification-autority-dal-trust-store-in-manjaro%2Farch" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ trust list --filter=ca-anchors|grep -B 3 -A 2 -i 0.0.0.0
+pkcs11:<span class="hljs-built_in">id</span>=%01%CA%F8%CB%75%AE%23%63%73%F6%8D%B9%24%0C%31%AD%5A%99%6B%21;<span class="hljs-built_in">type</span>=cert
+    <span class="hljs-built_in">type</span>: certificate
+    label: 0.0.0.0
+    trust: anchor
+    category: authority
+$ <span class="hljs-built_in">sudo</span> trust anchor --remove <span class="hljs-string">&quot;pkcs11:id=%01%CA%F8%CB%75%AE%23%63%73%F6%8D%B9%24%0C%31%AD%5A%99%6B%21;type=cert&quot;</span>
+<span class="hljs-comment"># Oppure:</span>
+$ <span class="hljs-built_in">sudo</span> trust anchor --remove rootCACert.pem 
+</code></pre>
+<h2 id="aggiungere-una-certification-autority-al-trust-store-in-manjaro%2Farch" tabindex="-1">Aggiungere una Certification Autority al Trust Store in Manjaro/Arch <a class="header-anchor" href="#aggiungere-una-certification-autority-al-trust-store-in-manjaro%2Farch" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Transport_Layer_Security">https://wiki.archlinux.org/title/Transport_Layer_Security</a></p>
+<p>Arch Linux provides a centralized system-wide interface for managing CA certificates. This interface is the library<br>
+<code>/usr/lib/pkcs11/p11-kit-trust.so</code> from the <a href="https://archlinux.org/packages/?name=libp11-kit">libp11-kit</a> package, which provides <a href="https://en.wikipedia.org/wiki/PKCS_11">PKCS #11</a> API for certificates, stored in <code>/usr/share/ca-certificates/trust-source/</code> (the token &quot;Default Trust&quot;) and <code>/etc/ca-certificates/trust-source/</code> (the token &quot;System Trust&quot;).<br>
+For using the interface from a command line, the <a href="https://archlinux.org/packages/?name=p11-kit">p11-kit</a> package provides the <a href="https://man.archlinux.org/man/trust.1">trust</a> utility.<br>
+For libraries, that have not been ported to <a href="https://en.wikipedia.org/wiki/PKCS_11">PKCS #11</a> and use a custom logic for managing CA certificates, the package <a href="https://archlinux.org/packages/?name=ca-certificates-utils">ca-certificates-utils</a> provides the <a href="https://archlinux.org/packages/?name=ca-certificates-utils">update-ca-trust</a> script. It copies CA certificates obtained through the centralized interface to <code>/etc/ca-certificates/extracted/</code> and <code>/etc/ssl/certs/</code>.</p>
+</li>
+</ul>
+<p>Le applicazioni come server web o di posta che utilizzano TLS possiedono normalmente un file di configurazione dove poter indicare la posizione dei file dei certificati delle CA.<br>
+Un nuovo approccio moderno e dinamico è basato su dei trust store contenenti i certificati delle CA ai quali le applicazioni accedono per tramite della libreria p11.
+OpenSSL in Arch Linux cerca i certificati in <code>/etc/ssl/cert.pem</code> e <code>/etc/ssl/certs/</code>.</p>
+<p>Vediamo come aggiungere un nuovo certificato di una CA al trust store in Manjaro.</p>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/User:Grawity/Adding_a_trusted_CA_certificate">https://wiki.archlinux.org/title/User:Grawity/Adding_a_trusted_CA_certificate</a></p>
+</li>
+<li>
+<p><a href="https://warlord0blog.wordpress.com/2021/01/17/trusting-ca-certificates-manjaro/">https://warlord0blog.wordpress.com/2021/01/17/trusting-ca-certificates-manjaro/</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/trust.1">https://man.archlinux.org/man/trust.1</a> trust is a command line tool to examine and modify the shared trust policy store.\</p>
+<p>Tool for operating on the trust policy store - comando fornito dal pacchetto <a href="https://archlinux.org/packages/core/x86_64/p11-kit/">https://archlinux.org/packages/core/x86_64/p11-kit/</a></p>
+<pre><code class="language-bash">$ pacman -Qo trust
+/usr/bin/trust è contenuto <span class="hljs-keyword">in</span> p11-kit 0.24.1-1
+</code></pre>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/core/ca-certificates-utils/update-ca-trust.8.en">https://man.archlinux.org/man/core/ca-certificates-utils/update-ca-trust.8.en</a></p>
+<p>The directories <code>/etc/ssl/certs</code> and <code>/etc/ca-certificates/extracted/</code> contain generated CA certificate bundle files which are created and updated, based on the source configuration by running the update-ca-trust extract command.
+If your application isn’t able to load the PKCS#11 module <a href="http://p11-kit-trust.so">p11-kit-trust.so</a>, then you can use these files in your application to load a list of global root CA certificates.</p>
+</li>
+<li>
+<p><a href="https://archlinux.org/packages/core/any/ca-certificates-utils/">https://archlinux.org/packages/core/any/ca-certificates-utils/</a></p>
+</li>
+<li>
+<p><a href="https://archlinux.org/packages/core/any/ca-certificates/">https://archlinux.org/packages/core/any/ca-certificates/</a></p>
+</li>
+<li>
+<p><code>/etc/ca-certificates/trust-source</code></p>
+</li>
+<li>
+<p><code>/usr/share/ca-certificates/trust-source/anchors</code></p>
+</li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> trust anchor --store myCA.crt
+<span class="hljs-comment"># The certificate will be written to /etc/ca-certificates/trust-source/myCA.p11-kit and the &quot;legacy&quot; directories automatically updated.</span>
+<span class="hljs-comment"># If you get &quot;no configured writable location&quot; or a similar error, import the CA manually:</span>
+<span class="hljs-comment">#  Copy the certificate to the /etc/ca-certificates/trust-source/anchors directory.</span>
+$ <span class="hljs-built_in">cp</span> myCA.crt/etc/ca-certificates/trust-source/anchors/
+$ <span class="hljs-built_in">sudo</span> update-ca-trust
+</code></pre>
+<p>Approfondimento:</p>
+<p>Libreria p11:</p>
+<ul>
+<li><a href="https://p11-glue.github.io/p11-glue/index.html">https://p11-glue.github.io/p11-glue/index.html</a></li>
+<li><a href="https://p11-glue.github.io/p11-glue/p11-kit/manual/">https://p11-glue.github.io/p11-glue/p11-kit/manual/</a></li>
+<li><a href="https://p11-glue.github.io/p11-glue/doc/storing-trust-policy/">https://p11-glue.github.io/p11-glue/doc/storing-trust-policy/</a></li>
+<li><a href="https://archlinux.org/packages/?sort=&amp;q=p11&amp;maintainer=&amp;flagged=">https://archlinux.org/packages/?sort=&amp;q=p11&amp;maintainer=&amp;flagged=</a></li>
+<li><a href="https://archlinux.org/packages/core/any/ca-certificates-utils/">https://archlinux.org/packages/core/any/ca-certificates-utils/</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> README 
+This directory /etc/ca-certificates/trust-source/ contains CA certificates
+and trust settings <span class="hljs-keyword">in</span> the PEM file format. The trust settings found here will be
+interpreted with a high priority - higher than the ones found <span class="hljs-keyword">in</span> 
+/usr/share/ca-certificates/trust-source/ .
+
+=============================================================================
+QUICK HELP: To add a certificate <span class="hljs-keyword">in</span> the simple PEM or DER file formats to the
+            list of CAs trusted on the system:
+
+            Copy it to the
+                    /etc/ca-certificates/trust-source/anchors/
+            subdirectory, and run the
+                    update-ca-trust
+            <span class="hljs-built_in">command</span>.
+
+            If your certificate is <span class="hljs-keyword">in</span> the extended BEGIN TRUSTED file format,
+            <span class="hljs-keyword">then</span> place it into the main trust-source/ directory instead.
+=============================================================================
+
+Please refer to the update-ca-trust(8) manual page <span class="hljs-keyword">for</span> additional information.
+</code></pre>
+<p>Let’s say I have two <code>.crt</code> files (<code>pem</code> format) for <strong>intermediate</strong> and <strong>root</strong> certs use the <code>trust</code> program to import them.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> trust anchor --store my-intermediate.crt
+$ <span class="hljs-built_in">sudo</span> trust anchor --store my-root.crt
+<span class="hljs-comment"># It’s quite clever, it puts them into `/etc/ca-certificates` and renames them to match the actual name of the certificate.</span>
+$ <span class="hljs-built_in">sudo</span> update-ca-trust
+</code></pre>
+<p>You can still check your certificates are imported using:</p>
+<pre><code class="language-bash">$ awk -v cmd=<span class="hljs-string">&#x27;openssl x509 -noout -subject&#x27;</span> <span class="hljs-string">&#x27;/BEGIN/{close(cmd)};{print | cmd}&#x27;</span> &lt; /etc/ssl/certs/ca-certificates.crt
+</code></pre>
+<p><code>p11-kit</code> offre un API per l'accesso al trust store in luogo della configurazione cablata dei path dei certificati,
+ma non tutte le applicazioni ancora lo utilizzano, vediamo quali applicazioni attualmente lo usano:</p>
+<p>openssh, curl --&gt; openssl --&gt; p11-kit</p>
+<ul>
+<li><a href="https://archlinux.org/packages/core/x86_64/p11-kit/">https://archlinux.org/packages/core/x86_64/p11-kit/</a></li>
+<li><a href="https://archlinux.org/packages/?sort=&amp;q=ca-certificates&amp;maintainer=&amp;flagged=">https://archlinux.org/packages/?sort=&amp;q=ca-certificates&amp;maintainer=&amp;flagged=</a></li>
+<li><a href="https://archlinux.org/packages/core/x86_64/openssl/">https://archlinux.org/packages/core/x86_64/openssl/</a></li>
+<li><a href="https://archlinux.org/packages/core/x86_64/openssh/">https://archlinux.org/packages/core/x86_64/openssh/</a></li>
+<li><a href="https://archlinux.org/packages/core/x86_64/curl/">https://archlinux.org/packages/core/x86_64/curl/</a></li>
+</ul>
+<pre><code class="language-bash">$ pactree -d 3 curl
+curl
+├─ca-certificates
+│ └─ca-certificates-mozilla
+│   └─ca-certificates-utils&gt;=20181109-3
+├─openssl
+
+$ pactree -r p11-kit
+p11-kit
+├─ca-certificates-utils
+│ ├─aria2
+│ ├─ca-certificates-mozilla
+│ │ └─ca-certificates
+│ │   ├─aria2
+│ │   ├─curl
+│ │   │ ├─audacious-plugins
+│ │   │ │ └─audacious
+│ │   │ ├─clamav
+│ │   │ │ └─clamtk
+│ │   │ ├─git
+│ │   │ ├─keepassxc
+│ ├─curl
+│ ├─jre-openjdk-headless
+│ │ └─jre-openjdk
+│ ├─gnupg
+│ ├─qpdf
+└─nss
+  ├─evolution-data-server
+  ├─firefox
+  ├─flashplugin
+  ├─google-chrome
+  ├─libnm
+  │ ├─networkmanager
+  ├─visual-studio-code-bin
+</code></pre>
+<h3 id="creare-una-ca-con-mkcert" tabindex="-1">Creare una CA con mkcert <a class="header-anchor" href="#creare-una-ca-con-mkcert" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/FiloSottile/mkcert">https://github.com/FiloSottile/mkcert</a></li>
+<li><a href="https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309">https://gist.github.com/fntlnz/cf14feb5a46b2eda428e000157447309</a></li>
+<li><a href="https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/">https://blog.filippo.io/mkcert-valid-https-certificates-for-localhost/</a></li>
+</ul>
+<p>Linux Trust Stores:</p>
+<ul>
+<li><code>update-ca-trust</code> (Fedora, RHEL, CentOS)</li>
+<li><code>update-ca-certificates</code> (Ubuntu, Debian, OpenSUSE, SLES) or</li>
+<li><code>trust</code> (Arch)</li>
+<li>Firefox (macOS and Linux only)</li>
+<li>Chrome and Chromium</li>
+<li>Java (when JAVA_HOME is set)</li>
+</ul>
+<pre><code class="language-bash">$ pamac search mkcert
+$ pamac install mkcert
+$ mkcert -CAROOT
+    /home/<span class="hljs-variable">$USER</span>/.local/share/mkcert
+$ SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$( cd <span class="hljs-string">&quot;<span class="hljs-subst">$( dirname <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span> )</span>&quot;</span> &amp;&gt; /dev/null &amp;&amp; pwd )</span>&quot;</span>
+$ <span class="hljs-built_in">export</span> CAROOT=<span class="hljs-variable">$SCRIPT_DIR</span>/ssl
+$ mkcert -CAROOT
+$ mkcert -install
+$ <span class="hljs-built_in">cd</span> ssl
+$ mkcert domain.cdp localhost 127.0.0.1 ::1 0.0.0.0
+    The certificate is at <span class="hljs-string">&quot;./domain.cdp+4.pem&quot;</span> and the key at <span class="hljs-string">&quot;./domain.cdp+4-key.pem&quot;</span>
+
+<span class="hljs-comment"># Lista certificati</span>
+$ <span class="hljs-built_in">sudo</span> trust list|grep mkcert
+
+<span class="hljs-comment"># Aggiungere un certificato</span>
+<span class="hljs-built_in">sudo</span> trust anchor --store myCA.crt
+<span class="hljs-comment"># The certificate will be written to /etc/ca-certificates/trust-source/myCA.p11-kit</span>
+<span class="hljs-comment"># update-ca-trust</span>
+
+<span class="hljs-comment"># Rimozione di un certificato</span>
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> /etc/ca-certificates/trust-source/example.pem
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> /etc/ca-certificates/trust-source/anchors/example2.pem
+<span class="hljs-built_in">sudo</span> update-ca-trust
+
+trust list --filter=ca-anchors|grep -B 3 -A 2 -i mkcert
+ll /etc/ca-certificates/trust-source/anchors/
+trust anchor --remove /etc/ca-certificates/trust-source/anchors/mkcert_development_CA_116359949960355618335438220366616733445.crt
+<span class="hljs-built_in">rm</span> /etc/ca-certificates/trust-source/anchors/mkcert*
+update-ca-trust
+</code></pre>
+<p>In cryptographic systems with hierarchical structure, a <strong><code>trust anchor</code></strong>
+<strong>is an authoritative entity for which trust is assumed and not derived</strong>.
+In <code>X.509</code> architecture, a <code>root certificate</code> would be the <code>trust anchor</code>
+from which the whole chain of trust is derived.</p>
+<pre><code class="language-bash">$ trust list --filter=ca-anchors|grep -B 3 -A 2 -i mkcert
+pkcs11:<span class="hljs-built_in">id</span>=%82%4A%CE%3A%CB%6C%10%E8%2C%3A%3F%E0%FD%C0%37%6B%40%5E%A6%34;<span class="hljs-built_in">type</span>=cert
+    <span class="hljs-built_in">type</span>: certificate
+    label: mkcert <span class="hljs-variable">$USER</span>@cdphome (Corrado)
+    trust: anchor
+    category: authority
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Importare una CA root nel sistema:</span>
+$ man update-ca-trust
+$ pacman -Qo update-ca-trust
+/usr/bin/update-ca-trust è contenuto <span class="hljs-keyword">in</span> ca-certificates-utils 20210529-1
+$ pacman -Qo trust
+/usr/bin/trust è contenuto <span class="hljs-keyword">in</span> p11-kit 0.23.22-1
+$ <span class="hljs-built_in">sudo</span> trust anchor --store rootCACert.pem
+<span class="hljs-comment"># oppure:</span>
+$ <span class="hljs-built_in">cp</span> -v rootCACert.pem /etc/ca-certificates/trust-source/anchors/
+$ <span class="hljs-built_in">ls</span> -la /etc/ssl/certs/ | <span class="hljs-built_in">wc</span> -l
+$ update-ca-trust extract
+$ <span class="hljs-built_in">ls</span> -la /etc/ssl/certs/ | <span class="hljs-built_in">wc</span> -l
+ll /etc/ca-certificates/trust-source/anchors/
+
+$ <span class="hljs-built_in">ls</span> -la /etc/ssl/certs/0.0.0.0.pem 
+/etc/ssl/certs/0.0.0.0.pem -&gt; ../../ca-certificates/extracted/cadir/0.0.0.0.pem
+
+In Debian:
+man update-ca-certificates
+    updates the directory /etc/ssl/certs to hold SSL certificates  and  generates  ca-certificates.crt,  
+    a  concatenated  single-file  list  of certificates.
+    It  reads  the  file  /etc/ca-certificates.conf.  Each  line  gives  a  pathname  of  a CA
+    certificate under /usr/share/ca-certificates that should be  trusted. 
+    Certificates must have a  .crt extension <span class="hljs-keyword">in</span> order to be included by update-ca-certificates.
+    Furthermore  all  certificates  with  a  .crt  extension  found below /usr/local/share/ca-certificates 
+    are also included as implicitly trusted.
+    
+$ <span class="hljs-built_in">wc</span> -l /etc/ssl/certs/ca-certificates.crt
+
+Conclusione:
+Copy your certificate <span class="hljs-keyword">in</span> PEM format (the format that has ----BEGIN CERTIFICATE---- <span class="hljs-keyword">in</span> it) 
+into /usr/local/share/ca-certificates and name it with a .crt file extension.
+Then run <span class="hljs-built_in">sudo</span> update-ca-certificates.
+
+
+$ docker run -it --<span class="hljs-built_in">rm</span> python-fastapi-server bash
+    apt-get update
+    apt search p11
+    apt show p11-kit
+    apt-get install apt-file
+    apt-file update
+    apt-file list p11-kit <span class="hljs-comment"># mostra il contenuto del pacchetto senza scaricarlo</span>
+          /usr/bin/trust
+    apt-get install p11-kit
+
+</code></pre>
+<h2 id="certificato-self-signed" tabindex="-1">Certificato Self Signed <a class="header-anchor" href="#certificato-self-signed" aria-hidden="true">🔗</a></h2>
+<p>Il certificato self signed cifra la connessione ma genera dei warning si sicurezza, che si devono disattivare per non avere continue segnalazioni.<br>
+A scopi di sviluppo è molto meglio creare ed installare nel sistema una root CA, che non genera warning nelle applicazioni client(Browser Web, curl etc.).</p>
+<ol>
+<li>
+<p>In curl con il parametro <code>-k</code>:</p>
+<pre><code class="language-bash">$ curl -k https://localhost:9999
+</code></pre>
+</li>
+<li>
+<p>In Python Requests con il parametro <code>verify=False</code>:</p>
+<pre><code class="language-python">requests.get(<span class="hljs-string">&#x27;https://0.0.0.0:9999&#x27;</span>, verify=<span class="hljs-literal">False</span>)
+</code></pre>
+</li>
+</ol>
+<p>In questo esempio la chiave privata non viene generata preventivamente con <code>openssl rsa</code> ma con un unico comando assieme alla generazione del certificato self-signed:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac install openssl python-pyopenssl <span class="hljs-comment"># non serve in manjaro è normalmente già installato</span>
+$ openssl version
+
+<span class="hljs-comment"># Generazione sia del certificato self signed che della chiave privata</span>
+$ openssl \
+  req \
+  -newkey rsa:4096 -noenc \
+  -keyout ssl/private.key \
+  -sha512 \
+  -x509 -days 36500 -out ssl/selfsigned.crt \
+  -subj <span class="hljs-string">&quot;/C=IT/ST=Rome/L=Rome/O=cdp.o/OU=cdp.ou/CN=0.0.0.0/emailAddress=cdp@cdp.it&quot;</span>
+$ openssl x509 -text -noout -<span class="hljs-keyword">in</span> ssl/selfsigned.crt
+</code></pre>
+<pre><code class="language-bash">$ openssl req -x509 -out ssl/localhost.crt -keyout ssl/localhost.key \
+  -newkey rsa:2048 -noenc -sha256 \
+  -subj <span class="hljs-string">&#x27;/CN=0.0.0.0&#x27;</span> -extensions EXT -config &lt;( \
+   <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;[dn]\nCN=0.0.0.0\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost,IP:0.0.0.0\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth&quot;</span>)
+</code></pre>
+<h2 id="test-connessione-e-certificati" tabindex="-1">Test Connessione e certificati <a class="header-anchor" href="#test-connessione-e-certificati" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ openssl s_client -connect google.com:443 -showcerts
+</code></pre>
+<pre><code class="language-bash">$ openssl req -<span class="hljs-keyword">in</span> cert.pem -noout -text <span class="hljs-comment"># stampa di verifica per una CSR</span>
+</code></pre>
+<h2 id="p7m-der-pem" tabindex="-1">p7m der pem <a class="header-anchor" href="#p7m-der-pem" aria-hidden="true">🔗</a></h2>
+<h3 id="cades" tabindex="-1">CAdES <a class="header-anchor" href="#cades" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/CAdES_(computing)">https://en.wikipedia.org/wiki/CAdES_(computing)</a></li>
+</ul>
+<p><code>CAdES</code> (<code>CMS</code> Advanced Electronic Signatures) è una firma digitale che può essere apposta su qualsiasi tipo di file. Tale modalità di firma genera una “busta crittografica” contenente il documento informatico originale e si caratterizza per il suffisso P7M che si aggiunge all’estensione del file (es. citazione.pdf.p7m). In altri termini, nella firma CAdES il documento oggetto di firma digitale viene incapsulato in un contenitore informatico “chiuso” con una firma digitale, che ne garantisce quindi l’autenticità e l’integrità (oltre che il “non ripudio”);</p>
+<p><a href="https://tools.ietf.org/html/rfc5126.html">CAdES</a> is a new standard for advanced <strong>digital signature</strong>. It was introduced by the European Directive on a community framework for Electronic Signatures, which extends the previous standard, <code>CMS</code>, specifying several additional profiles. <code>CAdES</code> provides some important features of extended electronic signature lacking in <code>CMS</code>, such as long term validation -- the ability to prove signature validity after a long period, several years or even decades after it was created.</p>
+<p><code>CAdES</code> stands for <code>CMS Advanced Electronic Signatures</code>. The <code>Cryptographic Message Syntax (CMS)</code> provides a framework for digitally signed documents, including PDF or emails (<code>eIDAS</code>-compliant signature).</p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc5652">CMS - Cryptographic Message Syntax</a> (CMS - Evoluzione di  <code>PKCS #7</code>)
+<a href="https://www.rfc-editor.org/rfc/rfc5126.html">CAdES - CMS Advanced Electronic Signatures</a></p>
+<p>A CAdES Basic Electronic Signature (<code>CAdES-BES</code>) contains:</p>
+<ul>
+<li>
+<p>The signed user data</p>
+</li>
+<li>
+<p>The digital signature value computed on the user data.</p>
+<p>+------Elect.Signature (CAdES-BES)------+
+|+----------------------------------- + |
+||+---------+ +----------+            | |
+|||Signer's | |  Signed  |  Digital   | |
+|||Document | |Attributes| Signature  | |
+|||         | |          |            | |
+||+---------+ +----------+            | |
+|+------------------------------------+ |
++---------------------------------------+</p>
+</li>
+</ul>
+<p>A <code>CAdES</code> Basic Electronic Signature (<code>CAdES-BES</code>), as defined in the European Standard <code>ETSI EN 319 122-1 V1.1.1</code>, contains:</p>
+<ul>
+<li>Signed user data (<strong>document being sent</strong>) as defined in <a href="https://www.rfc-editor.org/rfc/rfc5652">CMS (RFC 5652)</a>;</li>
+<li>A collection of mandatory signed attributes
+<ul>
+<li><strong>Content-type</strong> of the EncapsulatedContentInfo value being signed</li>
+<li><strong>Message-digest</strong> of the eContent OCTET STRING within encapContentInfo being signed;</li>
+<li>ESS <strong>signing-certificate</strong> or ESS signing-certificate-v2 (Enhanced Security Services for S/MIME) <a href="https://www.rfc-editor.org/rfc/rfc2634">https://www.rfc-editor.org/rfc/rfc2634</a> Enhanced Security Services for S/MIME. An ESS signingCertificate attribute only allows for SHA-1 as digest algorithm. An ESS signingCertificateV2 attribute allows for any digest algorithm.</li>
+</ul>
+</li>
+<li>Additional mandatory signed attributes (as defined in sent document)</li>
+<li><strong>Digital signature</strong> value that has been <strong>computed on the user data and signed attributes</strong></li>
+</ul>
+<p>Additionally, a CAdES Basic Electronic Signature may contain optional signed attributes, including:</p>
+<ul>
+<li><strong>Public Key Certificates</strong> (PKCs)</li>
+<li>Signing-time</li>
+<li>Content-time-stamp</li>
+<li>Mime-type</li>
+</ul>
+<h4 id="ess-signingcertificate" tabindex="-1">ESS signingCertificate <a class="header-anchor" href="#ess-signingcertificate" aria-hidden="true">🔗</a></h4>
+<p>Si tratta di un attributo, hash del certificato del signer, che viene aggiunto al calcolo della firma digitale.</p>
+<p><a href="https://www.rfc-editor.org/rfc/rfc2634">https://www.rfc-editor.org/rfc/rfc2634</a> ESS signingCertificate Enhanced Security Services for S/MIME
+<a href="https://www.rfc-editor.org/rfc/rfc5035">https://www.rfc-editor.org/rfc/rfc5035</a> Enhanced Security Services (ESS) Update</p>
+<p>Si tratta di un attributo aggiunto per legare crittograficamente il certificato del signer of a CMS SignedData object alla firma digitale. In questo modo la firma digitale non è solo funzione della chiave privata del signer e del documento, ma anche del certificato digitale del signer.</p>
+<pre><code>SigningCertificate ::=  SEQUENCE {
+    certs        SEQUENCE OF ESSCertID,
+    policies     SEQUENCE OF PolicyInformation OPTIONAL
+}
+ESSCertID ::=  SEQUENCE {
+        certHash                 Hash,
+        issuerSerial             IssuerSerial OPTIONAL
+}
+Hash ::= OCTET STRING -- SHA1 hash of entire certificate
+</code></pre>
+<p>Signing certificates are useful in any environment where certificates might be transmitted with signed messages.
+When creating an ESSCertID, the certHash is computed over the entire
+DER encoded certificate including the signature. The issuerSerial
+would normally be present unless the value can be inferred from other
+information.
+Concerns have been raised over the fact that the certificate which
+the signer of a CMS SignedData object desired to be bound into the
+verification process of the SignedData object is not
+cryptographically bound into the signature itself.</p>
+<h3 id="file-.der-e-.pem" tabindex="-1">file .der e .pem <a class="header-anchor" href="#file-.der-e-.pem" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-format-options.1ssl.en">https://man.archlinux.org/man/openssl-format-options.1ssl.en</a></p>
+<ul>
+<li><code>DER</code> A <strong>binary format</strong>, encoded or parsed according to Distinguished Encoding Rules (<code>DER</code>) of the <code>ASN.1</code> data language.</li>
+<li><code>PEM</code> A text format defined in IETF RFC 1421 and IETF RFC 7468. Briefly, this is a block of <strong>base-64 encoding</strong> (defined in IETF RFC 4648).</li>
+<li><code>SMIME</code> An <code>S/MIME</code> object as described in IETF RFC 8551. Earlier versions were known as <code>CMS</code> and are compatible. Note that the parsing is simple and might fail to parse some legal data.</li>
+<li><code>P12</code> A <code>DER</code>-encoded file containing a <code>PKCS#12</code> object. It might be necessary to provide a decryption password to retrieve the private key.</li>
+</ul>
+</li>
+<li>
+<p><code>DER</code> (Distinguished Encoding Rules) is <strong>binary</strong> format, its structure is called <code>ASN.1</code>. <code>PEM</code> format is <code>Base64</code> encoded <code>DER</code>. Un modo per codificare la sintassi <code>ASN.1</code> in binario, un file <code>.pem</code> è solo un file <code>.der</code> con codifica <code>Base64</code>. OpenSSL può convertirli in <code>.pem</code><br>
+<a href="https://en.wikipedia.org/wiki/X.690#DER_encoding">https://en.wikipedia.org/wiki/X.690#DER_encoding</a></p>
+</li>
+<li>
+<p><code>.pem</code> - <a href="https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail">Privacy-Enhanced Mail</a>, è un certificato codificato prima <a href="https://en.wikipedia.org/wiki/X.690#DER_encoding">DER</a> e poi con <a href="https://en.wikipedia.org/wiki/Base64">Base64</a>, racchiuso tra <code>-----BEGIN CERTIFICATE-----</code> e <code>-----END CERTIFICATE-----</code>;</p>
+</li>
+<li>
+<p><code>.cer</code>, <code>.crt</code>, <code>.der</code> - certificato codificato con <code>DER</code>, a volte sequenze di certificati;</p>
+</li>
+<li>
+<p><code>.p7b</code>, <code>.p7c</code> – struttura SignedData <a href="https://en.wikipedia.org/wiki/PKCS7">PKCS#7</a> <strong>senza dati</strong>, <strong>solo il/i certificato/i</strong> o la/le CRL (Certificate revocation list);</p>
+</li>
+<li>
+<p><code>.pfx</code>, <code>.P12</code> - <a href="https://en.wikipedia.org/wiki/PKCS12">PKCS#12</a>, può contenere certificati e chiavi pubbliche e private (protette da password);</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ openssl x509 -inform der -<span class="hljs-keyword">in</span> to-convert.der -out converted.pem
+</code></pre>
+<h3 id="p7m" tabindex="-1">p7m <a class="header-anchor" href="#p7m" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/eniocarboni/p7m">https://github.com/eniocarboni/p7m</a></li>
+</ul>
+<p>Il file <code>p7m</code> è un file di firma digitale nel formato <strong><code>CAdES</code></strong> (<code>CMS Advanced Electronic Signatures</code>) che è un’estensione del Cryptographic Message Syntax (CMS) che è basato a sua volta su <code>PKCS#7</code>. Il file <code>p7m</code> non è altro che un <strong>contenitore che incapsula sia il documento originale (non criptato) che la firma digitale personale e quella della catena della CA che ha rilasciato il certificato</strong>. Andando per ordine nel file <code>p7m</code> troviamo:</p>
+<ul>
+<li>nei primi byte l’header <code>PKCS#7</code></li>
+<li>poi viene il nostro documento originale (<strong>non criptato</strong>)</li>
+<li>quindi l’hash di firma (che valida per legge il contenuto)</li>
+<li>il certificato digitale personale di chi ha firmato</li>
+<li>ed infine il certificato della CA.</li>
+</ul>
+<p>L’estensione <code>.p7m</code> fa riferimento a un file firmato digitalmente in modalità <code>CADES</code>. Quando la firma digitale è apposta in modalità <code>CADES</code>, il documento firmato e il file con la firma digitale sono inseriti in una busta anch’essa con estensione <code>.p7m</code>.</p>
+<p>A <code>P7M</code> file is an <code>S/MIME</code> encrypted or signed email message.</p>
+<h3 id="firmare-un-file-in-.p7m" tabindex="-1">Firmare un file in .p7m <a class="header-anchor" href="#firmare-un-file-in-.p7m" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Creazione di una chiave privata senza password</span>
+$ openssl genrsa -out private-key.pem 2048
+<span class="hljs-comment"># Creazione di un certificato self-signed</span>
+$ openssl req -new -x509 -sha256 -key private-key.pem -subj <span class="hljs-string">&quot;/C=IT/ST=IT/O=CDP/OU=CDP.S/CN=0.0.0.0&quot;</span> -out self-signed-cert.pem -days 360 
+$ openssl x509 -<span class="hljs-keyword">in</span> self-signed-cert.pem -text <span class="hljs-comment"># Visualizzazione del certificato</span>
+<span class="hljs-comment"># Creazione di un file di esempio</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;testo&quot;</span> &gt; file.txt
+<span class="hljs-comment"># Firma del file di esempio</span>
+$ openssl cms -sign -cades -nosmimecap -md sha256 -nodetach -binary -stream -outform DER -signer self-signed-cert.pem -inkey private-key.pem -<span class="hljs-keyword">in</span> file.txt -out file.txt.p7m
+<span class="hljs-comment"># Recupero del file</span>
+$ openssl cms -verify -noverify -inform DER -<span class="hljs-keyword">in</span> file.txt.p7m -out file2.txt
+</code></pre>
+<ul>
+<li>
+<p><a href="https://www.misterpki.com/openssl-cms/">https://www.misterpki.com/openssl-cms/</a></p>
+<p>Both the openssl <code>cms</code> and <code>smime</code> utilities can be used for digitally signing, verifying, encrypted, and decrypting both regular text files and <code>S/MIME</code> messages. The <code>cms</code> utility is used more often with newer versions of <code>S/MIME</code>, and generally supports newer and stronger methods of encryption.
+The <code>Cryptographic Message Syntax (CMS)</code> can be researched further by reading <code>RFC-5652</code>.</p>
+</li>
+</ul>
+<h3 id="estrarre-file-p7m" tabindex="-1">Estrarre file p7m <a class="header-anchor" href="#estrarre-file-p7m" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-smime.1ssl.en">https://man.archlinux.org/man/openssl-smime.1ssl.en</a> This command handles S/MIME mail. It can encrypt, decrypt, sign and verify S/MIME messages.</p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/openssl-format-options.1ssl.en">https://man.archlinux.org/man/openssl-format-options.1ssl.en</a></p>
+<pre><code class="language-bash">$ openssl smime -h
+$ man openssl-smime
+```
+
+-inform parm          Input format SMIME (default), PEM or DER
+-verify               Verify signed message, to tell openssl that you will feed a signed mail message on input and outputs the signed data.
+-noverify             <span class="hljs-keyword">do</span> not verify the signers certificate of a signed message.
+-decrypt              Decrypt encrypted message
+-<span class="hljs-keyword">in</span> infile            Input file
+-out outfile          Output file
+-signer file          If a message is being verified <span class="hljs-keyword">then</span> the signers certificates will be written to this file <span class="hljs-keyword">if</span> the verification was successful.
+
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-bash">$ openssl smime -verify -noverify -inform DER -<span class="hljs-keyword">in</span> documento.pdf.p7m -out documento.pdf -signer signer_cert.pem
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-comment"># DIR=&quot;$( cd &quot;$( dirname &quot;${BASH_SOURCE[0]}&quot; )&quot; &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd )&quot;</span>
+<span class="hljs-comment"># cd $DIR</span>
+
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -ne 1 ]
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> indicare un file .p7m;
+    <span class="hljs-built_in">exit</span> 1;
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> ]
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;indicare un file .p7m&quot;</span>
+    <span class="hljs-built_in">exit</span> 2;
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> [ ! <span class="hljs-variable">${file: -4}</span> == <span class="hljs-string">&quot;.p7m&quot;</span> ]
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;indicare un file .p7m&quot;</span>
+    <span class="hljs-built_in">exit</span> 3;
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">if</span> [ ! -f <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> ] 
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;File <span class="hljs-variable">$1</span> non esistente&quot;</span>
+    <span class="hljs-built_in">exit</span> 4
+<span class="hljs-keyword">fi</span>
+
+filename=<span class="hljs-variable">${1%.*}</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Input: <span class="hljs-variable">$1</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Output: <span class="hljs-variable">$filename</span>&quot;</span>
+
+openssl smime -verify -noverify -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> -inform DER -out <span class="hljs-string">&quot;<span class="hljs-variable">$filename</span>&quot;</span>
+</code></pre>
+<h2 id="tutorial-su-openssl" tabindex="-1">Tutorial su OpenSSL <a class="header-anchor" href="#tutorial-su-openssl" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://blog.passwork.pro/openssl/">https://blog.passwork.pro/openssl/</a></p>
+</li>
+<li>
+<p><a href="https://blog.passwork.pro/7-ways-to-create-self-signed-certificates-on-windows/">https://blog.passwork.pro/7-ways-to-create-self-signed-certificates-on-windows/</a></p>
+</li>
+<li>
+<p><a href="https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm">https://www.digicert.com/kb/ssl-support/openssl-quick-reference-guide.htm</a></p>
+</li>
+<li>
+<p><a href="https://www.keycdn.com/blog/openssl-tutorial">https://www.keycdn.com/blog/openssl-tutorial</a></p>
+</li>
+<li>
+<p><a href="https://www.freecodecamp.org/news/openssl-command-cheatsheet-b441be1e8c4a/">https://www.freecodecamp.org/news/openssl-command-cheatsheet-b441be1e8c4a/</a></p>
+</li>
+<li>
+<p><a href="https://dynacont.net/documentation/linux/openssl/">https://dynacont.net/documentation/linux/openssl/</a></p>
+</li>
+<li>
+<p><a href="https://www.sslshopper.com/article-most-common-openssl-commands.html">https://www.sslshopper.com/article-most-common-openssl-commands.html</a></p>
+</li>
+<li>
+<p><a href="https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs">https://www.digitalocean.com/community/tutorials/openssl-essentials-working-with-ssl-certificates-private-keys-and-csrs</a></p>
+</li>
+<li>
+<p><a href="https://www.feistyduck.com/library/openssl-cookbook/online/">https://www.feistyduck.com/library/openssl-cookbook/online/</a></p>
+<pre><code class="language-bash">$ openssl <span class="hljs-built_in">help</span>
+</code></pre>
+<p><strong>Database delle CA in formato PEM utilizzabile da OpenSSL</strong></p>
+<p>Il database della CA di Mozilla è in formato proprietario mentre OpenSSL lo vuole in formato PEM,<br>
+esiste uno script perl nel sito di curl per effettuare la conversione CA Mozilla --&gt; CA PEM.</p>
+<p><a href="https://hg.mozilla.org/releases/mozilla-beta/file/tip/security/nss/lib/ckfw/builtins/certdata.txt">https://hg.mozilla.org/releases/mozilla-beta/file/tip/security/nss/lib/ckfw/builtins/certdata.txt</a>
+<a href="http://curl.haxx.se/docs/caextract.html">http://curl.haxx.se/docs/caextract.html</a></p>
+<p>is a root store with all trusted certificates in the same file. This will work fine if you’re only going to be using it with, say, the <code>s_client</code> tool. In that case, all you need to do is point the <code>-CAfile</code> switch to your root store.</p>
+<p><a href="https://raw.githubusercontent.com/curl/curl/master/lib/mk-ca-bundle.pl">https://raw.githubusercontent.com/curl/curl/master/lib/mk-ca-bundle.pl</a> script per il download e la conversione del db CA Mozilla in un .pem utilizzabile come CA da OpenSSL</p>
+<p><strong>Creazione di una chiave privata/pubblica</strong></p>
+<pre><code class="language-bash">$ openssl genpkey -out fd.key \
+-algorithm RSA \
+-pkeyopt rsa_keygen_bits:2048 \
+-aes-128-cbc
+</code></pre>
+<p>the key be protected with <code>AES-128</code>. You can also use <code>AES-256</code> (with the <code>-aes-256-cbc</code> switch)</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> fd.key <span class="hljs-comment"># PKCS #8 format</span>
+-----BEGIN ENCRYPTED PRIVATE KEY-----
+$ openssl pkey -<span class="hljs-keyword">in</span> fd.key -text -noout
+$ openssl pkey -<span class="hljs-keyword">in</span> fd.key -pubout -out fd-public.key
+$ <span class="hljs-built_in">cat</span> fd-public.key
+-----BEGIN PUBLIC KEY-----
+
+$ openssl genpkey -out fd.key \
+-algorithm EC  \
+-pkeyopt ec_paramgen_curve:P-256 \
+-aes-128-cbc
+
+$ openssl genpkey -algorithm ed25519
+</code></pre>
+<p><strong>Creazione di una Certificate Signing Requests</strong></p>
+<pre><code class="language-bash">$ openssl req -new -key fd.key -out fd.csr
+<span class="hljs-comment"># Common Name (e.g. server FQDN or YOUR name) []:www.feistyduck.com</span>
+$ openssl req -text -<span class="hljs-keyword">in</span> fd.csr -noout
+<span class="hljs-comment"># After a CSR is generated, use it to sign your own certificate and/or send it to a public CA and ask it to sign the certificate. </span>
+<span class="hljs-comment"># Creating CSRs from Existing Certificates</span>
+<span class="hljs-comment"># You can save yourself some typing if you’re renewing a certificate and don’t want to make any changes to the information presented in it. With the following command, you can create a brand-new CSR from an existing certificate:</span>
+$ openssl x509 -x509toreq -<span class="hljs-keyword">in</span> fd.crt -out fd.csr -signkey fd.key
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &gt; fd.cnf &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+    [req]
+    prompt = no
+    distinguished_name = dn
+    req_extensions = ext
+    input_password = PASSPHRASE
+
+    [dn]
+    CN = www.feistyduck.com
+    emailAddress = webmaster@feistyduck.com
+    O = Feisty Duck Ltd
+    L = London
+    C = GB
+
+    [ext]
+    subjectAltName = DNS:www.feistyduck.com,DNS:feistyduck.com
+EOF
+</code></pre>
+<p>Now you can create the CSR directly from the command line:</p>
+<pre><code class="language-bash">$ openssl req -new -config fd.cnf -key fd.key -out fd.csr
+<span class="hljs-comment"># Signing Your Own Certificates</span>
+$ openssl x509 -req -days 365 -<span class="hljs-keyword">in</span> fd.csr -signkey fd.key -out fd.crt
+<span class="hljs-comment"># You don’t actually have to create a CSR in a separate step. The following command creates a self-signed certificate starting with a key alone:</span>
+$ openssl req -new -x509 -days 365 -key fd.key -out fd.crt
+<span class="hljs-comment"># If you don’t wish to be asked any questions, use the -subj switch to provide the certificate subject information on the command line:</span>
+$ openssl req -new -x509 -days 365 -key fd.key -out fd.crt \
+-subj <span class="hljs-string">&quot;/C=GB/L=London/O=Feisty Duck Ltd/CN=www.feistyduck.com&quot;</span>
+</code></pre>
+<p><strong>Creating Certificates Valid for Multiple Hostnames</strong></p>
+<p>There are two mechanisms for supporting multiple hostnames in a certificate. The first is to list all desired hostnames using an <code>X.509</code> extension called <code>Subject Alternative Name (SAN)</code>. The second is to use wildcards.<br>
+You can also use a combination of the two approaches when it’s more convenient. In practice, for most sites, you can specify a bare domain name and a wildcard to cover all the subdomains (e.g., <code>feistyduck.com</code> and <code>*.feistyduck.com</code>).</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &gt; fd.ext &lt;&lt; `EOF`
+    subjectAltName = DNS:*.feistyduck.com, DNS:feistyduck.com
+EOF
+</code></pre>
+<pre><code class="language-bash">$ openssl x509 -req -days 365 \
+-<span class="hljs-keyword">in</span> fd.csr -signkey fd.key -out fd.crt \
+-extfile fd.ext
+
+<span class="hljs-comment"># Examining Certificates</span>
+$ openssl x509 -text -<span class="hljs-keyword">in</span> fd.crt -noout
+</code></pre>
+<p><strong>Conversioni di certificati</strong></p>
+<pre><code class="language-bash"><span class="hljs-comment"># Certificate conversion between PEM and DER formats</span>
+$ openssl x509 -inform PEM -<span class="hljs-keyword">in</span> fd.pem -outform DER -out fd.der
+$ openssl x509 -inform DER -<span class="hljs-keyword">in</span> fd.der -outform PEM -out fd.pem
+
+<span class="hljs-comment"># PKCS #12 (PFX) Conversion</span>
+$ openssl pkcs12 -<span class="hljs-built_in">export</span> \
+    -name <span class="hljs-string">&quot;My Certificate&quot;</span> \
+    -out fd.p12 \
+    -inkey fd.key \
+    -<span class="hljs-keyword">in</span> fd.crt \
+    -certfile fd-chain.crt
+$ openssl pkcs12 -<span class="hljs-keyword">in</span> fd.p12 -nocerts -out fd.key -nodes
+$ openssl pkcs12 -<span class="hljs-keyword">in</span> fd.p12 -nokeys -clcerts -out fd.crt
+$ openssl pkcs12 -<span class="hljs-keyword">in</span> fd.p12 -nokeys -cacerts -out fd-chain.crt
+
+<span class="hljs-comment"># PKCS #7 Conversion</span>
+<span class="hljs-comment"># To convert from PEM to PKCS #7</span>
+$ openssl crl2pkcs7 -nocrl -out fd.p7b -certfile fd.crt -certfile fd-chain.crt
+<span class="hljs-comment"># To convert from PKCS #7 to PEM</span>
+$ openssl pkcs7 -<span class="hljs-keyword">in</span> fd.p7b -print_certs -out fd.pem
+
+$ openssl ciphers -v <span class="hljs-string">&#x27;ALL:COMPLEMENTOFALL&#x27;</span>
+$ openssl version -d
+$ openssl speed rsa ecdsa
+
+<span class="hljs-comment"># software-only implementation:</span>
+$ openssl speed aes-128-cbc
+<span class="hljs-comment"># with hardware acceleration:</span>
+$ openssl speed -evp aes-128-cbc
+</code></pre>
+<p><strong>Creating a Private Certification Authority</strong></p>
+<pre><code class="language-bash">$ man config
+$ <span class="hljs-built_in">cat</span> &gt; root-ca.conf &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[default]
+name                    = root-ca
+domain_suffix           = example.com
+aia_url                 = http://<span class="hljs-variable">$name</span>.<span class="hljs-variable">$domain_suffix</span>/<span class="hljs-variable">$name</span>.crt
+crl_url                 = http://<span class="hljs-variable">$name</span>.<span class="hljs-variable">$domain_suffix</span>/<span class="hljs-variable">$name</span>.crl
+ocsp_url                = http://ocsp.<span class="hljs-variable">$name</span>.<span class="hljs-variable">$domain_suffix</span>:9080
+default_ca              = ca_default
+name_opt                = utf8,esc_ctrl,multiline,lname,align
+
+[ca_dn]
+countryName             = <span class="hljs-string">&quot;GB&quot;</span>
+organizationName        = <span class="hljs-string">&quot;Example&quot;</span>
+commonName              = <span class="hljs-string">&quot;Root CA&quot;</span>
+
+[ca_default]
+home                    = .
+database                = <span class="hljs-variable">$home</span>/db/index
+serial                  = <span class="hljs-variable">$home</span>/db/serial
+crlnumber               = <span class="hljs-variable">$home</span>/db/crlnumber
+certificate             = <span class="hljs-variable">$home</span>/<span class="hljs-variable">$name</span>.crt
+private_key             = <span class="hljs-variable">$home</span>/private/<span class="hljs-variable">$name</span>.key
+RANDFILE                = <span class="hljs-variable">$home</span>/private/random
+new_certs_dir           = <span class="hljs-variable">$home</span>/certs
+unique_subject          = no
+copy_extensions         = none
+default_days            = 3650
+default_crl_days        = 365
+default_md              = sha256
+policy                  = policy_c_o_match
+
+[policy_c_o_match]
+countryName             = match
+stateOrProvinceName     = optional
+organizationName        = match
+organizationalUnitName  = optional
+commonName              = supplied
+emailAddress            = optional
+
+[req]
+default_bits            = 4096
+encrypt_key             = <span class="hljs-built_in">yes</span>
+default_md              = sha256
+utf8                    = <span class="hljs-built_in">yes</span>
+string_mask             = utf8only
+prompt                  = no
+distinguished_name      = ca_dn
+req_extensions          = ca_ext
+
+[ca_ext]
+basicConstraints        = critical,CA:<span class="hljs-literal">true</span>
+keyUsage                = critical,keyCertSign,cRLSign
+subjectKeyIdentifier    = <span class="hljs-built_in">hash</span>
+
+[sub_ca_ext]
+authorityInfoAccess     = @issuer_info
+authorityKeyIdentifier  = keyid:always
+basicConstraints        = critical,CA:<span class="hljs-literal">true</span>,pathlen:0
+crlDistributionPoints   = @crl_info
+extendedKeyUsage        = clientAuth,serverAuth
+keyUsage                = critical,keyCertSign,cRLSign
+nameConstraints         = @name_constraints
+subjectKeyIdentifier    = <span class="hljs-built_in">hash</span>
+
+[crl_info]
+URI.0                   = <span class="hljs-variable">$crl_url</span>
+
+[issuer_info]
+caIssuers;URI.0         = <span class="hljs-variable">$aia_url</span>
+OCSP;URI.0              = <span class="hljs-variable">$ocsp_url</span>
+
+[name_constraints]
+permitted;DNS.0=example.com
+permitted;DNS.1=example.org
+excluded;IP.0=0.0.0.0/0.0.0.0
+excluded;IP.1=0:0:0:0:0:0:0:0/0:0:0:0:0:0:0:0
+[ocsp_ext]
+authorityKeyIdentifier  = keyid:always
+basicConstraints        = critical,CA:<span class="hljs-literal">false</span>
+extendedKeyUsage        = OCSPSigning
+keyUsage                = critical,digitalSignature
+subjectKeyIdentifier    = <span class="hljs-built_in">hash</span>
+EOF
+
+$ <span class="hljs-built_in">mkdir</span> root-ca
+$ <span class="hljs-built_in">cd</span> root-ca
+$ <span class="hljs-built_in">mkdir</span> certs db private
+$ <span class="hljs-built_in">chmod</span> 700 private
+$ <span class="hljs-built_in">touch</span> db/index
+$ openssl rand -hex 16  &gt; db/serial
+$ <span class="hljs-built_in">echo</span> 1001 &gt; db/crlnumber
+
+$ openssl req -new \
+    -config root-ca.conf \
+    -out root-ca.csr \
+    -keyout private/root-ca.key
+
+$ openssl ca -selfsign \
+    -config root-ca.conf \
+    -<span class="hljs-keyword">in</span> root-ca.csr \
+    -out root-ca.crt \
+    -extensions ca_ext
+
+$ openssl ca -gencrl \
+    -config root-ca.conf \
+    -out root-ca.crl
+
+$ openssl ca \
+    -config root-ca.conf \
+    -<span class="hljs-keyword">in</span> sub-ca.csr \
+    -out sub-ca.crt \
+    -extensions sub_ca_ext
+
+$ openssl ca \
+    -config root-ca.conf \
+    -revoke certs/1002.pem \
+    -crl_reason keyCompromise
+</code></pre>
+</li>
+<li>
+<p><a href="https://quoll.it/firma-digitale-p7m-come-estrarre-il-contenuto/">https://quoll.it/firma-digitale-p7m-come-estrarre-il-contenuto/</a></p>
+<pre><code class="language-bash"><span class="hljs-comment"># estrazione documento</span>
+perl -ne <span class="hljs-string">&#x27;s/^.*%PDF/%PDF/; print if /%PDF/../%%EOF/&#x27;</span> documento.pdf.p7m &gt;documento.pdf
+openssl smime -verify -noverify -<span class="hljs-keyword">in</span> documento.pdf.p7m -inform DER -out documento.pdf
+
+<span class="hljs-comment"># Estrazione del certificato</span>
+<span class="hljs-comment"># Per estrarre il certificato digitale personale di chi ha firmato basta usare openssl con il comando</span>
+openssl pkcs7 -inform DER -<span class="hljs-keyword">in</span> documento.pdf.p7m -print_certs -out cert.pem
+<span class="hljs-comment"># il certificato è nel file cert.pem e se si vuole visualizzare in modo testuale basta il comando per i certificati x509</span>
+openssl x509 -<span class="hljs-keyword">in</span> cert.pem -text -noout
+
+<span class="hljs-comment"># Verifica della firma di tutto il documento</span>
+<span class="hljs-comment"># Per verificare la firma bisogna utilizzare il comando</span>
+openssl smime -<span class="hljs-keyword">in</span> documento.pdf.p7m -inform DER -verify -out documento.pdf
+<span class="hljs-comment"># mentre per verificare la validità del semplice certificato il comando è</span>
+openssl verify cert.pem
+
+<span class="hljs-comment"># Naturalmente, provando così com’è, la verifica fallisce (“unable to load certificate“) perché non abbiamo i certificati di fiducia della CA.</span>
+<span class="hljs-comment"># Tali Certificate Authority sono state definite per legge italiana e sono registrati sul CNIPA, che dal dicembre 2009  è diventato DigitPA, come portafoglio di certificati XML e li ho trovati sullo stesso sito all’indirizzo  https://eidas.agid.gov.it/TL/TSL-IT.xml (che sostitusce il vecchio) .</span>
+<span class="hljs-comment"># Per far in modo che openssl li gestisca bisogna metterli nel suo formato quindi:</span>
+
+<span class="hljs-comment"># https://github.com/eniocarboni/getTrustCAP7m</span>
+wget -O - https://eidas.agid.gov.it/TL/TSL-IT.xml | perl -ne <span class="hljs-string">&#x27;if (/&lt;X509Certificate&gt;/) {
+s/^\s+//; s/\s+$//;
+s/&lt;\/*X509Certificate&gt;//g;
+print &quot;-----BEGIN CERTIFICATE-----\n&quot;;
+while (length($_)&gt;64) {
+print substr($_,0,64).&quot;\n&quot;;
+$_=substr($_,64);
+}
+print $_.&quot;\n&quot;;
+print &quot;-----END CERTIFICATE-----\n&quot;;
+}&#x27;</span> &gt;CA.pem
+
+<span class="hljs-comment"># In tal modo abbiamo tutti i certificati presenti in un unico file CA.pem, purtroppo anche quelli che forse sono scaduti.</span>
+<span class="hljs-comment"># Anche se scaduti potremmo aver bisogno di verificare un file vecchio e quindi ci possono servire anche gli scaduti.</span>
+<span class="hljs-comment"># Adesso possiamo verificare il certificato con esito positivo con:</span>
+openssl verify -CAfile CA.pem cert.pem
+<span class="hljs-comment"># ed il file p7m con il comando:</span>
+openssl smime -<span class="hljs-keyword">in</span> documento.pdf.p7m -inform DER -verify -CAfile CA.pem -out documento.pdf
+<span class="hljs-comment"># Naturalmente quest’ultimo comando oltreché verificare la validità della firma estrae anche il documento originale.</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://quoll.it/p7m-viewer-firma-digitale-parte-seconda/">https://quoll.it/p7m-viewer-firma-digitale-parte-seconda/</a></p>
+<p>p7m codificato in <code>DER</code> (Distinguished Encoding Rules) ovvero in formato binario mentre è possibile trovarsi con dei p7m codificati in <code>PEM</code> (Privacy Enhancement for Internet Electronic Mail) se abbiamo la codifica DER non abbiamo problemi mentre per i PEM dobbiamo dire ad openssl del cambio di codifica tramite il parametro:</p>
+<p><code>-inform PEM</code></p>
+<p>Quindi il solito comando di verifica ed estrazione dell’allegato sarà:</p>
+<pre><code class="language-bash">openssl smime -<span class="hljs-keyword">in</span> documento.pdf.p7m -inform PEM -verify -CAfile CA.pem -out documento.pdf
+</code></pre>
+<p>Per i sottocomandi openssl che usano direttamente la codifica DER dobbiamo considerare di convertire la codifica.</p>
+<p><strong>Conversione da PEM a DER</strong>\</p>
+<p>Un file pm7 codificato PEM non è altro che un file ascii editabile con un qualunque editor a caratteri (come vim, nano, kate e molti altri) avente la prima riga uguale a:</p>
+<p><code>-----BEGIN PKCS7-----</code></p>
+<p>e l’ultima uguale a:</p>
+<p><code>-----END PKCS7-----</code></p>
+<p>mentre le altre non sono altro che la codifica base64 (con allineamento a 64 byte per riga) del certificati DER<br>
+Quindi per la conversione sono equivalenti i seguenti comandi:</p>
+<ol>
+<li>
+<pre><code class="language-bash"> openssl pkcs7 -outform der -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;file_codica-pem.p7m&quot;</span> -out <span class="hljs-string">&quot;file_codifica-der.p7m&quot;</span>
+</code></pre>
+</li>
+<li>
+<pre><code class="language-bash"> openssl <span class="hljs-built_in">base64</span> -d -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;file_codica-pem.p7m&quot;</span> -out <span class="hljs-string">&quot;file_codifica-der.p7m&quot;</span>
+</code></pre>
+</li>
+<li>
+<pre><code class="language-perl"> perl -MMIME::Base64 -<span class="hljs-keyword">ne</span> <span class="hljs-string">&#x27;print decode_base64($_) if ! /-----BEGIN|END/&#x27;</span> file_codifica-pem.p7m<span class="hljs-string">&quot; &gt; &quot;</span>file_codifica-der.p7m<span class="hljs-string">&quot;
+</span></code></pre>
+</li>
+</ol>
+<p>Naturalmente il primo è quello ufficiale di conversione da PEM a DER di openssl</p>
+<p><strong>Come verificare il formato di codifica del file p7m</strong></p>
+<p>Come abbiamo visto nel paragrafo precedente basta editare il file p7m con un editor di testo per capire se è in formato PEM ma se volessimo farlo in automatico tramite script basta semplicemente:</p>
+<pre><code class="language-bash">file_p7m=<span class="hljs-string">&quot;file_originale.p7m&quot;</span>
+file_der_p7m=<span class="hljs-string">&quot;<span class="hljs-variable">$file_p7m</span>&quot;</span>
+openssl pkcs7 -print_certs -text -noout -inform pem -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file_p7m</span>&quot;</span> &gt;/dev/null2&gt;&amp;1
+<span class="hljs-keyword">if</span> [ $? == 0 ]; <span class="hljs-keyword">then</span>
+<span class="hljs-comment"># il file è in formato pem lo converto da in der</span>
+file_der_p7m=<span class="hljs-string">&quot;der_<span class="hljs-variable">${file_p7m}</span>&quot;</span>
+openssl pkcs7 -outform der -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file_p7m</span>&quot;</span> -out <span class="hljs-string">&quot;<span class="hljs-variable">$file_der_p7m</span>}&quot;</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-comment"># da qui in poi $file_der_p7m è codificato DER</span>
+</code></pre>
+<p><strong>Scaricamento portafoglio CA (CNIPA): metodo alternativo</strong></p>
+<pre><code class="language-bash"><span class="hljs-comment"># https://github.com/eniocarboni/getTrustCAP7m</span>
+XML_CERTS=<span class="hljs-string">&#x27;https://applicazioni.cnipa.gov.it/TSL/_IT_TSL_signed.xml&#x27;</span>
+wget --tries=2 -O Ca.xml <span class="hljs-variable">${XML_CERTS}</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> `grep <span class="hljs-string">&#x27;&lt;X509Certificate&#x27;</span> Ca.xml`; <span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;-----BEGIN CERTIFICATE-----&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>| sed -e <span class="hljs-string">&#x27;s/&lt;\/*X509Certificate&gt;//g&#x27;</span>| openssl <span class="hljs-built_in">base64</span> -d -A| openssl <span class="hljs-built_in">base64</span>
+<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;-----END CERTIFICATE-----&quot;</span>
+<span class="hljs-keyword">done</span> &gt;Ca.pem
+<span class="hljs-built_in">rm</span> Ca.xml
+</code></pre>
+<p><strong>Estrazione campi dal certificato</strong></p>
+<p>Per estrarre il certificato abbiamo visto che basta utilizzare il comando:</p>
+<pre><code class="language-bash">openssl pkcs7 -inform DER -<span class="hljs-keyword">in</span> file.p7m -print_certs -out cert.pem
+</code></pre>
+<p>Ora nel file cert.pem abbiamo il certificato di chi ha firmato il documento e per veder i campi del certificato possiamo utilizzare il comando:</p>
+<pre><code class="language-bash">openssl x509 -<span class="hljs-keyword">in</span> cert.pem -text -noout
+</code></pre>
+<p>Se invece volessimo utilizzare i campi del certificato in uno script potremmo semplicemente scrivere:</p>
+<pre><code class="language-bash">cert=$(openssl pkcs7 -print_certs -text -inform der -<span class="hljs-keyword">in</span> <span class="hljs-string">&quot;file.p7m&quot;</span> 2&gt;&amp;1)
+cn=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$cert</span>&quot;</span>| grep <span class="hljs-string">&#x27;Subject:&#x27;</span>|sed -e <span class="hljs-string">&#x27;s/^.*CN=//&#x27;</span> -e <span class="hljs-string">&#x27;s/[\/,].*$//&#x27;</span> 2&gt;&amp;1)
+cf=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$cert</span>&quot;</span>| grep <span class="hljs-string">&#x27;Subject:&#x27;</span>|sed -e <span class="hljs-string">&#x27;s/^.*serialNumber=//&#x27;</span> -e <span class="hljs-string">&#x27;s/[\/,].*$//&#x27;</span> -e <span class="hljs-string">&#x27;s/^.*://&#x27;</span> 2&gt;&amp;1)
+ou=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$cert</span>&quot;</span>| grep <span class="hljs-string">&#x27;Subject:&#x27;</span>|sed -e <span class="hljs-string">&#x27;s/^.*O=//&#x27;</span> -e <span class="hljs-string">&#x27;s/[\/,].*$//&#x27;</span> -e <span class="hljs-string">&#x27;s/^.*://&#x27;</span> 2&gt;&amp;1)
+issuer=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$cert</span>&quot;</span>| grep <span class="hljs-string">&#x27;Issuer:&#x27;</span>|sed -e <span class="hljs-string">&#x27;s/^.*CN=//&#x27;</span> -e <span class="hljs-string">&#x27;s/[\/,].*$//&#x27;</span> 2&gt;&amp;1)
+notbefore=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$cert</span>&quot;</span>| grep <span class="hljs-string">&#x27;Not Before\s*:&#x27;</span> | sed -e <span class="hljs-string">&#x27;s/^.*Not Before\s*:\s*//&#x27;</span>)
+notafter=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$cert</span>&quot;</span>| grep -E <span class="hljs-string">&#x27;Not After\s*:&#x27;</span> | sed -e <span class="hljs-string">&#x27;s/^.*Not After\s*:\s*//&#x27;</span>)
+</code></pre>
+<p>In tal modo abbiamo il nome e cognome (<code>$cn</code>), il codice fiscale (<code>$cf</code>), l’ente di appartenenza (<code>$ou</code>), l’ente certificatore (<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>i</mi><mi>s</mi><mi>s</mi><mi>u</mi><mi>e</mi><mi>r</mi><mo stretchy="false">)</mo><mo separator="true">,</mo><mi>l</mi><mi>a</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>i</mi><mi>d</mi><mi>i</mi><mi>t</mi><mover accent="true"><mi>a</mi><mo>ˋ</mo></mover><mi>d</mi><mi>e</mi><mi>l</mi><mi>c</mi><mi>e</mi><mi>r</mi><mi>t</mi><mi>i</mi><mi>f</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>t</mi><mi>o</mi><mo stretchy="false">(</mo><mi>c</mi><mi>o</mi><mi>m</mi><mi>p</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>a</mi><mi>t</mi><mi>r</mi><mi>a</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">issuer), la validità del certificato (compresa tra `</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">i</span><span class="mord mathnormal">ss</span><span class="mord mathnormal">u</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mclose">)</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">i</span><span class="mord mathnormal">t</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">a</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.25em;"><span class="mord">ˋ</span></span></span></span></span></span></span><span class="mord mathnormal">d</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.02778em;">cer</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mopen">(</span><span class="mord mathnormal">co</span><span class="mord mathnormal">m</span><span class="mord mathnormal">p</span><span class="mord mathnormal">res</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord">‘</span></span></span></span>notbefore<code>e</code><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mi>o</mi><mi>t</mi><mi>a</mi><mi>f</mi><mi>t</mi><mi>e</mi><mi>r</mi><mi mathvariant="normal">‘</mi><mo stretchy="false">)</mo><mi mathvariant="normal">.</mi><mtext> </mtext><mi>N</mi><mi>e</mi><mi>l</mi><mi>c</mi><mi>a</mi><mi>s</mi><mi>o</mi><mi>v</mi><mi>o</mi><mi>l</mi><mi>e</mi><mi>s</mi><mi>s</mi><mi>i</mi><mi>m</mi><mi>o</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>r</mi><mi>o</mi><mi>l</mi><mi>l</mi><mi>a</mi><mi>r</mi><mi>e</mi><mi>s</mi><mi>e</mi><mi>i</mi><mi>l</mi><mi>c</mi><mi>e</mi><mi>r</mi><mi>t</mi><mi>i</mi><mi>f</mi><mi>i</mi><mi>c</mi><mi>a</mi><mi>t</mi><mi>o</mi><mover accent="true"><mi>e</mi><mo>ˋ</mo></mover><mi>v</mi><mi>a</mi><mi>l</mi><mi>i</mi><mi>d</mi><mi>o</mi><mi>p</mi><mi>o</mi><mi>t</mi><mi>r</mi><mi>e</mi><mi>m</mi><mi>m</mi><mi>o</mi><mi>c</mi><mi>o</mi><mi>n</mi><mi>f</mi><mi>r</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>a</mi><mi>r</mi><mi>e</mi><mi>l</mi><mtext>’</mtext><mi>i</mi><mi>n</mi><mi>t</mi><mi>e</mi><mi>r</mi><mi>v</mi><mi>a</mi><mi>l</mi><mi>l</mi><mi>o</mi><mi>t</mi><mi>r</mi><mi>a</mi><mi mathvariant="normal">‘</mi></mrow><annotation encoding="application/x-tex">notafter`).\
+  Nel caso volessimo controllare se il certificato è valido potremmo confrontare l’intervallo tra `</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathnormal">n</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord">‘</span><span class="mclose">)</span><span class="mord">.</span><span class="mspace"> </span><span class="mord mathnormal" style="margin-right:0.10903em;">N</span><span class="mord mathnormal">e</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">so</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">o</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">ess</span><span class="mord mathnormal">im</span><span class="mord mathnormal">oco</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">ro</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">a</span><span class="mord mathnormal">rese</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal" style="margin-right:0.02778em;">cer</span><span class="mord mathnormal">t</span><span class="mord mathnormal">i</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">i</span><span class="mord mathnormal">c</span><span class="mord mathnormal">a</span><span class="mord mathnormal">t</span><span class="mord mathnormal">o</span><span class="mord accent"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6944em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="mord mathnormal">e</span></span><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="accent-body" style="left:-0.1944em;"><span class="mord">ˋ</span></span></span></span></span></span></span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord mathnormal">i</span><span class="mord mathnormal">d</span><span class="mord mathnormal">o</span><span class="mord mathnormal">p</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span><span class="mord mathnormal">re</span><span class="mord mathnormal">mm</span><span class="mord mathnormal">oco</span><span class="mord mathnormal">n</span><span class="mord mathnormal" style="margin-right:0.10764em;">f</span><span class="mord mathnormal">ro</span><span class="mord mathnormal">n</span><span class="mord mathnormal">t</span><span class="mord mathnormal">a</span><span class="mord mathnormal">re</span><span class="mord mathnormal" style="margin-right:0.01968em;">l</span><span class="mord">’</span><span class="mord mathnormal">in</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">er</span><span class="mord mathnormal" style="margin-right:0.03588em;">v</span><span class="mord mathnormal">a</span><span class="mord mathnormal" style="margin-right:0.01968em;">ll</span><span class="mord mathnormal">o</span><span class="mord mathnormal">t</span><span class="mord mathnormal" style="margin-right:0.02778em;">r</span><span class="mord mathnormal">a</span><span class="mord">‘</span></span></span></span>notbefore<code>e</code>$notafter` con la data attuale e tramite script scrivere le seguenti righe:</p>
+<pre><code class="language-bash">notbefore_ts=$(<span class="hljs-built_in">date</span> --<span class="hljs-built_in">date</span>=<span class="hljs-string">&quot;<span class="hljs-variable">${notbefore}</span>&quot;</span> <span class="hljs-string">&quot;+%s&quot;</span>)
+notafter_ts=$(<span class="hljs-built_in">date</span> --<span class="hljs-built_in">date</span>=<span class="hljs-string">&quot;<span class="hljs-variable">${notafter}</span>&quot;</span> <span class="hljs-string">&quot;+%s&quot;</span>)
+now=$(<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%s&quot;</span>)
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">${now}</span>&quot;</span> -ge <span class="hljs-string">&quot;<span class="hljs-variable">${notbefore_ts}</span>&quot;</span> -a <span class="hljs-string">&quot;<span class="hljs-variable">${now}</span>&quot;</span> -le <span class="hljs-string">&quot;<span class="hljs-variable">${notafter_ts}</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;certificato non scaduto&quot;</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;certificato scaduto&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://en.quoll.it/p7m-digital-signature/">https://en.quoll.it/p7m-digital-signature/</a></p>
+</li>
+<li>
+<p><a href="https://www.golinuxcloud.com/tutorial-pki-certificates-authority-ocsp/">https://www.golinuxcloud.com/tutorial-pki-certificates-authority-ocsp/</a></p>
+</li>
+<li>
+<p><a href="https://www.golinuxcloud.com/create-certificate-authority-root-ca-linux/">https://www.golinuxcloud.com/create-certificate-authority-root-ca-linux/</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/10782826/digital-signature-for-a-file-using-openssl">https://stackoverflow.com/questions/10782826/digital-signature-for-a-file-using-openssl</a>
+Signing:</p>
+<pre><code>  openssl dgst -sha256 data.txt &gt; hash
+  openssl rsautl -sign -inkey privatekey.pem -keyform PEM -in hash &gt;signature
+
+  Verifying just the signature:
+
+  openssl rsautl -verify -inkey publickey.pem -pubin -keyform PEM -in signature
+
+  Verifying that the owner of the private key does vouch for data.txt:
+
+  openssl dgst -sha256 -verify publickey.pem -signature signature data.txt
+</code></pre>
+</li>
+<li>
+<p><a href="https://jamielinux.com/docs/openssl-certificate-authority/index.html">https://jamielinux.com/docs/openssl-certificate-authority/index.html</a></p>
+</li>
+<li>
+<p><a href="https://linuxconfig.org/testing-https-client-using-openssl-to-simulate-a-server">https://linuxconfig.org/testing-https-client-using-openssl-to-simulate-a-server</a></p>
+</li>
+<li>
+<p><a href="https://httpie.io/docs/cli">https://httpie.io/docs/cli</a> <a href="https://man.archlinux.org/man/http.1">https://man.archlinux.org/man/http.1</a></p>
+</li>
+</ul>
+<h2 id="subshell-al-posto-dei-parametri--config--extfile--key" tabindex="-1">subshell al posto dei parametri -config -extfile -key <a class="header-anchor" href="#subshell-al-posto-dei-parametri--config--extfile--key" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://tldp.org/LDP/abs/html/subshells.html">https://tldp.org/LDP/abs/html/subshells.html</a></p>
+</li>
+<li>
+<p><a href="http://www.pluto.it/files/ildp/guide/abs/subshells.html">http://www.pluto.it/files/ildp/guide/abs/subshells.html</a></p>
+</li>
+<li>
+<p><a href="https://unix.stackexchange.com/questions/138463/do-parentheses-really-put-the-command-in-a-subshell">https://unix.stackexchange.com/questions/138463/do-parentheses-really-put-the-command-in-a-subshell</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/bash.1">https://man.archlinux.org/man/bash.1</a> e cercare <code>(list)</code></p>
+<p>list is executed in a subshell environment.</p>
+</li>
+<li>
+<p><a href="https://en.wikiversity.org/wiki/Bash_programming/Subshells">https://en.wikiversity.org/wiki/Bash_programming/Subshells</a></p>
+</li>
+</ul>
+<p>Siccome molti parametri di openssl che vogliono path accettano anche <code>/dev/stdin</code> allora è possibile utilizzare delle subshell che producono la configurazione al posto del path al file di configurazione:</p>
+<ul>
+<li>
+<p><a href="https://security.stackexchange.com/questions/74345/provide-subjectaltname-to-openssl-directly-on-the-command-line">https://security.stackexchange.com/questions/74345/provide-subjectaltname-to-openssl-directly-on-the-command-line</a></p>
+<pre><code class="language-bash">openssl req -new -subj <span class="hljs-string">&quot;/C=GB/CN=foo&quot;</span> \
+                -addext <span class="hljs-string">&quot;subjectAltName = DNS:foo.co.uk&quot;</span> \
+                -addext <span class="hljs-string">&quot;certificatePolicies = 1.2.3.4&quot;</span> \
+                -newkey rsa:2048 -keyout key.pem -out req.pem
+
+openssl req -new -sha256 \
+    -key domain.key \
+    -subj <span class="hljs-string">&quot;/C=US/ST=CA/O=Acme, Inc./CN=example.com&quot;</span> \
+    -reqexts SAN \
+    -config &lt;(<span class="hljs-built_in">cat</span> /etc/ssl/openssl.cnf \
+        &lt;(<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;\n[SAN]\nsubjectAltName=DNS:example.com,DNS:www.example.com&quot;</span>)) \
+    -out domain.csr
+openssl req -new -sha256 -key domain.key -subj <span class="hljs-string">&quot;/C=US/ST=CA/O=Acme, Inc./CN=example.com&quot;</span> -reqexts SAN -config &lt;(<span class="hljs-built_in">cat</span> /etc/ssl/openssl.cnf &lt;(<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;[SAN]\nsubjectAltName=DNS:example.com,DNS:www.example.com&quot;</span>)) -out domain.csr
+
+openssl genrsa -out ca.key 2048
+openssl req -new -x509 -days 365 -key ca.key -subj <span class="hljs-string">&quot;/C=CN/ST=GD/L=SZ/O=Acme, Inc./CN=Acme Root CA&quot;</span> -out ca.crt
+openssl req -newkey rsa:2048 -nodes -keyout server.key -subj <span class="hljs-string">&quot;/C=CN/ST=GD/L=SZ/O=Acme, Inc./CN=*.example.com&quot;</span> -out server.csr
+openssl x509 -req -extfile &lt;(<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;subjectAltName=DNS:example.com,DNS:www.example.com&quot;</span>) -days 365 -<span class="hljs-keyword">in</span> server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt
+openssl x509 -<span class="hljs-keyword">in</span> server.crt -text -noout
+</code></pre>
+</li>
+<li>
+<p><a href="https://superuser.com/questions/407874/openssl-csr-generation-with-subject-key-from-stdin">https://superuser.com/questions/407874/openssl-csr-generation-with-subject-key-from-stdin</a></p>
+<pre><code class="language-bash">openssl req -new -key /dev/stdin
+</code></pre>
+</li>
+</ul>
+<h2 id="check-the-modulus-of-an-ssl-certificate-and-key-with-openssl" tabindex="-1">Check the modulus of an SSL certificate and key with openssl <a class="header-anchor" href="#check-the-modulus-of-an-ssl-certificate-and-key-with-openssl" aria-hidden="true">🔗</a></h2>
+<p><a href="https://major.io/2007/09/14/check-the-modulus-of-an-ssl-certificate-and-key-with-openssl/">https://major.io/2007/09/14/check-the-modulus-of-an-ssl-certificate-and-key-with-openssl/</a></p>
+<p>When you create a CSR and private key to obtain an SSL certificate, the private key has some internal data called a <code>modulus</code>. This is integral to the security of your SSL encryption, but for this specific post, we will focus on one specific aspect.</p>
+<p>If your private key and certificate do not contain the same modulus, then Apache will sometimes refuse to start or it may not respond properly to SSL requests.<br>
+<strong>You can check the modulus of your private key and SSL certificate are the same</strong> with these commands:</p>
+<pre><code class="language-bash">$ openssl rsa -noout -modulus -<span class="hljs-keyword">in</span> server.key | openssl md5
+$ openssl x509 -noout -modulus -<span class="hljs-keyword">in</span> server.crt | openssl md5
+</code></pre>
+<p>If the MD5 checksums match, then the certificate and key will work together. However,<br>
+<strong>if they are different, then you cannot use them together</strong>.<br>
+Generally, this means that you used the wrong CSR (that corresponded to some other private key) when you obtained/created your SSL certificate.</p>
+<pre><code class="language-mermaid">flowchart TD
+    A[Christmas] --&gt;|Get money| B(Go shopping)
+    B --&gt; C{Let me think}
+    C --&gt;|One| D[Laptop]
+    C --&gt;|Two| E[iPhone]
+    C --&gt;|Three| F[fa:fa-car Car]
+</code></pre>
+<h2 id="symmetic-encryption---encrypt-%26-decrypt-files-with-password" tabindex="-1">Symmetic encryption - Encrypt &amp; Decrypt Files With Password <a class="header-anchor" href="#symmetic-encryption---encrypt-%26-decrypt-files-with-password" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://man.archlinux.org/man/openssl-enc.1ssl">https://man.archlinux.org/man/openssl-enc.1ssl</a></li>
+<li><a href="https://en.wikipedia.org/wiki/PBKDF2">https://en.wikipedia.org/wiki/PBKDF2</a></li>
+<li><a href="https://man.archlinux.org/man/fallocate.1">https://man.archlinux.org/man/fallocate.1</a></li>
+<li><a href="https://manpages.org/fallocate/1">https://manpages.org/fallocate/1</a></li>
+<li><a href="http://bropages.org/fallocate">http://bropages.org/fallocate</a></li>
+</ul>
+<pre><code class="language-bash">$ openssl enc -list
+    <span class="hljs-built_in">base64</span>
+    des-ede3-cbc
+    aes-[128|192|256]-cbc  128/192/256 bit AES <span class="hljs-keyword">in</span> CBC mode
+
+<span class="hljs-comment"># Creare un file grande di esempio</span>
+$ fallocate -l 900M sample.txt
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Encryption and decryption of large files with OpenSSL on Baeldung!!!&quot;</span> &gt;&gt; sample.txt
+
+<span class="hljs-comment"># Creare un keyfile da utilizzare con il parametro -k</span>
+$ openssl rand 256 &gt; symmetric_keyfile.key
+
+$ PASS=mypassword
+<span class="hljs-comment"># Encrypt</span>
+$ openssl enc -p -aes-256-cbc -pbkdf2 -k <span class="hljs-variable">$PASS</span> -<span class="hljs-keyword">in</span> un_encrypted.data -out encrypted.data
+<span class="hljs-comment"># Decrypt</span>
+$ openssl enc -d -aes-256-cbc -pbkdf2 -k <span class="hljs-variable">$PASS</span> -<span class="hljs-keyword">in</span> encrypted.data -out un_encrypted.data
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th>Parametro</th>
+<th>Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enc</code></td>
+<td>Encoding with Ciphers</td>
+</tr>
+<tr>
+<td><code>-d</code></td>
+<td>Decrypts data</td>
+</tr>
+<tr>
+<td><code>-aes-256-cbc</code></td>
+<td>The encryption cipher to be used</td>
+</tr>
+<tr>
+<td><code>-pbkdf2</code></td>
+<td>Use PBKDF2 algorithm with default iteration count unless otherwise specified.</td>
+</tr>
+<tr>
+<td><code>-in</code></td>
+<td>Specifies the input file</td>
+</tr>
+<tr>
+<td><code>-out</code></td>
+<td>Specifies the output file.</td>
+</tr>
+<tr>
+<td><code>-k</code> <code>-pass</code></td>
+<td>The password to derive the key from.</td>
+</tr>
+<tr>
+<td><code>-p</code></td>
+<td>Print out the key and IV used.</td>
+</tr>
+<tr>
+<td><code>-a</code></td>
+<td>Base64 process the data.</td>
+</tr>
+<tr>
+<td><code>-e</code></td>
+<td>Encrypt the input data: this is the <strong>default</strong>.</td>
+</tr>
+<tr>
+<td><code>-salt</code></td>
+<td>Use salt (randomly generated or provide with -S option) when encrypting, this is the <strong>default</strong>.</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>256bit AES is what the United States government uses to encrypt information at the Top Secret level.</li>
+<li>The <code>-salt</code> option should ALWAYS be used if the key is being derived from a password.</li>
+</ul>
+<h2 id="public-key-encryption---encrypt-%26-decrypt-files-with-public-key" tabindex="-1">Public-key encryption - Encrypt &amp; Decrypt Files With Public Key <a class="header-anchor" href="#public-key-encryption---encrypt-%26-decrypt-files-with-public-key" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<p>Generazione chiavi pubblica e privata per Alice e Bob</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Alice generates her set of key pairs with:</span>
+alice $ openssl genrsa -aes128 -out alice_private.pem 1024
+<span class="hljs-comment"># generate a 1024-bit public/private key pair</span>
+<span class="hljs-comment"># uses aes128, a symmetric key algorithm, to encrypt the private key</span>
+alice $ <span class="hljs-built_in">head</span> alice_private.pem
+alice $ openssl rsa -<span class="hljs-keyword">in</span> alice_private.pem -noout -text
+<span class="hljs-comment"># Alice must extract her public key and save it to a file using the following command:</span>
+alice $ openssl rsa -<span class="hljs-keyword">in</span> alice_private.pem -pubout &gt; alice_public.pem
+alice $ openssl rsa -<span class="hljs-keyword">in</span> alice_public.pem -pubin -text -noout
+
+<span class="hljs-comment"># Bob follows the same procedure to create his key pair</span>
+bob $ openssl genrsa -aes128 -out bob_private.pem 1024
+bob $ openssl rsa -<span class="hljs-keyword">in</span> bob_private.pem -pubout &gt; bob_public.pem
+</code></pre>
+</li>
+<li>
+<p>Scambio delle chiavi pubbliche</p>
+<pre><code class="language-bash">alice $ scp alice_public.pem bob@bob-machine-or-ip:/path/
+bob $ scp bob_public.pem alice@alice-machine-or-ip:/path/
+alice $ <span class="hljs-built_in">ls</span> -l bob_public.pem 
+bob $ <span class="hljs-built_in">ls</span> -l alice_public.pem 
+</code></pre>
+</li>
+<li>
+<p>Scambio di messaggi cifrati con la chiave pubblica</p>
+<pre><code class="language-bash">alice $ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;vim or emacs ?&quot;</span> &gt; top_secret.txt
+alice $ <span class="hljs-built_in">cat</span> top_secret.txt
+alice $ openssl rsautl -encrypt -inkey bob_public.pem -pubin -<span class="hljs-keyword">in</span> top_secret.txt -out top_secret.enc
+alice $ <span class="hljs-built_in">ls</span> -l top_secret.*
+alice $ <span class="hljs-built_in">cat</span> top_secret.enc
+alice $ hexdump -C ./top_secret.enc
+alice $ scp top_secret.enc bob@bob-machine-or-ip:/path/
+
+bob $ <span class="hljs-built_in">ls</span> -l top_secret.enc
+bob $ <span class="hljs-built_in">cat</span> top_secret.enc
+bob $ hexdump -C top_secret.enc
+bob $ openssl rsautl -decrypt -inkey bob_private.pem -<span class="hljs-keyword">in</span> top_secret.enc &gt; top_secret.txt
+bob $ <span class="hljs-built_in">ls</span> -l top_secret.txt
+bob $ <span class="hljs-built_in">cat</span> top_secret.txt
+
+bob $ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;nano for life&quot;</span> &gt; reply_secret.txt
+bob $ <span class="hljs-built_in">cat</span> reply_secret.txt
+bob $ openssl rsautl -encrypt -inkey alice_public.pem -pubin -<span class="hljs-keyword">in</span> reply_secret.txt -out reply_secret.enc
+bob $ <span class="hljs-built_in">ls</span> -l reply_secret.enc
+bob $ <span class="hljs-built_in">cat</span> reply_secret.enc
+bob $ hexdump -C ./reply_secret.enc
+bob $ scp reply_secret.enc alice@alice-machine-or-ip:/path/
+
+alice $ <span class="hljs-built_in">ls</span> -l reply_secret.enc
+alice $ <span class="hljs-built_in">cat</span> reply_secret.enc 
+alice $ hexdump -C ./reply_secret.enc
+alice $ openssl rsautl -decrypt -inkey alice_private.pem -<span class="hljs-keyword">in</span> reply_secret.enc &gt; reply_secret.txt
+alice $ <span class="hljs-built_in">ls</span> -l reply_secret.txt
+alice $ <span class="hljs-built_in">cat</span> reply_secret.txt
+</code></pre>
+</li>
+</ol>
+</body></html>

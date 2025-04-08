@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.658" />
+        <title>pipenv</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pipenv" tabindex="-1">pipenv <a class="header-anchor" href="#pipenv" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.658</p>
+<nav class="table-of-contents"><ol><li><a href="#virtualenv">virtualenv </a><ol><li><a href="#creare-i-virtualenv-all'interno-del-progetto-stesso">Creare i virtualenv all&#39;interno del progetto stesso </a></li></ol></li><li><a href="#installazione-user">Installazione user </a></li><li><a href="#installazione-pipenv">Installazione Pipenv </a></li><li><a href="#pipfile">Pipfile </a></li><li><a href="#installazione-delle-librerie-da-pipfile">Installazione delle librerie da Pipfile </a><ol><li><a href="#per-produzione">Per produzione </a></li></ol></li><li><a href="#aggiungere-librerie-al-progetto">Aggiungere librerie al progetto </a></li><li><a href="#aggiornare-tutte-le-librerie-del-progetto">Aggiornare tutte le librerie del progetto </a></li><li><a href="#vedere-le-versioni-attuali-delle-librerie-installate">Vedere le versioni attuali delle librerie installate </a></li><li><a href="#esecuzione-del-progetto">Esecuzione del progetto </a></li><li><a href="#generare-il-pipfile-dai-requirements-pip">Generare il Pipfile dai requirements pip </a></li><li><a href="#generare-i-requirements-in-formato-pip">Generare i requirements in formato pip </a></li><li><a href="#virtualenv-1">Virtualenv </a></li><li><a href="#.env">.env </a></li></ol></nav><h1 id="pipenv-1" tabindex="-1">pipenv <a class="header-anchor" href="#pipenv-1" aria-hidden="true">🔗</a></h1>
+<p>pipenv è come <code>npm</code> per Node.js, gestisce pip e virtualenv <br>
+salva i virtualenv del progetto in:</p>
+<ul>
+<li>Linux: <code>~/.local/share/virtualenvs</code></li>
+<li>Windows: <code>%USERPROFILE%/.virtualenvs</code></li>
+</ul>
+<p>Dà automaticamente il nome al virtualenv utilizzando il nome della directory radice del progetto.</p>
+<ul>
+<li><a href="https://pipenv.pypa.io/">https://pipenv.pypa.io/</a></li>
+<li><a href="https://github.com/pypa/pipenv">https://github.com/pypa/pipenv</a></li>
+<li><a href="https://pipenv.pypa.io/en/latest/advanced/">https://pipenv.pypa.io/en/latest/advanced/</a></li>
+<li><a href="https://github.com/toml-lang/toml">https://github.com/toml-lang/toml</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># pipenvupgrade.sh</span>
+$ pip install --user --upgrade pipenv
+<span class="hljs-comment"># oppure</span>
+$ <span class="hljs-built_in">sudo</span> pacman install python-pipenv
+
+<span class="hljs-comment"># Utilizzo</span>
+$ pipenv install
+$ pipenv install attrdict3
+$ pipenv install wxPython
+$ pipenv run python main.py <span class="hljs-comment"># esecuzione dell&#x27;applicazione</span>
+
+$ pipenv update --outdated  <span class="hljs-comment"># Aggiorna le librerie vecchie</span>
+
+<span class="hljs-comment"># Info</span>
+$ python --version
+$ pip --version
+$ pipenv --version
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(python -m site --user-base)</span>/bin&quot;</span>
+$ <span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${PATH}</span>:<span class="hljs-subst">$(python -c &#x27;import site; print(f<span class="hljs-string">&quot;{site.USER_BASE}/bin&quot;</span>)</span>&#x27;)&quot;</span>
+$ pipenv --venv
+$ pipenv --<span class="hljs-built_in">where</span>
+</code></pre>
+<h2 id="virtualenv" tabindex="-1">virtualenv <a class="header-anchor" href="#virtualenv" aria-hidden="true">🔗</a></h2>
+<p>pipenv crea automaticamente i virtualenv, alla prima esecuzione di <code>pipenv install &lt;libreria&gt;</code>
+pipenv crea il <code>Pipfile</code> ed un virtualenv che ha come nome il nome della directory root del progetto seguito
+dall'hash del full path della directory root del progetto.
+Esiste dunque un mapping tra virtualenv creato automaticamente e path assoluto del progetto.
+Se si sposta il progetto nel file system bisogna cancellare e ricreare il virtualenv</p>
+<h3 id="creare-i-virtualenv-all'interno-del-progetto-stesso" tabindex="-1">Creare i virtualenv all'interno del progetto stesso <a class="header-anchor" href="#creare-i-virtualenv-all'interno-del-progetto-stesso" aria-hidden="true">🔗</a></h3>
+<p>You might want to set export <code>PIPENV_VENV_IN_PROJECT=1</code> in your <code>.bashrc/.zshrc</code> (or any shell configuration file) for creating the virtualenv inside your project’s directory, avoiding problems with subsequent path changes.</p>
+<h2 id="installazione-user" tabindex="-1">Installazione user <a class="header-anchor" href="#installazione-user" aria-hidden="true">🔗</a></h2>
+<p>Controllare il PATH dei pacchetti python installati a livello <code>--user</code> :</p>
+<pre><code class="language-bash"><span class="hljs-comment"># verificare che ~/.local/bin sia nel PATH</span>
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${PATH}</span>:<span class="hljs-subst">$(python -c &#x27;import site; print(site.USER_BASE)</span>&#x27;)/bin&quot;</span>)
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${PATH}</span>:~/.local/bin&quot;</span>)
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-comment">rem verificare che %APPDATA%\Python\bin sia nel PATH</span>
+<span class="hljs-built_in">SET</span> <span class="hljs-built_in">PATH</span>=<span class="hljs-variable">%PATH%</span>;<span class="hljs-variable">%APPDATA%</span>\Python\bin
+</code></pre>
+<ul>
+<li><a href="https://pip.pypa.io/en/stable/user_guide/#user-installs">https://pip.pypa.io/en/stable/user_guide/#user-installs</a>
+<code>export PYTHONUSERBASE=/myappenv</code></li>
+</ul>
+<p>Installiamo <code>pipenv</code> come pacchetto utente per non dover utilizzare le utenze administrator/root</p>
+<ul>
+<li>
+<p><a href="https://docs.python.org/3/library/site.html#site.USER_BASE">https://docs.python.org/3/library/site.html#site.USER_BASE</a></p>
+<pre><code class="language-bat"><span class="hljs-variable">%APPDATA%</span>\Python
+</code></pre>
+<pre><code class="language-bash">~/.local
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.python.org/3/library/site.html#site.USER_SITE">https://docs.python.org/3/library/site.html#site.USER_SITE</a></p>
+<pre><code class="language-bat"><span class="hljs-variable">%APPDATA%</span>\Python\PythonXY\site-packages
+</code></pre>
+<pre><code class="language-bash">~/.local/lib/pythonX.Y/site-packages
+~/.local/bin
+</code></pre>
+</li>
+</ul>
+<h2 id="installazione-pipenv" tabindex="-1">Installazione Pipenv <a class="header-anchor" href="#installazione-pipenv" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ python --version
+$ pip --version
+
+<span class="hljs-comment"># Installazione di pipenv a livello utente</span>
+$ pip install --user pipenv
+
+$ <span class="hljs-comment"># oppure: python -m pip --user install pipenv</span>
+$ pipenv --version
+
+<span class="hljs-comment"># Aggiornamento</span>
+$ pip install --user --upgrade pipenv
+
+<span class="hljs-comment"># Per vedere dove --user salva i pacchetti: https://pipenv.pypa.io/en/latest/install/#pragmatic-installation-of-pipenv</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(python -m site --user-base)</span>/bin&quot;</span>
+python -c <span class="hljs-string">&quot;import site;print(&quot;</span>site.USER_BASE<span class="hljs-string">&quot;)&quot;</span>
+python -c <span class="hljs-string">&quot;import site;print(&quot;</span>site.USER_SITE<span class="hljs-string">&quot;)&quot;</span>
+
+    ~/.local/lib/python3.9/site-packages
+    ~/.local/bin
+
+<span class="hljs-built_in">export</span> PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${PATH}</span>:<span class="hljs-subst">$(python -c &#x27;import site; print(f<span class="hljs-string">&quot;{site.USER_BASE}/bin&quot;</span>)</span>&#x27;)
+
+</span></code></pre>
+<h2 id="pipfile" tabindex="-1">Pipfile <a class="header-anchor" href="#pipfile" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://pipenv.pypa.io/en/latest/basics/#general-recommendations-version-control">https://pipenv.pypa.io/en/latest/basics/#general-recommendations-version-control</a></li>
+</ul>
+<p>Pipfile uses the <a href="https://github.com/toml-lang/toml">TOML Spec</a></p>
+<p>Il <code>Pipfile</code> viene creato automaticamente alla prima installazione di una libreria.</p>
+<p>Esempio di <code>Pipfile</code> presente nella root del progetto:</p>
+<pre><code class="language-ini"><span class="hljs-section">[[source]]</span>
+<span class="hljs-attr">url</span> = <span class="hljs-string">&quot;https://pypi.org/simple&quot;</span>
+<span class="hljs-attr">verify_ssl</span> = <span class="hljs-literal">true</span>
+<span class="hljs-attr">name</span> = <span class="hljs-string">&quot;pypi&quot;</span>
+
+<span class="hljs-section">[packages]</span>
+<span class="hljs-attr">apscheduler</span> = <span class="hljs-string">&quot;*&quot;</span>
+<span class="hljs-attr">async-dns</span> = <span class="hljs-string">&quot;*&quot;</span>
+<span class="hljs-attr">cryptography</span> = <span class="hljs-string">&quot;*&quot;</span>
+<span class="hljs-attr">fastapi</span> = <span class="hljs-string">&quot;*&quot;</span>
+<span class="hljs-attr">requests</span> =<span class="hljs-string">&quot;*&quot;</span>
+<span class="hljs-attr">sqlalchemy</span> = <span class="hljs-string">&quot;*&quot;</span>
+<span class="hljs-attr">uvicorn</span> = {extras = [ <span class="hljs-string">&quot;standard&quot;</span>,],version = <span class="hljs-string">&quot;*&quot;</span>}
+<span class="hljs-attr">redis</span> = <span class="hljs-string">&quot;*&quot;</span>
+
+<span class="hljs-section">[dev-packages]</span>
+
+<span class="hljs-section">[requires]</span>
+<span class="hljs-attr">python_version</span> = <span class="hljs-string">&quot;3.9&quot;</span>
+</code></pre>
+<h2 id="installazione-delle-librerie-da-pipfile" tabindex="-1">Installazione delle librerie da Pipfile <a class="header-anchor" href="#installazione-delle-librerie-da-pipfile" aria-hidden="true">🔗</a></h2>
+<p>Le librerie vengono installate nel virtualenv dal <code>Pipfile</code> con:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># chiamare install senza argomenti installa tutti i pacchetti del Pipfile</span>
+$ pipenv install
+<span class="hljs-comment"># Crea il Pipfile.lock</span>
+</code></pre>
+<p>Le librerie vengono installate nel virtualenv dal <code>Pipfile.lock</code> con:</p>
+<pre><code class="language-bash">$ pipenv install --ignore-pipfile
+</code></pre>
+<h3 id="per-produzione" tabindex="-1">Per produzione <a class="header-anchor" href="#per-produzione" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Per produzione</span>
+$ pipenv check <span class="hljs-comment"># cerca vulnerabilita di sicurezza</span>
+$ pipenv lock  <span class="hljs-comment"># crea il file Pipenv.lock in formato pipenv</span>
+$ pipenv install --ignore-pipfile <span class="hljs-comment"># usa il file lock per installare i pacchetti</span>
+$ pipenv install --dev <span class="hljs-comment"># installa solo i pacchetti dev del pipfile</span>
+</code></pre>
+<h2 id="aggiungere-librerie-al-progetto" tabindex="-1">Aggiungere librerie al progetto <a class="header-anchor" href="#aggiungere-librerie-al-progetto" aria-hidden="true">🔗</a></h2>
+<p>Esempi di aggiunta di nuove librerie al progetto, questi comandi installano le librerie nel virtualenv ed aggiornano il Pipfile</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> myproject
+$ pipenv install <span class="hljs-comment"># inizializza il virtualenv e lo attiva</span>
+$ pipenv install flask==0.12.1
+$ pipenv install numpy
+$ pipenv install pytest --dev
+</code></pre>
+<h2 id="aggiornare-tutte-le-librerie-del-progetto" tabindex="-1">Aggiornare tutte le librerie del progetto <a class="header-anchor" href="#aggiornare-tutte-le-librerie-del-progetto" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pipenv update --outdated  <span class="hljs-comment"># Aggiorna le librerie vecchie</span>
+$ pipenv update             <span class="hljs-comment"># Aggiorna tutto</span>
+</code></pre>
+<h2 id="vedere-le-versioni-attuali-delle-librerie-installate" tabindex="-1">Vedere le versioni attuali delle librerie installate <a class="header-anchor" href="#vedere-le-versioni-attuali-delle-librerie-installate" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pipenv graph
+$ pipenv graph --reverse
+$ pipenv lock -r
+$ pipenv run pip freeze
+</code></pre>
+<h2 id="esecuzione-del-progetto" tabindex="-1">Esecuzione del progetto <a class="header-anchor" href="#esecuzione-del-progetto" aria-hidden="true">🔗</a></h2>
+<p>Esempio di esecuzione del progetto, l'entry point dell'applicazione è <code>main.py</code>:</p>
+<pre><code class="language-bash">$ pipenv run python main.py
+</code></pre>
+<p>Aprire una shell attivando il virtualenv:</p>
+<pre><code class="language-bash">$ pipenv shell
+</code></pre>
+<h2 id="generare-il-pipfile-dai-requirements-pip" tabindex="-1">Generare il Pipfile dai requirements pip <a class="header-anchor" href="#generare-il-pipfile-dai-requirements-pip" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pipenv install -r path/to/requirements.txt
+</code></pre>
+<h2 id="generare-i-requirements-in-formato-pip" tabindex="-1">Generare i requirements in formato pip <a class="header-anchor" href="#generare-i-requirements-in-formato-pip" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Per generare i requirements in formato pip:</span>
+$ pipenv lock -r &gt; requirements.txt
+$ pipenv lock -r --dev-only &gt; dev-requirements.txt
+</code></pre>
+<h2 id="virtualenv-1" tabindex="-1">Virtualenv <a class="header-anchor" href="#virtualenv-1" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pipenv --venv
+$ pipenv --<span class="hljs-built_in">rm</span> <span class="hljs-comment"># Remove project virtualenv (inferred from current directory)</span>
+$ pipenv --<span class="hljs-built_in">where</span>
+$ pipenv --py
+</code></pre>
+<h2 id=".env" tabindex="-1">.env <a class="header-anchor" href="#.env" aria-hidden="true">🔗</a></h2>
+<p>If a <code>.env</code> file is present in your project, <code>$ pipenv shell</code> and <code>$ pipenv run</code> will automatically load it, for you</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> .<span class="hljs-built_in">env</span>
+HELLO=WORLD⏎
+
+pipenv run python -c <span class="hljs-string">&quot;import os;print(os.environ[&#x27;HELLO&#x27;])&quot;</span>
+Loading .<span class="hljs-built_in">env</span> environment variables...
+WORLD
+
+</code></pre>
+</body></html>

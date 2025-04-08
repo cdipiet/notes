@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.864" />
+        <title>prompt</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="prompt" tabindex="-1">prompt <a class="header-anchor" href="#prompt" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.864</p>
+<nav class="table-of-contents"><ol><li><a href="#add-another-prompt-for-remote-connection-(hostname-%7C%7C-tty)">add another prompt for remote connection (hostname || tty) </a></li><li><a href="#esempi-di-prompt">Esempi di prompt </a></li><li><a href="#prompt-escape-codes">Prompt Escape Codes </a></li><li><a href="#colours-in-bash">Colours In Bash </a></li><li><a href="#here-is-an-example-borrowed-from-the-bash-prompt-howto">Here is an example borrowed from the Bash-Prompt-HOWTO </a></li><li><a href="#prompt">prompt </a></li></ol></nav><h1 id="prompt-1" tabindex="-1">prompt <a class="header-anchor" href="#prompt-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&quot;\e[48;34m \u@\H:\W\e[m&gt;\$ &quot;</span>
+</code></pre>
+<h2 id="add-another-prompt-for-remote-connection-(hostname-%7C%7C-tty)" tabindex="-1">add another prompt for remote connection (hostname || tty) <a class="header-anchor" href="#add-another-prompt-for-remote-connection-(hostname-%7C%7C-tty)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> -z <span class="hljs-variable">$SSH_TTY</span>
+<span class="hljs-keyword">then</span>
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&#x27;\[\033[01;34m\]\!,$cur_tty,$?,\[\033[01;33m\]\W\[\033[01;34m\],\[\033[01;32m\] \$ \[\033[00m\]&#x27;</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&#x27;\[\033[01;34m\]\!,\h,$?,\[\033[01;33m\]\W\[\033[01;34m\],\[\033[01;32m\] \$ \[\033[00m\]&#x27;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="esempi-di-prompt" tabindex="-1">Esempi di prompt <a class="header-anchor" href="#esempi-di-prompt" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-built_in">export</span> AA_P=<span class="hljs-string">&quot;export PVE=\&quot;\\033[m\\033[38;5;2m\&quot;\$(( \`sed -nu \&quot;s/MemFree:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\&quot; /proc/meminfo\` / 1024 ))\&quot;\\033[38;5;22m/\&quot;\$((\`sed -nu \&quot;s/MemTotal:[\\t ]\\+\\([0-9]\\+\\) kB/\\1/p\&quot; /proc/meminfo\`/ 1024 ))MB\&quot;\\t\\033[m\\033[38;5;55m\$(&lt; /proc/loadavg)\\033[m\&quot;;echo -en \&quot;<span class="hljs-variable">$PVE</span>\&quot;&quot;</span> <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$AA_P</span>&quot;</span> &amp;&amp; <span class="hljs-built_in">export</span> PROMPT_COMMAND=<span class="hljs-string">&#x27;history -a;(($SECONDS % 10==0 ))&amp;&amp;eval &quot;$AA_P&quot;;echo -en &quot;$PVE&quot;;&#x27;</span> &amp;&amp; <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-variable">$AA_P</span>&quot;</span>; <span class="hljs-comment"># sets up the prompt PS1=&#x27;\[\e[m\n\e[1;30m\][$$:$PPID \j:\!\[\e[1;30m\]]\[\e[0;36m\] \T \d \[\e[1;30m\][\[\e[1;34m\]\u@\H\[\e[1;30m\]:\[\e[0;37m\]${SSH_TTY} \[\e[0;32m\]+${SHLVL}\[\e[1;30m\]] \[\e[1;37m\]\w\[\e[0;37m\] \n($SHLVL:\!)\$ &#x27;;</span>
+
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&quot;\n\e[1;37m[\e[0;32m\u\e[0;35m@\e[0;32m\h\e[1;37m]\e[1;37m[\e[0;31m\w\e[1;37m]\n$ \e[0m&quot;</span>
+[user@host][~/bin/tools]
+
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&quot;\n[$?]\e[1;37m[\e[0;32m\u\e[0;35m@\e[0;32m\h\e[1;37m]\e[1;37m[\e[0;31m\w\e[1;37m](<span class="hljs-variable">$SHLVL</span>:\!)\n\[\033[0m\]\$ &quot;</span>
+[0][user@host][~/bin/tools](1:2130)
+
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&#x27;\[\033[1;33m\]\u\[\033[1;37m\]@\[\033[1;32m\]\h\[\033[1;37m\]:\[\033[1;31m\]\w \[\033[1;36m\]\$ \[\033[0m\]&#x27;</span>
+user@host:~/bin/tools $
+
+<span class="hljs-built_in">export</span> PS1=<span class="hljs-string">&quot;\e[1;31m[\h]<span class="hljs-variable">$NC</span> \W &gt; \[\033]0;\${TERM} [\u@\h] \w\]&quot;</span>
+[lifesaver] tools &gt;
+</code></pre>
+<h2 id="prompt-escape-codes" tabindex="-1">Prompt Escape Codes <a class="header-anchor" href="#prompt-escape-codes" aria-hidden="true">🔗</a></h2>
+<p>When executing interactively, bash displays the primary prompt <code>PS1</code> when it is ready to read a command and the secondary prompt <code>PS2</code> when it needs more input to complete a command. Bash allows these prompt strings to be customized by inserting a number of backslash-escaped special characters that are decoded as follows:</p>
+<ul>
+<li>\a - an ASCII bell character (07)</li>
+<li>\d - the date in &quot;Weekday Month Date&quot; format (e.g., &quot;Tue May 26&quot;)</li>
+<li>\D{format} - the format is passed to strftime(3) and the result is inserted into the prompt string; an empty format results in a locale-specific time representation. The braces are required</li>
+<li>\e - an ASCII escape character (033)</li>
+<li>\h - the hostname up to the first '.'</li>
+<li>\H - the hostname</li>
+<li>\j - the number of jobs currently managed by the shell</li>
+<li>\l - the basename of the shell's terminal device name</li>
+<li>\n - newline</li>
+<li>\r - carriage return</li>
+<li>\s - the name of the shell, the basename of $0 (the portion following the final slash)</li>
+<li>\t - the current time in 24-hour HH:MM:SS format</li>
+<li>\T - the current time in 12-hour HH:MM:SS format</li>
+<li>\@ - the current time in 12-hour am/pm format</li>
+<li>\A - the current time in 24-hour HH:MM format</li>
+<li>\u - the username of the current user</li>
+<li>\v - the version of bash (e.g., 2.00)</li>
+<li>\V - the release of bash, version + patch level (e.g., 2.00.0)</li>
+<li>\w - the current working directory, with $HOME abbreviated with a tilde</li>
+<li>\W - the basename of the current working directory, with $HOME abbreviated with a tilde</li>
+<li>\! - the history number of this command</li>
+<li>\# - the command number of this command</li>
+<li>\$ - if the effective UID is 0, a #, otherwise a $</li>
+<li>\nnn - the character corresponding to the octal number nnn</li>
+<li>\\ - a backslash</li>
+<li>\[ - begin a sequence of non-printing characters, which could be used to embed a terminal control sequence into the prompt</li>
+<li>\] - end a sequence of non-printing characters</li>
+</ul>
+<h2 id="colours-in-bash" tabindex="-1">Colours In Bash <a class="header-anchor" href="#colours-in-bash" aria-hidden="true">🔗</a></h2>
+<pre><code>Black 0;30 Dark Gray 1;30
+Blue 0;34 Light Blue 1;34
+Green 0;32 Light Green 1;32
+Cyan 0;36 Light Cyan 1;36
+Red 0;31 Light Red 1;31
+Purple 0;35 Light Purple 1;35
+Brown 0;33 Yellow 1;33
+Light Gray 0;37 White 1;37
+</code></pre>
+<h2 id="here-is-an-example-borrowed-from-the-bash-prompt-howto" tabindex="-1">Here is an example borrowed from the Bash-Prompt-HOWTO <a class="header-anchor" href="#here-is-an-example-borrowed-from-the-bash-prompt-howto" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">PS1=<span class="hljs-string">&quot;\[\033[1;34m\][\$(date +%H%M)][\u@\h:\w]$\[\033[0m\] &quot;</span>
+</code></pre>
+<p>This turns the text blue, displays the time in brackets (very useful for not losing track of time while working), and displays the user name, host, and current directory enclosed in brackets. The <code>\[\033[0m\]</code> following the $ returns the colour to the previous foreground colour.</p>
+<p>How about command prompt modification thats a bit more &quot;pretty&quot;:</p>
+<pre><code class="language-bash">PS1=<span class="hljs-string">&quot;\[\033[1;30m\][\[\033[1;34m\]\u\[\033[1;30m\]@\[\033[0;35m\]\h\[\033[1;30m\]] \[\033[0;37m\]\W \[\033[1;30m\]\$\[\033[0m\] &quot;</span>
+</code></pre>
+<p>This one sets up a prompt like this: <code>[user@host] directory $</code></p>
+<p>Break down:</p>
+<pre><code class="language-bash">\[\033[1;30m\] - Sets the color <span class="hljs-keyword">for</span> the characters that follow it. Here 1;30 will <span class="hljs-built_in">set</span> them to Dark Gray.
+\u \h \W \$ - Look to the table above
+\[\033[0m\] - Sets the colours back to how they were originally.
+</code></pre>
+<p>Each user on a system can have their own customized prompt by setting the PS1 variable in either the .bashrc or .profile files located in their home directories.</p>
+<h2 id="prompt-2" tabindex="-1">prompt <a class="header-anchor" href="#prompt-2" aria-hidden="true">🔗</a></h2>
+<p>cat /etc/skel/.bashrc</p>
+<p>diff .bashrc /etc/skel/.bashrc</p>
+</body></html>

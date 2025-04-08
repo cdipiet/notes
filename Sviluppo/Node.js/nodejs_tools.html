@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.763" />
+        <title>nodejs_tools</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nodejs_tools" tabindex="-1">nodejs_tools <a class="header-anchor" href="#nodejs_tools" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.763</p>
+<nav class="table-of-contents"><ol><li><a href="#https%3A%2F%2Fgithub.com%2Fraineorshine%2Fnpm-check-updates">https://github.com/raineorshine/npm-check-updates </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fdylang%2Fnpm-check">https://github.com/dylang/npm-check </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fdepcheck%2Fdepcheck">https://github.com/depcheck/depcheck </a></li><li><a href="#https%3A%2F%2Feslint.org%2F">https://eslint.org/ </a></li><li><a href="#https%3A%2F%2Fprettier.io%2F">https://prettier.io/ </a></li><li><a href="#https%3A%2F%2Fbrowsersync.io">https://browsersync.io </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fkimmobrunfeldt%2Fconcurrently">https://github.com/kimmobrunfeldt/concurrently </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Funitech%2Fpm2">https://github.com/Unitech/pm2 </a></li><li><a href="#https%3A%2F%2Fnodemon.io%2F">https://nodemon.io/ </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fopen-cli">https://github.com/sindresorhus/open-cli </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fmysticatea%2Fnpm-run-all">https://github.com/mysticatea/npm-run-all </a></li><li><a href="#jsdoc">JSDoc </a></li></ol></nav><h1 id="node.js-tools" tabindex="-1">Node.js Tools <a class="header-anchor" href="#node.js-tools" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash"><span class="hljs-comment"># Tool globali</span>
+$ npm install -g npm-run-all
+
+<span class="hljs-comment"># Tool installati a livello di progetto</span>
+$ npm install -D npm-check-updates depcheck eslint prettier eslint-config-prettier browser-sync open-cli jsdoc foodoc
+</code></pre>
+<h2 id="https%3A%2F%2Fgithub.com%2Fraineorshine%2Fnpm-check-updates" tabindex="-1"><a href="https://github.com/raineorshine/npm-check-updates">https://github.com/raineorshine/npm-check-updates</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fraineorshine%2Fnpm-check-updates" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ npm install -g npm-check-updates
+$ ncu
+$ ncu -u
+</code></pre>
+<p><code>npm-check-updates</code> upgrades your <code>package.json</code> dependencies to the latest versions, ignoring specified versions.</p>
+<h2 id="https%3A%2F%2Fgithub.com%2Fdylang%2Fnpm-check" tabindex="-1"><a href="https://github.com/dylang/npm-check">https://github.com/dylang/npm-check</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fdylang%2Fnpm-check" aria-hidden="true">🔗</a></h2>
+<p>** ATTUALMENTE NON UTILIZZATO **</p>
+<p>Controlla non solo le versioni delle librerie ma anche se ve ne sono di non utilizzate nei sorgenti.
+(utilizza depcheck per trovare le librerie non utilizzate)</p>
+<pre><code class="language-bash">$ npm install -g npm-check
+$ npm-check
+</code></pre>
+<p>Check for outdated, incorrect, and <strong>unused dependencies</strong>.</p>
+<h2 id="https%3A%2F%2Fgithub.com%2Fdepcheck%2Fdepcheck" tabindex="-1"><a href="https://github.com/depcheck/depcheck">https://github.com/depcheck/depcheck</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fdepcheck%2Fdepcheck" aria-hidden="true">🔗</a></h2>
+<p>A tool for analyzing the dependencies in a project to see: how each dependency is used, which dependencies are useless, and which dependencies are missing from <code>package.json</code>.</p>
+<pre><code class="language-bash">$ npm install -g depcheck
+</code></pre>
+<h2 id="https%3A%2F%2Feslint.org%2F" tabindex="-1"><a href="https://eslint.org/">https://eslint.org/</a> <a class="header-anchor" href="#https%3A%2F%2Feslint.org%2F" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint</a>
+<code>ext install dbaeumer.vscode-eslint</code></li>
+<li><a href="https://code.visualstudio.com/docs/languages/javascript">https://code.visualstudio.com/docs/languages/javascript</a></li>
+</ul>
+<pre><code class="language-bash">$ npm install -g eslint <span class="hljs-comment"># globale</span>
+$ npm install eslint --save-dev <span class="hljs-comment"># di progetto</span>
+$ eslint --init <span class="hljs-comment"># da terminale nella root del progetto per creare la configurazione nel progetto visual studio code</span>
+</code></pre>
+<p>installazione plugin Visual Studio Code:</p>
+<pre><code>ext install dbaeumer.vscode-eslint
+</code></pre>
+<p><code>.eslintrc.yml</code> customizzato di progetto</p>
+<pre><code class="language-yml"><span class="hljs-attr">env:</span>
+  <span class="hljs-attr">browser:</span> <span class="hljs-literal">false</span>
+  <span class="hljs-attr">es2021:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">extends:</span> 
+    <span class="hljs-bullet">-</span> <span class="hljs-string">eslint:recommended</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">prettier</span>
+<span class="hljs-attr">parserOptions:</span>
+  <span class="hljs-attr">ecmaVersion:</span> <span class="hljs-string">latest</span>
+  <span class="hljs-attr">sourceType:</span> <span class="hljs-string">module</span>
+<span class="hljs-attr">rules:</span> {}
+</code></pre>
+<h2 id="https%3A%2F%2Fprettier.io%2F" tabindex="-1"><a href="https://prettier.io/">https://prettier.io/</a> <a class="header-anchor" href="#https%3A%2F%2Fprettier.io%2F" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://prettier.io/docs/en/install.html">https://prettier.io/docs/en/install.html</a></li>
+<li><a href="https://github.com/prettier/eslint-config-prettier#cli-helper-tool">https://github.com/prettier/eslint-config-prettier#cli-helper-tool</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint</a></li>
+</ul>
+<pre><code class="language-bash">$ npm install --save-dev --save-exact prettier
+$ npm install --save-dev eslint-config-prettier <span class="hljs-comment"># disattiva le regole eslint che vanno in conflitto con prettier</span>
+$ <span class="hljs-built_in">cat</span> &gt; .prettierrc.json &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+{
+    <span class="hljs-string">&quot;tabWidth&quot;</span>: 4,
+    <span class="hljs-string">&quot;useTabs&quot;</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-string">&quot;semi&quot;</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-string">&quot;printWidth&quot;</span>: 120,
+    <span class="hljs-string">&quot;singleQuote&quot;</span>: <span class="hljs-literal">true</span>
+}
+EOF
+</code></pre>
+<p><code>.vscode/settings.json</code></p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;editor.defaultFormatter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;esbenp.prettier-vscode&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;[markdown]&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editor.defaultFormatter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;yzhang.markdown-all-in-one&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>Interazione con ESLint:</p>
+<p><code>.eslintrc.yml</code> aggiungere prettier alla <code>extends</code>:</p>
+<pre><code class="language-yaml"><span class="hljs-attr">env:</span>
+    <span class="hljs-attr">browser:</span> <span class="hljs-literal">false</span>
+    <span class="hljs-attr">es2021:</span> <span class="hljs-literal">true</span>
+<span class="hljs-attr">extends:</span> 
+    <span class="hljs-bullet">-</span> <span class="hljs-string">eslint:recommended</span>
+    <span class="hljs-bullet">-</span> <span class="hljs-string">prettier</span>
+<span class="hljs-attr">parserOptions:</span>
+    <span class="hljs-attr">ecmaVersion:</span> <span class="hljs-string">latest</span>
+    <span class="hljs-attr">sourceType:</span> <span class="hljs-string">module</span>
+<span class="hljs-attr">rules:</span> {}
+</code></pre>
+<pre><code class="language-bash">$ npx eslint-config-prettier ./js/index.js <span class="hljs-comment"># per verificare che non vi siano conflitti con le rules eslint</span>
+$ npx eslint ./js
+$ npx prettier --write ./js
+</code></pre>
+<h2 id="https%3A%2F%2Fbrowsersync.io" tabindex="-1"><a href="https://browsersync.io">https://browsersync.io</a> <a class="header-anchor" href="#https%3A%2F%2Fbrowsersync.io" aria-hidden="true">🔗</a></h2>
+<p>Time-saving synchronised browser testing.</p>
+<h2 id="https%3A%2F%2Fgithub.com%2Fkimmobrunfeldt%2Fconcurrently" tabindex="-1"><a href="https://github.com/kimmobrunfeldt/concurrently">https://github.com/kimmobrunfeldt/concurrently</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fkimmobrunfeldt%2Fconcurrently" aria-hidden="true">🔗</a></h2>
+<p>Run multiple commands concurrently. Like npm run watch-js &amp; npm run watch-less but better.
+concurrently &quot;command1 arg&quot; &quot;command2 arg&quot;
+In package.json, escape quotes:
+&quot;start&quot;: &quot;concurrently &quot;command1 arg&quot; &quot;command2 arg&quot;&quot;</p>
+<h2 id="https%3A%2F%2Fgithub.com%2Funitech%2Fpm2" tabindex="-1"><a href="https://github.com/Unitech/pm2">https://github.com/Unitech/pm2</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Funitech%2Fpm2" aria-hidden="true">🔗</a></h2>
+<p>PM2 is a production process manager for Node.js applications with a built-in load balancer. It allows you to keep applications alive forever, to reload them without downtime and to facilitate common system admin tasks.</p>
+<h2 id="https%3A%2F%2Fnodemon.io%2F" tabindex="-1"><a href="https://nodemon.io/">https://nodemon.io/</a> <a class="header-anchor" href="#https%3A%2F%2Fnodemon.io%2F" aria-hidden="true">🔗</a></h2>
+<p>Just use nodemon instead of node to run your code, and now your process will automatically restart when your code changes.
+To install, get node.js, then from your terminal run:</p>
+<h2 id="https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fopen-cli" tabindex="-1"><a href="https://github.com/sindresorhus/open-cli">https://github.com/sindresorhus/open-cli</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fopen-cli" aria-hidden="true">🔗</a></h2>
+<p>Open stuff like URLs, files, executables. Cross-platform.</p>
+<h2 id="https%3A%2F%2Fgithub.com%2Fmysticatea%2Fnpm-run-all" tabindex="-1"><a href="https://github.com/mysticatea/npm-run-all">https://github.com/mysticatea/npm-run-all</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fmysticatea%2Fnpm-run-all" aria-hidden="true">🔗</a></h2>
+<p>A CLI tool to run multiple npm-scripts in parallel or sequential.</p>
+<h2 id="jsdoc" tabindex="-1">JSDoc <a class="header-anchor" href="#jsdoc" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://jsdoc.app/about-configuring-jsdoc.html">https://jsdoc.app/about-configuring-jsdoc.html</a></p>
+</li>
+<li>
+<p><a href="https://github.com/frncesc/docstrap-template">https://github.com/frncesc/docstrap-template</a> <a href="https://www.npmjs.com/package/ink-docstrap-template">https://www.npmjs.com/package/ink-docstrap-template</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ankitskvmdam/clean-jsdoc-theme">https://github.com/ankitskvmdam/clean-jsdoc-theme</a> <a href="https://www.npmjs.com/package/clean-jsdoc-theme">https://www.npmjs.com/package/clean-jsdoc-theme</a> <a href="https://fusejs.io/">https://fusejs.io/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/steveush/foodoc">https://github.com/steveush/foodoc</a> <a href="https://www.npmjs.com/package/foodoc">https://www.npmjs.com/package/foodoc</a></p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/jsdoc">https://www.npmjs.com/package/jsdoc</a></p>
+</li>
+<li>
+<p><a href="https://github.com/jsdoc/jsdoc">https://github.com/jsdoc/jsdoc</a></p>
+</li>
+</ul>
+<p><code>jsdoc.conf.json</code></p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;tags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;allowUnknownTags&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;dictionaries&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-string">&quot;jsdoc&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-string">&quot;closure&quot;</span>
+        <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;source&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;include&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-string">&quot;./js&quot;</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;exclude&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+            <span class="hljs-string">&quot;node_modules&quot;</span>
+        <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;includePattern&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;.+\\.js(doc|x)?$&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;excludePattern&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;(^|\\/|\\\\)_&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;sourceType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;module&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;plugins/markdown&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;templates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;logoFile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;cleverLinks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;monospaceLinks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;dateFormat&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;YYYY-MM-dd&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;outputSourceFiles&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;outputSourcePath&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;systemName&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;DirSync&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;footer&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;copyright&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Corrado Di Pietro © 2020-2030&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;navType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vertical&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;theme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;cosmo&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;linenums&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;collapseSymbols&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;inverseNav&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;protocol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;html://&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;methodHeadingReturns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;markdown&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;parser&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gfm&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;hardwrap&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node_modules/foodoc/template&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;encoding&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;utf8&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;destination&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;out/docs&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;recurse&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;readme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;README.md&quot;</span>
+    <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<pre><code class="language-json"><span class="hljs-attr">&quot;opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;templates/default&quot;</span>
+    <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node_modules/ink-docstrap/template&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node_modules/clean-jsdoc-theme&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;template&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;node_modules/foodoc/template&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<pre><code class="language-bash">$  npm install -D jsdoc foodoc ink-docstrap clean-jsdoc-theme
+</code></pre>
+</body></html>

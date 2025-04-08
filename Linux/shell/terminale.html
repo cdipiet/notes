@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.871" />
+        <title>terminale</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="terminale" tabindex="-1">terminale <a class="header-anchor" href="#terminale" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.871</p>
+<nav class="table-of-contents"><ol><li><a href="#accesso-remoto-ssh-grafico">Accesso remoto SSH grafico </a></li><li><a href="#terminal-recorders---registrare-sessioni-shell">Terminal Recorders - Registrare sessioni shell </a><ol><li><a href="#ttyrec">ttyrec </a></li><li><a href="#script">script </a></li></ol></li><li><a href="#terminal-multiplexer">Terminal Multiplexer </a><ol><li><a href="#screen">screen </a><ol><li><a href="#screen-e-ssh">screen e ssh </a></li></ol></li><li><a href="#byoubu">byoubu </a></li><li><a href="#customizing-the-configuration-file">Customizing the configuration file </a></li><li><a href="#shortcuts">Shortcuts </a></li><li><a href="#sharing-a-session-with-others">Sharing a session with others </a></li><li><a href="#setup-to-allow-screen-to-be-shared">Setup to allow screen to be shared </a></li><li><a href="#connecting-to-the-shared-screen">Connecting to the shared screen </a></li><li><a href="#working-from-multiple-locations">Working from multiple locations </a></li></ol></li></ol></nav><h1 id="terminale-1" tabindex="-1">terminale <a class="header-anchor" href="#terminale-1" aria-hidden="true">🔗</a></h1>
+<p><code>termacp</code> terminal capabilities</p>
+<p>Terminali:</p>
+<ul>
+<li>
+<p><a href="http://guake.org/">http://guake.org/</a></p>
+</li>
+<li>
+<p><a href="https://gitlab.gnome.org/raggesilver/blackbox">https://gitlab.gnome.org/raggesilver/blackbox</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm blackbox-terminal
+</code></pre>
+</li>
+<li>
+<p><a href="https://alacritty.org/">https://alacritty.org/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/alacritty/alacritty">https://github.com/alacritty/alacritty</a></p>
+</li>
+<li>
+<p><a href="https://github.com/contour-terminal/contour/">https://github.com/contour-terminal/contour/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Swordfish90/cool-retro-term">https://github.com/Swordfish90/cool-retro-term</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm cool-retro-term
+</code></pre>
+</li>
+<li>
+<p><a href="https://github.com/wez/wezterm">https://github.com/wez/wezterm</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm wezterm
+</code></pre>
+</li>
+</ul>
+<p>Terminal Multiplexer:</p>
+<ul>
+<li>
+<p><a href="https://www.byobu.org/">https://www.byobu.org/</a> Enhanced tmux</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm byobu
+</code></pre>
+</li>
+<li>
+<p><a href="https://github.com/tmux/tmux">https://github.com/tmux/tmux</a></p>
+</li>
+<li>
+<p><a href="https://github.com/tmux/tmux/wiki">https://github.com/tmux/tmux/wiki</a></p>
+</li>
+<li>
+<p><a href="https://gnome-terminator.org/">https://gnome-terminator.org/</a></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/screen/manual/screen.html">https://www.gnu.org/software/screen/manual/screen.html</a></p>
+</li>
+<li>
+<p><a href="https://michael-prokop.at/screen/index.php3">https://michael-prokop.at/screen/index.php3</a></p>
+</li>
+</ul>
+<p>Terminal Recorder:</p>
+<ul>
+<li><a href="https://github.com/util-linux/util-linux/blob/master/term-utils/script.c">https://github.com/util-linux/util-linux/blob/master/term-utils/script.c</a></li>
+<li><a href="https://www.geeksforgeeks.org/script-command-in-linux-with-examples/">https://www.geeksforgeeks.org/script-command-in-linux-with-examples/</a></li>
+<li><a href="https://asciinema.org/">https://asciinema.org/</a></li>
+<li><a href="https://github.com/ovh/ovh-ttyrec">https://github.com/ovh/ovh-ttyrec</a></li>
+</ul>
+<p>Web Terminal:</p>
+<ul>
+<li><a href="https://github.com/tsl0922/ttyd">https://github.com/tsl0922/ttyd</a></li>
+<li><a href="https://github.com/butlerx/wetty">https://github.com/butlerx/wetty</a></li>
+<li><a href="https://github.com/bastillion-io/Bastillion">https://github.com/bastillion-io/Bastillion</a></li>
+</ul>
+<h2 id="accesso-remoto-ssh-grafico" tabindex="-1">Accesso remoto SSH grafico <a class="header-anchor" href="#accesso-remoto-ssh-grafico" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> nano /etc/ssh/sshd_config Cercate la rigaX11Forwarding <span class="hljs-built_in">yes</span>
+$ <span class="hljs-built_in">which</span> xauth
+$ ssh -X nomeutente@nomehost
+<span class="hljs-comment"># Potete anche usare SSH per aprire un’applicazione specifica, usando questa sintassi:</span>
+$ ssh -f -T -X nomeutente@nomehost nomeapp
+<span class="hljs-comment"># Per connettersi da internet si consiglia un servizio DNS dinamico: http://www.noip.com/free</span>
+<span class="hljs-comment"># Bisogna inoltre configurare il router, sezione forwarding, abilitando la porta 22</span>
+</code></pre>
+<h2 id="terminal-recorders---registrare-sessioni-shell" tabindex="-1">Terminal Recorders - Registrare sessioni shell <a class="header-anchor" href="#terminal-recorders---registrare-sessioni-shell" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/script-command-in-linux-with-examples/">https://www.geeksforgeeks.org/script-command-in-linux-with-examples/</a></li>
+<li><a href="https://github.com/util-linux/util-linux/blob/master/term-utils/script.c">https://github.com/util-linux/util-linux/blob/master/term-utils/script.c</a></li>
+<li><a href="https://github.com/ovh/ovh-ttyrec">https://github.com/ovh/ovh-ttyrec</a></li>
+</ul>
+<p>Comandi per la registrazione dell'attivita da terminale</p>
+<h3 id="ttyrec" tabindex="-1">ttyrec <a class="header-anchor" href="#ttyrec" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>ttyrec - Terminal interaction recorder and player (for tty)</li>
+</ul>
+<pre><code class="language-bash">$ pamac search ttyrec
+termrec                                                                                                                                          0.18-1                  AUR 
+    A <span class="hljs-built_in">set</span> of tools <span class="hljs-keyword">for</span> recording/replaying text-terminal session, <span class="hljs-keyword">in</span> the vein of ttyrec.
+ipbt                                                                                                                                             20211203.104f822-1      AUR 
+    A high-tech ttyrec player
+ovh-ttyrec-git                                                                                                                                   v1.1.6.7.r1.ga13ca74-1  AUR 
+    Enhanced (but compatible) version of the classic ttyrec
+</code></pre>
+<h3 id="script" tabindex="-1">script <a class="header-anchor" href="#script" aria-hidden="true">🔗</a></h3>
+<p>permette di registrare una sessione di terminale</p>
+<pre><code class="language-bash">$ script -q -ttiming_log filesessione.txt
+$ scriptreplay -ttiming_log filesessione.txt
+</code></pre>
+<p>La registrazione si termina con <code>CTRL+D</code> o con il comando <code>exit</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">which</span> script
+/usr/bin/script
+$ pacman -Qo /usr/bin/script
+/usr/bin/script è contenuto <span class="hljs-keyword">in</span> util-linux 2.37.4-1
+</code></pre>
+<h2 id="terminal-multiplexer" tabindex="-1">Terminal Multiplexer <a class="header-anchor" href="#terminal-multiplexer" aria-hidden="true">🔗</a></h2>
+<h3 id="screen" tabindex="-1">screen <a class="header-anchor" href="#screen" aria-hidden="true">🔗</a></h3>
+<p>Far partire screen in una connessione SSH
+usare il comando screen per creare sessioni multiple
+<code>tmux</code>: un multiplexer di terminale, come screen</p>
+<p>Screen è utile in molte occasioni, soprattutto quando usato con SSH perchè vi consente di abbandonare e riprendere la connessione SSH senza interrompere i processi in esecuzione. Non ve ne rendete conto finche non avviate un lungo processo in una sessione SSH senza screen e vi ritrovate a dover interrompere il contatto. Aggiungete le righe seguenti al vostro profile (<code>/etc/profile</code> per tutti gli utenti oppure uno tra <code>~/.bash_profilee</code> <code>~/.bash_login</code> solo per voi):</p>
+<pre><code class="language-bash">    <span class="hljs-keyword">if</span> [[ -n <span class="hljs-string">&quot;<span class="hljs-variable">${SSH_TTY}</span>&quot;</span> ]] &amp;&amp; [[ -z <span class="hljs-string">&quot;<span class="hljs-variable">${STY}</span>&quot;</span> ]]; <span class="hljs-keyword">then</span>
+    screen -xRR
+    <span class="hljs-keyword">fi</span>
+</code></pre>
+<p>Ora effettuate il login con SSH e automaticamente partira una sessione di screen gia attiva, oppure ne verrà creata una nuova se non esiste. I comandi inseriti controllano l'esistenza di <code>$SSH_TTY</code>, cioè se siamo loggati via SSH, e che non esista <code>$STY</code>, il che vuol dire che eravate gia in screen. Senza questo passo il vostro SSH farebbe partire un nuovo screen, che leggerebbe questo file cercando di avviare screen ancora. L'opzione <code>-xRR</code> fa ricollegare screen a una sessione attiva in modalita multiutente, se la sessione esistente è ancora collegata a un altro terminale non verra scollegata di forza. Questo è utile se avviate screen su un computer e poi volete collegarvi ad esso da qualche altra parte. Uscendo da screen con <code>CTRL+D</code> o <code>CTRL+A D</code> vi riporta alla shell SSH standard. Se volete che la sessione SSH termini quando uscite da screen, modificate la seconda riga:</p>
+<pre><code class="language-bash">    screen -xRR &amp;&amp; <span class="hljs-built_in">exit</span>
+</code></pre>
+<p>screen: Per aprire piu sessioni persistenti con un unica connessione SSH</p>
+<p><a href="https://www.gnu.org/software/screen/manual/screen.html">https://www.gnu.org/software/screen/manual/screen.html</a></p>
+<ol>
+<li>effettuare accesso ssh</li>
+<li>screen</li>
+<li><span class="k">CTRL+A</span> e poi <span class="k">C</span> per creare una nuova sessione eseguita in parallelo</li>
+<li><span class="k">CTRL+A</span> e poi <span class="k">N</span> per passare alla sessione successiva</li>
+<li><span class="k">CTRL+A</span> e poi <span class="k">D</span> per tornare al prompt normale lasciando le sessioni screen in esecuzione</li>
+<li><code>screen -r</code> per ricollegarsi alle sessioni</li>
+</ol>
+<p>To close a screen session where all tasks are finished you can type</p>
+<pre><code>exit
+</code></pre>
+<h4 id="screen-e-ssh" tabindex="-1">screen e ssh <a class="header-anchor" href="#screen-e-ssh" aria-hidden="true">🔗</a></h4>
+<p><a href="https://saveriomiroddi.github.io/Remotely-running-asynchronous-commands-scripts-via-gnu-screen/">https://saveriomiroddi.github.io/Remotely-running-asynchronous-commands-scripts-via-gnu-screen/</a></p>
+<p>In system administration, it’s typical to perform long-running commands on remote hosts.<br>
+With GNU Screen and one supporting script, it’s possible to efficiently perform such operations, by running them   asynchronously and receiving an email at the end, all in a single command.
+Screen it’s typically used in order to give resume capabilities to an SSH session.</p>
+<pre><code class="language-bash">$ ssh dbhost <span class="hljs-string">&quot;screen_session_execute.sh alter_table user@mycompany.com&quot;</span> &lt;&lt;<span class="hljs-string">&#x27;CMD&#x27;</span>
+&gt; mysql -e <span class="hljs-string">&#x27;CREATE TABLE mytable.bak SELECT * FROM mytable&#x27;</span>
+&gt; CMD
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-built_in">set</span> -o errexit
+
+<span class="hljs-built_in">help</span>=$<span class="hljs-string">&#x27;Usage: screen_session_execute.sh &lt;session_name&gt; &lt;email_recipient&gt; &lt;heredoc_command&gt;
+
+Executes the command in a detached screen session, then sends the log to the email recipient, and closes the session.
+
+The session name can\&#x27;</span>t start with a number!
+
+Example:
+
+    screen_session_execute.sh alter_table user@mycompany.com &lt;&lt;\&#x27;CMD\&#x27;
+    mysql -e <span class="hljs-string">&quot;CREATE TABLE mydb._mytable_bak SELECT * FROM mydb.mytable&quot;</span>
+    CMD
+<span class="hljs-string">&#x27;
+
+if [[ $# -ne 2 ]] || [[ &quot;$1&quot; = &quot;-h&quot; ]] || [[ &quot;$1&quot; = &quot;--help&quot; ]] || [[ $1 =~ ^[0-9] ]]; then
+  echo &quot;$help&quot;
+  exit 1
+fi
+
+session_name=&quot;$1&quot;
+command_file=&quot;session_$session_name.sh&quot;
+log_file=&quot;session_$session_name.log&quot;
+email_recipient=&quot;$2&quot;
+
+# Now, we send the script/command to the screen session
+# which redirects the output we send in heredoc format (&lt;&lt;&#x27;</span>CMD<span class="hljs-string">&#x27;) to the remote terminal input.
+cat &gt; &quot;$command_file&quot; # non essendoci un nome file come parametro, legge da stdin e grazie al &gt; scrive nel file
+
+screen -dmS &quot;$session_name&quot; # Here we start the session
+
+screen -r &quot;$session_name&quot; -X readbuf &quot;$command_file&quot;
+screen -r &quot;$session_name&quot; -X paste .
+
+# We need to workaround an issue with Screen: it may not make the session immediately available, so we wait for it
+while ! screen -ls &quot;$session_name&quot; | grep -q tached; do sleep 0.1; done
+# Now we actually execute the script, followed by email sending and session exit
+screen -r &quot;$session_name&quot; -X stuff &quot;\
+bash $command_file &gt; $log_file 2&gt;&amp;1
+
+xz -2k $log_file
+&quot;
+
+screen -r &quot;$session_name&quot; -X stuff &quot;\
+if [[ \$? -eq 0 ]]; then
+  mail_title=&#x27;</span>Session <span class="hljs-variable">$session_name</span> successful!<span class="hljs-string">&#x27;
+else
+  mail_title=&#x27;</span>Session <span class="hljs-variable">$session_name</span> failed<span class="hljs-string">&#x27;
+fi
+
+cat &lt;(echo \$&#x27;</span>Last 20 lines of the <span class="hljs-built_in">log</span>:\n<span class="hljs-string">&#x27;) &lt;(tail -n 20 $log_file) | mutt -e &#x27;</span><span class="hljs-built_in">set</span> copy=no<span class="hljs-string">&#x27; -a $log_file.xz -s &#x27;</span>Session <span class="hljs-variable">$session_name</span> successful!<span class="hljs-string">&#x27; -- $email_recipient
+&quot;
+
+screen -r &quot;$session_name&quot; -X stuff &quot;\
+shred -u $command_file $log_file $log_file.xz
+
+exit 0
+&quot;
+</span></code></pre>
+<h3 id="byoubu" tabindex="-1">byoubu <a class="header-anchor" href="#byoubu" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://www.byobu.org/">https://www.byobu.org/</a></li>
+</ul>
+<h3 id="customizing-the-configuration-file" tabindex="-1">Customizing the configuration file <a class="header-anchor" href="#customizing-the-configuration-file" aria-hidden="true">🔗</a></h3>
+<p>Screen keeps its configuration file in the same vein that many applications do: in a dot file in your user's home directory. This file is aptly named <code>.screenrc</code>. In my experience, most people use <code>~/.screenrc</code> to do two things:</p>
+<ul>
+<li>Make a hardstatus line. This is basically a line at the bottom of the screen that lists your current terminal and all opened ones. It can also display the system clock and the hostname.</li>
+<li>Default screens on startup. It's quite nice to have your IRC connection, mail client, and default SSH connections auto-start for you!</li>
+</ul>
+<p>The lines below are numbered for reference. Your config file should not have numbered lines.</p>
+<pre><code>1 hardstatus alwayslastline
+2 hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{=kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B}%Y-%m-%d %{W}%c %{g}]'
+3
+4 # Default screens
+5 screen -t shell1 0
+6 screen -t shell2 1
+7 screen -t server 2 ssh me@myserver
+</code></pre>
+<p>On lines 1 and 2, you are setting the hardstatus. Line 1 makes the hardstatus always show up as the last line. Line 2 is what will be shown in the hardstatus line.</p>
+<p>As you change screens, you will see the parentheses move around the active screen.</p>
+<p>Line 4 is a comment, as it starts with #. Lines 5-7 are all screen statements in the following format:</p>
+<pre><code>screen -t NameOfScreen ScreenNumber ShellCommand
+</code></pre>
+<h3 id="shortcuts" tabindex="-1">Shortcuts <a class="header-anchor" href="#shortcuts" aria-hidden="true">🔗</a></h3>
+<p>The following are some of the most commonly used shortcuts that let you navigate through your screen environment. Note that unless modified by your <code>.screenrc</code>, by default every screen shortcut is preceded by Ctrl+a. Note also that these shortcuts are case-sensitive.</p>
+<ul>
+<li><code>0</code> through <code>9</code> Switches between windows</li>
+<li><span class="k">Ctrl+n</span> Switches to the next available window</li>
+<li><span class="k">Backspace</span> Switches to the previous available window</li>
+<li><span class="k">Ctrl+a</span> Switches back to the last window you were on</li>
+<li><span class="k">A</span> Changes window session name</li>
+<li><span class="k">K</span> Kills a window session</li>
+<li><span class="k">c</span> Creates a new window</li>
+<li><span class="k">[</span> Then use arrows to scroll up and down terminal</li>
+<li><span class="k">&quot;</span> Displays a lists of all opened tabs allowing navigation with your arrow keys.</li>
+</ul>
+<p>You can learn more about shortcuts in Screen's man pages. In your terminal, run:</p>
+<pre><code>man screen
+</code></pre>
+<h3 id="sharing-a-session-with-others" tabindex="-1">Sharing a session with others <a class="header-anchor" href="#sharing-a-session-with-others" aria-hidden="true">🔗</a></h3>
+<p>Another great application of Screen is to allow other people to login to your station and to watch the work you are doing. It is a great way to teach someone how to do things in the shell.</p>
+<p>Note: Screen has to be SUID if you want to share a terminal between two users. SUID allows an executable to be run with the privileges of the owner of that file, instead of with the user's own privileges. There are some security concerns when doing this, so use this tip at your own discretion.</p>
+<h3 id="setup-to-allow-screen-to-be-shared" tabindex="-1">Setup to allow screen to be shared <a class="header-anchor" href="#setup-to-allow-screen-to-be-shared" aria-hidden="true">🔗</a></h3>
+<p>First, as root:</p>
+<pre><code>chmod u+s /usr/bin/screen
+chmod 755 /var/run/screen
+</code></pre>
+<p>Log out of root, and run Screen as the user who is going to share the session:</p>
+<pre><code>screen
+</code></pre>
+<p>Under your new screen session:</p>
+<ol>
+<li>Press <span class="k">Ctrl+a</span>, then type <code>:multiuser on</code> and press Enter.</li>
+<li>Press <span class="k">Ctrl+a</span>, then type <code>:acladd $username</code></li>
+</ol>
+<p>Where <code>$username</code> is the username of the person who will connect to your screen session.</p>
+<h3 id="connecting-to-the-shared-screen" tabindex="-1">Connecting to the shared screen <a class="header-anchor" href="#connecting-to-the-shared-screen" aria-hidden="true">🔗</a></h3>
+<p>Now that a screen session is being shared by following the previous steps, let's attach ourselves to the session and watch it by connecting to the machine via ssh and entering the following command:</p>
+<pre><code>screen -x $username/
+</code></pre>
+<p>Where <code>$username</code> is the username of the person who is sharing the screen session, and yes, you do need slash (<code>/</code>) at the end of the command.</p>
+<p>And now both the users (from the host and guest) will be sharing a screen session and can run commands on the terminal.</p>
+<h3 id="working-from-multiple-locations" tabindex="-1">Working from multiple locations <a class="header-anchor" href="#working-from-multiple-locations" aria-hidden="true">🔗</a></h3>
+<p>Let's say you have a screen session open at work with X number of windows on it. Within those screens you may be running an IRC client, an SSH connection to the web server, and your favorite text-based email client. It's 5 p.m. and you have to go home, but you still have work left to do.</p>
+<p>Without Screen you would probably go home, VPN into your company's network, and fire up all the shells you need to keep working from home. With Screen, life gets a little easier.</p>
+<p>You can simply SSH into your workstation at work and list your available screen sessions with the command:</p>
+<pre><code>screen -ls
+</code></pre>
+<p>And connect to the sessions you were running at work with the command:</p>
+<pre><code>screen -x screen_session_name
+</code></pre>
+<p>This way screen will let you pick things up exactly from where you left off.</p>
+<p>Once you get used to the shortcuts in GNU Screen, not only will your desktop become more organized (due to the lower number of open windows), but your efficiency as a developer or system administrator will increase not only at work but at your home office as well.</p>
+</body></html>

@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.228" />
+        <title>backup</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="backup" tabindex="-1">backup <a class="header-anchor" href="#backup" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.228</p>
+<nav class="table-of-contents"><ol><li><a href="#copia-di-un-file-di-grandi-dimensioni-con-visualizzazione-del-progresso">Copia di un file di grandi dimensioni con visualizzazione del progresso </a></li><li><a href="#clonare-un-hard-disk">Clonare un hard disk </a><ol><li><a href="#creare-l'immagine-di-un-disco">Creare l&#39;immagine di un disco </a></li><li><a href="#ripristinare-il-sistema">Ripristinare il sistema </a></li></ol></li><li><a href="#ddrescue">ddrescue </a><ol><li><a href="#ddrescue-con-tar-ed-ssh">ddrescue con tar ed ssh </a></li></ol></li><li><a href="#split-e-cat-per-dividere-e-riunire-file-di-grandi-dimensioni">split e cat per dividere e riunire file di grandi dimensioni </a></li><li><a href="#come-copiare-una-installazione-linux-su-un-altra-partizione">Come copiare una installazione Linux su un altra partizione </a><ol><li><a href="#%2Fetc%2Ffstab%3A-static-file-system-information.">/etc/fstab: static file system information. </a></li><li><a href="#altri-comandi-per-copiare-il-filesystem">Altri comandi per copiare il filesystem </a></li></ol></li><li><a href="#spostare-%2Fhome">Spostare /home </a></li><li><a href="#comparazione-tra-directory">Comparazione tra directory </a></li><li><a href="#sostituire-file-duplicati-con-hardlink">Sostituire file duplicati con hardlink </a></li><li><a href="#split-di-file">Split di file </a></li><li><a href="#split-di-directory">Split di directory </a></li></ol></nav><h1 id="backup-1" tabindex="-1">Backup <a class="header-anchor" href="#backup-1" aria-hidden="true">🔗</a></h1>
+<h2 id="copia-di-un-file-di-grandi-dimensioni-con-visualizzazione-del-progresso" tabindex="-1">Copia di un file di grandi dimensioni con visualizzazione del progresso <a class="header-anchor" href="#copia-di-un-file-di-grandi-dimensioni-con-visualizzazione-del-progresso" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">rsync -av -P sda5/504.20.4.iso bitlocker/SEC504/
+</code></pre>
+<h2 id="clonare-un-hard-disk" tabindex="-1">Clonare un hard disk <a class="header-anchor" href="#clonare-un-hard-disk" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://www.garloff.de/kurt/linux/ddrescue/">http://www.garloff.de/kurt/linux/ddrescue/</a></li>
+<li><a href="https://clonezilla.org/">https://clonezilla.org/</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Disk_cloning">https://wiki.archlinux.org/index.php/Disk_cloning</a></li>
+</ul>
+<h3 id="creare-l'immagine-di-un-disco" tabindex="-1">Creare l'immagine di un disco <a class="header-anchor" href="#creare-l'immagine-di-un-disco" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>Effettuare il boot da un sistema live(liveCD o liveUSB).</li>
+<li>Assicurarsi che nessuna partizione sia montata dal disco di origine.</li>
+<li>Effettuare il mount di un disco esterno.</li>
+<li>Effettuare il backup del disco:<pre><code class="language-bash"><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/hda conv=<span class="hljs-built_in">sync</span>,noerror bs=64K | gzip -c  &gt; /mnt/sda1/hda.img.gz
+</code></pre>
+</li>
+<li>Salvare alcune informazioni addizionali riguardo al disco, come la sua geometria, sarà necessario per interpretare la tavola delle partizioni salvata nell'immagine. L'informazione più importante è la dimensione dei cilindri.<pre><code class="language-bash">fdisk -l /dev/hda &gt; /mnt/sda1/hda_fdisk.info
+</code></pre>
+</li>
+</ol>
+<p><em>Nota:</em> Sarà possibile usare un valore di dimensione dei blocchi (bs=) uguale all'ammontare della cache del disco di cui si sta creando l'immagine. Ad esempio, bs=8192K funziona per una cache di 8MB. Il valore di 64K menzionato in questo articolo è migliore del valore di default, che è impostato a bs=512 byte, perché dd verrà eseguito più velocemente con un valore di bs= maggiore.</p>
+<h3 id="ripristinare-il-sistema" tabindex="-1">Ripristinare il sistema <a class="header-anchor" href="#ripristinare-il-sistema" aria-hidden="true">🔗</a></h3>
+<p>Per ripristinare il sistema:</p>
+<pre><code class="language-bash">gunzip -c /mnt/sda1/hda.img.gz | <span class="hljs-built_in">dd</span> of=/dev/hda
+</code></pre>
+<h2 id="ddrescue" tabindex="-1">ddrescue <a class="header-anchor" href="#ddrescue" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install gddrescue
+
+<span class="hljs-comment"># To clone a faulty or dying drive, run ddrescue twice. For the first round, copy every block without read error and map the errors to rescue.map.</span>
+<span class="hljs-comment"># where X and Y are the desired partition letters of the block devices.</span>
+ddrescue -f -n /dev/sdX /dev/sdY rescue.map
+<span class="hljs-comment"># -n, --no-scrape                skip the scraping phase</span>
+
+<span class="hljs-comment"># For the second round, copy only the bad blocks and try 3 times to read from the source before giving up.</span>
+ddrescue -d -f -r3 /dev/sdX /dev/sdY rescue.map
+<span class="hljs-comment"># -f Force ddrescue to run even if the destination file already exists (this is required when writing to a disk). It will overwrite.</span>
+<span class="hljs-comment"># -n Short for’–no-scrape’. This option prevents ddrescue from running through the scraping phase, essentially preventing the utility from spending too much time attempting to recreate heavily damaged areas of a file.</span>
+<span class="hljs-comment"># Now you can check the file system for corruption and mount the new drive.</span>
+fsck -f /dev/sdY
+
+
+<span class="hljs-built_in">sudo</span> ddrescue -f -n /dev/hda1 /mnt/hdb1/hda1.img
+<span class="hljs-built_in">sudo</span> ddrescue -f -n /mnt/hdb1/hda1.img /dev/hda1
+</code></pre>
+<h3 id="ddrescue-con-tar-ed-ssh" tabindex="-1">ddrescue con tar ed ssh <a class="header-anchor" href="#ddrescue-con-tar-ed-ssh" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># cat With no FILE, or when FILE is -, read standard input.</span>
+
+<span class="hljs-comment"># Use dd and ssh to create an image on another machine:</span>
+<span class="hljs-built_in">sudo</span> ddrescue -f -n /dev/hda1 - | ssh username@machine <span class="hljs-string">&#x27;cat &gt; /home/username/hda1.img&#x27;</span>
+ssh username@machine <span class="hljs-string">&#x27;cat /home/username/hda1.img&#x27;</span> | <span class="hljs-built_in">sudo</span> ddrescue - /dev/hda1
+
+<span class="hljs-comment"># use tar and ssh to compress the partition and copy it to another machine:</span>
+tar zcvf - /mnt/hda1 | ssh username@machine <span class="hljs-string">&#x27;cat /tmp/hda1_bak.tar.gz&#x27;</span>
+<span class="hljs-comment"># to restore the partition</span>
+ssh username@machine <span class="hljs-string">&#x27;cat /tmp/hda1_bak.tar.gz&#x27;</span> | tar zxvf -
+
+</code></pre>
+<h2 id="split-e-cat-per-dividere-e-riunire-file-di-grandi-dimensioni" tabindex="-1">split e cat per dividere e riunire file di grandi dimensioni <a class="header-anchor" href="#split-e-cat-per-dividere-e-riunire-file-di-grandi-dimensioni" aria-hidden="true">🔗</a></h2>
+<p>What if you don't want to leave the copied images on another hard drive? If the images you've created are small enough, you can burn them to CD; if they're larger, burn them to DVD. If an image is too big for that, use the split command to break the file into sections and burn each section to disk. If you ever need to join the sections again, copy each section from your disk(s) and use the cat command to rejoin them (you can avoid this scenario by backing up to external hard drives).</p>
+<p>To break up a 10GB gzipped tar file (named hda1_bak.tar.gz in this example) into two smaller files suitable for burning onto two DVDs, you'd use the following:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">split</span> --bytes=4000m --verbose hda1_bak.tar.gz hda1_bak
+</code></pre>
+<p>This command produces three files: hda1_bakaa, hda1_bakab, and hda1_bakac. The first two are 4GB each, and the last one is 2GB (all that's left of the 10 GB original). Burn them onto DVDs and you're good to go.</p>
+<p>When it's time to rejoin what you've burned onto DVD, copy the three files from the DVDs and onto a hard drive, and then run the following:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> hda1_bak* &gt; hda1_bak.tar.gz
+</code></pre>
+<p>After some time, you have your single file back. Use ssh and tar to restore it to your hard drive on another machine.</p>
+<h2 id="come-copiare-una-installazione-linux-su-un-altra-partizione" tabindex="-1">Come copiare una installazione Linux su un altra partizione <a class="header-anchor" href="#come-copiare-una-installazione-linux-su-un-altra-partizione" aria-hidden="true">🔗</a></h2>
+<p>Funziona anche con un hard disk esterno/chiave USB.</p>
+<p>Supponiamo di voler spostare la partizione root ext4 esistente su <code>/dev/sda5</code> e di voler installare il grub2 sull'hard disk <code>/dev/sda</code></p>
+<ul>
+<li>
+<p>Partizionare l'hard disk <code>/dev/sda</code> in modo da avere una partizione ext4 ed una di swap(usare gparted-fdisk-cfdisk), esempio:</p>
+<pre><code>  /dev/sda5 ext4
+  /dev/sda6 swap
+</code></pre>
+<p>con gparted impostare su <code>/dev/sda5</code> il flag boot(impostare il boot USB da BIOS),
+creare inoltre la partizione di swap <code>/dev/sda6</code></p>
+</li>
+<li>
+<p>Effettuare il boot del sistema da clonare - Entrare in GNOME/KDE, partendo con Linux partizione root che si vuole copiare</p>
+</li>
+<li>
+<p><span class="k">CTRL-ALT-F1</span></p>
+</li>
+<li>
+<p>login come root</p>
+</li>
+<li>
+<p><code>/etc/init.d/kdm stop</code></p>
+</li>
+<li>
+<p><code>init 1</code> # chiederà di nuovo la password root, chiude tutti i processi inutili permettendo la copia del file system root (<code>cat /etc/inittab</code> per vedere i runlevel)</p>
+</li>
+<li>
+<p><code>mkdir /mnt/sda5</code> # Mount del file system destinazione verso il quale si vuole clonare il file system root</p>
+</li>
+<li>
+<p><code>mount /dev/sda5 /mnt/sda5</code> # se serve cancellare o formattare la partizione</p>
+</li>
+<li>
+<p><code>cp -ax / /mnt/sda5</code> # &quot;a&quot; serve per copiare gli attributi, &quot;x&quot; serve per copiare i soli file presenti nel file system</p>
+</li>
+<li>
+<p><code>cd /mnt/</code></p>
+</li>
+<li>
+<p><code>mount --bind /dev sda5/dev</code> # montare i file system root(gia fatto prima), dev e proc per poter eseguire il chroot</p>
+</li>
+<li>
+<p><code>mount --bind /proc sda5/proc</code></p>
+</li>
+<li>
+<p><code>mount --bind /sys sda5/sys</code></p>
+</li>
+<li>
+<p><code>chroot sda5</code> # ora il file system root e' quello copiato, installiamoci grub</p>
+</li>
+<li>
+<p><code>update-grub</code></p>
+</li>
+<li>
+<p><code>grub-install /dev/sda</code></p>
+</li>
+<li>
+<p><code>blkid</code> # per vedere gli UUID delle partizioni, aggiornare dunque</p>
+</li>
+<li>
+<p><code>vi /etc/fstab</code> # Aggiornare gli UUID e la definizione della partizione di swap</p>
+</li>
+<li>
+<p><code>umount /mnt/sda5/dev</code></p>
+</li>
+<li>
+<p><code>umount /mnt/sda5/proc</code></p>
+</li>
+<li>
+<p><code>umount /mnt/sda5/sys</code></p>
+</li>
+<li>
+<p>'umount /mnt/sda5`</p>
+</li>
+</ul>
+<h3 id="%2Fetc%2Ffstab%3A-static-file-system-information." tabindex="-1">/etc/fstab: static file system information. <a class="header-anchor" href="#%2Fetc%2Ffstab%3A-static-file-system-information." aria-hidden="true">🔗</a></h3>
+<pre><code>#
+# &lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;
+proc /proc proc defaults 0 0
+#Entry for /dev/sda3 :
+UUID=26DE667DDE664561 /mnt/sda3 ntfs-3g defaults,locale=it_IT.UTF-8 0 0
+#Entry for /dev/sda5 :
+UUID=12bf143c-1c74-46fa-8fb9-4b14bd8d8767 / ext4 noatime,errors=remount-ro 0 1
+#Entry for /dev/sda6 :
+UUID=353e22f5-16d0-4fde-9f93-8f35603639a5 none swap sw 0 0
+/dev/scd0 /media/cdrom0 udf,iso9660 user,noauto 0 0
+</code></pre>
+<h3 id="altri-comandi-per-copiare-il-filesystem" tabindex="-1">Altri comandi per copiare il filesystem <a class="header-anchor" href="#altri-comandi-per-copiare-il-filesystem" aria-hidden="true">🔗</a></h3>
+<pre><code>dd if=/dev/sda/ of=/dev/sdb conv=noerror,sync
+</code></pre>
+<p>noerror e sync sono utili nel caso ci siano settori danneggiati nell'hard disk</p>
+<pre><code>rsync -av --delete-excluded --exclude-from=blacklist.lst / /destinazione
+</code></pre>
+<p>blacklist.lst:
+# files to include
++ /dev/console
++ /dev/initctl
++ /dev/null
++ /dev/zero
+# files to exclude
+- /dev/*
+- /proc/*
+- /sys/*
+- /tmp/*</p>
+<p>abbiamo cosi escluso dalla copia i file generati al boot</p>
+<h2 id="spostare-%2Fhome" tabindex="-1">Spostare /home <a class="header-anchor" href="#spostare-%2Fhome" aria-hidden="true">🔗</a></h2>
+<p>Salve, sono un vostro assiduo lettore e uso Ubuntu da oltre tre anni. Ho installato Hardy Heron anche su un laptop dove prima avevo installato Vista
+e Ubuntu Feisty. Dal momento che in un anno non avevo mai sentito il bisogno di utilizzare Vista ho deciso di eliminarlo cancellando prima tutto
+nella partizione che lo conteneva. Nellinstallare Hardy Heron ho optato per il partizionamento guidato credendo che Hardy venisse installato
+nella partizione svuotata che prima era di Vista, mantenendo Feisty integro al suo posto. Al contrario successo che Feisty stata sovrascritto
+e la partizione (sda1) vuota rimasta tale. Ora pero vorrei sfruttare questa partizione vuota per
+utilizzarla come /home, come voi avete da sempre consigliato. Ho formattato la partizione vuota sda1 come ext3 ma poi non so piu come comportarmi.
+Cesare</p>
+<p>Ciao Cesare, per ottenere lo spostamento della /home, per prima cosa, ti consigliamo di avviare il portatile dal CD di Ubuntu e non dalla
+distro installata. Poi apri un terminale e crea una cartella in cui montare il nuovo disco; usa questi comandi:</p>
+<pre><code>mkdir nuova_home
+sudo mount /dev/sda1 nuova_home
+cd nuova_home
+sudo mkdir &lt;nome_utente&gt;
+</code></pre>
+<p>Poi devi creare un altra cartella per montare il disco
+con Linux, presumiamo sia sda2:</p>
+<pre><code>cd ; mkdir vecchia_home
+sudo mount /dev/sda2 vecchia_home
+cd vecchia_home/home/
+</code></pre>
+<p>Ora copia tutto il contenuto della tua home nella nuova
+cartella, cambiando i permessi in maniera corretta:</p>
+<pre><code>sudo cp -v -r* ../../nuova_home/
+cd
+cd nuova_home/
+sudo chown -R&lt;UID&gt;:&lt;GID&gt; ./&lt;nome_utente&gt;
+</code></pre>
+<p>dove, al posto di <UID> e <GID> devi mettere i valori corrispondenti al tuo utente sulla distro Linux installata.
+Per scoprirli esamina il contenuto del file passwd (ad esempio digita cat ~/vecchia_home/etc/passwd):
+scorrendo i file troverai una voce con il tuo nome utente e, a fianco, due valori numerici, ad esempio 1000:1000.
+Questi sono i valori di UID e GID. Infine devi modificare il file fstab aggiungendo una voce per la nuova /home;
+prima pero devi scoprire l'UUID del nuovo disco/partizione: (ls -l /dev/disk/by-uuid/ | grep /dev/sda3, oppure sudo blkid)
+(Ubuntu, invece dei classici /dev/sdxx, usa un identificatore numerico); ecco la sequenza di comandi:</p>
+<pre><code>sudo tune2fs -l /dev/sda1
+cd
+sudo gedit vecchia_home/etc/fstab
+</code></pre>
+<p>In fstab, dopo le righe</p>
+<pre><code># &lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;
+y y proc /proc proc defaults 0 0
+</code></pre>
+<p>aggiungi una riga simile alla seguente, mettendo al posto di XXXXX l'UUID restituito in precedenza dal comando tune2fs:</p>
+<pre><code># /dev/sda1 UUID=XXXXXXX /home ext3 defaults 0 1
+</code></pre>
+<p>In alternativa usa /dev/sda1 nel primo campo. Infine rinomina la vecchia /home e crea una nuova /home vuota:</p>
+<pre><code>cd ; sudo mv vecchia_home/home vecchia_home/home_old
+cd vecchia_home ; sudo mkdir home
+</code></pre>
+<p>Riavvia e se tutto andato bene potrai cancellare la vecchia home, se invece qualcosa non va
+potrai ripristinarla sempre partendo da un Live CD, commentando la nuova voce inserita in fstab
+e ripristinando il nome originale a /home.</p>
+<h2 id="comparazione-tra-directory" tabindex="-1">Comparazione tra directory <a class="header-anchor" href="#comparazione-tra-directory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    diff -r -q cdp /media/truecrypt1/cdp
+    rsync -ani /media/Backup/ProgrammingDocs /media/ExternalBak/ |grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+</code></pre>
+<p>To get the ordered size of all directories in the current directory:</p>
+<pre><code class="language-bash">    find . -maxdepth 1 -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">print</span> | xargs <span class="hljs-built_in">du</span> -sk | <span class="hljs-built_in">sort</span> -rn
+</code></pre>
+<h2 id="sostituire-file-duplicati-con-hardlink" tabindex="-1">Sostituire file duplicati con hardlink <a class="header-anchor" href="#sostituire-file-duplicati-con-hardlink" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">fdupes -r -1 path | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> line; <span class="hljs-keyword">do</span> j=<span class="hljs-string">&quot;0&quot;</span>; <span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> <span class="hljs-variable">${line[*]}</span>; <span class="hljs-keyword">do</span> <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span> == <span class="hljs-string">&quot;0&quot;</span> ]; <span class="hljs-keyword">then</span> j=<span class="hljs-string">&quot;1&quot;</span>; <span class="hljs-keyword">else</span> <span class="hljs-built_in">ln</span> -f <span class="hljs-variable">${line// .*/}</span> <span class="hljs-variable">$file</span>; <span class="hljs-keyword">fi</span>; <span class="hljs-keyword">done</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="split-di-file" tabindex="-1">Split di file <a class="header-anchor" href="#split-di-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">split</span> --bytes=1m /path/to/large/file /path/to/output/file/prefix
+</code></pre>
+<p>To restore the original file, you can use cat command.
+To join all the smaller file to restore the original file type:-</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> prefix* &gt; NEWFILENAME
+</code></pre>
+<h2 id="split-di-directory" tabindex="-1">Split di directory <a class="header-anchor" href="#split-di-directory" aria-hidden="true">🔗</a></h2>
+<p>il pacchetto <code>genisoimage</code> contiene il comando(programma Perl) <code>dirsplit</code>(utile anche per mkisofs)</p>
+<pre><code class="language-bash">dirsplit -H
+dirsplit [options] [advanced options] &lt; directory &gt;
+-n|--no-act Only <span class="hljs-built_in">print</span> the commands, no action (implies -v)
+-s|--size NUMBER - Size of the medium (default: 4488M)
+-m|--move Move files to target <span class="hljs-built_in">dirs</span> (default: create mkisofs catalogs)
+-l|--symlink similar to -m but just creates symlinks <span class="hljs-keyword">in</span> the target <span class="hljs-built_in">dirs</span>
+-p|--prefix STRING - first part of catalog/directory name (default: vol_)
+-f|--filter EXPR - Filter expression, see examples below and perlre manpage
+-e|--expmode NUMBER, special exploration modes, used with directory argument
+1: (default) native exploration of the specified directory, but file sizes are rounded up to 2048 blocks plus estimated overhead <span class="hljs-keyword">for</span> filenames (see -o option)
+2: like 1, but all files <span class="hljs-keyword">in</span> directory are put together (as <span class="hljs-string">&quot;atom&quot;</span>) onto the same medium. This does not apply to subdirectories, however.
+4: like 2, but the max. size of the atoms is limited to 4488M (storing the rest on another medium)
+File sizes are expected to be <span class="hljs-keyword">in</span> bytes, append modifier letters to multiply
+with a <span class="hljs-built_in">factor</span>, eg 200M (b,k,K,m,M,g,G <span class="hljs-keyword">for</span> Bytes, Kb, KiB, Mb, MiB, Gb, GiB).
+</code></pre>
+<p>Examples:</p>
+<pre><code class="language-bash">dirsplit -m -s 120M -e4 largedirwithdata/ -p /zipmedia/backup_ <span class="hljs-comment">#move stuff into splitted backup dirs</span>
+dirsplit -s 700M -e2 music/ <span class="hljs-comment"># make mkisofs catalogs to burn all music to 700M CDRs, keep single files in each dir together</span>
+dirsplit -s 700M -e2 -f <span class="hljs-string">&#x27;/other\/Soundtracks/&#x27;</span> music/ <span class="hljs-comment"># like above, only take files from other/Soundtracks</span>
+dirsplit -s 700M -e2 -f <span class="hljs-string">&#x27;!/Thumbs.db|Desktop.ini|\.m3u$/i&#x27;</span> <span class="hljs-comment"># like above, ignore some junk files and playlists, both letter cases</span>
+dirsplit -n -l -s 2Kb -e4 /home/cdipiet/cdp/Projects/Perl -p /home/cdipiet/tmp/backup_
+</code></pre>
+<p>Comando utile per avere una lista di file contenuti in una struttura di directory con relative dimensioni in bytes</p>
+<pre><code class="language-bash">find . -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s %p \n&quot;</span>|<span class="hljs-built_in">sort</span> -n
+</code></pre>
+</body></html>

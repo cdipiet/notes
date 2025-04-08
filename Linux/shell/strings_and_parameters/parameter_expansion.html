@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.887" />
+        <title>parameter_expansion</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="parameter_expansion" tabindex="-1">parameter_expansion <a class="header-anchor" href="#parameter_expansion" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.887</p>
+<nav class="table-of-contents"><ol><li><a href="#set-up-the-test-directory">Set Up the Test Directory </a></li><li><a href="#basic-parameter-expansion">Basic Parameter Expansion </a></li><li><a href="#default-values">Default Values </a></li><li><a href="#substring-manipulations">Substring Manipulations </a></li><li><a href="#miscellaneous">Miscellaneous </a></li><li><a href="#example-uses">Example Uses </a><ol><li><a href="#esempi-default">Esempi default </a></li><li><a href="#esempi-%40">Esempi @ </a></li></ol></li><li><a href="#testare-se-una-variabile-non-%C3%A8-definita">Testare se una variabile non è definita </a></li></ol></nav><h1 id="operazioni-su-stringhe" tabindex="-1">Operazioni su stringhe <a class="header-anchor" href="#operazioni-su-stringhe" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html">https://www.gnu.org/software/bash/manual/html_node/Shell-Parameter-Expansion.html</a></li>
+<li><a href="https://www.tldp.org/LDP/abs/html/parameter-substitution.html">https://www.tldp.org/LDP/abs/html/parameter-substitution.html</a></li>
+<li><a href="https://wiki.bash-hackers.org/syntax/pe">https://wiki.bash-hackers.org/syntax/pe</a></li>
+</ul>
+<pre><code class="language-bash">man bash <span class="hljs-comment"># e cercare &#x27;Parameter Expansion&#x27;</span>
+</code></pre>
+<h2 id="set-up-the-test-directory" tabindex="-1">Set Up the Test Directory <a class="header-anchor" href="#set-up-the-test-directory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">cd</span> <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">touch</span> file1 file2 file3
+</code></pre>
+<h2 id="basic-parameter-expansion" tabindex="-1">Basic Parameter Expansion <a class="header-anchor" href="#basic-parameter-expansion" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">expression</th>
+<th style="text-align:left">output</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>$ param1=hello</code></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo $param1</code></td>
+<td style="text-align:left">hello</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1}a</code></td>
+<td style="text-align:left">helloa</td>
+<td style="text-align:left">the braces separate the name</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param2}</code></td>
+<td style="text-align:left"></td>
+<td style="text-align:left">nothing there</td>
+</tr>
+</tbody>
+</table>
+<h2 id="default-values" tabindex="-1">Default Values <a class="header-anchor" href="#default-values" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">expression</th>
+<th style="text-align:left">output</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>$ echo ${param2:-file*}</code></td>
+<td style="text-align:left">file1 file2 file3</td>
+<td style="text-align:left">all files in the directory</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param2:-$param1}</code></td>
+<td style="text-align:left">hello</td>
+<td style="text-align:left">uses $param1's value...</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo $param2</code></td>
+<td style="text-align:left">(nothing)</td>
+<td style="text-align:left">... but didn't change $param2</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param3:=$param1}</code></td>
+<td style="text-align:left">hello</td>
+<td style="text-align:left">uses $param1's value...</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo $param3</code></td>
+<td style="text-align:left">hello</td>
+<td style="text-align:left">... and assigns it to $param3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="substring-manipulations" tabindex="-1">Substring Manipulations <a class="header-anchor" href="#substring-manipulations" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">expression</th>
+<th style="text-align:left">output</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1:2}    </code></td>
+<td style="text-align:left">llo</td>
+<td style="text-align:left">substring from 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1:2:2}  </code></td>
+<td style="text-align:left">ll</td>
+<td style="text-align:left">substring from 2, len 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1#he}   </code></td>
+<td style="text-align:left">llo</td>
+<td style="text-align:left">strip shortest match from start</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1#hel*} </code></td>
+<td style="text-align:left">lo</td>
+<td style="text-align:left">strip shortest match from start</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1#he*l} </code></td>
+<td style="text-align:left">lo</td>
+<td style="text-align:left">strip shortest match from start</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1##he*l}</code></td>
+<td style="text-align:left">o</td>
+<td style="text-align:left">strip longest match from start</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1%l*o}  </code></td>
+<td style="text-align:left">hel</td>
+<td style="text-align:left">strip shortest match from end</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1%%l*o} </code></td>
+<td style="text-align:left">he</td>
+<td style="text-align:left">strip longest match from end</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1/l/p}  </code></td>
+<td style="text-align:left">heplo</td>
+<td style="text-align:left">replace as few as possible</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${param1//l/p} </code></td>
+<td style="text-align:left">heppo</td>
+<td style="text-align:left">replace as many as possible</td>
+</tr>
+</tbody>
+</table>
+<h2 id="miscellaneous" tabindex="-1">Miscellaneous <a class="header-anchor" href="#miscellaneous" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">expression</th>
+<th style="text-align:left">output</th>
+<th style="text-align:left">description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>$ echo ${!param*}</code></td>
+<td style="text-align:left">param1 param2 param3</td>
+<td style="text-align:left">parameter names starting with...</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>$ echo ${#param1}</code></td>
+<td style="text-align:left">5</td>
+<td style="text-align:left">length of parameter value</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-uses" tabindex="-1">Example Uses <a class="header-anchor" href="#example-uses" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Rename all .GIF files to .gif</span>
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> *.GIF; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-variable">$file</span> <span class="hljs-variable">${file%GIF}</span>gif; <span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Now number the files sequentially</span>
+cnt=0;
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> *.gif; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-variable">$file</span> $cnt<span class="hljs-variable">$file</span>; <span class="hljs-built_in">let</span> cnt=cnt++; <span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Oops, I didn&#x27;t mean that... get rid of the numbers.</span>
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> *.gif; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-variable">$file</span> <span class="hljs-variable">${file##[0-9]}</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<h3 id="esempi-default" tabindex="-1">Esempi default <a class="header-anchor" href="#esempi-default" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+$ string=01234567890abcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string:7}</span>
+7890abcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string:7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string:7:2}</span>
+78
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string:7:-2}</span>
+7890abcdef
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string: -7}</span>
+bcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string: -7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string: -7:2}</span>
+bc
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${string: -7:-2}</span>
+bcdef
+$ <span class="hljs-built_in">set</span> -- 01234567890abcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1:7}</span>
+7890abcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1:7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1:7:2}</span>
+78
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1:7:-2}</span>
+7890abcdef
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1: -7}</span>
+bcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1: -7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1: -7:2}</span>
+bc
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${1: -7:-2}</span>
+bcdef
+$ array[0]=01234567890abcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]:7}</span>
+7890abcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]:7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]:7:2}</span>
+78
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]:7:-2}</span>
+7890abcdef
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]: -7}</span>
+bcdefgh
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]: -7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]: -7:2}</span>
+bc
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]: -7:-2}</span>
+bcdef
+</code></pre>
+<h3 id="esempi-%40" tabindex="-1">Esempi @ <a class="header-anchor" href="#esempi-%40" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+$ <span class="hljs-built_in">set</span> -- 1 2 3 4 5 6 7 8 9 0 a b c d e f g h
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@:7}</span>
+7 8 9 0 a b c d e f g h
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@:7:0}</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@:7:2}</span>
+7 8
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@:7:-2}</span>
+bash: -2: substring expression &lt; 0
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@: -7:2}</span>
+b c
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@:0}</span>
+./bash 1 2 3 4 5 6 7 8 9 0 a b c d e f g h
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@:0:2}</span>
+./bash 1
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${@: -7:0}</span>
+
+$ array=(0 1 2 3 4 5 6 7 8 9 0 a b c d e f g h)
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]:7}</span>
+7 8 9 0 a b c d e f g h
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]:7:2}</span>
+7 8
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]: -7:2}</span>
+b c
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]: -7:-2}</span>
+bash: -2: substring expression &lt; 0
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]:0}</span>
+0 1 2 3 4 5 6 7 8 9 0 a b c d e f g h
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]:0:2}</span>
+0 1
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[@]: -7:0}</span>
+</code></pre>
+<h2 id="testare-se-una-variabile-non-%C3%A8-definita" tabindex="-1">Testare se una variabile non è definita <a class="header-anchor" href="#testare-se-una-variabile-non-%C3%A8-definita" aria-hidden="true">🔗</a></h2>
+<p><a href="https://stackoverflow.com/questions/8889302/what-is-the-meaning-of-a-question-mark-in-bash-variable-parameter-expansion-as-i">https://stackoverflow.com/questions/8889302/what-is-the-meaning-of-a-question-mark-in-bash-variable-parameter-expansion-as-i</a></p>
+<pre><code class="language-bash">man -Len bash
+</code></pre>
+<p>La forma <code>${parameter?}</code> nel caso in cui la variabile <code>parameter</code> non sia definita<br>
+stampa un errore ed esce nel caso di shell non interattiva.</p>
+<p>La cosa non è chiaramente scritta nel man di bash ma è una conseguenza delle due sezioni:</p>
+<ul>
+<li>
+<p>When not performing substring expansion, using the forms documented below, bash tests for a parameter that is unset or null. <strong>Omitting the colon results in a test only for a parameter that is unset</strong>.</p>
+</li>
+<li>
+<p><code>${parameter:?word}</code><br>
+<strong>Display Error if Null or Unset</strong>. If parameter is null or unset, the expansion of word (or a message to that effect if word is not present) is written to the standard error and the shell, if it is not interactive, exits. Otherwise, the value of parameter is substituted.</p>
+</li>
+</ul>
+<p>Che in pratica associate producono una sezione del tipo:</p>
+<p><code>${parameter?word}</code><br>
+<strong>Display Error if Unset</strong>. If parameter is unset, the expansion of word (or a message to that effect if word is not present) is written to the standard error and the shell, if it is not interactive, exits. Otherwise, the value of parameter is substituted.</p>
+</body></html>

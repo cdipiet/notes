@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.011" />
+        <title>postfix</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="postfix" tabindex="-1">postfix <a class="header-anchor" href="#postfix" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.011</p>
+<nav class="table-of-contents"><ol><li><a href="#riferimenti">Riferimenti </a></li><li><a href="#installazione-e-configurazione">Installazione e Configurazione </a></li><li><a href="#porte-utilizzate---smtp-tcp-25">Porte utilizzate - SMTP TCP 25 </a></li><li><a href="#firewall">Firewall </a></li><li><a href="#comando-mail-in-manjaro">Comando mail in Manjaro </a></li><li><a href="#tls">TLS </a></li></ol></nav><h1 id="postfix-1" tabindex="-1">postfix <a class="header-anchor" href="#postfix-1" aria-hidden="true">🔗</a></h1>
+<h2 id="riferimenti" tabindex="-1">Riferimenti <a class="header-anchor" href="#riferimenti" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://www.postfix.org/documentation.html">http://www.postfix.org/documentation.html</a></li>
+<li><a href="http://www.postfix.org/BASIC_CONFIGURATION_README.html">http://www.postfix.org/BASIC_CONFIGURATION_README.html</a></li>
+<li><a href="http://www.postfix.org/SOHO_README.html">http://www.postfix.org/SOHO_README.html</a></li>
+<li><a href="http://www.postfix.org/STANDARD_CONFIGURATION_README.html#stand_alone">http://www.postfix.org/STANDARD_CONFIGURATION_README.html#stand_alone</a></li>
+<li><a href="http://www.postfix.org/TLS_README.html#tlsmgr_controls">http://www.postfix.org/TLS_README.html#tlsmgr_controls</a></li>
+<li><a href="https://www.netarky.com/programming/arch_linux/Arch_Linux_mail_server_setup_1.html">https://www.netarky.com/programming/arch_linux/Arch_Linux_mail_server_setup_1.html</a></li>
+<li><a href="https://wiki.archlinux.org/title/Postfix">https://wiki.archlinux.org/title/Postfix</a></li>
+<li><a href="https://ubuntu.com/server/docs/mail-postfix">https://ubuntu.com/server/docs/mail-postfix</a></li>
+<li><a href="https://ubuntu.com/server/docs/security-certificates">https://ubuntu.com/server/docs/security-certificates</a></li>
+</ul>
+<h2 id="installazione-e-configurazione" tabindex="-1">Installazione e Configurazione <a class="header-anchor" href="#installazione-e-configurazione" aria-hidden="true">🔗</a></h2>
+<p>Non serve configurarlo, serve solo impostare l'hostname in modo che abbia un nome completo con un dominio(<a href="http://cdp.it">cdp.it</a>)</p>
+<pre><code class="language-bash">$ set-hostname cdphome.cdp.it
+$ hostname --fqdn
+cdphome.cdp.it.homenet.telecomitalia.it
+
+$ <span class="hljs-built_in">sudo</span> pamac install postfix postfix-sqlite postfixadmin
+$ man 5 postconf
+$ man 5 master
+<span class="hljs-comment"># sudo gedit /etc/postfix/main.cf &amp; # Non ce ne è bisogno, funziona senza configurarlo</span>
+$ <span class="hljs-built_in">sudo</span> postfix check
+$ <span class="hljs-built_in">sudo</span> postconf -n
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> postfix.service 
+$ <span class="hljs-built_in">sudo</span> systemctl start postfix.service 
+$ systemctl show postfix.service --no-pager
+$ systemctl status postfix.service
+$ journalctl --since <span class="hljs-string">&quot;13:45&quot;</span>  -u postfix.service
+$ journalctl --since <span class="hljs-string">&quot;13:45&quot;</span>  -u postfix.service --no-pager -o json-pretty
+$ journalctl -n 20
+$ journalctl -f
+$ journalctl --disk-usage
+$ <span class="hljs-built_in">sudo</span> journalctl --vacuum-size=1G
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;My message&quot;</span> | mail -s subject corrado.dipietro@gmail.com
+
+$ timedatectl list-timezones --no-pager |grep Rome
+$ <span class="hljs-built_in">sudo</span> timedatectl set-timezone <span class="hljs-string">&quot;Europe/Rome&quot;</span>
+$ timedatectl status
+</code></pre>
+<h2 id="porte-utilizzate---smtp-tcp-25" tabindex="-1">Porte utilizzate - SMTP TCP 25 <a class="header-anchor" href="#porte-utilizzate---smtp-tcp-25" aria-hidden="true">🔗</a></h2>
+<p>The default SMTP port: <code>TCP 25</code>
+Secure SMTP (port <code>465</code>) is used only by clients connecting to your server in order to send mail out.
+Port <code>587</code> is considered a submission port. \ 
+It is also what clients use to send mail out using your server. <br>
+Port <code>587</code> is preferred in SMTP settings of clients over port <code>25</code> because port <code>25</code> is blocked by many ISPs.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> ss -nap |grep :25
+tcp   LISTEN     0      100     0.0.0.0:25    0.0.0.0:*     <span class="hljs-built_in">users</span>:((&quot;master&quot;,pid=<span class="hljs-number">96952</span>,fd=<span class="hljs-number">13</span>))
+
+$ ps aux|grep postfix
+root       96952  0.0  0.0  41136  5248 ?        Ss   13:47   0:00 /usr/lib/postfix/bin/master -w
+postfix    96953  0.0  0.0  45916  8500 ?        S    13:47   0:00 pickup -l -t unix -u
+postfix    96954  0.0  0.0  45964  8548 ?        S    13:47   0:00 qmgr -l -t unix -u
+
+$ <span class="hljs-built_in">sudo</span> ss -ltnp |grep master
+tcp   LISTEN 0      100                             0.0.0.0:25         0.0.0.0:*    <span class="hljs-built_in">users</span>:((&quot;master&quot;,pid=<span class="hljs-number">96952</span>,fd=<span class="hljs-number">13</span>))
+$ <span class="hljs-built_in">sudo</span> netstat -ltunp |grep master
+tcp        0      0 0.0.0.0:25              0.0.0.0:*               LISTEN      96952/master      
+$ <span class="hljs-built_in">sudo</span> ss -ltunp |grep :25
+tcp   LISTEN 0      100                             0.0.0.0:25         0.0.0.0:*    <span class="hljs-built_in">users</span>:((&quot;master&quot;,pid=<span class="hljs-number">96952</span>,fd=<span class="hljs-number">13</span>))    
+</code></pre>
+<h2 id="firewall" tabindex="-1">Firewall <a class="header-anchor" href="#firewall" aria-hidden="true">🔗</a></h2>
+<p>Bisogna abilitare la porta TCP 25 in ingresso</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Abilitare la porta SMTP in ingresso</span>
+$ <span class="hljs-built_in">sudo</span> ufw status verbose
+$ <span class="hljs-built_in">sudo</span> ufw app list
+$ <span class="hljs-built_in">sudo</span> ufw allow SMTP
+
+<span class="hljs-comment"># Esempio di ricerca e abilitazione di una app</span>
+$ <span class="hljs-built_in">sudo</span> ufw app info <span class="hljs-string">&quot;Mail submission&quot;</span> <span class="hljs-comment"># 587/tcp</span>
+$ <span class="hljs-built_in">sudo</span> ufw allow <span class="hljs-string">&quot;Mail submission&quot;</span>
+$ <span class="hljs-built_in">sudo</span> ufw deny <span class="hljs-string">&quot;Mail submission&quot;</span>
+
+<span class="hljs-comment"># Esempio di cancellazione di una regola</span>
+$ <span class="hljs-built_in">sudo</span> ufw status numbered
+$ <span class="hljs-built_in">sudo</span> ufw delete 2
+</code></pre>
+<h2 id="comando-mail-in-manjaro" tabindex="-1">Comando mail in Manjaro <a class="header-anchor" href="#comando-mail-in-manjaro" aria-hidden="true">🔗</a></h2>
+<p>In Manjaro il comando mail è fornito dal pacchetto <code>s-nail</code></p>
+<pre><code class="language-bash">$ pamac search mailx
+$ pamac info s-nail
+$ pamac search -f /usr/bin/mail
+$ pamac install postfix
+$ postconf mail_version
+$ telnet gmail-smtp-in.l.google.com 25
+$ mail username@gmail.com
+</code></pre>
+<h2 id="tls" tabindex="-1">TLS <a class="header-anchor" href="#tls" aria-hidden="true">🔗</a></h2>
+<p>Creazione certificati Certification Autority Root e server, installazione nel sistem locale del certificato della CA root.</p>
+<p>Se si vuole utilizzare il server anche in ricezione, è importantissimo indicare come &quot;<strong>Common name</strong>&quot; il nome nost della macchina &quot;fully qualified&quot; (<strong>FQDN</strong>), cioè il nome host della macchina + il dominio della macchina raggiungibile da web.  Occorre cioè che per quel server sia stato configurato un dominio registrato (un dominio come quelli che usiamo per i siti web) che punti a quell'IP tramite la creazione di un record <code>A</code> nel <code>DNS</code> del dominio.</p>
+<p>CN=FQDN: <a href="http://cdphome.cdp.it.homenet.telecomitalia.it">cdphome.cdp.it.homenet.telecomitalia.it</a></p>
+<p><a href="../../sicurezza/openssl.html">Creazione di una Root CA</a></p>
+<pre><code class="language-bash">$ set-hostname cdphome.cdp.it
+$ hostname --fqdn
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /etc/postfix/tls
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ~/workspaces/Python/Applications/DNSMonitor/ssl/localhostCert.csr /etc/postfix/tls/server.csr
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ~/workspaces/Python/Applications/DNSMonitor/ssl/localhostKey.pem  /etc/postfix/tls/server.key
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ~/workspaces/Python/Applications/DNSMonitor/ssl/localhostCert.pem /etc/postfix/tls/server.crt
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ~//workspaces/Python/Applications/DNSMonitor/ssl/rootCACert.pem   /etc/postfix/tls/cacert.pem
+$ <span class="hljs-comment"># vim /etc/postfix/main.cf​</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtp_tls_security_level = may&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtpd_tls_security_level = may&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtp_tls_note_starttls_offer = yes&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtpd_tls_key_file = /etc/postfix/tls/server.key&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtpd_tls_cert_file = /etc/postfix/tls/server.crt&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtpd_tls_loglevel = 1&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtpd_tls_received_header = yes&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;myhostname = cdphome.cdp.it&#x27;</span>
+<span class="hljs-comment"># If you are using your own Certificate Authority to sign the certificate enter:</span>
+$ <span class="hljs-built_in">sudo</span> postconf -e <span class="hljs-string">&#x27;smtpd_tls_CAfile = /etc/postfix/tls/cacert.pem&#x27;</span>
+$ <span class="hljs-built_in">sudo</span> systemctl restart postfix.service
+$ <span class="hljs-built_in">sudo</span> systemctl status postfix
+<span class="hljs-comment"># Test che TLS funzioni</span>
+$  telnet localhost 25
+EHLO <span class="hljs-built_in">test</span>
+...
+STARTTLS
+quit
+<span class="hljs-comment"># Secondo test:</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;My message&quot;</span> | mail -s subject corrado.dipietro@gmail.com
+$ journalctl -u postfix --no-pager
+$ journalctl -f -u postfix --no-pager
+</code></pre>
+<pre><code>error: open database /etc/postfix/aliases.db: No such file or directory
+The IP you're using to send mail is not authorized to end email directly to our servers. Please use the SMTP relay at your service provider instead
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/15771932/the-ip-youre-using-to-send-mail-is-not-authorized-to-send-email-directly-to-our">https://stackoverflow.com/questions/15771932/the-ip-youre-using-to-send-mail-is-not-authorized-to-send-email-directly-to-our</a></p>
+<p><a href="https://check.spamhaus.org/listed/?searchterm=87.16.219.78">https://check.spamhaus.org/listed/?searchterm=87.16.219.78</a></p>
+</body></html>

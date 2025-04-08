@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.225" />
+        <title>docker_compose</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="docker_compose" tabindex="-1">docker_compose <a class="header-anchor" href="#docker_compose" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.225</p>
+<nav class="table-of-contents"><ol><li><a href="#disabilitare-un-servizio">Disabilitare un servizio </a></li><li><a href="#esempio-1">Esempio 1 </a></li><li><a href="#esempio-2">Esempio 2 </a></li></ol></nav><h1 id="compose" tabindex="-1">Compose <a class="header-anchor" href="#compose" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/05-services/#container_name">https://docs.docker.com/compose/compose-file/05-services/#container_name</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/build/">https://docs.docker.com/compose/compose-file/build/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/12-interpolation/">https://docs.docker.com/compose/compose-file/12-interpolation/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#environment-replacement">https://docs.docker.com/reference/dockerfile/#environment-replacement</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/05-services/#privileged">https://docs.docker.com/compose/compose-file/05-services/#privileged</a> serve per systemd</p>
+</li>
+<li>
+<p><code>docker run -i</code> <a href="https://docs.docker.com/compose/compose-file/05-services/#stdin_open">https://docs.docker.com/compose/compose-file/05-services/#stdin_open</a></p>
+</li>
+<li>
+<p><code>docker run -t</code> <a href="https://docs.docker.com/compose/compose-file/05-services/#tty">https://docs.docker.com/compose/compose-file/05-services/#tty</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/05-services/#ports">https://docs.docker.com/compose/compose-file/05-services/#ports</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/05-services/#restart">https://docs.docker.com/compose/compose-file/05-services/#restart</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/05-services/#volumes">https://docs.docker.com/compose/compose-file/05-services/#volumes</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/">https://docs.docker.com/compose/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/gettingstarted/">https://docs.docker.com/compose/gettingstarted/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/features-uses/">https://docs.docker.com/compose/features-uses/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/build/buildkit/dockerfile-frontend/">https://docs.docker.com/build/buildkit/dockerfile-frontend/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md">https://github.com/compose-spec/compose-spec/blob/master/spec.md</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/compose_run/">https://docs.docker.com/engine/reference/commandline/compose_run/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/compose_up/">https://docs.docker.com/engine/reference/commandline/compose_up/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/docker/awesome-compose">https://github.com/docker/awesome-compose</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/startup-order/">https://docs.docker.com/compose/startup-order/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/networking/">https://docs.docker.com/compose/networking/</a></p>
+<p>By default Compose sets up a single network for your app. Each container for a service joins the default network and is both reachable by other containers on that network, and discoverable by them at a <strong>hostname identical to the container name</strong>. <br>
+When <code>HOST_PORT</code> is defined, the service is accessible to the Host.</p>
+</li>
+<li>
+<p><a href="https://github.com/vishnubob/wait-for-it">https://github.com/vishnubob/wait-for-it</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Eficode/wait-for">https://github.com/Eficode/wait-for</a></p>
+<ul>
+<li><a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md#command">https://github.com/compose-spec/compose-spec/blob/master/spec.md#command</a></li>
+<li><a href="https://docs.docker.com/reference/dockerfile/#cmd">https://docs.docker.com/reference/dockerfile/#cmd</a></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">$ docker info
+$ docker compose config <span class="hljs-comment"># mostra la configurazione con le variabili di ambiente sostituite dai valori effettivi</span>
+$ docker compose -h
+$ docker compose <span class="hljs-built_in">ls</span>
+<span class="hljs-comment"># Per debug/sviluppo dell&#x27;immagine</span>
+<span class="hljs-comment"># https://docs.docker.com/build/buildkit/</span>
+$ <span class="hljs-built_in">export</span> DOCKER_BUILDKIT=1 <span class="hljs-comment"># per far funzionare l&#x27;heredoc https://docs.docker.com/reference/dockerfile/#here-documents</span>
+$ docker compose build --no-cache --progress plain <span class="hljs-comment"># se si è cambiato il Dockerfile</span>
+$ docker compose run --<span class="hljs-built_in">rm</span> manjaro_cdp
+
+<span class="hljs-comment"># Per debug/sviluppo dell&#x27;immagine - altro modo</span>
+$ docker compose up -d <span class="hljs-comment"># detached</span>
+$ docker <span class="hljs-built_in">exec</span> -ti manjaro_cdp /bin/bash
+$ docker compose stop <span class="hljs-comment"># Stop services</span>
+$ docker compose down <span class="hljs-comment"># Stop and remove containers, networks</span>
+</code></pre>
+<pre><code class="language-bash">$ xdg-open <span class="hljs-string">&quot;http://localhost:5000/&quot;</span>
+$ docker image <span class="hljs-built_in">ls</span>
+<span class="hljs-comment"># https://docs.docker.com/compose/compose-v2/</span>
+$ docker compose config
+$ docker compose <span class="hljs-built_in">cp</span> my-service:~/path/to/myfile ~/local/path/to/copied/file <span class="hljs-comment"># Copy a file from a service container to the local filesystem</span>
+$ docker compose <span class="hljs-built_in">cp</span> --all ~/local/path/to/source/file my-service:~/path/to/copied/file <span class="hljs-comment"># copy from the local filesystem to all the running containers of a service</span>
+$ docker compose <span class="hljs-built_in">ls</span> --all --format json <span class="hljs-comment"># list the Compose project</span>
+[{<span class="hljs-string">&quot;Name&quot;</span>:<span class="hljs-string">&quot;dockergithubio&quot;</span>,<span class="hljs-string">&quot;Status&quot;</span>:<span class="hljs-string">&quot;exited(1)&quot;</span>,<span class="hljs-string">&quot;ConfigFiles&quot;</span>:<span class="hljs-string">&quot;/path/to/docs/docker-compose.yml&quot;</span>}]
+</code></pre>
+<ul>
+<li><a href="https://docs.docker.com/compose/compose-file/">https://docs.docker.com/compose/compose-file/</a></li>
+<li><a href="https://github.com/compose-spec/compose-spec/blob/master/spec.md">https://github.com/compose-spec/compose-spec/blob/master/spec.md</a>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#image">https://docs.docker.com/compose/compose-file/#image</a> <a href="https://docs.docker.com/compose/compose-file/#image">https://docs.docker.com/compose/compose-file/#image</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#read_only">https://docs.docker.com/compose/compose-file/#read_only</a>  configures service container to be created with a read-only filesystem.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#restart">https://docs.docker.com/compose/compose-file/#restart</a> <code>unless-stopped</code>: The policy restarts a container irrespective of the exit code but will stop restarting when the service is stopped or removed.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#container_name">https://docs.docker.com/compose/compose-file/#container_name</a> a string that specifies a custom container name, rather than a generated default name.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#env_file">https://docs.docker.com/compose/compose-file/#env_file</a> adds environment variables to the container based on file content. <code>env_file: .env</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/environment-variables/#the-env-file">https://docs.docker.com/compose/environment-variables/#the-env-file</a> Carica automaticamente il file <code>.env</code>.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#environment">https://docs.docker.com/compose/compose-file/#environment</a> defines environment variables set in the container. When both env_file and environment are set for a service, values set by environment have precedence.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/environment-variables/#pass-environment-variables-to-containers">https://docs.docker.com/compose/environment-variables/#pass-environment-variables-to-containers</a> se non si assegna il valore ma si usa solamente il nome della variabile allora viene preso il valore della variabile di ambiente della shell di lancio.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#expose">https://docs.docker.com/compose/compose-file/#expose</a> defines the ports that Compose implementations MUST expose from container.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#volumes">https://docs.docker.com/compose/compose-file/#volumes</a> defines mount host paths or named volumes that MUST be accessible by service containers.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#ports">https://docs.docker.com/compose/compose-file/#ports</a> Exposes container ports.</p>
+<pre><code>  [HOST:]CONTAINER
+  HOST is [IP:](port | range)
+  CONTAINER is port | range        
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#healthcheck">https://docs.docker.com/compose/compose-file/#healthcheck</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/deploy/#resources">https://docs.docker.com/compose/compose-file/deploy/#resources</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/deploy/#memory">https://docs.docker.com/compose/compose-file/deploy/#memory</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#specifying-byte-values">https://docs.docker.com/compose/compose-file/#specifying-byte-values</a></p>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Stop e Reset</span>
+$ docker-compose down -v <span class="hljs-comment"># rimuove anche i volumi oltre ai container, Stop and remove containers, networks</span>
+$ docker <span class="hljs-built_in">rm</span> -f $(docker ps -a -q)
+$ docker volume <span class="hljs-built_in">rm</span> $(docker volume <span class="hljs-built_in">ls</span> -q)
+$ <span class="hljs-built_in">rm</span> -rf /opt/elastic_search_pwned/data/*
+<span class="hljs-comment"># Start</span>
+$ docker-compose up -d   <span class="hljs-comment"># Create and start containers</span>
+$ docker compose <span class="hljs-built_in">cp</span> es01:/usr/share/elasticsearch/config/certs/ca/ca.crt .
+$ docker compose ps
+<span class="hljs-comment"># Utilità</span>
+$ docker compose <span class="hljs-built_in">exec</span>  es01 <span class="hljs-built_in">ls</span> -la /usr/share/elasticsearch/config/certs/
+$ docker compose <span class="hljs-built_in">exec</span> -it -u 0 es01 bash <span class="hljs-comment"># -u 0 entra come root invece che come elasticsearch</span>
+$ docker compose <span class="hljs-built_in">exec</span>  es01 bash -c <span class="hljs-string">&quot;command1 ; command2 ; command3&quot;</span>
+$ docker stats <span class="hljs-comment"># per vedere la memoria utilizzata</span>
+$ docker compose logs es01
+$ docker compose ps
+<span class="hljs-comment"># Query di esempio</span>
+$ curl --cacert ca.crt -u elastic:elspwd01 https://es01:9200
+<span class="hljs-comment"># http://kibana:5601</span>
+</code></pre>
+<h2 id="disabilitare-un-servizio" tabindex="-1">Disabilitare un servizio <a class="header-anchor" href="#disabilitare-un-servizio" aria-hidden="true">🔗</a></h2>
+<p>Per disabilitare un servizio lo si puo inserire in un profilo, solamente i servizi senza profilo vengono eseguiti di default.</p>
+<ul>
+<li><a href="https://docs.docker.com/compose/reference/run/">https://docs.docker.com/compose/reference/run/</a></li>
+<li><a href="https://docs.docker.com/compose/profiles/">https://docs.docker.com/compose/profiles/</a></li>
+</ul>
+<p>il servizio è sempre eseguibile, specificando il profilo assegnato in docker-compose up</p>
+<p><code>compose.yml</code></p>
+<pre><code class="language-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;3.9&quot;</span>
+<span class="hljs-attr">services:</span>
+  <span class="hljs-attr">frontend:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">frontend</span>
+    <span class="hljs-attr">profiles:</span> [<span class="hljs-string">&quot;frontend&quot;</span>]
+
+  <span class="hljs-attr">phpmyadmin:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">phpmyadmin</span>
+    <span class="hljs-attr">depends_on:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">db</span>
+    <span class="hljs-attr">profiles:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">debug</span>
+
+  <span class="hljs-attr">backend:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">backend</span>
+
+  <span class="hljs-attr">db:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">mysql</span>
+</code></pre>
+<pre><code class="language-bash">$ docker-compose --profile debug up
+</code></pre>
+<h2 id="esempio-1" tabindex="-1">Esempio 1 <a class="header-anchor" href="#esempio-1" aria-hidden="true">🔗</a></h2>
+<p><code>Dockerfile</code></p>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">14</span>
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /usr/src/app</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> package.json .</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> npm install</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> . .</span>
+<span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">3000</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;node&quot;</span>, <span class="hljs-string">&quot;server.js&quot;</span>]</span>
+</code></pre>
+<p><code>docker-compose.yml</code></p>
+<pre><code class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-number">3.8</span>
+<span class="hljs-attr">services:</span>
+    <span class="hljs-attr">mongo:</span>
+        <span class="hljs-attr">image:</span> <span class="hljs-string">mongo:4.4</span>
+        <span class="hljs-attr">container_name:</span> <span class="hljs-string">docker_mongo</span>
+        <span class="hljs-attr">ports:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;27017:27017&quot;</span>
+    <span class="hljs-attr">app:</span>
+        <span class="hljs-attr">build:</span> <span class="hljs-string">./app</span>
+        <span class="hljs-attr">container_name:</span> <span class="hljs-string">node_app</span>
+        <span class="hljs-attr">ports:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;3000:3000&quot;</span>
+        <span class="hljs-attr">environment:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">MONGO_URL=mongodb://mongo:27017/testdb</span>
+        <span class="hljs-attr">depends_on:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">mongo</span>
+</code></pre>
+<pre><code class="language-sh">$ docker compose up
+</code></pre>
+<h2 id="esempio-2" tabindex="-1">Esempio 2 <a class="header-anchor" href="#esempio-2" aria-hidden="true">🔗</a></h2>
+<p><code>docker-compose.yml</code></p>
+<pre><code class="language-yaml"><span class="hljs-attr">version:</span> <span class="hljs-number">3.8</span>
+<span class="hljs-attr">services:</span>
+    <span class="hljs-attr">build:</span>
+        <span class="hljs-attr">image:</span> <span class="hljs-string">node:16</span>
+        <span class="hljs-attr">volumes:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">./app:/app</span>
+        <span class="hljs-attr">working_dir:</span> <span class="hljs-string">/app</span>
+        <span class="hljs-attr">command:</span> <span class="hljs-string">sh</span> <span class="hljs-string">-c</span> <span class="hljs-string">&quot;npm install &amp;&amp; npm run build&quot;</span>
+    <span class="hljs-attr">nginx:</span>
+        <span class="hljs-attr">image:</span> <span class="hljs-string">nginx:1.21</span>
+        <span class="hljs-attr">depends_on:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">build</span>
+        <span class="hljs-attr">volumes:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">./app/build:/usr/share/nginx/html:ro</span>
+        <span class="hljs-attr">ports:</span>
+            <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;8000:80&quot;</span>
+        
+</code></pre>
+<pre><code class="language-sh">$ docker compose run build
+$ docker compose up -d nginx
+$ xgd-open http://localhost:8080
+</code></pre>
+</body></html>

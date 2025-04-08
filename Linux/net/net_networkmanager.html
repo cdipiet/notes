@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.991" />
+        <title>net_networkmanager</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="net_networkmanager" tabindex="-1">net_networkmanager <a class="header-anchor" href="#net_networkmanager" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.991</p>
+<nav class="table-of-contents"><ol><li><a href="#info">Info </a></li><li><a href="#aggiungere-connessioni">Aggiungere Connessioni </a></li><li><a href="#wi-fi">Wi-Fi </a></li><li><a href="#editor-interattivo">Editor Interattivo </a></li><li><a href="#edit-a-connection">Edit a Connection </a></li><li><a href="#ip-statico">IP Statico </a><ol><li><a href="#utilizzando-networkmanager-da-riga-di-comando-con-nmcli">Utilizzando NetworkManager da riga di comando con nmcli </a></li><li><a href="#utilizzando-networkmanager-da-riga-di-comando-con-nmcli-2">Utilizzando NetworkManager da riga di comando con nmcli 2 </a></li><li><a href="#esempio-modifica-connessione-da-dhcp-a-ip-statico">Esempio modifica connessione da DHCP a IP Statico </a></li></ol></li><li><a href="#interfacce-tuntap">Interfacce tuntap </a></li><li><a href="#route">Route </a></li><li><a href="#differance-between-ip4-and-ipv4-addresses%2C-nmcli">Differance between ip4 and ipv4 addresses, nmcli </a></li><li><a href="#connessione-base-con-dhcp">Connessione base con dhcp </a></li></ol></nav><h1 id="networkmanager" tabindex="-1">NetworkManager <a class="header-anchor" href="#networkmanager" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/NetworkManager">https://wiki.archlinux.org/title/NetworkManager</a></li>
+<li><a href="https://guide.lauricella.eu/network-manager-nmcli/">https://guide.lauricella.eu/network-manager-nmcli/</a></li>
+<li><a href="https://www.linuxhowto.net/how-to-configure-network-connection-using-nmcli-tool/">https://www.linuxhowto.net/how-to-configure-network-connection-using-nmcli-tool/</a></li>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_nmcli">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-configuring_ip_networking_with_nmcli</a></li>
+<li><a href="https://devconnected.com/network-manager-on-linux-with-examples/">https://devconnected.com/network-manager-on-linux-with-examples/</a></li>
+</ul>
+<h2 id="info" tabindex="-1">Info <a class="header-anchor" href="#info" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man NetworkManager
+$ man NetworkManager.conf
+$ man nmcli-examples
+$ man nm-settings <span class="hljs-comment"># per vedere i parametri utilizzabili per configurare la connessione</span>
+$ nmcli con modify --<span class="hljs-built_in">help</span>
+
+$ nmcli con show --active
+$ nmcli con show <span class="hljs-string">&quot;connection_name&quot;</span>
+$ nmcli dev status
+$ nmcli dev show
+$ nmcli dev show <span class="hljs-string">&quot;device_name&quot;</span>
+</code></pre>
+<h2 id="aggiungere-connessioni" tabindex="-1">Aggiungere Connessioni <a class="header-anchor" href="#aggiungere-connessioni" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ nmcli con show
+$ nmcli device status
+
+<span class="hljs-comment"># Aggiunge una connessione di rete in DHCP con indirizzo IP dinamico</span>
+$ nmcli con add con-name <span class="hljs-string">&quot;connection_name&quot;</span> <span class="hljs-built_in">type</span> ethernet ifname <span class="hljs-string">&quot;device_name&quot;</span>
+$ nmcli con add <span class="hljs-built_in">type</span> ethernet con-name my-office ifname ens3
+$ nmcli con modify my-office ipv4.dhcp-hostname host-name ipv6.dhcp-hostname <span class="hljs-comment"># per cambiare l&#x27;hostname</span>
+$ nmcli con mod my-office ipv4.ignore-auto-dns <span class="hljs-built_in">yes</span> ipv6.ignore-auto-dns <span class="hljs-built_in">yes</span> <span class="hljs-comment"># per ignorare i server DNS inviati dal server DHCP</span>
+$ nmcli con up my-office
+
+<span class="hljs-comment"># Aggiunge una connessione di rete, specificando IP, Gateway e DNS</span>
+<span class="hljs-comment"># ipv4.method manual</span>
+$ nmcli con add con-name <span class="hljs-string">&quot;connection_name&quot;</span> ifname device_name autoconnect <span class="hljs-built_in">yes</span> <span class="hljs-built_in">type</span> ethernet ip4 aaa.bbb.xxx.ddd/24 gw4 aaa.bbb.ccc.ddd ipv4.dns aaa.bbb.ccc.ddd
+$ nmcli con add con-name static-enp0s3 ifname enp0s3 autoconnect <span class="hljs-built_in">yes</span> <span class="hljs-built_in">type</span> ethernet ip4 192.168.10.50/24 gw4 192.168.10.1 ipv4.dns 192.168.0.254
+
+<span class="hljs-comment"># Optionally, at the same time specify IPv6 address and gateway for the device:</span>
+~]$ nmcli con add <span class="hljs-built_in">type</span> ethernet con-name test-lab ifname ens9 ip4 10.10.10.10/24 \
+gw4 10.10.10.254 ip6 abbe::cafe gw6 2001:db8::1
+    Connection <span class="hljs-string">&#x27;test-lab&#x27;</span> (05abfd5e-324e-4461-844e-8501ba704773) successfully added.
+
+<span class="hljs-comment"># To set two IPv4 DNS server addresses:</span>
+~]$ nmcli con mod test-lab ipv4.dns <span class="hljs-string">&quot;8.8.8.8 8.8.4.4&quot;</span>
+<span class="hljs-comment"># To set two IPv6 DNS server addresses:</span>
+~]$ nmcli con mod test-lab ipv6.dns <span class="hljs-string">&quot;2001:4860:4860::8888 2001:4860:4860::8844&quot;</span>
+<span class="hljs-comment"># to add additional DNS servers to any previously set, use the + prefix:</span>
+~]$ nmcli con mod test-lab +ipv4.dns <span class="hljs-string">&quot;8.8.8.8 8.8.4.4&quot;</span>
+
+<span class="hljs-comment"># Aggiunge un secondo IP statico</span>
+$ nmcli con mod <span class="hljs-string">&quot;static&quot;</span> +ipv4.addresses aaa.bbb.xxx.ddd/24
+
+<span class="hljs-comment"># Aggiunge il dns secondario</span>
+$ nmcli con mod <span class="hljs-string">&quot;connection_name&quot;</span> +ipv4.dns aaa.bbb.xxx.ddd
+
+<span class="hljs-comment"># Modifica l’IP statico, il Gateway ed il DNS per ipv4</span>
+$ nmcli con mod <span class="hljs-string">&quot;connection_name&quot;</span> ipv4.address aaa.bbb.xxx.ddd/24
+$ nmcli con mod <span class="hljs-string">&quot;connection_name&quot;</span> ipv4.gateway aaa.bbb.xxx.ddd
+$ nmcli con mod <span class="hljs-string">&quot;connection_name&quot;</span> ipv4.dns aaa.bbb.xxx.ddd
+
+<span class="hljs-comment"># Modifica l’IP statico ed il gateway</span>
+$ nmcli con mod <span class="hljs-string">&quot;connection_name&quot;</span> ipv4.addresses aaa.bbb.xxx.ddd/24 aaa.bbb.xxx.ddd
+
+<span class="hljs-comment"># Ricarica la configurazione</span>
+<span class="hljs-comment"># eseguire la disconnessione e riconnessione affinche&#x27; le modifiche abbiano effetto</span>
+$ nmcli con reload
+
+<span class="hljs-comment"># Disattiva ed attiva la connessione</span>
+$ nmcli con down <span class="hljs-string">&quot;connection_name&quot;</span>
+$ nmcli con up <span class="hljs-string">&quot;connection_name&quot;</span>
+
+<span class="hljs-comment"># Disabilita l’autoconnect</span>
+$ nmcli con mod <span class="hljs-string">&quot;connection_name&quot;</span> connection.autoconnect no
+
+<span class="hljs-comment"># Elimina la connessione di rete</span>
+$ nmcli connection delete <span class="hljs-built_in">id</span> <span class="hljs-string">&quot;connection_name&quot;</span>
+
+~]$ nmcli -p con show test-lab
+</code></pre>
+<h2 id="wi-fi" tabindex="-1">Wi-Fi <a class="header-anchor" href="#wi-fi" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ nmcli device wifi list
+$ nmcli -f ALL dev wifi
+$ nmcli device wifi connect SSID_or_BSSID password password
+$ nmcli device wifi connect SSID_or_BSSID password password hidden <span class="hljs-built_in">yes</span> <span class="hljs-comment"># connettersi ad una rete wifi nascosta</span>
+$ nmcli device wifi connect SSID_or_BSSID password password ifname wlan1 profile_name <span class="hljs-comment"># connettersi ad una rete wifi tramite l&#x27;interfaccia wlan1</span>
+$ nmcli device disconnect ifname eth0
+$ nmcli connection show
+$ nmcli connection up name_or_uuid
+$ nmcli connection delete name_or_uuid
+$ nmcli device
+$ nmcli device show
+$ nmcli -p device show
+$ nmcli radio wifi off
+$ ip a
+    enp5s0:
+
+
+<span class="hljs-comment"># To create a Wi-Fi connection profile with static IP configuration, but allowing automatic DNS address assignment:</span>
+~]$ nmcli con add con-name MyCafe ifname wlp61s0 <span class="hljs-built_in">type</span> wifi ssid MyCafe \
+ip4 192.168.100.101/24 gw4 192.168.100.1
+
+<span class="hljs-comment"># To set a WPA2 password, for example “caffeine”:</span>
+~]$ nmcli con modify MyCafe wifi-sec.key-mgmt wpa-psk
+~]$ nmcli con modify MyCafe wifi-sec.psk caffeine
+<span class="hljs-comment"># To change Wi-Fi state:</span>
+~]$ nmcli radio wifi [on | off ]
+</code></pre>
+<h2 id="editor-interattivo" tabindex="-1">Editor Interattivo <a class="header-anchor" href="#editor-interattivo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">~]$ nmcli con edit <span class="hljs-built_in">type</span> ethernet con-name ens3
+
+===| nmcli interactive connection editor |===
+
+Adding a new <span class="hljs-string">&#x27;802-3-ethernet&#x27;</span> connection
+
+Type <span class="hljs-string">&#x27;help&#x27;</span> or <span class="hljs-string">&#x27;?&#x27;</span> <span class="hljs-keyword">for</span> available commands.
+Type <span class="hljs-string">&#x27;describe [&lt;setting&gt;.&lt;prop&gt;]&#x27;</span> <span class="hljs-keyword">for</span> detailed property description.
+
+You may edit the following settings: connection, 802-3-ethernet (ethernet), 802-1x, ipv4, ipv6, dcb
+nmcli&gt; describe ipv4.method
+
+=== [method] ===
+[NM property description]
+IPv4 configuration method.  If <span class="hljs-string">&#x27;auto&#x27;</span> is specified <span class="hljs-keyword">then</span> the appropriate automatic method (DHCP, PPP, etc) is used <span class="hljs-keyword">for</span> the interface and most other properties can be left <span class="hljs-built_in">unset</span>.  If <span class="hljs-string">&#x27;link-local&#x27;</span> is specified, <span class="hljs-keyword">then</span> a link-local address <span class="hljs-keyword">in</span> the 169.254/16 range will be assigned to the interface.  If <span class="hljs-string">&#x27;manual&#x27;</span> is specified, static IP addressing is used and at least one IP address must be given <span class="hljs-keyword">in</span> the <span class="hljs-string">&#x27;addresses&#x27;</span> property.  If <span class="hljs-string">&#x27;shared&#x27;</span> is specified (indicating that this connection will provide network access to other computers) <span class="hljs-keyword">then</span> the interface is assigned an address <span class="hljs-keyword">in</span> the 10.42.x.1/24 range and a DHCP and forwarding DNS server are started, and the interface is NAT-ed to the current default network connection.  <span class="hljs-string">&#x27;disabled&#x27;</span> means IPv4 will not be used on this connection.  This property must be <span class="hljs-built_in">set</span>.
+
+nmcli&gt; <span class="hljs-built_in">set</span> ipv4.method auto
+nmcli&gt; save
+Saving the connection with <span class="hljs-string">&#x27;autoconnect=yes&#x27;</span>. That might result <span class="hljs-keyword">in</span> an immediate activation of the connection.
+Do you still want to save? [<span class="hljs-built_in">yes</span>] <span class="hljs-built_in">yes</span>
+Connection <span class="hljs-string">&#x27;ens3&#x27;</span> (090b61f7-540f-4dd6-bf1f-a905831fc287) successfully saved.
+nmcli&gt; quit
+~]$
+</code></pre>
+<h2 id="edit-a-connection" tabindex="-1">Edit a Connection <a class="header-anchor" href="#edit-a-connection" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man nm-settings
+$ nmcli con
+
+<span class="hljs-comment"># nmcli interactive editor</span>
+$ nmcli connection edit <span class="hljs-string">&#x27;Wired connection 2&#x27;</span>.
+
+<span class="hljs-comment"># nmcli command line interface</span>
+$ nmcli connection modify <span class="hljs-string">&#x27;Wired connection 2&#x27;</span> setting.property value
+<span class="hljs-comment"># See nmcli(1) for usage. For example you can change its IPv4 route metric to 200 using </span>
+$ nmcli connection modify <span class="hljs-string">&#x27;Wired connection 2&#x27;</span> ipv4.route-metric 200 
+<span class="hljs-comment"># command.</span>
+
+<span class="hljs-comment"># To remove a setting pass an empty field (&quot;&quot;) to it like this:</span>
+$ nmcli connection modify <span class="hljs-string">&#x27;Wired connection 2&#x27;</span> setting.property <span class="hljs-string">&quot;&quot;</span>
+
+<span class="hljs-comment"># Connection file</span>
+<span class="hljs-comment"># In /etc/NetworkManager/system-connections/, modify the corresponding Wired connection 2.nmconnection file.</span>
+<span class="hljs-comment"># Do not forget to reload the configuration file with </span>
+$ nmcli connection reload.
+</code></pre>
+<h2 id="ip-statico" tabindex="-1">IP Statico <a class="header-anchor" href="#ip-statico" aria-hidden="true">🔗</a></h2>
+<h3 id="utilizzando-networkmanager-da-riga-di-comando-con-nmcli" tabindex="-1">Utilizzando NetworkManager da riga di comando con nmcli <a class="header-anchor" href="#utilizzando-networkmanager-da-riga-di-comando-con-nmcli" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ nmcli con
+NAME             UUID                                  TYPE      DEVICE
+Cavo             c98bfddf-7828-4a2c-ae63-f9fd7aa545db  ethernet  enp5s0
+$ ip route show
+default via 192.168.1.1 dev enp5s0 proto dhcp metric 100
+$ nmcli con mod <span class="hljs-string">&quot;Cavo&quot;</span> \
+  ipv4.addresses <span class="hljs-string">&quot;192.168.1.2/24&quot;</span> \
+  ipv4.gateway <span class="hljs-string">&quot;192.168.1.1&quot;</span> \
+  <span class="hljs-comment">#ipv4.dns &quot;8.8.8.8,4.4.4.4&quot; \</span>
+  ipv4.dns <span class="hljs-string">&quot;192.168.1.1&quot;</span> \
+  ipv4.dns-search <span class="hljs-string">&quot;homenet.telecomitalia.it&quot;</span> \
+  ipv4.method <span class="hljs-string">&quot;manual&quot;</span>
+
+$ <span class="hljs-built_in">sudo</span> nmcli connection modify <span class="hljs-string">&#x27;Cavo&#x27;</span> connection.autoconnect <span class="hljs-built_in">yes</span> ipv4.method manual ipv4.address 192.168.1.2/24 ipv4.gateway 192.168.1.1 ipv4.dns 192.168.1.1  
+
+<span class="hljs-comment"># cat /etc/NetworkManager/system-connections/Cavo.nmconnection </span>
+[connection]
+<span class="hljs-built_in">id</span>=Cavo
+uuid=c98bfddf-7828-4a2c-ae63-f9fd7aa545db
+<span class="hljs-built_in">type</span>=ethernet
+permissions=
+
+[ipv4]
+dns-search=
+method=auto
+</code></pre>
+<h3 id="utilizzando-networkmanager-da-riga-di-comando-con-nmcli-2" tabindex="-1">Utilizzando NetworkManager da riga di comando con nmcli 2 <a class="header-anchor" href="#utilizzando-networkmanager-da-riga-di-comando-con-nmcli-2" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ nmcli con show
+$ nmcli con show <span class="hljs-string">&quot;Connessione via cavo 2&quot;</span>
+  NAME   Connessione via cavo 2
+  DEVICE enp0s8
+
+$ nmcli -p  dev show enp0s8
+</code></pre>
+<pre><code>===============================================================================
+                      Informazioni dispositivo (enp0s8)
+===============================================================================
+GENERAL.DEVICE:                         enp0s8
+-------------------------------------------------------------------------------
+GENERAL.TYPE:                           ethernet
+-------------------------------------------------------------------------------
+GENERAL.HWADDR:                         08:00:27:FB:64:9F
+-------------------------------------------------------------------------------
+GENERAL.MTU:                            1500
+-------------------------------------------------------------------------------
+GENERAL.STATE:                          100 (collegato)
+-------------------------------------------------------------------------------
+GENERAL.CONNECTION:                     Connessione via cavo 2
+-------------------------------------------------------------------------------
+GENERAL.CON-PATH:                       /org/freedesktop/NetworkManager/ActiveConnection/1
+-------------------------------------------------------------------------------
+WIRED-PROPERTIES.CARRIER:               on
+-------------------------------------------------------------------------------
+IP4.ADDRESS[1]:                         192.168.56.101/24
+IP4.GATEWAY:                            --
+IP4.ROUTE[1]:                           dst = 192.168.56.0/24, nh = 0.0.0.0, mt = 100
+-------------------------------------------------------------------------------
+IP6.ADDRESS[1]:                         fe80::b656:ec:422c:5c41/64
+IP6.GATEWAY:                            --
+IP6.ROUTE[1]:                           dst = fe80::/64, nh = ::, mt = 100
+-------------------------------------------------------------------------------
+</code></pre>
+<pre><code class="language-bash">$ nmcli con mod <span class="hljs-string">&quot;Connessione via cavo 2&quot;</span> ipv4.method manual ipv4.address 192.168.56.1/24
+$ nmcli con reload
+$ <span class="hljs-built_in">cat</span> /etc/NetworkManager/system-connections/Connessione\ via\ cavo\ 2.nmconnection 
+</code></pre>
+<pre><code>[connection]
+id=Connessione via cavo 2
+uuid=948849b7-ed55-317a-b457-2f03e6f3c40a
+type=ethernet
+autoconnect-priority=-999
+interface-name=enp0s8
+permissions=
+timestamp=1640258831
+
+[ethernet]
+mac-address-blacklist=
+
+[ipv4]
+address1=192.168.56.1/24
+dns-search=
+method=manual
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+
+[proxy]
+</code></pre>
+<h3 id="esempio-modifica-connessione-da-dhcp-a-ip-statico" tabindex="-1">Esempio modifica connessione da DHCP a IP Statico <a class="header-anchor" href="#esempio-modifica-connessione-da-dhcp-a-ip-statico" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ ip addr <span class="hljs-comment"># per vedere lo stato corrente dell&#x27;interfaccia di rete</span>
+
+$ nmcli con mod enps03 ipv4.addresses 192.168.2.20/24
+$ nmcli con mod enps03 ipv4.gateway 192.168.2.1
+$ nmcli con mod enps03 ipv4.dns “8.8.8.8”
+$ nmcli con mod enps03 ipv4.method manual
+$ nmcli con up enps03
+<span class="hljs-comment"># The changes will be written to /etc/network-scripts/ifcfg-enps03 file.</span>
+<span class="hljs-comment"># To confirm the IP, once again run the command:</span>
+$ ip addr enps03
+$ <span class="hljs-built_in">cat</span> /etc/network-scripts/ifcfg-enps03
+</code></pre>
+<h2 id="interfacce-tuntap" tabindex="-1">Interfacce tuntap <a class="header-anchor" href="#interfacce-tuntap" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># &lt;https://wiki.archlinux.org/title/Network_bridge&gt;</span>
+$ brctl show
+$ nmcli connection show
+$ nmcli connection show --active
+$ nmcli connection down br-e3dd97dbc1cb
+    $ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br-e3dd97dbc1cb down
+$ nmcli d
+$ nmcli connection delete br-e3dd97dbc1cb
+$ nmcli device delete br-e3dd97dbc1cb$
+    $ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> delete br-e3dd97dbc1cb <span class="hljs-built_in">type</span> bridge
+    $ brctl delbr br-e3dd97dbc1cb
+
+
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap0 con-name nmtap0 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.56.1/24
+<span class="hljs-comment"># $ sudo ip route add 192.168.56.0/24 dev tap0 metric 10</span>
+<span class="hljs-comment"># The connection will have autoconnect=yes by default and so the device</span>
+<span class="hljs-comment"># will be created automatically every time NM starts. You can manually</span>
+<span class="hljs-comment"># enable or disable the connection with:</span>
+$ nmcli connection up nmtap0
+$ nmcli connection down nmtap0
+$ nmcli connection del nmtap0
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+$ ip tuntap <span class="hljs-built_in">help</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add tap0 mode tap
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 up
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.56.1/24 dev tap0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> tap0 promisc on
+$ <span class="hljs-built_in">sudo</span> ip route add 192.168.56.0/24 dev tap0
+<span class="hljs-comment"># Per eliminare il NIC</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev tap0 down
+$ <span class="hljs-built_in">sudo</span> ip tuntap del tap0 mode tap
+</code></pre>
+<h2 id="route" tabindex="-1">Route <a class="header-anchor" href="#route" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> nmcli connection modify enp0s3 +ipv4.routes <span class="hljs-string">&quot;10.0.3.0/24 10.0.3.1&quot;</span>
+$ nmcli connection reload
+</code></pre>
+<h2 id="differance-between-ip4-and-ipv4-addresses%2C-nmcli" tabindex="-1">Differance between ip4 and ipv4 addresses, nmcli <a class="header-anchor" href="#differance-between-ip4-and-ipv4-addresses%2C-nmcli" aria-hidden="true">🔗</a></h2>
+<p>When creating new interfaces with nmcli, ip address can be set with both ipv4.addresses and ip4 parameter.<br>
+Is there a differance between these?\</p>
+<p>examples\</p>
+<pre><code>nmcli con add ifname ens192 con-name ens192 type ethernet ipv4.addresses 192.168.0.10/24
+</code></pre>
+<p>vs</p>
+<pre><code>nmcli con add ifname ens192 con-name ens192 type ethernet ip4 192.168.0.10/24 gw4 192.168.1.1
+</code></pre>
+<p>From nmcli manual:</p>
+<pre><code>Table 25. IPv4 options
+┌──────┬────────────────┬────────────────────────┐
+│Alias │ Property       │ Note                   │
+├──────┼────────────────┼────────────────────────┤
+│ip4   │ ipv4.addresses │ The alias is           │
+│      │ ipv4.method    │ equivalent to the      │
+│      │                │ +ipv4.addresses syntax │
+│      │                │ and also sets          │
+│      │                │ ipv4.method to manual. │
+│      │                │ It can be specified    │
+│      │                │ multiple times.        │
+├──────┼────────────────┼────────────────────────┤
+│gw4   │ ipv4.gateway   │                        │
+└──────┴────────────────┴────────────────────────┘
+</code></pre>
+<h2 id="connessione-base-con-dhcp" tabindex="-1">Connessione base con dhcp <a class="header-anchor" href="#connessione-base-con-dhcp" aria-hidden="true">🔗</a></h2>
+<p><code>/etc/NetworkManager/system-connections/Cavo.nmconnection</code></p>
+<pre><code>[connection]
+id=Cavo
+uuid=84f06a65-6885-4a58-ada2-9942b9dd1d03
+type=ethernet
+interface-name=enp5s0
+permissions=
+timestamp=1643818437
+
+[ethernet]
+mac-address-blacklist=
+
+[ipv4]
+dns-search=
+method=auto
+
+[ipv6]
+addr-gen-mode=stable-privacy
+dns-search=
+method=auto
+
+[proxy]
+</code></pre>
+</body></html>

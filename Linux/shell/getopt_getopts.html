@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.821" />
+        <title>getopt_getopts</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="getopt_getopts" tabindex="-1">getopt_getopts <a class="header-anchor" href="#getopt_getopts" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.821</p>
+<nav class="table-of-contents"><ol><li><a href="#getopt">getopt </a></li><li><a href="#getopts">getopts </a></li></ol></nav><h1 id="getopt-e-getopts" tabindex="-1">getopt e getopts <a class="header-anchor" href="#getopt-e-getopts" aria-hidden="true">🔗</a></h1>
+<p>Both &quot;getopt&quot; and getopts are tools to use for processing and validating shell script arguments. They are similar, but not identical. More confusingly, functionality may vary from place to place, so you need to read the man pages carefully if your usage is more than casual.</p>
+<p>Properly handling command line arguments is difficult if you want the usage to be flexible. It's easy to write a script that demands arguments in a specific order; much harder to allow any order at all. It's also hard to allow bunched together arguments or spaced out to be equivalent:</p>
+<pre><code>foo -a -b -c
+
+foo -abc
+
+foo -a -c +b
+
+foo -ac +b
+</code></pre>
+<p>These are the problems that getopt(s) are designed to handle. They ease the job considerably, but introduce their own little quirks that your script will need to deal with.</p>
+<h2 id="getopt" tabindex="-1">getopt <a class="header-anchor" href="#getopt" aria-hidden="true">🔗</a></h2>
+<p>This is a standalone executable that has been around a long time. Older versions lack the ability to handle quoted arguments (foo a &quot;this won't work&quot; c) and the versions that can, do so clumsily. If you are running a recent Linux version, your &quot;getopt&quot; can do that; SCO OSR5, Mac OS X 10.2.6 and FreeBSD 4.4 has an older version that does not.</p>
+<p>The simple use of &quot;getopt&quot; is shown in this mini-script:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Before getopt&quot;</span>
+<span class="hljs-keyword">for</span> i
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+args=`getopt abc:d $*`
+<span class="hljs-built_in">set</span> -- <span class="hljs-variable">$args</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;After getopt&quot;</span>
+<span class="hljs-keyword">for</span> i
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--&gt;<span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>What we have said is that any of -a, -b, -c or -d will be allowed, but that -c is followed by an argument (the &quot;c:&quot; says that).</p>
+<p>If we call this &quot;g&quot; and try it out:</p>
+<pre><code>bash-2.05a$ ./g -abc foo
+</code></pre>
+<p>Before getopt</p>
+<pre><code>-abc
+
+foo
+</code></pre>
+<p>After getopt</p>
+<pre><code>--&gt;-a
+
+--&gt;-b
+
+--&gt;-c
+
+--&gt;foo
+
+--&gt;--
+</code></pre>
+<p>We start with two arguments, and &quot;getopt&quot; breaks apart the options and puts each in its own argument. It also added &quot;--&quot;.</p>
+<p>Of course &quot;getopt&quot; doesn't care that we didn't use &quot;-d&quot;; if that were important, it would be up to your script to notice and complain. However, &quot;getopt&quot; will notice if we try to use a flag that wasn't specified:</p>
+<pre><code>bash-2.05a$ ./g -abc foo -d -f
+</code></pre>
+<p>Before getopt</p>
+<pre><code>-abc
+
+foo
+
+-d
+
+-f
+
+getopt: illegal option -- f
+</code></pre>
+<p>After getopt</p>
+<pre><code>--&gt;-a
+
+--&gt;-b
+
+--&gt;-c
+
+--&gt;foo
+
+--&gt;-d
+
+--&gt;--
+</code></pre>
+<p>However, if you preface the option string with a colon:</p>
+<pre><code>args=`getopt :abc:d $*`
+</code></pre>
+<p>&quot;getopt&quot; will be silent about the unwanted flag.</p>
+<p>As noted at the beginning, if we give &quot;getopt&quot; arguments containing spaces, it breaks:</p>
+<pre><code>bash-2.05a$ ./g -abc &quot;foo bar&quot;
+</code></pre>
+<p>Before getopt</p>
+<pre><code>-abc
+
+foo bar
+</code></pre>
+<p>After getopt</p>
+<pre><code>--&gt;-a
+
+--&gt;-b
+
+--&gt;-c
+
+--&gt;foo
+
+--&gt;--
+
+--&gt;bar
+</code></pre>
+<p>Not only has &quot;foo bar&quot; become two arguments, but they have been separated. This will be true whether you have the newer version that is capable of handling those arguments or not, because it requires different syntax to handle them. If you do have the newer &quot;getopt&quot;, you'd need to write the script differently:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Before getopt&quot;</span>
+<span class="hljs-keyword">for</span> i
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+args=`getopt -o abc: -- <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>`
+<span class="hljs-built_in">eval</span> <span class="hljs-built_in">set</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$args</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;After getopt&quot;</span>
+<span class="hljs-keyword">for</span> i
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--&gt;<span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>We've added a &quot;-o&quot;, changed $* to $@ in quotes, and used an &quot;eval&quot; for the set. With the newer (as is on Linux) version, that works:</p>
+<p>bash-2.05a$ ./g -abc &quot;foo bar&quot;</p>
+<p>Before getopt</p>
+<pre><code>-abc
+
+foo bar
+</code></pre>
+<p>After getopt</p>
+<pre><code>--&gt;-a
+
+--&gt;-b
+
+--&gt;-c
+
+--&gt;foo bar
+
+--&gt;--
+</code></pre>
+<p>However, if you use that script with the older getopt, you get a useless result:</p>
+<pre><code>bash-2.05a$ ./gg -abc &quot;foo bar&quot;
+</code></pre>
+<p>Before getopt</p>
+<pre><code>-abc
+
+foo bar
+</code></pre>
+<p>After getopt</p>
+<pre><code>--&gt;--
+
+--&gt;abc:
+
+--&gt;--
+
+--&gt;-abc
+
+--&gt;foo
+
+--&gt;bar
+</code></pre>
+<p>It's unfortunately easy to get bad results from &quot;getopt&quot; by misquoting or using the wrong syntax. Whenever I've had to use this, I make sure to print out the arguments as I did in the &quot;After getopt&quot; while testing. Once you get it right, using it is easy:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># (old version)</span>
+args=`getopt abc: $*`
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">test</span> $? != 0
+<span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Usage: -a -b -c file&#x27;</span>
+<span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">set</span> -- <span class="hljs-variable">$args</span>
+<span class="hljs-keyword">for</span> i
+<span class="hljs-keyword">do</span>
+<span class="hljs-keyword">case</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-keyword">in</span>
+-c) <span class="hljs-built_in">shift</span>;<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;flag c set to <span class="hljs-variable">$1</span>&quot;</span>;<span class="hljs-built_in">shift</span>;;
+-a) <span class="hljs-built_in">shift</span>;<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;flag a set&quot;</span>;;
+-b) <span class="hljs-built_in">shift</span>;<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;flag b set&quot;</span>;;
+<span class="hljs-keyword">esac</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>and the results are as expected.</p>
+<pre><code>bash-2.05a$ ./g -abc &quot;foo&quot;
+flag a set
+flag b set
+flag c set to foo
+bash-2.05a$
+</code></pre>
+<p>However, note the &quot;Usage&quot; section which prints if &quot;getopt&quot; doesn't like what you gave it: an extra flag, or not giving an argument to a flag that requires one. Using the this newest script, we can test some of that:</p>
+<pre><code>bash-2.05a$ ./g -ab -c
+getopt: option requires an argument -- c
+Usage: -a -b -c file
+Bash-2.05a$ ./g -abj foo
+getopt: illegal option -- j
+Usage: -a -b -c file
+But &quot;getopt&quot; is easily fooled:
+bash-2.05a$ ./g -a -c -b foo
+flag a set
+flag c set to -b
+flag b set
+</code></pre>
+<p>You'd have to deal with that nastiness yourself.</p>
+<h2 id="getopts" tabindex="-1">getopts <a class="header-anchor" href="#getopts" aria-hidden="true">🔗</a></h2>
+<p>sh and bash builtin. <strong>Easier to use and generally better than getopt</strong>, though of course not available in csh-like shells. You shouldn't be using those anyway.</p>
+<p>This works rather differently than &quot;getopt&quot;. First, because it's a built-in, you usually won't find a separate man page for it, though &quot;help getopts&quot; may give you what you need.</p>
+<p>The old &quot;getopt&quot; is called once, and it modifies the environment as we saw above. The builtin &quot;getopts&quot; is called each time you want to process an argument, and it doesn't change the original arguments . A simple script to test with:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">&quot;abc:&quot;</span> flag
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$flag</span>&quot;</span> <span class="hljs-variable">$OPTIND</span> <span class="hljs-variable">$OPTARG</span>
+<span class="hljs-keyword">done</span>
+Trying this produces good results:
+bash-2.05a$ ./g -abc <span class="hljs-string">&quot;foo&quot;</span>
+a 1
+b 1
+c 3 foo
+</code></pre>
+<p>The <code>$OPTIND</code> will contain the index of the argument that will be examined next. If you really needed to, you could tell from that whether arguments were bunched together or given separately, but the real point of it is to let you reset it to re-process the arguments. Try this slightly more complicated version (we'll call it &quot;gg&quot;):</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">&quot;abc:def:ghi&quot;</span> flag
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$flag</span>&quot;</span> <span class="hljs-variable">$OPTIND</span> <span class="hljs-variable">$OPTARG</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Resetting&quot;</span>
+OPTIND=1
+<span class="hljs-keyword">while</span> <span class="hljs-built_in">getopts</span> <span class="hljs-string">&quot;abc:def:ghi&quot;</span> flag
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$flag</span>&quot;</span> <span class="hljs-variable">$OPTIND</span> <span class="hljs-variable">$OPTARG</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>We'll give it more arguments so that you can observe it at work:</p>
+<pre><code>bash-2.05a$ ./gg -a -bc foo -f &quot;foo bar&quot; -h -gde
+a 2
+b 2
+c 4 foo
+f 6 foo bar
+h 7
+g 7
+d 7
+e 8
+</code></pre>
+<p>Resetting</p>
+<pre><code>a 2
+b 2
+c 4 foo
+f 6 foo bar
+h 7
+g 7
+d 7
+e 8
+</code></pre>
+<p>The leading <code>:</code> works like it does in &quot;getopt&quot; to suppress errors, but &quot;getopt&quot; gives you more help. Back to our first simple version:</p>
+<pre><code>sh-2.05a$ ./g -a -c -b foo
+a 2
+c 4 -b
+</code></pre>
+<p>The builtin &quot;getopts&quot; doesn't get fooled: the &quot;-b&quot; is the argument to c, but it doesn't think that b is set also.</p>
+<p>If &quot;getopts&quot; encounters an unwanted argument, and hasn't been silenced by a leading &quot;:&quot;, the &quot;$flag&quot; in our script above will be set to <code>?</code>:</p>
+<pre><code>bash-2.05a$ ./g -a -c foo -l
+a 2
+c 4 foo
+./g: illegal option -- l
+? 4
+
+bash-2.05a$ ./g -a -c
+a 2
+./g: option requires an argument -- c
+? 3
+</code></pre>
+<p>With a leading <code>:</code> (while getopts <code>:abc:d</code> flag), things are different:</p>
+<pre><code>bash-2.05a$ ./g -a -c
+a 2
+: 3 c
+
+bash-2.05a$ ./g -a -c foo -l
+a 2
+c 4 foo
+? 4 l
+
+bash-2.05a$ ./g -a -c
+a 2
+: 3 c
+</code></pre>
+<p>If an argument is not given for a flag that needs one, <code>$flag</code> gets set to <code>:</code> and <code>OPTARG</code> has the misused flag. If an unknown argument is given, a <code>?</code> is put in <code>$flag</code>, and <code>OPTARG</code> again has the unrecognized flag.</p>
+</body></html>

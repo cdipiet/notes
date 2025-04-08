@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.556" />
+        <title>ps</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="ps" tabindex="-1">ps <a class="header-anchor" href="#ps" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.556</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22ps%22description%3A-%22the-ps-command-description-and-usage%22keywords%3A-%22container%2C-running%2C-list%22">title: &quot;ps&quot;description: &quot;The ps command description and usage&quot;keywords: &quot;container, running, list&quot; </a></li><li><a href="#examples">Examples </a><ol><li><a href="#prevent-truncating-output">Prevent truncating output </a></li><li><a href="#show-both-running-and-stopped-containers">Show both running and stopped containers </a></li><li><a href="#show-disk-usage-by-container">Show disk usage by container </a></li><li><a href="#filtering">Filtering </a><ol><li><a href="#label">label </a></li><li><a href="#name">name </a></li><li><a href="#exited">exited </a></li><li><a href="#filter-by-exit-signal">Filter by exit signal </a></li><li><a href="#status">status </a></li><li><a href="#ancestor">ancestor </a></li><li><a href="#create-time">Create time </a><ol><li><a href="#before">before </a></li><li><a href="#since">since </a></li></ol></li><li><a href="#volume">volume </a></li><li><a href="#network">network </a></li><li><a href="#publish-and-expose">publish and expose </a></li></ol></li><li><a href="#formatting">Formatting </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22ps%22description%3A-%22the-ps-command-description-and-usage%22keywords%3A-%22container%2C-running%2C-list%22" tabindex="-1">title: &quot;ps&quot;
+description: &quot;The ps command description and usage&quot;
+keywords: &quot;container, running, list&quot; <a class="header-anchor" href="#title%3A-%22ps%22description%3A-%22the-ps-command-description-and-usage%22keywords%3A-%22container%2C-running%2C-list%22" aria-hidden="true">🔗</a></h2>
+<h1 id="ps-1" tabindex="-1">ps <a class="header-anchor" href="#ps-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage: docker ps [OPTIONS]
+
+List containers
+
+Options:
+  -a, --all             Show all containers (default shows just running)
+  -f, --filter value    Filter output based on conditions provided (default [])
+<span class="hljs-bullet">                        -</span> ancestor=(<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">image-name</span>&gt;</span></span>[:tag]|<span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">image-id</span>&gt;</span></span>|<span class="language-xml">&lt;image@digest&gt;</span>)
+<span class="hljs-code">                          containers created from an image or a descendant.
+                        - before=(&lt;container-name&gt;|&lt;container-id&gt;)
+                        - expose=(&lt;port&gt;[/&lt;proto&gt;]|&lt;startport-endport&gt;/[&lt;proto&gt;])
+                        - exited=&lt;int&gt; an exit code of &lt;int&gt;
+                        - health=(starting|healthy|unhealthy|none)
+                        - id=&lt;ID&gt; a container&#x27;s ID
+                        - isolation=(`default`|`process`|`hyperv`) (Windows daemon only)
+                        - is-task=(true|false)
+                        - label=&lt;key&gt; or label=&lt;key&gt;=&lt;value&gt;
+                        - name=&lt;string&gt; a container&#x27;s name
+                        - network=(&lt;network-id&gt;|&lt;network-name&gt;)
+                        - publish=(&lt;port&gt;[/&lt;proto&gt;]|&lt;startport-endport&gt;/[&lt;proto&gt;])
+                        - since=(&lt;container-name&gt;|&lt;container-id&gt;)
+                        - status=(created|restarting|removing|running|paused|exited)
+                        - volume=(&lt;volume name&gt;|&lt;mount point destination&gt;)
+      --format string   Pretty-print containers using a Go template
+      --help            Print usage
+  -n, --last int        Show n last created containers (includes all states) (default -1)
+  -l, --latest          Show the latest created container (includes all states)
+      --no-trunc        Don&#x27;t truncate output
+  -q, --quiet           Only display numeric IDs
+  -s, --size            Display total file sizes
+</span></code></pre>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="prevent-truncating-output" tabindex="-1">Prevent truncating output <a class="header-anchor" href="#prevent-truncating-output" aria-hidden="true">🔗</a></h3>
+<p>Running <code>docker ps --no-trunc</code> showing 2 linked containers.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
+
+CONTAINER ID        IMAGE                        COMMAND                CREATED              STATUS              PORTS               NAMES
+4c01db0b339c        ubuntu:12.04                 bash                   17 seconds ago       Up 16 seconds       3300-3310/tcp       webapp
+d7886598dbe2        crosbymichael/redis:latest   /redis-server --dir    33 minutes ago       Up 33 minutes       6379/tcp            redis,webapp/db
+</code></pre>
+<h3 id="show-both-running-and-stopped-containers" tabindex="-1">Show both running and stopped containers <a class="header-anchor" href="#show-both-running-and-stopped-containers" aria-hidden="true">🔗</a></h3>
+<p>The <code>docker ps</code> command only shows running containers by default. To see all
+containers, use the <code>-a</code> (or <code>--all</code>) flag:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps -a</span>
+</code></pre>
+<p><code>docker ps</code> groups exposed ports into a single range if possible. E.g., a
+container that exposes TCP ports <code>100, 101, 102</code> displays <code>100-102/tcp</code> in
+the <code>PORTS</code> column.</p>
+<h3 id="show-disk-usage-by-container" tabindex="-1">Show disk usage by container <a class="header-anchor" href="#show-disk-usage-by-container" aria-hidden="true">🔗</a></h3>
+<p>The <code>docker ps -s</code> command displays two different on-disk-sizes for each container:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps -s</span>
+
+CONTAINER ID   IMAGE          COMMAND                  CREATED        STATUS       PORTS   NAMES        SIZE                                                                                      SIZE
+e90b8831a4b8   nginx          &quot;/bin/bash -c &#x27;mkdir &quot;   11 weeks ago   Up 4 hours           my_nginx     35.58 kB (virtual 109.2 MB)
+00c6131c5e30   telegraf:1.5   &quot;/entrypoint.sh&quot;         11 weeks ago   Up 11 weeks          my_telegraf  0 B (virtual 209.5 MB)
+</code></pre>
+<ul>
+<li>The &quot;size&quot; information shows the amount of data (on disk) that is used for the <em>writable</em> layer of each container</li>
+<li>The &quot;virtual size&quot; is the total amount of disk-space used for the read-only <em>image</em> data used by the container and the writable layer.</li>
+</ul>
+<p>For more information, refer to the <a href="https://docs.docker.com/storage/storagedriver/#container-size-on-disk">container size on disk</a> section.</p>
+<h3 id="filtering" tabindex="-1">Filtering <a class="header-anchor" href="#filtering" aria-hidden="true">🔗</a></h3>
+<p>The filtering flag (<code>-f</code> or <code>--filter</code>) format is a <code>key=value</code> pair. If there is more
+than one filter, then pass multiple flags (e.g. <code>--filter &quot;foo=bar&quot; --filter &quot;bif=baz&quot;</code>)</p>
+<p>The currently supported filters are:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Filter</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>id</code></td>
+<td style="text-align:left">Container's ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>name</code></td>
+<td style="text-align:left">Container's name</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>label</code></td>
+<td style="text-align:left">An arbitrary string representing either a key or a key-value pair. Expressed as <code>&lt;key&gt;</code> or <code>&lt;key&gt;=&lt;value&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>exited</code></td>
+<td style="text-align:left">An integer representing the container's exit code. Only useful with <code>--all</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>status</code></td>
+<td style="text-align:left">One of <code>created</code>, <code>restarting</code>, <code>running</code>, <code>removing</code>, <code>paused</code>, <code>exited</code>, or <code>dead</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ancestor</code></td>
+<td style="text-align:left">Filters containers which share a given image as an ancestor. Expressed as <code>&lt;image-name&gt;[:&lt;tag&gt;]</code>,  <code>&lt;image id&gt;</code>, or <code>&lt;image@digest&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>before</code> or <code>since</code></td>
+<td style="text-align:left">Filters containers created before or after a given container ID or name</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>volume</code></td>
+<td style="text-align:left">Filters running containers which have mounted a given volume or bind mount.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>network</code></td>
+<td style="text-align:left">Filters running containers connected to a given network.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>publish</code> or <code>expose</code></td>
+<td style="text-align:left">Filters containers which publish or expose a given port. Expressed as <code>&lt;port&gt;[/&lt;proto&gt;]</code> or <code>&lt;startport-endport&gt;/[&lt;proto&gt;]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>health</code></td>
+<td style="text-align:left">Filters containers based on their healthcheck status. One of <code>starting</code>, <code>healthy</code>, <code>unhealthy</code> or <code>none</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>isolation</code></td>
+<td style="text-align:left">Windows daemon only. One of <code>default</code>, <code>process</code>, or <code>hyperv</code>.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>is-task</code></td>
+<td style="text-align:left">Filters containers that are a &quot;task&quot; for a service. Boolean option (<code>true</code> or <code>false</code>)</td>
+</tr>
+</tbody>
+</table>
+<h4 id="label" tabindex="-1">label <a class="header-anchor" href="#label" aria-hidden="true">🔗</a></h4>
+<p>The <code>label</code> filter matches containers based on the presence of a <code>label</code> alone or a <code>label</code> and a
+value.</p>
+<p>The following filter matches containers with the <code>color</code> label regardless of its value.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter <span class="hljs-string">&quot;label=color&quot;</span></span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+673394ef1d4c        busybox             &quot;top&quot;               47 seconds ago      Up 45 seconds                           nostalgic_shockley
+d85756f57265        busybox             &quot;top&quot;               52 seconds ago      Up 51 seconds                           high_albattani
+</code></pre>
+<p>The following filter matches containers with the <code>color</code> label with the <code>blue</code> value.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter <span class="hljs-string">&quot;label=color=blue&quot;</span></span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+d85756f57265        busybox             &quot;top&quot;               About a minute ago   Up About a minute                       high_albattani
+</code></pre>
+<h4 id="name" tabindex="-1">name <a class="header-anchor" href="#name" aria-hidden="true">🔗</a></h4>
+<p>The <code>name</code> filter matches on all or part of a container's name.</p>
+<p>The following filter matches all containers with a name containing the <code>nostalgic_stallman</code> string.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter <span class="hljs-string">&quot;name=nostalgic_stallman&quot;</span></span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+9b6247364a03        busybox             &quot;top&quot;               2 minutes ago       Up 2 minutes                            nostalgic_stallman
+</code></pre>
+<p>You can also filter for a substring in a name as this shows:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter <span class="hljs-string">&quot;name=nostalgic&quot;</span></span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+715ebfcee040        busybox             &quot;top&quot;               3 seconds ago       Up 1 second                             i_am_nostalgic
+9b6247364a03        busybox             &quot;top&quot;               7 minutes ago       Up 7 minutes                            nostalgic_stallman
+673394ef1d4c        busybox             &quot;top&quot;               38 minutes ago      Up 38 minutes                           nostalgic_shockley
+</code></pre>
+<h4 id="exited" tabindex="-1">exited <a class="header-anchor" href="#exited" aria-hidden="true">🔗</a></h4>
+<p>The <code>exited</code> filter matches containers by exist status code. For example, to
+filter for containers that have exited successfully:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps -a --filter <span class="hljs-string">&#x27;exited=0&#x27;</span></span>
+
+CONTAINER ID        IMAGE             COMMAND                CREATED             STATUS                   PORTS                      NAMES
+ea09c3c82f6e        registry:latest   /srv/run.sh            2 weeks ago         Exited (0) 2 weeks ago   127.0.0.1:5000-&gt;5000/tcp   desperate_leakey
+106ea823fe4e        fedora:latest     /bin/sh -c &#x27;bash -l&#x27;   2 weeks ago         Exited (0) 2 weeks ago                              determined_albattani
+48ee228c9464        fedora:20         bash                   2 weeks ago         Exited (0) 2 weeks ago                              tender_torvalds
+</code></pre>
+<h4 id="filter-by-exit-signal" tabindex="-1">Filter by exit signal <a class="header-anchor" href="#filter-by-exit-signal" aria-hidden="true">🔗</a></h4>
+<p>You can use a filter to locate containers that exited with status of <code>137</code>
+meaning a <code>SIGKILL(9)</code> killed them.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps -a --filter <span class="hljs-string">&#x27;exited=137&#x27;</span></span>
+
+CONTAINER ID        IMAGE               COMMAND                CREATED             STATUS                       PORTS               NAMES
+b3e1c0ed5bfe        ubuntu:latest       &quot;sleep 1000&quot;           12 seconds ago      Exited (137) 5 seconds ago                       grave_kowalevski
+a2eb5558d669        redis:latest        &quot;/entrypoint.sh redi   2 hours ago         Exited (137) 2 hours ago                         sharp_lalande
+</code></pre>
+<p>Any of these events result in a <code>137</code> status:</p>
+<ul>
+<li>the <code>init</code> process of the container is killed manually</li>
+<li><code>docker kill</code> kills the container</li>
+<li>Docker daemon restarts which kills all running containers</li>
+</ul>
+<h4 id="status" tabindex="-1">status <a class="header-anchor" href="#status" aria-hidden="true">🔗</a></h4>
+<p>The <code>status</code> filter matches containers by status. You can filter using
+<code>created</code>, <code>restarting</code>, <code>running</code>, <code>removing</code>, <code>paused</code>, <code>exited</code> and <code>dead</code>. For example,
+to filter for <code>running</code> containers:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter status=running</span>
+
+CONTAINER ID        IMAGE                  COMMAND             CREATED             STATUS              PORTS               NAMES
+715ebfcee040        busybox                &quot;top&quot;               16 minutes ago      Up 16 minutes                           i_am_nostalgic
+d5c976d3c462        busybox                &quot;top&quot;               23 minutes ago      Up 23 minutes                           top
+9b6247364a03        busybox                &quot;top&quot;               24 minutes ago      Up 24 minutes                           nostalgic_stallman
+</code></pre>
+<p>To filter for <code>paused</code> containers:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter status=paused</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                      PORTS               NAMES
+673394ef1d4c        busybox             &quot;top&quot;               About an hour ago   Up About an hour (Paused)                       nostalgic_shockley
+</code></pre>
+<h4 id="ancestor" tabindex="-1">ancestor <a class="header-anchor" href="#ancestor" aria-hidden="true">🔗</a></h4>
+<p>The <code>ancestor</code> filter matches containers based on its image or a descendant of
+it. The filter supports the following image representation:</p>
+<ul>
+<li><code>image</code></li>
+<li><code>image:tag</code></li>
+<li><code>image:tag@digest</code></li>
+<li><code>short-id</code></li>
+<li><code>full-id</code></li>
+</ul>
+<p>If you don't specify a <code>tag</code>, the <code>latest</code> tag is used. For example, to filter
+for containers that use the latest <code>ubuntu</code> image:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter ancestor=ubuntu</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+919e1179bdb8        ubuntu-c1           &quot;top&quot;               About a minute ago   Up About a minute                       admiring_lovelace
+5d1e4a540723        ubuntu-c2           &quot;top&quot;               About a minute ago   Up About a minute                       admiring_sammet
+82a598284012        ubuntu              &quot;top&quot;               3 minutes ago        Up 3 minutes                            sleepy_bose
+bab2a34ba363        ubuntu              &quot;top&quot;               3 minutes ago        Up 3 minutes                            focused_yonath
+</code></pre>
+<p>Match containers based on the <code>ubuntu-c1</code> image which, in this case, is a child
+of <code>ubuntu</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter ancestor=ubuntu-c1</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+919e1179bdb8        ubuntu-c1           &quot;top&quot;               About a minute ago   Up About a minute                       admiring_lovelace
+</code></pre>
+<p>Match containers based on the <code>ubuntu</code> version <code>12.04.5</code> image:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter ancestor=ubuntu:12.04.5</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+82a598284012        ubuntu:12.04.5      &quot;top&quot;               3 minutes ago        Up 3 minutes                            sleepy_bose
+</code></pre>
+<p>The following matches containers based on the layer <code>d0e008c6cf02</code> or an image
+that have this layer in its layer stack.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter ancestor=d0e008c6cf02</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS               NAMES
+82a598284012        ubuntu:12.04.5      &quot;top&quot;               3 minutes ago        Up 3 minutes                            sleepy_bose
+</code></pre>
+<h4 id="create-time" tabindex="-1">Create time <a class="header-anchor" href="#create-time" aria-hidden="true">🔗</a></h4>
+<h5 id="before" tabindex="-1">before <a class="header-anchor" href="#before" aria-hidden="true">🔗</a></h5>
+<p>The <code>before</code> filter shows only containers created before the container with
+given id or name. For example, having these containers created:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
+
+CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
+9c3527ed70ce        busybox     &quot;top&quot;         14 seconds ago       Up 15 seconds                          desperate_dubinsky
+4aace5031105        busybox     &quot;top&quot;         48 seconds ago       Up 49 seconds                          focused_hamilton
+6e63f6ff38b0        busybox     &quot;top&quot;         About a minute ago   Up About a minute                      distracted_fermat
+</code></pre>
+<p>Filtering with <code>before</code> would give:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps -f before=9c3527ed70ce</span>
+
+CONTAINER ID        IMAGE       COMMAND       CREATED              STATUS              PORTS              NAMES
+4aace5031105        busybox     &quot;top&quot;         About a minute ago   Up About a minute                      focused_hamilton
+6e63f6ff38b0        busybox     &quot;top&quot;         About a minute ago   Up About a minute                      distracted_fermat
+</code></pre>
+<h5 id="since" tabindex="-1">since <a class="header-anchor" href="#since" aria-hidden="true">🔗</a></h5>
+<p>The <code>since</code> filter shows only containers created since the container with given
+id or name. For example, with the same containers as in <code>before</code> filter:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps -f since=6e63f6ff38b0</span>
+
+CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
+9c3527ed70ce        busybox     &quot;top&quot;         10 minutes ago      Up 10 minutes                           desperate_dubinsky
+4aace5031105        busybox     &quot;top&quot;         10 minutes ago      Up 10 minutes                           focused_hamilton
+</code></pre>
+<h4 id="volume" tabindex="-1">volume <a class="header-anchor" href="#volume" aria-hidden="true">🔗</a></h4>
+<p>The <code>volume</code> filter shows only containers that mount a specific volume or have
+a volume mounted in a specific path:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter volume=remote-volume --format <span class="hljs-string">&quot;table {{.ID}}\t{{.Mounts}}&quot;</span></span>
+
+CONTAINER ID        MOUNTS
+9c3527ed70ce        remote-volume
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps --filter volume=/data --format <span class="hljs-string">&quot;table {{.ID}}\t{{.Mounts}}&quot;</span></span>
+
+CONTAINER ID        MOUNTS
+9c3527ed70ce        remote-volume
+</code></pre>
+<h4 id="network" tabindex="-1">network <a class="header-anchor" href="#network" aria-hidden="true">🔗</a></h4>
+<p>The <code>network</code> filter shows only containers that are connected to a network with
+a given name or id.</p>
+<p>The following filter matches all containers that are connected to a network
+with a name containing <code>net1</code>.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --net=net1 --name=test1 ubuntu top</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --net=net2 --name=test2 ubuntu top</span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps --filter network=net1</span>
+
+CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
+9d4893ed80fe        ubuntu      &quot;top&quot;         10 minutes ago      Up 10 minutes                           test1
+</code></pre>
+<p>The network filter matches on both the network's name and id. The following
+example shows all containers that are attached to the <code>net1</code> network, using
+the network id as a filter;</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network inspect --format <span class="hljs-string">&quot;{{.ID}}&quot;</span> net1</span>
+
+8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps --filter network=8c0b4110ae930dbe26b258de9bc34a03f98056ed6f27f991d32919bfe401d7c5</span>
+
+CONTAINER ID        IMAGE       COMMAND       CREATED             STATUS              PORTS               NAMES
+9d4893ed80fe        ubuntu      &quot;top&quot;         10 minutes ago      Up 10 minutes                           test1
+</code></pre>
+<h4 id="publish-and-expose" tabindex="-1">publish and expose <a class="header-anchor" href="#publish-and-expose" aria-hidden="true">🔗</a></h4>
+<p>The <code>publish</code> and <code>expose</code> filters show only containers that have published or exposed port with a given port
+number, port range, and/or protocol. The default protocol is <code>tcp</code> when not specified.</p>
+<p>The following filter matches all containers that have published port of 80:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --publish=80 busybox top</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -d --expose=8080 busybox top</span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps -a</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                   NAMES
+9833437217a5        busybox             &quot;top&quot;               5 seconds ago       Up 4 seconds        8080/tcp                dreamy_mccarthy
+fc7e477723b7        busybox             &quot;top&quot;               50 seconds ago      Up 50 seconds       0.0.0.0:32768-&gt;80/tcp   admiring_roentgen
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps --filter publish=80</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED              STATUS              PORTS                   NAMES
+fc7e477723b7        busybox             &quot;top&quot;               About a minute ago   Up About a minute   0.0.0.0:32768-&gt;80/tcp   admiring_roentgen
+</code></pre>
+<p>The following filter matches all containers that have exposed TCP port in the range of <code>8000-8080</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter expose=8000-8080/tcp</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+9833437217a5        busybox             &quot;top&quot;               21 seconds ago      Up 19 seconds       8080/tcp            dreamy_mccarthy
+</code></pre>
+<p>The following filter matches all containers that have exposed UDP port <code>80</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter publish=80/udp</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+</code></pre>
+<h3 id="formatting" tabindex="-1">Formatting <a class="header-anchor" href="#formatting" aria-hidden="true">🔗</a></h3>
+<p>The formatting option (<code>--format</code>) pretty-prints container output using a Go
+template.</p>
+<p>Valid placeholders for the Go template are listed below:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Placeholder</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>.ID</code></td>
+<td style="text-align:left">Container ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Image</code></td>
+<td style="text-align:left">Image ID</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Command</code></td>
+<td style="text-align:left">Quoted command</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.CreatedAt</code></td>
+<td style="text-align:left">Time when the container was created.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.RunningFor</code></td>
+<td style="text-align:left">Elapsed time since the container was started.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Ports</code></td>
+<td style="text-align:left">Exposed ports.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.State</code></td>
+<td style="text-align:left">Container status (for example; &quot;created&quot;, &quot;running&quot;, &quot;exited&quot;).</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Status</code></td>
+<td style="text-align:left">Container status with details about duration and health-status.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Size</code></td>
+<td style="text-align:left">Container disk size.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Names</code></td>
+<td style="text-align:left">Container names.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Labels</code></td>
+<td style="text-align:left">All labels assigned to the container.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Label</code></td>
+<td style="text-align:left">Value of a specific label for this container. For example <code>'{{.Label &quot;com.docker.swarm.cpu&quot;}}'</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Mounts</code></td>
+<td style="text-align:left">Names of the volumes mounted in this container.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.Networks</code></td>
+<td style="text-align:left">Names of the networks attached to this container.</td>
+</tr>
+</tbody>
+</table>
+<p>When using the <code>--format</code> option, the <code>ps</code> command will either output the data
+exactly as the template declares or, when using the <code>table</code> directive, includes
+column headers as well.</p>
+<p>The following example uses a template without headers and outputs the <code>ID</code> and
+<code>Command</code> entries separated by a colon (<code>:</code>) for all running containers:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --format <span class="hljs-string">&quot;{{.ID}}: {{.Command}}&quot;</span></span>
+
+a87ecb4f327c: /bin/sh -c #(nop) MA
+01946d9d34d8: /bin/sh -c #(nop) MA
+c1d3b0166030: /bin/sh -c yum -y up
+41d50ecd2f57: /bin/sh -c #(nop) MA
+</code></pre>
+<p>To list all running containers with their labels in a table format you can use:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --format <span class="hljs-string">&quot;table {{.ID}}\t{{.Labels}}&quot;</span></span>
+
+CONTAINER ID        LABELS
+a87ecb4f327c        com.docker.swarm.node=ubuntu,com.docker.swarm.storage=ssd
+01946d9d34d8
+c1d3b0166030        com.docker.swarm.node=debian,com.docker.swarm.cpu=6
+41d50ecd2f57        com.docker.swarm.node=fedora,com.docker.swarm.cpu=3,com.docker.swarm.storage=ssd
+</code></pre>
+</body></html>

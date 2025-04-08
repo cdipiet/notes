@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.957" />
+        <title>net_dns_dig</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="net_dns_dig" tabindex="-1">net_dns_dig <a class="header-anchor" href="#net_dns_dig" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.957</p>
+<nav class="table-of-contents"><ol><li><a href="#dns">DNS </a></li><li><a href="#domain-information-groper">Domain Information Groper </a></li><li><a href="#esempi">Esempi </a></li><li><a href="#zone-transfer">Zone Transfer </a></li><li><a href="#esempio-di-analisi-del-dns">Esempio di analisi del DNS </a></li><li><a href="#record-dns">Record DNS </a><ol><li><a href="#resource-record-(rr)">Resource Record (RR) </a></li><li><a href="#tipi-https%3A%2F%2Ftoolbox.googleapps.com%2Fapps%2Fdig%2F-per-bi%3A-soa%2C-ns%2C-txt%2C-mx">Tipi https://toolbox.googleapps.com/apps/dig/ per BI: SOA, NS, TXT, MX </a><ol><li><a href="#a-record">A record </a></li><li><a href="#aaaa-record">AAAA Record </a></li><li><a href="#caa-record">CAA Record </a></li><li><a href="#cname-record">CNAME Record </a></li><li><a href="#mx-record">MX Record </a></li><li><a href="#ns-record">NS Record </a></li><li><a href="#ptr-record">PTR Record </a></li><li><a href="#soa-record">SOA Record </a></li><li><a href="#srv-record">SRV Record </a></li><li><a href="#txt-record">TXT Record </a></li></ol></li></ol></li><li><a href="#dns---iptables">DNS - iptables </a><ol><li><a href="#impostare-opendns-mediante-regole-di-redirezionamento-di-netfilter">Impostare OpenDNS mediante regole di redirezionamento di netfilter </a></li><li><a href="#load-balancing-utilizzando-server-primario-e-secondario-di-opendns">Load balancing utilizzando server primario e secondario di OpenDNS </a></li><li><a href="#trasformare-linux-in-un-router-wireless---nat">Trasformare Linux in un Router Wireless - NAT </a></li><li><a href="#ottenere-un-nome-dns-statico-con-https%3A%2F%2Fdyndns.it%2F">Ottenere un nome DNS statico con https://dyndns.it/ </a></li></ol></li></ol></nav><h1 id="dig" tabindex="-1">dig <a class="header-anchor" href="#dig" aria-hidden="true">🔗</a></h1>
+<h2 id="dns" tabindex="-1">DNS <a class="header-anchor" href="#dns" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Domain_Name_System">https://en.wikipedia.org/wiki/Domain_Name_System</a></li>
+<li><a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types">https://en.wikipedia.org/wiki/List_of_DNS_record_types</a></li>
+<li><a href="https://it.wikipedia.org/wiki/Tipi_di_record_DNS">https://it.wikipedia.org/wiki/Tipi_di_record_DNS</a></li>
+</ul>
+<h2 id="domain-information-groper" tabindex="-1">Domain Information Groper <a class="header-anchor" href="#domain-information-groper" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://it.wikipedia.org/wiki/Domain_Information_Groper">https://it.wikipedia.org/wiki/Domain_Information_Groper</a></li>
+<li><a href="https://toolbox.googleapps.com/apps/dig/">https://toolbox.googleapps.com/apps/dig/</a></li>
+<li><a href="https://github.com/ogham/dog">https://github.com/ogham/dog</a></li>
+<li><a href="https://linuxize.com/post/how-to-use-dig-command-to-query-dns-in-linux/">https://linuxize.com/post/how-to-use-dig-command-to-query-dns-in-linux/</a></li>
+</ul>
+<h2 id="esempi" tabindex="-1">Esempi <a class="header-anchor" href="#esempi" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">dig +short myip.opendns.com @resolver1.opendns.com
+dig &lt;host&gt;.it ANY +noall +answer
+</code></pre>
+<h2 id="zone-transfer" tabindex="-1">Zone Transfer <a class="header-anchor" href="#zone-transfer" aria-hidden="true">🔗</a></h2>
+<p>Use DIG to download zone data</p>
+<p>Zone data can downloaded programmatically from your Managed DNS account using BIND’s DIG tool</p>
+<ul>
+<li>To attempt a zone transfer from a Windows system
+– C:&gt; nslookup
+– &gt; server 10.142.147.1
+– &gt; ls -d <a href="http://yourdomain.com">yourdomain.com</a></li>
+<li>To attempt a zone transfer from a Unix system
+– $ dig @10.142.147.1 AFXR <a href="http://yourdomain.com">yourdomain.com</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># ns1.sunset.org è il server DNS primario</span>
+<span class="hljs-comment"># issplaylist.com è il dominio da scaricare</span>
+$ dig ns issplaylist.com
+$ dig @ns1.sunset.org issplaylist.com -t ANY
+$ dig @ns1.sunsetisp.com AXFR issplaylist.com <span class="hljs-comment"># Zone Transfer</span>
+
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Per prima cosa cerchiamo i server DNS del dominio che vogliamo analizzare:</span>
+$ dig +short ns zonetransfer.me
+nsztm1.digi.ninja.
+nsztm2.digi.ninja.
+<span class="hljs-comment"># Zone Transfer:</span>
+$ dig axfr zonetransfer.me @nsztm1.digi.ninja.
+</code></pre>
+<h2 id="esempio-di-analisi-del-dns" tabindex="-1">Esempio di analisi del DNS <a class="header-anchor" href="#esempio-di-analisi-del-dns" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">dig &lt;host&gt;.it ANY +noall +answer
+&lt;host&gt;.it. 600     IN MX 20 mail02.&lt;host&gt;.it.
+&lt;host&gt;.it. 600     IN MX 20 mail01.&lt;host&gt;.it.
+&lt;host&gt;.it. 600     IN MX 20 mail04.&lt;host&gt;.it.
+&lt;host&gt;.it. 600     IN MX 20 mail03.&lt;host&gt;.it.
+&lt;host&gt;.it. 3600 IN TXT <span class="hljs-string">&quot;MS=ms20159413&quot;</span>
+&lt;host&gt;.it. 3600 IN TXT <span class="hljs-string">&quot;v=spf1 ip4:85.159.198.130 ip4:85.159.198.132 ip4:95.110.240.0/24 ip4:109.70.245.0/24 ip4:109.70.242.0/24 ip4:212.31.255.96/28 a:gw1.bravosolution.com a:gw2.bravosolution.com ip4:85.159.192.139 ip4:85.159.192.140 ip4:85.159.192.141 ip4:85.159.192.142 -all&quot;</span>
+&lt;host&gt;.it. 3600 IN TXT <span class="hljs-string">&quot;apple-domain-verification=kwf73Jwz4B8I0GYG&quot;</span>
+&lt;host&gt;.it. 28800 IN SOA ns1.&lt;host&gt;.it. hostmaster.&lt;host&gt;.it. 2015023211 10800 3600 2419200 900
+&lt;host&gt;.it. 10562 IN NS dns9.interbusiness.it.
+&lt;host&gt;.it. 10562 IN NS ns2.&lt;host&gt;.it.
+&lt;host&gt;.it. 10562 IN NS ns1.&lt;host&gt;.it.
+
+<span class="hljs-comment"># Per scoprire il server autoritativo:</span>
+$ whois &lt;host&gt;.it
+...
+....
+Nameservers
+  dns9.interbusiness.it
+  ns1.&lt;host&gt;.it
+  ns2.&lt;host&gt;.it
+$ host ns1.&lt;host&gt;.it
+ns1.&lt;host&gt;.it has address 85.159.198.145
+
+</code></pre>
+<h2 id="record-dns" tabindex="-1">Record DNS <a class="header-anchor" href="#record-dns" aria-hidden="true">🔗</a></h2>
+<h3 id="resource-record-(rr)" tabindex="-1">Resource Record (RR) <a class="header-anchor" href="#resource-record-(rr)" aria-hidden="true">🔗</a></h3>
+<p>Un record di risorsa è una descrizione testuale di una riga che definisce una particolare risorsa.</p>
+<table class="table"><thead>
+<tr>
+<th>Field</th>
+<th>Description</th>
+<th>Length (octets)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NAME</td>
+<td>Name of the node to which this record pertains</td>
+<td>Variable</td>
+</tr>
+<tr>
+<td>TTL</td>
+<td>Count of seconds that the RR stays valid (The maximum is (2^31)−1, (about 68 years)</td>
+<td>4</td>
+</tr>
+<tr>
+<td>CLASS</td>
+<td>Class code</td>
+<td>2</td>
+</tr>
+<tr>
+<td>TYPE</td>
+<td>Type of RR in numeric form (e.g., 15 for MX RRs)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>RDLENGTH</td>
+<td>Length of RDATA field (specified in octets)</td>
+<td>2</td>
+</tr>
+<tr>
+<td>RDATA</td>
+<td>Additional RR-specific data</td>
+<td>Variable, as per RDLENGTH</td>
+</tr>
+</tbody>
+</table>
+<pre><code>name ttl class type data
+</code></pre>
+<ul>
+<li>Name: Il nome dell’host per il record.</li>
+<li>TTL: Time to live in seconds (tempo di vita in secondi).
+È la quantità di tempo in cui il record può essere memorizzato nella cache.
+Un TTL di 3600 indica che il record si aggiornerà ogni ora.
+Un TTL di 86400 significa che ci vorrà un giorno per aggiornare le modifiche.
+Il TTL è un valore in un record DNS che determina il numero di secondi prima che le successive modifiche al record entrino in vigore.</li>
+<li>Class: Un valore che descrive la famiglia di protocolli utilizzati. Il più delle volte è impostato su <code>IN</code>,
+che significa “internet protocol”.</li>
+<li>Type: Identifica il tipo di resource record, che è l’abbreviazione del tipo di dati memorizzati nel campo dati successivo.
+Tra gli esempi ci sono, tra gli altri, A (address) e MX (mail exchange).</li>
+<li>Data: La quantità di dati necessaria per il particolare tipo di record.
+Questa parte può contenere uno o più elementi separati da spazi bianchi.</li>
+</ul>
+<h3 id="tipi-https%3A%2F%2Ftoolbox.googleapps.com%2Fapps%2Fdig%2F-per-bi%3A-soa%2C-ns%2C-txt%2C-mx" tabindex="-1">Tipi <a href="https://toolbox.googleapps.com/apps/dig/">https://toolbox.googleapps.com/apps/dig/</a> per BI: SOA, NS, TXT, MX <a class="header-anchor" href="#tipi-https%3A%2F%2Ftoolbox.googleapps.com%2Fapps%2Fdig%2F-per-bi%3A-soa%2C-ns%2C-txt%2C-mx" aria-hidden="true">🔗</a></h3>
+<pre><code>A AAAA CAA CNAME MX NS PTR SOA SRV TXT
+</code></pre>
+<p><host>.it</p>
+<pre><code>A AAAA CAA CNAME MX NS PTR SOA SRV TXT
+                 X  X      X       X
+</code></pre>
+<p>www.<host>.it</p>
+<pre><code>A AAAA CAA CNAME MX NS PTR SOA SRV TXT
+X
+</code></pre>
+<h4 id="a-record" tabindex="-1">A record <a class="header-anchor" href="#a-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types#A">https://en.wikipedia.org/wiki/List_of_DNS_record_types#A</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p>restituisce un indirizzo IPv4 a 32 bit, normalmente utilizzato per collegare un nome host al suo indirizzo IP.</p>
+<p>Il record <code>A</code>, o Address record, è uno dei tipi di record più usati.
+Esso consente di mappare un nome di dominio su un indirizzo IP.
+Quando si aggiunge un <code>A</code> record, il nome di dominio viene automaticamente aggiunto al nome che inserisci.
+Quindi, ad esempio, se vuoi creare un <code>A</code> record per <a href="http://www.iltuodominio.com">www.iltuodominio.com</a>,
+è sufficiente aggiungere <code>www</code> per il valore del nome.
+La parte <em><a href="http://yourdomain.com">yourdomain.com</a></em> viene automaticamente assunta. Esempio:</p>
+<pre><code>www 86400 IN A 123.456.78.90
+</code></pre>
+<pre><code class="language-bash">dig google.com  A +noall +answer
+google.com.  63 IN A 142.250.180.174
+</code></pre>
+<h4 id="aaaa-record" tabindex="-1">AAAA Record <a class="header-anchor" href="#aaaa-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/AAAA_record">https://en.wikipedia.org/wiki/AAAA_record</a></li>
+<li><a href="https://tools.ietf.org/html/rfc3596">https://tools.ietf.org/html/rfc3596</a></li>
+</ul>
+<p>restituisce un indirizzo IPv6 a 128 bit, normalmente utilizzato per collegare un nome host al suo indirizzo IPv6.</p>
+<pre><code>$ dig AAAA ns1.dnsimple.com
+ns1.dnsimple.com. 1795 IN AAAA 2400:cb00:2049:1::a29f:1804
+</code></pre>
+<pre><code class="language-bash">dig ns1.dnsimple.com AAAA +noall +answer
+ns1.dnsimple.com. 3562 IN AAAA 2400:cb00:2049:1::a29f:1804
+</code></pre>
+<h4 id="caa-record" tabindex="-1">CAA Record <a class="header-anchor" href="#caa-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/DNS_Certification_Authority_Authorization">https://en.wikipedia.org/wiki/DNS_Certification_Authority_Authorization</a></li>
+</ul>
+<p>DNS Certification Authority Authorization (CAA)</p>
+<p>In un record CAA viene specificata l’autorità di certificazione (CA, Certification Authority)
+autorizzata a emettere certificati per un determinato dominio.
+Il record CAA (Certification Authority Authorization)  garantisce quindi che solo le autorità di certificazione dichiarate
+nel record possono rilasciare certificati validi per quel dominio.</p>
+<p>To indicate that only the certificate authority identified by <a href="http://ca.example.net">ca.example.net</a> is authorized to issue certificates for <a href="http://example.com">example.com</a> and all subdomains</p>
+<pre><code>example.com.  IN  CAA 0 issue &quot;ca.example.net&quot;
+</code></pre>
+<p>To disallow any certificate issuance</p>
+<pre><code>example.com.  IN  CAA  0 issue &quot;;&quot;
+</code></pre>
+<p>To indicate that certificate authorities should report invalid certificate requests to an email address and a Real-time Inter-network Defense endpoint:</p>
+<pre><code>example.com.  IN  CAA 0 iodef &quot;mailto:security@example.com&quot;
+example.com.  IN  CAA 0 iodef &quot;http://iodef.example.com/&quot;
+</code></pre>
+<pre><code class="language-bash">dig google.com  CAA +noall +answer
+google.com.  86400 IN CAA 0 issue <span class="hljs-string">&quot;pki.goog&quot;</span>
+</code></pre>
+<h4 id="cname-record" tabindex="-1">CNAME Record <a class="header-anchor" href="#cname-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/CNAME_record">https://en.wikipedia.org/wiki/CNAME_record</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p><code>CNAME</code> sta per canonical name (nome canonico).
+Un record CNAME viene utilizzato per reindirizzare automaticamente da un nome di dominio ad un altro.
+Ad esempio, se desideri che <a href="http://store.iltuodominio.com">store.iltuodominio.com</a> reindirizzi automaticamente al tuo negozio eBay,
+puoi aggiungere un CNAME record per ottenere questo risultato. Per esempio:</p>
+<pre><code>store.iltuodominio.com 86400 IN CNAME iltuostore.ebay.com
+
+NAME                    TYPE   VALUE
+--------------------------------------------------
+bar.example.com.        CNAME  foo.example.com.
+foo.example.com.        A      192.0.2.23
+</code></pre>
+<p>when an A record lookup for <a href="http://bar.example.com">bar.example.com</a> is carried out, the resolver will see a CNAME record
+and restart the checking at <a href="http://foo.example.com">foo.example.com</a> and will then return 192.0.2.23.</p>
+<p>Permette di collegare un nome DNS ad un altro. La risoluzione continuerà con il nuovo nome indicato dal record CNAME.
+Questa funzione è molto utile quando, ad esempio, sullo stesso server sono disponibili più servizi come FTP, HTTP, ecc.
+operanti su porte differenti. Ciascun servizio potrà avere il suo riferimento DNS (ad esempio <a href="http://ftp.example.com">ftp.example.com</a>.
+e <a href="http://www.example.com">www.example.com</a>.). È molto utile anche quando sullo stesso server ci sono più istanze web con differenti nomi
+ma utilizzando lo stesso indirizzo.</p>
+<pre><code class="language-bash">dig mail.google.com CNAME +noall +answer
+mail.google.com. 435437 IN CNAME googlemail.l.google.com.
+</code></pre>
+<h4 id="mx-record" tabindex="-1">MX Record <a class="header-anchor" href="#mx-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://it.wikipedia.org/wiki/MX_record">https://it.wikipedia.org/wiki/MX_record</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p>Collega un nome di dominio ad una lista di server di posta autorevoli per quel dominio.
+I record indicano anche la preferenza di un server rispetto ad un altro.</p>
+<p><code>MX</code> è l’acronimo di Mail Exchange. Un record MX punta al server di posta che dovrebbe essere usato per consegnare
+la posta per un dominio, utilizzando l’SMTP (simple mail transfer protocol).
+I record MX puntano sempre a un dominio, non a un indirizzo IP.
+Se un dominio non ha un record MX, un server di invio cercherà di consegnare la posta al record A del dominio.</p>
+<pre><code>Domain   TTL   Class    Type  Priority      Host
+example.com. 1936  IN    MX  10            onemail.example.com.
+example.com. 1936  IN   MX  10            twomail.example.com.
+
+86400 IN MX 10 mail.dominio.com
+</code></pre>
+<p>Come puoi notare, un record MX non elenca un nome host all’inizio. Questo perché si applica a tutta la zona.
+Il 10 è un numero extra che imposta la priorità di questo record se sono definiti più server di posta.
+I numeri inferiori hanno una priorità più alta.</p>
+<pre><code class="language-bash">dig google.com MX +noall +answer
+google.com.  600 IN MX 50 alt4.aspmx.l.google.com.
+google.com.  600 IN MX 40 alt3.aspmx.l.google.com.
+google.com.  600 IN MX 20 alt1.aspmx.l.google.com.
+google.com.  600 IN MX 30 alt2.aspmx.l.google.com.
+google.com.  600 IN MX 10 aspmx.l.google.com.
+</code></pre>
+<h4 id="ns-record" tabindex="-1">NS Record <a class="header-anchor" href="#ns-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/List_of_DNS_record_types#NS">https://en.wikipedia.org/wiki/List_of_DNS_record_types#NS</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p>Delegates a DNS zone to use the given authoritative name servers</p>
+<p>Delega una zona DNS ad essere gestita da un server DNS autorevole per quel nome di dominio.
+Come accennato in precedenza, un record <code>NS</code> indica quale server è responsabile dell’elaborazione delle richieste
+per un dominio. Se cambi l’hosting con un provider diverso da quello con cui hai registrato il dominio,
+è devi aggiornare i record NS.</p>
+<pre><code>Esempio: iltuodominio.com 86400 IN NS ns1.iltuoprovider.com
+</code></pre>
+<pre><code class="language-bash">dig google.com NS +noall +answer
+google.com.  19595 IN NS ns2.google.com.
+google.com.  19595 IN NS ns4.google.com.
+google.com.  19595 IN NS ns3.google.com.
+google.com.  19595 IN NS ns1.google.com.
+</code></pre>
+<h4 id="ptr-record" tabindex="-1">PTR Record <a class="header-anchor" href="#ptr-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Reverse_DNS_lookup">https://en.wikipedia.org/wiki/Reverse_DNS_lookup</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p>Un record PTR (pointer), detto anche record DNS inverso, risolve un indirizzo IP a un nome di dominio.
+Questo è esattamente l’opposto di ciò che fa un record A.
+I record PTR sono usati principalmente per verificare se il nome di un server è effettivamente associato all’indirizzo IP
+dal quale è stata avviata la connessione. I record PTR sono spesso utilizzati per i server di posta in uscita,
+perché molti provider di posta rifiutano o contrassegnano come spam i messaggi ricevuti da server che non hanno
+un record PTR valido.</p>
+<h4 id="soa-record" tabindex="-1">SOA Record <a class="header-anchor" href="#soa-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/SOA_record">https://en.wikipedia.org/wiki/SOA_record</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p>A Start of Authority record (abbreviated as SOA record) is a type of resource record in the Domain Name System (DNS) containing administrative information about the zone, especially regarding zone transfers. The SOA record format is specified in RFC 1035</p>
+<p>Restituisce informazioni autorevoli sulla zona DNS, incluso il server DNS principale,
+l'e-mail dell'amministratore, il numero seriale del dominio (utile per sapere se i dati della zona sono stati variati)
+e diversi timer che regolano la frequenza di trasferimento e la durata di validità dei record.</p>
+<pre><code>   TTL 86400                ; time to live
+   IN                       ; classe internet
+        SOA                 ; abbreviation for Start of Authority
+        ns.icann.org.      ; MNAME Primary master name server for this zone
+        noc.dns.icann.org. ; RNAME Email address of the administrator responsible for this zone. 
+        2020080302  ;Serial Serial number for this zone.
+        7200        ;Refresh number of seconds after which secondary name servers should query the master for the SOA record, to detect zone changes.
+        3600        ;Retry number of seconds after which secondary name servers should retry to request the serial number from the master if the master does not respond. 
+        1209600     ;Expire number of seconds after which secondary name servers should stop answering request for this zone if the master does not respond. 
+        3600        ;Negative response caching TTL Time to live for purposes of negative caching.
+</code></pre>
+<pre><code class="language-bash">dig google.com SOA +noall +answer
+google.com.  8 IN SOA ns1.google.com. dns-admin.google.com. 378362259 900 900 1800 60
+</code></pre>
+<h4 id="srv-record" tabindex="-1">SRV Record <a class="header-anchor" href="#srv-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/SRV_record">https://en.wikipedia.org/wiki/SRV_record</a></li>
+<li><a href="https://tools.ietf.org/html/rfc2782">https://tools.ietf.org/html/rfc2782</a></li>
+</ul>
+<p>Un servizio generalizzato di ricerca di servizi molto utile per nuovi protocolli
+per non dover aggiungere tipi di record specializzati come ad esempio il record MX.</p>
+<pre><code>_service._proto.name. TTL class SRV priority weight port target.
+_sip._tcp.example.com. 86400 IN SRV 0 5 5060 sipserver.example.com.
+</code></pre>
+<h4 id="txt-record" tabindex="-1">TXT Record <a class="header-anchor" href="#txt-record" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/TXT_record">https://en.wikipedia.org/wiki/TXT_record</a></li>
+<li><a href="https://tools.ietf.org/html/rfc1035">https://tools.ietf.org/html/rfc1035</a></li>
+</ul>
+<p>Era stato pensato per aggiungere commenti leggibili ad un record DNS. Dall'inizio degli anni novanta, invece,
+è utilizzato per trasferire informazioni di sicurezza in accordo alla RFC 1464
+Un TXT record ti consente di aggiungere dati di testo nei tuoi record DNS.
+Un uso comune è la verifica della proprietà.
+Ad esempio, se desideri utilizzare Google Webmaster Tools, un modo per dimostrare che sei il proprietario del dominio
+è quello di aggiungere un record TXT contenente una stringa generata in modo casuale fornita da Google.
+Google controlla poi se il record esiste per confermare che il dominio ti appartiene.</p>
+<pre><code>iltuodominio.com 86400 IN TXT &quot;v=spf1 ip4:192.0.2.0/24 ip4:198.51.100.123 ip6:2620:0:860::/46 a -all&quot;
+</code></pre>
+<pre><code class="language-bash">dig google.com TXT +noall +answer
+google.com.  3600 IN TXT <span class="hljs-string">&quot;facebook-domain-verification=22rm551cu4k0ab0bxsw536tlds4h95&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;v=spf1 include:_spf.google.com ~all&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;google-site-verification=wD8N7i1JTNTkezJ49swvWW48f8_9xveREV4oB-0Hf5o&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;docusign=1b0a6754-49b1-4db5-8540-d2c12664b289&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;docusign=05958488-4752-4ef2-95eb-aa7ba8a3bd0e&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;apple-domain-verification=30afIBcvSuDV2PLX&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;google-site-verification=TV9-DBe4R80X4v0M4U_bd_J9cpOJM0nikft0jAgjmsQ&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;globalsign-smime-dv=CDYX+XFHUw2wml6/Gb8+59BsH31KzUr6c1l2BPvqKX8=&quot;</span>
+google.com.  3600 IN TXT <span class="hljs-string">&quot;MS=E4A68B9AB2BB9670BCE15412F62916164C0B20BB&quot;</span>
+</code></pre>
+<h2 id="dns---iptables" tabindex="-1">DNS - iptables <a class="header-anchor" href="#dns---iptables" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">pamac install <span class="hljs-built_in">bind</span> <span class="hljs-comment"># contiene dig in manjaro</span>
+dig dyn.com any
+nslookup www.google.it
+host www.google.it
+dig www.google.it
+dig +trace www.google.it
+<span class="hljs-built_in">cat</span> /etc/resolv.conf
+dhclient <span class="hljs-comment"># per richiedere un indirizzo ip, il gateway ed il server DNS</span>
+</code></pre>
+<h3 id="impostare-opendns-mediante-regole-di-redirezionamento-di-netfilter" tabindex="-1">Impostare OpenDNS mediante regole di redirezionamento di netfilter <a class="header-anchor" href="#impostare-opendns-mediante-regole-di-redirezionamento-di-netfilter" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">iptables -I PREROUTING -t nat -p udp --dport 53 -j DNAT --to-destination 208.67.22.222:53
+iptables -I PREROUTING -t nat -p tcp --dport 53 -j DNAT --to-destination 208.67.22.222:53
+</code></pre>
+<p>In questo modo anche se un client si trova impostato DNS diversi, le richieste verranno sempre e comunque inoltrate al server primario di OpenDNS.</p>
+<h3 id="load-balancing-utilizzando-server-primario-e-secondario-di-opendns" tabindex="-1">Load balancing utilizzando server primario e secondario di OpenDNS <a class="header-anchor" href="#load-balancing-utilizzando-server-primario-e-secondario-di-opendns" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">iptables -I PREROUTING -t nat -p udp --dport 53 -j DNAT --to-destination 208.67.22.222-208.67.22.220:53
+iptables -I PREROUTING -t nat -p tcp --dport 53 -j DNAT --to-destination 208.67.22.222-208.67.22.220:53
+</code></pre>
+<h3 id="trasformare-linux-in-un-router-wireless---nat" tabindex="-1">Trasformare Linux in un Router Wireless - NAT <a class="header-anchor" href="#trasformare-linux-in-un-router-wireless---nat" aria-hidden="true">🔗</a></h3>
+<p><a href="../kernel/sysctl.html">sysctl</a></p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> sysctl -w net.ipv4.ip_forward=1
+</code></pre>
+<p>oppure aggiungere ad /etc/sysctl.d/99-sysctl.conf la riga &quot;net.ipv4.ip_forward=1&quot;</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/99-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -d 0.0.0.0/0 -j MASQUERADE
+</code></pre>
+<h3 id="ottenere-un-nome-dns-statico-con-https%3A%2F%2Fdyndns.it%2F" tabindex="-1">Ottenere un nome DNS statico con <a href="https://dyndns.it/">https://dyndns.it/</a> <a class="header-anchor" href="#ottenere-un-nome-dns-statico-con-https%3A%2F%2Fdyndns.it%2F" aria-hidden="true">🔗</a></h3>
+<p><a href="https://dyndns.it/guide/configurazione-dyndns-it-ddclient-debian/">https://dyndns.it/guide/configurazione-dyndns-it-ddclient-debian/</a></p>
+<p>Se si ha un indirizzo IP dinamico mediante un servizio di DNS statico è possibile risolvere il problema, permettendo così l'accesso al nostro pc mediante un nome DNS statico.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install ddclient
+</code></pre>
+<p>Parametri di configurazione:</p>
+<pre><code>Tipo di dyndns              Other
+Protocollo                  dyndns2
+Sito per l’aggiornamento    dyndns.it
+Username, Password e NomeHost da aggiornare
+    myusername
+    mypassword
+    myhost.homepc.it
+
+# /etc/ddclient.conf
+protocol=dyndns2
+use=web, web=checkip.dyndns.it
+server=update.dyndns.it
+login=INSERIRE_IL_PROPRIO_USERNAME
+password='INSERIRE_LA_PROPRIA_PASSWORD'
+INSERIRE_IL_NOME_HOST
+</code></pre>
+<pre><code class="language-bash">ddclient -debug
+/etc/init.d/ddclient restart
+</code></pre>
+</body></html>

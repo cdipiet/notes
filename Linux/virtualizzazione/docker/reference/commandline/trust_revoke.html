@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.694" />
+        <title>trust_revoke</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="trust_revoke" tabindex="-1">trust_revoke <a class="header-anchor" href="#trust_revoke" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.694</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22trust-revoke%22description%3A-%22the-revoke-command-description-and-usage%22keywords%3A-%22revoke%2C-notary%2C-trust%22">title: &quot;trust revoke&quot;description: &quot;The revoke command description and usage&quot;keywords: &quot;revoke, notary, trust&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#revoke-signatures-from-a-signed-tag">Revoke signatures from a signed tag </a></li><li><a href="#revoke-signatures-on-all-tags-in-a-repository">Revoke signatures on all tags in a repository </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22trust-revoke%22description%3A-%22the-revoke-command-description-and-usage%22keywords%3A-%22revoke%2C-notary%2C-trust%22" tabindex="-1">title: &quot;trust revoke&quot;
+description: &quot;The revoke command description and usage&quot;
+keywords: &quot;revoke, notary, trust&quot; <a class="header-anchor" href="#title%3A-%22trust-revoke%22description%3A-%22the-revoke-command-description-and-usage%22keywords%3A-%22revoke%2C-notary%2C-trust%22" aria-hidden="true">🔗</a></h2>
+<h1 id="trust-revoke" tabindex="-1">trust revoke <a class="header-anchor" href="#trust-revoke" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker trust revoke [OPTIONS] IMAGE[:TAG]
+
+Remove trust for an image
+
+Options:
+<span class="hljs-code">      --help   Print usage
+  -y, --yes    Do not prompt for confirmation
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p><code>docker trust revoke</code> removes signatures from tags in signed repositories.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="revoke-signatures-from-a-signed-tag" tabindex="-1">Revoke signatures from a signed tag <a class="header-anchor" href="#revoke-signatures-from-a-signed-tag" aria-hidden="true">🔗</a></h3>
+<p>Here's an example of a repo with two signed tags:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker trust inspect --pretty example/trust-demo</span>
+SIGNED TAG          DIGEST                                                              SIGNERS
+red                 852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943    alice
+blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
+
+List of signers and their keys for example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys for example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre>
+<p>When <code>alice</code>, one of the signers, runs <code>docker trust revoke</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker trust revoke example/trust-demo:red</span>
+Enter passphrase for delegation key with ID 27d42a8:
+Successfully deleted signature for example/trust-demo:red
+</code></pre>
+<p>After revocation, the tag is removed from the list of released tags:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker trust inspect --pretty example/trust-demo</span>
+SIGNED TAG          DIGEST                                                              SIGNERS
+blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
+
+List of signers and their keys for example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys for example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre>
+<h3 id="revoke-signatures-on-all-tags-in-a-repository" tabindex="-1">Revoke signatures on all tags in a repository <a class="header-anchor" href="#revoke-signatures-on-all-tags-in-a-repository" aria-hidden="true">🔗</a></h3>
+<p>When no tag is specified, <code>docker trust</code> revokes all signatures that you have a signing key for.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker trust inspect --pretty example/trust-demo</span>
+SIGNED TAG          DIGEST                                                              SIGNERS
+red                 852cc04935f930a857b630edc4ed6131e91b22073bcc216698842e44f64d2943    alice
+blue                f1c38dbaeeb473c36716f6494d803fbfbe9d8a76916f7c0093f227821e378197    alice, bob
+
+List of signers and their keys for example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys for example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre>
+<p>When <code>alice</code>, one of the signers, runs <code>docker trust revoke</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker trust revoke example/trust-demo</span>
+Please confirm you would like to delete all signature data for example/trust-demo? [y/N] y
+Enter passphrase for delegation key with ID 27d42a8:
+Successfully deleted signature for example/trust-demo
+</code></pre>
+<p>All tags that have <code>alice</code>'s signature on them are removed from the list of released tags:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker trust inspect --pretty example/trust-demo</span>
+
+No signatures for example/trust-demo
+
+
+List of signers and their keys for example/trust-demo:
+
+SIGNER              KEYS
+alice               05e87edcaecb
+bob                 5600f5ab76a2
+
+Administrative keys for example/trust-demo:
+Repository Key: ecc457614c9fc399da523a5f4e24fe306a0a6ee1cc79a10e4555b3c6ab02f71e
+Root Key:       3cb2228f6561e58f46dbc4cda4fcaff9d5ef22e865a94636f82450d1d2234949
+</code></pre>
+</body></html>

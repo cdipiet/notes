@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.438" />
+        <title>dockerd</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="dockerd" tabindex="-1">dockerd <a class="header-anchor" href="#dockerd" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.438</p>
+<nav class="table-of-contents"><ol><li><a href="#description">Description </a><ol><li><a href="#environment-variables">Environment variables </a></li></ol></li><li><a href="#examples">Examples </a><ol><li><a href="#daemon-socket-option">Daemon socket option </a><ol><li><a href="#bind-docker-to-another-host%2Fport-or-a-unix-socket">Bind Docker to another host/port or a Unix socket </a></li></ol></li><li><a href="#daemon-storage-driver">Daemon storage-driver </a></li><li><a href="#options-per-storage-driver">Options per storage driver </a><ol><li><a href="#devicemapper-options">Devicemapper options </a><ol><li><a href="#dm.thinpooldev">dm.thinpooldev </a><ol><li><a href="#example%3A">Example: </a></li></ol></li><li><a href="#dm.directlvm_device">dm.directlvm_device </a><ol><li><a href="#example%3A-1">Example: </a></li></ol></li><li><a href="#dm.thinp_percent">dm.thinp_percent </a><ol><li><a href="#example%3A-2">Example: </a></li></ol></li><li><a href="#dm.thinp_metapercent">dm.thinp_metapercent </a><ol><li><a href="#example%3A-3">Example: </a></li></ol></li><li><a href="#dm.thinp_autoextend_threshold">dm.thinp_autoextend_threshold </a><ol><li><a href="#example%3A-4">Example: </a></li></ol></li><li><a href="#dm.thinp_autoextend_percent">dm.thinp_autoextend_percent </a><ol><li><a href="#example%3A-5">Example: </a></li></ol></li><li><a href="#dm.basesize">dm.basesize </a><ol><li><a href="#examples-1">Examples </a></li></ol></li><li><a href="#dm.loopdatasize">dm.loopdatasize </a><ol><li><a href="#example">Example </a></li></ol></li><li><a href="#dm.loopmetadatasize">dm.loopmetadatasize </a><ol><li><a href="#example-1">Example </a></li></ol></li><li><a href="#dm.fs">dm.fs </a><ol><li><a href="#example-2">Example </a></li></ol></li><li><a href="#dm.mkfsarg">dm.mkfsarg </a><ol><li><a href="#example-3">Example </a></li></ol></li><li><a href="#dm.mountopt">dm.mountopt </a><ol><li><a href="#example-4">Example </a></li></ol></li><li><a href="#dm.datadev">dm.datadev </a><ol><li><a href="#example-5">Example </a></li></ol></li><li><a href="#dm.metadatadev">dm.metadatadev </a><ol><li><a href="#example-6">Example </a></li></ol></li><li><a href="#dm.blocksize">dm.blocksize </a><ol><li><a href="#example-7">Example </a></li></ol></li><li><a href="#dm.blkdiscard">dm.blkdiscard </a><ol><li><a href="#examples-2">Examples </a></li></ol></li><li><a href="#dm.override_udev_sync_check">dm.override_udev_sync_check </a></li><li><a href="#dm.use_deferred_removal">dm.use_deferred_removal </a><ol><li><a href="#example-8">Example </a></li></ol></li><li><a href="#dm.use_deferred_deletion">dm.use_deferred_deletion </a></li><li><a href="#dm.min_free_space">dm.min_free_space </a><ol><li><a href="#example-9">Example </a></li></ol></li><li><a href="#dm.xfs_nospace_max_retries">dm.xfs_nospace_max_retries </a><ol><li><a href="#example-10">Example </a></li></ol></li><li><a href="#dm.libdm_log_level">dm.libdm_log_level </a><ol><li><a href="#example-11">Example </a></li></ol></li></ol></li><li><a href="#zfs-options">ZFS options </a><ol><li><a href="#zfs.fsname">zfs.fsname </a><ol><li><a href="#example-12">Example </a></li></ol></li></ol></li><li><a href="#btrfs-options">Btrfs options </a><ol><li><a href="#btrfs.min_space">btrfs.min_space </a><ol><li><a href="#example-13">Example </a></li></ol></li></ol></li><li><a href="#overlay2-options">Overlay2 options </a><ol><li><a href="#overlay2.override_kernel_check">overlay2.override_kernel_check </a></li><li><a href="#overlay2.size">overlay2.size </a><ol><li><a href="#example-14">Example </a></li></ol></li></ol></li><li><a href="#windowsfilter-options">Windowsfilter options </a><ol><li><a href="#size">size </a><ol><li><a href="#example-15">Example </a></li></ol></li></ol></li><li><a href="#lcow-(linux-containers-on-windows)-options">LCOW (Linux Containers on Windows) options </a><ol><li><a href="#lcow.globalmode">lcow.globalmode </a><ol><li><a href="#example-16">Example </a></li></ol></li><li><a href="#lcow.kirdpath">lcow.kirdpath </a><ol><li><a href="#example-17">Example </a></li></ol></li><li><a href="#lcow.kernel">lcow.kernel </a><ol><li><a href="#example-18">Example </a></li></ol></li><li><a href="#lcow.initrd">lcow.initrd </a><ol><li><a href="#example-19">Example </a></li></ol></li><li><a href="#lcow.bootparameters">lcow.bootparameters </a><ol><li><a href="#example-20">Example </a></li></ol></li><li><a href="#lcow.vhdx">lcow.vhdx </a><ol><li><a href="#example-21">Example </a></li></ol></li><li><a href="#lcow.timeout">lcow.timeout </a><ol><li><a href="#example-22">Example </a></li></ol></li><li><a href="#lcow.sandboxsize">lcow.sandboxsize </a><ol><li><a href="#example-23">Example </a></li></ol></li></ol></li></ol></li><li><a href="#docker-runtime-execution-options">Docker runtime execution options </a><ol><li><a href="#options-for-the-runtime">Options for the runtime </a></li></ol></li><li><a href="#daemon-dns-options">Daemon DNS options </a></li><li><a href="#allow-push-of-nondistributable-artifacts">Allow push of nondistributable artifacts </a></li><li><a href="#insecure-registries">Insecure registries </a><ol><li><a href="#legacy-registries">Legacy Registries </a></li></ol></li><li><a href="#running-a-docker-daemon-behind-an-https_proxy">Running a Docker daemon behind an HTTPS_PROXY </a></li><li><a href="#default-ulimit-settings">Default ulimit settings </a></li><li><a href="#node-discovery">Node discovery </a></li><li><a href="#access-authorization">Access authorization </a></li><li><a href="#daemon-user-namespace-options">Daemon user namespace options </a></li><li><a href="#miscellaneous-options">Miscellaneous options </a><ol><li><a href="#default-cgroup-parent">Default cgroup parent </a></li><li><a href="#daemon-metrics">Daemon metrics </a></li><li><a href="#node-generic-resources">Node Generic Resources </a></li></ol></li><li><a href="#daemon-configuration-file">Daemon configuration file </a><ol><li><a href="#on-linux">On Linux </a></li><li><a href="#on-windows">On Windows </a></li><li><a href="#feature-options">Feature options </a></li><li><a href="#configuration-reload-behavior">Configuration reload behavior </a></li></ol></li><li><a href="#run-multiple-daemons">Run multiple daemons </a></li></ol></li></ol></nav><hr>
+<p>title: &quot;dockerd&quot;
+description: &quot;The daemon command description and usage&quot;
+keywords: &quot;container, daemon, runtime&quot;
+redirect_from:</p>
+<ul>
+<li>/engine/reference/commandline/daemon/</li>
+</ul>
+<hr>
+<!-- This file is maintained within the docker/cli GitHub
+     repository at https://github.com/docker/cli/. Make all
+     pull requests against that repo. If you see this file in
+     another repository, consider it read-only there, as it will
+     periodically be overwritten by the definitive file. Pull
+     requests which include edits to this file in other repositories
+     will be rejected.
+-->
+<h1 id="daemon" tabindex="-1">daemon <a class="header-anchor" href="#daemon" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage: dockerd COMMAND
+
+A self-sufficient runtime for containers.
+
+Options:
+<span class="hljs-code">      --add-runtime runtime                   Register an additional OCI compatible runtime (default [])
+      --allow-nondistributable-artifacts list Allow push of nondistributable artifacts to registry
+      --api-cors-header string                Set CORS headers in the Engine API
+      --authorization-plugin list             Authorization plugins to load
+      --bip string                            Specify network bridge IP
+  -b, --bridge string                         Attach containers to a network bridge
+      --cgroup-parent string                  Set parent cgroup for all containers
+      --config-file string                    Daemon configuration file (default &quot;/etc/docker/daemon.json&quot;)
+      --containerd string                     containerd grpc address
+      --containerd-namespace string           Containerd namespace to use (default &quot;moby&quot;)
+      --containerd-plugins-namespace string   Containerd namespace to use for plugins (default &quot;plugins.moby&quot;)
+      --cpu-rt-period int                     Limit the CPU real-time period in microseconds for the
+                                              parent cgroup for all containers
+      --cpu-rt-runtime int                    Limit the CPU real-time runtime in microseconds for the
+                                              parent cgroup for all containers
+      --cri-containerd                        start containerd with cri
+      --data-root string                      Root directory of persistent Docker state (default &quot;/var/lib/docker&quot;)
+  -D, --debug                                 Enable debug mode
+      --default-address-pool pool-options     Default address pools for node specific local networks
+      --default-cgroupns-mode string          Default mode for containers cgroup namespace (&quot;host&quot; | &quot;private&quot;) (default &quot;host&quot;)
+      --default-gateway ip                    Container default gateway IPv4 address
+      --default-gateway-v6 ip                 Container default gateway IPv6 address
+      --default-ipc-mode string               Default mode for containers ipc (&quot;shareable&quot; | &quot;private&quot;) (default &quot;private&quot;)
+      --default-runtime string                Default OCI runtime for containers (default &quot;runc&quot;)
+      --default-shm-size bytes                Default shm size for containers (default 64MiB)
+      --default-ulimit ulimit                 Default ulimits for containers (default [])
+      --dns list                              DNS server to use
+      --dns-opt list                          DNS options to use
+      --dns-search list                       DNS search domains to use
+      --exec-opt list                         Runtime execution options
+      --exec-root string                      Root directory for execution state files (default &quot;/var/run/docker&quot;)
+      --experimental                          Enable experimental features
+      --fixed-cidr string                     IPv4 subnet for fixed IPs
+      --fixed-cidr-v6 string                  IPv6 subnet for fixed IPs
+  -G, --group string                          Group for the unix socket (default &quot;docker&quot;)
+      --help                                  Print usage
+  -H, --host list                             Daemon socket(s) to connect to
+      --host-gateway-ip ip                    IP address that the special &#x27;host-gateway&#x27; string in --add-host resolves to.
+                                              Defaults to the IP address of the default bridge
+      --icc                                   Enable inter-container communication (default true)
+      --init                                  Run an init in the container to forward signals and reap processes
+      --init-path string                      Path to the docker-init binary
+      --insecure-registry list                Enable insecure registry communication
+      --ip ip                                 Default IP when binding container ports (default 0.0.0.0)
+      --ip-forward                            Enable net.ipv4.ip_forward (default true)
+      --ip-masq                               Enable IP masquerading (default true)
+      --iptables                              Enable addition of iptables rules (default true)
+      --ip6tables                             Enable addition of ip6tables rules (default false)
+      --ipv6                                  Enable IPv6 networking
+      --label list                            Set key=value labels to the daemon
+      --live-restore                          Enable live restore of docker when containers are still running
+      --log-driver string                     Default driver for container logs (default &quot;json-file&quot;)
+  -l, --log-level string                      Set the logging level (&quot;debug&quot;|&quot;info&quot;|&quot;warn&quot;|&quot;error&quot;|&quot;fatal&quot;) (default &quot;info&quot;)
+      --log-opt map                           Default log driver options for containers (default map[])
+      --max-concurrent-downloads int          Set the max concurrent downloads for each pull (default 3)
+      --max-concurrent-uploads int            Set the max concurrent uploads for each push (default 5)
+      --max-download-attempts int             Set the max download attempts for each pull (default 5)
+      --metrics-addr string                   Set default address and port to serve the metrics api on
+      --mtu int                               Set the containers network MTU
+      --network-control-plane-mtu int         Network Control plane MTU (default 1500)
+      --no-new-privileges                     Set no-new-privileges by default for new containers
+      --node-generic-resource list            Advertise user-defined resource
+      --oom-score-adjust int                  Set the oom_score_adj for the daemon (default -500)
+  -p, --pidfile string                        Path to use for daemon PID file (default &quot;/var/run/docker.pid&quot;)
+      --raw-logs                              Full timestamps without ANSI coloring
+      --registry-mirror list                  Preferred Docker registry mirror
+      --rootless                              Enable rootless mode; typically used with RootlessKit
+      --seccomp-profile string                Path to seccomp profile
+      --selinux-enabled                       Enable selinux support
+      --shutdown-timeout int                  Set the default shutdown timeout (default 15)
+  -s, --storage-driver string                 Storage driver to use
+      --storage-opt list                      Storage driver options
+      --swarm-default-advertise-addr string   Set default address or interface for swarm advertised address
+      --tls                                   Use TLS; implied by --tlsverify
+      --tlscacert string                      Trust certs signed only by this CA (default &quot;~/.docker/ca.pem&quot;)
+      --tlscert string                        Path to TLS certificate file (default &quot;~/.docker/cert.pem&quot;)
+      --tlskey string                         Path to TLS key file (default &quot;~/.docker/key.pem&quot;)
+      --tlsverify                             Use TLS and verify the remote
+      --userland-proxy                        Use userland proxy for loopback traffic (default true)
+      --userland-proxy-path string            Path to the userland proxy binary
+      --userns-remap string                   User/Group setting for user namespaces
+      --validate                              Validate daemon configuration and exit
+  -v, --version                               Print version information and quit
+</span></code></pre>
+<p>Options with [] may be specified multiple times.</p>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p><code>dockerd</code> is the persistent process that manages containers. Docker
+uses different binaries for the daemon and client. To run the daemon you
+type <code>dockerd</code>.</p>
+<p>To run the daemon with debug output, use <code>dockerd --debug</code> or add <code>&quot;debug&quot;: true</code>
+to <a href="#daemon-configuration-file">the <code>daemon.json</code> file</a>.</p>
+<blockquote>
+<p><strong>Enabling experimental features</strong></p>
+<p>Enable experimental features by starting <code>dockerd</code> with the <code>--experimental</code>
+flag or adding <code>&quot;experimental&quot;: true</code> to the <code>daemon.json</code> file.</p>
+</blockquote>
+<h3 id="environment-variables" tabindex="-1">Environment variables <a class="header-anchor" href="#environment-variables" aria-hidden="true">🔗</a></h3>
+<p>For easy reference, the following list of environment variables are supported
+by the <code>dockerd</code> command line:</p>
+<ul>
+<li><code>DOCKER_DRIVER</code> The graph driver to use.</li>
+<li><code>DOCKER_NOWARN_KERNEL_VERSION</code> Prevent warnings that your Linux kernel is
+unsuitable for Docker.</li>
+<li><code>DOCKER_RAMDISK</code> If set this will disable 'pivot_root'.</li>
+<li><code>DOCKER_TMPDIR</code> Location for temporary Docker files.</li>
+<li><code>MOBY_DISABLE_PIGZ</code> Do not use <a href="https://linux.die.net/man/1/pigz"><code>unpigz</code></a> to
+decompress layers in parallel when pulling images, even if it is installed.</li>
+</ul>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="daemon-socket-option" tabindex="-1">Daemon socket option <a class="header-anchor" href="#daemon-socket-option" aria-hidden="true">🔗</a></h3>
+<p>The Docker daemon can listen for <a href="https://docs.docker.com/engine/api/">Docker Engine API</a>
+requests via three different types of Socket: <code>unix</code>, <code>tcp</code>, and <code>fd</code>.</p>
+<p>By default, a <code>unix</code> domain socket (or IPC socket) is created at
+<code>/var/run/docker.sock</code>, requiring either <code>root</code> permission, or <code>docker</code> group
+membership.</p>
+<p>If you need to access the Docker daemon remotely, you need to enable the <code>tcp</code>
+Socket. Beware that the default setup provides un-encrypted and
+un-authenticated direct access to the Docker daemon - and should be secured
+either using the <a href="https://docs.docker.com/engine/security/https/">built in HTTPS encrypted socket</a>, or by
+putting a secure web proxy in front of it. You can listen on port <code>2375</code> on all
+network interfaces with <code>-H tcp://0.0.0.0:2375</code>, or on a particular network
+interface using its IP address: <code>-H tcp://192.168.59.103:2375</code>. It is
+conventional to use port <code>2375</code> for un-encrypted, and port <code>2376</code> for encrypted
+communication with the daemon.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>If you're using an HTTPS encrypted socket, keep in mind that only
+TLS1.0 and greater are supported. Protocols SSLv3 and under are not
+supported anymore for security reasons.</p>
+</blockquote>
+<p>On Systemd based systems, you can communicate with the daemon via
+<a href="https://0pointer.de/blog/projects/socket-activation.html">Systemd socket activation</a>,
+use <code>dockerd -H fd://</code>. Using <code>fd://</code> will work perfectly for most setups but
+you can also specify individual sockets: <code>dockerd -H fd://3</code>. If the
+specified socket activated files aren't found, then Docker will exit. You can
+find examples of using Systemd socket activation with Docker and Systemd in the
+<a href="https://github.com/docker/docker/tree/master/contrib/init/systemd/">Docker source tree</a>.</p>
+<p>You can configure the Docker daemon to listen to multiple sockets at the same
+time using multiple <code>-H</code> options:</p>
+<p>The example below runs the daemon listenin on the default unix socket, and
+on 2 specific IP addresses on this host:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd -H unix:///var/run/docker.sock -H tcp://192.168.59.106 -H tcp://10.10.10.2</span>
+</code></pre>
+<p>The Docker client will honor the <code>DOCKER_HOST</code> environment variable to set the
+<code>-H</code> flag for the client. Use <strong>one</strong> of the following commands:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker -H tcp://0.0.0.0:2375 ps</span>
+</code></pre>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">export</span> DOCKER_HOST=<span class="hljs-string">&quot;tcp://0.0.0.0:2375&quot;</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps</span>
+</code></pre>
+<p>Setting the <code>DOCKER_TLS_VERIFY</code> environment variable to any value other than
+the empty string is equivalent to setting the <code>--tlsverify</code> flag. The following
+are equivalent:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker --tlsverify ps</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">or</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">export</span> DOCKER_TLS_VERIFY=1</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps</span>
+</code></pre>
+<p>The Docker client will honor the <code>HTTP_PROXY</code>, <code>HTTPS_PROXY</code>, and <code>NO_PROXY</code>
+environment variables (or the lowercase versions thereof). <code>HTTPS_PROXY</code> takes
+precedence over <code>HTTP_PROXY</code>.</p>
+<p>The Docker client supports connecting to a remote daemon via SSH:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker -H ssh://me@example.com:22 ps</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker -H ssh://me@example.com ps</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker -H ssh://example.com ps</span>
+</code></pre>
+<p>To use SSH connection, you need to set up <code>ssh</code> so that it can reach the
+remote host with public key authentication. Password authentication is not
+supported. If your key is protected with passphrase, you need to set up
+<code>ssh-agent</code>.</p>
+<h4 id="bind-docker-to-another-host%2Fport-or-a-unix-socket" tabindex="-1">Bind Docker to another host/port or a Unix socket <a class="header-anchor" href="#bind-docker-to-another-host%2Fport-or-a-unix-socket" aria-hidden="true">🔗</a></h4>
+<blockquote :="" class="warning" :="">
+<p><strong>Warning</strong></p>
+<p>Changing the default <code>docker</code> daemon binding to a
+TCP port or Unix <em>docker</em> user group will increase your security risks
+by allowing non-root users to gain <em>root</em> access on the host. Make sure
+you control access to <code>docker</code>. If you are binding
+to a TCP port, anyone with access to that port has full Docker access;
+so it is not advisable on an open network.</p>
+</blockquote>
+<p>With <code>-H</code> it is possible to make the Docker daemon to listen on a
+specific IP and port. By default, it will listen on
+<code>unix:///var/run/docker.sock</code> to allow only local connections by the
+<em>root</em> user. You <em>could</em> set it to <code>0.0.0.0:2375</code> or a specific host IP
+to give access to everybody, but that is <strong>not recommended</strong> because
+then it is trivial for someone to gain root access to the host where the
+daemon is running.</p>
+<p>Similarly, the Docker client can use <code>-H</code> to connect to a custom port.
+The Docker client will default to connecting to <code>unix:///var/run/docker.sock</code>
+on Linux, and <code>tcp://127.0.0.1:2376</code> on Windows.</p>
+<p><code>-H</code> accepts host and port assignment in the following format:</p>
+<pre><code>tcp://[host]:[port][path] or unix://path
+</code></pre>
+<p>For example:</p>
+<ul>
+<li><code>tcp://</code> -&gt; TCP connection to <code>127.0.0.1</code> on either port <code>2376</code> when TLS encryption
+is on, or port <code>2375</code> when communication is in plain text.</li>
+<li><code>tcp://host:2375</code> -&gt; TCP connection on
+host:2375</li>
+<li><code>tcp://host:2375/path</code> -&gt; TCP connection on
+host:2375 and prepend path to all requests</li>
+<li><code>unix://path/to/socket</code> -&gt; Unix socket located
+at <code>path/to/socket</code></li>
+</ul>
+<p><code>-H</code>, when empty, will default to the same value as
+when no <code>-H</code> was passed in.</p>
+<p><code>-H</code> also accepts short form for TCP bindings: <code>host:</code> or <code>host:port</code> or <code>:port</code></p>
+<p>Run Docker in daemon mode:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> &lt;path to&gt;/dockerd -H 0.0.0.0:5555 &amp;</span>
+</code></pre>
+<p>Download an <code>ubuntu</code> image:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker -H :5555 pull ubuntu</span>
+</code></pre>
+<p>You can use multiple <code>-H</code>, for example, if you want to listen on both
+TCP and a Unix socket</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd -H tcp://127.0.0.1:2375 -H unix:///var/run/docker.sock &amp;</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">Download an ubuntu image, use default Unix socket</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull ubuntu</span>
+<span class="hljs-meta prompt_"># </span><span class="language-bash">OR use the TCP port</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">docker -H tcp://127.0.0.1:2375 pull ubuntu</span>
+</code></pre>
+<h3 id="daemon-storage-driver" tabindex="-1">Daemon storage-driver <a class="header-anchor" href="#daemon-storage-driver" aria-hidden="true">🔗</a></h3>
+<p>On Linux, the Docker daemon has support for several different image layer storage
+drivers: <code>aufs</code>, <code>devicemapper</code>, <code>btrfs</code>, <code>zfs</code>, <code>overlay</code>, <code>overlay2</code>, and <code>fuse-overlayfs</code>.</p>
+<p>The <code>aufs</code> driver is the oldest, but is based on a Linux kernel patch-set that
+is unlikely to be merged into the main kernel. These are also known to cause
+some serious kernel crashes. However <code>aufs</code> allows containers to share
+executable and shared library memory, so is a useful choice when running
+thousands of containers with the same program or libraries.</p>
+<p>The <code>devicemapper</code> driver uses thin provisioning and Copy on Write (CoW)
+snapshots. For each devicemapper graph location – typically
+<code>/var/lib/docker/devicemapper</code> – a thin pool is created based on two block
+devices, one for data and one for metadata. By default, these block devices
+are created automatically by using loopback mounts of automatically created
+sparse files. Refer to <a href="#devicemapper-options">Devicemapper options</a> below
+for a way how to customize this setup.
+<a href="https://jpetazzo.github.io/2014/01/29/docker-device-mapper-resize/">~jpetazzo/Resizing Docker containers with the Device Mapper plugin</a>
+article explains how to tune your existing setup without the use of options.</p>
+<p>The <code>btrfs</code> driver is very fast for <code>docker build</code> - but like <code>devicemapper</code>
+does not share executable memory between devices. Use
+<code>dockerd --storage-driver btrfs --data-root /mnt/btrfs_partition</code>.</p>
+<p>The <code>zfs</code> driver is probably not as fast as <code>btrfs</code> but has a longer track record
+on stability. Thanks to <code>Single Copy ARC</code> shared blocks between clones will be
+cached only once. Use <code>dockerd -s zfs</code>. To select a different zfs filesystem
+set <code>zfs.fsname</code> option as described in <a href="#zfs-options">ZFS options</a>.</p>
+<p>The <code>overlay</code> is a very fast union filesystem. It is now merged in the main
+Linux kernel as of <a href="https://lkml.org/lkml/2014/10/26/137">3.18.0</a>. <code>overlay</code>
+also supports page cache sharing, this means multiple containers accessing
+the same file can share a single page cache entry (or entries), it makes
+<code>overlay</code> as efficient with memory as <code>aufs</code> driver. Call <code>dockerd -s overlay</code>
+to use it.</p>
+<p>The <code>overlay2</code> uses the same fast union filesystem but takes advantage of
+<a href="https://lkml.org/lkml/2015/2/11/106">additional features</a> added in Linux
+kernel 4.0 to avoid excessive inode consumption. Call <code>dockerd -s overlay2</code>
+to use it.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The <code>overlay</code> storage driver can cause excessive inode consumption (especially
+as the number of images grows). We recommend using the <code>overlay2</code> storage
+driver instead.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Both <code>overlay</code> and <code>overlay2</code> are currently unsupported on <code>btrfs</code>
+or any Copy on Write filesystem and should only be used over <code>ext4</code> partitions.</p>
+</blockquote>
+<p>The <code>fuse-overlayfs</code> driver is similar to <code>overlay2</code> but works in userspace.
+The <code>fuse-overlayfs</code> driver is expected to be used for <a href="https://docs.docker.com/engine/security/rootless/">Rootless mode</a>.</p>
+<p>On Windows, the Docker daemon supports a single image layer storage driver
+depending on the image platform: <code>windowsfilter</code> for Windows images, and
+<code>lcow</code> for Linux containers on Windows.</p>
+<h3 id="options-per-storage-driver" tabindex="-1">Options per storage driver <a class="header-anchor" href="#options-per-storage-driver" aria-hidden="true">🔗</a></h3>
+<p>Particular storage-driver can be configured with options specified with
+<code>--storage-opt</code> flags. Options for <code>devicemapper</code> are prefixed with <code>dm</code>,
+options for <code>zfs</code> start with <code>zfs</code>, options for <code>btrfs</code> start with <code>btrfs</code>
+and options for <code>lcow</code> start with <code>lcow</code>.</p>
+<h4 id="devicemapper-options" tabindex="-1">Devicemapper options <a class="header-anchor" href="#devicemapper-options" aria-hidden="true">🔗</a></h4>
+<p>This is an example of the configuration file for devicemapper on Linux:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;storage-driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;devicemapper&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;storage-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-string">&quot;dm.thinpooldev=/dev/mapper/thin-pool&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-string">&quot;dm.use_deferred_deletion=true&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-string">&quot;dm.use_deferred_removal=true&quot;</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h5 id="dm.thinpooldev" tabindex="-1"><code>dm.thinpooldev</code> <a class="header-anchor" href="#dm.thinpooldev" aria-hidden="true">🔗</a></h5>
+<p>Specifies a custom block storage device to use for the thin pool.</p>
+<p>If using a block device for device mapper storage, it is best to use <code>lvm</code>
+to create and manage the thin-pool volume. This volume is then handed to Docker
+to exclusively create snapshot volumes needed for images and containers.</p>
+<p>Managing the thin-pool outside of Engine makes for the most feature-rich
+method of having Docker utilize device mapper thin provisioning as the
+backing storage for Docker containers. The highlights of the lvm-based
+thin-pool management feature include: automatic or interactive thin-pool
+resize support, dynamically changing thin-pool features, automatic thinp
+metadata checking when lvm activates the thin-pool, etc.</p>
+<p>As a fallback if no thin pool is provided, loopback files are
+created. Loopback is very slow, but can be used without any
+pre-configuration of storage. It is strongly recommended that you do
+not use loopback in production. Ensure your Engine daemon has a
+<code>--storage-opt dm.thinpooldev</code> argument provided.</p>
+<h6 id="example%3A" tabindex="-1">Example: <a class="header-anchor" href="#example%3A" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.thinpooldev=/dev/mapper/thin-pool</span>
+</code></pre>
+<h5 id="dm.directlvm_device" tabindex="-1"><code>dm.directlvm_device</code> <a class="header-anchor" href="#dm.directlvm_device" aria-hidden="true">🔗</a></h5>
+<p>As an alternative to providing a thin pool as above, Docker can setup a block
+device for you.</p>
+<h6 id="example%3A-1" tabindex="-1">Example: <a class="header-anchor" href="#example%3A-1" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.directlvm_device=/dev/xvdf</span>
+</code></pre>
+<h5 id="dm.thinp_percent" tabindex="-1"><code>dm.thinp_percent</code> <a class="header-anchor" href="#dm.thinp_percent" aria-hidden="true">🔗</a></h5>
+<p>Sets the percentage of passed in block device to use for storage.</p>
+<h6 id="example%3A-2" tabindex="-1">Example: <a class="header-anchor" href="#example%3A-2" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.thinp_percent=95</span>
+</code></pre>
+<h5 id="dm.thinp_metapercent" tabindex="-1"><code>dm.thinp_metapercent</code> <a class="header-anchor" href="#dm.thinp_metapercent" aria-hidden="true">🔗</a></h5>
+<p>Sets the percentage of the passed in block device to use for metadata storage.</p>
+<h6 id="example%3A-3" tabindex="-1">Example: <a class="header-anchor" href="#example%3A-3" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.thinp_metapercent=1</span>
+</code></pre>
+<h5 id="dm.thinp_autoextend_threshold" tabindex="-1"><code>dm.thinp_autoextend_threshold</code> <a class="header-anchor" href="#dm.thinp_autoextend_threshold" aria-hidden="true">🔗</a></h5>
+<p>Sets the value of the percentage of space used before <code>lvm</code> attempts to
+autoextend the available space [100 = disabled]</p>
+<h6 id="example%3A-4" tabindex="-1">Example: <a class="header-anchor" href="#example%3A-4" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.thinp_autoextend_threshold=80</span>
+</code></pre>
+<h5 id="dm.thinp_autoextend_percent" tabindex="-1"><code>dm.thinp_autoextend_percent</code> <a class="header-anchor" href="#dm.thinp_autoextend_percent" aria-hidden="true">🔗</a></h5>
+<p>Sets the value percentage value to increase the thin pool by when <code>lvm</code>
+attempts to autoextend the available space [100 = disabled]</p>
+<h6 id="example%3A-5" tabindex="-1">Example: <a class="header-anchor" href="#example%3A-5" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.thinp_autoextend_percent=20</span>
+</code></pre>
+<h5 id="dm.basesize" tabindex="-1"><code>dm.basesize</code> <a class="header-anchor" href="#dm.basesize" aria-hidden="true">🔗</a></h5>
+<p>Specifies the size to use when creating the base device, which limits the
+size of images and containers. The default value is 10G. Note, thin devices
+are inherently &quot;sparse&quot;, so a 10G device which is mostly empty doesn't use
+10 GB of space on the pool. However, the filesystem will use more space for
+the empty case the larger the device is.</p>
+<p>The base device size can be increased at daemon restart which will allow
+all future images and containers (based on those new images) to be of the
+new base device size.</p>
+<h6 id="examples-1" tabindex="-1">Examples <a class="header-anchor" href="#examples-1" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.basesize=50G</span>
+</code></pre>
+<p>This will increase the base device size to 50G. The Docker daemon will throw an
+error if existing base device size is larger than 50G. A user can use
+this option to expand the base device size however shrinking is not permitted.</p>
+<p>This value affects the system-wide &quot;base&quot; empty filesystem
+that may already be initialized and inherited by pulled images. Typically,
+a change to this value requires additional steps to take effect:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> service docker stop</span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/lib/docker</span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> service docker start</span>
+</code></pre>
+<h5 id="dm.loopdatasize" tabindex="-1"><code>dm.loopdatasize</code> <a class="header-anchor" href="#dm.loopdatasize" aria-hidden="true">🔗</a></h5>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>This option configures devicemapper loopback, which should not
+be used in production.</p>
+</blockquote>
+<p>Specifies the size to use when creating the loopback file for the
+&quot;data&quot; device which is used for the thin pool. The default size is
+100G. The file is sparse, so it will not initially take up this
+much space.</p>
+<h6 id="example" tabindex="-1">Example <a class="header-anchor" href="#example" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.loopdatasize=200G</span>
+</code></pre>
+<h5 id="dm.loopmetadatasize" tabindex="-1"><code>dm.loopmetadatasize</code> <a class="header-anchor" href="#dm.loopmetadatasize" aria-hidden="true">🔗</a></h5>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>This option configures devicemapper loopback, which should not
+be used in production.</p>
+</blockquote>
+<p>Specifies the size to use when creating the loopback file for the
+&quot;metadata&quot; device which is used for the thin pool. The default size
+is 2G. The file is sparse, so it will not initially take up
+this much space.</p>
+<h6 id="example-1" tabindex="-1">Example <a class="header-anchor" href="#example-1" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.loopmetadatasize=4G</span>
+</code></pre>
+<h5 id="dm.fs" tabindex="-1"><code>dm.fs</code> <a class="header-anchor" href="#dm.fs" aria-hidden="true">🔗</a></h5>
+<p>Specifies the filesystem type to use for the base device. The supported
+options are &quot;ext4&quot; and &quot;xfs&quot;. The default is &quot;xfs&quot;</p>
+<h6 id="example-2" tabindex="-1">Example <a class="header-anchor" href="#example-2" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.fs=ext4</span>
+</code></pre>
+<h5 id="dm.mkfsarg" tabindex="-1"><code>dm.mkfsarg</code> <a class="header-anchor" href="#dm.mkfsarg" aria-hidden="true">🔗</a></h5>
+<p>Specifies extra mkfs arguments to be used when creating the base device.</p>
+<h6 id="example-3" tabindex="-1">Example <a class="header-anchor" href="#example-3" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt <span class="hljs-string">&quot;dm.mkfsarg=-O ^has_journal&quot;</span></span>
+</code></pre>
+<h5 id="dm.mountopt" tabindex="-1"><code>dm.mountopt</code> <a class="header-anchor" href="#dm.mountopt" aria-hidden="true">🔗</a></h5>
+<p>Specifies extra mount options used when mounting the thin devices.</p>
+<h6 id="example-4" tabindex="-1">Example <a class="header-anchor" href="#example-4" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.mountopt=nodiscard</span>
+</code></pre>
+<h5 id="dm.datadev" tabindex="-1"><code>dm.datadev</code> <a class="header-anchor" href="#dm.datadev" aria-hidden="true">🔗</a></h5>
+<p>(Deprecated, use <code>dm.thinpooldev</code>)</p>
+<p>Specifies a custom blockdevice to use for data for the thin pool.</p>
+<p>If using a block device for device mapper storage, ideally both <code>datadev</code> and
+<code>metadatadev</code> should be specified to completely avoid using the loopback
+device.</p>
+<h6 id="example-5" tabindex="-1">Example <a class="header-anchor" href="#example-5" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd \
+      --storage-opt dm.datadev=/dev/sdb1 \
+      --storage-opt dm.metadatadev=/dev/sdc1</span>
+</code></pre>
+<h5 id="dm.metadatadev" tabindex="-1"><code>dm.metadatadev</code> <a class="header-anchor" href="#dm.metadatadev" aria-hidden="true">🔗</a></h5>
+<p>(Deprecated, use <code>dm.thinpooldev</code>)</p>
+<p>Specifies a custom blockdevice to use for metadata for the thin pool.</p>
+<p>For best performance the metadata should be on a different spindle than the
+data, or even better on an SSD.</p>
+<p>If setting up a new metadata pool it is required to be valid. This can be
+achieved by zeroing the first 4k to indicate empty metadata, like this:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=<span class="hljs-variable">$metadata_dev</span> bs=4096 count=1</span>
+</code></pre>
+<h6 id="example-6" tabindex="-1">Example <a class="header-anchor" href="#example-6" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd \
+      --storage-opt dm.datadev=/dev/sdb1 \
+      --storage-opt dm.metadatadev=/dev/sdc1</span>
+</code></pre>
+<h5 id="dm.blocksize" tabindex="-1"><code>dm.blocksize</code> <a class="header-anchor" href="#dm.blocksize" aria-hidden="true">🔗</a></h5>
+<p>Specifies a custom blocksize to use for the thin pool. The default
+blocksize is 64K.</p>
+<h6 id="example-7" tabindex="-1">Example <a class="header-anchor" href="#example-7" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.blocksize=512K</span>
+</code></pre>
+<h5 id="dm.blkdiscard" tabindex="-1"><code>dm.blkdiscard</code> <a class="header-anchor" href="#dm.blkdiscard" aria-hidden="true">🔗</a></h5>
+<p>Enables or disables the use of <code>blkdiscard</code> when removing devicemapper
+devices. This is enabled by default (only) if using loopback devices and is
+required to resparsify the loopback file on image/container removal.</p>
+<p>Disabling this on loopback can lead to <em>much</em> faster container removal
+times, but will make the space used in <code>/var/lib/docker</code> directory not be
+returned to the system for other use when containers are removed.</p>
+<h6 id="examples-2" tabindex="-1">Examples <a class="header-anchor" href="#examples-2" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.blkdiscard=<span class="hljs-literal">false</span></span>
+</code></pre>
+<h5 id="dm.override_udev_sync_check" tabindex="-1"><code>dm.override_udev_sync_check</code> <a class="header-anchor" href="#dm.override_udev_sync_check" aria-hidden="true">🔗</a></h5>
+<p>Overrides the <code>udev</code> synchronization checks between <code>devicemapper</code> and <code>udev</code>.
+<code>udev</code> is the device manager for the Linux kernel.</p>
+<p>To view the <code>udev</code> sync support of a Docker daemon that is using the
+<code>devicemapper</code> driver, run:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker info</span>
+&lt;...&gt;
+Udev Sync Supported: true
+&lt;...&gt;
+</code></pre>
+<p>When <code>udev</code> sync support is <code>true</code>, then <code>devicemapper</code> and udev can
+coordinate the activation and deactivation of devices for containers.</p>
+<p>When <code>udev</code> sync support is <code>false</code>, a race condition occurs between
+the<code>devicemapper</code> and <code>udev</code> during create and cleanup. The race condition
+results in errors and failures. (For information on these failures, see
+<a href="https://github.com/docker/docker/issues/4036">docker#4036</a>)</p>
+<p>To allow the <code>docker</code> daemon to start, regardless of <code>udev</code> sync not being
+supported, set <code>dm.override_udev_sync_check</code> to true:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.override_udev_sync_check=<span class="hljs-literal">true</span></span>
+</code></pre>
+<p>When this value is <code>true</code>, the  <code>devicemapper</code> continues and simply warns
+you the errors are happening.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The ideal is to pursue a <code>docker</code> daemon and environment that does
+support synchronizing with <code>udev</code>. For further discussion on this
+topic, see <a href="https://github.com/docker/docker/issues/4036">docker#4036</a>.
+Otherwise, set this flag for migrating existing Docker daemons to
+a daemon with a supported environment.</p>
+</blockquote>
+<h5 id="dm.use_deferred_removal" tabindex="-1"><code>dm.use_deferred_removal</code> <a class="header-anchor" href="#dm.use_deferred_removal" aria-hidden="true">🔗</a></h5>
+<p>Enables use of deferred device removal if <code>libdm</code> and the kernel driver
+support the mechanism.</p>
+<p>Deferred device removal means that if device is busy when devices are
+being removed/deactivated, then a deferred removal is scheduled on
+device. And devices automatically go away when last user of the device
+exits.</p>
+<p>For example, when a container exits, its associated thin device is removed.
+If that device has leaked into some other mount namespace and can't be
+removed, the container exit still succeeds and this option causes the
+system to schedule the device for deferred removal. It does not wait in a
+loop trying to remove a busy device.</p>
+<h6 id="example-8" tabindex="-1">Example <a class="header-anchor" href="#example-8" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.use_deferred_removal=<span class="hljs-literal">true</span></span>
+</code></pre>
+<h5 id="dm.use_deferred_deletion" tabindex="-1"><code>dm.use_deferred_deletion</code> <a class="header-anchor" href="#dm.use_deferred_deletion" aria-hidden="true">🔗</a></h5>
+<p>Enables use of deferred device deletion for thin pool devices. By default,
+thin pool device deletion is synchronous. Before a container is deleted,
+the Docker daemon removes any associated devices. If the storage driver
+can not remove a device, the container deletion fails and daemon returns.</p>
+<pre><code class="language-console">Error deleting container: Error response from daemon: Cannot destroy container
+</code></pre>
+<p>To avoid this failure, enable both deferred device deletion and deferred
+device removal on the daemon.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd \
+      --storage-opt dm.use_deferred_deletion=<span class="hljs-literal">true</span> \
+      --storage-opt dm.use_deferred_removal=<span class="hljs-literal">true</span></span>
+</code></pre>
+<p>With these two options enabled, if a device is busy when the driver is
+deleting a container, the driver marks the device as deleted. Later, when
+the device isn't in use, the driver deletes it.</p>
+<p>In general it should be safe to enable this option by default. It will help
+when unintentional leaking of mount point happens across multiple mount
+namespaces.</p>
+<h5 id="dm.min_free_space" tabindex="-1"><code>dm.min_free_space</code> <a class="header-anchor" href="#dm.min_free_space" aria-hidden="true">🔗</a></h5>
+<p>Specifies the min free space percent in a thin pool require for new device
+creation to succeed. This check applies to both free data space as well
+as free metadata space. Valid values are from 0% - 99%. Value 0% disables
+free space checking logic. If user does not specify a value for this option,
+the Engine uses a default value of 10%.</p>
+<p>Whenever a new a thin pool device is created (during <code>docker pull</code> or during
+container creation), the Engine checks if the minimum free space is
+available. If sufficient space is unavailable, then device creation fails
+and any relevant <code>docker</code> operation fails.</p>
+<p>To recover from this error, you must create more free space in the thin pool
+to recover from the error. You can create free space by deleting some images
+and containers from the thin pool. You can also add more storage to the thin
+pool.</p>
+<p>To add more space to a LVM (logical volume management) thin pool, just add
+more storage to the volume group container thin pool; this should automatically
+resolve any errors. If your configuration uses loop devices, then stop the
+Engine daemon, grow the size of loop files and restart the daemon to resolve
+the issue.</p>
+<h6 id="example-9" tabindex="-1">Example <a class="header-anchor" href="#example-9" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.min_free_space=10%</span>
+</code></pre>
+<h5 id="dm.xfs_nospace_max_retries" tabindex="-1"><code>dm.xfs_nospace_max_retries</code> <a class="header-anchor" href="#dm.xfs_nospace_max_retries" aria-hidden="true">🔗</a></h5>
+<p>Specifies the maximum number of retries XFS should attempt to complete
+IO when ENOSPC (no space) error is returned by underlying storage device.</p>
+<p>By default XFS retries infinitely for IO to finish and this can result
+in unkillable process. To change this behavior one can set
+xfs_nospace_max_retries to say 0 and XFS will not retry IO after getting
+ENOSPC and will shutdown filesystem.</p>
+<h6 id="example-10" tabindex="-1">Example <a class="header-anchor" href="#example-10" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --storage-opt dm.xfs_nospace_max_retries=0</span>
+</code></pre>
+<h5 id="dm.libdm_log_level" tabindex="-1"><code>dm.libdm_log_level</code> <a class="header-anchor" href="#dm.libdm_log_level" aria-hidden="true">🔗</a></h5>
+<p>Specifies the maxmimum <code>libdm</code> log level that will be forwarded to the
+<code>dockerd</code> log (as specified by <code>--log-level</code>). This option is primarily
+intended for debugging problems involving <code>libdm</code>. Using values other than the
+defaults may cause false-positive warnings to be logged.</p>
+<p>Values specified must fall within the range of valid <code>libdm</code> log levels. At the
+time of writing, the following is the list of <code>libdm</code> log levels as well as
+their corresponding levels when output by <code>dockerd</code>.</p>
+<table class="table"><thead>
+<tr>
+<th><code>libdm</code> Level</th>
+<th style="text-align:right">Value</th>
+<th><code>--log-level</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>_LOG_FATAL</code></td>
+<td style="text-align:right">2</td>
+<td>error</td>
+</tr>
+<tr>
+<td><code>_LOG_ERR</code></td>
+<td style="text-align:right">3</td>
+<td>error</td>
+</tr>
+<tr>
+<td><code>_LOG_WARN</code></td>
+<td style="text-align:right">4</td>
+<td>warn</td>
+</tr>
+<tr>
+<td><code>_LOG_NOTICE</code></td>
+<td style="text-align:right">5</td>
+<td>info</td>
+</tr>
+<tr>
+<td><code>_LOG_INFO</code></td>
+<td style="text-align:right">6</td>
+<td>info</td>
+</tr>
+<tr>
+<td><code>_LOG_DEBUG</code></td>
+<td style="text-align:right">7</td>
+<td>debug</td>
+</tr>
+</tbody>
+</table>
+<h6 id="example-11" tabindex="-1">Example <a class="header-anchor" href="#example-11" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd \
+      --log-level debug \
+      --storage-opt dm.libdm_log_level=7</span>
+</code></pre>
+<h4 id="zfs-options" tabindex="-1">ZFS options <a class="header-anchor" href="#zfs-options" aria-hidden="true">🔗</a></h4>
+<h5 id="zfs.fsname" tabindex="-1"><code>zfs.fsname</code> <a class="header-anchor" href="#zfs.fsname" aria-hidden="true">🔗</a></h5>
+<p>Set zfs filesystem under which docker will create its own datasets.
+By default docker will pick up the zfs filesystem where docker graph
+(<code>/var/lib/docker</code>) is located.</p>
+<h6 id="example-12" tabindex="-1">Example <a class="header-anchor" href="#example-12" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd -s zfs --storage-opt zfs.fsname=zroot/docker</span>
+</code></pre>
+<h4 id="btrfs-options" tabindex="-1">Btrfs options <a class="header-anchor" href="#btrfs-options" aria-hidden="true">🔗</a></h4>
+<h5 id="btrfs.min_space" tabindex="-1"><code>btrfs.min_space</code> <a class="header-anchor" href="#btrfs.min_space" aria-hidden="true">🔗</a></h5>
+<p>Specifies the minimum size to use when creating the subvolume which is used
+for containers. If user uses disk quota for btrfs when creating or running
+a container with <strong>--storage-opt size</strong> option, docker should ensure the
+<strong>size</strong> cannot be smaller than <strong>btrfs.min_space</strong>.</p>
+<h6 id="example-13" tabindex="-1">Example <a class="header-anchor" href="#example-13" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd -s btrfs --storage-opt btrfs.min_space=10G</span>
+</code></pre>
+<h4 id="overlay2-options" tabindex="-1">Overlay2 options <a class="header-anchor" href="#overlay2-options" aria-hidden="true">🔗</a></h4>
+<h5 id="overlay2.override_kernel_check" tabindex="-1"><code>overlay2.override_kernel_check</code> <a class="header-anchor" href="#overlay2.override_kernel_check" aria-hidden="true">🔗</a></h5>
+<p>Overrides the Linux kernel version check allowing overlay2. Support for
+specifying multiple lower directories needed by overlay2 was added to the
+Linux kernel in 4.0.0. However, some older kernel versions may be patched
+to add multiple lower directory support for OverlayFS. This option should
+only be used after verifying this support exists in the kernel. Applying
+this option on a kernel without this support will cause failures on mount.</p>
+<h5 id="overlay2.size" tabindex="-1"><code>overlay2.size</code> <a class="header-anchor" href="#overlay2.size" aria-hidden="true">🔗</a></h5>
+<p>Sets the default max size of the container. It is supported only when the
+backing fs is <code>xfs</code> and mounted with <code>pquota</code> mount option. Under these
+conditions the user can pass any size less then the backing fs size.</p>
+<h6 id="example-14" tabindex="-1">Example <a class="header-anchor" href="#example-14" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd -s overlay2 --storage-opt overlay2.size=1G</span>
+</code></pre>
+<h4 id="windowsfilter-options" tabindex="-1">Windowsfilter options <a class="header-anchor" href="#windowsfilter-options" aria-hidden="true">🔗</a></h4>
+<h5 id="size" tabindex="-1"><code>size</code> <a class="header-anchor" href="#size" aria-hidden="true">🔗</a></h5>
+<p>Specifies the size to use when creating the sandbox which is used for containers.
+Defaults to 20G.</p>
+<h6 id="example-15" tabindex="-1">Example <a class="header-anchor" href="#example-15" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> size=<span class="hljs-number">40</span>G
+</code></pre>
+<h4 id="lcow-(linux-containers-on-windows)-options" tabindex="-1">LCOW (Linux Containers on Windows) options <a class="header-anchor" href="#lcow-(linux-containers-on-windows)-options" aria-hidden="true">🔗</a></h4>
+<h5 id="lcow.globalmode" tabindex="-1"><code>lcow.globalmode</code> <a class="header-anchor" href="#lcow.globalmode" aria-hidden="true">🔗</a></h5>
+<p>Specifies whether the daemon instantiates utility VM instances as required
+(recommended and default if omitted), or uses single global utility VM (better
+performance, but has security implications and not recommended for production
+deployments).</p>
+<h6 id="example-16" tabindex="-1">Example <a class="header-anchor" href="#example-16" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.globalmode=false
+</code></pre>
+<h5 id="lcow.kirdpath" tabindex="-1"><code>lcow.kirdpath</code> <a class="header-anchor" href="#lcow.kirdpath" aria-hidden="true">🔗</a></h5>
+<p>Specifies the folder path to the location of a pair of kernel and initrd files
+used for booting a utility VM. Defaults to <code>%ProgramFiles%\Linux Containers</code>.</p>
+<h6 id="example-17" tabindex="-1">Example <a class="header-anchor" href="#example-17" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.kirdpath=c:\path\to\files
+</code></pre>
+<h5 id="lcow.kernel" tabindex="-1"><code>lcow.kernel</code> <a class="header-anchor" href="#lcow.kernel" aria-hidden="true">🔗</a></h5>
+<p>Specifies the filename of a kernel file located in the <code>lcow.kirdpath</code> path.
+Defaults to <code>bootx64.efi</code>.</p>
+<h6 id="example-18" tabindex="-1">Example <a class="header-anchor" href="#example-18" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.kernel=kernel.efi
+</code></pre>
+<h5 id="lcow.initrd" tabindex="-1"><code>lcow.initrd</code> <a class="header-anchor" href="#lcow.initrd" aria-hidden="true">🔗</a></h5>
+<p>Specifies the filename of an initrd file located in the <code>lcow.kirdpath</code> path.
+Defaults to <code>initrd.img</code>.</p>
+<h6 id="example-19" tabindex="-1">Example <a class="header-anchor" href="#example-19" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.initrd=myinitrd.img
+</code></pre>
+<h5 id="lcow.bootparameters" tabindex="-1"><code>lcow.bootparameters</code> <a class="header-anchor" href="#lcow.bootparameters" aria-hidden="true">🔗</a></h5>
+<p>Specifies additional boot parameters for booting utility VMs when in kernel/
+initrd mode. Ignored if the utility VM is booting from VHD. These settings
+are kernel specific.</p>
+<h6 id="example-20" tabindex="-1">Example <a class="header-anchor" href="#example-20" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> <span class="hljs-string">&quot;lcow.bootparameters=&#x27;option=value&#x27;&quot;</span>
+</code></pre>
+<h5 id="lcow.vhdx" tabindex="-1"><code>lcow.vhdx</code> <a class="header-anchor" href="#lcow.vhdx" aria-hidden="true">🔗</a></h5>
+<p>Specifies a custom VHDX to boot a utility VM, as an alternate to kernel
+and initrd booting. Defaults to <code>uvm.vhdx</code> under <code>lcow.kirdpath</code>.</p>
+<h6 id="example-21" tabindex="-1">Example <a class="header-anchor" href="#example-21" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.vhdx=custom.vhdx
+</code></pre>
+<h5 id="lcow.timeout" tabindex="-1"><code>lcow.timeout</code> <a class="header-anchor" href="#lcow.timeout" aria-hidden="true">🔗</a></h5>
+<p>Specifies the timeout for utility VM operations in seconds. Defaults
+to 300.</p>
+<h6 id="example-22" tabindex="-1">Example <a class="header-anchor" href="#example-22" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.timeout=<span class="hljs-number">240</span>
+</code></pre>
+<h5 id="lcow.sandboxsize" tabindex="-1"><code>lcow.sandboxsize</code> <a class="header-anchor" href="#lcow.sandboxsize" aria-hidden="true">🔗</a></h5>
+<p>Specifies the size in GB to use when creating the sandbox which is used for
+containers. Defaults to 20. Cannot be less than 20.</p>
+<h6 id="example-23" tabindex="-1">Example <a class="header-anchor" href="#example-23" aria-hidden="true">🔗</a></h6>
+<pre><code class="language-powershell">C:\&gt; dockerd <span class="hljs-literal">--storage-opt</span> lcow.sandboxsize=<span class="hljs-number">40</span>
+</code></pre>
+<h3 id="docker-runtime-execution-options" tabindex="-1">Docker runtime execution options <a class="header-anchor" href="#docker-runtime-execution-options" aria-hidden="true">🔗</a></h3>
+<p>The Docker daemon relies on a
+<a href="https://github.com/opencontainers/runtime-spec">OCI</a> compliant runtime
+(invoked via the <code>containerd</code> daemon) as its interface to the Linux
+kernel <code>namespaces</code>, <code>cgroups</code>, and <code>SELinux</code>.</p>
+<p>By default, the Docker daemon automatically starts <code>containerd</code>. If you want to
+control <code>containerd</code> startup, manually start <code>containerd</code> and pass the path to
+the <code>containerd</code> socket using the <code>--containerd</code> flag. For example:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --containerd /var/run/dev/docker-containerd.sock</span>
+</code></pre>
+<p>Runtimes can be registered with the daemon either via the
+configuration file or using the <code>--add-runtime</code> command line argument.</p>
+<p>The following is an example adding 2 runtimes via the configuration:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;default-runtime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;runc&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;runtimes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;custom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/local/bin/my-runc-replacement&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;runtimeArgs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--debug&quot;</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;runc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;runc&quot;</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>This is the same example via the command line:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --add-runtime runc=runc --add-runtime custom=/usr/local/bin/my-runc-replacement</span>
+</code></pre>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Defining runtime arguments via the command line is not supported.</p>
+</blockquote>
+<h4 id="options-for-the-runtime" tabindex="-1">Options for the runtime <a class="header-anchor" href="#options-for-the-runtime" aria-hidden="true">🔗</a></h4>
+<p>You can configure the runtime using options specified
+with the <code>--exec-opt</code> flag. All the flag's options have the <code>native</code> prefix. A
+single <code>native.cgroupdriver</code> option is available.</p>
+<p>The <code>native.cgroupdriver</code> option specifies the management of the container's
+cgroups. You can only specify <code>cgroupfs</code> or <code>systemd</code>. If you specify
+<code>systemd</code> and it is not available, the system errors out. If you omit the
+<code>native.cgroupdriver</code> option,<code> cgroupfs</code> is used on cgroup v1 hosts, <code>systemd</code>
+is used on cgroup v2 hosts with systemd available.</p>
+<p>This example sets the <code>cgroupdriver</code> to <code>systemd</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --exec-opt native.cgroupdriver=systemd</span>
+</code></pre>
+<p>Setting this option applies to all containers the daemon launches.</p>
+<p>Also Windows Container makes use of <code>--exec-opt</code> for special purpose. Docker user
+can specify default container isolation technology with this, for example:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">&gt; </span><span class="language-bash">dockerd --exec-opt isolation=hyperv</span>
+</code></pre>
+<p>Will make <code>hyperv</code> the default isolation technology on Windows. If no isolation
+value is specified on daemon start, on Windows client, the default is
+<code>hyperv</code>, and on Windows server, the default is <code>process</code>.</p>
+<h3 id="daemon-dns-options" tabindex="-1">Daemon DNS options <a class="header-anchor" href="#daemon-dns-options" aria-hidden="true">🔗</a></h3>
+<p>To set the DNS server for all Docker containers, use:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --dns 8.8.8.8</span>
+</code></pre>
+<p>To set the DNS search domain for all Docker containers, use:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --dns-search example.com</span>
+</code></pre>
+<h3 id="allow-push-of-nondistributable-artifacts" tabindex="-1">Allow push of nondistributable artifacts <a class="header-anchor" href="#allow-push-of-nondistributable-artifacts" aria-hidden="true">🔗</a></h3>
+<p>Some images (e.g., Windows base images) contain artifacts whose distribution is
+restricted by license. When these images are pushed to a registry, restricted
+artifacts are not included.</p>
+<p>To override this behavior for specific registries, use the
+<code>--allow-nondistributable-artifacts</code> option in one of the following forms:</p>
+<ul>
+<li><code>--allow-nondistributable-artifacts myregistry:5000</code> tells the Docker daemon
+to push nondistributable artifacts to myregistry:5000.</li>
+<li><code>--allow-nondistributable-artifacts 10.1.0.0/16</code> tells the Docker daemon to
+push nondistributable artifacts to all registries whose resolved IP address
+is within the subnet described by the CIDR syntax.</li>
+</ul>
+<p>This option can be used multiple times.</p>
+<p>This option is useful when pushing images containing nondistributable artifacts
+to a registry on an air-gapped network so hosts on that network can pull the
+images without connecting to another server.</p>
+<blockquote>
+<p><strong>Warning</strong>: Nondistributable artifacts typically have restrictions on how
+and where they can be distributed and shared. Only use this feature to push
+artifacts to private registries and ensure that you are in compliance with
+any terms that cover redistributing nondistributable artifacts.</p>
+</blockquote>
+<h3 id="insecure-registries" tabindex="-1">Insecure registries <a class="header-anchor" href="#insecure-registries" aria-hidden="true">🔗</a></h3>
+<p>Docker considers a private registry either secure or insecure. In the rest of
+this section, <em>registry</em> is used for <em>private registry</em>, and <code>myregistry:5000</code>
+is a placeholder example for a private registry.</p>
+<p>A secure registry uses TLS and a copy of its CA certificate is placed on the
+Docker host at <code>/etc/docker/certs.d/myregistry:5000/ca.crt</code>. An insecure
+registry is either not using TLS (i.e., listening on plain text HTTP), or is
+using TLS with a CA certificate not known by the Docker daemon. The latter can
+happen when the certificate was not found under
+<code>/etc/docker/certs.d/myregistry:5000/</code>, or if the certificate verification
+failed (i.e., wrong CA).</p>
+<p>By default, Docker assumes all, but local (see local registries below),
+registries are secure. Communicating with an insecure registry is not possible
+if Docker assumes that registry is secure. In order to communicate with an
+insecure registry, the Docker daemon requires <code>--insecure-registry</code> in one of
+the following two forms:</p>
+<ul>
+<li><code>--insecure-registry myregistry:5000</code> tells the Docker daemon that
+myregistry:5000 should be considered insecure.</li>
+<li><code>--insecure-registry 10.1.0.0/16</code> tells the Docker daemon that all registries
+whose domain resolve to an IP address is part of the subnet described by the
+CIDR syntax, should be considered insecure.</li>
+</ul>
+<p>The flag can be used multiple times to allow multiple registries to be marked
+as insecure.</p>
+<p>If an insecure registry is not marked as insecure, <code>docker pull</code>,
+<code>docker push</code>, and <code>docker search</code> will result in an error message prompting
+the user to either secure or pass the <code>--insecure-registry</code> flag to the Docker
+daemon as described above.</p>
+<p>Local registries, whose IP address falls in the 127.0.0.0/8 range, are
+automatically marked as insecure as of Docker 1.3.2. It is not recommended to
+rely on this, as it may change in the future.</p>
+<p>Enabling <code>--insecure-registry</code>, i.e., allowing un-encrypted and/or untrusted
+communication, can be useful when running a local registry.  However,
+because its use creates security vulnerabilities it should ONLY be enabled for
+testing purposes.  For increased security, users should add their CA to their
+system's list of trusted CAs instead of enabling <code>--insecure-registry</code>.</p>
+<h4 id="legacy-registries" tabindex="-1">Legacy Registries <a class="header-anchor" href="#legacy-registries" aria-hidden="true">🔗</a></h4>
+<p>Operations against registries supporting only the legacy v1 protocol are no longer
+supported. Specifically, the daemon will not attempt <code>push</code>, <code>pull</code> and <code>login</code>
+to v1 registries. The exception to this is <code>search</code> which can still be performed
+on v1 registries.</p>
+<h3 id="running-a-docker-daemon-behind-an-https_proxy" tabindex="-1">Running a Docker daemon behind an HTTPS_PROXY <a class="header-anchor" href="#running-a-docker-daemon-behind-an-https_proxy" aria-hidden="true">🔗</a></h3>
+<p>When running inside a LAN that uses an <code>HTTPS</code> proxy, the Docker Hub
+certificates will be replaced by the proxy's certificates. These certificates
+need to be added to your Docker host's configuration:</p>
+<ol>
+<li>Install the <code>ca-certificates</code> package for your distribution</li>
+<li>Ask your network admin for the proxy's CA certificate and append them to
+<code>/etc/pki/tls/certs/ca-bundle.crt</code></li>
+<li>Then start your Docker daemon with <code>HTTPS_PROXY=http://username:password@proxy:port/ dockerd</code>.
+The <code>username:</code> and <code>password@</code> are optional - and are only needed if your
+proxy is set up to require authentication.</li>
+</ol>
+<p>This will only add the proxy and authentication to the Docker daemon's requests -
+your <code>docker build</code>s and running containers will need extra configuration to
+use the proxy</p>
+<h3 id="default-ulimit-settings" tabindex="-1">Default <code>ulimit</code> settings <a class="header-anchor" href="#default-ulimit-settings" aria-hidden="true">🔗</a></h3>
+<p><code>--default-ulimit</code> allows you to set the default <code>ulimit</code> options to use for
+all containers. It takes the same options as <code>--ulimit</code> for <code>docker run</code>. If
+these defaults are not set, <code>ulimit</code> settings will be inherited, if not set on
+<code>docker run</code>, from the Docker daemon. Any <code>--ulimit</code> options passed to
+<code>docker run</code> will overwrite these defaults.</p>
+<p>Be careful setting <code>nproc</code> with the <code>ulimit</code> flag as <code>nproc</code> is designed by Linux to
+set the maximum number of processes available to a user, not to a container. For details
+please check the <a href="run.html">run</a> reference.</p>
+<h3 id="node-discovery" tabindex="-1">Node discovery <a class="header-anchor" href="#node-discovery" aria-hidden="true">🔗</a></h3>
+<p>The <code>--cluster-advertise</code> option specifies the <code>host:port</code> or <code>interface:port</code>
+combination that this particular daemon instance should use when advertising
+itself to the cluster. The daemon is reached by remote hosts through this value.
+If you  specify an interface, make sure it includes the IP address of the actual
+Docker host. For Engine installation created through <code>docker-machine</code>, the
+interface is typically <code>eth1</code>.</p>
+<p>The daemon uses <a href="https://github.com/docker/libkv/">libkv</a> to advertise
+the node within the cluster. Some key-value backends support mutual
+TLS. To configure the client TLS settings used by the daemon can be configured
+using the <code>--cluster-store-opt</code> flag, specifying the paths to PEM encoded
+files. For example:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd \
+    --cluster-advertise 192.168.1.2:2376 \
+    --cluster-store etcd://192.168.1.2:2379 \
+    --cluster-store-opt kv.cacertfile=/path/to/ca.pem \
+    --cluster-store-opt kv.certfile=/path/to/cert.pem \
+    --cluster-store-opt kv.keyfile=/path/to/key.pem</span>
+</code></pre>
+<p>The currently supported cluster store options are:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Option</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>discovery.heartbeat</code></td>
+<td style="text-align:left">Specifies the heartbeat timer in seconds which is used by the daemon as a <code>keepalive</code> mechanism to make sure discovery module treats the node as alive in the cluster. If not configured, the default value is 20 seconds.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>discovery.ttl</code></td>
+<td style="text-align:left">Specifies the TTL (time-to-live) in seconds which is used by the discovery module to timeout a node if a valid heartbeat is not received within the configured ttl value. If not configured, the default value is 60 seconds.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>kv.cacertfile</code></td>
+<td style="text-align:left">Specifies the path to a local file with PEM encoded CA certificates to trust.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>kv.certfile</code></td>
+<td style="text-align:left">Specifies the path to a local file with a PEM encoded certificate. This certificate is used as the client cert for communication with the Key/Value store.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>kv.keyfile</code></td>
+<td style="text-align:left">Specifies the path to a local file with a PEM encoded private key. This private key is used as the client key for communication with the Key/Value store.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>kv.path</code></td>
+<td style="text-align:left">Specifies the path in the Key/Value store. If not configured, the default value is 'docker/nodes'.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="access-authorization" tabindex="-1">Access authorization <a class="header-anchor" href="#access-authorization" aria-hidden="true">🔗</a></h3>
+<p>Docker's access authorization can be extended by authorization plugins that your
+organization can purchase or build themselves. You can install one or more
+authorization plugins when you start the Docker <code>daemon</code> using the
+<code>--authorization-plugin=PLUGIN_ID</code> option.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd --authorization-plugin=plugin1 --authorization-plugin=plugin2,...</span>
+</code></pre>
+<p>The <code>PLUGIN_ID</code> value is either the plugin's name or a path to its specification
+file. The plugin's implementation determines whether you can specify a name or
+path. Consult with your Docker administrator to get information about the
+plugins available to you.</p>
+<p>Once a plugin is installed, requests made to the <code>daemon</code> through the
+command line or Docker's Engine API are allowed or denied by the plugin.
+If you have multiple plugins installed, each plugin, in order, must
+allow the request for it to complete.</p>
+<p>For information about how to create an authorization plugin, refer to the
+<a href="../../extend/plugins_authorization.html">authorization plugin</a> section.</p>
+<h3 id="daemon-user-namespace-options" tabindex="-1">Daemon user namespace options <a class="header-anchor" href="#daemon-user-namespace-options" aria-hidden="true">🔗</a></h3>
+<p>The Linux kernel
+<a href="https://man7.org/linux/man-pages/man7/user_namespaces.7.html">user namespace support</a>
+provides additional security by enabling a process, and therefore a container,
+to have a unique range of user and group IDs which are outside the traditional
+user and group range utilized by the host system. Potentially the most important
+security improvement is that, by default, container processes running as the
+<code>root</code> user will have expected administrative privilege (with some restrictions)
+inside the container but will effectively be mapped to an unprivileged <code>uid</code> on
+the host.</p>
+<p>For details about how to use this feature, as well as limitations, see
+<a href="https://docs.docker.com/engine/security/userns-remap/">Isolate containers with a user namespace</a>.</p>
+<h3 id="miscellaneous-options" tabindex="-1">Miscellaneous options <a class="header-anchor" href="#miscellaneous-options" aria-hidden="true">🔗</a></h3>
+<p>IP masquerading uses address translation to allow containers without a public
+IP to talk to other machines on the Internet. This may interfere with some
+network topologies and can be disabled with <code>--ip-masq=false</code>.</p>
+<p>Docker supports softlinks for the Docker data directory (<code>/var/lib/docker</code>) and
+for <code>/var/lib/docker/tmp</code>. The <code>DOCKER_TMPDIR</code> and the data directory can be
+set like this:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">DOCKER_TMPDIR=/mnt/disk2/tmp /usr/local/bin/dockerd --data-root /var/lib/docker -H unix:// &gt; /var/lib/docker-machine/docker.log 2&gt;&amp;1</span>
+</code></pre>
+<p>or</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">export</span> DOCKER_TMPDIR=/mnt/disk2/tmp</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">/usr/local/bin/dockerd --data-root /var/lib/docker -H unix:// &gt; /var/lib/docker-machine/docker.log 2&gt;&amp;1</span>
+</code></pre>
+<h4 id="default-cgroup-parent" tabindex="-1">Default cgroup parent <a class="header-anchor" href="#default-cgroup-parent" aria-hidden="true">🔗</a></h4>
+<p>The <code>--cgroup-parent</code> option allows you to set the default cgroup parent
+to use for containers. If this option is not set, it defaults to <code>/docker</code> for
+fs cgroup driver and <code>system.slice</code> for systemd cgroup driver.</p>
+<p>If the cgroup has a leading forward slash (<code>/</code>), the cgroup is created
+under the root cgroup, otherwise the cgroup is created under the daemon
+cgroup.</p>
+<p>Assuming the daemon is running in cgroup <code>daemoncgroup</code>,
+<code>--cgroup-parent=/foobar</code> creates a cgroup in
+<code>/sys/fs/cgroup/memory/foobar</code>, whereas using <code>--cgroup-parent=foobar</code>
+creates the cgroup in <code>/sys/fs/cgroup/memory/daemoncgroup/foobar</code></p>
+<p>The systemd cgroup driver has different rules for <code>--cgroup-parent</code>. Systemd
+represents hierarchy by slice and the name of the slice encodes the location in
+the tree. So <code>--cgroup-parent</code> for systemd cgroups should be a slice name. A
+name can consist of a dash-separated series of names, which describes the path
+to the slice from the root slice. For example, <code>--cgroup-parent=user-a-b.slice</code>
+means the memory cgroup for the container is created in
+<code>/sys/fs/cgroup/memory/user.slice/user-a.slice/user-a-b.slice/docker-&lt;id&gt;.scope</code>.</p>
+<p>This setting can also be set per container, using the <code>--cgroup-parent</code>
+option on <code>docker create</code> and <code>docker run</code>, and takes precedence over
+the <code>--cgroup-parent</code> option on the daemon.</p>
+<h4 id="daemon-metrics" tabindex="-1">Daemon metrics <a class="header-anchor" href="#daemon-metrics" aria-hidden="true">🔗</a></h4>
+<p>The <code>--metrics-addr</code> option takes a tcp address to serve the metrics API.
+This feature is still experimental, therefore, the daemon must be running in experimental
+mode for this feature to work.</p>
+<p>To serve the metrics API on <code>localhost:9323</code> you would specify <code>--metrics-addr 127.0.0.1:9323</code>,
+allowing you to make requests on the API at <code>127.0.0.1:9323/metrics</code> to receive metrics in the
+<a href="https://prometheus.io/docs/instrumenting/exposition_formats/">prometheus</a> format.</p>
+<p>Port <code>9323</code> is the <a href="https://github.com/prometheus/prometheus/wiki/Default-port-allocations">default port associated with Docker
+metrics</a>
+to avoid collisions with other prometheus exporters and services.</p>
+<p>If you are running a prometheus server you can add this address to your scrape configs
+to have prometheus collect metrics on Docker.  For more information
+on prometheus refer to the <a href="https://prometheus.io/">prometheus website</a>.</p>
+<pre><code class="language-yaml"><span class="hljs-attr">scrape_configs:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">job_name:</span> <span class="hljs-string">&#x27;docker&#x27;</span>
+    <span class="hljs-attr">static_configs:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-attr">targets:</span> [<span class="hljs-string">&#x27;127.0.0.1:9323&#x27;</span>]
+</code></pre>
+<p>Please note that this feature is still marked as experimental as metrics and metric
+names could change while this feature is still in experimental.  Please provide
+feedback on what you would like to see collected in the API.</p>
+<h4 id="node-generic-resources" tabindex="-1">Node Generic Resources <a class="header-anchor" href="#node-generic-resources" aria-hidden="true">🔗</a></h4>
+<p>The <code>--node-generic-resources</code> option takes a list of key-value
+pair (<code>key=value</code>) that allows you to advertise user defined resources
+in a swarm cluster.</p>
+<p>The current expected use case is to advertise NVIDIA GPUs so that services
+requesting <code>NVIDIA-GPU=[0-16]</code> can land on a node that has enough GPUs for
+the task to run.</p>
+<p>Example of usage:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;node-generic-resources&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-string">&quot;NVIDIA-GPU=UUID1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-string">&quot;NVIDIA-GPU=UUID2&quot;</span>
+  <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h3 id="daemon-configuration-file" tabindex="-1">Daemon configuration file <a class="header-anchor" href="#daemon-configuration-file" aria-hidden="true">🔗</a></h3>
+<p>The <code>--config-file</code> option allows you to set any configuration option
+for the daemon in a JSON format. This file uses the same flag names as keys,
+except for flags that allow several entries, where it uses the plural
+of the flag name, e.g., <code>labels</code> for the <code>label</code> flag.</p>
+<p>The options set in the configuration file must not conflict with options set
+via flags. The docker daemon fails to start if an option is duplicated between
+the file and the flags, regardless their value. We do this to avoid
+silently ignore changes introduced in configuration reloads.
+For example, the daemon fails to start if you set daemon labels
+in the configuration file and also set daemon labels via the <code>--label</code> flag.
+Options that are not present in the file are ignored when the daemon starts.</p>
+<p>The <code>--validate</code> option allows to validate a configuration file without
+starting the Docker daemon. A non-zero exit code is returned for invalid
+configuration files.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">dockerd --validate --config-file=/tmp/valid-config.json</span>
+configuration OK
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> $?</span>
+0
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">dockerd --validate --config-file /tmp/invalid-config.json</span>
+unable to configure the Docker daemon with file /tmp/invalid-config.json: the following directives don&#x27;t match any configuration option: unknown-option
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> $?</span>
+1
+</code></pre>
+<h5 id="on-linux" tabindex="-1">On Linux <a class="header-anchor" href="#on-linux" aria-hidden="true">🔗</a></h5>
+<p>The default location of the configuration file on Linux is
+<code>/etc/docker/daemon.json</code>. The <code>--config-file</code> flag can be used to specify a
+non-default location.</p>
+<p>This is a full example of the allowed configuration options on Linux:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;allow-nondistributable-artifacts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;api-cors-header&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;authorization-plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;bip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;bridge&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cgroup-parent&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cluster-advertise&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cluster-store&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cluster-store-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;containerd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/run/containerd/containerd.sock&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;containerd-namespace&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;docker&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;containerd-plugin-namespace&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;docker-plugins&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data-root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;debug&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-address-pools&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;base&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.30.0.0/16&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">24</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;base&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;172.31.0.0/16&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">24</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-cgroupns-mode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;private&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-gateway&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-gateway-v6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-runtime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;runc&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-shm-size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;64M&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-ulimits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;nofile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;Hard&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">64000</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;nofile&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;Soft&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">64000</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dns-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dns-search&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;exec-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;exec-root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;experimental&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;features&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fixed-cidr&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fixed-cidr-v6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;hosts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;icc&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;init&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;init-path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/libexec/docker-init&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;insecure-registries&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ip&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;0.0.0.0&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ip-forward&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ip-masq&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;iptables&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ip6tables&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;ipv6&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;live-restore&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;log-driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;json-file&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;log-level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;log-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;cache-disabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;false&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cache-max-file&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;5&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cache-max-size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;20m&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;cache-compress&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;true&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;env&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;os,customer&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;somelabel&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;max-file&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;5&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;max-size&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;10m&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max-concurrent-downloads&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max-concurrent-uploads&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max-download-attempts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;mtu&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;no-new-privileges&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;node-generic-resources&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+    <span class="hljs-string">&quot;NVIDIA-GPU=UUID1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-string">&quot;NVIDIA-GPU=UUID2&quot;</span>
+  <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;oom-score-adjust&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">-500</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;pidfile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;raw-logs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;runtimes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;cc-runtime&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/bin/cc-runtime&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;custom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">&quot;path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/local/bin/my-runc-replacement&quot;</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">&quot;runtimeArgs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;--debug&quot;</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;seccomp-profile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;selinux-enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;shutdown-timeout&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;storage-driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;storage-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;swarm-default-advertise-addr&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tls&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlscacert&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlscert&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlskey&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlsverify&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;userland-proxy&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;userland-proxy-path&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;/usr/libexec/docker-proxy&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;userns-remap&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>You cannot set options in <code>daemon.json</code> that have already been set on
+daemon startup as a flag.
+On systems that use <code>systemd</code> to start the Docker daemon, <code>-H</code> is already set, so
+you cannot use the <code>hosts</code> key in <code>daemon.json</code> to add listening addresses.
+See <a href="https://docs.docker.com/engine/admin/systemd/#custom-docker-daemon-options">https://docs.docker.com/engine/admin/systemd/#custom-docker-daemon-options</a> for how
+to accomplish this task with a systemd drop-in file.</p>
+</blockquote>
+<h5 id="on-windows" tabindex="-1">On Windows <a class="header-anchor" href="#on-windows" aria-hidden="true">🔗</a></h5>
+<p>The default location of the configuration file on Windows is
+<code>%programdata%\docker\config\daemon.json</code>. The <code>--config-file</code> flag can be
+used to specify a non-default location.</p>
+<p>This is a full example of the allowed configuration options on Windows:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;allow-nondistributable-artifacts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;authorization-plugins&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;bridge&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cluster-advertise&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;cluster-store&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;containerd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\\\\.\\pipe\\containerd-containerd&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;containerd-namespace&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;docker&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;containerd-plugin-namespace&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;docker-plugins&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;data-root&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;debug&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;default-ulimits&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dns&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dns-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;dns-search&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;exec-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;experimental&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;features&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span><span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;fixed-cidr&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;hosts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;insecure-registries&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;labels&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;log-driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;log-level&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max-concurrent-downloads&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">3</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max-concurrent-uploads&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;max-download-attempts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">5</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;mtu&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;pidfile&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;raw-logs&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;registry-mirrors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;shutdown-timeout&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;storage-driver&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;storage-opts&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;swarm-default-advertise-addr&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlscacert&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlscert&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlskey&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;tlsverify&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h4 id="feature-options" tabindex="-1">Feature options <a class="header-anchor" href="#feature-options" aria-hidden="true">🔗</a></h4>
+<p>The optional field <code>features</code> in <code>daemon.json</code> allows users to enable or disable specific
+daemon features. For example, <code>{&quot;features&quot;:{&quot;buildkit&quot;: true}}</code> enables <code>buildkit</code> as the
+default docker image builder.</p>
+<p>The list of currently supported feature options:</p>
+<ul>
+<li><code>buildkit</code>: It enables <code>buildkit</code> as default builder when set to <code>true</code> or disables it by
+<code>false</code>. Note that if this option is not explicitly set in the daemon config file, then it
+is up to the cli to determine which builder to invoke.</li>
+</ul>
+<h4 id="configuration-reload-behavior" tabindex="-1">Configuration reload behavior <a class="header-anchor" href="#configuration-reload-behavior" aria-hidden="true">🔗</a></h4>
+<p>Some options can be reconfigured when the daemon is running without requiring
+to restart the process. We use the <code>SIGHUP</code> signal in Linux to reload, and a global event
+in Windows with the key <code>Global\docker-daemon-config-$PID</code>. The options can
+be modified in the configuration file but still will check for conflicts with
+the provided flags. The daemon fails to reconfigure itself
+if there are conflicts, but it won't stop execution.</p>
+<p>The list of currently supported options that can be reconfigured is this:</p>
+<ul>
+<li><code>debug</code>: it changes the daemon to debug mode when set to true.</li>
+<li><code>cluster-store</code>: it reloads the discovery store with the new address.</li>
+<li><code>cluster-store-opts</code>: it uses the new options to reload the discovery store.</li>
+<li><code>cluster-advertise</code>: it modifies the address advertised after reloading.</li>
+<li><code>labels</code>: it replaces the daemon labels with a new set of labels.</li>
+<li><code>live-restore</code>: Enables <a href="https://docs.docker.com/config/containers/live-restore/">keeping containers alive during daemon downtime</a>.</li>
+<li><code>max-concurrent-downloads</code>: it updates the max concurrent downloads for each pull.</li>
+<li><code>max-concurrent-uploads</code>: it updates the max concurrent uploads for each push.</li>
+<li><code>max-download-attempts</code>: it updates the max download attempts for each pull.</li>
+<li><code>default-runtime</code>: it updates the runtime to be used if not is
+specified at container creation. It defaults to &quot;default&quot; which is
+the runtime shipped with the official docker packages.</li>
+<li><code>runtimes</code>: it updates the list of available OCI runtimes that can
+be used to run containers.</li>
+<li><code>authorization-plugin</code>: it specifies the authorization plugins to use.</li>
+<li><code>allow-nondistributable-artifacts</code>: Replaces the set of registries to which the daemon will push nondistributable artifacts with a new set of registries.</li>
+<li><code>insecure-registries</code>: it replaces the daemon insecure registries with a new set of insecure registries. If some existing insecure registries in daemon's configuration are not in newly reloaded insecure registries, these existing ones will be removed from daemon's config.</li>
+<li><code>registry-mirrors</code>: it replaces the daemon registry mirrors with a new set of registry mirrors. If some existing registry mirrors in daemon's configuration are not in newly reloaded registry mirrors, these existing ones will be removed from daemon's config.</li>
+<li><code>shutdown-timeout</code>: it replaces the daemon's existing configuration timeout with a new timeout for shutting down all containers.</li>
+<li><code>features</code>: it explicitly enables or disables specific features.</li>
+</ul>
+<p>Updating and reloading the cluster configurations such as <code>--cluster-store</code>,
+<code>--cluster-advertise</code> and <code>--cluster-store-opts</code> will take effect only if
+these configurations were not previously configured. If <code>--cluster-store</code>
+has been provided in flags and <code>cluster-advertise</code> not, <code>cluster-advertise</code>
+can be added in the configuration file without accompanied by <code>--cluster-store</code>.
+Configuration reload will log a warning message if it detects a change in
+previously configured cluster configurations.</p>
+<h3 id="run-multiple-daemons" tabindex="-1">Run multiple daemons <a class="header-anchor" href="#run-multiple-daemons" aria-hidden="true">🔗</a></h3>
+<blockquote>
+<p><strong>Note:</strong></p>
+<p>Running multiple daemons on a single host is considered as &quot;experimental&quot;. The user should be aware of
+unsolved problems. This solution may not work properly in some cases. Solutions are currently under development
+and will be delivered in the near future.</p>
+</blockquote>
+<p>This section describes how to run multiple Docker daemons on a single host. To
+run multiple daemons, you must configure each daemon so that it does not
+conflict with other daemons on the same host. You can set these options either
+by providing them as flags, or by using a <a href="#daemon-configuration-file">daemon configuration file</a>.</p>
+<p>The following daemon options must be configured for each daemon:</p>
+<pre><code class="language-console">-b, --bridge=                          Attach containers to a network bridge
+--exec-root=/var/run/docker            Root of the Docker execdriver
+--data-root=/var/lib/docker            Root of persisted Docker data
+-p, --pidfile=/var/run/docker.pid      Path to use for daemon PID file
+-H, --host=[]                          Daemon socket(s) to connect to
+--iptables=true                        Enable addition of iptables rules
+--config-file=/etc/docker/daemon.json  Daemon configuration file
+--tlscacert=&quot;~/.docker/ca.pem&quot;         Trust certs signed only by this CA
+--tlscert=&quot;~/.docker/cert.pem&quot;         Path to TLS certificate file
+--tlskey=&quot;~/.docker/key.pem&quot;           Path to TLS key file
+</code></pre>
+<p>When your daemons use different values for these flags, you can run them on the same host without any problems.
+It is very important to properly understand the meaning of those options and to use them correctly.</p>
+<ul>
+<li>The <code>-b, --bridge=</code> flag is set to <code>docker0</code> as default bridge network. It is created automatically when you install Docker.
+If you are not using the default, you must create and configure the bridge manually or just set it to 'none': <code>--bridge=none</code></li>
+<li><code>--exec-root</code> is the path where the container state is stored. The default value is <code>/var/run/docker</code>. Specify the path for
+your running daemon here.</li>
+<li><code>--data-root</code> is the path where persisted data such as images, volumes, and
+cluster state are stored. The default value is <code>/var/lib/docker</code>. To avoid any
+conflict with other daemons, set this parameter separately for each daemon.</li>
+<li><code>-p, --pidfile=/var/run/docker.pid</code> is the path where the process ID of the daemon is stored. Specify the path for your
+pid file here.</li>
+<li><code>--host=[]</code> specifies where the Docker daemon will listen for client connections. If unspecified, it defaults to <code>/var/run/docker.sock</code>.</li>
+<li><code>--iptables=false</code> prevents the Docker daemon from adding iptables rules. If
+multiple daemons manage iptables rules, they may overwrite rules set by another
+daemon. Be aware that disabling this option requires you to manually add
+iptables rules to expose container ports. If you prevent Docker from adding
+iptables rules, Docker will also not add IP masquerading rules, even if you set
+<code>--ip-masq</code> to <code>true</code>. Without IP masquerading rules, Docker containers will not be
+able to connect to external hosts or the internet when using network other than
+default bridge.</li>
+<li><code>--config-file=/etc/docker/daemon.json</code> is the path where configuration file is stored. You can use it instead of
+daemon flags. Specify the path for each daemon.</li>
+<li><code>--tls*</code> Docker daemon supports <code>--tlsverify</code> mode that enforces encrypted and authenticated remote connections.
+The <code>--tls*</code> options enable use of specific certificates for individual daemons.</li>
+</ul>
+<p>Example script for a separate “bootstrap” instance of the Docker daemon without network:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> dockerd \
+        -H unix:///var/run/docker-bootstrap.sock \
+        -p /var/run/docker-bootstrap.pid \
+        --iptables=<span class="hljs-literal">false</span> \
+        --ip-masq=<span class="hljs-literal">false</span> \
+        --bridge=none \
+        --data-root=/var/lib/docker-bootstrap \
+        --exec-root=/var/run/docker-bootstrap</span>
+</code></pre>
+</body></html>

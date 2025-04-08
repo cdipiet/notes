@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.799" />
+        <title>bind_tasti</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="bind_tasti" tabindex="-1">bind_tasti <a class="header-anchor" href="#bind_tasti" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.799</p>
+<nav class="table-of-contents"><ol></ol></nav><h1 id="bind" tabindex="-1">bind <a class="header-anchor" href="#bind" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash"><span class="hljs-built_in">help</span> <span class="hljs-built_in">bind</span>
+<span class="hljs-string">&#x27;bind -P | less&#x27;</span>
+The complete list!
+You can also create your own:
+<span class="hljs-string">&#x27;$ bind &quot;\C-b&quot;:backward-word&#x27;</span> to go backward one word at time with <span class="hljs-string">&#x27;control-b&#x27;</span>
+You can also launch apps with them:
+$ <span class="hljs-built_in">bind</span> -x <span class="hljs-string">&#x27;&quot;\C-e&quot;&#x27;</span>:mozilla.
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Tasti</th>
+<th style="text-align:left">Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">CTRL+O</td>
+<td style="text-align:left">Riesegue i comandi della history dal punto della history in cui ci si è posizionati con il tasto cursore alto</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+R</code></td>
+<td style="text-align:left">Ricerca incrementale all'indietro nella history</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+S</td>
+<td style="text-align:left">Ricerca incrementale in avanti nella history</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+J</td>
+<td style="text-align:left">Abbandona la ricerca incrementale, lasciando nella shell la linea trovata</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+G</td>
+<td style="text-align:left">Abbandona la ricerca incrementale, lasciando nella shell la linea originale</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ALT+.</code></td>
+<td style="text-align:left">Inserisce al posto del cursore l'argomento finale dell'ultimo comando usato</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ESC+.</code></td>
+<td style="text-align:left">Inserisce al posto del cursore l'argomento finale dell'ultimo comando usato</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>!$</code></td>
+<td style="text-align:left">Inserisce al posto del cursore l'argomento finale dell'ultimo comando usato</td>
+</tr>
+<tr>
+<td style="text-align:left">ESC+CTRL+Y</td>
+<td style="text-align:left">Inserisce al posto del cursore l'argomento iniziale dell'ultimo comando usato</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+A</td>
+<td style="text-align:left">Muove il cursore all'inizio della riga di comando</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+E</td>
+<td style="text-align:left">Muove il cursore alla fine della riga di comando</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+U</code></td>
+<td style="text-align:left">Cancella dall'inizio della riga alla posizione del cursore</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+K</code></td>
+<td style="text-align:left">Cancella dalla posizione del cursore alla fine della riga</td>
+</tr>
+<tr U,K="">
+<td style="text-align:left">CTRL+Y</td>
+<td style="text-align:left">Incolla cio che e' stato cancellato con CTRL+</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+T</td>
+<td style="text-align:left">Traspone, ossia cambia di posto, le ultime due lettere prima del cursore</td>
+</tr>
+<tr>
+<td style="text-align:left">ALT+T</td>
+<td style="text-align:left">Traspone, ossia inverte la posizione delle ultime due parole prima del cursore</td>
+</tr>
+<tr>
+<td style="text-align:left">ALT+C+Y</td>
+<td style="text-align:left">Inserisce il primo argomento del comando precedente, <code>ALT+&lt;N&gt;</code> e poi <code>ALT+C+Y</code> per l'ennesimo argomento</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+L</td>
+<td style="text-align:left">Clears the Screen, similar to the clear command</td>
+</tr>
+<tr>
+<td style="text-align:left">CTRL+H</td>
+<td style="text-align:left">Same as backspace</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+C</code></td>
+<td style="text-align:left">Kill whatever you are running, sends <code>SIGINT</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+D</code></td>
+<td style="text-align:left">Exit the current shell, send <code>EOF</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+Z</code></td>
+<td style="text-align:left">Puts whatever you are running into a suspended background process. <code>fg</code> restores it.</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">TAB</span></td>
+<td style="text-align:left">Auto-complete files and folder names</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash"><span class="hljs-built_in">history</span> | <span class="hljs-built_in">tail</span> -3
+481 aixpert -l low -n
+482 <span class="hljs-built_in">ls</span> -l /etc/security/aixpert/core/
+483 vi /etc/security/aixpert/core/secaixpert.xml
+!481 will run the aixpert <span class="hljs-built_in">command</span>. After that is over, you can <span class="hljs-built_in">type</span> !483, and it will vi the output.
+<span class="hljs-built_in">set</span> -o vi
+gives you vim power over your bash commands
+</code></pre>
+</body></html>

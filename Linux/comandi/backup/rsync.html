@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.242" />
+        <title>rsync</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="rsync" tabindex="-1">rsync <a class="header-anchor" href="#rsync" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.242</p>
+<nav class="table-of-contents"><ol><li><a href="#sincronizzazione-di-directory-con-esclusione">Sincronizzazione di directory con esclusione </a></li><li><a href="#per-avere-un-report-dei-file-copiati%2Fcancellati">Per avere un report dei file copiati/cancellati </a></li><li><a href="#copia-di-un-file-di-grandi-dimensioni-con-visualizzazione-del-progresso">Copia di un file di grandi dimensioni con visualizzazione del progresso </a></li><li><a href="#allineare-due-directory-con-rsync-su-ntfs">Allineare due directory con RSync su NTFS </a></li><li><a href="#fat">FAT </a></li><li><a href="#allineare-due-directory-con-rsync-su-ext4">Allineare due directory con RSync su ext4 </a></li><li><a href="#report%3A--i%2C---itemize-changes">Report: -i, --itemize-changes </a></li><li><a href="#esempio-rsync-su-ssh">Esempio rsync su SSH </a></li><li><a href="#client-server">Client Server </a><ol><li><a href="#parte-server%5Baprire-sul-firewall-la-porta-873-tcp%5D">Parte Server[Aprire sul firewall la porta 873 TCP] </a></li><li><a href="#parte-client">Parte Client </a></li></ol></li><li><a href="#srget">srget </a></li></ol></nav><h1 id="rsync-1" tabindex="-1">rsync <a class="header-anchor" href="#rsync-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/rsync.1">https://man.archlinux.org/man/rsync.1</a></p>
+</li>
+<li>
+<p><a href="https://manpages.org/rsync">https://manpages.org/rsync</a></p>
+</li>
+<li>
+<p><a href="https://rsync.samba.org/">https://rsync.samba.org/</a></p>
+<pre><code>--archive, -a            archive mode is -rlptgoD (no -A,-X,-U,-N,-H)
+--recursive, -r          recurse into directories
+--links, -l              copy symlinks as symlinks
+--perms, -p              preserve permissions
+--times, -t              preserve modification times
+--group, -g              preserve group
+--owner, -o              preserve owner (super-user only)
+-D                       same as --devices --specials
+--devices                preserve device files (super-user only)
+--specials               preserve special files
+
+--verbose, -v            increase verbosity
+--del                    an alias for --delete-during
+--delete-during          receiver deletes during the transfer
+--itemize-changes, -i    output a change-summary for all updates
+--dry-run, -n            perform a trial run with no changes made
+
+Per exfat:
+--copy-links, -L         transform symlink into referent file/dir
+--no-p 
+</code></pre>
+</li>
+</ul>
+<p>q</p>
+<pre><code class="language-bash">$ man rsync
+$ rsync [OPTION...] SRC... [DEST]
+
+$ rsync *.c src/                      <span class="hljs-comment"># copia i file .c nella directory src</span>
+$ rsync -avz src/bar /data/tmp        <span class="hljs-comment"># copia la directory sorgente bar nella directory destinazione /data/tmp/bar</span>
+$ rsync -avz foo:src/bar/ /data/tmp   <span class="hljs-comment"># lo slash terminale della directory sorgente fà copiare il contenuto della directory sorgente src/bar dentro la directory destinazione /data/tmp</span>
+
+<span class="hljs-comment"># Questi due comandi sono equivalenti: il contenuto della directory foo viene copiato nella directory /dest/foo</span>
+$ rsync -av /src/foo /dest
+$ rsync -av /src/foo/ /dest/foo
+
+
+$ rsync -ani /media/Backup/ProgrammingDocs /media/ExternalBak/ |grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+$ rsync -av -P sda5/504.20.4.iso bitlocker/SEC504/
+$ rsync -i -a --del imgcd /media/CDP250GB/ |grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+
+</code></pre>
+<h2 id="sincronizzazione-di-directory-con-esclusione" tabindex="-1">Sincronizzazione di directory con esclusione <a class="header-anchor" href="#sincronizzazione-di-directory-con-esclusione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://man.archlinux.org/man/rsync.1#FILTER_RULES">https://man.archlinux.org/man/rsync.1#FILTER_RULES</a></li>
+</ul>
+<p>Regole per i pattern di esclusione:</p>
+<ul>
+<li>Utilizzando <code>--exclude</code> o <code>--exclude-from</code> al posto di <code>--filter</code>, per le esclusioni non c'e' bisogno del prefisso <code>-</code> oppure <code>exclude</code>.</li>
+<li>Il pattern che inizia per <code>/</code> è un path assoluto. Se il pattern non inizia per <code>/</code> allora viene cercata la corrispondenza del pattern in ogni punto dell'albero.</li>
+<li>Se il pattern termina per <code>/</code> è una directory.</li>
+<li>rsync sceglie se effettuare un match <code>string</code> o <code>wildcard</code>. Se il pattern contiene uno dei caratteri <code>*</code>, <code>?</code>, <code>[</code> allora il match non è di tipo stringa ma di tipo wildcard.</li>
+<li>Glob, non RegEx. il pattern <code>*</code> corrisponde ad una parte di un path, che non può dunque oltrepassare un <code>/</code>.</li>
+<li><code>**</code> corrisponde a uno o più componenti di path, può includere dunque degli <code>/</code>.</li>
+<li><code>?</code> corrisponde ad un solo carattere, eccetto <code>/</code>.</li>
+<li>Se il pattern contiene un <code>/</code> (come ultimo carattere non conta), oppure se il pattern contiene un <code>**</code> ==&gt; il pattern deve corrispondere al pathname completo.</li>
+<li>Se il pattern non contiene un <code>/</code>(come ultimo carattere non conta), o un <code>**</code>                          ==&gt; il pattern deve corrispondere al componente terminale del pathname.</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Sincronizzazione di directory con esclusione</span>
+<span class="hljs-comment"># --delete                 delete extraneous files from dest dirs</span>
+<span class="hljs-comment"># --del                    an alias for --delete-during</span>
+<span class="hljs-comment"># --delete-during          receiver deletes during the transfer</span>
+<span class="hljs-comment"># --delete-excluded        also delete excluded files from dest dirs</span>
+<span class="hljs-comment"># rsync 3.0.0 made --delete-during the default delete mode </span>
+<span class="hljs-built_in">cat</span> &gt;&gt; /tmp/rsync_exclude_list.txt &lt;&lt; <span class="hljs-string">EOF
+.cache/
+.config/
+.dbus/
+.gnome/
+EOF</span>
+$ <span class="hljs-built_in">mkdir</span> -p /tmp/Backup
+$ rsync -i -a --del --delete-excluded --exclude-from=<span class="hljs-string">&#x27;/tmp/rsync_exclude_list.txt&#x27;</span> ~/bin /mnt/Backup/
+$ rsync -av --exclude={<span class="hljs-string">&#x27;file1.txt&#x27;</span>,<span class="hljs-string">&#x27;dir1/*&#x27;</span>,<span class="hljs-string">&#x27;dir2&#x27;</span>} src_directory/ dst_directory/
+
+<span class="hljs-comment"># Per copiare solo i file .jpg</span>
+<span class="hljs-comment"># --include=&#x27;*.jpg&#x27; - First we are including all .jpg files.</span>
+<span class="hljs-comment"># --include=&#x27;*/&#x27; - Then we are including all directories inside the in src_directory directory. Without this rsync will only copy *.jpg files in the top level directory.</span>
+<span class="hljs-comment"># -m - Removes the empty directories.</span>
+$ rsync -a -m --include=<span class="hljs-string">&#x27;*.jpg&#x27;</span> --include=<span class="hljs-string">&#x27;*/&#x27;</span> --exclude=<span class="hljs-string">&#x27;*&#x27;</span> src_directory/ dst_directory/
+
+$ find src_directory/ -name <span class="hljs-string">&quot;*.jpg&quot;</span> -<span class="hljs-built_in">printf</span> %P\\0\\n | rsync -a --files-from=- src_directory/ dst_directory/
+</code></pre>
+<h2 id="per-avere-un-report-dei-file-copiati%2Fcancellati" tabindex="-1">Per avere un report dei file copiati/cancellati <a class="header-anchor" href="#per-avere-un-report-dei-file-copiati%2Fcancellati" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ rsync -i -a --del imgcd.iso /media/CDP250GB/ |grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+</code></pre>
+<pre><code>-a              archive mode; equals -rlptgoD (no -H,-A,-X)
+-r              recurse into directories
+-l              copy symlinks as symlinks
+-p              preserve permissions
+-t              preserve modification times
+-g              preserve group
+-o              preserve owner (super-user only)
+-D                       same as --devices --specials
+--del                    an alias for --delete-during
+--delete-during          receiver deletes during the transfer
+-v            increase verbosity
+-P     The -P option is equivalent to --partial --progress.
+</code></pre>
+<h2 id="copia-di-un-file-di-grandi-dimensioni-con-visualizzazione-del-progresso" tabindex="-1">Copia di un file di grandi dimensioni con visualizzazione del progresso <a class="header-anchor" href="#copia-di-un-file-di-grandi-dimensioni-con-visualizzazione-del-progresso" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> rsync -a --del -P /opt/vm/Windows10 /run/media/<span class="hljs-variable">$USER</span>/backup/
+$ rsync -av -P sda5/504.20.4.iso bitlocker/SEC504/
+</code></pre>
+<h2 id="allineare-due-directory-con-rsync-su-ntfs" tabindex="-1">Allineare due directory con RSync su NTFS <a class="header-anchor" href="#allineare-due-directory-con-rsync-su-ntfs" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ rsync -rtv --del --modify-window=1 --progress ~/Documenti/per /mnt/sdb1/cdp250/Documents/
+</code></pre>
+<pre><code>-r : ricorsivo
+-t : preserva i tempi di modifica
+--del : cancella i file non presenti nella destinazione
+--modify-window=1: tolleranza di differenza sui tempi di modifica dei files di 1 secondo
+</code></pre>
+<h2 id="fat" tabindex="-1">FAT <a class="header-anchor" href="#fat" aria-hidden="true">🔗</a></h2>
+<p>Nel filesystem FAT c'e' una tolleranza di 2 secondi nella rappresentazione del tempo.
+Se ci sono problemi di differenza tra i files di pochi secondi, utilizzare as esempio:</p>
+<pre><code>--modify-window=5
+</code></pre>
+<p>introdurrà una tolleranza di 5 secondi</p>
+<h2 id="allineare-due-directory-con-rsync-su-ext4" tabindex="-1">Allineare due directory con RSync su ext4 <a class="header-anchor" href="#allineare-due-directory-con-rsync-su-ext4" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ rsync -a --del sdir /path/dest/
+</code></pre>
+<p>allinea la directory <code>sdir</code> all'interno della directory <code>/pat/dest/</code>, al termine esistera' allineata la directory: <code>/path/dest/sdir</code></p>
+<p>Una altra barra al termine della <strong>directory sorgente</strong>: sdir<code>/</code> indica di copiare <strong>il contenuto</strong> di <code>sdir</code> nella destinazione e non sdir stessa,
+elimina cioè un livello di directory entrando in sdir.</p>
+<h2 id="report%3A--i%2C---itemize-changes" tabindex="-1">Report: -i, --itemize-changes <a class="header-anchor" href="#report%3A--i%2C---itemize-changes" aria-hidden="true">🔗</a></h2>
+<p>Requests a simple itemized list of the changes that are being made to each file, including attribute changes. This is exactly the same as specifying <code>--out-format='%i %n%L'</code>. If you repeat the option, unchanged files will also be output, but only if the receiving rsync is at least version 2.6.7 (you can use -vv with older versions of rsync, but that also turns on the output of other verbose messages).</p>
+<p>The <code>%i</code> escape has a cryptic output that is 11 letters long. The general format is like the string</p>
+<p class="b m"><span class="bl">Y</span><span class="r">X</span>cstpoguax</p>
+<p>where Y is replaced by the type of update being done, X is replaced by the file-type, and the other letters represent attributes that may be output if they are being modified.</p>
+<p>The <span class="mbb">update types</span> that replace the <span class="bl b m">Y</span> are as follows:</p>
+<ul>
+<li>A <span class="mbb">&lt;</span> means that a file is being transferred to the remote host (sent).</li>
+<li>A <span class="mbb">&gt;</span> means that a file is being transferred to the local host (received).</li>
+<li>A <span class="mbb">c</span> means that a local change/creation is occurring for the item (such as the creation of a directory or the changing of a symlink, etc.).</li>
+<li>A <span class="mbb">h</span> means that the item is a hard link to another item (requires --hard-links).</li>
+<li>A <span class="mbb">.</span> means that the item is not being updated (though it might have attributes that are being modified).</li>
+<li>A <span class="mbb">*</span> means that the rest of the itemized-output area contains a message (e.g. &quot;deleting&quot;).</li>
+</ul>
+<p>The <span class="mrb">file-types</span> that replace the <span class="mrb">X</span> are:</p>
+<ul>
+<li><span class="mrb">f</span> for a file</li>
+<li><span class="mrb">d</span> for a directory</li>
+<li><span class="mrb">L</span> for a symlink</li>
+<li><span class="mrb">D</span> for a device</li>
+<li><span class="mrb">S</span> for a special file (e.g. named sockets and fifos).</li>
+</ul>
+<p>The other letters in the string above are the actual letters that will be output if the associated attribute for the item is being updated or a <code>.</code> for no change. Three exceptions to this are:</p>
+<ol>
+<li>a newly created item replaces each letter with a <code>+</code></li>
+<li>an identical item replaces the dots with <code>spaces</code></li>
+<li>an unknown attribute replaces each letter with a <code>?</code> (this can happen when talking to an older rsync).</li>
+</ol>
+<p>The attribute that is associated with each letter is as follows:</p>
+<ul>
+<li>A <code>c</code> means either that a regular file has a different checksum (requires --checksum) or that a symlink, device, or special file has a changed value. Note that if you are sending files to an rsync prior to 3.0.1, this change flag will be present only for checksum-differing regular files.</li>
+<li>A <code>s</code> means the size of a regular file is different and will be updated by the file transfer.</li>
+<li>A <code>t</code> means the modification time is different and is being updated to the sender's value (requires --times). An alternate value of T means that the modification time will be set to the transfer time, which happens when a file/symlink/device is updated without --times and when a symlink is changed and the receiver can't set its time. (Note: when using an rsync 3.0.0 client, you might see the s flag combined with t instead of the proper T flag for this time-setting failure.)</li>
+<li>A <code>p</code> means the permissions are different and are being updated to the sender's value (requires --perms).</li>
+<li>An <code>o</code> means the owner is different and is being updated to the sender's value (requires --owner and super-user privileges).</li>
+<li>A <code>g</code>means the group is different and is being updated to the sender's value (requires --group and the authority to set the group).</li>
+<li>The <code>u</code> slot is reserved for future use.</li>
+<li>The <code>a</code> means that the ACL information changed.</li>
+<li>The <code>x</code> means that the extended attribute information changed.</li>
+</ul>
+<p>One other output is possible: when deleting files, the <code>%i</code> will output the string <code>*deleting</code> for each item that is being removed (assuming that you are talking to a recent enough rsync that it logs deletions instead of outputting them as a verbose message).</p>
+<h2 id="esempio-rsync-su-ssh" tabindex="-1">Esempio rsync su SSH <a class="header-anchor" href="#esempio-rsync-su-ssh" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ rsync -i -a --del CBS_UTL_LCU_3.5.50-6.1_CDP -e ssh:cbsuser@cmv1upm:migration/|grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+$ rsync -i -a --del -e sshcdipiet@cdipiet-laptop:cdp /home/cdipiet/|grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+$ <span class="hljs-built_in">alias</span> getlaptopcdp=<span class="hljs-string">&quot;rsync -i -a --del -e ssh cdipiet@cdipiet-laptop:cdp /home/cdipiet/|grep -v -E &#x27;^\.&#x27;|sort&quot;</span>
+$ <span class="hljs-built_in">alias</span> setlaptopcdp=<span class="hljs-string">&quot;rsync -i -a --del -e ssh /home/cdipiet/cdp cdipiet@cdipiet-laptop:|grep -v -E &#x27;^\.&#x27;|sort&quot;</span>
+</code></pre>
+<h2 id="client-server" tabindex="-1">Client Server <a class="header-anchor" href="#client-server" aria-hidden="true">🔗</a></h2>
+<h3 id="parte-server%5Baprire-sul-firewall-la-porta-873-tcp%5D" tabindex="-1">Parte Server[Aprire sul firewall la porta 873 TCP] <a class="header-anchor" href="#parte-server%5Baprire-sul-firewall-la-porta-873-tcp%5D" aria-hidden="true">🔗</a></h3>
+<pre><code>man rsyncd.conf
+
+/etc/rsyncd.conf contiene le definizioni dei moduli
+
+motd file = /etc/rsyncd.motd
+log file = /var/log/rsyncd.log
+pid file = /var/run/rsyncd.pid
+lock file = /var/run/rsync.lock
+
+[cvs]
+path = /data/cvs
+comment = CVS repository (requires authentication)
+auth users = tridge, susan
+secrets file = /usr/local/etc/rsyncd.secrets
+hosts allow = 192.168.0.0/24
+uid = root
+gid = root
+read only = no
+list = yes
+chroot = yes
+</code></pre>
+<p>The /usr/local/etc/rsyncd.secrets file would look something like this:</p>
+<pre><code>tridge:mypass
+susan:herpass
+</code></pre>
+<h3 id="parte-client" tabindex="-1">Parte Client <a class="header-anchor" href="#parte-client" aria-hidden="true">🔗</a></h3>
+<pre><code>rsync --verbose --progress --stats --delete --compress --recursive --times --perms --links /etc 192.168.0.240:cvs
+</code></pre>
+<p>Chiudere la porta 873 ed usare la porta 22 di SSH:</p>
+<pre><code>rsync --verbose --progress --stats --delete --compress --recursive --times --perms --links --rsh=ssh /etc 192.168.0.240:cvs
+</code></pre>
+<p>(effettuare la condivisione delle chiavi SSH per evitare la richiesta della password)</p>
+<h2 id="srget" tabindex="-1">srget <a class="header-anchor" href="#srget" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+OPT=/opt/
+EXTHD=/media/ext700/
+<span class="hljs-keyword">if</span> [ -e <span class="hljs-variable">${DATA}</span> ] &amp;&amp; [ -e <span class="hljs-variable">${OPT}</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Rsync to External HD from Ubuntu VM&quot;</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">cd</span> <span class="hljs-variable">${OPT}</span>; <span class="hljs-keyword">then</span>
+rsync -i -a --del <span class="hljs-variable">${HOME}</span>/cdp Backup/ |grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+rsync -i -a --del Backup <span class="hljs-variable">${EXTHD}</span> |grep -v -E <span class="hljs-string">&#x27;^\.&#x27;</span>|<span class="hljs-built_in">sort</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${DATA}</span> does not exists!&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Done Rsync to External HD from Ubuntu VM.&quot;</span>
+</code></pre>
+</body></html>

@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.234" />
+        <title>docker_python</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="docker_python" tabindex="-1">docker_python <a class="header-anchor" href="#docker_python" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.234</p>
+<nav class="table-of-contents"><ol><li><a href="#ssl%2Fhttps">SSL/HTTPS </a></li><li><a href="#partenza-uvicorn-con-ssl">partenza uvicorn con SSL </a></li></ol></nav><h1 id="docker-python-applications" tabindex="-1">Docker Python Applications <a class="header-anchor" href="#docker-python-applications" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/language/python/">https://docs.docker.com/language/python/</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/python">https://hub.docker.com/_/python</a></p>
+</li>
+<li>
+<p><a href="https://pythonspeed.com/articles/activate-virtualenv-dockerfile/">https://pythonspeed.com/articles/activate-virtualenv-dockerfile/</a> Come attivare un virtualenv in un Dockerfile, invece di lanciare lo script di attivazione di può semplicemente inserire il virtualenv nel PATH. We can replace activate by setting the appropriate environment variables: Docker’s ENV command applies both subsequent RUNs as well as to the CMD.</p>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> python:<span class="hljs-number">3.9</span>-slim-bullseye
+
+<span class="hljs-keyword">ENV</span> VIRTUAL_ENV=/opt/venv
+<span class="hljs-keyword">RUN</span><span class="language-bash"> python3 -m venv <span class="hljs-variable">$VIRTUAL_ENV</span></span>
+<span class="hljs-keyword">ENV</span> PATH=<span class="hljs-string">&quot;$VIRTUAL_ENV/bin:$PATH&quot;</span>
+
+<span class="hljs-comment"># Install dependencies:</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> requirements.txt .</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> pip install -r requirements.txt</span>
+
+<span class="hljs-comment"># Run the application:</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> myapp.py .</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;python&quot;</span>, <span class="hljs-string">&quot;myapp.py&quot;</span>]</span>
+</code></pre>
+<p>Altro modo:</p>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> python:<span class="hljs-number">3.9</span>-slim-bullseye
+
+<span class="hljs-keyword">RUN</span><span class="language-bash"> python3 -m venv /opt/venv</span>
+
+<span class="hljs-comment"># Install dependencies:</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> requirements.txt .</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> . /opt/venv/bin/activate &amp;&amp; pip install -r requirements.txt</span>
+
+<span class="hljs-comment"># Run the application:</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> myapp.py .</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> . /opt/venv/bin/activate &amp;&amp; <span class="hljs-built_in">exec</span> python myapp.py</span>
+</code></pre>
+<p>La exec è presente per gestire correttamente i segnali: <a href="https://hynek.me/articles/docker-signals/">https://hynek.me/articles/docker-signals/</a></p>
+</li>
+<li>
+<p><a href="https://sourcery.ai/blog/python-docker/">https://sourcery.ai/blog/python-docker/</a></p>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> python:<span class="hljs-number">3.7</span>-slim as base
+
+<span class="hljs-comment"># Setup env</span>
+<span class="hljs-keyword">ENV</span> LANG C.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">ENV</span> LC_ALL C.UTF-<span class="hljs-number">8</span>
+<span class="hljs-keyword">ENV</span> PYTHONDONTWRITEBYTECODE <span class="hljs-number">1</span>
+<span class="hljs-keyword">ENV</span> PYTHONFAULTHANDLER <span class="hljs-number">1</span>
+
+
+<span class="hljs-keyword">FROM</span> base AS python-deps
+
+<span class="hljs-comment"># Install pipenv and compilation dependencies</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> pip install pipenv</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y --no-install-recommends gcc</span>
+
+<span class="hljs-comment"># Install python dependencies in /.venv</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> Pipfile .</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> Pipfile.lock .</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> PIPENV_VENV_IN_PROJECT=1 pipenv install --deploy</span>
+
+
+<span class="hljs-keyword">FROM</span> base AS runtime
+
+<span class="hljs-comment"># Copy virtual env from python-deps stage</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> --from=python-deps /.venv /.venv</span>
+<span class="hljs-keyword">ENV</span> PATH=<span class="hljs-string">&quot;/.venv/bin:$PATH&quot;</span>
+
+<span class="hljs-comment"># Create and switch to a new user</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> useradd --create-home appuser</span>
+<span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /home/appuser</span>
+<span class="hljs-keyword">USER</span> appuser
+
+<span class="hljs-comment"># Install application into container</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> . .</span>
+
+<span class="hljs-comment"># Run the application</span>
+<span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;python&quot;</span>, <span class="hljs-string">&quot;-m&quot;</span>, <span class="hljs-string">&quot;http.server&quot;</span>]</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;--directory&quot;</span>, <span class="hljs-string">&quot;directory&quot;</span>, <span class="hljs-string">&quot;8000&quot;</span>]</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="ssl%2Fhttps" tabindex="-1">SSL/HTTPS <a class="header-anchor" href="#ssl%2Fhttps" aria-hidden="true">🔗</a></h2>
+<p>Creazione dei certificati da utilizzare per impostare uvicorn su TLS</p>
+<p>Riferimenti:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/27164354/create-a-self-signed-x509-certificate-in-python">https://stackoverflow.com/questions/27164354/create-a-self-signed-x509-certificate-in-python</a></li>
+<li><a href="https://www.pyopenssl.org/en/stable/api.html">https://www.pyopenssl.org/en/stable/api.html</a></li>
+<li><a href="https://www.devdungeon.com/content/creating-self-signed-ssl-certificates-openssl">https://www.devdungeon.com/content/creating-self-signed-ssl-certificates-openssl</a></li>
+<li><a href="https://docs.python-requests.org/en/master/user/advanced/#ssl-cert-verification">https://docs.python-requests.org/en/master/user/advanced/#ssl-cert-verification</a></li>
+</ul>
+<h2 id="partenza-uvicorn-con-ssl" tabindex="-1">partenza uvicorn con SSL <a class="header-anchor" href="#partenza-uvicorn-con-ssl" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.uvicorn.org/deployment/#running-with-https">https://www.uvicorn.org/deployment/#running-with-https</a></li>
+</ul>
+<pre><code class="language-python">    uvicorn.run(
+        app_module,
+        reload=<span class="hljs-literal">False</span>, <span class="hljs-comment"># Altrimenti ogni volta che cambia /log il server riparte</span>
+        host=<span class="hljs-string">&quot;0.0.0.0&quot;</span>,
+        port=<span class="hljs-number">8000</span>,
+        ssl_keyfile=<span class="hljs-string">&quot;ssl/private.key&quot;</span>,
+        ssl_certfile=<span class="hljs-string">&quot;ssl/selfsigned.crt&quot;</span>
+    )
+</code></pre>
+</body></html>

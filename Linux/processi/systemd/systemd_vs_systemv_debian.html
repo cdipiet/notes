@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.952" />
+        <title>systemd_vs_systemv_debian</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="systemd_vs_systemv_debian" tabindex="-1">systemd_vs_systemv_debian <a class="header-anchor" href="#systemd_vs_systemv_debian" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.952</p>
+<nav class="table-of-contents"><ol><li><a href="#esempio-di-aggiunta-di-un-comando-all'init-in-stile-system-v">Esempio di aggiunta di un comando all&#39;init in stile System-V </a></li><li><a href="#per-modificare-i-processi-che-partono-al-boot-con-systemd-in-stile-system-v">Per modificare i processi che partono al boot con systemd in stile System-V </a><ol><li><a href="#examples">EXAMPLES </a></li></ol></li><li><a href="#how-bootup-scripts-work-in-debian-based-systems">How bootup scripts work in Debian-based systems </a></li><li><a href="#gestire-ubuntu-con-systemd">Gestire Ubuntu con Systemd </a><ol><li><a href="#i-runlevel-diventano-target">I runlevel diventano target </a></li></ol></li></ol></nav><h1 id="systemd-in-confronto-con-i-runlevel-di-systemv" tabindex="-1">systemd in confronto con i runlevel di systemv <a class="header-anchor" href="#systemd-in-confronto-con-i-runlevel-di-systemv" aria-hidden="true">🔗</a></h1>
+<h2 id="esempio-di-aggiunta-di-un-comando-all'init-in-stile-system-v" tabindex="-1">Esempio di aggiunta di un comando all'init in stile System-V <a class="header-anchor" href="#esempio-di-aggiunta-di-un-comando-all'init-in-stile-system-v" aria-hidden="true">🔗</a></h2>
+<p>Copiare i file in:</p>
+<pre><code>/etc/init.d/netcheckd
+/usr/bin/netcheck
+</code></pre>
+<p>E poi creare i collegamenti a netcheckd per i runlevel:</p>
+<pre><code>sudo update-rc.d netcheckd defaults
+</code></pre>
+<p>Su Debian: <code>init 1</code> per andare in modalita monoutente</p>
+<pre><code>cat /etc/inittab # per vedere i runlevel
+</code></pre>
+<p>That is for rebooting as well as halt. Some notes :-</p>
+<ul>
+<li>Start first all scripts in <code>/etc/rcS.d/</code></li>
+<li>For the runlevel 2, first all <code>K##scripts</code> in <code>/etc/rc2.d/</code>, next all <code>S##script</code>.</li>
+<li>All <code>.sh</code> scripts are sourced, the rest are exec-ed</li>
+<li>Almost everything is symlinked to <code>/etc/init.d</code></li>
+</ul>
+<h2 id="per-modificare-i-processi-che-partono-al-boot-con-systemd-in-stile-system-v" tabindex="-1">Per modificare i processi che partono al boot con systemd in stile System-V <a class="header-anchor" href="#per-modificare-i-processi-che-partono-al-boot-con-systemd-in-stile-system-v" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">/etc/init.d/
+/etc/rc.*
+
+update-rc.d
+
+update-rc.d [-n] name start|stop NN runlevel [runlevel].... start|stop NN runlevel [runlevel]... . ...
+</code></pre>
+<p>When run with either the defaults, start, or stop options, <code>update-rc.d</code> makes links <code>/etc/rcrunlevel.d/[SK]NNname</code> that point to the script
+<code>/etc/init.d/name</code>.</p>
+<h3 id="examples" tabindex="-1">EXAMPLES <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h3>
+<p>Insert links using the defaults</p>
+<pre><code>update-rc.d foobar defaults
+</code></pre>
+<p>Equivalent command using explicit argument sets:</p>
+<pre><code>update-rc.d foobar start 20 2 3 4 5 . stop 20 0 1 6 .
+</code></pre>
+<p>More typical command using explicit argument sets:</p>
+<pre><code>update-rc.d foobar start 30 2 3 4 5 . stop 70 0 1 6 .
+</code></pre>
+<p>Insert links at default runlevels when B requires A</p>
+<pre><code>update-rc.d script_for_A defaults 80 20
+update-rc.d script_for_B defaults 90 10
+</code></pre>
+<p>Insert a link to a service that (presumably) will not be needed by any other daemon</p>
+<pre><code>update-rc.d top_level_app defaults 98 02
+</code></pre>
+<p>Insert links for a script that requires services that start/stop at sequence number 20</p>
+<pre><code>update-rc.d script_depends_on_svc20 defaults 21 19
+</code></pre>
+<p>Remove all links for a script (assuming foobar has been deleted already):</p>
+<pre><code>update-rc.d foobar remove
+</code></pre>
+<p>Example of disabling a service:</p>
+<pre><code>update-rc.d -f foobar remove
+update-rc.d foobar stop 20 2 3 4 5 .
+</code></pre>
+<p>Example of a command for installing a system initialization-and-shutdown script:</p>
+<pre><code>update-rc.d foobar start 45 S . stop 31 0 6 .
+</code></pre>
+<p>Example of a command for disabling a system initialization-and-shutdown script:</p>
+<pre><code>update-rc.d -f foobar remove
+update-rc.d foobar stop 45 S .
+</code></pre>
+<h2 id="how-bootup-scripts-work-in-debian-based-systems" tabindex="-1">How bootup scripts work in Debian-based systems <a class="header-anchor" href="#how-bootup-scripts-work-in-debian-based-systems" aria-hidden="true">🔗</a></h2>
+<ol start="0">
+<li>
+<p>Overview
+All scripts executed by the init system are located in <code>/etc/init.d</code>. The directories <code>/etc/rc?.d</code> (? = S, 0 .. 6) contain relative links to those scripts. These links are named <code>S&lt;2-digit-number&gt;&lt;original-name&gt;</code> or <code>K&lt;2-digit-number&gt;&lt;original-name&gt;</code>.
+If a script has the &quot;.sh&quot; suffix it is a bourne shell script and MAY be handled in an optimized manner. The behaviour of executing the script in an optimized way will not differ in any way from it being forked and executed in the regular way.</p>
+<p>The following runlevels are defined:</p>
+<pre><code>N System bootup (NONE).
+S Single user mode (not to be switched to directly)
+0 Halt
+1 Single user mode
+2 - 5Multi user mode
+6 Reboot
+</code></pre>
+</li>
+<li>
+<p>Boot</p>
+<p>When the systems boots, the <code>/etc/init.d/rcS</code> script is executed. It in turn executes all the <code>S*scripts</code> in <code>/etc/rcS.d</code> in alphabetical (and thus numerical) order. The first argument passed to the executed scripts is <code>start</code>. The runlevel at this point is <code>N</code> (<code>none</code>).</p>
+<p>Only things that need to be run once to get the system into a consistent state are to be run. The <code>rcS.d</code> directory is NOT meant to replace <code>rc.local</code>. One should not start daemons in this runlevel unless absolutely necessary. Eg, NFS might need the portmapper, so it is OK to start it early in the bootprocess. But this is not the time to start the squid proxy server.</p>
+</li>
+<li>
+<p>Going multiuser</p>
+<p>After the <code>rcS.d</code> scripts have been executed, init switches to the default runlevel as specified in <code>/etc/inittab</code>, usually &quot;2&quot;. Init then executes the <code>/etc/init.d/rc</code> script which takes care of starting the services in <code>/etc/rc2.d</code>.</p>
+<p>Because the previous runlevel is <code>N</code>(none) the <code>/etc/rc2.d/KXXxxxx</code> scripts will NOT be executed - there is nothing to stop yet, the system is busy coming up.</p>
+<p>If for example there is a service that wants to run in runlevel 4 and ONLY in that level, it will place a <code>KXXxxxx</code> script in <code>/etc/rc{2,3,5}.d</code> to stop the service when switching out of runlevel 4. We do not need to run that script at this point.</p>
+<p>The <code>/etc.rc2.d/SXXxxxx</code> scripts will be executed in alphabetical order, with the first argument set to &quot;start&quot;.</p>
+</li>
+<li>
+<p>Switching runlevels</p>
+<p>When one switches from (for example) runlevel 2 to runlevel 3, <code>/etc/init.d/rc</code> will first execute in alphabetical order all <code>K</code> scripts for runlevel 3 (<code>/etc/rc3.d/KXXxxxx</code>) with as first argument &quot;stop&quot; and then all <code>S</code> scripts for runlevel 3 (<code>/etc/rc3.d/SXXxxxx</code>) with as first argument &quot;start&quot;.</p>
+<p>As an optimization, a check is made for each &quot;service&quot; to see if it was already running in the previous runlevel. If it was, and there is no <code>K</code> (stop) script present for it in the new runlevel, there is no need to start it a second time so that will not be done.</p>
+<p>On the other hand, if there was a K script present, it is assumed the service was stopped on purpose first and so needs to be restarted.</p>
+<p>We MIGHT make the same optimization for stop scripts as well, if no <code>S</code> script was present in the previous runlevel, we can assume that service was not running and we don't need to stop it either. In that case we can remove the &quot;coming from level N&quot; special case mentioned above in 2). But right now that has not been implemented.</p>
+</li>
+<li>
+<p>Single user mode</p>
+<p>Switching to single user mode is done by switching to runlevel 1. That will cause all services to be stopped (assuming they all have a K script in <code>/etc/rc1.d</code>). The runlevel <code>1</code> scripts will then switch to runlevel <code>S</code> which usually has no scripts - all it does is spawn a shell directly on /dev/console for maintenance.</p>
+</li>
+<li>
+<p>Halt/reboot</p>
+<p>Going to runlevel <code>0</code> or <code>6</code> will cause the system to be halted or rebooted, respectively. For example, if we go to runlevel <code>6</code> (<code>reboot</code>) first all <code>/etc/rc6.d/KXXxxxx</code> scripts will be executed alphabetically with &quot;stop&quot; as the first argument.</p>
+<p>Then the <code>/etc/rc6.d/SXXxxxx</code> scripts will be executed alphabetically with &quot;stop&quot; as the first argument as well. The reason is that there is nothing to start anymore at this point - all scripts that are run are meant to bring the system down.</p>
+<p>In the future, the <code>/etc/rc6.d/SXXxxxx</code> scripts MIGHT be moved to <code>/etc/rc6.d/K1XXxxxx</code> for clarity.</p>
+</li>
+</ol>
+<h2 id="gestire-ubuntu-con-systemd" tabindex="-1">Gestire Ubuntu con Systemd <a class="header-anchor" href="#gestire-ubuntu-con-systemd" aria-hidden="true">🔗</a></h2>
+<p>Uno dei compiti più importanti di Systemd è gestire
+il processo di avvio e mantenere le informazioni relative
+a quest’ultimo sempre aggiornate. Se quindi volete
+conoscere quanto tempo ha impiegato il PC per avviarsi,
+utilizzate il seguente comando:</p>
+<pre><code>systemd-analyze
+Startup finished in 4.988s (kernel) + 9.674s (userspace) =
+14.622s
+</code></pre>
+<p>Per avere informazioni dettagliate sul processo e visualizzare
+il tempo impiegato da ogni attività durante il boot, eseguite:</p>
+<pre><code>systemd-analyze blame
+</code></pre>
+<p>Per visualizzare queste informazioni, usate:</p>
+<pre><code>systemd-analyze plot &gt; boot.svg
+</code></pre>
+<p>Quest’ultimo comando vi permetterà di descrivere il processo
+di avvio e il tempo impiegato da ogni servizio all’interno del file
+boot.svg. Una volta generato, è possibile fare doppio click
+sul dato per visualizzarlo con il visualizzatore di immagini
+predefinito di Ubuntu. Systemd può anche generare un grafico
+di dipendenza di tutti i servizi installati. Per questo, si dovrà
+installare il software di visualizzazione GraphViz:
+sudo apt-get install graphviz
+Adesso è possibile generare un grafico di dipendenza per l’intero sistema con:</p>
+<pre><code>systemd-analyze dot --order | dot -Tsvg &gt; systemd-system.svg
+</code></pre>
+<p>Niente vieta di restringere il campo per creare un grafico per
+una particolare sessione utente.</p>
+<pre><code>systemd-analyze dot --user --order | dot -Tsvg &gt; systemd-user.svg
+</code></pre>
+<p>o un particolare servizio come SSH:</p>
+<pre><code>systemd-analyze dot ‘ssh*’ | dot -Tsvg &gt; ssh.svg
+</code></pre>
+<p>Per gestire i servizi con Systemd, usate il comando systemctl
+senza alcuna opzione. Otterrete una lunga lista di processi,
+punti di mount e dispositivi con il loro rispettivo stato
+operativo. Per avere un elenco più leggibile, usate:</p>
+<pre><code>systemctl list-unit-files --type=service
+</code></pre>
+<p>Per verificare quali servizi non sono stati caricati:</p>
+<pre><code>systemctl --state=failed
+</code></pre>
+<p>Potete utilizzare anche systemctl per farvi restituire una serie
+di dettagli sui singoli processi:</p>
+<pre><code>systemctl list-dependencies sshd.service
+</code></pre>
+<p>Questo comando, per esempio, recupera un elenco di
+dipendenze per il servizio SSH. Allo stesso modo, sostituendo
+list-dependencies con show avrete un riepilogo dei dettagli
+di configurazione del servizio. Il comando systemctl offre
+invece diverse opzioni per il controllo dei servizi:</p>
+<pre><code>systemctl start sshd.service
+</code></pre>
+<p>inizializzerà il server SSH. Con stoplo fermerete e con start
+lo farete ripartire. Per abilitare in modo permanente un servizio
+così che si avvii automaticamente ogni volta che il computer
+si accende, utilizzate l’opzione <code>enable</code>:</p>
+<pre><code>systemctl enable sshd.service
+</code></pre>
+<p>Allo stesso modo, per disabilitare temporaneamente l’uso
+di un processo, utilizzate l’opzione <code>disable</code> anziché
+enable. In alternativa, tramite il comando restart
+bloccherete e riavvierete il servizio in questione. Con
+l’opzione reload, se supportata dal componente, verrà
+ricaricata la configurazione senza interrompere le
+operazioni in corso. Infine, usate statusper conoscere lo
+stato attuale del processo.</p>
+<h3 id="i-runlevel-diventano-target" tabindex="-1">I runlevel diventano target <a class="header-anchor" href="#i-runlevel-diventano-target" aria-hidden="true">🔗</a></h3>
+<p>Il sistema init porta con sé varie funzioni chiamate runlevel
+che definiscono lo stato della macchina dopo l’avvio. Vengono
+indicate da una serie di numeri, dove per esempio il runlevel 3
+pone il computer in modalità solo testo multi-utente, mentre
+<strong>il runlevel 5 avvia anche il display manager</strong>. Systemd ha
+sostituito il concetto di runlevel con i target. Essenzialmente
+si tratta di meccanismi di raggruppamento che consentono ai
+vari servizi di avviarsi allo stesso tempo. In definitiva, un target
+può essere paragonato a un sistema utilizzato per simulare
+un runlevel. A differenza di questi ultimi, però, un target viene
+richiamato. Ci sono target systemd che imitano i runlevel
+comuni, come il multi-utente o l’arresto. Per una maggiore
+flessibilità, Systemd permette di gestire anche target che
+ereditano tutti i servizi da un altro target. L’elenco dei processi
+associati a un particolare target viene memorizzato in una
+directory chiamata con il nome di destinazione e il suffisso
+.wants. Li potete trovare nella cartella <code>/etc/systemd/system</code> con collegamenti simbolici a tutti i servizi che in realtà si
+trovano in <code>/lib/system/systemd</code>. Per visualizzare l’utilizzo predefinito dei target, usate:</p>
+<pre><code>systemctl get-default
+</code></pre>
+<p>È quindi possibile passare a un altro target con l’opzione
+isolate. Un esempio può essere quando si vuole spostare
+un target multi-utente che equivale al runlevel 3:</p>
+<pre><code>systemctl isolate multi-user.target
+</code></pre>
+<p>Allo stesso modo, è possibile passare al runlevel grafico con:</p>
+<pre><code>systemctl isolate graphical.target
+</code></pre>
+<p>I comandi precedenti permetteranno di passare
+immediatamente a un diverso target, ma per effettuare
+un passaggio persistente è necessario utilizzare lo switch set-default. Per esempio:</p>
+<pre><code>systemctl set-default multi-user.target
+</code></pre>
+<p>Avrete così impostato in modo permanente lo stato del
+runlevel per usare la vostra macchina in modalità non grafica.</p>
+</body></html>

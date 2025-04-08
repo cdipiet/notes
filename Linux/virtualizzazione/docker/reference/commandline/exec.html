@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.470" />
+        <title>exec</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="exec" tabindex="-1">exec <a class="header-anchor" href="#exec" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.470</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22exec%22description%3A-%22the-exec-command-description-and-usage%22keywords%3A-%22command%2C-container%2C-run%2C-execute%22">title: &quot;exec&quot;description: &quot;The exec command description and usage&quot;keywords: &quot;command, container, run, execute&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#run-docker-exec-on-a-running-container">Run docker exec on a running container </a></li><li><a href="#try-to-run-docker-exec-on-a-paused-container">Try to run docker exec on a paused container </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22exec%22description%3A-%22the-exec-command-description-and-usage%22keywords%3A-%22command%2C-container%2C-run%2C-execute%22" tabindex="-1">title: &quot;exec&quot;
+description: &quot;The exec command description and usage&quot;
+keywords: &quot;command, container, run, execute&quot; <a class="header-anchor" href="#title%3A-%22exec%22description%3A-%22the-exec-command-description-and-usage%22keywords%3A-%22command%2C-container%2C-run%2C-execute%22" aria-hidden="true">🔗</a></h2>
+<h1 id="exec-1" tabindex="-1">exec <a class="header-anchor" href="#exec-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Run a command in a running container
+
+Options:
+  -d, --detach         Detached mode: run command in the background
+<span class="hljs-code">      --detach-keys    Override the key sequence for detaching a container
+  -e, --env=[]         Set environment variables
+      --env-file       Read in a file of environment variables
+      --help           Print usage
+  -i, --interactive    Keep STDIN open even if not attached
+      --privileged     Give extended privileges to the command
+  -t, --tty            Allocate a pseudo-TTY
+  -u, --user           Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
+  -w, --workdir        Working directory inside the container
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>The <code>docker exec</code> command runs a new command in a running container.</p>
+<p>The command started using <code>docker exec</code> only runs while the container's primary
+process (<code>PID 1</code>) is running, and it is not restarted if the container is
+restarted.</p>
+<p>COMMAND will run in the default directory of the container. If the
+underlying image has a custom directory specified with the WORKDIR directive
+in its Dockerfile, this will be used instead.</p>
+<p>COMMAND should be an executable, a chained or a quoted command
+will not work. Example: <code>docker exec -ti my_container &quot;echo a &amp;&amp; echo b&quot;</code> will
+not work, but <code>docker exec -ti my_container sh -c &quot;echo a &amp;&amp; echo b&quot;</code> will.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="run-docker-exec-on-a-running-container" tabindex="-1">Run <code>docker exec</code> on a running container <a class="header-anchor" href="#run-docker-exec-on-a-running-container" aria-hidden="true">🔗</a></h3>
+<p>First, start a container.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run --name ubuntu_bash --<span class="hljs-built_in">rm</span> -i -t ubuntu bash</span>
+</code></pre>
+<p>This will create a container named <code>ubuntu_bash</code> and start a Bash session.</p>
+<p>Next, execute a command on the container.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">exec</span> -d ubuntu_bash <span class="hljs-built_in">touch</span> /tmp/execWorks</span>
+</code></pre>
+<p>This will create a new file <code>/tmp/execWorks</code> inside the running container
+<code>ubuntu_bash</code>, in the background.</p>
+<p>Next, execute an interactive <code>bash</code> shell on the container.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">exec</span> -it ubuntu_bash bash</span>
+</code></pre>
+<p>This will create a new Bash session in the container <code>ubuntu_bash</code>.</p>
+<p>Next, set environment variables in the current bash session.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">exec</span> -it -e VAR_A=1 -e VAR_B=2 ubuntu_bash bash</span>
+</code></pre>
+<p>This will create a new Bash session in the container <code>ubuntu_bash</code> with environment
+variables <code>$VAR_A</code> and <code>$VAR_B</code> set to &quot;1&quot; and &quot;2&quot; respectively. Note that these
+environment variables will only be valid on the current Bash session.</p>
+<p>By default <code>docker exec</code> command runs in the same working directory set when container was created.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">exec</span> -it ubuntu_bash <span class="hljs-built_in">pwd</span></span>
+/
+</code></pre>
+<p>You can select working directory for the command to execute into</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">exec</span> -it -w /root ubuntu_bash <span class="hljs-built_in">pwd</span></span>
+/root
+</code></pre>
+<h3 id="try-to-run-docker-exec-on-a-paused-container" tabindex="-1">Try to run <code>docker exec</code> on a paused container <a class="header-anchor" href="#try-to-run-docker-exec-on-a-paused-container" aria-hidden="true">🔗</a></h3>
+<p>If the container is paused, then the <code>docker exec</code> command will fail with an error:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pause <span class="hljs-built_in">test</span></span>
+
+test
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker ps</span>
+
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS                   PORTS               NAMES
+1ae3b36715d2        ubuntu:latest       &quot;bash&quot;              17 seconds ago      Up 16 seconds (Paused)                       test
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker <span class="hljs-built_in">exec</span> <span class="hljs-built_in">test</span> <span class="hljs-built_in">ls</span></span>
+
+FATA[0000] Error response from daemon: Container test is paused, unpause the container before exec
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> $?</span>
+1
+</code></pre>
+</body></html>

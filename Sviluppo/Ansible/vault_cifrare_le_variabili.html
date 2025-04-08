@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.109" />
+        <title>vault_cifrare_le_variabili</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vault_cifrare_le_variabili" tabindex="-1">vault_cifrare_le_variabili <a class="header-anchor" href="#vault_cifrare_le_variabili" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.109</p>
+<nav class="table-of-contents"><ol><li><a href="#cifrare-i-dati-nel-vault">Cifrare i dati nel vault </a></li><li><a href="#cifrare-files-contenenti-le-variabili">Cifrare files contenenti le variabili </a></li><li><a href="#cifrare-singole-variabili">Cifrare singole variabili </a></li><li><a href="#cifrare-le-variabili-mantenendone-il-nome-in-chiaro">Cifrare le variabili mantenendone il nome in chiaro </a></li><li><a href="#una-altra-idea%2C-utilizziamo-uno-script-eseguibile-python-come-file-delle-password">Una altra idea, utilizziamo uno script eseguibile python come file delle password </a></li></ol></nav><h1 id="usare-il-vault-per-cifrare-le-variabilli" tabindex="-1">Usare il Vault per cifrare le variabilli <a class="header-anchor" href="#usare-il-vault-per-cifrare-le-variabilli" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html">https://docs.ansible.com/ansible/latest/user_guide/vault.html</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/cli/ansible-vault.html">https://docs.ansible.com/ansible/latest/cli/ansible-vault.html</a></li>
+</ul>
+<h2 id="cifrare-i-dati-nel-vault" tabindex="-1">Cifrare i dati nel vault <a class="header-anchor" href="#cifrare-i-dati-nel-vault" aria-hidden="true">🔗</a></h2>
+<p>Come nascondere dati cifrandoli nel vault.</p>
+<ul>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data">https://www.digitalocean.com/community/tutorials/how-to-use-vault-to-protect-sensitive-ansible-data</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Setting the Ansible Vault Editor</span>
+$ <span class="hljs-built_in">export</span> EDITOR=nano
+<span class="hljs-comment"># Creating New Encrypted Files</span>
+$ EDITOR=nano ansible-vault create vault.yml
+<span class="hljs-comment"># si aprirà un editor, inserire la stringa &#x27;Secret information&#x27;</span>
+$ <span class="hljs-built_in">cat</span> vault.yml
+$ ansible-vault view vault.yml
+
+<span class="hljs-comment"># Encrypting Existing File</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;unencrypted stuff&#x27;</span> &gt; encrypt_me.txt
+$ ansible-vault encrypt encrypt_me.txt
+$ <span class="hljs-built_in">cat</span> encrypt_me.txt
+<span class="hljs-comment"># Viewing Encrypted Files</span>
+$ ansible-vault view vault.yml
+<span class="hljs-comment"># Editing Encrypted Files</span>
+$ ansible-vault edit vault.yml
+<span class="hljs-comment"># Manually Decrypting Encrypted Files</span>
+$ ansible-vault decrypt vault.yml
+$ <span class="hljs-built_in">cat</span> vault.yml
+<span class="hljs-comment"># Changing the Password of Encrypted Files</span>
+$ ansible-vault rekey encrypt_me.txt
+
+<span class="hljs-comment"># Running Ansible with Vault-Encrypted Files</span>
+$ ansible-vault create secret_key
+$ ansible --ask-vault-pass -bK -m copy -a <span class="hljs-string">&#x27;src=secret_key dest=/tmp/secret_key mode=0600 owner=root group=root&#x27;</span> localhost
+
+<span class="hljs-comment"># Using Ansible Vault with a Password File</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;my_vault_password&#x27;</span> &gt; .vault_pass
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;.vault_pass&#x27;</span> &gt;&gt; .gitignore
+$ ansible --vault-password-file=.vault_pass -bK -m copy -a <span class="hljs-string">&#x27;src=secret_key dest=/tmp/secret_key mode=0600 owner=root group=root&#x27;</span> localhost
+
+<span class="hljs-comment"># Reading the Password File Automatically</span>
+$ <span class="hljs-built_in">export</span> ANSIBLE_VAULT_PASSWORD_FILE=./.vault_pass
+$ ansible -bK -m copy -a <span class="hljs-string">&#x27;src=secret_key dest=/tmp/secret_key mode=0600 owner=root group=root&#x27;</span> localhost
+
+<span class="hljs-comment"># Reading the Password from an Environment Variable</span>
+<span class="hljs-comment"># if your password file is executable, Ansible will run it as a script and use the resulting output as the password</span>
+$ <span class="hljs-built_in">cat</span> &gt; .vault_pass &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment">#!/usr/bin/env python</span>
+import os
+<span class="hljs-built_in">print</span>(os.environ[<span class="hljs-string">&#x27;VAULT_PASSWORD&#x27;</span>])
+EOF
+$ <span class="hljs-built_in">chmod</span> +x .vault_pass
+$ <span class="hljs-built_in">export</span> VAULT_PASSWORD=my_vault_password
+<span class="hljs-comment"># Ora è possibile utilizzare il file .vault_pass come file delle password, che però ha il vantaggio di non contenere la password!</span>
+
+<span class="hljs-comment"># Creare un file che contiene sia variabili cifrate sia variabili in chiaro</span>
+<span class="hljs-comment"># Setting Up the Example</span>
+$ <span class="hljs-built_in">mkdir</span> -p group_vars
+$ nano group_vars/database
+    ---
+    <span class="hljs-comment"># nonsensitive data</span>
+    mysql_port: 3306
+    mysql_host: 10.0.0.3
+    mysql_user: fred
+
+    <span class="hljs-comment"># sensitive data</span>
+    mysql_password: supersecretpassword
+$ nano hosts
+    [database]
+    localhost ansible_connection=<span class="hljs-built_in">local</span>
+$ nano ansible.cfg
+    [defaults]
+    inventory = ./hosts
+$ ansible -m debug -a <span class="hljs-string">&#x27;var=hostvars[inventory_hostname]&#x27;</span> database
+        <span class="hljs-string">&quot;mysql_host&quot;</span>: <span class="hljs-string">&quot;10.0.0.3&quot;</span>,
+        <span class="hljs-string">&quot;mysql_password&quot;</span>: <span class="hljs-string">&quot;supersecretpassword&quot;</span>,
+        <span class="hljs-string">&quot;mysql_port&quot;</span>: 3306,
+        <span class="hljs-string">&quot;mysql_user&quot;</span>: <span class="hljs-string">&quot;fred&quot;</span>,
+<span class="hljs-comment"># Moving Sensitive Variables into Ansible Vault, we will split our variables between two files.</span>
+<span class="hljs-comment"># It is possible to use a variable directory in place of an Ansible variable file in order to apply variables from more than one file.</span>
+$ <span class="hljs-built_in">mv</span> group_vars/database group_vars/vars
+$ <span class="hljs-built_in">mkdir</span> group_vars/database
+$ <span class="hljs-built_in">mv</span> group_vars/vars group_vars/database/
+<span class="hljs-comment"># Edit the group_vars/database/vars file to remove the confidential data</span>
+$ nano group_vars/database/vars <span class="hljs-comment"># This will be our unencrypted variable file</span>
+    ---
+    <span class="hljs-comment"># nonsensitive data</span>
+    mysql_port: 3306
+    mysql_host: 10.0.0.3
+    mysql_user: fred
+<span class="hljs-comment"># In this file, define the sensitive variables that used to be in the vars file. Use the same variable names, but prepend the string vault_ to indicate that these variables are defined in the vault-protected file:</span>
+$ ansible-vault create group_vars/database/vault
+    ---
+    vault_mysql_password: supersecretpassword
+</code></pre>
+<pre><code>.
+├── . . .
+├── group_vars/
+│   └── database/
+│       ├── vars
+│       └── vault
+└── . . .
+</code></pre>
+<p>L'unico inconveniente di questa ultima soluzione è che il file vault è interamente cifrato,<br>
+<strong>compresi i nomi delle variabili</strong>, rendendo così difficile individuare dove una variabile protetta è stata definita.<br>
+Per risolvere il problema si può aggiungere nel file vars non cifrato una variabile che punta alla corrispondente nel file vault cifrato:</p>
+<pre><code class="language-bash">$ nano group_vars/database/vars
+    ---
+    <span class="hljs-comment"># nonsensitive data</span>
+    mysql_port: 3306
+    mysql_host: 10.0.0.3
+    mysql_user: fred
+
+    <span class="hljs-comment"># sensitive data</span>
+    mysql_password: <span class="hljs-string">&quot;{{ vault_mysql_password }}&quot;</span>
+
+$ ansible -m debug -a <span class="hljs-string">&#x27;var=hostvars[inventory_hostname]&#x27;</span> database
+</code></pre>
+<h2 id="cifrare-files-contenenti-le-variabili" tabindex="-1">Cifrare files contenenti le variabili <a class="header-anchor" href="#cifrare-files-contenenti-le-variabili" aria-hidden="true">🔗</a></h2>
+<p>Con questa soluzione tutto il file delle variabili viene cifrato e non è possibile inserirvi variabili in chiaro.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># definiamo nel .bashrc la variabile di ambiente che contiene la password del vault</span>
+$ <span class="hljs-built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-built_in">export</span> ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
+EOF
+
+<span class="hljs-comment"># File contenente la password del vault</span>
+$ <span class="hljs-built_in">cat</span> &gt; ~/.vault_pass.txt &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+AnsibleVaultPwd123_
+EOF
+
+<span class="hljs-comment"># Cifrare l&#x27;intero file delle variabili</span>
+<span class="hljs-comment"># creazione del file in chiaro</span>
+$ <span class="hljs-built_in">cat</span> &gt; host_vars/localhost &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+    ansible_become_password: mypassword
+    EOF
+<span class="hljs-comment"># cifratura del file</span>
+$ ansible-vault encrypt host_vars/localhost <span class="hljs-comment"># La password del vault in chiaro si trova nel file puntato dalla variabile di ambiente ANSIBLE_VAULT_PASSWORD_FILE </span>
+<span class="hljs-comment"># visualizzazione del file cifrato</span>
+$ ansible-vault view host_vars/localhost
+$ ansible localhost -m ansible.builtin.debug -a var=<span class="hljs-string">&quot;ansible_become_password&quot;</span> -e <span class="hljs-string">&quot;@host_vars/localhost&quot;</span>
+</code></pre>
+<h2 id="cifrare-singole-variabili" tabindex="-1">Cifrare singole variabili <a class="header-anchor" href="#cifrare-singole-variabili" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.cloudbees.com/blog/how-to-keep-your-playbooks-secure-with-ansible-vault">https://www.cloudbees.com/blog/how-to-keep-your-playbooks-secure-with-ansible-vault</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html#setting-a-default-password-source">https://docs.ansible.com/ansible/latest/user_guide/vault.html#setting-a-default-password-source</a></li>
+</ul>
+<ol>
+<li>
+<p>Definizione della posizione del file contenente la password del vault <strong>in chiaro</strong></p>
+<pre><code class="language-bash"><span class="hljs-comment"># definiamo nel .bashrc la variabile di ambiente che contiene la password del vault</span>
+$ <span class="hljs-built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-built_in">export</span> ANSIBLE_VAULT_PASSWORD_FILE=~/.vault_pass.txt
+EOF
+</code></pre>
+</li>
+<li>
+<p>Creazione del file contenente la password del vault</p>
+<pre><code class="language-bash"><span class="hljs-comment"># File contenente la password del vault</span>
+$ <span class="hljs-built_in">cat</span> &gt; ~/.vault_pass.txt &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+xxxxxxxxxxxx
+EOF
+</code></pre>
+</li>
+<li>
+<p>Usare il file <code>host_vars/localhost</code> per ospitare la password cifrata, che verrà caricata così automaticamente da Ansible per l'host locale:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&#x27;password_utente&#x27;</span> | ansible-vault encrypt_string --stdin-name <span class="hljs-string">&#x27;ansible_become_password&#x27;</span> &gt;&gt; host_vars/localhost
+</code></pre>
+</li>
+</ol>
+<p>Con questa soluzione non c'e' piu bisogno del parametro <code>--vault-password-file</code> perchè la password viene recuparata automaticamente da Ansible.
+Inoltre nel file <code>host_vars/localhost</code> <strong>possono essere presenti sia variabili in chiaro che cifrate</strong>.</p>
+<p>Esempio:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># La password del vault è contenuta in chiaro nel file puntato dalla variabile di ambiente ANSIBLE_VAULT_PASSWORD_FILE</span>
+<span class="hljs-comment"># Creazione del file host_vars/localhost contenente la password cifrata ansible_become_password: !vault |... </span>
+$ <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&#x27;password_utente&#x27;</span> | ansible-vault encrypt_string --stdin-name <span class="hljs-string">&#x27;ansible_become_password&#x27;</span> &gt; host_vars/localhost
+<span class="hljs-comment"># Test di decifratura della password:</span>
+$ ansible localhost -m ansible.builtin.debug -a var=<span class="hljs-string">&quot;ansible_become_password&quot;</span> -e <span class="hljs-string">&quot;@host_vars/localhost&quot;</span>
+<span class="hljs-comment"># Il playbook viene eseguito senza speficicare la password del vault</span>
+$ ansible-playbook pacman_example.yml
+</code></pre>
+<p>Altro modo per cifrare solamente il valore di una varibile mantenendo il nome in chiaro:</p>
+<pre><code class="language-bash">$ ansible-vault encrypt_string --vault-password-file .vault_pass <span class="hljs-string">&#x27;Pa55w0rD&#x27;</span> --name <span class="hljs-string">&#x27;password&#x27;</span>
+</code></pre>
+<h2 id="cifrare-le-variabili-mantenendone-il-nome-in-chiaro" tabindex="-1">Cifrare le variabili mantenendone il nome in chiaro <a class="header-anchor" href="#cifrare-le-variabili-mantenendone-il-nome-in-chiaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#keep-vaulted-variables-safely-visible">https://docs.ansible.com/ansible/latest/user_guide/playbooks_best_practices.html#keep-vaulted-variables-safely-visible</a></li>
+</ul>
+<p>Utilizzando due file, è possibile riuscire a:</p>
+<ul>
+<li>avere in un unico file sia le variabili in chiaro sia le variabili cifrate ma con il nome in chiaro</li>
+<li>avere assieme in un unico file le sole variabili cifrate, in modo da poterlo inserire nel <code>.gitignore</code></li>
+</ul>
+<p>L'idea è quella di:</p>
+<ol>
+<li>creare il file <code>vault</code> cifrato, però non cifrandolo interamente, ma cifrando lesingole variabili mantenendone il nome in chiaro,
+nome che dovrà iniziare per <code>vault_</code></li>
+<li>inserire le corrispondenti variabili senza il prefisso <code>vault_</code>  nel file in chiaro, ciascuna variabile sarà assegnata dalla corrispondente variabili <code>vault_</code></li>
+<li>inserire entrambi i file, <code>vault</code> ed in chiaro in una directory che può essere una directory variabile di gruppo, in modo che ansible carichi entrambi i file.<br>
+<strong>Ansible se si crea una directory invece di un file come configurazione di gruppo o host, carica tutti i file YAML contenuti nella directory</strong>.</li>
+</ol>
+<p>In alternativa è anche possibile cifrare l'intero file <code>vault</code>.</p>
+<ol>
+<li>Create a <code>group_vars/</code> subdirectory named after the group.</li>
+<li>Inside this subdirectory, create two files named <code>vars</code> and <code>vault</code>.</li>
+<li>In the <code>vars</code> file, define all of the variables needed, including any sensitive ones.</li>
+<li>Copy all of the sensitive variables over to the <code>vault</code> file and <strong>prefix</strong> these variables with <code>vault_</code>.</li>
+<li>Adjust the variables in the <code>vars</code> file to point to the matching <code>vault_</code> variables using jinja2 syntax: <code>db_password: {{ vault_db_password }}</code>.</li>
+<li>Encrypt the vault file to protect its contents.</li>
+<li>Use the variable name from the vars file in your playbooks.</li>
+</ol>
+<h2 id="una-altra-idea%2C-utilizziamo-uno-script-eseguibile-python-come-file-delle-password" tabindex="-1">Una altra idea, utilizziamo uno script eseguibile python come file delle password <a class="header-anchor" href="#una-altra-idea%2C-utilizziamo-uno-script-eseguibile-python-come-file-delle-password" aria-hidden="true">🔗</a></h2>
+<p>Come caricare la password del vault da una variabile di ambiente.<br>
+Sfruttiamo la proprietà di ansible per la quale se il file delle password indicato nei comandi tramite <code>--vault-password-file</code>
+è un file eseguibile, questo viene eseguito e ne viene ritornato il risultato invece del contenuto:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># definiamo nel .bashrc la variabile di ambiente che contiene la password del vault</span>
+$ <span class="hljs-built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-built_in">export</span> ANSIBLE_VAULT_PASSWORD=Qui_si_imposta_la_password_del_vault
+EOF
+
+<span class="hljs-comment"># creiamo un comando eseguibile che ritorna la password prelevandola dall&#x27;ambiente</span>
+$ <span class="hljs-built_in">cat</span> &gt; .vault_pass &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment">#!/usr/bin/env python</span>
+import os
+<span class="hljs-built_in">print</span>(os.environ[<span class="hljs-string">&#x27;ANSIBLE_VAULT_PASSWORD&#x27;</span>])
+EOF
+<span class="hljs-variable">$chmod</span> +x .vault_pass
+
+<span class="hljs-comment"># directory dove ansible cerca automaticamente i file di configurazione con le variabili per ciascun host</span>
+$ <span class="hljs-built_in">mkdir</span> host_vars
+</code></pre>
+<p>ora è possibile utilizzare <code>--vault-password-file .vault_pass</code>, la password è contenuta in una variabile di ambiente
+ed il file .vault_pass puo essere aggiunto ad un sistema di versioning come git senza problemi.</p>
+<p>Cifriamo la password utente da usare negli script ansible per effettuare il sudo a root:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&#x27;password_utente&#x27;</span> | ansible-vault encrypt_string --vault-password-file .vault_pass --stdin-name <span class="hljs-string">&#x27;ansible_become_password&#x27;</span> &gt; host_vars/localhost
+$ ansible localhost -m ansible.builtin.debug -a var=<span class="hljs-string">&quot;ansible_become_password&quot;</span> -e <span class="hljs-string">&quot;@host_vars/localhost&quot;</span> --vault-password-file .vault_pass
+$ ansible-playbook --vault-password-file .vault_pass pacman_example.yml
+</code></pre>
+<p>La cosa funziona ma bisogna sempre indicare il parametro <code>--vault-password-file</code>.</p>
+</body></html>

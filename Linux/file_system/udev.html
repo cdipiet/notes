@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.085" />
+        <title>udev</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="udev" tabindex="-1">udev <a class="header-anchor" href="#udev" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.085</p>
+<nav class="table-of-contents"><ol></ol></nav><h1 id="udev-1" tabindex="-1">udev <a class="header-anchor" href="#udev-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Udev#Setting_static_device_names">https://wiki.archlinux.org/index.php/Udev#Setting_static_device_names</a></li>
+<li><a href="http://www.reactivated.net/writing_udev_rules.html#example-printer">http://www.reactivated.net/writing_udev_rules.html#example-printer</a></li>
+</ul>
+<pre><code class="language-bash">man udev
+<span class="hljs-comment"># udev rules written by the administrator go in</span>
+/etc/udev/rules.d
+<span class="hljs-comment"># their file name has to end with .rules</span>
+<span class="hljs-comment"># le regole già definite dai vari package sono in: /lib/udev/rules.d</span>
+grep sd /lib/udev/rules.d/*
+/lib/udev/rules.d/60-persistent-storage.rules:
+KERNEL==<span class="hljs-string">&quot;sd*|sr*|cciss*&quot;</span>, ENV{DEVTYPE}==<span class="hljs-string">&quot;disk&quot;</span>, ENV{ID_SERIAL}==<span class="hljs-string">&quot;?*&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;disk/by-id/<span class="hljs-variable">$env</span>{ID_BUS}-<span class="hljs-variable">$env</span>{ID_SERIAL}&quot;</span>
+/lib/udev/rules.d/60-persistent-storage.rules:
+KERNEL==<span class="hljs-string">&quot;sd*|cciss*&quot;</span>, ENV{DEVTYPE}==<span class="hljs-string">&quot;partition&quot;</span>, ENV{ID_SERIAL}==<span class="hljs-string">&quot;?*&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;disk/by-id/<span class="hljs-variable">$env</span>{ID_BUS}-<span class="hljs-variable">$env</span>{ID_SERIAL}-part%n&quot;</span>
+
+man udedvadm
+
+$ udevadm info -a -p $(udevadm info -q path -n /dev/sdb1)
+$ udevadm info -a -n sda1
+</code></pre>
+<pre><code class="language-bash">udevadm <span class="hljs-built_in">test</span> $(udevadm info -q path -n device_name) 2&gt;&amp;1
+</code></pre>
+<pre><code>%k and %n. %k evaluates to the kernel name for the device, e.g. &quot;sda3&quot; for a device that would (by default) appear at /dev/sda3. %n evaluates to the kernel number for the device (the partition number for storage devices), e.g. &quot;3&quot; for /dev/sda3. 
+KERNEL - match against the kernel name for the device
+NAME - the name that shall be used for the device node
+</code></pre>
+<pre><code class="language-bash">KERNEL==<span class="hljs-string">&quot;sd*&quot;</span>, SUBSYSTEMS==<span class="hljs-string">&quot;scsi&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;USB 2.0 Storage Device&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;usbhd%n&quot;</span>
+ACTION==<span class="hljs-string">&quot;add&quot;</span>, KERNEL==<span class="hljs-string">&quot;sd[a-z]&quot;</span>, ENV{ID_SERIAL_SHORT}==<span class="hljs-string">&quot;X5ER1ALX&quot;</span>, RUN+=<span class="hljs-string">&quot;/path/to/script /dev/%k&quot;</span>
+/etc/udev/rules.d/83-webcam.rules
+KERNEL==<span class="hljs-string">&quot;video[0-9]*&quot;</span>, SUBSYSTEM==<span class="hljs-string">&quot;video4linux&quot;</span>, SUBSYSTEMS==<span class="hljs-string">&quot;usb&quot;</span>, ATTRS{idVendor}==<span class="hljs-string">&quot;05a9&quot;</span>, ATTRS{idProduct}==<span class="hljs-string">&quot;4519&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;video-cam1&quot;</span>
+</code></pre>
+<p>Scoprire le caratteristiche del disco che ci interessa,
+lanciare il monitor e poi collegare il disco:</p>
+<pre><code class="language-bash"><span class="hljs-variable">$USER</span>@CDPPC:~$ udevadm monitor -u -p ==&gt; ci dà anche l<span class="hljs-string">&#x27;ENV{ID_SERIAL_SHORT}
+</span></code></pre>
+<p>Le info per costruire la regola si ottengono con:</p>
+<pre><code class="language-bash">$ udevadm info -a -p $(udevadm info -q path -n /dev/sdb1)
+    KERNEL==<span class="hljs-string">&quot;sdb1&quot;</span>
+    SUBSYSTEM==<span class="hljs-string">&quot;block&quot;</span>
+KERNELS==<span class="hljs-string">&quot;sdb&quot;</span>
+    SUBSYSTEMS==<span class="hljs-string">&quot;block&quot;</span>
+   ATTRS{idProduct}==<span class="hljs-string">&quot;1078&quot;</span>
+    ATTRS{idVendor}==<span class="hljs-string">&quot;1058&quot;</span>
+ATTRS{product}==<span class="hljs-string">&quot;Elements 1078&quot;</span>
+ATTRS{manufacturer}==<span class="hljs-string">&quot;Western Digital&quot;</span>
+ATTRS{serial}==<span class="hljs-string">&quot;5758443145323531304D3245&quot;</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-variable">$USER</span>@CDPPC:~$ udevadm info -q property --name=/dev/sdb | grep ID_SERIAL_SHORT
+ID_SERIAL_SHORT=WD-WXD1E2510M2E
+<span class="hljs-comment"># oppure:</span>
+udevadm info -n sdb|grep ID_SERIAL_SHORT
+
+$ udevadm info -a -n sdb1
+
+ENV{ID_SERIAL_SHORT}==<span class="hljs-string">&quot;WD-WXD1E2510M2E&quot;</span>
+</code></pre>
+<p>Ecco dunque la regola:</p>
+<pre><code class="language-bash">/etc/udev/rules.d/83-bitlocker.rules
+KERNEL==<span class="hljs-string">&quot;sd[a-z]1&quot;</span>, SUBSYSTEM==<span class="hljs-string">&quot;block&quot;</span>, ENV{ID_SERIAL_SHORT}==<span class="hljs-string">&quot;WD-WXD1E2510M2E&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;bitlocker&quot;</span>
+
+udevadm <span class="hljs-built_in">test</span> $(udevadm info -q path -n sdb1) 2&gt;&amp;1
+</code></pre>
+</body></html>

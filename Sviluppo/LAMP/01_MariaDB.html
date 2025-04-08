@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.826" />
+        <title>01_MariaDB</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="01_mariadb" tabindex="-1">01_MariaDB <a class="header-anchor" href="#01_mariadb" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.826</p>
+<nav class="table-of-contents"><ol><li><a href="#install-mariadb">Install MariaDB </a></li><li><a href="#configurazione">Configurazione </a><ol><li><a href="#porta-di-default-3306">Porta di default 3306 </a></li></ol></li><li><a href="#partenza-ed-abilitazione-del-servizio-systemd">Partenza ed abilitazione del servizio systemd </a></li><li><a href="#avviare%2Ffermare-mariadb-da-riga-di-comando-senza-systemd">Avviare/Fermare MariaDB da riga di comando senza systemd </a></li><li><a href="#impostazione-password-per-utente-root">Impostazione password per utente root </a></li><li><a href="#creazione-db-ed-utenti">Creazione DB ed Utenti </a></li><li><a href="#python">Python </a></li><li><a href="#find-the-ip-address-that-has-been-assigned-to-the-container">Find the IP address that has been assigned to the container </a></li><li><a href="#gli-utenti-anonimi-''-creano-solo-problemi-meglio-eliminarli">Gli utenti anonimi &#39;&#39; creano solo problemi meglio eliminarli </a><ol><li><a href="#localhost-and-%25">localhost and % </a></li></ol></li><li><a href="#script-riassuntivo">Script riassuntivo </a></li><li><a href="#eseguire-uno-script">Eseguire uno script </a></li><li><a href="#sample-dbs">Sample DBs </a></li><li><a href="#import---export">Import - Export </a><ol><li><a href="#executable-comments">Executable Comments </a></li></ol></li></ol></nav><h1 id="mariadb" tabindex="-1">MariaDB <a class="header-anchor" href="#mariadb" aria-hidden="true">🔗</a></h1>
+<p>Manjaro Install</p>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/MariaDB">https://wiki.archlinux.org/title/MariaDB</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/MySQL">https://wiki.archlinux.org/title/MySQL</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/extra/mariadb/mariadb-install-db.1.en">https://man.archlinux.org/man/extra/mariadb/mariadb-install-db.1.en</a></p>
+</li>
+<li>
+<p><a href="https://archlinux.org/news/mariadb-replaces-mysql-in-repositories/">https://archlinux.org/news/mariadb-replaces-mysql-in-repositories/</a></p>
+</li>
+<li>
+<p><a href="https://www.makeuseof.com/install-set-up-mariadb-on-ubuntu/">https://www.makeuseof.com/install-set-up-mariadb-on-ubuntu/</a></p>
+</li>
+<li>
+<p><a href="https://www.cherryservers.com/blog/how-to-install-and-start-using-mariadb-on-ubuntu-20-04">https://www.cherryservers.com/blog/how-to-install-and-start-using-mariadb-on-ubuntu-20-04</a></p>
+</li>
+<li>
+<p><a href="https://github.com/MariaDB/server/blob/11.1/scripts/mysql_secure_installation.sh">https://github.com/MariaDB/server/blob/11.1/scripts/mysql_secure_installation.sh</a></p>
+</li>
+<li>
+<p><a href="https://github.com/MariaDB/server/blob/11.1/scripts/mysql_install_db.sh">https://github.com/MariaDB/server/blob/11.1/scripts/mysql_install_db.sh</a></p>
+</li>
+</ul>
+<p>Documentation</p>
+<ul>
+<li><a href="https://mariadb.com/kb/en/documentation/">https://mariadb.com/kb/en/documentation/</a></li>
+<li><a href="https://mariadb.com/kb/en/mariadb-basics/">https://mariadb.com/kb/en/mariadb-basics/</a></li>
+<li><a href="https://mariadb.com/kb/en/a-mariadb-primer/">https://mariadb.com/kb/en/a-mariadb-primer/</a></li>
+<li><a href="https://mariadb.com/kb/en/useful-mariadb-queries/">https://mariadb.com/kb/en/useful-mariadb-queries/</a></li>
+<li><a href="https://mariadb.com/kb/en/sql-statements/">https://mariadb.com/kb/en/sql-statements/</a></li>
+<li><a href="https://mariadb.com/kb/en/installing-system-tables-mysql_install_db/">https://mariadb.com/kb/en/installing-system-tables-mysql_install_db/</a></li>
+<li><a href="https://mariadb.com/kb/en/mysql_install_db/#options">https://mariadb.com/kb/en/mysql_install_db/#options</a></li>
+<li><a href="https://mariadb.com/kb/en/systemd/">https://mariadb.com/kb/en/systemd/</a></li>
+</ul>
+<p>Problemi di connessione</p>
+<ul>
+<li><a href="https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/">https://mariadb.com/kb/en/configuring-mariadb-for-remote-client-access/</a></li>
+<li><a href="https://mariadb.com/kb/en/server-system-variables/#bind_address">https://mariadb.com/kb/en/server-system-variables/#bind_address</a></li>
+<li><a href="https://mariadb.com/kb/en/troubleshooting-connection-issues/">https://mariadb.com/kb/en/troubleshooting-connection-issues/</a></li>
+<li><a href="https://mariadb.org/ask-chatgpt-getting-started-with-mariadb-a-comprehensive-guide-for-beginners/">https://mariadb.org/ask-chatgpt-getting-started-with-mariadb-a-comprehensive-guide-for-beginners/</a>
+<code>sudo mysql_secure_installation</code> <br>
+From MariaDB-<strong>10.4</strong> this isn’t required any more. The distribution install will include a secure version with unix socket authentication <br>
+<strong>so only the <code>root</code> unix user can login to the <code>root</code> MariaDB account</strong>. Distribution installs also don’t configure a test database.</li>
+</ul>
+<p>Docker</p>
+<ul>
+<li><a href="https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/">https://mariadb.com/kb/en/installing-and-using-mariadb-via-docker/</a></li>
+<li><a href="https://hub.docker.com/_/mariadb/">https://hub.docker.com/_/mariadb/</a></li>
+<li><a href="https://github.com/MariaDB/mariadb-docker">https://github.com/MariaDB/mariadb-docker</a></li>
+</ul>
+<p>GUI</p>
+<ul>
+<li><a href="https://www.mysql.com/products/workbench/">https://www.mysql.com/products/workbench/</a></li>
+<li><a href="https://dbeaver.io/">https://dbeaver.io/</a></li>
+<li><a href="https://github.com/beekeeper-studio/beekeeper-studio">https://github.com/beekeeper-studio/beekeeper-studio</a></li>
+</ul>
+<p>Python</p>
+<ul>
+<li><a href="https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/">https://mariadb.com/resources/blog/how-to-connect-python-programs-to-mariadb/</a></li>
+<li><a href="https://mariadb.com/kb/en/mariadb-connector-python/">https://mariadb.com/kb/en/mariadb-connector-python/</a></li>
+<li><a href="https://pypi.org/project/mariadb/">https://pypi.org/project/mariadb/</a></li>
+<li><a href="https://github.com/mariadb-corporation/mariadb-connector-python">https://github.com/mariadb-corporation/mariadb-connector-python</a></li>
+<li><a href="https://mariadb-corporation.github.io/mariadb-connector-python/">https://mariadb-corporation.github.io/mariadb-connector-python/</a></li>
+<li><a href="https://stackoverflow.com/questions/43102442/whats-the-difference-between-mysqldb-mysqlclient-and-mysql-connector-python">https://stackoverflow.com/questions/43102442/whats-the-difference-between-mysqldb-mysqlclient-and-mysql-connector-python</a></li>
+<li><a href="https://github.com/PyMySQL/mysqlclient">https://github.com/PyMySQL/mysqlclient</a></li>
+<li><a href="https://mysqlclient.readthedocs.io/">https://mysqlclient.readthedocs.io/</a></li>
+<li><a href="https://github.com/mysql/mysql-connector-python">https://github.com/mysql/mysql-connector-python</a></li>
+<li><a href="https://dev.mysql.com/doc/connector-python/en/">https://dev.mysql.com/doc/connector-python/en/</a></li>
+</ul>
+<h2 id="install-mariadb" tabindex="-1">Install MariaDB <a class="header-anchor" href="#install-mariadb" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syuu --noconfirm
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed mariadb mariadb-clients mysql-workbench
+$ mariadb --version
+$ systemctl status mariadb
+$ <span class="hljs-built_in">sudo</span> mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+</code></pre>
+<pre><code>:: You need to initialize the MariaDB data directory prior to starting
+the service. This can be done with mariadb-install-db command, e.g.:
+mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+
+Creating group 'mysql' with GID 951.
+Creating user 'mysql' (MariaDB) with UID 951 and GID 951.
+</code></pre>
+<ul>
+<li>
+<p><a href="https://archlinux.org/packages/extra/x86_64/mariadb-libs/">https://archlinux.org/packages/extra/x86_64/mariadb-libs/</a></p>
+<p><code>mariadb-libs</code> <strong>Replaces</strong> <code>libmariadbclient</code></p>
+</li>
+</ul>
+<p>Con l'installazione di default l'utente mariadb <code>root</code> <strong>puo essere utilizzato solo</strong> dall'utente Linux <code>root</code> e solo mediante socket, tcp disabilitato.</p>
+<pre><code>Installing MariaDB/MySQL system tables in '/var/lib/mysql' ...
+OK
+
+To start mariadbd at boot time you have to copy
+support-files/mariadb.service to the right place for your system
+
+Two all-privilege accounts were created.
+One is root@localhost, it has no password, but you need to
+be system 'root' user to connect. Use, for example, sudo mysql
+The second is mysql@localhost, it has no password either, but
+you need to be the system 'mysql' user to connect.
+After connecting you can set the password, if you would need to be
+able to connect as any of these users with a password and without sudo
+
+You can start the MariaDB daemon with:
+cd '/usr' ; /usr/bin/mariadb-safe --datadir='/var/lib/mysql'
+
+You can test the MariaDB daemon with mysql-test-run.pl
+cd '/usr/mysql-test' ; perl mariadb-test-run.pl
+</code></pre>
+<h2 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h2>
+<p><a href="https://wiki.archlinux.org/title/MariaDB">https://wiki.archlinux.org/title/MariaDB</a></p>
+<p>Queste configurazioni NON sono state effettuate:</p>
+<p><a href="https://mariadb.com/docs/skysql-dbaas/ref/mdb/cli/mariadb/auto-rehash/">https://mariadb.com/docs/skysql-dbaas/ref/mdb/cli/mariadb/auto-rehash/</a></p>
+<pre><code class="language-bash">SBAGLIATO: https://stackoverflow.com/questions/16694263/mysql-client-setting-no-auto-rehash-conflicting-with-mysqldump
+  <span class="hljs-comment"># Per il completamento della riga di comando di mariadb</span>
+  <span class="hljs-built_in">sudo</span> vim /etc/my.cnf.d/client.cnf
+      [client-mariadb]
+      auto-rehash
+  se si fa questo poi mariadb-dump --<span class="hljs-built_in">help</span> dà errore:
+    $ mariadb-dump --<span class="hljs-built_in">help</span>
+    mariadb-dump: unknown option <span class="hljs-string">&#x27;--auto-rehash&#x27;</span>
+questo perchè mettendo auto-rehash nella sezione client-mariadb l<span class="hljs-string">&#x27;opzione viene passata anche a mariadb-dump, che pero non la possiede.
+
+Soluzione: come indicato nel thread stackoverflow inserire l&#x27;</span>opzione solamente nella sezione mysql:
+
+$ <span class="hljs-built_in">sudo</span> vim /etc/my.cnf.d/mysql-clients.cnf
+  <span class="hljs-comment">#</span>
+  <span class="hljs-comment"># These groups are read by MariaDB command-line tools</span>
+  <span class="hljs-comment"># Use it for options that affect only one utility</span>
+  <span class="hljs-comment">#</span>
+  [mysql]
+  auto-rehash
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Per impedire il login da rete</span>
+<span class="hljs-built_in">sudo</span> vim /etc/my.cnf.d/server.cnf
+    [mariadb]
+    <span class="hljs-comment"># skip-networking</span>
+
+<span class="hljs-comment"># Per disabilitare i log che occupano spazio</span>
+<span class="hljs-built_in">sudo</span> vim /etc/my.cnf.d/my.cnf
+    <span class="hljs-comment">#log-bin=mysql-bin</span>
+    <span class="hljs-comment">#binlog_format=mixed</span>
+</code></pre>
+<h3 id="porta-di-default-3306" tabindex="-1">Porta di default 3306 <a class="header-anchor" href="#porta-di-default-3306" aria-hidden="true">🔗</a></h3>
+<p><a href="https://mariadb.com/kb/en/connecting-to-mariadb/#port">https://mariadb.com/kb/en/connecting-to-mariadb/#port</a></p>
+<pre><code>  mariadb&gt; SHOW VARIABLES LIKE 'port';
+</code></pre>
+<pre><code class="language-bash">$ vim /etc/my.cnf.d/server.cnf
+<span class="hljs-comment"># this is read by the standalone daemon and embedded servers</span>
+[server]
+port=3306
+</code></pre>
+<h2 id="partenza-ed-abilitazione-del-servizio-systemd" tabindex="-1">Partenza ed abilitazione del servizio systemd <a class="header-anchor" href="#partenza-ed-abilitazione-del-servizio-systemd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">cat</span> mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl show mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl start mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl status mariadb
+</code></pre>
+<h2 id="avviare%2Ffermare-mariadb-da-riga-di-comando-senza-systemd" tabindex="-1">Avviare/Fermare MariaDB da riga di comando senza systemd <a class="header-anchor" href="#avviare%2Ffermare-mariadb-da-riga-di-comando-senza-systemd" aria-hidden="true">🔗</a></h2>
+<p>Può servire ad esempio per un Dockerfile dove non è ancora partito <code>systemd</code>(non è quindi disponibile <code>systemctl start mariadb</code>) e bisogna
+inviare comandi a MariaDB per la creazione del database e degli utenti.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Avviare/Fermare MariaDB senza systemd</span>
+$ <span class="hljs-built_in">sudo</span> -u mysql -s <span class="hljs-string">&quot;cd /tmp/; nohup /usr/bin/mariadbd --datadir=/var/lib/mysql &lt;/dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&quot;</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;kill -SIGTERM <span class="hljs-subst">$(pidof mariadbd)</span>&quot;</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&#x27;nohup mariadb -hlocalhost -P3306 -uxxxxxx -pxxxxxx &lt; /var/lib/mysql/backups/dump.sql &amp;&#x27;</span>
+$ mariadb -ucdp -e <span class="hljs-string">&#x27;SHOW VARIABLES WHERE Variable_Name LIKE &quot;%dir&quot;&#x27;</span>
++---------------------------+----------------------------+
+| Variable_name             | Value                      |
++---------------------------+----------------------------+
+| basedir                   | /usr/                      |
+| character_sets_dir        | /usr/share/mysql/charsets/ |
+| datadir                   | /var/lib/mysql/            |
+| plugin_dir                | /usr/lib/mysql/plugin/     |
+| tmpdir                    | /tmp                       |
+| wsrep_data_home_dir       | /var/lib/mysql/            |
++---------------------------+----------------------------+
+</code></pre>
+<h2 id="impostazione-password-per-utente-root" tabindex="-1">Impostazione password per utente root <a class="header-anchor" href="#impostazione-password-per-utente-root" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://mariadb.com/kb/en/authentication-plugin-unix-socket/#switching-to-password-based-authentication">https://mariadb.com/kb/en/authentication-plugin-unix-socket/#switching-to-password-based-authentication</a></li>
+<li><a href="https://mariadb.com/kb/en/authentication-from-mariadb-104/">https://mariadb.com/kb/en/authentication-from-mariadb-104/</a></li>
+</ul>
+<p>Il tipo di autenticazione di default dell'utente <code>root</code> è la <code>unix_socket</code>, per impostare la password bisogna cambiare il metodo di autenticazione:</p>
+<p>Socket/Pipe/Path: <code>/var/run/mysqld/mysqld.sock</code></p>
+<p>Utenti creati inizialmente:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> root<span class="hljs-variable">@localhost</span> IDENTIFIED VIA unix_socket <span class="hljs-keyword">OR</span> mysql_native_password <span class="hljs-keyword">USING</span> <span class="hljs-string">&#x27;invalid&#x27;</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> mysql<span class="hljs-variable">@localhost</span> IDENTIFIED VIA unix_socket <span class="hljs-keyword">OR</span> mysql_native_password <span class="hljs-keyword">USING</span> <span class="hljs-string">&#x27;invalid&#x27;</span>
+</code></pre>
+<p>Impostazione password per utente root:</p>
+<p>Per le versioni moderne di MariaDB <strong>NON</strong> bisogna più utilizzare:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">SET</span> PASSWORD <span class="hljs-keyword">FOR</span> <span class="hljs-string">&#x27;root&#x27;</span><span class="hljs-variable">@localhost</span> <span class="hljs-operator">=</span> PASSWORD(&quot;root&quot;);
+</code></pre>
+<p>ma:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt;<span class="hljs-string">EOF 
+ALTER USER root@localhost IDENTIFIED VIA mysql_native_password USING PASSWORD(&quot;root&quot;);
+EOF</span>
+</code></pre>
+<pre><code class="language-sql"><span class="hljs-comment">-- Oppure_</span>
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">USER</span> root<span class="hljs-variable">@localhost</span> IDENTIFIED VIA mysql_native_password;
+<span class="hljs-keyword">SET</span> PASSWORD <span class="hljs-operator">=</span> PASSWORD(<span class="hljs-string">&#x27;root&#x27;</span>);
+</code></pre>
+<h2 id="creazione-db-ed-utenti" tabindex="-1">Creazione DB ed Utenti <a class="header-anchor" href="#creazione-db-ed-utenti" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://mariadb.com/kb/en/account-management-sql-commands/">https://mariadb.com/kb/en/account-management-sql-commands/</a></li>
+<li><a href="https://mariadb.com/kb/en/create-user/">https://mariadb.com/kb/en/create-user/</a></li>
+<li><a href="https://mariadb.com/kb/en/authentication-plugins/">https://mariadb.com/kb/en/authentication-plugins/</a></li>
+<li><a href="https://mariadb.com/kb/en/authentication-plugin-unix-socket/">https://mariadb.com/kb/en/authentication-plugin-unix-socket/</a></li>
+<li><a href="https://mariadb.com/kb/en/authentication-plugin-mysql_native_password/">https://mariadb.com/kb/en/authentication-plugin-mysql_native_password/</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl restart mariadb
+$ journalctl -u mariadb -f
+$ <span class="hljs-built_in">sudo</span> mariadb -u root -p
+
+MariaDB&gt; show variables like <span class="hljs-string">&#x27;%log_error%&#x27;</span>;
+MariaDB&gt; show variables like <span class="hljs-string">&#x27;%general%&#x27;</span>;
+MariaDB&gt; show binary logs;
+MariaDB&gt; show variables like <span class="hljs-string">&#x27;%log_bin%&#x27;</span>;
+MariaDB&gt; show variables like <span class="hljs-string">&#x27;%slow_query_log%&#x27;</span>;
+MariaDB&gt; show variables like <span class="hljs-string">&#x27;%long_query_time%&#x27;</span>;
+
+$ <span class="hljs-built_in">sudo</span> mysqlbinlog /var/log/mariadb/binary.000001 <span class="hljs-comment"># per vedere i log binari</span>
+MariaDB&gt; <span class="hljs-keyword">select</span> <span class="hljs-built_in">sleep</span>(6); <span class="hljs-comment"># per testare lo slow query log</span>
+
+<span class="hljs-built_in">sudo</span> vim /etc/my.cnf.d/cdp.cnf
+    <span class="hljs-comment"># Enable this if you want to have error logging into a separate file</span>
+    log_error = /var/log/mariadb/error.log
+    
+    <span class="hljs-comment"># Both location gets rotated by the cronjob.</span>
+    <span class="hljs-comment"># Be aware that this log type is a performance killer.</span>
+    <span class="hljs-comment"># Recommend only changing this at runtime for short testing periods if needed!</span>
+    general_log_file       = /var/log/mariadb/general-query.log
+    general_log            = 1
+
+    <span class="hljs-comment"># Enable the slow query log to see queries with especially long duration</span>
+    slow_query_log         = 1
+    slow_query_log_file    = /var/log/mariadb/slow-query.log
+    long_query_time        = 5
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /var/log/mariadb
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> mysql:mysql /var/log/mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl restart mariadb.service
+$ <span class="hljs-built_in">cat</span> /var/log/mariadb/error.log
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /var/log/mariadb/general-query.log
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /var/log/mariadb/slow-query.log
+</code></pre>
+<pre><code class="language-sql">$ sudo bash <span class="hljs-operator">-</span>c &quot;mariadb -u root -p&quot; <span class="hljs-operator">&lt;&lt;</span> EOF
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;username&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;xxxx&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> <span class="hljs-operator">*</span>.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;username&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION;
+FLUSH PRIVILEGES;
+EOF
+
+# DB Wordpress
+$ sudo bash <span class="hljs-operator">-</span>c &quot;mariadb -u root -p&quot; <span class="hljs-operator">&lt;&lt;</span> EOF
+<span class="hljs-keyword">DROP</span> DATABASE IF <span class="hljs-keyword">EXISTS</span> wordpress;
+<span class="hljs-keyword">CREATE</span> DATABASE wordpress;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;wp-user&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;wp-user&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> PRIVILEGES <span class="hljs-keyword">ON</span> wordpress.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;wp-user&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">GRANT</span> OPTION;
+FLUSH PRIVILEGES;
+EOF
+$ sudo systemctl restart mariadb
+$ sudo systemctl restart httpd
+
+# DB PHPMyAdmin
+$ sudo bash <span class="hljs-operator">-</span>c &quot;mariadb -u root -p&quot; <span class="hljs-operator">&lt;&lt;</span> EOF
+<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">USER</span> IF <span class="hljs-keyword">EXISTS</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;pmapass&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">ALL</span> <span class="hljs-keyword">ON</span> phpmyadmin.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> USAGE <span class="hljs-keyword">ON</span> mysql.<span class="hljs-operator">*</span> <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span> IDENTIFIED <span class="hljs-keyword">BY</span> <span class="hljs-string">&#x27;pmapass&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> (
+    Host, <span class="hljs-keyword">User</span>, Select_priv, Insert_priv, Update_priv, Delete_priv,
+    Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv,
+    File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,
+    Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv,
+    Execute_priv, Repl_slave_priv, Repl_client_priv
+    ) <span class="hljs-keyword">ON</span> mysql.user <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">ON</span> mysql.db <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+<span class="hljs-keyword">GRANT</span> <span class="hljs-keyword">SELECT</span> (Host, Db, <span class="hljs-keyword">User</span>, Table_name, Table_priv, Column_priv)
+    <span class="hljs-keyword">ON</span> mysql.tables_priv <span class="hljs-keyword">TO</span> <span class="hljs-string">&#x27;pma&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+FLUSH PRIVILEGES;
+EOF
+
+$ sudo mariadb <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>p
+    <span class="hljs-keyword">SHOW</span> GRANTS <span class="hljs-keyword">FOR</span> <span class="hljs-string">&#x27;username&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">user</span>, host, plugin <span class="hljs-keyword">FROM</span> mysql.user;
+    <span class="hljs-keyword">SHOW</span> DATABASES;
+    <span class="hljs-keyword">SELECT</span> DATABASE();
+    USE test;
+    <span class="hljs-keyword">SHOW</span> TABLES;
+    SOURCE nation.sql
+    USE nation;
+    <span class="hljs-keyword">SHOW</span> TABLES;
+    EXIT
+    <span class="hljs-keyword">SHOW</span> VARIABLES <span class="hljs-keyword">LIKE</span> <span class="hljs-string">&#x27;log_error&#x27;</span>;
+</code></pre>
+<h2 id="python" tabindex="-1">Python <a class="header-anchor" href="#python" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac build python-mariadb-connector
+</code></pre>
+<h2 id="find-the-ip-address-that-has-been-assigned-to-the-container" tabindex="-1">Find the IP address that has been assigned to the container <a class="header-anchor" href="#find-the-ip-address-that-has-been-assigned-to-the-container" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    docker inspect -f <span class="hljs-string">&#x27;{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}&#x27;</span> manjaro_lamp
+    172.22.0.2
+    mariadb -h 172.22.0.2 -P 3306 --protocol=tcp -u cdp -pcdp
+</code></pre>
+<h2 id="gli-utenti-anonimi-''-creano-solo-problemi-meglio-eliminarli" tabindex="-1">Gli utenti anonimi '' creano solo problemi meglio eliminarli <a class="header-anchor" href="#gli-utenti-anonimi-''-creano-solo-problemi-meglio-eliminarli" aria-hidden="true">🔗</a></h2>
+<p><a href="https://mariadb.com/kb/en/troubleshooting-connection-issues/#localhost-and">https://mariadb.com/kb/en/troubleshooting-connection-issues/#localhost-and</a></p>
+<p>La presenza dell'utente anonimo creato inizialmente all'installazione, utente che non ha diritti,
+lo faceva selezionare automaticamente in fase di connessione dal client al posto dell'utente desiderato,
+eliminando l'utente anonimo '' il problema è stato risolto.</p>
+<pre><code class="language-sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>(), <span class="hljs-built_in">current_user</span>();
+    <span class="hljs-operator">+</span><span class="hljs-comment">---------------+----------------+</span>
+    <span class="hljs-operator">|</span> <span class="hljs-keyword">user</span>()        <span class="hljs-operator">|</span> <span class="hljs-built_in">current_user</span>() <span class="hljs-operator">|</span>
+    <span class="hljs-operator">+</span><span class="hljs-comment">---------------+----------------+</span>
+    <span class="hljs-operator">|</span> cdp<span class="hljs-variable">@localhost</span> <span class="hljs-operator">|</span> <span class="hljs-variable">@localhost</span>     <span class="hljs-operator">|</span>
+    <span class="hljs-operator">+</span><span class="hljs-comment">---------------+----------------+</span>
+</code></pre>
+<pre><code class="language-sql">$ sudo mariadb <span class="hljs-operator">-</span>u root
+    <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">USER</span> <span class="hljs-string">&#x27;&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">USER</span>(), <span class="hljs-built_in">CURRENT_USER</span>();
+
+    <span class="hljs-operator">+</span><span class="hljs-comment">---------------+----------------+</span>
+    <span class="hljs-operator">|</span> <span class="hljs-keyword">user</span>()        <span class="hljs-operator">|</span> <span class="hljs-built_in">current_user</span>() <span class="hljs-operator">|</span>
+    <span class="hljs-operator">+</span><span class="hljs-comment">---------------+----------------+</span>
+    <span class="hljs-operator">|</span> cdp<span class="hljs-variable">@localhost</span> <span class="hljs-operator">|</span> cdp@<span class="hljs-operator">%</span>          <span class="hljs-operator">|</span>
+    <span class="hljs-operator">+</span><span class="hljs-comment">---------------+----------------+</span>
+
+    <span class="hljs-keyword">show</span> grants;
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> mariadb -h 127.0.0.1 -u cdp --protocol=tcp -pcdp
+</code></pre>
+<p>Eliminare l'utente anonimo:</p>
+<pre><code class="language-sql">  MariaDB [(<span class="hljs-keyword">none</span>)]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">User</span>,Host, plugin <span class="hljs-keyword">from</span> mysql.user;
+  <span class="hljs-operator">+</span><span class="hljs-comment">-------------+----------------+</span>
+  <span class="hljs-operator">|</span> <span class="hljs-keyword">User</span>        <span class="hljs-operator">|</span> Host           <span class="hljs-operator">|</span>
+  <span class="hljs-operator">+</span><span class="hljs-comment">-------------+----------------+</span>
+  <span class="hljs-operator">|</span> PUBLIC      <span class="hljs-operator">|</span>                <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> admin       <span class="hljs-operator">|</span> <span class="hljs-operator">%</span>              <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> cdp         <span class="hljs-operator">|</span> <span class="hljs-operator">%</span>              <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> root        <span class="hljs-operator">|</span> <span class="hljs-operator">%</span>              <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span>             <span class="hljs-operator">|</span> cdphome.cdp.it <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> <span class="hljs-keyword">USER</span>        <span class="hljs-operator">|</span> localhost      <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> mariadb.sys <span class="hljs-operator">|</span> localhost      <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> mysql       <span class="hljs-operator">|</span> localhost      <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> pma         <span class="hljs-operator">|</span> localhost      <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> root        <span class="hljs-operator">|</span> localhost      <span class="hljs-operator">|</span>
+  <span class="hljs-operator">|</span> wp<span class="hljs-operator">-</span><span class="hljs-keyword">user</span>     <span class="hljs-operator">|</span> localhost      <span class="hljs-operator">|</span>
+  <span class="hljs-operator">+</span><span class="hljs-comment">-------------+----------------+</span>
+  <span class="hljs-number">11</span> <span class="hljs-keyword">rows</span> <span class="hljs-keyword">in</span> <span class="hljs-keyword">set</span> (<span class="hljs-number">0</span>,<span class="hljs-number">004</span> sec)
+
+  <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> mysql.user <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span>&quot;&quot;;
+  MariaDB [(<span class="hljs-keyword">none</span>)]<span class="hljs-operator">&gt;</span> <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;&#x27;</span>@<span class="hljs-string">&#x27;cdphome.cdp.it&#x27;</span>;
+</code></pre>
+<p><a href="https://mariadb.com/kb/en/troubleshooting-connection-issues/#localhost-and">https://mariadb.com/kb/en/troubleshooting-connection-issues/#localhost-and</a></p>
+<h3 id="localhost-and-%25" tabindex="-1">localhost and % <a class="header-anchor" href="#localhost-and-%25" aria-hidden="true">🔗</a></h3>
+<p>You may have created a user with something like:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> melisa identified <span class="hljs-keyword">by</span> <span class="hljs-string">&#x27;password&#x27;</span>;
+</code></pre>
+<p>This creates a user with the <code>%</code> wildcard host.</p>
+<pre><code class="language-sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,host <span class="hljs-keyword">from</span> mysql.user <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;melisa&#x27;</span>;
+<span class="hljs-operator">+</span><span class="hljs-comment">--------+------+</span>
+<span class="hljs-operator">|</span> <span class="hljs-keyword">user</span>   <span class="hljs-operator">|</span> host <span class="hljs-operator">|</span>
+<span class="hljs-operator">+</span><span class="hljs-comment">--------+------+</span>
+<span class="hljs-operator">|</span> melisa <span class="hljs-operator">|</span> <span class="hljs-operator">%</span>    <span class="hljs-operator">|</span>
+<span class="hljs-operator">+</span><span class="hljs-comment">--------+------+</span>
+</code></pre>
+<p>However, you may still be failing to login from localhost.
+<strong>Some setups create anonymous users, including localhost</strong>.
+So the following records exist in the user table:</p>
+<pre><code class="language-sql"><span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,host <span class="hljs-keyword">from</span> mysql.user <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;melisa&#x27;</span> <span class="hljs-keyword">or</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span>;
+<span class="hljs-operator">+</span><span class="hljs-comment">--------+-----------+</span>
+<span class="hljs-operator">|</span> <span class="hljs-keyword">user</span>   <span class="hljs-operator">|</span> host      <span class="hljs-operator">|</span>
+<span class="hljs-operator">+</span><span class="hljs-comment">--------+-----------+</span>
+<span class="hljs-operator">|</span> melisa <span class="hljs-operator">|</span> <span class="hljs-operator">%</span>         <span class="hljs-operator">|</span>
+<span class="hljs-operator">|</span>        <span class="hljs-operator">|</span> localhost <span class="hljs-operator">|</span>
+<span class="hljs-operator">+</span><span class="hljs-comment">--------+-----------+</span>
+</code></pre>
+<p>Since you are connecting from localhost,
+<strong>the anonymous credentials, rather than those for the 'melisa' user, are used.</strong>
+The solution is either to add a new user specific to localhost, or to <strong>remove the anonymous localhost user</strong>.</p>
+<pre><code class="language-sql">mysql <span class="hljs-operator">-</span>u root <span class="hljs-operator">-</span>Dmysql <span class="hljs-operator">-</span>p <span class="hljs-operator">-</span>BNe <span class="hljs-string">&#x27;SELECT USER(),CURRENT_USER()&#x27;</span>
+<span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>, password, host, plugin <span class="hljs-keyword">from</span> mysql.user;
+<span class="hljs-keyword">show</span> grants <span class="hljs-keyword">for</span> <span class="hljs-built_in">current_user</span>();
+<span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> mysql.user <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span>;
+<span class="hljs-keyword">select</span> <span class="hljs-keyword">user</span>,host, plugin <span class="hljs-keyword">from</span> mysql.user <span class="hljs-keyword">where</span> <span class="hljs-keyword">user</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span>;
+
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+ERROR <span class="hljs-number">1396</span> (HY000): Operation <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">USER</span> failed <span class="hljs-keyword">for</span> <span class="hljs-string">&#x27;&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>
+<span class="hljs-keyword">To</span> solve the problem, flush privileges:
+flush privileges;
+<span class="hljs-keyword">And</span> run again:
+<span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&#x27;&#x27;</span>@<span class="hljs-string">&#x27;localhost&#x27;</span>;
+</code></pre>
+<p><a href="https://github.com/MariaDB/server/blob/11.1/scripts/mysql_secure_installation.sh">https://github.com/MariaDB/server/blob/11.1/scripts/mysql_secure_installation.sh</a>
+<a href="https://mariadb.com/kb/en/mysqluser-table/">https://mariadb.com/kb/en/mysqluser-table/</a>
+In MariaDB 10.4 and later, the <code>mysql.global_priv</code> table has <strong>replaced</strong> the <code>mysql.user</code> table,</p>
+<p>Estratto delle operazioni effettuate da <code>mysql_secure_installation.sh</code>:</p>
+<pre><code class="language-sql">
+    # set_root_password
+    <span class="hljs-keyword">UPDATE</span> mysql.global_priv <span class="hljs-keyword">SET</span> priv<span class="hljs-operator">=</span>json_set(priv, <span class="hljs-string">&#x27;$.plugin&#x27;</span>, <span class="hljs-string">&#x27;mysql_native_password&#x27;</span>, <span class="hljs-string">&#x27;$.authentication_string&#x27;</span>, PASSWORD(<span class="hljs-string">&#x27;$esc_pass&#x27;</span>)) <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">User</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;
+    # remove_anonymous_users
+    <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> mysql.global_priv <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">User</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;&#x27;</span>;
+    # remove_remote_root
+    <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> mysql.global_priv <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">User</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span> <span class="hljs-keyword">AND</span> Host <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">IN</span> (<span class="hljs-string">&#x27;localhost&#x27;</span>, <span class="hljs-string">&#x27;127.0.0.1&#x27;</span>, <span class="hljs-string">&#x27;::1&#x27;</span>);
+    # remove_test_database
+    <span class="hljs-keyword">DROP</span> DATABASE IF <span class="hljs-keyword">EXISTS</span> test;
+    <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> mysql.db <span class="hljs-keyword">WHERE</span> Db<span class="hljs-operator">=</span><span class="hljs-string">&#x27;test&#x27;</span> <span class="hljs-keyword">OR</span> Db<span class="hljs-operator">=</span><span class="hljs-string">&#x27;test\\_%&#x27;</span>
+    # reload_privilege_tables
+    FLUSH PRIVILEGES;
+    <span class="hljs-keyword">UPDATE</span> mysql.global_priv <span class="hljs-keyword">SET</span> priv<span class="hljs-operator">=</span>json_set(priv, <span class="hljs-string">&#x27;$.password_last_changed&#x27;</span>, UNIX_TIMESTAMP(), <span class="hljs-string">&#x27;$.plugin&#x27;</span>, <span class="hljs-string">&#x27;mysql_native_password&#x27;</span>, <span class="hljs-string">&#x27;$.authentication_string&#x27;</span>, <span class="hljs-string">&#x27;invalid&#x27;</span>, <span class="hljs-string">&#x27;$.auth_or&#x27;</span>, <span class="hljs-built_in">json_array</span>(<span class="hljs-built_in">json_object</span>(), <span class="hljs-built_in">json_object</span>(<span class="hljs-string">&#x27;plugin&#x27;</span>, <span class="hljs-string">&#x27;unix_socket&#x27;</span>))) <span class="hljs-keyword">WHERE</span> <span class="hljs-keyword">User</span><span class="hljs-operator">=</span><span class="hljs-string">&#x27;root&#x27;</span>;
+</code></pre>
+<h2 id="script-riassuntivo" tabindex="-1">Script riassuntivo <a class="header-anchor" href="#script-riassuntivo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syuu --noconfirm
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed mariadb mariadb-clients mysql-workbench
+$ <span class="hljs-built_in">sudo</span> pamac build python-mariadb-connector
+$ <span class="hljs-built_in">sudo</span> mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql
+$ <span class="hljs-built_in">sudo</span> systemctl start mariadb
+
+<span class="hljs-comment"># Verifica corretta installazione</span>
+$ <span class="hljs-built_in">sudo</span> su
+$ mariadb --version
+$ mariadbd --verbose --<span class="hljs-built_in">help</span>
+$ systemctl status mariadb
+<span class="hljs-comment"># Porta 3306</span>
+$ telnet localhost 3306
+$ <span class="hljs-built_in">sudo</span> netstat -tlpn | grep mariadb
+<span class="hljs-comment"># All&#x27;inizio la connessione a root è possibile solo su unix socket e solo come root</span>
+$ <span class="hljs-built_in">sudo</span> mariadb -u root -e <span class="hljs-string">&quot;SHOW VARIABLES LIKE &#x27;port&#x27;;&quot;</span>
+SELECT user, host, plugin FROM mysql.user;
+$ <span class="hljs-built_in">sudo</span> mariadb -u root -e <span class="hljs-string">&quot;SELECT User, Host FROM mysql.user WHERE Host &lt;&gt; &#x27;localhost&#x27;;&quot;</span>
+$ <span class="hljs-built_in">sudo</span> mariadb -u root -e <span class="hljs-string">&quot;SHOW GRANTS FOR root@localhost;&quot;</span>
+$ <span class="hljs-built_in">sudo</span> mariadb -u root -e <span class="hljs-string">&quot;SELECT * FROM INFORMATION_SCHEMA.GLOBAL_VARIABLES;&quot;</span>
+$ <span class="hljs-built_in">sudo</span> mariadb -u root -proot -e <span class="hljs-string">&quot;status&quot;</span>
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt;<span class="hljs-string">EOF 
+ALTER USER root@localhost IDENTIFIED VIA mysql_native_password USING PASSWORD(&quot;&quot;);
+EOF</span>
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt; <span class="hljs-string">EOF
+CREATE USER &#x27;username&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;xxxx&#x27;;
+GRANT ALL PRIVILEGES ON *.* TO &#x27;username&#x27;@&#x27;localhost&#x27; WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF</span>
+
+<span class="hljs-comment"># DB Wordpress</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt; <span class="hljs-string">EOF
+DROP DATABASE IF EXISTS wordpress;
+CREATE DATABASE wordpress;
+CREATE USER &#x27;wp-user&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;wp-user&#x27;;
+GRANT ALL PRIVILEGES ON wordpress.* TO &#x27;wp-user&#x27;@&#x27;localhost&#x27; WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF</span>
+$ <span class="hljs-built_in">sudo</span> systemctl restart mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd
+
+<span class="hljs-comment"># DB PHPMyAdmin</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt; <span class="hljs-string">EOF
+DROP USER IF EXISTS &#x27;pma&#x27;@&#x27;localhost&#x27;;
+CREATE USER &#x27;pma&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;pmapass&#x27;;
+GRANT ALL ON phpmyadmin.* TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT USAGE ON mysql.* TO &#x27;pma&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;pmapass&#x27;;
+GRANT SELECT (
+    Host, User, Select_priv, Insert_priv, Update_priv, Delete_priv,
+    Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv,
+    File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,
+    Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv,
+    Execute_priv, Repl_slave_priv, Repl_client_priv
+    ) ON mysql.user TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT SELECT ON mysql.db TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT SELECT (Host, Db, User, Table_name, Table_priv, Column_priv)
+    ON mysql.tables_priv TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+FLUSH PRIVILEGES;
+EOF</span>
+
+$ <span class="hljs-built_in">sudo</span> systemctl restart mariadb
+
+$ <span class="hljs-built_in">sudo</span> -u mysql -s <span class="hljs-string">&quot;cd /tmp/; nohup /usr/bin/mariadbd --datadir=/var/lib/mysql &lt;/dev/null &gt;/dev/null 2&gt;&amp;1 &amp;&quot;</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;kill -SIGTERM <span class="hljs-subst">$(pidof mariadbd)</span>&quot;</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&#x27;nohup mariadb -hlocalhost -P3306 -uxxxxxx -pxxxxxx &lt; /var/lib/mysql/backups/dump.sql &amp;&#x27;</span>
+$ mariadb -ucdp -e <span class="hljs-string">&#x27;SHOW VARIABLES WHERE Variable_Name LIKE &quot;%dir&quot;&#x27;</span>
+</code></pre>
+<h2 id="eseguire-uno-script" tabindex="-1">Eseguire uno script <a class="header-anchor" href="#eseguire-uno-script" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> mariadb -u root &lt; /usr/share/webapps/phpMyAdmin/sql/create_tables.sql
+</code></pre>
+<h2 id="sample-dbs" tabindex="-1">Sample DBs <a class="header-anchor" href="#sample-dbs" aria-hidden="true">🔗</a></h2>
+<p>MySql Employees</p>
+<ul>
+<li><a href="https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html">https://www3.ntu.edu.sg/home/ehchua/programming/sql/SampleDatabases.html</a></li>
+<li><a href="https://dev.mysql.com/doc/employee/en/">https://dev.mysql.com/doc/employee/en/</a></li>
+<li><a href="https://github.com/datacharmer/test_db">https://github.com/datacharmer/test_db</a></li>
+</ul>
+<p>Altri</p>
+<ul>
+<li><a href="https://github.com/mariadb-corporation/dev-example-bookings">https://github.com/mariadb-corporation/dev-example-bookings</a> Bookings</li>
+<li><a href="https://www.mariadbtutorial.com/getting-started/mariadb-sample-database/">https://www.mariadbtutorial.com/getting-started/mariadb-sample-database/</a> Nations</li>
+<li><a href="https://www.mysqltutorial.org/mysql-sample-database.aspx">https://www.mysqltutorial.org/mysql-sample-database.aspx</a> Classic Models</li>
+<li><a href="https://www.digitalocean.com/community/tutorials/introduction-to-queries-mysql#creating-a-sample-database">https://www.digitalocean.com/community/tutorials/introduction-to-queries-mysql#creating-a-sample-database</a></li>
+</ul>
+<h2 id="import---export" tabindex="-1">Import - Export <a class="header-anchor" href="#import---export" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://mariadb.com/kb/en/mysqldump/">https://mariadb.com/kb/en/mysqldump/</a> <a href="https://mariadb.com/kb/en/mariadb-dump/">https://mariadb.com/kb/en/mariadb-dump/</a></li>
+<li><a href="https://wordpress.org/documentation/article/backing-up-your-database/#using-straight-mysql-mariadb-commands">https://wordpress.org/documentation/article/backing-up-your-database/#using-straight-mysql-mariadb-commands</a></li>
+<li><a href="https://mariadb.com/kb/en/mariadb-dump/#restoring">https://mariadb.com/kb/en/mariadb-dump/#restoring</a></li>
+<li><a href="https://www.digitalocean.com/community/tutorials/how-to-import-and-export-databases-in-mysql-or-mariadb">https://www.digitalocean.com/community/tutorials/how-to-import-and-export-databases-in-mysql-or-mariadb</a></li>
+<li><a href="https://simplebackups.com/blog/the-complete-mysqldump-guide-with-examples/">https://simplebackups.com/blog/the-complete-mysqldump-guide-with-examples/</a></li>
+</ul>
+<pre><code class="language-bash">$ man mariadb-dump
+$ mariadb-dump [options] db_name [tbl_name ...]
+</code></pre>
+<p><code>mysqldump</code> is now a symlink to <code>mariadb-dump</code></p>
+<pre><code class="language-bash">$ mariadb-dump -u root --add-drop-database --comments --complete-insert --databases wordpress &gt; doc/$(<span class="hljs-built_in">date</span> <span class="hljs-string">&quot;+%Y-%m-%d_%H.%M.%S&quot;</span>)_wordpress_dump.sql
+ 
+
+$ mysqldump -h db01.example.net -u dbocodex -ppasswd wp | bzip2 -c &gt; blog.bak.sql.bz2
+</code></pre>
+<p>To restore a backup created with <code>mariadb-dump</code>, use the mariadb client to import the dump, for example:</p>
+<pre><code class="language-bash">$ mariadb db_name &lt; backup-file.sql
+</code></pre>
+<pre><code class="language-bash">$ mysqldump -u username -p database_name &gt; data-dump.sql
+$ <span class="hljs-built_in">head</span> -n 5 data-dump.sql
+$ mysql -u root -p
+CREATE DATABASE new_database;
+$ mysql -u username -p new_database &lt; data-dump.sql
+</code></pre>
+<h3 id="executable-comments" tabindex="-1">Executable Comments <a class="header-anchor" href="#executable-comments" aria-hidden="true">🔗</a></h3>
+<p><a href="https://mariadb.com/kb/en/comment-syntax/#executable-comments">https://mariadb.com/kb/en/comment-syntax/#executable-comments</a></p>
+<p>I commenti contenuti nel file di dump <strong>in realtà vengono eseguiti</strong> da client MariaDB.</p>
+<p>Code that should be executed only starting from a specific MySQL or MariaDB version:</p>
+<pre><code class="language-sql"><span class="hljs-comment">/*!##### MySQL or MariaDB-specific code */</span>
+</code></pre>
+<p>The numbers, represented by <code>######</code> in the syntax examples above specify the specific the minimum versions of MySQL and MariaDB that should execute the comment. The first number is the major version, the second 2 numbers are the minor version and the last 2 is the patch level.</p>
+</body></html>

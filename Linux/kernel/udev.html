@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.049" />
+        <title>udev</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="udev" tabindex="-1">udev <a class="header-anchor" href="#udev" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.049</p>
+<nav class="table-of-contents"><ol><li><a href="#configurazione">Configurazione </a></li><li><a href="#riconoscere-un-dispositivo-come-un-drive-usb">Riconoscere un dispositivo come un drive USB </a></li><li><a href="#impedire-l'accesso-ad-un-dispositivo">Impedire l&#39;accesso ad un dispositivo </a></li><li><a href="#quali-valori-pu%C3%B2-assumere-action%3F">Quali valori può assumere ACTION? </a></li><li><a href="#disable-all-usb-ports">Disable all USB ports </a></li><li><a href="#disable-all-usb-block-devices">Disable all USB block devices </a></li><li><a href="#selectively-allow-usb-block-devices-via-a-custom-program">Selectively allow USB block devices via a custom program </a></li><li><a href="#udevadm">udevadm </a><ol><li><a href="#udevadm-monitor">udevadm monitor </a></li><li><a href="#udevadm-trigger">udevadm trigger </a></li><li><a href="#esempio">Esempio </a></li></ol></li><li><a href="#auto-mounting-usb-storage-with-udev">Auto-mounting USB storage with udev </a></li><li><a href="#howto%3A-montare-dispositivo-dove-voglio">HowTo: montare dispositivo dove voglio </a></li><li><a href="#writing-udev-rules-by-daniel-drake-(dsd)-version-0.74">Writing udev rules by Daniel Drake (dsd) Version 0.74 </a></li></ol></nav><h1 id="udev-1" tabindex="-1">UDEV <a class="header-anchor" href="#udev-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/udev">https://wiki.archlinux.org/index.php/udev</a></li>
+<li><a href="http://www.reactivated.net/writing_udev_rules.html">http://www.reactivated.net/writing_udev_rules.html</a></li>
+</ul>
+<ol>
+<li>
+<p>Il kernel per ogni dispositivo crea un file in <code>/sys</code></p>
+</li>
+<li>
+<p>Udev leggendo <code>/sys</code> e le regole in:</p>
+<pre><code> /lib/udev/rules.d
+ /etc/udev/rules.d
+</code></pre>
+<p>crea un dispositivo sotto <code>/dev</code></p>
+</li>
+<li>
+<p>In ultimo Udev notifica le operazioni effettuate ad HAL(Ora HAL è deprecato)<a href="https://wiki.ubuntu.com/Halsectomy">https://wiki.ubuntu.com/Halsectomy</a></p>
+<pre><code> man udev
+</code></pre>
+</li>
+</ol>
+<p>I file di regole (che sono un'ulteriore configurazione di udevd) sono in <code>/run/udev/rules.d</code>, <code>/etc/udev/rules.d</code> o <code>/lib/udev/rules.d</code> (<strong>Debian mette la maggior parte delle regole in <code>/lib/udev/rules.d</code></strong>).
+<a href="https://wiki.debian.org/it/udev">https://wiki.debian.org/it/udev</a></p>
+<h2 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h2>
+<p><a href="http://www.reactivated.net/writing_udev_rules.html">http://www.reactivated.net/writing_udev_rules.html</a></p>
+<p>udev crea files in <code>/dev/</code> in base alle regole definite in:</p>
+<pre><code class="language-bash">    /lib/udev/rules.d &lt;-- directory di sistema, editata dall<span class="hljs-string">&#x27;installazione dei pacchetti
+    /etc/udev/rules.d &lt;-- directory configurabile dall&#x27;</span>utente
+</code></pre>
+<p>I nomi dei file di regole devono iniziare con un numero e terminare con <code>.rules</code>, i numeri piu piccoli vengono eseguiti prima.</p>
+<p>Esempio di regola condizioni/azione:</p>
+<pre><code class="language-bash">    DRIVERS==<span class="hljs-string">&quot;sd&quot;</span>,ATTRS{vendor}==<span class="hljs-string">&quot;Google&quot;</span>,SYMLINK=<span class="hljs-string">&quot;android&quot;</span>
+</code></pre>
+<p>Se il dispositivo inserito è un unita di memoria hard disk(/dev/sda,/dev/sdb etc.) e se il vendor è &quot;Google&quot; allora creare nella cartella /dev un symlink di nome android: es. /dev/sdc --&gt; /dev/android
+Per ottenere info sul dispositivo al fine della creazione di una regola che lo intercetti:</p>
+<pre><code class="language-bash">    udevadm info --name /dev/sdb1 <span class="hljs-comment"># che però non produce un formato utile alle regole</span>
+    udevadm --info --attribute-walk --name /dev/sdb1 | less
+</code></pre>
+<p>Altra fonte utile di info sui dispositivi sono le cartelle virtuali <code>/dev/disk/by-ide</code> <code>/dev/disk/by-partlabel</code><br>
+Uno scanner viene montato ma è visibile solo al superutente, come risolvere il problema con una regola udev:</p>
+<pre><code class="language-bash">    ATTRS{product}==<span class="hljs-string">&quot;CanoScan&quot;</span>,
+    ATTRS{manufacturer}==<span class="hljs-string">&quot;Canon&quot;</span>,GROUP:=<span class="hljs-string">&quot;scanner&quot;</span>,
+    MODE:=<span class="hljs-string">&quot;0666&quot;</span>,SYMLINK=<span class="hljs-string">&quot;scanner&quot;</span>
+</code></pre>
+<p><code>GROUP</code> e <code>MODE</code> cambiano il proprietario ed i permessi del nodo creato.<br>
+<code>:=</code> è un assegnamento prioritario che contrariamente ad <code>=</code> non puo essere annullato da assegnamenti successivi - il nome del file <code>.rules</code> è meglio che inizi con <code>10</code> in modo da farlo eseguire prima degli altri.</p>
+<p>La regola assegna il dispositivo al gruppo scanner, concedendo i diritti di scrittura e quindi rendendolo di fatto usabile da tutti i membri del gruppo.<br>
+In <code>/etc/udev/rules.d/70-persistent-net.rules</code> ci sono le regole che assegnano i nomi <code>/dev</code> alle schede di rete in base al loro MAC Address.<br>
+Se si cambia la scheda di rete può essere interessante editare tale file per riciclare eth0 senza passare ad eth1 eth2.</p>
+<h2 id="riconoscere-un-dispositivo-come-un-drive-usb" tabindex="-1">Riconoscere un dispositivo come un drive USB <a class="header-anchor" href="#riconoscere-un-dispositivo-come-un-drive-usb" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>Smontare il driver</li>
+<li>Utilizzare uno dei seguenti comandi per riconoscere il dispositivo(prima dare i comando e poi montare la pendrive):<pre><code class="language-bash"><span class="hljs-built_in">tail</span> -f /var/log/syslog
+<span class="hljs-built_in">tail</span> -f -n 0 /var/log/kern.log
+udevadm monitor --environment --udev
+</code></pre>
+</li>
+</ol>
+<p>Esempio: utilizzando gli attributi riportati da <code>udevinfo -a -p $(udevinfo -q path -n /dev/sdd)</code> :</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> nano /etc/udev/rules.d/10-local.rules
+    BUS==<span class="hljs-string">&quot;usb&quot;</span>, SYSFS{product}==<span class="hljs-string">&quot;TS128MJFLASHA&quot;</span>, KERNEL==<span class="hljs-string">&quot;sd?1&quot;</span>, NAME=<span class="hljs-string">&quot;transcend128mb&quot;</span>, SYMLINK=<span class="hljs-string">&quot;usbdevices/transcend128mb&quot;</span>
+</code></pre>
+<p>A quick explanation.</p>
+<ul>
+<li>The <code>BUS==”usb”</code> and <code>SYSFS{product}==”TS128MJFLASHA”</code> options are the same as those I picked out from the udevinfo output.</li>
+<li>The option <code>KERNEL=&quot;sd?1&quot;</code> will only match locations like <code>/dev/sda1</code>, <code>/dev/sdb1</code> and more importantly, it won't match nodes like <code>/dev/sda</code>, <code>/dev/sdb</code>, which can be fdisk'ed. The 'Writing udev rules' guide also mentions this.</li>
+<li>The options <code>NAME=&quot;transcend128mb&quot;</code> and <code>SYMLINK=&quot;usbdevices/transcend128mb&quot;</code> will create the persistant node at <code>/dev/transcend128mb</code> and a symlink <code>/dev/usbdevices/transcend128mb</code> that points to the persistant node <code>/dev/transcend128mb</code>. The SYMLINK option is not required. The reason I have included it is so that all my USB devices will have a symlink starting with <code>/dev/usbdevices/...</code>
+I just think its neater.
+There are other options that could be used to create udev rules, such as <code>GROUP=”some_group”</code>, if you want to assigned the group ownership of the device node to a specific group, and <code>MODE=”0660”</code>, which would give the owner/group read and write permissions, like chmod.<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> /etc/init.d/udev restart
+<span class="hljs-built_in">sudo</span> nano /etc/fstab
+    /dev/transcend128mb /media/usb128mb vfat iocharset=utf8,<span class="hljs-built_in">umask</span>=000 0 0
+    oppure:
+    /dev/usbdevices/transcend128mb /media/usb128mb vfat iocharset=utf8,<span class="hljs-built_in">umask</span>=000 0 0
+<span class="hljs-built_in">sudo</span> mount /media/usb128mb
+</code></pre>
+</li>
+</ul>
+<h2 id="impedire-l'accesso-ad-un-dispositivo" tabindex="-1">Impedire l'accesso ad un dispositivo <a class="header-anchor" href="#impedire-l'accesso-ad-un-dispositivo" aria-hidden="true">🔗</a></h2>
+<p>L'idea è quella di creare un gruppo ed assegnarlo come owner del dispositivo e poi assegnare gli utenti a tale gruppo</p>
+<ul>
+<li>Con il seguente comando si assegna al dispositivo usb il gruppo &quot;weather&quot;:<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> nano /etc/udev/rules.d/10-local.rules
+    ACTION!=<span class="hljs-string">&quot;add|change&quot;</span>, GOTO=<span class="hljs-string">&quot;weather_station_end&quot;</span>
+    SUBSYSTEM==<span class="hljs-string">&quot;usb&quot;</span>, ATTRS{idVendor}==<span class="hljs-string">&quot;1941&quot;</span>, ATTRS{idProduct}==<span class="hljs-string">&quot;8021&quot;</span>, GROUP=<span class="hljs-string">&quot;weather&quot;</span>
+    ....
+    LABEL=<span class="hljs-string">&quot;weather_station_end&quot;</span>
+</code></pre>
+</li>
+<li>Si crea il gruppo &quot;weather&quot;:<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> addgroup --system weather
+Adding group `weather<span class="hljs-string">&#x27; (GID 127) ...
+Done.
+sudo gpasswd -a tj weather
+Adding user `tj&#x27;</span> to group `weather<span class="hljs-string">&#x27; ...
+Adding user tj to group weather
+Done.
+( sudo moduser --append --groups weather tj # equivalent to moduser -aG weather tj )
+</span></code></pre>
+</li>
+</ul>
+<h2 id="quali-valori-pu%C3%B2-assumere-action%3F" tabindex="-1">Quali valori può assumere ACTION? <a class="header-anchor" href="#quali-valori-pu%C3%B2-assumere-action%3F" aria-hidden="true">🔗</a></h2>
+<p>Comando per sniffare gli eventi udev e vedere che valori assume ACTION:</p>
+<pre><code class="language-bash">udevadm monitor --property
+grep ACTION /lib/udev/rules.d/*
+</code></pre>
+<p>Searching the <code>/lib/udev/rules.d/*</code> files showed ACTION values of &quot;add&quot;, &quot;change&quot; and &quot;remove&quot; (and one &quot;add|change&quot;).
+&quot;change&quot; corresponds, for example, to removing or inserting an sdcard in a sdcard reader, or changing the hard disc inside a usb-to-sata enclosure. The device itself is not added nor removed, but the media is no longer the same.</p>
+<pre><code class="language-bash">udevtest /class/sound/dsp
+udevadm control --reload
+udevadm trigger
+</code></pre>
+<h2 id="disable-all-usb-ports" tabindex="-1">Disable all USB ports <a class="header-anchor" href="#disable-all-usb-ports" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">BUS==<span class="hljs-string">&quot;usb&quot;</span>, OPTIONS+=<span class="hljs-string">&quot;ignore_device&quot;</span>
+</code></pre>
+<p>The effect of this rule will be to disable all devices connected to all USB ports of your system — USB printers,
+keyboards and mouses will not work. So use it with care!</p>
+<h2 id="disable-all-usb-block-devices" tabindex="-1">Disable all USB block devices <a class="header-anchor" href="#disable-all-usb-block-devices" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">BUS==<span class="hljs-string">&quot;usb&quot;</span>, SUBSYSTEM==<span class="hljs-string">&quot;block&quot;</span>, OPTIONS+=<span class="hljs-string">&quot;ignore_device&quot;</span>
+</code></pre>
+<p>This particular rule prevents USB block storage devices from being recognised.
+This may be useful for information security or confidentiality within an organisation.</p>
+<h2 id="selectively-allow-usb-block-devices-via-a-custom-program" tabindex="-1">Selectively allow USB block devices via a custom program <a class="header-anchor" href="#selectively-allow-usb-block-devices-via-a-custom-program" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">BUS==<span class="hljs-string">&quot;usb&quot;</span>, SUBSYSTEM==<span class="hljs-string">&quot;block&quot;</span>, PROGRAM=<span class="hljs-string">&quot;/bin/usbc.jar&quot;</span>, RESULT!=<span class="hljs-string">&quot;my&quot;</span>, OPTIONS+=<span class="hljs-string">&quot;ignore_device&quot;</span>
+</code></pre>
+<p>If the output generated by the program is equal to the ‘my’ value that is specified,
+then allow the USB device; if the output is anything else, then ignore the device.</p>
+<h2 id="udevadm" tabindex="-1">udevadm <a class="header-anchor" href="#udevadm" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ find /sys -name sda
+udevadm info -a -p /sys/block/sda <span class="hljs-comment"># info su attributi del nodo e dei nodi parente</span>
+udevadm info -q path -n /dev/sda  <span class="hljs-comment"># per ottenere l&#x27;indirizzo all&#x27;interno di /sys di un device montato sotto /dev</span>
+</code></pre>
+<p>Combinando i due comandi, ottenere gli attributi di un device montato sotto /dev:</p>
+<pre><code class="language-bash">udevadm info -a -p $(udevadm info -q path -n /dev/sda)
+</code></pre>
+<h3 id="udevadm-monitor" tabindex="-1">udevadm monitor <a class="header-anchor" href="#udevadm-monitor" aria-hidden="true">🔗</a></h3>
+<p>Permette di visualizzare gli eventi emessi dal kernel e le azioni intraprese da Udev
+ad es. dopo avero lanciato inserire una chiavetta USB</p>
+<h3 id="udevadm-trigger" tabindex="-1">udevadm trigger <a class="header-anchor" href="#udevadm-trigger" aria-hidden="true">🔗</a></h3>
+<p>provvede a rigenerare tutti i file del /dev
+utile se si e' cancellato per sbaglio un device sotto /dev</p>
+<h3 id="esempio" tabindex="-1">Esempio <a class="header-anchor" href="#esempio" aria-hidden="true">🔗</a></h3>
+<p>Collegando una stampante le viene dato il nome <code>/dev/lp0</code></p>
+<pre><code class="language-bash">udevadm info -a -p $(udevadm info -q path -n /dev/lp0)
+...
+SUBSYSTEM==<span class="hljs-string">&quot;usb&quot;</span>
+...
+ATTRS[serial]==<span class="hljs-string">&quot;L72010011070626380&quot;</span>
+</code></pre>
+<p>Con queste info potete creare una regola per questa periferica:</p>
+<p><code>SUBSYSTEM==&quot;usb&quot;, ATTRS[serial]==&quot;L72010011070626380&quot;, SYMLINK+=&quot;epson_680&quot;</code></p>
+<h2 id="auto-mounting-usb-storage-with-udev" tabindex="-1">Auto-mounting USB storage with udev <a class="header-anchor" href="#auto-mounting-usb-storage-with-udev" aria-hidden="true">🔗</a></h2>
+<p>Auto-mounting external USB devices can be very handy, especially when using headless (no GUI) servers, or in my case a Raspberry Pi. A simple udev script is all that is needed, and assumed that any external storage device connected via USB will need to be mounted automatically in a subdirectory of <code>/media</code></p>
+<p>Simply create a file <code>/etc/udev/rules.d/11-media-by-label-auto-mount.rules</code> with the following:</p>
+<pre><code class="language-bash">    KERNEL!=<span class="hljs-string">&quot;sd[a-z][0-9]&quot;</span>, GOTO=<span class="hljs-string">&quot;media_by_label_auto_mount_end&quot;</span>
+    <span class="hljs-comment"># Import FS infos</span>
+    IMPORT{program}=<span class="hljs-string">&quot;/sbin/blkid -o udev -p %N&quot;</span>
+    <span class="hljs-comment"># Get a label if present, otherwise specify one</span>
+    ENV{ID_FS_LABEL}!=<span class="hljs-string">&quot;&quot;</span>, ENV{dir_name}=<span class="hljs-string">&quot;%E{ID_FS_LABEL}&quot;</span>
+    ENV{ID_FS_LABEL}==<span class="hljs-string">&quot;&quot;</span>, ENV{dir_name}=<span class="hljs-string">&quot;usbhd-%k&quot;</span>
+    <span class="hljs-comment"># Global mount options</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, ENV{mount_options}=<span class="hljs-string">&quot;relatime&quot;</span>
+    <span class="hljs-comment"># Filesystem-specific mount options</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, ENV{ID_FS_TYPE}==<span class="hljs-string">&quot;vfat|ntfs&quot;</span>, ENV{mount_options}=<span class="hljs-string">&quot;<span class="hljs-variable">$env</span>{mount_options},utf8,gid=100,umask=002&quot;</span>
+    <span class="hljs-comment"># Mount the device</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/mkdir -p /media/%E{dir_name}&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/mount -o <span class="hljs-variable">$env</span>{mount_options} /dev/%k /media/%E{dir_name}&quot;</span>
+    <span class="hljs-comment"># Clean up after removal</span>
+    ACTION==<span class="hljs-string">&quot;remove&quot;</span>, ENV{dir_name}!=<span class="hljs-string">&quot;&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/umount -l /media/%E{dir_name}&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/rmdir /media/%E{dir_name}&quot;</span>
+    <span class="hljs-comment"># Exit</span>
+    LABEL=<span class="hljs-string">&quot;media_by_label_auto_mount_end&quot;</span>
+</code></pre>
+<p>Once you have created your script and saved it, reload udev with:</p>
+<pre><code class="language-bash">    udevadm control --reload-rules
+</code></pre>
+<p>Now, when you connect the USB storage device, udev should automatically create a directory under /media with either the device ID, or device label (if you have assigned one), and mount the device. If you disconnect the device, the drive directory (in /media) will be automatically removed.</p>
+<pre><code>IMPORT{type} Specifies a set of variables for the device property, depending on type:
+    program Run the specified value as an external program and imports its result, which must be in environmental key format.
+    For example IMPORT{program}=&quot;usb_id --export %p&quot;.
+$env{key}, %E{key} A device property value.
+%k evaluates to the kernel name for the device, e.g. &quot;sda3&quot; for a device that would (by default) appear at /dev/sda3.
+%n evaluates to the kernel number for the device (the partition number for storage devices), e.g. &quot;3&quot; for /dev/sda3.
+%p, $devpath The device path of the device in the sysfs file system under /sys. For example, RUN+=&quot;keyboard-force-release.sh $devpath common-volume-keys&quot;
+</code></pre>
+<h2 id="howto%3A-montare-dispositivo-dove-voglio" tabindex="-1">HowTo: montare dispositivo dove voglio <a class="header-anchor" href="#howto%3A-montare-dispositivo-dove-voglio" aria-hidden="true">🔗</a></h2>
+<p>Abbiamo visto qualche tempo fa come montare in automatico i dispositivi USB, in quel caso i dispositivi venivano montati in un percorso casuale. Insomma, non proprio casuale, veniva montato nella prima directory libera di un elenco (con usbmount). Ma, come faccio a far montare in automatico un determinato dispositivo rimovibile in una determinata directory? Mi spiego meglio, se abbiamo due penne USB di diversa marca e un HD USB, come facciamo a fare in modo che la penna A venga montata nella directory A, la penna B nella directory B e l?HD esterno C nella directory C? Il modo esiste, vediamolo.</p>
+<p>Penna USB Prima di tutto bisogna conoscere qualcosa di udev:</p>
+<p><a href="http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html">http://www.kernel.org/pub/linux/utils/kernel/hotplug/udev.html</a></p>
+<p>sapere come funziona:</p>
+<p><a href="http://guide.debianizzati.org/index.php/Udev_e_Debian">http://guide.debianizzati.org/index.php/Udev_e_Debian</a></p>
+<p>e come scriverne le regole:</p>
+<p><a href="http://www.reactivated.net/writing_udev_rules.html">http://www.reactivated.net/writing_udev_rules.html</a></p>
+<p>Ho capito, non ne avete voglia.</p>
+<p>Le regole di udev si trovano nella directory <code>/etc/udev/rules.d/</code>, meglio non modificare le regole gia? esistenti, creiamo dunque un nuovo file, e siccome le regole vengono lette e processate in ordine alfabetico, il file che andiamo a creare per essere letto per primo lo possiamo nominare:</p>
+<p><code>00_local.rules</code></p>
+<p>Ma prima dobbiamo sapere come vengono identificati i nostri dispositivi. Diamo dunque il seguente comando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">tail</span> -f /var/log/syslog
+</code></pre>
+<p>e inseriamo il dispositivo rimovibile.
+Oppure, inseriamo il dispositivo e poi diamo questo comando:</p>
+<pre><code class="language-bash">$ dmesg
+</code></pre>
+<p>Possiamo subito notare il posizionamento (sda ad esempio), il tipo di prodotto e il modello (ad esempio External HDD e Western Digital).</p>
+<p>Ora diamo il comando:</p>
+<pre><code class="language-bash">$ udevinfo -a -p /sys/block/sda
+</code></pre>
+<p>se il dispositivo non si trova in sda, ma sdb, sdc, o quello che e?, inserite il percorso giusto. Esce un output piuttosto lungo, ma non spaventatevi, le cose che ci interessano sono tre, annotatevi:</p>
+<pre><code class="language-bash">    ---8&lt;---
+    KERNEL==<span class="hljs-string">&quot;sda&quot;</span>
+    ---8&lt;---
+    ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>
+    ---8&lt;---
+    ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>
+    ---8&lt;---
+</code></pre>
+<p>Queste informazioni sono sufficienti per creare una regola. Infatti sono informazioni che possono essere reperite da udev, che le puo? utilizzare per riconoscere il dispositivo.</p>
+<p>Tutto quello che abbiamo visto fin qui e? propedeutico alla scrittura delle regole. Veniamo ora alla scrittura della/e regola/e. Vogliamo che quando inseriamo il nostro Hard Disk Western Digital, venga montato nella directory /media/hdwd.
+Creiamo il nostro file:</p>
+<pre><code class="language-bash">nano /etc/udev/rules.d/00_local.rules
+</code></pre>
+<p>e aggiungiamoci la regola:</p>
+<pre><code class="language-bash">    ---8&lt;---
+    KERNEL==<span class="hljs-string">&quot;sda&quot;</span>, ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>, NAME=<span class="hljs-string">&quot;%k&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;usbhdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, KERNEL==<span class="hljs-string">&quot;sda&quot;</span>, ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/mkdir /media/hdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, KERNEL==<span class="hljs-string">&quot;sda&quot;</span>, ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/mount -t vfat -o sync,flush,uid=1000,gid=100 /dev/usbhdwd /media/hdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;remove&quot;</span>, KERNEL==<span class="hljs-string">&quot;sda&quot;</span>, ENV{ID_VENDOR}==<span class="hljs-string">&quot;WD&quot;</span>, ENV{ID_MODEL}=<span class="hljs-string">&quot;5000AAV_External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/umount /media/hdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;remove&quot;</span>, KERNEL==<span class="hljs-string">&quot;sda&quot;</span>, ENV{ID_VENDOR}==<span class="hljs-string">&quot;WD&quot;</span>, ENV{ID_MODEL}=<span class="hljs-string">&quot;5000AAV_External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/rmdir /media/hdwd&quot;</span>
+    ---8&lt;---
+</code></pre>
+<p>Se fosse un Hard Disk partizionato, allora la regola sarebbe questa:</p>
+<pre><code class="language-bash">    ---8&lt;---
+    KERNEL==<span class="hljs-string">&quot;sd?1&quot;</span>, ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>, NAME=<span class="hljs-string">&quot;%k&quot;</span>, SYMLINK+=<span class="hljs-string">&quot;usbhdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, KERNEL==<span class="hljs-string">&quot;sd?1&quot;</span>, ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/mkdir /media/hdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;add&quot;</span>, KERNEL==<span class="hljs-string">&quot;sd?1&quot;</span>, ATTRS{vendor}==<span class="hljs-string">&quot;WD&quot;</span>, ATTRS{model}==<span class="hljs-string">&quot;5000AAV External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/mount -t vfat -o sync,flush,uid=1000,gid=100 /dev/usbhdwd /media/hdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;remove&quot;</span>, KERNEL==<span class="hljs-string">&quot;sd?1&quot;</span>, ENV{ID_VENDOR}==<span class="hljs-string">&quot;WD&quot;</span>, ENV{ID_MODEL}=<span class="hljs-string">&quot;5000AAV_External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/umount /media/hdwd&quot;</span>
+    ACTION==<span class="hljs-string">&quot;remove&quot;</span>, KERNEL==<span class="hljs-string">&quot;sd?1&quot;</span>, ENV{ID_VENDOR}==<span class="hljs-string">&quot;WD&quot;</span>, ENV{ID_MODEL}=<span class="hljs-string">&quot;5000AAV_External&quot;</span>, RUN+=<span class="hljs-string">&quot;/bin/rmdir /media/hdwd&quot;</span>
+    ---8&lt;---
+</code></pre>
+<p>Quando scrivete le vostre regole, state attenti a inserire i dati che corrispondono al vostro dispositivo. Ora potete creare in questo modo anche le regole per la vostra penna USB di marca x e per quella di marca y. Questo sistema e? molto utile quando dovete usare piu? dispositivi rimovibili contemporaneamente, venendo montati sempre nella stessa posizione, non rischiate di confondervi tra un dispositivo e l?altro.</p>
+<h2 id="writing-udev-rules-by-daniel-drake-(dsd)-version-0.74" tabindex="-1">Writing udev rules by Daniel Drake (dsd) Version 0.74 <a class="header-anchor" href="#writing-udev-rules-by-daniel-drake-(dsd)-version-0.74" aria-hidden="true">🔗</a></h2>
+<p>The most recent version of this document can always be found at:</p>
+<p><a href="http://www.reactivated.net/writing_udev_rules.html">http://www.reactivated.net/writing_udev_rules.html</a></p>
+<pre><code>Contents
+
+Introduction
+About this document
+History
+The concepts
+Terminology: devfs, sysfs, nodes, etc.
+Why?
+Built-in persistent naming schemes
+Rule writing
+Rule files and semantics
+Rule syntax
+Basic rules
+Matching sysfs attributes
+Device hierarchy
+String substitutions
+String matching
+Finding suitable information from sysfs
+The sysfs tree
+udevinfo
+Alternative methods
+Advanced topics
+Controlling permissions and ownership
+Using external programs to name devices
+Running external programs on certain events
+Environment interaction
+Additional options
+Examples
+USB Printer
+USB Camera
+USB Hard Disk
+USB Card Reader
+USB Palm Pilot
+CD/DVD drives
+Network interfaces
+Testing and debugging
+Putting your rules into action
+udevtest
+Author and contact
+
+Introduction
+About this document
+
+udev is targeted at Linux kernels 2.6 and beyond to provide a userspace solution for a dynamic /dev directory, with persistent device naming. The previous /dev implementation, devfs, is now deprecated, and udev is seen as the successor. udev vs devfs is a sensitive area of conversation - you should read this document before making comparisons.
+
+Over the years, the things that you might use udev rules for has changed, as well as the flexibility of rules themselves. On a modern system, udev provides persistent naming for some device types out-of-the-box, eliminating the need for custom rules for those devices. However, some users will still require the extra level of customisation.
+
+This document assumes that you have udev installed and running OK with default configurations. This is usually handled by your Linux distribution.
+
+This document does not cover every single detail of rule writing, but does aim to introduce all of the main concepts. The finer details can be found in the udev man page.
+
+This document uses various examples (many of which are entirely fictional) to illustrate ideas and concepts. Not all syntax is explicitly described in the accompanying text, be sure to look at the example rules to get a complete understanding.
+History
+
+April 5th 2008 v0.74: Typo fixes.
+December 3rd 2007 v0.73: Update for new udev versions, and some miscellaneous improvements.
+October 2nd 2006 v0.72: Fixed a typo in one of the example rules.
+June 10th 2006 v0.71: Misc changes based on recent feedback - thanks!
+June 3rd 2006 v0.7: Complete rework, to be more suited for the modern-day udev.
+May 9th 2005 v0.6: Misc updates, including information about udevinfo, groups and permissions, logging, and udevtest.
+June 20th 2004 v0.55: Added info on multiple symlinks, and some minor changes/updates.
+April 26th 2004 v0.54: Added some Debian info. Minor corrections. Re-reverted information about what to call your rule file. Added info about naming network interfaces.
+April 15th 2004 v0.53: Minor corrections. Added info about NAME{all_partitions}. Added info about other udevinfo tricks.
+April 14th 2004 v0.52: Reverted to suggesting using &quot;udev.rules&quot; until the udev defaults allow for other files. Minor work.
+April 6th 2004 v0.51: I now write suggest users to use their own &quot;local.rules&quot; file rather than prepending &quot;udev.rules&quot;.
+April 3rd 2004 v0.5: Minor cleanups and preparations for possible inclusion in the udev distribution.
+March 20th 2004 v0.4: General improvements, clarifications, and cleanups. Added more information about writing rules for usb-storage.
+February 23rd 2004 v0.3: Rewrote some parts to emphasise how sysfs naming works, and how it can be matched. Updated rule-writing parts to represent udev 018s new SYSFS{filename} naming scheme. Improved sectioning, and clarified many points. Added info about KDE.
+February 18th 2004 v0.2: Fixed a small omission in an example. Updated section on identifying mass-storage devices. Updated section on nvidia.
+February 15th 2004 v0.1: Initial publication.
+
+The concepts
+Terminology: devfs, sysfs, nodes, etc.
+
+A basic introduction only, might not be totally accurate.
+
+On typical Linux-based systems, the /dev directory is used to store file-like device nodes which refer to certain devices in the system. Each node points to a part of the system (a device), which might or might not exist. Userspace applications can use these device nodes to interface with the systems hardware, for example, the X server will &quot;listen to&quot; /dev/input/mice so that it can relate the user's mouse movements to moving the visual mouse pointer.
+
+The original /dev directories were just populated with every device that might possibly appear in the system. /dev directories were typically very large because of this. devfs came along to provide a more manageable approach (noticeably, it only populated /dev with hardware that is plugged into the system), as well as some other functionality, but the system proved to have problems which could not be easily fixed.
+
+udev is the &quot;new&quot; way of managing /dev directories, designed to clear up some issues with previous /dev implementations, and provide a robust path forward. In order to create and name /dev device nodes corresponding to devices that are present in the system, udev relies on matching information provided by sysfs with rules provided by the user. This documentation aims to detail the process of rule-writing, one of the only udev-related tasks that must (optionally) be performed by the user.
+
+sysfs is a new filesystem to the 2.6 kernels. It is managed by the kernel, and exports basic information about the devices currently plugged into your system. udev can use this information to create device nodes corresponding to your hardware. sysfs is mounted at /sys and is browseable. You may wish to investigate some of the files stored there before getting to grips with udev. Throughout this document, I will use the terms /sys and sysfs interchangeably.
+Why?
+
+udev rules are flexible and very powerful. Here are some of the things you can use rules to achieve:
+
+Rename a device node from the default name to something else
+Provide an alternative/persistent name for a device node by creating a symbolic link to the default device node
+Name a device node based on the output of a program
+Change permissions and ownership of a device node
+Launch a script when a device node is created or deleted (typically when a device is attached or unplugged)
+Rename network interfaces
+
+Writing rules is not a workaround for the problem where no device nodes for your particular device exist. Even if there are no matching rules, udev will create the device node with the default name supplied by the kernel.
+
+Having persistently named device nodes has several advantages. Assume you own two USB storage devices: a digital camera and a USB flash disk. These devices are typically assigned device nodes /dev/sda and /dev/sdb but the exact assignment depends on the order which they were originally connected. This may cause problems to some users, who would benefit greatly if each device could be named persistently every time, e.g. /dev/camera and /dev/flashdisk.
+Built-in persistent naming schemes
+
+udev provides persistent naming for some device types out of the box. This is a very useful feature, and in many circumstances means that your journey ends here: you do not have to write any rules.
+
+udev provides out-of-the-box persistent naming for storage devices in the /dev/disk directory. To view the persistent names which have been created for your storage hardware, you can use the following command:
+
+# ls -lR /dev/disk
+
+This works for all storage types. As an example, udev has created /dev/disk/by-id/scsi-SATA_ST3120827AS_4MS1NDXZ-part3 which is a persistent-named symbolic link to my root partition. udev creates /dev/disk/by-id/usb-Prolific_Technology_Inc._USB_Mass_Storage_Device-part1 when I plug my USB flash disk in, which is also a persistent name.
+Rule writing
+Rule files and semantics
+
+When deciding how to name a device and which additional actions to perform, udev reads a series of rules files. These files are kept in the /etc/udev/rules.d directory, and they all must have the .rules suffix.
+
+Default udev rules are stored in /etc/udev/rules.d/50-udev.rules. You may find it interesting to look over this file - it includes a few examples, and then some default rules proving a devfs-style /dev layout. However, you should not write rules into this file directly.
+
+Files in /etc/udev/rules.d/ are parsed in lexical order, and in some circumstances, the order in which rules are parsed is important. In general, you want your own rules to be parsed before the defaults, so I suggest you create a file at /etc/udev/rules.d/10-local.rules and write all your rules into this file.
+
+In a rules file, lines starting with &quot;#&quot; are treated as comments. Every other non-blank line is a rule. Rules cannot span multiple lines.
+
+One device can be matched by more than one rule. This has it's practical advantages, for example, we can write two rules which match the same device, where each one provides its own alternate name for the device. Both alternate names will be created, even if the rules are in separate files. It is important to understand that udev will not stop processing when it finds a matching rule, it will continue searching and attempt to apply every rule that it knows about.
+Rule syntax
+
+Each rule is constructed from a series of key-value pairs, which are separated by commas. match keys are conditions used to identify the device which the rule is acting upon. When all match keys in a rule correspond to the device being handled, then the rule is applied and the actions of the assignment keys are invoked. Every rule should consist of at least one match key and at least one assignment key.
+
+Here is an example rule to illustrate the above:
+
+KERNEL==&quot;hdb&quot;, NAME=&quot;my_spare_disk&quot;
+
+The above rule includes one match key (KERNEL) and one assignment key (NAME). The semantics of these keys and their properties will be detailed later. It is important to note that the match key is related to its value through the equality operator (==), whereas the assignment key is related to its value through the assignment operator (=).
+
+Be aware that udev does not support any form of line continuation. Do not insert any line breaks in your rules, as this will cause udev to see your one rule as multiple rules and will not work as expected.
+Basic Rules
+
+udev provides several different match keys which can be used to write rules which match devices very precisely. Some of the most common keys are introduced below, others will be introduced later in this document. For a complete list, see the udev man page.
+
+KERNEL - match against the kernel name for the device
+SUBSYSTEM - match against the subsystem of the device
+DRIVER - match against the name of the driver backing the device
+
+After you have used a series of match keys to precisely match a device, udev gives you fine control over what happens next, through a range of assignment keys. For a complete list of possible assignment keys, see the udev man page. The most basic assignment keys are introduced below. Others will be introduced later in this document.
+
+NAME - the name that shall be used for the device node
+SYMLINK - a list of symbolic links which act as alternative names for the device node
+
+As hinted above, udev only creates one true device node for one device. If you wish to provide alternate names for this device node, you use the symbolic link functionality. With the SYMLINK assignment, you are actually maintaining a list of symbolic links, all of which will be pointed at the real device node. To manipulate these links, we introduce a new operator for appending to lists: +=. You can append multiple symlinks to the list from any one rule by separating each one with a space.
+
+KERNEL==&quot;hdb&quot;, NAME=&quot;my_spare_disk&quot;
+
+The above rule says: match a device which was named by the kernel as hdb, and instead of calling it hdb, name the device node as my_spare_disk. The device node appears at /dev/my_spare_disk.
+
+KERNEL==&quot;hdb&quot;, DRIVER==&quot;ide-disk&quot;, SYMLINK+=&quot;sparedisk&quot;
+
+The above rule says: match a device which was named by the kernel as hdb AND where the driver is ide-disk. Name the device node with the default name and create a symbolic link to it named sparedisk. Note that we did not specify a device node name, so udev uses the default. In order to preserve the standard /dev layout, your own rules will typically leave the NAME alone but create some SYMLINKs and/or perform other assignments.
+
+KERNEL==&quot;hdc&quot;, SYMLINK+=&quot;cdrom cdrom0&quot;
+
+The above rule is probably more typical of the types of rules you might be writing. It creates two symbolic links at /dev/cdrom and /dev/cdrom0, both of which point at /dev/hdc. Again, no NAME assignment was specified, so the default kernel name (hdc) is used.
+Matching sysfs attributes
+
+The match keys introduced so far only provide limited matching capabilities. Realistically we require much finer control: we want to identify devices based on advanced properties such as vendor codes, exact product numbers, serial numbers, storage capacities, number of partitions, etc.
+
+Many drivers export information like this into sysfs, and udev allows us to incorporate sysfs-matching into our rules, using the ATTR key with a slightly different syntax.
+
+Here is an example rule which matches a single attribute from sysfs. Further detail will be provided later in this document which will aid you in writing rules based on sysfs attributes.
+
+SUBSYSTEM==&quot;block&quot;, ATTR{size}==&quot;234441648&quot;, SYMLINK+=&quot;my_disk&quot;
+
+Device hierarchy
+
+The Linux kernel actually represents devices in a tree-like structure, and this information is exposed through sysfs and useful when writing rules. For example, the device representation of my hard disk device is a child of the SCSI disk device, which is in turn a child of the Serial ATA controller device, which is in turn a child of the PCI bus device. It is likely that you will find yourself needing to refer to information from a parent of the device in question, for example the serial number of my hard disk device is not exposed at the device level, it is exposed by its direct parent at the SCSI disk level.
+
+The four main match keys introduced so far (KERNEL/SUBSYSTEM/DRIVER/ATTR) only match against values corresponding to the device in question, and do not match values from parent devices. udev provides variants of the match keys that will search upwards through the tree:
+
+KERNELS - match against the kernel name for the device, or the kernel name for any of the parent devices
+SUBSYSTEMS - match against the subsystem of the device, or the subsystem of any of the parent devices
+DRIVERS - match against the name of the driver backing the device, or the name of the driver backing any of the parent devices
+ATTRS - match a sysfs attribute of the device, or a sysfs attribute of any of the parent devices
+
+With hierarchy considerations in mind, you may feel that rule writing is becoming a little complicated. Rest assured that there are tools that help out here, which will be introduced later.
+String substitutions
+
+When writing rules which will potentially handle multiple similar devices, udev's printf-like string substitution operators are very useful. You can simply include these operators in any assignments your rule makes, and udev will evaluate them when they are executed.
+
+The most common operators are %k and %n. %k evaluates to the kernel name for the device, e.g. &quot;sda3&quot; for a device that would (by default) appear at /dev/sda3. %n evaluates to the kernel number for the device (the partition number for storage devices), e.g. &quot;3&quot; for /dev/sda3.
+
+udev also provides several other substitution operators for more advanced functionality. Consult the udev man page after reading the rest of this document. There is also an alternative syntax for these operators - $kernel and $number for the examples above. For this reason, if you wish to match a literal % in a rule then you must write %%, and if you wish to match a literal $ then you must write $$.
+
+To illustrate the concept of string substitution, some example rules are shown below.
+
+KERNEL==&quot;mice&quot;, NAME=&quot;input/%k&quot;
+KERNEL==&quot;loop0&quot;, NAME=&quot;loop/%n&quot;, SYMLINK+=&quot;%k&quot;
+
+The first rule ensures that the mice device node appears exclusively in the /dev/input directory (by default it would be at /dev/mice). The second rule ensures that the device node named loop0 is created at /dev/loop/0 but also creates a symbolic link at /dev/loop0 as usual.
+
+The use of the above rules is questionable, as they all could be rewritten without using any substitution operators. The true power of these substitutions will become apparent in the next section.
+String matching
+
+As well as matching strings exactly, udev allows you to use shell-style pattern matching. There are 3 patterns supported:
+
+* - match any character, zero or more times
+? - match any character exactly once
+[] - match any single character specified in the brackets, ranges are also permitted
+
+Here are some examples which incorporate the above patterns. Note the use of the string substitution operators.
+
+KERNEL==&quot;fd[0-9]*&quot;, NAME=&quot;floppy/%n&quot;, SYMLINK+=&quot;%k&quot;
+KERNEL==&quot;hiddev*&quot;, NAME=&quot;usb/%k&quot;
+
+The first rule matches all floppy disk drives, and ensures that the device nodes are placed in the /dev/floppy directory, as well as creating a symbolic link from the default name. The second rule ensures that hiddev devices are only present in the /dev/usb directory.
+Finding information from sysfs
+The sysfs tree
+
+The concept of using interesting information from sysfs was briefly touched upon above. In order to write rules based on this information, you first need to know the names of the attributes and their current values.
+
+sysfs is actually a very simple structure. It is logically divided into directories. Each directory contains a number of files (attributes) which typically contain just one value. Some symbolic links are present, which link devices to their parents. The hierarchical structure was touched upon above.
+
+Some directories are referred to as top-level device paths. These directories represent actual devices that have corresponding device nodes. Top-level device paths can be classified as sysfs directories which contain a dev file, the following command will list these for you:
+
+# find /sys -name dev
+
+For example, on my system, the /sys/block/sda directory is the device path for my hard disk. It is linked to it's parent, the SCSI disk device, through the /sys/block/sda/device symbolic link.
+
+When you write rules based on sysfs information, you are simply matching attribute contents of some files in one part of the chain. For example, I can read the size of my hard disk as follows:
+
+# cat /sys/block/sda/size
+234441648
+
+In a udev rule, I could use ATTR{size}==&quot;234441648&quot; to identify this disk. As udev iterates through the entire device chain, I could alternatively opt to match attributes in another part of the chain (e.g. attributes in /sys/class/block/sda/device/) using ATTRS, however there are some caveats when dealing with different parts of the chain which are described later.
+
+Although this serves as a useful introduction as to the structure of sysfs and exactly how udev matches values, manually trawling through sysfs is both time consuming and unnecessary.
+udevinfo
+
+Enter udevinfo, which is probably the most straightforward tool you can use to construct rules. All you need to know is the sysfs device path of the device in question. A trimmed example is shown below:
+
+# udevinfo -a -p /sys/block/sda
+
+looking at device '/block/sda':
+KERNEL==&quot;sda&quot;
+SUBSYSTEM==&quot;block&quot;
+ATTR{stat}==&quot; 128535 2246 2788977 766188 73998 317300 3132216 5735004 0 516516 6503316&quot;
+ATTR{size}==&quot;234441648&quot;
+ATTR{removable}==&quot;0&quot;
+ATTR{range}==&quot;16&quot;
+ATTR{dev}==&quot;8:0&quot;
+
+looking at parent device '/devices/pci0000:00/0000:00:07.0/host0/target0:0:0/0:0:0:0':
+KERNELS==&quot;0:0:0:0&quot;
+SUBSYSTEMS==&quot;scsi&quot;
+DRIVERS==&quot;sd&quot;
+ATTRS{ioerr_cnt}==&quot;0x0&quot;
+ATTRS{iodone_cnt}==&quot;0x31737&quot;
+ATTRS{iorequest_cnt}==&quot;0x31737&quot;
+ATTRS{iocounterbits}==&quot;32&quot;
+ATTRS{timeout}==&quot;30&quot;
+ATTRS{state}==&quot;running&quot;
+ATTRS{rev}==&quot;3.42&quot;
+ATTRS{model}==&quot;ST3120827AS &quot;
+ATTRS{vendor}==&quot;ATA &quot;
+ATTRS{scsi_level}==&quot;6&quot;
+ATTRS{type}==&quot;0&quot;
+ATTRS{queue_type}==&quot;none&quot;
+ATTRS{queue_depth}==&quot;1&quot;
+ATTRS{device_blocked}==&quot;0&quot;
+
+looking at parent device '/devices/pci0000:00/0000:00:07.0':
+KERNELS==&quot;0000:00:07.0&quot;
+SUBSYSTEMS==&quot;pci&quot;
+DRIVERS==&quot;sata_nv&quot;
+ATTRS{vendor}==&quot;0x10de&quot;
+ATTRS{device}==&quot;0x037f&quot;
+
+As you can see, udevinfo simply produces a list of attributes you can use as-is as match keys in your udev rules. From the above example, I could produce (e.g.) either of the following two rules for this device:
+
+SUBSYSTEM==&quot;block&quot;, ATTR{size}==&quot;234441648&quot;, NAME=&quot;my_hard_disk&quot;
+SUBSYSTEM==&quot;block&quot;, SUBSYSTEMS==&quot;scsi&quot;, ATTRS{model}==&quot;ST3120827AS&quot;, NAME=&quot;my_hard_disk&quot;
+
+You may have noted the use of colour in the above examples. This is to demonstrate that while it is legal to combine the attributes from the device in question and a single parent device, you cannot mix-and-match attributes from multiple parent devices - your rule will not work. For example, the following rule is invalid as it attempts to match attributes from two parent devices:
+
+SUBSYSTEM==&quot;block&quot;, ATTRS{model}==&quot;ST3120827AS&quot;, DRIVERS==&quot;sata_nv&quot;, NAME=&quot;my_hard_disk&quot;
+
+You are usually provided with a large number of attributes, and you must pick a number of them to construct your rule. In general, you want to choose attributes which identify your device in a persistent and human-recognisable way. In the examples above, I chose the size of my disk and its model number. I did not use meaningless numbers such as ATTRS{iodone_cnt}==&quot;0x31737&quot;.
+
+Observe the effects of hierarchy in the udevinfo output. The green section corresponding to the device in question uses the standard match keys such as KERNEL and ATTR. The blue and maroon sections corresponding to parent devices use the parent-traversing variants such as SUBSYSTEMS and ATTRS. This is why the complexity introduced by the hierarchical structure is actually quite easy to deal with, just be sure to use the exact values that udevinfo suggests.
+
+Another point to note is that it is common for text attributes to appear in the udevinfo output to be padded with spaces (e.g. see ST3120827AS above). In your rules, you can either specify the extra spaces, or you can cut them off as I have done.
+
+The only complication with using udevinfo is that you are required to know the top-level device path (/sys/block/sda in the example above). This is not always obvious. However, as you are generally writing rules for device nodes which already exist, you can use udevinfo to look up the device path for you:
+
+# udevinfo -a -p $(udevinfo -q path -n /dev/sda)
+
+Alternative methods
+
+Although udevinfo is almost certainly the most straightforward way of listing the exact attributes you can build rules from, some users are happier with other tools. Utilities such as usbview display a similar set of information, most of which can be used in rules.
+Advanced topics
+Controlling permissions and ownership
+
+udev allows you to use additional assignments in rules to control ownership and permission attributes on each device.
+
+The GROUP assignment allows you to define which Unix group should own the device node. Here is an example rule which defines that the video group will own the framebuffer devices:
+
+KERNEL==&quot;fb[0-9]*&quot;, NAME=&quot;fb/%n&quot;, SYMLINK+=&quot;%k&quot;, GROUP=&quot;video&quot;
+
+The OWNER key, perhaps less useful, allows you to define which Unix user should have ownership permissions on the device node. Assuming the slightly odd situation where you would want john to own your floppy devices, you could use:
+
+KERNEL==&quot;fd[0-9]*&quot;, OWNER=&quot;john&quot;
+
+udev defaults to creating nodes with Unix permissions of 0660 (read/write to owner and group). If you need to, you can override these defaults on certain devices using rules including the MODE assignment. As an example, the following rule defines that the inotify node shall be readable and writable to everyone:
+
+KERNEL==&quot;inotify&quot;, NAME=&quot;misc/%k&quot;, SYMLINK+=&quot;%k&quot;, MODE=&quot;0666&quot;
+
+Using external programs to name devices
+
+Under some circumstances, you may require more flexibility than standard udev rules can provide. In this case, you can ask udev to run a program and use the standard output from that program to provide device naming.
+
+To use this functionality, you simply specify the absolute path of the program to run (and any parameters) in the PROGRAM assignment, and you then use some variant of the %c substitution in the NAME/SYMLINK assignments.
+
+The following examples refer to a fictional program found at /bin/device_namer. device_namer takes one command line argument which is the kernel name for the device. Based upon this kernel name, device_namer does its magic and produces some output to the usual stdout pipe, split into several parts. Each part is just a single word, and parts are separated by a single space.
+
+In our first example, we assume that device_namer outputs a number of parts, each one to form a symbolic link (alternative name) for the device in question.
+
+KERNEL==&quot;hda&quot;, PROGRAM=&quot;/bin/device_namer %k&quot;, SYMLINK+=&quot;%c&quot;
+
+The next example assumes that device_namer outputs two parts, the first being the device name, and the second being the name for an additional symbolic link. We now introduce the %c{N} substitution, which refers to part N of the output:
+
+KERNEL==&quot;hda&quot;, PROGRAM=&quot;/bin/device_namer %k&quot;, NAME=&quot;%c{1}&quot;, SYMLINK+=&quot;%c{2}&quot;
+
+The next example assumes that device_namer outputs one part for the device name, followed by any number of parts which will form additional symbolic links. We now introduce the %c{N+} substitution, which evaluates to part N, N+1, N+2, ... until the end of the output.
+
+KERNEL==&quot;hda&quot;, PROGRAM=&quot;/bin/device_namer %k&quot;, NAME=&quot;%c{1}&quot;, SYMLINK+=&quot;%c{2+}&quot;
+
+Output parts can be used in any assignment key, not only NAME and SYMLINK. The example below uses a fictional program to determine the Unix group which should own the device:
+
+KERNEL==&quot;hda&quot;, PROGRAM=&quot;/bin/who_owns_device %k&quot;, GROUP=&quot;%c&quot;
+
+Running external programs upon certain events
+
+Yet another reason for writing udev rules is to run a particular program when a device is connected or disconnected. For example, you might want to execute a script to automatically download all of your photos from your digital camera when it is connected.
+
+Do not confuse this with the PROGRAM functionality described above. PROGRAM is used for running programs which produce device names (and they shouldn't do anything other than that). When those programs are being executed, the device node has not yet been created, so acting upon the device in any way is not possible.
+
+The functionality introduced here allows you to run a program after the device node is put in place. This program can act on the device, however it must not run for any extended period of time, because udev is effectively paused while these programs are running. One workaround for this limitation is to make sure your program immediately detaches itself.
+
+Here is an example rule which demonstrates the use of the RUN list assignment:
+
+KERNEL==&quot;sdb&quot;, RUN+=&quot;/usr/bin/my_program&quot;
+
+When /usr/bin/my_program is executed, various parts of the udev environment are available as environment variables, including key values such as SUBSYSTEM. You can also use the ACTION environment variable to detect whether the device is being connected or disconnected - ACTION will be either &quot;add&quot; or &quot;remove&quot; respectively.
+
+udev does not run these programs on any active terminal, and it does not execute them under the context of a shell. Be sure to ensure your program is marked executable, if it is a shell script ensure it starts with an appropriate shebang (e.g. #!/usr/bin/env bash), and do not expect any standard output to appear on your terminal.
+Environment interaction
+
+udev provides an ENV key for environment variables which can be used for both matching and assignment.
+
+In the assignment case, you can set environment variables which you can then match against later. You can also set environment variables which can be used by any external programs invoked using the techniques mentioned above. A fictional example rule which sets an environment variable is shown below.
+
+KERNEL==&quot;fd0&quot;, SYMLINK+=&quot;floppy&quot;, ENV{some_var}=&quot;value&quot;
+
+In the matching case, you can ensure that rules only run depending on the value of an environment variable. Note that the environment that udev sees will not be the same user environment as you get on the console. A fictional rule involving an environment match is shown below.
+
+KERNEL==&quot;fd0&quot;, ENV{an_env_var}==&quot;yes&quot;, SYMLINK+=&quot;floppy&quot;
+
+The above rule only creates the /dev/floppy link if $an_env_var is set to &quot;yes&quot; in udev's environment.
+Additional options
+
+Another assignment which can prove useful is the OPTIONS list. A few options are available:
+
+all_partitions - create all possible partitions for a block device, rather than only those that were initially detected
+ignore_device - ignore the event completely
+last_rule - ensure that no later rules have any effect
+
+For example, the rule below sets the group ownership on my hard disk node, and ensures that no later rule can have any effect:
+
+KERNEL==&quot;sda&quot;, GROUP=&quot;disk&quot;, OPTIONS+=&quot;last_rule&quot;
+
+Examples
+USB Printer
+
+I power on my printer, and it is assigned device node /dev/lp0. Not satisfied with such a bland name, I decide to use udevinfo to aid me in writing a rule which will provide an alternative name:
+
+# udevinfo -a -p $(udevinfo -q path -n /dev/lp0)
+looking at device '/class/usb/lp0':
+KERNEL==&quot;lp0&quot;
+SUBSYSTEM==&quot;usb&quot;
+DRIVER==&quot;&quot;
+ATTR{dev}==&quot;180:0&quot;
+
+looking at parent device '/devices/pci0000:00/0000:00:1d.0/usb1/1-1':
+SUBSYSTEMS==&quot;usb&quot;
+ATTRS{manufacturer}==&quot;EPSON&quot;
+ATTRS{product}==&quot;USB Printer&quot;
+ATTRS{serial}==&quot;L72010011070626380&quot;
+
+My rule becomes:
+
+SUBSYSTEM==&quot;usb&quot;, ATTRS{serial}==&quot;L72010011070626380&quot;, SYMLINK+=&quot;epson_680&quot;
+
+USB Camera
+
+Like most, my camera identifies itself as an external hard disk connected over the USB bus, using the SCSI transport. To access my photos, I mount the drive and copy the image files onto my hard disk.
+
+Not all cameras work in this way: some of them use a non-storage protocol such as cameras supported by gphoto2. In the gphoto case, you do not want to be writing rules for your device, as is it controlled purely through userspace (rather than a specific kernel driver).
+
+A common complication with USB camera devices is that they usually identify themselves as a disk with a single partition, in this case /dev/sdb with /dev/sdb1. The sdb node is useless to me, but sdb1 is interesting - this is the one I want to mount. There is a problem here that because sysfs is chained, the useful attributes which udevinfo produces for /dev/sdb1 are identical to the ones for /dev/sdb. This results in your rule potentially matching both the raw disk and the partition, which is not what you want, your rule should be specific.
+
+To get around this, you simply need to think about what differs between sdb and sdb1. It is surprisingly simple: the name itself differs, so we can use a simple pattern match on the NAME field.
+
+# udevinfo -a -p $(udevinfo -q path -n /dev/sdb1)
+looking at device '/block/sdb/sdb1':
+KERNEL==&quot;sdb1&quot;
+SUBSYSTEM==&quot;block&quot;
+
+looking at parent device '/devices/pci0000:00/0000:00:02.1/usb1/1-1/1-1:1.0/host6/target6:0:0/6:0:0:0':
+KERNELS==&quot;6:0:0:0&quot;
+SUBSYSTEMS==&quot;scsi&quot;
+DRIVERS==&quot;sd&quot;
+ATTRS{rev}==&quot;1.00&quot;
+ATTRS{model}==&quot;X250,D560Z,C350Z&quot;
+ATTRS{vendor}==&quot;OLYMPUS &quot;
+ATTRS{scsi_level}==&quot;3&quot;
+ATTRS{type}==&quot;0&quot;
+
+My rule:
+
+KERNEL==&quot;sd?1&quot;, SUBSYSTEMS==&quot;scsi&quot;, ATTRS{model}==&quot;X250,D560Z,C350Z&quot;, SYMLINK+=&quot;camera&quot;
+
+USB Hard Disk
+
+A USB hard disk is comparable to the USB camera I described above, however typical usage patterns are different. In the camera example, I explained that I am not interested in the sdb node - it's only real use is for partitioning (e.g. with fdisk), but why would I want to partition my camera!?
+
+Of course, if you have a 100GB USB hard disk, it is perfectly understandable that you might want to partition it, in which case we can take advantage of udev's string substitutions:
+
+KERNEL==&quot;sd*&quot;, SUBSYSTEMS==&quot;scsi&quot;, ATTRS{model}==&quot;USB 2.0 Storage Device&quot;, SYMLINK+=&quot;usbhd%n&quot;
+
+This rule creates symlinks such as:
+
+/dev/usbhd - The fdiskable node
+/dev/usbhd1 - The first partition (mountable)
+/dev/usbhd2 - The second partition (mountable)
+
+USB Card Reader
+
+USB card readers (CompactFlash, SmartMedia, etc) are yet another range of USB storage devices which have different usage requirements.
+
+These devices typically do not inform the host computer upon media change. So, if you plug in the device with no media, and then insert a card, the computer does not realise, and you do not have your mountable sdb1 partition node for the media.
+
+One possible solution is to take advantage of the all_partitions option, which will create 16 partition nodes for every block device that the rule matches:
+
+KERNEL=&quot;sd*&quot;, SUBSYSTEMS==&quot;scsi&quot;, ATTRS{model}==&quot;USB 2.0 CompactFlash Reader&quot;, SYMLINK+=&quot;cfrdr%n&quot;, OPTIONS+=&quot;all_partitions&quot;
+
+You will now have nodes named: cfrdr, cfrdr1, cfrdr2, cfrdr3, ..., cfrdr15.
+USB Palm Pilot
+
+These devices work as USB-serial devices, so by default, you only get the ttyUSB1 device node. The palm utilities rely on /dev/pilot, so many users will want to use a rule to provide this.
+
+Carsten Clasohm's blog post appears to be the definitive source for this. Carsten's rule is shown below:
+
+SUBSYSTEMS==&quot;usb&quot;, ATTRS{product}==&quot;Palm Handheld&quot;, KERNEL==&quot;ttyUSB*&quot;, SYMLINK+=&quot;pilot&quot;
+
+Note that the product string seems to vary from product to product, so make sure that you check (using udevinfo) which one applies to you.
+CD/DVD drives
+
+I have two optical drives in this computer: a DVD reader (hdc), and a DVD rewriter (hdd). I do not expect these device nodes to change, unless I physically rewire my system. However, many users like to have device nodes such as /dev/dvd for convenience.
+
+As we know the KERNEL names for these devices, rule writing is simple. Here are some examples for my system:
+
+SUBSYSTEM==&quot;block&quot;, KERNEL==&quot;hdc&quot;, SYMLINK+=&quot;dvd&quot;, GROUP=&quot;cdrom&quot;
+SUBSYSTEM==&quot;block&quot;, KERNEL==&quot;hdd&quot;, SYMLINK+=&quot;dvdrw&quot;, GROUP=&quot;cdrom&quot;
+
+Network interfaces
+
+Even though they are referenced by names, network interfaces typically do not have device nodes associated with them. Despite that, the rule writing process is almost identical.
+
+It makes sense to simply match the MAC address of your interface in the rule, as this is unique. However, make sure that you use the exact MAC address as shown as udevinfo, because if you do not match the case exactly, your rule will not work.
+
+# udevinfo -a -p /sys/class/net/eth0
+looking at class device '/sys/class/net/eth0':
+KERNEL==&quot;eth0&quot;
+ATTR{address}==&quot;00:52:8b:d5:04:48&quot;
+
+Here is my rule:
+
+KERNEL==&quot;eth*&quot;, ATTR{address}==&quot;00:52:8b:d5:04:48&quot;, NAME=&quot;lan&quot;
+
+You will need to reload the net driver for this rule to take effect. You can either unload and reload the module, or simply reboot the system. You will also need to reconfigure your system to use &quot;lan&quot; rather than &quot;eth0&quot;. I had some troubles getting this going (the interface wasn't being renamed) until I had completely dropped all references to eth0. After that, you should be able to use &quot;lan&quot; instead of &quot;eth0&quot; in any calls to ifconfig or similar utilities.
+Testing and debugging
+Putting your rules into action
+
+Assuming you are on a recent kernel with inotify support, udev will automatically monitor your rules directory and automatically pick up any modifications you make to the rule files.
+
+Despite this, udev will not automatically reprocess all devices and attempt to apply the new rule(s). For example, if you write a rule to add an extra symbolic link for your camera while your camera is plugged in, you cannot expect the extra symbolic link to show up right away.
+
+To make the symbolic link show up, you can either disconnect and reconnect your camera, or alternatively in the case of non-removable devices, you can run udevtrigger.
+
+If your kernel does not have inotify support, new rules will not be detected automatically. In this situation, you must run udevcontrol reload_rules after making any rule file modifications for those modifications to take effect.
+udevtest
+
+If you know the top-level device path in sysfs, you can use udevtest to show the actions which udev would take. This may help you debug your rules. For example, assuming you want to debug a rule which acts on /sys/class/sound/dsp:
+
+# udevtest /class/sound/dsp
+main: looking at device '/class/sound/dsp' from subsystem 'sound'
+udev_rules_get_name: add symlink 'dsp'
+udev_rules_get_name: rule applied, 'dsp' becomes 'sound/dsp'
+udev_device_event: device '/class/sound/dsp' already known, remove possible symlinks
+udev_node_add: creating device node '/dev/sound/dsp', major = '14', minor = '3', mode = '0660', uid = '0', gid = '18'
+udev_node_add: creating symlink '/dev/dsp' to 'sound/dsp'
+
+Note the /sys prefix was removed from the udevtest command line argument, this is because udevtest operates on device paths. Also note that udevtest is purely a testing/debugging tool, it does not create any device nodes, despite what the output suggests!
+Author and contact
+
+This document is written by Daniel Drake &lt;dan@reactivated.net&gt;. Feedback is appreciated.
+
+For support, you should mail the linux-hotplug mailing list: linux-hotplug-devel@lists.sourceforge.net.
+
+Copyright (C) 2003-2006 Daniel Drake.
+This document is licensed under the GNU General Public License, Version 2.
+</code></pre>
+</body></html>

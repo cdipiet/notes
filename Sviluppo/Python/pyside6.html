@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.673" />
+        <title>pyside6</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pyside6" tabindex="-1">pyside6 <a class="header-anchor" href="#pyside6" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.673</p>
+<nav class="table-of-contents"><ol><li><a href="#manjaro">Manjaro </a></li><li><a href="#installazione-in-un-progetto-poetry">Installazione in un progetto poetry </a></li><li><a href="#esempi-ufficiali">Esempi ufficiali </a></li><li><a href="#signals-and-slots">Signals and Slots </a></li><li><a href="#qtdesigner---tools">QtDesigner - Tools </a></li><li><a href="#import-resources_rc">import resources_rc </a></li><li><a href="#porting">Porting </a><ol><li><a href="#problema-warning-kvantum">Problema warning kvantum </a><ol><li><a href="#soluzione">Soluzione </a></li></ol></li><li><a href="#versione">Versione </a></li><li><a href="#pyside6-resource-system">PySide6 Resource System </a></li><li><a href="#migrazione-pyqt5---%3E-pyside6">Migrazione PyQt5 --&gt; PySide6 </a></li><li><a href="#properties">Properties </a></li></ol></li><li><a href="#qtdesigner-.ui-.qrc">QtDesigner .ui .qrc </a><ol><li><a href="#custom-widgets-in-qt-designer">Custom Widgets in Qt Designer </a></li><li><a href="#tipi-delle-properties">Tipi delle properties </a></li></ol></li><li><a href="#doc-pyside6-per-pycharm">Doc PySide6 per PyCharm </a><ol><li><a href="#pyside6">PySide6 </a></li></ol></li></ol></nav><h1 id="pyside6-1" tabindex="-1">PySide6 <a class="header-anchor" href="#pyside6-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.qt.io/qt-for-python">https://www.qt.io/qt-for-python</a></li>
+<li><a href="https://doc.qt.io/qtforpython/">https://doc.qt.io/qtforpython/</a></li>
+<li><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/Property.html">https://doc.qt.io/qtforpython/PySide6/QtCore/Property.html</a></li>
+<li><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/signals_and_slots.html">https://doc.qt.io/qtforpython/tutorials/basictutorial/signals_and_slots.html</a></li>
+<li><a href="https://doc.qt.io/qtforpython/gettingstarted/package_details.html#tools-included">https://doc.qt.io/qtforpython/gettingstarted/package_details.html#tools-included</a></li>
+<li><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/qrcfiles.html">https://doc.qt.io/qtforpython/tutorials/basictutorial/qrcfiles.html</a></li>
+<li><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html#designer-custom-widgets">https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html#designer-custom-widgets</a></li>
+<li><a href="https://doc.qt.io/qt-6/designer-ui-file-format.html">https://doc.qt.io/qt-6/designer-ui-file-format.html</a></li>
+</ul>
+<p>API</p>
+<ul>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/api.html">https://doc.qt.io/qtforpython/api.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html">https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html</a>
+A QObject instance is said to have a <code>thread affinity</code>, or that it lives in a certain thread. When a QObject receives a queued signal or a posted event , <strong>the slot or event handler will run in the thread that the object lives in</strong>.</p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/QCoreApplication.html">https://doc.qt.io/qtforpython/PySide6/QtCore/QCoreApplication.html</a>
+provides an event loop for Qt applications without UI.</p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/Signal.html">https://doc.qt.io/qtforpython/PySide6/QtCore/Signal.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/QMetaObject.html#PySide6.QtCore.PySide6.QtCore.QMetaObject.connectSlotsByName">https://doc.qt.io/qtforpython/PySide6/QtCore/QMetaObject.html#PySide6.QtCore.PySide6.QtCore.QMetaObject.connectSlotsByName</a>
+<code>on_&lt;object = void(&lt;signal parameters&gt;)</code></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/Property.html">https://doc.qt.io/qtforpython/PySide6/QtCore/Property.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/QThread.html">https://doc.qt.io/qtforpython/PySide6/QtCore/QThread.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject.moveToThread">https://doc.qt.io/qtforpython/PySide6/QtCore/QObject.html#PySide6.QtCore.PySide6.QtCore.QObject.moveToThread</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/QMutex.html">https://doc.qt.io/qtforpython/PySide6/QtCore/QMutex.html</a></p>
+</li>
+<li>
+<p>&lt;&gt;</p>
+</li>
+</ul>
+<h2 id="manjaro" tabindex="-1">Manjaro <a class="header-anchor" href="#manjaro" aria-hidden="true">🔗</a></h2>
+<p>Vedere se PySide6 è installato come pacchetto di sistema</p>
+<pre><code class="language-bash">$ pacman -Ss pyside6
+extra/pyside6 6.4.2-5 [installato]
+$ pacman -Ql pyside6|
+$ pactree -r pyside6
+pyside6
+└─web-installer-url-handler
+  └─manjaro-hello
+    └─manjaro-gnome-tour
+</code></pre>
+<h2 id="installazione-in-un-progetto-poetry" tabindex="-1">Installazione in un progetto poetry <a class="header-anchor" href="#installazione-in-un-progetto-poetry" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ poetry add pyside6
+</code></pre>
+<h2 id="esempi-ufficiali" tabindex="-1">Esempi ufficiali <a class="header-anchor" href="#esempi-ufficiali" aria-hidden="true">🔗</a></h2>
+<p>Trovare gli esempi all'interno della directory di installazione del venv poetry <code>/site-packages/PySide6/examples/</code>:</p>
+<pre><code class="language-bash">$ poetry <span class="hljs-built_in">env</span> info -o
+/home/<span class="hljs-variable">$USER</span>/.cache/pypoetry/virtualenvs/language-6InknBj2-py3.10
+$ <span class="hljs-built_in">cd</span> /home/<span class="hljs-variable">$USER</span>/.cache/pypoetry/virtualenvs/language-6InknBj2-py3.10/lib/python3.10/site-packages/PySide6/examples/
+</code></pre>
+<h2 id="signals-and-slots" tabindex="-1">Signals and Slots <a class="header-anchor" href="#signals-and-slots" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://doc.qt.io/qtforpython/tutorials/pretutorial/typesoffiles.html">https://doc.qt.io/qtforpython/tutorials/pretutorial/typesoffiles.html</a></li>
+<li><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/Signal.html">https://doc.qt.io/qtforpython/PySide6/QtCore/Signal.html</a></li>
+<li><a href="https://www.pythonguis.com/tutorials/pyside6-signals-slots-events/">https://www.pythonguis.com/tutorials/pyside6-signals-slots-events/</a></li>
+<li><a href="https://zetcode.com/gui/pysidetutorial/eventsandsignals/">https://zetcode.com/gui/pysidetutorial/eventsandsignals/</a></li>
+</ul>
+<h2 id="qtdesigner---tools" tabindex="-1">QtDesigner - Tools <a class="header-anchor" href="#qtdesigner---tools" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/gettingstarted/package_details.html#tools-included">https://doc.qt.io/qtforpython/gettingstarted/package_details.html#tools-included</a></p>
+<ul>
+<li><code>pyside6-project</code>, to build Qt Designer forms (<code>.ui</code> files), resource files (<code>.qrc</code>) and QML type files (<code>.qmltype</code>) from a <code>.pyproject</code> file.</li>
+<li><code>pyside6-designer</code>, drag-and-drop tool for designing Widget UIs (generates <code>.ui</code> files).</li>
+<li><code>pyside6-uic</code>, to generate Python code from <code>.ui</code> form files.</li>
+<li><code>pyside6-rcc</code>, to generate serialized data from <code>.qrc</code> resources files. Keep in mind these files can be used in other non-widget projects.</li>
+<li><code>pyside6-lupdate</code>, to synchronize source code and translations.</li>
+<li><code>pyside6-lrelease</code>, to create run-time translation files for the application.</li>
+<li><code>pyside6-linguist</code>, for translating text in applications.</li>
+<li><code>pyside6-deploy</code>, to deploy desktop applications in Linux, Windows and macOS environments.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/pretutorial/whichide.html">https://doc.qt.io/qtforpython/tutorials/pretutorial/whichide.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html">https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html</a></p>
+<ul>
+<li><a href="https://doc.qt.io/qt-6/uic.html">https://doc.qt.io/qt-6/uic.html</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/qrcfiles.html">https://doc.qt.io/qtforpython/tutorials/basictutorial/qrcfiles.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/pretutorial/typesoffiles.html">https://doc.qt.io/qtforpython/tutorials/pretutorial/typesoffiles.html</a></p>
+</li>
+</ul>
+<pre><code class="language-bash"> $ poetry run pyside6-designer
+ $ poetry run pyside6-uic -h
+</code></pre>
+<p>Qt User Interface Compiler version 6.4.1</p>
+<p>Options:</p>
+<table class="table"><thead>
+<tr>
+<th>option</th>
+<th>description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-h, --help</code></td>
+<td>Displays help on commandline options.</td>
+</tr>
+<tr>
+<td><code>--help-all</code></td>
+<td>Displays help including Qt specific options.</td>
+</tr>
+<tr>
+<td><code>-v, --version</code></td>
+<td>Displays version information.</td>
+</tr>
+<tr>
+<td><code>-d, --dependencies</code></td>
+<td>Display the dependencies.</td>
+</tr>
+<tr>
+<td><code>-o, --output &lt;file&gt;</code></td>
+<td>Place the output into <file></td>
+</tr>
+<tr>
+<td><code>-a, --no-autoconnection</code></td>
+<td>Do not generate a call to QObject::connectSlotsByName().</td>
+</tr>
+<tr>
+<td><code>-p, --no-protection</code></td>
+<td>Disable header protection.</td>
+</tr>
+<tr>
+<td><code>-n, --no-implicit-includes</code></td>
+<td>Disable generation of #include-directives.</td>
+</tr>
+<tr>
+<td><code>--postfix &lt;postfix&gt;</code></td>
+<td>Postfix to add to all generated classnames.</td>
+</tr>
+<tr>
+<td><code>--tr, --translate &lt;function&gt;</code></td>
+<td>Use <function> for i18n.</td>
+</tr>
+<tr>
+<td><code>--include &lt;include-file&gt;</code></td>
+<td>Add #include <include-file> to <file>.</td>
+</tr>
+<tr>
+<td><code>-g, --generator &lt;python,cpp&gt;</code></td>
+<td>Select generator.</td>
+</tr>
+<tr>
+<td><code>-c, --connections &lt;pmf,string&gt;</code></td>
+<td>Connection syntax.</td>
+</tr>
+<tr>
+<td><code>--idbased</code></td>
+<td>Use id based function for i18n</td>
+</tr>
+<tr>
+<td><code>--from-imports</code></td>
+<td>Python: generate imports relative to '.'</td>
+</tr>
+<tr>
+<td><code>--rc-prefix</code></td>
+<td>Python: Generate &quot;rc_file&quot; instead of &quot;file_rc&quot; import</td>
+</tr>
+<tr>
+<td><code>--star-imports</code></td>
+<td>Python: Use * imports</td>
+</tr>
+</tbody>
+</table>
+<p>Arguments:</p>
+<p><code>[uifile]</code>                        Input file (<code>*.ui</code>), otherwise stdin.</p>
+<pre><code class="language-bash">$ pyside6-rcc -h
+Usage: /site-packages/PySide6/Qt/libexec/rcc [options] inputs
+Qt Resource Compiler version 6.4.1
+
+Options:
+  -h, --<span class="hljs-built_in">help</span>                            Displays <span class="hljs-built_in">help</span> on commandline options.
+  --help-all                            Displays <span class="hljs-built_in">help</span> including Qt specific
+                                        options.
+  -v, --version                         Displays version information.
+  -o, --output &lt;file&gt;                   Write output to &lt;file&gt; rather than
+                                        stdout.
+  -t, --temp &lt;file&gt;                     Use temporary &lt;file&gt; <span class="hljs-keyword">for</span> big resources.
+  --name &lt;name&gt;                         Create an external initialization
+                                        <span class="hljs-keyword">function</span> with &lt;name&gt;.
+  --root &lt;path&gt;                         Prefix resource access path with root
+                                        path.
+  --compress-algo &lt;algo&gt;                Compress input files using algorithm
+                                        &lt;algo&gt; ([zlib], none).
+  --compress &lt;level&gt;                    Compress input files by &lt;level&gt;.
+  --no-compress                         Disable all compression. Same as
+                                        --compress-algo=none.
+  --no-zstd                             Disable usage of zstd compression.
+  --threshold &lt;level&gt;                   Threshold to consider compressing
+                                        files.
+  --binary                              Output a binary file <span class="hljs-keyword">for</span> use as a
+                                        dynamic resource.
+  -g, --generator &lt;cpp|python|python2&gt;  Select generator.
+  --pass &lt;number&gt;                       Pass number <span class="hljs-keyword">for</span> big resources
+  --namespace                           Turn off namespace macros.
+  --verbose                             Enable verbose mode.
+  --list                                Only list .qrc file entries, <span class="hljs-keyword">do</span> not
+                                        generate code.
+  --list-mapping                        Only output a mapping of resource paths
+                                        to file system paths defined <span class="hljs-keyword">in</span> the .qrc
+                                        file, <span class="hljs-keyword">do</span> not generate code.
+  -d, --depfile &lt;file&gt;                  Write a depfile with the .qrc
+                                        dependencies to &lt;file&gt;.
+  --project                             Output a resource file containing all
+                                        files from the current directory.
+  --format-version &lt;number&gt;             The RCC format version to write
+
+Arguments:
+  inputs                                Input files (*.qrc).
+</code></pre>
+<p>Compilazione dei file .uic e qrc</p>
+<ul>
+<li><code>pyside6-uic</code></li>
+<li><code>pyside6-rcc</code></li>
+<li><code>pyside6-lupdate</code></li>
+</ul>
+<h2 id="import-resources_rc" tabindex="-1">import resources_rc <a class="header-anchor" href="#import-resources_rc" aria-hidden="true">🔗</a></h2>
+<p><code>import resources_rc</code></p>
+<p>Attenzione a non eliminare inavvertitamente la <code>import resources_rc</code> ad esempio mediante l'ottimizzatore di codice dell'IDE.
+Il presente listato non accede direttamente a metodi o variabili del modulo <code>resources_rc</code>, per cui un IDE potrebbe ritenere che la sua import non serva.
+Tuttavia l'eseguirne l'import è sufficiente a caricare le definizioni delle risorse in esso contenute,
+al termine di <code>resources_rc.py</code> c'e':
+<code>qInitResources()</code> che <strong>carica nel sistema Qt le risorse in esso definite</strong>.</p>
+<h2 id="porting" tabindex="-1">Porting <a class="header-anchor" href="#porting" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://doc.qt.io/qtforpython/porting_from2.html">https://doc.qt.io/qtforpython/porting_from2.html</a></li>
+<li><a href="https://doc.qt.io/qtforpython/considerations.html">https://doc.qt.io/qtforpython/considerations.html</a></li>
+<li><a href="https://www.pythonguis.com/pyside6-tutorial/">https://www.pythonguis.com/pyside6-tutorial/</a></li>
+<li><a href="https://www.pythonguis.com/pyside6-tutorial/">https://www.pythonguis.com/pyside6-tutorial/</a></li>
+<li><a href="https://www.pythonguis.com/pyqt6-tutorial/">https://www.pythonguis.com/pyqt6-tutorial/</a></li>
+<li><a href="https://build-system.fman.io/pyqt5-tutorial">https://build-system.fman.io/pyqt5-tutorial</a></li>
+<li><a href="https://www.geeksforgeeks.org/migrate-pyqt5-app-to-pyside2/">https://www.geeksforgeeks.org/migrate-pyqt5-app-to-pyside2/</a></li>
+<li><a href="https://www.pythonguis.com/faq/pyqt5-vs-pyside2/">https://www.pythonguis.com/faq/pyqt5-vs-pyside2/</a></li>
+<li><a href="https://www.pythonguis.com/faq/pyqt5-vs-pyside2/">https://www.pythonguis.com/faq/pyqt5-vs-pyside2/</a></li>
+<li><a href="https://www.pythonguis.com/faq/pyqt6-vs-pyside6/">https://www.pythonguis.com/faq/pyqt6-vs-pyside6/</a></li>
+<li><a href="https://www.pythonguis.com/tutorials/pyside-qresource-system/">https://www.pythonguis.com/tutorials/pyside-qresource-system/</a></li>
+<li><a href="https://www.riverbankcomputing.com/static/Docs/PyQt6/pyqt5_differences.html">https://www.riverbankcomputing.com/static/Docs/PyQt6/pyqt5_differences.html</a></li>
+<li><a href="https://stackoverflow.com/questions/66099225/how-can-resources-be-provided-in-pyqt6-which-has-no-pyrcc">https://stackoverflow.com/questions/66099225/how-can-resources-be-provided-in-pyqt6-which-has-no-pyrcc</a></li>
+</ul>
+<h3 id="problema-warning-kvantum" tabindex="-1">Problema warning kvantum <a class="header-anchor" href="#problema-warning-kvantum" aria-hidden="true">🔗</a></h3>
+<pre><code>QApplication: invalid style override 'kvantum' passed, ignoring it.
+    Available styles: Windows, Fusion
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$QT_STYLE_OVERRIDE</span>
+    kvantum
+</code></pre>
+<h4 id="soluzione" tabindex="-1">Soluzione <a class="header-anchor" href="#soluzione" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;Styles: <span class="hljs-subst">{PySide6.QtWidgets.QStyleFactory.keys()}</span>&quot;</span>) <span class="hljs-comment"># ==&gt; Styles: [&#x27;Windows&#x27;, &#x27;Fusion&#x27;]</span>
+<span class="hljs-keyword">import</span> os
+<span class="hljs-keyword">try</span>:
+    <span class="hljs-keyword">del</span> os.environ[<span class="hljs-string">&#x27;QT_STYLE_OVERRIDE&#x27;</span>]  <span class="hljs-comment"># Risolve l&#x27;errore QApplication: invalid style override &#x27;kvantum&#x27; passed, ignoring it.</span>
+<span class="hljs-keyword">except</span> KeyError:
+    <span class="hljs-keyword">pass</span>
+app = QApplication(sys.argv)
+<span class="hljs-comment"># app.setStyle(&#x27;Fusion&#x27;)</span>
+</code></pre>
+<h3 id="versione" tabindex="-1">Versione <a class="header-anchor" href="#versione" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-python"><span class="hljs-comment"># https://www.pythonguis.com/faq/get-pyqt-version-number/</span>
+
+    <span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> QT_VERSION_STR, PYQT_VERSION_STR
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Qt: v&quot;</span>, QT_VERSION_STR, <span class="hljs-string">&quot;\tPyQt: v&quot;</span>, PYQT_VERSION_STR)
+	<span class="hljs-comment"># ==&gt;</span>
+    <span class="hljs-keyword">import</span> PySide6
+    <span class="hljs-keyword">import</span> PySide6.QtCore
+    <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Qt: v&quot;</span>, PySide6.QtCore.__version__, <span class="hljs-string">&quot;\tPyQt: v&quot;</span>, PySide6.__version__)
+</code></pre>
+<h3 id="pyside6-resource-system" tabindex="-1">PySide6 Resource System <a class="header-anchor" href="#pyside6-resource-system" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/qrcfiles.html">https://doc.qt.io/qtforpython/tutorials/basictutorial/qrcfiles.html</a></p>
+<p><code>icons.rc</code></p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">ui</span>&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">RCC</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">RCC</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;1.0&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">qresource</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>icons/play.png<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>icons/pause.png<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>icons/stop.png<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>icons/previous.png<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">file</span>&gt;</span>icons/forward.png<span class="hljs-tag">&lt;/<span class="hljs-name">file</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">qresource</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">RCC</span>&gt;</span>    
+</code></pre>
+<pre><code class="language-bash">    pyside6-rcc icons.rc -o rc_icons.py
+</code></pre>
+<pre><code class="language-python">    <span class="hljs-keyword">import</span> rc_icons
+    <span class="hljs-keyword">from</span> PySide6.QtGui <span class="hljs-keyword">import</span> QIcon, QKeySequence, QPixmap
+    playIcon = QIcon(QPixmap(<span class="hljs-string">&quot;:/icons/play.png&quot;</span>))
+</code></pre>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qt-5/resources.html">https://doc.qt.io/qt-5/resources.html</a></p>
+</li>
+<li>
+<p><a href="https://www.pythonguis.com/tutorials/pyside-qresource-system/">https://www.pythonguis.com/tutorials/pyside-qresource-system/</a></p>
+</li>
+<li>
+<p><a href="https://www.riverbankcomputing.com/static/Docs/PyQt6/pyqt5_differences.html">https://www.riverbankcomputing.com/static/Docs/PyQt6/pyqt5_differences.html</a></p>
+<ul>
+<li>
+<p>Support for Qt’s resource system has been removed (i.e. there is <code>no pyrcc6</code>).</p>
+</li>
+<li>
+<p><code>pylupdate6</code> di PyQt6 diventa <code>pyside6-lupdate</code> in PySide6.</p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/66099225/how-can-resources-be-provided-in-pyqt6-which-has-no-pyrcc">https://stackoverflow.com/questions/66099225/how-can-resources-be-provided-in-pyqt6-which-has-no-pyrcc</a></p>
+<pre><code class="language-python">icon = QtGui.QIcon(<span class="hljs-string">&#x27;:/icons/myicon.png&#x27;</span>)
+</code></pre>
+<p>Diviene:</p>
+<pre><code class="language-python"><span class="hljs-comment"># somewhere at the beginning of your program</span>
+QtCore.QDir.addSearchPath(<span class="hljs-string">&#x27;icons&#x27;</span>, <span class="hljs-string">&#x27;path_to_icons/&#x27;</span>)
+icon = QtGui.QIcon(<span class="hljs-string">&#x27;icons:myicon.png&#x27;</span>)
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="migrazione-pyqt5---%3E-pyside6" tabindex="-1">Migrazione PyQt5 --&gt; PySide6 <a class="header-anchor" href="#migrazione-pyqt5---%3E-pyside6" aria-hidden="true">🔗</a></h3>
+<p>PySide6</p>
+<ul>
+<li><a href="https://www.qt.io/qt-for-python">https://www.qt.io/qt-for-python</a></li>
+<li><a href="https://www.pythonguis.com/pyside6-tutorial/">https://www.pythonguis.com/pyside6-tutorial/</a></li>
+<li><a href="https://www.reddit.com/r/QtFramework/comments/ni27qi/complete_26_part_pyside_tutorial_updated_for/">https://www.reddit.com/r/QtFramework/comments/ni27qi/complete_26_part_pyside_tutorial_updated_for/</a></li>
+</ul>
+<p>PyQt6</p>
+<ul>
+<li><a href="https://www.pythonguis.com/pyqt6-tutorial/">https://www.pythonguis.com/pyqt6-tutorial/</a></li>
+<li><a href="https://zetcode.com/pyqt6/">https://zetcode.com/pyqt6/</a></li>
+</ul>
+<p>PyQt5</p>
+<ul>
+<li><a href="https://build-system.fman.io/pyqt5-tutorial">https://build-system.fman.io/pyqt5-tutorial</a></li>
+</ul>
+<p>PyQt5 --&gt; PySide6</p>
+<ul>
+<li><a href="https://www.geeksforgeeks.org/migrate-pyqt5-app-to-pyside2/">https://www.geeksforgeeks.org/migrate-pyqt5-app-to-pyside2/</a></li>
+<li><a href="https://www.pythonguis.com/faq/pyqt5-vs-pyside2/">https://www.pythonguis.com/faq/pyqt5-vs-pyside2/</a></li>
+<li><a href="https://www.pythonguis.com/faq/pyqt5-vs-pyqt6/">https://www.pythonguis.com/faq/pyqt5-vs-pyqt6/</a></li>
+<li><a href="https://www.pythonguis.com/faq/pyqt6-vs-pyside6/">https://www.pythonguis.com/faq/pyqt6-vs-pyside6/</a></li>
+<li><a href="https://github.com/spyder-ide/qtpy">https://github.com/spyder-ide/qtpy</a></li>
+</ul>
+<p><code>build_ui</code> --&gt; <code>ui_2_py</code></p>
+<p>Compilazione dei file .uic e qrc  make_src_dir() = . ==&gt; make_dst_dir() = &quot;cdp_app/ui&quot;</p>
+<ul>
+<li><code>pyside6-uic</code></li>
+<li><code>pyside6-rcc</code></li>
+<li><code>pyside6-lupdate</code></li>
+</ul>
+<p><code>qt_res_compiler.py</code>:
+- PYUIC5 --&gt; PYUIC</p>
+<p><code>main.py</code></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> QApplication
+==&gt;
+<span class="hljs-keyword">from</span> PySide6.QtWidgets <span class="hljs-keyword">import</span> QApplication
+</code></pre>
+<p><code>cdp_app\csr_sqlite_report_gui.py</code></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> pyqtSlot
+<span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> QMessageBox, QSizePolicy, QWidget, QVBoxLayout
+<span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> QObject
+==&gt;
+<span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> Slot
+<span class="hljs-keyword">from</span> PySide6.QtWidgets <span class="hljs-keyword">import</span> QMessageBox, QSizePolicy, QWidget, QVBoxLayout
+<span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> QObject
+<span class="hljs-comment"># self.set_window_title(&#x27;Andamento Saldo&#x27;) # NON FUNZIONA PIU</span>
+
+<span class="hljs-meta">@pyqtSlot(<span class="hljs-params"><span class="hljs-built_in">str</span></span>) ==&gt; @Slot(<span class="hljs-params"><span class="hljs-built_in">str</span></span>)</span>
+</code></pre>
+<p><code>cdp_app\csr_xlsx_import_gui.py</code></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> QObject, pyqtSlot, QThread, QDir
+<span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> QMessageBox, QFileDialog
+directory = QFileDialog.getExistingDirectory(<span class="hljs-variable language_">self</span>.parent(), caption=<span class="hljs-string">&quot;Directory .xlsx CSR&quot;</span>, directory=QDir.currentPath(), options=options)
+==&gt;
+<span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> QObject, Slot, QThread, QDir
+<span class="hljs-keyword">from</span> PySide6.QtWidgets <span class="hljs-keyword">import</span> QMessageBox, QFileDialog
+directory = QFileDialog.getExistingDirectory(<span class="hljs-variable language_">self</span>.parent(), caption=<span class="hljs-string">&quot;Directory .xlsx CSR&quot;</span>, <span class="hljs-built_in">dir</span>=QDir.currentPath(), options=options)
+
+<span class="hljs-meta">@pyqtSlot(<span class="hljs-params"><span class="hljs-built_in">str</span></span>) ==&gt; @Slot(<span class="hljs-params"><span class="hljs-built_in">str</span></span>)</span>
+
+</code></pre>
+<p><code>cdp_app\csr_sqlite_report_thread.py</code></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> QMutex, QThread, pyqtSignal
+exception = pyqtSignal(<span class="hljs-built_in">str</span>)  <span class="hljs-comment"># utilizzato per segnalare errori di esecuzione</span>
+threading.currentThread().name = <span class="hljs-string">&#x27;SQLite_GLEIF_Thread&#x27;</span>
+==&gt;
+<span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> QMutex, QThread, Signal
+exception = Signal(<span class="hljs-built_in">str</span>)  <span class="hljs-comment"># utilizzato per segnalare errori di esecuzione</span>
+threading.current_thread().name = <span class="hljs-string">&#x27;SQLite_GLEIF_Thread&#x27;</span>
+</code></pre>
+<p><code>cdp_app\csr_xlsx_import_thread.py</code></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> QMutex, QObject, pyqtSignal
+exception = pyqtSignal(<span class="hljs-built_in">str</span>) <span class="hljs-comment"># per segnalare errori di esecuzione</span>
+finished = pyqtSignal()     <span class="hljs-comment"># per segnalare il termine del lavoro con successo</span>
+threading.currentThread().name = <span class="hljs-variable language_">self</span>.objectName()+<span class="hljs-string">&#x27;_Thread&#x27;</span>
+
+<span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> sheet.iter_rows(row_offset=<span class="hljs-number">1</span>):
+==&gt;
+<span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> QMutex, QObject, Signal
+exception = Signal(<span class="hljs-built_in">str</span>) <span class="hljs-comment"># per segnalare errori di esecuzione</span>
+finished = Signal()     <span class="hljs-comment"># per segnalare il termine del lavoro con successo</span>
+threading.current_thread().name = <span class="hljs-variable language_">self</span>.objectName()+<span class="hljs-string">&#x27;_Thread&#x27;</span>
+
+<span class="hljs-comment"># min_row=2 : viene saltato l&#x27;header (1-based)</span>
+<span class="hljs-comment"># https://openpyxl.readthedocs.io/en/latest/api/openpyxl.worksheet.worksheet.html#openpyxl.worksheet.worksheet.Worksheet.min_row</span>
+<span class="hljs-comment"># row_offset è stato sostituito da min_row:</span>
+<span class="hljs-comment"># https://stackoverflow.com/questions/54617949/in2csv-iter-rows-got-an-unexpected-keyword-argument-row-offset</span>
+<span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> sheet.iter_rows(min_row=<span class="hljs-number">2</span>):
+</code></pre>
+<p><code>cdp_app\main_window.py</code></p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtCore <span class="hljs-keyword">import</span> Qt, pyqtSlot, QUrl, QEvent
+<span class="hljs-keyword">from</span> PyQt5.QtWebEngineWidgets <span class="hljs-keyword">import</span> QWebEngineView
+<span class="hljs-keyword">from</span> PyQt5.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QDialog, QMessageBox, QProgressBar, QWidget
+==&gt;
+<span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> Qt, Slot, QUrl, QEvent
+<span class="hljs-keyword">from</span> PySide6.QtWebEngineWidgets <span class="hljs-keyword">import</span> QWebEngineView
+<span class="hljs-keyword">from</span> PySide6.QtWidgets <span class="hljs-keyword">import</span> QApplication, QMainWindow, QDialog, QMessageBox, QProgressBar, QWidget
+<span class="hljs-keyword">from</span> cdp.qt.qt_logging <span class="hljs-keyword">import</span> LogSignal
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LogDialog</span>(QDialog, Ui_LogDialog):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, parent=<span class="hljs-literal">None</span></span>):
+        <span class="hljs-built_in">super</span>(QDialog, <span class="hljs-variable language_">self</span>).__init__(parent=<span class="hljs-literal">None</span>, flags=Qt.Window)
+==&gt;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LogDialog</span>(QDialog, Ui_LogDialog):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, parent=<span class="hljs-literal">None</span></span>):
+        <span class="hljs-built_in">super</span>().__init__(parent=<span class="hljs-literal">None</span>, f=Qt.Window)
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MainWindow</span>(QMainWindow, Ui_MainWindow):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, parent=<span class="hljs-literal">None</span></span>):
+        <span class="hljs-built_in">super</span>(QMainWindow, <span class="hljs-variable language_">self</span>).__init__(parent)
+==&gt;
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">MainWindow</span>(QMainWindow, Ui_MainWindow):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, *args, ** kwargs</span>):
+        <span class="hljs-built_in">super</span>().__init__(*args, **kwargs)
+
+qtloghandler = cdp_app.log.addQPlainTextEdit(parent=<span class="hljs-variable language_">self</span>, qplaintextedit=<span class="hljs-variable language_">self</span>.txLog)
+==&gt;
+logsignal = LogSignal()
+qtloghandler = cdp_app.log.addQPlainTextEdit(logsignal, qplaintextedit=<span class="hljs-variable language_">self</span>.txLog)
+
+<span class="hljs-meta">@pyqtSlot() ==&gt; @Slot()</span>
+</code></pre>
+<h3 id="properties" tabindex="-1">Properties <a class="header-anchor" href="#properties" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://doc.qt.io/qtforpython/PySide6/QtCore/Property.html">https://doc.qt.io/qtforpython/PySide6/QtCore/Property.html</a></li>
+</ul>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> QObject, Property
+ <span class="hljs-keyword">class</span> <span class="hljs-title class_">MyObject</span>(<span class="hljs-title class_ inherited__">QObject</span>):
+     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, startval=<span class="hljs-number">42</span></span>):
+         QObject.__init__(<span class="hljs-variable language_">self</span>)
+         <span class="hljs-variable language_">self</span>.ppval = startval
+
+     <span class="hljs-keyword">def</span> <span class="hljs-title function_">readPP</span>(<span class="hljs-params">self</span>):
+         <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>.ppval
+
+     <span class="hljs-keyword">def</span> <span class="hljs-title function_">setPP</span>(<span class="hljs-params">self, val</span>):
+         <span class="hljs-variable language_">self</span>.ppval = val
+     pp = Property(<span class="hljs-built_in">int</span>, readPP, setPP)
+</code></pre>
+<p>Esempio di migrazione:</p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PyQt5.QtCore pyqtProperty
+
+<span class="hljs-meta">@pyqtProperty(<span class="hljs-params"><span class="hljs-built_in">int</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">first_column_width</span>(<span class="hljs-params">self</span>):
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>._first_column_width
+
+
+<span class="hljs-meta">@first_column_width.setter</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">first_column_width</span>(<span class="hljs-params">self, value</span>):
+    <span class="hljs-variable language_">self</span>._first_column_width = value
+    <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.treeView:
+        <span class="hljs-variable language_">self</span>.treeView.setColumnWidth(<span class="hljs-number">0</span>, value)
+</code></pre>
+<p>==&gt;</p>
+<pre><code class="language-python"><span class="hljs-keyword">from</span> PySide6.QtCore <span class="hljs-keyword">import</span> QObject, Property
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">firstColumnWidth</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-keyword">return</span> <span class="hljs-variable language_">self</span>._first_column_width
+
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">setFirstColumnWidth</span>(<span class="hljs-params">self, value</span>):
+        <span class="hljs-variable language_">self</span>._first_column_width = value
+        <span class="hljs-variable language_">self</span>.treeView.setColumnWidth(<span class="hljs-number">0</span>, value)
+
+    first_column_width = Property(<span class="hljs-built_in">int</span>, firstColumnWidth, setFirstColumnWidth)
+</code></pre>
+<h2 id="qtdesigner-.ui-.qrc" tabindex="-1">QtDesigner <code>.ui</code> <code>.qrc</code> <a class="header-anchor" href="#qtdesigner-.ui-.qrc" aria-hidden="true">🔗</a></h2>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html">https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html</a></p>
+<p>Con QtDesigner si generano i file .ui e .qrc, questi possono essere compilati in .py oppure caricati direttamente a runtime.</p>
+<ul>
+<li>
+<p>Option A: Generating a Python class</p>
+<pre><code class="language-bash">  pyside6-uic mainwindow.ui &gt; ui_mainwindow.py
+</code></pre>
+<pre><code class="language-python">    <span class="hljs-keyword">from</span> ui_mainwindow <span class="hljs-keyword">import</span> Ui_MainWindow
+    <span class="hljs-variable language_">self</span>.ui = Ui_MainWindow()
+    <span class="hljs-variable language_">self</span>.ui.setupUi(<span class="hljs-variable language_">self</span>)
+</code></pre>
+</li>
+<li>
+<p>Option B: Loading it directly</p>
+<pre><code class="language-python">  <span class="hljs-keyword">from</span> PySide6.QtUiTools <span class="hljs-keyword">import</span> QUiLoader
+  ui_file = QFile(<span class="hljs-string">&quot;mainwindow.ui&quot;</span>)
+  ui_file.<span class="hljs-built_in">open</span>(QFile.ReadOnly)
+  loader = QUiLoader()
+  window = loader.load(ui_file)
+</code></pre>
+</li>
+</ul>
+<h3 id="custom-widgets-in-qt-designer" tabindex="-1">Custom Widgets in Qt Designer <a class="header-anchor" href="#custom-widgets-in-qt-designer" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html#designer-custom-widgets">https://doc.qt.io/qtforpython/tutorials/basictutorial/uifiles.html#designer-custom-widgets</a></p>
+<p>Registering this with Qt Designer is done <br>
+by providing a registration script named <code>register*.py</code>
+and pointing the path-type environment variable <code>PYSIDE_DESIGNER_PLUGINS</code> to the directory.</p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtDesigner/QPyDesignerCustomWidgetCollection.html">https://doc.qt.io/qtforpython/PySide6/QtDesigner/QPyDesignerCustomWidgetCollection.html</a></p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qt-6/qtdesigner-customwidgetplugin-example.html">https://doc.qt.io/qt-6/qtdesigner-customwidgetplugin-example.html</a></p>
+<p>The <code>domXml()</code> function provides a way to include default settings for the widget in the standard XML format used by Qt Designer.
+<a href="https://doc.qt.io/qt-6/qdesignercustomwidgetinterface.html#domXml">https://doc.qt.io/qt-6/qdesignercustomwidgetinterface.html#domXml</a> Returns the XML that is used to describe the custom widget's properties to Qt Designer.</p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtDesigner/">https://doc.qt.io/qtforpython/PySide6/QtDesigner/</a> classes to create your own custom widget plugins for Qt Designer and classes to access Qt Designer components.</p>
+</li>
+<li>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtDesigner/QPyDesignerCustomWidgetCollection.html#PySide6.QtDesigner.QPyDesignerCustomWidgetCollection.registerCustomWidget">https://doc.qt.io/qtforpython/PySide6/QtDesigner/QPyDesignerCustomWidgetCollection.html#PySide6.QtDesigner.QPyDesignerCustomWidgetCollection.registerCustomWidget</a></p>
+<p>Registering this with Qt Designer is done by providing a registration script named <code>register*.py</code><br>
+and pointing the path-type environment variable <code>PYSIDE_DESIGNER_PLUGINS</code> to the directory.</p>
+</li>
+</ul>
+<p>Ho notato che il qtdesigner installato con pyside6 ha configurato il wigglywidget, demo per far vedere come si realizza un widget custom per il qtdesigner.
+Mi sono chiesto dove veniva impostata la variabile di ambiente <code>PYSIDE_DESIGNER_PLUGINS</code>:</p>
+<pre><code class="language-bash">$ poetry <span class="hljs-built_in">env</span> info -p
+/home/<span class="hljs-variable">$USER</span>/.cache/pypoetry/virtualenvs/bankaccountreport-Z8y35qPH-py3.10
+<span class="hljs-built_in">cd</span> /home/<span class="hljs-variable">$USER</span>/.cache/pypoetry/virtualenvs/bankaccountreport-Z8y35qPH-py3.10
+$ find . -iname <span class="hljs-string">&quot;*wiggly*&quot;</span>
+./lib/python3.10/site-packages/PySide6/examples/widgetbinding/
+$ find . -iname <span class="hljs-string">&quot;*tictac*&quot;</span>
+./lib/python3.10/site-packages/PySide6/examples/designer/taskmenuextension/t
+
+$ <span class="hljs-built_in">which</span> pyside6-designer
+/home/<span class="hljs-variable">$USER</span>/.cache/pypoetry/virtualenvs/bankaccountreport-Z8y35qPH-py3.10/bin/pyside6-designer
+==&gt; 
+/home/<span class="hljs-variable">$USER</span>/.cache/pypoetry/virtualenvs/bankaccountreport-Z8y35qPH-py3.10/lib/python3.10/site-packages/PySide6/scripts/pyside_tool.py
+</code></pre>
+<pre><code class="language-python"><span class="hljs-comment"># pyside_tool.py</span>
+
+    <span class="hljs-comment"># Add the Wiggly Widget example</span>
+    wiggly_dir = os.fspath(pyside_dir / <span class="hljs-string">&#x27;examples&#x27;</span> / <span class="hljs-string">&#x27;widgetbinding&#x27;</span>)
+    _append_to_path_var(<span class="hljs-string">&#x27;PYSIDE_DESIGNER_PLUGINS&#x27;</span>, wiggly_dir)
+    taskmenu_dir = os.fspath(pyside_dir / <span class="hljs-string">&#x27;examples&#x27;</span> / <span class="hljs-string">&#x27;designer&#x27;</span> / <span class="hljs-string">&#x27;taskmenuextension&#x27;</span>)
+    _append_to_path_var(<span class="hljs-string">&#x27;PYSIDE_DESIGNER_PLUGINS&#x27;</span>, taskmenu_dir)
+    qt_tool_wrapper(ui_tool_binary(<span class="hljs-string">&quot;designer&quot;</span>), sys.argv[<span class="hljs-number">1</span>:])
+</code></pre>
+<pre><code class="language-bash">$ grep -lr PYSIDE_DESIGNER_PLUGINS *
+lib/python3.10/site-packages/PySide6/Qt/plugins/designer/libPySidePlugin.so
+lib/python3.10/site-packages/PySide6/examples/widgetbinding/registerwigglywidget.py
+lib/python3.10/site-packages/PySide6/examples/designer/taskmenuextension/registertictactoe.py
+lib/python3.10/site-packages/PySide6/scripts/pyside_tool.py
+</code></pre>
+<h3 id="tipi-delle-properties" tabindex="-1">Tipi delle properties <a class="header-anchor" href="#tipi-delle-properties" aria-hidden="true">🔗</a></h3>
+<p><a href="https://doc.qt.io/qt-6/designer-ui-file-format.html">https://doc.qt.io/qt-6/designer-ui-file-format.html</a></p>
+<pre><code class="language-xml">        <span class="hljs-tag">&lt;<span class="hljs-name">xs:complexType</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Property&quot;</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">xs:choice</span>&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;bool&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;color&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Color&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cstring&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cursor&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:integer&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;cursorshape&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;enum&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;font&quot;</span> <span class="hljs-attr">type</span> =<span class="hljs-string">&quot;Font&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;iconset&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;ResourceIcon&quot;</span>/&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;pixmap&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;ResourcePixmap&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;palette&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Palette&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;point&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Point&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;rect&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Rect&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;set&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;locale&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Locale&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sizepolicy&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;SizePolicy&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;size&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Size&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;string&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;String&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;stringlist&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;StringList&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;number&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:integer&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;float&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:float&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;double&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:double&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;date&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Date&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;time&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Time&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;datetime&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;DateTime&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;pointf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;PointF&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;rectf&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;RectF&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;sizef&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;SizeF&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;longlong&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:long&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;char&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Char&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;url&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Url&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;uint&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:unsignedInt&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;ulonglong&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:unsignedLong&quot;</span> /&gt;</span>
+                        <span class="hljs-tag">&lt;<span class="hljs-name">xs:element</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;brush&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;Brush&quot;</span> /&gt;</span>
+                <span class="hljs-tag">&lt;/<span class="hljs-name">xs:choice</span>&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;name&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:string&quot;</span> /&gt;</span>
+                <span class="hljs-tag">&lt;<span class="hljs-name">xs:attribute</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;stdset&quot;</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;xs:integer&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">xs:complexType</span>&gt;</span>
+</code></pre>
+<h2 id="doc-pyside6-per-pycharm" tabindex="-1">Doc PySide6 per PyCharm <a class="header-anchor" href="#doc-pyside6-per-pycharm" aria-hidden="true">🔗</a></h2>
+<p><a href="https://www.jetbrains.com/help/pycharm/settings-tools-python-external-documentation.html">https://www.jetbrains.com/help/pycharm/settings-tools-python-external-documentation.html</a></p>
+<p><code>File | Settings | Tools | External Documentation</code></p>
+<h3 id="pyside6-2" tabindex="-1">PySide6 <a class="header-anchor" href="#pyside6-2" aria-hidden="true">🔗</a></h3>
+<p>Module Name: <code>PySide6</code>
+URL Pattern: <code>https://doc.qt.io/qtforpython/{module.name.slashes}/{class.name}.html#{module.name}.{element.qname}</code></p>
+<p>Esempio:</p>
+<p><a href="https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget.setGeometry">https://doc.qt.io/qtforpython/PySide6/QtWidgets/QWidget.html#PySide6.QtWidgets.PySide6.QtWidgets.QWidget.setGeometry</a></p>
+</body></html>

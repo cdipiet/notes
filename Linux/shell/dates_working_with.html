@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.806" />
+        <title>dates_working_with</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="dates_working_with" tabindex="-1">dates_working_with <a class="header-anchor" href="#dates_working_with" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.806</p>
+<nav class="table-of-contents"><ol><li><a href="#the-base-structure">The base structure </a></li><li><a href="#writing-safer-bash-scripts">Writing safer Bash scripts </a><ol><li><a href="#errexit">errexit </a></li><li><a href="#nounset%2C-with-pattern">nounset, with pattern </a></li><li><a href="#pipefail">pipefail </a></li><li><a href="#pipefail-versus-grep--q">pipefail versus grep -q </a></li></ol></li><li><a href="#first-step%3A-handling-dates%2C-cycling-the-data">First step: Handling dates, cycling the data </a></li><li><a href="#splitting-a-string-via-perl">Splitting a string via Perl </a></li><li><a href="#splitting-a-string-via-cut">Splitting a string via cut </a></li><li><a href="#dates%2C-arithmetic%2C-and-putting-all-together">Dates, arithmetic, and putting all together </a></li><li><a href="#sostituire-perl-con-cut">Sostituire Perl con Cut </a></li><li><a href="#conclusion">Conclusion </a></li><li><a href="#purge_trash.sh">purge_trash.sh </a></li></ol></nav><h1 id="lavorare-con-le-date" tabindex="-1">lavorare con le date <a class="header-anchor" href="#lavorare-con-le-date" aria-hidden="true">🔗</a></h1>
+<p><a href="https://saveriomiroddi.github.io/Working-with-dates-and-numbers-in-Bash-and-other-goodies/">https://saveriomiroddi.github.io/Working-with-dates-and-numbers-in-Bash-and-other-goodies/</a></p>
+<p>ho tradotto la parte perl in ...</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install trash-cli
+</code></pre>
+<p><a href="file:///home/$USER/workspaces/shell/purge_trash">purge_trash.sh</a></p>
+<p>Every month, I purge the files trashed more than one month before.<br>
+Since it’s been scientifically proven that manual operations cause PTSD in system administrators, I’ve made a script.<br>
+In this small article, I’ll explain some concepts involved, most notably, working with dates and numbers in Bash, and some other scripting-related concepts.</p>
+<h2 id="the-base-structure" tabindex="-1">The base structure <a class="header-anchor" href="#the-base-structure" aria-hidden="true">🔗</a></h2>
+<p>The <a href="file:///home/$USER/workspaces/shell/purge_trash">purge_trash.sh</a> script is pretty simple:</p>
+<ul>
+<li>it lists the content of the trash (via <code>trash-list</code>);</li>
+<li>it extracts the timestamp of each file;</li>
+<li>if the trashing timestamp is before the threshold, it purges the file (via <code>trash-rm &lt;filename&gt;</code>).</li>
+</ul>
+<h2 id="writing-safer-bash-scripts" tabindex="-1">Writing safer Bash scripts <a class="header-anchor" href="#writing-safer-bash-scripts" aria-hidden="true">🔗</a></h2>
+<p>Bash provides a set of options, some of whom make scripts more solid, and that should always be used.<br>
+The extended syntax for setting an option is <code>set -o &lt;extended_option_name&gt;</code>. Generally, one puts all the options setting at the top of the file.<br>
+The next sections will explain the relevant options.</p>
+<h3 id="errexit" tabindex="-1">errexit <a class="header-anchor" href="#errexit" aria-hidden="true">🔗</a></h3>
+<p>The option <code>errexit</code> causes the script to terminate when there is an error.<br>
+Bash, by default, uses a On Error Resume Next approach (RIP Visual Basic 6 😉), so setting this option is a no-brainer.<br>
+However, this requires some cases to be handled - some commands exit with error codes during the normal workflow, grep being one of the most common.<br>
+There is an exception to this behavior: expressions of if conditionals will not cause the script to terminate. In other words, in a script like:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> &lt;command_that_fails&gt;; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Extensive error message!&quot;</span>
+  <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>The “Extensive error message!” will be printed; <strong>Bash will not terminate after executing <code>&lt;command_that_fails&gt;</code></strong>.<br>
+A real-world, typical example, is grep filtering; a subsection below is dedicated to this.</p>
+<h3 id="nounset%2C-with-pattern" tabindex="-1">nounset, with pattern <a class="header-anchor" href="#nounset%2C-with-pattern" aria-hidden="true">🔗</a></h3>
+<p>The option <code>nounset</code> treats as an error referencing a variable that hasn’t been initialized.<br>
+The most common logic that needs some treatment when this option is set, is user parameters handling.<br>
+Let’s suppose we write a script with the following definition: myscript <code>[&lt;optional_parameter&gt;]</code>, which can translate to:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -o nounset
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> == <span class="hljs-string">&quot;value_1&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-comment"># ...</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>If the user invokes myscript without the parameter, the script will blow up, because <code>$1</code> hasn’t been initialized!<br>
+The Bash functionality handling this case is a form of <a href="https://wiki.bash-hackers.org/syntax/pe">parameter expansion</a>; the syntax is <code>${&lt;variable_name&gt;:-&lt;value&gt;}</code>.<br>
+If we want to default to an empty string, we can omit <code>&lt;value&gt;</code>; therefore, the myscript specific code will be:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -o nounset
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">${1:-}</span>&quot;</span> == <span class="hljs-string">&quot;value_1&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-comment"># ...</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>This won’t fail.</p>
+<p>Note that this expansion considers uninitialized variables and empty strings the same; see:</p>
+<pre><code class="language-bash">$ myvar=
+$ myvar=<span class="hljs-variable">${myvar:-myvalue}</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$myvar</span>
+myvalue
+</code></pre>
+<h3 id="pipefail" tabindex="-1">pipefail <a class="header-anchor" href="#pipefail" aria-hidden="true">🔗</a></h3>
+<p>The option pipefail treats as an error a pipeline (a sequence of commands chained via pipe <code>(|)</code>) whose any of the commands fails.</p>
+<p>By default, <strong>Bash considers, in a pipeline, only the exit status of the last command</strong>; for example:</p>
+<pre><code class="language-bash">$ bash -c <span class="hljs-string">&#x27;
+set -o errexit
+
+false | echo &quot;pipeline with error&quot;
+echo &quot;following command&quot;
+&#x27;</span>
+pipeline with error
+following <span class="hljs-built_in">command</span>
+</code></pre>
+<p>Let’s see what happens with pipefail enabled:</p>
+<pre><code class="language-bash">$ bash -c <span class="hljs-string">&#x27;
+set -o errexit
+set -o pipefail
+
+false | echo &quot;pipeline with error&quot;
+echo &quot;following command&quot;
+&#x27;</span>
+pipeline with error
+</code></pre>
+<p>The “following command” is not executed; the script exited.<br>
+Note how <code>set -o errexit</code> is required; pipefail will mark the pipeline as errored, but that alone doesn’t imply that an error will cause an exit.</p>
+<h3 id="pipefail-versus-grep--q" tabindex="-1">pipefail versus grep -q <a class="header-anchor" href="#pipefail-versus-grep--q" aria-hidden="true">🔗</a></h3>
+<p>A very headscratching behavior is <code>grep -q</code> causing an exit with error when pipefail (with <code>errexit</code>) is enabled.<br>
+<code>grep -q</code> is used when testing some data against a string, without the result to be printed (“--quiet”).<br>
+Let’s suppose we want to test if a package is not installed. In our example, the package <code>trash-cli</code> is installed.</p>
+<p>The first version could be:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! dpkg --get-selections | grep -P &quot;trash-cli\t+install&quot;; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+trash-cli         install
+</code></pre>
+<p>The string Package not installed will not be printed as expected, however, <code>trash-cli install</code> will - it’s the output of the grep command.<br>
+Therefore, one needs to filter grep’s output:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! dpkg --get-selections | grep -P &quot;trash-cli\t+install&quot; &gt; /dev/null; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+</code></pre>
+<p>All good! No more noise.<br>
+Now, the problem is that some smartpants (like me 😬) will find out the -<code>q/--quiet</code> option in the grep manpages, which supposedly yields the same result:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! dpkg --get-selections | grep -qP &quot;trash-cli\t+install&quot;; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+Package not installed
+</code></pre>
+<p>D’oh!!</p>
+<p>What happened? <a href="https://stackoverflow.com/a/19120674">This</a> happened. In simple terms, <code>grep -q</code> <strong>exits early</strong>, causing dpkg to raise an error.<br>
+For those who really want to use <code>grep -q</code> (I recognize the appeal of not using <code>&gt; /dev/null</code>), the <code>here-string</code> operator (<code>&lt;&lt;&lt;</code>) will do the trick:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! grep -qP &quot;trash-cli\t+install&quot; &lt;&lt;&lt; &quot;$(dpkg --get-selections)&quot;; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+</code></pre>
+<p>All good! No more pipe, no more problems, and smartpants are satisfied 😄</p>
+<h2 id="first-step%3A-handling-dates%2C-cycling-the-data" tabindex="-1">First step: Handling dates, cycling the data <a class="header-anchor" href="#first-step%3A-handling-dates%2C-cycling-the-data" aria-hidden="true">🔗</a></h2>
+<p>One may occasionally want to process timestamps.<br>
+With the aid of the utility date, and the Bash arithmetic expansion (<code>$(( &lt;expression&gt; ))</code>), we can do this easily.<br>
+Let’s suppose the input:</p>
+<pre><code class="language-bash">$ trash-list
+2019-12-19 22:06:09 /path/to/test abc.png
+2019-12-04 23:16:48 /path/to/xorgxrdp-0.2.11.tar.gz
+2019-12-25 00:15:27 /path/to/probe-data.json.bak
+2019-12-26 19:13:43 /path/to/subiquity_notes.md
+2019-12-04 23:16:48 /path/to/xrdp-0.9.11.tar.gz
+2019-12-25 00:31:20 /path/to/issue_subiquity.txt
+2019-12-25 20:57:49 /path/to/ubuntu-mate-18.04.3-desktop-amd64.iso
+2019-12-25 00:31:20 /path/to/probe-data.json
+</code></pre>
+<p>We want to print, say, the files older than 15 days before today (01/01/2010). We also want to sort the output, for good UX 😉</p>
+<p>In order to work with timestamps, we need to convert them to integers. Let’s see an example:</p>
+<pre><code class="language-bash">$ timestamp=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png&quot;</span> | awk <span class="hljs-string">&#x27;{print $1 &quot; &quot; $2 }&#x27;</span>) <span class="hljs-comment"># 2019-12-19 22:06:09</span>
+$ <span class="hljs-built_in">echo</span> $(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;<span class="hljs-variable">$timestamp</span>&quot;</span> +<span class="hljs-string">&quot;%s&quot;</span>)
+1576789569
+</code></pre>
+<p>There you go. The awk command prints the first two tokens (date and time).<br>
+Now, let’s write a basic cycle, which prints the sorted output:</p>
+<pre><code class="language-bash">$ trash_content=$(trash-list | <span class="hljs-built_in">sort</span>)
+$ <span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r line; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span>
+<span class="hljs-keyword">done</span> &lt;&lt;&lt; <span class="hljs-string">&quot;<span class="hljs-variable">$trash_content</span>&quot;</span>
+<span class="hljs-comment"># full list...</span>
+</code></pre>
+<ul>
+<li>The <code>while</code> expression you see above is a common pattern for iterating data (in this case, the output of <code>trash-list | sort</code>) line by line.</li>
+<li>The <code>IFS=</code> expression disables the built-in field separator, whose effect, in this context, is to preserve leading and trailing whitespace.</li>
+<li>The <code>-r</code> option of read doesn’t interpret backslashes in the data (e.g. <code>\n</code>).</li>
+</ul>
+<p>The two technicalities above are not required for this dataset, but I write them here for completeness’ sake.<br>
+Next bit: extracting a filename. We have several options!</p>
+<h2 id="splitting-a-string-via-perl" tabindex="-1">Splitting a string via Perl <a class="header-anchor" href="#splitting-a-string-via-perl" aria-hidden="true">🔗</a></h2>
+<p>We want the tokens from index 2 (base 0) to the last; Awk doesn’t have nice syntax for this, so we use Perl (❤️):</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png&quot;</span> | perl -lane <span class="hljs-string">&#x27;print &quot;@F[2..$#F]&quot;&#x27;</span>
+/path/to/test abc.png
+</code></pre>
+<p>This reads “print the entries of the array <code>@F</code>, from the index 2 to the size of the array”, in other words, “read from index 2 to the end”.</p>
+<h2 id="splitting-a-string-via-cut" tabindex="-1">Splitting a string via cut <a class="header-anchor" href="#splitting-a-string-via-cut" aria-hidden="true">🔗</a></h2>
+<p>We can also use cut:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png&quot;</span> | <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27; &#x27;</span> -f 3-
+/path/to/test abc.png
+</code></pre>
+<p>Read as: use as delimiter space (<code>-d ' '</code>), and extract the fields from 3 onwards (<code>3-</code>)<br>
+Note how cut uses a base 1 indexing (therefore, we select from index 3 onwards).<br>
+For files with a fixed structure, we can also index by character:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png&quot;</span> | <span class="hljs-built_in">cut</span> -c 21-
+/path/to/test abc.png
+</code></pre>
+<p>Read as: index by characters, from the number 21 onwards (<code>-c 21-</code>).</p>
+<h2 id="dates%2C-arithmetic%2C-and-putting-all-together" tabindex="-1">Dates, arithmetic, and putting all together <a class="header-anchor" href="#dates%2C-arithmetic%2C-and-putting-all-together" aria-hidden="true">🔗</a></h2>
+<p>The last bit is the arithmetic:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> (( trash_date_in_seconds &lt; time_now_in_seconds - threshold_seconds )); <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;File before threshold: <span class="hljs-variable">$filename</span>&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>The double round brackets denote delimit an <strong>arithmetic expression</strong>; note how variables don’t require the <code>$</code>.<br>
+If we need to assign the result of an arithmetic expression to a variable, this is the syntax:</p>
+<pre><code class="language-bash">myvar1=12
+myvar2=$(( myvar1 + <span class="hljs-number">2</span> + <span class="hljs-number">3</span>)) <span class="hljs-comment"># 17</span>
+</code></pre>
+<p>Now we can put all together!</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Result of `trash_content=$(trash-list | sort)`</span>
+<span class="hljs-comment">#</span>
+$ trash_content=<span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png
+2019-12-04 23:16:48 /path/to/xorgxrdp-0.2.11.tar.gz
+2019-12-25 00:15:27 /path/to/probe-data.json.bak
+2019-12-26 19:13:43 /path/to/subiquity_notes.md
+2019-12-04 23:16:48 /path/to/xrdp-0.9.11.tar.gz
+2019-12-25 00:31:20 /path/to/issue_subiquity.txt
+2019-12-25 20:57:49 /path/to/ubuntu-mate-18.04.3-desktop-amd64.iso
+2019-12-25 00:31:20 /path/to/probe-data.json&quot;</span>
+
+$ threshold_seconds=$(( <span class="hljs-number">15</span> * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span> ))
+$ time_now_in_seconds=1577919970 <span class="hljs-comment">#  2 Jan 00:06:10 CET 2020</span>
+
+$ <span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r line || [[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> ]]; <span class="hljs-keyword">do</span>
+  trashing_timestamp=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> | awk <span class="hljs-string">&#x27;{print $1 &quot; &quot; $2 }&#x27;</span>) <span class="hljs-comment"># 2019-12-19 22:06:09</span>
+  trashing_timestamp_in_seconds=$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;<span class="hljs-variable">$trashing_timestamp</span>&quot;</span> +<span class="hljs-string">&quot;%s&quot;</span>)
+
+  <span class="hljs-keyword">if</span> (( trashing_timestamp_in_seconds &lt; time_now_in_seconds - threshold_seconds )); <span class="hljs-keyword">then</span>
+    <span class="hljs-comment"># filename=$(echo &quot;$line&quot; | perl -lane &#x27;print &quot;@F[2..$#F]&quot;&#x27;)</span>
+    filename=$(<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> | <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27; &#x27;</span> -f 3-)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;File in threshold: <span class="hljs-variable">$filename</span>&quot;</span>
+  <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span> &lt;&lt;&lt; <span class="hljs-string">&quot;<span class="hljs-variable">$trash_content</span>&quot;</span>
+File before threshold: /path/to/xorgxrdp-0.2.11.tar.gz
+File before threshold: /path/to/xrdp-0.9.11.tar.gz
+</code></pre>
+<h2 id="sostituire-perl-con-cut" tabindex="-1">Sostituire Perl con Cut <a class="header-anchor" href="#sostituire-perl-con-cut" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png&quot;</span> | perl -lane <span class="hljs-string">&#x27;print &quot;@F[2..$#F]&quot;&#x27;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;2019-12-19 22:06:09 /path/to/test abc.png&quot;</span> | <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27; &#x27;</span> -f 3-
+</code></pre>
+<h2 id="conclusion" tabindex="-1">Conclusion <a class="header-anchor" href="#conclusion" aria-hidden="true">🔗</a></h2>
+<p>Although we’ve witnessed an ugly quirk (<code>grep -q</code>), all the concepts introduced in this article, from Bash functionalities to Unix tools, fit smoothly to produce solid, readable and flexible scripts.</p>
+<h2 id="purge_trash.sh" tabindex="-1">purge_trash.sh <a class="header-anchor" href="#purge_trash.sh" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># sudo apt install trash-cli</span>
+<span class="hljs-comment"># https://saveriomiroddi.github.io/Working-with-dates-and-numbers-in-Bash-and-other-goodies/</span>
+<span class="hljs-built_in">set</span> -o errexit
+<span class="hljs-built_in">set</span> -o nounset
+<span class="hljs-built_in">set</span> -o pipefail
+
+DEBUG=<span class="hljs-literal">true</span>
+c_default_threshold_days=30
+c_help=<span class="hljs-string">&quot;Usage: <span class="hljs-subst">$(basename <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>)</span> [&lt;threshold_days&gt;]
+
+Clean the files trashed before the given threshold in days.
+
+Note that the tool used (\`trash-cli\` package) support deletion via filenames, so if two files are one inside the threshold, and one outside, they will both be deleted.
+
+Default threshold: <span class="hljs-variable">$c_default_threshold_days</span> days.&quot;</span>
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">${1:-}</span>&quot;</span> == <span class="hljs-string">&quot;-h&quot;</span> || <span class="hljs-string">&quot;<span class="hljs-variable">${1:-}</span>&quot;</span> == <span class="hljs-string">&quot;--help&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$c_help</span>&quot;</span>
+  <span class="hljs-built_in">exit</span> 0
+<span class="hljs-keyword">elif</span> [[ <span class="hljs-variable">$#</span> -gt 1 ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Unexpected number of parameters&quot;</span>
+  <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">elif</span> ! grep -qP <span class="hljs-string">&quot;^trash-cli\s+install$&quot;</span> &lt;&lt;&lt; $(dpkg --get-selections); <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;The `trash-cli` package is required!&#x27;</span>
+  <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+
+threshold_days=<span class="hljs-variable">${1:-<span class="hljs-variable">$c_default_threshold_days</span>}</span>
+threshold_seconds=$((threshold_days * <span class="hljs-number">24</span> * <span class="hljs-number">60</span> * <span class="hljs-number">60</span>))
+
+<span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r line || [[ -n <span class="hljs-string">&quot;<span class="hljs-variable">$line</span>&quot;</span> ]]; <span class="hljs-keyword">do</span>
+  trash_date=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$line</span> | awk <span class="hljs-string">&#x27;{print $1 &quot; &quot; $2}&#x27;</span>)
+  trash_date_in_seconds=$(<span class="hljs-built_in">date</span> -d <span class="hljs-string">&quot;<span class="hljs-variable">$trash_date</span>&quot;</span> +<span class="hljs-string">&quot;%s&quot;</span>)
+  current_date_in_seconds=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%s&quot;</span>)
+
+  <span class="hljs-keyword">if</span> ((trash_date_in_seconds &lt; current_date_in_seconds - threshold_seconds)); <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Deleting: <span class="hljs-variable">$line</span> ...&quot;</span>
+    <span class="hljs-comment"># file_basename=$(basename &quot;$(echo $line | perl -lane &#x27;print &quot;@F[2..$#F]&quot;&#x27;)&quot;)</span>
+    file_basename=$(<span class="hljs-built_in">basename</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(echo $line | cut -d &#x27; &#x27; -f 3-)</span>&quot;</span>)
+    trash-rm <span class="hljs-string">&quot;<span class="hljs-variable">$file_basename</span>&quot;</span>
+  <span class="hljs-keyword">else</span> 
+    <span class="hljs-variable">$DEBUG</span> &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Not Deleted: <span class="hljs-variable">$line</span>&quot;</span>
+  <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span> &lt;&lt;&lt; <span class="hljs-string">&quot;<span class="hljs-subst">$(trash-list | sort)</span>&quot;</span>
+</code></pre>
+</body></html>

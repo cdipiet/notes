@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.944" />
+        <title>git_ignore</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="git_ignore" tabindex="-1">git_ignore <a class="header-anchor" href="#git_ignore" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.944</p>
+<nav class="table-of-contents"><ol><li><a href="#ignored-files">Ignored Files </a><ol><li><a href="#visualizzazione-file-ignorati">Visualizzazione file ignorati </a></li><li><a href="#ignoring-a-previously-committed-file">Ignoring a previously committed file </a></li><li><a href="#committing-an-ignored-file">Committing an ignored file </a></li><li><a href="#debugging-.gitignore-files">Debugging .gitignore files </a></li><li><a href="#sintassi-.gitignore">Sintassi .gitignore </a></li></ol></li></ol></nav><h1 id=".gitignore" tabindex="-1">.gitignore <a class="header-anchor" href="#.gitignore" aria-hidden="true">🔗</a></h1>
+<h2 id="ignored-files" tabindex="-1">Ignored Files <a class="header-anchor" href="#ignored-files" aria-hidden="true">🔗</a></h2>
+<p>Gestione dei file da ignorare</p>
+<h3 id="visualizzazione-file-ignorati" tabindex="-1">Visualizzazione file ignorati <a class="header-anchor" href="#visualizzazione-file-ignorati" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat">$ git status --ignored
+$ git ls-files --other --ignored --exclude-standard
+</code></pre>
+<h3 id="ignoring-a-previously-committed-file" tabindex="-1">Ignoring a previously committed file <a class="header-anchor" href="#ignoring-a-previously-committed-file" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> debug.log &gt;&gt; .gitignore
+git <span class="hljs-built_in">rm</span> --cached debug.log
+<span class="hljs-built_in">rm</span> <span class="hljs-string">&#x27;debug.log&#x27;</span>
+git commit -m <span class="hljs-string">&quot;Start ignoring debug.log&quot;</span>
+</code></pre>
+<p>Using the <code>--cached</code> option with <code>git rm</code> means that <strong>the file will be deleted from your repository, but will remain in your working directory as an ignored file</strong>.
+You can omit the <code>--cached</code> option <strong>if you want to delete the file from both the repository and your local file system</strong>.</p>
+<h3 id="committing-an-ignored-file" tabindex="-1">Committing an ignored file <a class="header-anchor" href="#committing-an-ignored-file" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> .gitignore
+*.<span class="hljs-built_in">log</span>
+$ git add -f debug.log
+$ git commit -m <span class="hljs-string">&quot;Force adding debug.log&quot;</span>
+</code></pre>
+<p>A better solution is to define an exception to the general rule:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> !debug.log &gt;&gt; .gitignore
+$ <span class="hljs-built_in">cat</span> .gitignore
+*.<span class="hljs-built_in">log</span>
+!debug.log
+$ git add debug.log
+$ git commit -m <span class="hljs-string">&quot;Adding debug.log&quot;</span>
+</code></pre>
+<h3 id="debugging-.gitignore-files" tabindex="-1">Debugging .gitignore files <a class="header-anchor" href="#debugging-.gitignore-files" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">git check-ignore -v debug.log
+</code></pre>
+<h3 id="sintassi-.gitignore" tabindex="-1">Sintassi .gitignore <a class="header-anchor" href="#sintassi-.gitignore" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ man gitignore
+$ man git-check-ignore
+$ git check-ignore
+</code></pre>
+<p>you can use <code>#</code> to include comments in your .gitignore file<br>
+You can use <code>\</code> to escape .gitignore pattern characters if you have files or directories containing them.</p>
+<ul>
+<li>
+<p><a href="https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring">https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring</a></p>
+<ul>
+<li>Un file <code>.gitignore</code> può essere creato in qualsiasi sottodirectory.</li>
+<li>Un path di default è corrisposto in qualunque livello di profondità</li>
+<li>Uno <code>/</code> all'inizio indica un path assoluto, disabilita dunque il matching in qualunque livello di profondità</li>
+<li>Uno <code>/</code> alla fine indica una directory</li>
+<li>Un <code>**</code> ricomprende tutte le possibili sottodirectory tra le due indicate a sinistra e a destra.</li>
+</ul>
+<p>Esempi:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># ignore all .a files</span>
+*.a
+
+<span class="hljs-comment"># but do track lib.a, even though you&#x27;re ignoring .a files above</span>
+!lib.a
+
+<span class="hljs-comment"># only ignore the TODO file in the current directory, not subdir/TODO</span>
+/TODO
+
+<span class="hljs-comment"># ignore all files in any directory named build</span>
+build/
+
+<span class="hljs-comment"># ignore doc/notes.txt, but not doc/server/arch.txt</span>
+doc/*.txt
+
+<span class="hljs-comment"># ignore all .pdf files in the doc/ directory and any of its subdirectories</span>
+doc/**/*.pdf
+</code></pre>
+</li>
+<li>
+<p><a href="https://it.atlassian.com/git/tutorials/saving-changes/gitignore">https://it.atlassian.com/git/tutorials/saving-changes/gitignore</a></p>
+</li>
+<li>
+<p><a href="https://git-scm.com/docs/gitignore">https://git-scm.com/docs/gitignore</a></p>
+</li>
+<li>
+<p><a href="https://github.com/github/gitignore">https://github.com/github/gitignore</a></p>
+</li>
+<li>
+<p>Patterns read from a <code>.gitignore</code> file in the same directory as the path, or in any parent directory, with <strong>patterns in the higher level files (up to the toplevel of the work tree) being overridden by those in lower level files down to the directory containing the file</strong>. These patterns <mark>match relative to the location of the <code>.gitignore</code> file</mark>.</p>
+</li>
+<li>
+<p>A line starting with <code>#</code> serves as a comment</p>
+</li>
+<li>
+<p>An optional prefix <code>!</code> which negates the pattern; any matching file excluded by a previous pattern will become included again.</p>
+</li>
+<li>
+<p>If there is a slash <strong><code>/</code></strong> separator at the <mark>beginning</mark> or <mark>middle</mark> (or both) of the pattern, then the pattern is <strong>relative</strong> to the directory level of the particular <code>.gitignore</code> file itself. Otherwise the pattern may also match at <strong>any level</strong> below the <code>.gitignore</code> level.</p>
+</li>
+<li>
+<p>If there is a separator at the <mark>end</mark> of the pattern then the pattern will only match directories, otherwise the pattern can match both files and directories.</p>
+</li>
+<li>
+<p>An asterisk <code>*</code> matches anything except a <code>slash</code>. The character <code>?</code> matches any one character except <code>/</code>.</p>
+</li>
+<li>
+<p>A leading <code>**</code> followed by a slash means match in all directories.</p>
+</li>
+<li>
+<p>A trailing <code>/**</code> matches everything inside.</p>
+</li>
+<li>
+<p>A <code>/</code> followed by <code>**</code> then a slash matches zero or more directories.</p>
+</li>
+</ul>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Pattern</th>
+<th style="text-align:left">Example matches</th>
+<th style="text-align:left">Explanation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left" rowspan="3"><code>**/logs</code></td>
+<td style="text-align:left"><code>logs/debug.log</code></td>
+<td style="text-align:left" rowspan="3">You can prepend a pattern with a double asterisk to match directories anywhere in the repository.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/monday/foo.bar</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>build/logs/debug.log</code></td>
+</tr>
+<tr>
+<td style="text-align:left" rowspan="3"><code>**/logs/debug.log</code></td>
+<td style="text-align:left"><code>logs/debug.log</code></td>
+<td style="text-align:left" rowspan="3">You can also use a double asterisk to match files based on their name and the name of their parent directory.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>build/logs/debug.log</code></td>
+</tr>
+<tr>
+<td style="text-align:left">but not: <code>logs/build/debug.log</code></td>
+</tr>
+<tr>
+<td style="text-align:left" rowspan="4"><code>*.log</code></td>
+<td style="text-align:left"><code>debug.log</code></td>
+<td style="text-align:left" rowspan="4">An asterisk is a wildcard that matches zero or more characters.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>foo.log</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>.log</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/debug.log</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>*.log</code> <code>!important.log</code></td>
+<td style="text-align:left"><code>debug.log</code> <code>trace.log</code>  but not <code>important.log</code> <code>logs/important.log</code></td>
+<td style="text-align:left">Prepending an exclamation mark to a pattern negates it. If a file matches a pattern, but also matches a negating pattern defined later in the file, it will not be ignored.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>*.log</code> <code>!important/*.log</code> <code>trace.*</code></td>
+<td style="text-align:left"><code>debug.log</code> <code>important/trace.log</code> but not <code>important/debug.log</code></td>
+<td style="text-align:left">Patterns defined after a negating pattern will re-ignore any previously negated files.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>/debug.log</code></td>
+<td style="text-align:left"><code>debug.log</code> but not <code>logs/debug.log</code></td>
+<td style="text-align:left">Prepending a slash matches files only in the repository root.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>debug.log</code></td>
+<td style="text-align:left"><code>debug.log</code> <code>logs/debug.log</code></td>
+<td style="text-align:left">By default, patterns match files in any directory</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>debug?.log</code></td>
+<td style="text-align:left"><code>debug0.log</code> <code>debugg.log</code> but not <code>debug10.log</code></td>
+<td style="text-align:left">A question mark matches exactly one character.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>debug[0-9].log</code></td>
+<td style="text-align:left"><code>debug0.log</code> <code>debug1.log</code> but not <code>debug10.log</code></td>
+<td style="text-align:left">Square brackets can also be used to match a single character from a specified range.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>debug[01].log</code></td>
+<td style="text-align:left"><code>debug0.log</code> <code>debug1.log</code> but not <code>debug2.log</code> <code>debug01.log</code></td>
+<td style="text-align:left">Square brackets match a single character form the specified set.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>debug[!01].log</code></td>
+<td style="text-align:left"><code>debug2.log</code> but not <code>debug0.log</code> <code>debug1.log</code> <code>debug01.log</code></td>
+<td style="text-align:left">An exclamation mark can be used to match any character except one from the specified set.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>debug[a-z].log</code></td>
+<td style="text-align:left"><code>debuga.log</code> <code>debugb.log</code> but not <code>debug1.log</code></td>
+<td style="text-align:left">Ranges can be numeric or alphabetic.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs</code></td>
+<td style="text-align:left"><code>logs</code> <code>logs/debug.log</code> <code>logs/latest/foo.bar</code> <code>build/logs</code> <code>build/logs/debug.log</code></td>
+<td style="text-align:left">If you don't append a slash, the pattern will match both files and the contents of directories with that name. In the example matches on the left, both directories and files named logs are ignored</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/</code></td>
+<td style="text-align:left"><code>logs/debug.log</code> <code>logs/latest/foo.bar</code> <code>build/logs/foo.bar</code> <code>build/logs/latest/debug.log</code></td>
+<td style="text-align:left">Appending a slash indicates the pattern is a directory. The entire contents of any directory in the repository matching that name – including all of its files and subdirectories – will be ignored</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/</code></td>
+<td style="text-align:left"><code>!logs/important.log</code> <code>logs/debug.log</code> <code>logs/important.log</code></td>
+<td style="text-align:left">Wait a minute! Shouldn't logs/important.log be negated in the example on the left.Nope! Due to a performance-related quirk in Git, you can not negate a file that is ignored due to a pattern matching a directory</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/**/debug.log</code></td>
+<td style="text-align:left"><code>logs/debug.log</code> <code>logs/monday/debug.log</code> <code>logs/monday/pm/debug.log</code></td>
+<td style="text-align:left">A double asterisk matches zero or more directories.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/*day/debug.log</code></td>
+<td style="text-align:left"><code>logs/monday/debug.log</code> <code>logs/tuesday/debug.log</code> but not <code>logs/latest/debug.log</code></td>
+<td style="text-align:left">Wildcards can be used in directory names as well.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>logs/debug.log</code></td>
+<td style="text-align:left"><code>logs/debug.log</code> but not <code>debug.log</code> <code>build/logs/debug.log</code></td>
+<td style="text-align:left">Patterns specifying a file in a particular directory are relative to the repository root. (You can prepend a slash if you like, but it doesn't do anything special.)</td>
+</tr>
+</tbody>
+</table>
+</body></html>

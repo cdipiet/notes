@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.859" />
+        <title>git_branch_merge</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="git_branch_merge" tabindex="-1">git_branch_merge <a class="header-anchor" href="#git_branch_merge" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.859</p>
+<nav class="table-of-contents"><ol><li><a href="#creare-un-branch-e-spostarsi-su-di-esso">Creare un branch e spostarsi su di esso </a></li><li><a href="#chiudere-il-branch-ed-unirlo-al-master---merge">Chiudere il branch ed unirlo al master - Merge </a></li><li><a href="#changing-a-branch-name">Changing a branch name </a></li><li><a href="#remote-branches---tracking-branches">Remote Branches - Tracking Branches </a></li><li><a href="#scaricare-una-versione-precisa-di-un-repository-creando-un-branch">Scaricare una versione precisa di un repository creando un branch </a></li><li><a href="#come-copiare-i-commit-da-un-branch-ad-un-altro%3A-cherry-pick">Come copiare i commit da un branch ad un altro: Cherry Pick </a></li><li><a href="#esempio-di-lavoro-con-i-branch">Esempio di lavoro con i branch </a></li><li><a href="#esempio-di-lavoro-con-i-branch-remoti">Esempio di lavoro con i branch remoti </a><ol><li><a href="#effettuare-il-merge-su-master-del-ramo-test-e-poi-riportare-tutto-sul-server">Effettuare il merge su master del ramo test e poi riportare tutto sul server </a></li></ol></li><li><a href="#creare-un-nuovo-ramo-e-riportarlo-sul-server">Creare un nuovo ramo e riportarlo sul server </a></li><li><a href="#branch-corrente">Branch corrente </a></li><li><a href="#diff-fra-branch">Diff fra branch </a></li></ol></nav><h1 id="branch" tabindex="-1">Branch <a class="header-anchor" href="#branch" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging">https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Branch-Management">https://git-scm.com/book/en/v2/Git-Branching-Branch-Management</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches">https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches</a></li>
+<li><a href="https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging">https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging</a></li>
+<li><a href="https://git-scm.com/docs/git-branch">https://git-scm.com/docs/git-branch</a></li>
+<li><a href="https://git-scm.com/docs/git-merge">https://git-scm.com/docs/git-merge</a></li>
+</ul>
+<h2 id="creare-un-branch-e-spostarsi-su-di-esso" tabindex="-1">Creare un branch e spostarsi su di esso <a class="header-anchor" href="#creare-un-branch-e-spostarsi-su-di-esso" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--bltnew-branchgt">https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--bltnew-branchgt</a></li>
+<li><a href="https://git-scm.com/docs/git-branch">https://git-scm.com/docs/git-branch</a></li>
+<li><a href="https://git-scm.com/docs/git-branch#Documentation/git-branch.txt--v">https://git-scm.com/docs/git-branch#Documentation/git-branch.txt--v</a></li>
+</ul>
+<pre><code class="language-bash">$ git checkout -b branchname
+<span class="hljs-comment"># Oppure:</span>
+$ git branch branchname
+$ git checkout branchname
+
+$ git branch -v
+</code></pre>
+<ul>
+<li><a href="https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/git-create-new-branch-with-local-changes-current-saved">https://www.theserverside.com/blog/Coffee-Talk-Java-News-Stories-and-Opinions/git-create-new-branch-with-local-changes-current-saved</a></li>
+</ul>
+<p><strong>creando un branch le modifiche locali vengono mantenute ed è possibile salvarle nel nuovo branch con un primo commit</strong>.</p>
+<h2 id="chiudere-il-branch-ed-unirlo-al-master---merge" tabindex="-1">Chiudere il branch ed unirlo al master - Merge <a class="header-anchor" href="#chiudere-il-branch-ed-unirlo-al-master---merge" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/docs/git-merge">https://git-scm.com/docs/git-merge</a></li>
+<li><a href="https://git-scm.com/docs/git-branch#Documentation/git-branch.txt--d">https://git-scm.com/docs/git-branch#Documentation/git-branch.txt--d</a></li>
+</ul>
+<pre><code class="language-bash">$ git checkout branchname
+$ <span class="hljs-comment"># fare modifiche ai files</span>
+$ git commit -a -m <span class="hljs-string">&quot;Primo Commit&quot;</span>
+
+$ git checkout master
+$ git branch --no-merged
+$ git merge branchname
+<span class="hljs-comment"># In caso di conflitti git segnalerà i files che devono essere editati:</span>
+<span class="hljs-comment"># 1. Risolvere eventuali conflitti sui files indicati, Editando i files e cancellando le righe:</span>
+<span class="hljs-comment"># &lt;&lt;&lt;&lt;&lt;&lt;&lt;</span>
+<span class="hljs-comment"># =======</span>
+<span class="hljs-comment"># &gt;&gt;&gt;&gt;&gt;&gt;&gt;</span>
+<span class="hljs-comment"># 2. Eseguire git add &lt;&gt; su ogni file editato per risolvere i conflitti</span>
+<span class="hljs-comment"># 3. Eseguire git commit -m &quot;Merge branch branchname&quot; per concludere il merge.</span>
+$ vim file1
+$ git add file1
+$ git commit -m <span class="hljs-string">&quot;Merge branch branchname&quot;</span>
+
+$ git branch --merged
+$ git branch -d branchname
+</code></pre>
+<h2 id="changing-a-branch-name" tabindex="-1">Changing a branch name <a class="header-anchor" href="#changing-a-branch-name" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Branch-Management#_changing_a_branch_name">https://git-scm.com/book/en/v2/Git-Branching-Branch-Management#_changing_a_branch_name</a></li>
+<li><a href="https://git-scm.com/docs/git-branch#Documentation/git-branch.txt--m">https://git-scm.com/docs/git-branch#Documentation/git-branch.txt--m</a></li>
+<li><a href="https://git-scm.com/docs/git-push#Documentation/git-push.txt--u">https://git-scm.com/docs/git-push#Documentation/git-push.txt--u</a></li>
+</ul>
+<pre><code class="language-bash">$ git branch --move bad-branch-name corrected-branch-name
+$ git push --set-upstream origin corrected-branch-name
+$ git branch --all
+$ git push origin --delete bad-branch-name
+
+$ git branch --move master main
+$ git push --set-upstream origin main
+$ git push origin --delete master
+</code></pre>
+<h2 id="remote-branches---tracking-branches" tabindex="-1">Remote Branches - Tracking Branches <a class="header-anchor" href="#remote-branches---tracking-branches" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#_tracking_branches">https://git-scm.com/book/en/v2/Git-Branching-Remote-Branches#_tracking_branches</a></li>
+<li><a href="https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--bltnew-branchgt">https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--bltnew-branchgt</a></li>
+<li><a href="https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--t">https://git-scm.com/docs/git-checkout#Documentation/git-checkout.txt--t</a></li>
+</ul>
+<p>Checking out a local branch from a remote-tracking branch <strong>automatically</strong> creates what is called a <strong><code>tracking branch</code></strong> and the branch it tracks is called an <strong><code>upstream branch</code></strong>.
+If you’re on a tracking branch and type <code>git pull</code>, <strong>Git automatically knows which server to fetch from and which branch to merge in</strong>.</p>
+<pre><code class="language-bash">$ git checkout -b serverfix origin/serverfix
+Branch serverfix <span class="hljs-built_in">set</span> up to track remote branch serverfix from origin.
+Switched to a new branch <span class="hljs-string">&#x27;serverfix&#x27;</span>
+
+$ git checkout --track origin/serverfix
+Branch serverfix <span class="hljs-built_in">set</span> up to track remote branch serverfix from origin.
+Switched to a new branch <span class="hljs-string">&#x27;serverfix&#x27;</span>
+
+$ git branch -vv
+</code></pre>
+<h2 id="scaricare-una-versione-precisa-di-un-repository-creando-un-branch" tabindex="-1">Scaricare una versione precisa di un repository creando un branch <a class="header-anchor" href="#scaricare-una-versione-precisa-di-un-repository-creando-un-branch" aria-hidden="true">🔗</a></h2>
+<p>Fare il checkout di un tag produce una versione non editabile,
+creando contestualmente anche un branch invece produce un nuovo branch editabile che parte con la versione indicata dal tag.</p>
+<p>Vogliamo scaricare la versione 5.182 di Payara, volendo poter effettuare
+modifiche e commit in locale.</p>
+<pre><code class="language-bat"><span class="hljs-variable">%USERPROFILE%</span>\app\Git\bin\git.exe clone https://github.com/payara/Payara.git
+<span class="hljs-built_in">cd</span> Payara
+
+:: Per vedere quali tag sono disponibili nel repository:
+git tag -l
+
+:: Chechout <span class="hljs-built_in">del</span> tag desiderato e creazione di un nuovo branch
+git checkout tags/payara-server-<span class="hljs-number">5</span>.<span class="hljs-number">182</span> -b cdp_gfclient
+</code></pre>
+<h2 id="come-copiare-i-commit-da-un-branch-ad-un-altro%3A-cherry-pick" tabindex="-1">Come copiare i commit da un branch ad un altro: Cherry Pick <a class="header-anchor" href="#come-copiare-i-commit-da-un-branch-ad-un-altro%3A-cherry-pick" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man git-cherry-pick
+</code></pre>
+<p><a href="https://git-scm.com/docs/git-cherry-pick">https://git-scm.com/docs/git-cherry-pick</a></p>
+<p>I've got two branches from my master:</p>
+<ul>
+<li>v2.1: (version 2) I've been working on for several months</li>
+<li>wss: that I created yesterday to add one specific feature to my master (in production)</li>
+</ul>
+<p>Is there a way to copy yesterday's commits from wss to v2.1?</p>
+<p>Use</p>
+<pre><code class="language-bash">$ git cherry-pick &lt;commit&gt;
+</code></pre>
+<p>to apply <code>&lt;commit&gt;</code> to your current branch.</p>
+<h2 id="esempio-di-lavoro-con-i-branch" tabindex="-1">Esempio di lavoro con i branch <a class="header-anchor" href="#esempio-di-lavoro-con-i-branch" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ git branch nuova_feature <span class="hljs-comment"># Crea solamente il branch, non sposta l&#x27;HEAD su di esso</span>
+$ git checkout nuova_feature 
+<span class="hljs-comment"># oppure :</span>
+$ git checkout -b nuova_feature <span class="hljs-comment"># per creare il branch e spostare l&#x27;HEAD con un solo comando</span>
+$ git <span class="hljs-built_in">log</span> --oneline --decorate --graph --all
+<span class="hljs-comment"># fare delle modifiche, ad esempio creare un nuovo file</span>
+$ git commit -a -m <span class="hljs-string">&#x27;made a change on nuova_feature branch&#x27;</span>
+$ git checkout master <span class="hljs-comment"># ci rispositamo nel branch master</span>
+$ git commit -a -m <span class="hljs-string">&#x27;made other changes on master branch&#x27;</span>
+$ git merge nuova_feature <span class="hljs-comment"># i commit del branch nuova_feature vengono riportati sul branch master</span>
+$ git branch -d nuova_feature <span class="hljs-comment"># Elimina il branch, non serve più dopo aver fatto il merge</span>
+<span class="hljs-comment"># Se il merge dà conflitti:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment">#    1) git status # per vederli</span>
+<span class="hljs-comment">#    2) Correggere i file, righe dove ci sono gli&lt;&lt;&lt;&lt;&lt;</span>
+<span class="hljs-comment">#    3) git add dei file corretti</span>
+<span class="hljs-comment">#    4) git commit # Crea da solo un messaggio significativo che descrive il merge</span>
+
+<span class="hljs-comment"># Se si vuole salvare lo stato dei file modificati</span>
+<span class="hljs-comment"># ad esempio per fare un cambio di branch senza perdere il lavoro:</span>
+$ git stash
+<span class="hljs-comment"># Per recuperare i file modificati una volta tornati sul branch:</span>
+$ git stash apply
+</code></pre>
+<h2 id="esempio-di-lavoro-con-i-branch-remoti" tabindex="-1">Esempio di lavoro con i branch remoti <a class="header-anchor" href="#esempio-di-lavoro-con-i-branch-remoti" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/id/v2/Git-Branching-Remote-Branches">https://git-scm.com/book/id/v2/Git-Branching-Remote-Branches</a></li>
+<li><a href="https://stackoverflow.com/questions/5601931/what-is-the-best-and-safest-way-to-merge-a-git-branch-into-master">https://stackoverflow.com/questions/5601931/what-is-the-best-and-safest-way-to-merge-a-git-branch-into-master</a></li>
+</ul>
+<h3 id="effettuare-il-merge-su-master-del-ramo-test-e-poi-riportare-tutto-sul-server" tabindex="-1">Effettuare il merge su master del ramo test e poi riportare tutto sul server <a class="header-anchor" href="#effettuare-il-merge-su-master-del-ramo-test-e-poi-riportare-tutto-sul-server" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ git checkout master
+$ git pull origin master
+$ git merge <span class="hljs-built_in">test</span>
+$ git push origin master
+</code></pre>
+<h2 id="creare-un-nuovo-ramo-e-riportarlo-sul-server" tabindex="-1">Creare un nuovo ramo e riportarlo sul server <a class="header-anchor" href="#creare-un-nuovo-ramo-e-riportarlo-sul-server" aria-hidden="true">🔗</a></h2>
+<p>First, you create your branch locally:</p>
+<pre><code class="language-bash">$ git checkout -b &lt;branch-name&gt; <span class="hljs-comment"># Create a new branch and check it out</span>
+$ git checkout -b <span class="hljs-built_in">test</span>
+</code></pre>
+<p>The remote branch is automatically created when you push it to the remote server. So when you feel ready for it, you can do:</p>
+<pre><code class="language-bash">$ git push &lt;remote-name&gt; &lt;branch-name&gt; 
+$ git push origin <span class="hljs-built_in">test</span>
+</code></pre>
+<p>Where <code>&lt;remote-name&gt;</code> is typically <code>origin</code>, the name which git gives to the remote you cloned from. <br>
+Your colleagues would then just pull that branch, and it's automatically created locally.</p>
+<p>Note however that formally, the format is:</p>
+<pre><code class="language-bash">$ git push &lt;remote-name&gt; &lt;local-branch-name&gt;:&lt;remote-branch-name&gt;
+</code></pre>
+<h2 id="branch-corrente" tabindex="-1">Branch corrente <a class="header-anchor" href="#branch-corrente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ git rev-parse --abbrev-ref HEAD   <span class="hljs-comment"># mostra il branch corrente</span>
+$ git branch --show-current         <span class="hljs-comment"># mostra il branch corrente</span>
+$ git branch -vv <span class="hljs-comment"># mostra i branch esistenti</span>
+$ git branch -r <span class="hljs-comment"># mostra i branch remoti</span>
+</code></pre>
+<h2 id="diff-fra-branch" tabindex="-1">Diff fra branch <a class="header-anchor" href="#diff-fra-branch" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ git <span class="hljs-built_in">log</span> --pretty=<span class="hljs-string">&quot;%h %cd %s %cn %d&quot;</span> --graph --<span class="hljs-built_in">date</span>=format:<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span> -5
+$ git diff origin/main..origin/1.2
+$ git <span class="hljs-built_in">log</span> origin/main..origin/1.2
+$ git diff origin/main..origin/1.2 -- sito-ui/nunjucks/templates/partials/_footer.njk
+</code></pre>
+</body></html>

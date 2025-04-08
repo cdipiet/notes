@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.057" />
+        <title>SSD</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="ssd" tabindex="-1">SSD <a class="header-anchor" href="#ssd" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.057</p>
+<nav class="table-of-contents"><ol><li><a href="#continuous-trim">Continuous Trim </a></li><li><a href="#periodic-trim">Periodic Trim </a></li><li><a href="#usare-cron">Usare cron </a></li><li><a href="#usare-systemd">Usare systemd </a></li><li><a href="#fs2s">FS2S </a></li><li><a href="#stato-dell'unita-ssd">Stato dell&#39;unita SSD </a></li><li><a href="#eliminare-il-journaling-da-ext4">Eliminare il Journaling da Ext4 </a></li><li><a href="#per-riattivare-il-journaling-in-ext4">Per riattivare il journaling in ext4 </a></li></ol></nav><h1 id="trim-hard-disk-ssd---discard" tabindex="-1">Trim Hard Disk SSD - discard <a class="header-anchor" href="#trim-hard-disk-ssd---discard" aria-hidden="true">🔗</a></h1>
+<h2 id="continuous-trim" tabindex="-1">Continuous Trim <a class="header-anchor" href="#continuous-trim" aria-hidden="true">🔗</a></h2>
+<p>Dischi a stato solido SSD:
+Aggiungere l'opzione <code>discard</code> in <code>/etc/fstab</code> abilita il <code>Continuous Trim</code>, questo può decrementare le performance
+<code>echo noop &gt;/sys/block/&lt;ssd&gt;/queue/scheduler</code> visto che l'accesso ai blocchi è costante in un SSD si può evitare lo scheduler
+Abilitare il <code>TRIM</code>(solo ext4 o btrfs) <strong>assicura che ogni transistor sia scritto il numero minimo di volte</strong>, allunga la vita della memoria SSD:</p>
+<pre><code class="language-bash">$ findmnt -O discard
+$ hpdarm -l /dev/&lt;ssd&gt;|grep <span class="hljs-string">&quot;TRIM supported&quot;</span>
+/etc/fstab:
+/dev/sda1 /ext4 default,discard 0 1
+<span class="hljs-built_in">echo</span> 1 &gt;/proc/sys/vm/swappiness
+</code></pre>
+<h2 id="periodic-trim" tabindex="-1">Periodic Trim <a class="header-anchor" href="#periodic-trim" aria-hidden="true">🔗</a></h2>
+<p>Trim più &quot;gentile&quot; di quello continuo che si abilita con l'opzione <code>discard</code> in <code>/etc/fstab</code>
+Prima di tutto rimuovere l'opzione discard da /etc/fstab:</p>
+<pre><code class="language-bash">findmnt -O discard
+<span class="hljs-built_in">sudo</span> mount -o remount,nodiscard /mnt/data
+<span class="hljs-built_in">sudo</span> nano /etc/fstab --&gt; togliere i discard
+</code></pre>
+<p>Preliminary checks:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> blockdev --getalignoff /dev/sda I get a 0 (<span class="hljs-built_in">which</span> as I understand confirms alignment)
+$ su -c <span class="hljs-string">&#x27;hdparm -I /dev/sda&#x27;</span> | grep TRIM I get that TRIM is supported
+<span class="hljs-comment"># Abilitare il trim ai livelli LVM, ext4,e crypt</span>
+/etc/lvm/lvm.conf
+    <span class="hljs-built_in">set</span> issue_discards = 1
+</code></pre>
+<h2 id="usare-cron" tabindex="-1">Usare cron <a class="header-anchor" href="#usare-cron" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /etc/cron.weekly/fstrim
+        <span class="hljs-comment">#!/usr/bin/env bash</span>
+        <span class="hljs-comment"># trim all mounted file systems which support it</span>
+        /sbin/fstrim --all || <span class="hljs-literal">true</span>
+</code></pre>
+<h2 id="usare-systemd" tabindex="-1">Usare systemd <a class="header-anchor" href="#usare-systemd" aria-hidden="true">🔗</a></h2>
+<p><a href="https://jason.the-graham.com/2013/03/06/how-to-use-systemd-timers/">https://jason.the-graham.com/2013/03/06/how-to-use-systemd-timers/</a></p>
+<p>Per Debian</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /usr/share/doc/util-linux/examples/fstrim.service /etc/systemd/system
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /usr/share/doc/util-linux/examples/fstrim.timer /etc/systemd/system
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> /etc/cron.weekly/fstrim /etc/cron.weekly/fstrim.bak
+<span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> fstrim.timer
+$ <span class="hljs-built_in">sudo</span> fstrim --verbose --all
+</code></pre>
+<p>Add discard option to appropriate line in/etc/crypttab</p>
+<pre><code class="language-bash"><span class="hljs-variable">$sudo</span> grubby --update-kernel=ALL --args=rd.luks.options=discard
+<span class="hljs-variable">$sudo</span> dracut -f
+$ <span class="hljs-built_in">sudo</span> reboot
+</code></pre>
+<h2 id="fs2s" tabindex="-1">FS2S <a class="header-anchor" href="#fs2s" aria-hidden="true">🔗</a></h2>
+<p>il kernel deve essere costruito con l’opzione CONFIG_F2FS e incorporato come modulo.
+Per verificare che il file /proc/config.gz sia presente nel sistema (la sua esistenza
+dipende da un’impostazione facoltativa nel kernel), usate il comando che segue:
+zgrep F2FS /proc/config.gz In caso contrario, è possibile verificare la
+presenza del modulo con modinfo:</p>
+<pre><code>modinfo f2fs
+</code></pre>
+<p>quindi potete controllare se il suddetto modulo è integrato nel kernel attraverso l’istruzione:
+grep f2fs /lib/modules/kernel-version/modules.builtin Se il modulo in questione non è presente nel kernel, è
+necessario compilare quest’ultimo come descritto nelle pagine che seguono. Se volete disporre la partizione
+root su F2FS, sarà opportuno costruirla direttamente nel kernel e non come modulo. Il passo successivo
+è installare gli aggiornamenti userspace, di solito chiamati f2fs-tools, attraverso il gestore pacchetti.
+Create quindi un filesystem F2FS con:</p>
+<pre><code>sudo mkfs.f2fs -l LABEL /dev/sdXN
+</code></pre>
+<h2 id="stato-dell'unita-ssd" tabindex="-1">Stato dell'unita SSD <a class="header-anchor" href="#stato-dell'unita-ssd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install smartmontools
+<span class="hljs-built_in">sudo</span> fdisk -l
+<span class="hljs-built_in">sudo</span> smartctl -a /dev/xxx
+</code></pre>
+<p>Possiamo verificare anche lo stato del nostro SSD, una percentuale ci indicherà quanto ne rimane ancora d'utilizzo digitando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> smartctl -a /dev/sdb | grep <span class="hljs-string">&quot;202 Unknown_SSD_Attribute&quot;</span>
+</code></pre>
+<p>avremo un risultato simile a</p>
+<pre><code>202 Unknown_SSD_Attribute 0×0031 090 090 090 Pre-fail Offline – 10
+</code></pre>
+<p>dove il - 10 indica che l'unità ha utilizzato il 10% della sua intera durata</p>
+<p>Possiamo avere informazioni dettagliate sulla nostra SSD anche attraverso I-Nex software che fornisce una valida alternativa in Linux al noto Cpu-Z.
+Per installare I-Nex basta digitare:</p>
+<pre><code>sudo add-apt-repository ppa:i-nex-development-team/stable
+sudo apt-get update
+sudo apt-get install i-nex
+</code></pre>
+<h2 id="eliminare-il-journaling-da-ext4" tabindex="-1">Eliminare il Journaling da Ext4 <a class="header-anchor" href="#eliminare-il-journaling-da-ext4" aria-hidden="true">🔗</a></h2>
+<p>Utile per hard disk SSD
+Procedura:
+È molto semplice, basta entrare da live e assicurarsi che le partizioni non siano montate, dopo di ché aprite il terminale e date il seguente comando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> tune2fs -O ^has_journal /dev/sdXN
+<span class="hljs-built_in">sudo</span> e4fsck -d /dev/sdXN
+shutdown -r now
+<span class="hljs-comment"># dopo il reboot verifichiamo che il journal sia spento</span>
+dmesg | grep EXT4
+</code></pre>
+<p>dove X è il numero del disco e N il numero della partizione. Se non sapete quale o qualli sono le vostre partizioni usate il comando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> fdisk -l
+</code></pre>
+<p>Ora la seguente cosa sarà modificare leggermente il grub.</p>
+<p><strong>Se avete Grub 1</strong></p>
+<p>dovete entrare nella configurazione del grub(/boot/grub/menu.lst) con l'editor a piacimento e aggiungere il parametro rootfstype=ext4 alla righa del kernel. Esempio:</p>
+<pre><code>kernel /boot/vmlinuz-netbook root=/dev/sda1 ro quiet rootfstype=ext4 elevator=noop
+</code></pre>
+<p>Dopodiché salvare il file.</p>
+<p><strong>Se avete Grub 2</strong></p>
+<p>editate il file <code>/etc/default/grub</code> e aggiungete lo stesso parametro <code>rootfstype=ext4</code> alla seguente riga:</p>
+<pre><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash elevator=noop rootfstype=ext4&quot;
+</code></pre>
+<p>una volta fatto salvata e aggiornate il grub con questo comando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> update-grub2
+</code></pre>
+<p>Per i più scrupolosi:
+Se volete controllare se c'è o no journal bisogna dare questo comando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> dumpe2fs -h /dev/sdXN
+</code></pre>
+<p>se nella voce Features non compare <code>has_journal</code> e se alla fine del file non c'è una voce chiamata journaling size allora il file system non ha il journaling.</p>
+<h2 id="per-riattivare-il-journaling-in-ext4" tabindex="-1">Per riattivare il journaling in ext4 <a class="header-anchor" href="#per-riattivare-il-journaling-in-ext4" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> tune2fs -O has_journal /dev/sdXN
+</code></pre>
+</body></html>

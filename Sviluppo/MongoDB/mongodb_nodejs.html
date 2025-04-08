@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.804" />
+        <title>mongodb_nodejs</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="mongodb_nodejs" tabindex="-1">mongodb_nodejs <a class="header-anchor" href="#mongodb_nodejs" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.804</p>
+<nav class="table-of-contents"><ol><li><a href="#creazione-del-db">Creazione del DB </a></li><li><a href="#esempio-nodejs">Esempio NodeJS </a></li></ol></nav><h1 id="driver-nodejs-per-mongodb" tabindex="-1">Driver NodeJS per MongoDB <a class="header-anchor" href="#driver-nodejs-per-mongodb" aria-hidden="true">🔗</a></h1>
+<p><a href="https://docs.mongodb.com/drivers/node/current/">https://docs.mongodb.com/drivers/node/current/</a></p>
+<pre><code class="language-bash">$ npm install mongodb
+</code></pre>
+<h2 id="creazione-del-db" tabindex="-1">Creazione del DB <a class="header-anchor" href="#creazione-del-db" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># In linux utilizziamo le directory dati e log configurate con /etc/mongod.conf</span>
+<span class="hljs-comment"># /var/lib/mongodb # data</span>
+<span class="hljs-comment"># /var/log/mongodb # log</span>
+$ ./createdb.sh
+</code></pre>
+<p><code>createdb.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># mkdir mongodata</span>
+<span class="hljs-comment"># mongod --dbpath mongodata</span>
+mongo mongo_create_db.js
+<span class="hljs-built_in">sudo</span> grep --color htmlitmessenger /var/log/mongodb/mongod.log
+</code></pre>
+<p><code>mongo_create_db.js</code></p>
+<pre><code class="language-javascript"><span class="hljs-comment">// https://docs.mongodb.com/manual/tutorial/write-scripts-for-the-mongo-shell/</span>
+db = db.<span class="hljs-title function_">getSiblingDB</span>(<span class="hljs-string">&#x27;htmlitmessenger&#x27;</span>);
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">email</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">unique</span>: <span class="hljs-literal">true</span>});
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span> });
+db.<span class="hljs-property">messages</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">userDest</span>: <span class="hljs-number">1</span>});
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">    C:\&gt; <span class="hljs-title">mkdir</span> <span class="hljs-title">mongodata</span>
+    <span class="hljs-title">C</span>:\&gt; <span class="hljs-title">mongod</span> --<span class="hljs-title">dbpath</span> <span class="hljs-title">mongodata</span>
+    <span class="hljs-title">C</span>:\&gt; <span class="hljs-title">mongo</span> <span class="hljs-title">mongo_create_db.js</span>
+</span></code></pre>
+<pre><code class="language-javascript">&gt; use htmlitmessenger
+&gt; db.<span class="hljs-property">users</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">email</span>: <span class="hljs-number">1</span> }, {<span class="hljs-attr">unique</span>: <span class="hljs-literal">true</span>})
+&gt; db.<span class="hljs-property">users</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;text&quot;</span> })
+&gt; db.<span class="hljs-property">messages</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">userDest</span>: <span class="hljs-number">1</span>})
+</code></pre>
+<h2 id="esempio-nodejs" tabindex="-1">Esempio NodeJS <a class="header-anchor" href="#esempio-nodejs" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-javascript"><span class="hljs-keyword">var</span> client = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;mongodb&#x27;</span>).<span class="hljs-property">MongoClient</span>;
+client.<span class="hljs-title function_">connect</span>(<span class="hljs-string">&quot;mongodb://localhost:27017/libri&quot;</span>, <span class="hljs-keyword">function</span>(<span class="hljs-params">error, libri</span>) {
+   <span class="hljs-keyword">if</span>(! error) {
+      <span class="hljs-keyword">var</span> autori = libri.<span class="hljs-title function_">collection</span>(<span class="hljs-string">&quot;autori&quot;</span>);
+      autori.<span class="hljs-title function_">insert</span>({ <span class="hljs-attr">nome</span>: <span class="hljs-string">&quot;Umberto&quot;</span>, <span class="hljs-attr">cognome</span>: <span class="hljs-string">&quot;Eco&quot;</span> }, <span class="hljs-keyword">function</span>(<span class="hljs-params">errorIns, risultatoIns</span>) {  });
+      db.<span class="hljs-title function_">close</span>();
+   }
+});
+</code></pre>
+<pre><code class="language-javascript">db.<span class="hljs-property">users</span>.<span class="hljs-title function_">insert</span>([
+        {<span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;user1@html.it&quot;</span> , <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 1&quot;</span>, <span class="hljs-attr">logins</span>: <span class="hljs-number">31</span>, <span class="hljs-attr">lastAccess</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>, <span class="hljs-number">10</span>, <span class="hljs-number">7</span>) },
+        {<span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;user2@html.it&quot;</span> , <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 2&quot;</span> }
+    ],
+    { <span class="hljs-attr">writeConcern</span>: { <span class="hljs-attr">w</span>: <span class="hljs-number">0</span> }
+}
+<span class="hljs-comment">// w: 0 ==&gt; Write Concern Unacknowledged</span>
+
+
+
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">update</span>(
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 1&quot;</span> },
+    {
+        <span class="hljs-attr">$inc</span>: { <span class="hljs-attr">logins</span>: <span class="hljs-number">1</span>},
+        <span class="hljs-attr">$set</span>: { <span class="hljs-attr">lastAccess</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>, <span class="hljs-number">10</span>, <span class="hljs-number">8</span>) }
+    }
+)
+
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">update</span>(
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 3&quot;</span> },
+    { <span class="hljs-attr">_id</span>: <span class="hljs-string">&quot;user3@html.it&quot;</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 3&quot;</span>, lastAccess : <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>() },
+    {<span class="hljs-attr">upsert</span>: <span class="hljs-literal">true</span> }
+)
+
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">remove</span>( { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 3&quot;</span> },  { <span class="hljs-attr">justOne</span>: <span class="hljs-literal">true</span> } )
+
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">findAndModify</span>({
+    <span class="hljs-attr">query</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 4&quot;</span> },
+    <span class="hljs-attr">update</span>: { <span class="hljs-attr">$currentDate</span>: {  <span class="hljs-attr">lastAccess</span>: <span class="hljs-literal">true</span> } } ,
+    <span class="hljs-attr">upsert</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">new</span>: <span class="hljs-literal">true</span>
+})
+
+db.<span class="hljs-property">users</span>.<span class="hljs-title function_">findAndModify</span>({
+    <span class="hljs-attr">query</span>: { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;User 4&quot;</span> },
+    <span class="hljs-attr">remove</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">fields</span>: { <span class="hljs-attr">_id</span>: <span class="hljs-literal">true</span> }
+})
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">isbn</span>: <span class="hljs-string">&#x27;1783287756&#x27;</span> })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;Programming&#x27;</span> })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-string">&#x27;authors.surname&#x27;</span>: <span class="hljs-string">&#x27;Fowler&#x27;</span>  })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">pages</span>: { <span class="hljs-attr">$lte</span>: <span class="hljs-number">200</span> } } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">category</span>: { <span class="hljs-attr">$nin</span>: [<span class="hljs-string">&quot;Java&quot;</span>, <span class="hljs-string">&quot;Databases&quot;</span>, <span class="hljs-string">&quot;Programming&quot;</span>] } } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>(  { <span class="hljs-attr">pages</span>: { <span class="hljs-attr">$not</span>: { <span class="hljs-attr">$gte</span>: <span class="hljs-number">200</span> } } } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">$or</span>: [ { <span class="hljs-attr">pages</span>: { <span class="hljs-attr">$lte</span>: <span class="hljs-number">200</span> } } , { <span class="hljs-attr">published</span>: { <span class="hljs-attr">$gt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>) }  } ] })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">pages</span>: { <span class="hljs-attr">$lte</span>: <span class="hljs-number">200</span> }, <span class="hljs-attr">published</span>: { <span class="hljs-attr">$gt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>) } })
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( {
+    <span class="hljs-attr">$or</span>: [
+        { <span class="hljs-attr">pages</span>: { <span class="hljs-attr">$lte</span>: <span class="hljs-number">200</span> } },
+        { <span class="hljs-attr">$and</span>: [
+            { <span class="hljs-attr">price</span>: { <span class="hljs-attr">$gt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>) } },
+            { <span class="hljs-attr">price</span>: { <span class="hljs-attr">$lt</span>:  <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>) } }
+            ]
+        }
+    ]
+})
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>(  { <span class="hljs-attr">published</span>: { <span class="hljs-attr">$exists</span>: <span class="hljs-literal">false</span> } } )
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>(  { <span class="hljs-attr">title</span>: { <span class="hljs-attr">$regex</span>: <span class="hljs-regexp">/nosql/i</span> } }  )
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">published</span>: {  <span class="hljs-attr">$gt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">$lt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>) } } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">published</span>: { <span class="hljs-attr">$elemMatch</span>: { <span class="hljs-attr">$gt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">$lt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>) } } } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>( { <span class="hljs-attr">published</span>: { <span class="hljs-attr">$all</span>: { <span class="hljs-attr">$gt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2013</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>), <span class="hljs-attr">$lt</span>: <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>(<span class="hljs-number">2014</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>) } } } )
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>(  { <span class="hljs-attr">title</span>: { <span class="hljs-attr">$regex</span>: <span class="hljs-regexp">/nosql/i</span> } }, { <span class="hljs-attr">title</span>: <span class="hljs-number">1</span>,  <span class="hljs-attr">authors</span>: <span class="hljs-number">1</span> } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>(  { <span class="hljs-attr">title</span>: { <span class="hljs-attr">$regex</span>: <span class="hljs-regexp">/nosql/i</span> } }, { <span class="hljs-attr">content</span>: <span class="hljs-number">0</span>, <span class="hljs-attr">authors</span>: { <span class="hljs-attr">$slice</span>: <span class="hljs-number">1</span> } } )
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">var</span> i=<span class="hljs-number">1</span>; i&lt;=<span class="hljs-number">20000</span>; i++) { db.<span class="hljs-property">books</span>.<span class="hljs-title function_">insert</span>( { <span class="hljs-attr">isbn</span>: <span class="hljs-number">223456</span> + I + <span class="hljs-string">&#x27;&#x27;</span>, title : <span class="hljs-string">&quot;book &quot;</span> + i } ); }
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">isbn</span>: <span class="hljs-string">&#x27;223458&#x27;</span> }).<span class="hljs-title function_">explain</span>()
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">isbn</span>: <span class="hljs-number">1</span>}, {<span class="hljs-attr">unique</span>: <span class="hljs-literal">true</span>})
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">category</span>: <span class="hljs-string">&#x27;Programming&#x27;</span>, <span class="hljs-attr">published</span>: <span class="hljs-number">2014</span> })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">ensureIndex</span>({ <span class="hljs-attr">category</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">published</span>: <span class="hljs-number">1</span> })
+
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">ensureIndex</span>( { <span class="hljs-attr">title</span>: <span class="hljs-string">&quot;text&quot;</span> } )
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">$text</span>: { <span class="hljs-attr">$search</span>: <span class="hljs-string">&#x27;NoSql MongoDB&#x27;</span> } })
+db.<span class="hljs-property">books</span>.<span class="hljs-title function_">find</span>({ <span class="hljs-attr">$text</span>: { <span class="hljs-attr">$search</span>: <span class="hljs-string">&#x27;NoSql MongoDB -Cassandra&#x27;</span> } })
+</code></pre>
+</body></html>

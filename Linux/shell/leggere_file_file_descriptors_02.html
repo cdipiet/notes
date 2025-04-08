@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.843" />
+        <title>leggere_file_file_descriptors_02</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="leggere_file_file_descriptors_02" tabindex="-1">leggere_file_file_descriptors_02 <a class="header-anchor" href="#leggere_file_file_descriptors_02" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.843</p>
+<nav class="table-of-contents"><ol><li><a href="#tecnica-di-utilizzo-del-comando-exec-senza-comando-per-aprire-file-descriptors">Tecnica di utilizzo del comando exec senza comando per aprire file descriptors </a></li><li><a href="#closing-file-descriptors">Closing File Descriptors </a></li></ol></nav><h1 id="file-descriptors" tabindex="-1">file descriptors <a class="header-anchor" href="#file-descriptors" aria-hidden="true">🔗</a></h1>
+<p><code>man -L en bash</code> e cercare &quot;redirection&quot;</p>
+<h2 id="tecnica-di-utilizzo-del-comando-exec-senza-comando-per-aprire-file-descriptors" tabindex="-1">Tecnica di utilizzo del comando <code>exec</code> senza comando per aprire file descriptors <a class="header-anchor" href="#tecnica-di-utilizzo-del-comando-exec-senza-comando-per-aprire-file-descriptors" aria-hidden="true">🔗</a></h2>
+<p>Using file descriptors is more efficient (reducing processing time by about 5x).
+This is because the file is not opened/closed implicitly between operations.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">readfiles</span></span>()
+{
+<span class="hljs-built_in">local</span> FD1=7
+<span class="hljs-built_in">local</span> FD2=8
+<span class="hljs-built_in">local</span> file1=<span class="hljs-variable">$1</span>
+<span class="hljs-built_in">local</span> file2=<span class="hljs-variable">$2</span>
+<span class="hljs-built_in">local</span> count1=0
+<span class="hljs-built_in">local</span> count2=0
+<span class="hljs-built_in">local</span> eof1=0
+<span class="hljs-built_in">local</span> eof2=0
+<span class="hljs-built_in">local</span> data1
+<span class="hljs-built_in">local</span> data2
+<span class="hljs-comment"># Open files. Use file descriptors in the range 3-9. File descriptors below 3 are used for standard input, output,</span>
+<span class="hljs-comment"># and error, the ones above 9 may be used by the shell internally.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># As a reference, the man page describes what exec is doing:</span>
+<span class="hljs-comment"># exec [-cl] [-a name] [command [arguments]]</span>
+<span class="hljs-comment"># If command is not specified, any redirections take effect in the current shell, and the return status is 0.</span>
+<span class="hljs-comment"># If there is a redirection error, the return status is 1.</span>
+<span class="hljs-built_in">exec</span> 7&lt;<span class="hljs-variable">$file1</span>
+<span class="hljs-built_in">exec</span> 8&lt;<span class="hljs-variable">$file2</span>
+<span class="hljs-comment"># E&#x27; possibile parametrizzare i numeri dei file descriptor con questo trucco:</span>
+<span class="hljs-comment"># eval exec &quot;$FD1&lt;$file1&quot;</span>
+<span class="hljs-keyword">while</span> [[ <span class="hljs-variable">$eof1</span> -eq 0 || <span class="hljs-variable">$eof2</span> -eq 0 ]]
+<span class="hljs-keyword">do</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">read</span> data1 &lt;&amp;<span class="hljs-variable">$FD1</span>; <span class="hljs-keyword">then</span> <span class="hljs-comment"># Notice the input redirection to read uses another special form that includes the</span>
+<span class="hljs-comment"># ampersand (&amp;) to specify that what follows is a file descriptor and not a file name.</span>
+<span class="hljs-built_in">let</span> count1++
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s, line %d: %s\n&quot;</span> <span class="hljs-variable">$file1</span> <span class="hljs-variable">$count1</span> <span class="hljs-string">&quot;<span class="hljs-variable">$data1</span>&quot;</span>
+<span class="hljs-keyword">else</span>
+eof1=1
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">if</span> <span class="hljs-built_in">read</span> data2 &lt;&amp;<span class="hljs-variable">$FD2</span>; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">let</span> count2++
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%s, line %d: %s\n&quot;</span> <span class="hljs-variable">$file2</span> <span class="hljs-variable">$count2</span> <span class="hljs-string">&quot;<span class="hljs-variable">$data2</span>&quot;</span>
+<span class="hljs-keyword">else</span>
+eof2=1
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+}
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Reading file1 and file2&quot;</span>
+readfiles file1 file2
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Reading file3 and file4&quot;</span>
+readfiles file3 file4
+</code></pre>
+<h2 id="closing-file-descriptors" tabindex="-1">Closing File Descriptors <a class="header-anchor" href="#closing-file-descriptors" aria-hidden="true">🔗</a></h2>
+<p>To be safe you could do the following to close the files:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">exec</span> 7&lt;/dev/null
+<span class="hljs-built_in">exec</span> 8&lt;/dev/null
+</code></pre>
+<p>There is an explicit syntax for closing a file descriptor. If you want to close descriptor 7:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">exec</span> 7&gt;&amp;-
+</code></pre>
+<p>I recommend avoiding this with descriptors <code>0-2</code>, since many programs will behave erratically if run with these descriptors closed.</p>
+<p>Thanks. That does appear to do what you describe. You can test it with the script:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">exec</span> 7&gt;junk
+<span class="hljs-built_in">echo</span> JUNK &gt;&amp;7
+lsof -p $$ | grep -v mem
+<span class="hljs-built_in">exec</span> 7&gt;&amp;-
+<span class="hljs-built_in">echo</span>
+lsof -p $$ | grep -v mem
+</code></pre>
+<p>Which should produce something like:</p>
+<pre><code>COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+sh 27781 mitch cwd DIR 9,0 20480 12517486 /home/mitch/tmp
+sh 27781 mitch rtd DIR 9,0 4096 2 /
+sh 27781 mitch txt REG 9,0 725048 5316638 /bin/bash
+sh 27781 mitch 0u CHR 136,1 0t0 3 /dev/pts/1
+sh 27781 mitch 1u CHR 136,1 0t0 3 /dev/pts/1
+sh 27781 mitch 2u CHR 136,1 0t0 3 /dev/pts/1
+sh 27781 mitch 7w REG 9,0 5 12517390 /home/mitch/tmp/junk
+sh 27781 mitch 255r REG 9,0 99 12519090 /home/mitch/tmp/j.sh
+
+COMMAND PID USER FD TYPE DEVICE SIZE/OFF NODE NAME
+sh 27781 mitch cwd DIR 9,0 20480 12517486 /home/mitch/tmp
+sh 27781 mitch rtd DIR 9,0 4096 2 /
+sh 27781 mitch txt REG 9,0 725048 5316638 /bin/bash
+sh 27781 mitch 0u CHR 136,1 0t0 3 /dev/pts/1
+sh 27781 mitch 1u CHR 136,1 0t0 3 /dev/pts/1
+sh 27781 mitch 2u CHR 136,1 0t0 3 /dev/pts/1
+sh 27781 mitch 255r REG 9,0 99 12519090 /home/mitch/tmp/j.sh
+</code></pre>
+<p>As you can see, in the second output from lsof the file on file descriptor 7 is now closed.</p>
+<p>Most interesting about this is that it doesn't appear to be in the man page anywhere, closest thing I see is:</p>
+<p>Similarly, the redirection operator</p>
+<pre><code class="language-bash">[n]&gt;&amp;digit-
+</code></pre>
+<p>moves the file descriptor digit to file descriptor n, or the standard output (file descriptor 1) if n is not specified.</p>
+<p>So I guess it's a special form of that. If you check back, leave a note as to where you found that documented.</p>
+</body></html>

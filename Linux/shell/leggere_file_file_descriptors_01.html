@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.843" />
+        <title>leggere_file_file_descriptors_01</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="leggere_file_file_descriptors_01" tabindex="-1">leggere_file_file_descriptors_01 <a class="header-anchor" href="#leggere_file_file_descriptors_01" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.843</p>
+<nav class="table-of-contents"><ol><li><a href="#calcolare-un-file-descriptor-disponibile-mediante-bash">calcolare un file descriptor disponibile mediante bash </a></li></ol></nav><h1 id="file-descriptors" tabindex="-1">file descriptors <a class="header-anchor" href="#file-descriptors" aria-hidden="true">🔗</a></h1>
+<p><code>man -L en bash</code> e cercare &quot;redirection&quot;</p>
+<h2 id="calcolare-un-file-descriptor-disponibile-mediante-bash" tabindex="-1">calcolare un file descriptor disponibile mediante bash <a class="header-anchor" href="#calcolare-un-file-descriptor-disponibile-mediante-bash" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># Esempio di comunicazione tra find ed il while di bash</span>
+<span class="hljs-comment"># è meglio utilizzare il carattere \0 per separare una lista di nomi di files</span>
+<span class="hljs-comment"># perchè a differenza dello spazio o di altri sicuramente non può essere presente nel nome di un file.</span>
+<span class="hljs-comment"># ecco perchè find possiede l&#x27;opzione -print0</span>
+<span class="hljs-comment"># per poter dire a while di aspettarsi una lista separata da \0 si utilizza il parametro -d &#x27;&#x27;</span>
+<span class="hljs-comment"># Per poter editare un array come &quot;a&quot; non possiamo utilizzare una pipe del tipo (while | find) perchè bash esegue entrambi i comandi in una subshell,</span>
+<span class="hljs-comment"># e le variabili impostate nella subshell vengono perdute alla sua uscita.</span>
+<span class="hljs-comment"># Uno schema del tipo &quot;while &lt; &lt;(find)&quot; esegue solamente find nella subshell e lo stato di a non viene perduto</span>
+<span class="hljs-comment"># per far parlare la subshell con il while utilizziamo la redirezione aprendo il primo file descriptor &gt;10 libero utilizzabile da bash,</span>
+<span class="hljs-comment"># man bash e cercare il paragrafo &quot;redirection&quot; :</span>
+<span class="hljs-comment"># Each redirection that may be preceded by a file descriptor number may instead be preceded by a word of the form {varname}.  </span>
+<span class="hljs-comment"># In this case, for each redirection operator except &gt;&amp;- and &lt;&amp;-, </span>
+<span class="hljs-comment"># the shell will allocate a file descriptor greater than or equal to 10 and assign it to varname.  </span>
+<span class="hljs-comment"># If &gt;&amp;- or &lt;&amp;- is preceded by {varname}, the value of varname defines the file  descriptor to  close.  </span>
+<span class="hljs-comment"># If {varname} is supplied, the redirection persists beyond the scope of the command, allowing the shell programmer to manage the file descriptor him‐self.</span>
+
+<span class="hljs-built_in">unset</span> a i
+a=()
+<span class="hljs-comment"># -d &#x27;&#x27; è equivalente a -d $&#x27;\0&#x27; </span>
+<span class="hljs-comment"># while IFS= read -r -u3 -d $&#x27;\0&#x27; file; do          # in questo esempio utilizziamo il file descriptor 3 sperando che sia disponibile</span>
+<span class="hljs-keyword">while</span> IFS= <span class="hljs-built_in">read</span> -r -u<span class="hljs-string">&quot;<span class="hljs-variable">$FD</span>&quot;</span> -d $<span class="hljs-string">&#x27;\0&#x27;</span> file; <span class="hljs-keyword">do</span>        <span class="hljs-comment"># in questo esempio utilizziamo il file descriptor trovato libero da bash</span>
+                                                    <span class="hljs-comment"># IFS= imposta il carattere del campo di input su nulla, assicurando che non si verifichino divisioni di parole/trim di spazi.</span>
+    <span class="hljs-comment"># a[i++]=&quot;$file&quot;                                # or however you want to process each file</span>
+    a+=(<span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>)
+<span class="hljs-comment"># done 3&lt; &lt;(find /tmp -type f -print0 2&gt;/dev/null)  # in questo esempio apriamo il file descriptor 3 sperando che sia disponibile</span>
+<span class="hljs-keyword">done</span> {FD}&lt; &lt;(find /tmp -<span class="hljs-built_in">type</span> f -print0 2&gt;/dev/null) <span class="hljs-comment"># bash cerca un file descriptor disponibile &gt; 10</span>
+<span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;%s\n&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${a[@]}</span>&quot;</span>                             <span class="hljs-comment"># esempio di come stampare un array</span>
+</code></pre>
+</body></html>

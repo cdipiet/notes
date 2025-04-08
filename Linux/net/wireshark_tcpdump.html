@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.010" />
+        <title>wireshark_tcpdump</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="wireshark_tcpdump" tabindex="-1">wireshark_tcpdump <a class="header-anchor" href="#wireshark_tcpdump" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.010</p>
+<nav class="table-of-contents"><ol><li><a href="#tcpdump">tcpdump </a></li></ol></nav><h1 id="wireshark-(ex-ethereal)" tabindex="-1">Wireshark (ex Ethereal) <a class="header-anchor" href="#wireshark-(ex-ethereal)" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.tcpdump.org/">https://www.tcpdump.org/</a></li>
+<li><a href="https://www.wireshark.org/">https://www.wireshark.org/</a></li>
+<li><a href="https://biot.com/capstats/bpf.html">https://biot.com/capstats/bpf.html</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Berkeley_Packet_Filter">https://en.wikipedia.org/wiki/Berkeley_Packet_Filter</a></li>
+<li><a href="https://wiki.archlinux.org/title/Wireshark#Capturing_privileges">https://wiki.archlinux.org/title/Wireshark#Capturing_privileges</a></li>
+<li><a href="https://wiki.archlinux.org/title/Users_and_groups#Group_management">https://wiki.archlinux.org/title/Users_and_groups#Group_management</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac install wireshark-qt
+$ <span class="hljs-built_in">sudo</span> gpasswd -a <span class="hljs-variable">$USER</span> wireshark
+
+<span class="hljs-comment">#usermod -aG wireshark $USER</span>
+</code></pre>
+<p><code>tshark</code> e' la versione di wireshark da riga di comando</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> tshark -i eth0 -c 100 -w /tmp/tshark.out not arp
+
+$ tcpdump -D <span class="hljs-comment"># visualizza le interfacce di rete</span>
+$ tcpdump -w outfile no tcp 22
+$ tcpdump -i
+<span class="hljs-comment"># caricare outfile con wireshark</span>
+</code></pre>
+<p>There are occasions when you want to capture packets using <code>tcpdump</code> rather than wireshark,
+especially when you want to do a remote capture and do not want the network load
+associated with running Wireshark remotely (not to mention all the X traffic polluting your capture).</p>
+<p>However, <strong>the default tcpdump parameters result in a capture file where each packet is truncated</strong>,
+because tcpdump, by default, only captures the first 68 bytes of each packet.</p>
+<p><strong>To ensure that you capture complete packets</strong>, use the following command:</p>
+<pre><code class="language-bash">tcpdump -i &lt;interface&gt; -s 1500 -w &lt;some-file&gt;
+</code></pre>
+<p>You will have to specify the correct interface and the name of a file to save into.
+In addition, you will have to terminate the capture with <code>^C</code> when you believe you have captured enough packets.</p>
+<pre><code>+-------+
+|LibPcap|
++-------+
+| +---------+
+|----| Dumpcap |
+| +---------+
+| | +---------+
+| |----|Wireshark|
+| +---------+
+| +-------+
+|____|Tcpdump|
+| +-------+
+| +----+
+|____|NMap|
+| +----+
+| +-----+
+|____|Snort|
++-----+ 
+</code></pre>
+<h2 id="tcpdump" tabindex="-1">tcpdump <a class="header-anchor" href="#tcpdump" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man tcpdump
+$ man pcap-filter
+$ tcpdump -D <span class="hljs-comment"># visualizza le interfacce di rete</span>
+$ wget -q https://raw.githubusercontent.com/yunchih/static-binaries/master/tcpdump -O tcpdump &amp;&amp; <span class="hljs-built_in">chmod</span> +x tcpdump
+$ ./tcpdump -D
+$ ./tcpdump -n -i eth0 -s 0 -w .packets.pcap
+</code></pre>
+<pre><code class="language-bash">$ tcpdump –nn port 27017 <span class="hljs-comment"># -nn do not resolve hostnames or ports</span>
+<span class="hljs-comment"># Berkley Packet Filters (BPF)</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -A -s0 port 80 <span class="hljs-comment"># –A include the ascii strings</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -n -i eth0 tcp –w file.pcap <span class="hljs-comment"># oppure “proto 17”</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -i eth0 host 10.10.1.1 <span class="hljs-comment"># sia src che dst</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump –n -i eth0 dst 10.10.1.20 <span class="hljs-comment"># -n no name resolution</span>
+$ tcpdump -r file -n –A <span class="hljs-comment"># -s0 : Snap length, is the size of the packet to capture. </span>
+                        <span class="hljs-comment"># -s0 will set the size to unlimited - use this to capture all the traffic</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -nn -A -s1500 -l | egrep -i <span class="hljs-string">&#x27;User-Agent:|Host:&#x27;</span> <span class="hljs-comment"># se si manda in pipe l’output è fondamentale i parametro –l : Make stdout line buffered</span>
+$ tcpdump -nnr packets.pcap
+$ tcpdump -r file <span class="hljs-string">&#x27;host 8.8.8.8&#x27;</span>
+$ tcpdump -r file <span class="hljs-string">&#x27;src host 8.8.8.8&#x27;</span>
+$ tcpdump -r file <span class="hljs-string">&#x27;not src host 8.8.8.8&#x27;</span>
+$ tcpdump -r file <span class="hljs-string">&#x27;icmp and (src host 8.8.8.8)&#x27;</span>
+$ tcpdump -nr falsimentis.pcap dst host 167.172.201.123 | <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27; &#x27;</span> -f 3 | <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27;.&#x27;</span> -f 1-4 | <span class="hljs-built_in">sort</span> -u
+<span class="hljs-comment"># To find the first timestamp for port 80 traffic:</span>
+$ <span class="hljs-keyword">for</span> octet <span class="hljs-keyword">in</span> 2 3 103 105 107 108 109; <span class="hljs-keyword">do</span> TZ=PST7PDT tcpdump -tttt -n -r falsimentis.pcap -c 1 <span class="hljs-string">&quot;src host 172.16.42.<span class="hljs-variable">$octet</span> and dst host 167.172.201.123 and dst port 80&quot;</span> 2&gt;/dev/null; <span class="hljs-keyword">done</span>
+<span class="hljs-comment">#cambiamo il server dns in modo che esso sia la macchina linux in modo da intercettare con tcpdump le richieste dns:</span>
+PS C:\&gt; Set-DnsClientServerAddress -InterfaceAlias Ethernet0 -ServerAddresses (<span class="hljs-string">&quot;10.10.75.1&quot;</span>)
+PS C:\&gt; Add-Content -Path C:\windows\system32\drivers\etc\hosts -Value <span class="hljs-string">&quot;10.10.75.1  www1-google-analytics.com&quot;</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -n -i eth0 –s0 udp port 53
+Victim$ ./tcpdump –D <span class="hljs-comment">#-D --list-interfaces</span>
+Victim$ ./tcpdump -n -i eth0 -s0 -w .packets.pcap
+$ <span class="hljs-built_in">sudo</span> tcpdump -s 0 -v -n -l | egrep -i <span class="hljs-string">&quot;POST /|GET /|Host:&quot;</span>
+<span class="hljs-comment"># Capture Cookies from Server and from Client</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -nn -A -s0 -l | egrep -i <span class="hljs-string">&#x27;Set-Cookie|Host:|Cookie:&#x27;</span>
+<span class="hljs-comment"># Show ICMP Packets that are not ECHO/REPLY (standard ping)</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump <span class="hljs-string">&#x27;icmp[icmptype] != icmp-echo and icmp[icmptype] != icmp-echoreply&#x27;</span>
+<span class="hljs-comment"># Capture SMTP / POP3 Email</span>
+$ <span class="hljs-built_in">sudo</span> tcpdump -nn -l port 25 | grep -i <span class="hljs-string">&#x27;MAIL FROM\|RCPT TO&#x27;</span>
+</code></pre>
+</body></html>

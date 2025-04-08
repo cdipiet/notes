@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.707" />
+        <title>Connessione_SSH_e_Tunnel</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="connessione_ssh_e_tunnel" tabindex="-1">Connessione_SSH_e_Tunnel <a class="header-anchor" href="#connessione_ssh_e_tunnel" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.707</p>
+<nav class="table-of-contents"><ol><li><a href="#tunnel-ssh-ed-abilitazione-dell'autenticazione-con-chiave-pubblica-da-windows">Tunnel SSH ed abilitazione dell&#39;autenticazione con chiave pubblica da Windows </a><ol><li><a href="#autenticazione-ssh-con-chiave-pubblica">Autenticazione SSH con chiave pubblica </a><ol><li><a href="#generare-una-coppia-di-chiavi-privata%2Fpubblica">Generare una coppia di chiavi privata/pubblica </a></li><li><a href="#invio-al-server-della-chiave-pubblica">Invio al server della chiave pubblica </a></li></ol></li><li><a href="#attivazione-tunnel-ssh-da-windows-con-openssh-installato">Attivazione Tunnel SSH Da Windows con OpenSSH installato </a></li></ol></li><li><a href="#verifica-di-connessione-da-windows">Verifica di connessione da Windows </a></li></ol></nav><h1 id="connessione-ssh-verso-la-macchina-postgresql-e-creazione-di-un-tunnel-ssh" tabindex="-1">Connessione SSH verso la macchina PostgreSQL e creazione di un Tunnel SSH <a class="header-anchor" href="#connessione-ssh-verso-la-macchina-postgresql-e-creazione-di-un-tunnel-ssh" aria-hidden="true">🔗</a></h1>
+<p>La macchina sulla quale è installato PostgreSQL è raggiungibile mediante utenza root in SSH,
+tramite tale connessione è possibile interrogare la base dati da riga di comando.
+Essendo il DB configurato per essere raggiungibile solamente da <code>localhost</code> creeremo un tunnel SSH
+per poterlo raggiungere tramite una porta locale del laptop,
+configureremo inoltre l'autenticazione mediante chiave pubblica.</p>
+<p>Accediamo al server tramite connessione SSH:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 <span class="hljs-title">root</span>@<span class="hljs-title">postgresql_host</span>  # <span class="hljs-title">SOAR</span> <span class="hljs-title">Server</span> <span class="hljs-title">certificazione</span>
+</span></code></pre>
+<p>Per poter accedere al DB PostgreSQL dal laptop bisogna utilizzare un tunnel SSH:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 -<span class="hljs-title">L</span> 5432:<span class="hljs-title">localhost</span>:5432 <span class="hljs-title">postgresql_host</span> # <span class="hljs-title">Tunnel</span> <span class="hljs-title">SSH</span>
+</span></code></pre>
+<p>In questo modo la porta locale del laptop <code>5432</code> corrisponderà a quella del server dove è stato installato PostgreSQL.
+Le connessioni al DB andranno dunque eseguite non direttamente verso la macchina del DB ma verso <code>localhost:5432</code>.
+Questo perchè PostgreSQL è configurato in modo da accettare solamente connessioni locali e non da rete, cosa a cui si ovvia mediante il tunnel SSH che farà giungere le richieste di connessioni dalla macchina server stessa anzichè dall'esterno.</p>
+<h2 id="tunnel-ssh-ed-abilitazione-dell'autenticazione-con-chiave-pubblica-da-windows" tabindex="-1">Tunnel SSH ed abilitazione dell'autenticazione con chiave pubblica da Windows <a class="header-anchor" href="#tunnel-ssh-ed-abilitazione-dell'autenticazione-con-chiave-pubblica-da-windows" aria-hidden="true">🔗</a></h2>
+<h3 id="autenticazione-ssh-con-chiave-pubblica" tabindex="-1">Autenticazione SSH con chiave pubblica <a class="header-anchor" href="#autenticazione-ssh-con-chiave-pubblica" aria-hidden="true">🔗</a></h3>
+<p>Key based authentication in SSH is called public key authentication.</p>
+<p>The <code>~/.ssh/authorized_keys</code> file in SSH specifies the SSH keys that can be used for logging into the user account for which the file is configured. It is a highly important configuration file, as it configures permanent access using SSH keys.</p>
+<h4 id="generare-una-coppia-di-chiavi-privata%2Fpubblica" tabindex="-1">Generare una coppia di chiavi privata/pubblica <a class="header-anchor" href="#generare-una-coppia-di-chiavi-privata%2Fpubblica" aria-hidden="true">🔗</a></h4>
+<p>Nella macchina Windows 10 non c'e' installato ssh-copy-id, bisognerà appendere &quot;manualmente&quot;
+la chiave pubblica al file .ssh/authorized_keys.</p>
+<ul>
+<li><code>%USERPROFILE%\.ssh\id_rsa.pub</code></li>
+<li><code>%USERPROFILE%\.ssh\id_ed25519.pub</code></li>
+<li><code>~/.ssh/authorized_keys</code></li>
+</ul>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span>-<span class="hljs-title">keygen</span> -<span class="hljs-title">t</span> <span class="hljs-title">rsa</span> -<span class="hljs-title">b</span> 4096 -<span class="hljs-title">C</span> &quot;<span class="hljs-title">nome.cognome</span>@<span class="hljs-title">xx.it</span>&quot;
+<span class="hljs-title">rem</span> <span class="hljs-title">oppure</span>(<span class="hljs-title">consigliata</span>):
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">ssh</span>-<span class="hljs-title">keygen</span> -<span class="hljs-title">t</span> <span class="hljs-title">ed25519</span> -<span class="hljs-title">C</span> &quot;<span class="hljs-title">nome.cognome</span>@<span class="hljs-title">xx.it</span>&quot;
+<span class="hljs-title">rem</span> <span class="hljs-title">copia</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">pubblica</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">clip</span> &lt; %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>\<span class="hljs-title">id_rsa.pub</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">oppure</span>(<span class="hljs-title">consigliata</span>):
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">clip</span> &lt; %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>\<span class="hljs-title">id_ed25519.pub</span>
+</span></code></pre>
+<h4 id="invio-al-server-della-chiave-pubblica" tabindex="-1">Invio al server della chiave pubblica <a class="header-anchor" href="#invio-al-server-della-chiave-pubblica" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 %<span class="hljs-title">USERNAME</span>%@<span class="hljs-title">posgresql_host</span> 
+</span></code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> ~/.ssh
+<span class="hljs-built_in">chmod</span> 751 <span class="hljs-variable">$HOME</span>
+<span class="hljs-built_in">chmod</span> 700 ~/.ssh
+<span class="hljs-built_in">touch</span> ~/.ssh/authorized_keys
+<span class="hljs-built_in">chmod</span> 600 ~/.ssh/authorized_keys
+</code></pre>
+<p>Invio della chiave pubblica al server:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">type</span> %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>\<span class="hljs-title">id_ed25519.pub</span> | <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 %<span class="hljs-title">USERNAME</span>%@<span class="hljs-title">posgresql_host</span> &quot;<span class="hljs-title">cat</span> - &gt;&gt; ~/.<span class="hljs-title">ssh</span>/<span class="hljs-title">authorized_keys</span>;<span class="hljs-title">chmod</span> 700 ~/.<span class="hljs-title">ssh</span>;<span class="hljs-title">chmod</span> 600 ~/.<span class="hljs-title">ssh</span>/<span class="hljs-title">authorized_keys</span>&quot;
+</span></code></pre>
+<p>Alternativa per inviare la chiave pubblica al server:</p>
+<pre><code class="language-bash">C:\&gt; scp -o MACs=hmac-sha2-512 %USERPROFILE%\.ssh\id_ed25519.pub %USERNAME%@posgresql_host:/home/%USERNAME%/.ssh/
+C:\&gt; ssh -m hmac-sha2-512 %USERNAME%@posgresql_host <span class="hljs-string">&quot;cat ~/.ssh/id_ed25519.pub &gt;&gt; ~/.ssh/authorized_keys&quot;</span>
+</code></pre>
+<p>Verifica di connessione da windows con tunnel SSH attivo:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 %<span class="hljs-title">USERNAME</span>%@<span class="hljs-title">posgresql_host</span> 
+</span></code></pre>
+<h3 id="attivazione-tunnel-ssh-da-windows-con-openssh-installato" tabindex="-1">Attivazione Tunnel SSH Da Windows con OpenSSH installato <a class="header-anchor" href="#attivazione-tunnel-ssh-da-windows-con-openssh-installato" aria-hidden="true">🔗</a></h3>
+<p>Avendo abilitato l'autenticazione mediante chiave pubblica il comando per far partire il tunnel SSH non richiederà la password:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 -<span class="hljs-title">L</span> 5432:<span class="hljs-title">localhost</span>:5432 <span class="hljs-title">posgresql_host</span>
+</span></code></pre>
+<p>Per evitare l'errore in windows <code>Corrupted MAC on input.</code></p>
+<p><a href="https://serverfault.com/questions/994646/ssh-on-windows-corrupted-mac-on-input">https://serverfault.com/questions/994646/ssh-on-windows-corrupted-mac-on-input</a></p>
+<pre><code>-m mac_spec
+            A comma-separated list of MAC (message authentication code) algorithms, 
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt;<span class="hljs-title">where</span> <span class="hljs-title">ssh</span>
+<span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">System32</span>\<span class="hljs-title">OpenSSH</span>\<span class="hljs-title">ssh.exe</span>
+
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">L</span> 5432:<span class="hljs-title">localhost</span>:5432 <span class="hljs-title">posgresql_host</span>
+<span class="hljs-title">Corrupted</span> <span class="hljs-title">MAC</span> <span class="hljs-title">on</span> <span class="hljs-title">input</span>.
+<span class="hljs-title">C</span>:\<span class="hljs-title">Users</span>\%<span class="hljs-title">USERNAME</span>%&gt;<span class="hljs-title">ssh</span> -<span class="hljs-title">Q</span> <span class="hljs-title">mac</span>
+<span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 -<span class="hljs-title">L</span> 5432:<span class="hljs-title">localhost</span>:5432 <span class="hljs-title">posgresql_host</span>
+</span></code></pre>
+<p>Windows: con Putty o MobaXterm creare un tunnel ssh:</p>
+<ul>
+<li>
+<p><a href="https://www.postgresql.org/docs/current/ssh-tunnels.html">https://www.postgresql.org/docs/current/ssh-tunnels.html</a></p>
+</li>
+<li>
+<p><a href="https://superuser.com/questions/1601631/create-ssh-tunnel-using-mobaxterm-on-windows">https://superuser.com/questions/1601631/create-ssh-tunnel-using-mobaxterm-on-windows</a></p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 -<span class="hljs-title">L</span> 5432:<span class="hljs-title">localhost</span>:5432 <span class="hljs-title">posgresql_host</span>
+</span></code></pre>
+</li>
+</ul>
+<p>Follow these steps to set up an SSH tunnel with PuTTY:</p>
+<ul>
+<li>Open up the PuTTy program.</li>
+<li>For “Host Name”, enter the hostname / domain or IP of the server you want to connect to.</li>
+<li>Click through “Connection” &gt; “SSH” &gt; “Tunnels” from the “Category” panel.</li>
+<li>Under “Source port” put down the local port number you want to connect to for forwarded traffic. A popular option is port “8080”.</li>
+<li>Next fill in the “Destination” field, enter the destination hostname or IP, followed by the destination port number. For example, you might enter “<a href="http://www.example.com:80">www.example.com:80</a>” if you’d like your tunnel to send its traffic to the http port on the host &lt;<a href="http://www.example.com">www.example.com</a>&gt;.</li>
+<li>Under “Forwarded ports” select “Local”, and then click “Add”</li>
+<li>Click the “Session” option in the “Category” panel to go back to the first screen again. From here, enter a name for the session under “Saved Sessions”, and then click “Save” so that you can easily load these options again later.</li>
+<li>Almost there! Just click “open” to connect via SSH, and enter your username and password when prompted.</li>
+</ul>
+<p>Once the tunnel is established, you can use your local port (e.g. 8080) as if it were the remote port on the destination host (e.g. <a href="www.example.com:80">www.example.com:80</a>). Any traffic sent to the local IP and port will be forwarded through the secure SSH tunnel to the destination host and port.</p>
+<h2 id="verifica-di-connessione-da-windows" tabindex="-1">Verifica di connessione da Windows <a class="header-anchor" href="#verifica-di-connessione-da-windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 %<span class="hljs-title">USERNAME</span>%@<span class="hljs-title">posgresql_host</span>
+</span></code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">m</span> <span class="hljs-title">hmac</span>-<span class="hljs-title">sha2</span>-512 -<span class="hljs-title">L</span> 5432:<span class="hljs-title">localhost</span>:5432 %<span class="hljs-title">USERNAME</span>%@<span class="hljs-title">posgresql_host</span>
+</span></code></pre>
+</body></html>

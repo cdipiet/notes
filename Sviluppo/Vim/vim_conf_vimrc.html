@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.527" />
+        <title>vim_conf_vimrc</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vim_conf_vimrc" tabindex="-1">vim_conf_vimrc <a class="header-anchor" href="#vim_conf_vimrc" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.527</p>
+<nav class="table-of-contents"><ol><li><a href="#problema-ctrl%2B%5D">Problema CTRL+] </a></li><li><a href="#problema-ctrl%2Bq">Problema CTRL+Q </a></li><li><a href="#file-e-parametri-di-configurazione">File e parametri di Configurazione </a></li><li><a href="#clipboard">Clipboard </a></li><li><a href="#variabili">Variabili </a></li><li><a href="#mapping">Mapping </a><ol><li><a href="#noremap---fermare-il-mapping-ricorsivo">noremap - fermare il mapping ricorsivo </a></li></ol></li><li><a href="#vimscript">vimscript </a></li><li><a href="#modelines">modelines </a></li></ol></nav><h1 id="vim-configurazione" tabindex="-1">VIM Configurazione <a class="header-anchor" href="#vim-configurazione" aria-hidden="true">🔗</a></h1>
+<h2 id="problema-ctrl%2B%5D" tabindex="-1">Problema CTRL+] <a class="header-anchor" href="#problema-ctrl%2B%5D" aria-hidden="true">🔗</a></h2>
+<p><code>CTRL+]</code> serve per visitare un link.</p>
+<p>Problema con la tastiera italiana ed i keybinding dei terminali Guake/Gnome Terminal:<br>
+questi terminali associano a <code>CTRL++</code> , dove <code>+</code> è il tasto che contiene anche <code>]</code> allo Zoom In,<br>
+questo keybinding ha priorità su quelli di VIM. Il problema si risolve riassegnando il keybinding per la visita di link<br>
+ad una doppia pressione consecutiva del carattere <code>o</code>:\</p>
+<p><code>:map oo &lt;C-]&gt;</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;map oo &lt;C-]&gt;&#x27;</span> &gt;&gt; ~/.vimrc
+</code></pre>
+<h2 id="problema-ctrl%2Bq" tabindex="-1">Problema CTRL+Q <a class="header-anchor" href="#problema-ctrl%2Bq" aria-hidden="true">🔗</a></h2>
+<p>On Unix like systems, the <code>Ctrl-S</code> and <code>Ctrl-Q</code> keys may be used for terminal flow control. If you map these keys in Vim, then when you invoke them, Vim will not receive these key sequences. To use these keys in Vim, you have to change the flow control characters used by the terminal using the <code>stty start</code> and <code>stty stop</code> commands to some other character or disable the terminal flow control using the following command:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">stty</span> -ixon
+<span class="hljs-comment"># oppure solamente per disabilitare CTRL+Q</span>
+$ <span class="hljs-built_in">stty</span> start undef
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &gt;&gt; ~/.bashrc &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment"># Serve a ~/.vimrc per poter utilizzare CTRL+Q</span>
+<span class="hljs-comment"># Normalmente il terminale utilizza CTRL+S per mettere in pausa lo scrolling e CTRL+Q per riprendere lo scrolling</span>
+<span class="hljs-comment">#stty start undef</span>
+<span class="hljs-built_in">stty</span> -ixon
+EOF
+</code></pre>
+<h2 id="file-e-parametri-di-configurazione" tabindex="-1">File e parametri di Configurazione <a class="header-anchor" href="#file-e-parametri-di-configurazione" aria-hidden="true">🔗</a></h2>
+<p><code>~/.vimrc</code></p>
+<pre><code>&quot; caricano la configurazione di default del sistema
+unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+&quot; per visitare i link con la pressione di due o consecutive invece che con CTRL-]
+map oo &lt;C-]&gt;
+&quot; utilizza Unicode
+set encoding=utf-8
+set number
+set relativenumber
+set autoindent
+&quot;set nosmartindent
+set tabstop=4
+set shiftwidth=4
+set smarttab
+set softtabstop=4
+&quot;https://vim.fandom.com/wiki/Converting_tabs_to_spaces
+set expandtab
+set mouse=a
+&quot;https://vim.fandom.com/wiki/Highlight_all_search_pattern_matches
+set hlsearch incsearch ignorecase smartcase
+&quot; utili per il comando find, cerca in tutte le sottodirectory della directory corrente:
+set path+=**
+set nowrap
+&quot; http://vim.wikia.com/wiki/Set_working_directory_to_the_current_file
+&quot; set autochdir
+&quot; http://stackoverflow.com/questions/9511253/how-to-effectively-use-vim-wildmenu
+set wildmenu wildmode=list:longest,full
+</code></pre>
+<p>Creando il proprio file di configurazione si perde la configurazione di default di sistema:</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Vim#Configuration">https://wiki.archlinux.org/title/Vim#Configuration</a></li>
+<li><code>:h defaults</code></li>
+</ul>
+<p>Per ripristinarla creare il <code>~/.vimrc</code> con le seguenti impostazioni:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> -e <span class="hljs-string">&#x27;unlet! skip_defaults_vim\nsource $VIMRUNTIME/defaults.vim&#x27;</span> &gt; ~/.vimrc
+</code></pre>
+<p>unlet! skip_defaults_vim
+source $VIMRUNTIME/defaults.vim
+/usr/share/vim/vim82/defaults.vim</p>
+<p>I parametri possono essere impostati anche a runtime con il comando <code>set</code>.<br>
+Per conoscere il valore di un parametro utilizzare il punto iterrogativo:</p>
+<p>Es.\</p>
+<pre><code class="language-vim">[:<span class="hljs-keyword">set</span> encoding]{.mb}[?]{.mr}
+</code></pre>
+<h2 id="clipboard" tabindex="-1">Clipboard <a class="header-anchor" href="#clipboard" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Vim#Clipboard">https://wiki.archlinux.org/title/Vim#Clipboard</a></li>
+<li><a href="../../Linux/comandi/xclip.html#clipboard">Clipboard</a></li>
+<li><a href="https://vim.fandom.com/wiki/Accessing_the_system_clipboard">https://vim.fandom.com/wiki/Accessing_the_system_clipboard</a></li>
+</ul>
+<p>Verifica che VIM sia stato compilato con il supporto per la clipboard per X11,<br>
+deve essere presente <code>+clipboard</code> oppure <code>+xterm_clipboard</code>:</p>
+<pre><code class="language-bash">$ vim --version | grep clipboard
+-clipboard         +keymap            +printer           +vertsplit
++<span class="hljs-built_in">eval</span>              -mouse_jsbterm     -sun_workshop      -xterm_clipboard
+</code></pre>
+<p>In Arch Linux <strong>per avere il supporto della clipboard bisogna installare <code>gvim</code> al posto di <code>vim</code></strong>.
+(non si è obbligati ad utilizzare gvim ma il vim da riga di comando avrà il supporto per la clipboard)</p>
+<p>Vim commands such as <code>:yank</code> or <code>:paste</code> operate with the <strong>unnamed register</strong>, which by default corresponds to the <code>&quot;&quot;</code> register. If the <code>+clipboard</code> feature is available, the <code>&quot;*</code> register is reflected to the <strong>PRIMARY buffer in X</strong>(la clipboard che contiene in X la selezione corrente del mouse).</p>
+<p>To change the default register, you can <code>:set clipboard=unnamedplus</code> to use the <code>&quot;+</code> register instead. The <code>&quot;+</code> register corresponds to the <code>CLIPBOARD buffer in X</code>(la clipboard normalmente utilizzata per CTRL+C CTRL+V).</p>
+<pre><code>:set clipboard?      per vedere la configurazione corrente
+:help quotequote     unnamed register &quot;&quot; dove VIM salva normalmente i contenuti, es. d y, è separato dalla clipboard di sistema
+:help quoteplus      registro &quot;+ collegato alla clipboard desktop XA_SECONDARY, CTRL+C CTRL+X CTRL+V
+:help quotestar      registro &quot;* collegato alla clipboard XA_PRIMARY X11 che contiene la selezione corrente del mouse 
+:help 'clipboard'
+</code></pre>
+<ul>
+<li><code>gg&quot;+yG</code> – copy the entire buffer into <code>+</code> (normal mode)</li>
+<li><code>&quot;*dd</code> – cut the current line into <code>*</code> (normal mode)</li>
+<li><code>&quot;+p</code> – paste from <code>+</code> after the cursor (works in both normal and visual modes)</li>
+<li>:<code>%y *</code> – copy the entire buffer into <code>*</code> (this one is an ex command)</li>
+</ul>
+<p>Esempio di map per la tastiera X11 like:</p>
+<p>:inoremap <C-v> <ESC>&quot;+pa
+:vnoremap <C-c> &quot;+y
+:vnoremap <C-d> &quot;+d</p>
+<p>&quot; &quot; Copy to clipboard
+vnoremap  <leader>y  &quot;+y
+nnoremap  <leader>Y  &quot;+yg_
+nnoremap  <leader>y  &quot;+y
+nnoremap  <leader>yy  &quot;+yy</p>
+<p>&quot; &quot; Paste from clipboard
+nnoremap <leader>p &quot;+p
+nnoremap <leader>P &quot;+P
+vnoremap <leader>p &quot;+p
+vnoremap <leader>P &quot;+P</p>
+<h2 id="variabili" tabindex="-1">Variabili <a class="header-anchor" href="#variabili" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><code>:set</code>              - shows vars different from defaults</li>
+<li><code>:set all</code>          - shows all values</li>
+<li><code>:set foo?</code>         - shows the value of foo</li>
+<li><code>:set foo+=opt</code>     - add opt to the value w/o changing others</li>
+<li><code>:set foo-=opt</code>     - remove opt from value</li>
+<li><code>:set foo&amp;</code>         - reset foo to default value</li>
+<li><code>:setlocal foo</code>     - only the current buffer</li>
+<li><code>:verbose set foo?</code> - tells you where it was last set!</li>
+</ul>
+<h2 id="mapping" tabindex="-1">Mapping <a class="header-anchor" href="#mapping" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)">https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_1)</a></li>
+<li><a href="https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)">https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)</a></li>
+<li><a href="https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_3)">https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_3)</a></li>
+<li><a href="https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping">https://stackoverflow.com/questions/3776117/what-is-the-difference-between-the-remap-noremap-nnoremap-and-vnoremap-mapping</a></li>
+<li><a href="https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)">https://vim.fandom.com/wiki/Mapping_keys_in_Vim_-_Tutorial_(Part_2)</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/intro.html#key-notation">http://vimdoc.sourceforge.net/htmldoc/intro.html#key-notation</a></li>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/map.html#map-which-keys">http://vimdoc.sourceforge.net/htmldoc/map.html#map-which-keys</a></li>
+</ul>
+<p><code>/usr/share/vim/vim82/doc/map.txt</code></p>
+<pre><code class="language-vim">:h key-mapping
+:<span class="hljs-keyword">help</span> recursive_mapping
+:h key-notation
+:<span class="hljs-keyword">help</span> <span class="hljs-built_in">index</span>.txt         sequenze <span class="hljs-keyword">di</span> tasti utilizzate in VIM
+:<span class="hljs-keyword">verbose</span> <span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;key&gt;</span>
+:h <span class="hljs-keyword">map</span>-which-<span class="hljs-built_in">keys</span>
+:<span class="hljs-keyword">help</span> :<span class="hljs-keyword">map</span>              per visualizzare i mapping attuali
+:<span class="hljs-keyword">help</span> :map!              per visualizzare i mapping attuali
+:<span class="hljs-keyword">help</span> :<span class="hljs-keyword">noremap</span>
+:<span class="hljs-keyword">help</span> :<span class="hljs-keyword">map</span>-modes
+
+:<span class="hljs-keyword">map</span>
+</code></pre>
+<h3 id="noremap---fermare-il-mapping-ricorsivo" tabindex="-1">noremap - fermare il mapping ricorsivo <a class="header-anchor" href="#noremap---fermare-il-mapping-ricorsivo" aria-hidden="true">🔗</a></h3>
+<p><code>{lhs}</code>	means left-hand-side
+<code>{rhs}</code>	means right-hand-side</p>
+<p>Quando VIM esegue una sequenza di mapping, se la parte sinistra della regola non è inclusa all'inizio della parte destra,
+(ovvero ne è un prefisso), VIM continua ad espandere le sequenze nella parte destra ricorsivamente.
+Vediamo un esempio di mapping ricorsivo che funziona:</p>
+<p>:map <F2>  :echo 'Current time = ' . strftime('%c')<CR>
+:map <F3> <F2></p>
+<p>Premendo F3 si stampa l'ora corrente.</p>
+<p>Tuttavia c'e' il rischio di andare in ricorsione, definendo ad esempio:</p>
+<p>:imap ab xyzab</p>
+<p>Se quando ci si trova in insert mode si scrive &quot;ab&quot;, si entrerà in ricorsione, che potrà essere fermata solamente con CTRL+C.</p>
+<p>Siccome invece quando la parte sinistra viene inserita all'inizio della parte destra la ricorsione viene disabilitata, questa regola è sicura e non genera ricorsione(x è il primo carattere di xyz):</p>
+<p>:nmap x xyz</p>
+<p>Vim has the &quot;<strong>noremap</strong>&quot; version of the map command for all the mode specific map commands. You can use &quot;nnoremap&quot;, &quot;inoremap&quot;, &quot;cnoremap&quot;, &quot;vnoremap&quot;, &quot;snoremap&quot;, &quot;xnoremap&quot; and &quot;onoremap&quot;. In most of the map commands, it is better to use the &quot;noremap&quot; version of the command to prevent unexpected behavior.</p>
+<p>If you include the <code>{lhs}</code> in the <code>{rhs}</code> you have a <strong>recursive mapping</strong>.<br>
+When <code>{lhs}</code> is typed, it will be replaced with <code>{rhs}</code>.  When the <code>{lhs}</code> which is included in <code>{rhs}</code> is encountered it will be replaced with <code>{rhs}</code>, and so on.
+This makes it possible to repeat a command <strong>an infinite number of times</strong>.<br>
+The only problem is that the only way to stop this is by causing an error.<br>
+<strong>There is one exception</strong> : If the <code>{rhs}</code> starts with <code>{lhs}</code>, the first character is not mapped again.<br>
+For example: \</p>
+<p>:map ab abcd</p>
+<p>will execute the &quot;a&quot; command and insert &quot;bcd&quot; in the text.  The &quot;ab&quot; in the <code>{rhs}</code> will not be mapped again.</p>
+<p>Usando la versione noremap dei comandi di mapping si inibisce la sostituzione ricorsiva, esempio:</p>
+<p>OK: nnoremap  <leader>Y  &quot;+yg_</p>
+<p>KO: nmap  <leader>Y  &quot;+yg_</p>
+<h2 id="vimscript" tabindex="-1">vimscript <a class="header-anchor" href="#vimscript" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://learnvimscriptthehardway.stevelosh.com/">https://learnvimscriptthehardway.stevelosh.com/</a></li>
+<li><a href="https://devhints.io/vimscript">https://devhints.io/vimscript</a></li>
+<li><a href="https://learnxinyminutes.com/docs/vimscript/">https://learnxinyminutes.com/docs/vimscript/</a></li>
+<li><a href="https://vimhelp.org/usr_41.txt.html">https://vimhelp.org/usr_41.txt.html</a></li>
+<li><a href="https://w0rp.com/blog/post/vim-script-for-the-javascripter/">https://w0rp.com/blog/post/vim-script-for-the-javascripter/</a></li>
+</ul>
+<pre><code class="language-vim">:h usr_41.txt
+:h <span class="hljs-keyword">function</span>-<span class="hljs-keyword">list</span>
+:h variables
+:<span class="hljs-keyword">help</span> internal-variables
+:<span class="hljs-keyword">help</span> expression-<span class="hljs-keyword">syntax</span>
+:<span class="hljs-keyword">help</span> <span class="hljs-keyword">vim</span>-script-<span class="hljs-keyword">intro</span>
+
+:r $VIMRUNTIME/defaults.<span class="hljs-keyword">vim</span>
+</code></pre>
+<p><a href="https://developer.ibm.com/articles/l-vim-script-1/">https://developer.ibm.com/articles/l-vim-script-1/</a></p>
+<pre><code class="language-vim">:<span class="hljs-keyword">help</span> <span class="hljs-keyword">vim</span>-script-<span class="hljs-keyword">intro</span>
+:<span class="hljs-keyword">source</span> /full/path/<span class="hljs-keyword">to</span>/the/scriptfile.<span class="hljs-keyword">vim</span>
+:<span class="hljs-keyword">call</span> MyBackupFunc(<span class="hljs-built_in">expand</span>(<span class="hljs-string">&#x27;%&#x27;</span>), { <span class="hljs-string">&#x27;all&#x27;</span>:<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;save&#x27;</span>:<span class="hljs-string">&#x27;recent&#x27;</span>})
+:<span class="hljs-keyword">nmap</span> ;s :<span class="hljs-keyword">source</span> /full/path/<span class="hljs-keyword">to</span>/the/scriptfile.<span class="hljs-keyword">vim</span><span class="hljs-symbol">&lt;CR&gt;</span>
+:<span class="hljs-keyword">nmap</span> \<span class="hljs-keyword">b</span> :<span class="hljs-keyword">call</span> MyBackupFunc(<span class="hljs-built_in">expand</span>(<span class="hljs-string">&#x27;%&#x27;</span>), { <span class="hljs-string">&#x27;all&#x27;</span>: <span class="hljs-number">1</span> })<span class="hljs-symbol">&lt;CR&gt;</span>
+
+<span class="hljs-keyword">function!</span> <span class="hljs-title">ToggleSyntax</span><span class="hljs-params">()</span>
+   <span class="hljs-keyword">if</span> <span class="hljs-built_in">exists</span>(<span class="hljs-string">&quot;g:syntax_on&quot;</span>)
+      <span class="hljs-keyword">syntax</span> off
+   <span class="hljs-keyword">else</span>
+      <span class="hljs-keyword">syntax</span> enable
+   <span class="hljs-keyword">endif</span>
+<span class="hljs-keyword">endfunction</span>
+
+<span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span>  ;s  :<span class="hljs-keyword">call</span> ToggleSyntax()<span class="hljs-symbol">&lt;CR&gt;</span>
+
+&lt;http://vimdoc.sourceforge.net/htmldoc/<span class="hljs-keyword">change</span>.html#sub-replace-special&gt;
+
+```<span class="hljs-keyword">vim</span>
+:h :<span class="hljs-keyword">substitute</span>
+:h sub-replace-special
+:h \&lt;
+:h \<span class="hljs-keyword">u</span>
+:h pattern
+
+<span class="hljs-keyword">function!</span> <span class="hljs-title">CapitalizeCenterAndMoveDown</span><span class="hljs-params">()</span>
+   s/\&lt;./\<span class="hljs-keyword">u</span>&amp;/g   <span class="hljs-comment">&quot;Built‑in substitution capitalizes each word</span>
+   <span class="hljs-keyword">center</span>        <span class="hljs-comment">&quot;Built‑in center command centers entire line</span>
+   +<span class="hljs-number">1</span>            <span class="hljs-comment">&quot;Built‑in relative motion (+1 line down)</span>
+<span class="hljs-keyword">endfunction</span>
+
+<span class="hljs-keyword">nmap</span> <span class="hljs-symbol">&lt;silent&gt;</span>  \C  :<span class="hljs-keyword">call</span> CapitalizeCenterAndMoveDown()<span class="hljs-symbol">&lt;CR&gt;</span>
+</code></pre>
+<h2 id="modelines" tabindex="-1">modelines <a class="header-anchor" href="#modelines" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.cs.oberlin.edu/~kuperman/help/vim/modelines.html">https://www.cs.oberlin.edu/~kuperman/help/vim/modelines.html</a></li>
+<li><a href="https://vim.fandom.com/wiki/Modeline_magic">https://vim.fandom.com/wiki/Modeline_magic</a></li>
+</ul>
+<p>VIM permette di inserire dei parametri anzichè nel <code>~/.vimrc</code> nei singoli file editati.
+VIM legge di default le prime 5 righe e le ultime 5 righe del file editato cercando i parametri.
+La variabile <code>modelines</code> permette di impostare il numero di righe lette all'inizio ed alla fine del file.</p>
+<p>Nel file l'impostazione dei parametri deve iniziare con <code>:vim</code>, che deve necessariamente essere preceduto da uno spazio,  e la sintassi dei parametri è duplice , con o senza <code>set</code>:</p>
+<ul>
+<li>
+<p>Con set: i parametri sono separati da spazi, la modeline termina con il primo due punti non preceduto da un backslash, ciò consente di appendere altro testo al termine della modeline, es. :</p>
+<pre><code>  # vim: set expandtab:
+  /* vim: set noai ts=4 sw=4: */
+  -or-
+  /* vim: set fdm=expr fde=getline(v\:lnum)=~'{'?'&gt;1'\:'1': */
+</code></pre>
+</li>
+<li>
+<p>Senza set: i parametri sono separati da due punti, non è possibile aggiungere altro testo dopo i parametri</p>
+<pre><code>  /* vim: noai:ts=4:sw=4 */
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-vim">:<span class="hljs-keyword">verbose</span> <span class="hljs-keyword">set</span> modeline? modelines?
+</code></pre>
+<p><code>~/.vimrc</code></p>
+<pre><code>set modeline
+set modelines=5
+</code></pre>
+</body></html>

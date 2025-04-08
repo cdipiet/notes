@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.138" />
+        <title>alpine</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="alpine" tabindex="-1">alpine <a class="header-anchor" href="#alpine" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.138</p>
+<nav class="table-of-contents"><ol><li><a href="#download-iso-di-alpine">Download ISO di Alpine </a></li><li><a href="#apk">APK </a></li><li><a href="#configurazione">Configurazione </a></li><li><a href="#openrc-mancante-nelle-immagini-docker-di-alpine">openrc mancante nelle immagini Docker di Alpine </a></li><li><a href="#python">Python </a></li></ol></nav><h1 id="alpine-linux" tabindex="-1">Alpine Linux <a class="header-anchor" href="#alpine-linux" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://pkgs.alpinelinux.org/packages">https://pkgs.alpinelinux.org/packages</a></p>
+</li>
+<li>
+<p><a href="https://www.alpinelinux.org/">https://www.alpinelinux.org/</a></p>
+</li>
+<li>
+<p><a href="https://www.tecnobabele.com/alpine-linux-spiegazione-del-distro-linux-leggero/2021-03-12/">https://www.tecnobabele.com/alpine-linux-spiegazione-del-distro-linux-leggero/2021-03-12/</a></p>
+</li>
+<li>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/index.html">https://docs.alpinelinux.org/user-handbook/0.1a/index.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Working/openrc.html">https://docs.alpinelinux.org/user-handbook/0.1a/Working/openrc.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Working/post-install.html">https://docs.alpinelinux.org/user-handbook/0.1a/Working/post-install.html</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Enable_Community_Repository">https://wiki.alpinelinux.org/wiki/Enable_Community_Repository</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Configure_Networking">https://wiki.alpinelinux.org/wiki/Configure_Networking</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Setting_up_a_SSH_server">https://wiki.alpinelinux.org/wiki/Setting_up_a_SSH_server</a></p>
+</li>
+<li>
+<p><a href="https://www.cyberciti.biz/faq/how-to-install-openssh-server-on-alpine-linux-including-docker/">https://www.cyberciti.biz/faq/how-to-install-openssh-server-on-alpine-linux-including-docker/</a></p>
+</li>
+</ul>
+<p>Immagini Docker derivate di Alpine Linux:</p>
+<ul>
+<li><a href="https://hub.docker.com/_/alpine">https://hub.docker.com/_/alpine</a> Alpine
+<ul>
+<li><a href="https://github.com/alpinelinux/docker-alpine">https://github.com/alpinelinux/docker-alpine</a></li>
+<li><a href="https://pkgs.alpinelinux.org/packages">https://pkgs.alpinelinux.org/packages</a></li>
+</ul>
+</li>
+<li><a href="https://hub.docker.com/_/python">https://hub.docker.com/_/python</a> Python basata su Alpine
+<ul>
+<li><a href="https://github.com/docker-library/python">https://github.com/docker-library/python</a>
+<ul>
+<li><a href="https://github.com/docker-library/python/blob/master/3.11/alpine3.17/Dockerfile">https://github.com/docker-library/python/blob/master/3.11/alpine3.17/Dockerfile</a></li>
+</ul>
+</li>
+<li><a href="https://pythonspeed.com/articles/alpine-docker-python/">https://pythonspeed.com/articles/alpine-docker-python/</a> Perchè non utilizzare python:alpine</li>
+</ul>
+</li>
+<li><a href="https://github.com/gliderlabs/docker-alpine">https://github.com/gliderlabs/docker-alpine</a>
+<ul>
+<li><a href="https://github.com/gliderlabs/docker-alpine/blob/master/docs/usage.md#disabling-cache">https://github.com/gliderlabs/docker-alpine/blob/master/docs/usage.md#disabling-cache</a></li>
+</ul>
+</li>
+<li><a href="https://github.com/tomsaleeba/alpine-cron-test">https://github.com/tomsaleeba/alpine-cron-test</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /etc/*-release
+</code></pre>
+<h2 id="download-iso-di-alpine" tabindex="-1">Download ISO di Alpine <a class="header-anchor" href="#download-iso-di-alpine" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> -p /opt/vm/Alpine
+<span class="hljs-built_in">cd</span> /opt/vm/Alpine
+wget https://dl-cdn.alpinelinux.org/alpine/v3.15/releases/x86_64/alpine-virt-3.15.0-x86_64.iso
+</code></pre>
+<h2 id="apk" tabindex="-1">APK <a class="header-anchor" href="#apk" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper">https://wiki.alpinelinux.org/wiki/Alpine_Package_Keeper</a></p>
+</li>
+<li>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Working/apk.html">https://docs.alpinelinux.org/user-handbook/0.1a/Working/apk.html</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Local_APK_cache#Automatically_Cleaning_Cache_on_Reboot">https://wiki.alpinelinux.org/wiki/Local_APK_cache#Automatically_Cleaning_Cache_on_Reboot</a></p>
+<pre><code class="language-bash">apk cache clean
+</code></pre>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/49118579/alpine-dockerfile-advantages-of-no-cache-vs-rm-var-cache-apk">https://stackoverflow.com/questions/49118579/alpine-dockerfile-advantages-of-no-cache-vs-rm-var-cache-apk</a></p>
+<p>The <code>--no-cache</code> option allows to not cache the index locally, which is useful for keeping containers small.
+Literally it equals <code>apk update</code> in the beginning and <code>rm -rf /var/cache/apk/*</code> in the end.</p>
+<pre><code class="language-bash">apk --no-cache add ansible
+</code></pre>
+</li>
+</ul>
+<h2 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html#_full_setup_alpine">https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html#_full_setup_alpine</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Guest: Alpine_0</span>
+root login: `root` (nessuna password)
+<span class="hljs-comment"># Configurazione iniziale</span>
+$ setup-alpine
+    it
+    it
+    alpine0
+    eth0        <span class="hljs-comment"># NIC1 da utilizzare per l&#x27;aggiornamento dei pacchetti</span>
+    192.168.1.10
+    255.255.255.0
+    192.168.1.1                 <span class="hljs-comment"># Gateway</span>
+    homenet.telecomitalia.it
+    192.168.1.1                 <span class="hljs-comment"># DNS</span>
+    New password: pwroot
+    timezone: Europe/Rome
+    none
+    none
+    [1]
+    openssh
+    sda
+    sys
+    y
+$ reboot <span class="hljs-comment"># le rimanenti impostazioni devono essere fatte dopo il reboot altrimenti non sono persistenti</span>
+<span class="hljs-comment"># Al reboot va rimosso il CD-ROM dai parametri di partenza di QEMU</span>
+</code></pre>
+<pre><code class="language-bash">apk search neovim
+</code></pre>
+<p>Ora è possibile gestire la VM accedendovi da SSH:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host</span>
+$ ssh 192.168.1.10 <span class="hljs-comment"># conviene connettersi in SSH dall&#x27;Host per poter condividere la clipboard del Giest</span>
+<span class="hljs-comment"># Guest: Alpine_0</span>
+$ su -
+$ apk add shadow <span class="hljs-comment"># contiene il comando useradd</span>
+$ useradd -m -U -s /bin/bash -G wheel <span class="hljs-variable">$USER</span> <span class="hljs-comment"># pwroot</span>
+$ su - <span class="hljs-variable">$USER</span>
+$ passwd <span class="hljs-comment"># impostarla come root per semplicità: pwroot</span>
+$ apk add vim <span class="hljs-built_in">sudo</span> 
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;%wheel ALL=(ALL) ALL&#x27;</span> &gt; /etc/sudoers.d/wheel
+<span class="hljs-comment"># Installazione dei pacchetti</span>
+$ vim /etc/apk/repositories <span class="hljs-comment"># e scommentare il community, oppure:</span>
+    <span class="hljs-built_in">cat</span> &gt; /etc/apk/repositories &lt;&lt; <span class="hljs-string">EOF; $(echo)
+    http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d&#x27;.&#x27; -f1,2)/main
+    http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d&#x27;.&#x27; -f1,2)/community
+    http://dl-cdn.alpinelinux.org/alpine/edge/testing
+    EOF</span>
+$ apk update
+$ apk upgrade
+$ apk add mc less neovim
+$ apk add util-linux pciutils usbutils coreutils binutils findutils grep iproute2
+$ apk add bash bash-doc bash-completion
+$ vim /etc/passwd <span class="hljs-comment"># per impostare la bash nell&#x27;utente root e per l&#x27;utente $USER</span>
+$ bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/99-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+$ poweroff
+</code></pre>
+<h2 id="openrc-mancante-nelle-immagini-docker-di-alpine" tabindex="-1">openrc mancante nelle immagini Docker di Alpine <a class="header-anchor" href="#openrc-mancante-nelle-immagini-docker-di-alpine" aria-hidden="true">🔗</a></h2>
+<p>Normalmente un servizio init come openrc o systemd non dovrebbe girare in una immagine Docker,
+ma se dovesse proprio servire...</p>
+<ul>
+<li><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Working/openrc.html">https://docs.alpinelinux.org/user-handbook/0.1a/Working/openrc.html</a></li>
+<li><a href="https://github.com/gliderlabs/docker-alpine/issues/183">https://github.com/gliderlabs/docker-alpine/issues/183</a> can't use service or rc-service</li>
+<li><a href="https://stackoverflow.com/questions/58577707/alpine-service-crond-does-not-exist">https://stackoverflow.com/questions/58577707/alpine-service-crond-does-not-exist</a></li>
+</ul>
+<pre><code class="language-bash">$ rc-service
+    bash: rc-service: <span class="hljs-built_in">command</span> not found
+
+<span class="hljs-comment"># Nelle immagini Docker di Alpine openrc non è installato</span>
+$ apk add --no-cache tini openrc busybox-openrc   
+
+<span class="hljs-comment">#Per far funzionare openrc in un sitema che non ha effettuato il boot con openrc:</span>
+$ <span class="hljs-built_in">mkdir</span> -p /run/openrc
+$ <span class="hljs-built_in">touch</span> /run/openrc/softlevel
+</code></pre>
+<h2 id="python" tabindex="-1">Python <a class="header-anchor" href="#python" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/62554991/how-do-i-install-python-on-alpine-linux">https://stackoverflow.com/questions/62554991/how-do-i-install-python-on-alpine-linux</a></p>
+</li>
+<li>
+<p><a href="https://github.com/gliderlabs/docker-alpine/blob/master/docs/usage.md#disabling-cache">https://github.com/gliderlabs/docker-alpine/blob/master/docs/usage.md#disabling-cache</a></p>
+</li>
+<li>
+<p><a href="https://pip.pypa.io/en/stable/topics/caching/">https://pip.pypa.io/en/stable/topics/caching/</a></p>
+<p><code>--no-cache-dir</code></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Local_APK_cache#Automatically_Cleaning_Cache_on_Reboot">https://wiki.alpinelinux.org/wiki/Local_APK_cache#Automatically_Cleaning_Cache_on_Reboot</a></p>
+<p><code>--no-cache</code></p>
+</li>
+</ul>
+<pre><code class="language-ruby"><span class="hljs-variable constant_">FROM</span> <span class="hljs-symbol">alpine:</span><span class="hljs-number">3.15</span>
+
+<span class="hljs-comment"># Install python/pip</span>
+<span class="hljs-variable constant_">ENV</span> <span class="hljs-variable constant_">PYTHONUNBUFFERED</span>=<span class="hljs-number">1</span>
+<span class="hljs-variable constant_">FROM</span> <span class="hljs-symbol">alpine:</span><span class="hljs-number">3.15</span>
+<span class="hljs-variable constant_">RUN</span> echo <span class="hljs-string">&quot;===&gt; Adding Python &amp; Ansible...&quot;</span>         &amp;&amp; \
+    apk add --update --no-cache python3 py3-pip py3-setuptools ansible &amp;&amp; ln -sf python3 /usr/bin/python &amp;&amp; \
+    python3 -m ensurepip --upgrade               &amp;&amp; \
+    pip3 install --no-cache-dir --upgrade setuptools &amp;&amp; \
+    \
+    \
+    apk --update add --virtual build-dependencies \
+                python3-dev libffi-dev build-base  &amp;&amp; \
+    pip install --upgrade cffi                            &amp;&amp; \
+    \
+    \
+    <span class="hljs-comment">#echo &quot;===&gt; Installing Ansible...&quot;  &amp;&amp; \</span>
+    <span class="hljs-comment">#pip install ansible                &amp;&amp; \</span>
+    \
+    \
+    echo <span class="hljs-string">&quot;===&gt; Adding Ansible localhost for convenience...&quot;</span>  &amp;&amp; \
+    mkdir -p /etc/ansible                        &amp;&amp; \
+    \
+    \
+    echo <span class="hljs-string">&quot;===&gt; Removing package list...&quot;</span>  &amp;&amp; \
+    apk del build-dependencies            &amp;&amp; \
+    
+    rm -rf /var/cache/apk/*               
+<span class="hljs-variable constant_">RUN</span> pip3 install --no-cache-dir colorama
+</code></pre>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/_/python">https://hub.docker.com/_/python</a> Python basata su Alpine</p>
+<ul>
+<li><a href="https://github.com/docker-library/python">https://github.com/docker-library/python</a>
+<ul>
+<li><a href="https://github.com/docker-library/python/blob/master/3.11/alpine3.17/Dockerfile">https://github.com/docker-library/python/blob/master/3.11/alpine3.17/Dockerfile</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/gettingstarted/#step-2-create-a-dockerfile">https://docs.docker.com/compose/gettingstarted/#step-2-create-a-dockerfile</a></p>
+<pre><code class="language-ruby"><span class="hljs-comment"># syntax=docker/dockerfile:1</span>
+<span class="hljs-variable constant_">FROM</span> <span class="hljs-symbol">python:</span><span class="hljs-number">3.7</span>-alpine
+<span class="hljs-variable constant_">WORKDIR</span> /code
+<span class="hljs-variable constant_">ENV</span> <span class="hljs-variable constant_">FLASK_APP</span>=app.py
+<span class="hljs-variable constant_">ENV</span> <span class="hljs-variable constant_">FLASK_RUN_HOST</span>=<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>
+<span class="hljs-variable constant_">RUN</span> apk add --no-cache gcc musl-dev linux-headers
+<span class="hljs-variable constant_">COPY</span> requirements.txt requirements.txt
+<span class="hljs-variable constant_">RUN</span> pip install -r requirements.txt
+<span class="hljs-variable constant_">EXPOSE</span> <span class="hljs-number">5000</span>
+<span class="hljs-variable constant_">COPY</span> . .
+<span class="hljs-variable constant_">CMD</span> [<span class="hljs-string">&quot;flask&quot;</span>, <span class="hljs-string">&quot;run&quot;</span>]
+</code></pre>
+</li>
+</ul>
+</body></html>

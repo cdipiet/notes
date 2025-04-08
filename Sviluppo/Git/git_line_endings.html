@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.949" />
+        <title>git_line_endings</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="git_line_endings" tabindex="-1">git_line_endings <a class="header-anchor" href="#git_line_endings" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.949</p>
+<nav class="table-of-contents"><ol><li><a href="#cercare-file-msdos-con-crlf">Cercare file MSDOS con CRLF </a></li><li><a href="#esempio-.gitattributes">Esempio .gitattributes </a></li></ol></nav><h1 id="line-endings" tabindex="-1">Line Endings <a class="header-anchor" href="#line-endings" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf">https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf</a></li>
+<li><a href="https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings#refreshing-a-repository-after-changing-line-endings">https://docs.github.com/en/get-started/getting-started-with-git/configuring-git-to-handle-line-endings#refreshing-a-repository-after-changing-line-endings</a></li>
+<li><a href="http://git-scm.com/docs/gitattributes">http://git-scm.com/docs/gitattributes</a></li>
+<li><a href="https://git-scm.com/book/it/v2/Customizing-Git-Git-Configuration">https://git-scm.com/book/it/v2/Customizing-Git-Git-Configuration</a></li>
+<li><a href="https://stackoverflow.com/questions/170961/whats-the-best-crlf-carriage-return-line-feed-handling-strategy-with-git">https://stackoverflow.com/questions/170961/whats-the-best-crlf-carriage-return-line-feed-handling-strategy-with-git</a></li>
+<li><a href="https://github.com/alexkaratarakis/gitattributes">https://github.com/alexkaratarakis/gitattributes</a></li>
+</ul>
+<p>Voglio normalizzare un repository in modo che i file di testo utilizzino solamente <code>\n</code></p>
+<p>Configurazione globale:</p>
+<pre><code class="language-bash">git config -l --show-origin
+git config --global core.autocrlf <span class="hljs-literal">false</span>
+git config --global core.eol lf
+git config --show-origin --get core.autocrlf
+git ls-files --eol
+</code></pre>
+<p>When a text file is normalized, its line endings are converted to <code>LF</code> in the repository.
+Setting the <code>text</code> attribute on a path enables end-of-line normalization and marks the path as a text file. <br>
+End-of-line conversion takes place without guessing the content type.</p>
+<p>Creazione di un file <code>.gitattributes</code> di progetto:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; .gitattributes
+<span class="hljs-comment"># Auto detect text files and perform LF normalization</span>
+<span class="hljs-comment"># https://www.davidlaing.com/2012/09/19/customise-your-gitattributes-to-become-a-git-ninja/</span>
+*          text=auto
+
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># The above will handle all files NOT found below</span>
+<span class="hljs-comment">#</span>
+
+<span class="hljs-comment"># Documents</span>
+*.bibtex   text diff=bibtex
+*.doc      diff=astextplain
+*.DOC      diff=astextplain
+*.docx     diff=astextplain
+*.DOCX     diff=astextplain
+*.dot      diff=astextplain
+*.DOT      diff=astextplain
+*.pdf      diff=astextplain
+*.PDF      diff=astextplain
+*.rtf      diff=astextplain
+*.RTF      diff=astextplain
+*.md       text diff=markdown
+*.tex      text diff=tex
+*.adoc     text
+*.textile  text
+*.mustache text
+*.csv      text
+*.tab      text
+*.tsv      text
+*.txt      text
+*.sql      text
+*.ps1      text eol=crlf
+
+<span class="hljs-comment"># Graphics</span>
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.tif      binary
+*.tiff     binary
+*.ico      binary
+<span class="hljs-comment"># SVG treated as text by default.</span>
+*.svg      text
+<span class="hljs-comment"># If you want to treat it as binary,</span>
+<span class="hljs-comment"># use the following line instead.</span>
+<span class="hljs-comment"># *.svg    binary</span>
+*.eps      binary
+
+<span class="hljs-comment"># Scripts</span>
+*.bash     text eol=lf
+*.fish     text eol=lf
+*.sh       text eol=lf
+<span class="hljs-comment"># These are explicitly windows files and should use crlf</span>
+*.bat      text eol=crlf
+*.cmd      text eol=crlf
+
+<span class="hljs-comment"># Serialisation</span>
+*.json     text
+*.toml     text
+*.xml      text
+*.yaml     text
+*.yml      text
+
+<span class="hljs-comment"># Archives</span>
+*.7z       binary
+*.gz       binary
+*.tar      binary
+*.tgz      binary
+*.zip      binary
+
+<span class="hljs-comment"># Text files where line endings should be preserved</span>
+*.patch    -text
+
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Exclude files from exporting</span>
+<span class="hljs-comment">#</span>
+
+.gitattributes export-ignore
+.gitignore     export-ignore
+.gitkeep       export-ignore
+
+<span class="hljs-comment"># Basic .gitattributes for a python repo.</span>
+
+<span class="hljs-comment"># Source files</span>
+<span class="hljs-comment"># ============</span>
+*.pxd    text diff=python
+*.py     text diff=python
+*.py3    text diff=python
+*.pyw    text diff=python
+*.pyx    text diff=python
+*.pyz    text diff=python
+*.pyi    text diff=python
+
+<span class="hljs-comment"># Binary files</span>
+<span class="hljs-comment"># ============</span>
+*.db     binary
+*.p      binary
+*.pkl    binary
+*.pickle binary
+*.pyc    binary export-ignore
+*.pyo    binary export-ignore
+*.pyd    binary
+
+<span class="hljs-comment"># Jupyter notebook</span>
+*.ipynb  text
+
+<span class="hljs-comment"># Note: .db, .p, and .pkl files are associated</span>
+<span class="hljs-comment"># with the python modules ``pickle``, ``dbm.*``,</span>
+<span class="hljs-comment"># ``shelve``, ``marshal``, ``anydbm``, &amp; ``bsddb``</span>
+<span class="hljs-comment"># (among others).</span>
+EOF
+</code></pre>
+<pre><code class="language-bash">git add . -A
+git commit -m <span class="hljs-string">&quot;Saving files before refreshing line endings&quot;</span>
+git add --renormalize .
+git status
+git commit -m <span class="hljs-string">&quot;Normalize all the line endings&quot;</span>
+</code></pre>
+<h2 id="cercare-file-msdos-con-crlf" tabindex="-1">Cercare file MSDOS con CRLF <a class="header-anchor" href="#cercare-file-msdos-con-crlf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Report sulle estensioni che sarebbero convertite</span>
+find . -not -<span class="hljs-built_in">type</span> d -print0 | xargs -0 dos2unix -ic0 | xargs -0 | sed <span class="hljs-string">&#x27;s/.*\.//&#x27;</span>|<span class="hljs-built_in">sort</span> -u
+<span class="hljs-comment"># Conversione ricorsiva di tutti i file contenenti CRLF in file LF</span>
+find . -not -<span class="hljs-built_in">type</span> d -print0 | xargs -0 dos2unix -ic0 | xargs -0 dos2unix
+
+
+find -not -<span class="hljs-built_in">type</span> d -print0 | xargs -0 dos2unix -ic
+find . -not -<span class="hljs-built_in">type</span> d -<span class="hljs-built_in">exec</span> file <span class="hljs-string">&quot;{}&quot;</span> \; |grep CRLF
+</code></pre>
+<p>Per produrre il <code>^M</code> (<code>CHR(13)</code>,  <code>\x0D</code>, <code>CR</code>) si utilizza la combinazione di tasti:  <span class="k">CTRL</span>+<span class="k">V</span> <span class="k">CTRL</span>+<span class="k">M</span></p>
+<pre><code class="language-bash">grep -lIUr --color <span class="hljs-string">&quot;^M&quot;</span> .
+<span class="hljs-built_in">cat</span> -A file <span class="hljs-comment"># per vedere i newline</span>
+</code></pre>
+<h2 id="esempio-.gitattributes" tabindex="-1">Esempio .gitattributes <a class="header-anchor" href="#esempio-.gitattributes" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-ini"><span class="hljs-comment"># Per non avere conversione in fase di checkout: git config --global core.autocrlf false</span>
+<span class="hljs-comment"># Imposta l&#x27;eol ad LF in fase di checkin ad eccezione dei file binari</span>
+* <span class="hljs-attr">text</span>=auto
+<span class="hljs-comment"># Conversione in fase di checkout</span>
+*.html text <span class="hljs-attr">eol</span>=lf
+*.css text <span class="hljs-attr">eol</span>=lf
+*.styl text <span class="hljs-attr">eol</span>=lf
+*.scss text <span class="hljs-attr">eol</span>=lf
+*.less text <span class="hljs-attr">eol</span>=lf
+*.js text <span class="hljs-attr">eol</span>=lf
+*.json text <span class="hljs-attr">eol</span>=lf
+*.md text <span class="hljs-attr">eol</span>=lf
+*.txt text <span class="hljs-attr">eol</span>=lf
+*.xml text <span class="hljs-attr">eol</span>=lf
+*.yml text <span class="hljs-attr">eol</span>=lf
+*.yaml text <span class="hljs-attr">eol</span>=lf
+*.sh text <span class="hljs-attr">eol</span>=lf
+*.bat text <span class="hljs-attr">eol</span>=crlf
+*.cmd text <span class="hljs-attr">eol</span>=crlf
+*.svg text <span class="hljs-attr">eol</span>=lf
+*.jpg  -text
+*.gif  -text
+*.png  -text
+*.dat  -text
+</code></pre>
+</body></html>

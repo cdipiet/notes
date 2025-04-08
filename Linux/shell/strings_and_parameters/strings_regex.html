@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.892" />
+        <title>strings_regex</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="strings_regex" tabindex="-1">strings_regex <a class="header-anchor" href="#strings_regex" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.892</p>
+<nav class="table-of-contents"><ol><li><a href="#ansi-c-quoting">ANSI-C quoting </a></li><li><a href="#printf---escape-strings">printf - Escape strings </a></li><li><a href="#regular-expressions-matching">Regular expressions matching </a></li><li><a href="#find-a-filename%E2%80%99s-basename">Find a filename’s basename </a></li><li><a href="#replace-the-extension-of-a-filename">Replace the extension of a filename </a></li><li><a href="#cycle-a-multi-line-variable">Cycle a multi-line variable </a><ol><li><a href="#pipeline-e-subshell">pipeline e subshell </a></li></ol></li></ol></nav><h1 id="string" tabindex="-1">string <a class="header-anchor" href="#string" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html">https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/html_node/Quoting.html#Quoting">https://www.gnu.org/software/bash/manual/html_node/Quoting.html#Quoting</a></li>
+</ul>
+<h2 id="ansi-c-quoting" tabindex="-1">ANSI-C quoting <a class="header-anchor" href="#ansi-c-quoting" aria-hidden="true">🔗</a></h2>
+<p>In bash, like many other languages, there are two main types of quoting: single and double quotes.</p>
+<p>Common limitations of the double quotes:</p>
+<ul>
+<li>can’t represent a newline as <code>\n</code></li>
+<li>they interpolate values (when one doesn’t want to interpolate)</li>
+</ul>
+<p>Common limitations of the single quotes:</p>
+<ul>
+<li>can’t represent a newline as <code>\n</code></li>
+<li>escaping single quotes is very awkward (<code>'\''</code>)</li>
+</ul>
+<p>ANSI-C quoting are convenient for some cases.</p>
+<p><strong>They are represented like the single quotes, <mark>preceded by the dollar simbol</mark></strong>; this is an example:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> $<span class="hljs-string">&#x27;This is an ANSI-C quoted string:\nmyvar=$\&#x27;</span>string content\&#x27;<span class="hljs-string">&#x27;
+</span></code></pre>
+<p>This is an ANSI-C quoted string:</p>
+<pre><code class="language-bash">myvar=$<span class="hljs-string">&#x27;string content&#x27;</span>
+</code></pre>
+<p>Those are the equivalent with single and double quotes:</p>
+<pre><code class="language-bash">
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;This is an ANSI-C quoted string:
+myvar=$&#x27;</span>\&#x27;<span class="hljs-string">&#x27;string content&#x27;</span>\&#x27;<span class="hljs-string">&#x27;&#x27;</span>
+</code></pre>
+<p>and</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;This is an ANSI-C quoted string:
+myvar=\$&#x27;string content&#x27;&quot;</span>
+</code></pre>
+<p>This quoting syntax supports some escape sequences: <a href="https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html">https://www.gnu.org/software/bash/manual/html_node/ANSI_002dC-Quoting.html</a></p>
+<h2 id="printf---escape-strings" tabindex="-1">printf - Escape strings <a class="header-anchor" href="#printf---escape-strings" aria-hidden="true">🔗</a></h2>
+<p>String can be quoted via <code>printf</code>:</p>
+<pre><code class="language-bash">entries_option+=$(<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%q&quot;</span> <span class="hljs-variable">${v_usb_storage_devices[$dev]}</span>)
+</code></pre>
+<h2 id="regular-expressions-matching" tabindex="-1">Regular expressions matching <a class="header-anchor" href="#regular-expressions-matching" aria-hidden="true">🔗</a></h2>
+<p><code>man bash</code> alla sezione <code>&quot;comandi composti&quot; [[ espressione ]]</code>:<br>
+Un ulteriore operatore binario, <strong><mark><code>=~</code></mark></strong>, è disponibile con la stessa precedenza di <code>==</code>  e  <code>!=</code>.<br>
+Quando  viene  usato,  la  stringa  alla  destra  dell'operatore  è  considerata un'<mark><strong>espressione regolare  estesa</strong></mark>
+e  confrontata  come  tale  (come in <code>regex(3)</code>).<br>
+Il valore di ritorno è <code>0</code> se la stringa corrisponde al modello, e <code>1</code> negli altri casi.</p>
+<p>Bash can match strings against regular expressions:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$v_rpi_static_ip_on_modem_net</span> =~ ^[0-9]{1,3}(\.[0-9]{1,3}){3}$ ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">break</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>The left operand doesn’t need quoting.<br>
+The example above will match an IP.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">read</span> -p <span class="hljs-string">&quot;Enter email: &quot;</span> email
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$email</span>&quot;</span> =~ ^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$ ]]
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;This email address looks fine: <span class="hljs-variable">$email</span>&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;This email address is flawed: <span class="hljs-variable">$email</span>&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> != 1 ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> address&quot;</span>
+    <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">else</span>
+    ip=<span class="hljs-variable">$1</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$ip</span> =~ ^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$ ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Looks like an IPv4 IP address&quot;</span>
+<span class="hljs-keyword">elif</span> [[ <span class="hljs-variable">$ip</span> =~ ^[A-Fa-f0-9:]+$ ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Could be an IPv6 IP address&quot;</span>
+<span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;oops&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="find-a-filename%E2%80%99s-basename" tabindex="-1">Find a filename’s basename <a class="header-anchor" href="#find-a-filename%E2%80%99s-basename" aria-hidden="true">🔗</a></h2>
+<p>The basename of a filename (path, or also http address), can be found with another cryptic construct:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+c_os_archive_address=http://vx2-downloads.raspberrypi.org/.../2017-09-07-raspbian-stretch-lite.zip
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${c_os_archive_address##*/}</span>&quot;</span>
+</code></pre>
+<p>The above will result in <code>2017-09-07-raspbian-stretch-lite.zip</code>.</p>
+<h2 id="replace-the-extension-of-a-filename" tabindex="-1">Replace the extension of a filename <a class="header-anchor" href="#replace-the-extension-of-a-filename" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+os_archive_filename=2017-09-07-raspbian-stretch-lite.zip
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${os_archive_filename%.zip}</span>.img&quot;</span>
+</code></pre>
+<p>The above will result in <code>2017-09-07-raspbian-stretch-lite.img</code>.</p>
+<h2 id="cycle-a-multi-line-variable" tabindex="-1">Cycle a multi-line variable <a class="header-anchor" href="#cycle-a-multi-line-variable" aria-hidden="true">🔗</a></h2>
+<p>Cycling a multi-line variable is tricky. This is a solution:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">while</span> IFS=$<span class="hljs-string">&#x27;\n&#x27;</span> <span class="hljs-built_in">read</span> -r partition_data; <span class="hljs-keyword">do</span>
+  message+=<span class="hljs-string">&quot;<span class="hljs-variable">$partition_data</span>&quot;</span>
+<span class="hljs-keyword">done</span> &lt;&lt;&lt; <span class="hljs-string">&quot;<span class="hljs-subst">$(mount)</span>&quot;</span>
+</code></pre>
+<p>Description:</p>
+<ul>
+<li><code>IFS=$'\n'</code> will set the separator to <code>\n</code></li>
+<li><code>read -r</code> reads the input (<code>-r</code> <strong>specifies not to interpret backslahes</strong>), separated by the IFS value, and writes the token for each cycle into partition_data</li>
+<li><code>&lt;&lt;&lt; &quot;$(mount)&quot;</code> needs to be used instead of <code>mount | while IFS=$'\n' read -r partition_data;</code> in the second case, the <strong>while is executed in a subshell (<mark>due to the pipe</mark>)</strong>, and <span class="mrb">message is not visible outside the while scope!</span></li>
+</ul>
+<h3 id="pipeline-e-subshell" tabindex="-1">pipeline e subshell <a class="header-anchor" href="#pipeline-e-subshell" aria-hidden="true">🔗</a></h3>
+<pre><code>man bash # e cercare Pipeline
+</code></pre>
+<p class="mrb">Ogni comando in una pipeline è eseguito come un processo separato (cioè in una subshell).</p>
+<p>Da questa caratteristica delle pipe bash è che non si può utilizzare un ciclo while
+che voglia aggiornare/accedere ad una variabile globale mettendo il ciclo while in pipe
+con un comando che produce/invia dati.
+Questo perchè la subshell non può accedere alle varibili della shell principale che le ha generate.</p>
+</body></html>

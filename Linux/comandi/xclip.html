@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.200" />
+        <title>xclip</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="xclip" tabindex="-1">xclip <a class="header-anchor" href="#xclip" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.200</p>
+<nav class="table-of-contents"><ol><li><a href="#sniffer-di-keyboard">Sniffer di keyboard </a></li><li><a href="#clipboard">Clipboard </a></li></ol></nav><h1 id="xclip---clipboard" tabindex="-1">xclip - clipboard <a class="header-anchor" href="#xclip---clipboard" aria-hidden="true">🔗</a></h1>
+<p>copia del testo da shell alla clipboard</p>
+<p>xclip - command line interface to X selections (clipboard)
+Reads from standard in, or from one or more files, and makes the data available as an X selection for pasting into X applications. Prints current X selection to standard out.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">uptime</span> | xclip
+
+</code></pre>
+<h2 id="sniffer-di-keyboard" tabindex="-1">Sniffer di keyboard <a class="header-anchor" href="#sniffer-di-keyboard" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Sniffer di keyboard:</span>
+$ x=<span class="hljs-string">&quot;&quot;</span>; <span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span> y=$(xclip -o); <span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$x</span>&quot;</span> != <span class="hljs-string">&quot;<span class="hljs-variable">$y</span>&quot;</span> ]; <span class="hljs-keyword">then</span> <span class="hljs-built_in">echo</span> <span class="hljs-variable">$y</span>; x=<span class="hljs-variable">$y</span>; <span class="hljs-keyword">fi</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<pre><code>-selection
+            specify which X selection to use, options are &quot;primary&quot; to use  XA_PRIMARY  (default),  &quot;secondary&quot;  for  XA_SECONDARY  
+            or  &quot;clipboard&quot;  for XA_CLIPBOARD
+</code></pre>
+<h2 id="clipboard" tabindex="-1">Clipboard <a class="header-anchor" href="#clipboard" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p>&quot;clipboard&quot; is what is used by most <code>Ctrl+X/C/V</code>; it is the clipboard you put things into on purpose.</p>
+</li>
+<li>
+<p>&quot;primary&quot; is what holds whatever text is currently selected; it is how <code>X</code> keeps track of what is selected and conveniently may be pasted by middle clicking (or, if you're awesome, clicking right and left buttons at the same time) or by <code>Shift+Insert</code> in <code>xterm</code>.</p>
+</li>
+<li>
+<p><a href="https://specifications.freedesktop.org/clipboards-spec/clipboards-latest.txt">https://specifications.freedesktop.org/clipboards-spec/clipboards-latest.txt</a></p>
+</li>
+<li>
+<p><a href="https://www.jwz.org/doc/x-cut-and-paste.html">https://www.jwz.org/doc/x-cut-and-paste.html</a></p>
+</li>
+</ul>
+<p>Historically, X clients have not handled cut-and-paste in a consistent
+way, leading users to believe that X doesn't even have a working
+clipboard. This isn't really accurate; there is a conventional
+behavior, somewhat standardized in the ICCCM. But many apps don't
+follow the conventional behavior.</p>
+<p>X has a thing called &quot;selections&quot; which are just clipboards,
+essentially (implemented with an asynchronous protocol so you don't
+actually copy data to them). There are three standard selections
+defined in the ICCCM: PRIMARY, SECONDARY, and CLIPBOARD.</p>
+<p>The ICCCM defines these as follows:</p>
+<p>&quot;The selection named by the atom PRIMARY is used for all com-
+mands  that take only a single argument and is the principal
+means of communication between clients that use  the  selec-
+tion mechanism.</p>
+<p>The selection named by the atom SECONDARY is used:</p>
+<p>o   As  the second argument to commands taking two arguments
+(for example, &quot;exchange  primary  and  secondary  selec-
+tions&quot;)</p>
+<p>o   As  a  means  of  obtaining data when there is a primary
+selection and the user does not want to disturb it</p>
+<p>The selection named by the atom CLIPBOARD is  used  to  hold
+data  that  is  being  transferred between clients, that is,
+data that usually is being cut and then pasted or copied and
+then  pasted.&quot;</p>
+<p>In addition, the ICCCM has a thing called &quot;cut buffers&quot; which most
+clients no longer support.</p>
+<p>There are two historical interpretations of the ICCCM:</p>
+<p>a) use PRIMARY for mouse selection, middle mouse button paste, and
+explicit cut/copy/paste menu items (Qt 2, GNU Emacs 20)
+b) use CLIPBOARD for the Windows-style cut/copy/paste menu items;
+use PRIMARY for the currently-selected text, even if it isn't
+explicitly copied, and for middle-mouse-click (Netscape, Mozilla,
+XEmacs, some GTK+ apps)</p>
+<p>No one ever does anything interesting with SECONDARY as far as I can
+tell.</p>
+<p>The current consensus is that interpretation b) is correct. Qt 3 and
+GNU Emacs 21 will use interpretation b), changing the behavior of
+previous versions.</p>
+<p>The correct behavior can be summarized as follows: CLIPBOARD works
+just like the clipboard on Mac or Windows; it only changes on explicit
+cut/copy. PRIMARY is an &quot;easter egg&quot; for expert users, regular users
+can just ignore it; it's normally pastable only via
+middle-mouse-click.</p>
+<p>The rationale for this behavior is mostly that behavior a) has a lot
+of problems, namely:</p>
+<ul>
+<li>inconsistent with Mac/Windows</li>
+<li>confusingly, selecting anything overwrites the clipboard</li>
+<li>not efficient with a tool such as xclipboard</li>
+<li>you should be able to select text, then paste the clipboard
+over it, but that doesn't work if the selection and
+clipboard are the same</li>
+<li>the Copy menu item is useless and does nothing,
+which is confusing</li>
+<li>if you think of PRIMARY as the current selection,
+Cut doesn't make any sense since the selection simultaneously
+disappears and becomes the current selection</li>
+</ul>
+<p>Application authors should follow the following guidelines to get
+correct behavior:</p>
+<ul>
+<li>
+<p>selecting but with no explicit copy should only set PRIMARY,
+never CLIPBOARD</p>
+</li>
+<li>
+<p>middle mouse button should paste PRIMARY, never CLIPBOARD</p>
+</li>
+<li>
+<p>explicit cut/copy commands (i.e. menu items, toolbar buttons)
+should always set CLIPBOARD to the currently-selected data (i.e.
+conceptually copy PRIMARY to CLIPBOARD)</p>
+</li>
+<li>
+<p>explicit cut/copy commands should always set both CLIPBOARD and
+PRIMARY, even when copying doesn't involve a selection (e.g. a
+&quot;copy url&quot; -option which explicitly copies an url without the
+url being selected first)</p>
+</li>
+<li>
+<p>explicit paste commands should paste CLIPBOARD, not PRIMARY</p>
+</li>
+<li>
+<p>a selection becoming unselected should never unset PRIMARY</p>
+</li>
+<li>
+<p>possibly contradicting the ICCCM, clients don't need to support
+SECONDARY, though if anyone can figure out what it's good
+for they should feel free to use it for that</p>
+</li>
+<li>
+<p>cut buffers are evil; they only support ASCII, they don't
+work with many clients, and they require data to be
+copied to the X server. Therefore clients should avoid
+using cut buffers and use only selections.</p>
+</li>
+</ul>
+<p>Apps that follow these guidelines give users a simple mental model to
+understand what's going on. PRIMARY is the current selection. Middle
+button pastes the current selection. CLIPBOARD is just like on
+Mac/Windows. You don't have to know about PRIMARY if you're a newbie.</p>
+<p>I don't think there's a sane mental model if we collapse everything
+into PRIMARY and ignore clipboard, see rationale above.</p>
+<p>A remaining somewhat odd thing about X selections is that exiting the
+app you did a cut/copy from removes the cut/copied data from the
+clipboard, since the selection protocol is asynchronous and requires
+the source app to provide the data at paste time. The solution here
+would be a standardized protocol for a &quot;clipboard daemon&quot; so that apps
+could hand off their data to a daemon when they exit. Or
+alternatively, you can run an application such as xclipboard which
+constantly &quot;harvests&quot; clipboard selections.</p>
+<p>References:</p>
+<ul>
+<li>the ICCCM, obviously</li>
+<li><a href="http://www.xfree86.org/~keithp/talks/selection.ps">http://www.xfree86.org/~keithp/talks/selection.ps</a></li>
+<li><a href="http://www.jwz.org/doc/x-cut-and-paste.html">http://www.jwz.org/doc/x-cut-and-paste.html</a></li>
+</ul>
+</body></html>

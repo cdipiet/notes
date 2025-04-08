@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.749" />
+        <title>UNIX_shell_quoting</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="unix_shell_quoting" tabindex="-1">UNIX_shell_quoting <a class="header-anchor" href="#unix_shell_quoting" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.749</p>
+<nav class="table-of-contents"><ol><li><a href="#list-of-special-characters-and-what-they-mean">List of Special Characters and what they mean </a></li><li><a href="#quoting-a-single-character-with-the-backslash">Quoting a single character with the backslash </a></li><li><a href="#strong-quoting-with-the-single-quotes">Strong Quoting with the Single Quotes </a></li><li><a href="#weak-quotes-with-the-double-quotes">Weak Quotes with the Double Quotes </a></li><li><a href="#using-quotes-to-include-spaces-and-characters-in-filenames">Using quotes to include spaces and characters in filenames </a></li><li><a href="#quotes-within-quotes">Quotes within Quotes </a></li><li><a href="#finding-out-if-your-quotes-are-wrong">Finding out if your quotes are wrong </a></li><li><a href="#the-verbose-and-echo-variables-in-the-c-shell">The verbose and echo variables in the C shell </a></li><li><a href="#the-bourne-shell-variables">The Bourne Shell variables </a></li><li><a href="#including-identical-quotes-within-quotes">Including identical quotes within quotes </a></li><li><a href="#quoting-long-lines">Quoting long lines </a></li><li><a href="#here-is-documents">HERE IS documents </a></li><li><a href="#when-to-quote%3F">When to quote? </a></li></ol></nav><h1 id="unix-shell-quoting" tabindex="-1">UNIX Shell Quoting <a class="header-anchor" href="#unix-shell-quoting" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="http://www.grymoire.com/Unix/Quote.html">http://www.grymoire.com/Unix/Quote.html</a></li>
+</ul>
+<p>Before you study regular expressions, it is important that you understand how to use the shell to send regular expressions to a program like grep and sed.</p>
+<p>Regular expressions use meta-characters. The shells also have meta-characters. <mark>Meta-characters</mark> are simply characters that have a special meaning. The problem occurs when you want to use a regular expression in a shell script. Will the shell do something special with the character? Or will it be passed unchanged to the program?</p>
+<p>If you want to send a meta-character to a program, you must quote the meta-character - that is - you must tell the shell to leave it alone.</p>
+<p>The &quot;<code>$</code>&quot; character is a good example. It could be the beginning of a variable name, or it could be part of a regular expression. If you need a regular expression, <mark>you must know if any of the characters of the expression are meta-characters, and must know the right way to quote that character, so that it is passed to the program without being modified by the shell</mark>.</p>
+<p>I wrote this tutorial in a shell-agnostic manner. That is, what I describe here holds for all of the major varieties of shells. In other words, it doesn't matter which shell you use - because they all understand the three methods of quoting/escaping meta-characters - more or less. There are some tricky bits, but I will mention them later when I cover the different shells.</p>
+<p>Here is a chart of the meta-characters the Bourne and C shell know about. I have also included several combinations of characters just to make this table more complete. There is a lot of detail on this chart.</p>
+<h2 id="list-of-special-characters-and-what-they-mean" tabindex="-1">List of Special Characters and what they mean <a class="header-anchor" href="#list-of-special-characters-and-what-they-mean" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th>Character</th>
+<th>Where</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;RETURN&gt;</td>
+<td>csh, sh</td>
+<td>Execute command</td>
+</tr>
+<tr>
+<td>#</td>
+<td>csh, sh</td>
+<td>Start a comment</td>
+</tr>
+<tr>
+<td>&lt;SPACE&gt;</td>
+<td>csh, sh</td>
+<td>Argument separator</td>
+</tr>
+<tr>
+<td>`</td>
+<td>csh, sh</td>
+<td>Command substitution</td>
+</tr>
+<tr>
+<td>&quot;</td>
+<td>csh, sh</td>
+<td>Weak Quotes</td>
+</tr>
+<tr>
+<td>'</td>
+<td>csh, sh</td>
+<td>Strong Quotes</td>
+</tr>
+<tr>
+<td>\</td>
+<td>csh, sh</td>
+<td>Single Character Quote</td>
+</tr>
+<tr>
+<td>variable</td>
+<td>csh, sh</td>
+<td>Variable</td>
+</tr>
+<tr>
+<td>|</td>
+<td>csh, sh</td>
+<td>Pipe character</td>
+</tr>
+<tr>
+<td>^</td>
+<td>sh</td>
+<td>Pipe Character</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>csh, sh</td>
+<td>Run program in background</td>
+</tr>
+<tr>
+<td>?</td>
+<td>csh, sh</td>
+<td>Match one character</td>
+</tr>
+<tr>
+<td>*</td>
+<td>csh, sh</td>
+<td>Match any number of characters</td>
+</tr>
+<tr>
+<td>;</td>
+<td>csh, sh</td>
+<td>Command separator</td>
+</tr>
+<tr>
+<td>;;</td>
+<td>sh</td>
+<td>End of Case statement</td>
+</tr>
+<tr>
+<td>~</td>
+<td>csh</td>
+<td>Home Directory</td>
+</tr>
+<tr>
+<td>~user</td>
+<td>csh</td>
+<td>User's Home Directory</td>
+</tr>
+<tr>
+<td>!</td>
+<td>csh</td>
+<td>History of Commands</td>
+</tr>
+<tr>
+<td>-</td>
+<td>Programs</td>
+<td>Start of optional argument</td>
+</tr>
+<tr>
+<td>$#</td>
+<td>csh, sh</td>
+<td>Number of arguments to script</td>
+</tr>
+<tr>
+<td>$*</td>
+<td>csh, sh</td>
+<td>Arguments to script</td>
+</tr>
+<tr>
+<td>$@</td>
+<td>sh</td>
+<td>Original arguments to script</td>
+</tr>
+<tr>
+<td>$-</td>
+<td>sh</td>
+<td>Flags passed to shell</td>
+</tr>
+<tr>
+<td>$?</td>
+<td>sh</td>
+<td>Status of previous command</td>
+</tr>
+<tr>
+<td>$$</td>
+<td>sh</td>
+<td>Process identification number</td>
+</tr>
+<tr>
+<td>$!</td>
+<td>sh</td>
+<td>PID of last background job</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>sh</td>
+<td>Short-circuit AND</td>
+</tr>
+<tr>
+<td>||</td>
+<td>sh</td>
+<td>Short-circuit OR</td>
+</tr>
+<tr>
+<td>.</td>
+<td>csh, sh</td>
+<td>Typ. filename extension</td>
+</tr>
+<tr>
+<td>.</td>
+<td>sh</td>
+<td>Source a file and execute as command</td>
+</tr>
+<tr>
+<td>:</td>
+<td>sh</td>
+<td>Nothing command</td>
+</tr>
+<tr>
+<td>:</td>
+<td>sh</td>
+<td>Separates Values in environment variables</td>
+</tr>
+<tr>
+<td>:</td>
+<td>csh</td>
+<td>Variable modifier</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>csh, sh</td>
+<td>Match range of characters</td>
+</tr>
+<tr>
+<td>[ ]</td>
+<td>sh</td>
+<td>Test</td>
+</tr>
+<tr>
+<td>%job</td>
+<td>csh</td>
+<td>Identifies job Number</td>
+</tr>
+<tr>
+<td>(cmd;cmd)</td>
+<td>csh, sh</td>
+<td>Runs cmd;cmd as a sub-shell</td>
+</tr>
+<tr>
+<td>{}</td>
+<td>csh</td>
+<td>In-line expansions</td>
+</tr>
+<tr>
+<td><code>{cmd;cmd}</code></td>
+<td>sh</td>
+<td>Like (cmd;cmd) without a subshell</td>
+</tr>
+<tr>
+<td>&gt;ofile</td>
+<td>csh, sh</td>
+<td>Standard output</td>
+</tr>
+<tr>
+<td>&gt;&gt;ofile</td>
+<td>csh, sh</td>
+<td>Append to standard output</td>
+</tr>
+<tr>
+<td>&lt;ifile</td>
+<td>csh, sh</td>
+<td>Standard Input</td>
+</tr>
+<tr>
+<td>&lt;&lt;word</td>
+<td>csh, sh</td>
+<td>Read until word, substitute variables</td>
+</tr>
+<tr>
+<td>&lt;&lt;\word</td>
+<td>csh, sh</td>
+<td>Read until word, no substitution</td>
+</tr>
+<tr>
+<td>&lt;&lt;-word</td>
+<td>sh</td>
+<td>Read until word, ignoring TABS</td>
+</tr>
+<tr>
+<td>&gt;&gt;!file</td>
+<td>csh</td>
+<td>Append to file, ignore error if not there</td>
+</tr>
+<tr>
+<td>&gt;!file</td>
+<td>csh</td>
+<td>Output to new file, ignore error if not there</td>
+</tr>
+<tr>
+<td>&gt;&amp;file</td>
+<td>csh</td>
+<td>Send standard &amp; error output to file</td>
+</tr>
+<tr>
+<td>&lt;&amp;digit</td>
+<td>sh</td>
+<td>Switch Standard Input to file</td>
+</tr>
+<tr>
+<td>&lt;&amp;-</td>
+<td>sh</td>
+<td>Close Standard Input</td>
+</tr>
+<tr>
+<td>&gt;&amp;digit</td>
+<td>sh</td>
+<td>Switch Standard Output to file</td>
+</tr>
+<tr>
+<td>&gt;&amp;-</td>
+<td>sh</td>
+<td>Close Standard Output</td>
+</tr>
+<tr>
+<td>digit1&lt;&amp;digit2</td>
+<td>sh</td>
+<td>Connect digit2 to digit1</td>
+</tr>
+<tr>
+<td>digit&lt;&amp;-</td>
+<td>sh</td>
+<td>Close file digit</td>
+</tr>
+<tr>
+<td>digit2&gt;&amp;digit1</td>
+<td>sh</td>
+<td>Connect digit2 to digit1</td>
+</tr>
+<tr>
+<td>digit&gt;&amp;-</td>
+<td>sh</td>
+<td>Close file digit</td>
+</tr>
+</tbody>
+</table>
+<p>I am not going to cover each one of these special meta-characters.</p>
+<p>What is important is a solid understanding of the characters that have these special meanings. I will also discuss how you can verify the shell is interpreting the special characters, so you can pinpoint where your problem lies.</p>
+<p>There are three different &quot;quotation&quot; marks on the keyboard.. Two of them use marks used for quotations in English usage, and are sometimes called the <code>single quote</code> and <code>double quote</code>. The third quotation mark is the back quote (more properly called <code>backtick</code> or <code>grave</code>) character: <mark>`</mark>. It looks like the single quote and some times people get them confused in shell scripts. The first two are used for quoting phrases in Unix. The back quote is not used for quoting characters. That character is used for command substitution, where the characters between them are executed by the shell and the results is inserted on that line. Example:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> the <span class="hljs-built_in">date</span> is `<span class="hljs-built_in">date</span>`
+</code></pre>
+<p>Let's get back to the Unix quoting mechanisms. The three quoting mechanisms you can use are the single quote, and double quote, and the backslash.</p>
+<h2 id="quoting-a-single-character-with-the-backslash" tabindex="-1">Quoting a single character with the backslash <a class="header-anchor" href="#quoting-a-single-character-with-the-backslash" aria-hidden="true">🔗</a></h2>
+<p>You can prevent the shell from interpreting a character by placing a backslash (&quot;<code>\</code>&quot;) in front of it. Here is a shell script that can delete any files that contain an asterisk:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> This script removes all files that
+<span class="hljs-built_in">echo</span> contain an asterisk <span class="hljs-keyword">in</span> the name.
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span> Are you sure you want to remove these files\?
+<span class="hljs-built_in">rm</span> -i *\**
+</code></pre>
+<p>The backslash was also necessary before the question mark, which is also a shell meta-character. Without it, the shell would look for all files that match the pattern &quot;files?.&quot; If you had the files &quot;files1&quot; and &quot;files2&quot; the script would print out</p>
+<p>Are you sure you want to remove these files1 files2</p>
+<p>which is not what you want.</p>
+<p>The backslash is the &quot;strongest&quot; method of quotation. It works when every other method fails. If you want to place text on two or more lines for readability, but the program expects one line, you need a line continuation character. Just use the backslash as the last character on the line:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> This could be \
+a very \
+long line\!
+This could be a very long line!
+%
+</code></pre>
+<p>This escapes or quotes the end of line character, so it no longer has a special meaning. In the above example, I also put a backslash before the exclamation point. This is necessary if you are using the C shell, which treats the &quot;!&quot; as a special character. If you are using some other shell, it might not be necessary.</p>
+<h2 id="strong-quoting-with-the-single-quotes" tabindex="-1">Strong Quoting with the Single Quotes <a class="header-anchor" href="#strong-quoting-with-the-single-quotes" aria-hidden="true">🔗</a></h2>
+<p>When you need to quote several character at once, you could use several backslashes:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> a\ \ \ \ \ \ \ b
+</code></pre>
+<p>(There are 7 spaces between 'a' and 'b'.) This is ugly but works. It is easier to use pairs of quotation marks to indicate the start and end of the characters to be quoted:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;a       b&#x27;</span>
+</code></pre>
+<p>(The HTML ruins the formatting. Imagine that there are 7 spaces between the a and b. -Bruce) Inside the single quotes, you can include almost all meta-characters:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;What the *heck* is a $ doing here???&#x27;</span>
+What the *heck* is a $ doing here???
+</code></pre>
+<p>The above example uses asterisks, dollar signs, and question marks meta-characters. The single quotes should be used when you want the text left alone. If you are using the C shell, the &quot;!&quot; character may need a backslash before it. It depends on the characters next to it. If it is surrounded by spaces, you don't need to use a backslash.</p>
+<h2 id="weak-quotes-with-the-double-quotes" tabindex="-1">Weak Quotes with the Double Quotes <a class="header-anchor" href="#weak-quotes-with-the-double-quotes" aria-hidden="true">🔗</a></h2>
+<p>Sometimes you want a weaker type of quoting: one that doesn't expand meta-characters like &quot;*&quot; or &quot;?,&quot; but does expand variables and does command substitution. This can be done with the double quote characters:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Is your home directory <span class="hljs-variable">$HOME</span>?&quot;</span>
+Is your home directory /home/kreskin/u0/barnett?
+% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Your current directory is `pwd`&quot;</span>
+Your current directory is /home/kreskin/u0/barnett
+</code></pre>
+<p>Once you learn the difference between single quotes and double quotes, you will have mastered a very useful skill. It's not hard. The single quotes are stronger than the double quotes. Got it? Okay. And the backslash is the strongest of all.</p>
+<h2 id="using-quotes-to-include-spaces-and-characters-in-filenames" tabindex="-1">Using quotes to include spaces and characters in filenames <a class="header-anchor" href="#using-quotes-to-include-spaces-and-characters-in-filenames" aria-hidden="true">🔗</a></h2>
+<p>If you want to work with files with spaces or special characters in the filename, you may have to use quotes. For instance, if you wanted to create a file with a space in the name, you could use the following:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">cp</span> /dev/null <span class="hljs-string">&#x27;a file with spaces in the name&#x27;</span>
+</code></pre>
+<p>Normally, <strong>the shell uses spaces to determine the end of each argument</strong>. Quoting changes that, and the above example only has two arguments. You can also use a backslash before the character. The example below will rename a file with a space in the name, changing the space to an underscore:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">mv</span> a\ file a_file
+</code></pre>
+<p>Using the same techniques, you can deal with any character in a filename:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">mv</span> a <span class="hljs-string">&#x27;a?&#x27;</span>
+</code></pre>
+<p>At worst, a space in a file makes it difficult to use as an argument. Other characters are very dangerous to use in a filename. In particular, using &quot;?&quot; and &quot;*&quot; in a filename is playing with fire. If you want to delete the file &quot;a?&quot; you may end up deleting more than the single file.</p>
+<h2 id="quotes-within-quotes" tabindex="-1">Quotes within Quotes <a class="header-anchor" href="#quotes-within-quotes" aria-hidden="true">🔗</a></h2>
+<p>While having two types of quotes (three if you count the backslash) might seem confusing, in reality it provides you with several ways to solve the same problems. You can put either quotes inside the other. If you want to quote single quotes, use double quotes around it. To quote double quotes, use single quotes. Heck, it's easier to show you:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Don&#x27;t do that&quot;</span>
+Don<span class="hljs-string">&#x27;t do that
+% echo &#x27;</span>The quote of the day is: <span class="hljs-string">&quot;TGIF&quot;</span><span class="hljs-string">&#x27;
+The quote of the day is: &quot;TGIF&quot;
+%
+</span></code></pre>
+<h2 id="finding-out-if-your-quotes-are-wrong" tabindex="-1">Finding out if your quotes are wrong <a class="header-anchor" href="#finding-out-if-your-quotes-are-wrong" aria-hidden="true">🔗</a></h2>
+<p>In some cases, you may need to use the backslash when you are not sure. In other cases, a backslash will do the wrong thing. How can you find out if you are quoting things correctly? The answer: use the shell.</p>
+<p>An easy way to check quotes is to add an &quot;echo&quot; before the command so you can see what is happening, or change an &quot;ls&quot; command into an &quot;echo&quot; command:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> rcp gateway:\*.tar.Z .
+rsh -n cruncher <span class="hljs-built_in">echo</span> <span class="hljs-built_in">ls</span> \*
+rsh -n cruncher <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;ls *&#x27;</span>
+</code></pre>
+<p>If you want to do file redirection on a remote machine, echo isn't sufficient. The command</p>
+<pre><code class="language-bash">rsh -n cruncher <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;ls * &gt;/tmp/file&#x27;</span>
+</code></pre>
+<p>sends the results of the echo to the file when you wanted the command echoed to your terminal. You need to nest the quotes:</p>
+<pre><code class="language-bash">rsh -n cruncher <span class="hljs-string">&quot;echo &#x27;ls * &gt;/tmp/file&#x27;&quot;</span>
+rsh -n cruncher <span class="hljs-string">&#x27;echo &quot;ls * &gt;/tmp/file&quot;&#x27;</span>
+rsh -n cruncher <span class="hljs-string">&quot;echo &#x27;cd newdir;ls * &gt;&gt;/tmp/file&#x27;&quot;</span>
+</code></pre>
+<p>If you are <strong>debugging</strong> a shell script, and you want to see what your script is doing, you can duplicate one of the important lines in your script and insert an &quot;echo&quot; in front of one of the duplicates. Doing this one or two times in a script isn't very difficult, but there are times when you want to watch every line of your script. In this case, just ask the shell to show you want is going on.</p>
+<h2 id="the-verbose-and-echo-variables-in-the-c-shell" tabindex="-1">The verbose and echo variables in the C shell <a class="header-anchor" href="#the-verbose-and-echo-variables-in-the-c-shell" aria-hidden="true">🔗</a></h2>
+<p>The C shell has two variables that, when set, will help you follow the convoluted trail of variable and meta-character expansion. The command</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> verbose
+</code></pre>
+<p>will echo every line of your script before the variables have been evaluated. The command</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> <span class="hljs-built_in">echo</span>
+</code></pre>
+<p>will display each line after the variables and meta-characters have been substituted. If you wish to turn the variables off, use unset instead of set</p>
+<p>A convenient way to turn these variables on the first line of the script using the the &quot;<code>-x</code>&quot; option (echo)</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/csh -x</span>
+</code></pre>
+<p>or the &quot;<code>-v</code>&quot; option (verbose):</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/csh -v</span>
+</code></pre>
+<p>In both examples above, the <code>.cshrc</code> file is read at the beginning of the script. The &quot;<code>-f</code>&quot; option can skip this file. You can combine all three options if you like:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/csh -fxv</span>
+</code></pre>
+<p>If you want to read in the <code>.cshrc</code> file, and want to trace the values of these variables, capitalize the &quot;X&quot; and &quot;V&quot; variables. This turns on tracing before the .cshrc file is read:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/csh -XV</span>
+</code></pre>
+<p>It is not necessary to modify the program if you want to turn on the verbose or echo variables. If this is a script that you do not have the permissions to modify, you can set these variables from the command line:</p>
+<pre><code class="language-bash">% csh -x shell_script
+</code></pre>
+<h2 id="the-bourne-shell-variables" tabindex="-1">The Bourne Shell variables <a class="header-anchor" href="#the-bourne-shell-variables" aria-hidden="true">🔗</a></h2>
+<p>You can enable variable expansion to Bourne shell scripts the same way:</p>
+<pre><code class="language-bash">% sh -v script
+% sh -x script
+</code></pre>
+<p>Inside a Bourne shell script, the syntax is different. To turn on the verbose flag, use</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -v
+</code></pre>
+<p>to turn on the echo variable, use:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -x
+</code></pre>
+<p>If you want to turn these variables off, use a plus instead of a minus:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> +x
+<span class="hljs-built_in">set</span> +v
+</code></pre>
+<h2 id="including-identical-quotes-within-quotes" tabindex="-1">Including identical quotes within quotes <a class="header-anchor" href="#including-identical-quotes-within-quotes" aria-hidden="true">🔗</a></h2>
+<p>One problem people have is including the same quotes within quotes. Many expect the following to work:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The word for today is \&quot;TGIF\&quot;&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Don\&#x27;</span>t quote me<span class="hljs-string">&#x27;
+</span></code></pre>
+<p>The first example <strong>works with the Bourne shell</strong>, but not the C shell. The second example doesn't work for either of them. I bet many of you programmers are confused by this. All of us are very familiar with strings in programming languages like C. This is why we get confused. <mark>The quotes turn substitution on and off. They are not used to indicate the starting and ending of a string</mark>. Consider the following set of quotes:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;a&#x27;</span>b<span class="hljs-string">&#x27;c&#x27;</span>
+</code></pre>
+<p>This is broken up into three units. The first and last are quoted, and the middle is not. After quoting and substitution occurs, the three units are combined. The middle can be a variable, for instance:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;a&#x27;</span><span class="hljs-variable">$HOME</span><span class="hljs-string">&#x27;b&#x27;</span>
+</code></pre>
+<p>This technique is a typical way to get a shell variable into an awk script. Here is a simple shell script that demonstrates this. Please study this, as it is important:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># this is a shell script that acts like a filter,</span>
+<span class="hljs-comment"># but in only prints out one column.</span>
+<span class="hljs-comment"># the value of the column is the argument </span>
+<span class="hljs-comment"># to the script</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># uncomment the next line to see how this works</span>
+<span class="hljs-comment">#set -x</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># example:</span>
+<span class="hljs-comment">#       printcol 1</span>
+<span class="hljs-comment">#       printcol 3</span>
+<span class="hljs-comment"># the value of the argument is $1</span>
+<span class="hljs-comment"># Here comes the tricky part -</span>
+awk <span class="hljs-string">&#x27;{print $&#x27;</span><span class="hljs-variable">$1</span><span class="hljs-string">&#x27;}&#x27;</span>
+<span class="hljs-comment"># I told you!</span>
+</code></pre>
+<p>In this example, the shell breaks up the argument to awk into three pieces:</p>
+<table class="table"><thead>
+<tr>
+<th>command</th>
+<th>action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>{print $</td>
+<td>Quoted</td>
+</tr>
+<tr>
+<td>$1</td>
+<td>Evaluated</td>
+</tr>
+<tr>
+<td>}</td>
+<td>Quoted</td>
+</tr>
+</tbody>
+</table>
+<p>You can uncomment the command &quot;set -x&quot; and try the script with the command</p>
+<pre><code class="language-bash">printcol 2 &lt;/etc/hosts
+</code></pre>
+<p>The argument to the shell script is 2, so &quot;$1&quot; is evaluated and returns the value &quot;2.&quot; This makes the argument to awk the string &quot;print {$2}&quot; and the second column is printed out.</p>
+<p><strong>You must understand this when you want to have quotes within quotes</strong>. In fact, <strong>you don't want to put quotes within quotes, you want to combine or concatenate several units into one argument</strong>.</p>
+<p>Let me rephrase that. <mark><strong>If you want to include a single quote in an argument that starts with a single quote, you must turn off the mechanism started by the single quote, and use a different quoting method</strong></mark>. Remember, the backslash is the strongest of all quoting mechanisms. You can quote anything with the backslash. This example quotes all three quote characters:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> \&#x27;\&quot;\\
+</code></pre>
+<p>Where the results are</p>
+<pre><code class="language-bash"><span class="hljs-string">&#x27;&quot;\
+</span></code></pre>
+<p>You can always use the backslash to quote a character. However, <strong>within the single quote mechanism, &quot;<code>\'</code>&quot; does not &quot;quote the quote</strong>&quot;. The proper way to do this is as follows:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Don&#x27;</span>   \&#x27;   <span class="hljs-string">&#x27;t do that&#x27;</span>
+Don <span class="hljs-string">&#x27; t do that
+</span></code></pre>
+<p>I put in a few extra spaces, so you could follow what was happening. Here it is again without the extra spaces:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Don&#x27;</span>\&#x27;<span class="hljs-string">&#x27;t do that&#x27;</span>
+Don<span class="hljs-string">&#x27;t do that
+</span></code></pre>
+<p>Just remember to match the quotes together when you mentally parse a shell script. This also works with double quotes:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The quote for today is &quot;</span>\&quot;TGIF\&quot;
+The quote <span class="hljs-keyword">for</span> today is <span class="hljs-string">&quot;TGIF&quot;</span>
+</code></pre>
+<p>Or, if you want to put quotes around &quot;TGIF:&quot;</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The quote for today is &quot;</span>\&quot;<span class="hljs-string">&quot;TGIF&quot;</span>\&quot;
+The quote <span class="hljs-keyword">for</span> today is <span class="hljs-string">&quot;TGIF&quot;</span>
+</code></pre>
+<p>Note that this technique works for any shell using either one of the quotes.</p>
+<h2 id="quoting-long-lines" tabindex="-1">Quoting long lines <a class="header-anchor" href="#quoting-long-lines" aria-hidden="true">🔗</a></h2>
+<p>Most Unix programs also use the backslash to escape a special characters. It is common for a Unix utility to <mark>interpret a backslash on the end of a line as a line continuation character--that is, the end of line character is quoted or escaped so the standard meaning is prevented</mark>.</p>
+<p>The Bourne shell and C shell behave differently when you are quoting lines that continue beyond the end of line marker. The C shell will not extend a quote beyond the line unless the last character is a backslash:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;A quote \
+on two lines&quot;</span>
+A quote
+on two lines
+</code></pre>
+<p>The Bourne shell does allow quotes to extend beyond lines:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;A quote
+&gt; on two lines&quot;</span>
+A quote
+on two lines
+</code></pre>
+<p>Notice how the Bourne shell prompts you with a &quot;&gt;&quot; when the quote is not closed. You can argue among yourselves which behavior is correct. I can understand the rational behind the C shell's reason for disallowing multi-line quoting by default. The earlier example:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Don\&#x27;</span>t <span class="hljs-keyword">do</span> that<span class="hljs-string">&#x27;
+</span></code></pre>
+<p>will generate an error if you use the C shell. However, <strong>if you use the Bourne shell, you will be given a &quot;&gt;&quot; prompt and this will continue until you type in a single quote</strong>. This can be confusing for new Unix users.</p>
+<p>I find the Bourne shell easier to use when I write multi-line quotes which are awk scripts:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash -x</span>
+<span class="hljs-comment">#This script counts how many people</span>
+<span class="hljs-comment"># are in the group specified as the first argument</span>
+grp=<span class="hljs-variable">${1:?&quot;Missing argument&quot;}</span>    <span class="hljs-comment"># get group ID number</span>
+<span class="hljs-comment"># If missing, report an error and exit.</span>
+awk -F: <span class="hljs-string">&#x27;
+# Awk script starts here
+BEGIN {
+    # set total to zero
+    #   before we start
+    total=0;
+}
+$3 ~ /^&#x27;</span><span class="hljs-variable">$grp</span><span class="hljs-string">&#x27;$/ {total++;}
+END {
+    # end of file, print total
+    printf(&quot;Total: %d\n&quot;, total);
+}&#x27;</span> &lt;/etc/passwd
+</code></pre>
+<p>This example uses the &quot;$grp&quot; shell variable right in the middle of the awk script. This is a common method of passing shell variables into the middle of an awk script.</p>
+<h2 id="here-is-documents" tabindex="-1">HERE IS documents <a class="header-anchor" href="#here-is-documents" aria-hidden="true">🔗</a></h2>
+<p>There is another type of quote the shells support. There are called *<em>Here is documents</em>. There are used <strong>when you need to read something from standard input, but you don't want to create a file to provide that input</strong>. They are also used to create files in a shell script. This can be done by the &quot;<code>&lt;&lt;</code>&quot; character, followed by a special word:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">sort</span> &gt;file &lt;&lt;<span class="hljs-string">EndOfSort
+zygote
+abacus
+EndOfSort</span>
+</code></pre>
+<p>This is very useful because variables are evaluated during this operation. Here is a way to transfer a file using ftp from a shell script:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># Usage:</span>
+<span class="hljs-comment">#   ftpfile machine file</span>
+<span class="hljs-comment"># set -x</span>
+SOURCE=<span class="hljs-variable">$1</span>
+FILE=<span class="hljs-variable">$2</span>
+BFILE=`<span class="hljs-built_in">basename</span> <span class="hljs-variable">$FILE</span>`
+ftp -n <span class="hljs-variable">$SOURCE</span> &lt;&lt;<span class="hljs-string">EndFTP
+ascii
+user anonymous $USER@`hostname`
+get $FILE /tmp/$BFILE
+EndFTP</span>
+</code></pre>
+<p>As you can see, <strong>variables and command substitutions are done</strong>. If you want the quoted text to be left alone, put a slash in front of the name of the word:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt;file &lt;&lt;\FaunkyStriNG
+</code></pre>
+<p>Notice the funky string. This is done just in case the text contains the word that ends the file. It is very unlikely that I will want to put that particular combination of characters in any file. You should be warned that the C shell expects the word to be escaped. i.e. &quot;\FunkyStriNG&quot; while the Bourne shell does not. It expects to see &quot;FunkyStriNG.&quot;</p>
+<h2 id="when-to-quote%3F" tabindex="-1">When to quote? <a class="header-anchor" href="#when-to-quote%3F" aria-hidden="true">🔗</a></h2>
+<p>As you can see, this quoting business can cause a lot of confusion. At this point, you should know how to get the shell to recognize the exact string you want. When I cover regular expressions next month, you will be able to follow the quotes without losing your mind.</p>
+</body></html>

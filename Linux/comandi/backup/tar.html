@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.245" />
+        <title>tar</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="tar" tabindex="-1">tar <a class="header-anchor" href="#tar" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.245</p>
+<nav class="table-of-contents"><ol><li><a href="#cdp%2Fbin%2Fmakecdpbackup.sh">cdp/bin/makecdpbackup.sh </a></li><li><a href="#tar-e-cicli-for">Tar e cicli for </a></li><li><a href="#tar---pigz">TAR - pigz </a></li><li><a href="#tar">TAR </a></li><li><a href="#parametro--i-per-cambiare-il-programma-di-compressione">Parametro -I per cambiare il programma di compressione </a></li><li><a href="#parametro--c-per-cambiare-la-directory-di-destinazione">Parametro -C per cambiare la directory di destinazione </a></li><li><a href="#p7zip">p7zip </a></li><li><a href="#recompiling-with-pigz-replacement">Recompiling with pigz replacement </a></li><li><a href="#visualizzazione-contenuto-archivio">Visualizzazione contenuto archivio </a></li><li><a href="#to-transfer-files-via-tar%2Fssh">To transfer files via tar/SSH </a><ol><li><a href="#archiviare-i-file-di-log-tuxedo-inviando-il-tar.gz-direttamente-sulla-macchina-di-sviluppo%3A">Archiviare i file di log Tuxedo inviando il tar.gz direttamente sulla macchina di sviluppo: </a></li></ol></li><li><a href="#estrazione-selettiva-con-wildcards(solo-versione-gnu)">Estrazione selettiva con wildcards(solo versione GNU) </a><ol><li><a href="#estrazione-file-.z">Estrazione file .Z </a></li></ol></li><li><a href="#linuxpro-n.71-p.24-backup-incrementale-con-tar">LinuxPro n.71 p.24 backup incrementale con tar </a><ol><li><a href="#backup-a-due-soli-livelli">Backup a due soli livelli </a></li></ol></li></ol></nav><h1 id="tar-1" tabindex="-1">tar <a class="header-anchor" href="#tar-1" aria-hidden="true">🔗</a></h1>
+<h2 id="cdp%2Fbin%2Fmakecdpbackup.sh" tabindex="-1">cdp/bin/makecdpbackup.sh <a class="header-anchor" href="#cdp%2Fbin%2Fmakecdpbackup.sh" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> ~
+<span class="hljs-keyword">if</span> [ ! -f Scaricati/workspace_linux.tar.gz ]; <span class="hljs-keyword">then</span>
+tar --use=pigz -cf Scaricati/workspace_linux.tar.gz workspace_linux
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">if</span> [ ! -f Scaricati/cdp.tar.gz ]; <span class="hljs-keyword">then</span>
+tar --use=pigz -cf Scaricati/cdp.tar.gz cdp
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="tar-e-cicli-for" tabindex="-1">Tar e cicli for <a class="header-anchor" href="#tar-e-cicli-for" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># TAR separati di tutte le directory</span>
+<span class="hljs-comment"># qui si suppone che la directory corrente contenga solo sottodirectory e non anche files</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> ./*
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> tar -zcvf <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>.tar.gz&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># all XML files</span>
+LIST=`find . -<span class="hljs-built_in">type</span> d -name <span class="hljs-string">&quot;*_toCompress.xml&quot;</span>`
+
+<span class="hljs-comment"># scan files</span>
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> <span class="hljs-variable">$LIST</span>; <span class="hljs-keyword">do</span>
+    direct=<span class="hljs-variable">${file}</span>
+    tar cvzf <span class="hljs-variable">$direct</span>.tar.gz <span class="hljs-variable">$direct</span> 
+<span class="hljs-keyword">done</span>	
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># all XML files</span>
+LIST=`find . -name <span class="hljs-string">&quot;*.gz&quot;</span>`
+<span class="hljs-comment"># scan files</span>
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> <span class="hljs-variable">$LIST</span>; <span class="hljs-keyword">do</span>
+    direct=<span class="hljs-variable">${file}</span>
+    tar xvzf <span class="hljs-variable">$direct</span> 
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="tar---pigz" tabindex="-1">TAR - pigz <a class="header-anchor" href="#tar---pigz" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Compressione parallela</span>
+tar --use=pigz-cf sox.tar.gz sox
+tar cvf - paths-to-archive | pigz &gt; archive.tar.gz
+tar c <span class="hljs-built_in">dir</span> | pigz -c &gt; dir.tar.gz
+
+<span class="hljs-comment"># Decompressione parallela</span>
+pigz -dc cdp.tar.gz | tar xf -
+<span class="hljs-comment"># -d --decompress --uncompress</span>
+<span class="hljs-comment"># Decompress the compressed input.</span>
+<span class="hljs-comment"># -c --stdout --to-stdout</span>
+<span class="hljs-comment"># Write all processed output to stdout (won&#x27;t delete).</span>
+tar --use=pigz -xf sox.tar.gz
+</code></pre>
+<h2 id="tar-2" tabindex="-1">TAR <a class="header-anchor" href="#tar-2" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    tar.gz di una directory
+    tar -zcvf cvsroot.tar.gz /servizio/cvsroot
+    tarcvf - /servizio/cvsroot | /usr/contrib/bin/gzip&gt; cvsroot.tar.gz
+    tar -xvfz cvsroot.tar.gz
+    gunzip&lt; file.tar.gz | tarxvf -
+    tar.gz su ssh
+    tarcvjf - * | sshuser@remote <span class="hljs-string">&quot;(cd/desired/path; tarxjf -)&quot;</span>
+</code></pre>
+<p>TAR:</p>
+<pre><code class="language-bash">tar cfz cdp.tar.gz cdp
+tar cvf - cdp | pigz &gt; cdp.tar.gz
+
+tar xfz cdp.tar.gz
+tar xfz cdp.tar.gz -C /tmp/cdp
+pigz -dc cdp.tar.gz | tar xf -
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> ./*
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> tar -zcvf <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>.tar.gz&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+
+
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> $(<span class="hljs-built_in">ls</span>); <span class="hljs-keyword">do</span> tar -czvf <span class="hljs-variable">$file</span>.tar.gz <span class="hljs-variable">$file</span> ; <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> ./*; <span class="hljs-keyword">do</span> tar -czvf <span class="hljs-variable">$file</span>.tar.gz <span class="hljs-variable">$file</span> ; <span class="hljs-keyword">done</span>
+
+<span class="hljs-keyword">for</span> file <span class="hljs-keyword">in</span> `<span class="hljs-built_in">ls</span> *`; <span class="hljs-keyword">do</span> tar -czvf <span class="hljs-variable">$file</span>.tar.gz <span class="hljs-variable">$file</span> ; <span class="hljs-keyword">done</span>
+
+
+tarcvf - /servizio/cvsroot | /usr/contrib/bin/gzip&gt; cvsroot.tar.gz
+gunzip&lt; file.tar.gz | tarxvf -
+tarcvjf - * | sshuser@remote <span class="hljs-string">&quot;(cd/desired/path; tarxjf -)&quot;</span>
+
+
+gunzip &lt; customfc.tar.gz | tar xvf -
+tar cvf - filenames | gzip &gt; file.tar.gz
+
+fxsvil01.int03:/servizio/export/home/int03&gt; tar cf - -C /servizio cvsroot | gzip &gt; cvsroot.tar.gz
+
+tar xfz eclipse-SDK-3.3.1.1-linux-gtk.tar.gz-C /opt
+unzip dtp-sdk_1.5.1_101607.zip -d /opt
+</code></pre>
+<h2 id="parametro--i-per-cambiare-il-programma-di-compressione" tabindex="-1">Parametro -I per cambiare il programma di compressione <a class="header-anchor" href="#parametro--i-per-cambiare-il-programma-di-compressione" aria-hidden="true">🔗</a></h2>
+<p>There is option for tar program:</p>
+<pre><code>-I, --use-compress-program PROG
+filter through PROG (must accept -d)
+</code></pre>
+<p>You can use multithread version of archiver or compressor utility.</p>
+<p>Most popular multithread archivers are <code>pigz</code> (instead of gzip) and pbzip2 (instead of bzip2). For instance:</p>
+<pre><code class="language-bash">$ tar -I pbzip2 -cf OUTPUT_FILE.tar.bz2 paths_to_archive
+$ tar --use-compress-program=pigz -cf OUTPUT_FILE.tar.gz paths_to_archive
+</code></pre>
+<p>Archiver must accept <code>-d</code>. If your replacement utility hasn't this parameter and/or you need specify additional parameters, then use pipes (add parameters if necessary):</p>
+<pre><code class="language-bash">$ tar cf - paths_to_archive | pbzip2 &gt; OUTPUT_FILE.tar.gz
+$ tar cf - paths_to_archive | pigz &gt; OUTPUT_FILE.tar.gz
+</code></pre>
+<p>Input and output of singlethread and multithread are compatible. You can compress using multithread version and decompress using singlethread version and vice versa.</p>
+<h2 id="parametro--c-per-cambiare-la-directory-di-destinazione" tabindex="-1">Parametro -C per cambiare la directory di destinazione <a class="header-anchor" href="#parametro--c-per-cambiare-la-directory-di-destinazione" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">tar -C /usr -czflocal.tgz <span class="hljs-built_in">local</span>/etc <span class="hljs-built_in">local</span>/www
+tar -C/usr -xzflocal.tgz <span class="hljs-comment"># To untar the local dir into /usr</span>
+<span class="hljs-built_in">cd</span> /usr; tar -xzflocal.tgz# Is the same as above
+</code></pre>
+<h2 id="p7zip" tabindex="-1">p7zip <a class="header-anchor" href="#p7zip" aria-hidden="true">🔗</a></h2>
+<p>For p7zip for compression you need a small shell script like the following:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$1</span> <span class="hljs-keyword">in</span>
+-d) 7za -txz -si -so e;;
+*) 7za -txz -si -so a .;;
+<span class="hljs-keyword">esac</span> 2&gt;/dev/null
+</code></pre>
+<p>Save it as <code>7zhelper.sh</code>. Here the example of usage:</p>
+<pre><code class="language-bash">$ tar-I7zhelper.sh -cf OUTPUT_FILE.tar.7z paths_to_archive
+$ tar -I7zhelper.sh -xf OUTPUT_FILE.tar.7z
+</code></pre>
+<h2 id="recompiling-with-pigz-replacement" tabindex="-1">Recompiling with pigz replacement <a class="header-anchor" href="#recompiling-with-pigz-replacement" aria-hidden="true">🔗</a></h2>
+<p>If you build tar from sources, then you can recompile with parameters</p>
+<pre><code>--with-gzip=pigz
+--with-bzip2=lbzip2
+--with-lzip=plzip
+</code></pre>
+<p>After recompiling tar with these options you can check the output of tar's help:</p>
+<pre><code class="language-bash">$ tar --<span class="hljs-built_in">help</span> | grep <span class="hljs-string">&quot;lbzip2\|plzip\|pigz&quot;</span>
+-j, --bzip2 filter the archive through lbzip2
+--lzip filter the archive through plzip
+-z, --gzip, --gunzip, --ungzip filter the archive through pigz
+</code></pre>
+<h2 id="visualizzazione-contenuto-archivio" tabindex="-1">Visualizzazione contenuto archivio <a class="header-anchor" href="#visualizzazione-contenuto-archivio" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">tar tf log_analisi_tux.tar.gz
+</code></pre>
+<p>Per fare <code>tar x</code> di un tar contenente path assoluti, si usa <code>pax</code> per rimuovere il prefisso di troppo:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install pax
+</code></pre>
+<p class="m b bl">gunzip &lt; TUXLOG_220508.tar.gz | <span class="r">pax -rf - -s@</span>/servizio/crmr/SW/Esercizio/companyFX/userDIR/<span class="r">@@p</span></p>
+<h2 id="to-transfer-files-via-tar%2Fssh" tabindex="-1">To transfer files via tar/SSH <a class="header-anchor" href="#to-transfer-files-via-tar%2Fssh" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">tar c <span class="hljs-built_in">dir</span>/ | gzip | ssh user@remote <span class="hljs-string">&#x27;dd of=dir.tgz&#x27;</span># <span class="hljs-built_in">arch</span> <span class="hljs-built_in">dir</span>/ and store remotely.
+tar cvf - `find . -<span class="hljs-built_in">print</span>` &gt; backup.tar# <span class="hljs-built_in">arch</span> the current directory.
+tar -cf - -C /etc . | tar xpf - -C /backup/etc	<span class="hljs-comment"># Local Copy directories</span>
+tar -cf - -C /etc . | ssh user@remote tar xpf - -C /backup/etc	<span class="hljs-comment"># Remote copy.</span>
+tar -czf home.tgz --exclude <span class="hljs-string">&#x27;*.o&#x27;</span> --exclude <span class="hljs-string">&#x27;tmp/&#x27;</span> home/
+
+tar cf - miadir/ | (<span class="hljs-built_in">cd</span> /tmp; tar xf -)
+tar cf - miadir| ssh macchinaesterna tar xf -
+
+tar cvf -TUXLOG/*.001|gzip | sshint03@10.208.112.5 <span class="hljs-string">&quot;(cd /debuglog/TUXLOG; gunzip|tar xf -)&quot;</span>
+
+tar zcvf - /wwwdata | ssh root@192.168.1.201 <span class="hljs-string">&quot;cat &gt; /backup/wwwdata.tar.gz&quot;</span>
+ssh root@192.168.1.201 <span class="hljs-string">&quot;cat /backup/wwwdata.tar.gz&quot;</span> | tar zxvf -
+</code></pre>
+<h3 id="archiviare-i-file-di-log-tuxedo-inviando-il-tar.gz-direttamente-sulla-macchina-di-sviluppo%3A" tabindex="-1">Archiviare i file di log Tuxedo inviando il tar.gz direttamente sulla macchina di sviluppo: <a class="header-anchor" href="#archiviare-i-file-di-log-tuxedo-inviando-il-tar.gz-direttamente-sulla-macchina-di-sviluppo%3A" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">    tar cf -<span class="hljs-built_in">log</span> | gzip | sshint03@10.208.112.5 <span class="hljs-string">&quot;cat &gt;/debuglog/TUXLOG.tar.gz&quot;</span>
+    tar cf -TUXLOG | gzip | sshint03@10.208.112.5 <span class="hljs-string">&quot;cat &gt;/debuglog/TUXLOG.tar.gz&quot;</span>
+    tar cf - <span class="hljs-built_in">log</span> | gzip | sshint03@10.208.112.5 <span class="hljs-string">&quot;cat &gt;/debuglog/TUXLOG.tar.gz&quot;</span>
+    tar cf - TuxLog_20080808_Test02_1000ev_CDPJar_OK | gzip | sshint03@10.208.112.5 <span class="hljs-string">&quot;cat &gt;/debuglog/TUXLOG.tar.gz&quot;</span>
+</code></pre>
+<h2 id="estrazione-selettiva-con-wildcards(solo-versione-gnu)" tabindex="-1">Estrazione selettiva con wildcards(solo versione GNU) <a class="header-anchor" href="#estrazione-selettiva-con-wildcards(solo-versione-gnu)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">tar -zxf home.tar.gz --wildcards --no-anchored <span class="hljs-string">&#x27;*.bash*&#x27;</span>
+</code></pre>
+<h3 id="estrazione-file-.z" tabindex="-1">Estrazione file .Z <a class="header-anchor" href="#estrazione-file-.z" aria-hidden="true">🔗</a></h3>
+<p>In Unix, how can I uncompress *.Z or *.tar.Z files?</p>
+<p>If you are on a Unix system, to uncompress *.Z or *.tar.Z files, at the shell prompt, enter:
+uncompress *.Z</p>
+<p>Use the ls command to check the resulting files. If uncompress creates a .tar file, you must extract the files by entering:</p>
+<pre><code class="language-bash">tar -xvf *.tar
+</code></pre>
+<p>Alternatively, to do this in one step and avoid creating the intermediate *.tar file, enter:</p>
+<pre><code class="language-bash">zcat *.Z | tar -xvf -
+</code></pre>
+<p>Su windows uso 7zip per decomprimere i file .Z</p>
+<h2 id="linuxpro-n.71-p.24-backup-incrementale-con-tar" tabindex="-1">LinuxPro n.71 p.24 backup incrementale con tar <a class="header-anchor" href="#linuxpro-n.71-p.24-backup-incrementale-con-tar" aria-hidden="true">🔗</a></h2>
+<p>tar: la versione GNU puo essere utilizzata per effettuare
+il backup incrementaleutilizzando un file di snapshot(.snar)</p>
+<ol>
+<li>
+<p>Backup di livello 0:</p>
+<pre><code> tar cvf/backup/lemiefoto.0.tar -glemiefoto.snar .
+</code></pre>
+</li>
+<li>
+<p>Backup di livello 1, secondo giorno:</p>
+<pre><code> tar cvf /backup/lemiefoto.1.tar -g lemiefoto.snar .
+</code></pre>
+</li>
+<li>
+<p>Backup di livello 2, terzo giorno:</p>
+<pre><code> tar cvf /backup/lemiefoto.2.tar -g lemiefoto.snar .
+</code></pre>
+</li>
+</ol>
+<p>Occorre poi ripristinare ogni livello nello stesso ordine:</p>
+<ol>
+<li>
+<pre><code>  tar xvf /backup/lemiefoto.0.tar -g /dev/null .
+</code></pre>
+</li>
+<li>
+<pre><code>  tar xvf /backup/lemiefoto.1.tar -g /dev/null .
+</code></pre>
+</li>
+<li>
+<pre><code> tar xvf /backup/lemiefoto.2.tar -g /dev/null .
+</code></pre>
+</li>
+</ol>
+<h3 id="backup-a-due-soli-livelli" tabindex="-1">Backup a due soli livelli <a class="header-anchor" href="#backup-a-due-soli-livelli" aria-hidden="true">🔗</a></h3>
+<p>Anziche effettuare un backup incrementale multilivello, per semplificare il rispristino,
+si puo utilizzare un backup ad un solo livello, ad esempio all'inizio della settimana si esegue
+un backup 0, e poi per tutta la settimana si riesegue un backup di livello 1,
+per fare questo bisogna utilizzare sempre il file di snapshot di livello 0, il quale deve ovviamente
+essere conservato ed utilizzato ogni giorno:</p>
+<p>per il giorno 2)</p>
+<pre><code>    cp lemiefoto.snar lemiefoto.snar2
+    tar cvf /backup/lemiefoto.giorno2.1.tar -g lemiefoto.snar2 .
+</code></pre>
+<p>per il giorno 3)</p>
+<pre><code>cp lemiefoto.snar lemiefoto.snar3
+tar cvf /backup/lemiefoto.giorno3.1.tar -g lemiefoto.snar3 .
+</code></pre>
+<p>Though tar is widely used for archiving it is rarely used for daily backups because it has no incremental capability - or at least, most people don't think it has. In fact, the GNU version of tar has a perfectly good mechanism for creating and restoring incremental archives; it just isn't very well documented on the man page and you have to hunt around to find a proper description.</p>
+<p>It works by storing additional metadata in a separate file called a snapshot file. Let me illustrate using a miniature example - let's suppose I start on 'day 1' with a directory called mypics that contains three files:</p>
+<pre><code>$ ls ~/mypics
+caption.jpg storm1.jpg sunset1.jpg
+</code></pre>
+<p>If I create a tar archive of this I'll get all three files in it. It is effectively our 'level 0' backup:</p>
+<pre><code>$ cd ~/mypics
+$ tar cvf /backups/mypics.0.tar -g mypics.snar .
+./
+./caption.jpg
+./mypics.snar
+./storm1.jpg
+./sunset1.jpg
+</code></pre>
+<p>The first argument to tar (cvf) is actually a set of three options. c means create the archive, v means verbose (that is, list the names of the files as they are written to the archive) and f means 'the next argument is the name of the file to write the archive to'. I am assuming here that /backups is a mount point for a filesystem from an NFS server, or perhaps for an external disk drive.</p>
+<p>The -gflag is the interesting one. It tells tar to keep a record of what has been archived (and when) in the snapshot file mypics.snar. Finally, the insignificant-looking '.' at the end of the command is the name of the directory I want to archive; in this case, the current directory.</p>
+<p>By day 2 I've added a new file to my directory called baby.jpg. I create another archive. It contains only the new file and is our 'level 1':</p>
+<pre><code>$ tar cvf /backups/mypics.1.tar -g mypics.snar .
+./
+./baby.jpg
+</code></pre>
+<p>I can continue on day 3, creating a level 2 backup like this:</p>
+<pre><code>$ tar cvf /backups/mypics.2.tar -g mypics.snar .
+</code></pre>
+<p>Please be clear that the digits I've put in the output filenames are only for my benefit and in no way control what level my archive will be. That's all handled by the snapshot file mypics.snar. As long as I keep updating the same snapshot, each archive will be incremental to the previous one.</p>
+<p>OK, now let's assume that for some reason we lost the entire content of the mypics directory and need to restore from the backup. I would need to restore each of the levels in order:</p>
+<pre><code>$ tar xvf /backups/mypics.0.tar -g /dev/null
+./
+./caption.jpg
+./mypics.snar
+./storm1.jpg
+./sunset1.jpg
+$ tar xvf /backups/mypics.1.tar -g /dev/null
+./
+./baby.jpg
+$ tar xvf /backups/mypics.2.tar -g /dev/null
+./
+./chris1.jpg
+</code></pre>
+<p>Even when restoring, you still need the -g flag to get the incremental behaviour, but in this case it does not actually need the snapshot file. It is conventional to give /dev/null as a placeholder argument here, but anything will do. When extracting from the incremental backup, tar attempts to restore the exact state the filesystem had when the archive was created. In particular, it will delete those files in the filesystem that did not exist in their directories when the archive was created.</p>
+<p>The above scheme creates a new level of backup each day. An alternative scheme might be to do a level 0 archive to begin with, then just a level 1 on each following day. Of course, the level 1's will gradually get larger, but this scheme makes it a little easier to restore from the archive as you only need to keep the level 0 and the most recent level 1. This requires some manual management of the snapshot file.</p>
+<p>In particular you would need to create a working copy of it to use for the level 1 backup on day 2, and on day three you'd again make a working copy of the original snapshot file to make your next level 1. On day 2 you'd do something like:</p>
+<pre><code>$ cp mypics.snar mypics.snar-2
+$ tar cvf /backups/mypics.day2.1.tar -g mypics.snar-2 .
+</code></pre>
+<p>and on day 3 you'd do it again:</p>
+<pre><code>$ cp mypics.snar mypics.snar-3
+$ tar cvf /backups/mypics.day3.1.tar -g mypics.snar-3 .
+</code></pre>
+</body></html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.189" />
+        <title>recode_iconv_convmv</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="recode_iconv_convmv" tabindex="-1">recode_iconv_convmv <a class="header-anchor" href="#recode_iconv_convmv" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.189</p>
+<nav class="table-of-contents"><ol><li><a href="#programmi-per-la-conversione-di-encoding">Programmi per la conversione di encoding </a></li><li><a href="#charset-encoding-conversion---recode">Charset Encoding Conversion - recode </a><ol><li><a href="#in-windows">In Windows </a></li><li><a href="#in-linux">In Linux </a></li></ol></li><li><a href="#analizzare-l'encoding-di-un-file">Analizzare l&#39;encoding di un file </a></li><li><a href="#semplificazione-di-encoding">Semplificazione di Encoding </a></li><li><a href="#conversione-di-encoding">Conversione di Encoding </a><ol><li><a href="#iconv">Iconv </a></li><li><a href="#convmv--converte-l'encoding-dei-nomi-dei-file-non-i-loro-contenuti!">convmv- Converte l&#39;encoding dei nomi dei file non i loro contenuti! </a></li><li><a href="#uniutils">uniutils </a></li><li><a href="#recode">recode </a></li></ol></li><li><a href="#unicode">Unicode </a><ol><li><a href="#encodings">Encodings </a></li><li><a href="#web-development-and-unicode">Web Development and Unicode </a></li></ol></li><li><a href="#stampare-la-lunghezza-di-ciascuna-riga-di-un-file">Stampare la lunghezza di ciascuna riga di un file </a></li><li><a href="#formattare-testo-a-75-colonne">Formattare testo a 75 colonne </a></li></ol></nav><h1 id="file-di-testo-ed-encoding" tabindex="-1">File di testo ed encoding <a class="header-anchor" href="#file-di-testo-ed-encoding" aria-hidden="true">🔗</a></h1>
+<h2 id="programmi-per-la-conversione-di-encoding" tabindex="-1">Programmi per la conversione di encoding <a class="header-anchor" href="#programmi-per-la-conversione-di-encoding" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install convmv dos2unix recode ascii unicode unaccent uni2ascii ascii2binary
+
+man charsets
+man ascii
+recode -l
+</code></pre>
+<p><code>UTF</code> stands for &quot;Unicode Transformation Format&quot;</p>
+<ul>
+<li><code>recode</code> (converte encoding file di caratteri)</li>
+<li><code>convmv</code> (converte encoding dei nomi di file e directory)</li>
+<li><code>iconv</code> (converte encoding file di caratteri, e' installato dal pacchetto <code>libc6</code>)</li>
+</ul>
+<h2 id="charset-encoding-conversion---recode" tabindex="-1">Charset Encoding Conversion - recode <a class="header-anchor" href="#charset-encoding-conversion---recode" aria-hidden="true">🔗</a></h2>
+<h3 id="in-windows" tabindex="-1">In Windows <a class="header-anchor" href="#in-windows" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bat"><span class="hljs-function">    d:\<span class="hljs-title">app</span>\<span class="hljs-title">unix</span>\<span class="hljs-title">recode.exe</span>
+
+    <span class="hljs-title">for</span> /<span class="hljs-title">f</span> %<span class="hljs-title">x</span> <span class="hljs-title">in</span> (&#x27;<span class="hljs-title">dir</span> /<span class="hljs-title">b</span> *.<span class="hljs-title">java</span>&#x27;) <span class="hljs-title">do</span> <span class="hljs-title">recode</span> <span class="hljs-title">ISO</span>-8859-1..<span class="hljs-title">UTF</span>-8 %<span class="hljs-title">x</span>
+
+    :: <span class="hljs-title">Conversione</span> <span class="hljs-title">Encoding</span> <span class="hljs-title">Sorgenti</span> <span class="hljs-title">in</span> <span class="hljs-title">MSDOS</span>
+    <span class="hljs-title">mkdir</span> <span class="hljs-title">new</span>
+    <span class="hljs-title">for</span> /<span class="hljs-title">f</span> %<span class="hljs-title">x</span> <span class="hljs-title">in</span> (&#x27;<span class="hljs-title">dir</span> /<span class="hljs-title">b</span> *.<span class="hljs-title">java</span>&#x27;) <span class="hljs-title">do</span> <span class="hljs-title">d</span>:\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">bin</span>\<span class="hljs-title">iconv.exe</span> -<span class="hljs-title">f</span> <span class="hljs-title">ISO</span>-8859-1 -<span class="hljs-title">t</span> <span class="hljs-title">UTF</span>-8 %<span class="hljs-title">x</span> &gt; <span class="hljs-title">new</span>/%<span class="hljs-title">x</span>
+    <span class="hljs-title">move</span> <span class="hljs-title">new</span>/*.* .
+    <span class="hljs-title">rmdir</span> <span class="hljs-title">new</span>
+</span></code></pre>
+<h3 id="in-linux" tabindex="-1">In Linux <a class="header-anchor" href="#in-linux" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> recode-to-utf8.sh
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-comment"># Recodes specified file to UTF-8, except if it seems to be UTF-8 already</span>
+
+result=`grep -c [åäöÅÄÖ] <span class="hljs-variable">$1</span>`
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$result</span>&quot;</span> -eq <span class="hljs-string">&quot;0&quot;</span> ]
+<span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Recoding <span class="hljs-variable">$1</span> from ISO-8859-1 to UTF-8&quot;</span>
+recode ISO-8859-1..UTF-8 <span class="hljs-variable">$1</span> <span class="hljs-comment"># overwrites file</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span> was already UTF-8 (probably); skipping it&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>(Batch processing files is of course a simple matter of e.g. <code>for f in *txt; do recode-to-utf8.sh $f; done</code>.)</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> dpkg-reconfigure locales
+</code></pre>
+<h2 id="analizzare-l'encoding-di-un-file" tabindex="-1">Analizzare l'encoding di un file <a class="header-anchor" href="#analizzare-l'encoding-di-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">
+<span class="hljs-built_in">od</span> -c miofile
+
+$ file query2.sql
+query2.sql: ISO-8859 text
+iconv -l|grep 8859
+$ iconv -f ISO_8859-15 -t UTF-8 query2.sql &gt;query2_UTF8.sql
+$ file query2_UTF8.sql
+query2_UTF8.sql: UTF-8 Unicode text
+
+$ iconv -f ISO_8859-15 -t ISO88599 query2.sql &gt;query3_ISO88599.sql
+$ file query3_ISO88599.sql
+query3_ISO88599.sql: ISO-8859 text
+
+<span class="hljs-comment"># od -c stampa i caratteri ascii ed i caratteri speciali in formato baskslash ottale,</span>
+<span class="hljs-comment"># ad esempio una e accentata decimale=232 ottale=350 in codifica ISO88599</span>
+
+<span class="hljs-comment"># per convertire da ottale a decimale:</span>
+&gt;bc
+ibase=8
+350
+232
+</code></pre>
+<h2 id="semplificazione-di-encoding" tabindex="-1">Semplificazione di Encoding <a class="header-anchor" href="#semplificazione-di-encoding" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>unaccent</li>
+<li>uni2ascii -e Convert characters to their approximate ASCII equivalents</li>
+</ul>
+<h2 id="conversione-di-encoding" tabindex="-1">Conversione di Encoding <a class="header-anchor" href="#conversione-di-encoding" aria-hidden="true">🔗</a></h2>
+<h3 id="iconv" tabindex="-1">Iconv <a class="header-anchor" href="#iconv" aria-hidden="true">🔗</a></h3>
+<p>e' installato dal pacchetto <code>libc6</code>
+Text encoding can get totally wrong, specially when the language requires special characters like
+<code>àäç</code>. The command iconv can convert from one encoding to an other.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># iconv -f &lt;from_encoding&gt; -t &lt;to_encoding&gt; &lt;input_file&gt;</span>
+<span class="hljs-comment"># iconv -f ISO8859-1 -t UTF-8 -o file.input &gt; file_utf8</span>
+<span class="hljs-comment"># iconv -l# List known coded character sets</span>
+iconv -f ISO8859-1 -t CP437 words.txt&gt; converted
+</code></pre>
+<h3 id="convmv--converte-l'encoding-dei-nomi-dei-file-non-i-loro-contenuti!" tabindex="-1">convmv- Converte l'encoding dei nomi dei file non i loro contenuti! <a class="header-anchor" href="#convmv--converte-l'encoding-dei-nomi-dei-file-non-i-loro-contenuti!" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install convmv
+<span class="hljs-comment"># Per riparare i nomi dei file mp3:</span>
+convmv -f iso-8859-15 -t utf8 * -r --notest
+convmv -f windows-1252 -t utf8 -r --notest*.*
+convmv -f iso-8859-15 -t utf8 <span class="hljs-string">&quot;E&#x27; già (duetto con G.Trovato).mp3&quot;</span> --notest
+</code></pre>
+<p>convmv, written in Perl, converts file and directory names into different character encodings. It converts only the filenames, not their contents. This example is a dry-run to illustrate what will happen if you convert all the filenames in the convertme directory:</p>
+<pre><code class="language-bash">$ convmv -f iso-8859-7 -t utf8 convertme/
+</code></pre>
+<p>By default, nothing gets changed, so when you're ready to do it for real, add the <code>--notestoption</code>:</p>
+<pre><code class="language-bash">$ convmv -f iso-8859-7 -t utf8 --notestconvertme/
+</code></pre>
+<p>Add <code>-r</code> to recurse through subdirectories.
+iconv works pretty much the same way, except it operates on the contents of files; not the filenames:</p>
+<pre><code class="language-bash">$ iconv -f ISO-8859-7 -t UTF-8 convertme converted
+</code></pre>
+<p>convertme is the input file and converted is the new output file. If you do not specify an output file, the results are displayed on standard output. See man convmv and man iconv for complete command options.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment">#Convert ISO-8859-1 to UTF-8</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -gt 0 ];<span class="hljs-keyword">then</span>
+convmv -f iso-8859-1 -t utf-8 -r --notest <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>| zenity --progress --pulsate --text=<span class="hljs-string">&quot;conversion in progress&quot;</span> --auto-close
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">exit</span> 0
+</code></pre>
+<h3 id="uniutils" tabindex="-1">uniutils <a class="header-anchor" href="#uniutils" aria-hidden="true">🔗</a></h3>
+<p><a href="http://billposer.org/Software/unidesc.html">http://billposer.org/Software/unidesc.html</a></p>
+<p>Tools for finding out what is in a Unicode file
+Useful tools when working with Unicode files when one doesn't know
+the writing system, doesn't have the necessary font, needs to inspect
+invisible characters, needs to find out whether characters have been
+combined or in what order they occur, or needs statistics on which
+characters occur.</p>
+<ul>
+<li><code>uniname</code> defaults to printing the character offset of each character,
+its byte offset, its hex code value, its encoding, the glyph itself,
+and its name. It may also be used to validate UTF-8 input.</li>
+<li><code>unidesc</code> reports the character ranges to which different portions of the
+text belong. It can also be used to identify Unicode encodings
+(e.g. UTF-16be) flagged by magic numbers.</li>
+<li><code>unihist</code> generates a histogram of the characters in its input.</li>
+<li><code>ExplicateUTF8</code> is intended for debugging or for learning about Unicode.
+It determines and explains the validity of a sequence of bytes as a UTF8
+encoding.</li>
+<li><code>utf8lookup</code> provides a handy way to look up Unicode characters from the
+command line.</li>
+<li><code>unirev</code> reverse each line of UTF-8 input character-by-character.</li>
+</ul>
+<h3 id="recode" tabindex="-1">recode <a class="header-anchor" href="#recode" aria-hidden="true">🔗</a></h3>
+<p><a href="http://directory.fsf.org/wiki/Recode">http://directory.fsf.org/wiki/Recode</a></p>
+<p>come iconv della libc6 converte l'encoding dei file</p>
+<pre><code class="language-bash">recode -l
+</code></pre>
+<h2 id="unicode" tabindex="-1">Unicode <a class="header-anchor" href="#unicode" aria-hidden="true">🔗</a></h2>
+<p>Let's give credit where credit's due: Unicode is a brilliant invention that makes life easier for millions—even billions—of people on our planet. At the same time, dealing with Unicode, as well as the various encoding systems that preceded it, can be an incredibly painful and frustrating experience. I've been dealing with some Unicode-related frustrations of my own in recent days, so I thought this might be a good time to revisit a topic that every modern software developer, and especially every Web developer, should understand.</p>
+<p>In case you don't know what Unicode is, or how it affects you, consider this:
+in C and in older versions of languages like Python and Ruby, a string is nothing more than a bunch of bytes.
+There's no rhyme or reason to it; you can read whatever data you want into a string, and the language will be fine with it.
+For example, if I fire up iPython (which uses Python 2.7), I can read a JPEG image into a string:</p>
+<pre><code class="language-python">s = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;Downloads/test.jpg&#x27;</span>).read()
+</code></pre>
+<p>Most of the time, you use strings not to hold JPEG images, but rather to hold text. If your text is all in English, you're in luck, because all the characters used by the English language are defined in ASCII, a standard that defines 128 different characters, each with a unique number. Thus, character 65 is uppercase A, and the space character is number 32. ASCII is great, and it works just fine—until you want to start using languages other than English.</p>
+<p>The problem is most languages require characters that are not used in English, and that aren't defined in ASCII. This means if you want to write words in French, let alone in Arabic or Chinese, you won't have a way to represent characters using ASCII.</p>
+<p>A solution for alphabetic languages was a set of ISO standards (<code>ISO 8859-*</code>), which took advantage of the fact that ASCII uses only 7 bits, but that data is transmitted with 8 bits. If you can take advantage of all 8 bits, you double the number of available characters, from 128 to 256. This is more than enough for languages with a defined alphabet. Thus, Western European languages were defined in ISO-8859-1, Hebrew in ISO-8859-8 and so forth. Moreover, these ISO standards were meant to make it possible to mix the &quot;foreign&quot; language with English. Thus, you could have a document with English and French or English and Arabic. ASCII characters retained their original values, and the non-ASCII characters were defined in the upper 128.</p>
+<p>But, what happens when you want to have a document that contains English, Arabic and French? In the ISO-8859 family of standards, there wasn't any way to accomplish this. The same number that was used to describe an accented character in French also would be used to describe a character in Arabic. The program displaying the text in question was responsible for deciding which language and, thus, which characters, would be displayed. A document written in Russian (ISO 8859-5) but displayed by a program expecting Hebrew (ISO 8859-8) would show Hebrew characters, or rather, gibberish.</p>
+<p>Things are even worse if you're working with non-alphabetic languages, such as Chinese. Even if you would like to use the upper-128 characters to write Chinese, you would be forced to choose from a tiny percentage of the characters that are necessary to use the language. Clearly, something else would be necessary, and indeed, the Chinese (as well as Japanese) invented their own systems for storing text on computers, which were completely incompatible with ASCII.</p>
+<p>Unicode was designed to solve all of these problems. Simply put, it gives every individual human-designed character its own unique number, or &quot;code point&quot;. Doing this removes the ambiguity associated with displaying text. So long as a program supports Unicode, it doesn't need to know the language family that's being used. English, French, Arabic and Russian all can coexist on the same page, without any interference between the characters. Moreover, Unicode supports a very large number of code points, allowing Chinese and Japanese characters to coexist with alphabetic characters.</p>
+<h3 id="encodings" tabindex="-1">Encodings <a class="header-anchor" href="#encodings" aria-hidden="true">🔗</a></h3>
+<p>So far, so good. But, switching over to this new system raised two questions. First, how do you take these individual code points, uniquely identifying just about every character humans have created, and translate them into bytes? Second, what happens to existing documents, which weren't written in Unicode?</p>
+<p>On the one hand, the answers to those questions are relatively straightforward. On the other hand, the answers lead to much of the frustration associated with using Unicode—not because Unicode itself is bad or difficult, but because the mix of different, existing encodings with a Unicode-based system can be frustrating.</p>
+<p>The first question, how do you encode the various Unicode characters using bytes, has multiple answers. If you're using a Unicode-aware language, you no longer can think of characters as being equivalent to bytes. Rather, one character might be a single byte, but it also might be multiple bytes. In the UCS-32 encoding scheme, for example, each Unicode character uses 4 bytes. This provides enough space for all of the defined Unicode characters, which is a good thing, but it also breaks backward compatibility with ASCII documents and quadruples the size of anything written using ASCII or any of the ISO-8859 series.</p>
+<p>For these reasons, the de facto standard in the Unicode world is UTF-8, a variable-length encoding scheme invented by famed programmers Rob Pike and Ken Thompson. The basic idea is that all defined ASCII characters, from 0–127, remain as they were. If the high (8th) bit is set, that indicates the character consumes an additional byte (that is, two bytes for the character). In a similar way, high bits are used on succeeding bytes to indicate that the character's description has not ended. In this way, UTF-8 characters can consume as little as one byte (for ASCII characters) or as many as 6 bytes for truly unusual characters. Languages like Chinese and Japanese will require 4 bytes per character.</p>
+<p>UTF-8 provides the best of all possible worlds—ASCII documents remain as they were, alphabetic languages don't use too many more bytes than necessary, you resolve ambiguity with Unicode, and you can represent all Unicode characters. But, it does introduce a new problem: strings can now be invalid! If you were to use the fixed-width UCS-32 system, just about every byte would point to a valid character. But in UTF-8, it's possible to have a sequence of bytes that's invalid according to this encoding scheme.</p>
+<p>To return to my example from earlier in this article, let's say I execute the following code in Python 3, rather than Python 2.7:</p>
+<pre><code class="language-python">s = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;Downloads/test.jpg&#x27;</span>).read()
+</code></pre>
+<p>Now, in Python 2.7, strings are just collections of bytes. If I want to use Unicode, I need to use a &quot;Unicode string&quot;, a special version of the str type in which characters are all in Unicode (and stored in UTF-8). In Python 3, the default string encoding is UTF-8, which means that executing the above code actually will result in an exception:</p>
+<pre><code>UnicodeDecodeError: 'utf-8' codec can't decode byte 0xff in
+position 0: invalid start byte
+</code></pre>
+<p>In other words, Python was expecting to get input in UTF-8, but noticed the byte 0xFF at the start of the file, which is illegal. What you need to do is tell Python that you want to read the file in binary format, by opening it in &quot;read binary&quot; mode:</p>
+<pre><code class="language-python">s = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;/Users/reuven/Downloads/test.jpg&#x27;</span>, mode=<span class="hljs-string">&#x27;rb&#x27;</span>).read()
+</code></pre>
+<p>Now, given that you've read the file in binary mode, you're treating it as bytes, rather than a string. And sure enough, if you ask Python what type of data was returned:</p>
+<pre><code class="language-python"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-built_in">type</span>(s)
+&lt;<span class="hljs-keyword">class</span> <span class="hljs-string">&#x27;bytes&#x27;</span>&gt;
+</code></pre>
+<p>In other words, Python won't create an illegal string. So instead of doing so, read() returns a bytestring, which is roughly the same as the Python 2.x string.</p>
+<p>That covers files that were written in Unicode. But what about files written in another encoding scheme, such as ISO-8859-5? In such a case, you need to pass another parameter to &quot;open&quot;, indicating the encoding you should use.</p>
+<p>Ruby has undergone a similar change in the past few years. Ruby 1.8 saw strings as collections of bytes, but it really didn't think or care much about Unicode and other encodings. Ruby 1.9 (as well as 2.0) made a shift in a similar direction to Python, such that every string has an encoding associated with it. Unlike Python, you can read binary data into a Ruby 2.0 string, and the language will be fine with that:</p>
+<pre><code class="language-python">s = File.read(<span class="hljs-string">&#x27;Downloads/test.jpg&#x27;</span>)
+</code></pre>
+<p>If you ask Ruby what sort of object was returned, it'll tell you that it was a string:</p>
+<pre><code class="language-python">&gt;&gt; s.<span class="hljs-keyword">class</span> <span class="hljs-comment">#=&gt; String</span>
+&gt;&gt; s.encoding <span class="hljs-comment">#=&gt; #&lt;Encoding:UTF-8&gt;</span>
+&gt;&gt; s.valid_encoding? <span class="hljs-comment">#=&gt; false</span>
+</code></pre>
+<p>But, you then can set the encoding to something else:</p>
+<pre><code class="language-python">&gt;&gt; s.force_encoding(Encoding.find(<span class="hljs-string">&#x27;ASCII-8BIT&#x27;</span>))
+&gt;&gt; s.encoding <span class="hljs-comment">#=&gt; #&lt;Encoding:ASCII-8BIT&gt;</span>
+&gt;&gt; s.valid_encoding? <span class="hljs-comment">#=&gt; true</span>
+</code></pre>
+<h3 id="web-development-and-unicode" tabindex="-1">Web Development and Unicode <a class="header-anchor" href="#web-development-and-unicode" aria-hidden="true">🔗</a></h3>
+<p>All of this is well and good, but how does it affect Web developers? Again, none of this would be a problem if you magically could flick a switch and have all documents and computers switch to using UTF-8. But, that's far from the case. Not only are there many documents out there that were written in non-UTF-8 formats, but also there are many computers whose encoding is still not UTF-8.</p>
+<p>This means if you have an HTML form and you accept input from users' browsers, you likely will get input from users' browsers in whatever encoding system their computers are using. True, most modern computers and browsers use UTF-8, but you would be amazed by how many old systems exist. You should experiment with your Web application, ensuring that even when someone sends you data in a non-Unicode system, you still can handle it (or gracefully deal with the failure).</p>
+<p>Another issue I recently encountered myself wasn't directly from user input, but rather files that users were uploading. My Web application worked in UTF-8, and everything seemed to be humming along—until it wasn't. The problem was that part of the application involved people uploading text files. I would read the contents of the file into a string and then store that string in a database. Unfortunately, the application would raise an exception, because the text files—coming from people around the world, in different languages and using many different encodings—often were incompatible with UTF-8. One solution would have been to try to identify the encoding of the uploaded file. In my particular case, I was able to catch the exception and report it to the user, indicating that only files in UTF-8 were acceptable. Whether such an error message will suffice for your application depends on what you're doing.</p>
+<p>And yes, that leads me to my next point, namely databases. All of the major relational and NoSQL databases with which I work support UTF-8 as a default. PostgreSQL, for example, gives each database an encoding, indicating the encoding that will be used in text columns. The good news is that this ensures that all text stored in the database will be valid UTF-8, or whatever other encoding you use. The bad news (to some degree) is that if you want to store both binary and textual data in the same column, you'll have to find another solution. Binary data, such as the contents of a JPEG file, cannot be stored in a text column, because it's not legal UTF-8. Instead, you'll need to store such information in a binary BYTEA column, which accepts any sequence of bytes and doesn't attempt to ensure its validity. Fortunately, the drivers with which I work understand the difference between TEXT and BYTEA columns and return results using appropriate data types.</p>
+<p>Realize that there is a difference, however, between encoding and collation. Encoding refers to the way UTF-8 (or any other character set) is translated into a series of bytes. Collation refers to how the text is sorted and, thus, is language-dependent. Consider that sorting a list of 100 words will have different results in English, Spanish and French, and you'll understand that your application's needs (and users) will determine, to a large degree, which collation, if any, you choose to use.
+Conclusion</p>
+<p>Just about ten years ago, I worked on a multilingual site that required Unicode, and my decision to use it caused a great deal of friction with others working on the project, because they didn't have editors that supported UTF-8.</p>
+<p>Things are quite different today. Just about every piece of Web-related software supports Unicode, from the operating system and language to the database and browser. However, the numerous non-Unicode computers, programs and files out there require that you keep them in mind and are able to work with them. Moreover, working with binary files and data means that you need to get out of the mindset that &quot;everything can be a string&quot;, because modern strings are picky about the data they will let you store.</p>
+<p>Understanding Unicode is essential to knowing how modern Web applications work. Once you've made sure your application is using the right methods and checking the data in the right places, it'll work just fine with users from around the world.</p>
+<h2 id="stampare-la-lunghezza-di-ciascuna-riga-di-un-file" tabindex="-1">Stampare la lunghezza di ciascuna riga di un file <a class="header-anchor" href="#stampare-la-lunghezza-di-ciascuna-riga-di-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-awk">awk <span class="hljs-string">&#x27;{print length}&#x27;</span> filename
+</code></pre>
+<h2 id="formattare-testo-a-75-colonne" tabindex="-1">Formattare testo a 75 colonne <a class="header-anchor" href="#formattare-testo-a-75-colonne" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">fmt</span> -s -w 75 &lt; INSTALL | less
+</code></pre>
+</body></html>

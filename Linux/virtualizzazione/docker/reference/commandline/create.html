@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.436" />
+        <title>create</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="create" tabindex="-1">create <a class="header-anchor" href="#create" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.436</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22create%22description%3A-%22the-create-command-description-and-usage%22keywords%3A-%22docker%2C-create%2C-container%22">title: &quot;create&quot;description: &quot;The create command description and usage&quot;keywords: &quot;docker, create, container&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#create-and-start-a-container">Create and start a container </a></li><li><a href="#initialize-volumes">Initialize volumes </a></li><li><a href="#specify-isolation-technology-for-container-(--isolation)">Specify isolation technology for container (--isolation) </a></li><li><a href="#dealing-with-dynamically-created-devices-(--device-cgroup-rule)">Dealing with dynamically created devices (--device-cgroup-rule) </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22create%22description%3A-%22the-create-command-description-and-usage%22keywords%3A-%22docker%2C-create%2C-container%22" tabindex="-1">title: &quot;create&quot;
+description: &quot;The create command description and usage&quot;
+keywords: &quot;docker, create, container&quot; <a class="header-anchor" href="#title%3A-%22create%22description%3A-%22the-create-command-description-and-usage%22keywords%3A-%22docker%2C-create%2C-container%22" aria-hidden="true">🔗</a></h2>
+<h1 id="create-1" tabindex="-1">create <a class="header-anchor" href="#create-1" aria-hidden="true">🔗</a></h1>
+<p>Creates a new container.</p>
+<pre><code class="language-markdown">Usage:  docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
+
+Create a new container
+
+Options:
+<span class="hljs-code">      --add-host value                Add a custom host-to-IP mapping (host:ip) (default [])
+  -a, --attach value                  Attach to STDIN, STDOUT or STDERR (default [])
+      --blkio-weight value            Block IO (relative weight), between 10 and 1000
+      --blkio-weight-device value     Block IO weight (relative device weight) (default [])
+      --cap-add value                 Add Linux capabilities (default [])
+      --cap-drop value                Drop Linux capabilities (default [])
+      --cgroupns string               Cgroup namespace to use
+                                      &#x27;host&#x27;:    Run the container in the Docker host&#x27;s cgroup namespace
+                                      &#x27;private&#x27;: Run the container in its own private cgroup namespace
+                                      &#x27;&#x27;:        Use the default Docker daemon cgroup namespace specified by the `--default-cgroupns-mode` option
+      --cgroup-parent string          Optional parent cgroup for the container
+      --cidfile string                Write the container ID to the file
+      --cpu-count int                 The number of CPUs available for execution by the container.
+                                      Windows daemon only. On Windows Server containers, this is
+                                      approximated as a percentage of total CPU usage.
+      --cpu-percent int               CPU percent (Windows only)
+      --cpu-period int                Limit CPU CFS (Completely Fair Scheduler) period
+      --cpu-quota int                 Limit CPU CFS (Completely Fair Scheduler) quota
+  -c, --cpu-shares int                CPU shares (relative weight)
+      --cpus NanoCPUs                 Number of CPUs (default 0.000)
+      --cpu-rt-period int             Limit the CPU real-time period in microseconds
+      --cpu-rt-runtime int            Limit the CPU real-time runtime in microseconds
+      --cpuset-cpus string            CPUs in which to allow execution (0-3, 0,1)
+      --cpuset-mems string            MEMs in which to allow execution (0-3, 0,1)
+      --device value                  Add a host device to the container (default [])
+      --device-cgroup-rule value      Add a rule to the cgroup allowed devices list
+      --device-read-bps value         Limit read rate (bytes per second) from a device (default [])
+      --device-read-iops value        Limit read rate (IO per second) from a device (default [])
+      --device-write-bps value        Limit write rate (bytes per second) to a device (default [])
+      --device-write-iops value       Limit write rate (IO per second) to a device (default [])
+      --disable-content-trust         Skip image verification (default true)
+      --dns value                     Set custom DNS servers (default [])
+      --dns-option value              Set DNS options (default [])
+      --dns-search value              Set custom DNS search domains (default [])
+      --domainname string             Container NIS domain name
+      --entrypoint string             Overwrite the default ENTRYPOINT of the image
+  -e, --env value                     Set environment variables (default [])
+      --env-file value                Read in a file of environment variables (default [])
+      --expose value                  Expose a port or a range of ports (default [])
+      --group-add value               Add additional groups to join (default [])
+      --health-cmd string             Command to run to check health
+      --health-interval duration      Time between running the check (ns|us|ms|s|m|h) (default 0s)
+      --health-retries int            Consecutive failures needed to report unhealthy
+      --health-timeout duration       Maximum time to allow one check to run (ns|us|ms|s|m|h) (default 0s)
+      --health-start-period duration  Start period for the container to initialize before counting retries towards unstable (ns|us|ms|s|m|h) (default 0s)
+      --help                          Print usage
+  -h, --hostname string               Container host name
+      --init                          Run an init inside the container that forwards signals and reaps processes
+  -i, --interactive                   Keep STDIN open even if not attached
+      --io-maxbandwidth string        Maximum IO bandwidth limit for the system drive (Windows only)
+      --io-maxiops uint               Maximum IOps limit for the system drive (Windows only)
+      --ip string                     IPv4 address (e.g., 172.30.100.104)
+      --ip6 string                    IPv6 address (e.g., 2001:db8::33)
+      --ipc string                    IPC namespace to use
+      --isolation string              Container isolation technology
+      --kernel-memory string          Kernel memory limit
+  -l, --label value                   Set meta data on a container (default [])
+      --label-file value              Read in a line delimited file of labels (default [])
+      --link value                    Add link to another container (default [])
+      --link-local-ip value           Container IPv4/IPv6 link-local addresses (default [])
+      --log-driver string             Logging driver for the container
+      --log-opt value                 Log driver options (default [])
+      --mac-address string            Container MAC address (e.g., 92:d0:c6:0a:29:33)
+  -m, --memory string                 Memory limit
+      --memory-reservation string     Memory soft limit
+      --memory-swap string            Swap limit equal to memory plus swap: &#x27;-1&#x27; to enable unlimited swap
+      --memory-swappiness int         Tune container memory swappiness (0 to 100) (default -1)
+      --mount value                   Attach a filesystem mount to the container (default [])
+      --name string                   Assign a name to the container
+      --network-alias value           Add network-scoped alias for the container (default [])
+      --network string                Connect a container to a network (default &quot;default&quot;)
+                                      &#x27;bridge&#x27;: create a network stack on the default Docker bridge
+                                      &#x27;none&#x27;: no networking
+                                      &#x27;container:&lt;name|id&gt;&#x27;: reuse another container&#x27;s network stack
+                                      &#x27;host&#x27;: use the Docker host network stack
+                                      &#x27;&lt;network-name&gt;|&lt;network-id&gt;&#x27;: connect to a user-defined network
+      --no-healthcheck                Disable any container-specified HEALTHCHECK
+      --oom-kill-disable              Disable OOM Killer
+      --oom-score-adj int             Tune host&#x27;s OOM preferences (-1000 to 1000)
+      --pid string                    PID namespace to use
+      --pids-limit int                Tune container pids limit (set -1 for unlimited), kernel &gt;= 4.3
+      --privileged                    Give extended privileges to this container
+  -p, --publish value                 Publish a container&#x27;s port(s) to the host (default [])
+  -P, --publish-all                   Publish all exposed ports to random ports
+      --read-only                     Mount the container&#x27;s root filesystem as read only
+      --restart string                Restart policy to apply when a container exits (default &quot;no&quot;)
+                                      Possible values are: no, on-failure[:max-retry], always, unless-stopped
+      --rm                            Automatically remove the container when it exits
+      --runtime string                Runtime to use for this container
+      --security-opt value            Security Options (default [])
+      --shm-size bytes                Size of /dev/shm
+                                      The format is `&lt;number&gt;&lt;unit&gt;`. `number` must be greater than `0`.
+                                      Unit is optional and can be `b` (bytes), `k` (kilobytes), `m` (megabytes),
+                                      or `g` (gigabytes). If you omit the unit, the system uses bytes.
+      --stop-signal string            Signal to stop the container
+      --stop-timeout int              Timeout (in seconds) to stop a container
+      --storage-opt value             Storage driver options for the container (default [])
+      --sysctl value                  Sysctl options (default map[])
+      --tmpfs value                   Mount a tmpfs directory (default [])
+  -t, --tty                           Allocate a pseudo-TTY
+      --ulimit value                  Ulimit options (default [])
+  -u, --user string                   Username or UID (format: &lt;name|uid&gt;[:&lt;group|gid&gt;])
+      --userns string                 User namespace to use
+                                      &#x27;host&#x27;: Use the Docker host user namespace
+                                      &#x27;&#x27;: Use the Docker daemon user namespace specified by `--userns-remap` option.
+      --uts string                    UTS namespace to use
+  -v, --volume value                  Bind mount a volume (default []). The format
+                                      is `[host-src:]container-dest[:&lt;options&gt;]`.
+                                      The comma-delimited `options` are [rw|ro],
+                                      [z|Z], [[r]shared|[r]slave|[r]private],
+                                      [delegated|cached|consistent], and
+                                      [nocopy]. The &#x27;host-src&#x27; is an absolute path
+                                      or a name value.
+      --volume-driver string          Optional volume driver for the container
+      --volumes-from value            Mount volumes from the specified container(s) (default [])
+  -w, --workdir string                Working directory inside the container
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>The <code>docker create</code> command creates a writeable container layer over the
+specified image and prepares it for running the specified command.  The
+container ID is then printed to <code>STDOUT</code>.  This is similar to <code>docker run -d</code>
+except the container is never started.  You can then use the
+<code>docker start &lt;container_id&gt;</code> command to start the container at any point.</p>
+<p>This is useful when you want to set up a container configuration ahead of time
+so that it is ready to start when you need it. The initial status of the
+new container is <code>created</code>.</p>
+<p>Please see the <a href="run.html">run command</a> section and the <a href="../run.html">Docker run reference</a> for more details.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="create-and-start-a-container" tabindex="-1">Create and start a container <a class="header-anchor" href="#create-and-start-a-container" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create -t -i fedora bash</span>
+
+6d8af538ec541dd581ebc2a24153a28329acb5268abe5ef868c1f1a261221752
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker start -a -i 6d8af538ec5</span>
+
+bash-4.2#
+</code></pre>
+<h3 id="initialize-volumes" tabindex="-1">Initialize volumes <a class="header-anchor" href="#initialize-volumes" aria-hidden="true">🔗</a></h3>
+<p>As of v1.4.0 container volumes are initialized during the <code>docker create</code> phase
+(i.e., <code>docker run</code> too). For example, this allows you to <code>create</code> the <code>data</code>
+volume container, and then use it from another container:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create -v /data --name data ubuntu</span>
+
+240633dfbb98128fa77473d3d9018f6123b99c454b3251427ae190a7d951ad57
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker run --<span class="hljs-built_in">rm</span> --volumes-from data ubuntu <span class="hljs-built_in">ls</span> -la /data</span>
+
+total 8
+drwxr-xr-x  2 root root 4096 Dec  5 04:10 .
+drwxr-xr-x 48 root root 4096 Dec  5 04:11 ..
+</code></pre>
+<p>Similarly, <code>create</code> a host directory bind mounted volume container, which can
+then be used from the subsequent container:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create -v /home/docker:/docker --name docker ubuntu</span>
+
+9aa88c08f319cd1e4515c3c46b0de7cc9aa75e878357b1e96f91e2c773029f03
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker run --<span class="hljs-built_in">rm</span> --volumes-from docker ubuntu <span class="hljs-built_in">ls</span> -la /docker</span>
+
+total 20
+drwxr-sr-x  5 1000 staff  180 Dec  5 04:00 .
+drwxr-xr-x 48 root root  4096 Dec  5 04:13 ..
+-rw-rw-r--  1 1000 staff 3833 Dec  5 04:01 .ash_history
+-rw-r--r--  1 1000 staff  446 Nov 28 11:51 .ashrc
+-rw-r--r--  1 1000 staff   25 Dec  5 04:00 .gitconfig
+drwxr-sr-x  3 1000 staff   60 Dec  1 03:28 .local
+-rw-r--r--  1 1000 staff  920 Nov 28 11:51 .profile
+drwx--S---  2 1000 staff  460 Dec  5 00:51 .ssh
+drwxr-xr-x 32 1000 staff 1140 Dec  5 04:01 docker
+</code></pre>
+<p>Set storage driver options per container.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create -it --storage-opt size=120G fedora /bin/bash</span>
+</code></pre>
+<p>This (size) will allow to set the container rootfs size to 120G at creation time.
+This option is only available for the <code>devicemapper</code>, <code>btrfs</code>, <code>overlay2</code>,
+<code>windowsfilter</code> and <code>zfs</code> graph drivers.
+For the <code>devicemapper</code>, <code>btrfs</code>, <code>windowsfilter</code> and <code>zfs</code> graph drivers,
+user cannot pass a size less than the Default BaseFS Size.
+For the <code>overlay2</code> storage driver, the size option is only available if the
+backing fs is <code>xfs</code> and mounted with the <code>pquota</code> mount option.
+Under these conditions, user can pass any size less than the backing fs size.</p>
+<h3 id="specify-isolation-technology-for-container-(--isolation)" tabindex="-1">Specify isolation technology for container (--isolation) <a class="header-anchor" href="#specify-isolation-technology-for-container-(--isolation)" aria-hidden="true">🔗</a></h3>
+<p>This option is useful in situations where you are running Docker containers on
+Windows. The <code>--isolation=&lt;value&gt;</code> option sets a container's isolation
+technology. On Linux, the only supported is the <code>default</code> option which uses
+Linux namespaces. On Microsoft Windows, you can specify these values:</p>
+<table class="table"><thead>
+<tr>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>default</code></td>
+<td>Use the value specified by the Docker daemon's <code>--exec-opt</code> . If the <code>daemon</code> does not specify an isolation technology, Microsoft Windows uses <code>process</code> as its default value if the daemon is running on Windows server, or <code>hyperv</code> if running on Windows client.</td>
+</tr>
+<tr>
+<td><code>process</code></td>
+<td>Namespace isolation only.</td>
+</tr>
+<tr>
+<td><code>hyperv</code></td>
+<td>Hyper-V hypervisor partition-based isolation.</td>
+</tr>
+</tbody>
+</table>
+<p>Specifying the <code>--isolation</code> flag without a value is the same as setting <code>--isolation=&quot;default&quot;</code>.</p>
+<h3 id="dealing-with-dynamically-created-devices-(--device-cgroup-rule)" tabindex="-1">Dealing with dynamically created devices (--device-cgroup-rule) <a class="header-anchor" href="#dealing-with-dynamically-created-devices-(--device-cgroup-rule)" aria-hidden="true">🔗</a></h3>
+<p>Devices available to a container are assigned at creation time. The
+assigned devices will both be added to the cgroup.allow file and
+created into the container once it is run. This poses a problem when
+a new device needs to be added to running container.</p>
+<p>One of the solutions is to add a more permissive rule to a container
+allowing it access to a wider range of devices. For example, supposing
+our container needs access to a character device with major <code>42</code> and
+any number of minor number (added as new devices appear), the
+following rule would be added:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create --device-cgroup-rule=<span class="hljs-string">&#x27;c 42:* rmw&#x27;</span> -name my-container my-image</span>
+</code></pre>
+<p>Then, a user could ask <code>udev</code> to execute a script that would <code>docker exec my-container mknod newDevX c 42 &lt;minor&gt;</code>
+the required device when it is added.</p>
+<p>NOTE: initially present devices still need to be explicitly added to
+the create/run command</p>
+</body></html>

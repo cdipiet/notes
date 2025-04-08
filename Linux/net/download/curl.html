@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.024" />
+        <title>curl</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="curl" tabindex="-1">curl <a class="header-anchor" href="#curl" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.024</p>
+<nav class="table-of-contents"><ol><li><a href="#stampare-un-newline-dopo-il-risultato">Stampare un newline dopo il risultato </a></li><li><a href="#visualizzare-header-http">Visualizzare Header HTTP </a></li><li><a href="#curl-per-interrogare-google">Curl per interrogare google </a></li><li><a href="#curl-per-controllare-l'account-gmail">Curl per controllare l&#39;account GMail </a></li><li><a href="#use-curl-to-monitor-your-vonage-phone-bill">Use curl to Monitor Your Vonage Phone Bill </a></li></ol></nav><h1 id="curl-1" tabindex="-1">curl <a class="header-anchor" href="#curl-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://man.archlinux.org/man/curl.1">https://man.archlinux.org/man/curl.1</a></li>
+</ul>
+<table class="table"><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-o, --output &lt;file&gt;</code></td>
+<td>Write output to <file> instead of stdout. <code>curl &quot;http://{one,two}.example.com&quot; -o &quot;file_#1.txt&quot;</code> <code>curl &quot;http://{site,host}.host[1-5].com&quot; -o &quot;#1_#2&quot; </code></td>
+</tr>
+<tr>
+<td><code>-X, --request &lt;command&gt;</code></td>
+<td>(HTTP) Specifies a custom request method to use when communicating with the HTTP server. The specified request method will be used instead of the method otherwise used (which defaults to GET).</td>
+</tr>
+<tr>
+<td><code>-k, --insecure</code></td>
+<td>(TLS) By default, every SSL connection curl makes is verified to be secure. This option allows curl to proceed and operate even for server connections otherwise considered insecure.</td>
+</tr>
+<tr>
+<td><code>-w, --write-out &lt;format&gt;</code></td>
+<td>Make curl display information on stdout after a completed transfer.</td>
+</tr>
+<tr>
+<td><code>-s, --silent</code></td>
+<td>Silent or quiet mode. Don't show progress meter or error messages. Makes Curl mute. It will still output the data you ask for,</td>
+</tr>
+<tr>
+<td><code>-I, --head</code></td>
+<td>(HTTP FTP FILE) Fetch the headers only!</td>
+</tr>
+<tr>
+<td><code>-H, --header &lt;header/@file&gt;</code></td>
+<td>(HTTP) Extra header to include in the request when sending HTTP to a server. <code>curl -H &quot;X-First-Name: Joe&quot; http://example.com/</code></td>
+</tr>
+<tr>
+<td><code>-i, --include</code></td>
+<td>Include the HTTP response headers in the output.</td>
+</tr>
+<tr>
+<td><code>-L, --location</code></td>
+<td>(HTTP) If the server reports that the requested page has moved to a different location (indicated with a Location: header and a 3XX response code), this option will make curl redo the request on the new place.</td>
+</tr>
+<tr>
+<td><code>-f, --fail</code></td>
+<td>(HTTP) Fail silently (no output at all) on server errors.</td>
+</tr>
+<tr>
+<td><code>-d,  --data &lt;data</code></td>
+<td>Sends the specified data in a POST request to the HTTP server</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">curl --basic --user <span class="hljs-string">&quot;username:password&quot;</span> --data-ascii <span class="hljs-string">&quot;status=140 character message&quot;</span> http://twitter.com/statuses/update.json
+curl -sL https://deb.nodesource.com/setup_12.x | <span class="hljs-built_in">sudo</span> -E bash -
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+curl http://0.0.0.0:8000/schedule/get_schedules/
+<span class="hljs-comment"># HTTPS con certificato self signed (-k)</span>
+curl -k https://0.0.0.0:8000/schedule/get_schedules/
+<span class="hljs-comment"># HTTPS con root CA, non richiede piu il -k per disabilitare il warning</span>
+curl -w <span class="hljs-string">&quot;\n&quot;</span> -X POST https://0.0.0.0:8000/schedule/schedule/1/?seconds=10
+curl -w <span class="hljs-string">&quot;\n&quot;</span> -X POST https://0.0.0.0:8000/schedule/schedule/2/?seconds=10
+curl -w <span class="hljs-string">&quot;\n&quot;</span> https://0.0.0.0:8000/schedule/get_schedules/
+curl -w <span class="hljs-string">&quot;\n&quot;</span> -X DELETE https://0.0.0.0:8000/schedule/schedule/1/
+curl -w <span class="hljs-string">&quot;\n&quot;</span> -X DELETE https://0.0.0.0:8000/schedule/schedule/2/
+curl -w <span class="hljs-string">&quot;\n&quot;</span> https://0.0.0.0:8000/schedule/get_schedules/
+
+<span class="hljs-comment"># Generate a Python endpoint for signing up that only allows strong passwords.</span>
+<span class="hljs-comment"># https://github.com/copilot/c/3569773a-78d4-4cbf-be8b-2419f9d8b694</span>
+$ curl -X POST http://127.0.0.1:5000/signup -H <span class="hljs-string">&quot;Content-Type: application/json&quot;</span> -d <span class="hljs-string">&#x27;{&quot;username&quot;:&quot;testuser&quot;, &quot;password&quot;:&quot;StrongPass1!&quot;}&#x27;</span>
+
+
+curl -X <span class="hljs-string">&#x27;POST&#x27;</span> \
+  <span class="hljs-string">&#x27;http://localhost:8000/create_api_key&#x27;</span> \
+  -H <span class="hljs-string">&#x27;accept: application/json&#x27;</span> \
+  -d <span class="hljs-string">&#x27;&#x27;</span>
+
+curl -X <span class="hljs-string">&#x27;GET&#x27;</span> \
+  <span class="hljs-string">&#x27;http://localhost:8000/keys&#x27;</span> \
+  -H <span class="hljs-string">&#x27;accept: application/json&#x27;</span>
+
+curl -X <span class="hljs-string">&#x27;GET&#x27;</span> \
+  <span class="hljs-string">&#x27;http://localhost:8000/protected&#x27;</span> \
+  -H <span class="hljs-string">&#x27;accept: application/json&#x27;</span> \
+  -H <span class="hljs-string">&#x27;api-key: 30fdea4affa15f15a2f52865f2c8d749acd74cac3bf19026bf29b458a7c7f293&#x27;</span>
+
+</code></pre>
+<h2 id="stampare-un-newline-dopo-il-risultato" tabindex="-1">Stampare un newline dopo il risultato <a class="header-anchor" href="#stampare-un-newline-dopo-il-risultato" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ curl -w <span class="hljs-string">&quot;\n&quot;</span> ifconfig.me
+</code></pre>
+<h2 id="visualizzare-header-http" tabindex="-1">Visualizzare Header HTTP <a class="header-anchor" href="#visualizzare-header-http" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    curl -I g.cn
+</code></pre>
+<h2 id="curl-per-interrogare-google" tabindex="-1">Curl per interrogare google <a class="header-anchor" href="#curl-per-interrogare-google" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">curl -A mozilla http://www.google.com/search?q=open+<span class="hljs-built_in">source</span> | html2text -width 80
+</code></pre>
+<h2 id="curl-per-controllare-l'account-gmail" tabindex="-1">Curl per controllare l'account GMail <a class="header-anchor" href="#curl-per-controllare-l'account-gmail" aria-hidden="true">🔗</a></h2>
+<p>Con la stringa che segue (che usa curl) e' possibile controllare
+quali sono i messaggi ancora da leggere nella nostra casella GMail.
+Basta sostituire username con il vostro nome utente. Ecco il comando:</p>
+<pre><code class="language-bash">curl -u corrado.dipietro --silent <span class="hljs-string">&quot;https://mail.google.com/mail/feed/atom&quot;</span> | perl -ne <span class="hljs-string">&#x27;print &quot;\t&quot; if //; print &quot;$2\n&quot; if /&lt;(title|name)&gt;(.*)&lt;\/\1&gt;/;&#x27;</span>
+</code></pre>
+<p>Una volta copiata ed eseguita, basterà richiamarla dall' history così:</p>
+<pre><code>!curl
+</code></pre>
+<h2 id="use-curl-to-monitor-your-vonage-phone-bill" tabindex="-1">Use curl to Monitor Your Vonage Phone Bill <a class="header-anchor" href="#use-curl-to-monitor-your-vonage-phone-bill" aria-hidden="true">🔗</a></h2>
+<p>If you're a Vonage user and you'd like to keep tabs on your bill as the month progresses, the script described here can help. The script uses curl to login to your Vonage account and download the web page with your current balance. The balance is then extracted using grep and sed.</p>
+<p>Downloading web pages with curl is fairly easy, it gets a bit tricky though when you need to login to a web site before you can get to the web page you want to download. The basic sequence of steps to get to a page behind a login page using curl is:</p>
+<ul>
+<li>Determine the login URL (the page with the login form on it).</li>
+<li>Open the login page in your browser.</li>
+<li>Use the browser's &quot;View Source&quot; option to look at the HTML and locate the login form. Make note of the URL that the form posts to and the names of the fields that get posted. Generally there are only 2 fields: username and password (although they might have different names), but there may also be some hidden fields that you need to include (as well as understand what they are and what is an appropriate value to send).</li>
+<li>Retrieve the login page with curl. Note, that it may not actually be necessary to retrieve this page but if the page that the form posts to expects some cookies to be set, you may need to retrieve this first page so that you can create and save the cookies (which curl does for you).</li>
+<li>Invoke curl a second time and post the login data.</li>
+<li>Now invoke curl a third time passing the URL of the actual page that you want to retrieve.</li>
+<li>If the site has a logout link you can optionally also use curl a fourth time to retrieve the logout page to ensure that the session is closed.</li>
+</ul>
+<p>The curl command below retrieves the Vonage login page:</p>
+<pre><code class="language-bash">curl --silent --cookie-jar <span class="hljs-variable">$cookie_jar</span> --output <span class="hljs-variable">$web_page</span>-1 http://www.vonage.com/?login
+</code></pre>
+<p>Note the --cookie-jar option, this stores any cookies required by the website in the specified file. The file to store the retrieved page is specified by the --output option.</p>
+<p>The curl command below now posts the login data required by the login form:</p>
+<pre><code>curl --silent --cookie $cookie_jar --cookie-jar $cookie_jar \
+--location \
+--data &quot;username=$username=$password&quot; \
+--output $web_page-2 \
+https://secure.vonage.com/vonage-web/public/login.htm
+</code></pre>
+<p>Notice here that in addition to --cookie-jar option we also specify the --cookie option. This tells curl to use the cookie jar that we created in the first invocation as input for this invocation. We also, specify the --location option so that any redirects sent by the page are followed. The actual data to post is specified with the --data option. The values before the equals signs in the data are the fields names from the login form, the values after are the appropriate field values to post.</p>
+<p>The following two curl commands now retrieve the billing page and logout from Vonage:</p>
+<pre><code>curl --silent --cookie $cookie_jar --cookie-jar $cookie_jar \
+--output $web_page-3 \
+https://secure.vonage.com/webaccount/billing/index.htm
+
+curl --silent --cookie $cookie_jar --cookie-jar $cookie_jar \
+--location \
+--output $web_page-4 \
+https://secure.vonage.com/webaccount/public/logoff.htm
+</code></pre>
+<p>All that's left now is to extract the account balance from the billing page (the third page that we retrieved). After looking at the returned HTML, I was able to see where the data I wanted was located and determine a way to filter out all the extraneous information using grep and sed:</p>
+<pre><code>echo Phone bill: $(grep 'td_value_total_amount' $web_page-3 | sed -e 's/.*&gt;\$//' -e 's/&lt;.*//')
+</code></pre>
+<p>The following shows a sample run of the script:</p>
+<pre><code>$ sh check-vonage.sh
+
+Phone bill: 12.50
+</code></pre>
+<p>The entire script follows:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+cookie_jar=cookies.tmp
+web_page=vonage.tmp
+username=USERNAME
+password=PASSWORD
+
+<span class="hljs-built_in">trap</span> <span class="hljs-string">&quot;rm -f <span class="hljs-variable">$cookie_jar</span> <span class="hljs-variable">$web_page</span>-*&quot;</span> EXIT
+
+curl --silent --cookie-jar <span class="hljs-variable">$cookie_jar</span> \
+--output <span class="hljs-variable">$web_page</span>-1 \
+http://www.vonage.com/?login
+
+curl --silent --cookie <span class="hljs-variable">$cookie_jar</span> --cookie-jar <span class="hljs-variable">$cookie_jar</span> \
+--location \
+--data <span class="hljs-string">&quot;username=<span class="hljs-variable">$username</span>=<span class="hljs-variable">$password</span>&quot;</span> \
+--output <span class="hljs-variable">$web_page</span>-2 \
+https://secure.vonage.com/vonage-web/public/login.htm
+
+curl --silent --cookie <span class="hljs-variable">$cookie_jar</span> --cookie-jar <span class="hljs-variable">$cookie_jar</span> \
+--output <span class="hljs-variable">$web_page</span>-3 \
+https://secure.vonage.com/webaccount/billing/index.htm
+
+curl --silent --cookie <span class="hljs-variable">$cookie_jar</span> --cookie-jar <span class="hljs-variable">$cookie_jar</span> \
+--location \
+--output <span class="hljs-variable">$web_page</span>-4 \
+https://secure.vonage.com/webaccount/public/logoff.htm
+
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span> Phone bill: $(grep <span class="hljs-string">&#x27;td_value_total_amount&#x27;</span> <span class="hljs-variable">$web_page</span>-3 | sed -e <span class="hljs-string">&#x27;s/.*&gt;\$//&#x27;</span> -e <span class="hljs-string">&#x27;s/&lt;.*//&#x27;</span>)
+
+</code></pre>
+</body></html>

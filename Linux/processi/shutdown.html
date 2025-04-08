@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.917" />
+        <title>shutdown</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="shutdown" tabindex="-1">shutdown <a class="header-anchor" href="#shutdown" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.917</p>
+<nav class="table-of-contents"><ol><li><a href="#shutdown-x">Shutdown X </a></li><li><a href="#kernel-(sysrq)">Kernel (SysRq) </a></li><li><a href="#shutdown-reisuo">Shutdown REISUO </a><ol><li><a href="#tasto-r-sist">Tasto R Sist </a></li></ol></li><li><a href="#abilitazione-della-combinazione-tasti-altgr%2Brsist">Abilitazione della combinazione tasti ALTGr+Rsist </a></li><li><a href="#modo-consigliato-di-riavvio-del-computer-quando-e'-bloccato">Modo consigliato di riavvio del computer quando e&#39; bloccato </a></li></ol></nav><h1 id="shutdown-del-sistema" tabindex="-1">Shutdown del sistema <a class="header-anchor" href="#shutdown-del-sistema" aria-hidden="true">🔗</a></h1>
+<h2 id="shutdown-x" tabindex="-1">Shutdown X <a class="header-anchor" href="#shutdown-x" aria-hidden="true">🔗</a></h2>
+<pre><code>ctrl + alt + backspace
+
+alt destro + printscreen + k
+</code></pre>
+<h2 id="kernel-(sysrq)" tabindex="-1">Kernel (SysRq) <a class="header-anchor" href="#kernel-(sysrq)" aria-hidden="true">🔗</a></h2>
+<p>Ci sono diverse combinazioni di tastiera che possono inviare segnali SysRq al Kernel mediante la combinazione di tasti <span class="k">ALT</span>+<span class="k">SysRq</span>.
+In alcune tastiere il tasto <code>SysRq</code> si chiama <code>Print Screen</code> o <code>Stamp</code>.</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Keyboard_shortcuts#Kernel_(SysRq)">https://wiki.archlinux.org/title/Keyboard_shortcuts#Kernel_(SysRq)</a></li>
+<li><a href="https://wiki.archlinux.org/title/Sysctl">https://wiki.archlinux.org/title/Sysctl</a></li>
+<li><a href="https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html">https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html</a></li>
+<li><a href="https://github.com/systemd/systemd/blob/main/sysctl.d/50-default.conf#L14-L19">https://github.com/systemd/systemd/blob/main/sysctl.d/50-default.conf#L14-L19</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Magic_SysRq_key">https://en.wikipedia.org/wiki/Magic_SysRq_key</a></li>
+</ul>
+<p>Di default <strong>systemd</strong> imposta i permessi <strong>sysrq</strong> a <code>0x10</code>,</p>
+<p><a href="https://github.com/systemd/systemd/blob/main/sysctl.d/50-default.conf#L14-L19">https://github.com/systemd/systemd/blob/main/sysctl.d/50-default.conf#L14-L19</a></p>
+<pre><code class="language-ini"><span class="hljs-comment"># System Request functionality of the kernel (SYNC)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Use kernel.sysrq = 1 to allow all keys.</span>
+<span class="hljs-comment"># See https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html for a list</span>
+<span class="hljs-comment"># of values and keys.</span>
+<span class="hljs-attr">kernel.sysrq</span> = <span class="hljs-number">16</span>
+</code></pre>
+<p>Il valore <code>0x10</code> come si vede da <a href="https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html#how-do-i-enable-the-magic-sysrq-key">https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html#how-do-i-enable-the-magic-sysrq-key</a>:</p>
+<pre><code class="language-ini"><span class="hljs-attr">1</span>  = enable all functions of sysrq
+<span class="hljs-attr">16</span> =  <span class="hljs-number">0</span>x10 - enable sync command
+</code></pre>
+<p>abilita solamente l'invio del comando sync, il che non consente di inviare il segnale di shutdown o reboot.
+Bisogna impostare <code>kernel.sysrq = 1</code> nella configurazione <strong>sysctl</strong> per abilitare tutti i comandi sysrq inviabili da tastiera al kernel.</p>
+<ul>
+<li><a href="https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html#how-do-i-enable-the-magic-sysrq-key">https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html#how-do-i-enable-the-magic-sysrq-key</a></li>
+</ul>
+<p>I comandi:</p>
+<p><code>sysctl kernel.sysrq=1</code> o <code>echo &quot;1&quot; &gt; /proc/sys/kernel/sysrq</code></p>
+<p>non cambiano in maniera persistente l'impostazione del parametro, sono temporanei ed al reboot vengono perduti.</p>
+<p>Un primo modo per impostare sysrq è quello di fornire un parametro al kernel <a href="https://wiki.archlinux.org/title/Kernel_parameters">https://wiki.archlinux.org/title/Kernel_parameters</a></p>
+<pre><code>sysrq_always_enabled=1
+</code></pre>
+<p>Oppure bisogna impostare <code>sysctl</code> per avere una configurazione persistente.</p>
+<p><a href="../kernel/sysctl.html">sysctl</a></p>
+<pre><code class="language-bash">$ locate sysctl.d
+$ <span class="hljs-built_in">cd</span> /usr/lib/sysctl.d/
+$ grep sysrq /usr/lib/sysctl.d/*
+/usr/lib/sysctl.d/50-default.conf:# Use kernel.sysrq = 1 to allow all keys.
+/usr/lib/sysctl.d/50-default.conf:# See https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html <span class="hljs-keyword">for</span> a list
+/usr/lib/sysctl.d/50-default.conf:kernel.sysrq = 16
+$ systemd-analyze cat-config sysctl.d --no-pager <span class="hljs-comment"># per vedere la configurazione attuale</span>
+$ sysctl --system <span class="hljs-comment"># carica tutti i file di configurazione</span>
+$ sysctl --all    <span class="hljs-comment"># visualizza tutti i parametri attuali in /proc/sys/kernel</span>
+$ <span class="hljs-built_in">sudo</span> sysctl --all| grep rq
+kernel.sysrq = 16
+
+```bash
+$ <span class="hljs-built_in">sudo</span> sysctl --all| grep rq
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/60-sysrq.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+kernel.sysrq = 1
+EOF
+$ <span class="hljs-built_in">sudo</span> sysctl --system <span class="hljs-comment"># carica tutti i file di configurazione</span>
+$ <span class="hljs-built_in">sudo</span> sysctl --all| grep rq
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Keyboard Shortcut</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="k">Alt</span>+<span class="k">Stamp</span>+<span class="k">r</span></td>
+<td style="text-align:left">Unraw Take control of keyboard back from X.</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">Alt</span>+<span class="k">Stamp</span>+<span class="k">e</span></td>
+<td style="text-align:left">Terminate Send SIGTERM to all processes, allowing them to terminate gracefully.</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">Alt</span>+<span class="k">Stamp</span>+<span class="k">i</span></td>
+<td style="text-align:left">Kill Send SIGKILL to all processes, forcing them to terminate immediately.</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">Alt</span>+<span class="k">Stamp</span>+<span class="k">s</span></td>
+<td style="text-align:left">Sync Flush data to disk.</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">Alt</span>+<span class="k">Stamp</span>+<span class="k">u</span></td>
+<td style="text-align:left">Unmount Unmount and remount all filesystems read-only.</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">Alt</span>+<span class="k">Stamp</span>+<span class="k">b</span></td>
+<td style="text-align:left">Reboot Reboot</td>
+</tr>
+</tbody>
+</table>
+<h2 id="shutdown-reisuo" tabindex="-1">Shutdown REISUO <a class="header-anchor" href="#shutdown-reisuo" aria-hidden="true">🔗</a></h2>
+<p><span class="b r">ALTGr+RSist+O</span>  Invia al kernel il segnale di shutdown</p>
+<h3 id="tasto-r-sist" tabindex="-1">Tasto R Sist <a class="header-anchor" href="#tasto-r-sist" aria-hidden="true">🔗</a></h3>
+<p><a href="https://it.wikipedia.org/wiki/R_Sist">https://it.wikipedia.org/wiki/R_Sist</a></p>
+<p><code>R Sist</code> (in inglese <code>SysReq</code> o <code>SysRq</code>, abbreviazioni di richiesta di sistema)</p>
+<p>Sulle tastiere a 84 tasti <code>R Sist</code> era un tasto a parte. Sulle più recenti tastiere a 101 tasti, condivide la posizione con il tasto <code>Stamp</code>.</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:center">Stamp</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">R Sist</td>
+</tr>
+</tbody>
+</table>
+<p><span class="k">Stamp</span><br>
+<span class="k">R Sist</span></p>
+<p>Cercare il tasto <code>RsysQ</code></p>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> showkey -k
+</code></pre>
+<p>premendo <code>Stamp</code> si ottiene <code>99</code>, è lui!</p>
+<h2 id="abilitazione-della-combinazione-tasti-altgr%2Brsist" tabindex="-1">Abilitazione della combinazione tasti <span class="k">ALTGr</span>+<span class="k">Rsist</span> <a class="header-anchor" href="#abilitazione-della-combinazione-tasti-altgr%2Brsist" aria-hidden="true">🔗</a></h2>
+<p>Verifica abilitazione kernel</p>
+<pre><code class="language-bash">$ grep CONFIG_MAGIC_SYSRQ /boot/config*
+CONFIG_MAGIC_SYSRQ=y
+</code></pre>
+<p>Abilitazione runtime</p>
+<p>il parametro del kernel <code>/proc/sys/kernel/sysrq</code> deve valere <code>1</code>:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> /proc/sys/kernel/sysrq
+$ <span class="hljs-built_in">echo</span> 1 &gt; /proc/sys/kernel/sysrq
+</code></pre>
+<p>oppure:</p>
+<pre><code class="language-bash">$ sysctl -w kernel.sysrq=1
+</code></pre>
+<p>Per rendere l'abilitazione permanente inserire la seguente riga nel file <code>/etc/sysctl.d/99-sysctl.conf</code>:</p>
+<pre><code class="language-bash">kernel.sysrq=1
+</code></pre>
+<h2 id="modo-consigliato-di-riavvio-del-computer-quando-e'-bloccato" tabindex="-1">Modo consigliato di riavvio del computer quando e' bloccato <a class="header-anchor" href="#modo-consigliato-di-riavvio-del-computer-quando-e'-bloccato" aria-hidden="true">🔗</a></h2>
+<p><strong>R&gt;E&gt;I&gt;S&gt;U&gt;B</strong></p>
+<p><strong>Radunare Elefanti Indiani Su Una Barca</strong></p>
+<p><code>AltGr+Rsyst+...: REISUB</code></p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Tasto</th>
+<th style="text-align:left">Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0-9</td>
+<td style="text-align:left">imposta il livello di log di comandi come M e P</td>
+</tr>
+<tr>
+<td style="text-align:left" class="b r">R</td>
+<td style="text-align:left">passa la tastiera in modalita XLATE, riprende il controllo della tastiera</td>
+</tr>
+<tr>
+<td style="text-align:left" class="b r">E</td>
+<td style="text-align:left">invia il segnale SIGTERM a tutti i processi tranne init, modo pulito di chiudere le applicazioni</td>
+</tr>
+<tr>
+<td style="text-align:left" class="b r">I</td>
+<td style="text-align:left">invia il segnale SIGKILL a tutti i processi escluso init. Terminazione forzata</td>
+</tr>
+<tr>
+<td style="text-align:left" class="b r">S</td>
+<td style="text-align:left">scrive su disco tutti i dati contenuti nei buffer</td>
+</tr>
+<tr>
+<td style="text-align:left" class="b r">U</td>
+<td style="text-align:left">rimonta tutti i filesystem in sola lettura</td>
+</tr>
+<tr>
+<td style="text-align:left" class="b r">B</td>
+<td style="text-align:left">esegue un riavvio immediato</td>
+</tr>
+<tr>
+<td style="text-align:left">O</td>
+<td style="text-align:left">spegne il computer</td>
+</tr>
+<tr>
+<td style="text-align:left">M</td>
+<td style="text-align:left">mostra sulla console dati statistici sull'uso della memoria</td>
+</tr>
+<tr>
+<td style="text-align:left">T</td>
+<td style="text-align:left">mostra sulla console la lista dei task</td>
+</tr>
+<tr>
+<td style="text-align:left">H</td>
+<td style="text-align:left">mostra un breve sommario di tutti i tasti R syst</td>
+</tr>
+</tbody>
+</table>
+</body></html>

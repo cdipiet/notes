@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.801" />
+        <title>debug</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="debug" tabindex="-1">debug <a class="header-anchor" href="#debug" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.801</p>
+<nav class="table-of-contents"><ol><li><a href="#tracciare-l'esecuzione-in-un-file-di-log">tracciare l&#39;esecuzione in un file di log </a></li><li><a href="#opzione--x-passata-da-shebang">Opzione -x passata da shebang </a></li><li><a href="#opzione--x-attivata%2Fdisattivata-nello-script">Opzione -x attivata/disattivata nello script </a></li><li><a href="#parametro-bash-errtrace-(-e)">parametro bash errtrace (-E) </a></li><li><a href="#parametro-bash-inherit_errexit">parametro bash inherit_errexit </a></li><li><a href="#writing-safer-bash-scripts">Writing safer Bash scripts </a><ol><li><a href="#errexit">errexit </a></li><li><a href="#nounset%2C-with-pattern">nounset, with pattern </a></li><li><a href="#pipefail">pipefail </a></li><li><a href="#pipefail-versus-grep--q">pipefail versus grep -q </a></li></ol></li><li><a href="#print_variables">print_variables </a><ol><li><a href="#esempio-di-utilizzo">esempio di utilizzo </a></li><li><a href="#richiamo-sugli-array">richiamo sugli array </a></li><li><a href="#richiamo-sugli-array-associativi">richiamo sugli array associativi </a></li></ol></li></ol></nav><h1 id="tecniche-di-debug" tabindex="-1">Tecniche di debug <a class="header-anchor" href="#tecniche-di-debug" aria-hidden="true">🔗</a></h1>
+<pre><code>help set | less
+
+-x  Print commands and their arguments as they are executed.
+-e  Exit immediately if a command exits with a non-zero status.
+-v  Print shell input lines as they are read.
+Using + rather than - causes these flags to be turned off.
+</code></pre>
+<pre><code class="language-bash">bash -ixlc : 2&gt;&amp;1 | grep ...
+zsh -ixc : 2&gt;&amp;1 | grep ...
+</code></pre>
+<h2 id="tracciare-l'esecuzione-in-un-file-di-log" tabindex="-1">tracciare l'esecuzione in un file di log <a class="header-anchor" href="#tracciare-l'esecuzione-in-un-file-di-log" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">exec</span> 5&gt; <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-subst">$(mktemp)</span>&quot;</span>)</span>/<span class="hljs-subst">$(basename <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>)</span>.log&quot;</span>
+BASH_XTRACEFD=<span class="hljs-string">&quot;5&quot;</span>
+<span class="hljs-built_in">set</span> -x
+</code></pre>
+<p>Note how we get the system temporary directory via <code>dirname &quot;$(mktemp)&quot;</code>.</p>
+<h2 id="opzione--x-passata-da-shebang" tabindex="-1">Opzione -x passata da shebang <a class="header-anchor" href="#opzione--x-passata-da-shebang" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env -S bash -x</span>
+<span class="hljs-comment"># oppure set -x</span>
+IFS=<span class="hljs-string">&quot; &quot;</span>
+FS_NUM=1
+<span class="hljs-comment">#grep -v \# /etc/fstab | grep ntfs-3g | while read FS MP REST</span>
+grep ntfs-3g /etc/fstab | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> FS MP REST
+<span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> [[ ! <span class="hljs-variable">$FS</span> == \#* ]]
+    <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${FS_NUM}</span>: file system: <span class="hljs-variable">${FS}</span>&quot;</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${FS_NUM}</span>: mount point: <span class="hljs-variable">${MP}</span>&quot;</span>
+        ((FS_NUM++))
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="opzione--x-attivata%2Fdisattivata-nello-script" tabindex="-1">Opzione -x attivata/disattivata nello script <a class="header-anchor" href="#opzione--x-attivata%2Fdisattivata-nello-script" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">set</span> -x
+IFS=<span class="hljs-string">&quot; &quot;</span>
+FS_NUM=1
+grep ntfs-3g /etc/fstab | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> FS MP REST
+<span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> [[ ! <span class="hljs-variable">$FS</span> == \#* ]]
+    <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${FS_NUM}</span>: file system: <span class="hljs-variable">${FS}</span>&quot;</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${FS_NUM}</span>: mount point: <span class="hljs-variable">${MP}</span>&quot;</span>
+        ((FS_NUM++))
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">set</span> +x
+</code></pre>
+<h2 id="parametro-bash-errtrace-(-e)" tabindex="-1">parametro bash errtrace (-E) <a class="header-anchor" href="#parametro-bash-errtrace-(-e)" aria-hidden="true">🔗</a></h2>
+<p><a href="https://saveriomiroddi.github.io/Additional-shell-options-for-non-trivial-bash-shell-scripts/">https://saveriomiroddi.github.io/Additional-shell-options-for-non-trivial-bash-shell-scripts/</a></p>
+<p><strong>by default, in the context of functions, trapping is not inherited.</strong></p>
+<p>E' fondamentale se vogliamo che un trap definito in una function anzichè nel corpo principale dello script
+sia attivo al livello globale e non solo nella funzione</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; /tmp/test_errtrace.sh &lt;&lt; <span class="hljs-string">&#x27;SHELL&#x27;</span>
+<span class="hljs-comment"># set -o errexit</span>
+<span class="hljs-built_in">set</span> -e <span class="hljs-comment"># equivale a set -o errexit</span>
+<span class="hljs-comment"># set -o errtrace # by default, in the context of functions, trapping is not inherited.</span>
+<span class="hljs-built_in">set</span> -E            <span class="hljs-comment"># equivale a set -o errtrace</span>
+
+var=foo
+
+<span class="hljs-keyword">function</span> print_variables {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Debug: \$var= <span class="hljs-variable">$var</span>&quot;</span>
+}
+
+<span class="hljs-keyword">function</span> trap_errors {
+  <span class="hljs-built_in">trap</span> print_variables ERR <span class="hljs-comment"># grazie all&#x27;opzione errtrace il trap funziona anche se è stato definito in una funzione</span>
+}
+
+<span class="hljs-keyword">function</span> main {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The script starts&quot;</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error coming; debug routine will kick in!&quot;</span>
+  <span class="hljs-literal">false</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The script ends&quot;</span>
+}
+
+trap_errors
+main
+SHELL
+<span class="hljs-built_in">chmod</span> +x /tmp/test_errtrace.sh
+</code></pre>
+<pre><code class="language-bash">/tmp/test_errtrace.sh
+</code></pre>
+<h2 id="parametro-bash-inherit_errexit" tabindex="-1">parametro bash inherit_errexit <a class="header-anchor" href="#parametro-bash-inherit_errexit" aria-hidden="true">🔗</a></h2>
+<p>In Bash, <strong>the <code>errexit</code> option is not inherited by shells spawned by command substitution</strong>.<br>
+This is of course a significant problem.<br>
+&quot;Listing2&quot; viene stampato anche se si verifica un errore le command substitution <code>$()</code>, caso del listing della directory foo,<br>
+the problem is that in Bash, the errexit option is not inherited by shells spawned by command substitution.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; /tmp/test_inherit_errexit.sh &lt;&lt; <span class="hljs-string">&#x27;SHELL&#x27;</span>
+<span class="hljs-comment"># set -o errexit # lo stesso di set -e, non viene considerata dal command substitution ($(&lt;command&gt;)).</span>
+<span class="hljs-built_in">set</span> -e <span class="hljs-comment"># non viene considerata dal command substitution ($(&lt;command&gt;)).</span>
+<span class="hljs-built_in">shopt</span> -s inherit_errexit <span class="hljs-comment"># in questo modo lo script esce anche quando si esegue ls /foo nel command substitution</span>
+
+<span class="hljs-keyword">function</span> processed_list_directory {
+  <span class="hljs-built_in">local</span> directory_listing
+
+  directory_listing=$(<span class="hljs-built_in">ls</span> -l <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> 2&gt; /dev/null)  <span class="hljs-comment"># se va in errore non interrompe lo script anche avendo definito errexit</span>
+                                                <span class="hljs-comment"># a meno che non sia attivato inherit_errexit</span>
+
+  <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$directory_listing</span> == <span class="hljs-string">&quot;total 0&quot;</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;(empty directory)&quot;</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$directory_listing</span>&quot;</span>
+  <span class="hljs-keyword">fi</span>
+}
+
+<span class="hljs-keyword">function</span> main {
+  <span class="hljs-built_in">local</span> processed_listing_tmp
+  <span class="hljs-built_in">local</span> processed_listing_foo
+
+  processed_listing_tmp=$(processed_list_directory /tmp)
+
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Listing 1: <span class="hljs-variable">$processed_listing_tmp</span>&quot;</span>
+  <span class="hljs-built_in">echo</span>
+
+  processed_listing_foo=$(processed_list_directory /foo)
+
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Listing 2: <span class="hljs-variable">$processed_listing_foo</span>&quot;</span>
+}
+
+main
+SHELL
+<span class="hljs-built_in">chmod</span> +x /tmp/test_inherit_errexit.sh
+</code></pre>
+<h2 id="writing-safer-bash-scripts" tabindex="-1">Writing safer Bash scripts <a class="header-anchor" href="#writing-safer-bash-scripts" aria-hidden="true">🔗</a></h2>
+<p>Bash provides a set of options, some of whom make scripts more solid, and that should always be used.<br>
+The extended syntax for setting an option is <code>set -o &lt;extended_option_name&gt;</code>. Generally, one puts all the options setting at the top of the file.<br>
+The next sections will explain the relevant options.</p>
+<h3 id="errexit" tabindex="-1">errexit <a class="header-anchor" href="#errexit" aria-hidden="true">🔗</a></h3>
+<p>The option <code>errexit</code> causes the script to terminate when there is an error.<br>
+Bash, by default, uses a On Error Resume Next approach (RIP Visual Basic 6 😉), so setting this option is a no-brainer.<br>
+However, this requires some cases to be handled - some commands exit with error codes during the normal workflow, grep being one of the most common.<br>
+There is an exception to this behavior: expressions of if conditionals will not cause the script to terminate. In other words, in a script like:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> &lt;command_that_fails&gt;; <span class="hljs-keyword">then</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Extensive error message!&quot;</span>
+  <span class="hljs-built_in">exit</span> 1
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>The “Extensive error message!” will be printed; <strong>Bash will not terminate after executing <code>&lt;command_that_fails&gt;</code></strong>.<br>
+A real-world, typical example, is grep filtering; a subsection below is dedicated to this.</p>
+<h3 id="nounset%2C-with-pattern" tabindex="-1">nounset, with pattern <a class="header-anchor" href="#nounset%2C-with-pattern" aria-hidden="true">🔗</a></h3>
+<p>The option <code>nounset</code> treats as an error referencing a variable that hasn’t been initialized.<br>
+The most common logic that needs some treatment when this option is set, is user parameters handling.<br>
+Let’s suppose we write a script with the following definition: myscript <code>[&lt;optional_parameter&gt;]</code>, which can translate to:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -o nounset
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> == <span class="hljs-string">&quot;value_1&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-comment"># ...</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>If the user invokes myscript without the parameter, the script will blow up, because <code>$1</code> hasn’t been initialized!<br>
+The Bash functionality handling this case is a form of <a href="https://wiki.bash-hackers.org/syntax/pe">parameter expansion</a>; the syntax is <code>${&lt;variable_name&gt;:-&lt;value&gt;}</code>.<br>
+If we want to default to an empty string, we can omit <code>&lt;value&gt;</code>; therefore, the myscript specific code will be:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">set</span> -o nounset
+
+<span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">${1:-}</span>&quot;</span> == <span class="hljs-string">&quot;value_1&quot;</span> ]]; <span class="hljs-keyword">then</span>
+  <span class="hljs-comment"># ...</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>This won’t fail.</p>
+<p>Note that this expansion considers uninitialized variables and empty strings the same; see:</p>
+<pre><code class="language-bash">$ myvar=
+$ myvar=<span class="hljs-variable">${myvar:-myvalue}</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$myvar</span>
+myvalue
+</code></pre>
+<h3 id="pipefail" tabindex="-1">pipefail <a class="header-anchor" href="#pipefail" aria-hidden="true">🔗</a></h3>
+<p>The option pipefail treats as an error a pipeline (a sequence of commands chained via pipe <code>(|)</code>) whose any of the commands fails.</p>
+<p>By default, <strong>Bash considers, in a pipeline, only the exit status of the last command</strong>; for example:</p>
+<pre><code class="language-bash">$ bash -c <span class="hljs-string">&#x27;
+set -o errexit
+
+false | echo &quot;pipeline with error&quot;
+echo &quot;following command&quot;
+&#x27;</span>
+pipeline with error
+following <span class="hljs-built_in">command</span>
+</code></pre>
+<p>Let’s see what happens with pipefail enabled:</p>
+<pre><code class="language-bash">$ bash -c <span class="hljs-string">&#x27;
+set -o errexit
+set -o pipefail
+
+false | echo &quot;pipeline with error&quot;
+echo &quot;following command&quot;
+&#x27;</span>
+pipeline with error
+</code></pre>
+<p>The “following command” is not executed; the script exited.<br>
+Note how <code>set -o errexit</code> is required; pipefail will mark the pipeline as errored, but that alone doesn’t imply that an error will cause an exit.</p>
+<h3 id="pipefail-versus-grep--q" tabindex="-1">pipefail versus grep -q <a class="header-anchor" href="#pipefail-versus-grep--q" aria-hidden="true">🔗</a></h3>
+<p>A very headscratching behavior is <code>grep -q</code> causing an exit with error when pipefail (with <code>errexit</code>) is enabled.<br>
+<code>grep -q</code> is used when testing some data against a string, without the result to be printed (“--quiet”).<br>
+Let’s suppose we want to test if a package is not installed. In our example, the package <code>trash-cli</code> is installed.</p>
+<p>The first version could be:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! dpkg --get-selections | grep -P &quot;trash-cli\t+install&quot;; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+trash-cli         install
+</code></pre>
+<p>The string Package not installed will not be printed as expected, however, <code>trash-cli install</code> will - it’s the output of the grep command.<br>
+Therefore, one needs to filter grep’s output:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! dpkg --get-selections | grep -P &quot;trash-cli\t+install&quot; &gt; /dev/null; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+</code></pre>
+<p>All good! No more noise.<br>
+Now, the problem is that some smartpants (like me 😬) will find out the -<code>q/--quiet</code> option in the grep manpages, which supposedly yields the same result:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! dpkg --get-selections | grep -qP &quot;trash-cli\t+install&quot;; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+Package not installed
+</code></pre>
+<p>D’oh!!</p>
+<p>What happened? <a href="https://stackoverflow.com/a/19120674">This</a> happened. In simple terms, <code>grep -q</code> <strong>exits early</strong>, causing dpkg to raise an error.<br>
+For those who really want to use <code>grep -q</code> (I recognize the appeal of not using <code>&gt; /dev/null</code>), the <code>here-string</code> operator (<code>&lt;&lt;&lt;</code>) will do the trick:</p>
+<pre><code class="language-bash">bash -c <span class="hljs-string">&#x27;
+set -o pipefail
+
+if ! grep -qP &quot;trash-cli\t+install&quot; &lt;&lt;&lt; &quot;$(dpkg --get-selections)&quot;; then
+  echo &quot;Package not installed&quot;
+fi
+&#x27;</span>
+</code></pre>
+<h2 id="print_variables" tabindex="-1">print_variables <a class="header-anchor" href="#print_variables" aria-hidden="true">🔗</a></h2>
+<p><a href="https://saveriomiroddi.github.io/Bash-Print-variables-using-indirect-references-with-introduction-to-array-data-types/">https://saveriomiroddi.github.io/Bash-Print-variables-using-indirect-references-with-introduction-to-array-data-types/</a></p>
+<pre><code>man -Len bash # e cercare nameref
+</code></pre>
+<p>Questa funzione riesce a stampare array, array associativi e variabili semplici.<br>
+Utilizza una nameref(variabile riferimento indiretta) definita tramite <code>declare -n</code>,
+la variabile <code>variable_reference</code> contiene il nome della variabile finale,<br>
+e quando viene acceduta è la variabile finale ad essere acceduta.<br>
+La declare è locale, non serve fare unset.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">function</span> print_variables {
+  <span class="hljs-keyword">for</span> variable_name <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">declare</span> -n variable_reference=<span class="hljs-string">&quot;<span class="hljs-variable">$variable_name</span>&quot;</span> <span class="hljs-comment"># definizione della variabile riferimento</span>
+
+    <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$variable_name</span>:&quot;</span>
+
+    <span class="hljs-keyword">case</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(declare -p <span class="hljs-string">&quot;<span class="hljs-variable">$variable_name</span>&quot;</span>)</span>&quot;</span> <span class="hljs-keyword">in</span> <span class="hljs-comment"># declare -p estrae la definizione del tipo da una variabile</span>
+    <span class="hljs-string">&quot;declare -a&quot;</span>* )
+      <span class="hljs-comment"># caso dell&#x27;array</span>
+      <span class="hljs-keyword">for</span> entry <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${variable_reference[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span>
+        <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot; \&quot;<span class="hljs-variable">$entry</span>\&quot;&quot;</span>
+      <span class="hljs-keyword">done</span>
+      ;;
+    <span class="hljs-string">&quot;declare -A&quot;</span>* )
+      <span class="hljs-comment"># caso dell&#x27;array associativo</span>
+      <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${!variable_reference[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span>
+        <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot; <span class="hljs-variable">$key</span>=\&quot;<span class="hljs-variable">${variable_reference[$key]}</span>\&quot;&quot;</span>
+      <span class="hljs-keyword">done</span>
+      ;;
+    * )
+      <span class="hljs-comment"># caso della variabile non strutturata</span>
+      <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot; <span class="hljs-variable">$variable_reference</span>&quot;</span>
+      ;;
+    <span class="hljs-keyword">esac</span>
+
+    <span class="hljs-built_in">echo</span> <span class="hljs-comment"># stampa un newline</span>
+  <span class="hljs-keyword">done</span>
+}
+</code></pre>
+<h3 id="esempio-di-utilizzo" tabindex="-1">esempio di utilizzo <a class="header-anchor" href="#esempio-di-utilizzo" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">foo=123
+bar=(abc <span class="hljs-string">&quot;cde fgh&quot;</span> ijk)
+<span class="hljs-built_in">declare</span> -A baz=([abc]=cde [fgh ijk]=<span class="hljs-string">&quot;lmn opq&quot;</span>) <span class="hljs-comment"># -A definisce un array associativo, -a un array</span>
+
+print_variables foo bar baz
+foo: 123
+bar: <span class="hljs-string">&quot;abc&quot;</span> <span class="hljs-string">&quot;cde fgh&quot;</span> <span class="hljs-string">&quot;ijk&quot;</span>
+baz: <span class="hljs-string">&quot;fgh ijk&quot;</span>=<span class="hljs-string">&quot;lmn opq&quot;</span> <span class="hljs-string">&quot;abc&quot;</span>=<span class="hljs-string">&quot;cde&quot;</span>
+</code></pre>
+<h3 id="richiamo-sugli-array" tabindex="-1">richiamo sugli array <a class="header-anchor" href="#richiamo-sugli-array" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Tre modi di dichiarare un array</span>
+
+<span class="hljs-comment"># Empty array</span>
+myarray=()
+
+<span class="hljs-comment"># Inline initialization</span>
+myarray=(myentry1 <span class="hljs-string">&quot;my entry 2&quot;</span> myentry3)
+
+<span class="hljs-comment"># Formal initialization</span>
+<span class="hljs-built_in">declare</span> -a myarray
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># operazioni varie</span>
+
+myarray=(myentry1 <span class="hljs-string">&quot;my entry 2&quot;</span> myentry3)
+
+<span class="hljs-comment"># Append an item</span>
+myarray+=(myentry4)
+
+<span class="hljs-comment"># Access</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${myarray[1]}</span>       <span class="hljs-comment"># &quot;my entry 2&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${myarray[-1]}</span>      <span class="hljs-comment"># &quot;myentry4&quot;</span>
+
+<span class="hljs-comment"># Slicing (0-based): from &lt;i&gt; to end</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${myarray[@]:2}</span>&quot;</span>   <span class="hljs-comment"># &quot;myentry3 myentry4&quot;</span>
+
+<span class="hljs-comment"># Delete an entry</span>
+<span class="hljs-built_in">unset</span> <span class="hljs-string">&#x27;myarray[3]&#x27;</span>
+
+<span class="hljs-comment"># Size</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#myarray[@]}</span>      <span class="hljs-comment"># 3</span>
+
+<span class="hljs-comment"># Print the whole array</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${myarray[@]}</span>&quot;</span>     <span class="hljs-comment"># &quot;myentry1 my entry 2 myentry3&quot;</span>
+
+<span class="hljs-comment"># Iterate</span>
+<span class="hljs-keyword">for</span> entry <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${myarray[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$entry</span>&quot;</span>; <span class="hljs-keyword">done</span>
+<span class="hljs-comment"># &quot;myentry1&quot;</span>
+<span class="hljs-comment"># &quot;my entry 2&quot;</span>
+<span class="hljs-comment"># &quot;myentry3&quot;</span>
+
+</code></pre>
+<p>Gli array bash non offrono una funzionalità di test di appartenenza di un elemento,<br>
+se serve si possono utilizzare gli array associativi con sole chiavi senza dare valori.</p>
+<h3 id="richiamo-sugli-array-associativi" tabindex="-1">richiamo sugli array associativi <a class="header-anchor" href="#richiamo-sugli-array-associativi" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Due modi di dichiarare un array associativo</span>
+
+<span class="hljs-comment"># Empty associative array</span>
+<span class="hljs-built_in">declare</span> -A myarray
+
+<span class="hljs-comment"># Inline initialization</span>
+<span class="hljs-built_in">declare</span> -A myarray=([mykey1]=myvalue1 [my key 2]=<span class="hljs-string">&quot;my value 2&quot;</span>)
+
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># operazioni varie</span>
+<span class="hljs-built_in">declare</span> -A myarray=([mykey1]=myvalue1 [my key 2]=<span class="hljs-string">&quot;my value 2&quot;</span>)
+
+<span class="hljs-comment"># Set an item</span>
+myarray[mykey3]=<span class="hljs-string">&quot;my value 3&quot;</span>
+
+<span class="hljs-comment"># Access</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${myarray[my key 2]}</span>  <span class="hljs-comment"># &quot;my value 2&quot;</span>
+
+<span class="hljs-comment"># Key test</span>
+[[ -v myarray[<span class="hljs-string">&quot;my key 2&quot;</span>] ]] &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;found!&quot;</span> <span class="hljs-comment"># &quot;found!&quot;</span>
+
+<span class="hljs-comment"># Delete an entry</span>
+<span class="hljs-built_in">unset</span> <span class="hljs-string">&#x27;myarray[mykey3]&#x27;</span>
+
+<span class="hljs-comment"># Size</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#myarray[@]}</span>        <span class="hljs-comment"># 2</span>
+
+<span class="hljs-comment"># Print the keys/values</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${!myarray[@]}</span>        <span class="hljs-comment"># &quot;mykey1 my key 2&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${myarray[@]}</span>         <span class="hljs-comment"># &quot;myvalue1 my value 2&quot;</span>
+
+<span class="hljs-comment"># Iterate</span>
+<span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${!myarray[@]}</span>&quot;</span>; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$key</span>: <span class="hljs-variable">${myarray[$key]}</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-comment"># mykey1: myvalue1</span>
+<span class="hljs-comment"># my key 2: my value 2</span>
+
+</code></pre>
+</body></html>

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.877" />
+        <title>trap_signals</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="trap_signals" tabindex="-1">trap_signals <a class="header-anchor" href="#trap_signals" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.877</p>
+<nav class="table-of-contents"><ol><li><a href="#info-sui-segnali">Info sui segnali </a></li><li><a href="#trap-errors">Trap errors </a></li><li><a href="#segnali%2C-trap-da-shell">segnali, trap da shell </a></li><li><a href="#trap-del-ctrl%2Bc">trap del CTRL+C </a></li><li><a href="#parametro-bash-errtrace-(-e)">parametro bash errtrace (-E) </a></li><li><a href="#parametro-bash-inherit_errexit">parametro bash inherit_errexit </a></li></ol></nav><h1 id="trap" tabindex="-1">trap <a class="header-anchor" href="#trap" aria-hidden="true">🔗</a></h1>
+<h2 id="info-sui-segnali" tabindex="-1">Info sui segnali <a class="header-anchor" href="#info-sui-segnali" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/coreutils/manual/html_node/Signal-specifications.html#Signal-specifications">https://www.gnu.org/software/coreutils/manual/html_node/Signal-specifications.html#Signal-specifications</a></li>
+<li><a href="../processi/kill.html">Kill</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-built_in">help</span> <span class="hljs-built_in">trap</span>
+    <span class="hljs-built_in">trap</span> [-lp] [[arg] spec_segnale ...]
+<span class="hljs-comment">#        Se uno SPEC_SEGNALE è EXIT (0) ARG viene eseguito all&#x27;uscita dalla shell. </span>
+<span class="hljs-comment">#        Se lo SPEC_SEGNALE è DEBUG, ARG viene eseguito prima di ogni comando semplice.</span>
+<span class="hljs-comment">#        Ciascun SPEC_SEGNALE è un nome di segnale in &lt;signal.h&gt; </span>
+
+<span class="hljs-built_in">kill</span> -l <span class="hljs-comment"># per avere l&#x27;elenco dei segnali</span>
+<span class="hljs-built_in">trap</span> -l <span class="hljs-comment"># per avere l&#x27;elenco dei segnali</span>
+
+man 2 signal
+man 7 signal
+
+</code></pre>
+<p><a href="https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html">https://www.gnu.org/software/libc/manual/html_node/Termination-Signals.html</a></p>
+<ul>
+<li><code>SIGHUP</code> usato per dire a un demone di ricaricarsi perchè i suoi file di configurazione sono stati cambiati</li>
+<li><code>SIGINT</code> mandato a un processo in foreground quando viene battuto <code>Ctrl+C</code> sulla tastiera. Molti programmi però ignorano questa azione, come ad esempio il comando less</li>
+<li><code>SIGQUIT</code> spedito tramite <code>Ctrl+;</code> anche questo termina il processo ma fa in modo che la shell scriva un file core per aiutare il cosidetto post-mortem debug</li>
+<li><code>SIGTERM</code> è il segnale di default del comando <code>kill</code>. Potete considerarla come una <strong>richiesta soft di chiusura e uscita</strong>. E’ inviato da init a tutti i processi in esecuzione durante lo spegnimento</li>
+<li><code>SIGKILL</code> è usato anch’esso da init ma solo quando <code>SIGTERM</code> non funziona. Questo segnale non può essere catturato o ignorato da nessun processo e la sua azione consiste nel terminare il processo. E’ usato come ultima risorsa solo quando i due precedenti falliscono, in quanto SIGKILL, al contrario di SIGTERM, non da ai processi la possibilità di sistemarsi</li>
+<li><code>SISGEV</code> (segmentation voilation) è creato internamente al programma stesso, e non esternamente come gli altri. Viene creato quando il programma tenta di accedere a un indirizzo di memoria non più allocato ad esso. L’azione di default è quella di chiudere il programma</li>
+</ul>
+<h2 id="trap-errors" tabindex="-1">Trap errors <a class="header-anchor" href="#trap-errors" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">trap</span> <span class="hljs-string">&#x27;echo Error at about $LINENO&#x27;</span> ERR
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">traperr</span></span>() {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ERROR: <span class="hljs-variable">${BASH_SOURCE[1]}</span> at about <span class="hljs-variable">${BASH_LINENO[0]}</span>&quot;</span>
+}
+
+<span class="hljs-built_in">set</span> -o errtrace
+<span class="hljs-built_in">trap</span> traperr ERR
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">trap</span> <span class="hljs-string">&quot;rm &#x27;<span class="hljs-variable">$PIDFILE</span>&#x27;&quot;</span> EXIT SIGTERM <span class="hljs-comment"># cancella il file di PID quando questo demone viene terminato(man bash e kill -l)</span>
+</code></pre>
+<h2 id="segnali%2C-trap-da-shell" tabindex="-1">segnali, trap da shell <a class="header-anchor" href="#segnali%2C-trap-da-shell" aria-hidden="true">🔗</a></h2>
+<p>Use the Bash trap Statement to Clean Up Temporary Files</p>
+<p>The trap statement in bash causes your script to execute one or more commands when a signal is received.
+One of the useful things you can use this for is to clean up temporary files when your script exits.</p>
+<p><strong>To execute code when your script receives a signal</strong>, use the following syntax:</p>
+<pre><code>trap arg sigspec...
+</code></pre>
+<p>The &quot;arg&quot; is the command to execute. If the command contains spaces, quote it. You can include multiple commands by separating them with semicolons. For more complex things, put your exit code in a function and just invoke the function. The &quot;sigspec&quot; list is a list of signals to trap and then execute &quot;arg&quot; (if/when they occur). For example, to remove a file on <code>EXIT</code>, do the following:</p>
+<pre><code>trap &quot;rm -f afile&quot; EXIT
+</code></pre>
+<p>Note that <code>EXIT</code> <strong>is not a real signal</strong> (do <code>kill -l</code> to see all signals); <strong>it is synthesized by bash</strong>.</p>
+<p>Be careful using wildcards in &quot;arg&quot;, because if they are unquoted or quoted with double quotes, they get expanded when the trap statement is encountered and not when &quot;arg&quot; is executed. For example, if you have a file named &quot;abc.tmp&quot; and the following trap statement is executed:</p>
+<pre><code>trap &quot;rm -f *.tmp&quot; EXIT
+</code></pre>
+<p>the command that gets executed when the script exits is <code>rm -f abc.tmp</code> and not <code>rm -f *.tmp</code>.
+To avoid this problem, <span class="mrb">use single quotes</span>.</p>
+<p>If you create temporary files at various places in your code and you don't use a naming convention that would allow you to use a wild card in your trap statement and you don't want to worry about changing your trap statement as your code evolves, you could write something like this to allow you to add new trap commands that get executed on exit:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">declare</span> -a on_exit_items
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">on_exit</span></span>()
+{
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${on_exit_items[@]}</span>&quot;</span>
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;on_exit: <span class="hljs-variable">$i</span>&quot;</span>
+<span class="hljs-built_in">eval</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">add_on_exit</span></span>()
+{
+<span class="hljs-built_in">local</span> n=<span class="hljs-variable">${#on_exit_items[*]}</span>
+on_exit_items[<span class="hljs-variable">$n</span>]=<span class="hljs-string">&quot;$*&quot;</span>
+<span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$n</span> -eq 0 ]]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Setting trap&quot;</span>
+<span class="hljs-built_in">trap</span> on_exit EXIT
+<span class="hljs-keyword">fi</span>
+}
+
+<span class="hljs-built_in">touch</span> $$-1.tmp
+add_on_exit <span class="hljs-built_in">rm</span> -f $$-1.tmp
+
+<span class="hljs-built_in">touch</span> $$-2.tmp
+add_on_exit <span class="hljs-built_in">rm</span> -f $$-2.tmp
+
+<span class="hljs-built_in">ls</span> -la
+</code></pre>
+<p>Here the function <code>add_on_exit()</code> adds commands to an array, and the <code>on_exit()</code> function loops through the commands in the array and executes them on exit. The <code>on_exit</code> function gets set as the trap command the first time add_on_exit is called.</p>
+<p>This also works in ksh (Korn Shell), with one exception: the <code>declare</code> keyword
+has to be replaced with <code>typeset</code> (ie. <code>typeset -a on_exit_items</code>).</p>
+<h2 id="trap-del-ctrl%2Bc" tabindex="-1">trap del CTRL+C <a class="header-anchor" href="#trap-del-ctrl%2Bc" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+cleanup()
+<span class="hljs-comment"># example cleanup function</span>
+{
+<span class="hljs-built_in">rm</span> -f /tmp/tempfile
+<span class="hljs-built_in">return</span> $?
+}
+
+control_c()
+<span class="hljs-comment"># run if user hits control-c</span>
+{
+<span class="hljs-built_in">echo</span> -en <span class="hljs-string">&quot;\n*** Ouch! Exiting ***\n&quot;</span>
+cleanup
+<span class="hljs-built_in">exit</span> $?
+}
+
+<span class="hljs-comment"># trap keyboard interrupt (control-c)</span>
+<span class="hljs-built_in">trap</span> control_c SIGINT
+
+<span class="hljs-comment"># main() loop</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span> <span class="hljs-built_in">read</span> x; <span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="parametro-bash-errtrace-(-e)" tabindex="-1">parametro bash errtrace (-E) <a class="header-anchor" href="#parametro-bash-errtrace-(-e)" aria-hidden="true">🔗</a></h2>
+<p><a href="https://saveriomiroddi.github.io/Additional-shell-options-for-non-trivial-bash-shell-scripts/">https://saveriomiroddi.github.io/Additional-shell-options-for-non-trivial-bash-shell-scripts/</a></p>
+<p><strong>by default, in the context of functions, trapping is not inherited.</strong></p>
+<p>E' fondamentale se vogliamo che un trap definito in una function anzichè nel corpo principale dello script
+sia attivo al livello globale e non solo nella funzione</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; /tmp/test_errtrace.sh &lt;&lt; <span class="hljs-string">&#x27;SHELL&#x27;</span>
+<span class="hljs-comment"># set -o errexit</span>
+<span class="hljs-built_in">set</span> -e <span class="hljs-comment"># equivale a set -o errexit</span>
+<span class="hljs-comment"># set -o errtrace # by default, in the context of functions, trapping is not inherited.</span>
+<span class="hljs-built_in">set</span> -E            <span class="hljs-comment"># equivale a set -o errtrace</span>
+
+var=foo
+
+<span class="hljs-keyword">function</span> print_variables {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Debug: \$var= <span class="hljs-variable">$var</span>&quot;</span>
+}
+
+<span class="hljs-keyword">function</span> trap_errors {
+  <span class="hljs-built_in">trap</span> print_variables ERR <span class="hljs-comment"># grazie all&#x27;opzione errtrace il trap funziona anche se è stato definito in una funzione</span>
+}
+
+<span class="hljs-keyword">function</span> main {
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The script starts&quot;</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Error coming; debug routine will kick in!&quot;</span>
+  <span class="hljs-literal">false</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;The script ends&quot;</span>
+}
+
+trap_errors
+main
+SHELL
+<span class="hljs-built_in">chmod</span> +x /tmp/test_errtrace.sh
+</code></pre>
+<pre><code class="language-bash">/tmp/test_errtrace.sh
+</code></pre>
+<h2 id="parametro-bash-inherit_errexit" tabindex="-1">parametro bash inherit_errexit <a class="header-anchor" href="#parametro-bash-inherit_errexit" aria-hidden="true">🔗</a></h2>
+<p>In Bash, <strong>the <code>errexit</code> option is not inherited by shells spawned by command substitution</strong>.<br>
+This is of course a significant problem.<br>
+&quot;Listing2&quot; viene stampato anche se si verifica un errore le command substitution <code>$()</code>, caso del listing della directory foo,<br>
+the problem is that in Bash, the errexit option is not inherited by shells spawned by command substitution.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; /tmp/test_inherit_errexit.sh &lt;&lt; <span class="hljs-string">&#x27;SHELL&#x27;</span>
+<span class="hljs-comment"># set -o errexit # lo stesso di set -e, non viene considerata dal command substitution ($(&lt;command&gt;)).</span>
+<span class="hljs-built_in">set</span> -e <span class="hljs-comment"># non viene considerata dal command substitution ($(&lt;command&gt;)).</span>
+<span class="hljs-built_in">shopt</span> -s inherit_errexit <span class="hljs-comment"># in questo modo lo script esce anche quando si esegue ls /foo nel command substitution</span>
+
+<span class="hljs-keyword">function</span> processed_list_directory {
+  <span class="hljs-built_in">local</span> directory_listing
+
+  directory_listing=$(<span class="hljs-built_in">ls</span> -l <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> 2&gt; /dev/null)  <span class="hljs-comment"># se va in errore non interrompe lo script anche avendo definito errexit</span>
+                                                <span class="hljs-comment"># a meno che non sia attivato inherit_errexit</span>
+
+  <span class="hljs-keyword">if</span> [[ <span class="hljs-variable">$directory_listing</span> == <span class="hljs-string">&quot;total 0&quot;</span> ]]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;(empty directory)&quot;</span>
+  <span class="hljs-keyword">else</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$directory_listing</span>&quot;</span>
+  <span class="hljs-keyword">fi</span>
+}
+
+<span class="hljs-keyword">function</span> main {
+  <span class="hljs-built_in">local</span> processed_listing_tmp
+  <span class="hljs-built_in">local</span> processed_listing_foo
+
+  processed_listing_tmp=$(processed_list_directory /tmp)
+
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Listing 1: <span class="hljs-variable">$processed_listing_tmp</span>&quot;</span>
+  <span class="hljs-built_in">echo</span>
+
+  processed_listing_foo=$(processed_list_directory /foo)
+
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Listing 2: <span class="hljs-variable">$processed_listing_foo</span>&quot;</span>
+}
+
+main
+SHELL
+<span class="hljs-built_in">chmod</span> +x /tmp/test_inherit_errexit.sh
+</code></pre>
+</body></html>

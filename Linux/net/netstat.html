@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.001" />
+        <title>netstat</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="netstat" tabindex="-1">netstat <a class="header-anchor" href="#netstat" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.001</p>
+<nav class="table-of-contents"><ol><li><a href="#netstat-port-scanning">netstat port scanning </a></li><li><a href="#comandi-per-apache-web-server">Comandi per Apache Web Server </a></li></ol></nav><h1 id="netstat-1" tabindex="-1">netstat <a class="header-anchor" href="#netstat-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/netstat.8">https://man.archlinux.org/man/netstat.8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/ss.8">https://man.archlinux.org/man/ss.8</a></p>
+<p>--numeric, -n Show numerical addresses instead of trying to determine symbolic host, port or user names.
+-p, --program Show the PID and name of the program to which each socket belongs. A hyphen is shown if the socket belongs to the kernel (e.g. a kernel service, or the process has exited but the socket hasn't finished closing yet).
+-a, --all Show both listening and non-listening sockets. With the --interfaces option, show interfaces that are not up
+-t, --tcp Display TCP sockets.</p>
+</li>
+</ul>
+<h2 id="netstat-port-scanning" tabindex="-1">netstat port scanning <a class="header-anchor" href="#netstat-port-scanning" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> netstat -natp
+$ <span class="hljs-built_in">sudo</span> ss -atp <span class="hljs-comment"># ss è il successore di netstat</span>
+</code></pre>
+<h2 id="comandi-per-apache-web-server" tabindex="-1">Comandi per Apache Web Server <a class="header-anchor" href="#comandi-per-apache-web-server" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Il demone sta girando?</span>
+ps -ef|grep httpd
+<span class="hljs-comment"># Il demone è in ascolto?</span>
+lsof -i tcp:80
+<span class="hljs-comment"># File di log da controllare:</span>
+<span class="hljs-built_in">tail</span> /var/log/httpd/access_log
+<span class="hljs-built_in">tail</span> /var/log/httpd/error_log
+
+<span class="hljs-comment"># If you run a more or less loaded apache web server, you will sooner or later happend to be in a situation that you need to know what ips are currently connected.</span>
+
+<span class="hljs-comment"># Here&#x27;s when netstat command comes in very handy.</span>
+<span class="hljs-comment"># To list all connections just issue:</span>
+
+netstat -a
+
+<span class="hljs-comment"># Since apache uses TCP we can limit the output to TCP connection:</span>
+netstat -at
+
+<span class="hljs-comment"># and we eliminate the dns lookup time overhead by adding another flag:</span>
+netstat -ant
+
+<span class="hljs-comment"># Ok, this will list all the tcp connections. Next we want to only list connections belonging to apache. Apache&#x27;s binnary is called httpd and netstat with -p parameter will list socket owner&#x27;s process number and process name.</span>
+
+netstat -anpt|grep httpd
+
+<span class="hljs-comment"># Now we have all sockets owned by apache. The problem is, that not all of them belong to currently connected users. We need to filter out only ESTABLISHED connections.</span>
+
+netstat -anpt|grep httpd|grep ESTABLISHED
+
+<span class="hljs-comment"># Ok, almost there - now we use the cut utility to get only remote ips connected:</span>
+netstat -anpt|grep httpd|grep ESTABLISHED|<span class="hljs-built_in">cut</span> -b45-60|<span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27;:&#x27;</span> -f1
+
+<span class="hljs-comment"># Now we have only remote ips, but it can be a pretty long list and there will be duplicit ips listed. We will use uniq and sort commands to sort it by number of occurences of remote ip address:</span>
+
+netstat -anpt|grep httpd|grep ESTABLISHED|<span class="hljs-built_in">cut</span> -b45-60|<span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27;:&#x27;</span> -f1|<span class="hljs-built_in">sort</span> -rn|<span class="hljs-built_in">uniq</span> -c|<span class="hljs-built_in">sort</span> -t<span class="hljs-string">&#x27; &#x27;</span> +1
+
+<span class="hljs-comment"># If you wonder why there are 2 sorts - the first one is neccessary for uniq to filter out same lines, the second one orders the whole thing by number of ip occurences given by the output of uniq -c command.</span>
+
+<span class="hljs-comment"># Now you have nice sorted list of ips connecting to your web server at the current moment. Using watch command you can monitor the output for a longer time:</span>
+
+watch <span class="hljs-string">&quot;netstat -anpt|grep httpd|grep ESTABLISHED|cut -b45-60|cut -d&#x27;:&#x27; -f1|sort -rn|uniq -c|sort -t&#x27; &#x27; +1&quot;</span>
+</code></pre>
+</body></html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.818" />
+        <title>get_script_directory</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="get_script_directory" tabindex="-1">get_script_directory <a class="header-anchor" href="#get_script_directory" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.818</p>
+<nav class="table-of-contents"><ol><li><a href="#script-generale-per-il-calcolo-della-directory-che-contiene-lo-script">Script generale per il calcolo della directory che contiene lo script </a><ol><li><a href="#spiegazione">Spiegazione </a></li><li><a href="#perch%C3%A8-non-utilizzare-%240-per-avere-il-path-dello-script">Perchè non utilizzare $0 per avere il path dello script </a></li><li><a href="#perch%C3%A8-utilizzare-%24bash_source-per-avere-il-path-dello-script">Perchè utilizzare $BASH_SOURCE per avere il path dello script </a></li></ol></li><li><a href="#risoluzione-dell'eventuale-link-simbolico">Risoluzione dell&#39;eventuale link simbolico </a><ol><li><a href="#path-assoluto">Path assoluto </a></li><li><a href="#directory-dello-script">Directory dello script </a></li><li><a href="#redirezione">Redirezione </a></li></ol></li></ol></nav><h1 id="get-bash-script-location-from-within-the-script" tabindex="-1">Get Bash Script Location From Within the Script <a class="header-anchor" href="#get-bash-script-location-from-within-the-script" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE}</span>&quot;</span>
+<span class="hljs-keyword">while</span> [ -L <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+  SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+  SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+  [[ <span class="hljs-variable">${SCRIPT_PATH}</span> != /* ]] &amp;&amp; SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_DIR}</span>/<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink -f <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname -- <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+UPDIR=$(<span class="hljs-built_in">dirname</span> <span class="hljs-variable">$SCRIPT_DIR</span>)
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_PATH=<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_DIR=<span class="hljs-variable">${SCRIPT_DIR}</span>&quot;</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$UPDIR</span>
+</code></pre>
+<h2 id="script-generale-per-il-calcolo-della-directory-che-contiene-lo-script" tabindex="-1">Script generale per il calcolo della directory che contiene lo script <a class="header-anchor" href="#script-generale-per-il-calcolo-della-directory-che-contiene-lo-script" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.baeldung.com/linux/bash-get-location-within-script">https://www.baeldung.com/linux/bash-get-location-within-script</a></li>
+</ul>
+<p>Script che calcola la sua posizione:</p>
+<ul>
+<li>sia se invocato come eseguibile che se invocato mediante source,\</li>
+<li>sia se invocato mediante link simbolico che se invocato sul file originario,\</li>
+<li>sia se la directory che lo contiene è un link simbolico sia se è la directory originaria.</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># uniloc.sh</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE}</span>&quot;</span>
+<span class="hljs-keyword">while</span> [ -L <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+  SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+  SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+  [[ <span class="hljs-variable">${SCRIPT_PATH}</span> != /* ]] &amp;&amp; SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_DIR}</span>/<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink -f <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname -- <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_PATH=<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_DIR=<span class="hljs-variable">${SCRIPT_DIR}</span>&quot;</span>
+</code></pre>
+<p>Formula più semplice che non risolve i link simbolici:</p>
+<pre><code class="language-bash">SCRIPT_DIR=$( <span class="hljs-built_in">cd</span> $( <span class="hljs-built_in">dirname</span> <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span> ) &amp;&gt; /dev/null &amp;&amp; <span class="hljs-built_in">pwd</span> )
+</code></pre>
+<h3 id="spiegazione" tabindex="-1">Spiegazione <a class="header-anchor" href="#spiegazione" aria-hidden="true">🔗</a></h3>
+<h3 id="perch%C3%A8-non-utilizzare-%240-per-avere-il-path-dello-script" tabindex="-1">Perchè non utilizzare <code>$0</code> per avere il path dello script <a class="header-anchor" href="#perch%C3%A8-non-utilizzare-%240-per-avere-il-path-dello-script" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/35006457/choosing-between-0-and-bash-source">https://stackoverflow.com/questions/35006457/choosing-between-0-and-bash-source</a></li>
+</ul>
+<p>Uno script può essere invocato in due modi, <code>source</code> ed <code>execute</code>:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># var.sh</span>
+<span class="hljs-built_in">declare</span> -a value=666
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Inside script: value=<span class="hljs-variable">${value}</span>&quot;</span>
+</code></pre>
+<p>invocando lo script <code>var.sh</code> con <code>source var.sh</code> (oppure con <code>. var.sh</code>), lo script viene eseguito nel processo bash corrente:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">declare</span> -a value=0
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${value}</span>&quot;</span>
+0
+$ <span class="hljs-built_in">source</span> var.sh
+Inside script: value=666
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${value}</span>&quot;</span>
+666 <span class="hljs-comment"># source non crea un nuovo processo, quindi la variabile viene modificata</span>
+</code></pre>
+<p>invocando lo script <code>var.sh</code> come eseguibile <code>./var.sh</code> (<code>chmod +x var.sh</code>), lo script viene eseguito in un nuovo processo bash:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">declare</span> -a value=0
+$ bash var.sh
+Inside script: value=666
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${value}</span>&quot;</span>
+0
+$ <span class="hljs-built_in">chmod</span> +x var.sh
+$ ./var.sh
+Inside script: value=666
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${value}</span>&quot;</span>
+0 <span class="hljs-comment"># execute crea un nuovo processo, la variabile della bash iniziale non viene alterata</span>
+</code></pre>
+<p><code>$0</code> contiene il primo elemento di invocazione dello script solamente se questo viene eseguito come eseguibile, non se eseguito con source:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># /opt/scripts/get_script_dir.sh</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>
+<span class="hljs-built_in">dirname</span> <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span> <span class="hljs-comment"># aggiungendo dirname ricaviamo la directory che contiene lo script</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> /opt/scripts &amp;&amp; ./get_script_dir.sh
+./get_script_dir.sh
+.                                       <span class="hljs-comment"># script lanciato come eseguibile, path relativo</span>
+
+$ <span class="hljs-built_in">cd</span> /opt &amp;&amp; scripts/get_script_dir.sh
+scripts/get_script_dir.sh
+scripts                                 <span class="hljs-comment"># script lanciato come eseguibile, path relativo</span>
+
+$ /opt/scripts/get_script_dir.sh
+/opt/scripts/get_script_dir.sh
+/opt/scripts                            <span class="hljs-comment"># script lanciato come eseguibile, path assoluto</span>
+</code></pre>
+<p>Lanciando lo script come eseguibile <code>$0</code> riporta il path dello script, purtroppo non se si lancia lo script con source:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> /opt/scripts &amp;&amp; <span class="hljs-built_in">source</span> ./get_script_dir.sh
+-bash
+$ <span class="hljs-built_in">cd</span> /opt &amp;&amp; <span class="hljs-built_in">source</span> scripts/get_script_dir.sh
+-bash
+$ <span class="hljs-built_in">source</span> /opt/scripts/get_script_dir.sh
+-bash
+</code></pre>
+<p>Non potendo rinunciare ad invocare lo script tramite source, <code>$0</code> non può essere utilizzato per reperire il path dello script in ogni situazione.</p>
+<h3 id="perch%C3%A8-utilizzare-%24bash_source-per-avere-il-path-dello-script" tabindex="-1">Perchè utilizzare <code>$BASH_SOURCE</code> per avere il path dello script <a class="header-anchor" href="#perch%C3%A8-utilizzare-%24bash_source-per-avere-il-path-dello-script" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://codefather.tech/blog/bash-get-script-directory/">https://codefather.tech/blog/bash-get-script-directory/</a></li>
+<li><a href="https://developpaper.com/bash-tips-01-get-the-scripts-own-path/">https://developpaper.com/bash-tips-01-get-the-scripts-own-path/</a></li>
+</ul>
+<p>L'array <code>$BASH_SOURCE</code> rappresenta una alternativa a <code>$0</code> molto più robusta perchè funziona sia con execute che con source.<br>
+Ricordiamo che <code>${BASH_SOURCE[0]}</code> è il primo elemento dell'array <code>$BASH_SOURCE</code> per cui <code>${BASH_SOURCE[0]} == ${BASH_SOURCE}</code>.</p>
+<p>Rivediamo l'esempio fatto con <code>$0</code>, realizzato con <code>$BASH_SOURCE</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># /opt/scripts/get_script_dir.sh</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span>
+<span class="hljs-built_in">dirname</span> <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># EXECUTE</span>
+$ <span class="hljs-built_in">cd</span> /opt/scripts &amp;&amp; ./get_script_dir.sh
+./get_script_dir.sh
+.                                       <span class="hljs-comment"># script lanciato come eseguibile, path relativo</span>
+
+$ <span class="hljs-built_in">cd</span> /opt &amp;&amp; scripts/get_script_dir.sh
+scripts/get_script_dir.sh
+scripts                                 <span class="hljs-comment"># script lanciato come eseguibile, path relativo</span>
+
+$ /opt/scripts/get_script_dir.sh
+/opt/scripts/get_script_dir.sh
+/opt/scripts                            <span class="hljs-comment"># script lanciato come eseguibile, path assoluto</span>
+
+<span class="hljs-comment"># SOURCE</span>
+$ <span class="hljs-built_in">cd</span> /opt/scripts &amp;&amp; <span class="hljs-built_in">source</span> ./get_script_dir.sh
+get_script_dir.sh
+.                                       <span class="hljs-comment"># script lanciato come eseguibile, path relativo</span>
+$ <span class="hljs-built_in">cd</span> /opt &amp;&amp; <span class="hljs-built_in">source</span> scripts/get_script_dir.sh
+scripts/get_script_dir.sh
+scripts                                 <span class="hljs-comment"># script lanciato come eseguibile, path relativo</span>
+$ <span class="hljs-built_in">source</span> /opt/scripts/get_script_dir.sh
+/opt/scripts/get_script_dir.sh
+/opt/scripts                            <span class="hljs-comment"># script lanciato come eseguibile, path assoluto</span>
+</code></pre>
+<p>Utilizzando <code>$BASH_SOURCE</code> si riesce a reperire il path dello script anche quando questo viene eseguito mediante source.</p>
+<h2 id="risoluzione-dell'eventuale-link-simbolico" tabindex="-1">Risoluzione dell'eventuale link simbolico <a class="header-anchor" href="#risoluzione-dell'eventuale-link-simbolico" aria-hidden="true">🔗</a></h2>
+<p>Per calcolare il path effettivo nel quale si trova lo script, si deve considerare anche il caso in cui lo script venga lanciato tramite un suo link simbolico:</p>
+<pre><code class="language-bash">SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE}</span>&quot;</span>
+<span class="hljs-keyword">while</span> [ -L <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+  TARGET=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+  <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">${TARGET}</span>&quot;</span> == /* ]]; <span class="hljs-keyword">then</span>
+    SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">$TARGET</span>&quot;</span>
+  <span class="hljs-keyword">else</span>
+    SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>/<span class="hljs-variable">${TARGET}</span>&quot;</span>
+  <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;BASH_SOURCE=<span class="hljs-variable">${BASH_SOURCE}</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_PATH=<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+</code></pre>
+<p>Con il test <a href="https://www.gnu.org/software/coreutils/manual/html_node/File-type-tests.html"><code>-L</code></a> si vede se la variabile <code>SCRIPT_PATH</code> punta ad un link simbolico(symlink).<br>
+Se <code>SCRIPT_PATH</code> è un link simbolico allora si vede se è un path assoluto oppure relativo, e lo si risolve, fino a che non si ottiene un hardlink</p>
+<h3 id="path-assoluto" tabindex="-1">Path assoluto <a class="header-anchor" href="#path-assoluto" aria-hidden="true">🔗</a></h3>
+<p><code>readlink -f</code> permette di calcolare il path assoluto</p>
+<pre><code class="language-bash">SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink -f <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;
+&gt; echo &quot;$(readlink -f &quot;${BASH_SOURCE}&quot;)&quot;
+&gt; &#x27;</span> &gt; location.sh
+$ . location.sh
+/location.sh
+</code></pre>
+<h3 id="directory-dello-script" tabindex="-1">Directory dello script <a class="header-anchor" href="#directory-dello-script" aria-hidden="true">🔗</a></h3>
+<p>Con <code>dirname</code> possiamo ricavare la directory che contiene lo script.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;
+&gt; echo &quot;$(dirname -- &quot;$(readlink -f &quot;${BASH_SOURCE}&quot;)&quot;)&quot;
+&gt; &#x27;</span> &gt; location.sh
+$ . location.sh
+/
+</code></pre>
+<p>Ma la directory può essere essa stessa un link simbolico, che deve essere risolto all'hardlink originale:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> subdir
+$ <span class="hljs-built_in">ln</span> --symbolic --relative subdir subdirlink
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(cd <span class="hljs-string">&quot;subdirlink&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+/subdirlink
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;subdirlink&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+/subdir
+</code></pre>
+<p>il comando <code>cd -P</code> permette di entrare in una directory che è un link simbolico, arrivando nella directory originaria(hardlink),
+quindi la combinazione di <code>cd -P</code> e <code>pwd</code> permette di risolvere un synlink ad una directory nel relativo hardlink(directory originale).</p>
+<h3 id="redirezione" tabindex="-1">Redirezione <a class="header-anchor" href="#redirezione" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://stackoverflow.com/questions/24793069/what-does-do-in-bash">https://stackoverflow.com/questions/24793069/what-does-do-in-bash</a></li>
+</ul>
+<pre><code class="language-bash">SCRIPT_DIR=$( <span class="hljs-built_in">cd</span> $( <span class="hljs-built_in">dirname</span> <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span> ) &gt;/dev/null 2&gt;&amp;1 &amp;&amp; <span class="hljs-built_in">pwd</span> )
+SCRIPT_DIR=$( <span class="hljs-built_in">cd</span> $( <span class="hljs-built_in">dirname</span> <span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE[0]}</span>&quot;</span> ) &amp;&gt; /dev/null &amp;&amp; <span class="hljs-built_in">pwd</span> )
+</code></pre>
+<p>Gli operatori di redirezione in uso sono:</p>
+<ul>
+<li>[file descriptor]<code>&gt;</code>[file_name], redireziona un file descriptor su un file, il default è <code>1</code> <code>stdout</code></li>
+<li>[file_descriptor]<code>&gt;&amp;</code>[file_descriptor], redireziona un file descriptor su un altro file descriptor</li>
+<li><code>&amp;&gt;</code> [file_name] redireziona <code>stdout</code> e <code>stderr</code> su un file</li>
+</ul>
+<p>If the file descriptor is omitted, the default is 0 (stdin) for input, or 1 (stdout) for output. 2 means stderr.</p>
+<p>So we have:</p>
+<p><code>&gt;name</code> means <code>1&gt;name</code> -- redirect stdout to the file <code>name</code>
+<code>&amp;&gt;name</code> is like <code>1&gt;name 2&gt;name</code> -- redirect stdout and stderr to the file <code>name</code> (however <code>name</code> is only opened once; if you actually wrote <code>1&gt;name 2&gt;name</code> it'd try to open <code>name</code> twice and perhaps malfunction).</p>
+<p>So when you write <code>git status 2&amp;&gt;1</code>, it is therefore like <code>git status 2 1&gt;1 2&gt;1</code> , i.e.</p>
+<ul>
+<li>the first <code>2</code> actually gets passed as an argument to git status.</li>
+<li><code>stdout</code> is redirected to the file named <code>1</code> (<strong>not</strong> the file descriptor 1)</li>
+<li><code>stderr</code> is redirected to the file named <code>1</code></li>
+</ul>
+</body></html>

@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.651" />
+        <title>stats</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="stats" tabindex="-1">stats <a class="header-anchor" href="#stats" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.651</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22stats%22description%3A-%22the-stats-command-description-and-usage%22keywords%3A-%22container%2C-resource%2C-statistics%22">title: &quot;stats&quot;description: &quot;The stats command description and usage&quot;keywords: &quot;container, resource, statistics&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#formatting">Formatting </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22stats%22description%3A-%22the-stats-command-description-and-usage%22keywords%3A-%22container%2C-resource%2C-statistics%22" tabindex="-1">title: &quot;stats&quot;
+description: &quot;The stats command description and usage&quot;
+keywords: &quot;container, resource, statistics&quot; <a class="header-anchor" href="#title%3A-%22stats%22description%3A-%22the-stats-command-description-and-usage%22keywords%3A-%22container%2C-resource%2C-statistics%22" aria-hidden="true">🔗</a></h2>
+<h1 id="stats-1" tabindex="-1">stats <a class="header-anchor" href="#stats-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker stats [OPTIONS] [CONTAINER...]
+
+Display a live stream of container(s) resource usage statistics
+
+Options:
+  -a, --all             Show all containers (default shows just running)
+<span class="hljs-code">      --format string   Pretty-print images using a Go template
+      --help            Print usage
+      --no-stream       Disable streaming stats and only pull the first result
+      --no-trunc        Don&#x27;t truncate output
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>The <code>docker stats</code> command returns a live data stream for running containers. To
+limit data to one or more specific containers, specify a list of container names
+or ids separated by a space. You can specify a stopped container but stopped
+containers do not return any data.</p>
+<p>If you need more detailed information about a container's resource usage, use
+the <code>/containers/(id)/stats</code> API endpoint.</p>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>On Linux, the Docker CLI reports memory usage by subtracting cache usage from
+the total memory usage. The API does not perform such a calculation but rather
+provides the total memory usage and the amount from the cache so that clients
+can use the data as needed. The cache usage is defined as the value of
+<code>total_inactive_file</code> field in the <code>memory.stat</code> file on cgroup v1 hosts.</p>
+<p>On Docker 19.03 and older, the cache usage was defined as the value of <code>cache</code>
+field. On cgroup v2 hosts, the cache usage is defined as the value of
+<code>inactive_file</code> field.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The <code>PIDS</code> column contains the number of processes and kernel threads created
+by that container. Threads is the term used by Linux kernel. Other equivalent
+terms are &quot;lightweight process&quot; or &quot;kernel task&quot;, etc. A large number in the
+<code>PIDS</code> column combined with a small number of processes (as reported by <code>ps</code>
+or <code>top</code>) may indicate that something in the container is creating many threads.</p>
+</blockquote>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<p>Running <code>docker stats</code> on all running containers against a Linux daemon.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats</span>
+
+CONTAINER ID        NAME                                    CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+b95a83497c91        awesome_brattain                        0.28%               5.629MiB / 1.952GiB   0.28%               916B / 0B           147kB / 0B          9
+67b2525d8ad1        foobar                                  0.00%               1.727MiB / 1.952GiB   0.09%               2.48kB / 0B         4.11MB / 0B         2
+e5c383697914        test-1951.1.kay7x1lh1twk9c0oig50sd5tr   0.00%               196KiB / 1.952GiB     0.01%               71.2kB / 0B         770kB / 0B          1
+4bda148efbc0        random.1.vnc8on831idyr42slu578u3cr      0.00%               1.672MiB / 1.952GiB   0.08%               110kB / 0B          578kB / 0B          2
+</code></pre>
+<p>If you don't <a href="#formatting">specify a format string using <code>--format</code></a>, the
+following columns are shown.</p>
+<table class="table"><thead>
+<tr>
+<th>Column name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CONTAINER ID</code> and <code>Name</code></td>
+<td>the ID and name of the container</td>
+</tr>
+<tr>
+<td><code>CPU %</code> and <code>MEM %</code></td>
+<td>the percentage of the host's CPU and memory the container is using</td>
+</tr>
+<tr>
+<td><code>MEM USAGE / LIMIT</code></td>
+<td>the total memory the container is using, and the total amount of memory it is allowed to use</td>
+</tr>
+<tr>
+<td><code>NET I/O</code></td>
+<td>The amount of data the container has received and sent over its network interface</td>
+</tr>
+<tr>
+<td><code>BLOCK I/O</code></td>
+<td>The amount of data the container has written to and read from block devices on the host</td>
+</tr>
+<tr>
+<td><code>PIDs</code></td>
+<td>the number of processes or threads the container has created</td>
+</tr>
+</tbody>
+</table>
+<p>Running <code>docker stats</code> on multiple containers by name and id against a Linux daemon.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats awesome_brattain 67b2525d8ad1</span>
+
+CONTAINER ID        NAME                CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+b95a83497c91        awesome_brattain    0.28%               5.629MiB / 1.952GiB   0.28%               916B / 0B           147kB / 0B          9
+67b2525d8ad1        foobar              0.00%               1.727MiB / 1.952GiB   0.09%               2.48kB / 0B         4.11MB / 0B         2
+</code></pre>
+<p>Running <code>docker stats</code> on container with name nginx and getting output in <code>json</code> format.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats nginx --no-stream --format <span class="hljs-string">&quot;{{ json . }}&quot;</span></span>
+{&quot;BlockIO&quot;:&quot;0B / 13.3kB&quot;,&quot;CPUPerc&quot;:&quot;0.03%&quot;,&quot;Container&quot;:&quot;nginx&quot;,&quot;ID&quot;:&quot;ed37317fbf42&quot;,&quot;MemPerc&quot;:&quot;0.24%&quot;,&quot;MemUsage&quot;:&quot;2.352MiB / 982.5MiB&quot;,&quot;Name&quot;:&quot;nginx&quot;,&quot;NetIO&quot;:&quot;539kB / 606kB&quot;,&quot;PIDs&quot;:&quot;2&quot;}
+</code></pre>
+<p>Running <code>docker stats</code> with customized format on all (Running and Stopped) containers.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats --all --format <span class="hljs-string">&quot;table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}&quot;</span> fervent_panini 5acfcb1b4fd1 drunk_visvesvaraya big_heisenberg</span>
+
+CONTAINER                CPU %               MEM USAGE / LIMIT
+fervent_panini           0.00%               56KiB / 15.57GiB
+5acfcb1b4fd1             0.07%               32.86MiB / 15.57GiB
+drunk_visvesvaraya       0.00%               0B / 0B
+big_heisenberg           0.00%               0B / 0B
+</code></pre>
+<p><code>drunk_visvesvaraya</code> and <code>big_heisenberg</code> are stopped containers in the above example.</p>
+<p>Running <code>docker stats</code> on all running containers against a Windows daemon.</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">PS</span> E:\&gt; docker stats
+CONTAINER ID        CPU %               PRIV WORKING <span class="hljs-built_in">SET</span>    NET I/O             BLOCK I/O
+<span class="hljs-number">09</span>d3bb5b1604        <span class="hljs-number">6.61</span>%               <span class="hljs-number">38.21</span> MiB           <span class="hljs-number">17.1</span> kB / <span class="hljs-number">7.73</span> kB   <span class="hljs-number">10.7</span> MB / <span class="hljs-number">3.57</span> MB
+<span class="hljs-number">9</span>db7aa4d986d        <span class="hljs-number">9.19</span>%               <span class="hljs-number">38.26</span> MiB           <span class="hljs-number">15.2</span> kB / <span class="hljs-number">7.65</span> kB   <span class="hljs-number">10.6</span> MB / <span class="hljs-number">3.3</span> MB
+<span class="hljs-number">3</span>f214c61ad1d        <span class="hljs-number">0.00</span>%               <span class="hljs-number">28.64</span> MiB           <span class="hljs-number">64</span> kB / <span class="hljs-number">6.84</span> kB     <span class="hljs-number">4.42</span> MB / <span class="hljs-number">6.93</span> MB
+</code></pre>
+<p>Running <code>docker stats</code> on multiple containers by name and id against a Windows daemon.</p>
+<pre><code class="language-powershell"><span class="hljs-built_in">PS</span> E:\&gt; docker <span class="hljs-built_in">ps</span> <span class="hljs-literal">-a</span>
+CONTAINER ID        NAME                IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+<span class="hljs-number">3</span>f214c61ad1d        awesome_brattain    nanoserver          <span class="hljs-string">&quot;cmd&quot;</span>               <span class="hljs-number">2</span> minutes ago       Up <span class="hljs-number">2</span> minutes                            big_minsky
+<span class="hljs-number">9</span>db7aa4d986d        mad_wilson          windowsservercore   <span class="hljs-string">&quot;cmd&quot;</span>               <span class="hljs-number">2</span> minutes ago       Up <span class="hljs-number">2</span> minutes                            mad_wilson
+<span class="hljs-number">09</span>d3bb5b1604        fervent_panini      windowsservercore   <span class="hljs-string">&quot;cmd&quot;</span>               <span class="hljs-number">2</span> minutes ago       Up <span class="hljs-number">2</span> minutes                            affectionate_easley
+
+<span class="hljs-built_in">PS</span> E:\&gt; docker stats <span class="hljs-number">3</span>f214c61ad1d mad_wilson
+CONTAINER ID        NAME                CPU %               PRIV WORKING <span class="hljs-built_in">SET</span>    NET I/O             BLOCK I/O
+<span class="hljs-number">3</span>f214c61ad1d        awesome_brattain    <span class="hljs-number">0.00</span>%               <span class="hljs-number">46.25</span> MiB           <span class="hljs-number">76.3</span> kB / <span class="hljs-number">7.92</span> kB   <span class="hljs-number">10.3</span> MB / <span class="hljs-number">14.7</span> MB
+<span class="hljs-number">9</span>db7aa4d986d        mad_wilson          <span class="hljs-number">9.59</span>%               <span class="hljs-number">40.09</span> MiB           <span class="hljs-number">27.6</span> kB / <span class="hljs-number">8.81</span> kB   <span class="hljs-number">17</span> MB / <span class="hljs-number">20.1</span> MB
+</code></pre>
+<h3 id="formatting" tabindex="-1">Formatting <a class="header-anchor" href="#formatting" aria-hidden="true">🔗</a></h3>
+<p>The formatting option (<code>--format</code>) pretty prints container output
+using a Go template.</p>
+<p>Valid placeholders for the Go template are listed below:</p>
+<table class="table"><thead>
+<tr>
+<th>Placeholder</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.Container</code></td>
+<td>Container name or ID (user input)</td>
+</tr>
+<tr>
+<td><code>.Name</code></td>
+<td>Container name</td>
+</tr>
+<tr>
+<td><code>.ID</code></td>
+<td>Container ID</td>
+</tr>
+<tr>
+<td><code>.CPUPerc</code></td>
+<td>CPU percentage</td>
+</tr>
+<tr>
+<td><code>.MemUsage</code></td>
+<td>Memory usage</td>
+</tr>
+<tr>
+<td><code>.NetIO</code></td>
+<td>Network IO</td>
+</tr>
+<tr>
+<td><code>.BlockIO</code></td>
+<td>Block IO</td>
+</tr>
+<tr>
+<td><code>.MemPerc</code></td>
+<td>Memory percentage (Not available on Windows)</td>
+</tr>
+<tr>
+<td><code>.PIDs</code></td>
+<td>Number of PIDs (Not available on Windows)</td>
+</tr>
+</tbody>
+</table>
+<p>When using the <code>--format</code> option, the <code>stats</code> command either
+outputs the data exactly as the template declares or, when using the
+<code>table</code> directive, includes column headers as well.</p>
+<p>The following example uses a template without headers and outputs the
+<code>Container</code> and <code>CPUPerc</code> entries separated by a colon (<code>:</code>) for all images:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats --format <span class="hljs-string">&quot;{{.Container}}: {{.CPUPerc}}&quot;</span></span>
+
+09d3bb5b1604: 6.61%
+9db7aa4d986d: 9.19%
+3f214c61ad1d: 0.00%
+</code></pre>
+<p>To list all containers statistics with their name, CPU percentage and memory
+usage in a table format you can use:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker stats --format <span class="hljs-string">&quot;table {{.Container}}\t{{.CPUPerc}}\t{{.MemUsage}}&quot;</span></span>
+
+CONTAINER           CPU %               PRIV WORKING SET
+1285939c1fd3        0.07%               796 KiB / 64 MiB
+9c76f7834ae2        0.07%               2.746 MiB / 64 MiB
+d1ea048f04e4        0.03%               4.583 MiB / 64 MiB
+</code></pre>
+<p>The default format is as follows:</p>
+<p>On Linux:</p>
+<pre><code>&quot;table {{.ID}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.MemPerc}}\t{{.NetIO}}\t{{.BlockIO}}\t{{.PIDs}}&quot;
+</code></pre>
+<p>On Windows:</p>
+<pre><code>&quot;table {{.ID}}\t{{.Name}}\t{{.CPUPerc}}\t{{.MemUsage}}\t{{.NetIO}}\t{{.BlockIO}}&quot;
+</code></pre>
+</body></html>

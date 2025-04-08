@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.104" />
+        <title>etc_fstab</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="etc_fstab" tabindex="-1">etc_fstab <a class="header-anchor" href="#etc_fstab" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.104</p>
+<nav class="table-of-contents"><ol></ol></nav><h1 id="%2Fetc%2Ffstab" tabindex="-1">/etc/fstab <a class="header-anchor" href="#%2Fetc%2Ffstab" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> su
+<span class="hljs-comment"># Trovare le partizioni NTFS che vogliamo montare</span>
+$ lsblk -o NAME,TYPE,PTTYPE,SIZE,FSTYPE,FSUSE%,LABEL,UUID,RO,MOUNTPOINT
+$ blkid|grep ntfs
+
+/dev/sda4: BLOCK_SIZE=<span class="hljs-string">&quot;512&quot;</span> UUID=<span class="hljs-string">&quot;1680643C80642509&quot;</span> TYPE=<span class="hljs-string">&quot;ntfs&quot;</span> PARTLABEL=<span class="hljs-string">&quot;Basic data partition&quot;</span> PARTUUID=<span class="hljs-string">&quot;c764130c-f696-468f-9dcb-db5908291845&quot;</span>
+/dev/sda5: LABEL=<span class="hljs-string">&quot;Dati&quot;</span> BLOCK_SIZE=<span class="hljs-string">&quot;512&quot;</span> UUID=<span class="hljs-string">&quot;16DA3DD3DA3DAFBB&quot;</span> TYPE=<span class="hljs-string">&quot;ntfs&quot;</span> PARTLABEL=<span class="hljs-string">&quot;Basic data partition&quot;</span> PARTUUID=<span class="hljs-string">&quot;75ccf395-3e37-4ab7-879c-8e2378704048&quot;</span>
+
+<span class="hljs-comment"># Creazione delle directory di mount</span>
+<span class="hljs-built_in">mkdir</span> -p /mnt/sda4
+<span class="hljs-built_in">mkdir</span> -p /mnt/sda5
+<span class="hljs-built_in">chmod</span> 775 /mnt/sda4
+<span class="hljs-built_in">chmod</span> 775 /mnt/sda5
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /mnt/CDPBackup256
+
+/etc/fstab
+<span class="hljs-comment"># /etc/fstab: static file system information.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Use &#x27;blkid&#x27; to print the universally unique identifier for a device; this may</span>
+<span class="hljs-comment"># be used with UUID= as a more robust way to name devices that works even if</span>
+<span class="hljs-comment"># disks are added and removed. See fstab(5).</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># &lt;file system&gt;             &lt;mount point&gt;  &lt;type&gt;  &lt;options&gt;  &lt;dump&gt;  &lt;pass&gt;</span>
+UUID=1061-E00E                            /boot/efi      vfat    <span class="hljs-built_in">umask</span>=0077 0 2
+UUID=4f9332f1-859f-4ef3-aca0-2ffe49a7d8c6 /              ext4    defaults,noatime 0 1
+UUID=687a2ec5-689b-4c51-8e4a-350685b2bfce /home          ext4    defaults,noatime 0 2
+tmpfs                                     /tmp           tmpfs   defaults,noatime,mode=1777 0 0
+<span class="hljs-comment"># Partizioni aggiuntive:</span>
+UUID=d3906971-bc5c-4b36-92a0-e6f55fccab4f /mnt/CDPBackup256 ext4           defaults,noatime,discard          0       2
+UUID=1680643C80642509                     /mnt/sda4         ntfs-3g        defaults,locale=it_IT.UTF-8       0       0
+UUID=16DA3DD3DA3DAFBB                     /mnt/sda5         ntfs-3g        defaults,locale=it_IT.UTF-8       0       0
+UUID=BA24EF8624EF444B                     /mnt/CDPBackup    ntfs-3g        defaults,locale=it_IT.UTF-8       0       0
+/dev/bitlocker                            /mnt/bl           fuse.dislocker user-password=xxxxxxxx,nofail     0       0
+/mnt/bl/dislocker-file                    /mnt/bitlocker    auto           nofail                            0       0
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#    FILE SYSTEM    #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Indica il tipo di supporto utilizzato</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># proc - File System virtuale che permette di riassumere le informazioni generali sui processi del sistema</span>
+<span class="hljs-comment"># hdax - Primary Master</span>
+<span class="hljs-comment"># hdbx - Primary Slave</span>
+<span class="hljs-comment"># hdcx - Secondary Master</span>
+<span class="hljs-comment"># hddx - Secondary Slave</span>
+<span class="hljs-comment"># fdx - Floppy Disk</span>
+<span class="hljs-comment"># cdrom - CD/DVD-RW</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#   MOUNT POINT     #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># E&#x27; la Directory dove viene montato e visualizzato il contenuto della partizione.</span>
+<span class="hljs-comment"># Deve esistere già come directory ed è a discrezione dell&#x27;user (a parte alcune restrizioni di root)</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#       TYPE        #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Rappresenta il tipo di formattazione della partizione</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># auto - riconosce automaticamente il File System della partizione (boot più lento ma è una garanzia)</span>
+<span class="hljs-comment"># ext2 - Filesystem standard di GNU/Linux (non è più utilizzata dalle nuove distribuzioni)</span>
+<span class="hljs-comment"># ext3 - Filesystem standard di GNU/Linux con supporto al journaling (che consente un parziale recupero dei dati</span>
+<span class="hljs-comment">#        in seguito ad un arresto improvviso della macchina)</span>
+<span class="hljs-comment"># ext4 - Filesystem standard di GNU/Linux (non ancora supportato da tutte le distribuzioni)</span>
+<span class="hljs-comment"># ffs - File System di UNIX</span>
+<span class="hljs-comment"># iso9660 - File System di supporti CD</span>
+<span class="hljs-comment"># msdos - FAT di MS-DOS</span>
+<span class="hljs-comment"># nfs - Network File System della Sun Microsystems</span>
+<span class="hljs-comment"># ntfs - NTFS di Windows</span>
+<span class="hljs-comment"># ntfs-3g - NTFS open source retro compatibile con NTFS di Windows</span>
+<span class="hljs-comment"># proc - File System Virtuale con le informazioni dei processi</span>
+<span class="hljs-comment"># reiserfs - File System di Linux (come la ext3 ma più efficace. Utilizzata da SuSE)</span>
+<span class="hljs-comment"># swap - Formattazione usata per il SWAP di Linux</span>
+<span class="hljs-comment"># udf - File System di supporti DVD</span>
+<span class="hljs-comment"># vfat - FAT32 di Windows</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#     OPTIONS       #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Sono le opzioni di montaggio delle partizioni</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># discard - L&#x27;opzione discard abilita i benefici del comando TRIM purchè si utilizzi una versione del kernel &gt;=2.6.33. Questa impostazione non funzione con ext3, l&#x27;utilizzo dell&#x27;opzione discard con una partizione di root con filesystem ext3 ne determinerà l&#x27;accesso in sola lettura.</span>
+<span class="hljs-comment"># async - Tutte le operazioni di input/output vengono eseguite in modo asincrono</span>
+<span class="hljs-comment"># atime - Aggiorna la data di accesso all&#x27;inode ad ogni accesso</span>
+<span class="hljs-comment"># auto - Il filesystem può essere montato passando &quot;-a&quot; a mount. Solo i filesystem che contengono questa</span>
+<span class="hljs-comment">#        opzione vengono resi disponibili ad ogni avvio del pc</span>
+<span class="hljs-comment"># defaults - Usa le opzioni di default: rw,suid,dev,exec,auto,nouser,async</span>
+<span class="hljs-comment"># dev - Interpreta i device speciali presenti nel filesystem</span>
+<span class="hljs-comment"># dirsync - Tutti gli aggiornamenti delle directory presenti nel filesystem vengono in modo sincrono</span>
+<span class="hljs-comment"># exec - Permette di eseguire i programmi</span>
+<span class="hljs-comment"># _netdev - Il filesystem risiede su un device disponibile via rete. Evita che il sistema cerchi di montarlo</span>
+<span class="hljs-comment">#           prima che sia disponibile l accesso alla rete</span>
+<span class="hljs-comment"># noatime - Non aggiorna la data di accesso all&#x27;inode ad ogni accesso. Aumenta la velocità di accesso ai dati</span>
+<span class="hljs-comment"># noauto - Il filesystem non viene montato in modo automatico l&#x27; opzione &quot;-a&quot; di mount non influisce</span>
+<span class="hljs-comment"># nodev - Non interpreta i device speciali presenti nel filesystem</span>
+<span class="hljs-comment"># noexec - Non permette l&#x27; esecuzione dei programmi presenti nel filesystem</span>
+<span class="hljs-comment"># nosuid - I bit di setuid e setgid non vengono presi in considerazione</span>
+<span class="hljs-comment"># nouser - Impedisce ai normali user di montare il filesystem</span>
+<span class="hljs-comment"># quiet - Tralascia gli errori sull&#x27;impossibilità di preservare i permessi durante la copia e lo spostamento da </span>
+<span class="hljs-comment">#         partizioni Linux</span>
+<span class="hljs-comment"># remount - Cerca di rieseguire il mount del filesystem già montato. Si usa per modificare le opzioni dello</span>
+<span class="hljs-comment">#           stesso</span>
+<span class="hljs-comment"># ro - Il filesystem viene montato in ReadOnly </span>
+<span class="hljs-comment"># rw - Il filesystem viene montato in ReadWrite (vedere anche &quot;captive&quot;)</span>
+<span class="hljs-comment"># showexec - Setta l&#x27;eseguibilità in fat32</span>
+<span class="hljs-comment"># suid - I bit di setuid e setgid vengono presi in considerazione</span>
+<span class="hljs-comment"># sw - Indica che si tratta di una partizione dedicata allo swap di Linux</span>
+<span class="hljs-comment"># sync - Tutte le operazioni di input e output vengono eseguite in modo sincrono</span>
+<span class="hljs-comment"># user - Permette a un utente comune di montare il filesystem. Il nome dell&#x27;utente è scritto in mtab in modo</span>
+<span class="hljs-comment">#        che egli possa smontare il filesystem nuovamente. Questa opzione implica le opzioni: noexec, nosuid e</span>
+<span class="hljs-comment">#        nodev ( a meno che sia scavalcata da altre opzioni come exec, dev, suid ).</span>
+<span class="hljs-comment"># users - Questa opzione permette ad ogni utente comune di montare e smontare il filesystem. Questa opzione</span>
+<span class="hljs-comment">#         implica le opzioni: noexec, nosuid, nodev a meno di opzioni diverse (leggi sopra)</span>
+<span class="hljs-comment"># utf8 - Indica il tipo di rappresentazione dei caratteri, che in questo caso è proprio quello dell&#x27;alfabeto</span>
+<span class="hljs-comment">#        europeo (simbolo rappresentato dal codice numerico. es: gib5 rappresentazione cinese)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Opzioni sui permessi</span>
+<span class="hljs-comment"># gid=GID - Indica, tramite il Group ID, il gruppo proprietario del filesystem montato</span>
+<span class="hljs-comment"># uid=UID - Indica, tramite lo User ID, l&#x27;utente proprietario del filesystem montato</span>
+<span class="hljs-comment"># umask=xxx - Imposta i permessi di filesystem DA SOTTRARRE A QUELLI DI SISTEMA (con la logica chmod), metto per </span>
+<span class="hljs-comment">#             esempio umask=777 neanche root può cambiare permessi a nessun file</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#       DUMP        #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Setta la risposta della partizione al comando &#x27;&#x27;&#x27;dump&#x27;&#x27;&#x27; (solo per filesystem ext2) da </span>
+<span class="hljs-comment"># &#x27;&#x27;&#x27;Shell&#x27;&#x27;&#x27; per i back-up (vedi &quot;man dump&quot;).</span>
+<span class="hljs-comment"># DUMP è un comando che controlla i file importanti che necessitano di Back-Up e con questo settaggio si decide </span>
+<span class="hljs-comment"># che partizione accetta il comando. </span>
+<span class="hljs-comment"># ANCHE SE OBSOLETO MEGLIO NON TOCCARE ;)</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># 0 - Non effettuerà back-up in questa partizione</span>
+<span class="hljs-comment"># 1 - Effettuerà back-up in questa partizione</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#       PASS        #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Determina la priorità secondo cui i file system vengono controllati dal comando &#x27;&#x27;&#x27;fsck&#x27;&#x27;&#x27; da &#x27;&#x27;&#x27;Shell&#x27;&#x27;&#x27;</span>
+<span class="hljs-comment"># IL FILESYSTEM DI BOOT DEVE ESSERE CONTROLLABILE SEMPRE E VA SETTATO A 1!!!</span>
+<span class="hljs-comment"># Se più partizioni hanno il PASS uguale verrà effettuato un controllo in parallelo.</span>
+<span class="hljs-comment"># Partizioni secondarie (dati) non necessitano del controllo ma il Filesystem di boot è meglio lasciarlo a</span>
+<span class="hljs-comment"># 1 per permettere interagibilità del &#x27;&#x27;&#x27;fsck&#x27;&#x27;&#x27; in caso di controlli di emergenza.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># 0 - Non viene permesso il controllo a pass</span>
+<span class="hljs-comment"># 1 - Viene controllato con alta priorità</span>
+<span class="hljs-comment"># 2 - Viene controllato con priorità secondaria</span>
+
+</code></pre>
+</body></html>

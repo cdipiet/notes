@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.539" />
+        <title>vim_uso_editing</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vim_uso_editing" tabindex="-1">vim_uso_editing <a class="header-anchor" href="#vim_uso_editing" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.539</p>
+<nav class="table-of-contents"><ol><li><a href="#editing">Editing </a><ol><li><a href="#inserimento-di-un-file">Inserimento di un file </a></li><li><a href="#inserimento-dell'output-di-un-comando">Inserimento dell&#39;output di un comando </a></li><li><a href="#text-selection">Text Selection </a></li><li><a href="#indenting">Indenting </a></li><li><a href="#case">Case </a></li><li><a href="#cut%2Fcopy-and-paste-con-modo-visual">Cut/Copy and paste con modo Visual </a><ol><li><a href="#salvataggio-del-testo-selezionato-in-modo-visual">Salvataggio del testo selezionato in modo Visual </a></li></ol></li><li><a href="#modo-vi">Modo VI </a></li><li><a href="#per-copiare-dal-cursore-tutta-la-parola-a-destra">Per copiare dal cursore tutta la parola a destra </a></li><li><a href="#per-copiare-dal-cursore-fino-a-fine-riga">Per copiare dal cursore fino a fine riga </a></li><li><a href="#column-mode">Column Mode </a></li><li><a href="#cancellazioni">Cancellazioni </a></li><li><a href="#per-cancellare-dal-cursore-fino-a-fine-riga">Per cancellare dal cursore fino a fine riga </a></li><li><a href="#annullare-cancellazioni">Annullare cancellazioni </a></li><li><a href="#column-mode-linux-and-windows">Column Mode Linux and Windows </a></li><li><a href="#copy-%26-paste-tra-due-files">Copy &amp; Paste tra due files </a></li></ol></li></ol></nav><h1 id="vim-editing" tabindex="-1">VIM Editing <a class="header-anchor" href="#vim-editing" aria-hidden="true">🔗</a></h1>
+<h2 id="editing" tabindex="-1">Editing <a class="header-anchor" href="#editing" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><span class="k">.</span> Ripete l'ultimo comando eseguito</li>
+<li><span class="k">u</span> Undo ultima operazione</li>
+<li><span class="k">U</span> Undo dell'ultima riga cambiata</li>
+<li><span class="k">CTRL</span>+<span class="k">R</span> Redo</li>
+<li><span class="k">i</span> modalità inserimento</li>
+<li><span class="k">R</span> modalità overwrite(replace)</li>
+<li><span class="k">r</span> replace di un solo carattere</li>
+<li><span class="k">o</span> aggiunge una riga sotto il cursore</li>
+<li><span class="k">O</span> aggiunge una riga sopra il cursore</li>
+<li><span class="k">a</span> aggiunge(append) testo dopo il cursore</li>
+<li><span class="k">A</span> aggiunge(append) testo alla fine della riga</li>
+<li><span class="k">y</span> copia(yank)</li>
+<li><span class="k">p</span> incolla(paste/put)</li>
+<li><span class="k">J</span> unisce due righe</li>
+<li><span class="k">c</span><span class="k">c</span> riscrive una riga</li>
+<li><span class="k">c</span><span class="k">w</span> riscrive dal cursore fino all'inizio della parola successiva a quella corrente.</li>
+<li><span class="k">c</span><span class="k">e</span> riscrive dal cursore fino alla fine della parola corrente.</li>
+<li><code>p</code> recupera ultimo contenuto del buffer</li>
+<li><code>:%d</code> cancella tutto il file</li>
+<li><code>25a-[ESC]</code> appende 25 trattini</li>
+<li><code>&quot;3p</code> vim saves the last nine line deletions in nine numbered deletion buffers. Recupera terzultima riga cancellata</li>
+</ul>
+<p><code>u</code> <code>U</code> e <code>CTRL+R</code> possono essere premuti diverse volte</p>
+<h3 id="inserimento-di-un-file" tabindex="-1">Inserimento di un file <a class="header-anchor" href="#inserimento-di-un-file" aria-hidden="true">🔗</a></h3>
+<p>Per inserire nel punto corrente il contenuto di un file:</p>
+<p><span class="k">:</span><span class="k">r</span> <span class="mb">&lt;nomefile&gt;</span></p>
+<h3 id="inserimento-dell'output-di-un-comando" tabindex="-1">Inserimento dell'output di un comando <a class="header-anchor" href="#inserimento-dell'output-di-un-comando" aria-hidden="true">🔗</a></h3>
+<p><span class="k">:</span><span class="k">r</span><span class="k">!</span> <span class="mb">ls -la</span></p>
+<h3 id="text-selection" tabindex="-1">Text Selection <a class="header-anchor" href="#text-selection" aria-hidden="true">🔗</a></h3>
+<p>If you want to do the same thing to a collection of lines, like cut, copy, sort, or format, you first need to select the text. Get out of insert mode, hit one of the options below, and then move up or down a few lines. You should see the selected text highlighted.</p>
+<ul>
+<li><span class="k">V</span>             - selects entire lines</li>
+<li><span class="k">v</span>             - selects range of text</li>
+<li><span class="k">CTRL</span>+<span class="k">v</span>  - selects columns</li>
+<li><code>gv</code>                - reselect block</li>
+</ul>
+<p>After selecting the text, try <code>d</code> to delete, or <code>y</code> to copy, or <code>:s/match/replace/</code>, or <code>:center</code>, or <code>!sort</code></p>
+<h3 id="indenting" tabindex="-1">Indenting <a class="header-anchor" href="#indenting" aria-hidden="true">🔗</a></h3>
+<p>Some variables you might want to set:</p>
+<ul>
+<li><code>:set tabstop=8</code>     - tabs are at proper location</li>
+<li><code>:set expandtab</code>     - don't use actual tab character (ctrl-v)</li>
+<li><code>:set shiftwidth=4</code>  - indenting is 4 spaces</li>
+<li><code>:set autoindent</code>    - turns it on</li>
+<li><code>:set smartindent</code>   - does the right thing (mostly) in programs</li>
+<li><code>:set cindent</code>       - stricter rules for C programs</li>
+</ul>
+<p>I like having auto on, but smart does funny things based on keywords.</p>
+<p>To indent the current line, or a visual block:</p>
+<p>ctrl-t, ctrl-d  - indent current line forward, backwards
+(insert mode)
+visual &gt; or &lt;   - indent block by sw (repeat with . )
+To stop indenting when pasting with the mouse, add this to your .vimrc:</p>
+<p>:set pastetoggle=<f5>
+then try hitting the F5 key while in insert mode (or just :set paste).</p>
+<h3 id="case" tabindex="-1">Case <a class="header-anchor" href="#case" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>~</code></td>
+<td style="text-align:left">La tilde cambia il case</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>Vu</code></td>
+<td style="text-align:left">Lowercase line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>VU</code></td>
+<td style="text-align:left">Uppercase line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>g~~</code></td>
+<td style="text-align:left">Invert case</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>vEU</code></td>
+<td style="text-align:left">Switch word to uppercase</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>vE~</code></td>
+<td style="text-align:left">Modify word case</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ggguG</code></td>
+<td style="text-align:left">Set all text to lowercase</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:set ignorecase</code></td>
+<td style="text-align:left">Ignore case in searches</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:set smartcase</code></td>
+<td style="text-align:left">Ignore case in searches excepted if an uppercase letter is used</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/\&lt;./\u&amp;/g</code></td>
+<td style="text-align:left">Sets first letter of each word to uppercase</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/\&lt;./\l&amp;/g</code></td>
+<td style="text-align:left">Sets first letter of each word to lowercase</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/.*/\u&amp;</code></td>
+<td style="text-align:left">Sets first letter of each line to uppercase</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/.*/\l&amp;</code></td>
+<td style="text-align:left">Sets first letter of each line to lowercase</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cut%2Fcopy-and-paste-con-modo-visual" tabindex="-1">Cut/Copy and paste con modo Visual <a class="header-anchor" href="#cut%2Fcopy-and-paste-con-modo-visual" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>Position the cursor where you want to begin cutting.</li>
+<li>Press <span class="k">v</span> to select characters, or uppercase <span class="k">V</span> to select whole lines(Modo <strong>Visual</strong>), <br>
+or <span class="k">CTRL</span>+<span class="k">v</span> to select rectangular blocks (use <span class="k">CTRL</span>+<span class="k">q</span> if <span class="k">CTRL</span>+<span class="k">v</span> is mapped to paste).</li>
+<li>Move the cursor to the end of what you want to cut.</li>
+<li>Press <span class="k">d</span> to cut (or <span class="k">y</span> to copy).</li>
+<li>Move to where you would like to paste.</li>
+<li>Press <span class="k">P</span> to paste before the cursor, or <span class="k">p</span> to paste after.</li>
+</ol>
+<h4 id="salvataggio-del-testo-selezionato-in-modo-visual" tabindex="-1">Salvataggio del testo selezionato in modo Visual <a class="header-anchor" href="#salvataggio-del-testo-selezionato-in-modo-visual" aria-hidden="true">🔗</a></h4>
+<p>Selezionare in modo Visual <span class="k">v</span> delle righe, e poi <span class="k">:</span><span class="k">w</span> <span class="m">nomefile</span> per salvare in un nuovo file la porzione di testo selezionata.</p>
+<h3 id="modo-vi" tabindex="-1">Modo VI <a class="header-anchor" href="#modo-vi" aria-hidden="true">🔗</a></h3>
+<p>Il mark lavora al livello di riga e non di carattere.</p>
+<ol>
+<li>Move the cursor to the top of the paragraph you want to move.</li>
+<li><span class="k">m</span><span class="k bl">a</span> Place a <strong>mark</strong> named <code>a</code> at this location. (Vim will give you no indication that this command has been executed. In other words, the screen will not change.)</li>
+<li>Move the cursor to the bottom of the paragraph to be moved.</li>
+<li><span class="k">d</span><span class="k r">'</span><span class="k bl">a</span> Delete to <strong>mark</strong> <code>a</code>. This puts the deleted text in a cut buffer.</li>
+<li>Move the cursor to line where the text is to go. The paragraph will be placed after this one.</li>
+<li><span class="k">p</span> Paste the text in below the cursor.</li>
+</ol>
+<p>Utilizzare <span class="k">y</span> anzichè <span class="k">d</span> per il <strong>Copy</strong> al posto del <strong>Cut</strong>.</p>
+<h3 id="per-copiare-dal-cursore-tutta-la-parola-a-destra" tabindex="-1">Per copiare dal cursore tutta la parola a destra <a class="header-anchor" href="#per-copiare-dal-cursore-tutta-la-parola-a-destra" aria-hidden="true">🔗</a></h3>
+<p><span class="k">y</span><span class="k">w</span></p>
+<p>sta per &quot;yank work&quot;</p>
+<h3 id="per-copiare-dal-cursore-fino-a-fine-riga" tabindex="-1">Per copiare dal cursore fino a fine riga <a class="header-anchor" href="#per-copiare-dal-cursore-fino-a-fine-riga" aria-hidden="true">🔗</a></h3>
+<p><span class="k">y</span><span class="k">$</span></p>
+<h3 id="column-mode" tabindex="-1">Column Mode <a class="header-anchor" href="#column-mode" aria-hidden="true">🔗</a></h3>
+<ol>
+<li><span class="k">CTRL</span>+<span class="k">v</span> per entrare in maniera visuale column mode</li>
+<li>selezionare il testo</li>
+<li><span class="k">y</span> per copiare</li>
+<li>spostarsi nel punto in cui si vuole incollare</li>
+<li><span class="k">p</span> per incollare</li>
+</ol>
+<h3 id="cancellazioni" tabindex="-1">Cancellazioni <a class="header-anchor" href="#cancellazioni" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>dd</code></li>
+<li><code>2dd</code></li>
+<li><code>dw</code></li>
+<li><code>dfx</code> cancella dalla posizione del cursore al carattere x compreso, f e' il find inline</li>
+<li><code>:%d</code> cancella tutto il file</li>
+</ul>
+<h3 id="per-cancellare-dal-cursore-fino-a-fine-riga" tabindex="-1">Per cancellare dal cursore fino a fine riga <a class="header-anchor" href="#per-cancellare-dal-cursore-fino-a-fine-riga" aria-hidden="true">🔗</a></h3>
+<p><code>d$</code>
+<code>D</code></p>
+<h3 id="annullare-cancellazioni" tabindex="-1">Annullare cancellazioni <a class="header-anchor" href="#annullare-cancellazioni" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="k">u</span></td>
+<td style="text-align:left">undo ultima operazione</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">U</span></td>
+<td style="text-align:left">annulla le modifiche fatte nella riga dal salvataggio, funziona solo se non si abbandona la riga</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">&quot;</span><span class="k">3</span><span class="k">p</span></td>
+<td style="text-align:left">vim saves the last nine line deletions in nine numbered deletion buffers. Recupera terzultima riga cancellata</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">p</span></td>
+<td style="text-align:left">recupera ultimo contenuto del buffer</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">R</span></td>
+<td style="text-align:left">REDO</td>
+</tr>
+</tbody>
+</table>
+<p><span class="k">u</span> <span class="k">U</span> e <span class="k">CTRL</span>+<span class="k">R</span> possono essere premuti diverse volte</p>
+<h3 id="column-mode-linux-and-windows" tabindex="-1">Column Mode Linux and Windows <a class="header-anchor" href="#column-mode-linux-and-windows" aria-hidden="true">🔗</a></h3>
+<p>In vim column visual mode is <span class="k">CTRL</span> + <span class="k">v</span> <br>
+The Windows version uses <span class="k">CTRL</span> + <span class="k">Q</span> since <span class="k">CTRL</span> + <span class="k">V</span> is the standard paste clipboard command.</p>
+<h3 id="copy-%26-paste-tra-due-files" tabindex="-1">Copy &amp; Paste tra due files <a class="header-anchor" href="#copy-%26-paste-tra-due-files" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>
+<p>To copy text across different versions of vim, you can use the <code>+ register</code>:
+Eg, to select a line of text in a vim session, and copy to a different instance of vim: <br>
+In the first instance, highlight, select <code>+ register</code>, and yank (save) to it: <br>
+<code>SHIFT-v</code> oppure <code>CTRL+v</code> oppure <code>v</code> selezione e <code>y</code> <br>
+<code>&quot;+y</code> <br>
+In the second vim, select <code>+ register</code>, and paste from it: <br>
+<code>&quot;+p</code> <br>
+To copy and paste from and to the select buffer, use the <code>* register</code>, eg: <br>
+<code>&quot;*p</code> <br>
+To paste from a mouse highlighted selection.</p>
+</li>
+<li>
+<p>Il trucco e' di utilizzare il named buffer <code>a</code></p>
+<pre><code> vi /etc/home/cdipiet/.bashrc_cdp
+</code></pre>
+<p>posizionarsi nel testo all'inizio della serie di linee da copiare <br>
+<code>&quot;a4yy</code> (questo comando copia nel buffer &quot;a&quot; 4 linee di testo a partire quella corrente) <br>
+<code>:e</code> /etc/profile <br>
+posizionarsi nel testo nel punto in cui voler incollare il buffer <br>
+<code>&quot;ap</code> (questo comando incollera nel testo le 4 linee nel buffer &quot;a&quot;) <br>
+<code>:w</code> (salva le modifiche) <br>
+<code>:e#</code> (riapre il file /etc/home/cdipiet/.bashrc_cdp, in alternativa <code>:q</code>)</p>
+</li>
+<li>
+<p>After copying text, open a new buffer for a new file:</p>
+<p><code>:e</code> ~/dummy <br>
+paste the text to the new buffer <br>
+write the new buffer (<code>:w</code>) <br>
+switch to the previous buffer (<code>:bp</code>) to release *.swp <br>
+now switch to the other console <br>
+put the cursor at the desired place <br>
+read the dummy file (<code>:r</code> ~/dummy)</p>
+</li>
+</ol>
+</body></html>

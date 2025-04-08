@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.962" />
+        <title>net_bridge_vlan</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="net_bridge_vlan" tabindex="-1">net_bridge_vlan <a class="header-anchor" href="#net_bridge_vlan" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.962</p>
+<nav class="table-of-contents"><ol><li><a href="#configurazione-di-rete-di-un-nic">Configurazione di rete di un NIC </a></li><li><a href="#bridge">Bridge </a><ol><li><a href="#bridge-contenente-il-nic-fisico---configurazione-non-persistente">bridge contenente il NIC fisico - configurazione non persistente </a></li><li><a href="#bridge-contenente-il-nic-fisico---configurazione-permanente-con-networkmanager">bridge contenente il NIC fisico - configurazione permanente con NetworkManager </a></li></ol></li><li><a href="#vlan">VLAN </a></li><li><a href="#bridge-device-configuration">Bridge Device Configuration </a><ol><li><a href="#vlan-devices">VLAN Devices </a></li><li><a href="#bridge-membership">Bridge Membership </a></li><li><a href="#vlan-aware-bridge">VLAN-aware Bridge </a></li><li><a href="#vlan-unaware-bridge">VLAN-unaware Bridge </a></li><li><a href="#bridge-port-configuration">Bridge Port Configuration </a></li><li><a href="#bridged-interfaces-and-vlan-tags">Bridged interfaces and VLAN tags </a></li></ol></li><li><a href="#configurare-un-bridge-come-un-hub">Configurare un Bridge come un Hub </a></li><li><a href="#bridge-con-vlan-e-nic-tap-collegati-a-delle-vm-qemu---esempio-completo">Bridge con VLAN e NIC TAP collegati a delle VM QEMU - Esempio completo </a></li><li><a href="#bridge-con-nic-veth-e-shell-in-net-namespaces---esempio-completo">Bridge con NIC VETH e Shell in Net Namespaces - Esempio completo </a></li><li><a href="#processi-bash-con-net-namespace-pid-inseriti-in-delle-vlan-mediante-dei-nic-veth-ed-un-bridge-vlan-filtering">Processi bash con net namespace PID inseriti in delle VLAN mediante dei NIC VETH ed un bridge vlan filtering </a><ol><li><a href="#host---creazione-di-4-processi-in-4-network-namespaces">Host - Creazione di 4 processi in 4 network namespaces </a></li><li><a href="#host---creazione-di-4-interfacce-veth-e-spostamento-dei-peer-nei-network-namespaces-dei-processi-bash">Host - Creazione di 4 interfacce VETH e spostamento dei peer nei network namespaces dei processi bash </a></li><li><a href="#host---creazione-del-bridge-con-vlan-filtering-attivato">Host - Creazione del Bridge con vlan filtering attivato </a></li><li><a href="#host---configurazione-delle-vlan-nel-bridge">Host - Configurazione delle VLAN nel Bridge </a></li><li><a href="#guest---configurazione-di-rete-dei-guest-bash">Guest - Configurazione di rete dei Guest Bash </a></li><li><a href="#script-cumulativo">Script cumulativo </a></li></ol></li><li><a href="#vlan-realizzate-con-bridge-e-veth-assegnati-a-dei-named-network-namespaces">VLAN realizzate con bridge e veth assegnati a dei named network namespaces </a></li><li><a href="#teoria-vlan">Teoria VLAN </a><ol><li><a href="#modalit%C3%A0-vlan-per-le-interfacce-dello-switch">Modalità VLAN per le interfacce dello switch </a></li><li><a href="#port-vlan-id">Port VLAN ID </a></li><li><a href="#default-vlan-e-native-vlan">Default VLAN e Native VLAN </a></li></ol></li></ol></nav><h1 id="bridge-e-vlan" tabindex="-1">Bridge e VLAN <a class="header-anchor" href="#bridge-e-vlan" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="net_namespaces.html">Network Namespaces</a></li>
+<li><a href="net_systemd-networkd.html#nomi-delle-interfacce-di-rete-con-syst.html">Nomi delle interfacce di rete con systemd</a></li>
+<li><a href="firewall/iptables.html">IPTables</a></li>
+<li><a href="https://iximiuz.com/en/posts/computer-networking-101/">https://iximiuz.com/en/posts/computer-networking-101/</a></li>
+<li><a href="https://iximiuz.com/en/posts/laymans-iptables-101/">https://iximiuz.com/en/posts/laymans-iptables-101/</a></li>
+<li><a href="https://iximiuz.com/en/posts/bridge-vs-switch/">https://iximiuz.com/en/posts/bridge-vs-switch/</a></li>
+<li><a href="https://iximiuz.com/en/posts/networking-lab-ethernet-broadcast-domains/">https://iximiuz.com/en/posts/networking-lab-ethernet-broadcast-domains/</a></li>
+<li><a href="https://iximiuz.com/en/posts/networking-lab-l3-to-l2-segments-mapping/">https://iximiuz.com/en/posts/networking-lab-l3-to-l2-segments-mapping/</a></li>
+<li><a href="https://iximiuz.com/en/posts/networking-lab-simple-vlan/">https://iximiuz.com/en/posts/networking-lab-simple-vlan/</a></li>
+</ul>
+<pre><code class="language-bash">$ ip route get 1 | <span class="hljs-built_in">head</span> -1 | <span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27; &#x27;</span> -f7
+192.168.1.2
+$ ip route get 1 | <span class="hljs-built_in">head</span> -1 | <span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27; &#x27;</span> -f5
+enp5s0
+ip -4 route show default| <span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27; &#x27;</span> -f3
+192.168.1.1
+</code></pre>
+<h2 id="configurazione-di-rete-di-un-nic" tabindex="-1">Configurazione di rete di un NIC <a class="header-anchor" href="#configurazione-di-rete-di-un-nic" aria-hidden="true">🔗</a></h2>
+<p>E' composta da:</p>
+<ol>
+<li>IP</li>
+<li>Subnet Mask</li>
+<li>Gateway</li>
+</ol>
+<p>La subnet mask permette al sistema di capire se le richieste in uscita sono destinate alla stessa sottorete dell'host,
+se è così il destinatario viene raggiunto nella sottorete interna tramite ARP,
+altrimenti il pacchetto viene inviato al gateway che saprà come indirizzarlo fungendo da router.</p>
+<h2 id="bridge" tabindex="-1">Bridge <a class="header-anchor" href="#bridge" aria-hidden="true">🔗</a></h2>
+<p>Un bridge permette di redirezionare il  traffico da una interfaccia verso tutte le altre interfacce presenti nel bridge stesso.
+L'obiettivo finale sarà quello di associare ogni interfaccia ad una VLAN, per ora iniziamo a creare un semplice bridge.
+Inserendo il NIC fisico <code>enp5s0</code> nel bridge, bisogna stare attenti perchè inserendolo nel bridge perde il suo ip,
+per non perdere la connessione ad internet della macchina bisogna perciò annotarsi la configurazione di rete nel NIC fisico
+e riapplicarla al bridge stesso che lo contiene.</p>
+<h3 id="bridge-contenente-il-nic-fisico---configurazione-non-persistente" tabindex="-1">bridge contenente il NIC fisico - configurazione non persistente <a class="header-anchor" href="#bridge-contenente-il-nic-fisico---configurazione-non-persistente" aria-hidden="true">🔗</a></h3>
+<p>Inserendo un NIC fisico in un bridge assieme a delle altre interfacce virtuali come ad es. tap,
+bisogna annotarsi ip e gateway del NIC fisico.
+All'inserimento nel bridge l'ip del NIC fisico deve essere rimosso ed i suoi ip e routing al gateway
+devono essere spostati sull bridge, in questo modo la connessione ad internet dell'host non verrà perduta,
+il bridge sarà diventato il collegamento con il mondo esterno alla macchina al posto del NIC fisico.</p>
+<p>Eseguiamo prima la configurazione manuale, per renderla persistente una volta testata utilizzeremo NetworkManager.<br>
+Effettuiamo la configurazione in modo che il bridge possa accedere ad internet al posto del NIC fisico, non piu direttamente visibile dal sistema.</p>
+<pre><code>              |
+              | physical link
+              |
+              o br0
+             / \
+            /   \
+    enp5s0 o     o tap0
+                 |
+     - - - - - - - - - - - - - - - Host / VM boundary
+                 |
+                 o eth0 (inside VM)
+</code></pre>
+<pre><code class="language-bash">$ nmcli conn modify Cavo connection.autoconnect no  <span class="hljs-comment"># Si disabilita la connessione NetworkManager del NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge                  <span class="hljs-comment"># Creazione del bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user &lt;utente&gt;# creazione dell<span class="hljs-string">&#x27;interfaccia virtuale tap(livello 2)
+$ sudo ip link set dev tap0 up                      # i NIC da inserire nel bridge devono essere attivi
+$ sudo ip link set dev enp5s0 up 
+$ sudo ip link set dev tap0 master br0              # Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)
+$ sudo ip link set dev enp5s0 master br0 
+$ sudo ip addr flush dev enp5s0                     # rimozione dell&#x27;</span>IP dal NIC fisico
+$ <span class="hljs-built_in">sudo</span> dhclient -v br0                              <span class="hljs-comment"># si usa il dhcp per assegnare un IP ed il routing al bridge</span>
+                                                    <span class="hljs-comment"># oppure si possono assegnare manualmente ip e route al default gateway</span>
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/24 dev br0
+$ <span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+<span class="hljs-comment"># Stop del bridge</span>
+<span class="hljs-comment"># Ripristino al NIC fisico senza cancellazione dei NIC virtuali</span>
+$ <span class="hljs-comment"># ip link delete tap0</span>
+$ <span class="hljs-comment"># ip link del br0 type bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 down                     <span class="hljs-comment"># il bridge viene disattivao</span>
+$ nmcli conn modify Cavo connection.autoconnect <span class="hljs-built_in">yes</span> <span class="hljs-comment"># si ripristina la connessione tramite NIC fisico</span>
+$ <span class="hljs-built_in">sudo</span> dhclient -v enp5s0                           <span class="hljs-comment"># assegna al NIC fisico ip e gateway</span>
+$ <span class="hljs-comment">#nmcli con up Cavo</span>
+
+<span class="hljs-comment"># Partenza del bridge</span>
+$ nmcli conn modify Cavo connection.autoconnect no  <span class="hljs-comment"># Si disabilita la connessione tramite NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0                     <span class="hljs-comment"># si rimuove l&#x27;ip del NIC fisico come anche dalla tabella di routing</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># si riattiva il bridge</span>
+<span class="hljs-comment"># Impostazioni ip e routing per il bridge</span>
+$ <span class="hljs-built_in">sudo</span> dhclient -v br0 <span class="hljs-comment"># ottiene l&#x27;ip ed imposta il routing verso il gateway, oppure manualmente:</span>
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/24 dev br0
+$ <span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev br0
+$ bridge <span class="hljs-built_in">link</span> show
+
+<span class="hljs-comment"># Addendum: Routing corretto con il bridge attivo _gateway è il gateway, nel nostro esempio 192.168.1.1:</span>
+$ ip route
+default via 192.168.1.1 dev br0 
+192.168.1.0/24 dev br0 proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.14 
+$ route
+Kernel IP routing table
+Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
+default         _gateway        0.0.0.0         UG    0      0        0 br0
+192.168.1.0     0.0.0.0         255.255.255.0   U     0      0        0 br0
+
+
+<span class="hljs-comment"># Ripristinare il NIC fisico</span>
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev br0
+<span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev tap0
+<span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+<span class="hljs-built_in">sudo</span> ip route flush dev enp5s0
+<span class="hljs-comment"># nmcli con up Cavo</span>
+<span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/24 dev enp5s0
+<span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev enp5s0
+</code></pre>
+<h3 id="bridge-contenente-il-nic-fisico---configurazione-permanente-con-networkmanager" tabindex="-1">bridge contenente il NIC fisico - configurazione permanente con NetworkManager <a class="header-anchor" href="#bridge-contenente-il-nic-fisico---configurazione-permanente-con-networkmanager" aria-hidden="true">🔗</a></h3>
+<p>Rendiamo permanente la configurazione precedente utilizzando NetworkManager.</p>
+<p><a href="https://it.linux-console.net/?p=1779">https://it.linux-console.net/?p=1779</a></p>
+<pre><code class="language-bash">$ nmcli conn show --active
+NAME             UUID                                  TYPE      DEVICE          
+Cavo             c98bfddf-7828-4a2c-ae63-f9fd7aa545db  ethernet  enp5s0  
+$ nmcli con show Cavo|grep -i IP4
+    IP4.ADDRESS[1]:                         192.168.1.2/24
+    IP4.GATEWAY:                            192.168.1.1
+    IP4.ROUTE[1]:                           dst = 0.0.0.0/0, nh = 192.168.1.1, mt = 100
+    IP4.ROUTE[2]:                           dst = 192.168.1.0/24, nh = 0.0.0.0, mt = 100
+    IP4.DNS[1]:                             192.168.1.1
+    IP4.DOMAIN[1]:                          homenet.telecomitalia.it
+
+<span class="hljs-comment"># Rendere la configurazione persistente con NetworkManager</span>
+<span class="hljs-comment"># https://networkmanager.dev/docs/man-pages/</span>
+$ nmcli conn add <span class="hljs-built_in">type</span> bridge ifname br0 con-name br0 ip4 192.168.1.1/24 gw4 192.168.1.1 autoconnect <span class="hljs-built_in">yes</span>
+<span class="hljs-comment"># nmcli conn modify br0 ipv4.addresses &#x27;192.168.1.1/24&#x27;</span>
+<span class="hljs-comment"># nmcli conn modify br0 ipv4.gateway &#x27;192.168.1.1&#x27;</span>
+$ nmcli conn modify br0 ipv4.dns <span class="hljs-string">&#x27;192.168.1.1&#x27;</span>
+$ nmcli conn modify br0 ipv4.method manual <span class="hljs-comment"># nessun dhcp, IPv4 address configured statically</span>
+$ <span class="hljs-comment"># nmcli conn modify br0 connection.autoconnect yes</span>
+$ nmcli connection modify br0 connection.autoconnect-slaves 1
+$ nmcli conn add <span class="hljs-built_in">type</span> bridge-slave ifname enp5s0 master br0 con-name br0-enp5s0
+$ nmcli conn modify Cavo connection.autoconnect no
+$ nmcli conn down Cavo
+$ nmcli conn up br0
+$ nmcli conn reload
+
+$ nmcli conn down br0
+$ nmcli conn del br0
+$ nmcli conn del br0-enp5s0
+$ nmcli conn modify Cavo connection.autoconnect <span class="hljs-built_in">yes</span>
+
+<span class="hljs-comment"># https://wiki.gentoo.org/wiki/Network_bridge</span>
+$ nmcli con add <span class="hljs-built_in">type</span> bridge con-name br0 ifname br0 ip4 10.0.0.3/24 gw4 10.0.0.1
+$ nmcli con add <span class="hljs-built_in">type</span> bridge-slave con-name br0-slave0 ifname eth0 master br0
+$ nmcli con add <span class="hljs-built_in">type</span> bridge-slave con-name br0-slave1 ifname eth1 master br0
+$ nmcli con mod br0 ipv4.dns 1.1.1.1 ipv4.method manual
+$ nmcli con up br0
+</code></pre>
+<h2 id="vlan" tabindex="-1">VLAN <a class="header-anchor" href="#vlan" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://www.netsetup.it/networking/196-porte-tagged-untagged">https://www.netsetup.it/networking/196-porte-tagged-untagged</a></p>
+</li>
+<li>
+<p>Ogni VLAN ha un solo ed unico identificativo numerico, VID o VLAN ID, il cui valore va da <code>1</code> a <code>4094</code>. In sostanza è il numero che identifica la VLAN.</p>
+</li>
+<li>
+<p>Per quanto riguarda gli switch, le porte possono essere untagged member o tagged member di una VLAN.</p>
+</li>
+<li>
+<p>Nella terminologia Cisco, una porta <code>untagged</code> è semplicemente una <code>Access Port</code>, mentre le porte <code>tagged</code> sono quelle di <code>Trunk</code>.</p>
+</li>
+<li>
+<p>Una porta può essere untagged per una sola VLAN (access port assegnata a quella sola VLAN), oppure tagged per diverse VLAN (ossia trunk).</p>
+</li>
+<li>
+<p><strong>Port VLAN ID</strong> - E' l'identificativo della VLAN utilizzato per classificare un pacchetto non taggato che entra nello switch.</p>
+</li>
+</ul>
+<p><a href="https://wiki.archlinux.org/title/VLAN">https://wiki.archlinux.org/title/VLAN</a></p>
+<p>Esempio di NIC VLAN, noi non lo utilizzeremo, utilizzeremo il bridge con NIC tap ciasuno configurato su una VLAN.</p>
+<pre><code class="language-bash">$ ip <span class="hljs-built_in">link</span> add <span class="hljs-built_in">link</span> eth0 name eth0.100 <span class="hljs-built_in">type</span> vlan <span class="hljs-built_in">id</span> 100
+$ ip -d <span class="hljs-built_in">link</span> show eth0.100
+$ ip -d addr show
+$ ip addr add 192.168.100.1/24 brd 192.168.100.255 dev eth0.100
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev eth0.100 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev eth0.100 down
+$ ip <span class="hljs-built_in">link</span> delete eth0.100
+$ tcpdump -nnei eth0 -vvv <span class="hljs-comment"># per vedere i frame 802.1Q</span>
+</code></pre>
+<ul>
+<li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-configure_802_1q_vlan_tagging_using_the_command_line">https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/networking_guide/sec-configure_802_1q_vlan_tagging_using_the_command_line</a></li>
+<li><a href="https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking">https://developers.redhat.com/blog/2018/10/22/introduction-to-linux-interfaces-for-virtual-networking</a></li>
+</ul>
+<h2 id="bridge-device-configuration" tabindex="-1">Bridge Device Configuration <a class="header-anchor" href="#bridge-device-configuration" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://github.com/pmachata/mlxsw/wiki/Bridge">https://github.com/pmachata/mlxsw/wiki/Bridge</a></li>
+<li><a href="https://wiki.archlinux.org/title/Network_bridge">https://wiki.archlinux.org/title/Network_bridge</a></li>
+</ul>
+<pre><code class="language-bash">$ man ip
+$ man bridge
+
+$ ip <span class="hljs-built_in">link</span> add name br0 <span class="hljs-built_in">type</span> bridge
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+$ ip -d <span class="hljs-built_in">link</span> show dev br0
+$ bridge <span class="hljs-built_in">link</span> show
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 <span class="hljs-built_in">type</span> bridge ageing_time 1000      <span class="hljs-comment">#  To change the aging time to 10 seconds. The aging time in seconds is the value entered divided by 100. Therefore, in the example above 1000/100=10 seconds.</span>
+$ ip <span class="hljs-built_in">link</span> del dev br0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1      <span class="hljs-comment"># makes br0 VLAN-aware</span>
+</code></pre>
+<h3 id="vlan-devices" tabindex="-1">VLAN Devices <a class="header-anchor" href="#vlan-devices" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ ip <span class="hljs-built_in">link</span> add <span class="hljs-built_in">link</span> sw1p5 name sw1p5.10 <span class="hljs-built_in">type</span> vlan <span class="hljs-built_in">id</span> 10  <span class="hljs-comment"># To configure a VLAN device sw1p5.10 on top of a front panel port sw1p5</span>
+                                                        <span class="hljs-comment"># VLAN devices are soft interfaces that can be set up on top of front panel ports. </span>
+                                                        <span class="hljs-comment"># Any traffic going in through the port with the VLAN device&#x27;s VLAN is directed to the VLAN device instead of the port netdev. </span>
+                                                        <span class="hljs-comment"># Similarly, any packet transmitted through the VLAN device carries the appropriate VLAN tag.</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p5.10 up
+    RTNETLINK answers: Network is down                  <span class="hljs-comment"># The VLAN device can only go up if the administrative state of the underlying device (the real device) is up</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p5 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p5.10 up    
+$ ip <span class="hljs-built_in">link</span> del dev sw1p5.10    
+</code></pre>
+<h3 id="bridge-membership" tabindex="-1">Bridge Membership <a class="header-anchor" href="#bridge-membership" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev DEV master BRDEV  <span class="hljs-comment"># To add a net device to a bridge (enslaving)</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev DEV nomaster      <span class="hljs-comment"># Similarly, to remove a net device from a bridge</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev BRDEV up          <span class="hljs-comment"># to make the bridge functional</span>
+</code></pre>
+<h3 id="vlan-aware-bridge" tabindex="-1">VLAN-aware Bridge <a class="header-anchor" href="#vlan-aware-bridge" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1  <span class="hljs-comment"># To enslave sw1p5 and sw1p6 to a VLAN-aware br0</span>
+$ bridge vlan show
+    port              vlan-id  
+    br0               1 PVID Egress Untagged
+
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p5 master br0                  <span class="hljs-comment">#</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p6 master br0                  <span class="hljs-comment">#</span>
+
+                                                    
+$ bridge vlan show dev sw1p5                        <span class="hljs-comment"># By default only the port VID (PVID) is allowed to ingress through any bridge port.</span>
+    port    vlan ids                                <span class="hljs-comment"># The PVID flag indicates that VLAN 1 is the PVID VLAN, which means that any untagged packet coming through this bridge port gets tagged with VID 1.</span>
+    sw1p5    1 PVID Egress Untagged                 <span class="hljs-comment"># the Egress Untagged flag causes packets going out of the bridge port with VID 1 to be untagged at egress.</span>
+
+$ bridge vlan add vid 20 dev sw1p5                  <span class="hljs-comment"># To allow another VLAN (VID 20) to ingress the bridge through sw1p5</span>
+$ bridge vlan show dev sw1p5
+    port    vlan ids
+    sw1p5    1 PVID Egress Untagged
+            20
+
+$ bridge vlan add vid 20 dev sw1p6 untagged         <span class="hljs-comment"># To allow packets with VID 20 to be bridged between sw1p5 and sw1p6, VID 20 needs to be configured on sw1p6 as well</span>
+                                                    <span class="hljs-comment"># the untagged flag sets the Egress Untagged flag for VID 20. </span>
+$ bridge vlan add vid 20 dev sw1p6                  <span class="hljs-comment"># To toggle untagged flag off</span>
+                                                    
+$ bridge vlan add vid 20 dev sw1p5 pvid             <span class="hljs-comment"># To change the PVID to 20. The PVID flag is removed from VID 1, as there can only be one PVID per bridge port.</span>
+$ bridge vlan show dev sw1p5
+    port    vlan ids
+    sw1p5    1 Egress Untagged
+            20 PVID
+
+$ bridge vlan add vid 20 dev sw1p5                  <span class="hljs-comment"># Removing the PVID flag entirely from the bridge port prevents untagged packets from entering the bridge through the port.</span>
+$ bridge vlan show dev sw1p5
+    port    vlan ids
+    sw1p5    1 Egress Untagged
+            20
+$ bridge vlan show
+</code></pre>
+<h3 id="vlan-unaware-bridge" tabindex="-1">VLAN-unaware Bridge <a class="header-anchor" href="#vlan-unaware-bridge" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://www.netsetup.it/networking/196-porte-tagged-untagged">https://www.netsetup.it/networking/196-porte-tagged-untagged</a></li>
+<li>&lt;<a href="https://gist.github.com/iximiuz/1e1670e237dcc0eff2d45eed7536879e">https://gist.github.com/iximiuz/1e1670e237dcc0eff2d45eed7536879e</a> Configure VLAN tagging on a Linux bridge. &gt;</li>
+</ul>
+<pre><code class="language-bash">$ ip <span class="hljs-built_in">link</span> add <span class="hljs-built_in">link</span> sw1p5 name sw1p5.30 <span class="hljs-built_in">type</span> vlan <span class="hljs-built_in">id</span> 30
+$ ip <span class="hljs-built_in">link</span> add <span class="hljs-built_in">link</span> sw1p6 name sw1p6.40 <span class="hljs-built_in">type</span> vlan <span class="hljs-built_in">id</span> 40
+$ ip <span class="hljs-built_in">link</span> add name br1 <span class="hljs-built_in">type</span> bridge
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p5.30 master br1
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p6.40 master br1    
+</code></pre>
+<h3 id="bridge-port-configuration" tabindex="-1">Bridge Port Configuration <a class="header-anchor" href="#bridge-port-configuration" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p>Learning – controls whether a given port learns MAC addresses from received traffic or not. By default this flag is on.</p>
+</li>
+<li>
+<p>Flooding – controls whether a given port floods unicast traffic for which there is no FDB entry. By default this flag is on.
+To toggle off all of the aforementioned attributes, run:</p>
+<pre><code class="language-bash">$ bridge <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev sw1p5 learning off flood off
+</code></pre>
+</li>
+</ul>
+<h3 id="bridged-interfaces-and-vlan-tags" tabindex="-1">Bridged interfaces and VLAN tags <a class="header-anchor" href="#bridged-interfaces-and-vlan-tags" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://unix.stackexchange.com/questions/546136/bridged-interfaces-and-vlan-tags">https://unix.stackexchange.com/questions/546136/bridged-interfaces-and-vlan-tags</a></li>
+<li><a href="https://linux-blog.anracom.com/2017/11/20/fun-with-veth-devices-linux-bridges-and-vlans-in-unnamed-linux-network-namespaces-iv/">https://linux-blog.anracom.com/2017/11/20/fun-with-veth-devices-linux-bridges-and-vlans-in-unnamed-linux-network-namespaces-iv/</a></li>
+<li><a href="https://man7.org/linux/man-pages/man8/bridge.8.html#bridge_vlan_-_VLAN_filter_list">https://man7.org/linux/man-pages/man8/bridge.8.html#bridge_vlan_-_VLAN_filter_list</a></li>
+</ul>
+<pre><code class="language-bash">$ ip tuntap add dev tap1 mode tap user <span class="hljs-variable">$USER</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> eth0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> tap1 up
+<span class="hljs-comment"># the following line could have directly included at bridge creation the additional parameter `vlan_filtering 1`</span>
+$ ip <span class="hljs-built_in">link</span> add name br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1
+<span class="hljs-comment"># ip link add name br0 type bridge</span>
+<span class="hljs-comment"># ip link set dev br0 type bridge vlan_filtering 1</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> tap1 master br0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> eth0 master br0
+
+$ bridge vlan del dev tap1 vid 1
+$ bridge vlan del dev eth0 vid 1
+$ bridge vlan add dev tap1 vid 5
+$ bridge vlan add dev eth0 vid 5 pvid untagged
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+$ bridge vlan show
+
+<span class="hljs-comment"># Note that the bridge&#x27;s self implicit port is still using VID 1,</span>
+<span class="hljs-comment"># so assigning an IP directly on the bridge as is done on some settings will now fail to communicate properly.</span>
+<span class="hljs-comment"># If such configuration is really needed, you can set the bridge&#x27;s self port in VLAN 5 too,</span>
+<span class="hljs-comment"># with a slightly different syntax (self) because it&#x27;s the bridge itself:</span>
+
+$ bridge vlan del dev br0 vid 1 self
+$ bridge vlan add dev br0 vid 5 pvid untagged self
+</code></pre>
+<h2 id="configurare-un-bridge-come-un-hub" tabindex="-1">Configurare un Bridge come un Hub <a class="header-anchor" href="#configurare-un-bridge-come-un-hub" aria-hidden="true">🔗</a></h2>
+<p>So I need to need to make the bridge to act as a hub and block communication between the interfaces of the bridge.
+To configure the bridge to act as a hub:</p>
+<pre><code class="language-bash">$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 <span class="hljs-built_in">type</span> bridge stp_state 0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 <span class="hljs-built_in">type</span> bridge ageing_time 0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 <span class="hljs-built_in">type</span> bridge forward_delay 0
+</code></pre>
+<p>(this should cause all packets to be flooded to all other interfaces, except the sender)</p>
+<ul>
+<li><code>stp_state</code> STP_STATE - turn spanning tree protocol on (STP_STATE &gt; 0) or off (STP_STATE == 0). for this bridge.</li>
+<li><code>ageing_time</code> 0 Turning a Bridge into a Hub (All traffic reflected to all ports.)</li>
+<li><code>iptables -A FORWARD -i br0 -o br0 -j ACCEPT</code> # Passing all Bridge Traffic</li>
+<li><code>ip link set dev $eth promisc on</code></li>
+</ul>
+<p>Bridged interfaces do not have internet access
+To make it works I had to enable NAT.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> iptables -t nat -A POSTROUTING -o enp5s0 -j MASQUERADE
+$ <span class="hljs-built_in">sudo</span> iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+$ <span class="hljs-built_in">sudo</span> iptables -A FORWARD -i br0 -o enp5s0 -j ACCEPT
+</code></pre>
+<p><a href="https://github.com/pmachata/mlxsw/wiki/Bridge">https://github.com/pmachata/mlxsw/wiki/Bridge</a>    vlan aware bridge</p>
+<p><a href="https://qastack.it/unix/136918/why-does-my-firewall-iptables-interfere-in-my-bridge-brctl">https://qastack.it/unix/136918/why-does-my-firewall-iptables-interfere-in-my-bridge-brctl</a></p>
+<pre><code class="language-bash">$ sysctl -w net.bridge.bridge-nf-call-iptables=0
+$ sysctl -w net.bridge.bridge-nf-call-ip6tables=0
+</code></pre>
+<h2 id="bridge-con-vlan-e-nic-tap-collegati-a-delle-vm-qemu---esempio-completo" tabindex="-1">Bridge con VLAN e NIC TAP collegati a delle VM QEMU - Esempio completo <a class="header-anchor" href="#bridge-con-vlan-e-nic-tap-collegati-a-delle-vm-qemu---esempio-completo" aria-hidden="true">🔗</a></h2>
+<p>Realizziamo 4 VM e le inseriamo in 2 VLAN assieme all'Host,
+mantenendo attiva la connessione ad internet e verificando che solamente
+le macchine nella stessa VLAN possono vedersi(se non si introduce un router con apposita configurazione)
+Si utilizzano un bridge nell'Host con funzione di vlan filtering attiva e tanti dispositivi tap tante quante sono le VM.
+Ogni VM è connessa in rete all'Host tramite un NIC tap, tutti i tap assieme al NIC fisico dell'Host sono connessi al bridge.</p>
+<p><a href="../virtualizzazione/alpine_qemu.html">Esempio con 4 VM e 2 VLAN</a></p>
+<h2 id="bridge-con-nic-veth-e-shell-in-net-namespaces---esempio-completo" tabindex="-1">Bridge con NIC VETH e Shell in Net Namespaces - Esempio completo <a class="header-anchor" href="#bridge-con-nic-veth-e-shell-in-net-namespaces---esempio-completo" aria-hidden="true">🔗</a></h2>
+<p>Per fare sperimentazione di rete non è necessario creare delle VM QEMU con altrettanti dispositivi tap collegati da un bridge.
+Grazie alla funzionalità dei network namespaces del kernel Linux
+<strong>al posto delle VM si possono creare dei processi Bash avente ognuno il proprio stack di rete</strong>,
+collegati ad un bridge nell'host mediante interfacce VETH.
+Grazie al comando <code>unshare</code> è possibile avviare processi come bash aventi il proprio stack di rete indipendente dall'Host.
+Il processo bash così creato costituisce un network namespaces, che può essere connesso in rete con l'Host mediante una interfaccia veth.</p>
+<ul>
+<li>
+<p><a href="net_namespaces.html">Network Namespaces</a></p>
+<pre><code>                                                                          +----------------------------------------------------------+
+</code></pre>
+<p>+----------------------------+                                               |                                                          |
+|                            |                                               |                                     HOST                 |
+|           GUEST            |                                               | +--------------------------+                             |
+|                            |                                               | |       br0 192.168.1.2    |                             |
+|                            |             +---------------------------------+-+------------------------+ |                             |
+|                            |             |    VETH                         | |                        | |                             |
+|                            |             +---------------------------+     | | +----------------------+ |                             |
+|  $ unshare -r -net bash    |             |                           |     | | |                      | |                             |
+|                            +-------------+    vGUEST(192.168.1.13)   +-----+-+-+   vHOST              | |                             |
+|                            |             |                           |     | | |                      | |                             |
+|                            |             +---------------------------+     | | +----------------------+ |                             |
+|                            |             |                                 | |                        | |                             |
+|                            |             +---------------------------------+-+------------------------+ |                             |
+|                            |                                               | |                          |                             |
+|                            |                                               | | +----------------------+ |                             |
+|                            |                                               | | |                      | |                             |
+|                            |                                               | | |   enp5s0             | |                             |
+|                            |                                               | | |                      | |                             |
+|                            |                                               | | +----------+-----------+ |                             |
+|                            |                                               | |            |             |                             |
+|                            |                                               | |            |             |                             |
+|                            |                                               | +------------+-------------+                             |
+|                            |                                               |              |                                           |
++----------------------------+                                               +--------------+-------------------------------------------+
+|
+|
++----------+----------------------------+
+|   GATEWAY                             |
+|                                       |
+|   192.168.1.1                         |
+|                                       |
+|                                       |
++---------------------------------------+</p>
+</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST:</span>
+$ unshare -r --net bash                 <span class="hljs-comment"># creiamo un processo bash che è una sorta di VM con il proprio autonomo stack di rete</span>
+<span class="hljs-comment"># Guest: </span>
+<span class="hljs-comment"># namespace (same terminal session) Ora siamo nel GUEST - NAMESPACE 2979</span>
+$ <span class="hljs-built_in">echo</span> $$                               <span class="hljs-comment"># annotiamo questo PID, perchè vi associeremo un peer veth appartenente ad un nuovo namespace di rete</span>
+2979                                    
+
+<span class="hljs-comment"># HOST:</span>
+$ <span class="hljs-built_in">sudo</span> -i
+<span class="hljs-comment"># create a veth interface</span>
+$ ip <span class="hljs-built_in">link</span> add vGUEST <span class="hljs-built_in">type</span> veth peer name vHOST  <span class="hljs-comment"># creazione dell&#x27;interfaccia veth, che offre due peer</span>
+                                                <span class="hljs-comment"># alla loro creazione entrambi sono presenti nello stack di rete dell&#x27;Host</span>
+                                                <span class="hljs-comment"># move one of its peers to network namespace</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST netns 2979                 <span class="hljs-comment"># spostiamo il device vGUEST nel network namespace del processo bash sopra creato</span>
+                                                <span class="hljs-comment"># in questo modo abbiamo connesso in rete la bash con l&#x27;host</span>
+<span class="hljs-comment"># create linux bridge</span>
+$ ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge
+<span class="hljs-comment"># wire vHOST to br0</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST master br0                  <span class="hljs-comment"># inseriamo il veth ed il nic fisico nel bridge in modo da connetterli</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 master br0                 <span class="hljs-comment"># spostiamo la configurazione di rete del nic fisico sul bridge in modo da non perdere la connessione ad internet</span>
+<span class="hljs-comment"># set IP addresses and bring devices up</span>
+$ ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+$ ip addr flush dev enp5s0 
+$ ip route flush dev br0
+$ ip addr add 192.168.1.2/24 dev br0
+$ ip route add default via 192.168.1.1 dev br0    
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST up
+$ ip addr
+$ <span class="hljs-comment"># sudo bash -c &quot;echo 1 &gt; /proc/sys/net/netfilter/nf_log_all_netns&quot;</span>
+$ ping 8.8.8.8 <span class="hljs-comment"># per verificare che l&#x27;accesso ad internet tramite br0 funzioni</span>
+$ ip route
+  default via 192.168.1.1 dev br0 
+  192.168.1.0/24 dev br0 proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.2 
+
+<span class="hljs-comment"># GUEST - NAMESPACE 2979</span>
+<span class="hljs-comment"># bring devices up</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST up
+<span class="hljs-comment"># configure IP address</span>
+$ ip addr add 192.168.1.13/24 dev vGUEST
+$ ip addr
+<span class="hljs-comment"># set default route via br0</span>
+$ ip route add default via 192.168.1.1 dev vGUEST <span class="hljs-comment"># il gateway deve essere lo stesso del NIC fisico dell&#x27;Host, NON l&#x27;Host(192.168.1.2)</span>
+$ ip route
+    default via 192.168.1.1 dev vGUEST 
+    192.168.1.0/24 dev vGUEST proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.13 
+   
+<span class="hljs-comment"># GUEST - Test di connessione ad internet</span>
+$ ping 8.8.8.8 <span class="hljs-comment"># non funziona se non inserisco il NIC fisico nel bridge e sposto la sua configurazione di ip e routing sul bridge,</span>
+               <span class="hljs-comment"># e se non imposto come gateway del GUEST lo stesso gawteway del NIC fisico nell&#x27;Host              </span>
+$ ping 192.168.1.2 <span class="hljs-comment"># funziona sermpre perchè non deve uscire da enp5s0</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST: Ripristinare il NIC fisico</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> del dev br0
+$ ip <span class="hljs-built_in">link</span> del vGUEST <span class="hljs-built_in">type</span> veth peer name vHOST
+$ <span class="hljs-built_in">sudo</span> ip addr flush dev enp5s0 
+$ <span class="hljs-built_in">sudo</span> ip route flush dev enp5s0
+<span class="hljs-comment"># nmcli con up Cavo</span>
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.2/24 dev enp5s0
+$ <span class="hljs-built_in">sudo</span> ip route add default via 192.168.1.1 dev enp5s0
+</code></pre>
+<h2 id="processi-bash-con-net-namespace-pid-inseriti-in-delle-vlan-mediante-dei-nic-veth-ed-un-bridge-vlan-filtering" tabindex="-1">Processi bash con net namespace PID inseriti in delle VLAN mediante dei NIC VETH ed un bridge vlan filtering <a class="header-anchor" href="#processi-bash-con-net-namespace-pid-inseriti-in-delle-vlan-mediante-dei-nic-veth-ed-un-bridge-vlan-filtering" aria-hidden="true">🔗</a></h2>
+<p>Realizziamo un Bridge che connette mediante 4 interfacce veth l'Host a 4 processi Bash aventi proprio network namespace senza nome.
+Creiamo poi 2 VLAN ed inseriamo l'host e due bash netns nella prima, le rimanenti due bash con netns nella seconda.
+I netns prendono il nome del PID dei processi bash, sono senza nome.</p>
+<p>Per fare sperimentazione di rete non è necessario creare delle VM QEMU con altrettanti dispositivi tap collegati da un bridge.
+Grazie alla funzionalità dei network namespaces del kernel Linux<br>
+<strong>al posto delle VM si possono creare dei processi Bash ognuno avente il proprio stack di rete</strong>,<br>
+collegati ad un bridge nell'host mediante interfacce VETH.</p>
+<h3 id="host---creazione-di-4-processi-in-4-network-namespaces" tabindex="-1">Host - Creazione di 4 processi in 4 network namespaces <a class="header-anchor" href="#host---creazione-di-4-processi-in-4-network-namespaces" aria-hidden="true">🔗</a></h3>
+<p>Creiamo 4 processi bash, ciascuno avente il suo stack di rete separato dagli altri,
+il pid di ciascuna shell può essere utilizzato come nome del network namespace definito nelle interfacce veth.
+Questi processi sostituiscono le VM che si sarebbero dovute creare per poter fare questo tipo di test.
+Grazie al comando <code>unshare</code> è possibile creare dei processi bash con stack di rete indipendente e diritti di root,
+grazie alle interfacce veth è poi possibile connettere le veth in tali namespace all'host.</p>
+<p>Creare 4 bash con network namespace separati ed annotarne i pid(che costituiscono il nome dei netns):</p>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST</span>
+$ unshare -r --net bash                 <span class="hljs-comment"># creiamo un processo bash che è una sorta di VM con il proprio autonomo stack di rete(network namespace)</span>
+<span class="hljs-comment"># Guest: </span>
+<span class="hljs-comment"># unshare ha creato una nuova bash con un nuovo network namespace, ora siamo nel GUEST</span>
+$ <span class="hljs-built_in">echo</span> $$                               <span class="hljs-comment"># annotiamo questo PID, perchè vi sposteremo un endpoint veth</span>
+  &lt;PID1&gt;                                <span class="hljs-comment"># a questo punto la rete della bash non è configurata e non possiede nic per poter dialogare in rete con l&#x27;host</span>
+
+$ unshare -r --net bash
+$ <span class="hljs-built_in">echo</span> $$
+  &lt;PID2&gt;
+$ unshare -r --net bash
+$ <span class="hljs-built_in">echo</span> $$
+  &lt;PID3&gt;
+$ unshare -r --net bash
+$ <span class="hljs-built_in">echo</span> $$
+  &lt;PID4&gt;
+</code></pre>
+<p>Ora abbiamo 4 processi bash con stack di rete separato dall'host ed il cui PID rappresenta il nome del rispettivo namespace di rete,
+le bash vivono nell'host ma hanno una configurazione di rete completamente separata da esso,
+in questo momento quindi non avendo eseguito configurazioni di rete e non possedendo NIC le bash non possono ancora comunicare in rete con l'host.</p>
+<h3 id="host---creazione-di-4-interfacce-veth-e-spostamento-dei-peer-nei-network-namespaces-dei-processi-bash" tabindex="-1">Host - Creazione di 4 interfacce VETH e spostamento dei peer nei network namespaces dei processi bash <a class="header-anchor" href="#host---creazione-di-4-interfacce-veth-e-spostamento-dei-peer-nei-network-namespaces-dei-processi-bash" aria-hidden="true">🔗</a></h3>
+<p>Per poter connettere le bash alla rete dell'Host creiamo 4 interfacce veth(ciascuna composta di due peer, un peer <code>vHOST</code> ed un peer <code>vGUEST</code>),
+spostando per ciascuna delle 4 coppie una estremità nel namespace della bash che vogliamo connettere in rete.</p>
+<p>Eseguire 4 volte utilizzando i pid precedentemente annotati</p>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST</span>
+$ <span class="hljs-built_in">sudo</span> -i
+
+$ ip <span class="hljs-built_in">link</span> add vGUEST1 <span class="hljs-built_in">type</span> veth peer name vHOST1 <span class="hljs-comment"># crea l&#x27;interfaccia veth con due peer</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST1 netns &lt;PID1&gt;               <span class="hljs-comment"># sposta il peer/device vGUEST nel network namespace del processo bash</span>
+                                                 <span class="hljs-comment"># ora la bash PID1 possiede un NIC vGUEST1 nel proprio stack di rete, che ancora però non è configurato</span>
+$ ip <span class="hljs-built_in">link</span> add vGUEST2 <span class="hljs-built_in">type</span> veth peer name vHOST2
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST2 netns &lt;PID2&gt;                                                                
+$ ip <span class="hljs-built_in">link</span> add vGUEST3 <span class="hljs-built_in">type</span> veth peer name vHOST3
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST3 netns &lt;PID3&gt;                                                                
+$ ip <span class="hljs-built_in">link</span> add vGUEST4 <span class="hljs-built_in">type</span> veth peer name vHOST4
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST4 netns &lt;PID4&gt;                                                                
+</code></pre>
+<pre><code>veth vGUEST1 &lt;--&gt; Bash PID1
+veth vGUEST2 &lt;--&gt; Bash PID2
+veth vGUEST3 &lt;--&gt; Bash PID3
+veth vGUEST4 &lt;--&gt; Bash PID4
+</code></pre>
+<p>Creando le interfacce veth e spostandone una estremità(vGUESTx) nel network namespace di ciascuna bash,
+abbiamo realizzato una prima parte di collegamento di rete dei processi bash.
+Ora dovremo connettere le rimanenti estremità vHOSTx delle interfacce veth al bridge che creeremo nell'Host.</p>
+<h3 id="host---creazione-del-bridge-con-vlan-filtering-attivato" tabindex="-1">Host - Creazione del Bridge con vlan filtering attivato <a class="header-anchor" href="#host---creazione-del-bridge-con-vlan-filtering-attivato" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST</span>
+$ <span class="hljs-comment"># nmcli conn modify Cavo connection.autoconnect no  # Si disabilita la connessione NetworkManager del NIC fisico</span>
+$ nmcli con down Cavo
+$ <span class="hljs-built_in">sudo</span> -i
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1 <span class="hljs-comment"># Creazione del bridge con funzionalità di VLAN</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST1 master br0                     <span class="hljs-comment"># Aggiungiamo tutti i peer veth al bridge, ciascun peer ha il corrispondente già agganciato ad un processo bash</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST2 master br0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST3 master br0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST4 master br0
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 master br0
+<span class="hljs-comment"># set IP addresses and bring devices up</span>
+$ ip addr flush dev br0 <span class="hljs-comment"># rimozione dell&#x27;IP dal NIC fisico</span>
+$ ip addr flush dev enp5s0 
+$ ip route flush dev br0
+$ ip addr add 192.168.1.2/24 dev br0
+$ ip route add default via 192.168.1.1 dev br0    
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST1 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST2 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST3 up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST4 up
+</code></pre>
+<pre><code>+--------------+
+|              |
+|              |     +--------------+       +---------------------+
+|              |     |              |       |     GATEWAY         |
+|              +-----+    enp5s0    +-------+                     |
+|     br0      |     |              |       |    192.168.1.1      |
+|              |     +--------------+       +---------------------+
+|    VLAN1     |
+|              |
+| 192.168.1.2  |     +--------------+       +---------------+          +----------------+
+|              |     |              |       |    vGUEST1    |          |                |
+|              +-----+   vHOST1     +-------+     VLAN1     +----------+ Bash PID1      |
+|              |     |              |       |  192.168.1.13 |          |                |
+|              |     +--------------+       +---------------+          +----------------+
+|              |
+|              |     +--------------+       +---------------+          +-----------------+
+|              |     |              |       |    vGUEST2    |          |                 |
+|              +-----+   vHOST2     +-------+     VLAN2     +----------+ Bash PID2       |
+|              |     |              |       |  192.168.1.14 |          |                 |
+|              |     +--------------+       +---------------+          +-----------------+
+|              |
+|              |
+|              |     +--------------+       +---------------+          +-----------------+
+|              |     |              |       |    vGUEST3    |          |                 |
+|              +-----+   vHOST3     +-------+     VLAN1     +----------+ Bash PID3       |
+|              |     |              |       | 192.168.1.1   |          |                 |
+|              |     +--------------+       +---------------+          +-----------------+
+|              |
+|              |     +--------------+       +---------------+          +-----------------+
+|              |     |              |       |   vGUEST4     |          |                 |
+|              +-----+   vHOST4     +-------+     VLAN2     +----------+ Bash PID4       |
+|              |     |              |       |  192.168.1.16 |          |                 |
++--------------+     +--------------+       +---------------+          +-----------------+
+</code></pre>
+<h3 id="host---configurazione-delle-vlan-nel-bridge" tabindex="-1">Host - Configurazione delle VLAN nel Bridge <a class="header-anchor" href="#host---configurazione-delle-vlan-nel-bridge" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>NIC</th>
+<th>Peer</th>
+<th>IP</th>
+<th>VLAN</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>br0</td>
+<td></td>
+<td>192.168.1.2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>vHOST1</td>
+<td>vGUEST1</td>
+<td>192.168.1.13</td>
+<td>1</td>
+</tr>
+<tr>
+<td>vHOST2</td>
+<td>vGUEST2</td>
+<td>192.168.1.14</td>
+<td>2</td>
+</tr>
+<tr>
+<td>vHOST3</td>
+<td>vGUEST3</td>
+<td>192.168.1.15</td>
+<td>1</td>
+</tr>
+<tr>
+<td>vHOST4</td>
+<td>vGUEST4</td>
+<td>192.168.1.16</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST</span>
+$ bridge vlan show
+    port              vlan-id  
+    enp5s0            1 PVID Egress Untagged
+    vHOST1            1 PVID Egress Untagged
+    vHOST2            1 PVID Egress Untagged
+    vHOST3            1 PVID Egress Untagged
+    vHOST4            1 PVID Egress Untagged
+    br0               1 PVID Egress Untagged
+
+$ bridge <span class="hljs-built_in">link</span> show
+    2: enp5s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 master br0 state forwarding priority 32 cost 4 
+    4: vHOST1@if5: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 master br0 state disabled priority 32 cost 2 
+    6: vHOST2@if7: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 master br0 state disabled priority 32 cost 2 
+    8: vHOST3@if9: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 master br0 state disabled priority 32 cost 2 
+    10: vHOST4@if11: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 master br0 state disabled priority 32 cost 2 
+
+<span class="hljs-comment"># Creazione delle VLAN</span>
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev enp5s0 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev enp5s0
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev vHOST1 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev vHOST1
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev vHOST2 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev vHOST2
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev vHOST3 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev vHOST3
+$ <span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev vHOST4 pvid untagged
+$ <span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev vHOST4
+$ <span class="hljs-built_in">sudo</span> bridge vlan del dev br0 vid 1 self
+$ <span class="hljs-built_in">sudo</span> bridge vlan add dev br0 vid 1 pvid untagged self
+
+$ bridge vlan show
+    port              vlan-id  
+    enp5s0            1 PVID Egress Untagged
+    vHOST1            1 PVID Egress Untagged
+    vHOST2            2 PVID Egress Untagged
+    vHOST3            1 PVID Egress Untagged
+    vHOST4            2 PVID Egress Untagged
+    br0               1 PVID Egress Untagged
+
+$ <span class="hljs-built_in">sudo</span> bridge vlan show dev vHOST1
+
+</code></pre>
+<p>Saranno ora possibili solo i seguenti ping:</p>
+<pre><code>Host &lt;--&gt; PID1
+Host &lt;--&gt; PID3
+PID1 &lt;--&gt; PID3
+</code></pre>
+<h3 id="guest---configurazione-di-rete-dei-guest-bash" tabindex="-1">Guest - Configurazione di rete dei Guest Bash <a class="header-anchor" href="#guest---configurazione-di-rete-dei-guest-bash" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>NIC</th>
+<th>IP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>br0</td>
+<td>192.168.1.2</td>
+</tr>
+<tr>
+<td>vGUEST1</td>
+<td>192.168.1.13</td>
+</tr>
+<tr>
+<td>vGUEST2</td>
+<td>192.168.1.14</td>
+</tr>
+<tr>
+<td>vGUEST3</td>
+<td>192.168.1.15</td>
+</tr>
+<tr>
+<td>vGUEST4</td>
+<td>192.168.1.16</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash"><span class="hljs-comment"># GUEST PID1</span>
+<span class="hljs-comment"># bring devices up</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST1 up
+<span class="hljs-comment"># configure IP address</span>
+$ ip addr add 192.168.1.13/24 dev vGUEST1
+<span class="hljs-comment"># set default route via br0</span>
+$ ip route add default via 192.168.1.1 dev vGUEST1 <span class="hljs-comment"># il gateway deve essere lo stesso del NIC fisico dell&#x27;Host, NON l&#x27;Host(192.168.1.2)</span>
+
+<span class="hljs-comment"># GUEST PID2</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST2 up
+$ ip addr add 192.168.1.14/24 dev vGUEST2
+$ ip route add default via 192.168.1.1 dev vGUEST2
+
+<span class="hljs-comment"># GUEST PID3</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST3 up
+$ ip addr add 192.168.1.15/24 dev vGUEST3
+$ ip route add default via 192.168.1.1 dev vGUEST3
+
+<span class="hljs-comment"># GUEST PID4</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST4 up
+$ ip addr add 192.168.1.16/24 dev vGUEST4
+$ ip route add default via 192.168.1.1 dev vGUEST4
+</code></pre>
+<h3 id="script-cumulativo" tabindex="-1">Script cumulativo <a class="header-anchor" href="#script-cumulativo" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># HOST</span>
+unshare -r --net bash
+<span class="hljs-comment"># GUESTs</span>
+<span class="hljs-built_in">echo</span> $$
+
+<span class="hljs-comment"># HOST</span>
+<span class="hljs-built_in">sudo</span> -i
+ip <span class="hljs-built_in">link</span> add vGUEST1 <span class="hljs-built_in">type</span> veth peer name vHOST1
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST1 netns &lt;PID1&gt;              
+ip <span class="hljs-built_in">link</span> add vGUEST2 <span class="hljs-built_in">type</span> veth peer name vHOST2
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST2 netns &lt;PID2&gt;                                                                
+ip <span class="hljs-built_in">link</span> add vGUEST3 <span class="hljs-built_in">type</span> veth peer name vHOST3
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST3 netns &lt;PID3&gt;                                                                
+ip <span class="hljs-built_in">link</span> add vGUEST4 <span class="hljs-built_in">type</span> veth peer name vHOST4
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST4 netns &lt;PID4&gt;                                                                
+
+ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                      
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST1 master br0                    
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST2 master br0
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST3 master br0
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST4 master br0
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 master br0
+<span class="hljs-built_in">set</span> IP addresses and bring devices up
+ip addr flush dev br0
+ip addr flush dev enp5s0 
+ip route flush dev br0
+ip addr add 192.168.1.2/24 dev br0
+ip route add default via 192.168.1.1 dev br0    
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST1 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST2 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST3 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST4 up
+
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev enp5s0 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev enp5s0
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev vHOST1 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev vHOST1
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev vHOST2 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev vHOST2
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 1 dev vHOST3 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 2 dev vHOST3
+<span class="hljs-built_in">sudo</span> bridge vlan add vid 2 dev vHOST4 pvid untagged
+<span class="hljs-built_in">sudo</span> bridge vlan del vid 1 dev vHOST4
+<span class="hljs-built_in">sudo</span> bridge vlan del dev br0 vid 1 self
+<span class="hljs-built_in">sudo</span> bridge vlan add dev br0 vid 1 pvid untagged self
+
+<span class="hljs-comment"># GUESTs</span>
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST1 up
+ip addr add 192.168.1.13/24 dev vGUEST1
+ip route add default via 192.168.1.1 dev vGUEST1
+
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST2 up
+ip addr add 192.168.1.14/24 dev vGUEST2
+ip route add default via 192.168.1.1 dev vGUEST2
+
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST3 up
+ip addr add 192.168.1.15/24 dev vGUEST3
+ip route add default via 192.168.1.1 dev vGUEST3
+
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST4 up
+ip addr add 192.168.1.16/24 dev vGUEST4
+ip route add default via 192.168.1.1 dev vGUEST4
+</code></pre>
+<h2 id="vlan-realizzate-con-bridge-e-veth-assegnati-a-dei-named-network-namespaces" tabindex="-1">VLAN realizzate con bridge e veth assegnati a dei named network namespaces <a class="header-anchor" href="#vlan-realizzate-con-bridge-e-veth-assegnati-a-dei-named-network-namespaces" aria-hidden="true">🔗</a></h2>
+<p>Vogliamo sperimentare l'isolamento offerto dalle VLAN(livello 2-ethernet),
+senza utilizzare delle VM (non serve scomodarle per effettuare sperimentazione di rete).
+Al posto delle VM QEMU creiamo dei network namespaces ciascuno avente come NIC un peer di una interfaccia VETH,
+ciascun peer corrispondente delle interfacce VETH viene poi connesso ad un bridge che attivata la funzionalità di vlan filtering.
+Creando dei namespace di rete con nome, non avremo più bisogno del comando <code>unshare</code> per creare una bash in un network namespace senza nome,
+bensì lanceremo i comandi nel contesto dei namespace specificandone il nome e senza il bisogno di istanziare dei processi bash.</p>
+<pre><code>+--------------+
+|              |
+|              |     +--------------+       +---------------------+
+|              |     |              |       |     GATEWAY         |
+|              +-----+    enp5s0    +-------+                     |
+|     br0      |     |              |       |    192.168.1.1      |
+|              |     +--------------+       +---------------------+
+|    VLAN1     |
+|              |
+| 192.168.1.2  |     +--------------+        +---------------+          +-------------------+
+|              |     |              |  VETH  |    vGUEST1    |          | Network Namespace |
+|              +-----+   vHOST1     +--------+     VLAN1     +----------+       ns1         |
+|              |     |              |        |  192.168.1.13 |          |                   |
+|              |     +--------------+        +---------------+          +-------------------+
+|              |
+|              |     +--------------+        +---------------+          +-------------------+
+|              |     |              |  VETH  |    vGUEST2    |          | Network Namespace |
+|              +-----+   vHOST2     +--------+     VLAN2     +----------+       ns2         |
+|              |     |              |        |  192.168.1.14 |          |                   |
+|              |     +--------------+        +---------------+          +-------------------+
+|              |
+|              |
+|              |     +--------------+        +---------------+          +-------------------+
+|              |     |              |  VETH  |    vGUEST3    |          | Network Namespace |
+|              +-----+   vHOST3     +--------+     VLAN1     +----------+       ns3         |
+|              |     |              |        | 192.168.1.15  |          |                   |
+|              |     +--------------+        +---------------+          +-------------------+
+|              |
+|              |     +--------------+        +---------------+          +-------------------+
+|              |     |              |  VETH  |   vGUEST4     |          | Network Namespace |
+|              +-----+   vHOST4     +--------+    VLAN2      +----------+       ns4         |
+|              |     |              |        |  192.168.1.16 |          |                   |
++--------------+     +--------------+        +---------------+          +-------------------+
+</code></pre>
+<ol>
+<li>
+<p>Creiamo 4 network namespace con nome ns<code>x</code></p>
+</li>
+<li>
+<p>Creiamo 4 interfacce VETH, ciascuna delle quali produce due NIC (due peer) che chiameremo vHOST<code>x</code>(che inseriremo nel bridge dell'host), vGUEST<code>x</code> (che sarà il NIC dei 4 network namespaces).<br>
+Grazie alle caratteristiche delle interfacce VETH, le coppie di peer VETH riescono a comunicare tra loro pur essendo contenuti in due namespace diversi(uno è il namespace di default dell'Host)</p>
+</li>
+<li>
+<p>Creiamo nell'Host un bridge con attivata la funzione di vlan_filtering ed assegnamogli la configurazione di rete del NIC fisico enp5s0</p>
+</li>
+<li>
+<p>spostiamo i 4 peer VETH vGUEST<code>x</code> nei corrispondenti namespaces ns<code>x</code></p>
+</li>
+<li>
+<p>Inseriamo nel bridge il NIC fisico <code>enp5s0</code> e spostiamo la sua configurazione di rete (ip e routing) sul bridge in modo da non perdere l'accesso ad internet.
+Inserire <code>enp5s0</code> nel bridge rende <code>enp5s0</code> invisibile al sistema e la connessione ad internet viene perduta, per ripristinarla bisogna impostare ip, subnet mask e gateway sul bridge in modo che questo diventi il nuovo NIC fisico per l'accesso ad internet.</p>
+</li>
+<li>
+<p>Effettuiamo la configurazione di rete dei 4 NIC peer VETH vGUEST<code>x</code> nel modo seguente:</p>
+<p>| NIC     | IP           |
+| ------- | ------------ |
+| br0     | 192.168.1.2  |
+| vGUEST1 | 192.168.1.13 |
+| vGUEST2 | 192.168.1.14 |
+| vGUEST3 | 192.168.1.15 |
+| vGUEST4 | 192.168.1.16 |</p>
+</li>
+<li>
+<p>Configuriamo due VLAN del bridge nel modo seguente:</p>
+<p>| NIC    | Peer    | IP           | NAMESPACE | VLAN |
+| ------ | ------- | ------------ | --------- | ---- |
+| br0    |         | 192.168.1.2  | default   | 1    |
+| vHOST1 | vGUEST1 | 192.168.1.13 | ns1       | 1    |
+| vHOST2 | vGUEST2 | 192.168.1.14 | ns2       | 2    |
+| vHOST3 | vGUEST3 | 192.168.1.15 | ns3       | 1    |
+| vHOST4 | vGUEST4 | 192.168.1.16 | ns4       | 2    |</p>
+</li>
+</ol>
+<p>A questo punto avremo 4 NIC peer VETH vGUEST<code>x</code> inseriti in 4 network namespaces e che potranno vedere i soli NIC appartenenti alla medesima VLAN e non tutti gli altri.</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> -i
+
+<span class="hljs-comment"># Creazione dei network namespace</span>
+ip netns add ns1
+ip netns add ns2
+ip netns add ns3
+ip netns add ns4
+
+<span class="hljs-comment"># Creazione interfacce veth</span>
+ip <span class="hljs-built_in">link</span> add vGUEST1 <span class="hljs-built_in">type</span> veth peer name vHOST1
+ip <span class="hljs-built_in">link</span> add vGUEST2 <span class="hljs-built_in">type</span> veth peer name vHOST2
+ip <span class="hljs-built_in">link</span> add vGUEST3 <span class="hljs-built_in">type</span> veth peer name vHOST3
+ip <span class="hljs-built_in">link</span> add vGUEST4 <span class="hljs-built_in">type</span> veth peer name vHOST4
+
+<span class="hljs-comment"># Creazione del bridge e sua configurazione di rete per uscire in internet al posto del NIC fisico</span>
+ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge vlan_filtering 1
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                      
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev enp5s0 up
+ip addr flush dev br0
+ip addr flush dev enp5s0 
+ip route flush dev br0
+ip addr add 192.168.1.2/24 dev br0
+ip route add default via 192.168.1.1 dev br0    
+
+<span class="hljs-comment"># Spostamento dei NIC peer VETH Host e del NIC fisico enp5s0 nel bridge</span>
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST1 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST2 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST3 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST4 up
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST1 master br0                    
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST2 master br0
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST3 master br0
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vHOST4 master br0
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> enp5s0 master br0
+
+<span class="hljs-comment"># Spostamento dei NIC peer VETH Guest nei rispettivi namespace</span>
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST1 netns ns1
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST2 netns ns2                                                                
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST3 netns ns3                                                                
+ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST4 netns ns4                                                                
+
+<span class="hljs-comment"># Configurazione di rete dei NIC Peer VETH Guest (ip -n NETNS è una abbreviazione per ip netns exec NETNS ip)</span>
+ip -n ns1 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip -n ns1 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST1 up
+ip -n ns1 addr add 192.168.1.13/24 dev vGUEST1
+ip -n ns1 route add default via 192.168.1.1 dev vGUEST1
+
+ip -n ns2 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip -n ns2 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST2 up
+ip -n ns2 addr add 192.168.1.14/24 dev vGUEST2
+ip -n ns2 route add default via 192.168.1.1 dev vGUEST2
+
+ip -n ns3 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip -n ns3 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST3 up
+ip -n ns3 addr add 192.168.1.15/24 dev vGUEST3
+ip -n ns3 route add default via 192.168.1.1 dev vGUEST3
+
+ip -n ns4 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> lo up
+ip -n ns4 <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> vGUEST4 up
+ip -n ns4 addr add 192.168.1.16/24 dev vGUEST4
+ip -n ns4 route add default via 192.168.1.1 dev vGUEST4
+
+<span class="hljs-comment"># Configurazione delle VLAN nel bridge</span>
+bridge vlan add vid 1 dev enp5s0 pvid untagged
+bridge vlan del vid 2 dev enp5s0
+bridge vlan add vid 1 dev vHOST1 pvid untagged
+bridge vlan del vid 2 dev vHOST1
+bridge vlan add vid 2 dev vHOST2 pvid untagged
+bridge vlan del vid 1 dev vHOST2
+bridge vlan add vid 1 dev vHOST3 pvid untagged
+bridge vlan del vid 2 dev vHOST3
+bridge vlan add vid 2 dev vHOST4 pvid untagged
+bridge vlan del vid 1 dev vHOST4
+bridge vlan del dev br0 vid 1 self
+bridge vlan add dev br0 vid 1 pvid untagged self
+
+<span class="hljs-comment"># Ping di test</span>
+ping -c2 192.168.1.15                   <span class="hljs-comment"># OK perchè Host e ns1 sono nella stessa VLAN1</span>
+ip netns <span class="hljs-built_in">exec</span> ns1 ping -c2 192.168.1.15 <span class="hljs-comment"># OK perchè nella stessa VLAN 1</span>
+ip netns <span class="hljs-built_in">exec</span> ns1 ping -c2 192.168.1.16 <span class="hljs-comment"># KO ns1 e ns4 sono in VLAN diverse</span>
+
+bridge <span class="hljs-built_in">link</span> show
+bridge vlan show
+ip netns list
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Reset</span>
+ip <span class="hljs-built_in">link</span> del dev br0
+ip <span class="hljs-built_in">link</span> del dev vHOST1
+ip <span class="hljs-built_in">link</span> del dev vHOST2
+ip <span class="hljs-built_in">link</span> del dev vHOST3
+ip <span class="hljs-built_in">link</span> del dev vHOST4
+ip netns del ns1
+ip netns del ns2
+ip netns del ns3
+ip netns del ns4
+ip addr add 192.168.1.2/24 dev enp5s0
+ip route add default via 192.168.1.1 dev enp5s0
+</code></pre>
+<h2 id="teoria-vlan" tabindex="-1">Teoria VLAN <a class="header-anchor" href="#teoria-vlan" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.netsetup.it/networking/196-porte-tagged-untagged">https://www.netsetup.it/networking/196-porte-tagged-untagged</a></li>
+</ul>
+<p>Chiarimenti sulle VLAN: default vlan, PVID, porte tagged e untagged</p>
+<p>Ogni VLAN ha un solo ed unico identificativo numerico, <code>VID</code> o VLAN ID, il cui valore va da <code>1</code> a <code>4094</code>. In sostanza è il numero che identifica la VLAN.<br>
+Per quanto riguarda gli switch, le porte possono essere <code>untagged</code> member o <code>tagged</code> member di una VLAN.<br>
+Nella terminologia Cisco, una <strong>porta untagged</strong> è semplicemente una <strong>Access Port</strong>, mentre le <strong>porte tagged</strong> sono quelle di <strong>Trunk</strong>.
+<strong>Una porta può essere untagged per una sola VLAN (access port assegnata a quella sola VLAN)</strong>, oppure tagged per diverse VLAN (ossia trunk).</p>
+<h3 id="modalit%C3%A0-vlan-per-le-interfacce-dello-switch" tabindex="-1">Modalità VLAN per le interfacce dello switch <a class="header-anchor" href="#modalit%C3%A0-vlan-per-le-interfacce-dello-switch" aria-hidden="true">🔗</a></h3>
+<p>In base al tipo di switch, è possibile configurare le porte in una delle modalità seguenti:</p>
+<ul>
+<li>
+<p>General - l'interfaccia supporta tutte le funzioni definite nelle specifiche IEEE 802.1q e può essere tagged o untagged member di una o più VLAN.</p>
+</li>
+<li>
+<p><strong>Access</strong> o <strong>untagged</strong> - in questa modalità <strong>l'interfaccia può essere untagged member di una sola VLAN</strong>. Access Port o Untagged Port sono definizioni equivalenti. <strong>I pacchetti che attraversano una porta untagged (o access) sono privi del tag VLAN</strong>. Infatti sulle porte untagged sono collegati PC e dispositivi che nulla sanno delle VLAN.
+· <strong>Trunk</strong> o <strong>tagged</strong> - l'interfaccia è tagged member di una o più VLAN. Una porta tagged è in grado di ricevere pacchetti &quot;taggati&quot;, e su queste porte possono essere collegati solo dispositivi in grado di interpretare i VLAN tag, come switch, router e firewall compatibili con il protocollo <code>802.1q</code>.</p>
+</li>
+<li>
+<p>Cosa succede se un pacchetto con tag VLAN n entra su una porta untagged? Semplice, il pacchetto viene scartato.</p>
+</li>
+<li>
+<p>Cosa succede se un pacchetto privo di VLAN tag entra su una porta untagged? Viene classificato in base al <code>PVID</code> (<strong>Port VLAN Identifier</strong>) di quella porta, cioè se quella porta è untagged per la VLAN <code>n</code>, il pacchetto sarà classificato come appartenente alla VLAN <code>n</code> e potrà essere inoltrato solo sulle porte untagged e tagged per quella VLAN.</p>
+</li>
+<li>
+<p>Cosa succede se un pacchetto con tag VLAN <code>n</code> arriva su una porta tagged? Se quella porta è tagged VLAN <code>n</code>, viene fatto passare, altrimenti viene scartato. Una volta che il pacchetto entra su una porta tagged, può andare solo sulle porte tagged e untagged della stessa VLAN <code>n</code>; se il pacchetto esce da una porta untagged sarà privato del tag VLAN, se esce da una porta tagged (trunk) rimarrà taggato come VLAN <code>n</code>.</p>
+</li>
+</ul>
+<h3 id="port-vlan-id" tabindex="-1">Port VLAN ID <a class="header-anchor" href="#port-vlan-id" aria-hidden="true">🔗</a></h3>
+<p>E' l'identificativo della VLAN utilizzato per classificare un pacchetto non taggato che entra nello switch. C'è corrispondenza tra PVID e le porte access o untagged: se una porta è impostata come access o untagged member della VLAN n, allora il PVID di quella porta è &quot;n&quot;. Pertanto il pacchetto che entra in quella porta sarà classificato come appartenente alla VLAN n.</p>
+<h3 id="default-vlan-e-native-vlan" tabindex="-1">Default VLAN e Native VLAN <a class="header-anchor" href="#default-vlan-e-native-vlan" aria-hidden="true">🔗</a></h3>
+<p>La <strong>Default VLAN</strong> ha le caratteristiche seguenti:</p>
+<ul>
+<li>esiste sempre e non può essere eliminata</li>
+<li>esiste perchè lo switch ha bisogno di almeno una VLAN a cui assegnare le sue porte; inoltre è utilizzata per protocolli speciali quali CDP, VTP, PAgP, e DTP;
+inizialmente, tutte le porte sono untagged member della VLAN di default a meno di modifiche, <strong>la VLAN di default ha ID 1</strong></li>
+<li>l'ID della VLAN di default può essere cambiato</li>
+<li>se una porta non è più membro di alcuna VLAN, automaticamente diventa untagged member della VLAN di default (una porta non appartiene più a una determinata VLAN quando è rimossa dalla VLAN stessa, oppure se quella VLAN viene eliminata)</li>
+</ul>
+<p>La <strong>Native VLAN</strong> invece <strong>riguarda solo i collegamenti in trunk fra switch</strong>. Default VLAN e Native VLAN causano spesso confusione... .<br>
+Quando la porta di uno switch è configurata in trunk, oppure è tagged member per una o più VLAN, i pacchetti in transito per quella porta saranno inoltrati lasciando inalterato il loro VLAN TAG. <strong>Se però i pacchetti sono privi di tag, saranno assegnati alla Native VLAN</strong>. In maniera predefinita, la Native VLAN coincide con la Default VLAN, quindi si può affermare che i pacchetti privi di tag, in transito su una porta di trunk, saranno assegnati alla Default VLAN.</p>
+<p>Alcuni switch permettono di modificare la Native VLAN (esempio Cisco Catalyst), altri non la mostrano nemmeno (esempio Cisco Managed serie 500), e rendono possibile modificare solo l'ID della VLAN di Default.</p>
+</body></html>

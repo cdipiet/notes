@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.148" />
+        <title>alpine_virtualbox</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="alpine_virtualbox" tabindex="-1">alpine_virtualbox <a class="header-anchor" href="#alpine_virtualbox" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.148</p>
+<nav class="table-of-contents"><ol><li><a href="#obiettivo">Obiettivo </a></li><li><a href="#virtualbox-hostonly-e-subnets">VirtualBox HostOnly e Subnets </a></li><li><a href="#creazione-vm-virtualbox">Creazione VM VirtualBox </a></li><li><a href="#setup-di-alpine">Setup di Alpine </a><ol><li><a href="#per-la-macchina-base-alpine_0-da-clonare">Per la macchina base Alpine_0 da clonare </a></li><li><a href="#per-le-macchine-clonate">Per le macchine clonate </a></li></ol></li><li><a href="#openvswitch">OpenvSwitch </a></li><li><a href="#al-posto-delle-reti-host-only-utilizziamo-dei-nic-tap-come-reti-bridged">Al posto delle reti host only utilizziamo dei nic tap come reti bridged </a></li></ol></nav><h1 id="alpine-linux" tabindex="-1">Alpine Linux <a class="header-anchor" href="#alpine-linux" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://www.alpinelinux.org/">https://www.alpinelinux.org/</a></p>
+</li>
+<li>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/index.html">https://docs.alpinelinux.org/user-handbook/0.1a/index.html</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Install_Alpine_on_VirtualBox">https://wiki.alpinelinux.org/wiki/Install_Alpine_on_VirtualBox</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders">https://wiki.alpinelinux.org/wiki/VirtualBox_shared_folders</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Enable_Community_Repository">https://wiki.alpinelinux.org/wiki/Enable_Community_Repository</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Configure_Networking">https://wiki.alpinelinux.org/wiki/Configure_Networking</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Setting_up_a_SSH_server">https://wiki.alpinelinux.org/wiki/Setting_up_a_SSH_server</a></p>
+</li>
+<li>
+<p><a href="https://www.cyberciti.biz/faq/how-to-install-openssh-server-on-alpine-linux-including-docker/">https://www.cyberciti.biz/faq/how-to-install-openssh-server-on-alpine-linux-including-docker/</a></p>
+</li>
+<li>
+<p><a href="https://www.tecnobabele.com/alpine-linux-spiegazione-del-distro-linux-leggero/2021-03-12/">https://www.tecnobabele.com/alpine-linux-spiegazione-del-distro-linux-leggero/2021-03-12/</a></p>
+</li>
+<li>
+<p><a href="https://www.virtualbox.org/">https://www.virtualbox.org/</a></p>
+</li>
+<li>
+<p><a href="https://www.openvswitch.org/">https://www.openvswitch.org/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/nbonnand/ovs-toolbox">https://github.com/nbonnand/ovs-toolbox</a></p>
+</li>
+<li>
+<p><a href="https://pkgs.alpinelinux.org/packages">https://pkgs.alpinelinux.org/packages</a></p>
+</li>
+</ul>
+<h2 id="obiettivo" tabindex="-1">Obiettivo <a class="header-anchor" href="#obiettivo" aria-hidden="true">🔗</a></h2>
+<p>Creare 4 macchine virtuali, due su una VLAN0 e due sulla VLAN1, verificando che solamente le macchine sulla stessa VLAN possano vedersi.<br>
+Utilizzeremo Open vSwitch sull'host per creare le VLAN.<br>
+Utilizzeremo le reti Host Only di VirtualBox, creandone ed assegnandone una per ciascuna VM,<br>
+la particolarità delle reti Host Only di VirtualBox è che creano un NIC virtuale nell'Host,<br>
+tali NIC virtuali possono essere utilizzati in Open vSwitch per la creazione delle VLAN.
+Gli indirizzi IP di ciascuna rete host only dovranno essere utilizzati come gateway nella VM corrispondente.</p>
+<h2 id="virtualbox-hostonly-e-subnets" tabindex="-1">VirtualBox HostOnly e Subnets <a class="header-anchor" href="#virtualbox-hostonly-e-subnets" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.nakivo.com/blog/virtualbox-network-setting-guide/">https://www.nakivo.com/blog/virtualbox-network-setting-guide/</a></li>
+<li><a href="https://objectpartners.com/2018/01/18/exploring-a-host-only-network/">https://objectpartners.com/2018/01/18/exploring-a-host-only-network/</a></li>
+<li><a href="https://sites.google.com/site/nandydandyoracle/openvswitch-ovs/configuring-virtualbox-vms-for-openvswitch-networking">https://sites.google.com/site/nandydandyoracle/openvswitch-ovs/configuring-virtualbox-vms-for-openvswitch-networking</a></li>
+<li><a href="https://docs.vmware.com/en/VMware-Workstation-Pro/16.0/com.vmware.ws.using.doc/GUID-87995B4F-5945-4AF8-86D1-1003DDEFCF25.html">https://docs.vmware.com/en/VMware-Workstation-Pro/16.0/com.vmware.ws.using.doc/GUID-87995B4F-5945-4AF8-86D1-1003DDEFCF25.html</a></li>
+<li><a href="https://jekewa.com/blogs/index.php/weBlog/2014/01/13/virtualbox-host-only-shared-networking">https://jekewa.com/blogs/index.php/weBlog/2014/01/13/virtualbox-host-only-shared-networking</a></li>
+<li><a href="https://devconnected.com/how-to-add-route-on-linux/">https://devconnected.com/how-to-add-route-on-linux/</a></li>
+<li><a href="https://devconnected.com/network-manager-on-linux-with-examples/">https://devconnected.com/network-manager-on-linux-with-examples/</a></li>
+<li><a href="https://linuxtect.com/ip-route-add-add-route-in-linux/">https://linuxtect.com/ip-route-add-add-route-in-linux/</a></li>
+<li><a href="https://wiki.archlinux.org/title/sysctl">https://wiki.archlinux.org/title/sysctl</a></li>
+<li><a href="https://wiki.archlinux.org/title/Open_vSwitch">https://wiki.archlinux.org/title/Open_vSwitch</a></li>
+<li><a href="https://docs.openvswitch.org/en/latest/faq/configuration/">https://docs.openvswitch.org/en/latest/faq/configuration/</a></li>
+<li><a href="https://docs.openvswitch.org/en/latest/howto/vlan/">https://docs.openvswitch.org/en/latest/howto/vlan/</a></li>
+<li><a href="https://docs.openvswitch.org/en/latest/faq/vlan/">https://docs.openvswitch.org/en/latest/faq/vlan/</a></li>
+<li><a href="https://github.com/nbonnand/ovs-toolbox">https://github.com/nbonnand/ovs-toolbox</a></li>
+</ul>
+<h2 id="creazione-vm-virtualbox" tabindex="-1">Creazione VM VirtualBox <a class="header-anchor" href="#creazione-vm-virtualbox" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>Creiamo prima le 4 reti <strong>host only</strong> assegnandogli un ip ciascuna. Le reti Host Only creano dei NIC virtuali nell'host, che sono utilizzabili per la configurazione di Open vSwitch.</li>
+<li>Creiamo la prima VM, cambiamo il NIC1 in HostOnly, creiamo 4 reti HostOnly, e la cloniamola 3 volte impostando in ciascuna hostname, ip statico e gateway(ip dell host only network).</li>
+</ul>
+<ol>
+<li>Creazione delle reti host only: <code>vbox_0_create_vm_alpine.sh</code></li>
+<li>Creazione della VM Alpine_0:    <code>vbox_1_create_vm_alpine.sh</code></li>
+<li>Configurazione della VM Alpine_0</li>
+<li>Creazione delle VM clonate:     <code>vbox_2_create_vm_alpine.sh</code></li>
+<li>Configurazione delle VM clonate</li>
+</ol>
+<p><code>vbox_create_vm_alpine.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># /opt/vm/vbox_0_create_vm_alpine.sh</span>
+<span class="hljs-comment"># Script da eseguire prima di vbox_1_create_vm_alpine.sh</span>
+<span class="hljs-comment"># Creazione delle Host Only Network che saranno associate alle VM create da vbox_1_create_vm_alpine.sh e vbox_2_create_vm_alpine.sh</span>
+
+<span class="hljs-comment"># Per rimuovere il vincolo sulla famiglia di indirizzi ip 192.168.56.0 delle reti host only</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch06.html#network_hostonly</span>
+<span class="hljs-comment">#sudo bash -c &quot;cat &gt; /etc/vbox/networks.conf&quot; &lt;&lt; &#x27;EOF&#x27;</span>
+<span class="hljs-comment">#* 0.0.0.0/0 ::/0</span>
+<span class="hljs-comment">#EOF</span>
+
+<span class="hljs-comment"># Eliminazione delle VM</span>
+vboxmanage unregistervm --delete <span class="hljs-string">&quot;Alpine_0&quot;</span>
+vboxmanage unregistervm --delete <span class="hljs-string">&quot;Alpine_1&quot;</span>
+vboxmanage unregistervm --delete <span class="hljs-string">&quot;Alpine_2&quot;</span>
+vboxmanage unregistervm --delete <span class="hljs-string">&quot;Alpine_3&quot;</span>
+
+<span class="hljs-comment"># Eliminazione delle reti host only</span>
+vboxmanage hostonlyif remove vboxnet0
+vboxmanage hostonlyif remove vboxnet1
+vboxmanage hostonlyif remove vboxnet2
+vboxmanage hostonlyif remove vboxnet3
+
+<span class="hljs-comment"># Creazione delle reti VirtualBox Host Only, gli ip di queste reti saranno i gateway impostati in ciascuna VM</span>
+VBoxManage hostonlyif create
+VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1 --netmask 255.255.255.0
+VBoxManage dhcpserver modify --ifname vboxnet0 --<span class="hljs-built_in">disable</span>
+
+vboxmanage hostonlyif create
+vboxmanage hostonlyif ipconfig vboxnet1 --ip 192.168.57.1 --netmask 255.255.255.0
+vboxmanage dhcpserver modify --ifname vboxnet1 --<span class="hljs-built_in">disable</span>
+
+vboxmanage hostonlyif create
+vboxmanage hostonlyif ipconfig vboxnet2 --ip 192.168.58.1 --netmask 255.255.255.0
+vboxmanage dhcpserver modify --ifname vboxnet2 --<span class="hljs-built_in">disable</span>
+
+vboxmanage hostonlyif create
+vboxmanage hostonlyif ipconfig vboxnet3 --ip 192.168.59.1 --netmask 255.255.255.0
+vboxmanage dhcpserver modify --ifname vboxnet3 --<span class="hljs-built_in">disable</span>
+
+vboxmanage list hostonlyifs
+vboxmanage list vms
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># /opt/vm/vbox_1_create_vm_alpine.sh</span>
+<span class="hljs-comment"># Script da eseguire prima di vbox_2_create_vm_alpine.sh e dopo vbox_0_create_vm_alpine.sh</span>
+VM=Alpine_0
+HD_SIZE_MB=2048
+CPUS=1
+MEMORY_MB=4096
+VRAM_MB=32
+ISO=/opt/vm/alpine-virt-3.15.0-x86_64.iso
+BASE=/opt/vm
+VDI=<span class="hljs-variable">$BASE</span>/<span class="hljs-variable">$VM</span>/<span class="hljs-variable">$VM</span>.vdi
+IF=$(ip route show default | awk <span class="hljs-string">&#x27;/default/ {print $5}&#x27;</span>) <span class="hljs-comment"># $(nmcli -t d|grep ethernet|cut -d: -f1) # enp5s0</span>
+<span class="hljs-comment"># sudo chown -R $USER:$USER /opt/vm</span>
+<span class="hljs-comment"># mkdir -p $BASE/$VM</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createvm</span>
+<span class="hljs-comment"># VBoxManage list ostypes</span>
+<span class="hljs-comment"># --memory &lt;memorysize in MB&gt;</span>
+<span class="hljs-comment"># --vram &lt;vramsize in MB&gt;</span>
+vboxmanage createvm --name <span class="hljs-variable">$VM</span> --ostype Linux_64 --basefolder <span class="hljs-variable">$BASE</span> --register
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --cpus <span class="hljs-variable">$CPUS</span> --memory <span class="hljs-variable">$MEMORY_MB</span> --vram <span class="hljs-variable">$VRAM_MB</span> --ioapic on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --pae on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --graphicscontroller vboxsvga
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --accelerate3d on
+<span class="hljs-comment"># Di default VirtualBox creaa una rete NAT sul nic1, che ci consente l&#x27;installazione dei pacchetti</span>
+<span class="hljs-comment"># $ vboxmanage modifyvm $VM --nic1 nat</span>
+<span class="hljs-comment"># Dopo l&#x27;installazione e configurazione del sistema operativo sostituiremo il NAT con un Host Only(che genera un NIC virtuale nell&#x27;Host)</span>
+<span class="hljs-comment"># $ vboxmanage modifyvm $VM --nic1 bridged --bridgeadapter1 $IF</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createmedium</span>
+<span class="hljs-comment"># --size &lt;megabytes&gt;</span>
+vboxmanage createmedium disk --filename <span class="hljs-variable">$VDI</span> --size <span class="hljs-variable">$HD_SIZE_MB</span> --format VDI --variant Standard
+vboxmanage storagectl <span class="hljs-variable">$VM</span> --name <span class="hljs-string">&quot;SATA Controller&quot;</span> --add sata --bootable on --hostiocache on <span class="hljs-comment"># --controller IntelAhci </span>
+vboxmanage storageattach <span class="hljs-variable">$VM</span> --storagectl <span class="hljs-string">&quot;SATA Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> hdd --medium <span class="hljs-variable">$VDI</span>
+vboxmanage storagectl <span class="hljs-variable">$VM</span> --name <span class="hljs-string">&quot;IDE Controller&quot;</span> --add ide <span class="hljs-comment"># --controller PIIX4</span>
+vboxmanage storageattach <span class="hljs-variable">$VM</span> --storagectl <span class="hljs-string">&quot;IDE Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> dvddrive --medium <span class="hljs-variable">$ISO</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --boot1 disk --boot2 dvd --boot3 none --boot4 none 
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --usb on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --usbxhci on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --mouse usb
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --keyboard usb
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audio pulse
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audiocontroller ac97
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audiocodec stac9700
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audioout on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --clipboard-mode bidirectional
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --draganddrop bidirectional
+vboxmanage setextradata <span class="hljs-variable">$VM</span> GUI/ScaleFactor 2
+vboxmanage sharedfolder add <span class="hljs-variable">$VM</span> --name=Share --hostpath=/opt/vm/Share --automount
+
+vboxmanage list vms
+<span class="hljs-comment">#vboxmanage startvm $VM</span>
+<span class="hljs-comment">#vboxmanage controlvm $VM acpipowerbutton</span>
+<span class="hljs-comment">#vboxmanage controlvm $VM poweroff</span>
+<span class="hljs-comment">#vboxmanage startvm $VM --type headless</span>
+
+<span class="hljs-comment"># Dopo aver eseguito questo script avviare la VM ed eseguire il setup di Alpine installando i pacchetti e configurando la rete host only al posto della rete NAT</span>
+<span class="hljs-comment"># Prima del reboot dopo l&#x27;installazione di Alpine rimuovere la iso dal CDROM virtuale</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># /opt/vm/vbox_2_create_vm_alpine.sh</span>
+<span class="hljs-comment"># Creazione delle vm clonate</span>
+
+<span class="hljs-comment"># Impostazioni sulla VM da clonare</span>
+vboxmanage modifyvm <span class="hljs-string">&#x27;Alpine_0&#x27;</span> --nic1 hostonly --hostonlyadapter1 vboxnet0 <span class="hljs-comment"># vboxnet0: 192.168.56.1 Alpine_0: 192.168.56.3</span>
+<span class="hljs-comment"># Creazione dello snapshot necessario per il linked clone</span>
+vboxmanage snapshot <span class="hljs-string">&#x27;Alpine_0&#x27;</span> delete <span class="hljs-string">&#x27;clone_base_snapshot&#x27;</span> 
+vboxmanage snapshot <span class="hljs-string">&#x27;Alpine_0&#x27;</span> take   <span class="hljs-string">&#x27;clone_base_snapshot&#x27;</span> --description <span class="hljs-string">&#x27;Snapshot base da utilizzare per il clone&#x27;</span>
+vboxmanage snapshot <span class="hljs-string">&#x27;Alpine_0&#x27;</span> list --machinereadable
+
+<span class="hljs-comment"># Esecuzione dei clone linked(necessita di uno Shapshot presente nella VM di partenza)</span>
+vboxmanage clonevm <span class="hljs-string">&#x27;Alpine_0&#x27;</span> --snapshot <span class="hljs-string">&#x27;clone_base_snapshot&#x27;</span> --options <span class="hljs-built_in">link</span> --name=<span class="hljs-string">&quot;Alpine_1&quot;</span> --register 
+vboxmanage clonevm <span class="hljs-string">&#x27;Alpine_0&#x27;</span> --snapshot <span class="hljs-string">&#x27;clone_base_snapshot&#x27;</span> --options <span class="hljs-built_in">link</span> --name=<span class="hljs-string">&quot;Alpine_2&quot;</span> --register 
+vboxmanage clonevm <span class="hljs-string">&#x27;Alpine_0&#x27;</span> --snapshot <span class="hljs-string">&#x27;clone_base_snapshot&#x27;</span> --options <span class="hljs-built_in">link</span> --name=<span class="hljs-string">&quot;Alpine_3&quot;</span> --register 
+
+<span class="hljs-comment"># Impostazione delle reti host only sulle VM clonate</span>
+<span class="hljs-comment"># Si usa nic2 per non perdere il nic1 che è un bridged e permette alla vm la connessione internet utile per il setup di Alpine_0</span>
+vboxmanage modifyvm Alpine_1 --nic1 hostonly --hostonlyadapter1 vboxnet1 <span class="hljs-comment"># vboxnet1: 192.168.57.1 Alpine_1: 192.168.57.3</span>
+vboxmanage modifyvm Alpine_2 --nic1 hostonly --hostonlyadapter1 vboxnet2 <span class="hljs-comment"># vboxnet2: 192.168.58.1 Alpine_2: 192.168.58.3</span>
+vboxmanage modifyvm Alpine_3 --nic1 hostonly --hostonlyadapter1 vboxnet3 <span class="hljs-comment"># vboxnet3: 192.168.59.1 Alpine_3: 192.168.59.3</span>
+
+<span class="hljs-comment"># Per ciascuna VM clonata</span>
+<span class="hljs-comment"># fare login nella VM ed impostare l&#x27;hostname e l&#x27;ip</span>
+<span class="hljs-comment"># $ setup-hostname alpine1</span>
+<span class="hljs-comment"># $ sed -i &#x27;s/192.168.56/192.168.57/g&#x27; /etc/network/interfaces </span>
+</code></pre>
+<h2 id="setup-di-alpine" tabindex="-1">Setup di Alpine <a class="header-anchor" href="#setup-di-alpine" aria-hidden="true">🔗</a></h2>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html#_full_setup_alpine">https://docs.alpinelinux.org/user-handbook/0.1a/Installing/setup_alpine.html#_full_setup_alpine</a></p>
+<pre><code>Host = Ctrl Destro
+Host+C per tornare dalla modalità scalata
+Host+Home per il menù
+</code></pre>
+<ul>
+<li>Boot della VM.</li>
+<li>Visualizzazione/Modalità scalata</li>
+</ul>
+<h3 id="per-la-macchina-base-alpine_0-da-clonare" tabindex="-1">Per la macchina base Alpine_0 da clonare <a class="header-anchor" href="#per-la-macchina-base-alpine_0-da-clonare" aria-hidden="true">🔗</a></h3>
+<p><a href="../kernel/sysctl.html">sysctl</a></p>
+<p>NIC1:eth0 default VirtualBox è NAT, permette l'accesso ad internet per l'installazione dei pacchetti, lo cambieremo in Host Only al termine dell'installazione</p>
+<ol>
+<li>
+<p>setup iniziale</p>
+<p>Utilizzeremo il NIC1 della VM come NAT(è il default per VirtualBox) inizialmente per l'installazione dei pacchetti aggiuntivi Alpine.
+Dopo l'installazione iniziale, riconfigureremo il NIC1 come HostOnly creando la rete vboxnet0 visibile come NIC virtuale dall'Host(e quindi utilizzabile nella configurazione OpenvSwitch) impostando come gateway nella configurazione di rete della VM l'ip della rete host only.</p>
+<pre><code class="language-bash">$ vboxmanage modifyvm <span class="hljs-string">&#x27;Alpine_0&#x27;</span> --nic1 nat
+$ vboxmanage modifyvm <span class="hljs-string">&#x27;Alpine_0&#x27;</span> --nic2 none
+</code></pre>
+<p>per poter scaricare i pacchetti configuriamo la rete in modo da avere il NIC1 NAT funzionante</p>
+<pre><code class="language-bash">root login: `root` (nessuna password)
+<span class="hljs-comment"># Configurazione iniziale</span>
+$ setup-alpine
+    it
+    it
+    alpine0
+    eth0        <span class="hljs-comment"># NIC1 NAT di VirtualBox, da utilizzare per l&#x27;aggiornamento dei pacchetti</span>
+    dhcp
+    New password: pwroot
+    timezone: Europe/Rome
+    none
+    none
+    [1]
+    openssh
+    sda
+    sys
+    y
+$ reboot <span class="hljs-comment"># le rimanenti impostazioni devono essere fatte dopo il reboot altrimenti non sono persistenti</span>
+$ useradd -m -U -s /bin/bash -G wheel <span class="hljs-variable">$USER</span> <span class="hljs-comment"># pwroot</span>
+$ apk add vim <span class="hljs-built_in">sudo</span> 
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;%wheel ALL=(ALL) ALL&#x27;</span> &gt; /etc/sudoers.d/wheel
+<span class="hljs-comment"># Installazione dei pacchetti</span>
+$ vim /etc/apk/repositories <span class="hljs-comment"># e scommentare il community, oppure:</span>
+    <span class="hljs-built_in">cat</span> &gt; /etc/apk/repositories &lt;&lt; <span class="hljs-string">EOF; $(echo)
+    http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d&#x27;.&#x27; -f1,2)/main
+    http://dl-cdn.alpinelinux.org/alpine/v$(cat /etc/alpine-release | cut -d&#x27;.&#x27; -f1,2)/community
+    http://dl-cdn.alpinelinux.org/alpine/edge/testing
+    EOF</span>
+$ apk update
+$ apk upgrade
+$ apk add mc
+$ apk add util-linux pciutils usbutils coreutils binutils findutils grep iproute2
+$ apk add bash bash-doc bash-completion
+$ vim /etc/passwd <span class="hljs-comment"># per impostare la bash nell&#x27;utente root e per l&#x27;utente $USER</span>
+<span class="hljs-comment"># Riconfiguriamo la rete per il prossimo boot, impostando un ip statico e come gateway l&#x27;ip della rete host only:</span>
+$ setup-interfaces
+    eth0        <span class="hljs-comment"># NIC1 che verrà cambiato da NAT ad Host Only, lo configuriamo con un ip statico</span>
+    192.168.56.3    <span class="hljs-comment"># IP della VM</span>
+    255.255.255.0
+    192.168.56.1    <span class="hljs-comment"># IP della rete Host Only vboxnet0</span>
+    n
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/99-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+
+<span class="hljs-comment"># Alpine utilizza OpenRC come sistema di init utilizza quindi /etc/network/interfaces per la configurazione di rete</span>
+alpine0:~$ <span class="hljs-built_in">cat</span> /etc/network/interfaces
+auto lo
+iface lo inet loopback
+
+auto eth0
+iface eth0 inet static
+    address 192.168.1.13    <span class="hljs-comment"># Indirizzo IP della VM</span>
+    netmask 255.255.255.0
+    gateway 192.168.1.1    <span class="hljs-comment"># indirizzo IP della rete Host Only vboxnet0</span>
+up ip route add default via 192.168.1.1 dev eth0
+
+$ rc-service networking restart
+$ poweroff
+
+<span class="hljs-comment"># Sull&#x27;Host, Al reboot sostituire nella VM VirtualBox la rete NAT con una rete hostonly creata come vboxnet0 ed ip 192.168.56.1</span>
+vboxmanage hostonlyif create
+vboxmanage hostonlyif ipconfig vboxnet0 --ip 192.168.56.1 --netmask 255.255.255.0
+vboxmanage dhcpserver modify --ifname vboxnet0 --<span class="hljs-built_in">disable</span>
+vboxmanage modifyvm Alpine_0 --nic1 hostonly --hostonlyadapter1 vboxnet0
+
+<span class="hljs-comment"># A questo punto al reboot della VM avremo un eth0 corrispondente ad una rete host only.</span>
+</code></pre>
+</li>
+</ol>
+<p>Se si utilizza una rete bridged bisogna aggiungere il default route:</p>
+<pre><code class="language-bash">$ ip route add default via 192.168.1.1 dev eth0
+</code></pre>
+<h3 id="per-le-macchine-clonate" tabindex="-1">Per le macchine clonate <a class="header-anchor" href="#per-le-macchine-clonate" aria-hidden="true">🔗</a></h3>
+<p>Impostiamo per ciascuna VM clonata l'hostname, l'ip ed il gateway(ip della rete host only corrispondente assegnata alla VM)</p>
+<pre><code class="language-bash">    $ setup-hostname alpine1
+    <span class="hljs-comment">#$ setup-interfaces</span>
+    $ sed -i <span class="hljs-string">&#x27;s/192.168.56/192.168.57/g&#x27;</span> /etc/network/interfaces
+    $ rc-service networking restart
+    $ poweroff
+</code></pre>
+<pre><code class="language-bash">    $ setup-hostname alpine2
+    <span class="hljs-comment">#$ setup-interfaces</span>
+    $ sed -i <span class="hljs-string">&#x27;s/192.168.56/192.168.58/g&#x27;</span> /etc/network/interfaces
+    $ rc-service networking restart
+    $ poweroff
+</code></pre>
+<pre><code class="language-bash">    $ setup-hostname alpine3
+    <span class="hljs-comment">#$ setup-interfaces</span>
+    $ sed -i <span class="hljs-string">&#x27;s/192.168.56/192.168.59/g&#x27;</span> /etc/network/interfaces
+    $ rc-service networking restart
+    $ poweroff
+</code></pre>
+<h2 id="openvswitch" tabindex="-1">OpenvSwitch <a class="header-anchor" href="#openvswitch" aria-hidden="true">🔗</a></h2>
+<p>By default, all OVS ports are VLAN trunks, so each port without tag will pass all VLANs</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione e partenza di OpenvSwitch</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm openvswitch
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> ovs-vswitchd
+$ <span class="hljs-built_in">sudo</span> systemctl start ovs-vswitchd
+$ systemctl status ovs-vswitchd
+
+<span class="hljs-comment"># Bisogna far partire le VM per fare creare le reti host only vboxnetX</span>
+
+$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..3};<span class="hljs-keyword">do</span> vboxmanage startvm Alpine_<span class="hljs-variable">$i</span>; <span class="hljs-keyword">done</span>
+$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..3};<span class="hljs-keyword">do</span> vboxmanage controlvm Alpine_<span class="hljs-variable">$i</span> poweroff; <span class="hljs-keyword">done</span>
+$ vboxmanage list runningvms
+
+$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..3};<span class="hljs-keyword">do</span> vboxmanage hostonlyif remove vboxnet<span class="hljs-variable">$i</span>; <span class="hljs-keyword">done</span>
+
+$ vboxmanage startvm Alpine_0 --<span class="hljs-built_in">type</span> headless
+$ vboxmanage startvm Alpine_1 --<span class="hljs-built_in">type</span> headless
+$ vboxmanage startvm Alpine_2 --<span class="hljs-built_in">type</span> headless
+$ vboxmanage startvm Alpine_3 --<span class="hljs-built_in">type</span> headless
+$ vboxmanage list runningvms
+$ vboxmanage controlvm Alpine_0 poweroff
+$ vboxmanage controlvm Alpine_1 poweroff
+$ vboxmanage controlvm Alpine_2 poweroff
+$ vboxmanage controlvm Alpine_3 poweroff
+$ vboxmanage list runningvms
+
+<span class="hljs-comment"># Creazione del bridge con VLAN</span>
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-br br0
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 vboxnet0 vlan_mode=access tag=10
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 vboxnet1 vlan_mode=access tag=20
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 vboxnet2 vlan_mode=access tag=10
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 vboxnet3 vlan_mode=access tag=20
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl show
+
+<span class="hljs-comment"># Risultato atteso:</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment">#     ping 0--&gt;2 ok</span>
+<span class="hljs-comment">#     ping 1--&gt;3 ok</span>
+<span class="hljs-comment">#     ping 0--&gt;1 ko</span>
+<span class="hljs-comment">#     ping 2--&gt;3 ko</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># i ping devono funzionare all&#x27;interno della stessa VLAN a meno che non ci sia un router con una configurazione che consenta il salto di VLAN.</span>
+
+<span class="hljs-comment"># Rimozione del bridge e disabilitazione del servizio OpenvSwitch</span>
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl del-br br0
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> ovs-vswitchd
+$ <span class="hljs-built_in">sudo</span> systemctl stop ovs-vswitchd
+$ systemctl status ovs-vswitchd
+
+
+</code></pre>
+<h2 id="al-posto-delle-reti-host-only-utilizziamo-dei-nic-tap-come-reti-bridged" tabindex="-1">Al posto delle reti host only utilizziamo dei nic tap come reti bridged <a class="header-anchor" href="#al-posto-delle-reti-host-only-utilizziamo-dei-nic-tap-come-reti-bridged" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap0 con-name nmtap0 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.56.1/24
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap1 con-name nmtap1 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.57.1/24
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap2 con-name nmtap2 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.58.1/24
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap3 con-name nmtap3 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.59.1/24
+
+$ <span class="hljs-comment"># sudo ip route add 192.168.56.0/24 dev tap0 metric 10</span>
+
+
+
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> ovs-vswitchd
+$ <span class="hljs-built_in">sudo</span> systemctl start ovs-vswitchd
+$ systemctl status ovs-vswitchd
+<span class="hljs-comment"># Creazione del bridge con VLAN</span>
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-br br0
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 tap0 tag=10
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 tap1 tag=20
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 tap2 tag=10
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 tap3 tag=20
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl show
+
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl get port tap1 tag
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl <span class="hljs-built_in">set</span> port tap1 tag=10
+
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl add-port br0 enp5s0
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl del-port br0 enp5s0
+$ <span class="hljs-built_in">sudo</span> ip addr add 192.168.1.5/24 dev br0
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> br0 up
+$ <span class="hljs-built_in">sudo</span> ip route del 192.168.56.0/24 dev tap0
+$ <span class="hljs-built_in">sudo</span> ip route add 192.168.56.0/24 dev br0
+
+
+<span class="hljs-comment"># Rimozione del bridge e disabilitazione del servizio OpenvSwitch</span>
+$ <span class="hljs-built_in">sudo</span> ovs-vsctl del-br br0
+$ <span class="hljs-built_in">sudo</span> systemctl stop ovs-vswitchd
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> ovs-vswitchd
+$ systemctl status ovs-vswitchd
+$ nmcli connection del nmtap0
+$ nmcli connection del nmtap1
+$ nmcli connection del nmtap2
+$ nmcli connection del nmtap3
+</code></pre>
+<p>Associamo ogni NIC tap in virtualbox nella configurazione della corrispondente VM come rete bridged.</p>
+<pre><code class="language-bash">$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..3};<span class="hljs-keyword">do</span> vboxmanage startvm Alpine_<span class="hljs-variable">$i</span>; <span class="hljs-keyword">done</span>
+$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..3};<span class="hljs-keyword">do</span> vboxmanage controlvm Alpine_<span class="hljs-variable">$i</span> poweroff; <span class="hljs-keyword">done</span>
+$ vboxmanage list runningvms
+$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> {0..3};<span class="hljs-keyword">do</span> vboxmanage hostonlyif remove vboxnet<span class="hljs-variable">$i</span>; <span class="hljs-keyword">done</span> <span class="hljs-comment"># rimozione delle reti host only</span>
+</code></pre>
+</body></html>

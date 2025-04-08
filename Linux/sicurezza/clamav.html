@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.726" />
+        <title>clamav</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="clamav" tabindex="-1">clamav <a class="header-anchor" href="#clamav" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.726</p>
+<nav class="table-of-contents"><ol><li><a href="#manjaro">Manjaro </a><ol><li><a href="#installazione">Installazione </a></li><li><a href="#configurazione">Configurazione </a></li><li><a href="#avvio-dei-servizi-systemd">Avvio dei servizi systemd </a></li><li><a href="#test">Test </a></li><li><a href="#utilizzo">Utilizzo </a></li><li><a href="#aggiornamento-database">Aggiornamento Database </a></li></ol></li><li><a href="#mint">Mint </a></li></ol></nav><h1 id="clamav-1" tabindex="-1">ClamAV <a class="header-anchor" href="#clamav-1" aria-hidden="true">🔗</a></h1>
+<h2 id="manjaro" tabindex="-1">Manjaro <a class="header-anchor" href="#manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="../../applicazioni/clamav.html">ClamAV</a></li>
+<li><a href="https://wiki.archlinux.org/title/ClamAV">https://wiki.archlinux.org/title/ClamAV</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/ClamAV_(Italiano)">https://wiki.archlinux.org/index.php/ClamAV_(Italiano)</a></li>
+</ul>
+<h3 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> pamac install clamav clamtk
+<span class="hljs-comment"># sudo pacman -S clamav clamtk</span>
+<span class="hljs-comment"># yaourt -S clamtk</span>
+</code></pre>
+<h3 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h3>
+<p>Se hai intenzione di usare ClamAV come demone o come semplice analizzatore di file bisogna commentare la linea che contiene la parola <code>Example</code>, si trova all'inizio nel file <code>/etc/clamav/freshclam.conf</code>.
+Bisogna fare lo stesso nel file <code>clamd.conf</code> che si trova nella stessa directory) ed aggiornare il database dei virus e dei malware.</p>
+<ul>
+<li><code>/etc/clamav/freshclam.conf</code></li>
+<li><code>/etc/clamav/clamd.conf</code></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Configurazione</span>
+<span class="hljs-built_in">sudo</span> vim /etc/clamav/clamd.conf
+</code></pre>
+<h3 id="avvio-dei-servizi-systemd" tabindex="-1">Avvio dei servizi systemd <a class="header-anchor" href="#avvio-dei-servizi-systemd" aria-hidden="true">🔗</a></h3>
+<p>Prima di abilitare i servizi systemd, <br>
+bisogna <strong>assolutamente</strong> prima eseguire <code>**freshclam**</code></p>
+<pre><code class="language-bash"><span class="hljs-comment"># Eseguire una prima volta freshclam prima di abilitare i servizi</span>
+$ <span class="hljs-built_in">sudo</span> freshclam
+
+$ <span class="hljs-built_in">sudo</span> systemctl status clamav-daemon.service
+$ <span class="hljs-built_in">sudo</span> systemctl status clamav-freshclam.service 
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> clamav-daemon.service
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> clamav-freshclam.service 
+$ <span class="hljs-built_in">sudo</span> systemctl start clamav-daemon.service
+$ <span class="hljs-built_in">sudo</span> systemctl start clamav-freshclam.service 
+</code></pre>
+<h3 id="test" tabindex="-1">Test <a class="header-anchor" href="#test" aria-hidden="true">🔗</a></h3>
+<p>Deve ritornare la riga <code>stdin: Win.Test.EICAR_HDB-1 FOUND</code> altrimenti l'antivirus non stà funzionando.</p>
+<pre><code class="language-bash"><span class="hljs-variable">$USER</span>@19:54:57 ~]$ curl https://secure.eicar.org/eicar.com.txt | clamscan -
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100    68  100    68    0     0    210      0 --:--:-- --:--:-- --:--:--   211
+stdin: Win.Test.EICAR_HDB-1 FOUND
+</code></pre>
+<h3 id="utilizzo" tabindex="-1">Utilizzo <a class="header-anchor" href="#utilizzo" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ clamscan myfile
+$ clamscan --recursive --infected /home
+<span class="hljs-comment"># clamscan --recursive --infected --exclude-dir=&#x27;^/sys|^/dev&#x27; /</span>
+
+<span class="hljs-comment"># -i, --infected</span>
+<span class="hljs-comment">#              Only print infected files.</span>
+
+$ clamscan --remove myfile
+$ clamscan --remove -r -i /home
+$ clamscan --remove -r -i --exclude-dir=^/sys\|^/proc\|^/dev /
+
+</code></pre>
+<h3 id="aggiornamento-database" tabindex="-1">Aggiornamento Database <a class="header-anchor" href="#aggiornamento-database" aria-hidden="true">🔗</a></h3>
+<p>Per vedere lo stato di aggiornamento:</p>
+<pre><code class="language-bash">$ clamscan --version
+ClamAV 0.103.2/26204/Thu Jun 17 13:19:00 2021
+$ <span class="hljs-built_in">cat</span> /var/log/clamav/freshclam.log
+</code></pre>
+<p>Per aggiornare il database bisogna che il demone sia avviato:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl start clamav-daemon.service`
+</code></pre>
+<p>Dopo aggiorna la definizione dei virus con:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> freshclam
+</code></pre>
+<p>I file del database sono salvati in:</p>
+<pre><code>/var/lib/clamav/daily.cvd
+/var/lib/clamav/main.cvd
+</code></pre>
+<p>Si vede con:</p>
+<pre><code class="language-bash">$ grep var /etc/clamav/clamd.conf 
+LogFile /var/log/clamav/clamd.log
+<span class="hljs-comment"># copy the configuration file, change the LogFile variable, and run</span>
+<span class="hljs-comment"># Default: system specific (usually /tmp or /var/tmp).</span>
+<span class="hljs-comment"># DatabaseDirectory /var/lib/clamav</span>
+</code></pre>
+<h2 id="mint" tabindex="-1">Mint <a class="header-anchor" href="#mint" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.hiroom2.com/2018/07/30/linuxmint-19-clamav-en/">https://www.hiroom2.com/2018/07/30/linuxmint-19-clamav-en/</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> su
+apt install clamav
+<span class="hljs-comment"># Solo la prima volta</span>
+systemctl stop clamav-freshclam
+freshclam --no-dns
+<span class="hljs-built_in">sudo</span> systemctl start clamav-freshclam
+grep Checks /etc/clamav/freshclam.conf
+$ <span class="hljs-built_in">mkdir</span> ~/virus
+$ clamscan -r -i --move=<span class="hljs-variable">$HOME</span>/virus .
+</code></pre>
+</body></html>

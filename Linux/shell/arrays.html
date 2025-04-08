@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.781" />
+        <title>arrays</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="arrays" tabindex="-1">arrays <a class="header-anchor" href="#arrays" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.781</p>
+<nav class="table-of-contents"><ol><li><a href="#bash-arrays">BASH Arrays </a></li></ol></nav><h1 id="array-in-bash" tabindex="-1">array in bash <a class="header-anchor" href="#array-in-bash" aria-hidden="true">🔗</a></h1>
+<h2 id="bash-arrays" tabindex="-1">BASH Arrays <a class="header-anchor" href="#bash-arrays" aria-hidden="true">🔗</a></h2>
+<p>It's hard to quote array values, though, if you don't know ahead of time
+how many there are! So, using</p>
+<pre><code>${foo[*]}
+</code></pre>
+<p>to give all members of the foo array <strong>suffers from word-splitting</strong> in ksh and bash2 (but not in zsh, by default).
+In ksh and bash2, though, you can use</p>
+<pre><code>&quot;${foo[@]}&quot;
+</code></pre>
+<p>which <strong>expands into a quoted list of the members</strong>;
+each member isn't split into separate words.</p>
+<p>In csh, <code>$foo[*]:q</code> does the trick.</p>
+<p>a convenient way of initializing an entire array is the notation:</p>
+<pre><code>array=( element1 element2 ... elementN )
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment">#/usr/bin/env bash</span>
+
+newline=<span class="hljs-string">&#x27;
+&#x27;</span>
+OIFS=<span class="hljs-variable">$IFS</span>         <span class="hljs-comment"># Salvo l&#x27;input field separator originale</span>
+IFS=<span class="hljs-variable">$newline</span>      <span class="hljs-comment"># Il nuovo IFS e&#x27; un \n cosi gli spazi interni delle parole non daranno luogo a separazioni</span>
+files=($(find .)) <span class="hljs-comment"># La lista dei files viene salvata in un array</span>
+IFS=<span class="hljs-variable">$OIFS</span>        <span class="hljs-comment"># Ripristino dell&#x27;input field separator originale</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">${files[@]}</span>&quot;</span>
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>This produces the correct output:</p>
+<pre><code class="language-bash">$ bash t2.sh
+.
+./file with spaces
+./t2.sh
+./t1.sh
+...
+</code></pre>
+<p>Esempi</p>
+<pre><code class="language-bash"><span class="hljs-comment">#/usr/bin/env bash</span>
+array=( zero one two three four five )
+<span class="hljs-comment"># Element 0 1 2 3 4 5</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${array[0]}</span> <span class="hljs-comment"># zero</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${array:0}</span> <span class="hljs-comment"># zero</span>
+<span class="hljs-comment"># Parameter expansion of first element,</span>
+<span class="hljs-comment">#+ starting at position # 0 (1st character).</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${array:1}</span> <span class="hljs-comment"># ero</span>
+<span class="hljs-comment"># Parameter expansion of first element,</span>
+<span class="hljs-comment">#+ starting at position # 1 (2nd character).</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;--------------&quot;</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#array[0]}</span> <span class="hljs-comment"># 4</span>
+<span class="hljs-comment"># Length of first element of array.</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#array}</span> <span class="hljs-comment"># 4</span>
+<span class="hljs-comment"># Length of first element of array.</span>
+<span class="hljs-comment"># (Alternate notation)</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#array[1]}</span> <span class="hljs-comment"># 3</span>
+<span class="hljs-comment"># Length of second element of array.</span>
+<span class="hljs-comment"># Arrays in Bash have zero-based indexing.</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#array[*]}</span> <span class="hljs-comment"># 6</span>
+<span class="hljs-comment"># Number of elements in array.</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">${#array[@]}</span> <span class="hljs-comment"># 6</span>
+<span class="hljs-comment"># Number of elements in array.</span>
+</code></pre>
+</body></html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.850" />
+        <title>mcookie_shuf_random</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="mcookie_shuf_random" tabindex="-1">mcookie_shuf_random <a class="header-anchor" href="#mcookie_shuf_random" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.850</p>
+<nav class="table-of-contents"><ol><li><a href="#genera-una-password-casuale">Genera una password casuale </a></li><li><a href="#mcookie">mcookie </a></li><li><a href="#shuf">Shuf </a></li><li><a href="#select-a-random-file%2Ffolder">Select a Random File/Folder </a></li><li><a href="#%24random">$RANDOM </a></li><li><a href="#example-9-14.-random-between-values">Example 9-14. Random between values </a></li></ol></nav><h1 id="random" tabindex="-1">random <a class="header-anchor" href="#random" aria-hidden="true">🔗</a></h1>
+<p>Generazione di una stringa Random</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+$ mcookie
+$ <span class="hljs-built_in">tr</span> -d -c <span class="hljs-string">&quot;a-zA-Z0-9&quot;</span> &lt; /dev/urandom | <span class="hljs-built_in">head</span> -c 20
+$ <span class="hljs-built_in">head</span> -c20 /dev/urandom | xxd -ps
+$ <span class="hljs-built_in">echo</span> $((<span class="hljs-variable">$RANDOM</span>%<span class="hljs-number">200</span>))  <span class="hljs-comment"># Random number 0..199</span>
+$ <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/random count=16 bs=1 2&gt;/dev/null|xxd -ps
+</code></pre>
+<pre><code class="language-bash">$ man mcookie
+$ man urandom
+</code></pre>
+<pre><code>DESCRIZIONE
+   I  file  speciali  a  caratteri  /dev/random  e  /dev/urandom  (presenti a partire da Linux 1.3.30) forniscono un'interfaccia al generatore del kernel di numeri casuali.  Il file
+   /dev/random ha numero primario 1 e numero secondario 8.  Il file /dev/urandom ha numero primario 1 e numero secondario 9.
+
+   Il generatore di numeri casuali raccoglie rumore di fondo dai dispositivi dei driver e da altre sorgenti nella fonte di entropia.  Il generatore  mantiene  anche  una  stima  del
+   numero di bit di rumore nella fonte di entropia.  Da questa fonte di entropia vengono creati i numeri casuali.
+
+   Quando  viene  letto,  il  dispositivo  /dev/random  restituisce  solo  un numero di byte casuali compatibili con la stima dei bit di rumore nella fonte di entropia.  /dev/random
+   dovrebbe essere adatto ad usi che richiedono un alto grado di casualità, come la cifratura &quot;one-time pad&quot; e la generazione di chiavi.  Quando la fonte di  entropia  è  vuota,  le
+   letture di /dev/random vengono bloccate finché non viene raccolto abbastanza rumore ambientale.
+
+   La lettura del dispositivo /dev/urandom non bloccherà l'attesa di ulteriore entropia.  Di conseguenza, se non c'è abbastanza entropia nella fonte di entropia, i valori restituiti
+   sono teoricamente vulnerabili ad un attacco crittografico sull'algoritmo usato dal driver.  Nella letteratura attualmente non classificata non c'è prova di  un  metodo  per  fare
+   ciò, ma è in teoria possibile che un attacco del genere possa esistere.  Se questo è fonte di problemi per la propria applicazione, si usi invece /dev/random.
+
+   La  scrittura  su  /dev/random  o  /dev/urandom  aggiorna la fonte d'entropia con i dati scritti, ma ciò non si tradurrà in un numero di entropia più alto.  Ciò vuo dire che esso
+   influirà sui contenuti letti da entrambi i file, ma non farà letture da /dev/random più velocemente.
+Uso
+   Se non si è sicuri di quale programma usare, /dev/random o /dev/urandom, probabilmente la scelta migliore  è  l'ultimo.   Come  regola  generale,  si  dovrebbe  usare  per  tutto
+   /dev/urandom, fatta eccezione per chiavi GPG/SSL/SSH esistenti da molto tempo.
+
+   Se  si  salva  un  file seed ai riavvii, come si raccomanda più avanti (tutte le più importanti distribuzioni Linux lo fanno almeno dal 2000), l'output sarà crittograficamente al
+   sicuro dagli attaccanti senza accesso di root in locale dato che viene ricaricato nella sequenza di boot, e sarà perfettamente adeguato alle chiavi criptate per  le  sessioni  di
+   rete.   Dato  che  le letture da /dev/random possono bloccarsi, gli utenti solitamente vorranno aprirlo in modo non bloccante (o eseguire una lettura senza timeout), e fornire un
+   qualche tipo di notifica se l'entropia desiderata non è immediatamente disponibile.
+
+   Il generatore di numeri casuali del kernel è stato sviluppato per produrre un piccolo quantitativo di materiale di seed di alta qualità, necessario  a  creare  un  generatore  di
+   numeri  pseudo-casuali  crittografico  (CPRNG).   È  stato creato per essere sicuro, non per essere veloce, e non è adatto a generare grandi quantità di dati casuali.  Gli utenti
+   dovrebbero creare una piccola quantità di materiale di seed da leggere da /dev/urandom (e /dev/random): leggere grandi quantitativi di dati da questi dispositivi avrà un  impatto
+   negativo sugli altri utenti dei dispositivi.
+
+   La  quantità  di  materiale di seed richiesto per generare una chiave crittografica è uguale alla dimensione reale della chiave.  Per esempio, una chiave privata RSA a 3072 bit o
+   una Diffie-Hellmann ha una dimensione effettiva di 128 bit (e richiede circa 2^128 operazioni per essere forzata), quindi un generatore di chiavi avrà bisogno solo di 128 bit (16
+   byte) di materiale di seed da /dev/random.
+</code></pre>
+<p><code>$RANDOM</code> is an internal Bash function (not a constant) that returns a pseudorandom integer in the range <code>0</code> - <code>32767</code>.<br>
+It should not be used to generate an encryption key.</p>
+<pre><code class="language-bash">files=(/usr/share/cowsay/cows/*); cowsay -f `<span class="hljs-built_in">echo</span> <span class="hljs-variable">${files[$((RANDOM%<span class="hljs-variable">${#files}</span>))]}</span>` `fortune` | toilet -F gay -f term
+</code></pre>
+<h2 id="genera-una-password-casuale" tabindex="-1">Genera una password casuale <a class="header-anchor" href="#genera-una-password-casuale" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+$ <span class="hljs-built_in">tr</span> -d -c <span class="hljs-string">&quot;a-zA-Z0-9&quot;</span> &lt; /dev/urandom | <span class="hljs-built_in">head</span> -c 20
+$ <span class="hljs-built_in">head</span> -c20 /dev/urandom | xxd -ps
+</code></pre>
+<h2 id="mcookie" tabindex="-1">mcookie <a class="header-anchor" href="#mcookie" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://man.archlinux.org/man/mcookie.1">https://man.archlinux.org/man/mcookie.1</a></li>
+</ul>
+<p>generates a 128-bit random hexadecimal number</p>
+<pre><code class="language-bash"><span class="hljs-comment"># tempfilename.sh</span>
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># tempfile-name.sh:  generatore di nomi di file temporanei</span>
+ 
+STR_BASE=`mcookie`   <span class="hljs-comment"># magic cookie di 32-caratteri.</span>
+POS=11               <span class="hljs-comment"># Posizione arbitraria nella stringa magic cookie.</span>
+LUN=5                <span class="hljs-comment"># Ottiene $LUN caratteri consecutivi.</span>
+ 
+prefisso=temp        <span class="hljs-comment">#  È, dopo tutto, un file &quot;temporaneo&quot;.</span>
+                     <span class="hljs-comment">#  Per una maggiore &quot;unicità&quot;, generate il prefisso del</span>
+                     <span class="hljs-comment">#+ nome del file usando lo stesso metodo del </span>
+                     <span class="hljs-comment">#+ suffisso, di seguito.</span>
+suffisso=<span class="hljs-variable">${STR_BASE:POS:LUN}</span>
+                     <span class="hljs-comment">#  Estrae una stringa di 5-caratteri, iniziando dall&#x27;11a</span>
+                     <span class="hljs-comment">#+ posizione.</span>
+nomefile_temp=<span class="hljs-variable">$prefisso</span>.<span class="hljs-variable">$suffisso</span>
+                     <span class="hljs-comment"># Crea il nome del file.</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Nome del file temporaneo = &quot;</span><span class="hljs-variable">$nomefile_temp</span><span class="hljs-string">&quot;&quot;</span>
+<span class="hljs-comment"># sh tempfile-name.sh</span>
+<span class="hljs-comment"># Nome del file temporaneo = temp.e19ea</span>
+<span class="hljs-comment">#  Confrontate questa tecnica per generare nomi di file &quot;univoci&quot;</span>
+<span class="hljs-comment">#+ con il metodo &#x27;date&#x27; usato in ex51.sh.</span>
+<span class="hljs-built_in">exit</span> 0
+<span class="hljs-comment"># Modo2:</span>
+<span class="hljs-comment"># Genera una checksum md5 dello script stesso.</span>
+<span class="hljs-comment"># random001=`md5sum $0 | awk &#x27;{print $1}&#x27;`</span>
+<span class="hljs-comment"># Usa &#x27;awk&#x27; per eliminare il nome del file.</span>
+<span class="hljs-comment"># Modo3: mktemp -p /extra/tmp example.XXXXXXXXXX` || exit 1</span>
+<span class="hljs-comment"># Modo4: $RANDOM</span>
+</code></pre>
+<h2 id="shuf" tabindex="-1">Shuf <a class="header-anchor" href="#shuf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Shuf permette anche di scegliere una linea casuale dal file usando l’opzione -n. Questo limita l’output al numero specificato</span>
+$ <span class="hljs-built_in">shuf</span> -n 1 test.txt
+
+<span class="hljs-comment"># Supponiamo di creare un file di testo test.txt e di scriverci quattro nomi. Dando il comando</span>
+$ <span class="hljs-built_in">shuf</span> test.txt
+<span class="hljs-comment"># verranno stampati i quattro nomi in ordine casuale. </span>
+
+<span class="hljs-comment"># L’opzione -e permette la permutazione dallo standard input:</span>
+$ <span class="hljs-built_in">shuf</span> -e uno due tre
+
+<span class="hljs-comment"># Ottenere in output solo cinque righe</span>
+$ <span class="hljs-built_in">shuf</span> -n 5 filename
+
+<span class="hljs-comment"># Generare un numero random in un range</span>
+<span class="hljs-built_in">shuf</span> -i 1-10
+</code></pre>
+<h2 id="select-a-random-file%2Ffolder" tabindex="-1">Select a Random File/Folder <a class="header-anchor" href="#select-a-random-file%2Ffolder" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">shuf</span> -n1 -e *
+<span class="hljs-built_in">ls</span> -1 | <span class="hljs-built_in">shuf</span> -n 1
+a=(*); <span class="hljs-built_in">echo</span> <span class="hljs-variable">${a[$((RANDOM % <span class="hljs-variable">${#a[@]}</span>))]}</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>; <span class="hljs-keyword">done</span> | <span class="hljs-built_in">shuf</span> -n1
+<span class="hljs-built_in">ls</span> -1 | awk <span class="hljs-string">&#x27;BEGIN{srand()} {x[NR] = $0} END{print &quot;Selected&quot;, x[1 + int(rand() * NR)]}&#x27;</span>
+<span class="hljs-built_in">ls</span> -1 | <span class="hljs-built_in">sort</span> -R | sed -n <span class="hljs-string">&#x27;s/^/Selected /;1p&#x27;</span>
+</code></pre>
+<h2 id="%24random" tabindex="-1">$RANDOM <a class="header-anchor" href="#%24random" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># $RANDOM returns a different random integer at each invocation.</span>
+<span class="hljs-comment"># Nominal range: 0 - 32767 (signed 16-bit integer).</span>
+MAXCOUNT=10
+count=1
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$MAXCOUNT</span> random numbers:&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;-----------------&quot;</span>
+<span class="hljs-keyword">while</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$count</span>&quot;</span> -le <span class="hljs-variable">$MAXCOUNT</span> ] <span class="hljs-comment"># Generate 10 ($MAXCOUNT) random integers.</span>
+<span class="hljs-keyword">do</span>
+number=<span class="hljs-variable">$RANDOM</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$number</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;count += 1&quot;</span> <span class="hljs-comment"># Increment count.</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;-----------------&quot;</span>
+<span class="hljs-comment"># If you need a random int within a certain range, use the &#x27;modulo&#x27; operator.</span>
+<span class="hljs-comment"># This returns the remainder of a division operation.</span>
+RANGE=500
+<span class="hljs-built_in">echo</span>
+number=<span class="hljs-variable">$RANDOM</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;number %= <span class="hljs-variable">$RANGE</span>&quot;</span>
+<span class="hljs-comment"># ^^</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Random number less than <span class="hljs-variable">$RANGE</span> --- <span class="hljs-variable">$number</span>&quot;</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-comment"># If you need a random integer greater than a lower bound,</span>
+<span class="hljs-comment">#+ then set up a test to discard all numbers below that.</span>
+FLOOR=200
+number=0 <span class="hljs-comment">#initialize</span>
+<span class="hljs-keyword">while</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$number</span>&quot;</span> -le <span class="hljs-variable">$FLOOR</span> ]
+<span class="hljs-keyword">do</span>
+number=<span class="hljs-variable">$RANDOM</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Random number greater than <span class="hljs-variable">$FLOOR</span> --- <span class="hljs-variable">$number</span>&quot;</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-comment"># Let&#x27;s examine a simple alternative to the above loop, namely</span>
+<span class="hljs-comment"># let &quot;number = $RANDOM + $FLOOR&quot;</span>
+<span class="hljs-comment"># That would eliminate the while-loop and run faster.</span>
+<span class="hljs-comment"># But, there might be a problem with that. What is it?</span>
+<span class="hljs-comment"># Combine above two techniques to retrieve random number between two limits.</span>
+number=0 <span class="hljs-comment">#initialize</span>
+<span class="hljs-keyword">while</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$number</span>&quot;</span> -le <span class="hljs-variable">$FLOOR</span> ]
+<span class="hljs-keyword">do</span>
+number=<span class="hljs-variable">$RANDOM</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;number %= <span class="hljs-variable">$RANGE</span>&quot;</span> <span class="hljs-comment"># Scales $number down within $RANGE.</span>
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Random number between <span class="hljs-variable">$FLOOR</span> and <span class="hljs-variable">$RANGE</span> --- <span class="hljs-variable">$number</span>&quot;</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-comment"># Generate binary choice, that is, &quot;true&quot; or &quot;false&quot; value.</span>
+BINARY=2
+T=1
+number=<span class="hljs-variable">$RANDOM</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;number %= <span class="hljs-variable">$BINARY</span>&quot;</span>
+<span class="hljs-comment"># Note that let &quot;number &gt;&gt;= 14&quot; gives a better random distribution</span>
+<span class="hljs-comment">#+ (right shifts out everything except last binary digit).</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;<span class="hljs-variable">$number</span>&quot;</span> -eq <span class="hljs-variable">$T</span> ]
+<span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;TRUE&quot;</span>
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;FALSE&quot;</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-comment"># Generate a toss of the dice.</span>
+SPOTS=6 <span class="hljs-comment"># Modulo 6 gives range 0 - 5.</span>
+<span class="hljs-comment"># Incrementing by 1 gives desired range of 1 - 6.</span>
+<span class="hljs-comment"># Thanks, Paulo Marcel Coelho Aragao, for the simplification.</span>
+die1=0
+die2=0
+<span class="hljs-comment"># Would it be better to just set SPOTS=7 and not add 1? Why or why not?</span>
+<span class="hljs-comment"># Tosses each die separately, and so gives correct odds.</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;die1 = <span class="hljs-variable">$RANDOM</span> % <span class="hljs-variable">$SPOTS</span> +1&quot;</span> <span class="hljs-comment"># Roll first one.</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;die2 = <span class="hljs-variable">$RANDOM</span> % <span class="hljs-variable">$SPOTS</span> +1&quot;</span> <span class="hljs-comment"># Roll second one.</span>
+<span class="hljs-comment"># Which arithmetic operation, above, has greater precedence --</span>
+<span class="hljs-comment">#+ modulo (%) or addition (+)?</span>
+<span class="hljs-built_in">let</span> <span class="hljs-string">&quot;throw = <span class="hljs-variable">$die1</span> + <span class="hljs-variable">$die2</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Throw of the dice = <span class="hljs-variable">$throw</span>&quot;</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">exit</span> 0
+</code></pre>
+<h2 id="example-9-14.-random-between-values" tabindex="-1">Example 9-14. Random between values <a class="header-anchor" href="#example-9-14.-random-between-values" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># random-between.sh</span>
+<span class="hljs-comment"># Random number between two specified values.</span>
+<span class="hljs-comment"># Script by Bill Gradwohl, with minor modifications by the document author.</span>
+<span class="hljs-comment"># Used with permission.</span>
+<span class="hljs-function"><span class="hljs-title">randomBetween</span></span>() {
+<span class="hljs-comment"># Generates a positive or negative random number</span>
+<span class="hljs-comment">#+ between $min and $max</span>
+<span class="hljs-comment">#+ and divisible by $divisibleBy.</span>
+<span class="hljs-comment"># Gives a &quot;reasonably random&quot; distribution of return values.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Bill Gradwohl - Oct 1, 2003</span>
+<span class="hljs-function"><span class="hljs-title">syntax</span></span>() {
+<span class="hljs-comment"># Function embedded within function.</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Syntax: randomBetween [min] [max] [multiple]&quot;</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;Expects up to 3 passed parameters, &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;but all are completely optional.&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;min is the minimum value&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;max is the maximum value&quot;</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;multiple specifies that the answer must be &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a multiple of this value.&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot; i.e. answer must be evenly divisible by this number.&quot;</span>
+<span class="hljs-built_in">echo</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;If any value is missing, defaults area supplied as: 0 32767 1&quot;</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;Successful completion returns 0, &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;unsuccessful completion returns&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;function syntax and 1.&quot;</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;The answer is returned in the global variable &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;randomBetweenAnswer&quot;</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;Negative values for any passed parameter are &quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;handled correctly.&quot;</span>
+}
+
+<span class="hljs-built_in">local</span> min=<span class="hljs-variable">${1:-0}</span>
+<span class="hljs-built_in">local</span> max=<span class="hljs-variable">${2:-32767}</span>
+<span class="hljs-built_in">local</span> divisibleBy=<span class="hljs-variable">${3:-1}</span>
+<span class="hljs-comment"># Default values assigned, in case parameters not passed to function.</span>
+
+<span class="hljs-built_in">local</span> x
+<span class="hljs-built_in">local</span> spread
+
+<span class="hljs-comment"># Let&#x27;s make sure the divisibleBy value is positive.</span>
+[ <span class="hljs-variable">${divisibleBy}</span> -lt 0 ] &amp;&amp; divisibleBy=$((<span class="hljs-number">0</span>-divisibleBy))
+
+<span class="hljs-comment"># Sanity check.</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">$#</span> -gt 3 -o <span class="hljs-variable">${divisibleBy}</span> -eq 0 -o <span class="hljs-variable">${min}</span> -eq <span class="hljs-variable">${max}</span> ]; <span class="hljs-keyword">then</span>
+syntax
+<span class="hljs-built_in">return</span> 1
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># See if the min and max are reversed.</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">${min}</span> -gt <span class="hljs-variable">${max}</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-comment"># Swap them.</span>
+x=<span class="hljs-variable">${min}</span>
+min=<span class="hljs-variable">${max}</span>
+max=<span class="hljs-variable">${x}</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># If min is itself not evenly divisible by $divisibleBy,</span>
+<span class="hljs-comment">#+ then fix the min to be within range.</span>
+<span class="hljs-keyword">if</span> [ $((min/divisibleBy*divisibleBy)) -ne <span class="hljs-variable">${min}</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">${min}</span> -lt 0 ]; <span class="hljs-keyword">then</span>
+min=$((min/divisibleBy*divisibleBy))
+<span class="hljs-keyword">else</span>
+min=$((((min/divisibleBy)+<span class="hljs-number">1</span>)*divisibleBy))
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># If max is itself not evenly divisible by $divisibleBy,</span>
+<span class="hljs-comment">#+ then fix the max to be within range.</span>
+<span class="hljs-keyword">if</span> [ $((max/divisibleBy*divisibleBy)) -ne <span class="hljs-variable">${max}</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">${max}</span> -lt 0 ]; <span class="hljs-keyword">then</span>
+max=$((((max/divisibleBy)-<span class="hljs-number">1</span>)*divisibleBy))
+<span class="hljs-keyword">else</span>
+max=$((max/divisibleBy*divisibleBy))
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># ---------------------------------------------------------------------</span>
+<span class="hljs-comment"># Now, to do the real work.</span>
+
+<span class="hljs-comment"># Note that to get a proper distribution for the end points,</span>
+<span class="hljs-comment">#+ the range of random values has to be allowed to go between</span>
+<span class="hljs-comment">#+ 0 and abs(max-min)+divisibleBy, not just abs(max-min)+1.</span>
+
+<span class="hljs-comment"># The slight increase will produce the proper distribution for the</span>
+<span class="hljs-comment">#+ end points.</span>
+
+<span class="hljs-comment"># Changing the formula to use abs(max-min)+1 will still produce</span>
+<span class="hljs-comment">#+ correct answers, but the randomness of those answers is faulty in</span>
+<span class="hljs-comment">#+ that the number of times the end points ($min and $max) are returned</span>
+<span class="hljs-comment">#+ is considerably lower than when the correct formula is used.</span>
+<span class="hljs-comment"># ---------------------------------------------------------------------</span>
+
+spread=$((max-min))
+<span class="hljs-comment"># Omair Eshkenazi points out that this test is unnecessary,</span>
+<span class="hljs-comment">#+ since max and min have already been switched around.</span>
+[ <span class="hljs-variable">${spread}</span> -lt 0 ] &amp;&amp; spread=$((<span class="hljs-number">0</span>-spread))
+<span class="hljs-built_in">let</span> spread+=divisibleBy
+randomBetweenAnswer=$(((RANDOM%spread)/divisibleBy*divisibleBy+min))
+
+<span class="hljs-built_in">return</span> 0
+
+<span class="hljs-comment"># However, Paulo Marcel Coelho Aragao points out that</span>
+<span class="hljs-comment">#+ when $max and $min are not divisible by $divisibleBy,</span>
+<span class="hljs-comment">#+ the formula fails.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># He suggests instead the following formula:</span>
+<span class="hljs-comment"># rnumber = $(((RANDOM%(max-min+1)+min)/divisibleBy*divisibleBy))</span>
+
+}
+
+<span class="hljs-comment"># Let&#x27;s test the function.</span>
+min=-14
+max=20
+divisibleBy=3
+
+<span class="hljs-comment"># Generate an array of expected answers and check to make sure we get</span>
+<span class="hljs-comment">#+ at least one of each answer if we loop long enough.</span>
+
+<span class="hljs-built_in">declare</span> -a answer
+minimum=<span class="hljs-variable">${min}</span>
+maximum=<span class="hljs-variable">${max}</span>
+<span class="hljs-keyword">if</span> [ $((minimum/divisibleBy*divisibleBy)) -ne <span class="hljs-variable">${minimum}</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">${minimum}</span> -lt 0 ]; <span class="hljs-keyword">then</span>
+minimum=$((minimum/divisibleBy*divisibleBy))
+<span class="hljs-keyword">else</span>
+minimum=$((((minimum/divisibleBy)+<span class="hljs-number">1</span>)*divisibleBy))
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># If max is itself not evenly divisible by $divisibleBy,</span>
+<span class="hljs-comment">#+ then fix the max to be within range.</span>
+
+<span class="hljs-keyword">if</span> [ $((maximum/divisibleBy*divisibleBy)) -ne <span class="hljs-variable">${maximum}</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-keyword">if</span> [ <span class="hljs-variable">${maximum}</span> -lt 0 ]; <span class="hljs-keyword">then</span>
+maximum=$((((maximum/divisibleBy)-<span class="hljs-number">1</span>)*divisibleBy))
+<span class="hljs-keyword">else</span>
+maximum=$((maximum/divisibleBy*divisibleBy))
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># We need to generate only positive array subscripts,</span>
+<span class="hljs-comment">#+ so we need a displacement that that will guarantee</span>
+<span class="hljs-comment">#+ positive results.</span>
+
+disp=$((<span class="hljs-number">0</span>-minimum))
+<span class="hljs-keyword">for</span> ((i=<span class="hljs-variable">${minimum}</span>; i&lt;=<span class="hljs-variable">${maximum}</span>; i+=divisibleBy)); <span class="hljs-keyword">do</span>
+answer[i+disp]=0
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Now loop a large number of times to see what we get.</span>
+loopIt=1000 <span class="hljs-comment"># The script author suggests 100000,</span>
+<span class="hljs-comment">#+ but that takes a good long while.</span>
+
+<span class="hljs-keyword">for</span> ((i=<span class="hljs-number">0</span>; i&lt;<span class="hljs-variable">${loopIt}</span>; ++i)); <span class="hljs-keyword">do</span>
+
+<span class="hljs-comment"># Note that we are specifying min and max in reversed order here to</span>
+<span class="hljs-comment">#+ make the function correct for this case.</span>
+
+randomBetween <span class="hljs-variable">${max}</span> <span class="hljs-variable">${min}</span> <span class="hljs-variable">${divisibleBy}</span>
+
+<span class="hljs-comment"># Report an error if an answer is unexpected.</span>
+[ <span class="hljs-variable">${randomBetweenAnswer}</span> -lt <span class="hljs-variable">${min}</span> -o <span class="hljs-variable">${randomBetweenAnswer}</span> -gt <span class="hljs-variable">${max}</span> ] \
+&amp;&amp; <span class="hljs-built_in">echo</span> MIN or MAX error - <span class="hljs-variable">${randomBetweenAnswer}</span>!
+[ $((randomBetweenAnswer%<span class="hljs-variable">${divisibleBy}</span>)) -ne 0 ] \
+&amp;&amp; <span class="hljs-built_in">echo</span> DIVISIBLE BY error - <span class="hljs-variable">${randomBetweenAnswer}</span>!
+
+<span class="hljs-comment"># Store the answer away statistically.</span>
+answer[randomBetweenAnswer+disp]=$((answer[randomBetweenAnswer+disp]+<span class="hljs-number">1</span>))
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-comment"># Let&#x27;s check the results</span>
+
+<span class="hljs-keyword">for</span> ((i=<span class="hljs-variable">${minimum}</span>; i&lt;=<span class="hljs-variable">${maximum}</span>; i+=divisibleBy)); <span class="hljs-keyword">do</span>
+[ <span class="hljs-variable">${answer[i+displacement]}</span> -eq 0 ] \
+&amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;We never got an answer of <span class="hljs-variable">$i</span>.&quot;</span> \
+|| <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${i}</span> occurred <span class="hljs-variable">${answer[i+displacement]}</span> times.&quot;</span>
+<span class="hljs-keyword">done</span>
+
+<span class="hljs-built_in">exit</span> 0
+</code></pre>
+</body></html>

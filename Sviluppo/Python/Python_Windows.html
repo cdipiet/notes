@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.600" />
+        <title>Python_Windows</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="python_windows" tabindex="-1">Python_Windows <a class="header-anchor" href="#python_windows" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.600</p>
+<nav class="table-of-contents"><ol><li><a href="#aggiunta-di-python-al-path-windows">Aggiunta di Python al PATH Windows </a></li><li><a href="#2to3.bat">2to3.bat </a></li><li><a href="#2to3all.bat">2to3all.bat </a></li><li><a href="#utente-python">UTENTE PYTHON </a></li><li><a href="#creazione-ambiente-portable-per-windows">Creazione Ambiente Portable per Windows </a><ol><li><a href="#installazione-interprete-e-creazione-versione-portable">Installazione Interprete e creazione versione Portable </a></li><li><a href="#ambiente-di-test-per-le-build-con-cx_freeze">Ambiente di test per le build con cx_freeze </a></li></ol></li></ol></nav><h1 id="python-in-windows" tabindex="-1">Python in Windows <a class="header-anchor" href="#python-in-windows" aria-hidden="true">🔗</a></h1>
+<h2 id="aggiunta-di-python-al-path-windows" tabindex="-1">Aggiunta di Python al PATH Windows <a class="header-anchor" href="#aggiunta-di-python-al-path-windows" aria-hidden="true">🔗</a></h2>
+<p>Utilizzando l'opzione <code>user=true</code> di <code>pip</code> bisogna aggiungere la directory utente <code>%APPDATA%\Python\Python37\Scripts</code> al path.</p>
+<p>Modifica variabili di ambiente per l'account:</p>
+<pre><code class="language-bat">:: Nel `<span class="hljs-built_in">PATH</span>` deve essere presente la directory che contiene l&#x27;eseguibile di poetry: `<span class="hljs-variable">%APPDATA%</span>\Python\Scripts`:
+<span class="hljs-function">C:\&gt; &quot;<span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">system32</span>\<span class="hljs-title">rundll32.exe</span>&quot; <span class="hljs-title">sysdm.cpl</span>,<span class="hljs-title">EditEnvironmentVariables</span>
+    <span class="hljs-title">PATH</span>
+        %<span class="hljs-title">PROGRAMFILES</span>%\<span class="hljs-title">python3</span>.11
+        %<span class="hljs-title">PROGRAMFILES</span>%\<span class="hljs-title">python3</span>.11\<span class="hljs-title">Scripts</span>
+        %<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">Python</span>\<span class="hljs-title">Python311</span>\<span class="hljs-title">Scripts</span>
+        %<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">Python</span>\<span class="hljs-title">Scripts</span>
+        %<span class="hljs-title">PROGRAMFILES</span>%\<span class="hljs-title">Git</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">PROGRAMFILES</span>%\7-<span class="hljs-title">zip</span>
+
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">python</span> --<span class="hljs-title">version</span>
+<span class="hljs-title">Python</span> 3.11.6
+
+:: <span class="hljs-title">Installazione</span> <span class="hljs-title">pip</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">python.exe</span> -<span class="hljs-title">m</span> <span class="hljs-title">pip</span> <span class="hljs-title">install</span> --<span class="hljs-title">upgrade</span> <span class="hljs-title">pip</span>
+<span class="hljs-title">C</span>:\&gt;<span class="hljs-title">pip</span> --<span class="hljs-title">version</span>
+<span class="hljs-title">pip</span> 23.3.1 <span class="hljs-title">from</span> <span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">python3</span>.11\<span class="hljs-title">Lib</span>\<span class="hljs-title">site</span>-<span class="hljs-title">packages</span>\<span class="hljs-title">pip</span> (<span class="hljs-title">python</span> 3.11)
+:: <span class="hljs-title">C</span>:\&gt; <span class="hljs-title">python</span> -<span class="hljs-title">m</span> <span class="hljs-title">pip</span> <span class="hljs-title">install</span> --<span class="hljs-title">user</span> --<span class="hljs-title">upgrade</span> <span class="hljs-title">pip</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">pip</span> <span class="hljs-title">config</span> <span class="hljs-title">list</span> -<span class="hljs-title">v</span>
+<span class="hljs-title">For</span> <span class="hljs-title">variant</span> &#x27;<span class="hljs-title">global</span>&#x27;, <span class="hljs-title">will</span> <span class="hljs-title">try</span> <span class="hljs-title">loading</span> &#x27;<span class="hljs-title">C</span>:\<span class="hljs-title">ProgramData</span>\<span class="hljs-title">pip</span>\<span class="hljs-title">pip.ini</span>&#x27;
+<span class="hljs-title">For</span> <span class="hljs-title">variant</span> &#x27;<span class="hljs-title">user</span>&#x27;, <span class="hljs-title">will</span> <span class="hljs-title">try</span> <span class="hljs-title">loading</span> &#x27;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">pip</span>\<span class="hljs-title">pip.ini</span>&#x27;
+<span class="hljs-title">For</span> <span class="hljs-title">variant</span> &#x27;<span class="hljs-title">user</span>&#x27;, <span class="hljs-title">will</span> <span class="hljs-title">try</span> <span class="hljs-title">loading</span> &#x27;%<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">pip</span>\<span class="hljs-title">pip.ini</span>&#x27;
+<span class="hljs-title">For</span> <span class="hljs-title">variant</span> &#x27;<span class="hljs-title">site</span>&#x27;, <span class="hljs-title">will</span> <span class="hljs-title">try</span> <span class="hljs-title">loading</span> &#x27;%<span class="hljs-title">PROGRAMFILES</span>%\<span class="hljs-title">python3</span>.11\<span class="hljs-title">pip.ini</span>&#x27;
+<span class="hljs-title">global.proxy</span>=&#x27;<span class="hljs-title">http</span>://<span class="hljs-title">username:password</span>@<span class="hljs-title">myserver.it</span>:8080&#x27;
+<span class="hljs-title">global.require</span>-<span class="hljs-title">virtualenv</span>=&#x27;<span class="hljs-title">false</span>&#x27;
+<span class="hljs-title">global.trusted</span>-<span class="hljs-title">host</span>=&#x27;<span class="hljs-title">pypi.python.org</span>\<span class="hljs-title">npypi.org</span>\<span class="hljs-title">nfiles.pythonhosted.org</span>&#x27;
+
+:: <span class="hljs-title">Installazione</span> <span class="hljs-title">Poetry</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">set</span> <span class="hljs-title">https_proxy</span>=<span class="hljs-title">http</span>://<span class="hljs-title">username:password</span>@<span class="hljs-title">proxy</span>:8080
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">curl</span> -<span class="hljs-title">sSL</span> <span class="hljs-title">https</span>://<span class="hljs-title">install.python</span>-<span class="hljs-title">poetry.org</span> | <span class="hljs-title">python</span> -
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">self</span> <span class="hljs-title">update</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">self</span> <span class="hljs-title">add</span> <span class="hljs-title">poetry</span>-<span class="hljs-title">plugin</span>-<span class="hljs-title">up</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">self</span> <span class="hljs-title">add</span> <span class="hljs-title">poetry</span>-<span class="hljs-title">plugin</span>-<span class="hljs-title">export</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> --<span class="hljs-title">version</span>
+
+:: <span class="hljs-title">Nuovo</span> <span class="hljs-title">Progetto</span>
+$ <span class="hljs-title">poetry</span> <span class="hljs-title">new</span> <span class="hljs-title">poetry</span>-<span class="hljs-title">demo</span>    # <span class="hljs-title">per</span> <span class="hljs-title">un</span> <span class="hljs-title">nuovo</span> <span class="hljs-title">progetto</span>/<span class="hljs-title">directory</span>
+
+:: <span class="hljs-title">Init</span> <span class="hljs-title">directory</span> <span class="hljs-title">esistente</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">mkdir</span> <span class="hljs-title">poetry</span>-<span class="hljs-title">demo</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">cd</span> <span class="hljs-title">poetry</span>-<span class="hljs-title">demo</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">init</span>               # <span class="hljs-title">per</span> <span class="hljs-title">una</span> <span class="hljs-title">directory</span> <span class="hljs-title">che</span> <span class="hljs-title">gi</span>à <span class="hljs-title">esiste</span>
+
+:: <span class="hljs-title">Creazione</span> <span class="hljs-title">venv</span> <span class="hljs-title">ed</span> <span class="hljs-title">installazione</span> <span class="hljs-title">librerie</span> <span class="hljs-title">di</span> <span class="hljs-title">un</span> <span class="hljs-title">progetto</span> <span class="hljs-title">esistente</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">install</span>
+
+:: <span class="hljs-title">Aggiunta</span> <span class="hljs-title">di</span> <span class="hljs-title">una</span> <span class="hljs-title">librerie</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">add</span> <span class="hljs-title">prettytable</span>
+:: <span class="hljs-title">Aggiornamento</span> <span class="hljs-title">delle</span> <span class="hljs-title">librerie</span>
+$ <span class="hljs-title">poetry</span> <span class="hljs-title">show</span> -<span class="hljs-title">o</span> # <span class="hljs-title">pacchetti</span> <span class="hljs-title">da</span> <span class="hljs-title">aggiornare</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">update</span>
+:: <span class="hljs-title">Esecuzione</span> <span class="hljs-title">del</span> <span class="hljs-title">progetto</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">run</span> <span class="hljs-title">python</span> <span class="hljs-title">your_script.py</span>
+:: <span class="hljs-title">Avvio</span> <span class="hljs-title">di</span> <span class="hljs-title">una</span> <span class="hljs-title">shell</span> <span class="hljs-title">con</span> <span class="hljs-title">il</span> <span class="hljs-title">venv</span> <span class="hljs-title">impostato</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">shell</span>
+:: <span class="hljs-title">Uscita</span> <span class="hljs-title">dalla</span> <span class="hljs-title">shell</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">deactivate</span>
+:: <span class="hljs-title">Build</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">build</span>
+
+:: <span class="hljs-title">Info</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">env</span> <span class="hljs-title">list</span> --<span class="hljs-title">full</span>-<span class="hljs-title">path</span> -<span class="hljs-title">vvv</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">env</span> <span class="hljs-title">info</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">env</span> <span class="hljs-title">info</span> -<span class="hljs-title">p</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">show</span> --<span class="hljs-title">tree</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">poetry</span> <span class="hljs-title">show</span> --<span class="hljs-title">latest</span>
+:: <span class="hljs-title">Posizione</span> <span class="hljs-title">della</span> <span class="hljs-title">directory</span> <span class="hljs-title">site</span>-<span class="hljs-title">packages</span>
+$ <span class="hljs-title">poetry</span> <span class="hljs-title">run</span> <span class="hljs-title">python</span> -<span class="hljs-title">m</span> <span class="hljs-title">site</span>
+
+$ <span class="hljs-title">poetry</span> <span class="hljs-title">up</span> --<span class="hljs-title">help</span>
+$ <span class="hljs-title">poetry</span> <span class="hljs-title">up</span> --<span class="hljs-title">latest</span>
+
+</span></code></pre>
+<pre><code class="language-ini"><span class="hljs-comment"># %USERPROFILE%\pip\pip.ini</span>
+<span class="hljs-section">[global]</span>
+<span class="hljs-comment"># PROBLEMA DEI DIRITTI DI ACCESSO ALL&#x27;INSTALLAZIONE PYTHON</span>
+<span class="hljs-comment"># --------------------------------------------------------</span>
+<span class="hljs-comment"># Nel pc di &lt;host&gt; pip non può installare librerie in C:\Programmi\Python\Lib, che è alterabile solo dall&#x27;amministratore,</span>
+<span class="hljs-comment"># Serve allora un modo che consenta all&#x27;utente non amministratore di poter installare librerie python mediante pip.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># SOLUZIONE 1: User mode</span>
+<span class="hljs-comment"># ---------------------</span>
+<span class="hljs-comment"># Per risolvere il problema è possibile far lavorare pip in modalità utente(parametro --user da riga di comando)</span>
+<span class="hljs-comment"># https://pip.pypa.io/en/stable/user_guide/#user-installs</span>
+<span class="hljs-comment"># https://docs.python.org/3/library/site.html#site.USER_BASE</span>
+<span class="hljs-comment"># in questo modo la lib nella quale python cerca le librerie si trova in %APPDATA%\Python</span>
+<span class="hljs-comment"># 		python -c &quot;import site;print(&quot;site.USER_BASE&quot;)&quot;</span>
+<span class="hljs-comment"># 		C:\Users\myuser\AppData\Roaming\Python</span>
+<span class="hljs-comment"># Per evitare di utilizzare il parametro --user da riga di comando basta scommentare il seguente parametro:</span>
+<span class="hljs-comment"># user = true</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># SOLUZIONE 2(MIGLIORE): Virtual Environment</span>
+<span class="hljs-comment"># ------------------------------------------ </span>
+<span class="hljs-comment"># La soluzione migliore è avere una installazione delle librerie locale per ciascun progetto,</span>
+<span class="hljs-comment"># realizzata mediante la creazione di un virtualenv per ogni progetto: python -m venv &lt;nomedir_venv&gt;; nomedir_venv\activate</span>
+<span class="hljs-comment"># Con il seguente parametro si obbliga pip a lavorare solamente se si è in un contesto di virtualenv attivo, dando errore altrimenti:</span>
+<span class="hljs-attr">require-virtualenv</span> = <span class="hljs-literal">false</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># PROXY PIP</span>
+<span class="hljs-comment"># ---------</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># PROXY HTTP</span>
+<span class="hljs-comment"># ----------</span>
+<span class="hljs-comment"># In alternativa a Nexus si puo utilizzare il proxy, ma la password utente è in chiaro e và sempre mantenuta aggiornata:</span>
+<span class="hljs-attr">proxy</span> = http://username:xxxxxxxxxxxx@myserver.it:<span class="hljs-number">8080</span>
+<span class="hljs-attr">trusted-host</span> = pypi.python.org
+			   pypi.org
+			   files.pythonhosted.org
+<span class="hljs-comment"># set https_proxy=http://c3username:xxxxxxx@myserver.it:8080</span>
+</code></pre>
+<h2 id="2to3.bat" tabindex="-1">2to3.bat <a class="header-anchor" href="#2to3.bat" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat">python %~dp0Tools\Scripts\<span class="hljs-number">2</span>to3.py %*
+</code></pre>
+<h2 id="2to3all.bat" tabindex="-1">2to3all.bat <a class="header-anchor" href="#2to3all.bat" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> <span class="hljs-variable">%%f</span> <span class="hljs-keyword">in</span> (*.py) <span class="hljs-keyword">do</span> (python C:\Python\Tools\scripts\<span class="hljs-number">2</span>to3.py -w &quot;<span class="hljs-variable">%%f</span>&quot;)
+</code></pre>
+<h2 id="utente-python" tabindex="-1">UTENTE PYTHON <a class="header-anchor" href="#utente-python" aria-hidden="true">🔗</a></h2>
+<p>Generazione del file 'D:\Dati\Profili%USERNAME%\python_users' contenente le password utente cifrate
+e del file &quot;<a href="http://config.py">config.py</a>&quot;, da importare nelle applicazioni,
+per accedere alla configurazione cifrata.</p>
+<p>D:\Dati\Profili%USERNAME%\workspaceBI\PythonWorkspaceBI\bi_config\gestione_della_configurazione_cifrata.txt</p>
+<p>C:\Python\python.exe D:/Dati/Profili/%USERNAME%/workspace/PythonWorkspace/PythonWorkbench/cdp/config/login.py nuova_pwd
+C:\Python\python.exe D:/Dati/Profili/%USERNAME%/workspace/PythonWorkspace/PythonWorkbench/cdp/config/crypt/manage_config_module.py</p>
+<h2 id="creazione-ambiente-portable-per-windows" tabindex="-1">Creazione Ambiente Portable per Windows <a class="header-anchor" href="#creazione-ambiente-portable-per-windows" aria-hidden="true">🔗</a></h2>
+<h3 id="installazione-interprete-e-creazione-versione-portable" tabindex="-1">Installazione Interprete e creazione versione Portable <a class="header-anchor" href="#installazione-interprete-e-creazione-versione-portable" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>
+<p><a href="https://www.python.org/ftp/python/3.6.5/python-3.6.5-amd64.exe">https://www.python.org/ftp/python/3.6.5/python-3.6.5-amd64.exe</a></p>
+</li>
+<li>
+<p>Aggiungere in <strong class="mbb">C:\Python</strong> le .dll presenti in <strong class="mrb">E:\BackupDVDRW\app\Sviluppo\Python\Python\dll_da_aggiungere</strong>
+In questo modo la directory home di python diviene portabile su un altra macchina che non possiede tali dll.</p>
+</li>
+<li>
+<p>Patch PIP(vedere il capitolo seguente per i dettagli):</p>
+</li>
+</ol>
+<p><strong class="mbb">copy &quot;E:\BackupDVDRW\app\Sviluppo\Python\Python\Python_pip_patch\Lib\site-packages\pip\compat\<strong>init</strong>.py&quot; C:\Python\Lib\site-packages\pip\compat\<strong>init</strong>.py</strong></p>
+<p>Risolve l'errore:
+<strong class="mr">PermissionError: [WinError 32] Impossibile accedere al file. Il file è utilizzato da un altro processo</strong></p>
+<ol start="4">
+<li>Impostazione Ambiente amministratore:</li>
+</ol>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">runas</span> /<span class="hljs-title">u:administrator</span> &quot;<span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">system32</span>\<span class="hljs-title">rundll32.exe</span> <span class="hljs-title">sysdm.cpl</span>,<span class="hljs-title">EditEnvironmentVariables</span>&quot;
+    <span class="hljs-title">set</span> <span class="hljs-title">TNS_ADMIN</span>=<span class="hljs-title">C</span>:\<span class="hljs-title">oracle</span>\<span class="hljs-title">app</span>\<span class="hljs-title">product</span>\11.2.0\<span class="hljs-title">client_1</span>\<span class="hljs-title">NETWORK</span>\<span class="hljs-title">ADMIN</span> &lt;-- <span class="hljs-title">solo</span> <span class="hljs-title">per</span> <span class="hljs-title">usare</span> <span class="hljs-title">sqlplus</span>, <span class="hljs-title">il</span> <span class="hljs-title">codice</span> <span class="hljs-title">python</span>/<span class="hljs-title">cx_oracle</span> <span class="hljs-title">non</span> <span class="hljs-title">deve</span> <span class="hljs-title">dipendere</span> <span class="hljs-title">da</span> <span class="hljs-title">essa</span>
+    <span class="hljs-title">set</span> <span class="hljs-title">PATH</span>=<span class="hljs-title">C</span>:\<span class="hljs-title">jdk1</span>.8.0\<span class="hljs-title">bin</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">oracle</span>\<span class="hljs-title">app</span>\<span class="hljs-title">product</span>\11.2.0\<span class="hljs-title">client_1</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">SystemRoot</span>%\<span class="hljs-title">system32</span>;%<span class="hljs-title">SystemRoot</span>%;%<span class="hljs-title">SystemRoot</span>%\<span class="hljs-title">System32</span>\<span class="hljs-title">Wbem</span>;%<span class="hljs-title">SYSTEMROOT</span>%\<span class="hljs-title">System32</span>\<span class="hljs-title">WindowsPowerShell</span>\<span class="hljs-title">v1</span>.0\;<span class="hljs-title">C</span>:\<span class="hljs-title">PROGRA</span>~2\<span class="hljs-title">IBM</span>\<span class="hljs-title">SQLLIB</span>\<span class="hljs-title">BIN</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">PROGRA</span>~2\<span class="hljs-title">IBM</span>\<span class="hljs-title">SQLLIB</span>\<span class="hljs-title">FUNCTION</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">DAL</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">DAL</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">IPT</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">IPT</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">windows</span>\<span class="hljs-title">SysWoW64</span>\<span class="hljs-title">archiflowdll</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">IBM</span>\<span class="hljs-title">Personal</span> <span class="hljs-title">Communications</span>\;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">IBM</span>\<span class="hljs-title">Trace</span> <span class="hljs-title">Facility</span>\;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">SAS</span>\<span class="hljs-title">SharedFiles</span>(32)\<span class="hljs-title">Formats</span>
+    <span class="hljs-title">C</span>:\<span class="hljs-title">ProgramData</span>\<span class="hljs-title">Oracle</span>\<span class="hljs-title">Java</span>\<span class="hljs-title">javapath</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">oracle</span>\<span class="hljs-title">app</span>\<span class="hljs-title">product</span>\11.2.0\<span class="hljs-title">client_1</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">SystemRoot</span>%\<span class="hljs-title">system32</span>;%<span class="hljs-title">SystemRoot</span>%;%<span class="hljs-title">SystemRoot</span>%\<span class="hljs-title">System32</span>\<span class="hljs-title">Wbem</span>;%<span class="hljs-title">SYSTEMROOT</span>%\<span class="hljs-title">System32</span>\<span class="hljs-title">WindowsPowerShell</span>\<span class="hljs-title">v1</span>.0\;<span class="hljs-title">C</span>:\<span class="hljs-title">PROGRA</span>~2\<span class="hljs-title">IBM</span>\<span class="hljs-title">SQLLIB</span>\<span class="hljs-title">BIN</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">PROGRA</span>~2\<span class="hljs-title">IBM</span>\<span class="hljs-title">SQLLIB</span>\<span class="hljs-title">FUNCTION</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">DAL</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">DAL</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">IPT</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">Intel</span>\<span class="hljs-title">Intel</span>(<span class="hljs-title">R</span>) <span class="hljs-title">Management</span> <span class="hljs-title">Engine</span> <span class="hljs-title">Components</span>\<span class="hljs-title">IPT</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">windows</span>\<span class="hljs-title">SysWoW64</span>\<span class="hljs-title">archiflowdll</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">IBM</span>\<span class="hljs-title">Personal</span> <span class="hljs-title">Communications</span>\;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">IBM</span>\<span class="hljs-title">Trace</span> <span class="hljs-title">Facility</span>\;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>\<span class="hljs-title">SAS</span>\<span class="hljs-title">SharedFiles</span>(32)\<span class="hljs-title">Formats</span>
+</span></code></pre>
+<ol start="5">
+<li>Impostazione Ambiente utente Python Vanilla:</li>
+</ol>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">C</span>:\<span class="hljs-title">Windows</span>\<span class="hljs-title">system32</span>\<span class="hljs-title">rundll32.exe</span> <span class="hljs-title">sysdm.cpl</span>,<span class="hljs-title">EditEnvironmentVariables</span>
+    <span class="hljs-title">set</span> <span class="hljs-title">PYTHONIOENCODING</span>=<span class="hljs-title">utf</span>-8
+    <span class="hljs-title">set</span> <span class="hljs-title">PIP_PROXY</span>=<span class="hljs-title">http</span>://$<span class="hljs-title">USER:xxx</span>@<span class="hljs-title">proxy</span>:8080
+    <span class="hljs-title">set</span> <span class="hljs-title">HTTP_PROXY</span>=<span class="hljs-title">http</span>://$<span class="hljs-title">USER:xxx</span>@<span class="hljs-title">proxy</span>:8080
+    <span class="hljs-title">set</span> <span class="hljs-title">HTTPS_PROXY</span>=<span class="hljs-title">http</span>://$<span class="hljs-title">USER:xxx</span>@<span class="hljs-title">proxy</span>:8080
+    <span class="hljs-title">set</span> <span class="hljs-title">PATH</span>=
+        <span class="hljs-title">C</span>:\<span class="hljs-title">Python</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Python</span>\<span class="hljs-title">Scripts</span>;<span class="hljs-title">C</span>:\<span class="hljs-title">Python</span>\<span class="hljs-title">Lib</span>\<span class="hljs-title">site</span>-<span class="hljs-title">packages</span>\<span class="hljs-title">pyqt5</span>-<span class="hljs-title">tools</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">instantclient</span>-<span class="hljs-title">x64</span>\<span class="hljs-title">instantclient_12_1</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">InnoSetup5</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">imagemagick</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">PDFTk</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">cmd</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">mingw64</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">usr</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\7-<span class="hljs-title">Zip</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">apache</span>-<span class="hljs-title">maven</span>-3.5.2\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">apache</span>-<span class="hljs-title">ant</span>-1.10.1\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Gradle</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">groovy</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">ANTLR</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">verpatch</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">DrMemory</span>\<span class="hljs-title">bin64</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">sys</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">graphviz</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">pandoc</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">nodejs</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">msys64</span>\<span class="hljs-title">mingw64</span>\<span class="hljs-title">bin</span>;%<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">msys64</span>\<span class="hljs-title">usr</span>\<span class="hljs-title">bin</span>
+        <span class="hljs-title">C</span>:\<span class="hljs-title">Python</span>
+        <span class="hljs-title">C</span>:\<span class="hljs-title">Python</span>\<span class="hljs-title">Scripts</span>
+        <span class="hljs-title">C</span>:\<span class="hljs-title">Python</span>\<span class="hljs-title">Lib</span>\<span class="hljs-title">site</span>-<span class="hljs-title">packages</span>\<span class="hljs-title">pyqt5</span>-<span class="hljs-title">tools</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">instantclient</span>-<span class="hljs-title">x64</span>\<span class="hljs-title">instantclient_12_1</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">InnoSetup5</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">imagemagick</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">PDFTk</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">cmd</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">mingw64</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Git</span>\<span class="hljs-title">usr</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\7-<span class="hljs-title">Zip</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">apache</span>-<span class="hljs-title">maven</span>-3.5.2\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">apache</span>-<span class="hljs-title">ant</span>-1.10.1\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">Gradle</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">groovy</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">ANTLR</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">verpatch</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">msys64</span>\<span class="hljs-title">mingw64</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">msys64</span>\<span class="hljs-title">usr</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">DrMemory</span>\<span class="hljs-title">bin64</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">sys</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">graphviz</span>\<span class="hljs-title">bin</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">pandoc</span>
+        %<span class="hljs-title">USERPROFILE</span>%\<span class="hljs-title">app</span>\<span class="hljs-title">nodejs</span>
+</span></code></pre>
+<ol start="6">
+<li>Impostazione Ambiente utente Python Landesk:</li>
+</ol>
+<pre><code class="language-bat"><span class="hljs-built_in">set</span> <span class="hljs-built_in">PATH</span>=
+<span class="hljs-function">    C:\<span class="hljs-title">python37</span>
+    <span class="hljs-title">C</span>:\<span class="hljs-title">python37</span>\<span class="hljs-title">Scripts</span>
+    %<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">Python</span>\<span class="hljs-title">Python37</span>\<span class="hljs-title">Scripts</span>
+</span></code></pre>
+<h3 id="ambiente-di-test-per-le-build-con-cx_freeze" tabindex="-1">Ambiente di test per le build con cx_freeze <a class="header-anchor" href="#ambiente-di-test-per-le-build-con-cx_freeze" aria-hidden="true">🔗</a></h3>
+<p>Per verificare che l'installer prodotto non sia dipendente dalla variabile di ambiente <code>TNS_ADMIN</code>
+e dalle dll locali di Oracle InstantClient, rimuovere la variabile <code>TNS_ADMIN</code>
+dall'ambiente e <code>%USERPROFILE%\app\instantclient-x64\instantclient_12_1</code> dal path.</p>
+</body></html>

@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.864" />
+        <title>Javascript_Versions</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="javascript_versions" tabindex="-1">Javascript_Versions <a class="header-anchor" href="#javascript_versions" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.864</p>
+<nav class="table-of-contents"><ol><li><a href="#downloading-pdf%2Fepub-formats">Downloading PDF/Epub formats </a></li><li><a href="#how-to-run-examples">How to run examples </a></li><li><a href="#what-is-ecmascript%3F">What is ECMAScript? </a></li><li><a href="#version-history">Version History </a><ol><li><a href="#table-of-contents">Table of Contents </a></li></ol></li><li><a href="#es2015-or-es6">ES2015 Or ES6 </a><ol><li><a href="#variable-scoping">Variable Scoping </a></li><li><a href="#arrow-functions">Arrow functions </a></li><li><a href="#classes">Classes </a></li><li><a href="#enhanced-object-literals">Enhanced object literals </a></li><li><a href="#template-literals">Template literals </a></li><li><a href="#destructuring">Destructuring </a></li><li><a href="#default-parameters">Default parameters </a></li><li><a href="#rest-parameter">Rest parameter </a></li><li><a href="#spread-operator">Spread Operator </a></li><li><a href="#iterators-%26-for..of">Iterators &amp; For..of </a></li><li><a href="#generators">Generators </a></li><li><a href="#modules">Modules </a></li><li><a href="#set">Set </a></li><li><a href="#weakset">Weakset </a></li><li><a href="#map">Map </a></li><li><a href="#weakmap">Weakmap </a></li><li><a href="#unicode">Unicode </a></li><li><a href="#symbols">Symbols </a></li><li><a href="#proxies">Proxies </a></li><li><a href="#promises">Promises </a></li><li><a href="#reflect">Reflect </a></li><li><a href="#binary-and-octal">Binary and Octal </a></li><li><a href="#proper-tail-calls">Proper Tail Calls </a></li><li><a href="#array-find-methods">Array find methods </a></li></ol></li><li><a href="#es2016-or-es7">ES2016 Or ES7 </a><ol><li><a href="#array-includes">Array Includes </a></li><li><a href="#exponentiation-operator">Exponentiation Operator </a></li></ol></li><li><a href="#es2017-or-es8">ES2017 Or ES8 </a><ol><li><a href="#async-functions">Async functions </a></li><li><a href="#object-values">Object values </a></li><li><a href="#object-entries">Object entries </a></li><li><a href="#object-property-descriptors">Object property descriptors </a></li><li><a href="#string-padding">String padding </a></li><li><a href="#shared-memory-and-atomics">Shared memory and atomics </a></li><li><a href="#trailing-commas">Trailing commas </a></li></ol></li><li><a href="#es2018-or-es9">ES2018 Or ES9 </a><ol><li><a href="#async-iterators">Async iterators </a></li><li><a href="#object-rest-and-spread-operators">Object rest and spread operators </a></li><li><a href="#promise-finally">Promise finally </a></li></ol></li><li><a href="#es2019-or-es10">ES2019 Or ES10 </a><ol><li><a href="#array-flat-and-flatmap">Array flat and flatMap </a></li><li><a href="#object-fromentries">Object fromEntries </a></li><li><a href="#string-trimstart-and-trimend">String trimStart and trimEnd </a></li><li><a href="#symbol-description">Symbol description </a></li><li><a href="#optional-catch-binding">Optional catch binding </a></li><li><a href="#json-improvements">JSON Improvements </a></li><li><a href="#array-stable-sort">Array Stable Sort </a></li><li><a href="#function.tostring()">Function.toString() </a></li><li><a href="#private-class-variables">Private Class Variables </a></li></ol></li><li><a href="#es2020-or-es11">ES2020 Or ES11 </a><ol><li><a href="#bigint">BigInt </a></li><li><a href="#dynamic-import">Dynamic Import </a></li><li><a href="#nullish-coalescing-operator">Nullish Coalescing Operator </a></li><li><a href="#string-matchall">String matchAll </a></li><li><a href="#optional-chaining">Optional chaining </a></li><li><a href="#promise.allsettled">Promise.allSettled </a></li><li><a href="#globalthis">globalThis </a></li><li><a href="#import.meta">import.meta </a></li><li><a href="#for..in-order">for..in order </a></li></ol></li><li><a href="#es2021-or-es12">ES2021 Or ES12 </a><ol><li><a href="#replaceall">replaceAll </a></li><li><a href="#promise.any">promise.any </a></li><li><a href="#weakref">WeakRef </a></li><li><a href="#numeric-separators">Numeric Separators </a></li><li><a href="#logical-operators">Logical Operators </a></li></ol></li></ol></nav><h1 id="ecmascript-features-or-cheatsheet" tabindex="-1">ECMAScript Features or Cheatsheet <a class="header-anchor" href="#ecmascript-features-or-cheatsheet" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://github.com/sudheerj/ECMAScript-features">https://github.com/sudheerj/ECMAScript-features</a></li>
+</ul>
+<blockquote>
+<p>Click :star:if you like the project. Pull Request are highly appreciated. Follow me <a href="https://twitter.com/SudheerJonna">@SudheerJonna</a> for technical updates.</p>
+</blockquote>
+<h2 id="downloading-pdf%2Fepub-formats" tabindex="-1">Downloading PDF/Epub formats <a class="header-anchor" href="#downloading-pdf%2Fepub-formats" aria-hidden="true">🔗</a></h2>
+<p>You can download the PDF and Epub version of this repository from the latest run on the <a href="https://github.com/sudheerj/ECMAScript-cheatsheet/actions">actions tab</a>.</p>
+<h2 id="how-to-run-examples" tabindex="-1">How to run examples <a class="header-anchor" href="#how-to-run-examples" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-cmd">npm install
+npx babel-node es2020/bigint // Try other examples too
+</code></pre>
+<h2 id="what-is-ecmascript%3F" tabindex="-1">What is ECMAScript? <a class="header-anchor" href="#what-is-ecmascript%3F" aria-hidden="true">🔗</a></h2>
+<p><strong>ECMAScript</strong> is the scripting language which acts as the basis of JavaScript. ECMAScript standardized by the ECMA International standards organization in the ECMA-262 and ECMA-402 specifications.
+Each proposal for an ECMAScript feature goes through the following maturity stages:</p>
+<ol>
+<li>Stage 0: Strawman;</li>
+<li>Stage 1: Proposal;</li>
+<li>Stage 2: Draft;</li>
+<li>Stage 3: Candidate;</li>
+<li>Stage 4: Finished.</li>
+</ol>
+<h2 id="version-history" tabindex="-1">Version History <a class="header-anchor" href="#version-history" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th>Edition</th>
+<th>Date</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ES3</td>
+<td>Dicembre 1999</td>
+<td>Aggiunte le espressioni regolari, gestione del try/catch</td>
+</tr>
+<tr>
+<td>ES5</td>
+<td>Dicembre 2009</td>
+<td>Aggiunge lo &quot;strict mode&quot;,  i getters e i setters, la libreria per il supporto a JSON e la reflection sulle proprietà degli oggetti</td>
+</tr>
+<tr>
+<td>ES2011 Or ES5.1</td>
+<td>Giugno 2011</td>
+<td>Questa edizione è stata creata per allineare la precedente allo standard internazionale ISO/IEC 16262:2011.</td>
+</tr>
+<tr>
+<td>ES2015 Or ES6</td>
+<td>June 2015</td>
+<td>classi, moduli, for of, generators, arrow functions, collections, promises, reflection</td>
+</tr>
+<tr>
+<td>ES2016 Or ES7</td>
+<td>June 2016</td>
+<td></td>
+</tr>
+<tr>
+<td>ES2017 Or ES8</td>
+<td>June 2017</td>
+<td></td>
+</tr>
+<tr>
+<td>ES2018 Or ES9</td>
+<td>June 2018</td>
+<td></td>
+</tr>
+<tr>
+<td>ES2019 Or ES10</td>
+<td>June 2019</td>
+<td></td>
+</tr>
+<tr>
+<td>ES2020 Or ES11</td>
+<td>June 2020</td>
+<td></td>
+</tr>
+<tr>
+<td>ES2021 Or ES12</td>
+<td>June 2021</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="table-of-contents" tabindex="-1">Table of Contents <a class="header-anchor" href="#table-of-contents" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>No.</th>
+<th>Feature</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td></td>
+<td><strong>ES2015 Or ES6</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#variable-scoping">Variable Scoping</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#arrow-functions">Arrow functions</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#classes">Classes</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#Enhanced-object-literals">Enhanced object literals</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#template-literals">Template literals</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#destructuring">Destructuring</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#default-parameters">Default parameters</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#rest-parameter">Rest parameter</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#spread-operator">Spread Operator</a></td>
+</tr>
+<tr>
+<td>10</td>
+<td><a href="#iterators-&amp;-forof">Iterators &amp; For..of</a></td>
+</tr>
+<tr>
+<td>11</td>
+<td><a href="#generators">Generators</a></td>
+</tr>
+<tr>
+<td>12</td>
+<td><a href="#modules">Modules</a></td>
+</tr>
+<tr>
+<td>13</td>
+<td><a href="#set">Set</a></td>
+</tr>
+<tr>
+<td>14</td>
+<td><a href="#weakset">Weakset</a></td>
+</tr>
+<tr>
+<td>15</td>
+<td><a href="#map">Map</a></td>
+</tr>
+<tr>
+<td>16</td>
+<td><a href="#weakmap">Weakmap</a></td>
+</tr>
+<tr>
+<td>17</td>
+<td><a href="#unicode">Unicode</a></td>
+</tr>
+<tr>
+<td>18</td>
+<td><a href="#proxies">Proxies</a></td>
+</tr>
+<tr>
+<td>19</td>
+<td><a href="#symbols">Symbols</a></td>
+</tr>
+<tr>
+<td>20</td>
+<td><a href="#promises">Promises</a></td>
+</tr>
+<tr>
+<td>21</td>
+<td><a href="#reflect">Reflect</a></td>
+</tr>
+<tr>
+<td>22</td>
+<td><a href="#binary-and-octal">Binary and Octal</a></td>
+</tr>
+<tr>
+<td>23</td>
+<td><a href="#proper-tail-calls">Proper Tail calls</a></td>
+</tr>
+<tr>
+<td>24</td>
+<td><a href="#array-find-methods">Array find methods</a></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>ES2016 Or ES7</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#array-includes">Array includes</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#exponentiation-operator">Exponentiation Operator</a></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>ES2017 Or ES8</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#async-functions">Async functions</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#object-values">Object values</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#object-entries">Object entries</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#object-property-descriptors">Object property descriptors</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#string-padding">String padding</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#shared-memory-and-atomics">Shared memory and atomics</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#trailing-commas">Trailing commas</a></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>ES2018 Or ES9</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#async-iterators">Async iterators</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#object-rest-and-spread-operators">Object rest and spread operators</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#promise-finally">Promise finally</a></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>ES2019 Or ES10</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#array-flat-and-flatmap">Array flat and flatMap</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#object-formentries">Object formEntries</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#string-trimstart-and-trimend">String trimStart and trimEnd</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#symbol-description">Symbol description</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#optional-catch-binding">Optional Catch Binding</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#json-improvements">JSON Improvements</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#array-stable-sort">Array Stable Sort</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#functiontostring()">Function.toString()</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#private-class-variables">Private Class Variables</a></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>ES2020 Or ES11</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#bigint">BigInt</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#dynamic-import">Dynamic Import</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#nullish-coalescing-operator">Nullish Coalescing Operator</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#optional-chaining">Optional chaining</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#promiseallsettled">Promise allSettled</a></td>
+</tr>
+<tr>
+<td>6</td>
+<td><a href="#string-matchall">String matchAll</a></td>
+</tr>
+<tr>
+<td>7</td>
+<td><a href="#globalthis">globalThis</a></td>
+</tr>
+<tr>
+<td>8</td>
+<td><a href="#importmeta">import.meta</a></td>
+</tr>
+<tr>
+<td>9</td>
+<td><a href="#forin-order">for..in order</a></td>
+</tr>
+<tr>
+<td></td>
+<td><strong>ES2021 Or ES12</strong></td>
+</tr>
+<tr>
+<td>1</td>
+<td><a href="#replaceall">replaceAll</a></td>
+</tr>
+<tr>
+<td>2</td>
+<td><a href="#promiseany">promise.any</a></td>
+</tr>
+<tr>
+<td>3</td>
+<td><a href="#weakref">WeakRef</a></td>
+</tr>
+<tr>
+<td>4</td>
+<td><a href="#numeric-separators">Numeric Separators</a></td>
+</tr>
+<tr>
+<td>5</td>
+<td><a href="#logical-operators">Logical Operators</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="es2015-or-es6" tabindex="-1">ES2015 Or ES6 <a class="header-anchor" href="#es2015-or-es6" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<h3 id="variable-scoping" tabindex="-1">Variable Scoping <a class="header-anchor" href="#variable-scoping" aria-hidden="true">🔗</a></h3>
+<p>The variable scoping determines the visibility or accessibility of a variable within the certain part of the program or region.</p>
+<p>In ES6, both <code>const</code> and <code>let</code> keywords allow developers to declare variables in the block scope.</p>
+<p>The <code>let</code> statement declares a block-scoped local variable which can be reassigned. i.e, <code>let</code> declaration creates a mutable variable.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> a = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">if</span> (a === <span class="hljs-number">1</span>) {
+  <span class="hljs-keyword">let</span> a = <span class="hljs-number">2</span>;
+
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">//2</span>
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a); <span class="hljs-comment">//1</span>
+</code></pre>
+<p><strong>const</strong> variables are similar to <strong>let</strong> variables but they can't be changed through reassignment. i.e, The const declaration creates a read-only reference to a value.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> x = <span class="hljs-number">1</span>;
+
+<span class="hljs-keyword">if</span> (x === <span class="hljs-number">1</span>) {
+    <span class="hljs-keyword">const</span> y = <span class="hljs-number">2</span>; <span class="hljs-comment">// You cannot re-assign the value similar to let variable</span>
+
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(y); <span class="hljs-comment">//2</span>
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x); <span class="hljs-comment">//1</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="arrow-functions" tabindex="-1">Arrow functions <a class="header-anchor" href="#arrow-functions" aria-hidden="true">🔗</a></h3>
+<p>The arrow functions provides a more concise syntax for writing function expressions by opting out the function and return keywords using fat arrow(=&gt;) notation. Let's see how this arrow function looks like,</p>
+<pre><code class="language-js"><span class="hljs-comment">// Function Expression</span>
+<span class="hljs-keyword">var</span> multiplyFunc = <span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) {
+  <span class="hljs-keyword">return</span> a * b;
+}
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">multiplyFunc</span>(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-comment">// Arrow function</span>
+<span class="hljs-keyword">var</span> <span class="hljs-title function_">multiplyArrowFunc</span> = (<span class="hljs-params">a, b</span>) =&gt; a * b;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">multiplyArrowFunc</span>(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// 10</span>
+</code></pre>
+<p>You can also skip parenthesis(()) if the function has exactly one parameter(either zero or more than one parameter). Apart from this, you can wrap braces({}) if the function has more than one expression in the body.</p>
+<p>Let's list down all the variations of arrow functions,</p>
+<pre><code class="language-js"><span class="hljs-comment">//1. Single parameter and single statement</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">message</span> = name =&gt; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Hello, &quot;</span> + name + <span class="hljs-string">&quot;!&quot;</span>);
+<span class="hljs-title function_">message</span>(<span class="hljs-string">&quot;Sudheer&quot;</span>); <span class="hljs-comment">// Hello, Sudheer!</span>
+
+<span class="hljs-comment">//2. Multiple parameters and single statement</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">multiply</span> = (<span class="hljs-params">x, y</span>) =&gt; x * y;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">multiply</span>(<span class="hljs-number">2</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-comment">//3. Single parameter and multiple statements</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">even</span> = number =&gt; {
+  <span class="hljs-keyword">if</span>(number%<span class="hljs-number">2</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Even&quot;</span>);
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Odd&quot;</span>);
+  }
+}
+<span class="hljs-title function_">even</span>(<span class="hljs-number">5</span>); <span class="hljs-comment">// odd</span>
+
+<span class="hljs-comment">//4. Multiple parameters and multiple statements</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">divide</span> = (<span class="hljs-params">x, y</span>) =&gt; {
+  <span class="hljs-keyword">if</span>(y != <span class="hljs-number">0</span>) {
+    <span class="hljs-keyword">return</span> x / y;
+  }
+}
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">divide</span>(<span class="hljs-number">100</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// 20</span>
+
+<span class="hljs-comment">//5. No parameter and single statement</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">greet</span> = (<span class="hljs-params"></span>) =&gt; <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Hello World!&#x27;</span>);
+<span class="hljs-title function_">greet</span>(); <span class="hljs-comment">// Hello World!</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="classes" tabindex="-1">Classes <a class="header-anchor" href="#classes" aria-hidden="true">🔗</a></h3>
+<p>The classes are introduced as syntactic sugar over existing prototype based inheritance and constructor functions. So this feature doesn't bring new object-oriented inheritance model to JavaScript.</p>
+<p>There are two ways to define classes,</p>
+<ol>
+<li><strong>Class declarations:</strong></li>
+</ol>
+<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Square</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">length</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span> = length;
+  }
+
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">area</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span> * <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span>;
+  }
+
+  <span class="hljs-keyword">set</span> <span class="hljs-title function_">area</span>(<span class="hljs-params">value</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">area</span> = value;
+  }
+}
+</code></pre>
+<ol start="2">
+<li><strong>Class expressions:</strong></li>
+</ol>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> square = <span class="hljs-keyword">class</span> <span class="hljs-title class_">Square</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">length</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span> = length;
+  }
+
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">area</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span> * <span class="hljs-variable language_">this</span>.<span class="hljs-property">length</span>;
+  }
+
+  <span class="hljs-keyword">set</span> <span class="hljs-title function_">area</span>(<span class="hljs-params">value</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">area</span> = value;
+  }
+}
+</code></pre>
+<p>You can use <strong>extend</strong> keyword to use inheritance. This enables the subclass to get all features of a parent class.</p>
+<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Vehicle</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">name</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">name</span> = name;
+  }
+
+  <span class="hljs-title function_">start</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.name}</span> vehicle started`</span>);
+  }
+}
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Car</span> <span class="hljs-keyword">extends</span> <span class="hljs-title class_ inherited__">Vehicle</span> {
+  <span class="hljs-title function_">start</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.name}</span> car started`</span>);
+  }
+}
+
+<span class="hljs-keyword">const</span> car = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Car</span>(<span class="hljs-string">&#x27;BMW&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(car.<span class="hljs-title function_">start</span>()); <span class="hljs-comment">// BMW car started</span>
+</code></pre>
+<p><strong>Note:</strong> Even though ES6 classes looks similar to classes in other object oriented languages, such as Java, PHP, etc but they do not work exactly the same way.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="enhanced-object-literals" tabindex="-1">Enhanced object literals <a class="header-anchor" href="#enhanced-object-literals" aria-hidden="true">🔗</a></h3>
+<p>Object literals are extended to support setting the prototype at construction, shorthand for foo: foo assignments, defining methods, making super calls, and computing property names with expressions.</p>
+<p>The important enhancements of object literals are,</p>
+<ol>
+<li><strong>Property Shorthand:</strong></li>
+</ol>
+<p>Object's properties are often created from variables with the same name.</p>
+<p>Let's see the ES5 representation</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">2</span>, c = <span class="hljs-number">3</span>,
+  obj = {
+    <span class="hljs-attr">a</span>: a,
+    <span class="hljs-attr">b</span>: b,
+    <span class="hljs-attr">c</span>: c
+  };
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj);
+</code></pre>
+<p>and it can be represented in a shorter syntax as below,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> a = <span class="hljs-number">1</span>, b = <span class="hljs-number">2</span>, c = <span class="hljs-number">3</span>;
+<span class="hljs-keyword">const</span> obj = {
+  a,
+  b,
+  c
+};
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj);
+</code></pre>
+<ol start="2">
+<li><strong>Method Shorthand:</strong>
+In ES5, Object methods require the function statement as below,</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> calculation = {
+  <span class="hljs-attr">sum</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) { <span class="hljs-keyword">return</span> a + b; },
+  <span class="hljs-attr">multiply</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">a, b</span>) { <span class="hljs-keyword">return</span> a * b; }
+};
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(calculation.<span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>));  <span class="hljs-comment">// 8</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(calculation.<span class="hljs-title function_">multiply</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">// 15</span>
+</code></pre>
+<p>This can be avoided in ES6,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> calculation = {
+  <span class="hljs-title function_">sum</span>(<span class="hljs-params">a, b</span>) { <span class="hljs-keyword">return</span> a + b; },
+  <span class="hljs-title function_">multiply</span>(<span class="hljs-params">a, b</span>) { <span class="hljs-keyword">return</span> a * b; }
+};
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(calculation.<span class="hljs-title function_">add</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>));  <span class="hljs-comment">// 8</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(calculation.<span class="hljs-title function_">multiply</span>(<span class="hljs-number">5</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">// 15</span>
+</code></pre>
+<ol start="3">
+<li><strong>Computed Property Names:</strong>
+In ES5, it wasn’t possible to use a variable for a key name during object creation stage.</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-keyword">var</span>
+  key = <span class="hljs-string">&#x27;three&#x27;</span>,
+  obj = {
+    <span class="hljs-attr">one</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">two</span>: <span class="hljs-number">2</span>
+  };
+
+obj[key] = <span class="hljs-number">3</span>;
+</code></pre>
+<p>Object keys can be dynamically assigned in ES6 by placing an expression in square brackets([])</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span>
+  key = <span class="hljs-string">&#x27;three&#x27;</span>,
+  computedObj = {
+    <span class="hljs-attr">one</span>: <span class="hljs-number">1</span>,
+    <span class="hljs-attr">two</span>: <span class="hljs-number">2</span>,
+    [key]: <span class="hljs-number">3</span>
+  };
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="template-literals" tabindex="-1">Template literals <a class="header-anchor" href="#template-literals" aria-hidden="true">🔗</a></h3>
+<p>Prior to ES6, JavaScript developers would need to do ugly string concatenation to creat dynamic strings.</p>
+<p>Template literals allows you to work with strings in a new way compared to ES5. These are just string literals allowing embedded expressions denoted by the dollar sign and curly braces (${expression}). Also, these literals are enclosed by the backtick (``) character instead of double or single quotes.</p>
+<p>ES6 has two new kinds of literals:</p>
+<ol>
+<li><strong>Template literals:</strong> string literals which exists across multiple lines and include interpolated expressions(i.e, ${expression})</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> firstName = <span class="hljs-string">&#x27;John&#x27;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello <span class="hljs-subst">${firstName}</span>!
+Good morning!`</span>);
+</code></pre>
+<ol start="2">
+<li><strong>Tagged template literals:</strong> Function calls which are created by mentioning a function before a template literal.</li>
+</ol>
+<p>The real world use case is creating components in CSS-In-JS styled components to use across the application</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> <span class="hljs-title class_">Button</span> = styled.<span class="hljs-property">a</span><span class="hljs-string">`
+  display: inline-block;
+  border-radius: 3px;
+`</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="destructuring" tabindex="-1">Destructuring <a class="header-anchor" href="#destructuring" aria-hidden="true">🔗</a></h3>
+<p>Destructuring is a javascript expression for extracting multiple values from data stored in objects(properties of an object) and Arrays.</p>
+<p><strong>Object destructuring:</strong></p>
+<p>This feature is used to extract values from an object.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> user = { <span class="hljs-attr">firstName</span>: <span class="hljs-string">&#x27;John&#x27;</span>, <span class="hljs-attr">lastName</span>: <span class="hljs-string">&#x27;Kary&#x27;</span> };
+<span class="hljs-keyword">const</span> {firstName, lastName} = user;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(firstName, lastName); <span class="hljs-comment">// John, Kary</span>
+</code></pre>
+<p><strong>Array destructuring:</strong></p>
+<p>This feature is used to extract values from an array.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> [one, two, three] = [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>];
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(one, two, three); <span class="hljs-comment">// one, two, three</span>
+</code></pre>
+<p>You can use destructing in below places,</p>
+<ol>
+<li>Variable declarations</li>
+<li>Assignments</li>
+<li>Parameter definitions</li>
+<li>for-of loop</li>
+</ol>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="default-parameters" tabindex="-1">Default parameters <a class="header-anchor" href="#default-parameters" aria-hidden="true">🔗</a></h3>
+<p>Default parameters allow named parameters of a function to be initialized with default values if no value or undefined is passed.</p>
+<p>Prior to ES6, you need check for undefined values and provide the default value for undefined values using if/else or ternary operator</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a, b</span>) {
+  a = (<span class="hljs-keyword">typeof</span> a !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? a : <span class="hljs-number">10</span>;
+  b = (<span class="hljs-keyword">typeof</span> b !== <span class="hljs-string">&#x27;undefined&#x27;</span>) ? b : <span class="hljs-number">20</span>;
+  <span class="hljs-keyword">return</span> a + b;
+}
+<span class="hljs-title function_">add</span>(<span class="hljs-number">20</span>); <span class="hljs-comment">// 40</span>
+<span class="hljs-title function_">add</span>(); <span class="hljs-comment">// 30</span>
+</code></pre>
+<p>In ES6, these checks can be avoided using default parameters</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">a = <span class="hljs-number">10</span>, b = <span class="hljs-number">20</span></span>) {
+  <span class="hljs-keyword">return</span> a + b;
+}
+<span class="hljs-title function_">add</span>(<span class="hljs-number">20</span>); <span class="hljs-comment">// 40</span>
+<span class="hljs-title function_">add</span>(); <span class="hljs-comment">// 30</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="rest-parameter" tabindex="-1">Rest parameter <a class="header-anchor" href="#rest-parameter" aria-hidden="true">🔗</a></h3>
+<p>The rest parameter is used to represent an indefinite number of arguments as an array. The important point here is only the function's last parameter can be a &quot;rest parameter&quot;. This feature has been introduced to reduce the boilerplate code that was induced by the arguments.</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sum</span>(<span class="hljs-params">...args</span>) {
+  <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">previous, current</span>) =&gt;</span> {
+    <span class="hljs-keyword">return</span> previous + current;
+  });
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">sum</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>)); <span class="hljs-comment">// 6</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">sum</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>)); <span class="hljs-comment">// 10</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">sum</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>)); <span class="hljs-comment">// 15</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="spread-operator" tabindex="-1">Spread Operator <a class="header-anchor" href="#spread-operator" aria-hidden="true">🔗</a></h3>
+<p>Spread Operator allows iterables( arrays / objects / strings ) to be expanded into single arguments/elements.</p>
+<ol>
+<li>In function and constructor calls, the spread operator turns iterable values into arguments</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(...[-<span class="hljs-number">10</span>, <span class="hljs-number">30</span>, <span class="hljs-number">10</span>, <span class="hljs-number">20</span>])); <span class="hljs-comment">//30</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(-<span class="hljs-number">10</span>, ...[-<span class="hljs-number">50</span>, <span class="hljs-number">10</span>], <span class="hljs-number">30</span>)); <span class="hljs-comment">//30</span>
+</code></pre>
+<ol start="2">
+<li>In Array literals and strings, the spread operator turns iterable values into Array elements</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>([<span class="hljs-number">1</span>, ...[<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-number">4</span>, ...[<span class="hljs-number">5</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>]]); <span class="hljs-comment">// 1, 2, 3, 4, 5, 6, 7</span>
+</code></pre>
+<p><strong>Note:</strong> The spread syntax is opposite of rest parameter.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="iterators-%26-for..of" tabindex="-1">Iterators &amp; For..of <a class="header-anchor" href="#iterators-%26-for..of" aria-hidden="true">🔗</a></h3>
+<p>String, Array, TypedArray, Map, and Set are all built-in iterables but objects are not iterables by default.
+Iterators are a new way to loop over any collection in JavaScript. These are objects which defines a sequence and potentially a return value upon its termination.
+An iterator implements the Iterator protocol by having a next() method that returns an object with two properties:</p>
+<ol>
+<li><strong>value:</strong> The next value in the iteration sequence.</li>
+<li><strong>done:</strong> returns rue if the last value in the sequence has already been consumed.</li>
+</ol>
+<p>You can make the object iterable by defining a <code>Symbol.iterator</code> property on it.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> collection = {
+  <span class="hljs-attr">one</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">two</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-attr">three</span>: <span class="hljs-number">3</span>,
+  [<span class="hljs-title class_">Symbol</span>.<span class="hljs-property">iterator</span>]() {
+    <span class="hljs-keyword">const</span> values = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(<span class="hljs-variable language_">this</span>);
+    <span class="hljs-keyword">let</span> i = <span class="hljs-number">0</span>;
+    <span class="hljs-keyword">return</span> {
+      <span class="hljs-attr">next</span>: <span class="hljs-function">() =&gt;</span> {
+        <span class="hljs-keyword">return</span> {
+          <span class="hljs-attr">value</span>: <span class="hljs-variable language_">this</span>[values[i++]],
+          <span class="hljs-attr">done</span>: i &gt; values.<span class="hljs-property">length</span>
+        }
+      }
+    };
+  }
+};
+
+<span class="hljs-keyword">const</span> iterator = collection[<span class="hljs-title class_">Symbol</span>.<span class="hljs-property">iterator</span>]();
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(iterator.<span class="hljs-title function_">next</span>());    <span class="hljs-comment">// → {value: 1, done: false}</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(iterator.<span class="hljs-title function_">next</span>());    <span class="hljs-comment">// → {value: 2, done: false}</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(iterator.<span class="hljs-title function_">next</span>());    <span class="hljs-comment">// → {value: 3, done: false}</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(iterator.<span class="hljs-title function_">next</span>());    <span class="hljs-comment">// → {value: undefined, done: true}</span>
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">const</span> value <span class="hljs-keyword">of</span> collection) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value);
+}
+</code></pre>
+<p>The for...of statement creates a loop iterating over user defined collection object. But this loop can be used for built-in objects too.</p>
+<p><strong>Note:</strong> The abrupt iteration termination can be caused by break, throw or return.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="generators" tabindex="-1">Generators <a class="header-anchor" href="#generators" aria-hidden="true">🔗</a></h3>
+<p>A generator is a function that can stop or suspend midway and then continue from where it stopped while maintaining the context(saved across re-entrances). It can be defined using a function keyword followed by an asterisk(i.e, function* ()).</p>
+<p>This function returns an iterator object and this iterator's <strong>next()</strong> method returns an object with a value property containing the yielded value and a done property which indicates whether the generator has yielded its last value.</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span>* <span class="hljs-title function_">myGenerator</span>(<span class="hljs-params">i</span>) {
+  <span class="hljs-keyword">yield</span> i + <span class="hljs-number">10</span>;
+  <span class="hljs-keyword">yield</span> i + <span class="hljs-number">20</span>;
+  <span class="hljs-keyword">return</span> i + <span class="hljs-number">30</span>;
+}
+
+<span class="hljs-keyword">const</span> myGenObj = <span class="hljs-title function_">myGenerator</span>(<span class="hljs-number">10</span>);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myGenObj.<span class="hljs-title function_">next</span>().<span class="hljs-property">value</span>); <span class="hljs-comment">// 20</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myGenObj.<span class="hljs-title function_">next</span>().<span class="hljs-property">value</span>); <span class="hljs-comment">// 30</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myGenObj.<span class="hljs-title function_">next</span>().<span class="hljs-property">value</span>); <span class="hljs-comment">// 40</span>
+</code></pre>
+<p><strong>Note:</strong> We can use <code>yield*</code> to delegate to another generator function</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="modules" tabindex="-1">Modules <a class="header-anchor" href="#modules" aria-hidden="true">🔗</a></h3>
+<p>Modules are small units of independent, reusable code to be used as the building blocks in a Javascript application.</p>
+<p>Prior to ES6, there was no native modules support in JavaScript. There were 3 major module standards used,</p>
+<ol>
+<li>Asynchronous Module Definition (AMD)</li>
+<li>RequireJS Modules</li>
+<li>CommonJS Modules (module.exports and require syntax used in Node.js)</li>
+</ol>
+<p>ES6 has provided the built-in support for modules. Everything inside a module is private by default, and runs in strict mode. Public variables, functions and classes are exposed using <code>export</code> statement and import the same using <code>import</code> statement.</p>
+<p><strong>Export Statement:</strong></p>
+<p>There are two types of exports:</p>
+<ol>
+<li>Named Exports (Zero or more exports per module)</li>
+</ol>
+<p>You can export each element or a single export statement to export all the elements at once</p>
+<pre><code class="language-js"><span class="hljs-comment">// module &quot;my-module.js&quot;</span>
+
+<span class="hljs-keyword">const</span> <span class="hljs-variable constant_">PI</span> = <span class="hljs-title class_">Math</span>.<span class="hljs-property">PI</span>;
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">...args</span>) {
+  <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">num, tot</span>) =&gt;</span> tot + num);
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">multiply</span>(<span class="hljs-params">...args</span>) {
+  <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">num, tot</span>) =&gt;</span> tot * num);
+}
+
+<span class="hljs-comment">// private function</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">print</span>(<span class="hljs-params">msg</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(msg);
+}
+
+<span class="hljs-keyword">export</span> { <span class="hljs-variable constant_">PI</span>, add, multiply };
+</code></pre>
+<ol start="2">
+<li>Default Exports (One per module)</li>
+</ol>
+<p>If we want to export a single value, you could use a default export</p>
+<pre><code class="language-js"><span class="hljs-comment">// module &quot;my-module.js&quot;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">add</span>(<span class="hljs-params">...args</span>) {
+                 <span class="hljs-keyword">return</span> args.<span class="hljs-title function_">reduce</span>(<span class="hljs-function">(<span class="hljs-params">num, tot</span>) =&gt;</span> tot + num);
+}
+</code></pre>
+<p><strong>Import Statement:</strong></p>
+<p>The static import statement is used to import read only live bindings which are exported by another module.</p>
+<p>There are many variations of import scenarios as below,</p>
+<pre><code class="language-js"><span class="hljs-comment">// 1. Import an entire module&#x27;s contents</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> name <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;my-module&quot;</span>;
+
+<span class="hljs-comment">//2.Import a single export from a module</span>
+<span class="hljs-keyword">import</span> { export1 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;my-module&quot;</span>;
+
+<span class="hljs-comment">//3.Import multiple exports from a module</span>
+<span class="hljs-keyword">import</span> { export1 , export2 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;my-module&quot;</span>;
+
+<span class="hljs-comment">//4.Import default export from a module</span>
+<span class="hljs-keyword">import</span> defaultExport <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;my-module&quot;</span>;
+
+<span class="hljs-comment">//5.Import an export with an alias</span>
+<span class="hljs-keyword">import</span> { export1 <span class="hljs-keyword">as</span> alias1 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;my-module&quot;</span>;
+
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="set" tabindex="-1">Set <a class="header-anchor" href="#set" aria-hidden="true">🔗</a></h3>
+<p>Set is a built-in object to store collections of unique values of any type.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> mySet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Set</span>()
+
+mySet.<span class="hljs-title function_">add</span>(<span class="hljs-number">1</span>);
+mySet.<span class="hljs-title function_">add</span>(<span class="hljs-number">2</span>);
+mySet.<span class="hljs-title function_">add</span>(<span class="hljs-number">2</span>);
+mySet.<span class="hljs-title function_">add</span>(<span class="hljs-string">&#x27;some text here&#x27;</span>);
+mySet.<span class="hljs-title function_">add</span>({<span class="hljs-attr">one</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">two</span>: <span class="hljs-number">2</span> , <span class="hljs-attr">three</span>: <span class="hljs-number">3</span>});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(mySet); <span class="hljs-comment">// Set [ 1, 2, &#x27;some text here&#x27;, {one: 1, two: 2 , three: 3} ]</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(mySet.<span class="hljs-property">size</span>) <span class="hljs-comment">// 4</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(mySet.<span class="hljs-title function_">has</span>(<span class="hljs-number">2</span>)); <span class="hljs-comment">// true</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="weakset" tabindex="-1">Weakset <a class="header-anchor" href="#weakset" aria-hidden="true">🔗</a></h3>
+<p>The Set is used to store any type of data such as primitives and object types. Whereas WeakSet is an object to store weakly held objects in a collection. (i.e, WeakSet is the collections of objects only). Here weak means,  If no other references to an object stored in the WeakSet exist, those objects can be garbage collected.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> myUserSet = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeakSet</span>();
+
+<span class="hljs-keyword">let</span> john = { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span> };
+<span class="hljs-keyword">let</span> rocky = { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Rocky&quot;</span> };
+<span class="hljs-keyword">let</span> alex = { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Alex&quot;</span> };
+<span class="hljs-keyword">let</span> nick = { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Nick&quot;</span> };
+
+myUserSet.<span class="hljs-title function_">add</span>(john);
+myUserSet.<span class="hljs-title function_">add</span>(rocky);
+myUserSet.<span class="hljs-title function_">add</span>(john);
+myUserSet.<span class="hljs-title function_">add</span>(nick);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myUserSet.<span class="hljs-title function_">has</span>(john)); <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myUserSet.<span class="hljs-title function_">has</span>(alex)); <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myUserSet.<span class="hljs-title function_">delete</span>(nick));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myUserSet.<span class="hljs-title function_">has</span>(nick)); <span class="hljs-comment">// false</span>
+
+john = <span class="hljs-literal">null</span>;
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="map" tabindex="-1">Map <a class="header-anchor" href="#map" aria-hidden="true">🔗</a></h3>
+<p>Map is a collection of elements where each element is stored as a Key, value pair. It can hold both objects and primitive values as either key or value and iterates its elements in insertion order.</p>
+<p>Let's take a map with different types of primitives and objects as key-value pairs and various methods on it,</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> typeMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Map</span>();
+
+<span class="hljs-keyword">var</span> keyObj = {<span class="hljs-string">&#x27;one&#x27;</span>: <span class="hljs-number">1</span>}
+
+typeMap.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;10&#x27;</span>, <span class="hljs-string">&#x27;string&#x27;</span>);   <span class="hljs-comment">// a string key</span>
+typeMap.<span class="hljs-title function_">set</span>(<span class="hljs-number">10</span>, <span class="hljs-string">&#x27;number&#x27;</span>);     <span class="hljs-comment">// a numeric key</span>
+typeMap.<span class="hljs-title function_">set</span>(<span class="hljs-literal">true</span>, <span class="hljs-string">&#x27;boolean&#x27;</span>); <span class="hljs-comment">// a boolean key</span>
+typeMap.<span class="hljs-title function_">set</span>(keyObj, <span class="hljs-string">&#x27;object&#x27;</span>); <span class="hljs-comment">// an object key</span>
+
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(typeMap.<span class="hljs-title function_">get</span>(<span class="hljs-number">10</span>)   ); <span class="hljs-comment">// number</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(typeMap.<span class="hljs-title function_">get</span>(<span class="hljs-string">&#x27;10&#x27;</span>) ); <span class="hljs-comment">// string</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(typeMap.<span class="hljs-title function_">get</span>(keyObj)) <span class="hljs-comment">// object</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(typeMap.<span class="hljs-title function_">get</span>({<span class="hljs-string">&#x27;one&#x27;</span>: <span class="hljs-number">1</span>})) <span class="hljs-comment">// undefined</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(typeMap.<span class="hljs-property">size</span> ); <span class="hljs-comment">// 3</span>
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> item <span class="hljs-keyword">of</span> typeMap) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item);
+}
+
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> item <span class="hljs-keyword">in</span> typeMap) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(item);
+}
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="weakmap" tabindex="-1">Weakmap <a class="header-anchor" href="#weakmap" aria-hidden="true">🔗</a></h3>
+<p>WeakMap object is a collection of key/value pairs in which the keys are weakly referenced. For this object, the keys must be objects and the values can be arbitrary values.</p>
+<p>Let's see various methods of weakmap with below example,</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> weakMap = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeakMap</span>();
+
+<span class="hljs-keyword">var</span> obj1  = {}
+<span class="hljs-keyword">var</span> obj2  = {}
+
+
+weakMap.<span class="hljs-title function_">set</span>(obj1, <span class="hljs-number">1</span>);
+weakMap.<span class="hljs-title function_">set</span>(obj2, <span class="hljs-number">2</span>);
+weakMap.<span class="hljs-title function_">set</span>({}, {<span class="hljs-string">&quot;four&quot;</span>: <span class="hljs-number">4</span>});
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(weakMap.<span class="hljs-title function_">get</span>(obj2)); <span class="hljs-comment">// 2</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(weakMap.<span class="hljs-title function_">has</span>({})); <span class="hljs-comment">// return false even though empty object exists as key. Because the keys have different references</span>
+
+<span class="hljs-keyword">delete</span> obj2;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(weakMap.<span class="hljs-title function_">get</span>(obj2)); <span class="hljs-comment">// 2</span>
+weakMap.<span class="hljs-title function_">delete</span>(obj1)
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(weakMap.<span class="hljs-title function_">get</span>(obj1)); <span class="hljs-comment">//undefined</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="unicode" tabindex="-1">Unicode <a class="header-anchor" href="#unicode" aria-hidden="true">🔗</a></h3>
+<p>Prior to ES6, JavaScript strings are represented by 16-bit character encoding (UTF-16). Each character is represented by 16-bit sequence known as code unit. Since the character set is been expanded by Unicode, you will get unexpected results from UTF-16 encoded strings containing surrogate pairs(i.e, Since it is not sufficient to represent certain characters in just 16-bits, you need two 16-bit code units).</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;𠮷&#x27;</span>;
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(str.<span class="hljs-property">length</span>);             <span class="hljs-comment">// 2</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">charAt</span>(<span class="hljs-number">0</span>));        <span class="hljs-comment">// &quot;&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">charAt</span>(<span class="hljs-number">1</span>));        <span class="hljs-comment">// &quot;&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">0</span>));    <span class="hljs-comment">// 55362(1st code unit)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(text.<span class="hljs-title function_">charCodeAt</span>(<span class="hljs-number">1</span>));    <span class="hljs-comment">// 57271(2nd code unit)</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-regexp">/^.$/</span>.<span class="hljs-title function_">test</span>(str)); <span class="hljs-comment">// false, because length is 2</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\u20BB7); // 7!(wrong value)
+console.log(str === &#x27;</span>\uD842\uDFB7<span class="hljs-string">&#x27;); // true
+</span></code></pre>
+<p>ECMAScript 6 added full support for UTF-16 within strings and regular expressions. It introduces new Unicode literal form in strings and new RegExp u mode to handle code points, as well as new APIs(codePointAt, fromCodePoint) to process strings.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> str = <span class="hljs-string">&#x27;𠮷&#x27;</span>;
+
+<span class="hljs-comment">// new string form</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;\u{20BB7}&#x27;</span>); <span class="hljs-comment">// &quot;𠮷&quot;</span>
+
+<span class="hljs-comment">// new RegExp u mode</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&#x27;\u{20BB7}&#x27;</span>, <span class="hljs-string">&#x27;u&#x27;</span>));
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-regexp">/^.$/u</span>.<span class="hljs-title function_">test</span>(str)); <span class="hljs-comment">// true</span>
+
+<span class="hljs-comment">//API methods</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(str.<span class="hljs-title function_">codePointAt</span>(<span class="hljs-number">0</span>)); <span class="hljs-comment">// 134071</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(str.<span class="hljs-title function_">codePointAt</span>(<span class="hljs-number">1</span>)); <span class="hljs-comment">// 57271</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">String</span>.<span class="hljs-title function_">fromCodePoint</span>(<span class="hljs-number">134071</span>));  <span class="hljs-comment">// &quot;𠮷&quot;</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="symbols" tabindex="-1">Symbols <a class="header-anchor" href="#symbols" aria-hidden="true">🔗</a></h3>
+<p>Symbol is a new peculiar primitive data type of JavaScript, along with other primitive types such as string, number, boolean, null and undefined. The new symbol is created just by calling the Symbol function. i.e, Every time you call the Symbol function, you’ll get a new and completely unique value. You can also pass a parameter to Symbol(), which is useful for debugging purpose only.</p>
+<p>Even though equality checks on two symbols is always false, it will be true while comparing symbols with <code>.for</code> method due to global registry (i.e, Symbols.for('key') === Symbols.for('key'))</p>
+<p>These symbols are useful to uniquely identify properties or unique constants,</p>
+<pre><code class="language-js"><span class="hljs-comment">//1. Object properties</span>
+<span class="hljs-keyword">let</span> id = <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&quot;id&quot;</span>);
+<span class="hljs-keyword">let</span> user = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">40</span>,
+  [id]: <span class="hljs-number">111</span>
+};
+
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> user) {
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(key); <span class="hljs-comment">// name, age without symbols</span>
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(user)); <span class="hljs-comment">// {&quot;name&quot;:&quot;John&quot;, &quot;age&quot;: 40}</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(user)); <span class="hljs-comment">// [&quot;name&quot;, &quot;age&quot;]</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>( <span class="hljs-string">&quot;User Id: &quot;</span> + user[id] ); <span class="hljs-comment">// Direct access by the symbol works</span>
+
+<span class="hljs-comment">//2. Unique constants</span>
+<span class="hljs-keyword">const</span> logLevels = {
+  <span class="hljs-attr">DEBUG</span>: <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;debug&#x27;</span>),
+  <span class="hljs-attr">INFO</span>: <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;info&#x27;</span>),
+  <span class="hljs-attr">WARN</span>: <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;warn&#x27;</span>),
+  <span class="hljs-attr">ERROR</span>: <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;error&#x27;</span>),
+};
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(logLevels.<span class="hljs-property">DEBUG</span>, <span class="hljs-string">&#x27;debug message&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(logLevels.<span class="hljs-property">INFO</span>, <span class="hljs-string">&#x27;info message&#x27;</span>);
+
+<span class="hljs-comment">//3. Equality Checks</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;foo&#x27;</span>) === <span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;foo&#x27;</span>));  <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;foo&#x27;</span>) === <span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;foo&#x27;</span>));  <span class="hljs-comment">// true</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="proxies" tabindex="-1">Proxies <a class="header-anchor" href="#proxies" aria-hidden="true">🔗</a></h3>
+<p>The Proxy object is used to create a proxy for another object, which can intercept and redefine fundamental operations for that object such as property lookup, assignment, enumeration, function invocation etc. These are used in many libraries and some browser frameworks.</p>
+<p>The proxy object is created with two parameters with below syntax,</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> proxy = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Proxy</span>(target, handler)
+</code></pre>
+<ol>
+<li><strong>target:</strong> Object on which you want to proxy</li>
+<li><strong>handler:</strong> An object that defines which operations will be intercepted and how to redefine them.</li>
+</ol>
+<p>The property Lookup Behavior of a user proxied object will be as below,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> target = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">3</span>
+};
+
+<span class="hljs-keyword">const</span> handler = {
+  <span class="hljs-attr">get</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">target, prop</span>) {
+    <span class="hljs-keyword">return</span> prop <span class="hljs-keyword">in</span> target ?
+        target[prop] :
+        <span class="hljs-string">`<span class="hljs-subst">${prop}</span> does not exist`</span>;
+  }
+};
+
+<span class="hljs-keyword">const</span> user = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Proxy</span>(target, handler);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(user.<span class="hljs-property">name</span>); <span class="hljs-comment">// John</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(user.<span class="hljs-property">age</span>); <span class="hljs-comment">// John</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(user.<span class="hljs-property">gender</span>); <span class="hljs-comment">// gender does not exist</span>
+</code></pre>
+<p>These proxies also enforce value validations. Let's take an example with set handler,</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> ageValidator = {
+  <span class="hljs-attr">set</span>: <span class="hljs-keyword">function</span>(<span class="hljs-params">obj, prop, value</span>) {
+    <span class="hljs-keyword">if</span> (prop === <span class="hljs-string">&#x27;age&#x27;</span>) {
+      <span class="hljs-keyword">if</span> (!<span class="hljs-title class_">Number</span>.<span class="hljs-title function_">isInteger</span>(value)) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">TypeError</span>(<span class="hljs-string">&#x27;The age is not an integer&#x27;</span>);
+      }
+      <span class="hljs-keyword">if</span> (value &gt; <span class="hljs-number">200</span>) {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">RangeError</span>(<span class="hljs-string">&#x27;Invalid age&#x27;</span>);
+      }
+    }
+
+    obj[prop] = value; <span class="hljs-comment">// The default behavior to store the value</span>
+
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>; <span class="hljs-comment">// Indicate success</span>
+  }
+};
+
+<span class="hljs-keyword">const</span> person = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Proxy</span>({}, validator);
+
+person.<span class="hljs-property">age</span> = <span class="hljs-number">30</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(person.<span class="hljs-property">age</span>); <span class="hljs-comment">// 30</span>
+person.<span class="hljs-property">age</span> = <span class="hljs-string">&#x27;old&#x27;</span>;    <span class="hljs-comment">// Throws an exception</span>
+person.<span class="hljs-property">age</span> = <span class="hljs-number">200</span>;        <span class="hljs-comment">// Throws an exception</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="promises" tabindex="-1">Promises <a class="header-anchor" href="#promises" aria-hidden="true">🔗</a></h3>
+<p>A promise is an object which represent the eventual completion or failure of an asynchronous operation.</p>
+<p>It is in one of these states:</p>
+<p><strong>pending:</strong>  Represents initial state, neither fulfilled nor rejected.
+<strong>fulfilled:</strong> Indicates that the operation is completed successfully.
+<strong>rejected:</strong> Indicates that the operation is failed.</p>
+<p>A promise is said to be settled if it is either fulfilled or rejected, but not pending. The instance methods <code>promise.then()</code>, <code>promise.catch()</code>, and <code>promise.finally()</code> are used to associate further action with a promise that becomes settled. And these methods also return a newly generated promise object, which can optionally be used for chaining.</p>
+<p><img src="../../inc/img/javascript/promises.png" alt="Screenshot"></p>
+<p>The promise chaining structure would be as below,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> promise = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">resolve, reject</span>) {
+  <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">1</span>), <span class="hljs-number">1000</span>);
+});
+
+promise.<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">result</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result); <span class="hljs-comment">// 1</span>
+
+    <span class="hljs-keyword">return</span> result * <span class="hljs-number">2</span>;
+  }).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">result</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result); <span class="hljs-comment">// 2</span>
+
+    <span class="hljs-keyword">return</span> result * <span class="hljs-number">3</span>;
+  }).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">result</span>) {
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result); <span class="hljs-comment">// 6</span>
+
+    <span class="hljs-keyword">return</span> result * <span class="hljs-number">4</span>;
+  }).<span class="hljs-title function_">catch</span>(<span class="hljs-keyword">function</span>(<span class="hljs-params">error</span>){
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(error);
+  });
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="reflect" tabindex="-1">Reflect <a class="header-anchor" href="#reflect" aria-hidden="true">🔗</a></h3>
+<p>Reflection is the ability of a code to inspect and manipulate variables, properties, and methods of objects at runtime. JavaScript already provides <code>Object.keys(), Object.getOwnPropertyDescriptor(), and Array.isArray()</code> methods as classic refection features. In ES6, it has been officially provided through Reflect object. Reflect is a new global object which is used to call methods, construct objects, get and set properties, manipulate and extend properties.</p>
+<p>Unlike most global objects, Reflect is not a constructor. i.e, You cannot use Reflect with the new operator or invoke the Reflect as a function. It is similar to Math and JSON objects in which all the methods of this object are static.</p>
+<p>Let's see the usage of Reflect API with below examples,</p>
+<ol>
+<li><strong>Creating objects using Reflect.construct();</strong></li>
+</ol>
+<p>The <code>construct()</code> method behaves like the regular new operator, but as a function. It is equivalent to calling new target(...args) with an option to specify a different prototype. The syntax looks like as below,</p>
+<pre><code class="language-js"><span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">construct</span>(target, args [, newTarget]);
+</code></pre>
+<p>The method has below parameters,</p>
+<ol>
+<li>target: The target function to call.</li>
+<li>argumentsList: An array-like object specifying the arguments with which target should be called.</li>
+<li>newTarget: The constructor whose prototype should be used. This is an optional parameter. i.e, If newTarget is not present, its value defaults to target.</li>
+</ol>
+<p><strong>Example:</strong></p>
+<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">firstName, lastName</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">firstName</span> = firstName;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">lastName</span> = lastName;
+  }
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">fullName</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.firstName}</span> <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.lastName}</span>`</span>;
+  }
+};
+
+<span class="hljs-keyword">let</span> args = [<span class="hljs-string">&#x27;John&#x27;</span>, <span class="hljs-string">&#x27;Emma&#x27;</span>];
+
+<span class="hljs-keyword">let</span> john = <span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">construct</span>(
+  <span class="hljs-title class_">User</span>,
+  args
+);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(john <span class="hljs-keyword">instanceof</span> <span class="hljs-title class_">User</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(john.<span class="hljs-property">fullName</span>); <span class="hljs-comment">// John Doe</span>
+</code></pre>
+<ol start="2">
+<li><strong>Calling a function using Reflect.apply():</strong>
+Prior to ES6, you can invoke a function with a specified <code>this</code> value and arguments by using the <code>Function.prototype.apply()</code> method.</li>
+</ol>
+<p>For example, you can call <code>max()</code> static method of Math object,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> max = <span class="hljs-title class_">Function</span>.<span class="hljs-property"><span class="hljs-keyword">prototype</span></span>.<span class="hljs-property">apply</span>.<span class="hljs-title function_">call</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-property">max</span>, <span class="hljs-title class_">Math</span>, [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>]);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(max);
+</code></pre>
+<p>In ES6, Reflect.apply() provides the same features as Function.prototype.apply() but in a less verbose syntax.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> max = <span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">apply</span>(<span class="hljs-title class_">Math</span>.<span class="hljs-property">max</span>, <span class="hljs-title class_">Math</span>, [<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, <span class="hljs-number">300</span>]);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(max);
+</code></pre>
+<ol start="3">
+<li><strong>Defining a property using Reflect.defineProperty():</strong>
+The <code>Reflect.defineProperty()</code> method is similar to <code>Object.defineProperty()</code> but it returns a Boolean value indicating whether or not the property was defined successfully instead of throwing an exception.</li>
+</ol>
+<p>The syntax of this method looks like below,</p>
+<pre><code class="language-js"><span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">defineProperty</span>(target, propertyName, propertyDescriptor)
+</code></pre>
+<p>Let's define the age property on user object,</p>
+<pre><code class="language-js"><span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">firstName, lastName</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">firstName</span> = firstName;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">lastName</span> = lastName;
+  }
+  <span class="hljs-keyword">get</span> <span class="hljs-title function_">fullName</span>() {
+    <span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.firstName}</span> <span class="hljs-subst">${<span class="hljs-variable language_">this</span>.lastName}</span>`</span>;
+  }
+};
+
+<span class="hljs-keyword">let</span> john = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>(<span class="hljs-string">&#x27;John&#x27;</span>, <span class="hljs-string">&#x27;Resig&#x27;</span>);
+
+<span class="hljs-keyword">if</span> (<span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">defineProperty</span>(john, <span class="hljs-string">&#x27;age&#x27;</span>, {
+    <span class="hljs-attr">writable</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">configurable</span>: <span class="hljs-literal">true</span>,
+    <span class="hljs-attr">enumerable</span>: <span class="hljs-literal">false</span>,
+    <span class="hljs-attr">value</span>: <span class="hljs-number">33</span>,
+  })) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(john.<span class="hljs-property">age</span>);
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Cannot define the age property on the user object.&#x27;</span>);
+}
+</code></pre>
+<ol start="4">
+<li><strong>Delete property using Reflect.deleteProperty():</strong></li>
+</ol>
+<p>The <code>Reflect.deleteProperty()</code> method is used to delete properties like the delete operator but as a function. It returns Boolean value indicating whether or not the property was successfully deleted.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> user = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;John&#x27;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">33</span>
+};
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">deleteProperty</span>(user, <span class="hljs-string">&#x27;age&#x27;</span>)); <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(user.<span class="hljs-property">age</span>); <span class="hljs-comment">// undefined</span>
+</code></pre>
+<ol start="5">
+<li><strong>Get property of an object using Reflect.get():</strong>
+The <code>Reflect.get</code> method is used to get a property on an object like the property accessor syntax but as a function.</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> user = {
+  <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;John&#x27;</span>,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">33</span>
+};
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Reflect</span>.<span class="hljs-title function_">get</span>(user, <span class="hljs-string">&#x27;age&#x27;</span>)); <span class="hljs-comment">// 33</span>
+</code></pre>
+<ol start="6">
+<li><strong>:</strong></li>
+</ol>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="binary-and-octal" tabindex="-1">Binary and Octal <a class="header-anchor" href="#binary-and-octal" aria-hidden="true">🔗</a></h3>
+<p>ES5 provided numeric literals in octal (prefix 0), decimal (no prefix), and hexadecimal ( 0x) representation. ES6 added support for binary literals and improvements on octal literals.</p>
+<p><strong>1. Binary literals:</strong></p>
+<p>Prior to ES5, JavaScript didn’t provide any literal form of binary numbers. So you need to use a binary string with the help of <code>parseInt()</code></p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> num = <span class="hljs-built_in">parseInt</span>(<span class="hljs-string">&#x27;110&#x27;</span>,<span class="hljs-number">2</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); <span class="hljs-comment">// 6</span>
+</code></pre>
+<p>Whereas ES6 added support for binary literals using the <strong>0b</strong> prefix followed by a sequence of binary numbers (i.e, 0 and 1).</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> num = <span class="hljs-number">0b110</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); <span class="hljs-comment">// 6</span>
+</code></pre>
+<p><strong>2. Octal literals:</strong></p>
+<p>In ES5, to represent an octal literal, you use the zero prefix (0) followed by a sequence of octal digits (from 0 to 7).</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> num = <span class="hljs-number">055</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); <span class="hljs-comment">// 45</span>
+
+<span class="hljs-keyword">let</span> invalidNum = <span class="hljs-number">058</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(invalidNum); <span class="hljs-comment">// treated as decimal 58</span>
+</code></pre>
+<p>Whereas ES6 represents the octal literal by using the prefix <strong>0o</strong> followed by a sequence of octal digits from 0 through 7.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> num = <span class="hljs-number">055</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(num); <span class="hljs-comment">// 45</span>
+
+<span class="hljs-keyword">const</span> invalidNum = <span class="hljs-number">028</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(invalidNum); <span class="hljs-comment">// treated as decimal 28</span>
+</code></pre>
+<p>Remember If you use an invalid number in the octal literal, JavaScript will throw a SyntaxError as below,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> invalidNum = <span class="hljs-number">028</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(invalidNum); <span class="hljs-comment">// SyntaxError</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="proper-tail-calls" tabindex="-1">Proper Tail Calls <a class="header-anchor" href="#proper-tail-calls" aria-hidden="true">🔗</a></h3>
+</li>
+</ol>
+<p><strong>Proper tail call(PTC)</strong> is a technique where the program or code will not create additional stack frames for a recursion when the function call is a tail call.</p>
+<p>For example, the below classic or head recursion of factorial function relies on stack for each step. Each step need to be processed upto <code>n * factorial(n - 1)</code></p>
+<pre><code class="language-js"> <span class="hljs-keyword">function</span> <span class="hljs-title function_">factorial</span>(<span class="hljs-params">n</span>) {
+   <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) {
+     <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>
+   }
+   <span class="hljs-keyword">return</span> n * <span class="hljs-title function_">factorial</span>(n - <span class="hljs-number">1</span>)
+ }
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">factorial</span>(<span class="hljs-number">5</span>)); <span class="hljs-comment">//120</span>
+</code></pre>
+<p>But if you use Tail recursion functions, they keep passing all the necessary data it needs down the recursion without relying on the stack.</p>
+<pre><code class="language-js"> <span class="hljs-keyword">function</span> <span class="hljs-title function_">factorial</span>(<span class="hljs-params">n, acc = <span class="hljs-number">1</span></span>) {
+   <span class="hljs-keyword">if</span> (n === <span class="hljs-number">0</span>) {
+     <span class="hljs-keyword">return</span> acc
+   }
+   <span class="hljs-keyword">return</span> <span class="hljs-title function_">factorial</span>(n - <span class="hljs-number">1</span>, n * acc)
+ }
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">factorial</span>(<span class="hljs-number">5</span>)); <span class="hljs-comment">//120</span>
+</code></pre>
+<p>The above pattern returns the same output as first one. But the accumulator keeps track of total as an argument without using stack memory on recursive calls.</p>
+<p>The browsers which supports PTC do not generate stack overflow instead shows Infinity with below inputs,</p>
+<pre><code class="language-js"> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">factorial</span>(<span class="hljs-number">10</span>));
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">factorial</span>(<span class="hljs-number">100</span>));
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">factorial</span>(<span class="hljs-number">1000</span>));
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">factorial</span>(<span class="hljs-number">10000</span>));
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<ol start="24">
+<li>
+<h3 id="array-find-methods" tabindex="-1">Array find methods <a class="header-anchor" href="#array-find-methods" aria-hidden="true">🔗</a></h3>
+<p>ES6 introduced few array methods and two of them are <code>Array.find()</code> and <code>Array.findIndex()</code>.</p>
+</li>
+</ol>
+<p><strong>Array.find()</strong>
+This method returns the value of the first element in an array that satisfies the given test. Let's take an example of array with all even elements except one element and use <code>find</code> method to find the odd element.</p>
+<pre><code>```js
+let arr = [2, 4, 5, 6, 8, 10];
+
+function isOdd(i) {
+  return i % 2 !== 0;
+}
+
+console.log(arr.find(isOdd)); // 5
+```
+</code></pre>
+<p><strong>Array.findIndex()</strong></p>
+<p>This method returns the index of the first element in the array that satisfies the given test. Let's take an example of array with all even elements except one element and use <code>findIndex</code> method to find the index of odd element.</p>
+<pre><code>```js
+let arr = [2, 4, 5, 6, 8, 10];
+
+function isOdd(i) {
+  return i % 2 !== 0;
+}
+
+console.log(arr.findIndex(isOdd)); //2
+```
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<h2 id="es2016-or-es7" tabindex="-1">ES2016 Or ES7 <a class="header-anchor" href="#es2016-or-es7" aria-hidden="true">🔗</a></h2>
+<p>ES2015/ES6 introduced a huge set of new features. But ECMAScript 2016 Or ES7 introduced only two new features:</p>
+<ol>
+<li>
+<p>Array.prototype.includes()</p>
+</li>
+<li>
+<p>Exponentiation operator</p>
+</li>
+<li>
+<h3 id="array-includes" tabindex="-1">Array Includes <a class="header-anchor" href="#array-includes" aria-hidden="true">🔗</a></h3>
+</li>
+</ol>
+<p>Prior to ES7, you have to use <code>indexOf</code> method and compare the result with '-1' to check whether an array element contains particular element or not.</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> array = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>];
+ <span class="hljs-keyword">if</span>(array.<span class="hljs-title function_">indexOf</span>(<span class="hljs-number">5</span>) &gt; -<span class="hljs-number">1</span> ){
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&quot;Found an element&quot;</span>);
+ }
+</code></pre>
+<p>Whereas in ES7, <code>array.prototype.includes()</code> method is introduced as a direct approach to determine whether an array includes a certain value among its entries or not.</p>
+<pre><code>```js
+const array = [1,2,3,4,5,6];
+if(array.includes(5)){
+  console.log(&quot;Found an element&quot;);
+}
+```
+</code></pre>
+<p>In addition to this, <code>Array.prototype.includes()</code> handles NaN and Undefined values better than <code>Array.prototype.indexOf()</code> methods. i.e, If the array contains NaN and Undefined values then <code>indexOf()</code> does not return correct index while searching for NaN and Undefined.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-title class_">NaN</span>, ,];
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(numbers.<span class="hljs-title function_">indexOf</span>(<span class="hljs-title class_">NaN</span>)); <span class="hljs-comment">// -1</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(numbers.<span class="hljs-title function_">indexOf</span>(<span class="hljs-literal">undefined</span>)); <span class="hljs-comment">// -1</span>
+</code></pre>
+<p>On the otherhand, <code>includes</code> method is able to find these elements</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> numbers = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-title class_">NaN</span>, ,];
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(numbers.<span class="hljs-title function_">includes</span>(<span class="hljs-title class_">NaN</span>)); <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(numbers.<span class="hljs-title function_">includes</span>(<span class="hljs-literal">undefined</span>)); <span class="hljs-comment">// true</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<ol start="2">
+<li>
+<h3 id="exponentiation-operator" tabindex="-1">Exponentiation Operator <a class="header-anchor" href="#exponentiation-operator" aria-hidden="true">🔗</a></h3>
+<p>The older versions of javascript uses <code>Math.pow</code> function to find the exponentiation of given numbers. ECMAScript 2016 introduced the exponentiation operator, **(similar to other languages such as Python or F#) to calculate the power computation in a clear representation using infix notation.</p>
+<pre><code class="language-js"><span class="hljs-comment">//Prior ES7</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">cube</span> = x =&gt; <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">pow</span>(x, <span class="hljs-number">3</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">cube</span>(<span class="hljs-number">3</span>)); <span class="hljs-comment">// 27</span>
+
+<span class="hljs-comment">//Using ES7</span>
+<span class="hljs-keyword">const</span> <span class="hljs-title function_">cube1</span> = x =&gt; x ** <span class="hljs-number">3</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">cube1</span>(<span class="hljs-number">3</span>)); <span class="hljs-comment">// 27</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+</ol>
+<h2 id="es2017-or-es8" tabindex="-1">ES2017 Or ES8 <a class="header-anchor" href="#es2017-or-es8" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<h3 id="async-functions" tabindex="-1">Async functions <a class="header-anchor" href="#async-functions" aria-hidden="true">🔗</a></h3>
+</li>
+</ol>
+<p>In ES6, Promises were introduced to solve the famous callback hell problem. When a series of nested asynchronous functions need to be executed in order, it leads to a callback hell</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">task</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">task1</span>(<span class="hljs-function">(<span class="hljs-params">response1</span>) =&gt;</span> {
+    <span class="hljs-title function_">task2</span>(response1, <span class="hljs-function">(<span class="hljs-params">response2</span>) =&gt;</span> {
+      <span class="hljs-title function_">task3</span>(response2, <span class="hljs-function">(<span class="hljs-params">response3</span>) =&gt;</span> {
+        <span class="hljs-comment">// etc...</span>
+      };
+    });
+  });
+}
+</code></pre>
+<p>But the Chained Promises creates complex flow for asynchronous code.</p>
+<p>Async functions were introduced as a combination of promises and generators to give us the possibility of writing asynchronous in a synchronous manner. i.e, This function is going to be declared with the <code>async</code> keyword which enable asynchronous, promise-based behavior to be written in a cleaner style by avoiding promise chains.  These functions can contain zero or more <code>await</code> expressions.</p>
+<p>Let's take a below async function example,</p>
+<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">logger</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">let</span> data = <span class="hljs-keyword">await</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://someapi.com/users&#x27;</span>); <span class="hljs-comment">// pause until fetch returns</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data)
+}
+<span class="hljs-title function_">logger</span>();
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<ol start="2">
+<li>
+<h3 id="object-values" tabindex="-1">Object values <a class="header-anchor" href="#object-values" aria-hidden="true">🔗</a></h3>
+<p>Similar to Object.keys which iterate over JavaScript object’s keys, Object.values will do the same thing on values. i.e, The Object.values() method is introduced to returns an array of a given object's own enumerable property values in the same order as <code>for...in</code> loop.</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> countries = {
+   <span class="hljs-attr">IN</span>: <span class="hljs-string">&#x27;India&#x27;</span>,
+   <span class="hljs-attr">SG</span>: <span class="hljs-string">&#x27;Singapore&#x27;</span>,
+ }
+ <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(countries) <span class="hljs-comment">// [&#x27;India&#x27;, &#x27;Singapore&#x27;]</span>
+</code></pre>
+<p>By the way, non-object argument will be coerced to an object</p>
+</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>([<span class="hljs-string">&#x27;India&#x27;</span>, <span class="hljs-string">&#x27;Singapore&#x27;</span>])); <span class="hljs-comment">// [&#x27;India&#x27;, &#x27;Singapore&#x27;]</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">values</span>(<span class="hljs-string">&#x27;India&#x27;</span>)); <span class="hljs-comment">// [&#x27;I&#x27;, &#x27;n&#x27;, &#x27;d&#x27;, &#x27;i&#x27;, &#x27;a&#x27;]</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<ol start="3">
+<li>
+<h3 id="object-entries" tabindex="-1">Object entries <a class="header-anchor" href="#object-entries" aria-hidden="true">🔗</a></h3>
+<p>The <code>Object.entries()</code> method is introduced to returns an array of a given object's own enumerable string-keyed property [key, value] pairsin the same order as <code>for...in</code> loop.</p>
+<pre><code class="language-js">   <span class="hljs-keyword">const</span> countries = {
+     <span class="hljs-attr">IN</span>: <span class="hljs-string">&#x27;India&#x27;</span>,
+     <span class="hljs-attr">SG</span>: <span class="hljs-string">&#x27;Singapore&#x27;</span>,
+   }
+   <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(countries) <span class="hljs-comment">// [[&quot;IN&quot;, &quot;India&quot;], [&quot;SG&quot;, &quot;Singapore&quot;]]</span>
+</code></pre>
+<p>By the way, non-object argument will be coerced to an object</p>
+<pre><code class="language-js">   <span class="hljs-keyword">const</span> countriesArr = [<span class="hljs-string">&#x27;India&#x27;</span>, <span class="hljs-string">&#x27;Singapore&#x27;</span>];
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(countriesArr)); <span class="hljs-comment">// [ [&#x27;0&#x27;, &#x27;India&#x27;], [&#x27;1&#x27;, &#x27;Singapore&#x27;]]</span>
+
+   <span class="hljs-keyword">const</span> country = <span class="hljs-string">&#x27;India&#x27;</span>;
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(country)); <span class="hljs-comment">// [[&quot;0&quot;, &quot;I&quot;], [&quot;1&quot;, &quot;n&quot;], [&quot;2&quot;, &quot;d&quot;], [&quot;3&quot;, &quot;i&quot;], [&quot;4&quot;, &quot;a&quot;]]</span>
+
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(<span class="hljs-number">100</span>)); <span class="hljs-comment">// [], an empty array for any primitive type because it won&#x27;t have any own properties</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="object-property-descriptors" tabindex="-1">Object property descriptors <a class="header-anchor" href="#object-property-descriptors" aria-hidden="true">🔗</a></h3>
+<p>Property descriptors describe the attributes of a property. The <code>Object.getOwnPropertyDescriptors()</code> method returns all own property descriptors of a given object.</p>
+<p>It provides the below attributes,</p>
+<ol>
+<li><strong>value:</strong> The value associated with the property (data descriptors only).</li>
+<li><strong>writable:</strong> true if and only if the value associated with the property may be changed</li>
+<li><strong>get:</strong> A function which serves as a getter for the property.</li>
+<li><strong>set:</strong> A function which serves as a setter for the property.</li>
+<li><strong>configurable:</strong> true if and only if the type of this property descriptor may be changed or deleted.</li>
+<li><strong>enumerable:</strong> true if and only if this property shows up during enumeration of the property.</li>
+</ol>
+<p>The usage of finding property descriptors for any property seems to be as below,</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> profile = {
+   <span class="hljs-attr">age</span>: <span class="hljs-number">42</span>
+ };
+
+ <span class="hljs-keyword">const</span> descriptors = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">getOwnPropertyDescriptors</span>(profile);
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(descriptors); <span class="hljs-comment">//  {age: {configurable: true, enumerable: true, writable: true }}</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="string-padding" tabindex="-1">String padding <a class="header-anchor" href="#string-padding" aria-hidden="true">🔗</a></h3>
+<p>Some strings and numbers(money, date, timers etc) need to be represented in a particular format. Both <code>padStart() &amp; padEnd()</code> methods introduced to pad a string with another string until the resulting string reaches the supplied length.</p>
+<ol>
+<li><strong>padStart():</strong> Using this method, padding is applied to the left or beginning side of the string.</li>
+</ol>
+<p>For example, you may want to show only the last four digits of credit card number for security reasons,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> cardNumber = <span class="hljs-string">&#x27;01234567891234&#x27;</span>;
+<span class="hljs-keyword">const</span> lastFourDigits = cardNumber.<span class="hljs-title function_">slice</span>(-<span class="hljs-number">4</span>);
+<span class="hljs-keyword">const</span> maskedCardNumber = lastFourDigits.<span class="hljs-title function_">padStart</span>(cardNumber.<span class="hljs-property">length</span>, <span class="hljs-string">&#x27;*&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(maskedCardNumber); <span class="hljs-comment">// expected output: &quot;**********1234&quot;</span>
+</code></pre>
+<ol start="2">
+<li><strong>padEnd():</strong> Using this method, padding is applied to the right or ending side of the string.</li>
+</ol>
+<p>For example, the profile information padded for label and values as below</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> label1 = <span class="hljs-string">&quot;Name&quot;</span>;
+<span class="hljs-keyword">const</span> label2 = <span class="hljs-string">&quot;Phone Number&quot;</span>;
+<span class="hljs-keyword">const</span> value1 = <span class="hljs-string">&quot;John&quot;</span>
+<span class="hljs-keyword">const</span> value2 = <span class="hljs-string">&quot;(222)-333-3456&quot;</span>;
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>((label1 + <span class="hljs-string">&#x27;: &#x27;</span>).<span class="hljs-title function_">padEnd</span>(<span class="hljs-number">20</span>, <span class="hljs-string">&#x27; &#x27;</span>) + value1); <span class="hljs-comment">// Name:                     John</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(label2 + <span class="hljs-string">&quot;: &quot;</span> + value2); <span class="hljs-comment">// Phone Number: (222)-333-3456</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="shared-memory-and-atomics" tabindex="-1">Shared memory and atomics <a class="header-anchor" href="#shared-memory-and-atomics" aria-hidden="true">🔗</a></h3>
+<p>The Atomics is a global object which provides atomic operations to be performed as static methods. They are used with SharedArrayBuffer(fixed-length binary data buffer) objects. The main use cases of these methods are,</p>
+<ol>
+<li>
+<p><strong>atomic operations:</strong> When memory is shared, multiple threads can read and write the same data in memory. So there would be a chance of loss of data. But atomic operations make sure that predictable values are written and read, that operations are finished before the next operation starts and that operations are not interrupted.</p>
+<p>It provides static methods such as add, or, and, xor, load, store, isLockFree etc as demonstrated below.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> sharedMemory = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SharedArrayBuffer</span>(<span class="hljs-number">1024</span>);
+<span class="hljs-keyword">const</span> sharedArray = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Uint8Array</span>(sharedMemory);
+sharedArray[<span class="hljs-number">0</span>] = <span class="hljs-number">10</span>;
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">add</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">20</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>)); <span class="hljs-comment">// 30</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">sub</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>)); <span class="hljs-comment">// 20</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">and</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>));  <span class="hljs-comment">// 4</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">or</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>));  <span class="hljs-comment">// 5</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">xor</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>)); <span class="hljs-comment">// 4</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">store</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">compareExchange</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">5</span>, <span class="hljs-number">10</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>)); <span class="hljs-comment">// 10</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">exchange</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">load</span>(sharedArray, <span class="hljs-number">0</span>)); <span class="hljs-comment">//10</span>
+
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">isLockFree</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// true</span>
+</code></pre>
+</li>
+<li>
+<p><strong>waiting to be notified:</strong>
+Both <code>wait()</code> and <code>notify()</code> methods provides ways for waiting until a certain condition becomes true and are typically used as blocking constructs.</p>
+<p>Let's demonstrate this functionality with reading and writing threads.</p>
+<p>First define a shared memory and array</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> sharedMemory = <span class="hljs-keyword">new</span> <span class="hljs-title class_">SharedArrayBuffer</span>(<span class="hljs-number">1024</span>);
+<span class="hljs-keyword">const</span> sharedArray = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Int32Array</span>(sharedMemory);
+</code></pre>
+<p>A reading thread is sleeping and waiting on location 0 which is expected to be 10. You can observe a different value after the value overwritten by a writing thread.</p>
+<pre><code class="language-js"><span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">wait</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">10</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sharedArray[<span class="hljs-number">0</span>]); <span class="hljs-comment">// 100</span>
+</code></pre>
+<p>Now a writing thread stores a new value(e.g, 100) and notifies the waiting thread,</p>
+<pre><code class="language-js"><span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">store</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">100</span>);
+<span class="hljs-title class_">Atomics</span>.<span class="hljs-title function_">notify</span>(sharedArray, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>);
+</code></pre>
+</li>
+</ol>
+</li>
+<li>
+<h3 id="trailing-commas" tabindex="-1">Trailing commas <a class="header-anchor" href="#trailing-commas" aria-hidden="true">🔗</a></h3>
+<p>Trailing commas are  allowed in parameter definitions and function calls</p>
+<pre><code class="language-js"> <span class="hljs-keyword">function</span> <span class="hljs-title function_">func</span>(<span class="hljs-params">a,b,</span>) { <span class="hljs-comment">// declaration</span>
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a, b);
+ }
+<span class="hljs-title function_">func</span>(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,); <span class="hljs-comment">// invocation</span>
+</code></pre>
+<p>But if the function parameter definition or function call only contains a comma, a syntax error will be thrown</p>
+<pre><code class="language-js"> <span class="hljs-keyword">function</span> <span class="hljs-title function_">func1</span>(<span class="hljs-params">,</span>) {  <span class="hljs-comment">// SyntaxError: missing formal parameter</span>
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;no args&#x27;</span>);
+ };
+<span class="hljs-title function_">func1</span>(,); <span class="hljs-comment">// SyntaxError: expected expression, got &#x27;,&#x27;</span>
+</code></pre>
+<p><strong>Note:</strong> Trailing commas are not allowed in Rest Parameters and JSON.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+</ol>
+<h2 id="es2018-or-es9" tabindex="-1">ES2018 Or ES9 <a class="header-anchor" href="#es2018-or-es9" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<h3 id="async-iterators" tabindex="-1">Async iterators <a class="header-anchor" href="#async-iterators" aria-hidden="true">🔗</a></h3>
+<p>ECMAScript 6 provides built-in support for synchronously iterating over data using iterators. Both strings and collections objects such as Set, Map, and Array come with a Symbol.iterator property which makes them iterable.</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> arr = [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>];
+ <span class="hljs-keyword">const</span> syncIterator = arr[<span class="hljs-title class_">Symbol</span>.<span class="hljs-property">iterator</span>]();
+
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(syncIterator.<span class="hljs-title function_">next</span>()); <span class="hljs-comment">// {value: a, done: false}</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(syncIterator.<span class="hljs-title function_">next</span>()); <span class="hljs-comment">// {value: b, done: false}</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(syncIterator.<span class="hljs-title function_">next</span>()); <span class="hljs-comment">// {value: c, done: false}</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(syncIterator.<span class="hljs-title function_">next</span>()); <span class="hljs-comment">// {value: d, done: false}</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(syncIterator.<span class="hljs-title function_">next</span>()); <span class="hljs-comment">// {value: undefined, done: true}</span>
+</code></pre>
+<p>But these iterators are only suitable for representing synchronous data sources.</p>
+<p>In order to access asynchronous data sources, ES2018 introduced the AsyncIterator interface, an asynchronous iteration statement (for-await-of), and async generator functions.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="object-rest-and-spread-operators" tabindex="-1">Object rest and spread operators <a class="header-anchor" href="#object-rest-and-spread-operators" aria-hidden="true">🔗</a></h3>
+<p>ES2015 or ES6 introduced both rest parameters and spread operators to convert arguments to array and vice versa using three-dot(...) notation.</p>
+<ol>
+<li>
+<p>Rest parameters can be used to convert function arguments to an array</p>
+<pre><code class="language-js"> <span class="hljs-keyword">function</span> <span class="hljs-title function_">myfunc</span>(<span class="hljs-params">p1, p2, ...p3</span>) {
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(p1, p2, p3); <span class="hljs-comment">// 1, 2, [3, 4, 5, 6]</span>
+ }
+<span class="hljs-title function_">myfunc</span>(<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>);
+</code></pre>
+</li>
+<li>
+<p>The spread operator works in the opposite way by converting an array into separate arguments in order to pass to a function</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> myArray = [<span class="hljs-number">10</span>, <span class="hljs-number">5</span>, <span class="hljs-number">25</span>, -<span class="hljs-number">100</span>, <span class="hljs-number">200</span>, -<span class="hljs-number">200</span>];
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>( <span class="hljs-title class_">Math</span>.<span class="hljs-title function_">max</span>(...myArray) ); <span class="hljs-comment">// 200</span>
+</code></pre>
+</li>
+</ol>
+<p>ES2018 enables this rest/spread behavior for objects as well.</p>
+<ol>
+<li>
+<p>You can pass object to a function</p>
+<pre><code class="language-js"> <span class="hljs-keyword">function</span> <span class="hljs-title function_">myfunc1</span>(<span class="hljs-params">{ a, ...x }</span>) {
+   <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(a, x); <span class="hljs-comment">// 1, { b: 2, c: 3, d:4 }</span>
+ }
+ <span class="hljs-title function_">myfunc1</span>({
+   <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>,
+   <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>,
+   <span class="hljs-attr">c</span>: <span class="hljs-number">3</span>,
+   <span class="hljs-attr">d</span>: <span class="hljs-number">4</span>
+ });
+</code></pre>
+</li>
+<li>
+<p>The spread operator can be used within other objects</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> myObject = { <span class="hljs-attr">a</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">b</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">c</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">d</span>:<span class="hljs-number">4</span> };
+<span class="hljs-keyword">const</span> myNewObject = { ...myObject, <span class="hljs-attr">e</span>: <span class="hljs-number">5</span> }; <span class="hljs-comment">// { a: 1, b: 2, c: 3, d: 4, e: 5 }</span>
+</code></pre>
+</li>
+</ol>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="promise-finally" tabindex="-1">Promise finally <a class="header-anchor" href="#promise-finally" aria-hidden="true">🔗</a></h3>
+<p>Sometimes you may need to avoid duplicate code in the then() and catch() methods.</p>
+<pre><code class="language-js">myPromise
+   .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> {
+     <span class="hljs-comment">// process the result and then clean up the resources</span>
+   })
+   .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {
+     <span class="hljs-comment">// handle the error and then clean up the resources</span>
+   });
+</code></pre>
+<p>The <code>finally()</code> method is useful if you want to do some processing or resource cleanup once the promise is settled(i.e either fulfilled or rejected).</p>
+<p>Let's take a below example to hide the loading spinner after the data is fetched and processed.</p>
+<pre><code class="language-js">  <span class="hljs-keyword">let</span> isLoading = <span class="hljs-literal">true</span>;
+  <span class="hljs-title function_">fetch</span>(<span class="hljs-string">&#x27;http://somesite.com/users&#x27;</span>)
+     .<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> data.<span class="hljs-title function_">json</span>())
+     .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">error</span>(err))
+     .<span class="hljs-title function_">finally</span>(<span class="hljs-function">() =&gt;</span> {
+       isLoading = <span class="hljs-literal">false</span>;
+       <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Finished loading!!&#x27;</span>);
+     })
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+</ol>
+<h2 id="es2019-or-es10" tabindex="-1">ES2019 Or ES10 <a class="header-anchor" href="#es2019-or-es10" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<h3 id="array-flat-and-flatmap" tabindex="-1">Array flat and flatMap <a class="header-anchor" href="#array-flat-and-flatmap" aria-hidden="true">🔗</a></h3>
+<p>Prior to ES2019, you need to use <code>reduce() or concat()</code> methods to get a flat array.</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">flatten</span>(<span class="hljs-params">arr</span>) {
+  <span class="hljs-keyword">const</span> flat = [].<span class="hljs-title function_">concat</span>(...arr);
+  <span class="hljs-keyword">return</span> flat.<span class="hljs-title function_">some</span>(<span class="hljs-title class_">Array</span>.<span class="hljs-property">isArray</span>) ? <span class="hljs-title function_">flatten</span>(flat) : flat;
+}
+<span class="hljs-title function_">flatten</span>([ [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>], [<span class="hljs-string">&#x27;one&#x27;</span>, <span class="hljs-string">&#x27;two&#x27;</span>, <span class="hljs-string">&#x27;three&#x27;</span>, [<span class="hljs-number">22</span>, <span class="hljs-number">33</span>] ], [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>] ]);
+</code></pre>
+<p>In ES2019, the <code>flat()</code> method is introduced to 'flattens' the nested arrays into the top-level array. The functionality of this method is similar to Lodash's <code>_.flattenDepth()</code> function. This method accepts an optional argument that specifies the number of levels a nested array should be flattened and the default nested level is 1.
+<strong>Note:</strong> If there are any empty slots in the array, they will be discarded.</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> numberArray = [[<span class="hljs-number">1</span>, <span class="hljs-number">2</span>], [[<span class="hljs-number">3</span>], <span class="hljs-number">4</span>], [<span class="hljs-number">5</span>, <span class="hljs-number">6</span>]];
+ <span class="hljs-keyword">const</span> charArray = [<span class="hljs-string">&#x27;a&#x27;</span>, , <span class="hljs-string">&#x27;b&#x27;</span>, , , [<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;d&#x27;</span>], <span class="hljs-string">&#x27;e&#x27;</span>];
+ <span class="hljs-keyword">const</span> flattenedArrOneLevel = numberArray.<span class="hljs-title function_">flat</span>(<span class="hljs-number">1</span>);
+ <span class="hljs-keyword">const</span> flattenedArrTwoLevel = numberArray.<span class="hljs-title function_">flat</span>(<span class="hljs-number">2</span>);
+ <span class="hljs-keyword">const</span> flattenedCharArrOneLevel = charArray.<span class="hljs-title function_">flat</span>(<span class="hljs-number">1</span>);
+
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(flattenedArrOneLevel); <span class="hljs-comment">// [1, 2, [3], 4, 5, 6]</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(flattenedArrTwoLevel); <span class="hljs-comment">// [1, 2, 3, 4, 5, 6]</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(flattenedCharArrOneLevel); <span class="hljs-comment">// [&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;, &#x27;d&#x27;, &#x27;e&#x27;]</span>
+</code></pre>
+<p>Whereas, <strong>flatMap()</strong> method combines <code>map()</code> and <code>flat()</code> into one method.  It first creates a new array with the return value of a given function and then concatenates all sub-array elements of the array.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> numberArray1 = [[<span class="hljs-number">1</span>], [<span class="hljs-number">2</span>], [<span class="hljs-number">3</span>], [<span class="hljs-number">4</span>], [<span class="hljs-number">5</span>]];
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(numberArray1.<span class="hljs-title function_">flatMap</span>(<span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> [value * <span class="hljs-number">10</span>])); <span class="hljs-comment">// [10, 20, 30, 40, 50]</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="object-fromentries" tabindex="-1">Object fromEntries <a class="header-anchor" href="#object-fromentries" aria-hidden="true">🔗</a></h3>
+<p>In JavaScript, it is very commonn to transforming data from one format. ES2017 introduced <code>Object.entries()</code> method to objects into arrays.</p>
+<p><strong>Object to Array:</strong></p>
+<pre><code class="language-js">     <span class="hljs-keyword">const</span> obj = {<span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-string">&#x27;1&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>: <span class="hljs-string">&#x27;2&#x27;</span>, <span class="hljs-string">&#x27;c&#x27;</span>: <span class="hljs-string">&#x27;3&#x27;</span> };
+     <span class="hljs-keyword">const</span> arr = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">entries</span>(obj);
+     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj); <span class="hljs-comment">// [ [&#x27;a&#x27;, &#x27;1&#x27;], [&#x27;b&#x27;, &#x27;2&#x27;], [&#x27;c&#x27;, &#x27;3&#x27;] ]</span>
+</code></pre>
+<p>But if you want to get the object back from an array then you need iterate and convert it as below,</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> arr = [ [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], [<span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>], [<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>] ];
+<span class="hljs-keyword">let</span> obj = {}
+<span class="hljs-keyword">for</span> (<span class="hljs-keyword">let</span> [key, val] <span class="hljs-keyword">of</span> arr) {
+    obj[key] = val;
+}
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj);
+</code></pre>
+</li>
+</ol>
+<p>We need a straightforward way to avoid this iteration. In ES2019, <code>Object.fromEntries()</code> method is introduced which performs the reverse of <code>Object.entries()</code> behavior. The above loop can be avoided easily as below,</p>
+<p><strong>Iterable( e.g Array or Map) to Object</strong></p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> arr = [ [<span class="hljs-string">&#x27;a&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>], [<span class="hljs-string">&#x27;b&#x27;</span>, <span class="hljs-string">&#x27;2&#x27;</span>], [<span class="hljs-string">&#x27;c&#x27;</span>, <span class="hljs-string">&#x27;3&#x27;</span>] ];
+ <span class="hljs-keyword">const</span> obj = <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">fromEntries</span>(arr);
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(obj); <span class="hljs-comment">// { a: &quot;1&quot;, b: &quot;2&quot;, c: &quot;3&quot; }</span>
+</code></pre>
+<p>One of the common case of this method usage is working with query params of an URL,</p>
+<pre><code class="language-js"> <span class="hljs-keyword">const</span> paramsString = <span class="hljs-string">&#x27;param1=foo&amp;param2=baz&#x27;</span>;
+ <span class="hljs-keyword">const</span> searchParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(paramsString);
+
+ <span class="hljs-title class_">Object</span>.<span class="hljs-title function_">fromEntries</span>(searchParams);    <span class="hljs-comment">// =&gt; {param1: &quot;foo&quot;, param2: &quot;baz&quot;}</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<ol start="3">
+<li>
+<h3 id="string-trimstart-and-trimend" tabindex="-1">String trimStart and trimEnd <a class="header-anchor" href="#string-trimstart-and-trimend" aria-hidden="true">🔗</a></h3>
+<p>In order to make consistency with padStart/padEnd, ES2019 provided the standard functions named as <code>trimStart</code> and <code>trimEnd</code> to trim white spaces on the beginning and ending of a string. However for web compatilibity(avoid any breakage) <code>trimLeft</code> and <code>trimRight</code> will be an alias for <code>trimStart</code> and <code>trimEnd</code> respectively.</p>
+<p>Let's see the usage with an example,</p>
+<pre><code class="language-js"> <span class="hljs-comment">//Prior ES2019</span>
+ <span class="hljs-keyword">let</span> messageOne = <span class="hljs-string">&quot;   Hello World!!    &quot;</span>;
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(messageOne.<span class="hljs-title function_">trimLeft</span>()); <span class="hljs-comment">//Hello World!!</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(messageOne.<span class="hljs-title function_">trimRight</span>()); <span class="hljs-comment">//   Hello World!!</span>
+
+ <span class="hljs-comment">//With ES2019</span>
+ <span class="hljs-keyword">let</span> messageTwo = <span class="hljs-string">&quot;   Hello World!!    &quot;</span>;
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(messageTwo.<span class="hljs-title function_">trimStart</span>()); <span class="hljs-comment">//Hello World!!</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(messageTwo.<span class="hljs-title function_">trimEnd</span>()); <span class="hljs-comment">//   Hello World!!</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="symbol-description" tabindex="-1">Symbol description <a class="header-anchor" href="#symbol-description" aria-hidden="true">🔗</a></h3>
+</li>
+</ol>
+<p>While creating symbols, you also can add a description to it for debugging purposes. But there was no method to access the description directly before ES2019. Considering this, ES2019 introduced a read-only description property to retrieve a string containing the description of the Symbol.</p>
+<p>This gives the possibility to access symbol description for different variations of Symbol objects</p>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;one&#x27;</span>).<span class="hljs-property">description</span>); <span class="hljs-comment">// one</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>.<span class="hljs-title function_">for</span>(<span class="hljs-string">&#x27;one&#x27;</span>).<span class="hljs-property">description</span>); <span class="hljs-comment">// &quot;one&quot;</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>(<span class="hljs-string">&#x27;&#x27;</span>).<span class="hljs-property">description</span>); <span class="hljs-comment">// &#x27;&#x27;</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>().<span class="hljs-property">description</span>); <span class="hljs-comment">// unefined</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">Symbol</span>.<span class="hljs-property">iterator</span>.<span class="hljs-property">description</span>); <span class="hljs-comment">// &quot;Symbol.iterator&quot;</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+<ol start="5">
+<li>
+<h3 id="optional-catch-binding" tabindex="-1">Optional catch binding <a class="header-anchor" href="#optional-catch-binding" aria-hidden="true">🔗</a></h3>
+<p>Prior to ES9, if you don't need <code>error</code> variable and omit the same variable then catch() clause won't be invoked. Also, the linters complain about unused variables. Inorder to avoid this problem, the optional catch binding feature is introduced to make the binding parameter optional in the catch clause. If you want to completely ignore the error or you already know the error but you just want to react to that the this feature is going to be useful.</p>
+<p>Let's see the below syntax difference between the versions,</p>
+<pre><code class="language-js"> <span class="hljs-comment">// With binding parameter(&lt;ES9)</span>
+ <span class="hljs-keyword">try</span> {
+   ···
+ } <span class="hljs-keyword">catch</span> (error) {
+   ···
+ }
+ <span class="hljs-comment">// Without binding parameter(ES9)</span>
+ <span class="hljs-keyword">try</span> {
+   ···
+ } <span class="hljs-keyword">catch</span> {
+   ···
+ }
+</code></pre>
+<p>For example, the feature detection on a browser is one of the most common case</p>
+<pre><code class="language-js"> <span class="hljs-keyword">let</span> isTheFeatureImplemented = <span class="hljs-literal">false</span>;
+ <span class="hljs-keyword">try</span> {
+   <span class="hljs-keyword">if</span>(<span class="hljs-title function_">isFeatureSupported</span>()) {
+     isTheFeatureImplemented = <span class="hljs-literal">true</span>;
+   }
+ } <span class="hljs-keyword">catch</span> (unused) {}
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="json-improvements" tabindex="-1">JSON Improvements <a class="header-anchor" href="#json-improvements" aria-hidden="true">🔗</a></h3>
+<p>JSON is used as a lightweight format for data interchange(to read and parse). The usage of JSON has been improved as part of ECMAScript specification. Basically there are 2 important changes related to JSON.</p>
+<ol>
+<li><strong>JSON Superset</strong></li>
+</ol>
+<p>Prior to ES2019, ECMAScript claims JSON as a subset in JSON.parse but that is not true. Because ECMAScript string literals couldn’t contain the characters <code>U+2028</code> (LINE SEPARATOR) and <code>U+2029</code> (PARAGRAPH SEPARATOR) unlike JSON Strings. If you still use those characters then there will be a syntax error. As a workaround, you had to use an escape sequence to put them into a string.</p>
+<pre><code class="language-js"><span class="hljs-built_in">eval</span>(<span class="hljs-string">&#x27;&quot;\u2028&quot;&#x27;</span>); <span class="hljs-comment">// SyntaxError</span>
+</code></pre>
+<p>Whereas JSON strings can contain both U+2028 and U+2029 without producing errors.​</p>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-string">&#x27;&quot;\u2028&quot;&#x27;</span>)); <span class="hljs-comment">// &#x27;&#x27;</span>
+</code></pre>
+<p>This restriction has been removed in ES2019. This simplifies the specification without the need of separate rules for ECMAScript string literals and JSON string literals.</p>
+<ol start="2">
+<li><strong>Well Formed JSON.Stringify():</strong>
+Prior to ES2019, JSON.stringify method is used to return unformed Unicode strings(ill-formed Unicode strings) if there are any lone surrogates in the input.</li>
+</ol>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(<span class="hljs-string">&quot;\uD800&quot;</span>)); <span class="hljs-comment">// &#x27;&quot;�&quot;&#x27;</span>
+</code></pre>
+<p>Whereas in ES2019, JSON.stringify outputs escape sequences for lone surrogates, making its output valid Unicode and representable in UTF-8.</p>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">stringify</span>(<span class="hljs-string">&quot;\uD800&quot;</span>)); <span class="hljs-comment">// &#x27;&quot;\ud800&quot;&#x27;</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="array-stable-sort" tabindex="-1">Array Stable Sort <a class="header-anchor" href="#array-stable-sort" aria-hidden="true">🔗</a></h3>
+<p>The sort method for arrays is stable in ES2020. i.e, If you have an array of objects and sort them on a given key, the elements in the list will retain their position relative to the other objects with the same key.​
+Now the array is using the stable <code>TimSort</code> algorithm for arrays over 10 elements instead of the unstable <code>QuickSort</code>.</p>
+<p>Let's see an example of users retain their original position with same age group.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> users = [
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Albert&quot;</span>,  <span class="hljs-attr">age</span>: <span class="hljs-number">30</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Bravo&quot;</span>,   <span class="hljs-attr">age</span>: <span class="hljs-number">30</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Colin&quot;</span>,   <span class="hljs-attr">age</span>: <span class="hljs-number">30</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Rock&quot;</span>,    <span class="hljs-attr">age</span>: <span class="hljs-number">50</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Sunny&quot;</span>,   <span class="hljs-attr">age</span>: <span class="hljs-number">50</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Talor&quot;</span>,    <span class="hljs-attr">age</span>: <span class="hljs-number">50</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;John&quot;</span>,   <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Kindo&quot;</span>,  <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Lary&quot;</span>,   <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Minjie&quot;</span>,   <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> },
+    { <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;Nova&quot;</span>,    <span class="hljs-attr">age</span>: <span class="hljs-number">25</span> }
+]
+users.<span class="hljs-title function_">sort</span>(<span class="hljs-function">(<span class="hljs-params">a, b</span>) =&gt;</span> a.<span class="hljs-property">age</span> - b.<span class="hljs-property">age</span>);
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="function.tostring()" tabindex="-1">Function.toString() <a class="header-anchor" href="#function.tostring()" aria-hidden="true">🔗</a></h3>
+<p>Functions have an instance method called <code>toString()</code> which return a string to represent the function code. Previous versions of ECMAScript removes white spaces,new lines and comments from the function code but it has been retained with original source code in ES2020.</p>
+<pre><code class="language-js"><span class="hljs-keyword">function</span> <span class="hljs-title function_">sayHello</span>(<span class="hljs-params">message</span>) {
+    <span class="hljs-keyword">let</span> msg = message;
+    <span class="hljs-comment">//Print message</span>
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Hello, <span class="hljs-subst">${msg}</span>`</span>);
+}
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(sayHello.<span class="hljs-title function_">toString</span>());
+<span class="hljs-comment">// function sayHello(message) {</span>
+<span class="hljs-comment">//       let msg = message;</span>
+<span class="hljs-comment">//       //Print message</span>
+<span class="hljs-comment">//       console.log(`Hello, ${msg}`);</span>
+<span class="hljs-comment">//   }</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="private-class-variables" tabindex="-1">Private Class Variables <a class="header-anchor" href="#private-class-variables" aria-hidden="true">🔗</a></h3>
+<p>In ES6, the classes are introduced to create reusable modules and variables are declared in clousure to make them private. Where as in ES2020, private class variables are introduced to allow the variables used in the class only. By just adding a simple hash symbol in front of our variable or function, you can reserve them entirely for internal to the class.</p>
+<pre><code class="language-js"> <span class="hljs-keyword">class</span> <span class="hljs-title class_">User</span> {
+   #message = <span class="hljs-string">&quot;Welcome to ES2020&quot;</span>
+
+   <span class="hljs-title function_">login</span>(<span class="hljs-params"></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-variable language_">this</span>.#message) }
+ }
+
+ <span class="hljs-keyword">const</span> user = <span class="hljs-keyword">new</span> <span class="hljs-title class_">User</span>()
+
+ user.<span class="hljs-title function_">login</span>() <span class="hljs-comment">// Welcome to ES2020</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(user.#message) <span class="hljs-comment">// Uncaught SyntaxError: Private field &#x27;#</span>
+</code></pre>
+<p><strong>Note:</strong> As shown in the above code, If you still try to access the variable directly from the object then you will receive syntax error.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+</ol>
+<h2 id="es2020-or-es11" tabindex="-1">ES2020 Or ES11 <a class="header-anchor" href="#es2020-or-es11" aria-hidden="true">🔗</a></h2>
+<p>ES2020 is the current newer version of ECMAScript corresponding to the year 2020. This is the eleventh edition of the ECMAScript Language Specification. Even though this release doesn't bring as many features as ES6, it included some really useful features.</p>
+<p>Most of these features already supported by some browsers and try out with babel parser support for unsupported features. This edition is set for final approval by the ECMA general assembly in June, 2020. The <a href="https://tc39.es/ecma262/2020/">ECMAScript 2020 (ES2020) language specification</a> is ready now.</p>
+<ol>
+<li>
+<h3 id="bigint" tabindex="-1">BigInt <a class="header-anchor" href="#bigint" aria-hidden="true">🔗</a></h3>
+<p>In earlier JavaScript version, there is a limitation of using the Number type. i.e, You cannot safely represent integer values(<code>Number</code> primitive) larger than pow(2, 53). In ES2020,</p>
+<p><code>BigInt</code> is introduced as the 7th primitive type to represent whole numbers(integers with arbitrary precision) larger than pow(2, 53) - 1(or 9007199254740991 or Number.MAX_SAFE_INTEGER). This is been created by appending <code>n</code> to the end of an integer literal or by calling the function BigInt().</p>
+<pre><code class="language-js"><span class="hljs-comment">// 1. Current number system</span>
+<span class="hljs-keyword">const</span> max = <span class="hljs-title class_">Number</span>.<span class="hljs-property">MAX_SAFE_INTEGER</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(max + <span class="hljs-number">1</span>) <span class="hljs-comment">// 9007199254740992</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(max + <span class="hljs-number">2</span>) <span class="hljs-comment">// 9007199254740992</span>
+
+<span class="hljs-comment">// 2. BigInt representation</span>
+<span class="hljs-keyword">const</span> bigInt = <span class="hljs-number">9007199254740991n</span>;
+<span class="hljs-keyword">const</span> bigIntConstructorRep = <span class="hljs-title class_">BigInt</span>(<span class="hljs-number">9007199254740991</span>); <span class="hljs-comment">// 9007199254740991n</span>
+<span class="hljs-keyword">const</span> bigIntStringRep = <span class="hljs-title class_">BigInt</span>(<span class="hljs-string">&quot;9007199254740991&quot;</span>); <span class="hljs-comment">// 9007199254740991n</span>
+
+<span class="hljs-comment">// 3. Typeof usage</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-number">1</span>)<span class="hljs-comment">// number</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-number">1n</span>)<span class="hljs-comment">// bigint</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">typeof</span> <span class="hljs-title class_">BigInt</span>(<span class="hljs-string">&#x27;1&#x27;</span>))<span class="hljs-comment">// bigint</span>
+
+<span class="hljs-comment">// 4. Operators</span>
+
+<span class="hljs-keyword">const</span> previousMaxNum = <span class="hljs-title class_">BigInt</span>(<span class="hljs-title class_">Number</span>.<span class="hljs-property">MAX_SAFE_INTEGER</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(previousMaxNum + <span class="hljs-number">2n</span>); <span class="hljs-comment">//9007199254740993n (this was not possible before)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(previousMaxNum -<span class="hljs-number">2n</span>); <span class="hljs-comment">//9007199254740990n</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(previousMaxNum * <span class="hljs-number">2n</span>); <span class="hljs-comment">//18014398509481982n</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(previousMaxNum % <span class="hljs-number">2n</span>); <span class="hljs-comment">//1n</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(previousMaxNum / <span class="hljs-number">2n</span>); <span class="hljs-comment">// 4503599627370495n</span>
+
+<span class="hljs-comment">// 5. comparison</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1n</span> === <span class="hljs-number">1</span>); <span class="hljs-comment">// false</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1n</span> === <span class="hljs-title class_">BigInt</span>(<span class="hljs-number">1</span>)); <span class="hljs-comment">// true</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-number">1n</span> == <span class="hljs-number">1</span>); <span class="hljs-comment">// true</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="dynamic-import" tabindex="-1">Dynamic Import <a class="header-anchor" href="#dynamic-import" aria-hidden="true">🔗</a></h3>
+<p>Static imports supports some of the important use cases such as static analysis, bundling tools, and tree shaking, it is also it's desirable to be able to dynamically load parts of a JavaScript application at runtime.</p>
+<p>The new feature <code>dynamic import</code> is introduced to load a module conditionally or on demand. Since it returns a promise for the module namespace object of the requested module, the module can be resolved or import can now be assigned to a variable using async/await as below</p>
+<pre><code class="language-js">&lt;script&gt;
+<span class="hljs-keyword">const</span> moduleSpecifier = <span class="hljs-string">&#x27;./message.js&#x27;</span>;
+<span class="hljs-keyword">import</span>(moduleSpecifier)
+  .<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params"><span class="hljs-variable language_">module</span></span>) =&gt;</span> {
+    <span class="hljs-variable language_">module</span>.<span class="hljs-title function_">default</span>(); <span class="hljs-comment">// Hello, default export</span>
+    <span class="hljs-variable language_">module</span>.<span class="hljs-title function_">sayGoodBye</span>(); <span class="hljs-comment">//Bye, named export</span>
+  })
+  .<span class="hljs-title function_">catch</span>(<span class="hljs-function"><span class="hljs-params">err</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;loading error&#x27;</span>));
+&lt;/script&gt;
+</code></pre>
+<pre><code class="language-js">&lt;script&gt;
+(<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> moduleSpecifier = <span class="hljs-string">&#x27;./message.js&#x27;</span>;
+  <span class="hljs-keyword">const</span> messageModule = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(moduleSpecifier);
+  messageModule.<span class="hljs-title function_">default</span>(); <span class="hljs-comment">// Hello, default export</span>
+  messageModule.<span class="hljs-title function_">sayGoodBye</span>(); <span class="hljs-comment">//Bye, named export</span>
+})();
+&lt;/script&gt;
+</code></pre>
+<p>and the imported module appears with both default and named exports</p>
+<pre><code class="language-js"><span class="hljs-keyword">export</span> <span class="hljs-title function_">default</span> () =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Hello, default export&quot;</span>;
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> <span class="hljs-title function_">sayGoodBye</span> = (<span class="hljs-params"></span>) =&gt; {
+  <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Bye, named export&quot;</span>
+}
+</code></pre>
+<p><strong>Note:</strong> Dynamic import does not require scripts of <code>type=&quot;module&quot;</code></p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="nullish-coalescing-operator" tabindex="-1">Nullish Coalescing Operator <a class="header-anchor" href="#nullish-coalescing-operator" aria-hidden="true">🔗</a></h3>
+<p>The nullish coalescing operator (??) is a logical operator that returns its right-hand side operand when its left-hand side operand is <code>null</code> or <code>undefined</code>, and otherwise returns its left-hand side operand. This operator replaces <code>||</code> operator to provide default values if you treat empty value or '', 0 and NaN as valid values. This is because the logical OR(||) operator treats(empty value or '', 0 and NaN) as falsy values and returns the right operand value which is wrong in this case. Hence, this operator truely checks for <code>nullish</code> values instead <code>falsy</code> values.</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> vehicle = {
+  <span class="hljs-attr">car</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&quot;&quot;</span>,
+    <span class="hljs-attr">speed</span>: <span class="hljs-number">0</span>
+  }
+};
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>.<span class="hljs-property">name</span> || <span class="hljs-string">&quot;Unknown&quot;</span>); <span class="hljs-comment">// Unknown</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>.<span class="hljs-property">speed</span> || <span class="hljs-number">90</span>); <span class="hljs-comment">// 90</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>.<span class="hljs-property">name</span> ?? <span class="hljs-string">&quot;Unknown&quot;</span>); <span class="hljs-comment">// &quot;&quot;(empty is valid case for name)</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>.<span class="hljs-property">speed</span> ?? <span class="hljs-number">90</span>); <span class="hljs-comment">// 0(zero is valid case for speed)</span>
+</code></pre>
+<p>In a short note, nullish operator returns a non-nullish value and || operator returns truthy values.</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="string-matchall" tabindex="-1">String matchAll <a class="header-anchor" href="#string-matchall" aria-hidden="true">🔗</a></h3>
+<p>There is <code>String#match</code> method to get all the matches of a string against a regular expression by iterating for each match. However this method gives you the substrings that match.</p>
+<p>The <code>String#matchAll()</code> is a new method added to String prototype, which returns an iterator of all results matching a string against a regular expression.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> regex = <span class="hljs-regexp">/t(e)(st(\d?))/g</span>;
+<span class="hljs-keyword">const</span> string = <span class="hljs-string">&#x27;test1test2&#x27;</span>;
+<span class="hljs-keyword">const</span> matchesIterator = string.<span class="hljs-title function_">matchAll</span>(regex);
+<span class="hljs-title class_">Array</span>.<span class="hljs-title function_">from</span>(matchesIterator, <span class="hljs-function"><span class="hljs-params">result</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(result));
+</code></pre>
+<p>When you this code in browser console, the matches iterator produces an array for each match including the capturing groups with a few extras.</p>
+<pre><code class="language-cmd">[&quot;test1&quot;, &quot;e&quot;, &quot;st1&quot;, &quot;<span class="hljs-number">1</span>&quot;, index: <span class="hljs-number">0</span>, input: &quot;test1test2&quot;, groups: undefined]
+[&quot;test2&quot;, &quot;e&quot;, &quot;st2&quot;, &quot;<span class="hljs-number">2</span>&quot;, index: <span class="hljs-number">5</span>, input: &quot;test1test2&quot;, groups: undefined]
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="optional-chaining" tabindex="-1">Optional chaining <a class="header-anchor" href="#optional-chaining" aria-hidden="true">🔗</a></h3>
+<p>In JavaScript, Long chains of property accesses is quite error-prone if any of them evaluates to <code>null</code> or <code>undefined</code> value. Also, it is not a good idea to check property existence on each item which in turn leads to a deeply-nested structured <code>if</code> statements.</p>
+<p>Optional chaining is a new feature that can make your JavaScript code look cleaner and robust by appending(?.) operator to stop the evaluation and return undefined if the item is undefined or null.
+By the way, this operator can be used together with nullish coalescing operator to provide default values</p>
+<pre><code class="language-js"><span class="hljs-keyword">let</span> vehicle = {
+};
+
+<span class="hljs-keyword">let</span> vehicle1 = {
+  <span class="hljs-attr">car</span>: {
+    <span class="hljs-attr">name</span>: <span class="hljs-string">&#x27;ABC&#x27;</span>,
+    <span class="hljs-attr">speed</span>: <span class="hljs-number">90</span>
+  }
+};
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>?.<span class="hljs-property">name</span>); <span class="hljs-comment">// TypeError: Cannot read property &#x27;name&#x27; of undefined</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>?.<span class="hljs-property">name</span>); <span class="hljs-comment">// Undefined</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>?.<span class="hljs-property">speed</span>); <span class="hljs-comment">// Undefined</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle1.<span class="hljs-property">car</span>?.<span class="hljs-property">name</span>); <span class="hljs-comment">// ABC</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle1.<span class="hljs-property">car</span>?.<span class="hljs-property">speed</span>); <span class="hljs-comment">// 90</span>
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>?.<span class="hljs-property">name</span> ?? <span class="hljs-string">&quot;Unknown&quot;</span>); <span class="hljs-comment">// Unknown</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(vehicle.<span class="hljs-property">car</span>?.<span class="hljs-property">speed</span> ?? <span class="hljs-number">90</span>); <span class="hljs-comment">// 90</span>
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="promise.allsettled" tabindex="-1">Promise.allSettled <a class="header-anchor" href="#promise.allsettled" aria-hidden="true">🔗</a></h3>
+<p>It is really helpful to log(especially to debug errors) about each promise when you are handling multiple promises. The  <code>Promise.allSettled()</code> method returns a new promise that resolves after all of the given promises have either fulfilled or rejected, with an array of objects describing the outcome of each promise.</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> promise1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-number">100</span>), <span class="hljs-number">1000</span>));
+
+<span class="hljs-keyword">const</span> promise2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(reject, <span class="hljs-number">1000</span>));
+
+<span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">allSettled</span>([promise1, promise2]).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">data</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(data)); <span class="hljs-comment">// [</span>
+                                                                          <span class="hljs-comment">// Object { status: &quot;fulfilled&quot;, value: 100},</span>
+                                                                          <span class="hljs-comment">// Object { status: &quot;rejected&quot;, reason: undefined}</span>
+                                                                          <span class="hljs-comment">// ]</span>
+</code></pre>
+<p>As per the output, each outcome object returns <code>status</code> field which denotes either &quot;fulfilled&quot;(value present) or &quot;rejected&quot;(reason present)</p>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+<li>
+<h3 id="globalthis" tabindex="-1">globalThis <a class="header-anchor" href="#globalthis" aria-hidden="true">🔗</a></h3>
+<p>Prior to ES2020, you need to write different syntax in different JavaScript environments(cross-platforms) just to access the global object. It is really a hard time for developers because you need to use <code>window, self, or frames</code> on the browser side, <code>global</code> on the nodejs, <code>self</code> on the web workers side.</p>
+<p>On the other hand, <code>this</code> keyword can be used inside functions for non-strict mode but it gives undefined in strict mode. If you think about <code>Function('return this')()</code> as a solution for above environments, it will fail for CSP enabled environments(where eval() is disabled).</p>
+<p>In the older versions, you can use es6-shim as below,</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> getGlobal = <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> self !== <span class="hljs-string">&#x27;undefined&#x27;</span>) { <span class="hljs-keyword">return</span> self; }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">window</span> !== <span class="hljs-string">&#x27;undefined&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">window</span>; }
+  <span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> <span class="hljs-variable language_">global</span> !== <span class="hljs-string">&#x27;undefined&#x27;</span>) { <span class="hljs-keyword">return</span> <span class="hljs-variable language_">global</span>; }
+  <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">&#x27;unable to locate global object&#x27;</span>);
+};
+
+<span class="hljs-keyword">var</span> globals = <span class="hljs-title function_">getGlobal</span>();
+
+<span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> globals.<span class="hljs-property">setTimeout</span> !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;no setTimeout in this environment or runtime&#x27;</span>);
+}
+</code></pre>
+<p>In ES2020, <code>globalThis</code> property is introduced to provide a standard way of accessing the global this value across environments.</p>
+<pre><code class="language-js"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> globalThis.<span class="hljs-property">setTimeout</span> !== <span class="hljs-string">&#x27;function&#x27;</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;no setTimeout in this environment or runtime&#x27;</span>);
+}
+</code></pre>
+</li>
+<li>
+<h3 id="import.meta" tabindex="-1">import.meta <a class="header-anchor" href="#import.meta" aria-hidden="true">🔗</a></h3>
+<p>The <code>import.meta</code> object was created by the ECMAScript implementation with a null prototype to get context-specific metadata about a JavaScript module.
+Let's say you are trying to load <code>my-module</code> from a script,</p>
+<pre><code class="language-js">&lt;script type=<span class="hljs-string">&quot;module&quot;</span> src=<span class="hljs-string">&quot;my-module.js&quot;</span>&gt;&lt;/script&gt;
+</code></pre>
+<p>Now you can access meta information(base URL of the module) about the module using the import.meta object</p>
+<pre><code class="language-js"><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>); <span class="hljs-comment">// { url: &quot;file:///home/user/my-module.js&quot; }</span>
+</code></pre>
+<p>The above URL can be either URL from which the script was obtained (for external scripts), or the document base URL of the containing document (for inline scripts).</p>
+<p><strong>Note:</strong> Remember <code>import</code> is not really an object but <code>import.meta</code> is provided as an object which is extensible, and its properties are writable, configurable, and enumerable.</p>
+</li>
+<li>
+<h3 id="for..in-order" tabindex="-1">for..in order <a class="header-anchor" href="#for..in-order" aria-hidden="true">🔗</a></h3>
+<p>Prior to ES2020, the specifications did not specify in which order for (a in b)  should run. Even though most of the javascript engines/browsers loop over the properties of an object in the order in which they were defined, it is not the case with all scenarios. This has been officially standardized in ES2020.</p>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> object = {
+  <span class="hljs-string">&#x27;a&#x27;</span>: <span class="hljs-number">2</span>,
+  <span class="hljs-string">&#x27;b&#x27;</span>: <span class="hljs-number">3</span>,
+  <span class="hljs-string">&#x27;c&#x27;</span>: <span class="hljs-number">4</span>
+}
+
+
+<span class="hljs-keyword">for</span>(<span class="hljs-keyword">let</span> key <span class="hljs-keyword">in</span> object) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(key); <span class="hljs-comment">// a b c</span>
+}
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+</ol>
+<h2 id="es2021-or-es12" tabindex="-1">ES2021 Or ES12 <a class="header-anchor" href="#es2021-or-es12" aria-hidden="true">🔗</a></h2>
+<p>ECMAScript 2021 or ES12 has been released in mid of 2021 with few important features which can be used JavaScript.</p>
+<ol>
+<li>
+<h3 id="replaceall" tabindex="-1">replaceAll <a class="header-anchor" href="#replaceall" aria-hidden="true">🔗</a></h3>
+<p>The new <code>replaceAll()</code> method from <code>String</code> prototype is used to replace all the occurrences of a string from another string value. Earlier it was not possible to replace all the instances of a substring without the use of regex.</p>
+<p><strong>Before ES2021</strong></p>
+<pre><code class="language-javascript"> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;10101010&#x27;</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">RegExp</span>(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;g&#x27;</span>), <span class="hljs-string">&#x27;1&#x27;</span>)); <span class="hljs-comment">// 11111111</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;01010101&#x27;</span>.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/0/g</span>, <span class="hljs-string">&#x27;1&#x27;</span>)); <span class="hljs-comment">// 11111111</span>
+</code></pre>
+<p><strong>After ES2021</strong></p>
+<pre><code class="language-javascript"> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;10101010&#x27;</span>.<span class="hljs-title function_">replaceAll</span>(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>)); <span class="hljs-comment">// 11111111</span>
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;01010101&#x27;</span>.<span class="hljs-title function_">replaceAll</span>(<span class="hljs-string">&#x27;0&#x27;</span>, <span class="hljs-string">&#x27;1&#x27;</span>)); <span class="hljs-comment">// 11111111</span>
+</code></pre>
+</li>
+<li>
+<h3 id="promise.any" tabindex="-1">promise.any <a class="header-anchor" href="#promise.any" aria-hidden="true">🔗</a></h3>
+<p>The new <code>promise.any</code> method takes multiple promises and resolves to the value of the first promise which is successfully fulfilled.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">let</span> promise1 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">100</span>, <span class="hljs-string">&#x27;Resolves after 100ms&#x27;</span>));
+<span class="hljs-keyword">let</span> promise2 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">200</span>, <span class="hljs-string">&#x27;Resolves after 200ms&#x27;</span>));
+<span class="hljs-keyword">let</span> promise3 = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> <span class="hljs-built_in">setTimeout</span>(reject, <span class="hljs-number">0</span>) );
+
+<span class="hljs-keyword">let</span> promises = [promise1, promise2, promise3];
+
+ <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">any</span>(promises)
+     .<span class="hljs-title function_">then</span>( <span class="hljs-function"><span class="hljs-params">value</span> =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(value)); <span class="hljs-comment">// Resolves after 100ms</span>
+</code></pre>
+<p>In case none of the promises resolved then it throws <code>AggregateError</code> exception.</p>
+<pre><code class="language-javascript"> (<span class="hljs-title function_">async</span> () =&gt; {
+   <span class="hljs-keyword">try</span> {
+     <span class="hljs-keyword">const</span> output = <span class="hljs-keyword">await</span> <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">any</span>([
+       <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">reject</span>(<span class="hljs-string">&#x27;Error 1&#x27;</span>),
+       <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">reject</span>(<span class="hljs-string">&#x27;Error 2&#x27;</span>),
+       <span class="hljs-title class_">Promise</span>.<span class="hljs-title function_">reject</span>(<span class="hljs-string">&#x27;Error 3&#x27;</span>),
+     ]);
+     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Output: <span class="hljs-subst">${output}</span>`</span>);
+   } <span class="hljs-keyword">catch</span> (err) {
+     <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Error: <span class="hljs-subst">${err.errors}</span>`</span>);
+   }
+ })(); 
+ <span class="hljs-comment">// Error: Error1,Error2,Error3</span>
+</code></pre>
+</li>
+<li>
+<h3 id="weakref" tabindex="-1">WeakRef <a class="header-anchor" href="#weakref" aria-hidden="true">🔗</a></h3>
+<p>WeakRef provides two new pieces of functionality</p>
+<ol>
+<li>creating weak references to objects with the WeakRef class</li>
+<li>running user-defined finalizers after objects are garbage-collected, with the FinalizationRegistry class</li>
+</ol>
+<p><strong>WeakRef:</strong>
+weak reference is a reference to an object that doesn’t prevent garbage collection if it is the only reference to the object in the <a href="http://memory.It">memory.It</a>’s useful when we don’t want to keep the object in memory forever(e.g, WebSocket). The main use of weak references is to implement caches or mappings to large objects for which you don't need to keep it in memory for rarely used objects.</p>
+<p>Prior to ES12, WeakMaps and WeakSets are the only way to kind-of-weakly reference an object in JavaScript. Whereas WeakRef in ES12 provides actual weak references, enabling a window into the lifetime of an object.</p>
+<p>Let's see an example of a weak reference object using <code>WeakRef</code> constructor and read the reference using <code>deref()</code> method</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> myObject = <span class="hljs-keyword">new</span> <span class="hljs-title class_">WeakRef</span>({
+  <span class="hljs-attr">name</span>: ‘<span class="hljs-title class_">Sudheer</span>’,
+  <span class="hljs-attr">age</span>: <span class="hljs-number">34</span>
+});
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myObject.<span class="hljs-title function_">deref</span>()); <span class="hljs-comment">//output: {name: “Sudheer”, age: 35}</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myObject.<span class="hljs-title function_">deref</span>().<span class="hljs-property">name</span>); <span class="hljs-comment">//output: Sudheer</span>
+</code></pre>
+<p><strong>Finalizers:</strong>
+A <code>FinalizationRegistry</code> object lets you request a callback when an object is garbage-collected. It works as a cleanup callback.</p>
+<pre><code class="language-javascript"><span class="hljs-comment">// Create new FinalizationRegistry:</span>
+<span class="hljs-keyword">const</span> reg = <span class="hljs-keyword">new</span> <span class="hljs-title class_">FinalizationRegistry</span>(<span class="hljs-function">(<span class="hljs-params">val</span>) =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(val);
+});
+
+(<span class="hljs-function">() =&gt;</span> {
+<span class="hljs-comment">// Create new object:</span>
+  <span class="hljs-keyword">const</span> obj = {}
+
+<span class="hljs-comment">// Register finalizer for the &quot;obj&quot; as first argument and value for callback function as second argument:</span>
+  reg.<span class="hljs-title function_">register</span>(obj, <span class="hljs-string">&#x27;obj has been garbage-collected.&#x27;</span>)
+})();
+</code></pre>
+<p><strong>Note:</strong> The finalization callback does not run immediately after garbage-collecting the event listener, so don't use it for important logic or metrics.</p>
+</li>
+<li>
+<h3 id="numeric-separators" tabindex="-1">Numeric Separators <a class="header-anchor" href="#numeric-separators" aria-hidden="true">🔗</a></h3>
+<p>Numeric separators are helpful to read large numbers(or numeric literals) in JavaScript by providing separation between digits using underscores(_). In otherwords, numeric literals are more readable by creating a visual separation between groups of digits.</p>
+<p>For example, one billion and one trillion becomes more readable with _ numeric separator,</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> billion = <span class="hljs-number">1000_000_000</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(billion); <span class="hljs-comment">// 1000000000</span>
+
+<span class="hljs-keyword">const</span> trillion = <span class="hljs-number">1000_000_000_000n</span>; <span class="hljs-comment">// BigInt number</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(trillion); <span class="hljs-comment">// 1000000000000</span>
+</code></pre>
+<p>It can be used for binary and hex literals as well.</p>
+<pre><code class="language-javascript"><span class="hljs-keyword">const</span> binaryLiteral = <span class="hljs-number">0b1010_1010</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(binaryLiteral);
+<span class="hljs-keyword">const</span> hexLiteral = <span class="hljs-number">0xFF_FF_FF_FF</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(hexLiteral);
+</code></pre>
+<p><strong>Note:</strong> The separator can be placed anywhere within the number for readability purpose.</p>
+</li>
+<li>
+<h3 id="logical-operators" tabindex="-1">Logical Operators <a class="header-anchor" href="#logical-operators" aria-hidden="true">🔗</a></h3>
+<p>Logical assignment operators combines the logical operations(&amp;&amp;, || or ??) with assignment. They are quite useful for assigning default values to variables.</p>
+<p><strong>&amp;&amp;=:</strong></p>
+<p>The <code>&amp;&amp;=</code> operator performs the assignment only when the left operand is truthy.</p>
+<pre><code class="language-javascript"> <span class="hljs-keyword">let</span> x = <span class="hljs-number">10</span>;
+ <span class="hljs-keyword">let</span> y = <span class="hljs-number">20</span>;
+ x &amp;&amp;= y;
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x); <span class="hljs-comment">// 20</span>
+</code></pre>
+<p>The above logical assignment operation can be expanded to:</p>
+<pre><code class="language-javascript"> x = x &amp;&amp; (x = y); 
+ (<span class="hljs-variable constant_">OR</span>)
+ <span class="hljs-keyword">if</span> (x) {
+   x = y;
+ }
+</code></pre>
+<p><strong>||=:</strong></p>
+<p>The ||= operator performs the assignment only when the left operand is falsy.</p>
+<pre><code class="language-javascript"> <span class="hljs-keyword">let</span> x = <span class="hljs-number">0</span>;
+ <span class="hljs-keyword">let</span> y = <span class="hljs-number">20</span>;
+   x ||= y;
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x); <span class="hljs-comment">// 20</span>
+</code></pre>
+<p>The above logical assignment operation can be expanded to:</p>
+<pre><code class="language-javascript"> x = x || (x = y); 
+ (<span class="hljs-variable constant_">OR</span>)
+ <span class="hljs-keyword">if</span> (!x) {
+   x = y;
+ }
+</code></pre>
+<p><strong>??=:</strong></p>
+<p>The ??= operator performs the assignment only when the left operand is null or undefined.</p>
+<pre><code class="language-javascript"> <span class="hljs-keyword">let</span> x;
+ <span class="hljs-keyword">let</span> y = <span class="hljs-number">1</span>;
+ x ??= y;
+ <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(x); <span class="hljs-comment">// 1</span>
+</code></pre>
+<p>The above logical assignment operation can be expanded to:</p>
+<pre><code class="language-javascript">  x = x ?? (x = y);
+  (<span class="hljs-variable constant_">OR</span>)
+  <span class="hljs-keyword">if</span> (!x) {
+    x = y;
+  }
+</code></pre>
+<p><strong><a href="#table-of-contents">⬆ Back to Top</a></strong></p>
+</li>
+</ol>
+</body></html>

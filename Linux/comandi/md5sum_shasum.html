@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.185" />
+        <title>md5sum_shasum</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="md5sum_shasum" tabindex="-1">md5sum_shasum <a class="header-anchor" href="#md5sum_shasum" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.185</p>
+<nav class="table-of-contents"><ol><li><a href="#trovare-file-duplicati">Trovare file duplicati </a></li><li><a href="#esempio-di-verifica-di-checksum">Esempio di verifica di checksum </a></li><li><a href="#per-file-multipli">Per file multipli </a></li></ol></nav><h1 id="calcolare-i-checksum" tabindex="-1">Calcolare i Checksum <a class="header-anchor" href="#calcolare-i-checksum" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash">$ pamac list -f coreutils|grep <span class="hljs-string">&#x27;bin.*sum&#x27;</span>
+/usr/bin/b2sum
+/usr/bin/cksum
+/usr/bin/md5sum
+/usr/bin/sha1sum
+/usr/bin/sha224sum
+/usr/bin/sha256sum
+/usr/bin/sha384sum
+/usr/bin/sha512sum
+/usr/bin/sum
+$ <span class="hljs-built_in">which</span> shasum
+/usr/bin/core_perl/shasum
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">md5sum</span> somefile
+76c6dafd6569222312357fdfdbace3e5 somefile
+$ <span class="hljs-built_in">md5sum</span> somefile &gt; somefile.md5
+<span class="hljs-comment"># Verificare il checksum</span>
+<span class="hljs-built_in">md5sum</span> -c somefile.md5
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">md5sum</span> /bin/* /sbin/* /usr/bin/* /usr/sbin/* /usr/X11R6/bin/* /etc/* &gt; <span class="hljs-string">&quot;/root/`date +&quot;</span>%Y%m%d<span class="hljs-string">&quot;`.md5&quot;</span> 2&gt;/dev/null
+<span class="hljs-built_in">md5sum</span> /bin/* /sbin/* /usr/bin/* /usr/sbin/* /usr/X11R6/bin/* /etc/* 2&gt;/dev/null | diff <span class="hljs-variable">$1</span> - | awk <span class="hljs-string">&#x27;$1==&quot;&lt;&quot; {print $3 &quot; ...differ&quot;}&#x27;</span> 
+
+</code></pre>
+<h2 id="trovare-file-duplicati" tabindex="-1">Trovare file duplicati <a class="header-anchor" href="#trovare-file-duplicati" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find /home/cdp/images -<span class="hljs-built_in">type</span> f -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">md5sum</span> <span class="hljs-string">&#x27;{}&#x27;</span> <span class="hljs-string">&#x27;;&#x27;</span> | <span class="hljs-built_in">sort</span> | <span class="hljs-built_in">uniq</span> --all-repeated=separate -w 15 &gt; duplicati.txt
+</code></pre>
+<h2 id="esempio-di-verifica-di-checksum" tabindex="-1">Esempio di verifica di checksum <a class="header-anchor" href="#esempio-di-verifica-di-checksum" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.4-linux-x86_64.tar.gz
+$ wget https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512
+$ shasum -a 512 -c elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512
+$ shasum -a 512 -c elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512
+elasticsearch-7.13.4-linux-x86_64.tar.gz: OK
+$ <span class="hljs-built_in">sha512sum</span> -c elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512
+elasticsearch-7.13.4-linux-x86_64.tar.gz: OK
+$ <span class="hljs-built_in">cat</span> elasticsearch-7.13.4-linux-x86_64.tar.gz.sha512
+510c0ce8af12ccc143b18e73d84047052376cd203f3a913af03baaeb26ffaedfffddd5c4477e5bce84aaf0aaaa436fef4c8012165fc9aa9895518f21cb84c28b  elasticsearch-7.13.4-linux-x86_64.tar.gz
+</code></pre>
+<h2 id="per-file-multipli" tabindex="-1">Per file multipli <a class="header-anchor" href="#per-file-multipli" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span> &gt;&gt; fsichk.conf
+/bin/*
+/boot/vmlinuz*
+/etc/fstab
+/usr/sbin/*
+EOF
+
+$ <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span> &gt; makesums
+<span class="hljs-comment">#!/bin/bash</span>
+CONFIG_FILE=./fsichk.conf
+CHECKSUM_FILE=./checksums
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> `<span class="hljs-built_in">cat</span> <span class="hljs-variable">$CONFIG_FILE</span>`; <span class="hljs-keyword">do</span>
+<span class="hljs-keyword">if</span> [ ! -d <span class="hljs-variable">$i</span> ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;md5sum <span class="hljs-variable">$i</span>&quot;</span> &gt;&gt; <span class="hljs-variable">$CHECKSUM_FILE</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+EOF
+$ <span class="hljs-built_in">chmod</span> +x makesums
+$ ./makesums
+<span class="hljs-comment"># I checksum generati saranno salvati nel file indicato da CHECKSUM_FILE.</span>
+<span class="hljs-comment"># Per ricontrollare tutti i checksum salvati nel file CHECKSUM_FILE:</span>
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">md5sum</span> -c ./checksums
+</code></pre>
+</body></html>

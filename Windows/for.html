@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.266" />
+        <title>for</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../inc/js/hljs/styles/default.css" />
+        <script src="../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="for" tabindex="-1">for <a class="header-anchor" href="#for" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.266</p>
+<nav class="table-of-contents"><ol><li><a href="#syntax">Syntax </a><ol><li><a href="#parameters">Parameters </a><ol><li><a href="#remarks">Remarks </a></li></ol></li></ol></li><li><a href="#examples">Examples </a></li><li><a href="#additional-references">Additional References </a></li><li><a href="#for">for </a></li></ol></nav><h1 id="for-1" tabindex="-1">for <a class="header-anchor" href="#for-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://github.com/MicrosoftDocs/windowsserverdocs/blob/master/WindowsServerDocs/administration/windows-commands/for.md">https://github.com/MicrosoftDocs/windowsserverdocs/blob/master/WindowsServerDocs/administration/windows-commands/for.md</a></li>
+<li><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/for">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/for</a></li>
+</ul>
+<p>description: Reference article for the for command, which runs a specified command for each file, within a set of files.</p>
+<p>Runs a specified command for each file, within a set of files.</p>
+<h2 id="syntax" tabindex="-1">Syntax <a class="header-anchor" href="#syntax" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> {%% | %}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">set</span>&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+<h3 id="parameters" tabindex="-1">Parameters <a class="header-anchor" href="#parameters" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>{%% | %}&lt;variable&gt;</code></td>
+<td>Required. Represents a replaceable parameter. Use a single percent sign (<code>%</code>) to carry out the <strong>for</strong> command at the command prompt. Use double percent signs (<code>%%</code>) to carry out the <strong>for</strong> command within a batch file. Variables are case sensitive, and they must be represented with an alphabetical value such as <strong>%a</strong>, <strong>%b</strong>, or <strong>%c</strong>.</td>
+</tr>
+<tr>
+<td>(<code>&lt;set&gt;</code>)</td>
+<td>Required. Specifies one or more files, directories, or text strings, or a range of values on which to run the command. The parentheses are required.</td>
+</tr>
+<tr>
+<td><code>&lt;command&gt;</code></td>
+<td>Required. Specifies the command that you want to carry out on each file, directory, or text string, or on the range of values included in <em>set</em>.</td>
+</tr>
+<tr>
+<td><code>&lt;commandlineoptions&gt;</code></td>
+<td>Specifies any command-line options that you want to use with the specified command.</td>
+</tr>
+<tr>
+<td>/?</td>
+<td>Displays help at the command prompt.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="remarks" tabindex="-1">Remarks <a class="header-anchor" href="#remarks" aria-hidden="true">🔗</a></h4>
+<ul>
+<li>
+<p>You can use this command within a batch file or directly from the command prompt.</p>
+</li>
+<li>
+<p>The following attributes apply to the <strong>for</strong> command:</p>
+<ul>
+<li>
+<p>This command replaces <code>% variable</code> or <code>%% variable</code> with each text string in the specified set until the specified command processes all of the files.</p>
+</li>
+<li>
+<p>Variable names are case sensitive, global, and no more than 52 can be active at a time.</p>
+</li>
+<li>
+<p>To avoid confusion with the batch parameters, <code>%0</code> through <code>%9</code>, you can use any character for <em>variable</em> except the numerals <strong>0</strong> through <strong>9</strong>. For simple batch files, a single character such as <code>%%f</code> will work.</p>
+</li>
+<li>
+<p>You can use multiple values for <em>variable</em> in complex batch files to distinguish different replaceable variables.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The <em>set</em> parameter can represent a single group of files or several groups of files. You can use wildcard characters (<strong>*</strong> and <strong>?</strong>) to specify a file set. The following are valid file sets:</p>
+<pre><code class="language-bat">(*.doc)
+(*.doc *.txt *.me)
+(jan*.doc jan*.rpt feb*.doc feb*.rpt)
+(ar??<span class="hljs-number">1991</span>.* ap??<span class="hljs-number">1991</span>.*)
+</code></pre>
+</li>
+<li>
+<p>When you use this command, the first value in <em>set</em> replaces <code>% variable</code> or <code>%% variable</code>, and then the specified command processes this value. This continues until all of the files (or groups of files) that correspond to the <em>set</em> value are processed.</p>
+</li>
+<li>
+<p><strong>In</strong> and <strong>do</strong> aren't parameters, but you must use them with this command. If you omit either of these keywords, an error message appears.</p>
+</li>
+<li>
+<p>If command extensions are enabled (that is the default), the following additional forms of <strong>for</strong> are supported:</p>
+<ul>
+<li>
+<p><strong>Directories only:</strong> If <em>set</em> contains wildcard characters (<strong>*</strong> or <strong>?</strong>), the specified <em>command</em> executes for each directory (instead of a set of files in a specified directory) that matches <em>set</em>. The syntax is:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /d {<span class="hljs-variable">%%|</span>%}&lt;Variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">Set</span>&gt;) <span class="hljs-keyword">do</span> &lt;Command&gt; [&lt;CommandLineOptions&gt;]
+</code></pre>
+</li>
+<li>
+<p><strong>Recursive:</strong> Walks the directory tree that is rooted at <em>drive</em>:<em>path</em> and executes the <strong>for</strong> statement in each directory of the tree. If no directory is specified after <strong>/r</strong>, the current directory is used as the root directory. If <em>set</em> is just a single period (.), it only enumerates the directory tree. The syntax is:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /r [[&lt;drive&gt;:]&lt;<span class="hljs-built_in">path</span>&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">set</span>&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+</code></pre>
+</li>
+<li>
+<p><strong>Iterating a range of values:</strong> Use an iterative variable to set the starting value (<em>start</em>#) and then step through a set range of values until the value exceeds the set ending value (<em>end</em>#). <strong>/l</strong> will execute the iterative by comparing <em>start</em># with <em>end</em>#. If <em>start</em># is less than <em>end</em># the command will execute. When the iterative variable exceeds <em>end</em>#, the command shell exits the loop. You can also use a negative <em>step</em># to step through a range in decreasing values. For example, (1,1,5) generates the sequence 1 2 3 4 5 and (5,-1,1) generates the sequence 5 4 3 2 1. The syntax is:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /l {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">start</span>#&gt;,&lt;step#&gt;,&lt;end#&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+</code></pre>
+</li>
+<li>
+<p><strong>Iterating and file parsing:</strong> Use file parsing to process command output, strings, and file content. Use iterative variables to define the content or strings that you want to examine, and use the various <em>parsingkeywords</em> options to further modify the parsing.  Use the <em>parsingkeywords</em> token option to specify which tokens should be passed as iterative variables. Note that when used without the token option, <strong>/f</strong> will only examine the first token.</p>
+<p>File parsing consists of reading the output, string, or file content, and then breaking it into individual lines of text and parsing each line into zero or more tokens. The <strong>for</strong> loop is then called with the iterative variable value set to the token. By default, <strong>/f</strong> passes the first blank separated token from each line of each file. Blank lines are skipped.</p>
+<p>The syntaxes are:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f [&lt;parsingkeywords&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">set</span>&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+<span class="hljs-keyword">for</span> /f [&lt;parsingkeywords&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;literalstring&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+<span class="hljs-keyword">for</span> /f [&lt;parsingkeywords&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&#x27;&lt;command&gt;&#x27;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+</code></pre>
+<p>The <em>set</em> argument specifies one or more file names. Each file is opened, read, and processed before moving to the next file in <em>set</em>. To override the default parsing behavior, specify <em>parsingkeywords</em>. This is a quoted string that contains one or more keywords to specify different parsing options.</p>
+<p>If you use the <strong>usebackq</strong> option, use one of the following syntaxes:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f [usebackq &lt;parsingkeywords&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">Set</span>&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+<span class="hljs-keyword">for</span> /f [usebackq &lt;parsingkeywords&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&#x27;&lt;LiteralString&gt;&#x27;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+<span class="hljs-keyword">for</span> /f [usebackq &lt;parsingkeywords&gt;] {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (`&lt;command&gt;`) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlinepptions&gt;]
+</code></pre>
+<p>The following table lists the parsing keywords that you can use for <em>parsingkeywords</em>.</p>
+<table class="table"><thead>
+<tr>
+<th>Keyword</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>eol=<code>&lt;c&gt;</code></td>
+<td>Specifies an end of line character (just one character).</td>
+</tr>
+<tr>
+<td>skip=<code>&lt;n&gt;</code></td>
+<td>Specifies the number of lines to skip at the beginning of the file.</td>
+</tr>
+<tr>
+<td>delims=<code>&lt;xxx&gt;</code></td>
+<td>Specifies a delimiter set. This replaces the default delimiter set of space and tab.</td>
+</tr>
+<tr>
+<td>tokens=<code>&lt;x,y,m–n&gt;</code></td>
+<td>Specifies which tokens from each line are to be passed to the <strong>for</strong> loop for each iteration. As a result, additional variable names are allocated. <em>m-n</em> specifies a range, from the <em>m</em>th through the <em>n</em>th tokens. If the last character in the <strong>tokens=</strong> string is an asterisk (<strong>*</strong>), an additional variable is allocated, and it receives the remaining text on the line after the last token that is parsed.</td>
+</tr>
+<tr>
+<td>usebackq</td>
+<td>Specifies to run a back-quoted string as a command, use a single-quoted string as a literal string, or, for long file names that contain spaces, allow file names in <code>&lt;set&gt;</code>, to each be enclosed in double-quotation marks.</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>Variable substitution:</strong> The following table lists optional syntax (for any variable <strong>I</strong>):</p>
+<table class="table"><thead>
+<tr>
+<th>Variable with modifier</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code> %~I</code></td>
+<td>Expands <code>%I</code> which removes any surrounding quotation marks.</td>
+</tr>
+<tr>
+<td><code>%~fI </code></td>
+<td>Expands <code>%I</code> to a fully qualified path name.</td>
+</tr>
+<tr>
+<td><code>%~dI </code></td>
+<td>Expands <code>%I</code> to a drive letter only.</td>
+</tr>
+<tr>
+<td><code>%~pI</code></td>
+<td>Expands <code>%I</code> to a path only.</td>
+</tr>
+<tr>
+<td><code>%~nI </code></td>
+<td>Expands <code>%I</code> to a file name only.</td>
+</tr>
+<tr>
+<td><code>%~xI</code></td>
+<td>Expands <code>%I</code> to a file name extension only.</td>
+</tr>
+<tr>
+<td><code>%~sI</code></td>
+<td>Expands path to contain short names only.</td>
+</tr>
+<tr>
+<td><code>%~aI</code></td>
+<td>Expands <code>%I</code> to the file attributes of file.</td>
+</tr>
+<tr>
+<td><code>%~tI</code></td>
+<td>Expands <code>%I</code> to the date and time of file.</td>
+</tr>
+<tr>
+<td><code>%~zI</code></td>
+<td>Expands <code>%I</code> to the size of the file.</td>
+</tr>
+<tr>
+<td><code>%~$PATH:I</code></td>
+<td>Searches the directories listed in the PATH environment variable and expands <code>%I</code> to the fully qualified name of the first directory found. If the environment variable name is not defined or the file is not found by the search, this modifier expands to the empty string.</td>
+</tr>
+</tbody>
+</table>
+<p>The following table lists modifier combinations that you can use to get compound results.</p>
+<table class="table"><thead>
+<tr>
+<th>Variable with combined modifiers</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>%~dpI </code></td>
+<td>Expands <code>%I</code> to a drive letter and path only.</td>
+</tr>
+<tr>
+<td><code>%~nxI</code></td>
+<td>Expands <code>%I</code> to a file name and extension only.</td>
+</tr>
+<tr>
+<td><code>%~fsI</code></td>
+<td>Expands <code>%I</code> to a full path name with short names only.</td>
+</tr>
+<tr>
+<td><code>%~dp$PATH:I</code></td>
+<td>Searches the directories that are listed in the PATH environment variable for <code>%I</code> and expands to the drive letter and path of the first one found.</td>
+</tr>
+<tr>
+<td><code>%~ftzaI</code></td>
+<td>Expands <code>%I</code> to an output line that is like <strong>dir</strong>.</td>
+</tr>
+</tbody>
+</table>
+<p>In the above examples, you can replace <code>%I</code> and PATH with other valid values. A valid <strong>for</strong> variable name ends the <strong>%~</strong> syntax.</p>
+<p>By using uppercase variable names such as <code>%I</code>, you can make your code more readable and avoid confusion with the modifiers, which are not case sensitive.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Parsing a string:</strong> You can use the <code>for /f</code> parsing logic on an immediate string by wrapping <code>&lt;literalstring&gt;</code> in either: double quotes (<em>without</em> usebackq) or in single quotes (<em>with</em> usebackq) --for example, (MyString) or ('MyString'). <code>&lt;literalstring&gt;</code> is treated as a single line of input from a file. When parsing <code>&lt;literalstring&gt;</code> in double-quotes, command symbols (such as, <code>\ &amp; | &gt; &lt; ^</code>) are treated as ordinary characters.</p>
+</li>
+<li>
+<p><strong>Parsing output:</strong> You can use the <code>for /f</code> command to parse the output of a command by placing a back-quoted <code>&lt;command&gt;</code> between the parentheses. It is treated as a command line, which is passed to a child Cmd.exe. The output is captured into memory and parsed as if it is a file.</p>
+</li>
+</ul>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<p>To use <strong>for</strong> in a batch file, use the following syntax:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> {<span class="hljs-variable">%%|</span>%}&lt;variable&gt; <span class="hljs-keyword">in</span> (&lt;<span class="hljs-built_in">set</span>&gt;) <span class="hljs-keyword">do</span> &lt;command&gt; [&lt;commandlineoptions&gt;]
+</code></pre>
+<p>To display the contents of all the files in the current directory that have the extension .doc or .txt by using the replaceable variable <strong>%f</strong>, type:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> %f <span class="hljs-keyword">in</span> (*.doc *.txt) <span class="hljs-keyword">do</span> <span class="hljs-built_in">type</span> %f
+</code></pre>
+<p>In the preceding example, each file that has the .doc or .txt extension in the current directory is substituted for the <strong>%f</strong> variable until the contents of every file are displayed. To use this command in a batch file, replace every occurrence of <strong>%f</strong> with <strong>%%f</strong>. Otherwise, the variable is ignored and an error message is displayed.</p>
+<p>To parse a file, ignoring commented lines, type:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f eol=; tokens=<span class="hljs-number">2</span>,<span class="hljs-number">3</span>* delims=, %i <span class="hljs-keyword">in</span> (myfile.txt) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> %i %j %k
+</code></pre>
+<p>This command parses each line in <em>myfile.txt</em>. It ignores lines that begin with a semicolon and passes the second and third token from each line to the <strong>for</strong> body (tokens are delimited by commas or spaces). The body of the <strong>for</strong> statement references <strong>%i</strong> to get the second token, <strong>%j</strong> to get the third token, and <strong>%k</strong> to get all of the remaining tokens. If the file names that you supply contain spaces, use quotation marks around the text (for example, File Name). To use quotation marks, you must use <strong>usebackq</strong>. Otherwise, the quotation marks are interpreted as defining a literal string to parse.</p>
+<p><strong>%i</strong> is explicitly declared in the <strong>for</strong> statement. <strong>%j</strong> and <strong>%k</strong> are implicitly declared by using <strong>tokens=</strong>. You can use <strong>tokens=</strong> to specify up to 26 tokens, provided that it does not cause an attempt to declare a variable higher than the letter z or Z.</p>
+<p>To parse the output of a command by placing <em>set</em> between the parentheses, type:</p>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f usebackq delims== %i <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">set</span>&#x27;) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> %i
+</code></pre>
+<h2 id="additional-references" tabindex="-1">Additional References <a class="header-anchor" href="#additional-references" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="command-line-syntax-key.html">Command-Line Syntax Key</a></li>
+</ul>
+<h2 id="for-2" tabindex="-1">for <a class="header-anchor" href="#for-2" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/for">https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/for</a></li>
+</ul>
+<pre><code class="language-bat"><span class="hljs-keyword">for</span> /f &quot;usebackq delims== tokens=<span class="hljs-number">1</span>,<span class="hljs-number">2</span>&quot; %i <span class="hljs-keyword">in</span> (`<span class="hljs-built_in">set</span>`) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> %j
+<span class="hljs-keyword">for</span> /f &quot;usebackq delims==&quot; %i <span class="hljs-keyword">in</span> (`<span class="hljs-built_in">set</span>`) <span class="hljs-keyword">do</span> @<span class="hljs-built_in">echo</span> %i
+<span class="hljs-keyword">FOR</span> /F &quot;usebackq delims==&quot; %i <span class="hljs-keyword">IN</span> (cat requirements.txt) <span class="hljs-keyword">DO</span> poetry add %i
+</code></pre>
+<ul>
+<li>
+<p><a href="https://stackoverflow.com/questions/18316538/for-loop-and-delims-in-batch-files">https://stackoverflow.com/questions/18316538/for-loop-and-delims-in-batch-files</a></p>
+<p>Most of the information you need is available in the built-in <code>help</code>, though it can be daunting if you are new to batch programming. <br>
+For example, type <code>HELP FOR</code> or <code>FOR /?</code> from the command prompt to get help on the <code>FOR</code> command.</p>
+<p>Explanation:</p>
+<pre><code class="language-bat"><span class="hljs-comment">REM  Explanation for:</span>
+<span class="hljs-keyword">FOR</span> /F &quot;delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /O-D /B &quot;<span class="hljs-variable">%TEST_RESULTS%</span>\*.trx&quot;&#x27;) ...
+
+<span class="hljs-keyword">IF</span> &quot;<span class="hljs-variable">%INPUT_PATH%</span>&quot;==&quot;&quot; (
+    <span class="hljs-built_in">echo</span> Searching <span class="hljs-keyword">for</span> latest test results <span class="hljs-keyword">in</span>: <span class="hljs-variable">%TEST_RESULTS%</span>
+    <span class="hljs-keyword">FOR</span> /F &quot;delims=&quot; <span class="hljs-variable">%%i</span> <span class="hljs-keyword">in</span> (&#x27;<span class="hljs-built_in">dir</span> /O-D /B &quot;<span class="hljs-variable">%TEST_RESULTS%</span>\*.trx&quot;&#x27;) <span class="hljs-keyword">DO</span> (
+        <span class="hljs-built_in">SET</span> INPUT_PATH=<span class="hljs-variable">%TEST_RESULTS%</span>\<span class="hljs-variable">%%~</span>ni
+        <span class="hljs-keyword">GOTO</span> :DoneInputPath
+) )
+</code></pre>
+<p>The <code>DIR</code> command lists all of the <code>*.TRX</code> files within the <code>%TEST_RESULTS%</code> path. The <code>/B</code> option gives the brief format (file names only).<br>
+The <code>/O-D</code> option sorts the files by last modified date descending (newest first).
+The <code>FOR /F</code> command has three modes, depending on the format of the <code>IN()</code> clause. The fact that the <code>IN()</code> clause is enclosed in single quotes means that <code>FOR /F</code> treats the contents as a command, and processes the output of the command, one line at a time. The <code>&quot;delims=&quot;</code> option means do not parse into tokens (preserve each entire line). So each line is iteratively loaded into the <code>%%i</code> variable. The <code>%%i</code> variable only exists within the context of the <code>FOR</code> command.</p>
+<pre><code class="language-bat"><span class="hljs-built_in">SET</span> INPUT_PATH=<span class="hljs-variable">%TEST_RESULTS%</span>\<span class="hljs-variable">%%~</span>ni
+</code></pre>
+<p>I think you know what most of this command does. The only &quot;unusual&quot; aspect is the <code>%%~ni</code> syntax.
+That syntax expands the value of <code>%%i</code> into the base file name only, without any extension.</p>
+<pre><code class="language-bat"><span class="hljs-keyword">GOTO</span> :DoneInputPath
+</code></pre>
+<p>The <code>GOTO</code> causes the <code>FOR</code> loop to abort after the first iteration. This means that <code>INPUT_PATH</code> will be set to the name of the most recently modified <code>*.trx</code> file, since it sorted to the top.</p>
+<p>If the <code>GOTO</code> were not there, then the end result would be the oldest <code>*.trx</code> file instead.</p>
+</li>
+</ul>
+</body></html>

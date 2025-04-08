@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.438" />
+        <title>README_05_WildFly</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="readme_05_wildfly" tabindex="-1">README_05_WildFly <a class="header-anchor" href="#readme_05_wildfly" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.438</p>
+<nav class="table-of-contents"><ol><li><a href="#links">Links </a></li><li><a href="#specifiche">Specifiche </a></li><li><a href="#snippets">Snippets </a></li><li><a href="#links-locali">Links Locali </a></li><li><a href="#installazione-e-configurazione">Installazione e Configurazione </a></li><li><a href="#crontab">Crontab </a></li><li><a href="#impostare-l'avvio-di-wildfly-nel-crontab">Impostare l&#39;avvio di WildFly nel crontab </a></li><li><a href="#test-di-uno-script-crontab">Test di uno script crontab </a></li><li><a href="#autodeploy">Autodeploy </a></li><li><a href="#problema-firefox">Problema firefox </a></li><li><a href="#dettagli-sulla-configurazione">Dettagli sulla configurazione </a><ol><li><a href="#apertura-delle-interfacce-per-potersi-connettere-dall'esterno-della-macchina-virtuale">Apertura delle interfacce per potersi connettere dall&#39;esterno della macchina virtuale </a></li><li><a href="#https">HTTPS </a></li></ol></li><li><a href="#metadata-complete">metadata-complete </a></li></ol></nav><p><img src="../../inc/img/java/wildfly.png" alt="" style="display:block; margin: 0 auto; width:50%"></p>
+<p><a href="./README_06_Eclipse.html">Eclipse</a></p>
+<h1 id="wildfly-15.0.1.final-2019-01-05" tabindex="-1">WildFly 15.0.1.Final 2019-01-05 <a class="header-anchor" href="#wildfly-15.0.1.final-2019-01-05" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="http://wildfly.org/downloads/">http://wildfly.org/downloads/</a></li>
+<li><a href="https://github.com/wildfly/quickstart/tree/15.0.1.Final">Sorgenti QuickStart</a></li>
+</ul>
+<h2 id="links" tabindex="-1">Links <a class="header-anchor" href="#links" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://wildfly.org/">http://wildfly.org/</a></li>
+<li><a href="http://docs.wildfly.org/">http://docs.wildfly.org/</a></li>
+<li><a href="http://github.com/wildfly/quickstart">http://github.com/wildfly/quickstart</a></li>
+<li><a href="http://docs.wildfly.org/14/Getting_Started_Guide.html#installation">http://docs.wildfly.org/14/Getting_Started_Guide.html#installation</a></li>
+</ul>
+<h2 id="specifiche" tabindex="-1">Specifiche <a class="header-anchor" href="#specifiche" aria-hidden="true">🔗</a></h2>
+<p><a href="http://wildfly.org/news/">http://wildfly.org/news/</a></p>
+<ul>
+<li>Java EE 8</li>
+<li>Java Servlet 4.0 JSR-369</li>
+<li>Contexts and Dependency Injection for Java 2.0 JSR-365 - Weld 3.0.5</li>
+<li>Bean Validation 2.0 JSR-380</li>
+<li>JavaServer Faces 2.3 JSR-372 - Mojarra 2.3.5 SP2</li>
+<li>Java Persistence 2.2 JSR-338 - Hibernate ORM 5.3.6 - Hibernate Validator 6.0.13 - Hibernate Search 5.10.3</li>
+<li>Common Annotations for the Java Platform 1.3 JSR-250</li>
+<li>Java API for RESTFul Web Services 2.1 JSR-370</li>
+<li>Java API for JSON Processing 1.1 JSR-374</li>
+<li>Java API for JSON Binding 1.0 JSR-367</li>
+</ul>
+<h2 id="snippets" tabindex="-1">Snippets <a class="header-anchor" href="#snippets" aria-hidden="true">🔗</a></h2>
+<pre><code>/var/www/html/tomcat8/wildfly-15.0.1.Final/bin/standalone.sh &amp;
+
+/var/www/html/tomcat8/wildfly-15.0.1.Final/bin/standalone.sh -b 0.0.0.0 -bmanagement=0.0.0.0
+
+/var/www/html/tomcat8/wildfly-15.0.1.Final/bin/jboss-cli.sh --connect --command=:shutdown
+
+jboss-cli.sh --help
+jboss-cli.sh --connect --command=&quot;help --commands&quot;
+jboss-cli.sh --connect --command=&quot;deployment list&quot;
+
+/var/www/html/tomcat8/wildfly-15.0.1.Final/bin/jboss-cli.sh --connect --command=&quot;/deployment=jsf.war:redeploy&quot;
+</code></pre>
+<h2 id="links-locali" tabindex="-1">Links Locali <a class="header-anchor" href="#links-locali" aria-hidden="true">🔗</a></h2>
+<p>Pagina principale</p>
+<ul>
+<li><a href="http://localhost:8080/">http://localhost:8080/</a></li>
+<li><a href="https://localhost:8443/">https://localhost:8443/</a></li>
+</ul>
+<p>Amministrazione:</p>
+<ul>
+<li><a href="http://localhost:9990">http://localhost:9990</a></li>
+<li><a href="https://localhost:9993">https://localhost:9993</a></li>
+</ul>
+<h1 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h1>
+<pre><code>C:\Windows\system32\rundll32.exe sysdm.cpl,EditEnvironmentVariables
+JBOSS_HOME=%USERPROFILE%\app\wildfly-15.0.1.Final
+</code></pre>
+<p>Abilitando HTTPS si attiva anche HTTP/2 che và disabilitato perchè genera errori:
+Ho impostato <code>enable-http2=&quot;false&quot;</code> nel file <code>/standalone/configuration/standalone.xml</code>:</p>
+<ul>
+<li>
+<p><a href="http://docs.wildfly.org/15/Getting_Started_Guide.html">http://docs.wildfly.org/15/Getting_Started_Guide.html</a></p>
+<p>&quot;C:\Users$USER\app\wildfly-15.0.1.Final\bin\standalone.bat&quot;</p>
+<p>C:\Users$USER\app\wildfly-15.0.1.Final\standalone\configuration\mgmt-users.properties</p>
+</li>
+</ul>
+<p>Prima di poter accedere alla console di amministrazione bisogna configurare un utente amministratore:
+siccome l'utente <code>admin</code> già esiste, bisogna abilitarlo:</p>
+<pre><code>&quot;C:\Users\$USER\app\wildfly-15.0.1.Final\bin\add-user.bat&quot;
+
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): a
+
+Enter the details of the new user to add.
+Using realm 'ManagementRealm' as discovered from the existing property files.
+Username : admin
+User 'admin' already exists and is disabled, would you like to...
+ a) Update the existing user password and roles
+ b) Enable the existing user
+ c) Type a new username
+(a): b
+Updated user 'admin' to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\standalone\configuration\mgmt-users.properties'
+Updated user 'admin' to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\domain\configuration\mgmt-users.properties'
+Updated user 'admin' with groups null to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\standalone\configuration\mgmt-groups.properties'
+Updated user 'admin' with groups null to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\domain\configuration\mgmt-groups.properties'
+</code></pre>
+<p>Ora che l'utente admin è stato abilitato bisogna richiamare di nuovo <code>add-user.bat</code> per definirne la password:</p>
+<pre><code>&quot;C:\Users\$USER\app\wildfly-15.0.1.Final\bin\add-user.bat&quot;
+
+What type of user do you wish to add?
+ a) Management User (mgmt-users.properties)
+ b) Application User (application-users.properties)
+(a): a
+
+Enter the details of the new user to add.
+Using realm 'ManagementRealm' as discovered from the existing property files.
+Username : admin
+User 'admin' already exists and is enabled, would you like to...
+ a) Update the existing user password and roles
+ b) Disable the existing user
+ c) Type a new username
+(a): a
+Password recommendations are listed below. To modify these restrictions edit the add-user.properties configuration file.
+ - The password should be different from the username
+ - The password should not be one of the following restricted values {root, admin, administrator}
+ - The password should contain at least 8 characters, 1 alphabetic character(s), 1 digit(s), 1 non-alphanumeric symbol(s)
+Password : !cdpcdp1030
+Re-enter Password : !cdpcdp1030
+What groups do you want this user to belong to? (Please enter a comma separated list, or leave blank for none)[PowerUser,BillingAdmin,]:
+Updated user 'admin' to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\standalone\configuration\mgmt-users.properties'
+Updated user 'admin' to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\domain\configuration\mgmt-users.properties'
+Updated user 'admin' with groups  to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\standalone\configuration\mgmt-groups.properties'
+Updated user 'admin' with groups  to file 'C:\Users\$USER\app\wildfly-15.0.1.Final\domain\configuration\mgmt-groups.properties'
+Is this new user going to be used for one AS process to connect to another AS process?
+e.g. for a slave host controller connecting to the master or for a Remoting connection for server to server EJB calls.
+yes/no? no
+
+
+&lt;JBOSS_HOME&gt;/bin/jboss-cli.sh --connect --command=:shutdown      (Unix / Linux)
+
+&lt;JBOSS_HOME&gt;\bin\jboss-cli.bat --connect --command=:shutdown     (Windows)
+</code></pre>
+<ul>
+<li><a href="https://localhost:8443/">https://localhost:8443/</a></li>
+<li><a href="http://localhost:9990/console/index.html">http://localhost:9990/console/index.html</a></li>
+</ul>
+<p>In <code>JBOSS_HOME\bin</code> ho creato lo script <code>shutdown.bat</code></p>
+<pre><code class="language-bat">@<span class="hljs-built_in">echo</span> off
+<span class="hljs-keyword">call</span> jboss-cli.bat --connect --command=:shutdown
+</code></pre>
+<h1 id="errore-sui-timer-ejb" tabindex="-1">Errore sui Timer EJB <a class="header-anchor" href="#errore-sui-timer-ejb" aria-hidden="true">🔗</a></h1>
+<p>Problema:</p>
+<pre><code>WFLYEJB0029: Could not restore timer from /var/www/html/tomcat8/wildfly-15.0.1.Final/standalone/data/timer-service-data/jsf.jsf.Timer/62cb1b35-c0af-4af2-b705-e4616cb446d6.xml
+</code></pre>
+<p>E' dovuto ad un stop non corretto del server, ad esempio a causa di OutOfMemoryError, che non ha permesso ai Timer EJB di essere stati correttamente serializzati.
+Soluzione: svuotare la directory</p>
+<pre><code>/var/www/html/tomcat8/wildfly-15.0.1.Final/standalone/data/timer-service-data/jsf.jsf.Timer
+</code></pre>
+<p>oppure cancellare i soli files che danno problemi, es. dimensione di 0 b.</p>
+<h1 id="logging" tabindex="-1">Logging <a class="header-anchor" href="#logging" aria-hidden="true">🔗</a></h1>
+<p><a href="http://docs.wildfly.org/14/Admin_Guide.html#periodic-size-rotating-file-handler">http://docs.wildfly.org/14/Admin_Guide.html#periodic-size-rotating-file-handler</a>
+<a href="https://wildscribe.github.io/WildFly/14.0/index.html">https://wildscribe.github.io/WildFly/14.0/index.html</a>	
+&lt;<a href="https://wildscribe.github.io/WildFly/14.0/subsystem/logging/index.html">https://wildscribe.github.io/WildFly/14.0/subsystem/logging/index.html</a>
+<a href="https://wildscribe.github.io/WildFly/14.0/subsystem/logging/periodic-size-rotating-file-handler/index.html">https://wildscribe.github.io/WildFly/14.0/subsystem/logging/periodic-size-rotating-file-handler/index.html</a>
+<a href="https://wildscribe.github.io/WildFly/14.0/subsystem/logging/size-rotating-file-handler/index.html">https://wildscribe.github.io/WildFly/14.0/subsystem/logging/size-rotating-file-handler/index.html</a></p>
+<pre><code>\wildfly-15.0.1.Final\standalone\configuration\logging.properties è utilizzato solo per il boot
+\wildfly-15.0.1.Final\standalone\configuration\standalone.xml è il file da configurare
+</code></pre>
+<pre><code class="language-xml">	<span class="hljs-comment">&lt;!--periodic-rotating-file-handler name=&quot;FILE&quot; autoflush=&quot;true&quot;&gt;
+		&lt;formatter&gt;
+			&lt;named-formatter name=&quot;PATTERN&quot;/&gt;
+		&lt;/formatter&gt;
+		&lt;file relative-to=&quot;jboss.server.log.dir&quot; path=&quot;server.log&quot;/&gt;
+		&lt;suffix value=&quot;.yyyy-MM-dd&quot;/&gt;
+		&lt;append value=&quot;true&quot;/&gt;
+	&lt;/periodic-rotating-file-handler--&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">size-rotating-file-handler</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;FILE&quot;</span> <span class="hljs-attr">autoflush</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">formatter</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">named-formatter</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;PATTERN&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">formatter</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">file</span> <span class="hljs-attr">relative-to</span>=<span class="hljs-string">&quot;jboss.server.log.dir&quot;</span> <span class="hljs-attr">path</span>=<span class="hljs-string">&quot;server.log&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">append</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">max-backup-index</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;10&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">rotate-size</span> <span class="hljs-attr">value</span>=<span class="hljs-string">&quot;2m&quot;</span>/&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">size-rotating-file-handler</span>&gt;</span>
+</code></pre>
+<h1 id="partenza-su-linux" tabindex="-1">Partenza Su Linux <a class="header-anchor" href="#partenza-su-linux" aria-hidden="true">🔗</a></h1>
+<h2 id="installazione-e-configurazione" tabindex="-1">Installazione e Configurazione <a class="header-anchor" href="#installazione-e-configurazione" aria-hidden="true">🔗</a></h2>
+<pre><code>$ sudo su - tomcat
+$ cd /var/www/html/tomcat8/webapps
+$ ln -s ../wildfly-15.0.1.Final
+</code></pre>
+<p>Questo link simbolico permette di vedere l'installazione di wildfly tramite la share samba:</p>
+<pre><code>\\host74\tomcat_webapps\wildfly-15.0.1.Final\
+
+C:\&gt; copy e:\BackupDVDRW\app\Sviluppo\Web\WildFly\wildfly-15.0.1.Final.zip \\host74\tomcat_webapps\
+
+$ sudo su - tomcat
+$ cd /var/www/html/tomcat8/
+$ unzip wildfly-15.0.1.Final.zip
+$ cd /var/www/html/tomcat8/wildfly-15.0.1.Final/bin
+$ chmod +x standalone.sh add-user.sh jboss-cli.sh
+$ ./add-user.sh
+    a
+    admin
+    b
+$ ./add-user.sh
+    a
+    admin
+    a
+    !cdpcdp1030
+    invio
+    no
+
+
+C:\&gt; copy e:\BackupDVDRW\app\Sviluppo\Web\WildFly\host74\var\www\html\tomcat8\wildfly-15.0.1.Final\standalone\configuration\ks_host74.pkcs12 \\host74\tomcat_webapps\wildfly-15.0.1.Final\standalone\configuration\
+C:\&gt; copy e:\BackupDVDRW\app\Sviluppo\Web\WildFly\host74\var\www\html\tomcat8\wildfly-15.0.1.Final\standalone\configuration\standalone.xml \\host74\tomcat_webapps\wildfly-15.0.1.Final\standalone\configuration\
+C:\&gt; copy e:\BackupDVDRW\app\Sviluppo\Web\WildFly\host74\var\www\html\tomcat8\wildfly-15.0.1.Final\bin\standalone.sh \\host74\tomcat_webapps\wildfly-15.0.1.Final\bin\
+</code></pre>
+<h2 id="crontab" tabindex="-1">Crontab <a class="header-anchor" href="#crontab" aria-hidden="true">🔗</a></h2>
+<h2 id="impostare-l'avvio-di-wildfly-nel-crontab" tabindex="-1">Impostare l'avvio di WildFly nel crontab <a class="header-anchor" href="#impostare-l'avvio-di-wildfly-nel-crontab" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">-sh-4.1$ crontab -e
+SHELL=/bin/bash
+PATH=/var/www/html/tomcat8/jdk1.8.0/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+JAVA_HOME=/var/www/html/tomcat8/jdk1.8.0
+@reboot /var/www/html/tomcat8/wildfly-15.0.1.Final/bin/standalone.sh 2&gt;&amp;1 &gt;&gt; /var/www/html/tomcat8/wildfly-15.0.1.Final/reboot.log
+-sh-4.1$ crontab -l
+</code></pre>
+<h2 id="test-di-uno-script-crontab" tabindex="-1">Test di uno script crontab <a class="header-anchor" href="#test-di-uno-script-crontab" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>Effettuare il backup del crontab corrente:</li>
+</ol>
+<pre><code class="language-bash">crontab -l &gt; crontab_`<span class="hljs-built_in">date</span> +%Y%m%d`.txt
+</code></pre>
+<ol start="2">
+<li>effettuare il dump dell'ambiente crontab(genera lo script <code>cron-env</code> contenente le variabili di ambiente per l'esecuzione degli script crontab):
+ATTENZIONE: questa operazione cancella il crontab originale, che và salvato in precedenza con <code>crontab -l &gt; crontab.txt</code></li>
+</ol>
+<pre><code class="language-bash">crontab -e
+* * * * *   /usr/bin/env &gt; /var/www/html/tomcat8/cron-env
+</code></pre>
+<p>cron eseguirà immediatamente il crontab e produrrà il file <code>cron-env</code>, ora è possibile ripristinare il crontab originale.</p>
+<ol start="3">
+<li>ora rimuovere la riga che è servita a produrre il dump dell'env e reimpostare il crontab reale:</li>
+</ol>
+<pre><code class="language-bash">-sh-4.1$ crontab crontab_`<span class="hljs-built_in">date</span> +%Y%m%d`.txt
+
+oppure manualmente:
+
+-sh-4.1$ crontab -e
+SHELL=/bin/bash
+PATH=/var/www/html/tomcat8/jdk1.8.0/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+JAVA_HOME=/var/www/html/tomcat8/jdk1.8.0
+@reboot /var/www/html/tomcat8/wildfly-15.0.1.Final/bin/standalone.sh 2&gt;&amp;1 &gt;&gt; /var/www/html/tomcat8/wildfly-15.0.1.Final/reboot.log
+-sh-4.1$ crontab -l
+</code></pre>
+<ol start="4">
+<li>copiare il contenuto del crontab nello script di test:</li>
+</ol>
+<pre><code class="language-bash">vim start_server.sh
+SHELL=/bin/bash
+PATH=/var/www/html/tomcat8/jdk1.8.0/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
+JAVA_HOME=/var/www/html/tomcat8/jdk1.8.0
+@reboot /var/www/html/tomcat8/wildfly-15.0.1.Final/bin/standalone.sh 2&gt;&amp;1 &gt;&gt; /var/www/html/tomcat8/wildfly-15.0.1.Final/reboot.log
+
+<span class="hljs-built_in">chmod</span> +x start_server.sh
+</code></pre>
+<ol start="5">
+<li>Lanciare lo script da testare con l'ambiente del crontab:</li>
+</ol>
+<pre><code class="language-bash">/usr/bin/env -i $(<span class="hljs-built_in">cat</span> /var/www/html/tomcat8/cron-env) ./start_server.sh
+</code></pre>
+<h2 id="autodeploy" tabindex="-1">Autodeploy <a class="header-anchor" href="#autodeploy" aria-hidden="true">🔗</a></h2>
+<p><a href="http://docs.wildfly.org/14/Admin_Guide.html#marker-files">http://docs.wildfly.org/14/Admin_Guide.html#marker-files</a></p>
+<p>Copiare i .war in:</p>
+<pre><code>/var/www/html/tomcat8/wildfly-15.0.1.Final/standalone/deployments
+\\host74\tomcat_webapps\wildfly-15.0.1.Final\standalone\deployments\
+</code></pre>
+<p>Basic workflows:</p>
+<p>All examples assume variable $JBOSS_HOME points to the root of the WildFly distribution.</p>
+<ul>
+<li>
+<p>Add new zipped content and deploy it:</p>
+<p>cp target/example.war/ $JBOSS_HOME/standalone/deployments</p>
+<p>(Manual mode only) touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</p>
+</li>
+<li>
+<p>Undeploy currently deployed content:</p>
+<p>rm $JBOSS_HOME/standalone/deployments/example.war.deployed</p>
+</li>
+<li>
+<p>Auto-deploy mode only: Undeploy currently deployed content:</p>
+<p>rm $JBOSS_HOME/standalone/deployments/example.war</p>
+</li>
+<li>
+<p>Replace currently deployed zipped content with a new version and deploy it:</p>
+<p>cp target/example.war/ $JBOSS_HOME/standalone/deployments</p>
+<p>(Manual mode only) touch $JBOSS_HOME/standalone/deployments/example.war.dodeploy</p>
+</li>
+</ul>
+<h2 id="problema-firefox" tabindex="-1">Problema firefox <a class="header-anchor" href="#problema-firefox" aria-hidden="true">🔗</a></h2>
+<p>Dall'interfaccia di amministrazione si ottengono gli errori:</p>
+<pre><code>Failed to open indexedDB, are you in private browsing mode
+</code></pre>
+<h2 id="dettagli-sulla-configurazione" tabindex="-1">Dettagli sulla configurazione <a class="header-anchor" href="#dettagli-sulla-configurazione" aria-hidden="true">🔗</a></h2>
+<pre><code>vim /var/www/html/tomcat8/wildfly-15.0.1.Final/bin/standalone.sh
+
+JAVA_HOME=/var/www/html/tomcat8/jdk1.8.0
+</code></pre>
+<h3 id="apertura-delle-interfacce-per-potersi-connettere-dall'esterno-della-macchina-virtuale" tabindex="-1">Apertura delle interfacce per potersi connettere dall'esterno della macchina virtuale <a class="header-anchor" href="#apertura-delle-interfacce-per-potersi-connettere-dall'esterno-della-macchina-virtuale" aria-hidden="true">🔗</a></h3>
+<p>Di default non ci si riesce a connettersi all'application server perchè esso ascolta solamente le richieste http/https da locale!</p>
+<pre><code>-sh-4.1$ ./standalone.sh -b 0.0.0.0 -bmanagement=0.0.0.0
+</code></pre>
+<p>perchè di default la modalità standalone ascolta solamente richieste che arrivano dalla macchina locale.
+utilizzando <code>-b 0.0.0.0 -bmanagement=0.0.0.0</code> si abilitano il server e la console di amministrazione
+ad accettare richieste provenienti anche da altre macchine</p>
+<p>In alternativa si può configurare standalone.xml la sezione interfacce:</p>
+<p>Cambiando:</p>
+<pre><code>/var/www/html/tomcat8/wildfly-15.0.1.Final/standalone/configuration/standalone.xml:
+\\host74\tomcat_webapps\wildfly-15.0.1.Final\standalone\configuration\standalone.xml:
+
+&lt;interfaces&gt;
+    &lt;interface name=&quot;management&quot;&gt;
+        &lt;inet-address value=&quot;${jboss.bind.address.management:127.0.0.1}&quot;/&gt;
+    &lt;/interface&gt;
+    &lt;interface name=&quot;public&quot;&gt;
+        &lt;inet-address value=&quot;${jboss.bind.address:127.0.0.1}&quot;/&gt;
+    &lt;/interface&gt;
+&lt;/interfaces&gt;
+</code></pre>
+<p>in:</p>
+<pre><code>&lt;interfaces&gt;
+    &lt;interface name=&quot;management&quot;&gt;
+        &lt;!--inet-address value=&quot;${jboss.bind.address.management:127.0.0.1}&quot;/--&gt;
+        &lt;any-address/&gt;
+    &lt;/interface&gt;
+    &lt;interface name=&quot;public&quot;&gt;
+        &lt;!--inet-address value=&quot;${jboss.bind.address:127.0.0.1}&quot;/--&gt;
+        &lt;any-address/&gt;
+    &lt;/interface&gt;
+&lt;/interfaces&gt;
+</code></pre>
+<h3 id="https" tabindex="-1">HTTPS <a class="header-anchor" href="#https" aria-hidden="true">🔗</a></h3>
+<p>Riciclo il keystore già generato per payara:</p>
+<pre><code>cp /var/www/html/tomcat8/payara5/glassfish/domains/domain1/config/ks_host74.pkcs12 /var/www/html/tomcat8/wildfly-15.0.1.Final/standalone/configuration/
+</code></pre>
+<p>Configurazione del keystore in WildFly:</p>
+<pre><code>/var/www/html/tomcat8/wildfly-15.0.1.Final/standalone/configuration/standalone.xml:
+
+        &lt;security-realm name=&quot;ApplicationRealm&quot;&gt;
+            &lt;server-identities&gt;
+                &lt;ssl&gt;
+                &lt;!--
+                    &lt;keystore path=&quot;application.keystore&quot;
+                        relative-to=&quot;jboss.server.config.dir&quot;
+                        keystore-password=&quot;password&quot;
+                        alias=&quot;server&quot;
+                        key-password=&quot;password&quot;
+                        generate-self-signed-certificate-host=&quot;localhost&quot;/&gt;
+                --&gt;
+                    &lt;keystore path=&quot;ks_host74.pkcs12&quot;
+                        relative-to=&quot;jboss.server.config.dir&quot;
+                        keystore-password=&quot;cdpcdp1030&quot;
+                        alias=&quot;host74&quot;
+                        key-password=&quot;cdpcdp1030&quot;
+                        /&gt;
+                &lt;/ssl&gt;
+            &lt;/server-identities&gt;
+        ...
+</code></pre>
+<p>Abilitando HTTPS si attiva anche HTTP/2 che và disabilitato perchè genera errori:</p>
+<p>Ho impostato <code>enable-http2=&quot;false&quot;</code> nel file <code>/standalone/configuration/standalone.xml</code>:</p>
+<pre><code>    &lt;subsystem xmlns=&quot;urn:jboss:domain:undertow:7.0&quot; default-server=&quot;default-server&quot; default-virtual-host=&quot;default-host&quot; default-servlet-container=&quot;default&quot; default-security-domain=&quot;other&quot;&gt;
+        &lt;buffer-cache name=&quot;default&quot;/&gt;
+        &lt;server name=&quot;default-server&quot;&gt;
+            &lt;http-listener name=&quot;default&quot; socket-binding=&quot;http&quot; redirect-socket=&quot;https&quot; enable-http2=&quot;false&quot;/&gt;
+            &lt;https-listener name=&quot;https&quot; socket-binding=&quot;https&quot; security-realm=&quot;ApplicationRealm&quot; enable-http2=&quot;false&quot;/&gt;
+            &lt;host name=&quot;default-host&quot; alias=&quot;localhost&quot;&gt;
+                &lt;location name=&quot;/&quot; handler=&quot;welcome-content&quot;/&gt;
+                &lt;http-invoker security-realm=&quot;ApplicationRealm&quot;/&gt;
+            &lt;/host&gt;
+        &lt;/server&gt;
+</code></pre>
+<h1 id="java.lang.outofmemoryerror%3A-metadata-space" tabindex="-1">java.lang.OutOfMemoryError: Metadata space <a class="header-anchor" href="#java.lang.outofmemoryerror%3A-metadata-space" aria-hidden="true">🔗</a></h1>
+<p>Si ottiene durante la fase di sviluppo effettuando il redeploy dell'applicazione molto spesso.</p>
+<p>Edit <code>bin/standalone.conf</code></p>
+<p>Change:</p>
+<pre><code>JAVA_OPTS=”-Xms64m -Xmx512m -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=256m -Djava.net.preferIPv4Stack=true”
+</code></pre>
+<p>To:</p>
+<pre><code>JAVA_OPTS=”-Xms64m -Xmx2G -XX:MetaspaceSize=96M -XX:MaxMetaspaceSize=2G -Djava.net.preferIPv4Stack=true”
+</code></pre>
+<h1 id="weld-non-%C3%A8-in-grado-di-iniettare-gli-ejb" tabindex="-1">Weld non è in grado di iniettare gli EJB <a class="header-anchor" href="#weld-non-%C3%A8-in-grado-di-iniettare-gli-ejb" aria-hidden="true">🔗</a></h1>
+<p>E' colpa di un errata impostazione nel <code>WEB-INF/web.xml</code></p>
+<h2 id="metadata-complete" tabindex="-1">metadata-complete <a class="header-anchor" href="#metadata-complete" aria-hidden="true">🔗</a></h2>
+<p><strong>L'attributo <code>metadata-complete</code> nel <code>WEB-INF/web.xml</code> deve essere <code>false</code> oppure non comparire affatto.</strong></p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+            <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+            <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span>
+            <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span>
+            <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3.1&quot;</span>&gt;</span>
+</code></pre>
+<p>Vedi: [Errore di partenza in Tomcat]</p>
+<p>Questo perchè se presente ed uguale a true causa dei malfunzionamenti a Weld impedendogli
+di effettuare correttamente le @Inject degli EJB all'interno dei managed bean.</p>
+<h1 id="exampleds" tabindex="-1">ExampleDS <a class="header-anchor" href="#exampleds" aria-hidden="true">🔗</a></h1>
+<p>per gli esempio Weld, che utilizzando il DataSource di WildFly <code>java:jboss/datasources/ExampleDS</code>
+definito nel <code>META-INF/persistence.xml</code> come persistence unit &quot;exampleDB&quot;</p>
+<p>Il DataSource <code>java:jboss/datasources/ExampleDS</code> è definito nel file</p>
+<p>come:</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">subsystem</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;urn:jboss:domain:datasources:5.0&quot;</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">datasources</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">datasource</span> <span class="hljs-attr">jndi-name</span>=<span class="hljs-string">&quot;java:jboss/datasources/ExampleDS&quot;</span> <span class="hljs-attr">pool-name</span>=<span class="hljs-string">&quot;ExampleDS&quot;</span> <span class="hljs-attr">enabled</span>=<span class="hljs-string">&quot;true&quot;</span> <span class="hljs-attr">use-java-context</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">connection-url</span>&gt;</span>jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE<span class="hljs-tag">&lt;/<span class="hljs-name">connection-url</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">driver</span>&gt;</span>h2<span class="hljs-tag">&lt;/<span class="hljs-name">driver</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">security</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">user-name</span>&gt;</span>sa<span class="hljs-tag">&lt;/<span class="hljs-name">user-name</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">password</span>&gt;</span>sa<span class="hljs-tag">&lt;/<span class="hljs-name">password</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">security</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">datasource</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">drivers</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">driver</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;h2&quot;</span> <span class="hljs-attr">module</span>=<span class="hljs-string">&quot;com.h2database.h2&quot;</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">xa-datasource-class</span>&gt;</span>org.h2.jdbcx.JdbcDataSource<span class="hljs-tag">&lt;/<span class="hljs-name">xa-datasource-class</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">driver</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">drivers</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">datasources</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">subsystem</span>&gt;</span>
+</code></pre>
+</body></html>

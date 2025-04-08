@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.844" />
+        <title>leggere_file_file_descriptors_tcp_ip</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="leggere_file_file_descriptors_tcp_ip" tabindex="-1">leggere_file_file_descriptors_tcp_ip <a class="header-anchor" href="#leggere_file_file_descriptors_tcp_ip" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.844</p>
+<nav class="table-of-contents"><ol><li><a href="#tech-tip%3A-tcp%2Fip-access-using-bash">Tech Tip: TCP/IP Access Using bash </a></li><li><a href="#bash-based-browser">Bash based browser </a></li><li><a href="#enable-bash-tcp-redirect-script-on-ubuntu">Enable bash tcp redirect script on Ubuntu </a></li></ol></nav><h1 id="usare-i-file-descriptors-per-comunicare-in-rete-con-tcp-ip" tabindex="-1">usare i file descriptors per comunicare in rete con tcp ip <a class="header-anchor" href="#usare-i-file-descriptors-per-comunicare-in-rete-con-tcp-ip" aria-hidden="true">🔗</a></h1>
+<p><a href="http://www.linuxjournal.com/content/tech-tip-tcpip-access-using-bash">http://www.linuxjournal.com/content/tech-tip-tcpip-access-using-bash</a></p>
+<h2 id="tech-tip%3A-tcp%2Fip-access-using-bash" tabindex="-1">Tech Tip: TCP/IP Access Using bash <a class="header-anchor" href="#tech-tip%3A-tcp%2Fip-access-using-bash" aria-hidden="true">🔗</a></h2>
+<p>Most of us default to <code>wget</code>, <code>curl</code>, <code>netcat</code> and others when in need of network data from the commandline,
+not knowing, or perhaps forgetting, that bash often provides the support that we need
+using redirection from <code>/dev/proto/host/port</code>.</p>
+<p>For example:</p>
+<pre><code>$ cat &lt; /dev/tcp/time.nist.gov/13
+
+55103 09-09-29 17:58:55 50 0 0 0.0 UTC(NIST) *
+</code></pre>
+<p>Reads the time in Daytime Protocol (RFC-867) from the NIST Internet Time Service server (documented at <a href="http://tf.nist.gov/service/its.htm">tf.nist.gov/service/its.htm</a>).
+The Advanced Bash-Scripting Guide includes some more involved examples in chapter 27, covering sending a protocol request, getting web pages, and even UDP use.
+Editor's Note: If this does not work for you, make sure to read the comments below,
+this option is not enabled on all distros (among them, some versions of Ubuntu).
+I tried this on my Ubuntu system and it did not work. So I looked at the bash manpage and saw the following:
+<strong>NOTE: Bash, as packaged for Debian, does not support using the /dev/tcp and /dev/udp files.</strong></p>
+<h2 id="bash-based-browser" tabindex="-1">Bash based browser <a class="header-anchor" href="#bash-based-browser" aria-hidden="true">🔗</a></h2>
+<p>The following script fetches the front page from Google:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">exec</span> 3&lt;&gt;/dev/tcp/www.google.com/80
+<span class="hljs-built_in">echo</span> -e <span class="hljs-string">&quot;GET / HTTP/1.1\r\nhost: http://www.google.com\r\nConnection: close\r\n\r\n&quot;</span> &gt;&amp;3
+<span class="hljs-built_in">cat</span> &lt;&amp;3
+</code></pre>
+<p>Pretty simple, just 3 lines. The first line may be a bit confusing if you haven't seen this type of thing before.
+This line causes <strong>file descriptor 3 to be opened for reading and writing on the specified TCP/IP socket</strong>.
+This is a special form of the exec statement. From the bash man page:</p>
+<pre><code>exec [-cl] [-a name] [command [arguments]]
+... If command is not specified, any redirections take effect in the current shell, and the return status is 0.
+</code></pre>
+<p>So <strong>using exec without a command is a way to open files in the current shell</strong>.</p>
+<p>After the socket is open we send our HTTP request out the socket with the <code>echo ... &gt;&amp;3</code> command. The request consists of:</p>
+<pre><code>GET / HTTP/1.1
+host: http://www.google.com
+Connection: close
+</code></pre>
+<p>Each line is followed by a carriage-return and newline, and all the headers are followed by a blank line
+to signal the end of the request (this is all standard HTTP stuff).</p>
+<p>Next we read the response out of the socket using <code>cat &lt;&amp;3</code>, which reads the response and prints it out. The response being the main HTML page from Google:</p>
+<pre><code>$ bash tcp.sh
+HTTP/1.1 200 OK
+Date: Wed, 30 Sep 2009 17:28:36 GMT
+Expires: -1
+Cache-Control: private, max-age=0
+Content-Type: text/html; charset=ISO-8859-1
+Set-Cookie: PREF=ID=...
+Set-Cookie: NID=27=...
+Server: gws
+X-XSS-Protection: 0
+Transfer-Encoding: chunked
+Connection: close
+
+fef
+&lt;!doctype html&gt;&lt;html&gt;&lt;head&gt;&lt;meta ...
+</code></pre>
+<p>And that's it, with just a few more lines of code you could have your own bash based browser... well maybe not.</p>
+<h2 id="enable-bash-tcp-redirect-script-on-ubuntu" tabindex="-1">Enable bash tcp redirect script on Ubuntu <a class="header-anchor" href="#enable-bash-tcp-redirect-script-on-ubuntu" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-comment"># This creates and then changes to a new temporary directory. mktemp should always be used to avoid accidently using an active file/dir.</span>
+bash_source=<span class="hljs-string">&quot;<span class="hljs-subst">$(/bin/mktemp -d)</span>&quot;</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;<span class="hljs-variable">${bash_source}</span>&quot;</span>
+
+<span class="hljs-comment"># Install the bash source.</span>
+apt-get <span class="hljs-built_in">source</span> bash
+
+<span class="hljs-comment"># Dependencies</span>
+<span class="hljs-comment"># The -y flag causes apt-get to assume you said yes and not prompt for y/n to install</span>
+/usr/bin/sudo apt-get build-dep -y bash
+/usr/bin/sudo apt-get install -y dpkg-dev fakeroot
+<span class="hljs-built_in">cd</span> bash-3.2
+
+<span class="hljs-comment"># This line changes the rules file which has the configure script options predefined in it. This causes the compile to now include network support.</span>
+/bin/sed -e <span class="hljs-string">&#x27;s/--disable-net-redirections/--enable-net-redirections/&#x27;</span> -i debian/rules
+
+<span class="hljs-comment"># This creates new .deb packages for bash which is several but we only need to install one since the others are copies of what is already installed.</span>
+/usr/bin/dpkg-buildpackage -rfakeroot
+
+<span class="hljs-comment"># Install the .deb. The asterisk is used for architecture independence. In my case it * matches _amd64 but this is different on non 64 bix x86 systems.</span>
+/usr/bin/sudo /usr/bin/dpkg -i ../bash_3.2-[45]ubuntu1*.deb
+
+<span class="hljs-comment"># The line below puts bash on hold within the package manager so that it is not automatically upgraded. If it is then you will lose this functionality.</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;bash hold&#x27;</span> | /usr/bin/sudo /usr/bin/dpkg --set-selections
+</code></pre>
+</body></html>

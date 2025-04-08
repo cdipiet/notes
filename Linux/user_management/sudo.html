@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.712" />
+        <title>sudo</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="sudo" tabindex="-1">sudo <a class="header-anchor" href="#sudo" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.712</p>
+<nav class="table-of-contents"><ol><li><a href="#per-diventare-superuser">Per diventare superuser </a></li><li><a href="#per-diventare-un-altro-utente">Per diventare un altro utente </a></li><li><a href="#esempi">Esempi </a><ol><li><a href="#esempio-1">Esempio 1 </a></li><li><a href="#esempio-2">Esempio 2 </a></li><li><a href="#esempio-3">Esempio 3 </a></li><li><a href="#esempio-4">Esempio 4 </a></li></ol></li><li><a href="#per-diventare-superuser-1">Per diventare superuser </a></li><li><a href="#un-comando-complesso">Un comando complesso </a></li><li><a href="#stop-telling-sudo-your-password">Stop Telling sudo Your Password </a></li><li><a href="#https%3A%2F%2Fwww.sudo.ws%2Fsample.sudoers">https://www.sudo.ws/sample.sudoers </a></li><li><a href="#esempi-sudo">Esempi sudo </a></li></ol></nav><h1 id="sudo-1" tabindex="-1">sudo <a class="header-anchor" href="#sudo-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/sudo">https://wiki.archlinux.org/title/sudo</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/sudo.8">https://man.archlinux.org/man/sudo.8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/visudo.8">https://man.archlinux.org/man/visudo.8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/sudoers.5">https://man.archlinux.org/man/sudoers.5</a></p>
+</li>
+<li>
+<p><a href="user_management.html">user_management</a></p>
+</li>
+<li>
+<p><a href="https://www.sudo.ws/intro.html">https://www.sudo.ws/intro.html</a></p>
+</li>
+<li>
+<p><a href="https://www.sudo.ws/man.html">https://www.sudo.ws/man.html</a></p>
+</li>
+<li>
+<p><a href="https://www.sudo.ws/man/sudoers.man.html">https://www.sudo.ws/man/sudoers.man.html</a></p>
+</li>
+</ul>
+<pre><code class="language-bash">$ man <span class="hljs-built_in">sudo</span>
+$ man sudoers
+$ man visudo
+
+<span class="hljs-comment"># Verifica della sintassi della configurazione</span>
+$ <span class="hljs-built_in">sudo</span> visudo -cf /etc/sudoers
+$ <span class="hljs-built_in">sudo</span> -l  <span class="hljs-comment"># Per vedere la configurazione corrente</span>
+$ <span class="hljs-built_in">sudo</span> -ll <span class="hljs-comment"># Per vedere la configurazione corrente</span>
+
+$ <span class="hljs-built_in">sudo</span> visudo <span class="hljs-comment"># per editare /etc/sudoers</span>
+
+<span class="hljs-comment"># Attenzione ad impostare i diritti corretti:</span>
+$ <span class="hljs-built_in">chown</span> -c root:root /etc/sudoers
+$ <span class="hljs-built_in">chmod</span> -c 0440 /etc/sudoers
+</code></pre>
+<p>The files in <code>/etc/sudoers.d/</code> directory are parsed in <strong>lexicographical order</strong>, file names containing <code>.</code> or <code>~</code> are skipped. <br>
+To avoid sorting problems, the file names should begin with two digits, e.g. <code>01_foo</code>.</p>
+<p>The basic structure of a user specification is:</p>
+<p><code>User</code> <code>Host</code> = <code>(RunAs)</code> <code>Commands</code></p>
+<ul>
+<li><code>User</code>: è l'utente/gruppo al quale si applica la regola, Con il <code>%</code> come primo carattere del User si indicano i gruppi.</li>
+<li><code>Host</code>: praticamente deve essere sempre <code>ALL</code>, è l'hostname al quale si applica la regola, usato quando si vuole scrivere un unico file
+sudoers da distribuire su più macchine e fare in modo che ogni macchina interpreti solo le regole di sua competenza.<br>
+<a href="https://unix.stackexchange.com/questions/220966/sudo-host-field-what-is-it-used-for">https://unix.stackexchange.com/questions/220966/sudo-host-field-what-is-it-used-for</a>
+In tal caso al posto di <code>ALL=</code> si utilizzerà per ogni riga di configurazione il nome della relativa macchina <code>&quot;nomehost&quot;=</code>.
+In questo modo in un unico file sudoers si possono inserire configurazioni per diverse macchine,
+il file sudoers va copiato in ciascuna macchina, ed ognuna considererà solamente le righe corrispondenti al proprio hostname.</li>
+<li><code>RunAs</code>: l'utente che è possibile impersonare. Se non c'e' la direttiva <code>RunAs</code> che specifica gli utenti che è possibile impersonificare, il default è <strong><code>root</code></strong>.</li>
+<li><code>Commands</code>: i comandi che <code>User</code> può eseguire impersonando <code>RunAs</code></li>
+</ul>
+<table class="table"><thead>
+<tr>
+<th>Configuration</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>**root** ALL=(ALL:ALL) ALL</code></td>
+<td>The first field indicates the username that the rule will apply to (root).</td>
+</tr>
+<tr>
+<td><code>root **ALL**=(ALL:ALL) ALL</code></td>
+<td>The first “ALL” indicates that this rule applies to all hosts.</td>
+</tr>
+<tr>
+<td><code>root ALL=(**ALL**:ALL) ALL</code></td>
+<td>This “ALL” indicates that the root user can run commands as all users.</td>
+</tr>
+<tr>
+<td><code>root ALL=(ALL:**ALL**) ALL</code></td>
+<td>This “ALL” indicates that the root user can run commands as all groups.</td>
+</tr>
+<tr>
+<td><code>root ALL=(ALL:ALL) **ALL**</code></td>
+<td>The last “ALL” indicates these rules apply to all commands.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="per-diventare-superuser" tabindex="-1">Per diventare superuser <a class="header-anchor" href="#per-diventare-superuser" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -i
+$ <span class="hljs-built_in">sudo</span> su
+</code></pre>
+<h2 id="per-diventare-un-altro-utente" tabindex="-1">Per diventare un altro utente <a class="header-anchor" href="#per-diventare-un-altro-utente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -iu cdp
+    -i, --login             Run the shell specified by the target user<span class="hljs-string">&#x27;s password database entry as a login shell. 
+    -u user, --user=user    Run the command as a user other than the default target user (usually root).
+</span></code></pre>
+<h2 id="esempi" tabindex="-1">Esempi <a class="header-anchor" href="#esempi" aria-hidden="true">🔗</a></h2>
+<h3 id="esempio-1" tabindex="-1">Esempio 1 <a class="header-anchor" href="#esempio-1" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-ini">dgb	<span class="hljs-attr">boulder</span> = (operator) /bin/ls, /bin/kill, /usr/bin/lprm
+</code></pre>
+<p>The user <strong>dgb</strong> may run <strong>/bin/ls</strong>, <strong>/bin/kill</strong>, and <strong>/usr/bin/lprm</strong> on the host <strong>boulder</strong> — but only as <strong>operator</strong>. E.g.,</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -u operator /bin/ls
+</code></pre>
+<h3 id="esempio-2" tabindex="-1">Esempio 2 <a class="header-anchor" href="#esempio-2" aria-hidden="true">🔗</a></h3>
+<p>It is also possible to override a Runas_Spec later on in an entry. If we modify the entry like so:</p>
+<pre><code class="language-ini">dgb	<span class="hljs-attr">boulder</span> = (operator) /bin/ls, (root) /bin/kill, /usr/bin/lprm
+</code></pre>
+<p>Then user <strong>dgb</strong> is now allowed to run <strong>/bin/ls</strong> as <strong>operator</strong>, but <strong>/bin/kill</strong> and <strong>/usr/bin/lprm</strong> as <strong>root</strong>.</p>
+<p>The following would all be permitted by the sudoers entry above:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -u operator /bin/ls
+$ <span class="hljs-built_in">sudo</span> -u operator -g operator /bin/ls
+</code></pre>
+<h3 id="esempio-3" tabindex="-1">Esempio 3 <a class="header-anchor" href="#esempio-3" aria-hidden="true">🔗</a></h3>
+<p>normalmente sudo richiede la password per l'autenticazione per l'esecuzione del comando,<br>
+questo può essere evitato applicando il tag <code>NOPASSWD:</code> alla lista dei comandi:</p>
+<pre><code class="language-ini">ray	<span class="hljs-attr">rushmore</span> = NOPASSWD: /bin/kill, /bin/ls, /usr/bin/lprm
+</code></pre>
+<p>would allow the user <strong>ray</strong> to run <strong>/bin/kill</strong>, <strong>/bin/ls</strong>, and <strong>/usr/bin/lprm</strong> as <strong>root</strong> on the machine <strong>rushmore</strong> without authenticating himself.<br>
+If we only want ray to be able to run /bin/kill without a password the entry would be:</p>
+<pre><code class="language-ini">ray	<span class="hljs-attr">rushmore</span> = NOPASSWD: /bin/kill, PASSWD: /bin/ls, /usr/bin/lprm
+</code></pre>
+<h3 id="esempio-4" tabindex="-1">Esempio 4 <a class="header-anchor" href="#esempio-4" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-ini">%adm <span class="hljs-attr">ALL</span>=(ALL) NOPASSWD: SETENV: ALL
+</code></pre>
+<p>Il gruppo adm può impersonare qualunque utente, potendo eseguire qualunque comando senza che venga richiesta la password, e potendo impostare le variabili di ambiente:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">export</span> GIT_DIR=<span class="hljs-string">&quot;/home/asnn/testing&quot;</span>
+$ <span class="hljs-built_in">sudo</span> -E sh -c <span class="hljs-string">&#x27;echo &quot;$GIT_DIR&quot;&#x27;</span>
+</code></pre>
+<p>Utilizzando il tag <code>SETENV</code> è possibile trasferire le variabili di ambiente all'ambiente di esecuzione.</p>
+<pre><code>-E, --preserve-env Indicates to the security policy that the user wishes to preserve theirexisting environment variables. 
+                   The security policy may return an error if the user does not have permission to preserve the environment.
+</code></pre>
+<h2 id="per-diventare-superuser-1" tabindex="-1">Per diventare superuser <a class="header-anchor" href="#per-diventare-superuser-1" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -i
+$ <span class="hljs-built_in">sudo</span> su
+</code></pre>
+<h2 id="un-comando-complesso" tabindex="-1">Un comando complesso <a class="header-anchor" href="#un-comando-complesso" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">echo</span> 12000 &gt; /proc/sys/vm/dirty_writeback_centisecs
+</code></pre>
+<p><strong>non funziona</strong> perche' sudo esegue solamente il comando &quot;echo 12000&quot; fino al redirezionatore dell'output<br>
+Le soluzioni sono le seguenti:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;echo 12000 &gt; /proc/sys/vm/dirty_writeback_centisecs&quot;</span> | <span class="hljs-built_in">sudo</span> sh
+$ <span class="hljs-built_in">sudo</span> sh -c <span class="hljs-string">&quot;cd /home ; du -s * | sort -rn &gt; USAGE&quot;</span>
+</code></pre>
+<h2 id="stop-telling-sudo-your-password" tabindex="-1">Stop Telling sudo Your Password <a class="header-anchor" href="#stop-telling-sudo-your-password" aria-hidden="true">🔗</a></h2>
+<p><a href="https://www.linuxjournal.com/content/stop-telling-sudo-your-password">https://www.linuxjournal.com/content/stop-telling-sudo-your-password</a></p>
+<p>If you get tired of typing your password for sudo, but you don't want (or don't have permissions) to put <code>NOPASSWD</code> in your <code>sudoers</code> file, you can use the following procedure to update the sudo password timestamp and avoid typing your password.</p>
+<ul>
+<li>
+<p>Step 1) Create <code>$HOME/bin/sudo-hack.sh</code>:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">while</span> [ <span class="hljs-literal">true</span> ];
+<span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">sudo</span> -u root /bin/true &gt; /dev/null 2&gt; /dev/null
+    <span class="hljs-built_in">sleep</span> 60
+<span class="hljs-keyword">done</span>
+</code></pre>
+</li>
+<li>
+<p>Step 2) Do an initial run of sudo to set its password timestamp:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -u root /bin/true
+Password: *******
+</code></pre>
+</li>
+<li>
+<p>Step 3) Start <code>$HOME/bin/sudo-hack.sh</code> in the background:</p>
+<pre><code class="language-bash">$ HOME/bin/sudo-hack.sh &amp;
+</code></pre>
+</li>
+</ul>
+<p>Now you can use sudo without getting a password prompt, regardless of how long it's been since the last time you ran sudo.<br>
+Note: there are most certainly security implications related to using this procedure; of course, that's also true of using <code>NOPASSWD</code> in the sudoers file.</p>
+<h2 id="https%3A%2F%2Fwww.sudo.ws%2Fsample.sudoers" tabindex="-1"><a href="https://www.sudo.ws/sample.sudoers">https://www.sudo.ws/sample.sudoers</a> <a class="header-anchor" href="#https%3A%2F%2Fwww.sudo.ws%2Fsample.sudoers" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-ini"><span class="hljs-comment">#</span>
+<span class="hljs-comment"># Sample /etc/sudoers file.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># This file MUST be edited with the &#x27;visudo&#x27; command as root.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># See the sudoers man page for the details on how to write a sudoers file.</span>
+
+<span class="hljs-comment">##</span>
+<span class="hljs-comment"># Override built-in defaults</span>
+<span class="hljs-comment">##</span>
+Defaults		<span class="hljs-attr">syslog</span>=auth
+Defaults&gt;root		!set_logname
+Defaults:FULLTIMERS	!lecture
+Defaults:millert	!authenticate
+Defaults@SERVERS	log_year, <span class="hljs-attr">logfile</span>=/var/log/sudo.log
+Defaults!PAGERS		noexec
+
+<span class="hljs-comment">##</span>
+<span class="hljs-comment"># User alias specification</span>
+<span class="hljs-comment">##</span>
+User_Alias	<span class="hljs-attr">FULLTIMERS</span> = millert, mikef, dowdy
+User_Alias	<span class="hljs-attr">PARTTIMERS</span> = bostley, jwfox, crawl
+User_Alias	<span class="hljs-attr">WEBMASTERS</span> = will, wendy, wim
+
+<span class="hljs-comment">##</span>
+<span class="hljs-comment"># Runas alias specification</span>
+<span class="hljs-comment">##</span>
+Runas_Alias	<span class="hljs-attr">OP</span> = root, operator
+Runas_Alias	<span class="hljs-attr">DB</span> = oracle, sybase
+
+<span class="hljs-comment">##</span>
+<span class="hljs-comment"># Host alias specification</span>
+<span class="hljs-comment">##</span>
+Host_Alias	<span class="hljs-attr">SPARC</span> = bigtime, eclipse, moet, anchor:\
+		<span class="hljs-attr">SGI</span> = grolsch, dandelion, black:\
+		<span class="hljs-attr">ALPHA</span> = widget, thalamus, foobar:\
+		<span class="hljs-attr">HPPA</span> = boa, nag, python
+Host_Alias	<span class="hljs-attr">CUNETS</span> = <span class="hljs-number">128.138</span>.<span class="hljs-number">0.0</span>/<span class="hljs-number">255.255</span>.<span class="hljs-number">0.0</span>
+Host_Alias	<span class="hljs-attr">CSNETS</span> = <span class="hljs-number">128.138</span>.<span class="hljs-number">243.0</span>, <span class="hljs-number">128.138</span>.<span class="hljs-number">204.0</span>/<span class="hljs-number">24</span>, <span class="hljs-number">128.138</span>.<span class="hljs-number">242.0</span>
+Host_Alias	<span class="hljs-attr">SERVERS</span> = master, mail, www, ns
+Host_Alias	<span class="hljs-attr">CDROM</span> = orion, perseus, hercules
+
+<span class="hljs-comment">##</span>
+<span class="hljs-comment"># Cmnd alias specification</span>
+<span class="hljs-comment">##</span>
+Cmnd_Alias	<span class="hljs-attr">DUMPS</span> = /usr/sbin/dump, /usr/sbin/rdump, /usr/sbin/restore, \
+			/usr/sbin/rrestore, /usr/bin/mt, \
+			sha224:0GomF8mNN3wlDt1HD9XldjJ3SNgpFdbjO1+<span class="hljs-attr">NsQ</span>== \
+			/home/operator/bin/start_backups
+Cmnd_Alias	<span class="hljs-attr">KILL</span> = /usr/bin/kill
+Cmnd_Alias	<span class="hljs-attr">PRINTING</span> = /usr/sbin/lpc, /usr/bin/lprm
+Cmnd_Alias	<span class="hljs-attr">SHUTDOWN</span> = /usr/sbin/shutdown
+Cmnd_Alias	<span class="hljs-attr">HALT</span> = /usr/sbin/halt
+Cmnd_Alias	<span class="hljs-attr">REBOOT</span> = /usr/sbin/reboot
+Cmnd_Alias	<span class="hljs-attr">SHELLS</span> = /sbin/sh, /usr/bin/sh, /usr/bin/csh, /usr/bin/ksh, \
+			 /usr/local/bin/tcsh, /usr/bin/rsh, \
+			 /usr/local/bin/zsh
+Cmnd_Alias	<span class="hljs-attr">SU</span> = /usr/bin/su
+Cmnd_Alias	<span class="hljs-attr">VIPW</span> = /usr/sbin/vipw, /usr/bin/passwd, /usr/bin/chsh, \
+		       /usr/bin/chfn
+Cmnd_Alias	<span class="hljs-attr">PAGERS</span> = /usr/bin/more, /usr/bin/pg, /usr/bin/less
+
+<span class="hljs-comment">##</span>
+<span class="hljs-comment"># User specification</span>
+<span class="hljs-comment">##</span>
+
+<span class="hljs-comment"># root and users in group wheel can run anything on any machine as any user</span>
+root		<span class="hljs-attr">ALL</span> = (ALL) ALL
+%wheel		<span class="hljs-attr">ALL</span> = (ALL) ALL
+
+<span class="hljs-comment"># full time sysadmins can run anything on any machine without a password</span>
+FULLTIMERS	<span class="hljs-attr">ALL</span> = NOPASSWD: ALL
+
+<span class="hljs-comment"># part time sysadmins may run anything but need a password</span>
+PARTTIMERS	<span class="hljs-attr">ALL</span> = ALL
+
+<span class="hljs-comment"># jack may run anything on machines in CSNETS</span>
+jack		<span class="hljs-attr">CSNETS</span> = ALL
+
+<span class="hljs-comment"># lisa may run any command on any host in CUNETS (a class B network)</span>
+lisa		<span class="hljs-attr">CUNETS</span> = ALL
+
+<span class="hljs-comment"># operator may run maintenance commands and anything in /usr/oper/bin/</span>
+operator	<span class="hljs-attr">ALL</span> = DUMPS, KILL, SHUTDOWN, HALT, REBOOT, PRINTING,\
+		sudoedit /etc/printcap, /usr/oper/bin/
+
+<span class="hljs-comment"># joe may su only to operator</span>
+joe		<span class="hljs-attr">ALL</span> = /usr/bin/su operator
+
+<span class="hljs-comment"># pete may change passwords for anyone but root on the hp snakes</span>
+pete		<span class="hljs-attr">HPPA</span> = /usr/bin/passwd [A-Za-z]*, !/usr/bin/passwd root
+
+<span class="hljs-comment"># bob may run anything on the sparc and sgi machines as any user</span>
+<span class="hljs-comment"># listed in the Runas_Alias &quot;OP&quot; (ie: root and operator)</span>
+bob		<span class="hljs-attr">SPARC</span> = (OP) ALL : SGI = (OP) ALL
+
+<span class="hljs-comment"># jim may run anything on machines in the biglab netgroup</span>
+jim		+<span class="hljs-attr">biglab</span> = ALL
+
+<span class="hljs-comment"># users in the secretaries netgroup need to help manage the printers</span>
+<span class="hljs-comment"># as well as add and remove users</span>
++secretaries	<span class="hljs-attr">ALL</span> = PRINTING, /usr/bin/useradd, /usr/bin/rmuser
+
+<span class="hljs-comment"># fred can run commands as oracle or sybase without a password</span>
+fred		<span class="hljs-attr">ALL</span> = (DB) NOPASSWD: ALL
+
+<span class="hljs-comment"># on the alphas, john may su to anyone but root and flags are not allowed</span>
+john		<span class="hljs-attr">ALPHA</span> = /usr/bin/su [!-]*, !/usr/bin/su *root*
+
+<span class="hljs-comment"># jen can run anything on all machines except the ones</span>
+<span class="hljs-comment"># in the &quot;SERVERS&quot; Host_Alias</span>
+jen		ALL, !<span class="hljs-attr">SERVERS</span> = ALL
+
+<span class="hljs-comment"># jill can run any commands in the directory /usr/bin/, except for</span>
+<span class="hljs-comment"># those in the SU and SHELLS aliases.</span>
+jill		<span class="hljs-attr">SERVERS</span> = /usr/bin/, !SU, !SHELLS
+
+<span class="hljs-comment"># steve can run any command in the directory /usr/local/op_commands/</span>
+<span class="hljs-comment"># as user operator.</span>
+steve		<span class="hljs-attr">CSNETS</span> = (operator) /usr/local/op_commands/
+
+<span class="hljs-comment"># matt needs to be able to kill things on his workstation when</span>
+<span class="hljs-comment"># they get hung.</span>
+matt		<span class="hljs-attr">valkyrie</span> = KILL
+
+<span class="hljs-comment"># users in the WEBMASTERS User_Alias (will, wendy, and wim)</span>
+<span class="hljs-comment"># may run any command as user www (which owns the web pages)</span>
+<span class="hljs-comment"># or simply su to www.</span>
+WEBMASTERS	<span class="hljs-attr">www</span> = (www) ALL, (root) /usr/bin/su www
+
+<span class="hljs-comment"># anyone can mount/unmount a cd-rom on the machines in the CDROM alias</span>
+ALL		<span class="hljs-attr">CDROM</span> = NOPASSWD: /sbin/umount /CDROM,\
+		/sbin/mount -o nosuid\,nodev /dev/cd0a /CDROM
+</code></pre>
+<h2 id="esempi-sudo" tabindex="-1">Esempi sudo <a class="header-anchor" href="#esempi-sudo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;node ALL=(ALL) ALL&quot;</span> &gt; /etc/sudoers.d/node &amp;&amp; <span class="hljs-built_in">chmod</span> 0440 /etc/sudoers.d/node
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;echo &#x27;%wheel ALL=(ALL) ALL&#x27; &gt; /etc/sudoers.d/wheel&quot;</span>
+
+$ <span class="hljs-built_in">sudo</span> visudo -f /etc/sudoers.d/vagrant
+    <span class="hljs-comment"># add vagrant user</span>
+    vagrant ALL=(ALL) NOPASSWD:ALL
+
+
+</code></pre>
+<p>Esempio AUR Builder, utente che puo eseguire un comando(pacman) come root senza che gli sia richiesta la password, cosa fondamentale perchè venga eseguito in un Ansible Playbook:</p>
+<pre><code class="language-ruby">    - <span class="hljs-symbol">name:</span> aur_user_sudo_config
+      <span class="hljs-symbol">become:</span> <span class="hljs-literal">true</span>
+      <span class="hljs-symbol">lineinfile:</span>
+        <span class="hljs-symbol">path:</span> /etc/sudoers.d/<span class="hljs-number">11</span>-install-aur_builder
+        <span class="hljs-symbol">line:</span> <span class="hljs-string">&#x27;aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman&#x27;</span>
+        <span class="hljs-symbol">create:</span> yes
+        <span class="hljs-symbol">validate:</span> <span class="hljs-string">&#x27;visudo -cf %s&#x27;</span>
+</code></pre>
+<p>Esempio Alpine Linux:</p>
+<pre><code class="language-bash">$ addgroup -g 1000 node &amp;&amp; adduser -u 1000 -G node -s /bin/sh -D node
+$ apk add <span class="hljs-built_in">sudo</span>
+$ passwd -u node <span class="hljs-comment"># sblocca la password vuota dell&#x27;utente node</span>
+$ NEWUSER=<span class="hljs-string">&#x27;node&#x27;</span>
+$ adduser -g <span class="hljs-string">&quot;<span class="hljs-variable">${NEWUSER}</span>&quot;</span> <span class="hljs-variable">$NEWUSER</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$NEWUSER</span> ALL=(ALL) ALL&quot;</span> &gt; /etc/sudoers.d/<span class="hljs-variable">$NEWUSER</span> &amp;&amp; <span class="hljs-built_in">chmod</span> 0440 /etc/sudoers.d/<span class="hljs-variable">$NEWUSER</span>
+
+adduser [OPTIONS] USER [GROUP]
+    Create new user, or add USER to GROUP
+     -h --home DIR           Home directory
+     -g --gecos GECOS        GECOS field
+     -s --shell SHELL        Login shell named SHELL by example /bin/bash
+     -G --ingroup GRP        Group (by name)
+     -S --system             Create a system user
+     -D --disabled-password  Don<span class="hljs-string">&#x27;t assign a password, so cannot login
+     -H --no-create-home     Don&#x27;</span>t create home directory
+     -u --uid UID            User <span class="hljs-built_in">id</span>
+     -k SKEL                 Skeleton directory (/etc/skel)
+</code></pre>
+<p>Esempio Wordpress:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">sudo</span> -s -- &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span>
+chsh -s /bin/bash http
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+<span class="hljs-built_in">chmod</span> +x wp-cli.phar
+<span class="hljs-built_in">mv</span> wp-cli.phar /usr/local/bin/wp
+<span class="hljs-built_in">cd</span> /srv/http/wordpress/
+EOF
+<span class="hljs-built_in">sudo</span> -u http -i -- wp core install --path=<span class="hljs-string">&quot;/srv/http/wordpress&quot;</span> --url=<span class="hljs-string">&quot;http://localhost/wordpress&quot;</span> --title=<span class="hljs-string">&quot;Wordpress Demo&quot;</span> --admin_user=<span class="hljs-string">&quot;admin&quot;</span> --admin_password=<span class="hljs-string">&quot;admin&quot;</span> --admin_email=<span class="hljs-string">&quot;corrado.dipietro@tiscali.it&quot;</span>
+</code></pre>
+<p>Esempio di esecuzione di comandi multipli come altro utente:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> -u myuser -s &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span>
+  a=<span class="hljs-string">&#x27;var&#x27;</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;Running serveral commands with sudo: $USER&#x27;</span>
+  <span class="hljs-built_in">mktemp</span> -d
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span>&quot;</span>
+EOF
+</code></pre>
+</body></html>

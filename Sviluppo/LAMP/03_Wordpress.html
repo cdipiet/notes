@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.836" />
+        <title>03_Wordpress</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="03_wordpress" tabindex="-1">03_Wordpress <a class="header-anchor" href="#03_wordpress" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.836</p>
+<nav class="table-of-contents"><ol><li><a href="#plugin">Plugin </a></li><li><a href="#themes">Themes </a></li><li><a href="#installazione">Installazione </a></li><li><a href="#configurazione">Configurazione </a><ol><li><a href="#per-poter-installare-plugin-e-temi-la-cartella-wp-content-deve-essere-scrivibile-dall'utente-che-esegue-apache">Per poter installare plugin e temi la cartella wp-content deve essere scrivibile dall&#39;utente che esegue Apache </a></li></ol></li><li><a href="#wp-cli">wp-cli </a></li></ol></nav><h1 id="wordpress" tabindex="-1">Wordpress <a class="header-anchor" href="#wordpress" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Wordpress">https://wiki.archlinux.org/title/Wordpress</a></p>
+</li>
+<li>
+<p><a href="https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions">https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions</a></p>
+</li>
+<li>
+<p><a href="https://wordpress.org">https://wordpress.org</a></p>
+</li>
+<li>
+<p><a href="https://computingforgeeks.com/how-setup-wordpress-on-arch-linux/">https://computingforgeeks.com/how-setup-wordpress-on-arch-linux/</a></p>
+</li>
+<li>
+<p><a href="https://www.atlantic.net/dedicated-server-hosting/how-to-install-wordpress-on-arch-linux/">https://www.atlantic.net/dedicated-server-hosting/how-to-install-wordpress-on-arch-linux/</a></p>
+</li>
+<li>
+<p><a href="https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-on-arch-linux">https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-on-arch-linux</a></p>
+</li>
+<li>
+<p><a href="https://gott50.github.io/installing-wordpress-on-arch-manjaro/">https://gott50.github.io/installing-wordpress-on-arch-manjaro/</a></p>
+</li>
+<li>
+<p><a href="https://it.wordpress.org/support/">https://it.wordpress.org/support/</a></p>
+</li>
+<li>
+<p><a href="https://it.wordpress.org/support/article/come-installare-wordpress/">https://it.wordpress.org/support/article/come-installare-wordpress/</a></p>
+</li>
+<li>
+<p><a href="https://wordpress.org/support/article/creating-database-for-wordpress/">https://wordpress.org/support/article/creating-database-for-wordpress/</a></p>
+</li>
+</ul>
+<h2 id="plugin" tabindex="-1">Plugin <a class="header-anchor" href="#plugin" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wordpress.org/plugins/">https://wordpress.org/plugins/</a></li>
+<li><a href="https://elementor.com/">https://elementor.com/</a></li>
+<li><a href="https://wordpress.org/plugins/elementor/">https://wordpress.org/plugins/elementor/</a></li>
+<li><a href="https://wordpress.org/plugins/envato-elements/">https://wordpress.org/plugins/envato-elements/</a></li>
+<li><a href="https://wordpress.org/plugins/ocean-extra/">https://wordpress.org/plugins/ocean-extra/</a></li>
+</ul>
+<h2 id="themes" tabindex="-1">Themes <a class="header-anchor" href="#themes" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wordpress.org/themes">https://wordpress.org/themes</a></li>
+<li><a href="https://wordpress.org/themes/oceanwp/">https://wordpress.org/themes/oceanwp/</a></li>
+</ul>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://developer.wordpress.org/advanced-administration/before-install/howto-install/">https://developer.wordpress.org/advanced-administration/before-install/howto-install/</a></li>
+<li><a href="https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions">https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions</a></li>
+</ul>
+<p><strong>NON bisogna installare wordpress con pacman ma con il download dal sito.</strong><br>
+Prima bisogna aver installato e configurato:</p>
+<ol>
+<li>MariaDB</li>
+<li>Apache HTTP Server</li>
+<li>PHP</li>
+<li>PHPMyAdmin</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-comment"># Installare Wordpress</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syuu --noconfirm
+$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">cd</span> /srv/http/
+$ wget https://wordpress.org/latest.tar.gz
+$ <span class="hljs-comment"># curl -O  https://wordpress.org/latest.tar.gz</span>
+<span class="hljs-comment"># Viene creata la cartella /srv/http/wordpress</span>
+$ tar xvzf latest.tar.gz
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R http:http /srv/http/wordpress
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/httpd/conf/extra/wordpress.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+Alias /wordpress <span class="hljs-string">&quot;/srv/http/wordpress&quot;</span>
+&lt;Directory <span class="hljs-string">&quot;/srv/http/wordpress&quot;</span>&gt;
+    DirectoryIndex index.php
+    AllowOverride All
+    Options FollowSymlinks
+    Require all granted
+&lt;/Directory&gt;
+EOF
+$ <span class="hljs-comment"># sudo code --no-sandbox --user-data-dir=/root/.config/Code /etc/httpd/conf/httpd.conf</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/httpd/conf/httpd.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+Include conf/extra/wordpress.conf
+&lt;IfModule dir_module&gt;
+    DirectoryIndex index.php
+&lt;/IfModule&gt;
+EOF
+$ apachectl configtest
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd
+
+<span class="hljs-comment"># MariaDB Wordpress</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt; <span class="hljs-string">EOF
+DROP DATABASE IF EXISTS wordpress;
+CREATE DATABASE wordpress;
+DROP USER &#x27;wp-user&#x27;@&#x27;localhost&#x27;;
+CREATE USER &#x27;wp-user&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;wp-user&#x27;;
+GRANT ALL PRIVILEGES ON wordpress.* TO &#x27;wp-user&#x27;@&#x27;localhost&#x27; WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+EOF</span>
+$ <span class="hljs-built_in">sudo</span> systemctl restart mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd
+</code></pre>
+<p>Navigare su <code>xdg-open http://localhost/wordpress</code></p>
+<pre><code>Nome del database: wordpress
+Nome utente: wp-user
+Password: wp-user
+Host del database: localhost
+Prefisso tabella: wp_
+Titolo del sito: Wordpress
+Utente: admin/VVaDKxNV^kgZWZDHQS
+</code></pre>
+<h2 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /srv/http/wordpress/wp-config-sample.php /srv/http/wordpress/wp-config.php
+<span class="hljs-comment"># Modify the file and provide database connection details:</span>
+$ <span class="hljs-built_in">sudo</span> code --no-sandbox --user-data-dir=/root/.config/Code /srv/http/wordpress/wp-config.php
+    // ** MySQL settings - You can get this info from your web host ** //
+    /** The name of the database <span class="hljs-keyword">for</span> WordPress */
+    define( <span class="hljs-string">&#x27;DB_NAME&#x27;</span>, <span class="hljs-string">&#x27;wordpress&#x27;</span> );
+    /** MySQL database username */
+    define( <span class="hljs-string">&#x27;DB_USER&#x27;</span>, <span class="hljs-string">&#x27;wordpress&#x27;</span> );
+    /** MySQL database password */
+    define( <span class="hljs-string">&#x27;DB_PASSWORD&#x27;</span>, <span class="hljs-string">&#x27;wordpress&#x27;</span> );
+</code></pre>
+<h3 id="per-poter-installare-plugin-e-temi-la-cartella-wp-content-deve-essere-scrivibile-dall'utente-che-esegue-apache" tabindex="-1">Per poter installare plugin e temi la cartella wp-content deve essere scrivibile dall'utente che esegue Apache <a class="header-anchor" href="#per-poter-installare-plugin-e-temi-la-cartella-wp-content-deve-essere-scrivibile-dall'utente-che-esegue-apache" aria-hidden="true">🔗</a></h3>
+<p>Installando un tema oppure un plugin si ottiene:<br>
+Errore: <code>to perform the requested action wordpress needs to access your web server. please enter your ftp</code></p>
+<p>Ciò accade perchè wordpress non riesce ad accedere in scrittura - per tramite dell'utenza che esegue apache - alla directory <code>wp-content</code>:</p>
+<ul>
+<li><a href="https://wordpress.stackexchange.com/questions/228591/to-perform-the-requested-action-wordpress-needs-to-access-your-web-server-pleas">https://wordpress.stackexchange.com/questions/228591/to-perform-the-requested-action-wordpress-needs-to-access-your-web-server-pleas</a></li>
+<li><a href="https://wordpress.stackexchange.com/questions/19649/wordpress-on-localhost-lamp-doesnt-let-me-install-plugins">https://wordpress.stackexchange.com/questions/19649/wordpress-on-localhost-lamp-doesnt-let-me-install-plugins</a></li>
+<li><a href="https://wordpress.stackexchange.com/questions/189554/what-security-concerns-should-i-have-when-setting-fs-method-to-direct-in-wp-co">https://wordpress.stackexchange.com/questions/189554/what-security-concerns-should-i-have-when-setting-fs-method-to-direct-in-wp-co</a></li>
+</ul>
+<p>Soluzione: permettere all'utente <code>http</code>(l'utente che esegue apache, e cioè il processo <code>httpd</code>) di poter scrivere nella directory <code>/srv/http/wordpress/wp-content</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R http:http /srv/http/wordpress <span class="hljs-comment"># per poter installare plugin e temi la dir wp-content deve essere scrivibile dall&#x27;utente http</span>
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd <span class="hljs-comment"># Per far ripartire wordpress</span>
+
+<span class="hljs-comment"># Oppure:</span>
+<span class="hljs-built_in">sudo</span> gedit/srv/http/wordpress/wp-config.php
+define( <span class="hljs-string">&#x27;FS_METHOD&#x27;</span>, <span class="hljs-string">&#x27;direct&#x27;</span> );
+</code></pre>
+<h2 id="wp-cli" tabindex="-1">wp-cli <a class="header-anchor" href="#wp-cli" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://make.wordpress.org/cli/handbook/">https://make.wordpress.org/cli/handbook/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/wp-cli/wp-cli">https://github.com/wp-cli/wp-cli</a></p>
+</li>
+<li>
+<p><a href="https://developer.wordpress.org/cli/commands/core/install/">https://developer.wordpress.org/cli/commands/core/install/</a></p>
+<p>--url=<url>
+The address of the new site.
+--title=<site-title>
+The title of the new site.
+--admin_user=<username>
+The name of the admin user.
+[--admin_password=<password>]
+The password for the admin user. Defaults to randomly generated string.
+--admin_email=<email>
+The email address for the admin user.
+[--locale=<locale>]
+The locale/language for the installation (e.g. de_DE). Default is en_US.
+[--skip-email]
+Don’t send an email notification to the new admin user.</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+$ php wp-cli.phar --info
+$ <span class="hljs-built_in">chmod</span> +x wp-cli.phar
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mv</span> wp-cli.phar /usr/local/bin/wp
+$ wp --info
+
+<span class="hljs-comment"># Install WordPress in 5 seconds</span>
+<span class="hljs-built_in">cd</span> /srv/http/wordpress/
+<span class="hljs-built_in">sudo</span> -u http wp core install --url=localhost --title=<span class="hljs-string">&quot;Wordpress Demo&quot;</span> --admin_user=admin --admin_password=admin --admin_email=corrado.dipietro@tiscali.it
+$ wp core install --url=localhost --title=<span class="hljs-string">&quot;Wordpress Demo&quot;</span> --admin_user=admin --admin_password=admin --admin_email=corrado.dipietro@tiscali.it
+</code></pre>
+<p>Navigare su <code>xdg-open http://localhost/wordpress/wp-admin/install.php</code></p>
+<p>Nome del database: wordpress
+Nome utente: wp-user
+Password: wp-user
+Host del database: localhost
+Prefisso tabella: wp_
+Titolo del sito: Wordpress
+Utente: admin/admin</p>
+</body></html>

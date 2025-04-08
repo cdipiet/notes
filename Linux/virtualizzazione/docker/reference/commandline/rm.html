@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.566" />
+        <title>rm</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="rm" tabindex="-1">rm <a class="header-anchor" href="#rm" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.566</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22rm%22description%3A-%22the-rm-command-description-and-usage%22keywords%3A-%22remove%2C-docker%2C-container%22">title: &quot;rm&quot;description: &quot;The rm command description and usage&quot;keywords: &quot;remove, Docker, container&quot; </a></li><li><a href="#examples">Examples </a><ol><li><a href="#remove-a-container">Remove a container </a></li><li><a href="#remove-a-link-specified-with---link-on-the-default-bridge-network">Remove a link specified with --link on the default bridge network </a></li><li><a href="#force-remove-a-running-container">Force-remove a running container </a></li><li><a href="#remove-all-stopped-containers">Remove all stopped containers </a></li><li><a href="#remove-a-container-and-its-volumes">Remove a container and its volumes </a></li><li><a href="#remove-a-container-and-selectively-remove-volumes">Remove a container and selectively remove volumes </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22rm%22description%3A-%22the-rm-command-description-and-usage%22keywords%3A-%22remove%2C-docker%2C-container%22" tabindex="-1">title: &quot;rm&quot;
+description: &quot;The rm command description and usage&quot;
+keywords: &quot;remove, Docker, container&quot; <a class="header-anchor" href="#title%3A-%22rm%22description%3A-%22the-rm-command-description-and-usage%22keywords%3A-%22remove%2C-docker%2C-container%22" aria-hidden="true">🔗</a></h2>
+<h1 id="rm-1" tabindex="-1">rm <a class="header-anchor" href="#rm-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker rm [OPTIONS] CONTAINER [CONTAINER...]
+
+Remove one or more containers
+
+Options:
+  -f, --force     Force the removal of a running container (uses SIGKILL)
+<span class="hljs-code">      --help      Print usage
+  -l, --link      Remove the specified link
+  -v, --volumes   Remove anonymous volumes associated with the container
+</span></code></pre>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="remove-a-container" tabindex="-1">Remove a container <a class="header-anchor" href="#remove-a-container" aria-hidden="true">🔗</a></h3>
+<p>This removes the container referenced under the link <code>/redis</code>.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">rm</span> /redis</span>
+
+/redis
+</code></pre>
+<h3 id="remove-a-link-specified-with---link-on-the-default-bridge-network" tabindex="-1">Remove a link specified with <code>--link</code> on the default bridge network <a class="header-anchor" href="#remove-a-link-specified-with---link-on-the-default-bridge-network" aria-hidden="true">🔗</a></h3>
+<p>This removes the underlying link between <code>/webapp</code> and the <code>/redis</code>
+containers on the default bridge network, removing all network communication
+between the two containers. This does not apply when <code>--link</code> is used with
+user-specified networks.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">rm</span> --<span class="hljs-built_in">link</span> /webapp/redis</span>
+
+/webapp/redis
+</code></pre>
+<h3 id="force-remove-a-running-container" tabindex="-1">Force-remove a running container <a class="header-anchor" href="#force-remove-a-running-container" aria-hidden="true">🔗</a></h3>
+<p>This command force-removes a running container.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">rm</span> --force redis</span>
+
+redis
+</code></pre>
+<p>The main process inside the container referenced under the link <code>redis</code> will receive
+<code>SIGKILL</code>, then the container will be removed.</p>
+<h3 id="remove-all-stopped-containers" tabindex="-1">Remove all stopped containers <a class="header-anchor" href="#remove-all-stopped-containers" aria-hidden="true">🔗</a></h3>
+<p>Use the <a href="container_prune.html"><code>docker container prune</code></a> command to remove all
+stopped containers, or refer to the <a href="system_prune.html"><code>docker system prune</code></a>
+command to remove unused containers in addition to other Docker resources, such
+as (unused) images and networks.</p>
+<p>Alternatively, you can use the <code>docker ps</code> with the <code>-q</code> / <code>--quiet</code> option to
+generate a list of container IDs to remove, and use that list as argument for
+the <code>docker rm</code> command.</p>
+<p>Combining commands can be more flexible, but is less portable as it depends
+on features provided by the shell, and the exact syntax may differ depending on
+what shell is used. To use this approach on Windows, consider using PowerShell
+or Bash.</p>
+<p>The example below uses <code>docker ps -q</code> to print the IDs of all containers that
+have exited (<code>--filter status=exited</code>), and removes those containers with
+the <code>docker rm</code> command:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">rm</span> $(docker ps --filter status=exited -q)</span>
+</code></pre>
+<p>Or, using the <code>xargs</code> Linux utility;</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker ps --filter status=exited -q | xargs docker <span class="hljs-built_in">rm</span></span>
+</code></pre>
+<h3 id="remove-a-container-and-its-volumes" tabindex="-1">Remove a container and its volumes <a class="header-anchor" href="#remove-a-container-and-its-volumes" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker <span class="hljs-built_in">rm</span> -v redis</span>
+redis
+</code></pre>
+<p>This command removes the container and any volumes associated with it.
+Note that if a volume was specified with a name, it will not be removed.</p>
+<h3 id="remove-a-container-and-selectively-remove-volumes" tabindex="-1">Remove a container and selectively remove volumes <a class="header-anchor" href="#remove-a-container-and-selectively-remove-volumes" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker create -v awesome:/foo -v /bar --name hello redis</span>
+hello
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">docker <span class="hljs-built_in">rm</span> -v hello</span>
+</code></pre>
+<p>In this example, the volume for <code>/foo</code> remains intact, but the volume for
+<code>/bar</code> is removed. The same behavior holds for volumes inherited with
+<code>--volumes-from</code>.</p>
+</body></html>

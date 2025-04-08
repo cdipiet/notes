@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.984" />
+        <title>net_info</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="net_info" tabindex="-1">net_info <a class="header-anchor" href="#net_info" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.984</p>
+<nav class="table-of-contents"><ol><li><a href="#info">Info </a><ol><li><a href="#macchine-presenti-nella-propria-rete">Macchine presenti nella propria rete </a></li><li><a href="#interfacce-attive">Interfacce attive </a></li><li><a href="#report-utilizzo-delle-porte">Report utilizzo delle porte </a><ol><li><a href="#chi-sta-utilizzando-la-porta-45331%3F">Chi sta utilizzando la porta 45331? </a></li></ol></li></ol></li><li><a href="#network-monitoring-tools">Network Monitoring Tools </a></li></ol></nav><h1 id="net-info" tabindex="-1">Net Info <a class="header-anchor" href="#net-info" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="net_iproute2.html">IPRoute2</a></p>
+</li>
+<li>
+<p><a href="net_arp_cache.html">ARP Cache</a></p>
+</li>
+<li>
+<p><a href="net_dns_dig.html">DNS</a></p>
+</li>
+<li>
+<p><a href="net_networkmanager.html">Network Manager</a></p>
+</li>
+<li>
+<p><a href="net_systemd-networkd.html">Systemd Net</a></p>
+</li>
+<li>
+<p><a href="net_theory.html">Theory</a></p>
+</li>
+<li>
+<p><a href="net_namespaces.html">Namespaces</a></p>
+</li>
+<li>
+<p><a href="net_tuntap.html">TAP Device</a></p>
+</li>
+<li>
+<p><a href="net_veth.html">VETH Device</a></p>
+</li>
+<li>
+<p><a href="net_bridge_vlan.html">Bridge e VLAN</a></p>
+</li>
+<li>
+<p><a href="wireshark_tcpdump.html">tcpdump</a></p>
+</li>
+<li>
+<p><a href="netcat.html">netcat</a></p>
+</li>
+<li>
+<p><a href="netstat.html">netstat</a></p>
+</li>
+<li>
+<p><a href="nmap.html">nmap</a></p>
+</li>
+<li>
+<p><a href="ss.html">ss-netstat</a></p>
+</li>
+</ul>
+<h2 id="info" tabindex="-1">Info <a class="header-anchor" href="#info" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Info generali</span>
+$ ip route get 1 | <span class="hljs-built_in">head</span> -1 | <span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27; &#x27;</span> -f7
+192.168.1.2
+$ ip route get 1 | <span class="hljs-built_in">head</span> -1 | <span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27; &#x27;</span> -f5
+enp5s0
+$ hostname
+    linux
+$ hostnamectl
+    Static hostname: linux
+        Icon name: computer-desktop
+            Chassis: desktop
+        Machine ID: 0be517f090d64e2094d187a3338481f3
+            Boot ID: 272a3066d7b544ddbb44f0005829e519
+    Operating System: Manjaro Linux                   
+            Kernel: Linux 5.13.5-1-MANJARO
+        Architecture: x86-64
+    Hardware Vendor: System manufacturer
+    Hardware Model: System Product Name
+$ inxi -n
+$ inxi -i
+$ ip n <span class="hljs-comment"># ARP cache</span>
+    192.168.1.1 dev enp5s0 lladdr 20:b0:01:95:2b:3c REACHABLE 
+    fe80::22b0:1ff:fe95:2b3c dev enp5s0 lladdr 20:b0:01:95:2b:3c router STALE 
+<span class="hljs-comment"># Lista delle interfacce di rete</span>
+$ netstat -i
+    Kernel Interface table
+    Iface             MTU    RX-OK RX-ERR RX-DRP RX-OVR    TX-OK TX-ERR TX-DRP TX-OVR Flg
+    br-e3dd97dbc1cb  1500        0      0      0 0             0      0      0      0 BMU
+    docker0          1500        0      0      0 0             0      0      0      0 BMU
+    enp5s0           1500   668596      0      0 0        182544      0      5      0 BMRU
+    lo              65536    75423      0      0 0         75423      0      0      0 LRU
+    wlp4s0           1500        0      0      0 0             0      0      0      0 BMU
+$ tcpdump -D
+    1.enp5s0 [Up, Running, Connected]
+    2.any (Pseudo-device that captures on all interfaces) [Up, Running]
+    3.lo [Up, Running, Loopback]
+    4.wlp4s0 [Up, Wireless, Not associated]
+    5.docker0 [Up, Disconnected]
+    6.br-e3dd97dbc1cb [Up, Disconnected]
+    7.bluetooth0 (Bluetooth adapter number 0) [Wireless, Association status unknown]
+    8.bluetooth-monitor (Bluetooth Linux Monitor) [Wireless]
+    9.nflog (Linux netfilter <span class="hljs-built_in">log</span> (NFLOG) interface) [none]
+    10.nfqueue (Linux netfilter queue (NFQUEUE) interface) [none]
+    11.dbus-system (D-Bus system bus) [none]
+    12.dbus-session (D-Bus session bus) [none]
+<span class="hljs-comment"># Comandi IP - rimpiazzano ifconfig e route</span>
+<span class="hljs-comment"># ip link is for configuring, adding, and deleting network interfaces.</span>
+$ ip -o <span class="hljs-built_in">link</span> show
+<span class="hljs-comment"># Use ip address command to display addresses, bind new address or delete old ones. </span>
+$ ip -o addr show
+$ nmcli -p device show
+<span class="hljs-comment"># Lista delle interfacce di rete con network manager</span>
+$ nmcli device status
+    DEVICE           TYPE      STATE                   CONNECTION             
+    enp5s0           ethernet  collegato               Connessione via cavo 1 
+    br-e3dd97dbc1cb  bridge    connected (externally)  br-e3dd97dbc1cb        
+    docker0          bridge    connected (externally)  docker0                
+    wlp4s0           wifi      disconnesso             --                     
+    p2p-dev-wlp4s0   wifi-p2p  disconnesso             --                     
+    lo               loopback  non gestito             --                     
+$ nmcli connection show
+    NAME                    UUID                                  TYPE      DEVICE          
+    Connessione via cavo 1  670572f1-bc8e-3e37-8528-4f21e62606e4  ethernet  enp5s0          
+    br-e3dd97dbc1cb         974c8e89-4d4b-4e75-a1aa-54acdf2f0aac  bridge    br-e3dd97dbc1cb 
+    docker0                 cd6b021f-531d-4664-85fb-23bf1bb872aa  bridge    docker0      
+<span class="hljs-comment"># Routing table</span>
+<span class="hljs-comment"># Use the IP route to print or display the routing table.</span>
+$ ip route show
+    default via 192.168.1.1 dev enp5s0 
+$ netstat -r
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+    default         modemtim.homene 0.0.0.0         UG        0 0          0 enp5s0
+    default         modemtim.homene 0.0.0.0         UG        0 0          0 enp5s0
+    172.17.0.0      0.0.0.0         255.255.0.0     U         0 0          0 docker0
+    172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 br-e3dd97dbc1cb
+    192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 enp5s0
+<span class="hljs-comment"># Info Hardware</span>
+$ lshw -class network
+$ <span class="hljs-built_in">ls</span> -d /sys/class/net/*/device | <span class="hljs-built_in">cut</span> -d/ -f5 <span class="hljs-comment"># will list only real NICs, leaving out bonds, loopback devices and so on.</span>
+$ <span class="hljs-built_in">ls</span> -l /sys/class/net/*/device/driver/module | <span class="hljs-built_in">cut</span> -d/ -f5,13 | sed <span class="hljs-string">&#x27;s?/? -&gt; ?&#x27;</span> <span class="hljs-comment"># will also show the driver bound to it</span>
+$ hwinfo --netcard
+$ hwinfo --network
+$ lspci | grep Ethernet
+    05:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 26)
+<span class="hljs-comment"># Per vedere l&#x27;ip esterno:</span>
+$ curl -w <span class="hljs-string">&quot;\n&quot;</span> ifconfig.me
+$ curl -w <span class="hljs-string">&quot;\n&quot;</span> http://ident.me
+$ curl -4 icanhazip.com
+$ curl checkip.dyndns.org
+$ dig +short myip.opendns.com @resolver1.opendns.com
+<span class="hljs-comment"># Gateway address</span>
+$ netstat -nr
+    Kernel IP routing table
+    Destination     Gateway         Genmask         Flags   MSS Window  irtt Iface
+    0.0.0.0         192.168.1.1     0.0.0.0         UG        0 0          0 enp5s0
+    0.0.0.0         192.168.1.1     0.0.0.0         UG        0 0          0 enp5s0
+    172.17.0.0      0.0.0.0         255.255.0.0     U         0 0          0 docker0
+    172.18.0.0      0.0.0.0         255.255.0.0     U         0 0          0 br-e3dd97dbc1cb
+    192.168.1.0     0.0.0.0         255.255.255.0   U         0 0          0 enp5s0
+<span class="hljs-comment"># DNS Info</span>
+$ <span class="hljs-built_in">cat</span> /etc/resolv.conf 
+    domain homenet.telecomitalia.it
+    search homenet.telecomitalia.it
+    nameserver 192.168.1.1
+$ nslookup localhost
+    Server:		192.168.1.1
+    Address:	192.168.1.1#53
+    Name:	localhost.homenet.telecomitalia.it
+    Address: 127.0.0.1
+$ dig localhost
+
+<span class="hljs-comment"># interfaccia di rete attiva:</span>
+$ ip route show default | awk <span class="hljs-string">&#x27;/default/ {print $5}&#x27;</span>
+
+<span class="hljs-comment"># Cercare le interfacce ethernet</span>
+$ nmcli -t d|grep ethernet|<span class="hljs-built_in">cut</span> -d: -f1
+$ ip <span class="hljs-built_in">link</span> show <span class="hljs-built_in">help</span>
+$ ip -details -j <span class="hljs-built_in">link</span> show | jq <span class="hljs-string">&#x27;.[] | .ifname, .link_type, .linkinfo.info_data.type&#x27;</span>
+$ ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">help</span> 2&gt;&amp;1 | grep -A10 <span class="hljs-string">&#x27;TYPE :=&#x27;</span>
+
+<span class="hljs-comment"># MAC Address</span>
+$ <span class="hljs-built_in">cat</span> /sys/class/net/$(ip route show default | awk <span class="hljs-string">&#x27;/default/ {print $5}&#x27;</span>)/address
+$ find /sys/class/net -mindepth 1 -maxdepth 1 ! -name lo -<span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%P: &quot;</span> -execdir <span class="hljs-built_in">cat</span> {}/address \;
+</code></pre>
+<h3 id="macchine-presenti-nella-propria-rete" tabindex="-1">Macchine presenti nella propria rete <a class="header-anchor" href="#macchine-presenti-nella-propria-rete" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Per vedere il proprio indirizzo IP e dedurre la sottorete</span>
+$ ip a
+    2: enp5s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+        <span class="hljs-built_in">link</span>/ether 3c:7c:3f:f2:b2:47 brd ff:ff:ff:ff:ff:ff
+        inet 192.168.1.2/24 brd 192.168.1.255 scope global dynamic noprefixroute enp5s0
+
+<span class="hljs-comment"># Per vedere le macchine nella propria rete</span>
+$ ip n
+    192.168.1.1 dev enp5s0 lladdr 20:b0:01:95:2b:3c REACHABLE 
+    fe80::22b0:1ff:fe95:2b3c dev enp5s0 lladdr 20:b0:01:95:2b:3c router STALE
+
+<span class="hljs-comment"># Per vedere le macchine nella propria rete</span>
+$ nmap -sn 192.168.1.0/24
+    Starting Nmap 7.92 ( https://nmap.org ) at 2021-12-22 18:54 CET
+    Nmap scan report <span class="hljs-keyword">for</span> modemtim.homenet.telecomitalia.it (192.168.1.1)
+    Host is up (0.0012s latency).
+    Nmap scan report <span class="hljs-keyword">for</span> linux.homenet.telecomitalia.it (192.168.1.2)
+    Host is up (0.000092s latency).
+    Nmap scan report <span class="hljs-keyword">for</span> linux-vb.homenet.telecomitalia.it (192.168.1.27)
+    Host is up (0.00013s latency).
+    Nmap scan report <span class="hljs-keyword">for</span> ModemTIM-AP-952B46.homenet.telecomitalia.it (192.168.1.77)
+    Host is up (0.00063s latency).
+    Nmap <span class="hljs-keyword">done</span>: 256 IP addresses (4 hosts up) scanned <span class="hljs-keyword">in</span> 3.02 seconds
+</code></pre>
+<h3 id="interfacce-attive" tabindex="-1">Interfacce attive <a class="header-anchor" href="#interfacce-attive" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ ip a show|grep <span class="hljs-string">&quot;state UP&quot;</span>
+$ ip addr show
+$ ip a show enp1s0 up
+$ <span class="hljs-built_in">cat</span> /sys/class/net/enp5s0/operstate
+$ tcpdump -D
+</code></pre>
+<h3 id="report-utilizzo-delle-porte" tabindex="-1">Report utilizzo delle porte <a class="header-anchor" href="#report-utilizzo-delle-porte" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> ss -napt
+$ nc -v -w3 -z localhost 1-65535
+$ <span class="hljs-built_in">sudo</span> lsof -i| grep nessus
+$ <span class="hljs-built_in">sudo</span> nmap -sV --reason -p- 127.0.0.1 | grep nesssus
+$ <span class="hljs-built_in">sudo</span> netstat -atp|grep nessus
+</code></pre>
+<h4 id="chi-sta-utilizzando-la-porta-45331%3F" tabindex="-1">Chi sta utilizzando la porta 45331? <a class="header-anchor" href="#chi-sta-utilizzando-la-porta-45331%3F" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> lsof -iTCP -sTCP:LISTEN -P -n
+    COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+    container  608 root   13u  IPv4  20756      0t0  TCP 127.0.0.1:45331 (LISTEN)
+    smbd      4739 root   48u  IPv6  24580      0t0  TCP *:445 (LISTEN)
+    smbd      4739 root   49u  IPv6  24581      0t0  TCP *:139 (LISTEN)
+    smbd      4739 root   50u  IPv4  24582      0t0  TCP *:445 (LISTEN)
+    smbd      4739 root   51u  IPv4  24583      0t0  TCP *:139 (LISTEN)
+    docker-pr 4942 root    4u  IPv4  18232      0t0  TCP *:8000 (LISTEN)
+    docker-pr 4950 root    4u  IPv6  16322      0t0  TCP *:8000 (LISTEN)
+
+$ <span class="hljs-built_in">sudo</span> netstat -ltnp | grep -w <span class="hljs-string">&#x27;45331&#x27;</span> 
+    tcp        0      0 127.0.0.1:45331         0.0.0.0:*               LISTEN      608/containerd     
+
+    l – tells netstat to only show listening sockets.
+    t – tells it to display tcp connections.
+    n – instructs it show numerical addresses.
+    p – enables showing of the process ID and the process name.
+
+$ <span class="hljs-built_in">sudo</span> lsof -i :45331
+    COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+    container 608 root   13u  IPv4  20756      0t0  TCP localhost:45331 (LISTEN)
+
+$ <span class="hljs-built_in">sudo</span> fuser 45331/tcp
+    45331/tcp:             608
+$ ps -wwf -p 608
+    USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+    root         608  0.2  0.2 1714840 45132 ?       Ssl  15:38   0:23 /usr/bin/containerd
+</code></pre>
+<h2 id="network-monitoring-tools" tabindex="-1">Network Monitoring Tools <a class="header-anchor" href="#network-monitoring-tools" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://github.com/vergoh/vnstat">https://github.com/vergoh/vnstat</a></li>
+<li><a href="https://www.tecmint.com/install-vnstat-and-vnstati-to-monitor-linux-network-traffic/">https://www.tecmint.com/install-vnstat-and-vnstati-to-monitor-linux-network-traffic/</a></li>
+<li><a href="https://github.com/sysstat/sysstat">https://github.com/sysstat/sysstat</a></li>
+<li><a href="https://hackertarget.com/tcpdump-examples/">https://hackertarget.com/tcpdump-examples/</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm sysstat        [On Arch Linux]  vnstat?  
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm iftop        [On Arch Linux]
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm nethogs        [On Arch Linux]
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm monitorix        [On Arch Linux]
+</code></pre>
+</body></html>

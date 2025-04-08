@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.896" />
+        <title>autostart</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="autostart" tabindex="-1">autostart <a class="header-anchor" href="#autostart" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.896</p>
+<nav class="table-of-contents"><ol><li><a href="#autopartenza-con-freedesktop-desktop-application-autostart">Autopartenza con Freedesktop Desktop Application Autostart </a><ol><li><a href="#comandi-per-editare-i-.desktop">Comandi per editare i .desktop </a></li><li><a href="#esempio-di-come-passare-i-parametri-al-comando-shell-grazie-alla-sintassi-del-parametro--c-di-bash">Esempio di come passare i parametri al comando shell grazie alla sintassi del parametro -c di bash </a></li></ol></li><li><a href="#autopartenza-con-cron">Autopartenza con cron </a></li><li><a href="#autopartenza-con-systemd-user">Autopartenza con systemd User </a><ol><li><a href="#creare-un-servizio-utente-in-autopartenza">Creare un servizio utente in autopartenza </a></li><li><a href="#esempio-di-servizio-in-autopartenza">Esempio di servizio in autopartenza </a></li><li><a href="#creare-un-nuovo-target-che-sostituisce-il-default-per-aggiungere-servizi-in-autopartenza">Creare un nuovo target che sostituisce il default per aggiungere servizi in autopartenza </a></li></ol></li></ol></nav><h1 id="processi-in-autopartenza" tabindex="-1">Processi in autopartenza <a class="header-anchor" href="#processi-in-autopartenza" aria-hidden="true">🔗</a></h1>
+<ol>
+<li>Freedesktop <code>~/.config/autostart/*.desktop</code></li>
+<li>systemd</li>
+<li>cron</li>
+</ol>
+<h2 id="autopartenza-con-freedesktop-desktop-application-autostart" tabindex="-1">Autopartenza con Freedesktop Desktop Application Autostart <a class="header-anchor" href="#autopartenza-con-freedesktop-desktop-application-autostart" aria-hidden="true">🔗</a></h2>
+<p>Method for automatically starting applications during the startup of a desktop environment and after mounting a removable medium.</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/XDG_Autostart">https://wiki.archlinux.org/title/XDG_Autostart</a> <code>~/.config/autostart</code></li>
+<li><a href="https://wiki.archlinux.org/title/Desktop_entries">https://wiki.archlinux.org/title/Desktop_entries</a></li>
+<li><a href="https://wiki.archlinux.org/title/GNOME#Autostart">https://wiki.archlinux.org/title/GNOME#Autostart</a></li>
+<li><a href="https://freedesktop.org/wiki/Specifications/desktop-entry-spec/">https://freedesktop.org/wiki/Specifications/desktop-entry-spec/</a></li>
+<li><a href="https://specifications.freedesktop.org/desktop-entry-spec/latest/">https://specifications.freedesktop.org/desktop-entry-spec/latest/</a></li>
+<li><a href="https://specifications.freedesktop.org/autostart-spec/autostart-spec-latest.html">https://specifications.freedesktop.org/autostart-spec/autostart-spec-latest.html</a></li>
+<li><a href="https://specifications.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html">https://specifications.freedesktop.org/icon-theme-spec/icon-theme-spec-latest.html</a></li>
+</ul>
+<p>Esempio: Definisco uno script di esempio che deve essere eseguito in automatico:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; ~/workspaces/shell/autostart_example/autostart_example.sh &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Autostart Example Timestamp: &quot;</span> $(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%F %T&quot;</span>) &gt; ~/autostart_timestamp.txt
+EOF
+<span class="hljs-built_in">chmod</span> +x ~/workspaces/shell/autostart_example/autostart_example.sh
+</code></pre>
+<p>Ora definiamo il suo <code>.desktop</code> per l'autopartenza:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> &gt; ~/.config/autostart/autostart_example.desktop &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Desktop Entry]
+Name=Autostart Example
+Comment=Esempio di esecuzione <span class="hljs-keyword">in</span> autostart di uno script shell mediante freedesktop
+Exec=/bin/bash -c <span class="hljs-string">&quot;~/workspaces/shell/autostart_example/autostart_example.sh&quot;</span>
+Path=~/workspaces/shell/autostart_example/
+Icon=system-run
+Type=Application
+Terminal=<span class="hljs-literal">false</span>
+Categories=Utility;Education;Languages;Java;
+StartupNotify=<span class="hljs-literal">true</span>
+X-GNOME-Autostart-enabled=<span class="hljs-literal">true</span>
+X-GNOME-Autostart-Delay=0
+NoDisplay=<span class="hljs-literal">false</span>
+Hidden=<span class="hljs-literal">false</span>
+EOF
+</code></pre>
+<p>Verifica sintattica:</p>
+<pre><code class="language-bash">$ desktop-file-validate ~/.config/autostart/autostart_example.desktop
+</code></pre>
+<h3 id="comandi-per-editare-i-.desktop" tabindex="-1">Comandi per editare i .desktop <a class="header-anchor" href="#comandi-per-editare-i-.desktop" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/desktop-file-validate.1">https://man.archlinux.org/man/desktop-file-validate.1</a></p>
+</li>
+<li>
+<p><a href="https://archlinux.org/packages/community/x86_64/gendesk/">https://archlinux.org/packages/community/x86_64/gendesk/</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/gendesk.1">https://man.archlinux.org/man/gendesk.1</a></p>
+<pre><code class="language-bash">$ gendesk -n --pkgname <span class="hljs-string">&quot;<span class="hljs-variable">$pkgname</span>&quot;</span> --pkgdesc <span class="hljs-string">&quot;<span class="hljs-variable">$pkgdesc</span>&quot;</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://aur.archlinux.org/packages/lsdesktopf">https://aur.archlinux.org/packages/lsdesktopf</a></p>
+<pre><code class="language-bash">$ lsdesktopf --list
+</code></pre>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/icons">https://wiki.archlinux.org/title/icons</a> <code>~/.local/share/icons/</code></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/convert.1">https://man.archlinux.org/man/convert.1</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/identify.1">https://man.archlinux.org/man/identify.1</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/icotool.1">https://man.archlinux.org/man/icotool.1</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/icns2png.1">https://man.archlinux.org/man/icns2png.1</a></p>
+</li>
+</ul>
+<p><code>~/.local/share/applications/</code></p>
+<pre><code class="language-bash">$ man desktop-file-validate
+$ man desktop-file-install
+$ man update-desktop-database
+$ man desktop-file-edit
+
+$ <span class="hljs-built_in">touch</span> gimp-2.8.desktop
+$ desktop-file-edit \
+--set-name=<span class="hljs-string">&quot;GIMP on LXD&quot;</span> \
+--set-comment=<span class="hljs-string">&quot;GIMP 2.8 with custom plugins&quot;</span> \
+--set-icon=<span class="hljs-string">&quot;/home/vivek/backups/desktop-entries/gimp.png&quot;</span> \
+--add-category=<span class="hljs-string">&quot;Graphics;2DGraphics;RasterGraphics;GTK;&quot;</span> \
+--set-key=<span class="hljs-string">&quot;Exec&quot;</span> --set-value=<span class="hljs-string">&quot;/snap/bin/lxc exec gui-1804-gimp -- sudo --login --user vivek /usr/bin/gimp-2.8 %U&quot;</span> \
+--set-key=<span class="hljs-string">&quot;Type&quot;</span> --set-value=<span class="hljs-string">&quot;Application&quot;</span> \
+gimp-2.8.desktop
+$ desktop-file-validate gimp-2.8.desktop
+$ desktop-file-install --<span class="hljs-built_in">dir</span>=~/.local/share/applications gimp-2.8.desktop
+$ update-desktop-database ~/.local/share/applications
+
+<span class="hljs-comment"># Icone</span>
+$ convert &lt;icon name&gt;.gif &lt;icon name&gt;.png
+$ identify /usr/share/vlc/vlc48x48.ico
+$ icotool -x &lt;icon name&gt;.ico
+$ icns2png -x &lt;icon name&gt;.icns
+$ find /path/to/source/package -regex <span class="hljs-string">&quot;.*\.\(svg\|png\|xpm\|gif\|ico\)$&quot;</span>
+</code></pre>
+<h3 id="esempio-di-come-passare-i-parametri-al-comando-shell-grazie-alla-sintassi-del-parametro--c-di-bash" tabindex="-1">Esempio di come passare i parametri al comando shell grazie alla sintassi del parametro <code>-c</code> di bash <a class="header-anchor" href="#esempio-di-come-passare-i-parametri-al-comando-shell-grazie-alla-sintassi-del-parametro--c-di-bash" aria-hidden="true">🔗</a></h3>
+<pre><code>-c      If the -c option is present, then commands are read from  the
+        first non-option argument command_string.  If there are argu‐
+        ments  after  the  command_string,  the  first  argument   is
+        assigned  to  $0  and any remaining arguments are assigned to
+        the positional parameters.  The assignment  to  $0  sets  the
+        name  of  the  shell, which is used in warning and error mes‐
+        sages.
+
+Exec=sh -c 'somecommand &quot;$@&quot; 2&gt;&gt; /path/to/stderr.log' sh %F
+</code></pre>
+<h2 id="autopartenza-con-cron" tabindex="-1">Autopartenza con cron <a class="header-anchor" href="#autopartenza-con-cron" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ man 5 crontab
+$ crontab -l
+$ crontab -e
+@reboot ~/workspaces/shell/autostart_example/autostart_example.sh
+</code></pre>
+<h2 id="autopartenza-con-systemd-user" tabindex="-1">Autopartenza con systemd User <a class="header-anchor" href="#autopartenza-con-systemd-user" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/systemd">https://wiki.archlinux.org/title/systemd</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente">https://wiki.archlinux.org/index.php/Systemd_(Italiano)/User_(Italiano)#Scrivere_servizi_utente</a></li>
+<li><a href="https://systemd.io/DESKTOP_ENVIRONMENTS/#xdg-autostart-integration">https://systemd.io/DESKTOP_ENVIRONMENTS/#xdg-autostart-integration</a></li>
+<li><a href="https://man.archlinux.org/man/systemd.unit.5">https://man.archlinux.org/man/systemd.unit.5</a></li>
+<li><a href="https://man.archlinux.org/man/systemd.target.5">https://man.archlinux.org/man/systemd.target.5</a></li>
+</ul>
+<h3 id="creare-un-servizio-utente-in-autopartenza" tabindex="-1">Creare un servizio utente in autopartenza <a class="header-anchor" href="#creare-un-servizio-utente-in-autopartenza" aria-hidden="true">🔗</a></h3>
+<p>systemd offre agli utenti la possibilità di gestire i servizi <strong>sotto il controllo dell'utente</strong> tramite una istanza di systemd per singolo utente, che consente agli stessi di avviare, fermare, abilitare e disabilitare le proprie unità. Questa caratteristica è utile per demoni e altre operazioni automatiche come lo scaricamento della posta.
+Secondo la configurazione di default in <code>/etc/pam.d/system-login</code>, il modulo pam_systemd avvia automaticamente una istanza di <code>systemd --user</code> al primo login dell'utente. Tale processo rimarrà in esecuzione fin tanto che l'utente sarà coneesso, e verrà terminato quando l'utente effettua il logout.</p>
+<p>i servizi utente risiedono nelle directory:</p>
+<ul>
+<li><code>/usr/lib/systemd/user/</code> directory per i servizi forniti dai pacchetti.</li>
+<li><code>/etc/systemd/user/</code> directory per i servizi definiti dall'amministratore di sistema.</li>
+<li><code>~/.config/systemd/user/</code> directory per i servizi utente.</li>
+</ul>
+<pre><code class="language-bash">$ ps -ef|grep <span class="hljs-string">&#x27;systemd --user&#x27;</span>|grep -v grep
+$ <span class="hljs-built_in">sudo</span> systemctl list-unit-files --<span class="hljs-built_in">type</span>=service
+$ <span class="hljs-built_in">sudo</span> systemctl is-enabled mysql
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> mysql
+$ <span class="hljs-built_in">mkdir</span> -p ~/.config/systemd/user
+</code></pre>
+<p>All'avvio di una istanza utente di systemd, viene caricato il target <code>default.target</code>;<br>
+è ora possibile controllare manualmente i servizi utente tramite <code>systemctl --user</code>.</p>
+<p>Tutti i servizi utente devono essere inseriti in <code>~/.config/systemd/user</code>.<br>
+Se si vuole avviare une servizio automaticamente al login, si esegua <code>systemctl --user enable servizio</code> per ogni servizio.</p>
+<p>L'istanza utente di systemd non eredita le variabili d'ambiente definite in .bashrc,<br>
+Per gli utenti che abbiano una propria home directory, si specifichi l'opzione <code>DefaultEnvironment</code> in <code>~/.config/systemd/user.conf</code>. Viene applicata solo alle unità utente di un utente specifico.</p>
+<pre><code class="language-bash">$ man systemd-user.conf
+$ <span class="hljs-built_in">cp</span> /etc/systemd/user.conf ~/.config/systemd/
+$ <span class="hljs-built_in">cat</span> &gt;&gt; ~/.bash_profile &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+systemctl --user import-environment PATH
+systemctl --user import-environment SHELL
+systemctl --user import-environment LANG
+systemctl --user import-environment USER
+EOF
+$ <span class="hljs-built_in">cat</span> &gt; ~/.config/systemd/user/autostart_example.service &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=Esempio di script <span class="hljs-keyword">in</span> autostart con systemd <span class="hljs-keyword">in</span> modalità user
+
+[Service]
+ExecStart=/usr/bin/env bash -c <span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>/workspaces/shell/autostart_example/autostart_example.sh&quot;</span>
+
+[Install]
+WantedBy=default.target
+EOF
+
+$ systemctl list-unit-files --<span class="hljs-built_in">type</span>=service --user
+$ systemctl --user start autostart_example
+$ systemctl --user status autostart_example
+$ systemctl --user <span class="hljs-built_in">enable</span> autostart_example
+</code></pre>
+<h3 id="esempio-di-servizio-in-autopartenza" tabindex="-1">Esempio di servizio in autopartenza <a class="header-anchor" href="#esempio-di-servizio-in-autopartenza" aria-hidden="true">🔗</a></h3>
+<p><a href="https://unix.stackexchange.com/questions/301987/how-to-create-a-systemd-target">https://unix.stackexchange.com/questions/301987/how-to-create-a-systemd-target</a></p>
+<pre><code class="language-bash"><span class="hljs-comment"># test_service.sh</span>
+info=/tmp/myservice-systemd-cat-pipe-info
+<span class="hljs-built_in">mkfifo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$info</span>&quot;</span>
+<span class="hljs-built_in">trap</span> <span class="hljs-string">&quot;exec 3&gt;&amp;-; rm <span class="hljs-variable">$info</span>&quot;</span> EXIT
+systemd-cat -p info &lt; <span class="hljs-string">&quot;<span class="hljs-variable">$info</span>&quot;</span> &amp;
+<span class="hljs-built_in">exec</span> 3&gt;<span class="hljs-string">&quot;<span class="hljs-variable">$info</span>&quot;</span>
+
+DATE=`<span class="hljs-built_in">date</span> <span class="hljs-string">&#x27;+%Y-%m-%d %H:%M:%S&#x27;</span>`
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Example service started at <span class="hljs-variable">${DATE}</span>&quot;</span> &gt; <span class="hljs-string">&quot;<span class="hljs-variable">$info</span>&quot;</span>
+
+<span class="hljs-keyword">while</span> :
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Looping...&quot;</span>;
+<span class="hljs-built_in">sleep</span> 30;
+<span class="hljs-keyword">done</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> test_service.sh /usr/bin/test_service.sh
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> +x /usr/bin/test_service.sh
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-comment"># myservice.service</span>
+<span class="hljs-section">[Unit]</span>
+<span class="hljs-attr">Description</span>=Example systemd service.
+
+<span class="hljs-section">[Service]</span>
+<span class="hljs-attr">Type</span>=simple
+<span class="hljs-attr">ExecStart</span>=/bin/bash /usr/bin/test_service.sh
+
+<span class="hljs-section">[Install]</span>
+<span class="hljs-attr">WantedBy</span>=multi-user.target
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> myservice.service /etc/systemd/system/myservice.service
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 644 /etc/systemd/system/myservice.service
+$ <span class="hljs-built_in">sudo</span> systemctl start myservice
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> myservice
+</code></pre>
+<h3 id="creare-un-nuovo-target-che-sostituisce-il-default-per-aggiungere-servizi-in-autopartenza" tabindex="-1">Creare un nuovo target che sostituisce il default per aggiungere servizi in autopartenza <a class="header-anchor" href="#creare-un-nuovo-target-che-sostituisce-il-default-per-aggiungere-servizi-in-autopartenza" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ systemctl get-default <span class="hljs-comment"># Per vedere il target di default da estendere, multi-user.target oppure graphical.target</span>
+$ <span class="hljs-built_in">ls</span> -l /usr/lib/systemd/system/default.target
+$ systemctl set-default graphical.target
+
+<span class="hljs-comment"># Autopartenza realizzata con systemd https://github.com/jceb/dex</span>
+<span class="hljs-comment"># Creiamo un nuovo target che funziona da raccoglitore/contenitore e che parte dopo il multi-user.target</span>
+$ man 5 systemd.unit 
+$ man 5 systemd.target 
+$ <span class="hljs-built_in">mkdir</span> -p ~/.config/systemd/user
+$ <span class="hljs-built_in">cat</span> &gt; ~/.config/systemd/user/autostart.target  &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=Current graphical user session
+Documentation=man:systemd.special(7)
+RefuseManualStart=no
+StopWhenUnneeded=no
+Wants=&lt;service name&gt;.service    <span class="hljs-comment"># Soft dependencies. The target does not require these to start.</span>
+                                <span class="hljs-comment"># Units listed in this option will be started if the configuring unit is. However, if the listed units fail to start or cannot be added to the transaction, this has no impact on the validity of the transaction as a whole, and this unit will still be started.</span>
+Requires=multi-user.target      <span class="hljs-comment"># Hard dependencies of the target. If this unit gets activated, the units listed will be activated as </span>
+                                well. If one of the other units fails to activate, and an ordering dependency After= on the failing unit is <span class="hljs-built_in">set</span>, this unit will not be started. 
+After=multi-user.target rescue.service rescue.target <span class="hljs-comment"># Boots after these services, configure ordering dependencies between units</span>
+Conflicts=rescue.service rescue.target
+AllowIsolate=<span class="hljs-built_in">yes</span>
+EOF
+$ <span class="hljs-built_in">cat</span> &gt; ~/.config/systemd/user/&lt;service name&gt;.service &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+[Unit]
+Description=&lt;service description&gt;
+
+[Service]
+ExecStart=&lt;path to the executable&gt; [&lt;parameters&gt;]
+EOF
+
+<span class="hljs-comment"># Esempio di dipendenza tra target e service</span>
+<span class="hljs-comment"># /etc/systemd/system/foo.target</span>
+<span class="hljs-comment"># /etc/systemd/system/foo.target.wants/</span>
+$ <span class="hljs-built_in">ln</span> -s /usr/lib/systemd/system/bar.service /etc/systemd/system/foo.target.wants/bar.service
+<span class="hljs-comment"># Oppure</span>
+$ systemctl --user add-wants foo.target bar.service
+
+<span class="hljs-comment"># Il nuovo target, che estende multi-user.target oppure graphical.target, deve ora essere impostato come il nuovo default:</span>
+<span class="hljs-comment"># https://unix.stackexchange.com/questions/301987/how-to-create-a-systemd-target</span>
+$ systemctl get-default <span class="hljs-comment"># ==&gt; multi-user.target oppure graphical.target</span>
+$ <span class="hljs-built_in">ln</span> -s /etc/systemd/system/foo.target /etc/systemd/system/default.target
+<span class="hljs-comment"># Oppure</span>
+$ systemctl set-default foo.target
+$ systemctl daemon-reload
+$ systemctl get-default
+
+$ <span class="hljs-built_in">rm</span> /etc/systemd/system/default.target
+$ <span class="hljs-built_in">ln</span> -sf /usr/lib/systemd/system/graphical.target /etc/systemd/system/default.target
+
+$ systemctl --user add-wants autostart.target &lt;service name&gt;.service
+<span class="hljs-comment">#$ systemctl --user disable &lt;service name&gt;.service</span>
+$ systemctl --user list-units
+$ systemctl --user start autostart.target
+$ systemctl --user daemon-reload
+$ systemctl --user start &lt;service name&gt;.service
+$ systemctl --user status &lt;service name&gt;.service
+$ systemctl --user stop &lt;service name&gt;.service
+</code></pre>
+</body></html>

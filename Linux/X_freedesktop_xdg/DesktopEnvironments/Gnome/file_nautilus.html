@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.322" />
+        <title>file_nautilus</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="file_nautilus" tabindex="-1">file_nautilus <a class="header-anchor" href="#file_nautilus" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.322</p>
+<nav class="table-of-contents"><ol><li><a href="#condivisione-samba-con-nautilus">Condivisione Samba con Nautilus </a></li><li><a href="#binding-f4-per-terminal">Binding F4 per Terminal </a></li><li><a href="#utilizzo-del-path-al-posto-del-breadcrumb">Utilizzo del path al posto del breadcrumb </a></li><li><a href="#create-a-new-document-from-the-right-click-menu">Create a new document from the right-click menu </a></li><li><a href="#custom-scripts">Custom scripts </a><ol><li><a href="#keybinds">Keybinds </a></li><li><a href="#esempio-python">Esempio Python </a></li><li><a href="#esempi-shell">Esempi Shell </a><ol><li><a href="#problema-del-for-con-nautilus_script_selected_file_paths">Problema del for con NAUTILUS_SCRIPT_SELECTED_FILE_PATHS </a></li></ol></li></ol></li></ol></nav><h1 id="file(nautilus)" tabindex="-1">File(Nautilus) <a class="header-anchor" href="#file(nautilus)" aria-hidden="true">🔗</a></h1>
+<p>Files was known as Nautilus prior to version 3.6.</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/GNOME/Files">https://wiki.archlinux.org/title/GNOME/Files</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac install python-nautilus filemanager-actions code-nautilus-git
+$ <span class="hljs-built_in">sudo</span> pamac install nautilus-share nautilus-empty-file nautilus-compare nautilus-copy-path nautilus-admin filemanager-actions
+$ nautilus -q
+</code></pre>
+<h2 id="condivisione-samba-con-nautilus" tabindex="-1">Condivisione Samba con Nautilus <a class="header-anchor" href="#condivisione-samba-con-nautilus" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac install nautilus-share
+$ nautilus -q
+</code></pre>
+<h2 id="binding-f4-per-terminal" tabindex="-1">Binding F4 per Terminal <a class="header-anchor" href="#binding-f4-per-terminal" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><code>~/.local/share/nautilus/scripts/terminal</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+gnome-terminal &amp;
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.local/share/nautilus/scripts/terminal
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+gnome-terminal &amp;
+EOF
+$ <span class="hljs-built_in">chmod</span> +x ~/.local/share/nautilus/scripts/terminal
+</code></pre>
+</li>
+<li>
+<p><code>~/.config/nautilus/scripts-accels</code></p>
+<pre><code>  F4 terminal
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.config/nautilus/scripts-accels
+F4 terminal
+; Commented lines must have a space after the semicolon
+; Examples of other key combinations:
+; &lt;Control&gt;F12 Terminal
+; &lt;Alt&gt;F12 Terminal
+; &lt;Shift&gt;F12 Terminal
+EOF
+</code></pre>
+</li>
+</ul>
+<h2 id="utilizzo-del-path-al-posto-del-breadcrumb" tabindex="-1">Utilizzo del path al posto del breadcrumb <a class="header-anchor" href="#utilizzo-del-path-al-posto-del-breadcrumb" aria-hidden="true">🔗</a></h2>
+<p>Invece di attivarlo sempre con <span class="k">CTRL</span>+<span class="k">L</span></p>
+<pre><code class="language-bash">gsettings <span class="hljs-built_in">set</span> org.gnome.nautilus.preferences always-use-location-entry <span class="hljs-literal">true</span>
+</code></pre>
+<h2 id="create-a-new-document-from-the-right-click-menu" tabindex="-1">Create a new document from the right-click menu <a class="header-anchor" href="#create-a-new-document-from-the-right-click-menu" aria-hidden="true">🔗</a></h2>
+<p><code>~/Modelli</code></p>
+<p>To get this option one has to create a <code>~/Templates/</code> folder in your home folder and place an empty file inside the folder through your favorite Terminal by <code>touch ~/Templates/new</code> or by using any other file manager. Then just restart Files.</p>
+<p>On non-English installations, the templates directory might have another name. One can find the actual directory with <code>xdg-user-dir TEMPLATES</code>.</p>
+<p>The templates directory can be configured in the <code>~/.config/user-dirs.dirs</code> file:</p>
+<p><code>XDG_TEMPLATES_DIR=&quot;$HOME/some/path&quot;</code></p>
+<h2 id="custom-scripts" tabindex="-1">Custom scripts <a class="header-anchor" href="#custom-scripts" aria-hidden="true">🔗</a></h2>
+<p>Scripts placed in <code>~/.local/share/nautilus/scripts</code> can be run from the right click context menu of a file.</p>
+<p>The context menu can also be organized into subfolders, e.g. <code>~/.local/share/nautilus/scripts/images</code> and <code>~/.local/share/nautilus/scripts/music</code>.</p>
+<p>Scripts have access to the following environment variables:</p>
+<pre><code>NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+NAUTILUS_SCRIPT_SELECTED_URIS
+NAUTILUS_SCRIPT_CURRENT_URI
+NAUTILUS_SCRIPT_WINDOW_GEOMETRY
+</code></pre>
+<p>Some example scripts:</p>
+<p><code>~/.local/share/nautilus/scripts/open-terminal-here</code></p>
+<pre><code class="language-bash"><span class="hljs-comment"># !/usr/bin/env bash</span>
+gnome-terminal
+</code></pre>
+<p><code>~/.local/share/nautilus/scripts/remove-extension</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span>&quot;</span> | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> filename; <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">mv</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$filename</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${filename%.*}</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>Note: Make sure the scripts are marked as executable. You may have to restart nautilus with <code>nautilus -q</code> for them to show up.</p>
+<h3 id="keybinds" tabindex="-1">Keybinds <a class="header-anchor" href="#keybinds" aria-hidden="true">🔗</a></h3>
+<p>Keybinds to execute scripts can be assigned in the <code>~/.config/nautilus/scripts-accels</code> file:</p>
+<pre><code>; Example Keybinds
+; Modifiers: &lt;Control&gt; &lt;Alt&gt; &lt;Shift&gt;
+F4 open-terminal-here
+&lt;Alt&gt;x remove-extension
+</code></pre>
+<p>Note: You cannot overwrite any pre-existing nautilus keybinds.</p>
+<h3 id="esempio-python" tabindex="-1">Esempio Python <a class="header-anchor" href="#esempio-python" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-python"><span class="hljs-comment">#!/usr/bin/env python</span>
+<span class="hljs-string">&quot;&quot;&quot;
+&quot;&quot;&quot;</span>
+
+<span class="hljs-keyword">import</span> datetime
+<span class="hljs-keyword">import</span> os
+
+<span class="hljs-keyword">from</span> PIL <span class="hljs-keyword">import</span> Image
+
+DATETIME_ORIGINAL=<span class="hljs-number">36867</span>
+
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():
+    <span class="hljs-keyword">for</span> path <span class="hljs-keyword">in</span> os.getenv(<span class="hljs-string">&#x27;NAUTILUS_SCRIPT_SELECTED_FILE_PATHS&#x27;</span>,<span class="hljs-string">&#x27;&#x27;</span>).splitlines():
+        <span class="hljs-keyword">try</span>:
+            exif_data = Image.<span class="hljs-built_in">open</span>(path)._getexif()
+        <span class="hljs-keyword">except</span> OSError:
+            <span class="hljs-keyword">continue</span>
+
+        <span class="hljs-keyword">try</span>:
+            date = datetime.datetime.strptime(exif_data[DATETIME_ORIGINAL], <span class="hljs-string">&#x27;%Y:%m:%d %H:%M:%S&#x27;</span>)
+            directory = os.path.join(date.strftime(<span class="hljs-string">&#x27;%Y&#x27;</span>), date.strftime(<span class="hljs-string">&#x27;%B&#x27;</span>))
+        <span class="hljs-keyword">except</span> (KeyError, ValueError, TypeError):
+            directory = <span class="hljs-string">&quot;unsorted&quot;</span>
+
+        os.makedirs(directory, exist_ok=<span class="hljs-literal">True</span>)
+        os.rename(path, os.path.join(directory, os.path.basename(path)))
+
+<span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">&#x27;__main__&#x27;</span>:
+    main()
+</code></pre>
+<h3 id="esempi-shell" tabindex="-1">Esempi Shell <a class="header-anchor" href="#esempi-shell" aria-hidden="true">🔗</a></h3>
+<p>Si può iterare <code>NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</code> con un <code>for</code> <br>
+avendo l'accortezza di impostare <code>IFS</code> al newline,
+oppure si può semplicemente utilizzare un <code>while</code>.
+In alternativa ancora il for si può utilizzare con <code>$@</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+pattern1=`zenity --entry --entry-text=<span class="hljs-string">&#x27;replace&#x27;</span>`
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;$?&quot;</span> -eq 1 ]
+<span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">exit</span>
+<span class="hljs-keyword">fi</span>
+pattern2=`zenity --entry --entry-text=<span class="hljs-string">&#x27;by&#x27;</span>`
+<span class="hljs-keyword">if</span> [ <span class="hljs-string">&quot;$?&quot;</span> -eq 1 ]
+<span class="hljs-keyword">then</span>
+   <span class="hljs-built_in">exit</span>
+<span class="hljs-keyword">fi</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span> | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> <span class="hljs-string">&#x27;file&#x27;</span>
+<span class="hljs-keyword">do</span>
+  rename <span class="hljs-string">&quot;s/<span class="hljs-variable">$motif1</span>/<span class="hljs-variable">$motif2</span>/g&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+zenity --info --text=<span class="hljs-string">&quot;Done&quot;</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+meld <span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span> &amp;
+</code></pre>
+<p>Usare <code>$@</code> al posto di NAUTILUS_SCRIPT_SELECTED_FILE_PATHS evita di impostare IFS al newline:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>
+<span class="hljs-keyword">do</span>
+ <span class="hljs-built_in">mv</span> ./<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> ./<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>.bak&quot;</span>
+ iconv -f $(uchardet ./<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>.bak&quot;</span>) ./<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>.bak&quot;</span> -t UTF-8 -o ./<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>
+ trash ./<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>.bak&quot;</span>
+<span class="hljs-keyword">done</span>
+notify-send <span class="hljs-string">&quot;File(s) converted to UTF-8&quot;</span>
+<span class="hljs-comment"># Note: Install uchardet, trash-cli and libnotify to use this script</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># versione while</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span> | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> <span class="hljs-string">&#x27;f&#x27;</span>
+<span class="hljs-keyword">do</span>
+  notify-send <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>
+  zenity --info --text=<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>
+  <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> | xclip -selection clipboard
+  mediainfo-gui <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> &amp;
+<span class="hljs-keyword">done</span>
+<span class="hljs-comment"># Note: Install xclip and libnotify to use this script</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># versione for 1</span>
+IFS_BAK=<span class="hljs-variable">$IFS</span>
+IFS=<span class="hljs-string">&quot;
+&quot;</span>
+<span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> <span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span>
+<span class="hljs-keyword">do</span>
+  notify-send <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>
+  zenity --info --text=<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span>
+  <span class="hljs-built_in">echo</span> -n <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> | xclip -selection clipboard
+  mediainfo-gui <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> &amp;
+<span class="hljs-keyword">done</span>
+IFS=<span class="hljs-variable">$IFS_BAK</span>
+<span class="hljs-comment"># Note: Install xclip and libnotify to use this script</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># versione for 2</span>
+<span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>
+<span class="hljs-keyword">do</span>
+<span class="hljs-comment">#  notify-send &quot;$f&quot;</span>
+<span class="hljs-comment">#  zenity --info --text=&quot;$f&quot;</span>
+<span class="hljs-comment">#  echo -n &quot;$f&quot; | xclip -selection clipboard</span>
+mediainfo-gui $(<span class="hljs-built_in">pwd</span>)/<span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> &amp;
+<span class="hljs-keyword">done</span>
+<span class="hljs-comment"># Note: Install xclip and libnotify to use this script</span>
+</code></pre>
+<h4 id="problema-del-for-con-nautilus_script_selected_file_paths" tabindex="-1">Problema del for con NAUTILUS_SCRIPT_SELECTED_FILE_PATHS <a class="header-anchor" href="#problema-del-for-con-nautilus_script_selected_file_paths" aria-hidden="true">🔗</a></h4>
+<p>Quando si utilizza il <code>for</code> con <code>NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</code>, <br>
+se ci sono dei nomi di file con spazi allora il <code>for</code> divide anche il nome del file
+producendo un risultato indesiderato.
+Per poter utilizzar il <code>for</code> con <code>NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</code> anche
+quando i nomi dei file contengono spazi bisogna impostare <code>IFS</code> al solo newline:</p>
+<pre><code class="language-bash">IFS_BAK=<span class="hljs-variable">$IFS</span>
+IFS=<span class="hljs-string">&quot;
+&quot;</span>
+
+<span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> <span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span>; <span class="hljs-keyword">do</span>
+    whatever <span class="hljs-variable">$line</span>
+<span class="hljs-keyword">done</span>
+
+IFS=<span class="hljs-variable">$IFS_BAK</span>
+</code></pre>
+</body></html>

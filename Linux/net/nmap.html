@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.002" />
+        <title>nmap</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nmap" tabindex="-1">nmap <a class="header-anchor" href="#nmap" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.002</p>
+<nav class="table-of-contents"><ol><li><a href="#ip-locale-ed-esterno">ip locale ed esterno </a></li><li><a href="#installazione-ed-utilizzo">Installazione ed utilizzo </a></li><li><a href="#subnet-scan---trovare-gli-host-attivi-nella-sottorete">Subnet scan - trovare gli host attivi nella sottorete </a></li><li><a href="#nmap-port-scanning---chi-sta-utilizzando-la-porta-45331%3F">nmap port scanning - Chi sta utilizzando la porta 45331? </a></li><li><a href="#usare-uno-script">Usare uno script </a></li></ol></nav><h1 id="nmap-1" tabindex="-1">nmap <a class="header-anchor" href="#nmap-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.spiderfoot.net/">https://www.spiderfoot.net/</a></li>
+<li><a href="https://github.com/robertdavidgraham/masscan">https://github.com/robertdavidgraham/masscan</a></li>
+</ul>
+<h2 id="ip-locale-ed-esterno" tabindex="-1">ip locale ed esterno <a class="header-anchor" href="#ip-locale-ed-esterno" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Per vedere l&#x27;ip:</span>
+$ ip -4 a show enp5s0
+    2: enp1s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+        inet 192.168.1.2/24 brd 192.168.1.255 scope global dynamic noprefixroute enp1s0
+        valid_lft 15157sec preferred_lft 15157sec
+$ nmcli device show
+
+<span class="hljs-comment"># Per vedere l&#x27;ip esterno:</span>
+$ curl -w <span class="hljs-string">&quot;\n&quot;</span> ifconfig.me
+$ curl -w <span class="hljs-string">&quot;\n&quot;</span> http://ident.me
+$ curl -4 icanhazip.com
+$ curl checkip.dyndns.org
+$ dig +short myip.opendns.com @resolver1.opendns.com
+</code></pre>
+<h2 id="installazione-ed-utilizzo" tabindex="-1">Installazione ed utilizzo <a class="header-anchor" href="#installazione-ed-utilizzo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac install nmap
+
+Esecuzione come utente non root
+$ nmap 127.0.0.1
+<span class="hljs-comment"># By default, when running as a non-root account, Nmap does a full TCP connect scan, </span>
+<span class="hljs-comment"># completing the TCP three-way handshake for each open TCP port on the target.</span>
+<span class="hljs-comment"># A   --&gt;SYN   B</span>
+<span class="hljs-comment"># A SYN-ACK&lt;-- B</span>
+<span class="hljs-comment"># A   --&gt;ACK   B</span>
+<span class="hljs-comment"># con --reason si vede il motivo delle conclusioni di nmap</span>
+$ nmap --reason 127.0.0.1
+<span class="hljs-comment"># When you run Nmap as a root user, the default scan type changes. As non-root, </span>
+<span class="hljs-comment"># Nmap uses a TCP connect() to determine if a port is open or closed. </span>
+<span class="hljs-comment"># As root, Nmap uses a half-open or TCP SYN scan (a TCP SYN is sent to start a connection, but the connection is never completed). </span>
+$ <span class="hljs-built_in">sudo</span> nmap --reason -p 1-1024 127.0.0.1
+<span class="hljs-comment"># you can specify -p 1-65535, or use the Nmap shorthand -p-. Scan all 65535 ports on the Slingshot Linux host, as shown here:</span>
+$ <span class="hljs-built_in">sudo</span> nmap --reason -p- 127.0.0.1
+<span class="hljs-comment"># Getting More Information - Banners</span>
+<span class="hljs-comment"># -sV (Version detection) Abilita il version detection, In alternativa, è possibile utilizzare l&#x27;opzione -A che attiva il version detection, tra le altre cose.</span>
+$ <span class="hljs-built_in">sudo</span> nmap -sV --reason -p- 127.0.0.1
+<span class="hljs-comment"># Analisi di tutte le porte: come root nmap esegue una connect tcp completa invece di un syn-ack</span>
+<span class="hljs-comment"># -sV: Probe open ports to determine service/version info</span>
+<span class="hljs-comment"># --reasom Display the reason a port is in a particular state</span>
+<span class="hljs-comment"># -p- indica tutte le porte 0-65535</span>
+$ <span class="hljs-built_in">sudo</span> nmap -sV --reason -p- 127.0.0.1
+<span class="hljs-comment"># Super aggressivo:</span>
+$ <span class="hljs-built_in">sudo</span> nmap -A 127.0.0.1
+</code></pre>
+<h2 id="subnet-scan---trovare-gli-host-attivi-nella-sottorete" tabindex="-1">Subnet scan - trovare gli host attivi nella sottorete <a class="header-anchor" href="#subnet-scan---trovare-gli-host-attivi-nella-sottorete" aria-hidden="true">🔗</a></h2>
+<p>Per trovare velocemente gli host attivi non facciamo un port scan,
+lo faremo in seguito sui singoli host di interesse trovati.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># -sL: List Scan - simply list targets to scan</span>
+$ nmap -sL 192.168.1.2/24
+<span class="hljs-comment"># Nelle versioni precedenti di Nmap, l&#x27;opzione -sn era chiamata -sP</span>
+<span class="hljs-comment">#  -sn (No port scan) Questa opzione indica a Nmap di non effettuare un port scan dopo un host discovery </span>
+$ nmap -sn 192.168.1.2/24
+$ nmap -sP 192.168.1.2/24
+</code></pre>
+<h2 id="nmap-port-scanning---chi-sta-utilizzando-la-porta-45331%3F" tabindex="-1">nmap port scanning - Chi sta utilizzando la porta 45331? <a class="header-anchor" href="#nmap-port-scanning---chi-sta-utilizzando-la-porta-45331%3F" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">
+$ <span class="hljs-built_in">sudo</span> nmap -p- -sV localhost <span class="hljs-comment"># scan su tutte le porte e con le versioni</span>
+Starting Nmap 7.91 ( https://nmap.org ) at 2021-06-21 17:35 CEST
+Nmap scan report <span class="hljs-keyword">for</span> localhost (127.0.0.1)
+Host is up (0.0000050s latency).
+Other addresses <span class="hljs-keyword">for</span> localhost (not scanned): ::1
+Not shown: 65531 closed ports
+PORT      STATE SERVICE     VERSION
+139/tcp   open  netbios-ssn Samba smbd 4.6.2
+445/tcp   open  netbios-ssn Samba smbd 4.6.2
+8000/tcp  open  http-alt    uvicorn
+45331/tcp open  unknown
+
+$ <span class="hljs-built_in">sudo</span> lsof -iTCP -sTCP:LISTEN -P -n
+COMMAND    PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+container  608 root   13u  IPv4  20756      0t0  TCP 127.0.0.1:45331 (LISTEN)
+smbd      4739 root   48u  IPv6  24580      0t0  TCP *:445 (LISTEN)
+smbd      4739 root   49u  IPv6  24581      0t0  TCP *:139 (LISTEN)
+smbd      4739 root   50u  IPv4  24582      0t0  TCP *:445 (LISTEN)
+smbd      4739 root   51u  IPv4  24583      0t0  TCP *:139 (LISTEN)
+docker-pr 4942 root    4u  IPv4  18232      0t0  TCP *:8000 (LISTEN)
+docker-pr 4950 root    4u  IPv6  16322      0t0  TCP *:8000 (LISTEN)
+
+$ <span class="hljs-built_in">sudo</span> netstat -ltnp | grep -w <span class="hljs-string">&#x27;45331&#x27;</span> 
+tcp        0      0 127.0.0.1:45331         0.0.0.0:*               LISTEN      608/containerd     
+
+l – tells netstat to only show listening sockets.
+t – tells it to display tcp connections.
+n – instructs it show numerical addresses.
+p – enables showing of the process ID and the process name.
+
+$ <span class="hljs-built_in">sudo</span> lsof -i :45331
+COMMAND   PID USER   FD   TYPE DEVICE SIZE/OFF NODE NAME
+container 608 root   13u  IPv4  20756      0t0  TCP localhost:45331 (LISTEN)
+
+$ <span class="hljs-built_in">sudo</span> fuser 45331/tcp
+45331/tcp:             608
+$ ps -wwf -p 608
+USER         PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         608  0.2  0.2 1714840 45132 ?       Ssl  15:38   0:23 /usr/bin/containerd
+
+</code></pre>
+<h2 id="usare-uno-script" tabindex="-1">Usare uno script <a class="header-anchor" href="#usare-uno-script" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> nmap -sV --script http-git 127.0.0.1
+$ <span class="hljs-built_in">sudo</span> nmap --script dns-brute --script-args dns-brute.domain=holidayhackchallenge.com,dns-brute.threads=6,dns-brute.hostlist=./namelist.txt -sS -p 53
+
+<span class="hljs-comment"># Nmap includes over 600 different scripts for vulnerability assessment, password attacks, sensitive data disclosure collection, </span>
+<span class="hljs-comment"># and much more as part of Nmap # Scripting Engine (NSE) library.</span>
+$ nmap --script-help <span class="hljs-string">&quot;http-*&quot;</span>
+$ nmap --script-help <span class="hljs-string">&quot;http*&quot;</span> | grep <span class="hljs-string">&quot;^http-&quot;</span>
+$ nmap --script-help http-git
+$ <span class="hljs-built_in">sudo</span> nmap --script http-git 127.0.0.1
+$ <span class="hljs-built_in">sudo</span> nmap -sV --script http-git 127.0.0.1
+
+<span class="hljs-comment"># Script disponibili:</span>
+$ locate *.nse
+/usr/share/nmap/scripts/acarsd-info.nse
+/usr/share/nmap/scripts/address-info.nse
+/usr/share/nmap/scripts/afp-brute.nse
+...
+
+<span class="hljs-comment"># List di un sito web</span>
+<span class="hljs-comment"># https://nmap.org/nsedoc/scripts/http-enum.html</span>
+$ nmap -sV --script <span class="hljs-string">&quot;http-enum&quot;</span> www.issplaylist.com
+Starting Nmap 7.60 ( https://nmap.org ) at 2021-08-02 12:47 UTC
+Nmap scan report <span class="hljs-keyword">for</span> www.issplaylist.com (10.142.146.10)
+Host is up (0.11s latency).
+Not shown: 999 closed ports
+PORT   STATE SERVICE VERSION
+80/tcp open  http    nginx 1.16.1
+| http-enum: 
+|   /admin.html: Possible admin folder
+|_  /README.txt: Interesting, a readme.
+|_http-server-header: nginx/1.16.1
+
+<span class="hljs-comment"># https://nmap.org/nsedoc/scripts/http-grep.html</span>
+$ nmap -sV --script <span class="hljs-string">&quot;http-grep&quot;</span> --script-args http-grep.url=<span class="hljs-string">&quot;company.html&quot;</span> -p80 www.issplaylist.com
+PORT   STATE SERVICE VERSION
+80/tcp open  http    nginx 1.16.1
+| http-grep: 
+|   (19) http://www.issplaylist.com:80/company.html: 
+|     (19) email: 
+|       + beva@issplaylist.com
+|       + ghajsson@issplaylist.com
+|       + pemma@issplaylist.com
+|_      + aruben@issplaylist.com
+|_http-server-header: nginx/1.16.1
+
+$ nmap -sV --script <span class="hljs-string">&quot;http-grep&quot;</span> --script-args http-grep.url=<span class="hljs-string">&quot;company.html&quot;</span>,http-grep.match=<span class="hljs-string">&quot;[Dd]irector&quot;</span> -p80 www.issplaylist.com
+PORT   STATE SERVICE VERSION
+80/tcp open  http    nginx 1.16.1
+| http-grep: 
+|   (1) http://www.issplaylist.com:80/company.html: 
+|     (1) User Pattern 1: 
+|_      + Director
+|_http-server-header: nginx/1.16.1
+
+$ nmap -p 80 www.example.com --script http-grep --script-args=<span class="hljs-string">&#x27;match=&quot;[A-Za-z0-9%.%%%+%-]+@[A-Za-z0-9%.%%%+%-]+%.%w%w%w?%w?&quot;,breakonmatch&#x27;</span>
+$ nmap -p 80 www.example.com --script http-grep --script-args <span class="hljs-string">&#x27;http-grep.builtins ={&quot;mastercard&quot;, &quot;discover&quot;}, http-grep.url=&quot;example.html&quot;&#x27;</span>
+</code></pre>
+</body></html>

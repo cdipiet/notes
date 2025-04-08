@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.306" />
+        <title>Gnome</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="gnome" tabindex="-1">Gnome <a class="header-anchor" href="#gnome" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.306</p>
+<nav class="table-of-contents"><ol><li><a href="#reset">Reset </a></li><li><a href="#install">Install </a></li><li><a href="#custom-keyboard-bindings">Custom Keyboard Bindings </a><ol><li><a href="#shutdown-con-ctrl%2Balt%2Bdel">Shutdown con CTRL+ALT+DEL </a></li></ol></li><li><a href="#evidenziare-le-finestre-e-non-le-applicazioni">Evidenziare le finestre e non le applicazioni </a></li><li><a href="#temi-gnome-shell">Temi Gnome Shell </a></li><li><a href="#reintrodurre-ctrl%2Balt%2Bt">Reintrodurre CTRL+ALT+T </a></li><li><a href="#win%2Be-per-aprire-nautilus">Win+E per aprire Nautilus </a></li><li><a href="#disabilitare-il-tasto-f10-in-gnome-terminal">Disabilitare il tasto F10 in GNOME-Terminal </a></li><li><a href="#nautilus">Nautilus </a></li><li><a href="#gedit">Gedit </a><ol><li><a href="#asm-syntax-highlighting">ASM Syntax Highlighting </a></li></ol></li><li><a href="#gnome-builder">Gnome Builder </a></li><li><a href="#screensaver">ScreenSaver </a></li><li><a href="#gnome-startup-applications">Gnome Startup Applications </a><ol><li><a href="#autostart-xdg">Autostart XDG </a></li><li><a href="#autostart-with-systemd-service">Autostart with Systemd service </a></li></ol></li><li><a href="#latte-dock-bar">Latte Dock Bar </a></li><li><a href="#gnome-sessioni">GNOME Sessioni </a></li><li><a href="#enable-fractional-scalings">enable fractional scalings </a></li><li><a href="#impostare-la-scala-dello-schermo-in-gnome-40-da-riga-di-comando">Impostare la scala dello schermo in Gnome 40 da riga di comando </a></li><li><a href="#keyring">Keyring </a></li><li><a href="#estensioni---customizzazione%2C-tema-e-schermo">Estensioni - Customizzazione, Tema e Schermo </a><ol><li><a href="#impedire-che-gnome-parta-in-overview-mode">Impedire che Gnome parta in overview mode </a></li></ol></li></ol></nav><h1 id="gnome-1" tabindex="-1">Gnome <a class="header-anchor" href="#gnome-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/GNOME">https://wiki.archlinux.org/title/GNOME</a></li>
+<li><a href="https://wiki.archlinux.org/title/GNOME/Tips_and_tricks">https://wiki.archlinux.org/title/GNOME/Tips_and_tricks</a></li>
+</ul>
+<p>Apps</p>
+<ul>
+<li><a href="https://wiki.gnome.org/Apps/Gedit">https://wiki.gnome.org/Apps/Gedit</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Gthumb">https://wiki.gnome.org/Apps/Gthumb</a></li>
+<li><a href="https://wiki.gnome.org/Apps/EasyTAG">https://wiki.gnome.org/Apps/EasyTAG</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Meld">https://wiki.gnome.org/Apps/Meld</a></li>
+<li><a href="https://wiki.gnome.org/Apps/EyeOfGnome">https://wiki.gnome.org/Apps/EyeOfGnome</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Characters">https://wiki.gnome.org/Apps/Characters</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Ghex">https://wiki.gnome.org/Apps/Ghex</a></li>
+<li><a href="https://wiki.gnome.org/Apps/SystemMonitor">https://wiki.gnome.org/Apps/SystemMonitor</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Usage">https://wiki.gnome.org/Apps/Usage</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Sysprof">https://wiki.gnome.org/Apps/Sysprof</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Calculator">https://wiki.gnome.org/Apps/Calculator</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Commander">https://wiki.gnome.org/Apps/Commander</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Disks">https://wiki.gnome.org/Apps/Disks</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Terminal">https://wiki.gnome.org/Apps/Terminal</a></li>
+<li><a href="https://wiki.gnome.org/Apps/Lollypop">https://wiki.gnome.org/Apps/Lollypop</a></li>
+<li><a href="https://wiki.gnome.org/Apps/SoundJuicer">https://wiki.gnome.org/Apps/SoundJuicer</a></li>
+</ul>
+<h2 id="reset" tabindex="-1">Reset <a class="header-anchor" href="#reset" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-sh">$ dconf reset -f /org/gnome/
+</code></pre>
+<pre><code class="language-sh">$ <span class="hljs-built_in">mv</span> ~/.config/dconf/user ~/.config/dconf/user.bak
+<span class="hljs-comment"># there after: logout / login (or restart)</span>
+</code></pre>
+<h2 id="install" tabindex="-1">Install <a class="header-anchor" href="#install" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm gnome
+$ <span class="hljs-built_in">cat</span> /usr/share/gnome/gnome-version.xml
+$ xdpyinfo | grep -B 2 resolution
+
+</code></pre>
+<p>Optional: To install extra themes, games, and features</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm gnome-extra sddm 
+$ <span class="hljs-built_in">sudo</span> pamac install menulibre <span class="hljs-comment"># menu editor per gnome3</span>
+$ <span class="hljs-built_in">sudo</span> pamac install latte-dock manjaro-gdm-theme
+$ <span class="hljs-built_in">sudo</span> pamac install python-nautilus filemanager-actions code-nautilus-git
+$ <span class="hljs-built_in">sudo</span> pamac install nautilus-share nautilus-empty-file nautilus-compare nautilus-copy-path nautilus-admin filemanager-actions
+$ nautilus -q
+</code></pre>
+<h2 id="custom-keyboard-bindings" tabindex="-1">Custom Keyboard Bindings <a class="header-anchor" href="#custom-keyboard-bindings" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://askubuntu.com/questions/573535/setting-special-keys-as-keyboard-shortcuts">https://askubuntu.com/questions/573535/setting-special-keys-as-keyboard-shortcuts</a></li>
+<li><a href="https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal">https://askubuntu.com/questions/597395/how-to-set-custom-keyboard-shortcuts-from-terminal</a></li>
+</ul>
+<p>I nomi simbolici dei tasti possono essere scoperti apportando le modifiche dalla GUI di Gnome <code>Impostazioni|Tastiera|Scorciatoie da tastiera</code> <br>
+e poi leggendone i valori da commandline con gsettings.</p>
+<pre><code>Super key:                 &lt;Super&gt;
+Control key:               &lt;Primary&gt; or &lt;Control&gt;
+Alt key:                   &lt;Alt&gt;
+Shift key:                 &lt;Shift&gt;
+numbers:                   1 (just the number)
+Spacebar:                  space
+Slash key:                 slash
+Asterisk key:              asterisk (so it would need `&lt;Shift&gt;` as well)
+Ampersand key:             ampersand (so it would need &lt;Shift&gt; as well)
+
+a few numpad keys:
+Numpad divide key (`/`):   KP_Divide
+Numpad multiply (Asterisk):KP_Multiply
+Numpad number key(s):      KP_1
+Numpad `-`:                KP_Subtract
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Keybindings that are handled by the window manager are persisted in the org.gnome.desktop.wm.keybindings section</span>
+$ gsettings list-keys org.gnome.desktop.wm.keybindings
+$ dconf-editor <span class="hljs-string">&quot;/org/gnome/desktop/wm/keybindings&quot;</span>
+
+<span class="hljs-comment"># Questo ha lo spiacevole effetto di raggruppare le finestre della stessa applicazione</span>
+$ gsettings get org.gnome.desktop.wm.keybindings switch-applications
+[<span class="hljs-string">&#x27;&lt;Super&gt;Tab&#x27;</span>, <span class="hljs-string">&#x27;&lt;Alt&gt;Tab&#x27;</span>]
+
+<span class="hljs-comment"># Questo lo preferisco perchè non raggruppa le finestre della stessa applicazione</span>
+<span class="hljs-comment"># oltre ad assegnare Alt+Tab a switch-windows bisogna anche rimuoverlo da switch-applications</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.desktop.wm.keybindings switch-windows <span class="hljs-string">&quot;[&#x27;&lt;Alt&gt;Tab&#x27;]&quot;</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.desktop.wm.keybindings switch-applications <span class="hljs-string">&quot;[]&quot;</span>
+$ gsettings get org.gnome.desktop.wm.keybindings switch-windows
+    [<span class="hljs-string">&#x27;&lt;Alt&gt;Tab&#x27;</span>]
+
+$ gsettings get org.gnome.desktop.wm.keybindings close
+    [<span class="hljs-string">&#x27;&lt;Super&gt;q&#x27;</span>]
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.desktop.wm.keybindings close <span class="hljs-string">&quot;[&#x27;&lt;Alt&gt;F4&#x27;]&quot;</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.desktop.wm.keybindings close <span class="hljs-string">&quot;[&#x27;Pause&#x27;, &#x27;&lt;Alt&gt;F4&#x27;]&quot;</span> <span class="hljs-comment"># Esempio di assegnazione multipla</span>
+
+
+<span class="hljs-comment"># Custom Keybindings</span>
+<span class="hljs-comment"># Custom shortcuts are stored using a &quot;relocatable schema&quot;.</span>
+<span class="hljs-comment"># The schema name is org.gnome.settings-daemon.plugins.media-keys.custom-keybinding</span>
+<span class="hljs-comment"># Each custom key binding has three properties: name, command, and binding.</span>
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys custom-keybindings
+[<span class="hljs-string">&#x27;/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/&#x27;</span>, <span class="hljs-string">&#x27;/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/&#x27;</span>]
+
+$ gsettings list-keys org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
+    binding
+    <span class="hljs-built_in">command</span>
+    name
+
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name
+    <span class="hljs-string">&#x27;Terminale&#x27;</span>
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ <span class="hljs-built_in">command</span>
+    <span class="hljs-string">&#x27;gnome-terminal&#x27;</span>
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding
+<span class="hljs-string">&#x27;&lt;Primary&gt;&lt;Alt&gt;t&#x27;</span>
+
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name
+    <span class="hljs-string">&#x27;File Manager&#x27;</span>
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ <span class="hljs-built_in">command</span>
+    <span class="hljs-string">&#x27;nautilus&#x27;</span>
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding
+<span class="hljs-string">&#x27;&lt;Super&gt;e&#x27;</span>
+
+<span class="hljs-comment"># Per aggiungere un nuovo custom binding custom2:</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.settings-daemon.plugins.media-keys custom-keybindings <span class="hljs-string">&quot;[&#x27;/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/&#x27;, &#x27;/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/&#x27;, &#x27;/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/&#x27;]&quot;</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ name <span class="hljs-string">&#x27;&lt;newname&gt;&#x27;</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ <span class="hljs-built_in">command</span> <span class="hljs-string">&#x27;&lt;newcommand&gt;&#x27;</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/ binding <span class="hljs-string">&#x27;&lt;key_combination&gt;&#x27;</span>
+</code></pre>
+<h3 id="shutdown-con-ctrl%2Balt%2Bdel" tabindex="-1">Shutdown con CTRL+ALT+DEL <a class="header-anchor" href="#shutdown-con-ctrl%2Balt%2Bdel" aria-hidden="true">🔗</a></h3>
+<p>Se <code>CTRL+ALT+DEL</code> dovesse essere associato a <code>logout</code> l'opzione per il poweroff non compare più, per ripristinarla:</p>
+<pre><code class="language-sh">$ gsettings list-recursively org.gnome.settings-daemon.plugins.media-keys
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.settings-daemon.plugins.media-keys shutdown <span class="hljs-string">&#x27;&lt;Control&gt;&lt;Alt&gt;Delete&#x27;</span>
+$ gsettings get org.gnome.settings-daemon.plugins.media-keys shutdown
+[<span class="hljs-string">&#x27;&lt;Control&gt;&lt;Alt&gt;Delete&#x27;</span>]
+</code></pre>
+<h2 id="evidenziare-le-finestre-e-non-le-applicazioni" tabindex="-1">Evidenziare le finestre e non le applicazioni <a class="header-anchor" href="#evidenziare-le-finestre-e-non-le-applicazioni" aria-hidden="true">🔗</a></h2>
+<p>Di default <span class="k">ALT</span>+<span class="k">Tab</span> è assegnato a <strong><code>Evidenzia le applicazioni</code></strong>, <br>
+<strong>questo ha lo spiacevole effetto di raggruppare le finestre della stessa applicazione</strong>,
+ad es. se ho due PyCharm o Chrome aperti non riesco a selezionarli perchè vengono raggruppati.</p>
+<p>Dal menu <code>Impostazioni|Tastiera|Scorciatoie da tastiera|Navigazione</code> <br>
+assegnare <span class="k">ALT</span>+<span class="k">Tab</span> ad <code>Evidenzia le finestre</code></p>
+<h2 id="temi-gnome-shell" tabindex="-1">Temi Gnome Shell <a class="header-anchor" href="#temi-gnome-shell" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="../../temi.html">Installazione Temi</a></li>
+</ul>
+<h2 id="reintrodurre-ctrl%2Balt%2Bt" tabindex="-1">Reintrodurre CTRL+ALT+T <a class="header-anchor" href="#reintrodurre-ctrl%2Balt%2Bt" aria-hidden="true">🔗</a></h2>
+<pre><code>Impostazioni | Tastiera |Scorciatoie da tastiera | Scorciatoie personalizzate | gnome-terminal --&gt; CTRL+ALT+T
+</code></pre>
+<h2 id="win%2Be-per-aprire-nautilus" tabindex="-1">Win+E per aprire Nautilus <a class="header-anchor" href="#win%2Be-per-aprire-nautilus" aria-hidden="true">🔗</a></h2>
+<pre><code>Impostazioni | Tastiera | Scorciatoie da tastiera | Scorciatoie personalizzate | nautilus --&gt; Win+e
+</code></pre>
+<h2 id="disabilitare-il-tasto-f10-in-gnome-terminal" tabindex="-1">Disabilitare il tasto F10 in GNOME-Terminal <a class="header-anchor" href="#disabilitare-il-tasto-f10-in-gnome-terminal" aria-hidden="true">🔗</a></h2>
+<p><span class="k">CTRL</span>+<span class="k">ALT</span>+<span class="k">T</span> per aprire il terminale</p>
+<p>Conflitto con <strong>Midnight-Commander</strong> sul tasto di uscita <span class="k">F10</span></p>
+<p>In Midnight Commander in Gnome Terminal e Gnome2, bisognava utilizzare la combinazione <span class="k">Windows</span>+<span class="k">F10</span> per uscire.<br>
+Questo perchè di default GnomeTerminal utilizza il tasto <span class="k">F10</span> per aprire il suo menù.</p>
+<p>In Gnome Shell, <span class="k">F10</span> è utilizzato da Gnome Terminal, ed anche <span class="k">Windows</span>+<span class="k">F10</span> è utilizzato da Gnome Shell!<br>
+Per risolvere il problema è sufficiente eliminare l'utilizzo di <span class="k">F10</span> in Gnome Terminal:</p>
+<p>Cerchiamo la chiave da cambiare con gsettings:(và bene anche dconf-editor)</p>
+<pre><code class="language-bash">[cdp@manjaro ~]$ gsettings list-schemas|grep Terminal
+org.gnome.Terminal.Legacy.Settings
+[cdp@manjaro ~]$ gsettings list-keys org.gnome.Terminal.Legacy.Settings
+&gt;&gt; menu-accelerator-enabled
+[cdp@manjaro ~]$ gsettings get org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled
+<span class="hljs-literal">true</span>
+[cdp@manjaro ~]$ gsettings <span class="hljs-built_in">set</span> org.gnome.Terminal.Legacy.Settings menu-accelerator-enabled <span class="hljs-literal">false</span>
+</code></pre>
+<h2 id="nautilus" tabindex="-1">Nautilus <a class="header-anchor" href="#nautilus" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="file_nautilus.html">File-Nautilus</a></li>
+</ul>
+<h2 id="gedit" tabindex="-1">Gedit <a class="header-anchor" href="#gedit" aria-hidden="true">🔗</a></h2>
+<h3 id="asm-syntax-highlighting" tabindex="-1">ASM Syntax Highlighting <a class="header-anchor" href="#asm-syntax-highlighting" aria-hidden="true">🔗</a></h3>
+<p>Scaricare il file <code>asm-intel.lang</code> da:</p>
+<ul>
+<li><a href="https://wiki.gnome.org/action/show/Projects/GtkSourceView/LanguageDefinitions">https://wiki.gnome.org/action/show/Projects/GtkSourceView/LanguageDefinitions</a></li>
+<li><a href="https://gitlab.gnome.org/GNOME/gtksourceview/tree/master/data/language-specs">https://gitlab.gnome.org/GNOME/gtksourceview/tree/master/data/language-specs</a></li>
+</ul>
+<p>E metterlo in :</p>
+<p><code>~/.local/share/gtksourceview-3.0/language-specs/asm-intel.lang</code></p>
+<pre><code class="language-bash">$ locate -r <span class="hljs-string">&quot;\.lang$&quot;</span>
+$ locate -r <span class="hljs-string">&quot;\.lang$&quot;</span>|xargs <span class="hljs-built_in">dirname</span>|<span class="hljs-built_in">sort</span> -u
+/usr/share/doc/highlight/extras/langDefs-resources
+/usr/share/gedit/plugins/snippets/lang
+/usr/share/gtksourceview-2.0/language-specs
+/usr/share/gtksourceview-3.0/language-specs
+/usr/share/gtksourceview-4/language-specs
+/usr/share/highlight/langDefs
+
+
+$ <span class="hljs-built_in">mkdir</span> -p ~/.local/share/gtksourceview-3.0/language-specs
+$ <span class="hljs-built_in">mv</span> ~/Scaricati/asm-intel.lang .<span class="hljs-built_in">local</span>/share/gtksourceview-3.0/language-specs/
+</code></pre>
+<h2 id="gnome-builder" tabindex="-1">Gnome Builder <a class="header-anchor" href="#gnome-builder" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.gnome.org/Apps/Builder">https://wiki.gnome.org/Apps/Builder</a></li>
+</ul>
+<h2 id="screensaver" tabindex="-1">ScreenSaver <a class="header-anchor" href="#screensaver" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/XScreenSaver_(Italiano)">https://wiki.archlinux.org/index.php/XScreenSaver_(Italiano)</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/XScreenSaver">https://wiki.archlinux.org/index.php/XScreenSaver</a></li>
+</ul>
+<pre><code class="language-bash">gsettings list-keys org.gnome.desktop.screensaver
+gsettings list-keys org.gnome.settings-daemon.plugins.power
+
+<span class="hljs-built_in">sudo</span> pacman -Rsn gnome-screensaver
+<span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm xscreensaver
+</code></pre>
+<p>All xscreensaver configuration is via the <code>~/.xscreensaver</code>  file.
+Rather than editing that file by hand, just run <code>xscreensaver-demo</code>:</p>
+<pre><code class="language-bash">xscreensaver &amp; xscreensaver-demo
+</code></pre>
+<p>con <code>gnome-tweak-tool</code> oppure systemd si può definire un nuovo programma di avvio:</p>
+<p><code>/usr/bin/xscreensaver -nosplash</code></p>
+<p>Per avviare immediatamente lo screensaver:</p>
+<p><code>xscreensaver-command --lock</code></p>
+<h2 id="gnome-startup-applications" tabindex="-1">Gnome Startup Applications <a class="header-anchor" href="#gnome-startup-applications" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/autostarting">https://wiki.archlinux.org/index.php/autostarting</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd">https://wiki.archlinux.org/index.php/Systemd</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Systemd/User">https://wiki.archlinux.org/index.php/Systemd/User</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Xinit">https://wiki.archlinux.org/index.php/Xinit</a></li>
+<li>&lt;<a href="https://wiki.archlinux.org/index.php/Bash#Configuration_files">https://wiki.archlinux.org/index.php/Bash#Configuration_files</a> ~/.bash_profile ~/.bashrc&gt;</li>
+<li><a href="https://wiki.archlinux.org/index.php/GNOME#Startup_applications">https://wiki.archlinux.org/index.php/GNOME#Startup_applications</a></li>
+</ul>
+<h3 id="autostart-xdg" tabindex="-1">Autostart XDG <a class="header-anchor" href="#autostart-xdg" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Desktop_entries#Autostart">https://wiki.archlinux.org/index.php/Desktop_entries#Autostart</a></li>
+<li><a href="http://standards.freedesktop.org/autostart-spec/autostart-spec-latest.html">http://standards.freedesktop.org/autostart-spec/autostart-spec-latest.html</a>
+Si può utilizzare gnome-tweak-tool che non fà altro che creare i file in~/.config/autostart/
+<a href="https://wiki.archlinux.org/index.php/Desktop_entries">https://wiki.archlinux.org/index.php/Desktop_entries</a>
+If you use an XDG-compliant desktop environment, such as GNOME or KDE, the desktop environment will automatically start *.desktopfiles found in the following directories:
+-System-wide:$XDG_CONFIG_DIRS/autostart/ (/etc/xdg/autostart/by default)</li>
+<li>GNOME also starts files found in:
+/usr/share/gnome/autostart/
+User-specific: $XDG_CONFIG_HOME/autostart/
+(~/.config/autostart/ by default)
+Users can override system-wide *.desktop files by copying them into the user-specific ~/.config/autostart/ folder.</li>
+</ul>
+<h3 id="autostart-with-systemd-service" tabindex="-1">Autostart with Systemd service <a class="header-anchor" href="#autostart-with-systemd-service" aria-hidden="true">🔗</a></h3>
+<p>We can also get XScreenSaver autostart at boot time with Systemd
+First, execute the following command to create a directory for storing Systemd service file of individual users.</p>
+<pre><code>mkdir -p ~/.config/systemd/user/
+cd ~/.config/systemd/user/
+</code></pre>
+<p>Then create xscreensaver.servicefile with nano text editor.</p>
+<pre><code>nano ~/.config/systemd/user/xscreensaver.service
+</code></pre>
+<p>Put the following text into the file.</p>
+<pre><code>[Unit]
+Description=XScreenSaver
+[Service]
+ExecStart=/usr/bin/xscreensaver -nosplash
+[Install]
+WantedBy=default.target
+</code></pre>
+<p>Press CTRL+O to save the file. Press CTRL+X to exit out of nano text editor. Finally, enable this service so that XScreenSaver will be automatically started at boot time.
+systemctl --user enable xscreensaver
+Created symlink /home/cdp/.config/systemd/user/default.target.wants/xscreensaver.service → /home/cdp/.config/systemd/user/xscreensaver.service.</p>
+<h2 id="latte-dock-bar" tabindex="-1">Latte Dock Bar <a class="header-anchor" href="#latte-dock-bar" aria-hidden="true">🔗</a></h2>
+<p><a href="https://github.com/KDE/latte-dock">https://github.com/KDE/latte-dock</a></p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm latte-dock
+</code></pre>
+<h2 id="gnome-sessioni" tabindex="-1">GNOME Sessioni <a class="header-anchor" href="#gnome-sessioni" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/GNOME_(Italiano)#GNOME_Sessioni">https://wiki.archlinux.org/title/GNOME_(Italiano)#GNOME_Sessioni</a></li>
+</ul>
+<p>GNOME ha tre sessioni disponibili, tutte usano GNOME Shell.</p>
+<ul>
+<li><strong>GNOME</strong> è l'impostazione predefinita che utilizza Wayland. Le applicazioni X tradizionali vengono eseguite attraverso Xwayland.</li>
+<li>GNOME Classic è un layout desktop tradizionale con un'interfaccia simile a GNOME 2, che utilizza estensioni e parametri pre-attivati. [1] Quindi è più una GNOME shell personalizzata che una modalità veramente distinta.</li>
+<li>GNOME on Xorg esegue GNOME Shell usando Xorg.</li>
+</ul>
+<h2 id="enable-fractional-scalings" tabindex="-1">enable fractional scalings <a class="header-anchor" href="#enable-fractional-scalings" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># x11</span>
+<span class="hljs-comment"># https://gitlab.gnome.org/GNOME/mutter</span>
+<span class="hljs-comment"># https://github.com/puxplaying/mutter-x11-scaling Mutter build with Ubuntu patches for Xorg fractional scaling on Manjaro / Arch Linux.</span>
+$ pacman -S mutter-x11-scaling
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.mutter experimental-features <span class="hljs-string">&quot;[&#x27;x11-randr-fractional-scaling&#x27;]&quot;</span>
+
+<span class="hljs-comment">#wayland</span>
+$ gsettings <span class="hljs-built_in">set</span> org.gnome.mutter experimental-features <span class="hljs-string">&quot;[&#x27;scale-monitor-framebuffer&#x27;]&quot;</span>
+
+<span class="hljs-comment"># reset:</span>
+gsettings reset org.gnome.mutter experimental-features
+
+
+$ gsettings monitor org.gnome.mutter
+$ dconf watch /
+</code></pre>
+<h2 id="impostare-la-scala-dello-schermo-in-gnome-40-da-riga-di-comando" tabindex="-1">Impostare la scala dello schermo in Gnome 40 da riga di comando <a class="header-anchor" href="#impostare-la-scala-dello-schermo-in-gnome-40-da-riga-di-comando" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://gitlab.gnome.org/GNOME/mutter/">https://gitlab.gnome.org/GNOME/mutter/</a></li>
+</ul>
+<p>Mutter non utilizza piu dconf/gsettings ma il file <code>~/.config/monitors.xml</code>
+bisogna cambiare il tag <code>scale</code> per variare la scala del monitor!</p>
+<p>Le vecchie impostazioni con gsettings non funzionano più:</p>
+<ul>
+<li>
+<p><a href="https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1713323">https://bugs.launchpad.net/ubuntu/+source/gnome-shell/+bug/1713323</a></p>
+<p><code>gsettings org.gnome.desktop.interface scaling-factor</code> appears to no longer be operational.
+Changing its value from 0 (default), 1 and 2 appears to have no effect on anything any more.
+<code>gsettings get org.gnome.desktop.interface text-scaling-factor</code>
+1.0</p>
+<pre><code class="language-bash">$ gsettings list-schemas | grep mutter | xargs -n 1 -I % sh -c <span class="hljs-string">&quot;echo %: &amp;&amp; gsettings list-keys % &amp;&amp; echo&quot;</span>
+</code></pre>
+</li>
+</ul>
+<p>Per cambiare la scala bisogna ora editare il file <code>~/.config/monitors.xml</code>:</p>
+<p><code>swap-res.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+File=~/.config/monitors.xml
+<span class="hljs-keyword">if</span> grep -q <span class="hljs-string">&quot;&lt;scale&gt;1&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$File</span>&quot;</span>; <span class="hljs-keyword">then</span>
+    sed -i -e <span class="hljs-string">&#x27;/&lt;scale&gt;1/ s/1/2/&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$File</span>&quot;</span>
+<span class="hljs-keyword">else</span>
+    sed -i -e <span class="hljs-string">&#x27;/&lt;scale&gt;2/ s/2/1/&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$File</span>&quot;</span>
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<p>The <code>monitors.xml</code> file stores the monitors settings as configure by Gnome System Settings. It can store configurations for multiple monitor setups and the user's personal choice of screen resolution. Gnome System Settings uses the <code>XRANDR</code> extension to reconfigure the display(s) on the fly.</p>
+<ul>
+<li><a href="https://wiki.gnome.org/Attic/RandR">https://wiki.gnome.org/Attic/RandR</a></li>
+<li><a href="https://wiki.archlinux.org/title/xrandr">https://wiki.archlinux.org/title/xrandr</a></li>
+</ul>
+<pre><code class="language-bash">xdotool keydown alt &amp;&amp; <span class="hljs-built_in">sleep</span> 1 &amp;&amp; xdotool key F2 keyup alt \
+  &amp;&amp; <span class="hljs-built_in">sleep</span> 1 &amp;&amp; xdotool key r key KP_Enter
+</code></pre>
+<p><code>~/.config/monitors.xml</code></p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">monitors</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;2&quot;</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">configuration</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">logicalmonitor</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">x</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">x</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">y</span>&gt;</span>0<span class="hljs-tag">&lt;/<span class="hljs-name">y</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">scale</span>&gt;</span>2<span class="hljs-tag">&lt;/<span class="hljs-name">scale</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">primary</span>&gt;</span>yes<span class="hljs-tag">&lt;/<span class="hljs-name">primary</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">monitor</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">monitorspec</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">connector</span>&gt;</span>DisplayPort-0<span class="hljs-tag">&lt;/<span class="hljs-name">connector</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">vendor</span>&gt;</span>GSM<span class="hljs-tag">&lt;/<span class="hljs-name">vendor</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">product</span>&gt;</span>LG HDR 4K<span class="hljs-tag">&lt;/<span class="hljs-name">product</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">serial</span>&gt;</span>0x000603bc<span class="hljs-tag">&lt;/<span class="hljs-name">serial</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">monitorspec</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">mode</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">width</span>&gt;</span>3840<span class="hljs-tag">&lt;/<span class="hljs-name">width</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">height</span>&gt;</span>2160<span class="hljs-tag">&lt;/<span class="hljs-name">height</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-name">rate</span>&gt;</span>59.996623992919922<span class="hljs-tag">&lt;/<span class="hljs-name">rate</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">mode</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">monitor</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">logicalmonitor</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">configuration</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">monitors</span>&gt;</span>
+</code></pre>
+<ul>
+<li><a href="https://stackoverflow.com/questions/10500521/linux-retrieve-monitor-names">https://stackoverflow.com/questions/10500521/linux-retrieve-monitor-names</a></li>
+<li><a href="https://github.com/MestreLion/scripts/blob/main/monitor-switch">https://github.com/MestreLion/scripts/blob/main/monitor-switch</a></li>
+</ul>
+<pre><code class="language-bash">$ xrandr | grep -w connected  | awk -F<span class="hljs-string">&#x27;[ +]&#x27;</span> <span class="hljs-string">&#x27;{print $1,$3,$4}&#x27;</span>
+DisplayPort-0 primary 3840x2160
+
+$ xrandr | grep -v disconnected | grep connected | <span class="hljs-built_in">cut</span> -d<span class="hljs-string">&#x27; &#x27;</span> -f1
+DisplayPort-0
+
+<span class="hljs-comment"># get the current scaled resolution:</span>
+$ xrandr | grep eDP1
+
+
+<span class="hljs-comment"># ~/.config/autostart/xrandr.desktop</span>
+[Desktop Entry]
+Exec=/usr/bin/xrandr --output DisplayPort-0 --scale 1.25x1.25 --panning 3840x2160
+Terminal=<span class="hljs-literal">false</span>
+Type=application
+</code></pre>
+<h2 id="keyring" tabindex="-1">Keyring <a class="header-anchor" href="#keyring" aria-hidden="true">🔗</a></h2>
+<p><a href="https://wiki.archlinux.org/title/GNOME/Keyring#Resetting_the_keyring">https://wiki.archlinux.org/title/GNOME/Keyring#Resetting_the_keyring</a></p>
+<p><code>~/.local/share/keyrings/</code></p>
+<p><a href="https://archlinux.org/packages/extra/x86_64/seahorse/">https://archlinux.org/packages/extra/x86_64/seahorse/</a></p>
+<h2 id="estensioni---customizzazione%2C-tema-e-schermo" tabindex="-1">Estensioni - Customizzazione, Tema e Schermo <a class="header-anchor" href="#estensioni---customizzazione%2C-tema-e-schermo" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://extensions.gnome.org">https://extensions.gnome.org</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm gnome-tweaks <span class="hljs-comment"># Personalizzazioni di GNOME</span>
+$ <span class="hljs-built_in">sudo</span> pamac install gnome-shell-extension-dash-to-dock
+$ <span class="hljs-built_in">sudo</span> pamac install gnome-shell-extension-arcmenu
+$ <span class="hljs-built_in">sudo</span> pamac install gnome-shell-extension-quick-settings-tweaks-git <span class="hljs-comment"># ATTUALMENTE NON SI INSTALLA</span>
+$ nautilus -q
+</code></pre>
+<ol>
+<li>
+<p><code>gnome-control-center</code> da <code>Impostazioni\Schermi\Scala</code> impostare il 300%</p>
+</li>
+<li>
+<p><code>gnome-extensions-app</code> da <code>Estensioni</code> (<code>gnome-shell</code>) abilitare:</p>
+<ol>
+<li>abilitare <code>User Themes</code></li>
+<li>installare dash to dock ed arcmenu:
+<ul>
+<li><a href="https://extensions.gnome.org/extension/307/dash-to-dock/">https://extensions.gnome.org/extension/307/dash-to-dock/</a></li>
+<li><a href="https://extensions.gnome.org/extension/3628/arcmenu/">https://extensions.gnome.org/extension/3628/arcmenu/</a></li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p><code>gnome-tweaks</code> ora da <code>Personalizzazioni</code> è possibile in <code>Aspetto</code> modificare l'aspetto della shell</p>
+</li>
+</ol>
+<pre><code class="language-bash">    xdpyinfo | grep -B2 resolution
+</code></pre>
+<p>Installate:</p>
+<ul>
+<li><a href="https://github.com/GSConnect/gnome-shell-extension-gsconnect">https://github.com/GSConnect/gnome-shell-extension-gsconnect</a></li>
+<li><a href="https://micheleg.github.io/dash-to-dock/">https://micheleg.github.io/dash-to-dock/</a></li>
+<li><a href="https://github.com/home-sweet-gnome/dash-to-panel">https://github.com/home-sweet-gnome/dash-to-panel</a></li>
+<li><a href="https://github.com/ubuntu/gnome-shell-extension-appindicator">https://github.com/ubuntu/gnome-shell-extension-appindicator</a></li>
+<li><a href="https://github.com/mukul29/legacy-theme-auto-switcher-gnome-extension">https://github.com/mukul29/legacy-theme-auto-switcher-gnome-extension</a></li>
+<li><a href="https://gitlab.com/arcmenu/ArcMenu">https://gitlab.com/arcmenu/ArcMenu</a></li>
+<li><a href="https://github.com/dimitriskp22/custom-accent-colors">https://github.com/dimitriskp22/custom-accent-colors</a></li>
+<li><a href="https://github.com/axxapy/gnome-ui-tune">https://github.com/axxapy/gnome-ui-tune</a> <a href="https://extensions.gnome.org/extension/4158/gnome-40-ui-improvements/">https://extensions.gnome.org/extension/4158/gnome-40-ui-improvements/</a> Gnome 4x UI Improvements</li>
+<li><a href="https://gitlab.com/smedius/desktop-icons-ng">https://gitlab.com/smedius/desktop-icons-ng</a></li>
+<li><a href="https://github.com/JoseExposito/gnome-shell-extension-x11gestures">https://github.com/JoseExposito/gnome-shell-extension-x11gestures</a></li>
+</ul>
+<p>Da Provare:</p>
+<ul>
+<li><a href="https://github.com/qwreey75/quick-settings-tweaks">https://github.com/qwreey75/quick-settings-tweaks</a> <a href="https://extensions.gnome.org/extension/5446/quick-settings-tweaker/">https://extensions.gnome.org/extension/5446/quick-settings-tweaker/</a> ATTUALMENTE NON SI INSTALLA</li>
+<li><a href="https://github.com/poehlerj/no-title-bar">https://github.com/poehlerj/no-title-bar</a></li>
+<li><a href="https://github.com/aunetx/blur-my-shell">https://github.com/aunetx/blur-my-shell</a></li>
+<li><a href="https://github.com/Leleat/Tiling-Assistant">https://github.com/Leleat/Tiling-Assistant</a></li>
+</ul>
+<h3 id="impedire-che-gnome-parta-in-overview-mode" tabindex="-1">Impedire che Gnome parta in overview mode <a class="header-anchor" href="#impedire-che-gnome-parta-in-overview-mode" aria-hidden="true">🔗</a></h3>
+<p>Da Gnome 40 parte in overview mode, per disabilitarlo:</p>
+<ul>
+<li><a href="https://fostips.com/prevent-overview-at-login-gnome-40/">https://fostips.com/prevent-overview-at-login-gnome-40/</a></li>
+<li><a href="https://github.com/fthx/no-overview">https://github.com/fthx/no-overview</a></li>
+</ul>
+<pre><code class="language-bash">$ pacman -Ss no-overview
+community/gnome-shell-extension-no-overview 12-1
+    No overview at start-up
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed gnome-shell-extension-no-overview
+</code></pre>
+</body></html>

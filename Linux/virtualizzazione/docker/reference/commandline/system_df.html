@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.675" />
+        <title>system_df</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="system_df" tabindex="-1">system_df <a class="header-anchor" href="#system_df" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.675</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22system-df%22description%3A-%22the-system-df-command-description-and-usage%22keywords%3A-%22system%2C-data%2C-usage%2C-disk%22">title: &quot;system df&quot;description: &quot;The system df command description and usage&quot;keywords: &quot;system, data, usage, disk&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a></li><li><a href="#performance">Performance </a></li><li><a href="#format-the-output">Format the output </a></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22system-df%22description%3A-%22the-system-df-command-description-and-usage%22keywords%3A-%22system%2C-data%2C-usage%2C-disk%22" tabindex="-1">title: &quot;system df&quot;
+description: &quot;The system df command description and usage&quot;
+keywords: &quot;system, data, usage, disk&quot; <a class="header-anchor" href="#title%3A-%22system-df%22description%3A-%22the-system-df-command-description-and-usage%22keywords%3A-%22system%2C-data%2C-usage%2C-disk%22" aria-hidden="true">🔗</a></h2>
+<h1 id="system-df" tabindex="-1">system df <a class="header-anchor" href="#system-df" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker system df [OPTIONS]
+
+Show docker filesystem usage
+
+Options:
+<span class="hljs-code">      --format string   Pretty-print images using a Go template
+      --help            Print usage
+  -v, --verbose         Show detailed information on space usage
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>The <code>docker system df</code> command displays information regarding the
+amount of disk space used by the docker daemon.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<p>By default the command will just show a summary of the data used:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker system <span class="hljs-built_in">df</span></span>
+
+TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
+Images              5                   2                   16.43 MB            11.63 MB (70%)
+Containers          2                   0                   212 B               212 B (100%)
+Local Volumes       2                   1                   36 B                0 B (0%)
+</code></pre>
+<p>A more detailed view can be requested using the <code>-v, --verbose</code> flag:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker system <span class="hljs-built_in">df</span> -v</span>
+
+Images space usage:
+
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE                SHARED SIZE         UNIQUE SIZE         CONTAINERS
+my-curl             latest              b2789dd875bf        6 minutes ago       11 MB               11 MB               5 B                 0
+my-jq               latest              ae67841be6d0        6 minutes ago       9.623 MB            8.991 MB            632.1 kB            0
+&lt;none&gt;              &lt;none&gt;              a0971c4015c1        6 minutes ago       11 MB               11 MB               0 B                 0
+alpine              latest              4e38e38c8ce0        9 weeks ago         4.799 MB            0 B                 4.799 MB            1
+alpine              3.3                 47cf20d8c26c        9 weeks ago         4.797 MB            4.797 MB            0 B                 1
+
+Containers space usage:
+
+CONTAINER ID        IMAGE               COMMAND             LOCAL VOLUMES       SIZE                CREATED             STATUS                      NAMES
+4a7f7eebae0f        alpine:latest       &quot;sh&quot;                1                   0 B                 16 minutes ago      Exited (0) 5 minutes ago    hopeful_yalow
+f98f9c2aa1ea        alpine:3.3          &quot;sh&quot;                1                   212 B               16 minutes ago      Exited (0) 48 seconds ago   anon-vol
+
+Local Volumes space usage:
+
+NAME                                                               LINKS               SIZE
+07c7bdf3e34ab76d921894c2b834f073721fccfbbcba792aa7648e3a7a664c2e   2                   36 B
+my-named-vol                                                       0                   0 B
+</code></pre>
+<ul>
+<li><code>SHARED SIZE</code> is the amount of space that an image shares with another one (i.e. their common data)</li>
+<li><code>UNIQUE SIZE</code> is the amount of space that is only used by a given image</li>
+<li><code>SIZE</code> is the virtual size of the image, it is the sum of <code>SHARED SIZE</code> and <code>UNIQUE SIZE</code></li>
+</ul>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Network information is not shown because it does not consume disk space.</p>
+</blockquote>
+<h2 id="performance" tabindex="-1">Performance <a class="header-anchor" href="#performance" aria-hidden="true">🔗</a></h2>
+<p>The <code>system df</code> command can be very resource-intensive. It traverses the
+filesystem of every image, container, and volume in the system. You should be
+careful running this command in systems with lots of images, containers, or
+volumes or in systems where some images, containers, or volumes have very large
+filesystems with many files. You should also be careful not to run this command
+in systems where performance is critical.</p>
+<h2 id="format-the-output" tabindex="-1">Format the output <a class="header-anchor" href="#format-the-output" aria-hidden="true">🔗</a></h2>
+<p>The formatting option (<code>--format</code>) pretty prints the disk usage output
+using a Go template.</p>
+<p>Valid placeholders for the Go template are listed below:</p>
+<table class="table"><thead>
+<tr>
+<th>Placeholder</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.Type</code></td>
+<td><code>Images</code>, <code>Containers</code> and <code>Local Volumes</code></td>
+</tr>
+<tr>
+<td><code>.TotalCount</code></td>
+<td>Total number of items</td>
+</tr>
+<tr>
+<td><code>.Active</code></td>
+<td>Number of active items</td>
+</tr>
+<tr>
+<td><code>.Size</code></td>
+<td>Available size</td>
+</tr>
+<tr>
+<td><code>.Reclaimable</code></td>
+<td>Reclaimable size</td>
+</tr>
+</tbody>
+</table>
+<p>When using the <code>--format</code> option, the <code>system df</code> command outputs
+the data exactly as the template declares or, when using the
+<code>table</code> directive, will include column headers as well.</p>
+<p>The following example uses a template without headers and outputs the
+<code>Type</code> and <code>TotalCount</code> entries separated by a colon (<code>:</code>):</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker system <span class="hljs-built_in">df</span> --format <span class="hljs-string">&quot;{{.Type}}: {{.TotalCount}}&quot;</span></span>
+
+Images: 2
+Containers: 4
+Local Volumes: 1
+</code></pre>
+<p>To list the disk usage with size and reclaimable size in a table format you
+can use:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker system <span class="hljs-built_in">df</span> --format <span class="hljs-string">&quot;table {{.Type}}\t{{.Size}}\t{{.Reclaimable}}&quot;</span></span>
+
+TYPE                SIZE                RECLAIMABLE
+Images              2.547 GB            2.342 GB (91%)
+Containers          0 B                 0 B
+Local Volumes       150.3 MB            150.3 MB (100%)
+&lt;Paste&gt;
+</code></pre>
+<p><strong>Note</strong> the format option is meaningless when verbose is true.</p>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="system_prune.html">system prune</a></li>
+<li><a href="container_prune.html">container prune</a></li>
+<li><a href="volume_prune.html">volume prune</a></li>
+<li><a href="image_prune.html">image prune</a></li>
+<li><a href="network_prune.html">network prune</a></li>
+</ul>
+</body></html>

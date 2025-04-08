@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.268" />
+        <title>hplip_scanner</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="hplip_scanner" tabindex="-1">hplip_scanner <a class="header-anchor" href="#hplip_scanner" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.268</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-pacchetti-aur-da-riga-di-comando-con-pamac">Installazione pacchetti AUR da riga di comando con pamac </a></li><li><a href="#stampanti">Stampanti </a></li><li><a href="#stampante">Stampante </a><ol><li><a href="#disinstallare-hplip-scaricato">Disinstallare hplip scaricato </a></li><li><a href="#reset-hplip">Reset hplip </a></li></ol></li><li><a href="#scanner">Scanner </a></li><li><a href="#errore-di-build-hplip-plugin">Errore di build hplip-plugin </a></li></ol></nav><h1 id="hplip" tabindex="-1">HPLIP <a class="header-anchor" href="#hplip" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://aur.archlinux.org/packages/hplip-plugin">https://aur.archlinux.org/packages/hplip-plugin</a></li>
+</ul>
+<p>Per poter utilizzare lo scanner,
+installare <code>hplip-plugin</code> da AUR con <code>pamac</code> <strong>ma da riga di comando</strong>, da GUI sembra non funzionare per un bug di pamac:</p>
+<h2 id="installazione-pacchetti-aur-da-riga-di-comando-con-pamac" tabindex="-1">Installazione pacchetti AUR da riga di comando con pamac <a class="header-anchor" href="#installazione-pacchetti-aur-da-riga-di-comando-con-pamac" aria-hidden="true">🔗</a></h2>
+<p>Utilizzare <code>pamac</code> da riga di comando, la versione GUI ha un bug che impedisce l'installazione di alcuni pacchetti.</p>
+<pre><code class="language-bash">/<span class="hljs-variable">$USER</span>/.hplip
+pacman -Syu --needed --noconfirm hlip
+<span class="hljs-comment"># I plugin per lo scanner sono in AUR:</span>
+<span class="hljs-comment"># Ricerca del pacchetto AUR con pamac</span>
+$ pamac search -a hplip-plugin
+<span class="hljs-comment"># Installazione</span>
+$ pamac build hplip-plugin
+<span class="hljs-comment"># Aggiornamento</span>
+$ pamac upgrade hplip-plugin
+</code></pre>
+<h2 id="stampanti" tabindex="-1">Stampanti <a class="header-anchor" href="#stampanti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm lib32-libcups cups gutenprint libpaper foomatic-db-engine ghostscript gsfonts foomatic-db foomatic-filters cups-pdf system-config-printer hplip
+    <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> org.cups.cupsd.service
+    <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> cups-browsed.service
+    <span class="hljs-built_in">sudo</span> systemctl start org.cups.cupsd.service
+    <span class="hljs-built_in">sudo</span> systemctl start cups-browsed.service
+</code></pre>
+<pre><code>Dalle opzioni di gnome aggiungere la stampante `cups-pdf`
+</code></pre>
+<p>HPLIP:</p>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm hplip
+</code></pre>
+<p>Impostare la stampante dall'applicazione di gestione HP Device Manager</p>
+<ul>
+<li><code>/usr/bin/hp-toolbox</code></li>
+<li><code>/usr/share/ppd/HP/hp-color_laserjet_cp1215-hpijs.ppd.gz</code></li>
+</ul>
+<p>CUPS-PDF
+Per la stampa su stampante virtuale pdf:</p>
+<pre><code class="language-bash">        <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm cups-pdf
+</code></pre>
+<p><a href="http://localhost:631/printers/CUPS-PDF-Printer">http://localhost:631/printers/CUPS-PDF-Printer</a></p>
+<p>File di configurazione:</p>
+<pre><code class="language-bash">        sudoedit /etc/cups/cups-pdf.conf
+            <span class="hljs-comment">### Key: Out (config)</span>
+            <span class="hljs-comment">## CUPS-PDF output directory</span>
+            <span class="hljs-comment">## special qualifiers:</span>
+            <span class="hljs-comment">## ${HOME} will be expanded to the user&#x27;s home directory</span>
+            <span class="hljs-comment">## ${USER} will be expanded to the user name</span>
+            <span class="hljs-comment">## in case it is an NFS export make sure it is exported without</span>
+            <span class="hljs-comment">## root_squash!</span>
+            <span class="hljs-comment">### Default: /var/spool/cups-pdf/${USER}</span>
+            <span class="hljs-comment">#Out /var/spool/cups-pdf/${USER}</span>
+            Out /var/spool/cups-pdf/<span class="hljs-variable">${HOME}</span>/PDF
+</code></pre>
+<p>CUPS:</p>
+<p><a href="http://localhost:631/">http://localhost:631/</a></p>
+<p>HP Color Laserject CP1215
+<a href="http://www.openprinting.org/printer/HP/HP-Color_LaserJet_CP1215">http://www.openprinting.org/printer/HP/HP-Color_LaserJet_CP1215</a>
+<a href="http://www.openprinting.org/driver/foo2hp/">http://www.openprinting.org/driver/foo2hp/</a></p>
+<p>HP Color LaserJet CP1215</p>
+<p>Consumables/Refills:
+Q6000A HP Color LaserJet black print cartridge
+Q6001A HP Color LaserJet cyan print cartridge
+Q6002A HP Color LaserJet yellow print cartridge
+Q6003A HP Color LaserJet magenta print cartridge
+Part numbers: Q6000A, Q6001A, Q6002A, Q6003A
+foo2hp
+This is a driver developed for the HP Color LaserJet 2600n printer.
+The driver supports 1-bit or 2-bit per pixel monochrome and color output, but none of these have been tuned for grayscale or color correction.
+PPD files (and the Foomatic XML files to generate them) come with the driver, therefore we do not supply PPDs here on the OpenPrinting site.</p>
+<h2 id="stampante" tabindex="-1">Stampante <a class="header-anchor" href="#stampante" aria-hidden="true">🔗</a></h2>
+<p>HP Color LaserJet Pro M283fdw</p>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/Printing">https://wiki.manjaro.org/index.php/Printing</a></li>
+</ul>
+<p>Ho configurato sulla stampante <code>NPIB06D32</code> l'ip statico <code>192.168.178.3</code> sul gateway <code>192.168.178.1</code> che è il modem Fritz!Box</p>
+<p>Per TIMHUB:
+Ho configurato per la stampante <code>NPIB06D32</code> nel router <code>192.168.1.1</code> un IP Statico: <code>192.168.1.3</code> per il MAC Address: <code>e8:d8:d1:b0:6d:32</code></p>
+<pre><code class="language-bash">$ getent hosts npib06d32
+    192.168.1.3    npib06d32.homenet.telecomitalia.it
+$ drill @192.168.1.1 npib06d32
+$ arp
+    Address                  HWtype  HWaddress           Flags Mask            Iface
+    192.168.1.70             ether   e8:d8:d1:b0:6d:32   C                     enp5s0
+</code></pre>
+<p><a href="https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index">https://developers.hp.com/hp-linux-imaging-and-printing/supported_devices/index</a></p>
+<pre><code>HP Color LaserJet Pro MFP M283fdw
+
+NPIB06D32
+
+Cartuccia nero 
+Ordinare ‭207A (W2210A)
+
+Cartuccia ciano 
+Ordinare ‭207A (W2211A)
+
+Cartuccia magenta 
+Ordinare ‭207A (W2213A)
+
+Cartuccia giallo 
+Ordinare ‭207A (W2212A)
+</code></pre>
+<p>Sono riuscito ad installarla scaricando i pacchetti da <a href="https://developers.hp.com/hp-linux-imaging-and-printing/gethplip">https://developers.hp.com/hp-linux-imaging-and-printing/gethplip</a></p>
+<pre><code>    ./hplip-3.20.3.run
+</code></pre>
+<p>ed in fase di ricerca su rete wifi selezionando il protocollo di ricerca <code>mDNS/Bonjour</code>(<strong>lasciando vuota la stringa di ricerca</strong>)</p>
+<pre><code class="language-bash">$ hp-check -r
+$ hp-makeuri 192.168.1.190
+</code></pre>
+<p>Non funziona su MINT:cercare la stampante <code>Network/Ethernet/Wireless Advanced Options</code>
+ed impostare il Network discovery method su <code>mDNS/Bonjour</code></p>
+<p>Su Mint: <code>Manual Discovery/network name: HPB22B2D</code></p>
+<p>Aggiungere una stampante di rete.</p>
+<h3 id="disinstallare-hplip-scaricato" tabindex="-1">Disinstallare hplip scaricato <a class="header-anchor" href="#disinstallare-hplip-scaricato" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> ~/app/hplip-3.20.3
+<span class="hljs-built_in">sudo</span> make uninstall
+</code></pre>
+<h3 id="reset-hplip" tabindex="-1">Reset hplip <a class="header-anchor" href="#reset-hplip" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># reset cups</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Rsn hplip cups manjaro-printer
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">disable</span> --now org.cups.cupsd.service
+$ <span class="hljs-built_in">sudo</span> pacman -Rsn manjaro-printer
+$ pacman -Qi cups
+<span class="hljs-comment"># Installazione/Reinstallazione</span>
+$ <span class="hljs-built_in">sudo</span> pamac install manjaro-printer
+$ <span class="hljs-built_in">sudo</span> gpasswd -a <span class="hljs-variable">$USER</span> sys
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now cups.service
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now cups.socket
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now cups.path
+
+$ hp-toolbox &amp;
+    discover options: mDNS/Bonjour 
+    search term: NPIB06D32
+
+</code></pre>
+<h2 id="scanner" tabindex="-1">Scanner <a class="header-anchor" href="#scanner" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://help.ubuntu.com/community/HpAllInOne">https://help.ubuntu.com/community/HpAllInOne</a></li>
+<li><a href="https://developers.hp.com/hp-linux-imaging-and-printing">https://developers.hp.com/hp-linux-imaging-and-printing</a></li>
+<li><a href="https://developers.hp.com/hp-linux-imaging-and-printing/tech_docs/man_pages/scan">https://developers.hp.com/hp-linux-imaging-and-printing/tech_docs/man_pages/scan</a></li>
+</ul>
+<p>Per far funzionare <code>hp-setup</code> ho dovuto configurare il firewall <code>ufw</code></p>
+<p>aggiungendo:</p>
+<ul>
+<li><code>CUPS</code></li>
+<li><code>HPLIP</code></li>
+<li><code>DNS Bonjour</code></li>
+</ul>
+<p>dalle regole predefinite di ufw,</p>
+<p><code>hp-setup</code> su mint non trova la stampante anche se eseguito da root, <code>sudo su -</code> permette di avere le variabili</p>
+<pre><code class="language-shell">sudo pacman -Syu --needed --noconfirm xsane
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> su -</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> apt install hplip hplip-gui</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> hp-setup</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> hp-setup -r <span class="hljs-comment"># per rimuovere una stampante</span></span>
+<span class="hljs-meta prompt_">
+$ </span><span class="language-bash">hp-doctor</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">sudo</span> hp-check -r</span> 
+<span class="hljs-meta prompt_"># </span><span class="language-bash">verranno segnalati dei pacchetti mancanti, installarli</span>
+<span class="hljs-meta prompt_">
+
+$ </span><span class="language-bash">hp-scan -h</span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">hp-uiscan -g</span>
+
+
+</code></pre>
+<p><a href="https://wiki.archlinux.org/title/SANE">https://wiki.archlinux.org/title/SANE</a></p>
+<pre><code class="language-bash">$ scanimage --format=png --output-file test.png --progress
+$ scanimage -L
+  device `escl:https://192.168.1.3:443<span class="hljs-string">&#x27; is a HP Color LaserJet MFP M283fdw (B06D32) platen,adf scanner
+  device `hpaio:/net/HP_ColorLaserJet_MFP_M282-M285?ip=192.168.1.3&#x27;</span> is a Hewlett-Packard HP_ColorLaserJet_MFP_M282-M285 all-in-one
+$ scanimage -A
+  Output format is not <span class="hljs-built_in">set</span>, using pnm as a default.
+  scanimage: rounded value of br-x from 215.9 to 215.9
+  scanimage: rounded value of br-y from 297.011 to 297.011
+  All options specific to device `escl:https://192.168.1.3:443<span class="hljs-string">&#x27;:
+      --mode Color|Gray [Color]
+          Selects the scan mode (e.g., lineart, monochrome, or color).
+      --resolution 75|150|200|300|600|1200dpi [75]
+          Sets the resolution of the scanned image.
+      --source Flatbed|ADF [Flatbed]
+          Selects the scan source (such as a document-feeder).
+      -l 0..167.132mm [0]
+          Top-left x position of scan area.
+      -t 0..248.243mm [0]
+          Top-left y position of scan area.
+      -x 48.768..215.9mm [215.9]
+          Width of scan-area.
+      -y 48.768..297.011mm [297.011]
+          Height of scan-area.
+      --preview[=(yes|no)] [no]
+          Request a preview-quality scan.
+      --preview-in-gray[=(yes|no)] [no]
+          Request that all previews are done in monochrome mode.  On a
+          three-pass scanner this cuts down the number of passes to one and on a
+          one-pass scanner, it reduces the memory requirements and scan-time of
+          the preview.
+      --brightness 32701..162994662 (in steps of 32701) [inactive]
+          Controls the brightness of the acquired image.
+      --contrast -127..127 (in steps of 1) [0]
+          Controls the contrast of the acquired image.
+      --sharpen 32701..32 [inactive]
+          Set sharpen value.
+      --threshold 0..0 (in steps of 238347936) [inactive]
+          Select minimum-brightness to get a white point
+
+</span></code></pre>
+<pre><code class="language-bash">$ hp-scan -g --device=<span class="hljs-string">&#x27;hpaio:/net/HP_ColorLaserJet_MFP_M282-M285?ip=192.168.1.3&#x27;</span> --file=~/prova.png
+$ scanimage --device <span class="hljs-string">&quot;hpaio:/net/HP_ColorLaserJet_MFP_M282-M285?ip=192.168.1.3&quot;</span> --format=tiff --output-file test.tiff --progress
+</code></pre>
+<h2 id="errore-di-build-hplip-plugin" tabindex="-1">Errore di build hplip-plugin <a class="header-anchor" href="#errore-di-build-hplip-plugin" aria-hidden="true">🔗</a></h2>
+<p>Questo errore si verifica solamente eseguendo l'aggiornamento da pamac in modalità grafica,
+<strong>si risolve eseguendo l'upgrade da riga di comando</strong>.</p>
+<ul>
+<li>
+<p><a href="https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html">https://developers.hp.com/hp-linux-imaging-and-printing/binary_plugin.html</a></p>
+</li>
+<li>
+<p><a href="https://aur.archlinux.org/packages/hplip-plugin">https://aur.archlinux.org/packages/hplip-plugin</a></p>
+</li>
+<li>
+<p><a href="../distribuzioni/manjaro/package_manager/pamac.html#fallimento-di-una-build-a-causa-del-pkgbuild-nel-repository-che-contiene-un-checksum-non-aggiornato">pamac analizzare errori di build</a></p>
+</li>
+<li>
+<p><a href="../distribuzioni/manjaro/package_manager/pacman.html#aur---arch-user-repository">pacman AUR</a></p>
+<p>Costruzione in corso di hplip-plugin...
+==&gt; Creazione del pacchetto: hplip-plugin 3.23.12-1 (ven 29 dic 2023, 11:57:09)
+==&gt; Controllo delle dipendenze durante l'avvio in corso...
+==&gt; Controllo delle dipendenze durante la compilazione in corso...
+==&gt; Download dei sorgenti in corso...
+-&gt; È stato trovato hplip-3.23.12-plugin.run
+==&gt; Validazione di source file con md5sums...
+hplip-3.23.12-plugin.run ... Verificato
+==&gt; Rimozione dell'esistente directory $srcdir/ in corso...
+==&gt; Estrazione dei sorgenti in corso...
+==&gt; Avvio di prepare() in corso...</p>
+<h1 id="analisi-degli-argomenti-non-riuscita%3A-opzione--title-sconosciuta" tabindex="-1">Analisi degli argomenti non riuscita: Opzione -title sconosciuta <a class="header-anchor" href="#analisi-degli-argomenti-non-riuscita%3A-opzione--title-sconosciuta" aria-hidden="true">🔗</a></h1>
+<p>==&gt; ERRORE: Si è verificato un errore in prepare().
+L'operazione sta per essere interrotta...</p>
+</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Risolto semplicemente eseguendo la build da riga di comando anzichè da GUI</span>
+$ pamac upgrade hplip-plugin
+</code></pre>
+</body></html>

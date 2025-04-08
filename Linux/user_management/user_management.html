@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.716" />
+        <title>user_management</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="user_management" tabindex="-1">user_management <a class="header-anchor" href="#user_management" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.716</p>
+<nav class="table-of-contents"><ol><li><a href="#vedere-i-gruppi-cui-un-utente-appartiene">Vedere i gruppi cui un utente appartiene </a></li><li><a href="#comandi-di-gestione-delle-utenze-di-basso-livello">Comandi di gestione delle utenze di basso livello </a></li><li><a href="#gruppi-dell'utente">Gruppi dell&#39;utente </a></li><li><a href="#creare-un-nuovo-gruppo">Creare un nuovo gruppo </a></li><li><a href="#aggiungere-un-utente-esistente-ad-un-gruppo">Aggiungere un utente esistente ad un gruppo </a></li><li><a href="#abilitazione-di-un-utente-a-sudo">Abilitazione di un utente a sudo </a></li><li><a href="#rimuovere-un-utente">Rimuovere un utente </a></li><li><a href="#change-existing-user-tony-primary-group-to-www">Change existing user tony primary group to www </a></li><li><a href="#change-the-existing-group-id-during-the-current-login-session">Change the existing group ID during the current login session </a></li><li><a href="#come-recuperare-la-password-di-un-utente">Come recuperare la password di un utente </a></li><li><a href="#come-resettare-la-password-di-root">Come resettare la password di root </a></li><li><a href="#diventare-superutente">Diventare superutente </a></li><li><a href="#eliminazione-utenti-e-gruppi">Eliminazione utenti e gruppi </a></li><li><a href="#disabilitare-un-utente">Disabilitare un utente </a></li><li><a href="#lock-ed-unlock-di-un-account">Lock ed Unlock di un Account </a><ol><li><a href="#attivare%2Fdisattivare-le-shadow-password">Attivare/disattivare le shadow password </a><ol><li><a href="#comando%3A-pwconv">Comando: pwconv </a></li><li><a href="#comando%3A-grpconv">Comando: grpconv </a></li><li><a href="#comando%3A-pwunconv">Comando: pwunconv </a></li><li><a href="#comando%3A-grpunconv">Comando: grpunconv </a></li></ol></li></ol></li><li><a href="#password-utente-dimenticata-in-ubuntu-13.10-saucy%3F-ecco-come-risolvere-il-problema">Password utente dimenticata in Ubuntu 13.10 Saucy? ecco come risolvere il problema </a></li><li><a href="#how-to-reset-a-lost-user-password-on-a-pc-running-ubuntu">How to Reset a Lost User Password on a PC Running Ubuntu </a></li><li><a href="#riabilitazione-dell'utente-root-su-ubuntu">Riabilitazione dell&#39;utente root su Ubuntu </a></li><li><a href="#creare-una-home-dopo-aver-creato-un-utente">Creare una home dopo aver creato un utente </a></li></ol></nav><h1 id="user-management" tabindex="-1">User Management <a class="header-anchor" href="#user-management" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/users_and_groups">https://wiki.archlinux.org/title/users_and_groups</a></li>
+<li><a href="https://wiki.archlinux.org/title/Sudo">https://wiki.archlinux.org/title/Sudo</a></li>
+<li><a href="sudo.html">sudo</a></li>
+</ul>
+<h2 id="vedere-i-gruppi-cui-un-utente-appartiene" tabindex="-1">Vedere i gruppi cui un utente appartiene <a class="header-anchor" href="#vedere-i-gruppi-cui-un-utente-appartiene" aria-hidden="true">🔗</a></h2>
+<p><a href="https://man.archlinux.org/man/id.1">https://man.archlinux.org/man/id.1</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">id</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">id</span> nomeutente
+$ <span class="hljs-built_in">sudo</span> passwd -Sa <span class="hljs-comment"># vedere tutti gli utenti</span>
+</code></pre>
+<h2 id="comandi-di-gestione-delle-utenze-di-basso-livello" tabindex="-1">Comandi di gestione delle utenze di basso livello <a class="header-anchor" href="#comandi-di-gestione-delle-utenze-di-basso-livello" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/useradd.8">https://man.archlinux.org/man/useradd.8</a></p>
+<pre><code>  -m, --create-home 
+  -s, --shell SHELL  es. /bin/bash
+  -G, --groups GROUP1[,GROUP2,...[,GROUPN]]]
+  -U, --user-group Create a group with the same name as the user, and add the user to this group. 
+</code></pre>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/usermod.8">https://man.archlinux.org/man/usermod.8</a></p>
+<pre><code>  -a, --append Add the user to the supplementary group(s). Use only with the -G option.
+  -G, --groups GROUP1[,GROUP2,...[,GROUPN]]]
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Creare un utente admin: il gruppo wheel deve essere abilitato in sudo con i massimi poteri e bisogna aggiungervi il nuovo utente</span>
+<span class="hljs-comment"># useradd - crea un nuovo utente o aggiorna le informazioni predefinite per i nuovi utenti</span>
+$ <span class="hljs-built_in">sudo</span> useradd testuser -m -s /bin/bash -G root sys <span class="hljs-built_in">log</span> network power vboxusers wireshark libvirt sambashare docker <span class="hljs-built_in">users</span> storage lp kvm input disk audio wheel testuser
+$ <span class="hljs-built_in">sudo</span> passwd testuser
+$ visudo
+    <span class="hljs-comment">## Uncomment to allow members of group wheel to execute any command</span>
+    %wheel ALL=(ALL) ALL
+<span class="hljs-comment"># Oppure:</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;echo &#x27;%wheel ALL=(ALL) ALL&#x27; &gt; /etc/sudoers.d/wheel&quot;</span>
+$ su - testuser
+
+<span class="hljs-comment"># Aggiungere piu gruppi ad un utente, replace additional_groups with a comma-separated list</span>
+<span class="hljs-comment"># usermod -aG additional_groups username</span>
+$ <span class="hljs-built_in">sudo</span> usermod -aG vboxusers,libvirt,docker,wheel testuser
+
+<span class="hljs-comment"># Cancellare l&#x27;utente</span>
+$ <span class="hljs-built_in">sudo</span> userdel - r testuser
+<span class="hljs-comment"># userdel is a low level utility for removing users. On Debian, administrators should usually use deluser(8) instead.</span>
+
+<span class="hljs-comment"># Aggiungere l&#x27;utente ad un solo gruppo</span>
+$ <span class="hljs-built_in">sudo</span> gpasswd --add testuser wheel
+<span class="hljs-comment"># gpasswd - administer /etc/group and /etc/gshadow</span>
+
+</code></pre>
+<h2 id="gruppi-dell'utente" tabindex="-1">Gruppi dell'utente <a class="header-anchor" href="#gruppi-dell'utente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">id</span>
+$ <span class="hljs-built_in">groups</span>
+    sys <span class="hljs-built_in">log</span> network power vboxusers wireshark sambashare docker <span class="hljs-built_in">users</span> storage lp input disk audio wheel <span class="hljs-variable">$USER</span>
+$ <span class="hljs-built_in">cat</span> /etc/group <span class="hljs-comment"># to list all groups on the system</span>
+</code></pre>
+<h2 id="creare-un-nuovo-gruppo" tabindex="-1">Creare un nuovo gruppo <a class="header-anchor" href="#creare-un-nuovo-gruppo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ groupadd group
+</code></pre>
+<h2 id="aggiungere-un-utente-esistente-ad-un-gruppo" tabindex="-1">Aggiungere un utente esistente ad un gruppo <a class="header-anchor" href="#aggiungere-un-utente-esistente-ad-un-gruppo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ gpasswd -a user group     <span class="hljs-comment"># permette di aggiungere l&#x27;utente ad un solo gruppo</span>
+$ usermod -aG gruppo1,gruppo2,gruppo3 nomeutente <span class="hljs-comment"># permette di aggiungere l&#x27;utente a piu gruppi contemporaneamente</span>
+
+<span class="hljs-comment"># Tre modi alternativi per aggiungere l&#x27;utente corrente al gruppo</span>
+$ <span class="hljs-built_in">sudo</span> gpasswd -a <span class="hljs-variable">$USER</span> vboxsf
+$ <span class="hljs-built_in">sudo</span> usermod -aG vboxsf <span class="hljs-variable">${USER}</span>
+</code></pre>
+<h2 id="abilitazione-di-un-utente-a-sudo" tabindex="-1">Abilitazione di un utente a sudo <a class="header-anchor" href="#abilitazione-di-un-utente-a-sudo" aria-hidden="true">🔗</a></h2>
+<pre><code>gpasswd -a cdipiet sudo
+newgrp cdipiet
+id cdipiet
+</code></pre>
+<p>Si suppone che in <code>/etc/sudoers</code> ci sia la riga <code>%sudo ALL=(ALL:ALL) ALL</code></p>
+<h2 id="rimuovere-un-utente" tabindex="-1">Rimuovere un utente <a class="header-anchor" href="#rimuovere-un-utente" aria-hidden="true">🔗</a></h2>
+<pre><code>sudo userdel --remove&lt;username&gt;
+sudo deluser --remove-home&lt;username&gt;
+</code></pre>
+<h2 id="change-existing-user-tony-primary-group-to-www" tabindex="-1">Change existing user tony primary group to www <a class="header-anchor" href="#change-existing-user-tony-primary-group-to-www" aria-hidden="true">🔗</a></h2>
+<pre><code>usermod -g www tony
+</code></pre>
+<h2 id="change-the-existing-group-id-during-the-current-login-session" tabindex="-1">Change the existing group ID during the current login session <a class="header-anchor" href="#change-the-existing-group-id-during-the-current-login-session" aria-hidden="true">🔗</a></h2>
+<p>Permette di vedere immediatamente l'effetto dei comandi usermod</p>
+<pre><code>newgrp users
+</code></pre>
+<p>This command will change the existing group ID during the current login session to &quot;susers&quot;.
+If you do not want this change, just logout and log back in again for the group membership to be effective.</p>
+<h2 id="come-recuperare-la-password-di-un-utente" tabindex="-1">Come recuperare la password di un utente <a class="header-anchor" href="#come-recuperare-la-password-di-un-utente" aria-hidden="true">🔗</a></h2>
+<pre><code>sudo apt-get install john
+sudo unshadow /etc/passwd /etc/shadow &gt; combined
+sudo john combined # cosi john puo utilizzare anche il campo gecos
+</code></pre>
+<h2 id="come-resettare-la-password-di-root" tabindex="-1">Come resettare la password di root <a class="header-anchor" href="#come-resettare-la-password-di-root" aria-hidden="true">🔗</a></h2>
+<p>Riavviate Ubuntu in modalita safe e digitate:</p>
+<pre><code>passwd
+</code></pre>
+<p>Per cambiare la password.</p>
+<h2 id="diventare-superutente" tabindex="-1">Diventare superutente <a class="header-anchor" href="#diventare-superutente" aria-hidden="true">🔗</a></h2>
+<pre><code>sudo -i
+sudo su
+su - in un ambiente dove l'utente root e' abilitato
+</code></pre>
+<h2 id="eliminazione-utenti-e-gruppi" tabindex="-1">Eliminazione utenti e gruppi <a class="header-anchor" href="#eliminazione-utenti-e-gruppi" aria-hidden="true">🔗</a></h2>
+<pre><code>userdel -r oracle
+groupdel dba
+</code></pre>
+<h2 id="disabilitare-un-utente" tabindex="-1">Disabilitare un utente <a class="header-anchor" href="#disabilitare-un-utente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> chage -E2010-05-10 nomeutente <span class="hljs-comment"># formato YYYY-MM-DD</span>
+</code></pre>
+<h2 id="lock-ed-unlock-di-un-account" tabindex="-1">Lock ed Unlock di un Account <a class="header-anchor" href="#lock-ed-unlock-di-un-account" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ passwd -l user_name <span class="hljs-comment"># (Temporarily lock the user from logging in)</span>
+$ passwd -u user_name <span class="hljs-comment"># (Unlock the account)</span>
+
+<span class="hljs-comment">## /etc/passwd</span>
+
+    /etc/passwd
+    /etc/shadow
+    /etc/group
+    /etc/gshadow
+
+Il file `/etc/passwd` è il database degli utenti su ogni sistema Unix.\
+Ad ogni user è dedicata una riga che definisce quali sono i suoi principali attributi.\
+Sui sistemi Unix meno recenti <span class="hljs-keyword">in</span> questo file viene scritta anche la password (criptata),\
+su quelli più recenti viene scritta, generalmente, <span class="hljs-keyword">in</span> `/etc/shadow`,\
+che ha maggiori restrizioni <span class="hljs-keyword">in</span> termini di sicurezza.
+
+Le righe di `/etc/passwd` si presentano nella seguente forma:
+
+    Username:Password:UserID:GroupID:GECOS:HomeDirectory:Shell
+
+| Parametro     | Descrizione                                                                                                                                                                                                                                                                                                                                  |
+| :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Username      | Nome dell<span class="hljs-string">&#x27;user, la login con cui può accedere al sistema;                                                                                                                                                                                                                                                                                    |
+| Password      | Campo riservato alla password dell&#x27;</span>utente. Può essere scritta direttamente <span class="hljs-keyword">in</span> forma criptata o esserci semplicemente una `x`(la password c<span class="hljs-string">&#x27;è ma è scritta altrove, di solito in /etc/shadow). Se c&#x27;</span>è un `*`(asterisco) significa che l<span class="hljs-string">&#x27;utente o non ha una password o la password non è valida (in questo caso non gli è permesso di login); |
+| UserID        | ID dell&#x27;</span>user;                                                                                                                                                                                                                                                                                                                                |
+| GroupID       | ID del gruppo di appartenenza;                                                                                                                                                                                                                                                                                                               |
+| Info          | Contiene informazioni sull<span class="hljs-string">&#x27;utente non necessarie al sistema (nome esteso, numero di telefono, mail ecc...);                                                                                                                                                                                                                                  |
+| HomeDirectory | Indica la directory della home dell&#x27;</span>utente;                                                                                                                                                                                                                                                                                                  |
+| Shell         | Indica la shell di default per quell<span class="hljs-string">&#x27;utente.                                                                                                                                                                                                                                                                                                 |
+
+### GECOS
+
+    /etc/passwd: user:password(x):userid:groupid:GECOS:homedir:shell
+
+Il campo **GECOS** (in inglese gecos field) è un campo presente nel file `/etc/passwd` dei sistemi Unix e Unix-like.
+Il nome deriva dall&#x27;</span>acronimo di **General Electric Comprehensive Operating System**. L<span class="hljs-string">&#x27;informazione è una forma di &quot;residuo&quot; dei primissimi sistemi Unix, in cui le informazioni di sicurezza erano gestite in modo relativamente primitivo ed era previsto un campo informativo usato generalmente per memorizzare informazioni generali riguardo ad un account, come il nome reale dell&#x27;</span>utente o il suo numero di telefono.
+Il tipico formato del campo gecos è composto da campi delimitati da una virgola, generalmente <span class="hljs-keyword">in</span> questo ordine:
+
+- Nome completo dell<span class="hljs-string">&#x27;utente (o nome dell&#x27;</span>applicazione, se l<span class="hljs-string">&#x27;account è un programma)
+- Edificio e numero di stanza o persona da contattare
+- Numero telefonico dell&#x27;</span>ufficio
+- Altre informazioni di contatto (numero del cercapersone, fax, ecc.)
+
+Si puo modificare con il comando `chfn`.
+
+<span class="hljs-comment">## /etc/shadow</span>
+
+    mark:$6$.n.:17736:0:99999:7:::
+    [--] [----] [---] - [---] ----
+    |      |      |   |   |   |||+-----------&gt; 9. Unused
+    |      |      |   |   |   ||+------------&gt; 8. Expiration <span class="hljs-built_in">date</span>
+    |      |      |   |   |   |+-------------&gt; 7. Inactivity period
+    |      |      |   |   |   +--------------&gt; 6. Warning period
+    |      |      |   |   +------------------&gt; 5. Maximum password age
+    |      |      |   +----------------------&gt; 4. Minimum password age
+    |      |      +--------------------------&gt; 3. Last password change
+    |      +---------------------------------&gt; 2. Encrypted Password
+    +----------------------------------------&gt; 1. Username
+
+Encrypted Password (Password crittografata). La password utilizza il formato `$<span class="hljs-built_in">type</span>$salt<span class="hljs-variable">$hashed</span>`. `<span class="hljs-variable">$type</span>` è l<span class="hljs-string">&#x27;algoritmo di crittografia hash del metodo e può avere i seguenti valori:
+
+| Type   | Alghorithm  |
+| :----- | :---------- |
+| `$1$`  | MD5         |
+| `$2a$` | Blowfish    |
+| `$2y$` | Eksblowfish |
+| `$5$`  | SHA-256     |
+| `$6$`  | SHA-512     |
+
+Per una descrizione esaustiva dei tipi di hash utilizzabili:
+
+```bash
+man 5 crypt
+</span></code></pre>
+<p>Se il campo password contiene un asterisco (*) o un punto esclamativo (!), l'utente non sarà in grado di accedere al sistema utilizzando l'autenticazione con password.</p>
+<p>un <code>!</code> al posto della password significa che la password e' bloccata</p>
+<p>Storicamente su Unix il file <code>/etc/passwd</code> contiene l'elenco di tutti gli utenti e la loro password in forma criptata.
+Per la stessa natura di Unix tutti gli utenti devono poter aver accesso in lettura a questo file,
+per cui l'esporre le password di tutti, seppur criptate, risultava rischioso per la sicurezza del sistema.</p>
+<p>Su tutti i Linux e gli Unix non troppo vecchi, la gestione della password è stata migliorata sia in termini di sicurezza
+che di versatilità affiancando al normale /etc/passwd la gestione del file <code>/etc/shadow</code> che introduce nuove funzionalità:</p>
+<ul>
+<li>Questo file è leggibile solo da root mentre viene lasciato l'accesso il lettura a <code>/etc/passwd</code> per tutti gli utenti;</li>
+<li>Le password in <code>/etc/shadow</code> sono criptate con algoritmi più complessi e robusti;</li>
+<li>E' possibile gestire il tempo di scadenza, la durata minima e massima e i tempi di notifica della password.</li>
+</ul>
+<p>Notare che:</p>
+<ul>
+<li>se la password è scritta in <code>/etc/shadow</code>, in <code>/etc/passwd</code> c'è solo una <code>x</code> al posto della password criptata.</li>
+<li>se in <code>/etc/passwd</code> il campo password è un <code>*</code> , la password è nulla e l'utente non può accedere al sistema.</li>
+</ul>
+<p>Il file <code>/etc/shadow</code> è il database delle password sui Unix più evoluti. In esso sono elencate per ogni utente la password (criptata) e vari parametri ad essa connessi (ultima modifica, durata massima e minima, ecc...). Ad esso fanno riferimento diversi files, fra cui /etc/passwd e tutti i comandi per la gestione degli utenti (useradd, userdel, usermod).</p>
+<p>Le righe in <code>/etc/shadow</code> si presentano nella seguente forma:</p>
+<pre><code>Username:password:lastchange:min:max:warn:inactive:expire:
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Parametro</th>
+<th style="text-align:left">Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">Username</td>
+<td style="text-align:left">Il nome dell'utente a cui fa riferimento la password;</td>
+</tr>
+<tr>
+<td style="text-align:left">Password</td>
+<td style="text-align:left">Password criptata (13 caratteri). Puo assumere anche altri valori quali <code>*</code> (asterisco) che sta ad indicare che l'utente è disabilitato e <code>!!</code> (o nessun carattere) che significa che l'utente non ha password (cosa molto pericolosa in termini di sicurezza);</td>
+</tr>
+<tr>
+<td style="text-align:left">lastchange</td>
+<td style="text-align:left">Numero di giorni compresi fra il 1 gennaio 1970 e l'ultima modifica della password;</td>
+</tr>
+<tr>
+<td style="text-align:left">min</td>
+<td style="text-align:left">Minimo numero di giorni dall'ultima data di modifica prima di poter nuovamente cambiare la password;</td>
+</tr>
+<tr>
+<td style="text-align:left">max</td>
+<td style="text-align:left">Durata massima della password (sempre in giorni);</td>
+</tr>
+<tr>
+<td style="text-align:left">warn</td>
+<td style="text-align:left">Numero di giorni di preavviso all'utente prima di invalidare la password;</td>
+</tr>
+<tr>
+<td style="text-align:left">inactive</td>
+<td style="text-align:left">Numero di giorni di inattività possibili per quell'utente.</td>
+</tr>
+<tr>
+<td style="text-align:left">expire</td>
+<td style="text-align:left">Data dopo la quale quel login non può più essere usato.</td>
+</tr>
+</tbody>
+</table>
+<p>Un esempio da un RedHat Linux standard evidenzia che di default non sono previste scadenze per la password e vari altri parametri:</p>
+<pre><code>[diego@vagante diego]$ cat /etc/passwd
+:root:$1$ÐQEXe5ÀJ$Jffvxi5UaGHpaMckCsKH0:11628:0:99999:7:::
+:daemon:*:11628:0:99999:7:::
+[...]
+:xfs:!!:11628:0:99999:7:::
+</code></pre>
+<h3 id="attivare%2Fdisattivare-le-shadow-password" tabindex="-1">Attivare/disattivare le shadow password <a class="header-anchor" href="#attivare%2Fdisattivare-le-shadow-password" aria-hidden="true">🔗</a></h3>
+<p>Il sistema delle shadow password può essere abilitato o disabilitato tramite opportuni comandi.
+Il comando <code>pwconv</code> (man page pwconv(8)) permette di convertire il file /etc/passwd standard
+in una coppia di file /etc/passwd e /etc/shadow, togliendo dal primo le password cifrate.</p>
+<h4 id="comando%3A-pwconv" tabindex="-1">Comando: pwconv <a class="header-anchor" href="#comando%3A-pwconv" aria-hidden="true">🔗</a></h4>
+<p>Path: <code>/usr/sbin/pwconv</code></p>
+<p>Il programma funziona anche se il file /etc/shadow esiste già: in tal caso serve per allineare correttamente i file /etc/passwd e /etc/shadow. Si avvale della configurazione contenuta in/etc/login.defs (man page login.defs(5)) per stabilire i periodi di validità delle password.</p>
+<p>Il comando grpconv (man page grpconv(8)) permette di convertire il file /etc/group normale
+in una coppia di file /etc/group e /etc/gshadow, togliendo dal primo le eventuali password cifrate.</p>
+<h4 id="comando%3A-grpconv" tabindex="-1">Comando: grpconv <a class="header-anchor" href="#comando%3A-grpconv" aria-hidden="true">🔗</a></h4>
+<p>Path: <code>/usr/sbin/grpconv</code></p>
+<p>Il programma funziona anche se il file /etc/gshadow esiste già: in tal caso serve per allineare correttamente i file /etc/group e /etc/gshadow.</p>
+<p>Il comando pwunconv svolge l?operazione inversa a quella di pwconv,
+ovvero trasferisce le password cifrate dal file /etc/shadow nel file /etc/passwd, eliminando poi il file /etc/shadow.
+La sintassi è la seguente</p>
+<h4 id="comando%3A-pwunconv" tabindex="-1">Comando: pwunconv <a class="header-anchor" href="#comando%3A-pwunconv" aria-hidden="true">🔗</a></h4>
+<p>Path: <code>/usr/sbin/pwunconv</code></p>
+<p>Il programma è in grado di funzionare correttamente anche se parte delle utenze si trovano già solo nel file /etc/passwd.</p>
+<p>Il comando grpunconv svolge l?operazione inversa a quella di grpconv, ovvero trasferisce le eventuali password cifrate dal file /etc/gshadow nel file /etc/group, eliminando poi il file /etc/gshadow. La sintassi è la seguente</p>
+<h4 id="comando%3A-grpunconv" tabindex="-1">Comando: grpunconv <a class="header-anchor" href="#comando%3A-grpunconv" aria-hidden="true">🔗</a></h4>
+<p>Path: <code>/usr/sbin/grpunconv</code></p>
+<p>Il programma è in grado di funzionare correttamente anche se parte delle utenze si trovano già solo nel file /etc/group.</p>
+<h2 id="password-utente-dimenticata-in-ubuntu-13.10-saucy%3F-ecco-come-risolvere-il-problema" tabindex="-1">Password utente dimenticata in Ubuntu 13.10 Saucy? ecco come risolvere il problema <a class="header-anchor" href="#password-utente-dimenticata-in-ubuntu-13.10-saucy%3F-ecco-come-risolvere-il-problema" aria-hidden="true">🔗</a></h2>
+<p>La password utente o amministratore è fondamentale in Ubuntu e in altre distribuzioni Linux dato che ci consente d'installare o accedere in alcune applicazioni, operare sul sistema, gestire / limitare alcuni utenti e molto altro ancora.
+Può capitare di aver installato Ubuntu e non ricordarci più la password, se non vogliamo reinstallare la distribuzione possiamo utilizzare un semplice &quot;trucchetto&quot;.
+All'avvio di Ubuntu clicchiamo un canc per visualizzare il bootloader grub e scegliamo la modalità avanzata
+e successivamente accediamo nella <mark><code>Recovery Mode</code></mark> (la modalità di ripristino di Ubuntu Linux).
+una volta attiva la modalità di ripristino selezioniamo &quot;root Drop to root shell prompt&quot; apparirà una schermata con il terminale con già l'accesso da root e digitiamo:</p>
+<pre><code>mount -rw -o remount /
+</code></pre>
+<p>e impostiamo una nuova password digitando:</p>
+<pre><code>passwd username
+</code></pre>
+<p>dove al posto di username dovremo inserire il nostro username nel mio caso dovrò digitare passwd lffl
+una volta dato il comando basta inserire la nuova password e la conferma ed ecco la nuova password utente
+non ci resta che riavviare la distribuzione digitando:</p>
+<pre><code>reboot
+</code></pre>
+<h2 id="how-to-reset-a-lost-user-password-on-a-pc-running-ubuntu" tabindex="-1">How to Reset a Lost User Password on a PC Running Ubuntu <a class="header-anchor" href="#how-to-reset-a-lost-user-password-on-a-pc-running-ubuntu" aria-hidden="true">🔗</a></h2>
+<p>Let's firstly start the Recovery Mode. Reboot your computer and hold down the SHIFT key, the GRUB boot menu will show up, select the line having the &quot;recovery mode&quot; option and press Enter
+Another menu will appear after a few seconds, select the line saying &quot;root Drop to root shell prompt&quot; and press Enter to enable the CLI mode:
+The file system in this case is set to <mark>read-only</mark> which will prevent us from resetting the user password. To set read/write permissions, you need to run this command:<br>
+<strong class="mbby">mount -rw -o remount /</strong>
+If you have also forgotten your username, you can use this command to get the list of all system user accounts: <code>cat /etc/passwd</code>
+Once you decide which user to reset password for, run this command: <code>passwd username</code></p>
+<h2 id="riabilitazione-dell'utente-root-su-ubuntu" tabindex="-1">Riabilitazione dell'utente root su Ubuntu <a class="header-anchor" href="#riabilitazione-dell'utente-root-su-ubuntu" aria-hidden="true">🔗</a></h2>
+<pre><code>root@cdipiet-laptop:/media/SYSTEM/software# cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+</code></pre>
+<ol>
+<li>cancellare la <code>x</code></li>
+<li>login come root: <code>sudo su</code> oppure <code>sudo -i</code></li>
+<li><code>passwd</code> e definire la nuova password</li>
+</ol>
+<h2 id="creare-una-home-dopo-aver-creato-un-utente" tabindex="-1">Creare una home dopo aver creato un utente <a class="header-anchor" href="#creare-una-home-dopo-aver-creato-un-utente" aria-hidden="true">🔗</a></h2>
+<p>Run <code>mkhomedir_helper &lt;username&gt;</code> to create the home directory.<br>
+<code>mkhomedir_helper</code> will create the user home directory and copy the stuff in <code>/etc/skel</code> as well.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cp</span> -rT /etc/skel /root
+<span class="hljs-comment"># https://superuser.com/questions/61611/how-to-copy-with-cp-to-include-hidden-files-and-hidden-directories-and-their-con</span>
+<span class="hljs-comment"># the -T option prevents the contents of /etc/skel from being copied to a new folder /home/user/skel should the folder /home/user exist.</span>
+</code></pre>
+</body></html>

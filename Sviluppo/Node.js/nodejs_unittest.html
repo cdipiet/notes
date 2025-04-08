@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.797" />
+        <title>nodejs_unittest</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nodejs_unittest" tabindex="-1">nodejs_unittest <a class="header-anchor" href="#nodejs_unittest" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.797</p>
+<nav class="table-of-contents"><ol><li><a href="#unit-test">Unit Test </a><ol><li><a href="#https%3A%2F%2Fjestjs.io%2F">https://jestjs.io/ </a><ol><li><a href="#testregex-%5Bstring-%7C-array%3Cstring%3E%5D">testRegex [string | array&lt;string&gt;] </a></li><li><a href="#standalone-expect">standalone expect </a></li></ol></li><li><a href="#https%3A%2F%2Fmochajs.org%2F">https://mochajs.org/ </a><ol><li><a href="#https%3A%2F%2Fwww.chaijs.com%2F">https://www.chaijs.com/ </a></li></ol></li></ol></li></ol></nav><h1 id="node.js-unit-test" tabindex="-1">Node.js Unit Test <a class="header-anchor" href="#node.js-unit-test" aria-hidden="true">🔗</a></h1>
+<h2 id="unit-test" tabindex="-1">Unit Test <a class="header-anchor" href="#unit-test" aria-hidden="true">🔗</a></h2>
+<h3 id="https%3A%2F%2Fjestjs.io%2F" tabindex="-1"><a href="https://jestjs.io/">https://jestjs.io/</a> <a class="header-anchor" href="#https%3A%2F%2Fjestjs.io%2F" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/facebook/jest">https://github.com/facebook/jest</a></p>
+<p>JavaScript Testing Framework</p>
+<p><a href="https://jestjs.io/docs/en/configuration#testregex-string--arraystring">https://jestjs.io/docs/en/configuration#testregex-string--arraystring</a>
+<a href="https://raw.githubusercontent.com/facebook/jest/master/docs/Configuration.md">https://raw.githubusercontent.com/facebook/jest/master/docs/Configuration.md</a></p>
+<h4 id="testregex-%5Bstring-%7C-array%3Cstring%3E%5D" tabindex="-1"><code>testRegex</code> [string | array&lt;string&gt;] <a class="header-anchor" href="#testregex-%5Bstring-%7C-array%3Cstring%3E%5D" aria-hidden="true">🔗</a></h4>
+<p>Default: <code>(/__tests__/.*|(\\.|/)(test|spec))\\.[jt]sx?$</code></p>
+<p>The pattern or patterns Jest uses to detect test files. By default it looks for <code>.js</code>, <code>.jsx</code>, <code>.ts</code> and <code>.tsx</code> files inside of <code>__tests__</code> folders, as well as any files with a suffix of <code>.test</code> or <code>.spec</code> (e.g. <code>Component.test.js</code> or <code>Component.spec.js</code>). It will also find files called <code>test.js</code> or <code>spec.js</code>. See also <a href="#testmatch-arraystring"><code>testMatch</code> [array&lt;string&gt;]</a>, but note that you cannot specify both options.</p>
+<p>The following is a visualization of the default regex:</p>
+<pre><code class="language-bash">├── __tests__
+│   └── component.spec.js <span class="hljs-comment"># test</span>
+│   └── anything <span class="hljs-comment"># test</span>
+├── package.json <span class="hljs-comment"># not test</span>
+├── foo.test.js <span class="hljs-comment"># test</span>
+├── bar.spec.jsx <span class="hljs-comment"># test</span>
+└── component.js <span class="hljs-comment"># not test</span>
+</code></pre>
+<p><em>Note: <code>testRegex</code> will try to detect test files using the <strong>absolute file path</strong>, therefore, having a folder with a name that matches it will run all the files as tests</em></p>
+<h4 id="standalone-expect" tabindex="-1">standalone expect <a class="header-anchor" href="#standalone-expect" aria-hidden="true">🔗</a></h4>
+<ul>
+<li>
+<p><a href="https://jestjs.io/docs/en/expect">https://jestjs.io/docs/en/expect</a></p>
+</li>
+<li>
+<p><a href="https://www.npmjs.com/package/expect">https://www.npmjs.com/package/expect</a></p>
+<p>This package exports the expect function used in Jest.</p>
+</li>
+</ul>
+<p>il pacchetto <code>expect</code> viene installato automaticamente da <code>npm install jest --save-dev</code> <br>
+ed è possibile utilizzarlo come funzione a sè stante</p>
+<pre><code>$ npm list jest expect
+test@1.0.0 /tmp/test
+└─┬ jest@26.4.2 
+└─┬ @jest/core@26.4.2
+    ├─┬ jest-config@26.4.2
+    │ └─┬ jest-jasmine2@26.4.2
+    │   └── expect@26.4.2  deduped
+    ├─┬ jest-runtime@26.4.2
+    │ └─┬ @jest/globals@26.4.2
+    │   └── expect@26.4.2  deduped
+    └─┬ jest-snapshot@26.4.2
+    └── expect@26.4.2 
+</code></pre>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> expect = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;expect&#x27;</span>);
+<span class="hljs-title function_">expect</span>(<span class="hljs-number">100</span>).<span class="hljs-title function_">toEqual</span>(<span class="hljs-number">110</span>);
+</code></pre>
+<h3 id="https%3A%2F%2Fmochajs.org%2F" tabindex="-1"><a href="https://mochajs.org/">https://mochajs.org/</a> <a class="header-anchor" href="#https%3A%2F%2Fmochajs.org%2F" aria-hidden="true">🔗</a></h3>
+<p>Mocha is a feature-rich JavaScript test framework running on Node.js and in the browser,</p>
+<h4 id="https%3A%2F%2Fwww.chaijs.com%2F" tabindex="-1"><a href="https://www.chaijs.com/">https://www.chaijs.com/</a> <a class="header-anchor" href="#https%3A%2F%2Fwww.chaijs.com%2F" aria-hidden="true">🔗</a></h4>
+<p>Chai is a BDD / TDD assertion library for node</p>
+</body></html>

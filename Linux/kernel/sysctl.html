@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.047" />
+        <title>sysctl</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="sysctl" tabindex="-1">sysctl <a class="header-anchor" href="#sysctl" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.047</p>
+<nav class="table-of-contents"><ol><li><a href="#sysctl-in-arch%2Fmanjaro">sysctl in Arch/Manjaro </a></li><li><a href="#systemd-analyze">systemd-analyze </a></li><li><a href="#sysrq">sysrq </a></li><li><a href="#incrementare-il-numero-di-file-controllabili-da-inotify">Incrementare il numero di file controllabili da inotify </a></li><li><a href="#diminuire-lo-swappiness">Diminuire lo swappiness </a></li><li><a href="#aumentare-il-numero-di-file-descriptor-disponibili">Aumentare il numero di file descriptor disponibili </a><ol><li><a href="#forwarding">Forwarding </a></li></ol></li></ol></nav><h1 id="sysctl-1" tabindex="-1">sysctl <a class="header-anchor" href="#sysctl-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/sysctl">https://wiki.archlinux.org/title/sysctl</a></li>
+<li><a href="http://0pointer.de/blog/projects/the-new-configuration-files">http://0pointer.de/blog/projects/the-new-configuration-files</a></li>
+</ul>
+<pre><code class="language-bash">$ man sysctl
+$ man sysctl.d
+$ man sysctl.conf
+
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/sysctl.d/99-sysctl.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+vm.max_map_count=262144
+EOF
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/60-sysrq.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+kernel.sysrq = 1
+EOF
+
+</code></pre>
+<h2 id="sysctl-in-arch%2Fmanjaro" tabindex="-1">sysctl in Arch/Manjaro <a class="header-anchor" href="#sysctl-in-arch%2Fmanjaro" aria-hidden="true">🔗</a></h2>
+<p>In Manjaro non si utilizza più il file <code>/etc/sysctl.conf</code>.</p>
+<p><code>/etc/sysctl.conf</code> ==&gt;  <strong><code>/etc/sysctl.d/99-sysctl.conf</code></strong></p>
+<p><code>sysctl</code> è un tool che serve ad esaminare ed impostare i parametri del kernel a runtime, è implementato in <code>procfs</code> per mezzo del file system virtuale <code>/proc/</code></p>
+<p>Ordine di esecuzione dei file di configurazione sysctl:</p>
+<pre><code class="language-bash">$ man sysctl.d
+    /etc/sysctl.d/*.conf
+    /run/sysctl.d/*.conf
+    /usr/lib/sysctl.d/*.conf
+</code></pre>
+<p>Files in <code>/etc/</code> are reserved for the local administrator, who may use this logic to override the configuration files installed by vendor packages. It is recommended to <strong>prefix all filenames with a two-digit number and a dash</strong>, to simplify the ordering of the files.<br>
+Files in <code>/etc/</code> override files with the same name in <code>/run/</code>, <code>/usr/local/lib/</code>, and <code>/usr/lib/</code>.<br>
+All configuration files are sorted by their filename in <strong>lexicographic order</strong>, regardless of which of the directories they reside in.<br>
+If multiple files specify the same option, <strong>the entry in the file with the lexicographically latest name will take precedence</strong>.<br>
+Thus, the configuration in a certain file may either be replaced completely (by placing a file with the same name in a directory with higher priority), or individual settings might be changed (by specifying additional settings in a file with a different name that is ordered later).</p>
+<ul>
+<li>systemd carica le impostazioni da <code>/etc/sysctl.d/*.conf</code> e <code>/usr/lib/sysctl.d/*.conf</code> con precedenza su <code>/etc</code> per file omonimi</li>
+<li>i file vengono eseguiti in ordine lessicografico di nome, il nome deve terminare in <code>.conf</code> ed iniziare con due cifre per fornire l'ordine di esecuzione</li>
+<li>se un parametro è presente in piu files vince il file eseguito per ultimo(esecuzione in ordine lessicografico).</li>
+<li>se due file hanno lo stesso nome vince quello in <code>/etc/sysctl.d</code> considerata directory a disposizione degli amministratori che vogliono effettuare override sulle configurazioni sysctl salvate in <code>/usr/lib/sysctl.d</code> dalle installazioni dei pacchetti. Per esempio parametri omonimi contenuti in <code>/usr/lib/sysctl.d/50-default.conf</code> saranno sovrascritti dagli omonimi in <code>/etc/sysctl.d/50-default.conf</code></li>
+</ul>
+<p>From version 207 and 21x, <strong>systemd</strong> only applies settings from <code>/etc/sysctl.d/*.conf</code> and <code>/usr/lib/sysctl.d/*.conf</code>.<br>
+If you had customized <code>/etc/sysctl.conf</code>, <br>
+you need to rename it as <strong><code>/etc/sysctl.d/99-sysctl.conf</code></strong>.<br>
+If you had e.g. <code>/etc/sysctl.d/foo</code>, you need to rename it to <code>/etc/sysctl.d/foo.conf</code>.
+The sysctl preload/configuration file can be created at <code>/etc/sysctl.d/99-sysctl.conf</code>.</p>
+<ul>
+<li><a href="https://linuxtect.com/ip-route-add-add-route-in-linux/">https://linuxtect.com/ip-route-add-add-route-in-linux/</a></li>
+</ul>
+<h2 id="systemd-analyze" tabindex="-1">systemd-analyze <a class="header-anchor" href="#systemd-analyze" aria-hidden="true">🔗</a></h2>
+<p>Permette di vedere in quale file di configurazione un parametro è stato definito</p>
+<pre><code class="language-bash">$ systemd-analyze cat-config sysctl.d
+$ systemd-analyze cat-config sysctl.d | grep net.ipv4.ip_forward
+$ systemd-analyze cat-config sysctl.d | grep fs.inotify.max_user_watches
+</code></pre>
+<h2 id="sysrq" tabindex="-1">sysrq <a class="header-anchor" href="#sysrq" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="../processi/shutdown.html">SYSRQ</a></li>
+</ul>
+<p>I comandi:</p>
+<p><code>sysctl kernel.sysrq=1</code> o <code>echo &quot;1&quot; &gt; /proc/sys/kernel/sysrq</code></p>
+<p>non cambiano in maniera persistente l'impostazione del parametro, sono temporanei ed al reboot vengono perduti.</p>
+<pre><code class="language-bash">$ locate sysctl.d
+$ <span class="hljs-built_in">cd</span> /usr/lib/sysctl.d/
+$ grep sysrq /usr/lib/sysctl.d/*
+/usr/lib/sysctl.d/50-default.conf:# Use kernel.sysrq = 1 to allow all keys.
+/usr/lib/sysctl.d/50-default.conf:# See https://www.kernel.org/doc/html/latest/admin-guide/sysrq.html <span class="hljs-keyword">for</span> a list
+/usr/lib/sysctl.d/50-default.conf:kernel.sysrq = 16
+$ systemd-analyze cat-config sysctl.d --no-pager <span class="hljs-comment"># per vedere la configurazione attuale</span>
+$ <span class="hljs-built_in">sudo</span> sysctl --all| grep rq
+kernel.sysrq = 16
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/60-sysrq.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+kernel.sysrq = 1
+EOF
+
+$ sysctl --system <span class="hljs-comment"># carica tutti i file di configurazione</span>
+$ sysctl --all    <span class="hljs-comment"># visualizza tutti i parametri attuali in /proc/sys/kernel</span>
+$ <span class="hljs-built_in">sudo</span> sysctl --all| grep rq
+</code></pre>
+<h2 id="incrementare-il-numero-di-file-controllabili-da-inotify" tabindex="-1">Incrementare il numero di file controllabili da inotify <a class="header-anchor" href="#incrementare-il-numero-di-file-controllabili-da-inotify" aria-hidden="true">🔗</a></h2>
+<p>Utile ad esempio per <strong>PyCharm</strong> ed AndroidStudio</p>
+<ul>
+<li><a href="https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit">https://youtrack.jetbrains.com/articles/IDEA-A-2/Inotify-Watches-Limit</a></li>
+</ul>
+<pre><code class="language-bash">$ systemd-analyze cat-config sysctl.d | grep fs.inotify.max_user_watches
+    /usr/lib/sysctl.d/10-manjaro.conf
+$ man sysctl
+$ man sysctl.d
+
+$ sysctl -n fs.inotify.max_user_watches
+$ <span class="hljs-built_in">sudo</span> sysctl -a|grep fs.inotify.max_user_watches
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/70-max_user_watches.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+fs.inotify.max_user_watches = 524288
+EOF
+<span class="hljs-built_in">sudo</span> sysctl -p --system <span class="hljs-comment"># ricaricare la configurazione</span>
+</code></pre>
+<h2 id="diminuire-lo-swappiness" tabindex="-1">Diminuire lo swappiness <a class="header-anchor" href="#diminuire-lo-swappiness" aria-hidden="true">🔗</a></h2>
+<p>I valori più vicini allo zero usano più RAM prima di passare allo swap.</p>
+<p>Aggiungere <code>vm.swappiness=10</code> alla fine del file <code>/etc/sysctl.d/99-sysctl.conf</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/sysctl.d/99-sysctl.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+vm.swappiness=10
+EOF
+
+$ <span class="hljs-built_in">sudo</span> sysctl vm.swappiness=10; <span class="hljs-built_in">cat</span> /proc/sys/vm/swappiness
+$ <span class="hljs-built_in">sudo</span> sysctl --system
+$ <span class="hljs-built_in">sudo</span> sysctl -a
+</code></pre>
+<h2 id="aumentare-il-numero-di-file-descriptor-disponibili" tabindex="-1">Aumentare il numero di file descriptor disponibili <a class="header-anchor" href="#aumentare-il-numero-di-file-descriptor-disponibili" aria-hidden="true">🔗</a></h2>
+<p>for increasing the limit on Red Hat 5.X systems:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> sysctl -a --pattern ^fs.
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/sysctl.d/99-sysctl.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+fs.file-max=70000
+EOF
+
+
+$ <span class="hljs-comment"># echo “fs.file-max=70000″ &gt;&gt; /etc/sysctl.d/99-sysctl.conf</span>
+sysctl -p
+$ <span class="hljs-built_in">echo</span> “* hard nofile 65536″ &gt;&gt; /etc/security/limits.conf
+$ <span class="hljs-built_in">echo</span> “session required pam_limits.so” &gt;&gt; /etc/pam.d/login
+$ <span class="hljs-built_in">ulimit</span> -n -H
+65536
+</code></pre>
+<h3 id="forwarding" tabindex="-1">Forwarding <a class="header-anchor" href="#forwarding" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ ip route show
+$ sysctl net.ipv4.ip_forward
+$ sysctl net.ipv4.ip_forward <span class="hljs-comment"># sysctl -a --pattern ip_forward</span>
+$ systemd-analyze cat-config sysctl.d | grep net.ipv4.ip_forward
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/61-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+
+$ <span class="hljs-built_in">sudo</span> iptables -t nat -A POSTROUTING -s 192.168.0.0/24 -d 0.0.0.0/0 -j MASQUERADE
+</code></pre>
+</body></html>

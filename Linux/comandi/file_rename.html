@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.168" />
+        <title>file_rename</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="file_rename" tabindex="-1">file_rename <a class="header-anchor" href="#file_rename" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.168</p>
+<nav class="table-of-contents"><ol><li><a href="#rename-di-files">Rename di files </a></li><li><a href="#rinominare-un-immagine-aggiungendovi-in-coda-le-sue-dimensioni">Rinominare un immagine aggiungendovi in coda le sue dimensioni </a></li><li><a href="#trasformazione-in-minuscolo-in-bash">trasformazione in minuscolo in Bash </a></li><li><a href="#convert-uppercase-file%2Fdir-names-in-current-directory-to-lowercase">convert uppercase file/dir names in current directory to lowercase </a></li><li><a href="#comando-rename-realizzato-in-perl">Comando rename realizzato in perl </a><ol><li><a href="#esempio">Esempio </a></li></ol></li><li><a href="#nautilus-action">Nautilus Action </a><ol><li><a href="#nautilus-mass-rename">Nautilus mass rename </a></li></ol></li></ol></nav><h1 id="rename" tabindex="-1">rename <a class="header-anchor" href="#rename" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="http://www.krename.net/">http://www.krename.net/</a></li>
+<li><a href="http://mp3rename.sourceforge.net/">http://mp3rename.sourceforge.net/</a></li>
+</ul>
+<h2 id="rename-di-files" tabindex="-1">Rename di files <a class="header-anchor" href="#rename-di-files" aria-hidden="true">🔗</a></h2>
+<p>Con sed e backreferences:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Vogliamo eliminare il secondo carattere dai nomi dei files</span>
+<span class="hljs-comment"># To test:</span>
+$ <span class="hljs-built_in">ls</span> F00001-0708-*|sed <span class="hljs-string">&#x27;s/\(.\).\(.*\)/mv &amp; \1\2/&#x27;</span>
+<span class="hljs-comment"># To perform:</span>
+$ <span class="hljs-built_in">ls</span> F00001-0708-*|sed <span class="hljs-string">&#x27;s/\(.\).\(.*\)/mv &amp; \1\2/&#x27;</span> | sh
+
+<span class="hljs-comment"># &amp; is special in the replacement text: it means &quot;the whole part of the input that was matched by the pattern&quot;</span>
+
+<span class="hljs-built_in">ls</span> yt* | sed -r <span class="hljs-string">&#x27;s/.*\- (.*)_320kbps(.mp3)/mv &quot;&amp;&quot; &quot;\1\2&quot;/&#x27;</span>      <span class="hljs-comment"># Test</span>
+<span class="hljs-built_in">ls</span> yt* | sed -r <span class="hljs-string">&#x27;s/.*\- (.*)_320kbps(.mp3)/mv &quot;&amp;&quot; &quot;\1\2&quot;/&#x27;</span>|sh   <span class="hljs-comment"># Esecuzione</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">mv</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;`echo <span class="hljs-variable">$i</span> | sed &quot;</span>s/regex/replace_text/<span class="hljs-string">&quot;`&quot;</span>;
+<span class="hljs-keyword">done</span>
+</code></pre>
+<p>If the regex contains groups (e.g. <code>\(</code>subregex<code>\)</code> then you can use them in the replacement text as <code>\1</code>, <code>\2</code> etc.</p>
+<p>Rinominare un insieme di file <code>*.svgz.svg</code> in <code>*.svg</code>:</p>
+<pre><code class="language-bash">find . -name <span class="hljs-string">&quot;*.svgz.svg&quot;</span>|awk <span class="hljs-string">&#x27;{print &quot;mv &quot; $0 &quot; &quot; gensub(&quot;.svgz&quot;,&quot;&quot;,&quot;g&quot;)}&#x27;</span> &gt; dorename.sh
+</code></pre>
+<p>Rinomina i files HTML in base al loro tag <code>&lt;title&gt;</code>:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.html;<span class="hljs-keyword">do</span> j=$(sed -n <span class="hljs-string">&#x27;s/\s*&lt;title&gt;\(.*\)&lt;\/title&gt;/\1/p&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>).html;[[ <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span> != <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> ]] &amp;&amp; <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;mv \&quot;%s\&quot; \&quot;%s\&quot;\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span>;<span class="hljs-keyword">done</span> &gt; rename.sh
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.html;<span class="hljs-keyword">do</span> j=$(sed -n <span class="hljs-string">&#x27;s/\s*&lt;title&gt;\(.*\)&lt;\/title&gt;/\1/p&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>).html;[[ <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span> != <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> ]] &amp;&amp; <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;mv \&quot;%s\&quot; \&quot;%s\&quot;\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span>;<span class="hljs-keyword">done</span> | sh
+</code></pre>
+<p>To change extensions from <code>.abc</code> to <code>.123</code>, use one of the following:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.abc; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${i/\.abc/.123}</span>&quot;</span>; <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.abc; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-variable">$i</span> `<span class="hljs-built_in">echo</span> <span class="hljs-variable">$i</span>|sed <span class="hljs-string">&#x27;s/\.abc$/.123$/&#x27;</span>`; <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-variable">$i</span> `<span class="hljs-built_in">basename</span> <span class="hljs-variable">$i</span> .abc`.123; <span class="hljs-keyword">done</span> <span class="hljs-comment"># ©2007 dsplabs.com.au</span>
+</code></pre>
+<p>The following bash one-liners convert filenames to lowercase:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> `find *`; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> <span class="hljs-string">&quot;`echo &quot;</span><span class="hljs-variable">$f</span><span class="hljs-string">&quot; | tr A-Z a-z`&quot;</span>; <span class="hljs-keyword">done</span>
+<span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> `find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*[A-Z]*&quot;</span>`; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> <span class="hljs-string">&quot;`echo &quot;</span><span class="hljs-variable">$f</span><span class="hljs-string">&quot; | tr A-Z a-z`&quot;</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="rinominare-un-immagine-aggiungendovi-in-coda-le-sue-dimensioni" tabindex="-1">Rinominare un immagine aggiungendovi in coda le sue dimensioni <a class="header-anchor" href="#rinominare-un-immagine-aggiungendovi-in-coda-le-sue-dimensioni" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># cdp/bin/image_rename</span>
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.{jpg,png,gif}; <span class="hljs-keyword">do</span> 
+<span class="hljs-keyword">if</span> [ -f <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+    <span class="hljs-keyword">if</span> identify <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> &amp;&gt;/dev/null;<span class="hljs-keyword">then</span> 
+        <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;mv \&quot;%s\&quot; \&quot;%s\&quot;\n&quot;</span>  <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(identify -format <span class="hljs-string">&quot;%t_%wx%h.%e&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>)</span>&quot;</span>
+    <span class="hljs-keyword">else</span> 
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Not a valid image file: \&quot;<span class="hljs-variable">$i</span>\&quot;&quot;</span>&gt;&amp;2
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">else</span> 
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Not Found Any File: \&quot;<span class="hljs-variable">$i</span>\&quot;&quot;</span>&gt;&amp;2
+<span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span> &gt; renamescript.sh
+</code></pre>
+<h2 id="trasformazione-in-minuscolo-in-bash" tabindex="-1">trasformazione in minuscolo in Bash <a class="header-anchor" href="#trasformazione-in-minuscolo-in-bash" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">man bash <span class="hljs-comment"># - Parameter Expansion</span>
+<span class="hljs-comment"># ${parameter,,pattern}</span>
+<span class="hljs-comment">#              Case modification.</span>
+<span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> * ; <span class="hljs-keyword">do</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${i,,}</span>&quot;</span>; <span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="convert-uppercase-file%2Fdir-names-in-current-directory-to-lowercase" tabindex="-1">convert uppercase file/dir names in current directory to lowercase <a class="header-anchor" href="#convert-uppercase-file%2Fdir-names-in-current-directory-to-lowercase" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> ./*[[:upper:]]*; <span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${i,,}</span>&quot;</span>;<span class="hljs-keyword">done</span>
+</code></pre>
+<p>You can write a function for it. Default is set to the command above, and by applying <code>-u</code> it do the opposite.</p>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">chcase</span></span>() { [[ <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> = <span class="hljs-string">&#x27;-u&#x27;</span> ]] &amp;&amp; <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> ./*[[:lower:]]*;<span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${i^^}</span>&quot;</span>;<span class="hljs-keyword">done</span> || <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> ./*[[:upper:]]*;<span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> -- <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${i,,}</span>&quot;</span>;<span class="hljs-keyword">done</span> }
+</code></pre>
+<h2 id="comando-rename-realizzato-in-perl" tabindex="-1">Comando <code>rename</code> realizzato in perl <a class="header-anchor" href="#comando-rename-realizzato-in-perl" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ rename <span class="hljs-string">&#x27;y/A-Z/a-z/&#x27;</span> *
+<span class="hljs-comment"># Equivale a</span>
+$ <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> *;<span class="hljs-keyword">do</span> <span class="hljs-built_in">mv</span> <span class="hljs-string">&quot;<span class="hljs-variable">$x</span>&quot;</span> <span class="hljs-string">&quot;`echo <span class="hljs-variable">$x</span>|tr [A-Z] [a-z]`&quot;</span>;<span class="hljs-keyword">done</span>
+</code></pre>
+<p>Prima si fa un test utilizzando l'opzione <code>-n</code>:</p>
+<pre><code class="language-bash">rename -n <span class="hljs-string">&#x27;s/\.svgz//&#x27;</span> *.svg
+</code></pre>
+<p>Poi si esegue il rename effettivo(eliminazione di .svgz dal nome di ogni file):</p>
+<pre><code class="language-bash">rename <span class="hljs-string">&#x27;s/\.svgz//&#x27;</span> *.svg
+</code></pre>
+<p><strong>Conta il numero dei caratteri di tutti i file .risql presenti a partire dalla directory corrente</strong></p>
+<pre><code class="language-bash">find . -name <span class="hljs-string">&quot;*.risql&quot;</span> | xargs <span class="hljs-built_in">wc</span> -m | awk <span class="hljs-string">&#x27;{cars+=$1} END {print cars}&#x27;</span>
+</code></pre>
+<pre><code>rename [ -v ] [ -n ] [ -f ] perlexpr [ files ]
+
+E' un tool Perl
+-v means &quot;verbose&quot; and it will output the names of the files when it renames them.
+It is a good idea to use this feature so you can keep track of what is being renamed.
+It is also a good idea to do a test run with -n which will do a test run where it won't rename any files, but will show you a list of files that would be renamed.
+The &quot;perlexpr&quot; part of the command is a Perl expression.
+Here is an example of the rename command:
+</code></pre>
+<pre><code class="language-bash">rename -n <span class="hljs-string">&quot;s/\.htm$/\.html/&quot;</span> *.htm
+</code></pre>
+<p>The <code>-n</code> means that it's a test run and will not actually change any files. It will show you a list of files that would be renamed if you removed the -n. In the case above, it will convert all files in the current directory from a file extension of .htm to .html.</p>
+<p>If the output of the above test run looked ok then you could run the final version:</p>
+<pre><code class="language-bash">rename -v <span class="hljs-string">&quot;s/\.htm$/\.html/&quot;</span> *.htm
+</code></pre>
+<p>The <code>-v</code> is optional, but it's a good idea to include it because it is the only record you will have of changes that were made by the rename command as shown in the sample output below:</p>
+<pre><code class="language-bash">$ rename -v <span class="hljs-string">&#x27;s/\.htm$/\.html/&#x27;</span> *.htm
+3.htm renamed as 3.html
+4.htm renamed as 4.html
+5.htm renamed as 5.html
+</code></pre>
+<p>Basically the <code>s</code> means substitute. The syntax is <code>s/old/new/</code> substitute the old with the new.</p>
+<p>A <code>.</code> (period) has a special meaning in a regular expression it means &quot;match any character&quot;.
+We don't want to match any character in the example above. It should match only a period. The backslash is a way to &quot;escape&quot; the regular expression meaning of &quot;any character&quot; and just read it as a normal period.</p>
+<p>The <code>$</code> means the end of the string. <code>\.htm$</code> means that it will match .htm but not .html.</p>
+<p>It's fairly basic substitute .htm with .html:</p>
+<p><code>'s/\.htm$/\.html/'</code></p>
+<p>The last part of the command, highlighted below, means to apply the rename command to every file that ends with .htm (the * is a wildcard).</p>
+<pre><code class="language-bash">rename -v ?s/\.htm$/\.html/? *.htm
+rename -v <span class="hljs-string">&#x27;s/\.JPG$/\.jpg/&#x27;</span> *.JPG
+</code></pre>
+<p>Here is the output of the above command:</p>
+<pre><code class="language-bash">$ rename -v <span class="hljs-string">&#x27;s/\.JPG$/\.jpg/&#x27;</span> *.JPG
+00001111.JPG renamed as 00001111.jpg
+00001112.JPG renamed as 00001112.jpg
+00001113.JPG renamed as 00001113.jpg
+</code></pre>
+<h3 id="esempio" tabindex="-1">Esempio <a class="header-anchor" href="#esempio" aria-hidden="true">🔗</a></h3>
+<p>Tip: Before trying more complicated renaming like in the example below,
+do a test run with the -n option as described at the beginning of this tutorial.</p>
+<pre><code class="language-bash">rename -v <span class="hljs-string">&#x27;s/(\d{8})\.JPG$/BeachPics_$1\.jpg/&#x27;</span> *.JPG
+</code></pre>
+<p>That will change filenames that have the pattern <code>########.JPG</code> (8 numbers and capital .JPG) to something like <code>BeachPics_########.jpg</code> (the same 8 numbers and changing the extension to lowercase .jpg).
+Here is a test run with the <code>-n</code> option:</p>
+<pre><code class="language-bash">$ rename -n <span class="hljs-string">&#x27;s/(\d{8})\.JPG$/BeachPics_$1\.jpg/&#x27;</span> *.JPG
+00001111.JPG renamed as BeachPics_00001111.jpg
+00001112.JPG renamed as BeachPics_00001112.jpg
+00001113.JPG renamed as BeachPics_00001113.jpg
+</code></pre>
+<p>Here's a quick breakdown of the Perl substitution with the regular expression above.</p>
+<p>The highlighted section below means to count 8 digits.<br>
+The parentheses mean to save those 8 digits for later<br>
+because they are going to be used again in the second half of the substitution:</p>
+<pre><code class="language-bash"><span class="hljs-string">&#x27;s/(\d{8})\.JPG$/BeachPics_$1\.jpg/&#x27;</span>
+</code></pre>
+<p>In the highlighted section below, it adds the string BeachPics, and underscore,<br>
+and then the text in parentheses from the first half of the substitution.<br>
+<code>$1</code> will insert the string from the first set of parentheses that it finds in this case the 8 digits.<br>
+If you have more than one set of parentheses you can access the second set with the Perl variable <code>$2</code> and so on.</p>
+<pre><code class="language-bash"><span class="hljs-string">&#x27;s/(\d{8})\.JPG$/BeachPics_$1\.jpg/&#x27;</span>
+</code></pre>
+<p>The following variation would make even cleaner-looking filenames. See if you can figure out how it works:</p>
+<pre><code class="language-bash">$ rename -n <span class="hljs-string">&#x27;s/\d{5}(\d{3})\.JPG$/BeachPics_$1\.jpg/&#x27;</span> *.JPG
+00000123.JPG renamed as BeachPics_123.jpg
+00000124.JPG renamed as BeachPics_124.jpg
+00000125.JPG renamed as BeachPics_125.jpg
+</code></pre>
+<h2 id="nautilus-action" tabindex="-1">Nautilus Action <a class="header-anchor" href="#nautilus-action" aria-hidden="true">🔗</a></h2>
+<p>Icon:</p>
+<pre><code>/usr/share/icons/hicolor/64x64/apps/gwenrename.png
+</code></pre>
+<p>Path:</p>
+<pre><code>gwenrename
+</code></pre>
+<p>Parameters:</p>
+<pre><code>%M
+</code></pre>
+<p>Creare un script che rinomina un insieme di file:</p>
+<pre><code class="language-bash">    find . -<span class="hljs-built_in">type</span> f | sed <span class="hljs-string">&#x27;s#./##g&#x27;</span> | awk -F\- <span class="hljs-string">&#x27;{ print &quot;mv &quot;$0&quot; &quot;$2&quot;-&quot;$3&quot;-&quot;$1&quot;.txt&quot;}&#x27;</span> &gt; filedicomandi.sh
+</code></pre>
+<h3 id="nautilus-mass-rename" tabindex="-1">Nautilus mass rename <a class="header-anchor" href="#nautilus-mass-rename" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># Nautilus script for mass file renaming</span>
+<span class="hljs-comment"># copiare in ~/.gnome2/nautilus-scripts</span>
+<span class="hljs-comment"># chmod +x ~/.gnome2/nautilus-scripts/rename</span>
+<span class="hljs-built_in">set</span> -e
+
+TITLE=`<span class="hljs-built_in">basename</span> <span class="hljs-string">&quot;<span class="hljs-variable">$0</span>&quot;</span>`
+
+<span class="hljs-comment"># Path to perl&#x27;s rename</span>
+RENAME=/usr/bin/rename
+
+
+<span class="hljs-function"><span class="hljs-title">rename_all</span></span>() {
+IFS=$<span class="hljs-string">&#x27;\n&#x27;</span>
+<span class="hljs-keyword">for</span> FILE <span class="hljs-keyword">in</span> <span class="hljs-variable">$NAUTILUS_SCRIPT_SELECTED_FILE_PATHS</span>
+<span class="hljs-keyword">do</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-string">&quot;`dirname &quot;</span><span class="hljs-variable">$FILE</span><span class="hljs-string">&quot;`&quot;</span>
+<span class="hljs-string">&quot;<span class="hljs-variable">$RENAME</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$EXPR</span>&quot;</span> -- <span class="hljs-string">&quot;`basename &quot;</span><span class="hljs-variable">$FILE</span><span class="hljs-string">&quot;`&quot;</span>
+<span class="hljs-keyword">done</span>
+}
+
+
+EXPR=<span class="hljs-string">&quot;s///&quot;</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>
+<span class="hljs-keyword">do</span>
+EXPR=`zenity --title <span class="hljs-string">&quot;<span class="hljs-variable">$TITLE</span> - expression&quot;</span> --entry --text <span class="hljs-string">&quot;Specify the Perl expression for modifying the filenames.&quot;</span> --entry-text <span class="hljs-string">&quot;<span class="hljs-variable">$EXPR</span>&quot;</span>` || <span class="hljs-built_in">exit</span>
+
+rename_all -n | sed -e <span class="hljs-string">&#x27;s/^\(.*\) renamed as \(.*\)$/\2\n\1/&#x27;</span> | zenity --list --width 800 --height 600 --title <span class="hljs-string">&quot;<span class="hljs-variable">$TITLE</span> - Preview&quot;</span> --text <span class="hljs-string">&quot;&quot;</span> --column <span class="hljs-string">&quot;New name&quot;</span> --column <span class="hljs-string">&quot;Old name&quot;</span> &amp;&amp; <span class="hljs-built_in">break</span>
+<span class="hljs-keyword">done</span>
+
+rename_all
+</code></pre>
+</body></html>

@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.937" />
+        <title>git_esempio_utilizzo</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="git_esempio_utilizzo" tabindex="-1">git_esempio_utilizzo <a class="header-anchor" href="#git_esempio_utilizzo" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.937</p>
+<nav class="table-of-contents"><ol><li><a href="#configurazione-client-git-in-windows">Configurazione client GIT in Windows </a></li><li><a href="#download-iniziale-repository-git-in-locale">Download iniziale Repository Git in Locale </a></li><li><a href="#analisi-preliminare-dello-stato-dei-branch">Analisi preliminare dello stato dei branch </a></li><li><a href="#merge-del-ramo-1.2-sul-master-in-locale-ed-invio-al-server-gitlab">Merge del ramo 1.2 sul master in locale ed invio al server GitLab </a></li><li><a href="#creazione-nuovo-branch-1.3-in-locale-e-suo-collegamento-al-server-gitlab">Creazione nuovo branch 1.3 in locale e suo collegamento al server GitLab </a></li><li><a href="#modifica-dei-files-in-locale">Modifica dei files in locale </a></li><li><a href="#applicare-un-tag-in-locale">Applicare un tag in Locale </a></li><li><a href="#verificare-la-differenza-tra-il-branch-remoto-e-quello-locale">Verificare la differenza tra il branch remoto e quello locale </a></li><li><a href="#push-dei-files-e-dei-tag">Push dei files e dei tag </a></li><li><a href="#ripristino-dei-file-dal-server">Ripristino dei file dal server </a></li><li><a href="#esempio-aggiornamento">Esempio Aggiornamento </a></li><li><a href="#esempio-aggiornamento-2">Esempio Aggiornamento 2 </a></li></ol></nav><h1 id="sviluppo-con-git" tabindex="-1">Sviluppo con GIT <a class="header-anchor" href="#sviluppo-con-git" aria-hidden="true">🔗</a></h1>
+<h2 id="configurazione-client-git-in-windows" tabindex="-1">Configurazione client GIT in Windows <a class="header-anchor" href="#configurazione-client-git-in-windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">type</span> %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">gitconfig</span>
+    [<span class="hljs-title">user</span>]
+        <span class="hljs-title">name</span> = &lt;<span class="hljs-title">userid</span>&gt;
+        <span class="hljs-title">email</span> = <span class="hljs-title">nome.cognome</span>@<span class="hljs-title">miamail.it</span>
+    [<span class="hljs-title">core</span>]
+        <span class="hljs-title">editor</span> = &#x27;<span class="hljs-title">C</span>:/<span class="hljs-title">Program</span> <span class="hljs-title">Files</span>/<span class="hljs-title">Notepad</span>++/<span class="hljs-title">notepad</span>++.<span class="hljs-title">exe</span>&#x27; -<span class="hljs-title">multiInst</span> -<span class="hljs-title">notabbar</span> -<span class="hljs-title">nosession</span> -<span class="hljs-title">noPlugin</span>
+</span></code></pre>
+<pre><code class="language-bat"><span class="hljs-comment">rem generiamo le chiavi ssh se già non presenti:</span>
+<span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span>-<span class="hljs-title">keygen</span> -<span class="hljs-title">t</span> <span class="hljs-title">rsa</span> -<span class="hljs-title">b</span> 4096 -<span class="hljs-title">C</span> &quot;<span class="hljs-title">nome.cognome</span>@<span class="hljs-title">miamail.it</span>&quot;
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">cd</span> /<span class="hljs-title">d</span> %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">copiamo</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">pubblica</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">clip</span> &lt; %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>\<span class="hljs-title">id_rsa.pub</span> 
+<span class="hljs-title">rem</span> <span class="hljs-title">apriamo</span> <span class="hljs-title">la</span> <span class="hljs-title">pagina</span> <span class="hljs-title">git</span> <span class="hljs-title">ed</span> <span class="hljs-title">inseriamo</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">pubblica</span> <span class="hljs-title">presente</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">start</span> <span class="hljs-title">https</span>://<span class="hljs-title">github.com</span>/<span class="hljs-title">settings</span>/<span class="hljs-title">keys</span>
+<span class="hljs-title">In</span> <span class="hljs-title">github</span>, <span class="hljs-title">dall</span>&#x27;<span class="hljs-title">account</span> <span class="hljs-title">andare</span> <span class="hljs-title">in</span> `<span class="hljs-title">Profile</span>/<span class="hljs-title">Settings</span>/<span class="hljs-title">SSH</span> <span class="hljs-title">and</span> <span class="hljs-title">GPG</span> <span class="hljs-title">keys</span>` <span class="hljs-title">ed</span> <span class="hljs-title">aggiungere</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">SSH</span> <span class="hljs-title">presente</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">Add</span> <span class="hljs-title">an</span> <span class="hljs-title">SSH</span> <span class="hljs-title">key</span> ... <span class="hljs-title">e</span> <span class="hljs-title">poi</span> <span class="hljs-title">CTRL</span>+<span class="hljs-title">V</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">testiamo</span> <span class="hljs-title">la</span> <span class="hljs-title">connessione</span> <span class="hljs-title">SSH</span> <span class="hljs-title">a</span> <span class="hljs-title">gitlab</span> <span class="hljs-title">da</span> <span class="hljs-title">riga</span> <span class="hljs-title">di</span> <span class="hljs-title">comando</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">T</span> <span class="hljs-title">git</span>@<span class="hljs-title">github.com</span>
+</span></code></pre>
+<h2 id="download-iniziale-repository-git-in-locale" tabindex="-1">Download iniziale Repository Git in Locale <a class="header-anchor" href="#download-iniziale-repository-git-in-locale" aria-hidden="true">🔗</a></h2>
+<p>Per lavorare con git in Windows <strong>cloniamo il repository nella root del file system in modo da avere path dei file piu brevi</strong>.
+Se si clona il repository git in una sottodirectory nel profilo utente, si può rendere git non funzionante
+a causa della limitazione sulla lunghezza dei path di windows.</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">cd</span> /<span class="hljs-title">d</span> <span class="hljs-title">D</span>:
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">clone</span> --<span class="hljs-title">recurse</span>-<span class="hljs-title">submodules</span> <span class="hljs-title">git</span>@<span class="hljs-title">github.com:cdipiet</span>/<span class="hljs-title">Sito.git</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">cd</span> <span class="hljs-title">git</span>\<span class="hljs-title">sito</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">rem</span> <span class="hljs-title">git</span> <span class="hljs-title">submodule</span> <span class="hljs-title">update</span> --<span class="hljs-title">init</span> --<span class="hljs-title">recursive</span>
+</span></code></pre>
+<h2 id="analisi-preliminare-dello-stato-dei-branch" tabindex="-1">Analisi preliminare dello stato dei branch <a class="header-anchor" href="#analisi-preliminare-dello-stato-dei-branch" aria-hidden="true">🔗</a></h2>
+<p>Vediamo quando è stato eseguito l'ultimo commit:</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">vv</span> <span class="hljs-title">rem</span> <span class="hljs-title">mostra</span> <span class="hljs-title">i</span> <span class="hljs-title">branch</span> <span class="hljs-title">esistenti</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">rev</span>-<span class="hljs-title">parse</span> --<span class="hljs-title">abbrev</span>-<span class="hljs-title">ref</span> <span class="hljs-title">HEAD</span> <span class="hljs-title">rem</span> <span class="hljs-title">mostra</span> <span class="hljs-title">il</span> <span class="hljs-title">branch</span> <span class="hljs-title">corrente</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">pretty</span>=&quot;%<span class="hljs-title">h</span> %<span class="hljs-title">cd</span> %<span class="hljs-title">s</span> %<span class="hljs-title">cn</span> %<span class="hljs-title">d</span>&quot; --<span class="hljs-title">graph</span> --<span class="hljs-title">date</span>=<span class="hljs-title">format</span>:&quot;%<span class="hljs-title">Y</span>-%<span class="hljs-title">m</span>-%<span class="hljs-title">d</span> %<span class="hljs-title">H</span>:%<span class="hljs-title">M</span>:%<span class="hljs-title">S</span>&quot; -5
+</span></code></pre>
+<p>Compariamo il branch master remoto con il branch 1.2 sempre remote sul quale è stato eseguito l'ultimo commit:</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">r</span> <span class="hljs-title">rem</span> <span class="hljs-title">mostra</span> <span class="hljs-title">i</span> <span class="hljs-title">branch</span> <span class="hljs-title">remoti</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">diff</span> <span class="hljs-title">origin</span>/<span class="hljs-title">main</span>..<span class="hljs-title">origin</span>/1.2
+</span></code></pre>
+<p>Per vedere la differenza tra i due branch in termini di commit:</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> <span class="hljs-title">origin</span>/<span class="hljs-title">main</span>..<span class="hljs-title">origin</span>/1.2
+
+    <span class="hljs-title">commit</span> 0<span class="hljs-title">xxxxxxxxxxxxxxzzzzzzzzzzz</span> (<span class="hljs-title">tag</span>: 1.2.13, <span class="hljs-title">origin</span>/1.2)
+    <span class="hljs-title">FIRST</span> <span class="hljs-title">member</span>, <span class="hljs-title">fix</span>
+
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">diff</span> <span class="hljs-title">origin</span>/<span class="hljs-title">main</span>..<span class="hljs-title">origin</span>/1.2 -- <span class="hljs-title">sito</span>-<span class="hljs-title">ui</span>/<span class="hljs-title">nunjucks</span>/<span class="hljs-title">templates</span>/<span class="hljs-title">partials</span>/<span class="hljs-title">_footer.njk</span>
+</span></code></pre>
+<h2 id="merge-del-ramo-1.2-sul-master-in-locale-ed-invio-al-server-gitlab" tabindex="-1">Merge del ramo 1.2 sul master in locale ed invio al server GitLab <a class="header-anchor" href="#merge-del-ramo-1.2-sul-master-in-locale-ed-invio-al-server-gitlab" aria-hidden="true">🔗</a></h2>
+<p>Vedendo il log l'ultimo commit è stato fatto nel branch 1.2,
+per apportare nuove modifiche al progetto, volendole registrare in un nuovo branch 1.3,
+dobbiamo prima chiudere il branch 1.2 riportandolo nel master.</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">checkout</span> <span class="hljs-title">master</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">pull</span> <span class="hljs-title">origin</span> <span class="hljs-title">master</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">merge</span> <span class="hljs-title">origin</span>/1.2
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span> <span class="hljs-title">origin</span> <span class="hljs-title">master</span>
+</span></code></pre>
+<h2 id="creazione-nuovo-branch-1.3-in-locale-e-suo-collegamento-al-server-gitlab" tabindex="-1">Creazione nuovo branch 1.3 in locale e suo collegamento al server GitLab <a class="header-anchor" href="#creazione-nuovo-branch-1.3-in-locale-e-suo-collegamento-al-server-gitlab" aria-hidden="true">🔗</a></h2>
+<p>Per apportare delle modifiche al progetto creiamo un nuovo branch.</p>
+<pre><code class="language-bat"><span class="hljs-comment">rem creazione di un nuovo branch in locale</span>
+<span class="hljs-function">D:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">checkout</span> -<span class="hljs-title">b</span> 1.3 <span class="hljs-title">rem</span> -<span class="hljs-title">b</span> <span class="hljs-title">crea</span> <span class="hljs-title">il</span> <span class="hljs-title">branch</span> <span class="hljs-title">se</span> <span class="hljs-title">non</span> <span class="hljs-title">esiste</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">invio</span> <span class="hljs-title">del</span> <span class="hljs-title">nuovo</span> <span class="hljs-title">branch</span> <span class="hljs-title">al</span> <span class="hljs-title">server</span>
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">push</span> -<span class="hljs-title">u</span> <span class="hljs-title">origin</span> 1.3
+<span class="hljs-title">rem</span> <span class="hljs-title">git</span> <span class="hljs-title">push</span> --<span class="hljs-title">set</span>-<span class="hljs-title">upstream</span> <span class="hljs-title">origin</span> 1.3 <span class="hljs-title">il</span> -<span class="hljs-title">u</span> <span class="hljs-title">precedente</span> <span class="hljs-title">evita</span> <span class="hljs-title">questo</span> <span class="hljs-title">comando</span>, <span class="hljs-title">collega</span> <span class="hljs-title">il</span> <span class="hljs-title">ramo</span> <span class="hljs-title">locale</span> <span class="hljs-title">a</span> <span class="hljs-title">quello</span> <span class="hljs-title">remoto</span>(<span class="hljs-title">upstream</span> <span class="hljs-title">branch</span>)
+<span class="hljs-title">rem</span> <span class="hljs-title">verifica</span> <span class="hljs-title">che</span> <span class="hljs-title">ci</span> <span class="hljs-title">troviamo</span> <span class="hljs-title">nel</span> <span class="hljs-title">nuovo</span> <span class="hljs-title">branch</span>
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">vv</span> 
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">remote</span> <span class="hljs-title">show</span> <span class="hljs-title">origin</span>
+</span></code></pre>
+<h2 id="modifica-dei-files-in-locale" tabindex="-1">Modifica dei files in locale <a class="header-anchor" href="#modifica-dei-files-in-locale" aria-hidden="true">🔗</a></h2>
+<p>Effettuiamo il commit in locale di alcuni file modificati nel nuovo branch.</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+    <span class="hljs-title">On</span> <span class="hljs-title">branch</span> 1.3
+        <span class="hljs-title">modified</span>:   <span class="hljs-title">images</span>/<span class="hljs-title">favicon.png</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">a</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Nuovo</span> <span class="hljs-title">Logo</span>&quot;
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">pretty</span>=<span class="hljs-title">oneline</span>
+</span></code></pre>
+<h2 id="applicare-un-tag-in-locale" tabindex="-1">Applicare un tag in Locale <a class="header-anchor" href="#applicare-un-tag-in-locale" aria-hidden="true">🔗</a></h2>
+<p>Una volta finito il lavoro nel nuovo branch aggiungiamo un tag con la versione semantica</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">tag</span> -<span class="hljs-title">a</span> 1.3.1 -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Aggiornate</span> <span class="hljs-title">immagini</span> <span class="hljs-title">Logo</span>&quot;
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">tag</span>
+</span></code></pre>
+<p>Questo tag non è ancora stato inviato al repository remoto, è ancora solamente in locale.</p>
+<h2 id="verificare-la-differenza-tra-il-branch-remoto-e-quello-locale" tabindex="-1">Verificare la differenza tra il branch remoto e quello locale <a class="header-anchor" href="#verificare-la-differenza-tra-il-branch-remoto-e-quello-locale" aria-hidden="true">🔗</a></h2>
+<p>A questo punto nel repository locale abbiamo:</p>
+<ul>
+<li>il nuovo branch</li>
+<li>il commit con le modifiche effettuate nel nuovo branch</li>
+<li>un nuovo tag</li>
+</ul>
+<p>Prima di inviare al repository remoto verifichiamo le differenze tra il nuovo branch locale e la sua versione remota.</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">fetch</span>                                 <span class="hljs-title">rem</span> <span class="hljs-title">preleva</span> <span class="hljs-title">gli</span> <span class="hljs-title">eventuali</span> <span class="hljs-title">cambiamenti</span> <span class="hljs-title">fatti</span> <span class="hljs-title">sul</span> <span class="hljs-title">server</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">vv</span>  -<span class="hljs-title">a</span>                        <span class="hljs-title">rem</span> <span class="hljs-title">visualizza</span> <span class="hljs-title">branch</span> <span class="hljs-title">locali</span> <span class="hljs-title">e</span> <span class="hljs-title">remoti</span>, <span class="hljs-title">se</span> <span class="hljs-title">non</span> <span class="hljs-title">c</span>&#x27;<span class="hljs-title">e</span>&#x27; <span class="hljs-title">la</span> <span class="hljs-title">scritta</span> <span class="hljs-title">BLU</span> <span class="hljs-title">allora</span> <span class="hljs-title">il</span> <span class="hljs-title">branch</span> <span class="hljs-title">locale</span> <span class="hljs-title">non</span> è <span class="hljs-title">collegato</span> <span class="hljs-title">ad</span> <span class="hljs-title">un</span> <span class="hljs-title">branch</span> <span class="hljs-title">remoto</span>!(<span class="hljs-title">upstream</span> <span class="hljs-title">branch</span>)
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">oneline</span> <span class="hljs-title">origin</span>/1.3..1.3         <span class="hljs-title">rem</span> <span class="hljs-title">visualizza</span> <span class="hljs-title">i</span> <span class="hljs-title">commit</span> <span class="hljs-title">locali</span> <span class="hljs-title">che</span> <span class="hljs-title">non</span> <span class="hljs-title">sono</span> <span class="hljs-title">presenti</span> <span class="hljs-title">in</span> <span class="hljs-title">remoto</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">diff</span> --<span class="hljs-title">stat</span> --<span class="hljs-title">color</span> 1.3..<span class="hljs-title">origin</span>/1.3   <span class="hljs-title">rem</span> <span class="hljs-title">verifica</span> <span class="hljs-title">delle</span> <span class="hljs-title">differenze</span> <span class="hljs-title">tra</span> <span class="hljs-title">ramo</span> <span class="hljs-title">locale</span> <span class="hljs-title">e</span> <span class="hljs-title">ramo</span> <span class="hljs-title">remoto</span>
+</span></code></pre>
+<h2 id="push-dei-files-e-dei-tag" tabindex="-1">Push dei files e dei tag <a class="header-anchor" href="#push-dei-files-e-dei-tag" aria-hidden="true">🔗</a></h2>
+<p>Inviamo il nuovo branch ed il tag al server remoto</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span> <span class="hljs-title">origin</span> --<span class="hljs-title">tags</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">diff</span> --<span class="hljs-title">stat</span> --<span class="hljs-title">color</span> 1.3..<span class="hljs-title">origin</span>/1.3
+</span></code></pre>
+<p>Per la build gulp-compass in windows c'e' un problema di lunghezza di path per cui il progetto deve essere spostato sulla root  del file system <code>D:\</code>.</p>
+<p>Aggiungendo/aggiornando un file deve essere anche spostato il tag.</p>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">a</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">asapp.properties</span>&quot;
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">tag</span> -<span class="hljs-title">fa</span> 1.3.1 -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Aggiornate</span> <span class="hljs-title">immagini</span> <span class="hljs-title">Logo</span>&quot;
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span> -<span class="hljs-title">f</span> --<span class="hljs-title">tags</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">stat</span>
+</span></code></pre>
+<h2 id="ripristino-dei-file-dal-server" tabindex="-1">Ripristino dei file dal server <a class="header-anchor" href="#ripristino-dei-file-dal-server" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ git reset --hard origin/master
+</code></pre>
+<h2 id="esempio-aggiornamento" tabindex="-1">Esempio Aggiornamento <a class="header-anchor" href="#esempio-aggiornamento" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">D:\&gt; <span class="hljs-title">cd</span> /<span class="hljs-title">d</span> <span class="hljs-title">D</span>:\<span class="hljs-title">cc.bb.it</span>\<span class="hljs-title">ccbi</span>-<span class="hljs-title">ui</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">pull</span> 
+
+:: <span class="hljs-title">Analisi</span> <span class="hljs-title">dello</span> <span class="hljs-title">stato</span> <span class="hljs-title">attuale</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">rev</span>-<span class="hljs-title">parse</span> --<span class="hljs-title">abbrev</span>-<span class="hljs-title">ref</span> <span class="hljs-title">HEAD</span> :: <span class="hljs-title">mostra</span> <span class="hljs-title">il</span> <span class="hljs-title">branch</span> <span class="hljs-title">corrente</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">pretty</span>=&quot;%<span class="hljs-title">h</span> %<span class="hljs-title">cd</span> %<span class="hljs-title">s</span> %<span class="hljs-title">cn</span> %<span class="hljs-title">d</span>&quot; --<span class="hljs-title">graph</span> --<span class="hljs-title">date</span>=<span class="hljs-title">format</span>:&quot;%<span class="hljs-title">Y</span>-%<span class="hljs-title">m</span>-%<span class="hljs-title">d</span> %<span class="hljs-title">H</span>:%<span class="hljs-title">M</span>:%<span class="hljs-title">S</span>&quot; -5
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">graph</span> --<span class="hljs-title">simplify</span>-<span class="hljs-title">by</span>-<span class="hljs-title">decoration</span> --<span class="hljs-title">pretty</span>=&#x27;%<span class="hljs-title">d</span>&#x27; --<span class="hljs-title">all</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">a</span>  :: <span class="hljs-title">per</span> <span class="hljs-title">vedere</span> <span class="hljs-title">i</span> <span class="hljs-title">branch</span> <span class="hljs-title">esistenti</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">vv</span> :: <span class="hljs-title">per</span> <span class="hljs-title">vedere</span> <span class="hljs-title">i</span> <span class="hljs-title">branch</span> <span class="hljs-title">esistenti</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">diff</span> <span class="hljs-title">origin</span>/<span class="hljs-title">master</span>..<span class="hljs-title">origin</span>/1.3 :: <span class="hljs-title">per</span> <span class="hljs-title">vedere</span> <span class="hljs-title">se</span> <span class="hljs-title">il</span> <span class="hljs-title">branch</span> è <span class="hljs-title">stato</span> <span class="hljs-title">riportato</span> <span class="hljs-title">sul</span> <span class="hljs-title">master</span>
+
+:: <span class="hljs-title">Merge</span> <span class="hljs-title">ramo</span> 1.3 <span class="hljs-title">sul</span> <span class="hljs-title">master</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">checkout</span> <span class="hljs-title">master</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">pull</span> <span class="hljs-title">origin</span> <span class="hljs-title">master</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">merge</span> <span class="hljs-title">origin</span>/1.3
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span> <span class="hljs-title">origin</span> <span class="hljs-title">master</span>
+
+:: <span class="hljs-title">creazione</span> <span class="hljs-title">di</span> <span class="hljs-title">un</span> <span class="hljs-title">nuovo</span> <span class="hljs-title">branch</span> <span class="hljs-title">in</span> <span class="hljs-title">locale</span>
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">checkout</span> -<span class="hljs-title">b</span> 1.4
+:: <span class="hljs-title">invio</span> <span class="hljs-title">del</span> <span class="hljs-title">nuovo</span> <span class="hljs-title">branch</span> <span class="hljs-title">al</span> <span class="hljs-title">server</span>
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">push</span> -<span class="hljs-title">u</span> <span class="hljs-title">origin</span> 1.4
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">branch</span> -<span class="hljs-title">vv</span> 
+<span class="hljs-title">D</span>:\&gt;  <span class="hljs-title">git</span> <span class="hljs-title">remote</span> <span class="hljs-title">show</span> <span class="hljs-title">origin</span>
+
+:: <span class="hljs-title">modifica</span> <span class="hljs-title">D</span>:\<span class="hljs-title">cc.bb.it</span>\<span class="hljs-title">ccbi</span>-<span class="hljs-title">ui</span>\<span class="hljs-title">asapp.properties</span> <span class="hljs-title">ed</span> <span class="hljs-title">altri</span> <span class="hljs-title">files</span>
+:: <span class="hljs-title">commit</span> <span class="hljs-title">in</span> <span class="hljs-title">locale</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">commit</span> -<span class="hljs-title">a</span> -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Aggiornamento</span> <span class="hljs-title">Testi</span>&quot;
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">pretty</span>=<span class="hljs-title">oneline</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">status</span>
+
+:: <span class="hljs-title">Applicazione</span> <span class="hljs-title">del</span> <span class="hljs-title">tag</span> <span class="hljs-title">in</span> <span class="hljs-title">locale</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">tag</span> -<span class="hljs-title">a</span> 1.4.1 -<span class="hljs-title">m</span> &quot;<span class="hljs-title">Aggiornamento</span> <span class="hljs-title">Testi</span>&quot;
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">tag</span>
+
+:: <span class="hljs-title">Invio</span> <span class="hljs-title">delle</span> <span class="hljs-title">modifiche</span> <span class="hljs-title">e</span> <span class="hljs-title">dei</span> <span class="hljs-title">tag</span> <span class="hljs-title">al</span> <span class="hljs-title">server</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span> <span class="hljs-title">origin</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">push</span> <span class="hljs-title">origin</span> --<span class="hljs-title">tags</span>
+
+:: <span class="hljs-title">Verifica</span> <span class="hljs-title">che</span> <span class="hljs-title">le</span> <span class="hljs-title">modifiche</span> <span class="hljs-title">siano</span> <span class="hljs-title">state</span> <span class="hljs-title">inviate</span> <span class="hljs-title">al</span> <span class="hljs-title">server</span>
+:: <span class="hljs-title">https</span>://<span class="hljs-title">git</span>-<span class="hljs-title">scm.com</span>/<span class="hljs-title">docs</span>/<span class="hljs-title">git</span>-<span class="hljs-title">log</span>#<span class="hljs-title">_pretty_formats</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">pretty</span>=&quot;%<span class="hljs-title">cd</span> %<span class="hljs-title">cn</span> %<span class="hljs-title">d</span>&quot; --<span class="hljs-title">graph</span> --<span class="hljs-title">date</span>=<span class="hljs-title">format</span>:&quot;%<span class="hljs-title">Y</span>-%<span class="hljs-title">m</span>-%<span class="hljs-title">d</span> %<span class="hljs-title">H</span>:%<span class="hljs-title">M</span>:%<span class="hljs-title">S</span>&quot; <span class="hljs-title">HEAD</span>..<span class="hljs-title">origin</span>/1.4
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">log</span> --<span class="hljs-title">pretty</span>=&quot;%<span class="hljs-title">cd</span> %<span class="hljs-title">cn</span> %<span class="hljs-title">d</span>&quot; --<span class="hljs-title">graph</span> --<span class="hljs-title">date</span>=<span class="hljs-title">format</span>:&quot;%<span class="hljs-title">Y</span>-%<span class="hljs-title">m</span>-%<span class="hljs-title">d</span> %<span class="hljs-title">H</span>:%<span class="hljs-title">M</span>:%<span class="hljs-title">S</span>&quot; <span class="hljs-title">origin</span>/1.4..<span class="hljs-title">HEAD</span>
+<span class="hljs-title">D</span>:\&gt; <span class="hljs-title">git</span> <span class="hljs-title">diff</span> --<span class="hljs-title">stat</span> 1.4..<span class="hljs-title">origin</span>/1.4
+</span></code></pre>
+<h2 id="esempio-aggiornamento-2" tabindex="-1">Esempio Aggiornamento 2 <a class="header-anchor" href="#esempio-aggiornamento-2" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Creazione di un nuovo ramo, modifiche e push sul server</span>
+git checkout -b 1.5
+git status
+git commit -a -m <span class="hljs-string">&quot;I nostri servizi&quot;</span>
+git tag -a 1.5.1 -m <span class="hljs-string">&quot;I nostri servizi&quot;</span>
+git push -u origin 1.5
+git push -f --tags
+
+<span class="hljs-comment"># Si vogliono accorpare tutti i commit del nuovo ramo in un solo commit e reinviare al server:</span>
+
+$ git reflog <span class="hljs-comment"># serve a trovare il commit antecedente al primo commit effettuato sul nuovo ramo</span>
+$ git reset --soft HEAD@{6} <span class="hljs-comment"># si sposta l&#x27;HEAD alla reference del commit precedente alla creazione del ramo, senza toccare index e working directory (--soft), reset su commit rende orfani i commit seguenti alla nuova posizione dell&#x27;head</span>
+$ git commit -a -m <span class="hljs-string">&quot;Aggiornamento I nostri servizi&quot;</span> <span class="hljs-comment"># si crea un nuovo commit che accorpa tutti i commit precedenti del ramo (resi orfani da reset --soft), che vengono poi eliminati dal garbage collector di git</span>
+$ git tag -fa 1.5.1 -m <span class="hljs-string">&quot;Aggiornamento I nostri servizi&quot;</span> <span class="hljs-comment"># si sposta il tag sul nuovo commit</span>
+$ git push origin +1.5 <span class="hljs-comment"># si invia al server solamente il nuovo ramo, sintassi + al posto di --force</span>
+$ git push -f --tags   <span class="hljs-comment"># si invia il tag spostato al server</span>
+$ git <span class="hljs-built_in">log</span> --oneline --graph --decorate
+</code></pre>
+</body></html>

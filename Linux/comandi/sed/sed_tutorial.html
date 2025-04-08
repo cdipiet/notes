@@ -1,0 +1,1896 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.334" />
+        <title>sed_tutorial</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="sed_tutorial" tabindex="-1">sed_tutorial <a class="header-anchor" href="#sed_tutorial" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.334</p>
+<nav class="table-of-contents"><ol><li><a href="#sed-regular-expression">sed Regular Expression </a><ol><li><a href="#use-ere-on-linux-(gnu-sed)">use ERE on Linux (GNU sed) </a></li><li><a href="#nota">Nota </a></li></ol></li><li><a href="#the-essential-command%3A-s-for-substitution">The essential command: s for substitution </a></li><li><a href="#the-slash-as-a-delimiter">The slash as a delimiter </a></li><li><a href="#using-%26-as-the-matched-string">Using &amp; as the matched string </a></li><li><a href="#extended-regular-expressions">Extended Regular Expressions </a></li><li><a href="#using-%5C1-to-keep-part-of-the-pattern">Using \1 to keep part of the pattern </a></li><li><a href="#sed-pattern-flags">Sed Pattern Flags </a></li><li><a href="#%2Fg---global-replacement">/g - Global replacement </a></li><li><a href="#is-sed-recursive%3F">Is sed recursive? </a></li><li><a href="#%2F1%2C-%2F2%2C-etc.-specifying-which-occurrence">/1, /2, etc. Specifying which occurrence </a></li><li><a href="#%2Fp---print">/p - print </a></li><li><a href="#write-to-a-file-with-%2Fw-filename">Write to a file with /w filename </a></li><li><a href="#%2Fi---ignore-case">/I - Ignore Case </a></li><li><a href="#combining-substitution-flags">Combining substitution flags </a></li><li><a href="#arguments-and-invocation-of-sed">Arguments and invocation of sed </a></li><li><a href="#multiple-commands-with--e-command">Multiple commands with -e command </a></li><li><a href="#filenames-on-the-command-line">Filenames on the command line </a></li><li><a href="#sed--n%3A-no-printing">sed -n: no printing </a></li><li><a href="#using-'sed-%2Fpattern%2F'">Using &#39;sed /pattern/&#39; </a></li><li><a href="#using-'sed--n-%2Fpattern%2Fp'-to-duplicate-the-function-of-grep">Using &#39;sed -n /pattern/p&#39; to duplicate the function of grep </a></li><li><a href="#sed--f-scriptname">sed -f scriptname </a></li><li><a href="#sed-in-shell-scripts">sed in shell scripts </a></li><li><a href="#quoting-multiple-sed-lines-in-the-c-shell">Quoting multiple sed lines in the C shell </a></li><li><a href="#quoting-multiple-sed-lines-in-the-bourne-shell">Quoting multiple sed lines in the Bourne shell </a></li><li><a href="#sed--v">sed -V </a></li><li><a href="#sed--h">sed -h </a></li><li><a href="#a-sed-interpreter-script">A sed interpreter script </a></li><li><a href="#comments">Comments </a></li><li><a href="#passing-arguments-into-a-sed-script">Passing arguments into a sed script </a></li><li><a href="#using-sed-in-a-shell-here-is-document">Using sed in a shell here-is document </a></li><li><a href="#multiple-commands-and-order-of-execution">Multiple commands and order of execution </a></li><li><a href="#addresses-and-ranges-of-text">Addresses and Ranges of Text </a></li><li><a href="#restricting-to-a-line-number">Restricting to a line number </a></li><li><a href="#patterns">Patterns </a></li><li><a href="#delete-with-d">Delete with d </a></li><li><a href="#printing-with-p">Printing with p </a></li><li><a href="#reversing-the-restriction-with-!">Reversing the restriction with ! </a></li><li><a href="#relationships-between-d%2C-p%2C-and-!">Relationships between d, p, and ! </a></li><li><a href="#the-q-or-quit-command">The q or quit command </a></li><li><a href="#grouping-with-%7B-and-%7D">Grouping with { and } </a></li><li><a href="#operating-in-a-pattern-range-except-for-the-patterns">Operating in a pattern range except for the patterns </a></li><li><a href="#writing-a-file-with-the-'w'-command">Writing a file with the &#39;w&#39; command </a></li><li><a href="#reading-in-a-file-with-the-'r'-command">Reading in a file with the &#39;r&#39; command </a></li><li><a href="#sunos-and-the-%23-comment-command">SunOS and the # Comment Command </a></li><li><a href="#adding%2C-changing%2C-inserting-new-lines">Adding, Changing, Inserting new lines </a><ol><li><a href="#append-a-line-with-'a'">Append a line with &#39;a&#39; </a></li><li><a href="#insert-a-line-with-'i'">Insert a line with &#39;i&#39; </a></li><li><a href="#change-a-line-with-'c'">Change a line with &#39;c&#39; </a></li></ol></li><li><a href="#leading-tabs-and-spaces-in-a-sed-script">Leading tabs and spaces in a sed script </a></li><li><a href="#adding-more-than-one-line">Adding more than one line </a></li><li><a href="#adding-lines-and-the-pattern-space">Adding lines and the pattern space </a></li><li><a href="#address-ranges-and-the-above-commands">Address ranges and the above commands </a></li><li><a href="#multi-line-patterns">Multi-Line Patterns </a></li><li><a href="#print-line-number-with-%3D">Print line number with = </a></li><li><a href="#transform-with-y">Transform with y </a></li><li><a href="#displaying-control-characters-with-a-l">Displaying control characters with a l </a></li><li><a href="#working-with-multiple-lines">Working with Multiple Lines </a><ol><li><a href="#matching-three-lines-with-sed">Matching three lines with sed </a></li></ol></li><li><a href="#matching-patterns-that-span-multiple-lines">Matching patterns that span multiple lines </a></li><li><a href="#using-newlines-in-sed-scripts">Using newlines in sed scripts </a></li><li><a href="#the-hold-buffer">The Hold Buffer </a><ol><li><a href="#exchange-with-x">Exchange with x </a></li><li><a href="#example-of-context-grep">Example of Context Grep </a></li><li><a href="#hold-with-h-or-h">Hold with h or H </a></li><li><a href="#keeping-more-than-one-line-in-the-hold-buffer">Keeping more than one line in the hold buffer </a></li><li><a href="#get-with-g-or-g">Get with g or G </a></li></ol></li><li><a href="#flow-control">Flow Control </a><ol><li><a href="#testing-with-t">Testing with t </a></li></ol></li><li><a href="#debugging-with-l">Debugging with l </a></li><li><a href="#the-poorly-documented-%3B">The poorly documented ; </a></li><li><a href="#passing-regular-expressions-as-arguments">Passing regular expressions as arguments </a></li><li><a href="#inserting-binary-characters">Inserting binary characters </a></li><li><a href="#ere---extended-regular-expressions">ERE - Extended Regular Expressions </a></li></ol></nav><h1 id="sed-tutorial" tabindex="-1">Sed Tutorial <a class="header-anchor" href="#sed-tutorial" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="http://www.grymoire.com/Unix/Sed.html">sed tutorial</a></li>
+<li><a href="http://www.grymoire.com/Unix/Quote.html">http://www.grymoire.com/Unix/Quote.html</a></li>
+<li><a href="http://www.grymoire.com/Unix/Regular.html">http://www.grymoire.com/Unix/Regular.html</a></li>
+</ul>
+<p><code>Last modified: Tue Feb 12 09:25:42 2019</code></p>
+<h2 id="sed-regular-expression" tabindex="-1">sed Regular Expression <a class="header-anchor" href="#sed-regular-expression" aria-hidden="true">🔗</a></h2>
+<p>sed defaults to BRE: The default behaviour of sed is to support <code>Basic Regular Expressions (BRE)</code>.
+To use all the features described on this page set the <code>-r</code> (Linux) or <code>-E</code> (BSD) flag
+to use  <code>Extended Regular Expressions (ERE)</code> as shown:</p>
+<h3 id="use-ere-on-linux-(gnu-sed)" tabindex="-1">use ERE on Linux (GNU sed) <a class="header-anchor" href="#use-ere-on-linux-(gnu-sed)" aria-hidden="true">🔗</a></h3>
+<p><strong class="mb">sed</strong> <strong class="mrb">-E</strong> <strong class="mb">'search expression' file</strong></p>
+<h3 id="nota" tabindex="-1">Nota <a class="header-anchor" href="#nota" aria-hidden="true">🔗</a></h3>
+<p>In realta su Linux le ERE sono abilitate di default, per avere il quantificatore <code>+</code> occorre lo slash esempio:</p>
+<p><strong class="mb">sed -n '/[d]</strong><strong class="mrb">\+</strong> <strong class="mb">/p' test.txt</strong></p>
+<h2 id="the-essential-command%3A-s-for-substitution" tabindex="-1">The essential command: s for substitution <a class="header-anchor" href="#the-essential-command%3A-s-for-substitution" aria-hidden="true">🔗</a></h2>
+<p>Sed has several commands, but most people only learn the substitute command: <code>s</code>. The substitute command changes all occurrences of the regular expression into a new value. A simple example is changing &quot;day&quot; in the &quot;old&quot; file to &quot;night&quot; in the &quot;new&quot; file:</p>
+<pre><code class="language-bash">sed s/day/night/ &lt;old &gt;new
+</code></pre>
+<p>Or another way (for UNIX beginners),</p>
+<pre><code class="language-bash">sed s/day/night/ old &gt;new
+</code></pre>
+<p>and for those who want to test this:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> day | sed s/day/night/
+</code></pre>
+<p>This will output &quot;night&quot;.</p>
+<p>I didn't put quotes around the argument because this example didn't need them. If you read my earlier tutorial on quotes, you would understand why it doesn't need quotes. However, I recommend you do use quotes. If you have meta-characters in the command, quotes are necessary. And if you aren't sure, it's a good habit, and I will henceforth quote future examples to emphasize the &quot;best practice.&quot; Using the strong (single quote) character, that would be:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/day/night/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>I must emphasize that the sed editor changes exactly what you tell it to. So if you executed</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> Sunday | sed <span class="hljs-string">&#x27;s/day/night/&#x27;</span>
+</code></pre>
+<p>This would output the word &quot;Sunnight&quot; because sed found the string &quot;day&quot; in the input.</p>
+<p>Another important concept is that sed is line oriented. Suppose you have the input file:</p>
+<pre><code>one two three, one two three
+four three two one
+one hundred
+</code></pre>
+<p>and you used the command</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/one/ONE/&#x27;</span> &lt;file
+</code></pre>
+<p>The output would be</p>
+<pre><code>ONE two three, one two three
+four three two ONE
+ONE hundred
+</code></pre>
+<p>Note that this changed &quot;one&quot; to &quot;ONE&quot; once on each line. The first line had &quot;one&quot; twice, but only the first occurrence was changed. That is the default behavior. If you want something different, you will have to use some of the options that are available. I'll explain them later.</p>
+<p>So let's continue.</p>
+<p>There are four parts to this substitute command:</p>
+<pre><code>s           Substitute command
+/../../     Delimiter
+one         Regular Expression Pattern Search Pattern
+ONE         Replacement string
+</code></pre>
+<p>The search pattern is on the left hand side and the replacement string is on the right hand side.</p>
+<h2 id="the-slash-as-a-delimiter" tabindex="-1">The slash as a delimiter <a class="header-anchor" href="#the-slash-as-a-delimiter" aria-hidden="true">🔗</a></h2>
+<p>The character after the s is the delimiter. It is conventionally a slash, because this is what ed, more, and vi use. It can be anything you want, however. If you want to change a pathname that contains a slash - say /usr/local/bin to /common/bin - you could use the backslash to quote the slash:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/\/usr\/local\/bin/\/common\/bin/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Gulp. Some call this a 'Picket Fence' and it's ugly. It is easier to read if you use an underline instead of a slash as a delimiter:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s_/usr/local/bin_/common/bin_&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Some people use colons:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s:/usr/local/bin:/common/bin:&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Others use the &quot;|&quot; character.</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s|/usr/local/bin|/common/bin|&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Pick one you like. As long as it's not in the string you are looking for, anything goes. And remember that you need three delimiters. If you get a &quot;Unterminated `s' command&quot; it's because you are missing one of them.</p>
+<h2 id="using-%26-as-the-matched-string" tabindex="-1">Using &amp; as the matched string <a class="header-anchor" href="#using-%26-as-the-matched-string" aria-hidden="true">🔗</a></h2>
+<p>Sometimes you want to search for a pattern and add some characters, like parenthesis, around or near the pattern you found. It is easy to do this if you are looking for a particular string:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/abc/(abc)/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>This won't work if you don't know exactly what you will find. How can you put the string you found in the replacement string if you don't know what it is?</p>
+<p>The solution requires the special character &quot;<code>&amp;</code>&quot;. It corresponds to the <strong>pattern found</strong>.</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[a-z]*/(&amp;)/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>You can have any number of &quot;<code>&amp;</code>&quot; in the replacement string. You could also double a pattern, e.g. the first number of a line:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;123 abc&quot;</span> | sed <span class="hljs-string">&#x27;s/[0-9]*/&amp; &amp;/&#x27;</span>
+123 123 abc
+</code></pre>
+<p>Let me slightly amend this example. Sed will match the first string, and make it as greedy as possible. I'll cover that later. If you don't want it to be so greedy (i.e. limit the matching), you need to put restrictions on the match.</p>
+<p>The first match for '[0-9]*' is the first character on the line, as this matches zero or more numbers. So if the input was &quot;abc 123&quot; the output would be unchanged (well, except for a space before the letters). A better way to duplicate the number is to make sure it matches a number:</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;123 abc&quot;</span> | sed <span class="hljs-string">&#x27;s/[0-9][0-9]*/&amp; &amp;/&#x27;</span>
+123 123 abc
+</code></pre>
+<p>The string &quot;abc&quot; is unchanged, because it was not matched by the regular expression. If you wanted to eliminate &quot;abc&quot; from the output, you must expand the regular expression to match the rest of the line and explicitly exclude part of the expression using &quot;<code>(</code>&quot;, &quot;<code>)</code>&quot; and &quot;<code>\1</code>&quot;, which is the next topic.</p>
+<h2 id="extended-regular-expressions" tabindex="-1">Extended Regular Expressions <a class="header-anchor" href="#extended-regular-expressions" aria-hidden="true">🔗</a></h2>
+<p>Let me add a quick comment here because there is another way to write the above script. &quot;<code>[0-9]*</code>&quot; matches zero or more numbers. &quot;<code>[0-9][0-9]*</code>&quot; matches one or more numbers. Another way to do this is to use the &quot;<code>+</code>&quot; meta-character and use the pattern &quot;<code>[0-9]+</code>&quot; as the &quot;<code>+</code>&quot; is a special character when using &quot;<code>extended regular expressions</code>&quot;. Extended regular expressions have more power, but sed scripts that treated &quot;<code>+</code>&quot; as a normal character would break. Therefore you must explicitly enable this extension with a command line option.</p>
+<p>GNU sed turns this feature on if you use the &quot;<code>-r</code>&quot; oppure <code>-E</code> command line option. So the above could also be written using</p>
+<pre><code class="language-bash">% <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;123 abc&quot;</span> | sed -r <span class="hljs-string">&#x27;s/[0-9]+/&amp; &amp;/&#x27;</span>
+123 123 abc
+</code></pre>
+<p>Mac OS X and FreeBSD uses -E instead of -r. For more information on extended regular expressions, see Regular Expressions and the description of the -r command line argument</p>
+<h2 id="using-%5C1-to-keep-part-of-the-pattern" tabindex="-1">Using \1 to keep part of the pattern <a class="header-anchor" href="#using-%5C1-to-keep-part-of-the-pattern" aria-hidden="true">🔗</a></h2>
+<p>I have already described the use of &quot;<code>(&quot; &quot;)</code>&quot; and &quot;<code>\1</code>&quot; in my tutorial on regular expressions. To review, the escaped parentheses (that is, parentheses with backslashes before them) remember a substring of the characters matched by the regular expression. You can use this to exclude part of the characters matched by the regular expression. The &quot;<code>\1</code>&quot; is the first remembered pattern, and the &quot;<code>\2</code>&quot; is the second remembered pattern. Sed has up to nine remembered patterns.</p>
+<p>If you wanted to keep the first word of a line, and delete the rest of the line, mark the important part with the parenthesis:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/\([a-z]*\).*/\1/&#x27;</span>
+</code></pre>
+<p>I should elaborate on this. Regular expressions are greedy, and try to match as much as possible. &quot;<code>[a-z]*</code>&quot; matches zero or more lower case letters, and tries to match as many characters as possible. The &quot;<code>.*</code>&quot; matches zero or more characters after the first match. Since the first one grabs all of the contiguous lower case letters, the second matches anything else. Therefore if you type</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> abcd123 | sed <span class="hljs-string">&#x27;s/\([a-z]*\).*/\1/&#x27;</span>
+</code></pre>
+<p>This will output &quot;abcd&quot; and delete the numbers.</p>
+<p>If you want to switch two words around, you can remember two patterns and change the order around:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/\([a-z]*\) \([a-z]*\)/\2 \1/&#x27;</span>
+</code></pre>
+<p>Note the space between the two remembered patterns. This is used to make sure two words are found. However, this will do nothing if a single word is found, or any lines with no letters. You may want to insist that words have at least one letter by using</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/\([a-z][a-z]*\) \([a-z][a-z]*\)/\2 \1/&#x27;</span>
+</code></pre>
+<p>or by using <strong>extended regular expressions</strong> (note that '<code>(</code>' and '<code>)</code>' <strong>no longer need to have a backslash</strong>):</p>
+<pre><code class="language-bash">sed -r <span class="hljs-string">&#x27;s/([a-z]+) ([a-z]+)/\2 \1/&#x27;</span> <span class="hljs-comment"># Using GNU sed</span>
+sed -E <span class="hljs-string">&#x27;s/([a-z]+) ([a-z]+)/\2 \1/&#x27;</span> <span class="hljs-comment"># Using Apple Mac OS X</span>
+</code></pre>
+<p>The &quot;<code>\1</code>&quot; doesn't have to be in the replacement string (in the right hand side). It can be in the pattern you are searching for (in the left hand side). If you want to eliminate duplicated words, you can try:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/\([a-z]*\) \1/\1/&#x27;</span>
+</code></pre>
+<p>If you want to detect duplicated words, you can use</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/\([a-z][a-z]*\) \1/p&#x27;</span>
+</code></pre>
+<p>or with extended regular expressions</p>
+<pre><code class="language-bash">sed -rn <span class="hljs-string">&#x27;/([a-z]+) \1/p&#x27;</span> <span class="hljs-comment"># GNU sed</span>
+sed -En <span class="hljs-string">&#x27;/([a-z]+) \1/p&#x27;</span> <span class="hljs-comment"># Mac OS X</span>
+</code></pre>
+<p>This, when used as a filter, will print lines with duplicated words.</p>
+<p>The numeric value can have up to nine values: &quot;<code>\1</code>&quot; thru &quot;<code>\9</code>&quot;. If you wanted to reverse the first three characters on a line, you can use</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/^\(.\)\(.\)\(.\)/\3\2\1/&#x27;</span>
+</code></pre>
+<h2 id="sed-pattern-flags" tabindex="-1">Sed Pattern Flags <a class="header-anchor" href="#sed-pattern-flags" aria-hidden="true">🔗</a></h2>
+<p>You can add additional flags after the last delimiter. You might have noticed I used a 'p' at the end of the previous substitute command. I also added the '-n' option. Let me first cover the 'p' and other pattern flags. These flags can specify what happens when a match is found. Let me describe them.</p>
+<h2 id="%2Fg---global-replacement" tabindex="-1">/g - Global replacement <a class="header-anchor" href="#%2Fg---global-replacement" aria-hidden="true">🔗</a></h2>
+<p>Most UNIX utilities work on files, reading a line at a time. Sed, by default, is the same way. If you tell it to change a word, it will only change the first occurrence of the word on a line. You may want to make the change on every word on the line instead of the first. For an example, let's place parentheses around words on a line. Instead of using a pattern like &quot;<code>[A-Za-z]*</code>&quot; which won't match words like &quot;won't,&quot; we will use a pattern, &quot;<code>[^ ]*,</code>&quot; that matches everything except a space. Well, this will also match anything because &quot;<code>*</code>&quot; means <strong>zero or more</strong>. The current version of Solaris's sed (as I wrote this) can get unhappy with patterns like this, and generate errors like &quot;Output line too long&quot; or even run forever. I consider this a bug, and have reported this to Sun. As a work-around, you must avoid matching the null string when using the &quot;<code>g</code>&quot; flag to sed. A work-around example is: &quot;<code>[^ ][^ ]*</code>&quot;. The following will put parenthesis around the first word:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[^ ]*/(&amp;)/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>If you want it to make changes for every word, add a &quot;<code>g</code>&quot; after the last delimiter and use the work-around:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[^ ][^ ]*/(&amp;)/g&#x27;</span> &lt;old &gt;new
+</code></pre>
+<h2 id="is-sed-recursive%3F" tabindex="-1">Is sed recursive? <a class="header-anchor" href="#is-sed-recursive%3F" aria-hidden="true">🔗</a></h2>
+<p>Sed only operates on patterns found in the in-coming data. That is, the input line is read, and when a pattern is matched, the modified output is generated, and the rest of the input line is scanned. The &quot;s&quot; command will not scan the newly created output. That is, you don't have to worry about expressions like:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/loop/loop the loop/g&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>This will not cause an infinite loop. If a second &quot;s&quot; command is executed, it could modify the results of a previous command. I will show you how to execute multiple commands later.</p>
+<h2 id="%2F1%2C-%2F2%2C-etc.-specifying-which-occurrence" tabindex="-1">/1, /2, etc. Specifying which occurrence <a class="header-anchor" href="#%2F1%2C-%2F2%2C-etc.-specifying-which-occurrence" aria-hidden="true">🔗</a></h2>
+<p>With no flags, the first matched substitution is changed. With the &quot;<code>g</code>&quot; option, all matches are changed. If you want to modify a particular pattern that is not the first one on the line, you could use &quot;<code>\(</code>&quot; and &quot;<code>\)</code>&quot; to mark each pattern, and use &quot;<code>\1</code>&quot; to put the first pattern back unchanged. This next example keeps the first word on the line but deletes the second:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/\([a-zA-Z]*\) \([a-zA-Z]*\) /\1 /&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Yuck. There is an easier way to do this. You can add a number after the substitution command to indicate you only want to match that particular pattern. Example:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[a-zA-Z]* //2&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>You can combine a number with the g (global) flag. For instance, if you want to leave the first word alone, but change the second, third, etc. to be DELETED instead, use /2g:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[a-zA-Z]* /DELETED /2g&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>I've heard that combining the number with the g command does not work on The MacOS, and perhaps the FreeSBD version of sed as well.</p>
+<p>Don't get <code>/2</code> and <code>\2</code> confused. The <code>/2</code> is used at the end. <code>\2</code> is used in inside the replacement field.</p>
+<p>Note the space after the &quot;<code>*</code>&quot; character. Without the space, sed will run a long, long time. (Note: this bug is probably fixed by now.) This is because the number flag and the &quot;<code>g</code>&quot; flag have the same bug. You should also be able to use the pattern</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[^ ]*//2&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>but this also eats CPU. If this works on your computer, and it does on some UNIX systems, you could remove the encrypted password from the password file:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[^:]*//2&#x27;</span> &lt;/etc/passwd &gt;/etc/password.new
+</code></pre>
+<p>But this didn't work for me the time I wrote this. Using &quot;<code>[^:][^:]*</code>&quot; as a work-around doesn't help because it won't match an non-existent password, and instead delete the third field, which is the user ID! Instead you have to use the ugly parenthesis:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/^\([^:]*\):[^:]:/\1::/&#x27;</span>  &lt;/etc/passwd &gt;/etc/password.new
+</code></pre>
+<p>You could also add a character to the first pattern so that it no longer matches the null pattern:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/[^:]*:/:/2&#x27;</span>  &lt;/etc/passwd &gt;/etc/password.new
+</code></pre>
+<p>The number flag is not restricted to a single digit. It can be any number from 1 to 512. If you wanted to add a colon after the 80th character in each line, you could type:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/./&amp;:/80&#x27;</span> &lt;file &gt;new
+</code></pre>
+<p>You can also do it the hard way by using 80 dots:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/^................................................................................/&amp;:/&#x27;</span> &lt;file &gt;new
+</code></pre>
+<h2 id="%2Fp---print" tabindex="-1">/p - print <a class="header-anchor" href="#%2Fp---print" aria-hidden="true">🔗</a></h2>
+<p>By default, sed prints every line. If it makes a substitution, the new text is printed instead of the old one. If you use an optional argument to sed, &quot;<code>sed -n</code>&quot;, it will not, by default, print any new lines. I'll cover this and other options later. When the &quot;<code>-n</code>&quot; option is used, the &quot;p&quot; flag will cause the modified line to be printed. Here is one way to duplicate the function of grep with sed:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/pattern/&amp;/p&#x27;</span> &lt;file
+</code></pre>
+<p>But a simpler version is described <a href="#using-'sed--n-%2Fpattern%2Fp'-to-duplicate-the-function-of-grep">later</a>.</p>
+<h2 id="write-to-a-file-with-%2Fw-filename" tabindex="-1">Write to a file with /w filename <a class="header-anchor" href="#write-to-a-file-with-%2Fw-filename" aria-hidden="true">🔗</a></h2>
+<p>There is one more flag that can follow the third delimiter. With it, you can specify a file that will receive the modified data. An example is the following, which will write all lines that start with an even number, followed by a space, to the file even:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/^[0-9]*[02468] /&amp;/w even&#x27;</span> &lt;file
+</code></pre>
+<p>In this example, the output file isn't needed, as the input was not modified. You must have exactly one space between the w and the filename. You can also have ten files open with one instance of sed. This allows you to split up a stream of data into separate files. Using the previous example combined with multiple substitution commands described later, you could split a file into ten pieces depending on the last digit of the first number. You could also use this method to log error or debugging information to a special file.</p>
+<h2 id="%2Fi---ignore-case" tabindex="-1">/I - Ignore Case <a class="header-anchor" href="#%2Fi---ignore-case" aria-hidden="true">🔗</a></h2>
+<p>GNU has added another pattern flags - /I</p>
+<p>This flag makes the pattern match case insensitive. This will match abc, aBc, ABC, AbC, etc.:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/abc/I p&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Note that a space after the '<code>/I</code>' and the '<code>p</code>' (print) command emphasizes that the '<code>p</code>' is not a modifier of the pattern matching process, but a command to execute <strong>after</strong> the pattern matching.</p>
+<h2 id="combining-substitution-flags" tabindex="-1">Combining substitution flags <a class="header-anchor" href="#combining-substitution-flags" aria-hidden="true">🔗</a></h2>
+<p>You can combine flags when it makes sense. Please note that the &quot;<code>w</code>&quot; has to be the last flag. For example the following command works:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/a/A/2pw /tmp/file&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Next I will discuss the options to sed, and different ways to invoke sed.</p>
+<h2 id="arguments-and-invocation-of-sed" tabindex="-1">Arguments and invocation of sed <a class="header-anchor" href="#arguments-and-invocation-of-sed" aria-hidden="true">🔗</a></h2>
+<p>previously, I have only used one substitute command. If you need to make two changes, and you didn't want to read the manual, you could pipe together multiple sed commands:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/BEGIN/begin/&#x27;</span> &lt;old | sed <span class="hljs-string">&#x27;s/END/end/&#x27;</span> &gt;new
+</code></pre>
+<p>This used two processes instead of one. A sed guru never uses two processes when one can do.</p>
+<h2 id="multiple-commands-with--e-command" tabindex="-1">Multiple commands with -e command <a class="header-anchor" href="#multiple-commands-with--e-command" aria-hidden="true">🔗</a></h2>
+<p>One method of combining multiple commands is to use a <code>-e</code> before each command:</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;s/a/A/&#x27;</span> -e <span class="hljs-string">&#x27;s/b/B/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>A &quot;<code>-e</code>&quot; isn't needed in the earlier examples because sed knows that there must always be one command. If you give sed one argument, it must be a command, and sed will edit the data read from standard input.</p>
+<p>The long argument version is</p>
+<pre><code class="language-bash">sed --expression=<span class="hljs-string">&#x27;s/a/A/&#x27;</span> --expression=<span class="hljs-string">&#x27;s/b/B/&#x27;</span> &lt;old &gt;new
+</code></pre>
+<p>Also see <a href="#quoting-multiple-sed-lines-in-the-c-shell">Quoting multiple sed lines in the Bourne shell</a></p>
+<h2 id="filenames-on-the-command-line" tabindex="-1">Filenames on the command line <a class="header-anchor" href="#filenames-on-the-command-line" aria-hidden="true">🔗</a></h2>
+<p>You can specify files on the command line if you wish. If there is more than one argument to sed that does not start with an option, it must be a filename. This next example will count the number of lines in three files that don't begin with a &quot;<code>#</code>&quot;:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/^#.*//&#x27;</span>  f1 f2 f3 | grep -v <span class="hljs-string">&#x27;^$&#x27;</span> | <span class="hljs-built_in">wc</span> -l
+</code></pre>
+<p>Let's break this down into pieces. The sed substitute command changes every line that starts with a &quot;<code>#</code>&quot; into a blank line. Grep was used to filter out (delete) empty lines. wc counts the number of lines left. Sed has more commands that make grep unnecessary. And <code>grep -c</code> can replace <code>wc -l</code>. I'll discuss how you can duplicate some of grep's functionality later.</p>
+<p>Of course you could write the last example using the &quot;-e&quot; option:</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;s/^#.*//&#x27;</span> f1 f2 f3 | grep -v <span class="hljs-string">&#x27;^$&#x27;</span> | <span class="hljs-built_in">wc</span> -l
+</code></pre>
+<p>There are two other options to sed.</p>
+<h2 id="sed--n%3A-no-printing" tabindex="-1">sed -n: no printing <a class="header-anchor" href="#sed--n%3A-no-printing" aria-hidden="true">🔗</a></h2>
+<p>The &quot;<code>-n</code>&quot; option will not print anything unless an explicit request to print is found. I mentioned the &quot;<code>/p</code>&quot; flag to the substitute command as one way to turn printing back on. Let me clarify this. The command</p>
+<pre><code class="language-bash">sed  <span class="hljs-string">&#x27;s/PATTERN/&amp;/p&#x27;</span> file
+</code></pre>
+<p>acts like the cat program if PATTERN is not in the file: e.g. nothing is changed. If PATTERN is in the file, then each line that has this is printed twice. Add the &quot;-n&quot; option and the example acts like grep:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/PATTERN/&amp;/p&#x27;</span> file
+</code></pre>
+<p>Nothing is printed, except those lines with PATTERN included.</p>
+<p>The long argument of the -n command is either</p>
+<pre><code class="language-bash">sed --quiet <span class="hljs-string">&#x27;s/PATTERN/&amp;/p&#x27;</span> file
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">sed --silent <span class="hljs-string">&#x27;s/PATTERN/&amp;/p&#x27;</span> file
+</code></pre>
+<h2 id="using-'sed-%2Fpattern%2F'" tabindex="-1">Using 'sed /pattern/' <a class="header-anchor" href="#using-'sed-%2Fpattern%2F'" aria-hidden="true">🔗</a></h2>
+<p>Sed has the ability to specify which lines are to be examined and/or modified, by specifying <a href="#using-'sed--n-%2Fpattern%2Fp'-to-duplicate-the-function-of-grep">addresses</a> before the command. I will just describe the simplest version for now - the <code>/PATTERN/</code> address. When used, only lines that match the pattern are given the command after the address. Briefly, when used with the <code>/p</code> flag, matching lines are printed twice:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/PATTERN/p&#x27;</span> file
+</code></pre>
+<p>And of course PATTERN is any regular expression.</p>
+<p>Please note that if you do not include a command, such as the &quot;<code>p</code>&quot; for print, you will get an error. When I type</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> abc | sed <span class="hljs-string">&#x27;/a/&#x27;</span>
+</code></pre>
+<p>I get the error</p>
+<pre><code class="language-bash">sed: -e expression <span class="hljs-comment">#1, char 3: missing command</span>
+</code></pre>
+<p>Also, you don't need to, but I recommend that you place a space after the pattern and the command. This will help you distinquish between flags that modify the pattern matching, and commands to execute after the pattern is matched. Therefore I recommend this style:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/PATTERN/ p&#x27;</span> file
+</code></pre>
+<h2 id="using-'sed--n-%2Fpattern%2Fp'-to-duplicate-the-function-of-grep" tabindex="-1">Using 'sed -n /pattern/p' to duplicate the function of grep <a class="header-anchor" href="#using-'sed--n-%2Fpattern%2Fp'-to-duplicate-the-function-of-grep" aria-hidden="true">🔗</a></h2>
+<p>If you want to duplicate the functionality of grep, combine the <code>-n</code> (noprint) option with the <code>/p</code> print flag:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/PATTERN/p&#x27;</span> file
+</code></pre>
+<h2 id="sed--f-scriptname" tabindex="-1">sed -f scriptname <a class="header-anchor" href="#sed--f-scriptname" aria-hidden="true">🔗</a></h2>
+<p>If you have a large number of sed commands, you can put them into a file and use</p>
+<pre><code class="language-bash">sed -f sedscript &lt;old &gt;new
+</code></pre>
+<p>where sedscript could look like this:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># sed comment - This script changes lower case vowels to upper case</span>
+s/a/A/g
+s/e/E/g
+s/i/I/g
+s/o/O/g
+s/u/U/g
+</code></pre>
+<p>When there are several commands in one file, each command must be on a separate line.</p>
+<p>The long argument version is</p>
+<pre><code class="language-bash">sed --file=sedscript &lt;old &gt;new
+</code></pre>
+<p>Also see <a href="#a-sed-interpreter-script">here on writing a script that executes sed directly</a></p>
+<h2 id="sed-in-shell-scripts" tabindex="-1">sed in shell scripts <a class="header-anchor" href="#sed-in-shell-scripts" aria-hidden="true">🔗</a></h2>
+<p>If you have many commands and they won't fit neatly on one line, you can break up the line using a backslash:</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;s/a/A/g&#x27;</span> \
+    -e <span class="hljs-string">&#x27;s/e/E/g&#x27;</span> \
+    -e <span class="hljs-string">&#x27;s/i/I/g&#x27;</span> \
+    -e <span class="hljs-string">&#x27;s/o/O/g&#x27;</span> \
+    -e <span class="hljs-string">&#x27;s/u/U/g&#x27;</span>  &lt;old &gt;new
+</code></pre>
+<h2 id="quoting-multiple-sed-lines-in-the-c-shell" tabindex="-1">Quoting multiple sed lines in the C shell <a class="header-anchor" href="#quoting-multiple-sed-lines-in-the-c-shell" aria-hidden="true">🔗</a></h2>
+<p>You can have a large, multi-line sed script in the C shell, but you must tell the C shell that the quote is continued across several lines. This is done by placing a backslash at the end of each line:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/csh -f</span>
+sed <span class="hljs-string">&#x27;s/a/A/g  \
+s/e/E/g \
+s/i/I/g \
+s/o/O/g \
+s/u/U/g&#x27;</span>  &lt;old &gt;new
+</code></pre>
+<h2 id="quoting-multiple-sed-lines-in-the-bourne-shell" tabindex="-1">Quoting multiple sed lines in the Bourne shell <a class="header-anchor" href="#quoting-multiple-sed-lines-in-the-bourne-shell" aria-hidden="true">🔗</a></h2>
+<p>The Bourne shell makes this easier as a quote can cover several lines:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+s/a/A/g 
+s/e/E/g 
+s/i/I/g 
+s/o/O/g 
+s/u/U/g&#x27;</span>  &lt;old &gt;new
+</code></pre>
+<h2 id="sed--v" tabindex="-1">sed -V <a class="header-anchor" href="#sed--v" aria-hidden="true">🔗</a></h2>
+<p>The <code>-V</code> option will print the version of sed you are using. The long argument of the command is</p>
+<pre><code class="language-bash">sed --version
+</code></pre>
+<h2 id="sed--h" tabindex="-1">sed -h <a class="header-anchor" href="#sed--h" aria-hidden="true">🔗</a></h2>
+<p>The <code>-h</code> option will print a summary of the sed commands. The long argument of the command is</p>
+<pre><code class="language-bash">sed --<span class="hljs-built_in">help</span>
+</code></pre>
+<h2 id="a-sed-interpreter-script" tabindex="-1">A sed interpreter script <a class="header-anchor" href="#a-sed-interpreter-script" aria-hidden="true">🔗</a></h2>
+<p>Another way of executing sed is to use an interpreter script. Create a file that contains:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/sed -f</span>
+s/a/A/g
+s/e/E/g
+s/i/I/g
+s/o/O/g
+s/u/U/g
+</code></pre>
+<p>If this script was stored in a file with the name &quot;CapVowel&quot; and was executable, you could use it with the simple command:</p>
+<pre><code class="language-bash">CapVowel &lt;old &gt;new
+</code></pre>
+<h2 id="comments" tabindex="-1">Comments <a class="header-anchor" href="#comments" aria-hidden="true">🔗</a></h2>
+<p>Sed comments are lines where the first non-white character is a &quot;<code>#</code>&quot;. On many systems, sed can have only one comment, and it must be the first line of the script. On the Sun (1988 when I wrote this), you can have several comment lines anywhere in the script. Modern versions of Sed support this. If the first line contains exactly &quot;<code>#n</code>&quot; then this does the same thing as the &quot;<code>-n</code>&quot; option: turning off printing by default. This could not done with a sed interpreter script, because the first line must start with &quot;<code>#!/bin/sed -f</code>&quot; as I think &quot;<code>#!/bin/sed -nf</code>&quot; generated an error. It worked when I first wrote this (2008). Note that &quot;<code>#!/bin/sed -fn</code>&quot; does not work because sed thinks the filename of the script is &quot;<code>n</code>&quot;. However,</p>
+<pre><code class="language-bash"><span class="hljs-string">&quot;#!/bin/sed -nf&quot;</span>
+</code></pre>
+<p>does work.</p>
+<h2 id="passing-arguments-into-a-sed-script" tabindex="-1">Passing arguments into a sed script <a class="header-anchor" href="#passing-arguments-into-a-sed-script" aria-hidden="true">🔗</a></h2>
+<p>Passing a word into a shell script that calls sed is easy if you remembered <a href="http://www.grymoire.com/Unix/Quote.html">my tutorial on the UNIX quoting mechanism</a>. To review, you use the single quotes to turn quoting on and off. A simple shell script that uses sed to emulate grep is:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed -n <span class="hljs-string">&#x27;s/&#x27;</span><span class="hljs-variable">$1</span><span class="hljs-string">&#x27;/&amp;/p&#x27;</span>
+</code></pre>
+<p>However - there is a problem with this script. If you have a space as an argument, the script would cause a syntax error A better version would protect from this happening:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed -n <span class="hljs-string">&#x27;s/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><span class="hljs-string">&#x27;/&amp;/p&#x27;</span>
+</code></pre>
+<p>If this was stored in a file called sedgrep, you could type</p>
+<pre><code class="language-bash">sedgrep <span class="hljs-string">&#x27;[A-Z][A-Z]&#x27;</span> &lt;file
+</code></pre>
+<p>This would allow sed to act as the grep command.</p>
+<h2 id="using-sed-in-a-shell-here-is-document" tabindex="-1">Using sed in a shell here-is document <a class="header-anchor" href="#using-sed-in-a-shell-here-is-document" aria-hidden="true">🔗</a></h2>
+<p>You can use sed to prompt the user for some parameters and then create a file with those parameters filled in. You could create a file with dummy values placed inside it, and use sed to change those dummy values. A simpler way is to use the &quot;here is&quot; document, which uses part of the shell script as if it were standard input:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&#x27;what is the value? &#x27;</span>
+<span class="hljs-built_in">read</span> value
+sed  <span class="hljs-string">&#x27;s/XYZ/&#x27;</span><span class="hljs-variable">$value</span><span class="hljs-string">&#x27;/&#x27;</span> &lt;&lt;<span class="hljs-string">EOF
+The value is XYZ
+EOF</span>
+</code></pre>
+<p>When executed, the script says:</p>
+<p>what is the value?</p>
+<p>If you type in &quot;123,&quot; the next line will be:</p>
+<p>The value is 123</p>
+<p>I admit this is a contrived example. &quot;Here is&quot; documents can have values evaluated without the use of sed. This example does the same thing:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&#x27;what is the value? &#x27;</span>
+<span class="hljs-built_in">read</span> value
+<span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">EOF
+The value is $value
+EOF</span>
+</code></pre>
+<p>However, combining &quot;here is&quot; documents with sed can be useful for some complex cases.
+Note that</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/XYZ/&#x27;</span><span class="hljs-variable">$value</span><span class="hljs-string">&#x27;/&#x27;</span> &lt;&lt;<span class="hljs-string">EOF
+</span></code></pre>
+<p>will give a syntax error if the user types an answer that contains a space, like &quot;a b c&quot;. Better form would be to put double quotes around the evaluation of the value:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">echo</span> -n <span class="hljs-string">&#x27;what is the value? &#x27;</span>
+<span class="hljs-built_in">read</span> value
+sed  <span class="hljs-string">&#x27;s/XYZ/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$value</span>&quot;</span><span class="hljs-string">&#x27;/&#x27;</span> &lt;&lt;<span class="hljs-string">EOF
+The value is XYZ
+EOF</span>
+</code></pre>
+<p>I covered this in <a href="http://www.grymoire.com/Unix/Quote.html">my tutorial on quotation marks</a>.</p>
+<h2 id="multiple-commands-and-order-of-execution" tabindex="-1">Multiple commands and order of execution <a class="header-anchor" href="#multiple-commands-and-order-of-execution" aria-hidden="true">🔗</a></h2>
+<p>As we explore more of the commands of sed, the commands will become complex, and the actual sequence can be confusing. It's really quite simple. Each line is read in. Each command, in order specified by the user, has a chance to operate on the input line. After the substitutions are made, the next command has a chance to operate on the same line, which may have been modified by earlier commands. If you ever have a question, the best way to learn what will happen is to create a small example. If a complex command doesn't work, make it simpler. If you are having problems getting a complex script working, break it up into two smaller scripts and pipe the two scripts together.</p>
+<h2 id="addresses-and-ranges-of-text" tabindex="-1">Addresses and Ranges of Text <a class="header-anchor" href="#addresses-and-ranges-of-text" aria-hidden="true">🔗</a></h2>
+<p>You have only learned one command, and you can see how powerful sed is. However, all it is doing is a grep and substitute. That is, the substitute command is treating each line by itself, without caring about nearby lines. What would be useful is the ability to restrict the operation to certain lines. Some useful restrictions might be:</p>
+<pre><code>Specifying a line by its number.
+Specifying a range of lines by number.
+All lines containing a pattern.
+All lines from the beginning of a file to a regular expression
+All lines from a regular expression to the end of the file.
+All lines between two regular expressions.
+</code></pre>
+<p>Sed can do all that and more. Every command in sed can be proceeded by an address, range or restriction like the above examples. The restriction or address immediately precedes the command:</p>
+<pre><code>restriction command
+</code></pre>
+<h2 id="restricting-to-a-line-number" tabindex="-1">Restricting to a line number <a class="header-anchor" href="#restricting-to-a-line-number" aria-hidden="true">🔗</a></h2>
+<p>The simplest restriction is a line number. If you wanted to delete the first number on line 3, just add a &quot;3&quot; before the command:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;3 s/[0-9][0-9]*//&#x27;</span> &lt;file &gt;new
+</code></pre>
+<h2 id="patterns" tabindex="-1">Patterns <a class="header-anchor" href="#patterns" aria-hidden="true">🔗</a></h2>
+<p>Many UNIX utilities like vi and more use a slash to search for a regular expression. Sed uses the same convention, provided you terminate the expression with a slash. To delete the first number on all lines that start with a &quot;<code>#</code>&quot;, use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/^#/ s/[0-9][0-9]*//&#x27;</span>
+</code></pre>
+<p>I placed a space after the &quot;/expression/&quot; so it is easier to read. <strong>It isn't necessary</strong>, but without it the command is harder to fathom. Sed does provide a few extra options when specifying regular expressions. But I'll discuss those later. If the expression starts with a backslash, the next character is the delimiter. <strong>To use a comma instead of a slash</strong>, use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;\,^#, s/[0-9][0-9]*//&#x27;</span>
+</code></pre>
+<p>The main advantage of this feature is searching for slashes. Suppose you wanted to search for the string &quot;/usr/local/bin&quot; and you wanted to change it for &quot;/common/all/bin.&quot; You could use the backslash to escape the slash:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/\/usr\/local\/bin/ s/\/usr\/local/\/common\/all/&#x27;</span>
+</code></pre>
+<p>It would be easier to follow if you used an underline instead of a slash as a search. This example uses the underline in both the search command and the substitute command:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;\_/usr/local/bin_ s_/usr/local_/common/all_&#x27;</span>
+</code></pre>
+<p>This illustrates why sed scripts get the reputation for obscurity. I could be perverse and show you the example that will search for all lines that start with a &quot;g,&quot; and change each &quot;g&quot; on that line to an &quot;s:&quot;</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/^g/s/g/s/g&#x27;</span>
+</code></pre>
+<p>Adding a space and using an underscore after the substitute command makes this much easier to read:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/^g/ s_g_s_g&#x27;</span>
+</code></pre>
+<p>Er, I take that back. It's hopeless. There is a lesson here: Use comments liberally in a sed script. You may have to remove the comments to run the script under a different (older) operating system, but you now know how to write a sed script to do that very easily! Comments are a Good Thing. You may have understood the script perfectly when you wrote it. But six months from now it could look like modem noise. And if you don't understand that reference, imagine an 8-month-old child typing on a computer.
+Ranges by line number</p>
+<p>You can specify a range on line numbers by inserting a comma between the numbers. To restrict a substitution to the first 100 lines, you can use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;1,100 s/A/a/&#x27;</span>
+</code></pre>
+<p>If you know exactly how many lines are in a file, you can explicitly state that number to perform the substitution on the rest of the file. In this case, assume you used wc to find out there are 532 lines in the file:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;101,532 s/A/a/&#x27;</span>
+</code></pre>
+<p>An easier way is to use the special character &quot;$,&quot; which means the last line in the file.</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;101,$ s/A/a/&#x27;</span>
+</code></pre>
+<p>The &quot;<code>$</code>&quot; is one of those conventions that mean &quot;last&quot; in utilities like cat -e, vi, and ed. &quot;cat -e&quot; Line numbers are cumulative if several files are edited. That is,</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;200,300 s/A/a/&#x27;</span> f1 f2 f3 &gt;new
+</code></pre>
+<p>is the same as</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> f1 f2 f3 | sed <span class="hljs-string">&#x27;200,300 s/A/a/&#x27;</span> &gt;new
+</code></pre>
+<h1 id="ranges-by-patterns" tabindex="-1">Ranges by patterns <a class="header-anchor" href="#ranges-by-patterns" aria-hidden="true">🔗</a></h1>
+<p>You can specify two regular expressions as the range. Assuming a &quot;<code>#</code>&quot; starts a comment, you can search for a keyword, remove all comments until you see the second keyword. In this case the two keywords are &quot;start&quot; and &quot;stop:&quot;</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/start/,/stop/ s/#.*//&#x27;</span>
+</code></pre>
+<p>The first pattern turns on a flag that tells sed to perform the substitute command on every line. The second pattern turns off the flag. If the &quot;start&quot; and &quot;stop&quot; pattern occurs twice, the substitution is done both times. If the &quot;stop&quot; pattern is missing, the flag is never turned off, and the substitution will be performed on every line until the end of the file.</p>
+<p>You should know that if the &quot;start&quot; pattern is found, the substitution occurs on the same line that contains &quot;start.&quot; This turns on a switch, which is line oriented. That is, the next line is read and the substitute command is checked. If it contains &quot;stop&quot; the switch is turned off. Switches are line oriented, and not word oriented.</p>
+<p>You can combine line numbers and regular expressions. This example will remove comments from the beginning of the file until it finds the keyword &quot;start:&quot;</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;1,/start/ s/#.*//&#x27;</span>
+</code></pre>
+<p>This example will remove comments everywhere except the lines between the two keywords:</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;1,/start/ s/#.*//&#x27;</span> -e <span class="hljs-string">&#x27;/stop/,$ s/#.*//&#x27;</span>
+</code></pre>
+<p>The last example has a range that overlaps the &quot;<code>/start/,/stop/</code>&quot; range, as both ranges operate on the lines that contain the keywords. I will show you later how to restrict a command up to, but not including the line containing the specified pattern. It is in Operating in a pattern range except for the patterns But I have to cover some more basic principles.</p>
+<p>Before I start discussing the various commands, I should explain that some commands cannot operate on a range of lines. I will let you know when I mention the commands. In this next section I will describe three commands, one of which cannot operate on a range.</p>
+<h2 id="delete-with-d" tabindex="-1">Delete with d <a class="header-anchor" href="#delete-with-d" aria-hidden="true">🔗</a></h2>
+<p>Using ranges can be confusing, so you should expect to do some experimentation when you are trying out a new script. A useful command deletes every line that matches the restriction: &quot;<code>d</code>&quot;. If you want to look at the first 10 lines of a file, you can use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;11,$ d&#x27;</span> &lt;file
+</code></pre>
+<p>which is similar in function to the head command. If you want to chop off the header of a mail message, which is everything up to the first blank line, use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;1,/^$/ d&#x27;</span> &lt;file
+</code></pre>
+<p>You can duplicate the function of the tail command, assuming you know the length of a file. Wc can count the lines, and expr can subtract 10 from the number of lines. A Bourne shell script to look at the last 10 lines of a file might look like this:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment">#print last 10 lines of file</span>
+<span class="hljs-comment"># First argument is the filename</span>
+lines=`<span class="hljs-built_in">wc</span> -l <span class="hljs-variable">$1</span> | awk <span class="hljs-string">&#x27;{print $1}&#x27;</span> `
+start=`<span class="hljs-built_in">expr</span> <span class="hljs-variable">$lines</span> - 10`
+sed <span class="hljs-string">&quot;1,<span class="hljs-variable">$start</span> d&quot;</span> <span class="hljs-variable">$1</span>
+</code></pre>
+<p>The range for deletions can be regular expressions pairs to mark the begin and end of the operation. Or it can be a single regular expression. Deleting all lines that start with a &quot;#&quot; is easy:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/^#/ d&#x27;</span>
+</code></pre>
+<p>Removing comments and blank lines takes two commands. The first removes every character from the &quot;#&quot; to the end of the line, and the second deletes all blank lines:</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;s/#.*//&#x27;</span> -e <span class="hljs-string">&#x27;/^$/ d&#x27;</span>
+</code></pre>
+<p>A third one should be added to remove all blanks and tabs immediately before the end of line:</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;s/#.*//&#x27;</span> -e <span class="hljs-string">&#x27;s/[ ^I]*$//&#x27;</span> -e <span class="hljs-string">&#x27;/^$/ d&#x27;</span>
+</code></pre>
+<p>The character &quot;<code>^I</code>&quot; is a <code>CTRL-I</code> or <code>tab</code> character. You would have to explicitly type in the tab. Note the order of operations above, which is in that order for a very good reason. Comments might start in the middle of a line, with white space characters before them. Therefore comments are first removed from a line, potentially leaving white space characters that were before the comment. The second command removes all trailing blanks, so that lines that are now blank are converted to empty lines. The last command deletes empty lines. Together, the three commands remove all lines containing only comments, tabs or spaces.</p>
+<p>This demonstrates the pattern space sed uses to operate on a line. The actual operation sed uses is:</p>
+<pre><code>Copy the input line into the pattern space.
+Apply the first
+sed command on the pattern space, if the address restriction is true.
+Repeat with the next sed expression, again
+operating on the pattern space.
+When the last operation is performed, write out the pattern space
+and read in the next line from the input file.
+</code></pre>
+<h2 id="printing-with-p" tabindex="-1">Printing with p <a class="header-anchor" href="#printing-with-p" aria-hidden="true">🔗</a></h2>
+<p>Another useful command is the print command: &quot;<code>p</code>&quot; If sed wasn't started with an &quot;-n&quot; option, the &quot;p&quot; command will duplicate the input. The command</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;p&#x27;</span>
+</code></pre>
+<p>will duplicate every line. If you wanted to double every empty line, use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/^$/ p&#x27;</span>
+</code></pre>
+<p>Adding the &quot;<code>-n</code>&quot; option turns off printing unless you request it. Another way of duplicating head's functionality is to print only the lines you want. This example prints the first 10 lines:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;1,10 p&#x27;</span> &lt;file
+</code></pre>
+<p>Sed can act like grep by combining the print operator to function on all lines that match a regular expression:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/match/ p&#x27;</span>
+</code></pre>
+<p>which is the same as:</p>
+<pre><code class="language-bash">grep match
+</code></pre>
+<h2 id="reversing-the-restriction-with-!" tabindex="-1">Reversing the restriction with ! <a class="header-anchor" href="#reversing-the-restriction-with-!" aria-hidden="true">🔗</a></h2>
+<p>Sometimes you need to perform an action on every line except those that match a regular expression, or those outside of a range of addresses. The &quot;<code>!</code>&quot; character, which often means not in UNIX utilities, inverts the address restriction. You remember that</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/match/ p&#x27;</span>
+</code></pre>
+<p>acts like the grep command. The &quot;<code>-v</code>&quot; option to grep prints all lines that don't contain the pattern. Sed can do this with</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/match/ !p&#x27;</span> &lt;/tmp/b
+</code></pre>
+<h2 id="relationships-between-d%2C-p%2C-and-!" tabindex="-1">Relationships between d, p, and ! <a class="header-anchor" href="#relationships-between-d%2C-p%2C-and-!" aria-hidden="true">🔗</a></h2>
+<p>As you may have noticed, there are often several ways to solve the same problem with sed. This is because print and delete are opposite functions, and it appears that &quot;<code>!p</code>&quot; is similar to &quot;<code>d</code>&quot;, while &quot;<code>!d</code>&quot; is similar to &quot;<code>p</code>&quot;. I wanted to test this, so I created a 20 line file, and tried every different combination. The following table, which shows the results, demonstrates the difference:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:center" colspan="4">Confronti tra d p e !</th>
+</tr>
+<tr>
+<th style="text-align:center">Sed</th>
+<th>Range</th>
+<th>Command</th>
+<th style="text-align:center">Results</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>1,10</td>
+<td>p</td>
+<td style="text-align:center">Print first 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>11,$</td>
+<td>!p</td>
+<td style="text-align:center">Print first 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>1,10</td>
+<td>!d</td>
+<td style="text-align:center">Print first 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>11,$</td>
+<td>d</td>
+<td style="text-align:center">Print first 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>1,10</td>
+<td>!p</td>
+<td style="text-align:center">Print last 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>11,$</td>
+<td>p</td>
+<td style="text-align:center">Print last 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>1,10</td>
+<td>d</td>
+<td style="text-align:center">Print last 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>11,$</td>
+<td>!d</td>
+<td style="text-align:center">Print last 10 lines</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>1,10</td>
+<td>d</td>
+<td style="text-align:center">Nothing printed</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>1,10</td>
+<td>!d</td>
+<td style="text-align:center">Nothing printed</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>11,$</td>
+<td>d</td>
+<td style="text-align:center">Nothing printed</td>
+</tr>
+<tr>
+<td style="text-align:center">sed -n</td>
+<td>11,$</td>
+<td>!d</td>
+<td style="text-align:center">Nothing printed</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>1,10</td>
+<td>p</td>
+<td style="text-align:center">Print first 10 lines twice, then next 10 lines once</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>11,$</td>
+<td>!p</td>
+<td style="text-align:center">Print first 10 lines twice, then last 10 lines once</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>1,10</td>
+<td>!p</td>
+<td style="text-align:center">Print first 10 lines once, then last 10 lines twice</td>
+</tr>
+<tr>
+<td style="text-align:center">sed</td>
+<td>11,$</td>
+<td>p</td>
+<td style="text-align:center">Print first 10 lines once, then last 10 lines twice</td>
+</tr>
+</tbody>
+</table>
+<p>This table shows that the following commands are identical:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;1,10 p&#x27;</span>
+sed -n <span class="hljs-string">&#x27;11,$ !p&#x27;</span>
+sed <span class="hljs-string">&#x27;1,10 !d&#x27;</span>
+sed <span class="hljs-string">&#x27;11,$ d&#x27;</span>
+</code></pre>
+<p>It also shows that the &quot;<code>!</code>&quot; command &quot;inverts&quot; the address range, operating on the other lines.</p>
+<h2 id="the-q-or-quit-command" tabindex="-1">The q or quit command <a class="header-anchor" href="#the-q-or-quit-command" aria-hidden="true">🔗</a></h2>
+<p>There is one more simple command that can restrict the changes to a set of lines. It is the &quot;<code>q</code>&quot; command: quit. the third way to duplicate the head command is:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;11 q&#x27;</span>
+</code></pre>
+<p>which quits when the eleventh line is reached. This command is most useful when you wish to abort the editing after some condition is reached.</p>
+<p>The &quot;<code>q</code>&quot; command is the one command that does not take a range of addresses. Obviously the command</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;1,10 q&#x27;</span>
+</code></pre>
+<p>cannot quit 10 times. Instead</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;1 q&#x27;</span>
+</code></pre>
+<p>or</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;10 q&#x27;</span>
+</code></pre>
+<p>is correct.</p>
+<h2 id="grouping-with-%7B-and-%7D" tabindex="-1">Grouping with <code>{</code> and <code>}</code> <a class="header-anchor" href="#grouping-with-%7B-and-%7D" aria-hidden="true">🔗</a></h2>
+<p>The curly braces, &quot;<code>{</code>&quot; and &quot;<code>}</code>&quot;, are used to group the commands.</p>
+<p>Hardly worth the buildup. All that prose and the solution is just matching squiggles. Well, there is one complication. Since each sed command must start on its own line, <strong>the curly braces and the nested sed commands must be on separate lines</strong>.</p>
+<p>Previously, I showed you how to remove comments starting with a &quot;<code>#</code>.&quot; If you wanted to restrict the removal to lines between special &quot;begin&quot; and &quot;end&quot; key words, you could use:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># This is a Bourne shell script that removes #-type comments</span>
+<span class="hljs-comment"># between &#x27;begin&#x27; and &#x27;end&#x27; words.</span>
+sed -n <span class="hljs-string">&#x27;
+    /begin/,/end/ {
+            s/#.*//
+            s/[ ^I]*$//
+            /^$/ d
+            p
+    }
+&#x27;</span>
+</code></pre>
+<p>These braces can be nested, which allow you to combine address ranges. You could perform the same action as before, but limit the change to the first 100 lines:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># This is a Bourne shell script that removes #-type comments</span>
+<span class="hljs-comment"># between &#x27;begin&#x27; and &#x27;end&#x27; words.</span>
+sed -n <span class="hljs-string">&#x27;
+    1,100 {
+        /begin/,/end/ {
+                s/#.*//
+                s/[ ^I]*$//
+                /^$/ d
+                p
+        }
+    }
+&#x27;</span>
+</code></pre>
+<p>You can place a &quot;<code>!</code>&quot; before a set of curly braces. This inverts the address, which removes comments from all lines except those between the two reserved words:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+    /begin/,/end/ !{
+            s/#.*//
+            s/[ ^I]*$//
+            /^$/ d
+            p
+    }
+&#x27;</span>
+</code></pre>
+<h2 id="operating-in-a-pattern-range-except-for-the-patterns" tabindex="-1">Operating in a pattern range except for the patterns <a class="header-anchor" href="#operating-in-a-pattern-range-except-for-the-patterns" aria-hidden="true">🔗</a></h2>
+<p>You may remember that I mentioned you can do a substitute on a pattern range, like changing &quot;old&quot; to &quot;new&quot; between a begin/end pattern:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+    /begin/,/end/ s/old/new/
+&#x27;</span>
+</code></pre>
+<p>Another way to write this is to use the curly braces for grouping:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+    /begin/,/end/ {
+        s/old/new/
+    }
+&#x27;</span>
+</code></pre>
+<p>I think this makes the code clearer to understand, and easier to modify, as you will see below.</p>
+<p>If you did not want to make any changes where the word &quot;begin&quot; occurred, you could simple add a new condition to skip over that line:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+    /begin/,/end/ {
+        /begin/n # skip over the line that has &quot;begin&quot; on it, il comando n passa alla riga seguente aggiungendola all ouput
+        s/old/new/
+    }
+&#x27;</span>
+</code></pre>
+<p>However, skipping over the line that has &quot;end&quot; is trickier. If you use the same method you used for &quot;begin&quot; then the sed engine will not see the &quot;end&quot; to stop the range - it skips over that as well. The solution is to do a substitute on all lines that don't have the &quot;end&quot; by using</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+    /begin/,/end/ {
+      /begin/n # skip over the line that has &quot;begin&quot; on it
+      /end/ !{
+        s/old/new/
+      }  
+    }
+&#x27;</span>
+</code></pre>
+<h2 id="writing-a-file-with-the-'w'-command" tabindex="-1">Writing a file with the 'w' command <a class="header-anchor" href="#writing-a-file-with-the-'w'-command" aria-hidden="true">🔗</a></h2>
+<p>You may remember that the substitute command can write to a file. Here again is the example that will only write <em>lines that start with an even number (and followed by a space)</em>:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/^[0-9]*[02468] /&amp;/w even&#x27;</span> &lt;file
+</code></pre>
+<p>I used the &quot;<code>&amp;</code>&quot; in the replacement part of the substitution command so that the line would not be changed. A simpler example is to use the &quot;<code>w</code>&quot; <code>command</code>, which has the same syntax as the &quot;<code>w</code>&quot; <code>flag</code> in the substitute command:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/^[0-9]*[02468]/ w even&#x27;</span> &lt;file
+</code></pre>
+<p>Remember - <strong>only one space must follow the command</strong>. Anything else will be considered part of the file name. The &quot;w&quot; command also has the same limitation as the &quot;w&quot; flag: only 10 files can be opened in sed.</p>
+<h2 id="reading-in-a-file-with-the-'r'-command" tabindex="-1">Reading in a file with the 'r' command <a class="header-anchor" href="#reading-in-a-file-with-the-'r'-command" aria-hidden="true">🔗</a></h2>
+<p>There is also a command for reading files. The command</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;$r end&#x27;</span> &lt;<span class="hljs-keyword">in</span>&gt;out
+</code></pre>
+<p>will append the file &quot;end&quot; at the end of the file (address &quot;<code>$</code>&quot;). The following will insert a file after the line with the word &quot;INCLUDE:&quot;</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/INCLUDE/ r file&#x27;</span> &lt;<span class="hljs-keyword">in</span> &gt;out
+</code></pre>
+<p>You can use the curly braces to delete the line having the &quot;INCLUDE&quot; command on it:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;/INCLUDE/ {
+    r file
+    d
+}&#x27;</span>
+</code></pre>
+<p><strong>The order of the delete command &quot;d&quot; and the read file command &quot;r&quot; is important</strong>. Change the order and it will not work. There are two subtle actions that prevent this from working. The first is the &quot;<code>r</code>&quot; command writes the file to the output stream. <mark>The file is not inserted into the pattern space, and therefore cannot be modified by any command</mark>. Therefore the delete command does not affect the data read from the file.</p>
+<p>The other subtlety is the &quot;<code>d</code>&quot; command deletes the current data in the pattern space. Once all of the data is deleted, it does make sense that no other action will be attempted. Therefore a &quot;<code>d</code>&quot; command executed in a curly brace also aborts all further actions. As an example, <strong>the substitute command below is never executed</strong>:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># this example is WRONG</span>
+sed -e <span class="hljs-string">&#x27;1 {
+    d
+    s/.*// # Questo comando non viene eseguito
+}&#x27;</span>
+</code></pre>
+<p>The earlier example is a crude version of the C preprocessor program. The file that is included has a predetermined name. It would be nice if sed allowed a variable (e.g &quot;<code>\1</code>&quot; ) instead of a fixed file name. Alas, sed doesn't have this ability. You could work around this limitation by creating sed commands on the fly, or by using shell quotes to pass variables into the sed script. Suppose you wanted to create a command that would include a file like cpp, but the filename is an argument to the script. An example of this script is:</p>
+<pre><code class="language-c">% include <span class="hljs-string">&#x27;sys/param.h&#x27;</span> &lt;file.c &gt;file.c.new
+</code></pre>
+<p>A shell script to do this would be:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># watch out for a &#x27;/&#x27; in the parameter</span>
+<span class="hljs-comment"># use alternate search delimiter</span>
+sed -e <span class="hljs-string">&#x27;\_#INCLUDE &lt;&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><span class="hljs-string">&#x27;&gt;_{
+    r &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><span class="hljs-string">&#x27;
+    d
+}&#x27;</span>
+</code></pre>
+<p>Let me elaborate. If you had a file that contains</p>
+<p>Test first file
+<code>#INCLUDE &lt;file1&gt;</code>
+Test second file
+<code>#INCLUDE &lt;file2&gt;</code></p>
+<p>you could use the command</p>
+<pre><code class="language-bash">sed_include1.sh file1&lt;input|sed_include1.sh file2
+</code></pre>
+<p>to include the specified files.</p>
+<h2 id="sunos-and-the-%23-comment-command" tabindex="-1">SunOS and the # Comment Command <a class="header-anchor" href="#sunos-and-the-%23-comment-command" aria-hidden="true">🔗</a></h2>
+<p>As we dig deeper into sed, comments will make the commands easier to follow. The older versions of sed only allow one line as a comment, and it must be the first line. SunOS (and GNU's sed) allows more than one comment, and these comments don't have to be first. The last example could be:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># watch out for a &#x27;/&#x27; in the parameter</span>
+<span class="hljs-comment"># use alternate search delimiter</span>
+sed -e <span class="hljs-string">&#x27;\_#INCLUDE &lt;&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><span class="hljs-string">&#x27;&gt;_{
+
+    # read the file
+    r &#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><span class="hljs-string">&#x27;
+
+    # delete any characters in the pattern space
+    # and read the next line in
+    d
+}&#x27;</span>
+</code></pre>
+<h2 id="adding%2C-changing%2C-inserting-new-lines" tabindex="-1">Adding, Changing, Inserting new lines <a class="header-anchor" href="#adding%2C-changing%2C-inserting-new-lines" aria-hidden="true">🔗</a></h2>
+<p>Sed has three commands used to add new lines to the output stream. Because an entire line is added, the new line is on a line by itself to emphasize this. There is no option, an entire line is used, and it must be on its own line. If you are familiar with many UNIX utilities, you would expect sed to use a similar convention: lines are continued by ending the previous line with a &quot;<code>\</code>&quot;. The syntax to these commands is finicky, like the &quot;<code>r</code>&quot; and &quot;<code>w</code>&quot; commands.</p>
+<h3 id="append-a-line-with-'a'" tabindex="-1">Append a line with '<code>a</code>' <a class="header-anchor" href="#append-a-line-with-'a'" aria-hidden="true">🔗</a></h3>
+<p>The &quot;<code>a</code>&quot; command appends a line after the range or pattern. This example will add a line after every line with &quot;WORD:&quot;</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/WORD/ a\
+Add this line after every line with WORD
+&#x27;</span>
+</code></pre>
+<p>You could eliminate two lines in the shell script if you wish:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;/WORD/ a\
+Add this line after every line with WORD&#x27;</span>
+</code></pre>
+<p>I prefer the first form because it's easier to add a new command by adding a new line and because the intent is clearer. There must not be a space after the &quot;<code>\</code>&quot;.</p>
+<h3 id="insert-a-line-with-'i'" tabindex="-1">Insert a line with 'i' <a class="header-anchor" href="#insert-a-line-with-'i'" aria-hidden="true">🔗</a></h3>
+<p>You can insert a new line before the pattern with the &quot;<code>i</code>&quot; command:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/WORD/ i\
+Add this line before every line with WORD
+&#x27;</span>
+</code></pre>
+<h3 id="change-a-line-with-'c'" tabindex="-1">Change a line with 'c' <a class="header-anchor" href="#change-a-line-with-'c'" aria-hidden="true">🔗</a></h3>
+<p>You can change the current line with a new line.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/WORD/ c\
+Replace the current line with the line
+&#x27;</span>
+</code></pre>
+<p>A &quot;<code>d</code>&quot; command followed by a &quot;<code>a</code>&quot; command won't work, as I discussed earlier. The &quot;<code>d</code>&quot; command <strong>would terminate the current actions</strong>. You can combine all three actions using curly braces:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/WORD/ {
+i\
+Add this line before
+a\
+Add this line after
+c\
+Change the line to this one
+}&#x27;</span>
+</code></pre>
+<h2 id="leading-tabs-and-spaces-in-a-sed-script" tabindex="-1">Leading tabs and spaces in a sed script <a class="header-anchor" href="#leading-tabs-and-spaces-in-a-sed-script" aria-hidden="true">🔗</a></h2>
+<p>Sed ignores leading tabs and spaces in all commands. However these white space characters may or may not be ignored if they start the text following a &quot;<code>a</code>,&quot; &quot;<code>c</code>&quot; or &quot;<code>i</code>&quot; command. In SunOS, both &quot;features&quot; are available. The Berkeley (and Linux) style sed is in /usr/bin, and the AT&amp;T version (System V) is in /usr/5bin/.</p>
+<p>To elaborate, the <code>/usr/bin/sed</code> command retains white space, while the /usr/5bin/sed strips off leading spaces. If you want to keep leading spaces, and not care about which version of sed you are using, put a &quot;<code>\</code>&quot; as the first character of the line:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+    a\
+\   This line starts with a tab
+&#x27;</span>
+</code></pre>
+<h2 id="adding-more-than-one-line" tabindex="-1">Adding more than one line <a class="header-anchor" href="#adding-more-than-one-line" aria-hidden="true">🔗</a></h2>
+<p>All three commands will allow you to add more than one line. Just end each line with a &quot;<code>\</code>&quot;:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/WORD/ a\
+Add this line\
+This line\
+And this line
+&#x27;</span>
+</code></pre>
+<h2 id="adding-lines-and-the-pattern-space" tabindex="-1">Adding lines and the pattern space <a class="header-anchor" href="#adding-lines-and-the-pattern-space" aria-hidden="true">🔗</a></h2>
+<p>I have mentioned the pattern space before. Most commands operate on the pattern space, and subsequent commands may act on the results of the last modification. The three previous commands, like the read file command, add the new lines to the output stream, bypassing the pattern space.</p>
+<h2 id="address-ranges-and-the-above-commands" tabindex="-1">Address ranges and the above commands <a class="header-anchor" href="#address-ranges-and-the-above-commands" aria-hidden="true">🔗</a></h2>
+<p>You may remember that earlier I warned you that some commands can take a range of lines, and others cannot. To be precise, the commands &quot;<code>a</code>&quot;, &quot;<code>i</code>&quot;, &quot;<code>r</code>&quot;, and &quot;<code>q</code>&quot; will not take a range like &quot;<code>1,100</code>&quot; or &quot;<code>/begin/,/end/</code>&quot;. The documentation states that the read command can take a range, but I got an error when I tried this. The &quot;<code>c</code>&quot; or change command allows this, and it will let you change several lines into one:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/begin/,/end/ c\
+***DELETED***
+&#x27;</span>
+</code></pre>
+<p>If you need to do this, you can use the curly braces, as that will let you perform the operation on every line:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># add a blank line after every line</span>
+sed <span class="hljs-string">&#x27;1,$ {
+    a\
+
+}&#x27;</span>
+</code></pre>
+<h2 id="multi-line-patterns" tabindex="-1">Multi-Line Patterns <a class="header-anchor" href="#multi-line-patterns" aria-hidden="true">🔗</a></h2>
+<p>Most UNIX utilities are line oriented. Regular expressions are line oriented. Searching for patterns that covers more than one line is not an easy task. (Hint: It will be very shortly.)</p>
+<p><strong>Sed reads in a line of text</strong>, performs commands which may modify the line, and outputs modification if desired. The main loop of a sed script looks like this:</p>
+<blockquote>
+<p>The next line is read from the input file and places it in the pattern space.</p>
+</blockquote>
+<blockquote>
+<p>If the end of file is found, and if there are additional files to read, the current file is closed, the next file is opened, and the first line of the new file is placed into the pattern space.</p>
+</blockquote>
+<blockquote>
+<p>The line count is incremented by one. Opening a new file does not reset this number.</p>
+</blockquote>
+<blockquote>
+<p>Each sed command is examined. If there is a restriction placed on the command, and the current line in the pattern space meets that restriction, the command is executed. Some commands, like &quot;n&quot; or &quot;d&quot; cause sed to go to the top of the loop. The &quot;q&quot; command causes sed to stop. Otherwise the next command is examined.</p>
+</blockquote>
+<blockquote>
+<p>After all of the commands are examined, the pattern space is output unless sed has the optional &quot;-n&quot; argument.</p>
+</blockquote>
+<p>The restriction before the command determines if the command is executed. If the restriction is a pattern, and the operation is the delete command, then the following will delete all lines that have the pattern:</p>
+<pre><code>/PATTERN/ d
+</code></pre>
+<p>If the restriction is a pair of numbers, then the deletion will happen if the line number is equal to the first number or greater than the first number and less than or equal to the last number:</p>
+<pre><code>10,20 d
+</code></pre>
+<p>If the restriction is a pair of patterns, there is a variable that is kept for each of these pairs. If the variable is false and the first pattern is found, the variable is made true. If the variable is true, the command is executed. If the variable is true, and the last pattern is on the line, after the command is executed the variable is turned off:</p>
+<pre><code>/begin/,/end/ d
+</code></pre>
+<p>Whew! That was a mouthful. If you have read carefully up to here, you should have breezed through this. You may want to refer back, because I covered several subtle points. My choice of words was deliberate. It covers some unusual cases, like:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># what happens if the second number</span>
+<span class="hljs-comment"># is less than the first number?</span>
+sed -n <span class="hljs-string">&#x27;20,1 p&#x27;</span> file
+</code></pre>
+<p>and</p>
+<pre><code class="language-bash"><span class="hljs-comment"># generate a 10 line file with line numbers</span>
+<span class="hljs-comment"># and see what happens when two patterns overlap</span>
+<span class="hljs-built_in">yes</span> | <span class="hljs-built_in">head</span> -10 | <span class="hljs-built_in">cat</span> -n | \
+sed -n -e <span class="hljs-string">&#x27;/1/,/7/ p&#x27;</span> -e <span class="hljs-string">&#x27;/5/,/9/ p&#x27;</span>
+</code></pre>
+<p>Enough mental punishment. Here is another review, this time in a table format. Assume the input file contains the following lines:</p>
+<pre><code>AB
+CD
+EF
+GH
+IJ
+</code></pre>
+<p>When sed starts up, the first line is placed in the pattern space. The next line is &quot;CD.&quot; The operations of the &quot;<code>n</code>&quot;, &quot;<code>d</code>&quot;, and &quot;<code>p</code>&quot; commands can be summarized as:</p>
+<table class="table"><thead>
+<tr>
+<th>Pattern Space</th>
+<th>Next Input</th>
+<th>Command</th>
+<th>Output</th>
+<th>New Pattern Space</th>
+<th>New Text Input</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>n</td>
+<td><default></td>
+<td>CD</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>d</td>
+<td>-</td>
+<td>CD</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>p</td>
+<td>AB</td>
+<td>CD</td>
+<td>EF</td>
+</tr>
+</tbody>
+</table>
+<h2 id="print-line-number-with-%3D" tabindex="-1">Print line number with = <a class="header-anchor" href="#print-line-number-with-%3D" aria-hidden="true">🔗</a></h2>
+<p>The &quot;<code>=</code>&quot; command prints the current line number to standard output. One way to find out the line numbers that contain a pattern is to use:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># add line numbers first,</span>
+<span class="hljs-comment"># then use grep, </span>
+<span class="hljs-comment"># then just print the number</span>
+<span class="hljs-built_in">cat</span> -n file | grep <span class="hljs-string">&#x27;PATTERN&#x27;</span> | awk <span class="hljs-string">&#x27;{print $1}&#x27;</span>
+</code></pre>
+<p>The sed solution is:</p>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/PATTERN/ =&#x27;</span> file
+</code></pre>
+<p>Earlier I used the following to find the number of lines in a file</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+lines=`<span class="hljs-built_in">wc</span> -l file | awk <span class="hljs-string">&#x27;{print $1}&#x27;</span> `
+</code></pre>
+<p>Using the &quot;<code>=</code>&quot; command can simplify this:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+lines=`sed -n <span class="hljs-string">&#x27;$=&#x27;</span> file `
+</code></pre>
+<p>The &quot;<code>=</code>&quot; command only accepts one address, so if you want to print the number for a range of lines, you must use the curly braces:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># Just print the line numbers </span>
+sed -n <span class="hljs-string">&#x27;/begin/,/end/ {
+=
+d
+}&#x27;</span> file
+</code></pre>
+<p>Since the &quot;<code>=</code>&quot; command only prints to standard output, you cannot print the line number on the same line as the pattern. You need to edit multi-line patterns to do this.</p>
+<h2 id="transform-with-y" tabindex="-1">Transform with y <a class="header-anchor" href="#transform-with-y" aria-hidden="true">🔗</a></h2>
+<p>If you wanted to change a word from lower case to upper case, you could write 26 character substitutions, converting &quot;a&quot; to &quot;A,&quot; etc. Sed has a command that operates like the tr program. It is called the &quot;<code>y</code>&quot; command. For instance, to change the letters &quot;a&quot; through &quot;f&quot; into their upper case form, use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;y/abcdef/ABCDEF/&#x27;</span> file
+</code></pre>
+<p>Here's a sed example that convers all uppercase letters to lowercase letters, like the tr command:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;y/ABCDEFGHIJKLMNOPQRSTUVWXYZ/abcdefghijklmnopqrstuvwxyz/&#x27;</span> &lt;uppercase &gt;lowercase
+</code></pre>
+<p>If you wanted to convert a line that contained a hexadecimal number (e.g. 0x1aff) to upper case (0x1AFF), you could use:</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/0x[0-9a-zA-Z]*/ y/abcdef/ABCDEF&#x27;</span> file
+</code></pre>
+<p>This works fine if there are only numbers in the file. If you wanted to change the second word in a line to upper case, and you are using classic sed, you are out of luck - unless you use multi-line editing. (Hey - I think there is some sort of theme here!)</p>
+<p>However, GNU sed has a uppercase and lowercase extension.</p>
+<h2 id="displaying-control-characters-with-a-l" tabindex="-1">Displaying control characters with a l <a class="header-anchor" href="#displaying-control-characters-with-a-l" aria-hidden="true">🔗</a></h2>
+<p>The &quot;<code>l</code>&quot; command prints the current pattern space. It is therefore useful in debugging sed scripts. It also converts unprintable characters into printing characters by outputting the value in octal preceded by a &quot;<code>\</code>&quot; character. I found it useful to print out the current pattern space, while probing the subtleties of sed.</p>
+<h2 id="working-with-multiple-lines" tabindex="-1">Working with Multiple Lines <a class="header-anchor" href="#working-with-multiple-lines" aria-hidden="true">🔗</a></h2>
+<p>There are three new commands used in multiple-line patterns: &quot;<code>N</code>&quot;, &quot;<code>D</code>&quot;, and &quot;<code>P</code>&quot;. I will explain their relation to the matching &quot;n,&quot; &quot;d,&quot; and &quot;p&quot; single-line commands.</p>
+<p>The &quot;<code>n</code>&quot; command will print out the current pattern space (unless the &quot;-n&quot; flag is used), empty the current pattern space, and read in the next line of input. The &quot;<code>N</code>&quot; command does not print out the current pattern space and does not empty the pattern space. It reads in the next line, but appends a new line character along with the input line itself to the pattern space.</p>
+<p>The &quot;<code>d</code>&quot; command deletes the current pattern space, reads in the next line, puts the new line into the pattern space, and aborts the current command, and starts execution at the first sed command. This is called starting a new &quot;cycle.&quot; The &quot;<code>D</code>&quot; command deletes the first portion of the pattern space, up to the new line character, leaving the rest of the pattern alone. Like &quot;d,&quot; it stops the current command and starts the command cycle over again. However, it will not print the current pattern space. You must print it yourself, a step earlier. If the &quot;D&quot; command is executed with a group of other commands in a curly brace, commands after the &quot;D&quot; command are ignored. The next group of sed commands is executed, unless the pattern space is emptied. If this happens, the cycle is started from the top and a new line is read.</p>
+<p>The &quot;<code>p</code>&quot; command prints the entire pattern space. The &quot;<code>P</code>&quot; command only prints the first part of the pattern space, up to the NEWLINE character. Neither the &quot;p&quot; nor the &quot;P&quot; command changes the patterns space.</p>
+<p>Some examples might demonstrate &quot;N&quot; by itself isn't very useful. the filter</p>
+<pre><code class="language-bash">sed -e <span class="hljs-string">&#x27;N&#x27;</span>
+</code></pre>
+<p>doesn't modify the input stream. Instead, it combines the first and second line, then prints them, combines the third and fourth line, and prints them, etc. It does allow you to use a new &quot;anchor&quot; character: &quot;<code>\n</code>&quot;. This matches the new line character that separates multiple lines in the pattern space. If you wanted to search for a line that ended with the character &quot;#,&quot; and append the next line to it, you could use</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+# look for a &quot;#&quot; at the end of the line
+/#$/ {
+# Found one - now read in the next line
+    N
+# delete the &quot;#&quot; and the new line character, 
+    s/#\n//
+}&#x27;</span> file
+</code></pre>
+<p>You could search for two lines containing &quot;ONE&quot; and &quot;TWO&quot; and only print out the two consecutive lines:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed -n <span class="hljs-string">&#x27;
+/ONE/ {
+# found &quot;ONE&quot; - read in next line
+    N
+# look for &quot;TWO&quot; on the second line
+# and print if there.
+    /\n.*TWO/ p
+}&#x27;</span> file
+</code></pre>
+<p>The next example would delete everything between &quot;ONE&quot; and &quot;TWO:&quot;</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/ONE/ {
+# append a line
+    N
+# search for TWO on the second line	
+    /\n.*TWO/ {
+# found it - now edit making one line
+        s/ONE.*\n.*TWO/ONE TWO/
+    }
+}&#x27;</span> file
+</code></pre>
+<h3 id="matching-three-lines-with-sed" tabindex="-1">Matching three lines with sed <a class="header-anchor" href="#matching-three-lines-with-sed" aria-hidden="true">🔗</a></h3>
+<p>You can match multiple lines in searches.</p>
+<p>Here is a way to look for the string &quot;skip3&quot;, and if found, delete that line and the next two lines.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;/skip3/ {
+           N
+           N
+           s/skip3\n.*\n.*/# 3 lines deleted/
+}&#x27;</span>  
+</code></pre>
+<p>Note that it doesn't matter what the next two lines are. If you wanted to match 3 particular lines, it's a little more work.</p>
+<p>This script looks for three lines, where the first line contains &quot;one&quot;, the second contained &quot;two&quot; and the third contains &quot;three&quot;, and if found, replace them with the string &quot;1+2+3&quot;:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/one/ {
+        N
+        /two/ {
+            N
+            /three/ {
+                    N
+                    s/one\ntwo\nthree/1+2+3/
+                    }
+            }
+        }
+&#x27;</span>
+</code></pre>
+<h2 id="matching-patterns-that-span-multiple-lines" tabindex="-1">Matching patterns that span multiple lines <a class="header-anchor" href="#matching-patterns-that-span-multiple-lines" aria-hidden="true">🔗</a></h2>
+<p>You can either search for a particular pattern on two consecutive lines, or you can search for two consecutive words that may be split on a line boundary. The next example will look for two words which are either on the same line or one is on the end of a line and the second is on the beginning of the next line. If found, the first word is deleted:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/ONE/ {
+# append a line
+    N
+# &quot;ONE TWO&quot; on same line
+    s/ONE TWO/TWO/
+# &quot;ONE
+# TWO&quot; on two consecutive lines
+    s/ONE\nTWO/TWO/
+}&#x27;</span> file
+</code></pre>
+<p>Let's use the</p>
+<pre><code>&quot;D&quot;     command, and if we find a line containing
+&quot;TWO&quot;   immediately after a line containing
+&quot;ONE&quot;   then delete the first line:
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/ONE/ {
+# append a line
+    N
+# if TWO found, delete the first line
+    /\n.*TWO/ D
+}&#x27;</span> file
+</code></pre>
+<p>If we wanted to print the first line instead of deleting it, and not print every other line, change the &quot;<code>D</code>&quot; to a &quot;<code>P</code>&quot; and add a &quot;<code>-n</code>&quot; as an argument to sed:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed -n <span class="hljs-string">&#x27;
+# by default - do not print anything
+/ONE/ {
+# append a line
+    N
+# if TWO found, print the first line
+    /\n.*TWO/ P
+}&#x27;</span> file
+</code></pre>
+<p>It is very common to combine all three multi-line commands. The typical order is &quot;<code>N'&quot;, &quot;</code>P<code>&quot; and lastly &quot;</code>D'&quot;. This one will delete everything between &quot;ONE&quot; and &quot;TWO&quot; if they are on one or two consecutive lines:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/ONE/ {
+# append the next line
+    N
+# look for &quot;ONE&quot; followed by &quot;TWO&quot;
+    /ONE.*TWO/ {
+#   delete everything between
+        s/ONE.*TWO/ONE TWO/
+#   print
+        P
+#   then delete the first line
+        D
+    }
+}&#x27;</span> file
+</code></pre>
+<p>Earlier I talked about the &quot;`='&quot; command, and using it to add line numbers to a file. You can use two invocations of sed to do this (although it is possible to do it with one, but that must wait until next section). The first sed command will output a line number on one line, and then print the line on the next line. The second invocation of sed will merge the two lines together:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;=&#x27;</span> file | \
+sed <span class="hljs-string">&#x27;{
+    N
+    s/\n/ /
+}&#x27;</span>
+</code></pre>
+<p>If you find it necessary, you can break one line into two lines, edit them, and merge them together again. As an example, if you had a file that had a hexadecimal number followed by a word, and you wanted to convert the first word to all upper case, you can use the &quot;y&quot; command, but you must first split the line into two lines, change one of the two, and merge them together. That is, a line containing</p>
+<pre><code>0x1fff table2
+</code></pre>
+<p>will be changed into two lines:</p>
+<pre><code>0x1fff
+table2
+</code></pre>
+<p>and the first line will be converted into upper case. I will use tr to convert the space into a new line, and then use sed to do the rest. The command would be</p>
+<pre><code class="language-bash">./sed_split &lt;file
+</code></pre>
+<p>and sed_split would be:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27; &#x27;</span> <span class="hljs-string">&#x27;\012&#x27;</span> | 
+sed <span class="hljs-string">&#x27; {
+    y/abcdef/ABCDEF/
+    N
+    s/\n/ /
+}&#x27;</span>
+</code></pre>
+<p>It isn't obvious, but sed could be used instead of tr. You can embed a new line in a substitute command, but you must escape it with a backslash. It is unfortunate that you must use &quot;<code>\n</code>&quot; in the left side of a substitute command, and an embedded new line in the right hand side. Heavy sigh. Here is the example:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+s/ /\
+/&#x27;</span> | \
+sed <span class="hljs-string">&#x27; {
+    y/abcdef/ABCDEF/
+    N
+    s/\n/ /
+}&#x27;</span>
+</code></pre>
+<p>Sometimes I add a special character as a marker, and look for that character in the input stream. When found, it indicates the place a blank used to be. A backslash is a good character, except it must be escaped with a backslash, and makes the sed script obscure. Save it for that guy who keeps asking dumb questions. The sed script to change a blank into a &quot;<code>\</code>&quot; following by a new line would be:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;s/ /\\\
+/&#x27;</span> file
+</code></pre>
+<p>Yeah. That's the ticket. Or use the C shell and really confuse him!</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/csh -f</span>
+sed <span class="hljs-string">&#x27;\
+s/ /\\\\
+/&#x27;</span> file
+</code></pre>
+<p>A few more examples of that, and he'll never ask you a question again! I think I'm getting carried away. I'll summarize with a chart that covers the features we've talked about:</p>
+<p>Assume the input file contains the following lines:</p>
+<pre><code>AB
+CD
+EF
+GH
+IJ
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th>Pattern Space</th>
+<th>Next Input</th>
+<th>Command</th>
+<th>Output</th>
+<th>New Pattern Space</th>
+<th>New Text Input</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>n</td>
+<td><default></td>
+<td>CD</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>N</td>
+<td>-</td>
+<td>AB\nCD</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>d</td>
+<td>-</td>
+<td>-</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>D</td>
+<td>-</td>
+<td>-</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>p</td>
+<td>AB</td>
+<td>AB</td>
+<td>CD</td>
+</tr>
+<tr>
+<td>AB</td>
+<td>CD</td>
+<td>P</td>
+<td>AB</td>
+<td>AB</td>
+<td>CD</td>
+</tr>
+<tr>
+<td>AB\nCD</td>
+<td>EF</td>
+<td>n</td>
+<td><default></td>
+<td>EF</td>
+<td>GH</td>
+</tr>
+<tr>
+<td>AB\nCD</td>
+<td>EF</td>
+<td>N</td>
+<td>-</td>
+<td>AB\nCD\nEF</td>
+<td>GH</td>
+</tr>
+<tr>
+<td>AB\nCD</td>
+<td>EF</td>
+<td>d</td>
+<td>-</td>
+<td>EF</td>
+<td>GH</td>
+</tr>
+<tr>
+<td>AB\nCD</td>
+<td>EF</td>
+<td>D</td>
+<td>-</td>
+<td>CD</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB\nCD</td>
+<td>EF</td>
+<td>p</td>
+<td>AB\nCD</td>
+<td>AB\nCD</td>
+<td>EF</td>
+</tr>
+<tr>
+<td>AB\nCD</td>
+<td>EF</td>
+<td>P</td>
+<td>AB</td>
+<td>AB\nCD</td>
+<td>EF</td>
+</tr>
+</tbody>
+</table>
+<h2 id="using-newlines-in-sed-scripts" tabindex="-1">Using newlines in sed scripts <a class="header-anchor" href="#using-newlines-in-sed-scripts" aria-hidden="true">🔗</a></h2>
+<p>Occasionally one wishes to use a new line character in a sed script. Well, this has some subtle issues here. If one wants to search for a new line, one has to use &quot;<code>\n</code>&quot;. Here is an example where you search for a phrase, and delete the new line character after that phrase - joining two lines together.</p>
+<pre><code class="language-bash">(<span class="hljs-built_in">echo</span> a;<span class="hljs-built_in">echo</span> x;<span class="hljs-built_in">echo</span> y) | sed <span class="hljs-string">&#x27;/x$/ {
+N
+s:x\n:x:
+}&#x27;</span>
+</code></pre>
+<p>which generates</p>
+<pre><code>a
+xy
+</code></pre>
+<p>However, if you are inserting a new line, don't use &quot;<code>\n</code>&quot; - instead <strong>insert a literal new line character</strong>:</p>
+<pre><code class="language-bash">(<span class="hljs-built_in">echo</span> a;<span class="hljs-built_in">echo</span> x;<span class="hljs-built_in">echo</span> y) | sed <span class="hljs-string">&#x27;s:x:X\
+:&#x27;</span>
+</code></pre>
+<p>generates</p>
+<pre><code>a
+X
+
+y
+</code></pre>
+<h2 id="the-hold-buffer" tabindex="-1">The Hold Buffer <a class="header-anchor" href="#the-hold-buffer" aria-hidden="true">🔗</a></h2>
+<p>So far we have talked about three concepts of sed: (1) The input stream or data before it is modified, (2) the output stream or data after it has been modified, and (3) the pattern space, or buffer containing characters that can be modified and send to the output stream.</p>
+<p>There is one more &quot;location&quot; to be covered: the hold buffer or <strong>hold space</strong>. Think of it as a spare pattern buffer. It can be used to &quot;copy&quot; or &quot;remember&quot; the data in the pattern space for later. There are five commands that use the hold buffer.</p>
+<h3 id="exchange-with-x" tabindex="-1">Exchange with x <a class="header-anchor" href="#exchange-with-x" aria-hidden="true">🔗</a></h3>
+<p>The &quot;<code>x</code>&quot; command eXchanges the pattern space with the hold buffer. By itself, the command isn't useful. Executing the sed command</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;x&#x27;</span>
+</code></pre>
+<p>as a filter adds a blank line in the front, and deletes the last line. It looks like it didn't change the input stream significantly, but the sed command is modifying every line.</p>
+<p>The hold buffer starts out containing a blank line. When the &quot;x&quot; command modifies the first line, line 1 is saved in the hold buffer, and the blank line takes the place of the first line. The second &quot;x&quot; command exchanges the second line with the hold buffer, which contains the first line. Each subsequent line is exchanged with the preceding line. The last line is placed in the hold buffer, and is not exchanged a second time, so it remains in the hold buffer when the program terminates, and never gets printed. This illustrates that care must be taken when storing data in the hold buffer, because it won't be output unless you explicitly request it.</p>
+<h3 id="example-of-context-grep" tabindex="-1">Example of Context Grep <a class="header-anchor" href="#example-of-context-grep" aria-hidden="true">🔗</a></h3>
+<p>One use of the hold buffer is to remember previous lines. An example of this is a utility that acts like grep as it shows you the lines that match a pattern. In addition, it shows you the line before and after the pattern. That is, if line 8 contains the pattern, this utility would print lines 7, 8 and 9.</p>
+<p>One way to do this is to see if the line has the pattern. If it does not have the pattern, put the current line in the hold buffer. If it does, print the line in the hold buffer, then the current line, and then the next line. After each set, three dashes are printed. The script checks for the existence of an argument, and if missing, prints an error. Passing the argument into the sed script is done by turning off the single quote mechanism, inserting the &quot;$1&quot; into the script, and starting up the single quote again:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># grep3 - prints out three lines around pattern</span>
+<span class="hljs-comment"># if there is only one argument, exit</span>
+
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$#</span> <span class="hljs-keyword">in</span>
+    1);;
+    *) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> pattern&quot;</span>;<span class="hljs-built_in">exit</span>;;
+<span class="hljs-keyword">esac</span>;
+<span class="hljs-comment"># I hope the argument doesn&#x27;t contain a /</span>
+<span class="hljs-comment"># if it does, sed will complain</span>
+
+<span class="hljs-comment"># use sed -n to disable printing</span>
+<span class="hljs-comment"># unless we ask for it</span>
+sed -n <span class="hljs-string">&#x27;
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; !{
+    #no match - put the current line in the hold buffer
+    x
+    # delete the old one, which is 
+    # now in the pattern buffer
+    d
+}
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; {
+    # a match - get last line
+    x
+    # print it
+    p
+    # get the original line back
+    x
+    # print it
+    p
+    # get the next line
+    n
+    # print it
+    p
+    # now add three dashes as a marker
+    a\
+---
+    # now put this line into the hold buffer
+    x
+}&#x27;</span>
+</code></pre>
+<p>Click here to get file: <a href="http://grep3.sh">grep3.sh</a></p>
+<p>You could use this to show the three lines around a keyword, i.e.:</p>
+<pre><code class="language-bash">grep3 vt100 &lt;/etc/termcap
+</code></pre>
+<h3 id="hold-with-h-or-h" tabindex="-1">Hold with h or H <a class="header-anchor" href="#hold-with-h-or-h" aria-hidden="true">🔗</a></h3>
+<p>The &quot;x&quot; command exchanges the hold buffer and the pattern buffer. Both are changed. The &quot;<code>h</code>&quot; command copies the pattern buffer into the hold buffer. The pattern buffer is unchanged. An identical script to the above uses the hold commands:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># grep3 version b - another version using the hold commands</span>
+<span class="hljs-comment"># if there is only one argument, exit</span>
+
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$#</span> <span class="hljs-keyword">in</span>
+    1);;
+    *) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> pattern&quot;</span>;<span class="hljs-built_in">exit</span>;;
+<span class="hljs-keyword">esac</span>;
+
+<span class="hljs-comment"># again - I hope the argument doesn&#x27;t contain a /</span>
+
+<span class="hljs-comment"># use sed -n to disable printing </span>
+
+sed -n <span class="hljs-string">&#x27;
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; !{
+    # put the non-matching line in the hold buffer
+    h
+}
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; {
+    # found a line that matches
+    # append it to the hold buffer
+    H
+    # the hold buffer contains 2 lines
+    # get the next line
+    n
+    # and add it to the hold buffer
+    H
+    # now print it back to the pattern space
+    x
+    # and print it.
+    p
+    # add the three hyphens as a marker
+    a\
+---
+}&#x27;</span>
+</code></pre>
+<h3 id="keeping-more-than-one-line-in-the-hold-buffer" tabindex="-1">Keeping more than one line in the hold buffer <a class="header-anchor" href="#keeping-more-than-one-line-in-the-hold-buffer" aria-hidden="true">🔗</a></h3>
+<p>The &quot;<code>H</code>&quot; command allows you to combine several lines in the hold buffer. It acts like the &quot;<code>N</code>&quot; command as lines are appended to the buffer, with a &quot;\n&quot; between the lines. You can save several lines in the hold buffer, and print them only if a particular pattern is found later.</p>
+<p>As an example, take a file that uses spaces as the first character of a line as a continuation character. The files /etc/termcap, /etc/printcap, makefile and mail messages use spaces or tabs to indicate a continuing of an entry. If you wanted to print the entry before a word, you could use this script. I use a &quot;<code>^I</code>&quot; to indicate an actual <code>tab</code> character:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># print previous entry</span>
+sed -n <span class="hljs-string">&#x27;
+/^[ ^I]/!{
+    # line does not start with a space or tab,
+    # does it have the pattern we are interested in?
+    &#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; {
+        # yes it does. print three dashes
+        i\
+---
+        # get hold buffer, save current line
+        x
+        # now print what was in the hold buffer
+        p
+        # get the original line back
+        x
+    }
+    # store it in the hold buffer
+    h
+}
+# what about lines that start
+# with a space or tab?
+/^[ ^I]/ {
+    # append it to the hold buffer
+    H
+}&#x27;</span>
+</code></pre>
+<p>You can also use the &quot;H&quot; to extend the context grep. In this example, the program prints out the two lines before the pattern, instead of a single line. The method to limit this to two lines is to use the &quot;s&quot; command to keep one new line, and deleting extra lines. I call it grep4:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+
+<span class="hljs-comment"># grep4: prints out 4 lines around pattern</span>
+<span class="hljs-comment"># if there is only one argument, exit</span>
+
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$#</span> <span class="hljs-keyword">in</span>
+    1);;
+    *) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> pattern&quot;</span>;<span class="hljs-built_in">exit</span>;;
+<span class="hljs-keyword">esac</span>;
+
+sed -n <span class="hljs-string">&#x27;
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; !{
+    # does not match - add this line to the hold space
+    H
+    # bring it back into the pattern space
+    x
+    # Two lines would look like .*\n.*
+    # Three lines look like .*\n.*\n.*
+    # Delete extra lines - keep two
+    s/^.*\n\(.*\n.*\)$/\1/
+    # now put the two lines (at most) into 
+    # the hold buffer again
+    x
+}
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; {
+    # matches - append the current line
+    H
+    # get the next line
+    n
+    # append that one also
+    H
+    # bring it back, but keep the current line in
+    # the hold buffer. This is the line after the pattern,
+    # and we want to place it in hold in case the next line
+    # has the desired pattern
+    x
+    # print the 4 lines
+    p
+    # add the mark
+    a\
+---
+}&#x27;</span>
+</code></pre>
+<p>You can modify this to print any number of lines around a pattern. As you can see, you must remember what is in the hold space, and what is in the pattern space. There are other ways to write the same routine.</p>
+<h3 id="get-with-g-or-g" tabindex="-1">Get with g or G <a class="header-anchor" href="#get-with-g-or-g" aria-hidden="true">🔗</a></h3>
+<p>Instead of exchanging the hold space with the pattern space, you can copy the hold space to the pattern space with the &quot;<code>g</code>&quot; command. This deletes the pattern space. If you want to append to the pattern space, use the &quot;<code>G</code>&quot; command. This adds a new line to the pattern space, and copies the hold space after the new line.</p>
+<p>Here is another version of the &quot;grep3&quot; command. It works just like the previous one, but is implemented differently. This illustrates that sed has more than one way to solve many problems. What is important is you understand your problem, and document your solution:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># grep3 version c: use &#x27;G&#x27;  instead of H</span>
+
+<span class="hljs-comment"># if there is only one argument, exit</span>
+
+<span class="hljs-keyword">case</span> <span class="hljs-variable">$#</span> <span class="hljs-keyword">in</span>
+    1);;
+    *) <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Usage: <span class="hljs-variable">$0</span> pattern&quot;</span>;<span class="hljs-built_in">exit</span>;;
+<span class="hljs-keyword">esac</span>;
+
+<span class="hljs-comment"># again - I hope the argument doesn&#x27;t contain a /</span>
+
+sed -n <span class="hljs-string">&#x27;
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; !{
+    # put the non-matching line in the hold buffer
+    h
+}
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; {
+    # found a line that matches
+    # add the next line to the pattern space
+    N
+    # exchange the previous line with the 
+    # 2 in pattern space
+    x
+    # now add the two lines back
+    G
+    # and print it.
+    p
+    # add the three hyphens as a marker
+    a\
+---
+    # remove first 2 lines
+    s/.*\n.*\n\(.*\)$/\1/
+    # and place in the hold buffer for next time
+    h
+}&#x27;</span>
+</code></pre>
+<p>The &quot;G&quot; command makes it easy to have two copies of a line. Suppose you wanted to the convert the first hexadecimal number to uppercase, and don't want to use the script I described in an earlier column</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># change the first hex number to upper case format</span>
+<span class="hljs-comment"># uses sed twice</span>
+<span class="hljs-comment"># used as a filter</span>
+<span class="hljs-comment"># convert2uc &lt;in &gt;out</span>
+sed <span class="hljs-string">&#x27;
+s/ /\
+/&#x27;</span> | \
+sed <span class="hljs-string">&#x27; {
+    y/abcdef/ABCDEF/
+    N
+    s/\n/ /
+}&#x27;</span>
+</code></pre>
+<p>Here is a solution that does not require two invocations of sed:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># convert2uc version b</span>
+<span class="hljs-comment"># change the first hex number to upper case format</span>
+<span class="hljs-comment"># uses sed once</span>
+<span class="hljs-comment"># used as a filter</span>
+<span class="hljs-comment"># convert2uc &lt;in &gt;out</span>
+sed <span class="hljs-string">&#x27;
+{
+    # remember the line
+    h
+    #change the current line to upper case
+    y/abcdef/ABCDEF/
+    # add the old line back
+    G
+    # Keep the first word of the first line, 
+    # and second word of the second line
+    # with one humongous regular expression
+    s/^\([^ ]*\) .*\n[^ ]* \(.*\)/\1 \2/
+}&#x27;</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-comment"># convert2uc version b</span>
+<span class="hljs-comment"># change the first hex number to upper case format</span>
+<span class="hljs-comment"># uses sed once</span>
+<span class="hljs-comment"># used as a filter</span>
+<span class="hljs-comment"># convert2uc &lt;in &gt;out</span>
+sed <span class="hljs-string">&#x27;
+{
+    # remember the line
+    h
+    #change the current line to upper case
+    y/abcdef/ABCDEF/
+    # add the old line back
+    G
+    # Keep the first word of the first line, 
+    # and second word of the second line
+    # with one humongous regular expression
+    s/ .* / / # delete all but the first and last word
+}&#x27;</span>
+</code></pre>
+<p>This example only converts the letters &quot;a&quot; through &quot;f&quot; to upper case. This was chosen to make the script easier to print in these narrow columns. You can easily modify the script to convert all letters to uppercase, or to change the first letter, second word, etc.</p>
+<h2 id="flow-control" tabindex="-1">Flow Control <a class="header-anchor" href="#flow-control" aria-hidden="true">🔗</a></h2>
+<p>As you learn about sed you realize that it has its own programming language. It is true that it's a very specialized and simple language. What language would be complete without a method of changing the flow control? There are three commands sed uses for this. You can specify a label with an text string preceded by a colon. The &quot;<code>b</code>&quot; command branches to the label. The label follows the command. If no label is there, branch to the end of the script. The &quot;<code>t</code>&quot; command is used to test conditions. Before I discuss the &quot;<code>t</code>&quot; command, I will show you an example using the &quot;<code>b</code>&quot; command.</p>
+<p>This example remembers paragraphs, and if it contains the pattern (specified by an argument), the script prints out the entire paragraph.</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed -n <span class="hljs-string">&#x27;
+# if an empty line, check the paragraph
+/^$/ b para
+# else add it to the hold buffer
+H
+# at end of file, check paragraph
+$ b para
+# now branch to end of script
+b
+# this is where a paragraph is checked for the pattern
+:para
+# return the entire paragraph
+# into the pattern space
+x
+# look for the pattern, if there - print
+/&#x27;</span><span class="hljs-variable">$1</span><span class="hljs-string">&#x27;/ p
+&#x27;</span>
+</code></pre>
+<h3 id="testing-with-t" tabindex="-1">Testing with t <a class="header-anchor" href="#testing-with-t" aria-hidden="true">🔗</a></h3>
+<p>You can execute a branch if a pattern is found. You may want to execute a branch only if a substitution is made. The command &quot;<code>t label</code>&quot; will branch to the label if the last substitute command modified the pattern space.</p>
+<p>One use for this is recursive patterns. Suppose you wanted to remove white space inside parenthesis. These parentheses might be nested. That is, you would want to delete a string that looked like &quot;<code>( ( ( ())) )</code>&quot;. The sed expressions</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/([ ^I]*)/g&#x27;</span>
+</code></pre>
+<p>would only remove the innermost set. You would have to pipe the data through the script four times to remove each set or parenthesis. You could use the regular expression</p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/([ ^I()]*)/g&#x27;</span>
+</code></pre>
+<p>but that would delete non-matching sets of parenthesis. The &quot;<code>t</code>&quot; command would solve this:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+:again
+    s/([ ^I]*)//
+    t again
+&#x27;</span>
+</code></pre>
+<p>An earlier version had a '<code>g</code>' after the '`s'' expression. This is not needed.</p>
+<h2 id="debugging-with-l" tabindex="-1">Debugging with l <a class="header-anchor" href="#debugging-with-l" aria-hidden="true">🔗</a></h2>
+<p>The '<code>l</code>' command will print the pattern space in an unambiguous form. Non-printing characters are printed in a C-style escaped format.</p>
+<p>This can be useful when debugging a complex multi-line sed script.
+An alternate way of adding comments</p>
+<p>There is one way to add comments in a sed script if you don't have a version that supports it. Use the &quot;<code>a</code>&quot; command with the line number of zero:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;
+/begin/ {
+0i\
+    This is a comment\
+    It can cover several lines\
+    It will work with any version of sed
+}&#x27;</span>
+</code></pre>
+<h2 id="the-poorly-documented-%3B" tabindex="-1">The poorly documented ; <a class="header-anchor" href="#the-poorly-documented-%3B" aria-hidden="true">🔗</a></h2>
+<p>There is one more sed command that isn't well documented. It is the &quot;<code>;</code>&quot; command. This can be used to combined several sed commands on one line. Here is the grep4 script I described earlier, but without the comments or error checking and with semicolons between commands:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed -n <span class="hljs-string">&#x27;
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; !{;H;x;s/^.*\n\(.*\n.*\)$/\1/;x;}
+&#x27;</span>/<span class="hljs-variable">$1</span>/<span class="hljs-string">&#x27; {;H;n;H;x;p;a\
+---
+}&#x27;</span>
+</code></pre>
+<p>Yessireebob! Definitely character building. I think I have made my point. As far as I am concerned, the only time the semicolon is useful is when you want to type the sed script on the command line. If you are going to place it in a script, format it so it is readable. I have mentioned earlier that many versions of sed do not support comments except on the first line. You may want to write your scripts with comments in them, and install them in &quot;binary&quot; form without comments. This should not be difficult. After all, you have become a sed guru by now. I won't even tell you how to write a script to strip out comments. That would be insulting your intelligence. Also - some operating systems do NOT let you use semicolons. So if you see a script with semicolons, and it does not work on a non-Linux system, replace the semicolon with a new line character. (As long as you are not using csh/tcsh, but that's another topic.</p>
+<h2 id="passing-regular-expressions-as-arguments" tabindex="-1">Passing regular expressions as arguments <a class="header-anchor" href="#passing-regular-expressions-as-arguments" aria-hidden="true">🔗</a></h2>
+<p>In the earlier scripts, I mentioned that you would have problems if you passed an argument to the script that had a slash in it. In fact, regular expression might cause you problems. A script like the following is asking to be broken some day:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+sed <span class="hljs-string">&#x27;s/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span><span class="hljs-string">&#x27;//g&#x27;</span>
+</code></pre>
+<p>If the argument contains any of these characters in it, you may get a broken script: &quot;<code>/\.*[]^$</code>&quot; For instance, if someone types a &quot;<code>/</code>&quot; then the substitute command will see four delimiters instead of three. You will also get syntax errors if you provide a &quot;<code>]</code>&quot; without a &quot;<code>]</code>&quot;. One solution is to have the user put a backslash before any of these characters when they pass it as an argument. However, the user has to know which characters are special.
+Another solution is to add a backslash before each of those characters in the script</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+arg=`<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$1</span>&quot;</span> | sed <span class="hljs-string">&#x27;s:[]\[\^\$\.\*\/]:\\\\&amp;:g&#x27;</span>`
+sed <span class="hljs-string">&#x27;s/&#x27;</span><span class="hljs-string">&quot;<span class="hljs-variable">$arg</span>&quot;</span><span class="hljs-string">&#x27;//g&#x27;</span>
+</code></pre>
+<p>If you were searching for the pattern &quot;<code>^../</code>&quot;, the script would convert this into &quot;<code>\^\.\.\/</code>&quot; before passing it to sed.</p>
+<h2 id="inserting-binary-characters" tabindex="-1">Inserting binary characters <a class="header-anchor" href="#inserting-binary-characters" aria-hidden="true">🔗</a></h2>
+<p>Dealing with binary characters can be trick, expecially when writing scripts for people to read. I can insert a binary character using an editor like EMACS but if I show the binary character, the terminal may change it to show it to you.</p>
+<p>The easiest way I have found to do this in a script in a portable fashion is to use the <code>tr</code> command. It understands octal notations, and it can be output into a variable which can be used.</p>
+<p>Here's a script that will replace the string &quot;ding&quot; with the ASCII bell character:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+BELL=`<span class="hljs-built_in">echo</span> x | <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;x&#x27;</span> <span class="hljs-string">&#x27;\007&#x27;</span>`
+sed <span class="hljs-string">&quot;s/ding/<span class="hljs-variable">$BELL</span>/&quot;</span>
+</code></pre>
+<p>Please note that I used double quotes. Since special characters are interpreted, you have to be careful when you use this mechanism.</p>
+<h2 id="ere---extended-regular-expressions" tabindex="-1">ERE - Extended Regular Expressions <a class="header-anchor" href="#ere---extended-regular-expressions" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://www.grymoire.com/Unix/Regular.html">http://www.grymoire.com/Unix/Regular.html</a></li>
+</ul>
+<p>Two programs use the extended regular expression: egrep and awk. With these extensions, those special characters preceded by a backslash no longer have the special meaning: &quot;<code>\{</code>&quot; , &quot;<code>\}</code>&quot;, &quot;<code>\&lt;</code>&quot;, &quot;<code>\&gt;</code>&quot;, &quot;<code>\(</code>&quot;, &quot;<code>\)</code>&quot; as well as the &quot;<code>\digit</code>&quot;. There is a very good reason for this, which I will delay explaining to build up suspense.</p>
+<p>The character &quot;<code>?</code>&quot; matches 0 or 1 instances of the character set before, and the character &quot;<code>+</code>&quot; matches one or more copies of the character set. You can't use the <code>\{</code> and <code>\}</code> in the extended regular expressions, but if you could, you might consider the &quot;<code>?</code>&quot; to be the same as &quot;<code>\{0,1\}</code>&quot; and the &quot;<code>+</code>&quot; to be the same as &quot;<code>\{1,\}</code>&quot;.</p>
+<p>By now, you are wondering why the extended regular expressions is even worth using. Except for two abbreviations, there are no advantages, and a lot of disadvantages. Therefore, examples would be useful.</p>
+<p><mark>The three important characters in the expanded regular expressions</mark> are &quot;<code>(</code>&quot;, &quot;<code>|</code>&quot;, and &quot;<code>)</code>&quot;. Together, they let you match a choice of patterns. As an example, you can egrep to print all From: and Subject: lines from your incoming mail:</p>
+<pre><code class="language-bash">egrep <span class="hljs-string">&#x27;^(From|Subject): &#x27;</span> /usr/spool/mail/<span class="hljs-variable">$USER</span>
+</code></pre>
+<p>All lines starting with &quot;From:&quot; or &quot;Subject:&quot; will be printed. There is no easy way to do this with the Basic regular expressions. You could try &quot;<code>^[FS][ru][ob][mj]e*c*t*: </code>&quot; and hope you don't have any lines that start with &quot;<code>Sromeet:</code>&quot;. Extended expressions don't have the &quot;<code>\&lt;</code>&quot; and &quot;`&gt;'&quot; characters. You can compensate by using the alternation mechanism. Matching the word &quot;the&quot; in the beginning, middle, end of a sentence, or end of a line can be done with the extended regular expression:</p>
+<pre><code>(^| )the([^a-z]|$)
+</code></pre>
+<p>There are two choices before the word, a space or the beginining of a line. After the word, there must be something besides a lower case letter or else the end of the line. One extra bonus with extended regular expressions is the ability to use the &quot;<code>*'&quot;, &quot;</code>+<code>&quot;, and &quot;</code>?<code>&quot; modifiers after a &quot;</code>(...)`&quot; grouping. The following will match &quot;a simple problem,&quot; &quot;an easy problem,&quot; as well as &quot;a problem&quot;.</p>
+<pre><code>egrep &quot;a[n]? (simple|easy)? problem&quot; data
+</code></pre>
+<p>I promised to explain why the backslash characters don't work in extended regular expressions. Well, perhaps the &quot;<code>\{...\}</code>&quot; and &quot;<code>\&lt;...\&gt;</code>&quot; could be added to the extended expressions. These are the newest addition to the regular expression family. They could be added, but this might confuse people if those characters are added and the &quot;<code>\(...\)</code>&quot; are not. And there is no way to add that functionality to the extended expressions without changing the current usage. Do you see why? It's quite simple. If &quot;<code>(</code>&quot; has a special meaning, then &quot;<code>\(</code>&quot; must be the ordinary character. This is the opposite of the Basic regular expressions, where &quot;<code>(</code>&quot; is ordinary, and &quot;<code>\(</code>&quot; is special. The usage of the parentheses is incompatable, and any change could break old programs.</p>
+<p>If the extended expression used &quot;<code>( ..|...)</code>&quot; as regular characters, and &quot;<code>\(...\|...\)</code>&quot; for specifying alternate patterns, then it is possible to have one set of regular expressions that has full functionality. This is exactly what GNU emacs does, by the way.</p>
+</body></html>

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.325" />
+        <title>nemo_file_manager</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nemo_file_manager" tabindex="-1">nemo_file_manager <a class="header-anchor" href="#nemo_file_manager" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.325</p>
+<nav class="table-of-contents"><ol><li><a href="#aggiungere-a-nemo-lo-shortcut-f4-per-aprire-il-terminale-del-folder-corrente">Aggiungere a Nemo lo shortcut F4 per aprire il terminale del folder corrente </a></li><li><a href="#definire-una-nuova-action-nemo">Definire una nuova action Nemo </a></li><li><a href="#nemo-samba-share">Nemo Samba Share </a></li></ol></nav><h1 id="nemo" tabindex="-1">Nemo <a class="header-anchor" href="#nemo" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash"><span class="hljs-built_in">cp</span> /usr/share/nemo/actions/sample.nemo_action ~/workspaces/configuration/mint/home/<span class="hljs-variable">$USER</span>/.local/share/nemo/actions
+</code></pre>
+<h3 id="aggiungere-a-nemo-lo-shortcut-f4-per-aprire-il-terminale-del-folder-corrente" tabindex="-1">Aggiungere a Nemo lo shortcut F4 per aprire il terminale del folder corrente <a class="header-anchor" href="#aggiungere-a-nemo-lo-shortcut-f4-per-aprire-il-terminale-del-folder-corrente" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Nemo">https://wiki.archlinux.org/index.php/Nemo</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-built_in">mkdir</span> -p ~/.gnome2/accels
+vim ~/.gnome2/accels/nemo
+
+		(gtk_accel_path <span class="hljs-string">&quot;&lt;Actions&gt;/DirViewActions/OpenInTerminal&quot;</span> <span class="hljs-string">&quot;F4&quot;</span>)
+</code></pre>
+<h3 id="definire-una-nuova-action-nemo" tabindex="-1">Definire una nuova action Nemo <a class="header-anchor" href="#definire-una-nuova-action-nemo" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://wiki.archlinux.org/index.php/Nemo#Clam_Scan">https://wiki.archlinux.org/index.php/Nemo#Clam_Scan</a></li>
+</ul>
+<pre><code class="language-bash">~/.local/share/nemo/actions
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># ~/.local/share/nemo/actions/clamscan.nemo_action</span>
+<span class="hljs-comment"># https://wiki.archlinux.org/index.php/Nemo#Nemo_Actions</span>
+[Nemo Action]
+Name=Clam Scan
+Comment=Clam Scan
+Exec=gnome-terminal -- sh -c <span class="hljs-string">&quot;clamscan -r %F | less&quot;</span>
+Icon-Name=bug-buddy
+Selection=Any
+Extensions=<span class="hljs-built_in">dir</span>;exe;dll;zip;gz;7z;rar;
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># ~/.local/share/nemo/actions/node_modules.nemo_action</span>
+<span class="hljs-comment"># https://wiki.archlinux.org/index.php/Nemo#Nemo_Actions</span>
+<span class="hljs-comment"># /usr/share/nemo/actions/sample.nemo_action</span>
+<span class="hljs-comment"># Standard tokens that can be used in the Name, Comment (tooltip) and Exec fields:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># %U - insert URI list of selection</span>
+<span class="hljs-comment"># %F - insert path list of selection</span>
+<span class="hljs-comment"># %P - insert path of parent (current) directory</span>
+<span class="hljs-comment"># %f or %N (deprecated) - insert display name of first selected file</span>
+<span class="hljs-comment"># %p - insert display name of parent directory</span>
+<span class="hljs-comment"># %D - insert device path of file (i.e. /dev/sdb1)</span>
+[Nemo Action]
+Active=<span class="hljs-literal">true</span>
+Name=Crea node__modules <span class="hljs-keyword">in</span> %f
+Comment=Crea un <span class="hljs-built_in">link</span> simbolico <span class="hljs-keyword">in</span> %f alla cartella ~/workspaces/npm/node_modules
+<span class="hljs-comment">#Exec=gnome-terminal -- sh -c &#x27;cd %P &amp;&amp;  ln -s ~/workspaces/npm/node_modules | less&#x27;</span>
+Exec=sh -c <span class="hljs-string">&#x27;cd %P &amp;&amp; ln -s ~/workspaces/npm/node_modules&#x27;</span>
+<span class="hljs-comment">#Exec=sh -c &#x27;pwd|less&#x27;</span>
+Icon-Name=bug-buddy
+<span class="hljs-comment"># What type selection: [s]ingle, [m]ultiple, any, notnone, none (background click), or</span>
+<span class="hljs-comment"># a number representing how many files must be selected to display.</span>
+<span class="hljs-comment"># ****** REQUIRED *******</span>
+Selection=none
+<span class="hljs-comment"># What extensions to display on - this is an array, end with a semicolon</span>
+<span class="hljs-comment"># Single entry options, ending in a semicolon:</span>
+<span class="hljs-comment">#     &quot;dir&quot; for directory selection</span>
+<span class="hljs-comment">#     &quot;none&quot; for no extension.</span>
+<span class="hljs-comment">#     &quot;nodirs&quot; for any selection, but not including directories.</span>
+<span class="hljs-comment">#     &quot;any&quot; for any file type, including directories.</span>
+<span class="hljs-comment"># Individual specific extensions can be a semicolon-terminated list</span>
+<span class="hljs-comment"># Extensions are NOT case sensitive.  jpg will match JPG, jPg, jpg, etc..</span>
+<span class="hljs-comment"># **** EITHER EXTENSIONS OR MIMETYPES IS REQUIRED *****</span>
+Extensions=<span class="hljs-built_in">dir</span>
+Terminal=<span class="hljs-literal">true</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># ~/.local/share/nemo/actions/open_vscode_here.nemo_action</span>
+<span class="hljs-comment"># https://wiki.archlinux.org/index.php/Nemo#Nemo_Actions</span>
+<span class="hljs-comment"># /usr/share/nemo/actions/sample.nemo_action</span>
+<span class="hljs-comment"># Standard tokens that can be used in the Name, Comment (tooltip) and Exec fields:</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># %U - insert URI list of selection</span>
+<span class="hljs-comment"># %F - insert path list of selection</span>
+<span class="hljs-comment"># %P - insert path of parent (current) directory</span>
+<span class="hljs-comment"># %f or %N (deprecated) - insert display name of first selected file</span>
+<span class="hljs-comment"># %p - insert display name of parent directory</span>
+<span class="hljs-comment"># %D - insert device path of file (i.e. /dev/sdb1)</span>
+[Nemo Action]
+Active=<span class="hljs-literal">true</span>
+Name=Open with Code
+Comment=Opens VSCode <span class="hljs-keyword">in</span> the current directory
+Exec=code %P
+<span class="hljs-comment">#Exec=gnome-terminal -- sh -c &#x27;cd %P &amp;&amp;  ln -s ~/workspaces/npm/node_modules | less&#x27;</span>
+<span class="hljs-comment">#Exec=sh -c &#x27;cd %P &amp;&amp; ln -s ~/workspaces/npm/node_modules&#x27;</span>
+<span class="hljs-comment">#Exec=sh -c &#x27;pwd|less&#x27;</span>
+Icon-Name=code
+<span class="hljs-comment"># What type selection: [s]ingle, [m]ultiple, any, notnone, none (background click), or</span>
+<span class="hljs-comment"># a number representing how many files must be selected to display.</span>
+<span class="hljs-comment"># ****** REQUIRED *******</span>
+Selection=none
+<span class="hljs-comment"># What extensions to display on - this is an array, end with a semicolon</span>
+<span class="hljs-comment"># Single entry options, ending in a semicolon:</span>
+<span class="hljs-comment">#     &quot;dir&quot; for directory selection</span>
+<span class="hljs-comment">#     &quot;none&quot; for no extension.</span>
+<span class="hljs-comment">#     &quot;nodirs&quot; for any selection, but not including directories.</span>
+<span class="hljs-comment">#     &quot;any&quot; for any file type, including directories.</span>
+<span class="hljs-comment"># Individual specific extensions can be a semicolon-terminated list</span>
+<span class="hljs-comment"># Extensions are NOT case sensitive.  jpg will match JPG, jPg, jpg, etc..</span>
+<span class="hljs-comment"># **** EITHER EXTENSIONS OR MIMETYPES IS REQUIRED *****</span>
+Extensions=any;
+Quote=double
+Dependencies=code;
+</code></pre>
+<h2 id="nemo-samba-share" tabindex="-1">Nemo Samba Share <a class="header-anchor" href="#nemo-samba-share" aria-hidden="true">🔗</a></h2>
+<p>Con Nemo-share è possibile condividere directory mediante Samba dal file manager Nemo</p>
+<ul>
+<li><a href="https://github.com/linuxmint/nemo-extensions/tree/master/nemo-share">https://github.com/linuxmint/nemo-extensions/tree/master/nemo-share</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Samba#Enable_Usershares">https://wiki.archlinux.org/index.php/Samba#Enable_Usershares</a></li>
+</ul>
+<p>Nemo-share utilizza la funzione usershares di samba</p>
+<p>Per vedere le share create con Nemo si utilizza il comando net di Samba:</p>
+<pre><code class="language-bash">$ net usershare info --long
+  /var/lib/samba/usershares
+
+$ man smb.conf
+ /etc/samba/smb.conf
+
+    [global]
+    usershare path = /var/lib/samba/usershares
+    usershare max shares = 100
+    usershare allow guests = <span class="hljs-built_in">yes</span>
+    usershare owner only = <span class="hljs-built_in">yes</span>
+
+    /etc/samba/smb.conf
+    [global]
+    ;inherit owner = unix only ; Inherit ownership of the parent directory <span class="hljs-keyword">for</span> new files and directories
+    ;inherit permissions = <span class="hljs-built_in">yes</span> ; Inherit permissions of the parent directory <span class="hljs-keyword">for</span> new files and directories
+    create mask = 0664
+    directory mask = 2755
+    force create mode = 0644
+    force directory mode = 2755
+    ...
+
+    [media]
+    comment = Media share accessible by greg and pcusers
+    path = /path/to/media
+    valid <span class="hljs-built_in">users</span> = greg @pcusers
+    force group = +pcusers
+    public = no
+    writable = <span class="hljs-built_in">yes</span>
+    create mask = 0664
+    directory mask = 2775
+    force create mode = 0664
+    force directory mode = 2775
+
+    [public]
+    comment = Public share <span class="hljs-built_in">where</span> archie has write access
+    path = /path/to/public
+    public = <span class="hljs-built_in">yes</span>
+    <span class="hljs-built_in">read</span> only = <span class="hljs-built_in">yes</span>
+    write list = archie
+    printable = no
+
+    [guests]
+    comment = Allow all <span class="hljs-built_in">users</span> to <span class="hljs-built_in">read</span>/write
+    path = /path/to/guests
+    public = <span class="hljs-built_in">yes</span>
+    only guest = <span class="hljs-built_in">yes</span>
+    writable = <span class="hljs-built_in">yes</span>
+    printable = no
+</code></pre>
+</body></html>

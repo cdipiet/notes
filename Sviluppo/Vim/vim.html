@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.505" />
+        <title>vim</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vim" tabindex="-1">vim <a class="header-anchor" href="#vim" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.505</p>
+<nav class="table-of-contents"><ol><li><a href="#getting-started">Getting Started </a><ol><li><a href="#cheatsheets">Cheatsheets </a></li></ol></li><li><a href="#vim-con-la-clipboard---gvim-senza-modalit%C3%A0-grafica">vim con la clipboard - gvim senza modalità grafica </a></li><li><a href="#help">Help </a></li><li><a href="#range">Range </a></li><li><a href="#marks">Marks </a></li><li><a href="#macro">Macro </a></li><li><a href="#registers">Registers </a><ol><li><a href="#special-registers">Special registers </a></li></ol></li><li><a href="#tabs">Tabs </a></li><li><a href="#buffers">Buffers </a><ol><li><a href="#movimenti-tra-buffer-aperti">Movimenti tra buffer aperti </a></li><li><a href="#using-named-buffers">Using Named Buffers </a></li><li><a href="#per-visitare-i-buffer-numerati-contenenti-le-ultime-9-cancellazioni">Per visitare i buffer numerati contenenti le ultime 9 cancellazioni </a></li><li><a href="#append">Append </a></li></ol></li><li><a href="#interagire-con-la-shell">Interagire con la shell </a></li><li><a href="#file-explorer">File explorer </a></li><li><a href="#scrolling">Scrolling </a></li><li><a href="#wrap-margin">Wrap Margin </a></li><li><a href="#numeri-di-riga">Numeri di riga </a></li><li><a href="#ordinare-un-file">Ordinare un file </a></li><li><a href="#eliminare-le-linee-vuote-superflue">Eliminare le linee vuote superflue </a></li><li><a href="#rimuovere-linee-vuote">Rimuovere linee vuote </a></li><li><a href="#eliminare-i-%5Em">Eliminare i ^M </a></li><li><a href="#eseguire-il-file-corrente">Eseguire il file corrente </a></li><li><a href="#visualizzare-il-path-del-file-corrente">Visualizzare il path del file corrente </a></li><li><a href="#windows">Windows </a></li></ol></nav><h1 id="vim-1" tabindex="-1">Vim <a class="header-anchor" href="#vim-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="vim_conf_install.html">Installazione</a></li>
+<li><a href="vim_conf_vimrc.html">Configurazione</a></li>
+<li><a href="vim_conf_plugins.html">Plugins</a></li>
+<li><a href="vim_uso_movimento.html">Movimento</a></li>
+<li><a href="vim_uso_editing.html">Editing</a></li>
+<li><a href="vim_uso_load-save-exit.html">Load/Save</a></li>
+<li><a href="vim_uso_search_replace.html">Search/Replace</a></li>
+</ul>
+<h2 id="getting-started" tabindex="-1">Getting Started <a class="header-anchor" href="#getting-started" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Vim">https://wiki.archlinux.org/title/Vim</a></p>
+</li>
+<li>
+<p><a href="https://danielmiessler.com/study/vim/">https://danielmiessler.com/study/vim/</a></p>
+</li>
+<li>
+<p><a href="https://dev.to/iggredible/learning-vim-in-202q0-1mma">https://dev.to/iggredible/learning-vim-in-202q0-1mma</a></p>
+</li>
+<li>
+<p><a href="https://github.com/mhinz/vim-galore/blob/master/README.md">https://github.com/mhinz/vim-galore/blob/master/README.md</a></p>
+</li>
+<li>
+<p><a href="http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/">http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/iggredible/Learn-Vim">https://github.com/iggredible/Learn-Vim</a></p>
+</li>
+<li>
+<p><a href="https://thevaluable.dev/vim-commands-beginner/">https://thevaluable.dev/vim-commands-beginner/</a></p>
+</li>
+<li>
+<p><a href="https://vim-adventures.com/">https://vim-adventures.com/</a></p>
+</li>
+<li>
+<p><a href="http://www.openvim.com">http://www.openvim.com</a></p>
+</li>
+<li>
+<p><a href="http://vimcasts.org/">http://vimcasts.org/</a></p>
+</li>
+</ul>
+<h3 id="cheatsheets" tabindex="-1">Cheatsheets <a class="header-anchor" href="#cheatsheets" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://devhints.io/vim">https://devhints.io/vim</a></li>
+<li><a href="https://quickref.me/vim">https://quickref.me/vim</a></li>
+<li><a href="https://bencrowder.net/files/vim-fu/">https://bencrowder.net/files/vim-fu/</a></li>
+<li><a href="https://www.cs.cmu.edu/~15131/f17/topics/vim/vim-cheatsheet.pdf">https://www.cs.cmu.edu/~15131/f17/topics/vim/vim-cheatsheet.pdf</a></li>
+<li><a href="https://catswhocode.com/vim-cheat-sheet/">https://catswhocode.com/vim-cheat-sheet/</a></li>
+<li><a href="https://github.com/hackjutsu/vim-cheatsheet">https://github.com/hackjutsu/vim-cheatsheet</a></li>
+<li><a href="http://michael.peopleofhonoronly.com/vim/vim_cheat_sheet_for_programmers_print.pdf">http://michael.peopleofhonoronly.com/vim/vim_cheat_sheet_for_programmers_print.pdf</a></li>
+<li><a href="https://man.archlinux.org/man/vimtutor.1">https://man.archlinux.org/man/vimtutor.1</a></li>
+</ul>
+<h2 id="vim-con-la-clipboard---gvim-senza-modalit%C3%A0-grafica" tabindex="-1">vim con la clipboard - gvim senza modalità grafica <a class="header-anchor" href="#vim-con-la-clipboard---gvim-senza-modalit%C3%A0-grafica" aria-hidden="true">🔗</a></h2>
+<p>Per avere la clipboard installare gvim al posto di vim,
+per far partire gvim in modalità testuale aggiungere i parametri <code>-v</code> e <code>-X</code>:</p>
+<pre><code class="language-bash">$ gvim -v -X
+</code></pre>
+<h2 id="help" tabindex="-1">Help <a class="header-anchor" href="#help" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">
+:h paragraph
+  A paragraph begins after each empty line,
+
+:h sentence
+  A sentence is defined as ending at a <span class="hljs-string">&#x27;.&#x27;</span>, <span class="hljs-string">&#x27;!&#x27;</span> or <span class="hljs-string">&#x27;?&#x27;</span> followed by either the
+  end of a line, or by a space or tab. 
+
+$ vimtutor it
+</code></pre>
+<ul>
+<li>
+<p><code>:q &lt;INVIO&gt;</code> per chiudere la finestra di aiuto.</p>
+</li>
+<li>
+<p><code>CTRL+]</code> <a href="vim_configurazione.html#problema-ctrl%2B%5D">per visitare un link è un binding già usato dagli emulatori di terminale</a>:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;map oo &lt;C-]&gt;&#x27;</span> &gt;&gt; ~/.vimrc
+</code></pre>
+</li>
+<li>
+<p><code>CTRL+O</code> per tornare indietro</p>
+</li>
+</ul>
+<pre><code class="language-vim">: h &lt;Tasto <span class="hljs-keyword">o</span> comando&gt;
+:<span class="hljs-keyword">help</span>
+:<span class="hljs-keyword">help</span> tutor
+:<span class="hljs-keyword">help</span> vimrc-<span class="hljs-keyword">intro</span>
+:<span class="hljs-keyword">help</span> plugins
+:<span class="hljs-keyword">help</span> <span class="hljs-built_in">range</span>
+:<span class="hljs-keyword">help</span> matchpairs
+:<span class="hljs-keyword">help</span> leader
+:<span class="hljs-keyword">help</span> <span class="hljs-built_in">filter</span>
+:<span class="hljs-keyword">help</span> <span class="hljs-built_in">expand</span>
+:h <span class="hljs-keyword">vim</span>-script
+
+:<span class="hljs-keyword">echo</span> $VIMRUNTIME
+/usr/share/<span class="hljs-keyword">vim</span>/vim81
+:r $VIMRUNTIME/vimrc_example.<span class="hljs-keyword">vim</span>
+:r $VIMRUNTIME/defaults.<span class="hljs-keyword">vim</span>
+</code></pre>
+<h2 id="range" tabindex="-1">Range <a class="header-anchor" href="#range" aria-hidden="true">🔗</a></h2>
+<p>Ranges <strong>may precede most &quot;colon&quot; commands</strong> and cause them to be executed on a line or lines. <br>
+For example <code>:3,7d</code> would delete lines 3-7. <br>
+Ranges are commonly combined with the <code>:s</code> command to perform a replacement on several lines, <br>
+as with <code>:.,$s/pattern/string/g</code> to make a replacement from the current line to the end of the file.</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>:%</code></td>
+<td style="text-align:left">All lines in file</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:.,$</code></td>
+<td style="text-align:left">from Current line to the end of file</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:n,m</code></td>
+<td style="text-align:left">Lines n-m</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:.</code></td>
+<td style="text-align:left">Current line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:$</code></td>
+<td style="text-align:left">Last line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:'c</code></td>
+<td style="text-align:left">Marker c</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:g/pattern/</code></td>
+<td style="text-align:left">All lines that contain pattern</td>
+</tr>
+</tbody>
+</table>
+<h2 id="marks" tabindex="-1">Marks <a class="header-anchor" href="#marks" aria-hidden="true">🔗</a></h2>
+<p>Use markers to set places you want to quickly get back to, or to specify a block of text you want to copy or cut.</p>
+<ul>
+<li><code>:marks</code>                      - list of marks</li>
+<li><span class="mr">m</span><span class="mb">k</span>              - mark current position (can use a-z)</li>
+<li><span class="mr">'</span><span class="mb">k</span>              - move to line of mark <span class="mb">k</span></li>
+<li><span class="mr">`</span><span class="mb">k</span>             - move to position of mark <span class="mb">k</span></li>
+<li><span class="mr">d</span><span class="mr">'</span><span class="mb">k</span>      - delete from current position to line of mark <span class="mb">k</span></li>
+<li><span class="mr">d</span><span class="mr">`</span><span class="mb">k</span>     - delete from current position to position of mark <span class="mb">k</span></li>
+<li><span class="mr">y`</span><span class="mb">a</span>            - yank text to position of mark A</li>
+<li><span class="mr">`0</span>                    - go to the position where Vim was previously exited</li>
+<li><span class="mr">`&quot;</span>                    - go to the position when last editing this file</li>
+<li><span class="k">`</span><span class="k">.</span>               - go to the position of the last change in this file</li>
+<li><code>'</code><span class="mb">a-z</span>                 - goto same file</li>
+<li><code>'</code><span class="mb">A-Z</span>                 - goto between files</li>
+</ul>
+<p>A straight tick <code>'</code> refers to the line, use a backtick <span class="mr">`</span> to also include the column.</p>
+<p>VI ha i bookmarks, detti marks, essi non sono persistenti, vanni persi all'uscita da VI.</p>
+<ul>
+<li><code>m</code>x Marks the current position with x (x can be any letter).</li>
+<li><code>'</code>x (Apostrophe.) Moves the cursor to the first character of the line marked by x.</li>
+<li><span class="m r">`</span>x (Backquote.) Moves the cursor to the character marked by x.</li>
+<li><span class="m r">``</span> (Backquotes.) Returns to the exact position of the previous mark or context after a move.</li>
+<li><code>''</code> (Apostrophes.) Returns to the beginning of the line of the previous mark or context.</li>
+</ul>
+<p>Dopo un comando <code>G</code>:</p>
+<ul>
+<li><span class="m r">``</span> ritorna alla posizione del cursore precedente il comando G</li>
+<li><code>''</code> ritorna all'inizio della riga dove ci si trovava prima del comando G</li>
+</ul>
+<h2 id="macro" tabindex="-1">Macro <a class="header-anchor" href="#macro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><span class="k">q</span><span class="k">a</span> - start record macro <code>a</code></li>
+<li><span class="k">q</span>        - stop recording macro</li>
+<li><span class="k">@</span><span class="k">a</span> - run macro <code>a</code></li>
+<li><span class="k">@</span><span class="k">@</span> - rerun last run macro</li>
+<li><code>5@@</code>          - riesegue l'ultima macro 5 volte</li>
+<li><span class="k">&quot;</span><span class="k">a</span><span class="k">p</span> -  stampa la macro <code>a</code> (le macro sono salvate nei registri con nome)</li>
+</ul>
+<h2 id="registers" tabindex="-1">Registers <a class="header-anchor" href="#registers" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><code>:reg</code>         - stampa nome e contenuto dei registri con nome</p>
+</li>
+<li>
+<p><code>&quot;5p</code>          - stampa il contenuto del registro 5</p>
+</li>
+<li>
+<p><code>:reg[isters]</code> - show registers content</p>
+</li>
+<li>
+<p><code>&quot;xy</code> - yank into register x</p>
+</li>
+<li>
+<p><code>&quot;xp</code> - paste contents of register x</p>
+</li>
+<li>
+<p><code>&quot;+y</code> - yank into the system clipboard register</p>
+</li>
+<li>
+<p><code>&quot;+p</code> - paste from the system clipboard register</p>
+</li>
+</ul>
+<p>Tip: Registers are being stored in <code>~/.viminfo</code>, and will be loaded again on next restart of vim.</p>
+<h3 id="special-registers" tabindex="-1">Special registers <a class="header-anchor" href="#special-registers" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>0</code> - last yank</li>
+<li><code>&quot;</code> - unnamed register, last delete or yank</li>
+<li><code>%</code> - current file name</li>
+<li><code>#</code> - alternate file name</li>
+<li><code>`*</code>  - clipboard contents (X11 primary)</li>
+<li><code>+</code> - clipboard contents (X11 clipboard)</li>
+<li><code>/</code> - last search pattern</li>
+<li><code>:</code> - last command-line</li>
+<li><code>.</code> - last inserted text</li>
+<li><code>-</code> - last small (less than a line) delete</li>
+<li><code>=</code> - expression register</li>
+<li><code>_</code> - black hole register</li>
+</ul>
+<h2 id="tabs" tabindex="-1">Tabs <a class="header-anchor" href="#tabs" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><code>tabs</code></li>
+<li><code>vim -p /path/to/file1 /path/to/file2 /path/to/file3</code></li>
+<li><code>:tabe [/path/to/file]</code> (al posto di <code>:e</code>)</li>
+<li><code>:tabnew</code></li>
+<li><code>:tabn[ext]</code> o <code>gt</code>     tab successivo</li>
+<li><code>:tabp[revious]</code> o <code>gT</code> tab precedente</li>
+<li><code>#gt</code> và al tab #</li>
+<li>:tabc[lose]</li>
+<li><code>:sp[lit]   [/path/to/file]</code>  # splits the window horizontally [and opens the file]</li>
+<li><code>:vs[plit]  [/path/to/file]</code>  # splits the window vertically [and opens the file]</li>
+</ul>
+<h2 id="buffers" tabindex="-1">Buffers <a class="header-anchor" href="#buffers" aria-hidden="true">🔗</a></h2>
+<h3 id="movimenti-tra-buffer-aperti" tabindex="-1">Movimenti tra buffer aperti <a class="header-anchor" href="#movimenti-tra-buffer-aperti" aria-hidden="true">🔗</a></h3>
+<p><code>:e</code> stà per <strong>edit</strong></p>
+<ul>
+<li><code>:ls</code> Elenca i buffer aperti</li>
+<li><span class="mr">:e</span> <span class="mb"><n></span> apre il buffer numero <code>&lt;n&gt;</code>, premendo <span class="k">Tab</span> si ottiene l'elenco dei buffer disponibili</li>
+<li><code>:e#</code> passa all'altro file</li>
+<li><code>:n</code> next file</li>
+<li><code>:prev</code> previous file</li>
+</ul>
+<h3 id="using-named-buffers" tabindex="-1">Using Named Buffers <a class="header-anchor" href="#using-named-buffers" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>&quot;dyy</code> Yank current line into buffer <code>d</code>.</li>
+<li><code>&quot;a7yy</code> Yank next seven lines into buffer <code>a</code>.</li>
+</ul>
+<p>After loading the named buffers and moving to the new position, use <code>p</code> or <code>P</code> to put the text back:</p>
+<ul>
+<li><code>&quot;dP</code> Put the contents of buffer d before cursor.</li>
+<li><code>&quot;ap</code> Put the contents of buffer a after cursor.</li>
+<li><code>&quot;a5dd</code> Delete five lines into buffer a.</li>
+</ul>
+<h3 id="per-visitare-i-buffer-numerati-contenenti-le-ultime-9-cancellazioni" tabindex="-1">Per visitare i buffer numerati contenenti le ultime 9 cancellazioni <a class="header-anchor" href="#per-visitare-i-buffer-numerati-contenenti-le-ultime-9-cancellazioni" aria-hidden="true">🔗</a></h3>
+<p><code>&quot;1pu.u.u</code> etc.</p>
+<p>il comando <code>u</code> di &quot;undo&quot; incrementa automaticamente il contatore al buffer numerato corrente <br>
+il comando <code>.</code> di &quot;repeat&quot; riesegue il <code>p</code> &quot;paste&quot; dal buffer numerato corrente.</p>
+<h3 id="append" tabindex="-1">Append <a class="header-anchor" href="#append" aria-hidden="true">🔗</a></h3>
+<p><strong>If you specify a buffer name with a capital letter</strong>, your yanked or deleted text will be appended to the current contents of that buffer. <br>
+This allows you to be selective in what you move or copy. For example: \</p>
+<ul>
+<li><code>&quot;zd)</code> Delete from cursor to end of current sentence and save in buffer <code>z</code>.</li>
+<li><code>2)</code> Move two sentences further on.</li>
+<li><code>&quot;Zy)</code> Add the next sentence to buffer <code>z</code>.</li>
+</ul>
+<h2 id="interagire-con-la-shell" tabindex="-1">Interagire con la shell <a class="header-anchor" href="#interagire-con-la-shell" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><code>:!</code>df -h</li>
+<li><code>!!</code>df -h inserisce l'output del comando nel testo</li>
+<li><code>:sh</code> e poi <span class="k">CTRL+D</span> per uscire dalla shell creata</li>
+<li><span class="k">CTRL+Z</span> per mettere VI in background e poi <code>fg</code> per riportare VI in foreground</li>
+<li><code>:%w !</code> <span class="mb">xmlstar sel -t -v &quot;count(//autoLogon)&quot;</span> <br>
+(il <code>%</code> indica tutto il file) <br>
+il <code>w</code> è il comando di write, in questo caso scrive in pipe mandando il buffer a xmlstarlet <br>
+Scrive l'intero contenuto del file in pipe verso xmlstarlet, contando tutti i tag &quot;autoLogon&quot;</li>
+</ul>
+<h2 id="file-explorer" tabindex="-1">File explorer <a class="header-anchor" href="#file-explorer" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>:e .</code></td>
+<td style="text-align:left">Open integrated file explorer - CTRL+6 per uscire</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:Sex</code></td>
+<td style="text-align:left">Split window and open integrated file explorer</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:browse</code></td>
+<td style="text-align:left">Graphical file explorer</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:ls</code></td>
+<td style="text-align:left">List buffers</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:cd ..</code></td>
+<td style="text-align:left">Move to parent directory</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:args</code></td>
+<td style="text-align:left">List files</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:args *.php</code></td>
+<td style="text-align:left">Open file list</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:grep expression *.php</code></td>
+<td style="text-align:left">Returns a list of .php files contening expression</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gf</code></td>
+<td style="text-align:left">Open file name under cursor</td>
+</tr>
+</tbody>
+</table>
+<h2 id="scrolling" tabindex="-1">Scrolling <a class="header-anchor" href="#scrolling" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><span class="k">CTRL</span>+<span class="k">F</span></li>
+<li><span class="k">CTRL</span>+<span class="k">B</span></li>
+<li><span class="k">z</span> <span class="k">ENTER</span> muove la riga corrente all'inizio dello schermo</li>
+<li><span class="k">z</span> <span class="k">.</span>. muove la riga corrente al centro dello schermo</li>
+<li><span class="k">z</span> <span class="k">-</span> muove la riga corrente alla fine dello schermo</li>
+<li><span class="k">ENTER</span></li>
+<li><span class="k">+</span></li>
+<li><span class="k">-</span></li>
+</ul>
+<h2 id="wrap-margin" tabindex="-1">Wrap Margin <a class="header-anchor" href="#wrap-margin" aria-hidden="true">🔗</a></h2>
+<p>Mette uno \n automatico quando si raggiunge la colonna 10:</p>
+<pre><code class="language-vim">:<span class="hljs-keyword">set</span> wm=<span class="hljs-number">10</span>
+</code></pre>
+<p>Per evitare problemi e' sempre meglio avere:</p>
+<pre><code class="language-vim">:<span class="hljs-keyword">set</span> wm=<span class="hljs-number">0</span>
+</code></pre>
+<h2 id="numeri-di-riga" tabindex="-1">Numeri di riga <a class="header-anchor" href="#numeri-di-riga" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-vim">:<span class="hljs-keyword">set</span> <span class="hljs-keyword">nu</span> # Display <span class="hljs-built_in">line</span> numbers
+:<span class="hljs-keyword">set</span> nonu # Hide <span class="hljs-built_in">line</span> numbers
+CTRL+G # Vedere <span class="hljs-keyword">lo</span> stato del <span class="hljs-keyword">file</span>
+
+:<span class="hljs-keyword">set</span> relativenumber # utile per vedere i parametri dei comandi senza fare calcoli <span class="hljs-keyword">a</span> mente
+</code></pre>
+<h2 id="ordinare-un-file" tabindex="-1">Ordinare un file <a class="header-anchor" href="#ordinare-un-file" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>:g/^ *$/d</code></td>
+<td style="text-align:left">per rimuovere le linee vuote, <code>g</code> è il range composte delle linee contenenti soli spazi</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%!sort</code> or <code>:1,$!sort</code></td>
+<td style="text-align:left">sort current file,il <code>%</code> significa tutte le linee</td>
+</tr>
+</tbody>
+</table>
+<h2 id="eliminare-le-linee-vuote-superflue" tabindex="-1">Eliminare le linee vuote superflue <a class="header-anchor" href="#eliminare-le-linee-vuote-superflue" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-vim">:%!cat -s
+</code></pre>
+<h2 id="rimuovere-linee-vuote" tabindex="-1">Rimuovere linee vuote <a class="header-anchor" href="#rimuovere-linee-vuote" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-vim"><span class="hljs-symbol">&lt;esc&gt;</span>:g/^$/d
+</code></pre>
+<p>NOTE: This means that all the lines that just have a carriage return on them (NO Spaces), will be removed. <br>
+Ok, so I have some of those lines too. How can I remove all of them as well? \</p>
+<pre><code class="language-vim"><span class="hljs-symbol">&lt;esc&gt;</span>:g/^ *$/d
+</code></pre>
+<p>NOTE: There is a space after the <code>^</code> and before the <code>*</code>.</p>
+<h2 id="eliminare-i-%5Em" tabindex="-1">Eliminare i <code>^M</code> <a class="header-anchor" href="#eliminare-i-%5Em" aria-hidden="true">🔗</a></h2>
+<p>Per scrivere <code>^M</code> occorre digitare la sequenza: <span class="k">CTRL</span>+<span class="k">V</span><span class="k">CTRL</span>+<span class="k">M</span></p>
+<p>In vi, you can remove the carriage return ( <code>^M</code> ) characters with the following command:</p>
+<pre><code class="language-vim">:<span class="hljs-number">1</span>,$s/^M//g
+oppure:
+:%s/^M//g
+</code></pre>
+<p>Note: To input the <code>^M</code> character, press <span class="k">CTRL</span>+<span class="k">v</span> , press <span class="k">CTRL</span><span class="k">m</span> then press <span class="k">Enter</span></p>
+<pre><code>^M
+</code></pre>
+<pre><code class="language-vim">:%!sed -<span class="hljs-keyword">e</span> <span class="hljs-string">&#x27;s/^[ SPACE TAB CTRL-v CTRL-m]*$//&#x27;</span> -<span class="hljs-keyword">e</span> <span class="hljs-string">&#x27;/./,/^$/!d&#x27;</span>
+</code></pre>
+<h2 id="eseguire-il-file-corrente" tabindex="-1">Eseguire il file corrente <a class="header-anchor" href="#eseguire-il-file-corrente" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-vim">:! %:<span class="hljs-keyword">p</span>
+</code></pre>
+<ul>
+<li><span class="k">:</span> for command mode</li>
+<li><span class="k">!</span> to run a shell command</li>
+<li><span class="k">%</span> to refer to the file in the current buffer</li>
+<li><span class="k">:p</span> to use the full path of the current file</li>
+</ul>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim"><span class="hljs-keyword">nnoremap</span> <span class="hljs-symbol">&lt;F9&gt;</span> :!%:<span class="hljs-keyword">p</span>
+</code></pre>
+<h2 id="visualizzare-il-path-del-file-corrente" tabindex="-1">Visualizzare il path del file corrente <a class="header-anchor" href="#visualizzare-il-path-del-file-corrente" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://vimdoc.sourceforge.net/htmldoc/editing.html#CTRL-G">http://vimdoc.sourceforge.net/htmldoc/editing.html#CTRL-G</a></li>
+<li><a href="https://vim.fandom.com/wiki/Get_the_name_of_the_current_file">https://vim.fandom.com/wiki/Get_the_name_of_the_current_file</a></li>
+</ul>
+<p><span class="k">1</span> <span class="k">CTRL</span>+<span class="k">g</span></p>
+<pre><code class="language-vim">:<span class="hljs-keyword">echo</span> <span class="hljs-built_in">expand</span>(<span class="hljs-string">&#x27;%:p&#x27;</span>)
+:<span class="hljs-keyword">help</span> <span class="hljs-built_in">expand</span>
+:<span class="hljs-keyword">help</span> CTRL-G
+</code></pre>
+<h2 id="windows" tabindex="-1">Windows <a class="header-anchor" href="#windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-vim">:h windows
+:h <span class="hljs-keyword">vne</span>
+
+<span class="hljs-comment">&quot; Apre una nuova finestra vuota verticale</span>
+:<span class="hljs-keyword">vne</span>
+
+~/.vimrc
+<span class="hljs-comment">&quot; CTRL+W CTRL+N per aprire una nuova finestra in verticale</span>
+<span class="hljs-keyword">map</span> <span class="hljs-symbol">&lt;C-W&gt;</span><span class="hljs-symbol">&lt;C-N&gt;</span> :<span class="hljs-keyword">vne</span><span class="hljs-symbol">&lt;CR&gt;</span>       
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Azione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">w</span>, <span class="k">CTRL</span>+<span class="k">n</span></td>
+<td style="text-align:left">Apre una nuova finestra vuota in verticale(aggiunto da me in <code>~/.vimrc</code>)</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">w</span>, <span class="k">s</span></td>
+<td style="text-align:left">for horizontal splitting</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">w</span>, <span class="k">v</span></td>
+<td style="text-align:left">for vertical splitting</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">w</span>, <span class="k">q</span></td>
+<td style="text-align:left">to close window</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">w</span>, <span class="k">CTRL</span>+<span class="k">w</span></td>
+<td style="text-align:left">to switch between windows</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">w</span>, <span class="k">j</span> xor <span class="k">j</span>, <span class="k">h</span>, <span class="k">l</span></td>
+<td style="text-align:left"><strong>lowercase</strong> <code>hjkl</code> to switch to adjacent window (intuitively up, down, left, right), <strong>oppure i tasti cursore</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="k">CTRL</span>+<span class="k">W</span>, <span class="k">L</span> o <span class="k">H</span></td>
+<td style="text-align:left"><strong>uppercase</strong> <code>LH</code> per spostare la finestra a destra o sinistra</td>
+</tr>
+</tbody>
+</table>
+</body></html>

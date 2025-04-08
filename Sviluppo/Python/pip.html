@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.648" />
+        <title>pip</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pip" tabindex="-1">pip <a class="header-anchor" href="#pip" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.648</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-pip">Installazione pip </a></li><li><a href="#aggiornamento-pip">Aggiornamento pip </a></li><li><a href="#modalit%C3%A0-development-mode-con-setuptools">Modalità Development Mode con setuptools </a></li><li><a href="#salvare-e-ripristinare-l'elenco-delle-librerie-installate">Salvare e ripristinare l&#39;elenco delle librerie installate </a></li><li><a href="#aggiornare-i-pacchetti">Aggiornare i pacchetti </a></li><li><a href="#utilizzare-pip%2Fpython-come-utente-non-amministratore">Utilizzare PIP/Python come utente non amministratore </a><ol><li><a href="#installare-le-librerie-nello-spazio-utente">Installare le librerie nello spazio utente </a></li><li><a href="#creare-un-virtualenv">Creare un virtualenv </a><ol><li><a href="#usare-virtualenv">Usare virtualenv </a></li><li><a href="#usare-venv">Usare venv </a></li></ol></li></ol></li><li><a href="#pip-as-administrator-in-windows">PIP As Administrator in Windows </a></li><li><a href="#installazione%2Faggiornamento-di-pip">Installazione/Aggiornamento di pip </a><ol><li><a href="#installazione">Installazione </a></li><li><a href="#aggiornamento">Aggiornamento </a></li></ol></li><li><a href="#bug-unicodedecodeerror-(verr%C3%A0-corretto-in-pip-10.0)">Bug UnicodeDecodeError (Verrà corretto in pip 10.0) </a></li><li><a href="#pip-install-codepage-error-(sqlalchemy%2Cwindows)-%234110">pip install codepage error (sqlalchemy,windows) #4110 </a></li><li><a href="#e'-un-problema-di-pip%2C-ecco-come-correggerlo%3A">E&#39; un problema di pip, ecco come correggerlo: </a></li><li><a href="#bisogna-effettuare-la-seguente-modifica-a-pip%3A">Bisogna effettuare la seguente modifica a pip: </a></li><li><a href="#extras">Extras </a></li><li><a href="#comandi-pip">Comandi pip </a></li><li><a href="#pip.ini">pip.ini </a></li></ol></nav><h1 id="pip-1" tabindex="-1">pip <a class="header-anchor" href="#pip-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://docs.python.org/3/library/ensurepip.html">https://docs.python.org/3/library/ensurepip.html</a></li>
+<li><a href="https://docs.python.org/3/installing/index.html">https://docs.python.org/3/installing/index.html</a></li>
+</ul>
+<p>pip is the preferred installer program. Starting with Python 3.4, it is included by default with the Python binary installers.</p>
+<h2 id="installazione-pip" tabindex="-1">Installazione pip <a class="header-anchor" href="#installazione-pip" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione pip - https://docs.python.org/3/library/ensurepip.html</span>
+$ python -m ensurepip --user --upgrade
+
+<span class="hljs-comment"># Installazione pip con python</span>
+$ wget https://bootstrap.pypa.io/get-pip.py &amp;&amp; python get-pip.py --user
+$ <span class="hljs-built_in">cd</span> .<span class="hljs-built_in">local</span>/bin
+$ ./pip install &lt;package_name&gt; --user
+<span class="hljs-comment"># ---</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm python
+$ curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+$ python get-pip.py --user
+
+<span class="hljs-comment"># Installazione pip con pacman</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S--needed --noconfirm python
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm python-pip
+</code></pre>
+<ul>
+<li>
+<p><a href="https://github.com/pypa/get-pip">https://github.com/pypa/get-pip</a> <a href="https://bootstrap.pypa.io/">https://bootstrap.pypa.io/</a></p>
+<pre><code class="language-bash">  $ curl -sSL https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+  $ python get-pip.py
+</code></pre>
+</li>
+</ul>
+<h2 id="aggiornamento-pip" tabindex="-1">Aggiornamento pip <a class="header-anchor" href="#aggiornamento-pip" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ python -m pip install --upgrade pip
+$ pip config list -v
+</code></pre>
+<h2 id="modalit%C3%A0-development-mode-con-setuptools" tabindex="-1">Modalità Development Mode con setuptools <a class="header-anchor" href="#modalit%C3%A0-development-mode-con-setuptools" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.python.org/3/library/venv.html">https://docs.python.org/3/library/venv.html</a></li>
+<li><a href="https://setuptools.pypa.io/en/latest/userguide/quickstart.html">https://setuptools.pypa.io/en/latest/userguide/quickstart.html</a></li>
+<li><a href="https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html">https://setuptools.pypa.io/en/latest/userguide/pyproject_config.html</a></li>
+</ul>
+<pre><code class="language-sh">$ python -m venv venv
+$ . ./venv/bin/activate
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">python</span> -<span class="hljs-title">m</span> <span class="hljs-title">venv</span> <span class="hljs-title">venv</span>
+<span class="hljs-title">C</span>:\&gt; &lt;<span class="hljs-title">venv</span>&gt;\<span class="hljs-title">Scripts</span>\<span class="hljs-title">activate.bat</span>
+</span></code></pre>
+<pre><code class="language-toml"><span class="hljs-comment"># pyproject.toml</span>
+<span class="hljs-section">[project]</span>
+<span class="hljs-attr">name</span> = <span class="hljs-string">&quot;mypackage&quot;</span>
+<span class="hljs-attr">version</span> = <span class="hljs-string">&quot;0.0.1&quot;</span>
+<span class="hljs-attr">dependencies</span> = [
+    <span class="hljs-string">&quot;requests&quot;</span>,
+    <span class="hljs-string">&#x27;importlib-metadata; python_version&lt;&quot;3.10&quot;&#x27;</span>,
+]
+</code></pre>
+<pre><code class="language-sh">$ pip install --editable .
+</code></pre>
+<h2 id="salvare-e-ripristinare-l'elenco-delle-librerie-installate" tabindex="-1">Salvare e ripristinare l'elenco delle librerie installate <a class="header-anchor" href="#salvare-e-ripristinare-l'elenco-delle-librerie-installate" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://pip.pypa.io/en/stable/cli/pip_freeze/">https://pip.pypa.io/en/stable/cli/pip_freeze/</a></li>
+<li><a href="https://pip.pypa.io/en/stable/cli/pip_install/">https://pip.pypa.io/en/stable/cli/pip_install/</a></li>
+</ul>
+<pre><code class="language-sh">$ python -m pip freeze &gt; requirements.txt
+$ python -m pip install -r requirements.txt
+</code></pre>
+<h2 id="aggiornare-i-pacchetti" tabindex="-1">Aggiornare i pacchetti <a class="header-anchor" href="#aggiornare-i-pacchetti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-sh"><span class="hljs-comment"># Elenco dei pacchetti aggiornabili</span>
+$ pip list --outdated --format=columns
+
+<span class="hljs-comment"># Aggiornare tutti i pacchetti</span>
+$ pip list --outdated --format=freeze | grep -v <span class="hljs-string">&#x27;^\-e&#x27;</span> | <span class="hljs-built_in">cut</span> -d = -f 1 | xargs -n1 pip install -U 
+</code></pre>
+<h2 id="utilizzare-pip%2Fpython-come-utente-non-amministratore" tabindex="-1">Utilizzare PIP/Python come utente non amministratore <a class="header-anchor" href="#utilizzare-pip%2Fpython-come-utente-non-amministratore" aria-hidden="true">🔗</a></h2>
+<p>In Windows e Linux se non si è amministratori, non si può utilizzare pip per installare pacchetti,
+ciò perchè come utente normale pip non può accedere all'installazione Python per alterarla aggiungendovi pacchetti.
+Inoltre è meglio così perchè è bene non alterare l'installazione principale di python aggiungendovi librerie.
+Ci sono due soluzioni:</p>
+<h3 id="installare-le-librerie-nello-spazio-utente" tabindex="-1">Installare le librerie nello spazio utente <a class="header-anchor" href="#installare-le-librerie-nello-spazio-utente" aria-hidden="true">🔗</a></h3>
+<p>Con la prima soluzione non alteriamo l'installazione di python installando le librerie pip in una directory del'utenza windows.</p>
+<ul>
+<li><a href="https://pip.readthedocs.io/en/latest/user_guide.html#user-installs">https://pip.readthedocs.io/en/latest/user_guide.html#user-installs</a></li>
+<li><a href="https://packaging.python.org/tutorials/installing-packages/#installing-to-the-user-site">https://packaging.python.org/tutorials/installing-packages/#installing-to-the-user-site</a></li>
+<li><a href="https://docs.python.org/3/install/index.html#alternate-installation-the-user-scheme">https://docs.python.org/3/install/index.html#alternate-installation-the-user-scheme</a></li>
+<li><a href="https://docs.python.org/3/library/site.html#site.USER_BASE">https://docs.python.org/3/library/site.html#site.USER_BASE</a></li>
+<li><a href="https://docs.python.org/3/installing/index.html#install-packages-just-for-the-current-user">https://docs.python.org/3/installing/index.html#install-packages-just-for-the-current-user</a></li>
+</ul>
+<p>Utilizzando l'opzione <code>--user</code>, che può essere anche aggiunta al <code>pip.ini</code> con <code>user=true</code>
+i pacchetti vengono installati nel sito locale dell'utente.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Per vedere dove --user salva i pacchetti:</span>
+$ python -m site --user-base
+$ python -c <span class="hljs-string">&quot;import site;print(&quot;</span>site.USER_BASE<span class="hljs-string">&quot;)&quot;</span>
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">pip</span> <span class="hljs-title">install</span> --<span class="hljs-title">user</span> &lt;<span class="hljs-title">package</span>&gt;
+</span></code></pre>
+<p>Per sapare dove si trova lo spazio utente:</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">python</span> -<span class="hljs-title">m</span> <span class="hljs-title">site</span> --<span class="hljs-title">user</span>-<span class="hljs-title">base</span> 
+%<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">Python</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">py</span> -<span class="hljs-title">m</span> <span class="hljs-title">site</span> --<span class="hljs-title">user</span>-<span class="hljs-title">site</span>
+%<span class="hljs-title">APPDATA</span>%\<span class="hljs-title">Python</span>\<span class="hljs-title">PythonXY</span>\<span class="hljs-title">site</span>-<span class="hljs-title">packages</span>
+</span></code></pre>
+<pre><code class="language-bash">$ python -m site --user-base 
+~/.local
+$ python -m site --user-site
+~/.local/lib/pythonX.Y/site-packages
+</code></pre>
+<p>Da questa informazione vediamo che al <code>PATH</code> andrebbe aggiunto il percorso:
+<code>%APPDATA%\Python\Python39\Scripts</code></p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/122327/how-do-i-find-the-location-of-my-python-site-packages-directory">https://stackoverflow.com/questions/122327/how-do-i-find-the-location-of-my-python-site-packages-directory</a></li>
+</ul>
+<pre><code class="language-bat">:: Global site-packages
+python -m site
+python -c &quot;import site; <span class="hljs-built_in">print</span>(site.getsitepackages())&quot;
+:: per user site-packages directory (PEP <span class="hljs-number">370</span>)
+python -m site --user-site
+pip list --user
+</code></pre>
+<h3 id="creare-un-virtualenv" tabindex="-1">Creare un virtualenv <a class="header-anchor" href="#creare-un-virtualenv" aria-hidden="true">🔗</a></h3>
+<p>Con la seconda soluzione, per non alterare l'installazione principale python, creiamo un virtualenv nel quale installare le librerie pip.</p>
+<p>Python “Virtual Environments” allow Python packages to be installed in an isolated location for a particular application, rather than being installed globally.</p>
+<p>Attivando un virtualenv pip è in grado di installarvi pacchetti senza che l'utente sia un amministratore.</p>
+<ul>
+<li><a href="https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments">https://packaging.python.org/tutorials/installing-packages/#creating-virtual-environments</a></li>
+<li><a href="https://www.python.org/dev/peps/pep-0405">PEP 405 Python Virtual Environments</a></li>
+<li><a href="https://docs.python.org/library/venv.html">https://docs.python.org/library/venv.html</a></li>
+<li><a href="https://virtualenv.pypa.io/en/latest/">https://virtualenv.pypa.io/en/latest/</a></li>
+</ul>
+<h4 id="usare-virtualenv" tabindex="-1">Usare virtualenv <a class="header-anchor" href="#usare-virtualenv" aria-hidden="true">🔗</a></h4>
+<ul>
+<li>Linux: <code>~/.local/share/virtualenvs</code></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># creare ed Utilizzare un virtualenv</span>
+$ python -m virtualenv ansible  <span class="hljs-comment"># Create a virtualenv if one does not already exist</span>
+$ <span class="hljs-built_in">source</span> ansible/bin/activate   <span class="hljs-comment"># Activate the virtual environment</span>
+$ python -m pip install ansible
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">pip</span> <span class="hljs-title">install</span> <span class="hljs-title">virtualenv</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">virtualenv</span> <span class="hljs-title">c</span>:\<span class="hljs-title">path</span>\<span class="hljs-title">to</span>\<span class="hljs-title">myenv</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">c</span>:\<span class="hljs-title">path</span>\<span class="hljs-title">to</span>\<span class="hljs-title">myenv</span>\<span class="hljs-title">Scripts</span>\<span class="hljs-title">activate.bat</span>
+</span></code></pre>
+<h4 id="usare-venv" tabindex="-1">Usare venv <a class="header-anchor" href="#usare-venv" aria-hidden="true">🔗</a></h4>
+<p>venv è un sottoinsieme di virtualenv integrato da Python 3.3, non và dunque installato in Python 3.7.</p>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">c</span>:\<span class="hljs-title">Python37</span>\<span class="hljs-title">python</span> -<span class="hljs-title">m</span> <span class="hljs-title">venv</span> <span class="hljs-title">c</span>:\<span class="hljs-title">path</span>\<span class="hljs-title">to</span>\<span class="hljs-title">myenv</span>
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">c</span>:\<span class="hljs-title">path</span>\<span class="hljs-title">to</span>\<span class="hljs-title">myenv</span>\<span class="hljs-title">Scripts</span>\<span class="hljs-title">activate.bat</span>
+</span></code></pre>
+<h2 id="pip-as-administrator-in-windows" tabindex="-1">PIP As Administrator in Windows <a class="header-anchor" href="#pip-as-administrator-in-windows" aria-hidden="true">🔗</a></h2>
+<p>Se si vuole alterare l'installazione di Python in windows, aggiungendo pacchetti con pip,
+in Windows 7/10 pip deve essere eseguito come <code>cmd.exe</code> da Amministratore</p>
+<ol>
+<li>Tasto Win, cercare &quot;cmd&quot;</li>
+<li>Avviarlo con <strong class="k">CTRL+SHIFT+ENTER</strong></li>
+</ol>
+<h2 id="installazione%2Faggiornamento-di-pip" tabindex="-1">Installazione/Aggiornamento di pip <a class="header-anchor" href="#installazione%2Faggiornamento-di-pip" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://packaging.python.org/tutorials/installing-packages">https://packaging.python.org/tutorials/installing-packages</a></li>
+</ul>
+<h3 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ python -m ensurepip --default-pip
+$ python -m pip install --upgrade pip setuptools wheel
+</code></pre>
+<ul>
+<li><a href="https://bootstrap.pypa.io/get-pip.py">https://bootstrap.pypa.io/get-pip.py</a></li>
+</ul>
+<p>python <a href="http://get-pip.py">get-pip.py</a></p>
+<h3 id="aggiornamento" tabindex="-1">Aggiornamento <a class="header-anchor" href="#aggiornamento" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"> python -m pip install --upgrade pip setuptools wheel
+ python -m pip install -U pip setuptools wheel
+</code></pre>
+<h2 id="bug-unicodedecodeerror-(verr%C3%A0-corretto-in-pip-10.0)" tabindex="-1">Bug UnicodeDecodeError (Verrà corretto in pip 10.0) <a class="header-anchor" href="#bug-unicodedecodeerror-(verr%C3%A0-corretto-in-pip-10.0)" aria-hidden="true">🔗</a></h2>
+<p>Errore PermissionError: [WinError 32] Impossibile accedere al file. Il file è utilizzato da un altro processo</p>
+<p>&quot;\BackupDVDRW\app\Sviluppo\Python\Python\Python_pip_patch\Lib\site-packages\pip\compat_<em>init</em>_.py&quot;
+--&gt;
+&quot;C:\Python\Lib\site-packages\pip\compat_<em>init</em>_.py&quot;</p>
+<p>Si ottiene ad esempio con:</p>
+<p>pip install -U sqlalchemy</p>
+<ul>
+<li>
+<p><a href="https://github.com/pypa/pip/issues/4110">https://github.com/pypa/pip/issues/4110</a> pip issues UnicodeDecodeError on Windows 10 for Russian language #4251</p>
+</li>
+<li>
+<p><a href="https://github.com/pypa/pip/issues/4251">https://github.com/pypa/pip/issues/4251</a> pip install codepage error (sqlalchemy,windows) #4110</p>
+<h2 id="pip-install-codepage-error-(sqlalchemy%2Cwindows)-%234110" tabindex="-1">pip install codepage error (sqlalchemy,windows) #4110 <a class="header-anchor" href="#pip-install-codepage-error-(sqlalchemy%2Cwindows)-%234110" aria-hidden="true">🔗</a></h2>
+<p>Exception:
+Traceback (most recent call last):
+File &quot;c:\python\lib\site-packages\pip\compat_<em>init</em>_.py&quot;, line 73, in console_to_str
+return s.decode(sys.<strong>stdout</strong>.encoding)
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xf9 in position 82: invalid start byte
+File &quot;c:\python\lib\site-packages\pip\utils_<em>init</em>_.py&quot;, line 114, in rmtree_errorhandler
+func(path)
+PermissionError: [WinError 32] Impossibile accedere al file. Il file è utilizzato da un altro processo: 'C:\Users\$USER\AppData\Local\Temp\pip-build-oxgv27e6\sqlalchemy'</p>
+<p>su windows 10 dà errore UnicodeDecodeError</p>
+<h2 id="e'-un-problema-di-pip%2C-ecco-come-correggerlo%3A" tabindex="-1">E' un problema di pip, ecco come correggerlo: <a class="header-anchor" href="#e'-un-problema-di-pip%2C-ecco-come-correggerlo%3A" aria-hidden="true">🔗</a></h2>
+<p>con &quot;chcp&quot; si può vedere la codepage utilizzata dalla console windows:
+C:\Users$USER&gt;chcp
+Tabella codici attiva: 850</p>
+<h2 id="bisogna-effettuare-la-seguente-modifica-a-pip%3A" tabindex="-1">Bisogna effettuare la seguente modifica a pip: <a class="header-anchor" href="#bisogna-effettuare-la-seguente-modifica-a-pip%3A" aria-hidden="true">🔗</a></h2>
+<p>--&gt;C:\Python\Lib\site-packages\pip\compat_<em>init</em>_.py</p>
+<p>if sys.version_info &gt;= (3,):
+def console_to_str(s):
+try:
+return s.decode(sys.<strong>stdout</strong>.encoding)
+except UnicodeDecodeError:
+# C:\Users$USER&gt;chcp
+# Tabella codici attiva: 850
+return s.decode('cp850')        # &lt;-- modifica apportata da me
+#return s.decode('utf_8')       # &lt;-- riga originale</p>
+</li>
+</ul>
+<h2 id="extras" tabindex="-1">Extras <a class="header-anchor" href="#extras" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://peps.python.org/pep-0508/#extras">https://peps.python.org/pep-0508/#extras</a> Dependency specification for Python Software Packages
+<code>requests[security]</code></p>
+</li>
+<li>
+<p><a href="https://pip.pypa.io/en/stable/cli/pip_install/">https://pip.pypa.io/en/stable/cli/pip_install/</a></p>
+<pre><code class="language-bash">$ python -m pip install SomePackage[PDF]
+$ python -m pip install <span class="hljs-string">&quot;SomePackage[PDF] @ git+https://git.repo/SomePackage@main#subdirectory=subdir_path&quot;</span>
+$ python -m pip install .[PDF]  <span class="hljs-comment"># project in current directory</span>
+$ python -m pip install SomePackage[PDF]==3.0
+$ python -m pip install SomePackage[PDF,EPUB]  <span class="hljs-comment"># multiple extras  </span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://python-poetry.org/docs/pyproject/#extras">https://python-poetry.org/docs/pyproject/#extras</a></p>
+</li>
+<li>
+<p><a href="https://python-poetry.org/docs/cli/#add">https://python-poetry.org/docs/cli/#add</a></p>
+<pre><code class="language-bash">$ poetry add <span class="hljs-string">&quot;requests[security,socks]&quot;</span>
+$ poetry add <span class="hljs-string">&quot;requests[security,socks]~=2.22.0&quot;</span>
+$ poetry add <span class="hljs-string">&quot;git+https://github.com/pallets/flask.git@1.1.1[dotenv,dev]&quot;</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="comandi-pip" tabindex="-1">Comandi pip <a class="header-anchor" href="#comandi-pip" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pip install --<span class="hljs-built_in">help</span>
+ 
+$ python -m pip install SomePackage
+$ python -m pip install SomePackage==1.0.4    <span class="hljs-comment"># specific version</span>
+$ python -m pip install <span class="hljs-string">&quot;SomePackage&gt;=1.0.4&quot;</span>  <span class="hljs-comment"># minimum version</span>
+$ python -m pip install --upgrade SomePackage
+$ pip install -U package                      <span class="hljs-comment"># aggiornamento</span>
+$ pip install -U --force-reinstall package    <span class="hljs-comment"># forza la reinstallazione durante l&#x27;aggiornamento</span>
+$ pip install -I package                      <span class="hljs-comment"># forza la reinstallazione</span>
+$ pip uninstall package
+ 
+$ pip list --outdated --format=columns
+$ pip show cx_Oracle       <span class="hljs-comment"># Visualizza le informazioni su un pacchetto installato</span>
+ 
+ 
+$ pip list --outdated --format=legacy| <span class="hljs-built_in">cut</span> -d <span class="hljs-string">&#x27; &#x27;</span> -f1| xargs pip install -U
+ 
+$ pip list --outdated --format=freeze | grep -v <span class="hljs-string">&#x27;^\-e&#x27;</span> | <span class="hljs-built_in">cut</span> -d = -f 1 | xargs -n1 pip install -U
+</code></pre>
+<h2 id="pip.ini" tabindex="-1">pip.ini <a class="header-anchor" href="#pip.ini" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-ini"><span class="hljs-comment"># %USERPROFILE%\pip\pip.ini</span>
+<span class="hljs-section">[global]</span>
+<span class="hljs-comment"># PROBLEMA DEI DIRITTI DI ACCESSO ALL&#x27;INSTALLAZIONE PYTHON</span>
+<span class="hljs-comment"># --------------------------------------------------------</span>
+<span class="hljs-comment"># Nel pc di &lt;host&gt; pip non può installare librerie in C:\Programmi\Python\Lib, che è alterabile solo dall&#x27;amministratore,</span>
+<span class="hljs-comment"># Serve allora un modo che consenta all&#x27;utente non amministratore di poter installare librerie python mediante pip.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># SOLUZIONE 1: User mode</span>
+<span class="hljs-comment"># ---------------------</span>
+<span class="hljs-comment"># Per risolvere il problema è possibile far lavorare pip in modalità utente(parametro --user da riga di comando)</span>
+<span class="hljs-comment"># https://pip.pypa.io/en/stable/user_guide/#user-installs</span>
+<span class="hljs-comment"># https://docs.python.org/3/library/site.html#site.USER_BASE</span>
+<span class="hljs-comment"># in questo modo la lib nella quale python cerca le librerie si trova in %APPDATA%\Python</span>
+<span class="hljs-comment"># 		python -c &quot;import site;print(&quot;site.USER_BASE&quot;)&quot;</span>
+<span class="hljs-comment"># 		C:\Users\myuser\AppData\Roaming\Python</span>
+<span class="hljs-comment"># Per evitare di utilizzare il parametro --user da riga di comando basta scommentare il seguente parametro:</span>
+<span class="hljs-comment"># user = true</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># SOLUZIONE 2(MIGLIORE): Virtual Environment</span>
+<span class="hljs-comment"># ------------------------------------------ </span>
+<span class="hljs-comment"># La soluzione migliore è avere una installazione delle librerie locale per ciascun progetto,</span>
+<span class="hljs-comment"># realizzata mediante la creazione di un virtualenv per ogni progetto: python -m venv &lt;nomedir_venv&gt;; nomedir_venv\activate</span>
+<span class="hljs-comment"># Con il seguente parametro si obbliga pip a lavorare solamente se si è in un contesto di virtualenv attivo, dando errore altrimenti:</span>
+<span class="hljs-attr">require-virtualenv</span> = <span class="hljs-literal">false</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># PROXY PIP</span>
+<span class="hljs-comment"># ---------</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># PROXY HTTP</span>
+<span class="hljs-comment"># ----------</span>
+<span class="hljs-comment"># In alternativa a Nexus si puo utilizzare il proxy, ma la password utente è in chiaro e và sempre mantenuta aggiornata:</span>
+<span class="hljs-attr">proxy</span> = http://username:xxxxxxxxxxxx@myserver.it:<span class="hljs-number">8080</span>
+<span class="hljs-attr">trusted-host</span> = pypi.python.org
+			   pypi.org
+			   files.pythonhosted.org
+<span class="hljs-comment"># set https_proxy=http://c3username:xxxxxxx@myserver.it:8080</span>
+</code></pre>
+</body></html>

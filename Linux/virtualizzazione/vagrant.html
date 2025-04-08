@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.196" />
+        <title>vagrant</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vagrant" tabindex="-1">vagrant <a class="header-anchor" href="#vagrant" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.196</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione">Installazione </a></li><li><a href="#tutorial">Tutorial </a></li><li><a href="#manjaro-virtualbox-creata-con-vagrant">Manjaro VirtualBox creata con Vagrant </a></li><li><a href="#creare-una-immagine-vagrant-di-una-vm-manjaro">Creare una immagine Vagrant di una VM Manjaro </a><ol><li><a href="#manjaro-virtualbox-creazione-con-vboxmanage">Manjaro VirtualBox creazione con VBoxManage </a></li><li><a href="#partenza-della-vm-guest">Partenza della VM Guest </a></li><li><a href="#aggiornamento-del-sistema">Aggiornamento del sistema </a></li><li><a href="#installare-i-guest-tools-per-virtualbox">Installare i guest tools per VirtualBox </a></li><li><a href="#impostare-la-password-root-a-'vagrant'">Impostare la password root a &#39;vagrant&#39; </a></li><li><a href="#impostare-sudo-per-l'utente-vagrant">Impostare sudo per l&#39;utente vagrant </a></li><li><a href="#creare-l'utente-vagrant-sul-guest">Creare l&#39;utente Vagrant sul Guest </a></li><li><a href="#installare-la-chiave-ssh-per-l'utente-vagrant-sul-guest">Installare la chiave ssh per l&#39;utente vagrant sul guest </a></li><li><a href="#installare-openssh">Installare OpenSSH </a></li><li><a href="#creare-il-box">Creare il box </a><ol><li><a href="#pulizia-del-guest-manjaro">Pulizia del Guest Manjaro </a></li><li><a href="#deframmentare-lo-spazio-vuoto">Deframmentare lo spazio vuoto </a></li><li><a href="#creazione-del-vbox">Creazione del vbox </a></li></ol></li><li><a href="#testare-il-box">Testare il box </a></li></ol></li><li><a href="#configurare-l'ip-statico-nel-vagrantfile">Configurare l&#39;ip statico nel Vagrantfile </a></li></ol></nav><h1 id="vagrant-1" tabindex="-1">Vagrant <a class="header-anchor" href="#vagrant-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://developer.hashicorp.com/vagrant/docs">https://developer.hashicorp.com/vagrant/docs</a></li>
+<li><a href="https://developer.hashicorp.com/vagrant/tutorials/getting-started">https://developer.hashicorp.com/vagrant/tutorials/getting-started</a></li>
+<li><a href="https://app.vagrantup.com/boxes/search">https://app.vagrantup.com/boxes/search</a></li>
+</ul>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Vagrant">https://wiki.archlinux.org/title/Vagrant</a></li>
+<li><a href="https://archlinux.org/packages/?name=vagrant">https://archlinux.org/packages/?name=vagrant</a></li>
+<li><a href="./virtualbox.html">VirtualBox</a></li>
+<li><a href="./qemu-libvirt.html">Libvirt</a> per l'installazione di libvirt e relativo demone</li>
+</ul>
+<p><strong>Avendo verificato che la versione presente in Manjaro è l'ultima ho deciso di installarlo dal repository</strong>:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione libvirt</span>
+$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm qemu virt-manager virt-viewer dnsmasq vde2 bridge-utils openbsd-netcat ebtables iptables libguestfs
+    :: openbsd-netcat e gnu-netcat vanno <span class="hljs-keyword">in</span> conflitto. Vuoi rimuovere gnu-netcat? [s/N] s
+    :: iptables-nft e iptables vanno <span class="hljs-keyword">in</span> conflitto. Vuoi rimuovere iptables? [s/N] s
+$ <span class="hljs-built_in">sudo</span> virt-host-validate
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> libvirtd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start libvirtd.service
+$ <span class="hljs-built_in">sudo</span> systemctl status libvirtd.service
+$ sed -i <span class="hljs-string">&#x27;/unix_sock_group/s/^#//g&#x27;</span> /tmp/libvirtd.conf
+$ sed -i <span class="hljs-string">&#x27;/unix_sock_rw_perms/s/^#//g&#x27;</span> /tmp/libvirtd.conf
+$ <span class="hljs-built_in">sudo</span> usermod -aG kvm <span class="hljs-variable">${USER}</span>
+$ <span class="hljs-built_in">sudo</span> usermod -aG libvirt <span class="hljs-variable">${USER}</span>
+$ <span class="hljs-built_in">sudo</span> usermod -a -G libvirt $(<span class="hljs-built_in">whoami</span>) <span class="hljs-comment"># $USER</span>
+$ newgrp libvirt
+$ <span class="hljs-built_in">sudo</span> systemctl restart libvirtd.service
+$ <span class="hljs-built_in">sudo</span> modprobe -r kvm_intel
+$ <span class="hljs-built_in">sudo</span> modprobe -r kvm_amd
+$ <span class="hljs-built_in">sudo</span> modprobe kvm_amd nested=1
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;options kvm_amd nested=1&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/modprobe.d/kvm-amd.conf
+<span class="hljs-comment"># Installazione VirtualBox</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm virtualbox virtualbox-guest-iso linux60-virtualbox-host-modules 
+$ <span class="hljs-built_in">sudo</span> pamac build virtualbox-ext-oracle
+$ <span class="hljs-built_in">sudo</span> vboxreload
+<span class="hljs-comment"># Installazione Vagrant</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm vagrant
+$ vagrant -v
+$ vagrant autocomplete install --bash --zsh
+$ <span class="hljs-built_in">sudo</span> vagrant plugin install vagrant-vbguest vagrant-share
+$ <span class="hljs-built_in">sudo</span> vagrant plugin install vagrant-libvirt <span class="hljs-comment"># vagrant up --provider=libvirt</span>
+</code></pre>
+<p>Vagrant consiglia di non installarlo dal pacchetto della distribuzione ma dall'installer scaricabile dal sito:</p>
+<ul>
+<li>
+<p><a href="https://www.vagrantup.com/downloads">https://www.vagrantup.com/downloads</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/45355277/how-can-i-decompress-an-archive-file-having-zst-or-tar-zst">https://stackoverflow.com/questions/45355277/how-can-i-decompress-an-archive-file-having-zst-or-tar-zst</a></p>
+</li>
+<li>
+<p><a href="https://github.com/facebook/zstd">https://github.com/facebook/zstd</a></p>
+<pre><code class="language-bash">$ wget https://releases.hashicorp.com/vagrant/2.2.19/vagrant_2.2.19_x86_64.tar.zst
+$ tar -I unzstd -xvf vagrant_2.2.19_x86_64.tar.zst
+$ tar --use-compress-program=unzstd -xvf vagrant_2.2.19_x86_64.tar.zst
+</code></pre>
+</li>
+</ul>
+<h2 id="tutorial" tabindex="-1">Tutorial <a class="header-anchor" href="#tutorial" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://learn.hashicorp.com/collections/vagrant/getting-started/">https://learn.hashicorp.com/collections/vagrant/getting-started/</a></li>
+</ul>
+<p>By default, Vagrant shares your project directory (the one containing the Vagrantfile) to the <code>/vagrant</code> directory in your guest machine.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> vagrant_getting_started
+$ <span class="hljs-built_in">cd</span> vagrant_getting_started
+$ vagrant init hashicorp/bionic64
+<span class="hljs-comment"># $ vagrant init archlinux/archlinux</span>
+$ vagrant up
+$ vagrant ssh
+$ vagrant global-status <span class="hljs-comment"># Elenco delle VM</span>
+$ vagrant halt
+$ vagrant destroy    
+$ vagrant box list
+$ vagrant box remove hashicorp/bionic64
+
+<span class="hljs-comment"># Directory dati e comandi di vagrant:</span>
+$ <span class="hljs-built_in">rm</span> -rf /opt/vagrant
+$ <span class="hljs-built_in">rm</span> -f /usr/bin/vagrant
+$ <span class="hljs-built_in">rm</span> -rf ~/.vagrant.d
+</code></pre>
+<h2 id="manjaro-virtualbox-creata-con-vagrant" tabindex="-1">Manjaro VirtualBox creata con Vagrant <a class="header-anchor" href="#manjaro-virtualbox-creata-con-vagrant" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://app.vagrantup.com/sashog/boxes/manjaro-os">https://app.vagrantup.com/sashog/boxes/manjaro-os</a></li>
+<li><a href="https://developer.hashicorp.com/vagrant/docs/providers/virtualbox/configuration">https://developer.hashicorp.com/vagrant/docs/providers/virtualbox/configuration</a></li>
+<li><a href="https://ostechnix.com/how-to-increase-memory-and-cpu-on-vagrant-machine/">https://ostechnix.com/how-to-increase-memory-and-cpu-on-vagrant-machine/</a></li>
+<li><a href="https://app.vagrantup.com/jpsainea/boxes/manjaro-cinnamon">https://app.vagrantup.com/jpsainea/boxes/manjaro-cinnamon</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> /opt/vm/vagrant_manjaro
+$ <span class="hljs-built_in">cd</span> /opt/vm/vagrant_manjaro
+$ vagrant init jpsainea/manjaro-cinnamon --box-version 22.0.0
+$ gedit Vagrantfile
+</code></pre>
+<p>Vagrantfile: editato per definire l'hostname ed aumentare le risorse</p>
+<pre><code class="language-ruby"><span class="hljs-title class_">Vagrant</span>.configure(<span class="hljs-string">&quot;2&quot;</span>) <span class="hljs-keyword">do</span> |<span class="hljs-params">config</span>|
+  config.vm.box = <span class="hljs-string">&quot;jpsainea/manjaro-cinnamon&quot;</span>
+  config.vm.box_version = <span class="hljs-string">&quot;22.0.0&quot;</span>
+  config.vm.hostname = <span class="hljs-string">&quot;linux-vm&quot;</span>
+  <span class="hljs-comment"># https://developer.hashicorp.com/vagrant/docs/providers/virtualbox/configuration</span>
+  config.vm.provider <span class="hljs-string">&quot;virtualbox&quot;</span> <span class="hljs-keyword">do</span> |<span class="hljs-params">vb</span>|
+    vb.gui = <span class="hljs-literal">false</span>
+    vb.check_guest_additions = <span class="hljs-literal">true</span>
+    vb.name = <span class="hljs-string">&quot;Manjaro_Linux&quot;</span> <span class="hljs-comment"># Nome della VM VirtualBox, non è l&#x27;hostname</span>
+    vb.memory = <span class="hljs-string">&quot;8192&quot;</span>
+    vb.cpus = <span class="hljs-number">6</span>
+    <span class="hljs-comment"># Richiamo di VBoxManage:</span>
+    <span class="hljs-comment"># vb.customize [&quot;modifyvm&quot;, :id, &quot;--cpuexecutioncap&quot;, &quot;50&quot;]</span>
+    <span class="hljs-comment"># The :id special parameter is replaced with the ID of the virtual machine being created, </span>
+  <span class="hljs-keyword">end</span>
+<span class="hljs-keyword">end</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-comment"># export VAGRANT_LOG=INFO</span>
+$ <span class="hljs-comment"># vagrant ssh-config</span>
+$ vagrant up <span class="hljs-comment"># utente/pwd: vagrant/vagrant</span>
+$ ssh-copy-id -p 2222 vagrant@linux-vm
+$ vagrant box list
+$ ssh vagrant@localhost -p 2222
+$ vagrant ssh
+$ vagrant halt
+$ vagrant box remove jpsainea/manjaro-cinnamon
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Set Public Key Authentication</span>
+$ <span class="hljs-comment"># yes|ssh-keygen -t rsa -b 4096 -N &#x27;&#x27; -C &quot;username@hostname&quot;</span>
+$ ssh-copy-id -p 2222 vagrant@linux-vm
+</code></pre>
+<h2 id="creare-una-immagine-vagrant-di-una-vm-manjaro" tabindex="-1">Creare una immagine Vagrant di una VM Manjaro <a class="header-anchor" href="#creare-una-immagine-vagrant-di-una-vm-manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://developer.hashicorp.com/vagrant/docs/boxes/base">https://developer.hashicorp.com/vagrant/docs/boxes/base</a></p>
+</li>
+<li>
+<p><a href="https://www.engineyard.com/blog/building-a-vagrant-box-from-start-to-finish/">https://www.engineyard.com/blog/building-a-vagrant-box-from-start-to-finish/</a></p>
+<p>NAT mode (with a port forwarding rule SSH/TCP/2222/22)</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p /opt/vm/vagrant_manjaro
+$ <span class="hljs-built_in">cd</span> /opt/vm/vagrant_manjaro
+</code></pre>
+<h3 id="manjaro-virtualbox-creazione-con-vboxmanage" tabindex="-1">Manjaro VirtualBox creazione con VBoxManage <a class="header-anchor" href="#manjaro-virtualbox-creazione-con-vboxmanage" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="./virtualbox.html#creare-una-vm-manjaro-con-vboxmanage">VirtualBox</a></p>
+</li>
+<li>
+<p>CPU: 4</p>
+</li>
+<li>
+<p>RAM: 16GB</p>
+</li>
+<li>
+<p>Hard Disk: 40GB</p>
+</li>
+<li>
+<p>Disable audio</p>
+</li>
+<li>
+<p>Disable USB</p>
+</li>
+<li>
+<p>Ensure <strong>Network Adapter 1</strong> is set to <code>NAT</code></p>
+</li>
+<li>
+<p>Add this <strong>port-forwarding rule</strong>: [Name: SSH, Protocol: TCP, Host IP: blank, Host Port: <code>2222</code>, Guest IP: blank, Guest Port: <code>22</code>]</p>
+<p><a href="https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm">https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm</a>
+<a href="https://superuser.com/questions/901422/virtualbox-command-line-setting-up-port-forwarding">https://superuser.com/questions/901422/virtualbox-command-line-setting-up-port-forwarding</a></p>
+<pre><code>  --nat-pfN=[name],tcp | udp,[host-IP],hostport,[guest-IP],guestport
+      Specifies the NAT port-forwarding rule to use
+
+  # vboxmanage modifyvm $VM --nic1 bridged --bridgeadapter1 $IF
+  vboxmanage modifyvm $VM --nic1 nat
+  vboxmanage modifyvm $VM --nat-pf1 &quot;guestssh,tcp,,2222,,22&quot;
+</code></pre>
+</li>
+</ul>
+<p><code>vbox_create_vm.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE}</span>&quot;</span>
+<span class="hljs-keyword">while</span> [ -L <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+  SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+  SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+  [[ <span class="hljs-variable">${SCRIPT_PATH}</span> != /* ]] &amp;&amp; SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_DIR}</span>/<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink -f <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname -- <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+UPDIR=$(<span class="hljs-built_in">dirname</span> <span class="hljs-variable">$SCRIPT_DIR</span>)
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_PATH=<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_DIR=<span class="hljs-variable">${SCRIPT_DIR}</span>&quot;</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$SCRIPT_DIR</span>
+
+BASE=<span class="hljs-variable">$SCRIPT_DIR</span>
+VM=Manjaro
+CPUS=4
+MEMORY_MB=16384
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createmedium</span>
+<span class="hljs-comment"># --size &lt;megabytes&gt;</span>
+<span class="hljs-comment"># 40960 MB = 40 GB</span>
+HD_SIZE_MB=40960
+VRAM_MB=128
+ISO=<span class="hljs-variable">$BASE</span>/manjaro-gnome-22.0-221224-linux61.iso
+VDI=<span class="hljs-variable">$BASE</span>/<span class="hljs-variable">$VM</span>/<span class="hljs-variable">$VM</span>.vdi
+IF=$(ip route show default | awk <span class="hljs-string">&#x27;/default/ {print $5}&#x27;</span>) <span class="hljs-comment"># $(nmcli -t d|grep ethernet|cut -d: -f1) # enp5s0</span>
+<span class="hljs-comment"># sudo chown -R $USER:$USER /opt/vm</span>
+<span class="hljs-comment"># mkdir -p $BASE/$VM</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createvm</span>
+<span class="hljs-comment"># VBoxManage list ostypes</span>
+<span class="hljs-comment"># --memory &lt;memorysize in MB&gt;</span>
+<span class="hljs-comment"># --vram &lt;vramsize in MB&gt;</span>
+vboxmanage createvm --name <span class="hljs-variable">$VM</span> --ostype ArchLinux_64 --basefolder <span class="hljs-variable">$BASE</span> --register
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --cpus <span class="hljs-variable">$CPUS</span> --memory <span class="hljs-variable">$MEMORY_MB</span> --vram <span class="hljs-variable">$VRAM_MB</span> --ioapic on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --pae on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --graphicscontroller vboxsvga
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --accelerate3d on
+<span class="hljs-comment"># vboxmanage modifyvm $VM --nic1 bridged --bridgeadapter1 $IF</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --nic1 nat
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm</span>
+<span class="hljs-comment"># [--nat-pfN= [rule-name],tcp | udp,[host-IP],hostport,[guest-IP],guestport ]</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --nat-pf1 <span class="hljs-string">&quot;guestssh,tcp,,2222,,22&quot;</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createmedium</span>
+<span class="hljs-comment"># --size &lt;megabytes&gt;</span>
+vboxmanage createmedium disk --filename <span class="hljs-variable">$VDI</span> --size <span class="hljs-variable">$HD_SIZE_MB</span> --format VDI --variant Standard
+vboxmanage storagectl <span class="hljs-variable">$VM</span> --name <span class="hljs-string">&quot;SATA Controller&quot;</span> --add sata --bootable on --hostiocache on <span class="hljs-comment"># --controller IntelAhci </span>
+vboxmanage storageattach <span class="hljs-variable">$VM</span> --storagectl <span class="hljs-string">&quot;SATA Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> hdd --medium <span class="hljs-variable">$VDI</span>
+vboxmanage storagectl <span class="hljs-variable">$VM</span> --name <span class="hljs-string">&quot;IDE Controller&quot;</span> --add ide <span class="hljs-comment"># --controller PIIX4</span>
+vboxmanage storageattach <span class="hljs-variable">$VM</span> --storagectl <span class="hljs-string">&quot;IDE Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> dvddrive --medium <span class="hljs-variable">$ISO</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --boot1 dvd --boot2 disk --boot3 none --boot4 none 
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --usb on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --usbxhci on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --mouse usb
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --keyboard usb
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audio pulse
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audiocontroller ac97
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audiocodec stac9700
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audioout on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --clipboard-mode bidirectional
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --draganddrop bidirectional
+vboxmanage setextradata <span class="hljs-variable">$VM</span> GUI/ScaleFactor 2
+vboxmanage sharedfolder add <span class="hljs-variable">$VM</span> --name=Share --hostpath=/opt/vm/Share --automount
+<span class="hljs-comment">#vboxmanage startvm $VM</span>
+<span class="hljs-comment">#vboxmanage controlvm $VM acpipowerbutton</span>
+<span class="hljs-comment">#vboxmanage controlvm $VM poweroff</span>
+</code></pre>
+<h3 id="partenza-della-vm-guest" tabindex="-1">Partenza della VM Guest <a class="header-anchor" href="#partenza-della-vm-guest" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ vboxmanage startvm Manjaro
+$ vboxmanage controlvm Manjaro acpipowerbutton
+$ vboxmanage controlvm Manjaro poweroff
+</code></pre>
+<p>Far partire la VM ed eseguire l'installazione del sistema operativo:</p>
+<ul>
+<li>hostname: linux-vm</li>
+<li>user: vagrant/vagrant</li>
+</ul>
+<p>Dopo aver eseguito l'installazione:</p>
+<ul>
+<li>poweroff,</li>
+<li>da virtualbox manager rimuovere il cdrom</li>
+<li>far ripartire la VM.</li>
+</ul>
+<h3 id="aggiornamento-del-sistema" tabindex="-1">Aggiornamento del sistema <a class="header-anchor" href="#aggiornamento-del-sistema" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;yes s |  pamac upgrade -a&quot;</span>
+</code></pre>
+<h3 id="installare-i-guest-tools-per-virtualbox" tabindex="-1">Installare i guest tools per VirtualBox <a class="header-anchor" href="#installare-i-guest-tools-per-virtualbox" aria-hidden="true">🔗</a></h3>
+<p>non è servito nel guest manjaro ho già trovato installato <code>virtualbox-guest-utils</code></p>
+<p><a href="https://blog.engineyard.com/building-a-vagrant-box-from-start-to-finish">https://blog.engineyard.com/building-a-vagrant-box-from-start-to-finish</a></p>
+<p><code>/Dispositivi/Inserisci l'immagine del CD delle Guest Additions</code> (deve essere stato installato nell'host il pacchetto <code>virtualbox-guest-iso</code>)</p>
+<p>GuestAdditions</p>
+<pre><code class="language-bash">$ lsblk
+$ <span class="hljs-built_in">sudo</span> mount /dev/sr0 /mnt
+$ <span class="hljs-built_in">sudo</span> /mnt/VBoxLinuxAdditions.run
+
+<span class="hljs-comment"># Oppure montare la iso con doppio click da Nautilus e poi aprire un terminale:</span>
+```bash
+~ <span class="hljs-built_in">whoami</span>
+~ <span class="hljs-built_in">sudo</span> su
+[<span class="hljs-built_in">sudo</span>] password di vagrant: 
+[linux-vm vagrant]# <span class="hljs-built_in">cd</span> /run/media/vagrant/VBox_GAs_7.0.4
+[linux-vm VBox_GAs_7.0.4]# ./VBoxLinuxAdditions.run
+
+</code></pre>
+<h3 id="impostare-la-password-root-a-'vagrant'" tabindex="-1">Impostare la password root a 'vagrant' <a class="header-anchor" href="#impostare-la-password-root-a-'vagrant'" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> passwd root <span class="hljs-comment"># vagrant</span>
+<span class="hljs-comment"># ora funzionerà</span>
+$ su - root <span class="hljs-comment"># con password vagrant</span>
+</code></pre>
+<p>Utenze:</p>
+<pre><code>root/vagrant
+vagrant/vagrant
+/etc/sudoers.d/10-vagrant
+    vagrant ALL=(ALL) NOPASSWD: ALL
+
+set the UseDNS configuration to no in the SSH server configuration.
+</code></pre>
+<h3 id="impostare-sudo-per-l'utente-vagrant" tabindex="-1">Impostare sudo per l'utente vagrant <a class="header-anchor" href="#impostare-sudo-per-l'utente-vagrant" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;vagrant ALL=(ALL) NOPASSWD: ALL&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/sudoers.d/vagrant 
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;%wheel ALL=(ALL) ALL” &gt;&gt; /etc/subdoers.d/wheel
+# Test
+$ cd /etc/sudoers.d
+$ visudo -c
+$ chmod 0440 * # per effettuare la fix sui diritti richiesta da visudo -c
+$ sudo -v
+$ su - vagrant
+$ whoami
+</span></code></pre>
+<h3 id="creare-l'utente-vagrant-sul-guest" tabindex="-1">Creare l'utente Vagrant sul Guest <a class="header-anchor" href="#creare-l'utente-vagrant-sul-guest" aria-hidden="true">🔗</a></h3>
+<p>Se l'utenza principale creata non era vagrant allora bisogna creare l'utenza. <br>
+it is a general convention to set the password for the <code>vagrant</code> user to <code>vagrant</code>.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> useradd -m -G root,sys,<span class="hljs-built_in">log</span>,network,power,vboxusers,wireshark,libvirt,sambashare,docker,<span class="hljs-built_in">users</span>,storage,lp,kvm,input,disk,audio,wheel -s /bin/bash vagrant <span class="hljs-comment"># After entering the above command, a brand new user account will be created accordingly.</span>
+<span class="hljs-comment"># sudo useradd --create-home vagrant</span>
+<span class="hljs-comment"># sudo usermod --append --groups wheel vagrant</span>
+$ <span class="hljs-built_in">sudo</span> passwd vagrant <span class="hljs-comment"># impostare a vagrant la password</span>
+$ <span class="hljs-built_in">exit</span>
+$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;vagrant ALL=(ALL) NOPASSWD: ALL&quot;</span> | <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">tee</span> /etc/sudoers.d/vagrant 
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;%wheel ALL=(ALL) ALL” &gt;&gt; /etc/subdoers.d/wheel
+# Test
+$ cd /etc/sudoers.d
+$ visudo -c
+$ chmod 0440 * # per effettuare la fix sui diritti richiesta da visudo -c
+$ sudo -v
+$ su - vagrant
+$ whoami
+</span></code></pre>
+<h3 id="installare-la-chiave-ssh-per-l'utente-vagrant-sul-guest" tabindex="-1">Installare la chiave ssh per l'utente vagrant sul guest <a class="header-anchor" href="#installare-la-chiave-ssh-per-l'utente-vagrant-sul-guest" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">mkdir</span> -p /home/vagrant/.ssh
+$ <span class="hljs-built_in">chmod</span> 0700 /home/vagrant/.ssh
+$ wget --no-check-certificate https://raw.githubusercontent.com/hashicorp/vagrant/main/keys/vagrant.pub -O /home/vagrant/.ssh/authorized_keys
+$ <span class="hljs-built_in">chmod</span> 0600 /home/vagrant/.ssh/authorized_keys
+$ <span class="hljs-built_in">chown</span> -R vagrant /home/vagrant/.ssh
+</code></pre>
+<h3 id="installare-openssh" tabindex="-1">Installare OpenSSH <a class="header-anchor" href="#installare-openssh" aria-hidden="true">🔗</a></h3>
+<p><a href="https://blog.engineyard.com/building-a-vagrant-box-from-start-to-finish">https://blog.engineyard.com/building-a-vagrant-box-from-start-to-finish</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm openssh
+$ <span class="hljs-built_in">sudo</span> systemctl status sshd.service
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> sshd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start sshd.service
+$ <span class="hljs-built_in">sudo</span> pacman -Syu
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm gcc make linux61-headers
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm base-devel linux-headers
+</code></pre>
+<pre><code class="language-bash">$ sed -i <span class="hljs-string">&quot;s/^#UseDNS no/UseDNS no/g&quot;</span> /etc/ssh/sshd_config
+$ vi /etc/ssh/sshd_config
+
+    grep AuthorizedKeysFile   /etc/ssh/sshd_config
+    AuthorizedKeysFile	.ssh/authorized_keys
+
+&lt;https://developer.hashicorp.com/vagrant/docs/boxes/base#ssh-tweaks&gt;
+
+    <span class="hljs-built_in">set</span> the `UseDNS` configuration to `no`
+</code></pre>
+<h3 id="creare-il-box" tabindex="-1">Creare il box <a class="header-anchor" href="#creare-il-box" aria-hidden="true">🔗</a></h3>
+<h4 id="pulizia-del-guest-manjaro" tabindex="-1">Pulizia del Guest Manjaro <a class="header-anchor" href="#pulizia-del-guest-manjaro" aria-hidden="true">🔗</a></h4>
+<p>Disinstallare le applicazioni non in uso:</p>
+<pre><code class="language-bash">$ pacman -Rsn &lt;app&gt;
+</code></pre>
+<pre><code class="language-bash">$ su
+$ <span class="hljs-built_in">sudo</span> pacman -Rns $(pacman -Qtdq)
+$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Scc
+$ <span class="hljs-built_in">sudo</span> paccache -ruk0
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/log/journal/* /var/log/old/* /var/log/faillog /var/log/lastlog /var/log/pacman.log
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /home/vagrant/.cache
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /home/vagrant/.bash_history
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /root/.bash_history
+</code></pre>
+<h4 id="deframmentare-lo-spazio-vuoto" tabindex="-1">Deframmentare lo spazio vuoto <a class="header-anchor" href="#deframmentare-lo-spazio-vuoto" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash"><span class="hljs-comment"># This fixes fragmentation issues with the underlying disk, which allows it to compress much more efficiently later.</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=/EMPTY bs=1M
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /EMPTY
+$ <span class="hljs-built_in">history</span> -c
+$ reboot
+</code></pre>
+<h4 id="creazione-del-vbox" tabindex="-1">Creazione del vbox <a class="header-anchor" href="#creazione-del-vbox" aria-hidden="true">🔗</a></h4>
+<p>il nome del parametro <code>--base</code> viene preso dal nome della vm VirtualBox</p>
+<p>La VM VirtualBox del nostro esempio si chiama: <code>Manjaro</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cd</span> /opt/vm/vagrant_manjaro
+$ vboxmanage list vms
+<span class="hljs-string">&quot;Windows 10&quot;</span> {74204375-f695-424d-9743-595561c2ec2a}
+<span class="hljs-string">&quot;Manjaro&quot;</span> {e71674bf-2c28-4a25-83e6-0749dab1eb98}
+$ vagrant package --base Manjaro --output manjaro.box
+<span class="hljs-comment"># https://developer.hashicorp.com/vagrant/docs/cli/box#box-add</span>
+$ vagrant box add manjaro /opt/vm/vagrant_manjaro/manjaro.box
+$ vagrant box list
+</code></pre>
+<h3 id="testare-il-box" tabindex="-1">Testare il box <a class="header-anchor" href="#testare-il-box" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ vagrant init manjaro
+$ vagrant up
+
+$ ssh-copy-id -p 2222 vagrant@linux-vm
+$ ssh -p <span class="hljs-string">&#x27;2222&#x27;</span> <span class="hljs-string">&#x27;vagrant@linux-vm&#x27;</span>
+
+<span class="hljs-comment"># Connect to the server you created from start to finish!</span>
+$ vagrant ssh
+$ vagrant ssh -- -v  <span class="hljs-comment"># per avere le info di connessione, come ad es. se si utilizza la publick key authentication</span>
+$ vagrant ssh-config <span class="hljs-comment"># per avere le info di connessione</span>
+$ vagrant halt
+$ vagrant destroy
+
+ssh vagrant@127.0.0.1 -p 2222
+</code></pre>
+<h2 id="configurare-l'ip-statico-nel-vagrantfile" tabindex="-1">Configurare l'ip statico nel Vagrantfile <a class="header-anchor" href="#configurare-l'ip-statico-nel-vagrantfile" aria-hidden="true">🔗</a></h2>
+<p><a href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">https://www.virtualbox.org/manual/ch06.html#network_hostonly</a></p>
+<p>On Linux, Mac OS X and Solaris Oracle VM VirtualBox will only allow IP addresses in <code>192.168.56.0/21</code> range to be assigned to host-only adapters.</p>
+<p>Inizialmente configurando in Vagrantfile l'IP:</p>
+<pre><code>config.vm.network &quot;private_network&quot;, ip: &quot;192.168.1.200&quot;
+</code></pre>
+<p>Ho ottenuto l'errore:</p>
+<pre><code>The IP address configured for the host-only network is not within the
+allowed ranges. Please update the address used to be within the allowed
+ranges and run the command again.
+
+Address: 192.168.1.200
+Ranges: 192.168.56.0/21
+
+Valid ranges can be modified in the /etc/vbox/networks.conf file. For
+more information including valid format see:
+
+https://www.virtualbox.org/manual/ch06.html#network_hostonly
+</code></pre>
+<p>Ho dunque impostato l'IP per l'interfaccia Host-Only:</p>
+<pre><code>config.vm.network &quot;private_network&quot;, ip: &quot;192.168.56.1&quot;
+</code></pre>
+</body></html>

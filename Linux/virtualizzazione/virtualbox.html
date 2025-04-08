@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.211" />
+        <title>virtualbox</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="virtualbox" tabindex="-1">virtualbox <a class="header-anchor" href="#virtualbox" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.211</p>
+<nav class="table-of-contents"><ol><li><a href="#allineamento-versioni-virtualbox-e-extension-pack">Allineamento versioni VirtualBox e Extension Pack </a></li><li><a href="#folder-di-default-delle-vm-impostato-ad-%2Fopt%2Fvm">Folder di Default delle VM impostato ad /opt/vm </a></li><li><a href="#bios">BIOS </a></li><li><a href="#info-cpu">Info CPU </a></li><li><a href="#installazione">Installazione </a><ol><li><a href="#installazione-in-manjaro-host">Installazione in Manjaro Host </a></li><li><a href="#installazione-virtualbox-e-vagrant">Installazione VirtualBox e Vagrant </a></li><li><a href="#installazione-in-manjaro-host-da-aur---caso-in-cui-aur-%C3%A8-pi%C3%B9-aggiornato-del-community">Installazione in Manjaro Host da AUR - caso in cui AUR è più aggiornato del community </a></li><li><a href="#installazione-da-script-run">Installazione da script run </a><ol><li><a href="#2.3.3.2.-using-the-alternative-generic-installer-(virtualbox.run)">2.3.3.2. Using the Alternative Generic Installer (VirtualBox.run) </a></li></ol></li></ol></li><li><a href="#creare-una-vm-manjaro-con-vboxmanage">Creare una VM Manjaro con VBoxManage </a></li><li><a href="#installazione-manjaro-guest">Installazione Manjaro Guest </a></li><li><a href="#boot-da-penna-usb">Boot da penna USB </a></li><li><a href="#vmdk-to-vdi">VMDK to VDI </a></li><li><a href="#guest-configuration">Guest Configuration </a><ol><li><a href="#montare-le-share-nel-sistema-guest">Montare le share nel sistema guest </a></li><li><a href="#guest-windows-10-ed-accesso-alla-rete">Guest Windows 10 ed accesso alla rete </a></li></ol></li><li><a href="#montare-nell'host-una-partizione-di-un-file-vdi">Montare nell&#39;host una partizione di un file VDI </a><ol><li><a href="#ridurre-un-file-.vdi">Ridurre un file .vdi </a></li></ol></li><li><a href="#virtualbox-schede-di-rete-host-only">VirtualBox Schede di rete Host Only </a></li></ol></nav><h1 id="virtualbox-1" tabindex="-1">VirtualBox <a class="header-anchor" href="#virtualbox-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/VirtualBox">https://wiki.manjaro.org/index.php/VirtualBox</a></li>
+</ul>
+<p>Right CTRL + INIZIO: per far riapparire il menu</p>
+<h2 id="allineamento-versioni-virtualbox-e-extension-pack" tabindex="-1">Allineamento versioni VirtualBox e Extension Pack <a class="header-anchor" href="#allineamento-versioni-virtualbox-e-extension-pack" aria-hidden="true">🔗</a></h2>
+<p>As noted by VirtualBox - it is important you are using the extension pack matching your installed version of VirtualBox.<br>
+<strong>Please install the same version extension pack as your installed version of VirtualBox</strong>.</p>
+<pre><code class="language-bash">$ vboxmanage --version
+</code></pre>
+<h2 id="folder-di-default-delle-vm-impostato-ad-%2Fopt%2Fvm" tabindex="-1">Folder di Default delle VM impostato ad /opt/vm <a class="header-anchor" href="#folder-di-default-delle-vm-impostato-ad-%2Fopt%2Fvm" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://www.virtualbox.org/manual/ch10.html#vboxconfigdata">https://www.virtualbox.org/manual/ch10.html#vboxconfigdata</a></p>
+<p>Utilizzare <strong>VBoxManage</strong> o <strong>VirtualBox Manager GUI</strong>, non editare direttamente il file:</p>
+<pre><code class="language-bash"><span class="hljs-variable">$HOME</span>/.config/VirtualBox/VirtualBox.xml
+</code></pre>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">SystemProperties</span> <span class="hljs-attr">defaultMachineFolder</span>=<span class="hljs-string">&quot;/opt/vm&quot;</span> <span class="hljs-attr">defaultHardDiskFormat</span>=<span class="hljs-string">&quot;VDI&quot;</span> <span class="hljs-attr">VRDEAuthLibrary</span>=<span class="hljs-string">&quot;VBoxAuth&quot;</span> <span class="hljs-attr">webServiceAuthLibrary</span>=<span class="hljs-string">&quot;VBoxAuth&quot;</span> <span class="hljs-attr">LogHistoryCount</span>=<span class="hljs-string">&quot;3&quot;</span> <span class="hljs-attr">proxyMode</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">exclusiveHwVirt</span>=<span class="hljs-string">&quot;true&quot;</span>/&gt;</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.virtualbox.org/manual/ch08.html#vboxmanage-setproperty">https://www.virtualbox.org/manual/ch08.html#vboxmanage-setproperty</a></p>
+<p><code>machinefolder</code>: Specifies the default folder in which virtual machine (VM) definitions are stored. Valid values are <code>default</code>, which specifies the default storage folder, or the name of the folder to use.
+The VBoxManage <code>setproperty</code> command enables you to change global settings that affect the entire Oracle VM VirtualBox installation. Some of these settings correspond to the settings in the Preferences dialog in the VirtualBox Manager.</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ vboxmanage setproperty machinefolder /opt/vm
+$ vboxmanage list systemproperties | grep folder
+Default machine folder:          /opt/vm
+</code></pre>
+<h2 id="bios" tabindex="-1">BIOS <a class="header-anchor" href="#bios" aria-hidden="true">🔗</a></h2>
+<p>Nel BIOS, essendo il Ryzen una CPU AMD le estensioni per la virtualizzazione si chiamano <code>SVM</code>
+di default sono disabilitate, <code>F2</code> per accedere al BIOS al boot:</p>
+<pre><code>Advanced|CPU Configuration/SVM Mode: Enabled
+</code></pre>
+<p>A questo punto nella creazione di una nuova VM saranno visibili quelle a 64 bit
+e non solo quelle a 32 bit.</p>
+<h2 id="info-cpu" tabindex="-1">Info CPU <a class="header-anchor" href="#info-cpu" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ lscpu
+
+<span class="hljs-comment"># se c&#x27;è lm allora la cpu è a 64 bit</span>
+$ grep -w -o lm /proc/cpuinfo | <span class="hljs-built_in">uniq</span>
+
+<span class="hljs-comment"># AMD V estensioni per la virtualizzazione</span>
+$ grep --color svm /proc/cpuinfo
+
+egrep -wo <span class="hljs-string">&#x27;vmx|lm|aes&#x27;</span> /proc/cpuinfo  | <span class="hljs-built_in">sort</span> | <span class="hljs-built_in">uniq</span>\
+| sed -e <span class="hljs-string">&#x27;s/aes/Hardware encryption=Yes (&amp;)/g&#x27;</span> \
+-e <span class="hljs-string">&#x27;s/lm/64 bit cpu=Yes (&amp;)/g&#x27;</span> -e <span class="hljs-string">&#x27;s/vmx/Intel hardware virtualization=Yes (&amp;)/g&#x27;</span>
+</code></pre>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<h3 id="installazione-in-manjaro-host" tabindex="-1">Installazione in Manjaro Host <a class="header-anchor" href="#installazione-in-manjaro-host" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione VirtualBox ed impostazione utente su sistema host</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm base-devel linux-headers
+$ mhwd-kernel -li
+Currently running: 6.0.15-1-MANJARO (linux60)
+The following kernels are installed <span class="hljs-keyword">in</span> your system:
+   * linux517
+   * linux60
+$ <span class="hljs-built_in">uname</span> -a
+Linux linux 6.0.15-1-MANJARO <span class="hljs-comment">#1 SMP PREEMPT_DYNAMIC Wed Dec 21 21:14:38 UTC 2022 x86_64 GNU/Linux</span>
+$ pamac search <span class="hljs-string">&quot;virtualbox-host-modules$&quot;</span>
+linux60-virtualbox-host-modules
+$ pacman -Ss virtualbox|grep 7.0
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm virtualbox virtualbox-guest-iso linux60-virtualbox-host-modules 
+<span class="hljs-comment"># Impostazione ad /opt/vm della directory che contiene le immagini</span>
+$ <span class="hljs-built_in">sudo</span> vboxmanage setproperty machinefolder /opt/vm
+<span class="hljs-comment"># Installazione delle estensioni oracle</span>
+$ pamac search -a virtualbox|grep 7.0
+virtualbox-ext-oracle                       7.0.4-1                   AUR
+$ <span class="hljs-built_in">sudo</span> pamac build virtualbox-ext-oracle <span class="hljs-comment"># deve essere della stessa versione di virtualbox altrimenti le vm non partono</span>
+$ <span class="hljs-built_in">sudo</span> vboxreload
+</code></pre>
+<h3 id="installazione-virtualbox-e-vagrant" tabindex="-1">Installazione VirtualBox e Vagrant <a class="header-anchor" href="#installazione-virtualbox-e-vagrant" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione VirtualBox</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm virtualbox virtualbox-guest-iso linux60-virtualbox-host-modules 
+$ <span class="hljs-built_in">sudo</span> pamac build virtualbox-ext-oracle
+$ <span class="hljs-built_in">sudo</span> vboxmanage setproperty machinefolder /opt/vm
+$ <span class="hljs-built_in">sudo</span> vboxreload
+
+<span class="hljs-comment"># Installazione Vagrant</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm vagrant
+$ vagrant -v
+$ vagrant autocomplete install --bash --zsh
+$ <span class="hljs-built_in">sudo</span> vagrant plugin install vagrant-vbguest vagrant-share
+$ <span class="hljs-built_in">sudo</span> vagrant plugin install vagrant-libvirt <span class="hljs-comment"># vagrant up --provider=libvirt</span>
+</code></pre>
+<h3 id="installazione-in-manjaro-host-da-aur---caso-in-cui-aur-%C3%A8-pi%C3%B9-aggiornato-del-community" tabindex="-1">Installazione in Manjaro Host da AUR - caso in cui AUR è più aggiornato del community <a class="header-anchor" href="#installazione-in-manjaro-host-da-aur---caso-in-cui-aur-%C3%A8-pi%C3%B9-aggiornato-del-community" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione VirtualBox ed impostazione utente su sistema host</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm base-devel
+$ <span class="hljs-built_in">sudo</span> pacman -S linux-headers
+$ mhwd-kernel -li
+Currently running: 5.13.1-3-MANJARO (linux513)
+The following kernels are installed <span class="hljs-keyword">in</span> your system:
+   * linux513
+$ pamac search <span class="hljs-string">&quot;virtualbox-host-modules$&quot;</span>
+pamac search <span class="hljs-string">&quot;^linux513.*virtualbox&quot;</span>                                                                                        linux513-virtualbox-host-modules                           
+
+<span class="hljs-comment"># Installazione da repository AUR - versione piu aggiornata</span>
+$ pamac search -a virtualbox|grep AUR|grep 6.1.32
+virtualbox-ext-oracle                       6.1.32-1                  AUR 
+virtualbox-bin-sdk                          6.1.32-1                  AUR 
+virtualbox-bin-guest-iso                    6.1.32-1                  AUR 
+virtualbox-bin                              6.1.32-1                  AUR 
+$ <span class="hljs-built_in">sudo</span> pacman -Syu linux513-virtualbox-host-modules
+$ <span class="hljs-built_in">sudo</span> pamac build virtualbox-bin
+$ <span class="hljs-built_in">sudo</span> pamac build virtualbox-bin-guest-iso
+$ <span class="hljs-built_in">sudo</span> pamac build virtualbox-ext-oracle <span class="hljs-comment"># deve essere della stessa versione di virtualbox altrimenti le vm non partono</span>
+
+<span class="hljs-comment"># Installazione da repository Manjaro - sconsigliato - versione meno aggiornata, non allineata con la versione delle extensions presente solo in AUR</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu virtualbox virtualbox-guest-iso linux513-virtualbox-host-modules virtualbox-host-dkms 
+$ <span class="hljs-built_in">sudo</span> pacman -Rsn virtualbox virtualbox-guest-iso virtualbox-host-dkms virtualbox-ext-oracle
+
+$ <span class="hljs-built_in">groups</span> <span class="hljs-variable">$USER</span>
+$ <span class="hljs-built_in">sudo</span> gpasswd -a <span class="hljs-variable">$USER</span> vboxusers
+$ <span class="hljs-built_in">sudo</span> usermod -a -G vboxusers <span class="hljs-variable">$USER</span>
+$ <span class="hljs-built_in">sudo</span> usermod -a -G disk <span class="hljs-variable">$USER</span> <span class="hljs-comment"># User should be in a disk group to access raw partitions</span>
+$ <span class="hljs-built_in">sudo</span> vboxreload
+
+<span class="hljs-comment"># Info - Gestione Kernel Manjaro - rimozione di un kernel non utilizzato</span>
+$ pamac search -i virtualbox
+$ mhwd-kernel -li
+$ <span class="hljs-built_in">sudo</span> mhwd-kernel -r linux419
+$ mhwd-kernel -li   
+Currently running: 5.12.2-1-MANJARO (linux512)
+The following kernels are installed <span class="hljs-keyword">in</span> your system:
+   * linux512
+$ <span class="hljs-built_in">sudo</span> vboxreload
+$ vboxmanage --version
+</code></pre>
+<h3 id="installazione-da-script-run" tabindex="-1">Installazione da script run <a class="header-anchor" href="#installazione-da-script-run" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://www.virtualbox.org/manual/UserManual.html#install-linux-performing">https://www.virtualbox.org/manual/UserManual.html#install-linux-performing</a></li>
+<li><a href="https://www.virtualbox.org/wiki/Linux_Downloads">https://www.virtualbox.org/wiki/Linux_Downloads</a></li>
+<li><a href="https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Linux_amd64.run">https://download.virtualbox.org/virtualbox/6.1.32/VirtualBox-6.1.32-149290-Linux_amd64.run</a></li>
+<li><a href="https://download.virtualbox.org/virtualbox/6.1.32/Oracle_VM_VirtualBox_Extension_Pack-6.1.32.vbox-extpack">https://download.virtualbox.org/virtualbox/6.1.32/Oracle_VM_VirtualBox_Extension_Pack-6.1.32.vbox-extpack</a></li>
+</ul>
+<h4 id="2.3.3.2.-using-the-alternative-generic-installer-(virtualbox.run)" tabindex="-1">2.3.3.2. Using the Alternative Generic Installer (VirtualBox.run) <a class="header-anchor" href="#2.3.3.2.-using-the-alternative-generic-installer-(virtualbox.run)" aria-hidden="true">🔗</a></h4>
+<p>The alternative generic installer performs the following steps:</p>
+<ul>
+<li>Unpacks the application files to the target directory <code>/opt/VirtualBox/</code>, which cannot be changed.</li>
+<li>Builds and installs the Oracle VM VirtualBox kernel modules: vboxdrv, vboxnetflt, and vboxnetadp.</li>
+<li>Creates <code>/sbin/rcvboxdrv</code>, an init script to start the Oracle VM VirtualBox kernel module.</li>
+<li>Creates a new system group called <code>vboxusers</code>.</li>
+<li>Creates symbolic links in <code>/usr/bin</code> to a shell script <code>/opt/VirtualBox/VBox</code> which does some sanity checks and dispatches to the actual executables: VirtualBox, VBoxVRDP, VBoxHeadless and VBoxManage.</li>
+<li>Creates <code>/etc/udev/rules.d/60-vboxdrv.rules</code>, a description file for udev, if that is present, which makes the USB devices accessible to all users in the vboxusers group.</li>
+<li>Writes the installation directory to <code>/etc/vbox/vbox.cfg</code>.</li>
+</ul>
+<p>The installer must be executed as root with either install or uninstall as the first parameter. For example:</p>
+<p><code>sudo ./VirtualBox.run install</code></p>
+<p>Or if you do not have the sudo command available, run the following as root instead:</p>
+<p><code>./VirtualBox.run install</code></p>
+<p>Add every user who needs to access USB devices from a VirtualBox guests to the group vboxusers. Either use the OS user management tools or run the following command as root:</p>
+<p><code>sudo usermod -a -G vboxusers username</code></p>
+<p>Note</p>
+<p>The usermod command of some older Linux distributions does not support the <code>-a</code> option, which adds the user to the given group without affecting membership of other groups. In this case, find out the current group memberships with the <code>groups</code> command and add all these groups in a comma-separated list to the command line after the <code>-G</code> option. For example: <code>usermod -G group1,group2,vboxusers username</code>.</p>
+<h2 id="creare-una-vm-manjaro-con-vboxmanage" tabindex="-1">Creare una VM Manjaro con VBoxManage <a class="header-anchor" href="#creare-una-vm-manjaro-con-vboxmanage" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.virtualbox.org/manual/ch08.html">https://www.virtualbox.org/manual/ch08.html</a></li>
+<li><a href="https://www.virtualbox.org/manual/ch06.html">https://www.virtualbox.org/manual/ch06.html</a></li>
+</ul>
+<p>/opt/vm/manjaro-gnome-21.0.7-210614-linux510.iso</p>
+<pre><code class="language-bash">$ VBoxManage list -l vms
+$ VBoxManage list runningvms
+$ VBoxManage list -l runningvms
+$ vboximg-mount --list --verbose
+$ VBoxManage list ostypes | grep -i <span class="hljs-string">&quot;arch.*64&quot;</span>
+    ID:          ArchLinux_64
+    Description: Arch Linux (64-bit)
+$ vboxmanage showvminfo Manjaro
+$ vboxmanage showvminfo Manjaro|grep NIC
+$ vboxmanage showvminfo Manjaro|grep SATA
+$ vboxmanage showvminfo Manjaro|grep IDE
+$ vboxmanage modifyvm|grep -i audio
+$ vboxmanage showvminfo Manjaro|grep -i audio
+$ vboxmanage getextradata Manjaro enumerate
+
+
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createvm</span>
+$ vboxmanage createvm --name Manjaro --ostype ArchLinux_64 --basefolder /opt/vm/ --register
+    Virtual machine <span class="hljs-string">&#x27;Manjaro&#x27;</span> is created and registered.
+    UUID: 3dbbd369-0f61-4d0d-be8c-5c4807fb6faf
+    Settings file: <span class="hljs-string">&#x27;/opt/vm/Manjaro/Manjaro.vbox&#x27;</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm</span>
+$ vboxmanage modifyvm Manjaro --cpus 8 --memory 16384 --vram 128 --ioapic on <span class="hljs-comment"># memoria in MB</span>
+$ vboxmanage modifyvm Manjaro --pae on
+$ vboxmanage modifyvm Manjaro --graphicscontroller vboxsvga
+$ vboxmanage modifyvm Manjaro --accelerate3d on
+$ vboxmanage modifyvm Manjaro --nic1 bridged --bridgeadapter1 enp5s0
+<span class="hljs-comment"># IDE    : PIIX3, PIIX4 or ICH6</span>
+<span class="hljs-comment"># SATA   : IntelAHCI</span>
+<span class="hljs-comment"># SCSI   : LsiLogic or BusLogic</span>
+<span class="hljs-comment"># SAS    : LsiLogicSas</span>
+<span class="hljs-comment"># Floppy : I82078</span>
+<span class="hljs-comment"># USB    : USB</span>
+<span class="hljs-comment"># 20480 MB = 20 GB</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createmedium</span>
+<span class="hljs-comment"># --size &lt;megabytes&gt;</span>
+$ vboxmanage createmedium disk --filename /opt/vm/Manjaro/manjaro.vdi --size 20480 --format VDI --variant Standard
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-storagectl</span>
+$ vboxmanage storagectl Manjaro --name <span class="hljs-string">&quot;SATA Controller&quot;</span> --add sata --bootable on --hostiocache on <span class="hljs-comment"># --controller IntelAhci </span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-storageattach</span>
+$ vboxmanage storageattach Manjaro --storagectl <span class="hljs-string">&quot;SATA Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> hdd --medium /opt/vm/Manjaro/manjaro.vdi
+$ vboxmanage storagectl Manjaro --name <span class="hljs-string">&quot;IDE Controller&quot;</span> --add ide <span class="hljs-comment"># --controller PIIX4</span>
+$ vboxmanage storageattach Manjaro --storagectl <span class="hljs-string">&quot;IDE Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> dvddrive --medium /opt/vm/manjaro-gnome-21.0.7-210614-linux510.iso
+$ vboxmanage modifyvm Manjaro --boot1 dvd --boot2 disk --boot3 none --boot4 none 
+$ vboxmanage modifyvm Manjaro --usb on
+$ vboxmanage modifyvm Manjaro --usbxhci on
+$ vboxmanage modifyvm Manjaro --mouse usb
+$ vboxmanage modifyvm Manjaro --keyboard usb
+$ vboxmanage modifyvm Manjaro --audio pulse
+$ vboxmanage modifyvm Manjaro --audiocontroller ac97
+$ vboxmanage modifyvm Manjaro --audiocodec stac9700
+$ vboxmanage modifyvm Manjaro --audioout on
+$ vboxmanage modifyvm Manjaro --clipboard-mode bidirectional
+$ vboxmanage modifyvm Manjaro --draganddrop bidirectional
+$ vboxmanage sharedfolder add Manjaro --name=Share --hostpath=/opt/vm/Share --automount
+<span class="hljs-comment"># Fattore di scala al 200%</span>
+$ vboxmanage setextradata Manjaro GUI/ScaleFactor 2
+
+$ vboxheadless --startvm Manjaro
+$ vboxmanage list runningvms
+$ vboxmanage controlvm Manjaro acpipowerbutton
+$ ssh linux-vb
+    <span class="hljs-built_in">sudo</span> su
+    shutdown -h now
+
+
+$ vboxmanage startvm Manjaro
+$ vboxmanage controlvm Manjaro acpipowerbutton
+$ vboxmanage controlvm Manjaro poweroff
+
+$ vboxmanage unregistervm Manjaro
+$ vboxmanage registervm /opt/vm/Manjaro/Manjaro.vbox
+
+
+vboxmanage modifyvm Manjaro --vrde on --vrdemulticon off --vrdeport default <span class="hljs-comment"># 3389                </span>
+vboxheadless --startvm Manjaro 
+vboxmanage startvm Manjaro --<span class="hljs-built_in">type</span> headless
+$ rdesktop -a 16 -N 1.2.3.4:3389
+</code></pre>
+<h2 id="installazione-manjaro-guest" tabindex="-1">Installazione Manjaro Guest <a class="header-anchor" href="#installazione-manjaro-guest" aria-hidden="true">🔗</a></h2>
+<p><a href="https://wiki.manjaro.org/index.php/VirtualBox">https://wiki.manjaro.org/index.php/VirtualBox</a></p>
+<pre><code>user: $USER
+hostname: linux-vb
+/usr/lib/virtualbox/additions/VBoxGuestAdditions.iso
+</code></pre>
+<p>Guest / Guest VM / Instance: A virtual machine running within the host</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm base-devel openssh yay
+$ <span class="hljs-built_in">sudo</span> reboot
+<span class="hljs-comment"># Installazione kernel headers - maniera manuale:</span>
+<span class="hljs-comment"># $ mhwd-kernel -li</span>
+<span class="hljs-comment">#     linux-510</span>
+<span class="hljs-comment"># $ sudo pacman -S linux510-headers</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm linux-headers
+<span class="hljs-comment"># Installazione guest additions</span>
+$ <span class="hljs-built_in">df</span> -hT
+$ <span class="hljs-built_in">cd</span> /run/media/jkmutai/VBox_GAs_6.1.26  
+$ <span class="hljs-built_in">sudo</span> ./VBoxLinuxAdditions.run
+<span class="hljs-comment"># Altro Modo per installare le guest additions:</span>
+<span class="hljs-comment">#     sudo pacman -Syu</span>
+<span class="hljs-comment">#     sudo reboot</span>
+<span class="hljs-comment">#     sudo pacman -Sy virtualbox-guest-utils</span>
+<span class="hljs-comment">#     sudo systemctl reboot</span>
+<span class="hljs-comment"># Attivazione del server SSH</span>
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> sshd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start sshd.service
+$ <span class="hljs-built_in">sudo</span> reboot
+</code></pre>
+<p>La cosa piu importante è configurare una <strong>utenza SSH</strong> per poter effettuare poi la configurazione mediante Ansible.
+Non serve configurare un ip statico perchè il router 192.168.1.1 fa anche da DNS e risolve l'hostname del guest.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Host - invio della chiave pubblica al Guest</span>
+$ ssh linux-vb
+$ ssh-copy-id linux-vb
+</code></pre>
+<h2 id="boot-da-penna-usb" tabindex="-1">Boot da penna USB <a class="header-anchor" href="#boot-da-penna-usb" aria-hidden="true">🔗</a></h2>
+<p>Creare il seguente hard disk virtuale che punta alla penna USB <code>/dev/sdc</code>
+0</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> usermod -a -G disk <span class="hljs-variable">$USER</span>
+<span class="hljs-built_in">sudo</span> vboxmanage internalcommands createrawvmdk -filename /home/vm/USBStick/usb.vmdk -rawdisk /dev/sdc
+</code></pre>
+<p>Creare una VM che abbia tale hard disk montato sul controller SATA</p>
+<h2 id="vmdk-to-vdi" tabindex="-1">VMDK to VDI <a class="header-anchor" href="#vmdk-to-vdi" aria-hidden="true">🔗</a></h2>
+<p>Non serve perchè VirtualBox lavora con il file vmdk</p>
+<pre><code class="language-bat">    VBoxManage clonemedium disk original.vmdk new.vdi --<span class="hljs-built_in">format</span> VDI
+<span class="hljs-function">    c:\<span class="hljs-title">program</span> <span class="hljs-title">files</span>\<span class="hljs-title">oracle</span>\<span class="hljs-title">virtualbox</span>\<span class="hljs-title">vboxmanage</span>&quot; <span class="hljs-title">clonehd</span> <span class="hljs-title">original.vmdk</span> <span class="hljs-title">new.vdi</span> --<span class="hljs-title">format</span> <span class="hljs-title">VDI</span>
+</span></code></pre>
+<h2 id="guest-configuration" tabindex="-1">Guest Configuration <a class="header-anchor" href="#guest-configuration" aria-hidden="true">🔗</a></h2>
+<p>You will need to load the modules if you don't want to reboot:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> modprobe vboxguest vboxvideo vboxsf
+</code></pre>
+<p>The guest utils than need to be started and enabled:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now vboxservice.service
+</code></pre>
+<p>Add you VM user to the <code>vboxsf</code> group (this requires you to logout to apply the new group)</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Tre modi alternativi per aggiungere l&#x27;utente corrente al gruppo</span>
+$ <span class="hljs-built_in">sudo</span> gpasswd -a <span class="hljs-variable">$USER</span> vboxsf
+$ <span class="hljs-built_in">sudo</span> usermod -aG vboxsf <span class="hljs-variable">${USER}</span>
+$ gpasswd -a sec504 vboxsf
+</code></pre>
+<p>Create media folder in root directory if it does not already exist</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> /media
+</code></pre>
+<p>Assign the correct permissions to the media folder to be able to access shared folders</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> 755 /media
+</code></pre>
+<h3 id="montare-le-share-nel-sistema-guest" tabindex="-1">Montare le share nel sistema guest <a class="header-anchor" href="#montare-le-share-nel-sistema-guest" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># supponiamo che la directory mount_point abbia i diritti per root e vboxsf</span>
+<span class="hljs-comment"># per permetterene l&#x27;accesso dobbiamo aggiungere l&#x27;utente al gruppo vboxsf</span>
+$ useradd -m -U -s /bin/bash -G vboxsf sec504 
+$ mount -t vboxsf share mount_point
+</code></pre>
+<pre><code>net use x: \\vboxsvr\share
+</code></pre>
+<h3 id="guest-windows-10-ed-accesso-alla-rete" tabindex="-1">Guest Windows 10 ed accesso alla rete <a class="header-anchor" href="#guest-windows-10-ed-accesso-alla-rete" aria-hidden="true">🔗</a></h3>
+<p>Supponiamo di avere la rete configurata in NAT</p>
+<p>Attivazione della rete</p>
+<pre><code>@ECHO OFF
+ECHO Resetting IP Address and Subnet Mask For DHCP
+netsh int ip set address name = &quot;Ethernet0&quot; source = dhcp
+ECHO Resetting DNS For DHCP
+netsh int ip set dns name = &quot;Ethernet0&quot; source = dhcp
+ECHO Resetting Windows Internet Name Service (WINS) For DHCP
+netsh int ip set wins name = &quot;Ethernet0&quot; source = dhcp
+netsh advfirewall set allprofiles state off
+pause
+</code></pre>
+<p>Disattivazione della rete</p>
+<pre><code>@ECHO OFF
+ECHO Resetting IP Address and Subnet Mask For Static Lab Use
+netsh int ip set address &quot;Ethernet0&quot; static 10.10.0.1 255.255.0.0 0.0.0.0 1
+netsh interface ipv4 delete dnsserver &quot;Ethernet0&quot; all
+netsh advfirewall set allprofiles state off
+netsh interface ipv4 show config &quot;Ethernet0&quot;
+pause
+</code></pre>
+<h2 id="montare-nell'host-una-partizione-di-un-file-vdi" tabindex="-1">Montare nell'host una partizione di un file VDI <a class="header-anchor" href="#montare-nell'host-una-partizione-di-un-file-vdi" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.virtualbox.org/manual/ch05.html#vboximg-mount">https://www.virtualbox.org/manual/ch05.html#vboximg-mount</a></li>
+</ul>
+<pre><code class="language-bash">$ vboximg-mount --list --verbose
+
+    ------------------------------------------------------
+    VM Name:   <span class="hljs-string">&quot;macOS High Sierra 10.13&quot;</span>
+    UUID:      3887d96d-831c-4187-a55a-567c504ff0e1
+    Location:  /Volumes/work/vm_guests/macOS High Sierra 10.13/macOS High Sierra 10.13.vbox
+       -----------------------
+       HDD base:   <span class="hljs-string">&quot;macOS High Sierra 10.13.vdi&quot;</span>
+       UUID:       f9ea7173-6869-4aa9-b487-68023a655980
+       Location:   /Volumes/work/vm_guests/macOS High Sierra 10.13/macOS High Sierra 10.13.vdi
+
+         Diff 1:
+              UUID:       98c2bac9-cf37-443d-a935-4e879b70166d
+              Location:   /Volumes/work/vm_guests/macOS High Sierra 10.13/
+              Snapshots/{98c2bac9-cf37-443d-a935-4e879b70166d}.vdi
+         Diff 2:
+              UUID:       f401f381-7377-40b3-948e-3c61241b1a42
+              Location:   /Volumes/work/vm_guests/macOS High Sierra 10.13/
+              Snapshots/{f401f381-7377-40b3-948e-3c61241b1a42}.vdi
+       -----------------------
+       HDD base:   <span class="hljs-string">&quot;simple_fixed_disk.vdi&quot;</span>
+       UUID:       ffba4d7e-1277-489d-8173-22ca7660773d
+       Location:   /Volumes/work/vm_guests/macOS High Sierra 10.13/simple_fixed_disk.vdi
+
+         Diff 1:
+              UUID:       aecab681-0d2d-468b-8682-93f79dc97a48
+              Location:   /Volumes/work/vm_guests/macOS High Sierra 10.13/
+              Snapshots/{aecab681-0d2d-468b-8682-93f79dc97a48}.vdi
+         Diff 2:
+              UUID:       70d6b34d-8422-47fa-8521-3b6929a1971c
+              Location:   /Volumes/work/vm_guests/macOS High Sierra 10.13/
+              Snapshots/{70d6b34d-8422-47fa-8521-3b6929a1971c}.vdi
+      ------------------------------------------------------
+      VM Name:   <span class="hljs-string">&quot;debian&quot;</span>
+      UUID:      5365ab5f-470d-44c0-9863-dad532ee5905
+      Location:  /Volumes/work/vm_guests/debian/debian.vbox
+         -----------------------
+         HDD base:   <span class="hljs-string">&quot;debian.vdi&quot;</span>
+         UUID:       96d2e92e-0d4e-46ab-a0f1-008fdbf997e7
+         Location:   /Volumes/work/vm_guests/debian/ol7.vdi
+
+            Diff 1:
+                UUID:       f9cc866a-9166-42e9-a503-bbfe9b7312e8
+                Location:   /Volumes/work/vm_guests/debian/Snapshots/
+                {f9cc866a-9166-42e9-a503-bbfe9b7312e8}.vdi
+
+<span class="hljs-comment"># The following command outputs partition information about the specified disk image:</span>
+
+$ vboximg-mount --image=f9ea7173-6869-4aa9-b487-68023a655980 --list
+
+    Virtual disk image:
+
+       Path: /Volumes/work/vm_guests/macOS High Sierra 10.13/macOS High Sierra 10.13.vdi
+       UUID: f9ea7173-6869-4aa9-b487-68023a655980
+
+      <span class="hljs-comment">#     Start  Sectors     Size       Offset  Type</span>
+      1        40  409599    199.9M        20480  EFI System
+      2    409640  67453071   32.1G    209735680  Hierarchical File System Plus (HFS+)
+      3  67862712  1269535   107.8M  34745708544  Apple Boot (Recovery HD)
+
+<span class="hljs-comment"># Mounting a Virtual Disk Image</span>
+<span class="hljs-comment"># The following steps show how to use the vboximg-mount command to mount a partition of a virtual disk image on the host OS.</span>
+
+<span class="hljs-comment">#    Create a mount point on the host OS. For example:</span>
+
+$ <span class="hljs-built_in">mkdir</span> macos_sysdisk
+
+<span class="hljs-comment">#    Show partition information about the virtual disk image.</span>
+
+$ vboximg-mount --image=uuid --list
+
+<span class="hljs-comment">#    where uuid is the UUID of the disk image.</span>
+<span class="hljs-comment">#    Use vboximg-mount to perform a FUSE mount of a partition on the virtual disk image. For example:</span>
+
+$ vboximg-mount --image=uuid -p 2 macos_sysdisk
+
+<span class="hljs-comment">#    where uuid is the UUID for the disk image.</span>
+<span class="hljs-comment">#    In this example, partition 2 is mounted on the macos_sysdisk mount point. The mount includes all snapshots for the disk image.</span>
+<span class="hljs-comment">#    Use the host OS to mount the vhdd device node. The FUSE-mounted device node represents the virtual disk image.</span>
+
+$ <span class="hljs-built_in">ls</span> macos_sysdisk
+       macOS High Sierra 10.13.vdi  vhdd
+
+$ <span class="hljs-built_in">sudo</span> mount macos_sysdisk/vhdd /mnt
+
+</code></pre>
+<p><code>vbox_create_vm.sh</code></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${BASH_SOURCE}</span>&quot;</span>
+<span class="hljs-keyword">while</span> [ -L <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span> ]; <span class="hljs-keyword">do</span>
+  SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+  SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+  [[ <span class="hljs-variable">${SCRIPT_PATH}</span> != /* ]] &amp;&amp; SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_DIR}</span>/<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-keyword">done</span>
+SCRIPT_PATH=<span class="hljs-string">&quot;<span class="hljs-subst">$(readlink -f <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span>
+SCRIPT_DIR=<span class="hljs-string">&quot;<span class="hljs-subst">$(cd -P <span class="hljs-string">&quot;<span class="hljs-subst">$(dirname -- <span class="hljs-string">&quot;<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>)</span>&quot;</span> &gt;/dev/null 2&gt;&amp;1 &amp;&amp; pwd)</span>&quot;</span>
+UPDIR=$(<span class="hljs-built_in">dirname</span> <span class="hljs-variable">$SCRIPT_DIR</span>)
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_PATH=<span class="hljs-variable">${SCRIPT_PATH}</span>&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCRIPT_DIR=<span class="hljs-variable">${SCRIPT_DIR}</span>&quot;</span>
+<span class="hljs-built_in">cd</span> <span class="hljs-variable">$SCRIPT_DIR</span>
+
+BASE=<span class="hljs-variable">$SCRIPT_DIR</span>
+VM=Manjaro
+CPUS=4
+MEMORY_MB=16384
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createmedium</span>
+<span class="hljs-comment"># --size &lt;megabytes&gt;</span>
+<span class="hljs-comment"># 40960 MB = 40 GB</span>
+HD_SIZE_MB=40960
+VRAM_MB=128
+ISO=<span class="hljs-variable">$BASE</span>/manjaro-gnome-22.0-221224-linux61.iso
+VDI=<span class="hljs-variable">$BASE</span>/<span class="hljs-variable">$VM</span>/<span class="hljs-variable">$VM</span>.vdi
+IF=$(ip route show default | awk <span class="hljs-string">&#x27;/default/ {print $5}&#x27;</span>) <span class="hljs-comment"># $(nmcli -t d|grep ethernet|cut -d: -f1) # enp5s0</span>
+<span class="hljs-comment"># sudo chown -R $USER:$USER /opt/vm</span>
+<span class="hljs-comment"># mkdir -p $BASE/$VM</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createvm</span>
+<span class="hljs-comment"># VBoxManage list ostypes</span>
+<span class="hljs-comment"># --memory &lt;memorysize in MB&gt;</span>
+<span class="hljs-comment"># --vram &lt;vramsize in MB&gt;</span>
+vboxmanage createvm --name <span class="hljs-variable">$VM</span> --ostype ArchLinux_64 --basefolder <span class="hljs-variable">$BASE</span> --register
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --cpus <span class="hljs-variable">$CPUS</span> --memory <span class="hljs-variable">$MEMORY_MB</span> --vram <span class="hljs-variable">$VRAM_MB</span> --ioapic on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --pae on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --graphicscontroller vboxsvga
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --accelerate3d on
+<span class="hljs-comment"># vboxmanage modifyvm $VM --nic1 bridged --bridgeadapter1 $IF</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --nic1 nat
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-modifyvm</span>
+<span class="hljs-comment"># [--nat-pfN= [rule-name],tcp | udp,[host-IP],hostport,[guest-IP],guestport ]</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --nat-pf1 <span class="hljs-string">&quot;guestssh,tcp,,2222,,22&quot;</span>
+<span class="hljs-comment"># https://www.virtualbox.org/manual/ch08.html#vboxmanage-createmedium</span>
+<span class="hljs-comment"># --size &lt;megabytes&gt;</span>
+vboxmanage createmedium disk --filename <span class="hljs-variable">$VDI</span> --size <span class="hljs-variable">$HD_SIZE_MB</span> --format VDI --variant Standard
+vboxmanage storagectl <span class="hljs-variable">$VM</span> --name <span class="hljs-string">&quot;SATA Controller&quot;</span> --add sata --bootable on --hostiocache on <span class="hljs-comment"># --controller IntelAhci </span>
+vboxmanage storageattach <span class="hljs-variable">$VM</span> --storagectl <span class="hljs-string">&quot;SATA Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> hdd --medium <span class="hljs-variable">$VDI</span>
+vboxmanage storagectl <span class="hljs-variable">$VM</span> --name <span class="hljs-string">&quot;IDE Controller&quot;</span> --add ide <span class="hljs-comment"># --controller PIIX4</span>
+vboxmanage storageattach <span class="hljs-variable">$VM</span> --storagectl <span class="hljs-string">&quot;IDE Controller&quot;</span> --port 0 --device 0 --<span class="hljs-built_in">type</span> dvddrive --medium <span class="hljs-variable">$ISO</span>
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --boot1 dvd --boot2 disk --boot3 none --boot4 none 
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --usb on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --usbxhci on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --mouse usb
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --keyboard usb
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audio pulse
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audiocontroller ac97
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audiocodec stac9700
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --audioout on
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --clipboard-mode bidirectional
+vboxmanage modifyvm <span class="hljs-variable">$VM</span> --draganddrop bidirectional
+vboxmanage setextradata <span class="hljs-variable">$VM</span> GUI/ScaleFactor 2
+vboxmanage sharedfolder add <span class="hljs-variable">$VM</span> --name=Share --hostpath=/opt/vm/Share --automount
+<span class="hljs-comment">#vboxmanage startvm $VM</span>
+<span class="hljs-comment">#vboxmanage controlvm $VM acpipowerbutton</span>
+<span class="hljs-comment">#vboxmanage controlvm $VM poweroff</span>
+</code></pre>
+<h3 id="ridurre-un-file-.vdi" tabindex="-1">Ridurre un file .vdi <a class="header-anchor" href="#ridurre-un-file-.vdi" aria-hidden="true">🔗</a></h3>
+<p>Prima bisogna ridimensionare la partizione ext del guest</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Spazio disponibile</span>
+$ lsblk -o NAME,TYPE,FSTYPE,SIZE,FSUSED,FSUSE%,MOUNTPOINT /dev/sda1
+    NAME TYPE FSTYPE SIZE FSUSED FSUSE% MOUNTPOINT
+    sda1 part ext4    40G  15,5G    39% /
+</code></pre>
+<p>root deve essere smontato per fare il resize,
+montiamo il CD-ROM di Manjaro sulla VM e facciamo boot da CD:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Reboot da cdrom Manjaro /dev/sda1 è già smontata</span>
+$ <span class="hljs-built_in">sudo</span> e2fsck -f /dev/sda1
+$ <span class="hljs-built_in">sudo</span> resize2fs -p /dev/sda1 20G
+</code></pre>
+<p>Rientrare nella VM e compattare lo spazio libero:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=/var/tmp/bigemptyfile bs=4096k; <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /var/tmp/bigemptyfile
+</code></pre>
+<p>Uscire dalla VM, ora che la partizione è stata ridotta possiamo ridurre il .vdi</p>
+<pre><code class="language-bash">$ vboxmanage modifymedium --compact /opt/vm/Manjaro/manjaro.vdi
+$ vboxmanage modifymedium disk /opt/vm/Manjaro/manjaro.vdi --resize 40960
+</code></pre>
+<h2 id="virtualbox-schede-di-rete-host-only" tabindex="-1">VirtualBox Schede di rete Host Only <a class="header-anchor" href="#virtualbox-schede-di-rete-host-only" aria-hidden="true">🔗</a></h2>
+<p>A differenza del bridged crea delle NIC virtuali nell'host.</p>
+<p>Il tipo di scheda delle VM deve essere Host Only, questo tipo permette la selezione di una delle reti create dal gestore di VirtualBox.</p>
+<p><a href="https://www.virtualbox.org/manual/ch06.html#network_hostonly">https://www.virtualbox.org/manual/ch06.html#network_hostonly</a></p>
+<p>When host-only networking is used, Oracle VM VirtualBox creates a new software interface on the host which then appears next to your existing network interfaces.
+On Linux, Mac OS X and Solaris Oracle VM VirtualBox will only allow IP addresses
+in <code>192.168.56.0/21</code> range.
+to be assigned to host-only adapters. For IPv6 only link-local addresses are allowed. If other ranges are desired, they can be enabled by creating /etc/vbox/networks.conf and specifying allowed ranges there. For example, to allow 10.0.0.0/8
+and 192.168.0.0/16 IPv4 ranges as well as 2001::/64 range put the following lines into <code>/etc/vbox/networks.conf</code>:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/vbox/networks.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+* 192.168.0.0/16
+EOF
+</code></pre>
+<p>Oppure per abilitare l'assegnazione di un qualunque IP:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/vbox/networks.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+* 0.0.0.0/0 ::/0
+EOF
+</code></pre>
+<pre><code class="language-bash">VBoxManage modifyvm vmname --nicx hostonly [--hostonlyadapter&lt;1-N&gt; none|&lt;devicename&gt;]
+VBoxManage hostonlyif create --<span class="hljs-built_in">help</span>
+vboxmanage unregistervm --delete <span class="hljs-string">&quot;Alpine_0&quot;</span>
+vboxmanage hostonlyif remove vboxnet0
+VBoxManage hostonlyif create
+VBoxManage hostonlyif ipconfig vboxnet0 --ip 192.168.1.100 --netmask 255.255.255.0
+VBoxManage dhcpserver modify --ifname vboxnet0 --<span class="hljs-built_in">disable</span>
+VBoxManage list vms
+VBoxManage list hostonlyifs
+vboxmanage modifyvm Alpine_0 --nic1 bridged --bridgeadapter1 enp5s0      <span class="hljs-comment"># il primo NIC lo cambio dal default NAT al Bridged</span>
+vboxmanage modifyvm Alpine_0 --nic2 hostonly --hostonlyadapter2 vboxnet0 <span class="hljs-comment"># il secondo NIC lo imposto come rete Host Only</span>
+
+</code></pre>
+</body></html>

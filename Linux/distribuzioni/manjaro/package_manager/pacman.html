@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.126" />
+        <title>pacman</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pacman" tabindex="-1">pacman <a class="header-anchor" href="#pacman" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.126</p>
+<nav class="table-of-contents"><ol><li><a href="#spostare-la-cache-dei-pacchetti">Spostare la cache dei pacchetti </a></li><li><a href="#info-parametri">Info Parametri </a></li><li><a href="#utilizzo">Utilizzo </a></li><li><a href="#noconfirm-e-yes">noconfirm e yes </a></li><li><a href="#ricerca-pacchetti">Ricerca pacchetti </a></li><li><a href="#installazione-pacchetti">Installazione Pacchetti </a></li><li><a href="#rimozione-di-un-pacchetto">Rimozione di un pacchetto </a></li><li><a href="#pulire-cache-pacchetti">Pulire cache pacchetti </a></li><li><a href="#aggiornamento-sistema">Aggiornamento sistema </a><ol><li><a href="#errore-lock-database-db.lck">Errore lock database db.lck </a></li><li><a href="#aggiornare-ed-ottimizzare-il-db-pacman">Aggiornare ed ottimizzare il db pacman </a></li></ol></li><li><a href="#info-pacchetti">Info pacchetti </a><ol><li><a href="#report-pacchetti">Report Pacchetti </a></li><li><a href="#pacchetti-orfani">Pacchetti Orfani </a></li></ol></li><li><a href="#installare-le-dipendenze-opzionali">Installare le dipendenze opzionali </a><ol><li><a href="#aur---arch-user-repository">AUR - Arch User Repository </a><ol><li><a href="#pacchetti-e-pkgbuild-di-esempio">Pacchetti e PKGBUILD di esempio </a><ol><li><a href="#scaricare-e-decomprimere-un-pacchetto-senza-installarlo">Scaricare e decomprimere un pacchetto senza installarlo </a></li></ol></li><li><a href="#installazione-pacchetti-aur-da-riga-di-comando-con-pamac">Installazione pacchetti AUR da riga di comando con pamac </a></li><li><a href="#installazione-pacchetti-aur-da-riga-di-comando-passo-passo">Installazione pacchetti AUR da riga di comando passo passo </a></li></ol></li></ol></li><li><a href="#pacman-mirrors">pacman-mirrors </a></li><li><a href="#cambiare-la-directory-della-cache">Cambiare la directory della cache </a></li><li><a href="#abilitare-il-repository-multilib">Abilitare il repository multilib </a><ol><li><a href="#conflitto-gcc%2Fgcc-multilib">Conflitto gcc/gcc-multilib </a><ol><li><a href="#soluzione">Soluzione </a></li></ol></li><li><a href="#rimozione-di-tutte-le-lib32">Rimozione di tutte le lib32 </a></li></ol></li></ol></nav><h1 id="pacman-1" tabindex="-1">pacman <a class="header-anchor" href="#pacman-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://archlinux.org/pacman/">https://archlinux.org/pacman/</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Pacman_(Italiano)">https://wiki.archlinux.org/title/Pacman_(Italiano)</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/pacman">https://wiki.archlinux.org/title/pacman</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/pacman.8">https://man.archlinux.org/man/pacman.8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/pactree.8">https://man.archlinux.org/man/pactree.8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/community/expac/expac.1.en">https://man.archlinux.org/man/community/expac/expac.1.en</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/pacgraph.1">https://man.archlinux.org/man/pacgraph.1</a></p>
+</li>
+</ul>
+<h2 id="spostare-la-cache-dei-pacchetti" tabindex="-1">Spostare la cache dei pacchetti <a class="header-anchor" href="#spostare-la-cache-dei-pacchetti" aria-hidden="true">🔗</a></h2>
+<p><a href="https://wiki.archlinux.org/title/pacman#Package_cache_directory">https://wiki.archlinux.org/title/pacman#Package_cache_directory</a></p>
+<pre><code class="language-bash">$ vim /etc/pacman.conf
+$ grep cache /etc/pacman.conf
+CacheDir = /var/cache/pacman/pkg/
+
+
+<span class="hljs-comment"># Reset DB dei pacchetti</span>
+pacman
+-u, --sysupgrade     aggiorna i pacchetti installati (-uu abilita i downgrade)
+-y --refresh        scarica il database aggiornato dei pacchetti dal server
+                    (-yy per forzare un aggiornamento anche se il database è già aggiornato)
+<span class="hljs-built_in">sudo</span>
+ -E, --preserve-env
+               Indicates to the security policy that the user wishes to preserve their existing environment variables.
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/lib/pacman/sync
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/lib/pacman/db.lck
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -rf /var/tmp/pamac/dbs/sync/*
+$ pamac update -a
+$ pamac clean --no-confirm
+$ <span class="hljs-built_in">sudo</span> -E pacman -Syyu
+
+$ <span class="hljs-built_in">alias</span> pu=<span class="hljs-string">&#x27;sudo bash -c &quot;yes s |  pamac update -a --no-confirm &amp;&amp; pamac clean --no-confirm&quot;&#x27;</span>
+</code></pre>
+<h2 id="info-parametri" tabindex="-1">Info Parametri <a class="header-anchor" href="#info-parametri" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pacman -Q --<span class="hljs-built_in">help</span> <span class="hljs-comment"># interrogare il database locale dei pacchetti</span>
+$ pacman -S --<span class="hljs-built_in">help</span> <span class="hljs-comment"># interrogare i database sincronizzati </span>
+$ pacman -R -h
+
+$ pacman -h -S
+$ man --color=always pacman
+$ man --color=always pacman.conf
+</code></pre>
+<pre><code>pacman {-S --sync} [opzioni] [pacchetto(i)]
+    -c, --clean          rimuove i vecchi pacchetti dalla cache
+                        (usa -cc per rimuoverli tutti)
+    -d, --nodeps         salta il controllo delle versioni delle dipendenze
+                        (-dd salta tutti i controlli)
+    -g, --groups         visualizza tutti i pacchetti appartenenti ad un gruppo
+                        (-gg per visualizzare tutti i gruppi e tutti i pacchetti)
+    -i, --info           visualizza le informazioni di un pacchetto (-ii per informazioni estese)
+    -l, --list &lt;repo&gt;    mostra la lista dei pacchetti di un repository
+    -p, --print          visualizza i pacchetti invece di effettuare l'operazione
+    -q, --quiet          mostra meno informazioni per la query e per la ricerca
+    -s, --search &lt;regex&gt; cerca le stringhe corrispondenti nei repository remoti
+    -u, --sysupgrade     aggiorna i pacchetti installati (-uu abilita i downgrade)
+    -v, --verbose        mostra maggiori informazioni
+    -w, --downloadonly   scarica i pacchetti senza installarli/aggiornarli
+    -y --refresh        scarica il database aggiornato dei pacchetti dal server
+                        (-yy per forzare un aggiornamento anche se il database è già aggiornato)
+    --noconfirm      non chiede nessuna conferma
+
+pacman {-Q --query} [opzioni] [pacchetto(i)]
+    -b, --dbpath &lt;path&gt;  imposta un percorso alternativo per il database
+    -c, --changelog      mostra il changelog di un pacchetto
+    -d, --deps           elenca i pacchetti installati come dipendenze [filtro]
+    -e, --explicit       elenca i pacchetti installati esplicitamente [filtro]
+    -g, --groups         mostra tutti i pacchetti di un gruppo
+    -i, --info           mostra le informazioni del pacchetto (-ii per i file di backup)
+    -k, --check          controlla che i file del pacchetto esistono (-kk per le proprietà dei file)
+    -l, --list           elenca i file appartenenti al pacchetto
+    -m, --foreign        elenca i pacchetti installati ma non trovati nei database [filtro]
+    -n, --native         elenca solo i pacchetti installati presenti nei db(s) [filtro]
+    -o, --owns &lt;file&gt;    interroga il pacchetto che contiene il &lt;file&gt;
+    -p, --file &lt;package&gt; interroga un file del pacchetto invece del database
+    -q, --quiet          mostra meno informazioni per la query e per la ricerca
+    -r, --root &lt;path&gt;    imposta una root alternativa per l'installazione
+    -s, --search &lt;regex&gt; cerca nei pacchetti installati le stringhe corrispondenti
+    -t, --unrequired     visualizza i pacchetti non (opzionalmente) richiesti da alcun pacchetto
+                        (-tt per ignorare le dipendenze opzionali) [filtro]
+    -u, --upgrades       elenca i pacchetti non aggiornati [filtro]
+    -v, --verbose        mostra maggiori informazioni
+    --noconfirm      non chiede nessuna conferma
+
+pacman {-R --remove} [opzioni] &lt;pacchetto(i)&gt;
+-c, --cascade        rimuove i pacchetti e tutti quelli che dipendono da essi
+-d, --nodeps         salta il controllo delle versioni delle dipendenze
+                    (-dd salta tutti i controlli)
+-n, --nosave         rimuove i file di configurazione
+-p, --print          visualizza i pacchetti invece di effettuare l'operazione
+-s, --recursive      rimuove le dipendenze non necessarie
+                    (-ss include le dipendenze installate esplicitamente)
+-u, --unneeded       rimuove i pacchetti non necessari
+-v, --verbose        mostra maggiori informazioni
+    --debug          mostra i messaggi di debug
+    --noconfirm      non chiede nessuna conferma
+</code></pre>
+<h2 id="utilizzo" tabindex="-1">Utilizzo <a class="header-anchor" href="#utilizzo" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># INSTALLAZIONE</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syuu --needed --noconfirm smartmontools
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm p7zip <span class="hljs-comment"># Installazione del pacchetto</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm python-poetry
+
+<span class="hljs-comment"># AGGIORNAMENTO</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Syu              <span class="hljs-comment"># Aggiornamento del sistema</span>
+                                <span class="hljs-comment"># -S repository remoto</span>
+                                <span class="hljs-comment"># -y, --refresh Download a fresh copy of the master package database from the server(s)</span>
+                                <span class="hljs-comment"># -u, --sysupgrade Upgrades all packages that are out-of-date.</span>
+                                <span class="hljs-comment">#     Pass this option twice to enable package downgrades; </span>
+
+$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Scc      <span class="hljs-comment"># Pulizia completa della cache</span>
+$ <span class="hljs-built_in">sudo</span> pacman-mirrors -g        <span class="hljs-comment"># Aggiornamento dei mirror più veloci</span>
+
+<span class="hljs-comment"># RICERCA</span>
+$ pacman -F smartctl            <span class="hljs-comment"># Ricerca del pacchetto che contiene il file</span>
+$ pacman -Ss 7z                 <span class="hljs-comment"># Ricerca di un pacchetto nel repository remoto</span>
+    extra/p7zip 1:17.04-3 [installato]
+    Command-line file archiver with high compression ratio
+$ <span class="hljs-built_in">which</span> 7z
+    /usr/bin/7z
+$ pacman -Qo /usr/bin/7z        <span class="hljs-comment"># Ricerca del pacchetto in locale per path del file</span>
+    /usr/bin/7z è contenuto <span class="hljs-keyword">in</span> p7zip 1:17.04-3  
+
+<span class="hljs-comment"># INFO</span>
+$ pacman -Si pacchetto          <span class="hljs-comment"># Descrizione del pacchetto remoto (non installato)</span>
+$ pacman -Qi p7zip              <span class="hljs-comment"># Descrizione del pacchetto locale(sono di più del S remoto)</span>
+$ pacman -Ql p7zip              <span class="hljs-comment"># File contenuti nel pacchetto</span>
+$ pacman -Qo /usr/bin/7z        <span class="hljs-comment"># Ricerca del pacchetto in locale per path del file</span>
+    /usr/bin/7z è contenuto <span class="hljs-keyword">in</span> p7zip 1:17.04-3  
+$ pactree  p7zip                <span class="hljs-comment"># pacchetti da cui p7zip dipende (pactree è contenuto in pacman)</span>
+$ pactree -r p7zip              <span class="hljs-comment"># pacchetti che dipendono da p7zip</span>
+
+<span class="hljs-comment"># DISINSTALLAZIONE PACCHETTO</span>
+$ pacman -Rsn p7zip             <span class="hljs-comment"># rimozione del pacchetto con dipendenze e configurazione</span>
+
+<span class="hljs-comment"># PULIZIA CACHE PACCHETTI</span>
+$ <span class="hljs-built_in">du</span> -sh /var/cache/pacman/pkg/
+$ <span class="hljs-built_in">yes</span> s | pacman -Scc           <span class="hljs-comment"># Pulizia completa della cache</span>
+</code></pre>
+<h2 id="noconfirm-e-yes" tabindex="-1">noconfirm e yes <a class="header-anchor" href="#noconfirm-e-yes" aria-hidden="true">🔗</a></h2>
+<p>Bisogna fare attenzione a come si utilizza l'opzione noconfirm.\ 
+<code>--noconfirm</code> non assume <code>yes</code> come risposta,
+assume invece la risposta di default, che può spesso essere <code>no</code>.</p>
+<p>Esempio:</p>
+<pre><code class="language-bash">$ pacman -Scc 
+Cache directory: /var/cache/pacman/pkg/ :: Do you want to remove ALL files from cache? [y/N] 
+</code></pre>
+<p>In questo esempio utilizzare <code>--noconfirm</code> non fà svuotare la cache dei pacchetti:</p>
+<pre><code class="language-bash">$ pacman --noconfirm -Scc 
+Cache directory: /var/cache/pacman/pkg/ :: Do you want to remove ALL files from cache? [y/N]
+N 
+</code></pre>
+<p>Al posto di <code>--noconfirm</code> in questo caso bisogna utilizzare il comando <code>yes</code> in pipe:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># In questo esempio ad ogni domanda viene risposto yes come desiderato e la cache viene svuotata</span>
+<span class="hljs-comment"># Bisogna impostare il locale di pacman ad english perchè altrimenti le domande offrono la versione italiana `[S/n]`</span>
+$ <span class="hljs-built_in">yes</span> | LC_ALL=en_US.UTF-8 pacman -Scc 
+<span class="hljs-comment"># Oppure:</span>
+$ <span class="hljs-built_in">yes</span> S | pacman -Scc 
+</code></pre>
+<h2 id="ricerca-pacchetti" tabindex="-1">Ricerca pacchetti <a class="header-anchor" href="#ricerca-pacchetti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Ricerca per nome file</span>
+$ pacman -Fy <span class="hljs-comment"># per aggiornare il database</span>
+$ pacman -F inotifywait <span class="hljs-comment"># per cercare in quale pacchetto si trova il file</span>
+<span class="hljs-comment"># Cercare pacchetti solo per nome</span>
+$ pacman -Ssq virtualbox| grep -i virtualbox
+<span class="hljs-comment"># Cercare pacchetti nel database, sia in base al nome del pacchetto che alla sua descrizione</span>
+$ pacman -Ss stringa1 stringa2 ... 
+$ pacman -Ss vscode
+$ pacman --color=always -Ss <span class="hljs-string">&#x27;C\+\+&#x27;</span>|grep mingw64
+$ pacman --color=always -Ss <span class="hljs-string">&#x27;x86_64.*armadillo&#x27;</span>
+<span class="hljs-comment"># To search for package file names in remote packages:</span>
+<span class="hljs-comment"># Ricerca per nome file del pacchetto nel solo nome del file</span>
+$ pacman -Fs string1 string2 ...
+<span class="hljs-comment"># `-Fs` cerca sì con una espressione regolare, ma solamente nel nome del file, ignorando il resto del path</span>
+<span class="hljs-comment"># Sometimes, `-s`&#x27;s builtin ERE (Extended Regular Expressions)can cause a lot of unwanted results, so it has to be limited to match the package name only; not the # description nor any other field:</span>
+$ pacman -Ss <span class="hljs-string">&#x27;^vim-&#x27;</span>
+
+<span class="hljs-comment"># Cercare i pacchetti già installati:</span>
+$ pacman -Q <span class="hljs-comment"># Per avere l&#x27;elenco dei pacchetti installati</span>
+$ pacman -Qte <span class="hljs-comment"># Per avere l&#x27;elenco dei pacchetti installati esplicitamente dopo l&#x27;installazione di base</span>
+$ pacman -Qs stringa1 stringa2 ... <span class="hljs-comment"># ricerca per sottostringa</span>
+
+<span class="hljs-comment"># Visualizzare informazioni dettagliate su un determinato pacchetto:</span>
+$ pacman -Si pacchetto
+<span class="hljs-comment"># Visualizzare informazioni dettagliate su un determinato pacchetto installato localmente:</span>
+$ pacman -Qi pacchetto
+<span class="hljs-comment"># Pacchetti installati da AUR</span>
+$ pacman -Qm
+$ pacman -Qqm
+
+<span class="hljs-comment"># Per recuperare un elenco dei file installati da un pacchetto:</span>
+$ pacman -Ql pacchetto
+
+<span class="hljs-comment"># Per sapere a quale pacchetto appartiene un determinato file nel sistema:</span>
+$ pacman -Qo /percorso/al/nome_del_file
+
+<span class="hljs-comment"># Per elencare tutti i pacchetti non più necessari come dipendenze (orfani):</span>
+$ pacman -Qdt
+$ pacman -Qdtq
+
+<span class="hljs-comment"># Per mostrare l&#x27;albero delle dipendenze di un pacchetto:</span>
+$ pactree pacchetto <span class="hljs-comment"># è contenuto in pacman</span>
+<span class="hljs-comment"># Per elencare tutti i pacchetti che dipendono da uno specifico pacchetto già installato:</span>
+$ pactree -r pacchetto
+
+<span class="hljs-comment"># Visualizza contenuto gruppo</span>
+$ pacman -Sg xorg-apps
+</code></pre>
+<h2 id="installazione-pacchetti" tabindex="-1">Installazione Pacchetti <a class="header-anchor" href="#installazione-pacchetti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pacman -Syu --needed mingw-w64-x86_64-wxPython
+<span class="hljs-comment"># --needed evita che vengano reinstallati i pacchetti già presenti</span>
+
+<span class="hljs-comment"># Installazione con una regex</span>
+$ pacman -Syu $(pacman -Ssq package_regex)
+
+</code></pre>
+<h2 id="rimozione-di-un-pacchetto" tabindex="-1">Rimozione di un pacchetto <a class="header-anchor" href="#rimozione-di-un-pacchetto" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ pacman -Qi vscode                     <span class="hljs-comment"># informazioni sul pacchetto</span>
+$ pacman -Ql vscode                     <span class="hljs-comment"># file contenuti nel pacchetto</span>
+$ pacman -Rsn mingw-w64-x86_64-wxPython <span class="hljs-comment"># rimozione del pacchetto con dipendenze e configurazione</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Rimozione pacchetti orfani</span>
+$ pacman -Rns $(pacman -Qtdq)
+</code></pre>
+<h2 id="pulire-cache-pacchetti" tabindex="-1">Pulire cache pacchetti <a class="header-anchor" href="#pulire-cache-pacchetti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Scc
+
+$ su
+$ <span class="hljs-built_in">du</span> -sh /var/cache/pacman/pkg/
+$ pacman -Rns $(pacman -Qtdq) <span class="hljs-comment"># Rimozione degli orfani</span>
+$ <span class="hljs-built_in">yes</span> s | <span class="hljs-built_in">sudo</span> pacman -Scc
+$ paccache -ruk0
+</code></pre>
+<h2 id="aggiornamento-sistema" tabindex="-1">Aggiornamento sistema <a class="header-anchor" href="#aggiornamento-sistema" aria-hidden="true">🔗</a></h2>
+<p>Aggiornare i mirror più veloci</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman-mirrors -g
+$ <span class="hljs-built_in">sudo</span> pacman -Syu <span class="hljs-comment"># Aggiornamento del sistema</span>
+</code></pre>
+<h3 id="errore-lock-database-db.lck" tabindex="-1">Errore lock database db.lck <a class="header-anchor" href="#errore-lock-database-db.lck" aria-hidden="true">🔗</a></h3>
+<p><a href="https://forum.manjaro.org/t/waiting-for-another-package-manager-to-quit/93309/8">https://forum.manjaro.org/t/waiting-for-another-package-manager-to-quit/93309/8</a></p>
+<pre><code class="language-bash">$ pamac update
+Preparazione...
+In attesa che un altro gestore di pacchetti si chiuda...
+
+$ <span class="hljs-built_in">sudo</span> lsof /var/lib/pacman/db.lck
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> /var/lib/pacman/db.lck
+</code></pre>
+<h3 id="aggiornare-ed-ottimizzare-il-db-pacman" tabindex="-1">Aggiornare ed ottimizzare il db pacman <a class="header-anchor" href="#aggiornare-ed-ottimizzare-il-db-pacman" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman-db-upgrade &amp;&amp; <span class="hljs-built_in">sudo</span> pacman-optimize &amp;&amp; syn
+</code></pre>
+<p>If you get the “lock database” or “failed to synchronize” error use the command</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> /var/lib/pacman/db.lck
+$ <span class="hljs-built_in">sudo</span> pacman -Syu --force
+</code></pre>
+<p>il <code>--force</code> fà sovrascrivere i files già esistenti</p>
+<pre><code class="language-bash">$ pacman -Syuu
+</code></pre>
+<pre><code>-S: Sync packages
+-y: refresh package database
+-uu: sys upgrade all packages, repeated 'u' flag enables downgrades (from man page):
+            Pass this option twice to enable package downgrades; in this case, pacman
+            will select sync packages whose versions do not match with the local
+            versions. This can be useful when the user switches from a testing repository
+            to a stable one.
+
+pacman -Syy:
+-S: Sync packages
+-yy: refresh package database, force refresh even if local database appears up-to-date
+</code></pre>
+<h2 id="info-pacchetti" tabindex="-1">Info pacchetti <a class="header-anchor" href="#info-pacchetti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pamac install expac pacgraph
+<span class="hljs-comment"># Elenco pacchetti installati ordinati per dimensione</span>
+$ expac -H M <span class="hljs-string">&quot;%011m\t%-20n\t%10d&quot;</span> $(<span class="hljs-built_in">comm</span> -23 &lt;(pacman -Qqen | <span class="hljs-built_in">sort</span>) &lt;(pacman -Qqg base base-devel | <span class="hljs-built_in">sort</span>)) | <span class="hljs-built_in">sort</span> -n
+</code></pre>
+<p><code>-S</code>(sync database, ricerca sul database dei pacchetti)</p>
+<pre><code class="language-bash">    $ pacman -Sy aggiorna il database dei pacchetti
+    $ pacman -Si mingw-w64-x86_64-freeglut
+</code></pre>
+<p><code>-Q</code> query nel database dei package installati</p>
+<pre><code class="language-bash">    <span class="hljs-comment"># Informazioni sul pacchetto</span>
+    $ pacman -Qi git
+</code></pre>
+<p><strong><mark>Visualizzazione Contenuto dei pacchetti installati</mark></strong></p>
+<pre><code class="language-bash">    $ pacman -Ql mingw-w64-x86_64-mesa
+</code></pre>
+<p>Visualizzazione albero delle dipendenze di un package</p>
+<pre><code class="language-bash">    $ pactreepackage_name
+</code></pre>
+<p>Visualizzazione dei pacchetti che dipendono da un pacchetto</p>
+<pre><code class="language-bash">$ pactree -r package_name
+</code></pre>
+<h3 id="report-pacchetti" tabindex="-1">Report Pacchetti <a class="header-anchor" href="#report-pacchetti" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ pacman -Ss | grep <span class="hljs-string">&#x27;^mingw64/&#x27;</span> -A 1 | sed -r -e <span class="hljs-string">&#x27;s/\[installed.*\]//&#x27;</span> -e <span class="hljs-string">&#x27;s#^mingw64/([^ ]+)#&lt;br/&gt;mingw/&lt;b&gt;\1&lt;/b&gt;#&#x27;</span> -e <span class="hljs-string">&#x27;s/-x86_64//&#x27;</span>
+$ pacman -Ss | grep <span class="hljs-string">&#x27;^msys/&#x27;</span> -A 1 | sed -r -e <span class="hljs-string">&#x27;s/\[installed.*\]//&#x27;</span> -e <span class="hljs-string">&#x27;s#^msys/([^ ]+)#&lt;br/&gt;msys/&lt;b&gt;\1&lt;/b&gt;#&#x27;</span>
+
+<span class="hljs-comment"># Elenco pacchetti installati ordinati per dimensione</span>
+$ expac -H M <span class="hljs-string">&quot;%011m\t%-20n\t%10d&quot;</span> $(<span class="hljs-built_in">comm</span> -23 &lt;(pacman -Qqen | <span class="hljs-built_in">sort</span>) &lt;(pacman -Qqg base base-devel | <span class="hljs-built_in">sort</span>)) | <span class="hljs-built_in">sort</span> -n
+</code></pre>
+<h3 id="pacchetti-orfani" tabindex="-1">Pacchetti Orfani <a class="header-anchor" href="#pacchetti-orfani" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Per elencare tutti i pacchetti non più necessari come dipendenze (orfani):</span>
+$ pacman -Qdt
+$ pacman -Qdtq
+</code></pre>
+<h2 id="installare-le-dipendenze-opzionali" tabindex="-1">Installare le dipendenze opzionali <a class="header-anchor" href="#installare-le-dipendenze-opzionali" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/pacman#Installation_reason">https://wiki.archlinux.org/title/pacman#Installation_reason</a></li>
+<li><a href="https://wiki.archlinux.org/title/PKGBUILD#optdepends">https://wiki.archlinux.org/title/PKGBUILD#optdepends</a></li>
+<li><a href="https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Packages_and_dependencies">https://wiki.archlinux.org/title/Pacman/Tips_and_tricks#Packages_and_dependencies</a></li>
+</ul>
+<p>Vedere le dipendenze opzionali di un pacchetto:</p>
+<pre><code class="language-bash">$ pacman -Si mc
+$ expac -S <span class="hljs-string">&#x27;%o&#x27;</span> mc <span class="hljs-comment"># crea una lista di pacchetti opzionali utilizzabile da pacman</span>
+$ <span class="hljs-built_in">sudo</span> pacman -S --asdeps --needed $(expac -S <span class="hljs-string">&#x27;%o&#x27;</span> mc)
+    ~/.bashrc
+    <span class="hljs-function"><span class="hljs-title">showoptdeps</span></span>(){
+        expac -S <span class="hljs-string">&#x27;%o&#x27;</span> <span class="hljs-variable">$1</span>
+    }
+</code></pre>
+<h3 id="aur---arch-user-repository" tabindex="-1">AUR - Arch User Repository <a class="header-anchor" href="#aur---arch-user-repository" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/creating_packages">https://wiki.archlinux.org/title/creating_packages</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Arch_package_guidelines">https://wiki.archlinux.org/title/Arch_package_guidelines</a></p>
+</li>
+<li>
+<p><a href="https://wiki.manjaro.org/index.php/Arch_User_Repository">https://wiki.manjaro.org/index.php/Arch_User_Repository</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Makepkg">https://wiki.archlinux.org/title/Makepkg</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/makepkg.8">https://man.archlinux.org/man/makepkg.8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/makepkg.conf.5">https://man.archlinux.org/man/makepkg.conf.5</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/PKGBUILD.5">https://man.archlinux.org/man/PKGBUILD.5</a></p>
+</li>
+</ul>
+<p>AUR Helpers</p>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/Pamac">https://wiki.manjaro.org/index.php/Pamac</a></li>
+<li><a href="https://wiki.archlinux.org/title/AUR_helpers">https://wiki.archlinux.org/title/AUR_helpers</a></li>
+<li><a href="https://github.com/Jguer/yay">https://github.com/Jguer/yay</a>  An AUR Helper Written in Go</li>
+<li><a href="https://github.com/morganamilo/paru">https://github.com/morganamilo/paru</a> fatto in rust</li>
+<li><a href="https://github.com/actionless/pikaur">https://github.com/actionless/pikaur</a> fatto in python</li>
+</ul>
+<h4 id="pacchetti-e-pkgbuild-di-esempio" tabindex="-1">Pacchetti e PKGBUILD di esempio <a class="header-anchor" href="#pacchetti-e-pkgbuild-di-esempio" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://gitlab.manjaro.org/packages">https://gitlab.manjaro.org/packages</a> permette di cercare il pacchetto Manjaro e di vedere il PKGBUILD</li>
+<li><a href="https://archlinux.org/packages/">https://archlinux.org/packages/</a> dal link &quot;Source Files&quot; in alto a destra nella pagina del pacchetto si può vedere anche il PKGBUILD di un pacchetto</li>
+<li><a href="https://aur.archlinux.org/">https://aur.archlinux.org/</a>
+Contributed **<code>PKGBUILD</code>**s must conform to the:
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Arch_package_guidelines">Arch Packaging Standards</a>
+Other prototypes are found in <code>/usr/share/pacman/</code> from the <a href="https://archlinux.org/packages/?name=pacman">pacman</a> package.</li>
+</ul>
+</li>
+<li><a href="https://manpages.org/zstd">https://manpages.org/zstd</a></li>
+<li><a href="https://man.archlinux.org/man/zstd.1">https://man.archlinux.org/man/zstd.1</a></li>
+</ul>
+<h5 id="scaricare-e-decomprimere-un-pacchetto-senza-installarlo" tabindex="-1">Scaricare e decomprimere un pacchetto senza installarlo <a class="header-anchor" href="#scaricare-e-decomprimere-un-pacchetto-senza-installarlo" aria-hidden="true">🔗</a></h5>
+<pre><code class="language-bash">$ pacman -Swdd &lt;pacchetto&gt; <span class="hljs-comment"># il pacchetto viene scaricato in `/var/cache/pacman/pkg`</span>
+<span class="hljs-comment"># -Sw only downloads the packages`</span>
+<span class="hljs-comment"># -dd ignores all dependencies</span>
+
+$ <span class="hljs-built_in">sudo</span> pacman -Sw --cachedir DIRECTORY PACKAGE <span class="hljs-comment"># per scaricare il pacchetto nella directory CACHEDIR es.:</span>
+$ <span class="hljs-built_in">sudo</span> pacman -Sw --cachedir . mc
+
+$ tar --use-compress-program=unzstd -xvf archive.tar.zst
+$ unzstd yourfilename.zst
+</code></pre>
+<p>il pacchetto viene scaricato in <code>/var/cache/pacman/pkg</code></p>
+<h4 id="installazione-pacchetti-aur-da-riga-di-comando-con-pamac" tabindex="-1">Installazione pacchetti AUR da riga di comando con pamac <a class="header-anchor" href="#installazione-pacchetti-aur-da-riga-di-comando-con-pamac" aria-hidden="true">🔗</a></h4>
+<p>Utilizzare <code>pamac</code> da riga di comando, la versione GUI ha un bug che impedisce l'installazione di alcuni pacchetti.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Ricerca del pacchetto AUR con pamac</span>
+<span class="hljs-comment"># --aur, -a       : cerca anche in AUR</span>
+$ pamac search -a hplip-plugin
+<span class="hljs-comment"># Installazione</span>
+$ pamac build hplip-plugin
+<span class="hljs-comment"># Aggiornamento</span>
+$ pamac upgrade hplip-plugin
+</code></pre>
+<h4 id="installazione-pacchetti-aur-da-riga-di-comando-passo-passo" tabindex="-1">Installazione pacchetti AUR da riga di comando passo passo <a class="header-anchor" href="#installazione-pacchetti-aur-da-riga-di-comando-passo-passo" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione manuale</span>
+<span class="hljs-comment"># Be sure you have the necessary files for building applications from source</span>
+$ pamac install base-devel git
+<span class="hljs-comment"># Clone the PKGBUILD</span>
+$ git <span class="hljs-built_in">clone</span> https://aur.archlinux.org/foo.git
+<span class="hljs-comment"># Change directory to cloned folder</span>
+$ <span class="hljs-built_in">cd</span> foo
+<span class="hljs-comment"># To make/compile the package, run:</span>
+$ makepkg -s
+<span class="hljs-comment"># This will build the package and pull in any dependencies needed. Note: it won&#x27;t pull a dependency from the AUR, only from the Manjaro Repos.. If you list the folder content</span>
+$ <span class="hljs-built_in">ls</span>
+<span class="hljs-comment"># you&#x27;ll probably find a few new files. You&#x27;re interested in the one that ends with .pkg.tar.zst</span>
+<span class="hljs-comment"># The final event is running $sudo pacman -U on that file</span>
+$ <span class="hljs-built_in">sudo</span> pacman -U foo.pkg.zst
+<span class="hljs-comment"># And you&#x27;ve done it...the safest way to install from the AUR. This is essentially what most install scripts do for you.</span>
+<span class="hljs-comment"># Note: Instead of using sudo pacman -U foo.pkg.zst can also use:</span>
+$ makepkg -i
+<span class="hljs-comment"># Note: To combine above steps into one:</span>
+$ makepkg -si
+</code></pre>
+<h2 id="pacman-mirrors" tabindex="-1">pacman-mirrors <a class="header-anchor" href="#pacman-mirrors" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/Pacman-mirrors">https://wiki.manjaro.org/index.php/Pacman-mirrors</a></li>
+</ul>
+<pre><code class="language-bash">
+$ <span class="hljs-built_in">sudo</span> pacman-mirrors -f &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syyu
+
+<span class="hljs-comment"># Help</span>
+$ pacman-mirrors --<span class="hljs-built_in">help</span> 
+<span class="hljs-comment"># Status</span>
+$ pacman-mirrors --status 
+<span class="hljs-comment"># List available countries</span>
+$ pacman-mirrors --country-list 
+<span class="hljs-comment"># What branch am I on</span>
+$ pacman-mirrors --get-branch 
+<span class="hljs-comment"># Update mirrorlist with the fastest mirrors</span>
+$ <span class="hljs-built_in">sudo</span> pacman-mirrors --fasttrack &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syu 
+<span class="hljs-comment"># Mirrors for your country only</span>
+$ <span class="hljs-built_in">sudo</span> pacman-mirrors --geoip &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syu
+<span class="hljs-comment"># Switch branch to unstable and use German mirrors</span>
+$ <span class="hljs-built_in">sudo</span> pacman-mirrors --country Germany --api --set-branch unstable &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syu
+<span class="hljs-comment"># Reset</span>
+$ <span class="hljs-built_in">sudo</span> pacman-mirrors --country all --api --protocols all --set-branch stable &amp;&amp; <span class="hljs-built_in">sudo</span> pacman -Syu 
+</code></pre>
+<h2 id="cambiare-la-directory-della-cache" tabindex="-1">Cambiare la directory della cache <a class="header-anchor" href="#cambiare-la-directory-della-cache" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /home/cache/pacman/pkg/
+$ <span class="hljs-built_in">sudo</span> pacman -Scc
+$ sed -i <span class="hljs-string">&#x27;s#.*CacheDir.*#CacheDir = /home/cache/pacman/pkg/#&#x27;</span> /etc/pacman.conf
+</code></pre>
+<pre><code>/var/cache/pacman/pkg
+/etc/pacman.conf
+    CacheDir = /var/cache/pacman/pkg/
+    CacheDir = /home/cache/pacman/pkg/
+</code></pre>
+<h2 id="abilitare-il-repository-multilib" tabindex="-1">Abilitare il repository multilib <a class="header-anchor" href="#abilitare-il-repository-multilib" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Official_repositories#multilib">https://wiki.archlinux.org/title/Official_repositories#multilib</a>
+multilib contains 32-bit software and libraries that can be used to run and build 32-bit applications on 64-bit installs (e.g. <strong>wine</strong>, <strong>steam</strong>, etc).</p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/69575241/test-what-cgroup-version-a-docker-container-is-running-with">https://stackoverflow.com/questions/69575241/test-what-cgroup-version-a-docker-container-is-running-with</a></p>
+</li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Abilitazione multilib</span>
+$ sed -i <span class="hljs-string">&quot;/\[multilib\]/,/Include/&quot;</span><span class="hljs-string">&#x27;s/^#//&#x27;</span> /etc/pacman.conf
+<span class="hljs-comment">#[multilib]</span>
+<span class="hljs-comment">#Include = /etc/pacman.d/mirrorlist</span>
+</code></pre>
+<h3 id="conflitto-gcc%2Fgcc-multilib" tabindex="-1">Conflitto gcc/gcc-multilib <a class="header-anchor" href="#conflitto-gcc%2Fgcc-multilib" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://www.reddit.com/r/archlinux/comments/6fbrx1/conflict_between_gcclibs_and_gcclibsmultilib/">https://www.reddit.com/r/archlinux/comments/6fbrx1/conflict_between_gcclibs_and_gcclibsmultilib/</a>
+Conflict between gcc-libs and gcc-libs-multilib causing upgrade to halt</p>
+<pre><code class="language-bash">$ pacman -Syu
+    resolving dependencies...
+    looking <span class="hljs-keyword">for</span> conflicting packages...
+    warning: removing <span class="hljs-string">&#x27;gcc-libs&#x27;</span> from target list because it conflicts with
+    <span class="hljs-string">&#x27;gcc-libs-multilib&#x27;</span>
+    error: failed to prepare transaction (could not satisfy dependencies)
+</code></pre>
+<p><a href="https://wiki.archlinux.org/index.php/Multilib">https://wiki.archlinux.org/index.php/Multilib</a></p>
+<p>The multilib repository is an official repository which allows the user to run and build 32-bit applications on 64-bit installations of Arch Linux.
+Il gcc-multilib rimpiazza il gcc, che và rimosso se presente altrimenti crea problemi al <code>pacman -Syu</code>.</p>
+</li>
+</ul>
+<h4 id="soluzione" tabindex="-1">Soluzione <a class="header-anchor" href="#soluzione" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu--needed --noconfirm gcc-multilib
+</code></pre>
+<p>questo comando installa il <code>gcc-multilib</code>, rimuovendo il <code>gcc</code>. Installare gcc-multilib al posto di gcc per non avere conflitti di upgrade in manjaro
+(<code>pacman -Syu</code>)</p>
+<h3 id="rimozione-di-tutte-le-lib32" tabindex="-1">Rimozione di tutte le lib32 <a class="header-anchor" href="#rimozione-di-tutte-le-lib32" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://forum.manjaro.org/t/lib32-on-amd64/134804/2">https://forum.manjaro.org/t/lib32-on-amd64/134804/2</a></li>
+</ul>
+<pre><code class="language-bash">$ pacman -R $(<span class="hljs-built_in">comm</span> -12 &lt;(pacman -Qq | <span class="hljs-built_in">sort</span>) &lt;(pacman -Slq multilib | <span class="hljs-built_in">sort</span>))
+</code></pre>
+</body></html>

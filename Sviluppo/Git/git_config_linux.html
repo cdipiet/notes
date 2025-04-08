@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.929" />
+        <title>git_config_linux</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="git_config_linux" tabindex="-1">git_config_linux <a class="header-anchor" href="#git_config_linux" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.929</p>
+<nav class="table-of-contents"><ol><li><a href="#help-su-linux">help su Linux </a></li><li><a href="#configurazione-linux">Configurazione Linux </a><ol><li><a href="#verificare-la-chiave-ssh-configurata-in-github">Verificare la chiave ssh configurata in GitHub </a></li></ol></li></ol></nav><h1 id="configurazione-git-linux" tabindex="-1">Configurazione Git Linux <a class="header-anchor" href="#configurazione-git-linux" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a></li>
+<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf">https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreautocrlf</a></li>
+<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-username">https://git-scm.com/docs/git-config#Documentation/git-config.txt-username</a></li>
+<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreeditor">https://git-scm.com/docs/git-config#Documentation/git-config.txt-coreeditor</a></li>
+<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-httpproxy">https://git-scm.com/docs/git-config#Documentation/git-config.txt-httpproxy</a></li>
+<li><a href="https://git-scm.com/docs/git-config#Documentation/git-config.txt-codeinitdefaultBranchcode">https://git-scm.com/docs/git-config#Documentation/git-config.txt-codeinitdefaultBranchcode</a></li>
+</ul>
+<p><code>~/.gitconfig</code></p>
+<p><code>%USERPROFILE%\.gitconfig</code></p>
+<h2 id="help-su-linux" tabindex="-1">help su Linux <a class="header-anchor" href="#help-su-linux" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">xdg-open file:///usr/share/doc/git-doc/user-manual.html
+
+man git
+man gitglossary
+man gittutorial
+man gittutorial-2
+man gitcore-tutorial
+man giteveryday
+
+man gitignore
+man git-check-ignore
+man git-cherry-pick
+</code></pre>
+<h2 id="configurazione-linux" tabindex="-1">Configurazione Linux <a class="header-anchor" href="#configurazione-linux" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup">https://git-scm.com/book/en/v2/Getting-Started-First-Time-Git-Setup</a></li>
+</ul>
+<p><strong>Installazione su Manjaro</strong></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm  git
+$ <span class="hljs-built_in">sudo</span> pamac install git-htmldocs
+</code></pre>
+<p><code>--global</code> ==&gt; <code>~/.gitconfig</code></p>
+<pre><code class="language-bash">$ man git-config
+
+$ git config -l --show-origin
+$ git config --show-origin core.autocrlf
+
+$ git config --global  user.name cdipiet
+$ git config --global  user.email johndoe@example.com
+$ git config --global core.autocrlf <span class="hljs-literal">false</span>
+$ git config --global init.defaultBranch main
+$ git config --global core.editor gedit
+$ git config --global alias.amend <span class="hljs-string">&#x27;commit --amend --no-edit&#x27;</span>
+</code></pre>
+<ol>
+<li>
+<p>Verifica dell'esistenza della directory di configurazione SSH client:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> -al ~/.ssh
+</code></pre>
+<p>e verificare che la directory esista e che contenga le chiavi, uno dei file tra:</p>
+<ul>
+<li>id_rsa.pub</li>
+<li>id_ecdsa.pub</li>
+<li>id_ed25519.pub</li>
+</ul>
+</li>
+<li>
+<p>se le chiavi non sono presenti, vanno generate:</p>
+<pre><code class="language-bash">$ ssh-keygen -t rsa -b 4096 -C <span class="hljs-string">&quot;corrado.dipietro@gmail.com&quot;</span>
+    <span class="hljs-comment"># -C è un comment</span>
+    Created directory <span class="hljs-string">&#x27;/home/$USER/.ssh&#x27;</span>.
+    Your identification has been saved <span class="hljs-keyword">in</span> /home/<span class="hljs-variable">$USER</span>/.ssh/id_rsa
+    Your public key has been saved <span class="hljs-keyword">in</span> /home/<span class="hljs-variable">$USER</span>/.ssh/id_rsa.pub
+    The key fingerprint is:
+    SHA256:U54p7X4v8zufVNW0WO2DwR5WE4Iw3e3HMLVj0vdSAJ4 corrado.dipietro@gmail.com
+$ <span class="hljs-built_in">yes</span>|ssh-keygen -t rsa -b 4096 -a 100 -f /tmp/testkey -N <span class="hljs-string">&#x27;&#x27;</span> -C <span class="hljs-string">&quot;username@hostname&quot;</span>
+</code></pre>
+</li>
+<li>
+<p>avvio dell'ssh-agent:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(ssh-agent -s)</span>&quot;</span>
+</code></pre>
+</li>
+<li>
+<p>aggiunta della chiave privata all'ssh-agent</p>
+<pre><code class="language-bash">$ ssh-add ~/.ssh/id_rsa
+Identity added: /home/<span class="hljs-variable">$USER</span>/.ssh/id_rsa (corrado.dipietro@gmail.com)
+</code></pre>
+</li>
+<li>
+<p>aggiunta della chiave pubblica SSH all'account github:</p>
+<p>Per poter accedere a GitHub tramite SSH bisogna generare la coppia di chiavi privata/pubblica e configurare in GitHub la chiave pubblica.<br>
+La directory <code>.ssh</code> può essere copiata in altri PC in modo da riutilizzare la chiave SSH per accedere a GitHub,<br>
+ovvero si utilizza un unica chiave SSH per accedere a GitHub da diversi PC.
+In alternativa su ogni PC viene generata una coppia di chiavi privata/pubblica e si configura in GitHub la chiave pubblica di ogni PC.</p>
+<pre><code class="language-bash">xclip -sel clip &lt; ~/.ssh/id_rsa.pub <span class="hljs-comment"># Copies the contents of the id_rsa.pub file to your clipboard</span>
+</code></pre>
+<p>In github, dall'account andare in <a href="https://github.com/settings/keys">https://github.com/settings/keys</a> <code>/Settings/SSH and GPG keys</code> ed aggiungere la chiave SSH pubblica presente nella clipboard</p>
+</li>
+<li>
+<p>Test della connessione SSH a github</p>
+<pre><code class="language-bash">ssh -T git@github.com
+</code></pre>
+</li>
+</ol>
+<h3 id="verificare-la-chiave-ssh-configurata-in-github" tabindex="-1">Verificare la chiave ssh configurata in GitHub <a class="header-anchor" href="#verificare-la-chiave-ssh-configurata-in-github" aria-hidden="true">🔗</a></h3>
+<p>Per verificare che la chiave ssh installata in locale sia quella inserita in <a href="https://github.com/settings/keys">https://github.com/settings/keys</a><br>
+bisogna confrontare i key fingerprint SHA256:</p>
+<pre><code class="language-bash">$ ssh-keygen -l -f ~/.ssh/id_rsa
+</code></pre>
+</body></html>

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.558" />
+        <title>vim_uso_search_replace</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vim_uso_search_replace" tabindex="-1">vim_uso_search_replace <a class="header-anchor" href="#vim_uso_search_replace" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.558</p>
+<nav class="table-of-contents"><ol><li><a href="#search-and-replace">Search and Replace </a><ol><li><a href="#search">Search </a></li><li><a href="#replace">Replace </a></li><li><a href="#cerca-e-sostituisci-tra-due-marks">Cerca e sostituisci tra due Marks </a></li><li><a href="#cerca-e-sostituisci-con-conferma-da-commandline-(%3A)">Cerca e sostituisci con conferma da commandline (:) </a></li><li><a href="#cerca-e-sostituisci-ottenuto-con-comandi">Cerca e sostituisci ottenuto con comandi </a></li><li><a href="#esempi-di-cerca-e-sostituisci">Esempi di cerca e sostituisci </a></li><li><a href="#ricerche-globali">Ricerche globali </a></li></ol></li><li><a href="#search-and-replace-in-files">Search and Replace in Files </a></li></ol></nav><h1 id="vim-search-%26-replace" tabindex="-1">VIM Search &amp; Replace <a class="header-anchor" href="#vim-search-%26-replace" aria-hidden="true">🔗</a></h1>
+<h2 id="search-and-replace" tabindex="-1">Search and Replace <a class="header-anchor" href="#search-and-replace" aria-hidden="true">🔗</a></h2>
+<h3 id="search" tabindex="-1">Search <a class="header-anchor" href="#search" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://vi.stackexchange.com/questions/15587/find-only-between-marks">https://vi.stackexchange.com/questions/15587/find-only-between-marks</a> find tra due marks</p>
+<pre><code class="language-vim">    /\%&gt;<span class="hljs-string">&#x27;afoo\%&lt;&#x27;</span><span class="hljs-keyword">b</span>
+    :h /\%<span class="hljs-string">&#x27;m
+</span></code></pre>
+</li>
+</ul>
+<pre><code class="language-vim">:h /
+</code></pre>
+<p>Per effettuare la ricerca ignore case:</p>
+<pre><code class="language-vim">:h ic
+:<span class="hljs-keyword">set</span> ic
+</code></pre>
+<p>For basic searching:</p>
+<ul>
+<li><code>/</code>pattern       - search forward for pattern</li>
+<li><code>?</code>pattern       - search backward</li>
+<li><code>n</code>              - repeat forward search</li>
+<li><code>N</code>              - repeat backward</li>
+</ul>
+<p>Some variables you might want to set:</p>
+<ul>
+<li><code>:set ignorecase</code> - case insensitive</li>
+<li><code>:set smartcase</code>  - use case if any caps used</li>
+<li><code>:set incsearch</code>  - show match as search proceeds</li>
+<li><code>:set hlsearch</code>   - search highlighting</li>
+</ul>
+<p>More cool searching tricks:</p>
+<ul>
+<li><code>*</code>                 - search for word currently under cursor</li>
+<li><code>g*</code>                - search for partial word under cursor (repeat with n)</li>
+<li><code>ctrl-o</code>, <code>ctrl-i</code>  - go through jump locations</li>
+<li><code>[I</code>                - show lines with matching word under cursor</li>
+</ul>
+<h3 id="replace" tabindex="-1">Replace <a class="header-anchor" href="#replace" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-vim">:h <span class="hljs-built_in">range</span>
+:h <span class="hljs-keyword">substitute</span>
+
+:<span class="hljs-built_in">range</span> s[ubstitute]/pattern/<span class="hljs-built_in">string</span>/cgiI
+</code></pre>
+<p>Quando il range viene omesso la sostituzione avviene nella riga corrente.
+Per effettuare la ricerca in tutto il file utilizzare <code>%</code> come range e l'opzione global <code>g</code>.</p>
+<p>For each line in the range replace a match of the pattern with the string where:</p>
+<ul>
+<li><code>c</code> Confirm each substitution</li>
+<li><code>g</code> Replace all occurrences in the line (without <code>g</code> - only first).</li>
+<li><code>i</code> Ignore case for the pattern.</li>
+<li><code>I</code> Don't ignore case for the pattern.</li>
+</ul>
+<h3 id="cerca-e-sostituisci-tra-due-marks" tabindex="-1">Cerca e sostituisci tra due Marks <a class="header-anchor" href="#cerca-e-sostituisci-tra-due-marks" aria-hidden="true">🔗</a></h3>
+<p>Supponiamo di aver impostato due marks: <code>ma</code> <code>mb</code> e che vogliamo cercare/sostituire solamente tra questi due marks.</p>
+<pre><code class="language-vim">:<span class="hljs-string">&#x27;a,&#x27;</span>bs/parola/sostituzione/g
+</code></pre>
+<h3 id="cerca-e-sostituisci-con-conferma-da-commandline-(%3A)" tabindex="-1">Cerca e sostituisci con conferma da commandline (<code>:</code>) <a class="header-anchor" href="#cerca-e-sostituisci-con-conferma-da-commandline-(%3A)" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-vim">:%s/prima/dopo/gc
+</code></pre>
+<p>Suppose you want to replace every occurrence of the word &quot;idiot&quot; with the word &quot;manager&quot;. <br>
+But you want the chance to review each change before you do it.</p>
+<p>Execute the command:</p>
+<pre><code class="language-vim">:%s/\&lt;idiot\&gt;/manager/gc
+</code></pre>
+<p><strong>togliendo la <code>c</code> finale viene effettuato il search/replace immediatamente su tutto il file senza conferma</strong></p>
+<p>This command will make the change and pause after each change to give you a chance to confirm it.
+You can enter <code>y</code> to accept the change or <code>n</code> to not accept it.</p>
+<p>The parts of this command are:</p>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Parte</th>
+<th style="text-align:left">Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>:</code></td>
+<td style="text-align:left">Enter command mode</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>%</code></td>
+<td style="text-align:left">Perform this command <strong>on all lines</strong> (<span class="mrby">%</span> is a synomim for the first to last line.)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>s</code></td>
+<td style="text-align:left">The short form of the <code>:substitute</code> command.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>/\&lt;idiot\&gt;/</code></td>
+<td style="text-align:left">This text specifies the text we are looking for wand want. The <code>\&lt;</code> tells Vim to match a word start and the <code>\&gt;</code> tells Vim to match the end of a word.</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>/manager/</code></td>
+<td style="text-align:left">The replacement text</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>gc</code></td>
+<td style="text-align:left">The flags. These are</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>g</code></td>
+<td style="text-align:left">Global -- Change every occurance, not use the first one on each line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>c</code></td>
+<td style="text-align:left">Confirm -- Ask before making each change</td>
+</tr>
+</tbody>
+</table>
+<h3 id="cerca-e-sostituisci-ottenuto-con-comandi" tabindex="-1">Cerca e sostituisci ottenuto con comandi <a class="header-anchor" href="#cerca-e-sostituisci-ottenuto-con-comandi" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><code>change</code> - si usa con un comando di movimento per indicare il range di modifica</li>
+<li><code>ce</code> cambia dalla posizione attuale alla fine della parole corrente</li>
+<li><code>cw</code> cambia dalla posizione attuale all'inizio della parola seguente</li>
+<li><code>c$</code> cambia dalla posizione del cursore al termine della riga</li>
+<li><code>c0</code> cambia dall'inizio della riga alla posizione del cursore</li>
+</ul>
+<ol>
+<li><code>1G</code> Go to the top of the document</li>
+<li><code>/idiot&lt;enter&gt;</code> Find the first occurrence of the word &quot;idiot&quot;</li>
+<li><code>cw</code>manager Change the word (<code>cw</code>) to manager.</li>
+<li><code>n</code> Repeat the last search (find the next idiot.)</li>
+<li><code>.</code> Repeat the last edit (change one word to manager) (If you do not want to change the word, skip this step.)</li>
+</ol>
+<p>Repeat steps 4 and 5 until you have replaced all occurred.</p>
+<h3 id="esempi-di-cerca-e-sostituisci" tabindex="-1">Esempi di cerca e sostituisci <a class="header-anchor" href="#esempi-di-cerca-e-sostituisci" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Comando</th>
+<th style="text-align:left">Descrizione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>:%s/old/new/g</code></td>
+<td style="text-align:left">Replace all occurences of old by new in file</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/old/new/gw</code></td>
+<td style="text-align:left">Replace all occurences with confirmation</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:2,35s/old/new/g</code></td>
+<td style="text-align:left">Replace all occurences between lines 2 and 35</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:5,$s/old/new/g</code></td>
+<td style="text-align:left">Replace all occurences from line 5 to EOF</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/^/hello/g</code></td>
+<td style="text-align:left">Replace the begining of each line by hello</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/$/Harry/g</code></td>
+<td style="text-align:left">Replace the end of each line by Harry</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/onward/forward/gi</code></td>
+<td style="text-align:left">Replace onward by forward, case unsensitive</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/ *$//g</code></td>
+<td style="text-align:left">Delete all white spaces</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:g/string/d</code></td>
+<td style="text-align:left">Delete all lines containing string</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:v/string/d</code></td>
+<td style="text-align:left">Delete all lines containing which didn’t contain string</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:s/Bill/Steve/</code></td>
+<td style="text-align:left">Replace the first occurence of Bill by Steve in current line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:s/Bill/Steve/g</code></td>
+<td style="text-align:left">Replace Bill by Steve in current line</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/Bill/Steve/g</code></td>
+<td style="text-align:left">Replace Bill by Steve in all the file</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/\r//g</code></td>
+<td style="text-align:left">Delete DOS carriage returns (^M)</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/\r/\r/g</code></td>
+<td style="text-align:left">Transform DOS carriage returns in returns</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s#&lt;[^&gt;]\+&gt;##g</code></td>
+<td style="text-align:left">Delete HTML tags but keeps text</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>:%s/^\(.*\)\n\1$/\1/</code></td>
+<td style="text-align:left">Delete lines which appears twice</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+a</code></td>
+<td style="text-align:left">Increment number under the cursor</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>CTRL+x</code></td>
+<td style="text-align:left">Decrement number under cursor</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>ggVGg?</code></td>
+<td style="text-align:left">Change text to Rot13</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ricerche-globali" tabindex="-1">Ricerche globali <a class="header-anchor" href="#ricerche-globali" aria-hidden="true">🔗</a></h3>
+<p>Use <code>:g!</code> (or its synonym <code>:v</code>) to search for all lines that do not contain pattern.</p>
+<pre><code class="language-vim">:g/pattern/
+</code></pre>
+<p>Finds (moves to) the last occurrence of pattern in the file.</p>
+<pre><code class="language-vim">:g/pattern/<span class="hljs-keyword">p</span>
+</code></pre>
+<p>Finds and displays all lines in the file containing pattern.</p>
+<pre><code class="language-vim">:g!/pattern/<span class="hljs-keyword">nu</span>
+</code></pre>
+<p>Finds and displays all lines in the file that don't contain pattern; also displays line number for each line found.</p>
+<pre><code class="language-vim">:<span class="hljs-number">60</span>,<span class="hljs-number">124</span>g/pattern/<span class="hljs-keyword">p</span>
+</code></pre>
+<p>Finds and displays any lines between 60 and 124 containing pattern.</p>
+<p><code>g</code> can also be used for global replacements.</p>
+<p>For example, to search for all lines that begin with WARNING: and change the first word not on those lines to NOT:</p>
+<pre><code class="language-vim">:g/^WARNING:/s/\&lt;not\&gt;/NOT/
+</code></pre>
+<h2 id="search-and-replace-in-files" tabindex="-1">Search and Replace in Files <a class="header-anchor" href="#search-and-replace-in-files" aria-hidden="true">🔗</a></h2>
+<p><a href="https://vim.fandom.com/wiki/Find_in_files_within_Vim">https://vim.fandom.com/wiki/Find_in_files_within_Vim</a></p>
+<ul>
+<li><code>:vim[grep][!] /{pattern}/[g][j] {file} ...</code> - search for pattern in multiple files\</li>
+</ul>
+<p>&quot;lgrep&quot; and &quot;lvimgrep&quot; fill the &quot;location list&quot; which is local to the current window, and can be opened with <code>:lw</code> or <code>:lopen</code></p>
+<pre><code class="language-vim">:lvim /\&lt;\(house\|home\)\&gt;/gj *.txt
+:<span class="hljs-keyword">lw</span>
+</code></pre>
+<ul>
+<li><code>:cn[ext]</code>     - jump to the next match</li>
+<li><code>:cp[revious]</code> - jump to the previous match</li>
+<li><code>:cope[n]</code>     - open a window containing the list of matches</li>
+<li><code>:ccl[ose]</code>    - close the quickfix window</li>
+</ul>
+</body></html>

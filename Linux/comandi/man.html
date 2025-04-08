@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.181" />
+        <title>man</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="man" tabindex="-1">man <a class="header-anchor" href="#man" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.181</p>
+<nav class="table-of-contents"><ol><li><a href="#man-in-italiano">man in italiano </a></li><li><a href="#convertire-un-file-groff-man-in-un-file-di-testo">Convertire un file groff man in un file di testo </a></li><li><a href="#posizione-del-file-nroff-sorgente-della-pagina-di-manuale">Posizione del file nroff sorgente della pagina di manuale </a></li><li><a href="#stampare-il-percorso-di-ricerca-delle-pagine-man">Stampare il percorso di ricerca delle pagine man </a></li><li><a href="#debug-info%2C-utile-per-vedere-dove-si-trova-la-pagina-man">debug info, utile per vedere dove si trova la pagina man </a></li><li><a href="#installazione-pagine-man-stdlibc%2B%2B">Installazione pagine man stdlibc++ </a></li><li><a href="#creating-linux-man-pages">Creating Linux Man Pages </a></li><li><a href="#the-linux-man-page-convention">The Linux Man Page Convention </a></li><li><a href="#creating-a-man-page">Creating a Man Page </a></li><li><a href="#testing-a-man-page">Testing a Man Page </a></li><li><a href="#linux-man-page-locations">Linux Man Page Locations </a></li><li><a href="#tldr">tldr </a></li></ol></nav><h1 id="man-1" tabindex="-1">man <a class="header-anchor" href="#man-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://man.archlinux.org/">https://man.archlinux.org/</a></li>
+</ul>
+<p><code>man -k</code> equivale ad <code>apropos</code></p>
+<pre><code>man [section-num] [command/tool name]
+</code></pre>
+<pre><code class="language-bash">$ man man
+$ man --<span class="hljs-built_in">help</span>
+
+
+$ man -k <span class="hljs-built_in">printf</span>  <span class="hljs-comment"># effettua una ricerca per parola chiave, equivale a apropos</span>
+$ apropos <span class="hljs-built_in">printf</span>
+
+$ man -f <span class="hljs-built_in">printf</span> <span class="hljs-comment"># elenca le sezioni nelle quali è presente il comando, equivale a whatis</span>
+$ whatis <span class="hljs-built_in">printf</span>
+
+$ man 1 <span class="hljs-built_in">printf</span>
+$ man 3 <span class="hljs-built_in">printf</span>
+
+
+$ man pacman | less -p --<span class="hljs-built_in">groups</span> <span class="hljs-comment"># apre man alla prima occorrenza di --groups</span>
+</code></pre>
+<table class="table"><thead>
+<tr>
+<th style="text-align:left">Section</th>
+<th style="text-align:left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">Programmi eseguibili e comandi della shell</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">Chiamate al sistema (funzioni fornite dal kernel)</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">Chiamate alle librerie (funzioni all'interno delle librerie di sistema)</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">File speciali (di solito trovabili in /dev)</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">Formati dei file e convenzioni <a href="http://p.es">p.es</a>. /etc/passwd</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">Giochi</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left">Pacchetti di macro e convenzioni <a href="http://p.es">p.es</a>. man(7), groff(7).</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left">Comandi per l'amministrazione del sistema (solitamente solo per root)</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left">Routine del kernel [Non standard]</td>
+</tr>
+</tbody>
+</table>
+<h2 id="man-in-italiano" tabindex="-1">man in italiano <a class="header-anchor" href="#man-in-italiano" aria-hidden="true">🔗</a></h2>
+<pre><code>man -L it ...
+</code></pre>
+<ol>
+<li></li>
+</ol>
+<pre><code>    /usr/local/man&gt;mkdir man1; cd man1
+    /usr/local/man/man1&gt;for fn in /opt/jdk1.5.0_04/man/man1/*; do ln -s $fn; done
+    (/opt&gt; ln -s /opt/j2sdk1.4.2_06/man/man1 /usr/local/man/man1)
+</code></pre>
+<ol start="2">
+<li>
+<pre><code> /opt&gt; mandb
+</code></pre>
+</li>
+</ol>
+<p>mandb serve a ricostruire l'indice del man, <code>/usr/local/man</code> è una delle directory presenti nel path del man(comando manpath, <code>/etc/manpath.config</code>)</p>
+<h2 id="convertire-un-file-groff-man-in-un-file-di-testo" tabindex="-1">Convertire un file groff man in un file di testo <a class="header-anchor" href="#convertire-un-file-groff-man-in-un-file-di-testo" aria-hidden="true">🔗</a></h2>
+<p>le pagine man sono in formato nroff</p>
+<pre><code class="language-bash">groff -mandoc screen.1 -T html &gt; screen.html
+groff -mandoc screen.1 -T ascii &gt; screen.txt
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">mansutxt</span></span>()
+{
+man --encoding=ascii <span class="hljs-variable">$1</span> &gt; file.txt
+lessfile.txt
+<span class="hljs-built_in">rm</span> file.txt
+}
+
+<span class="hljs-keyword">function</span> <span class="hljs-function"><span class="hljs-title">mansupdf</span></span>()
+{
+man -t <span class="hljs-variable">$1</span> &gt; file.ps
+ps2pdf file.ps &amp;&amp; <span class="hljs-built_in">rm</span> -f file.ps
+evince file.pdf
+<span class="hljs-built_in">rm</span> file.txt
+}
+
+man bar|a2ps -d
+</code></pre>
+<h2 id="posizione-del-file-nroff-sorgente-della-pagina-di-manuale" tabindex="-1">Posizione del file nroff sorgente della pagina di manuale <a class="header-anchor" href="#posizione-del-file-nroff-sorgente-della-pagina-di-manuale" aria-hidden="true">🔗</a></h2>
+<pre><code>man -w mcs
+</code></pre>
+<h2 id="stampare-il-percorso-di-ricerca-delle-pagine-man" tabindex="-1">Stampare il percorso di ricerca delle pagine man <a class="header-anchor" href="#stampare-il-percorso-di-ricerca-delle-pagine-man" aria-hidden="true">🔗</a></h2>
+<pre><code>man -d aria2c
+</code></pre>
+<h2 id="debug-info%2C-utile-per-vedere-dove-si-trova-la-pagina-man" tabindex="-1">debug info, utile per vedere dove si trova la pagina man <a class="header-anchor" href="#debug-info%2C-utile-per-vedere-dove-si-trova-la-pagina-man" aria-hidden="true">🔗</a></h2>
+<pre><code>manpath
+</code></pre>
+<p>utilizzando:</p>
+<pre><code>manpath -d
+</code></pre>
+<p>ho capito perche' riesco a vedere il man dell'installazione compilata di mono sotto <code>/opt/mono/share/man</code>,
+ci riesco perche ho inserito nel PATH la directory <code>/opt/mono/bin</code>:</p>
+<pre><code>path directory /opt/mono/bin is not in the config file
+but does have a ../man, man, ../share/man, or share/man subdirectory
+adding /opt/mono/share/man to manpath
+</code></pre>
+<p>Ossia il percorso di ricerca di man non e' solo quello configurato in <code>/etc/manpath.config</code>
+man cerca anche nel PATH le directory che abbiano corrispondenti directory <code>../share/man</code> e le
+aggiunge se le trova</p>
+<h2 id="installazione-pagine-man-stdlibc%2B%2B" tabindex="-1">Installazione pagine man stdlibc++ <a class="header-anchor" href="#installazione-pagine-man-stdlibc%2B%2B" aria-hidden="true">🔗</a></h2>
+<pre><code>apt-get install manpages-dev manpages-posix-dev libstdc++6-4.3-doc
+</code></pre>
+<p><a href="ftp://gcc.gnu.org/pub/gcc/libstdc++/doxygen/libstdc++-man.4.3.0.tar.bz2">ftp://gcc.gnu.org/pub/gcc/libstdc++/doxygen/libstdc++-man.4.3.0.tar.bz2</a></p>
+<pre><code>tar xfj libstdc++-man.4.3.0.tar.bz2
+cd libstdc++-man.4.3.20080326
+mv man3 /usr/local/man
+</code></pre>
+<p>a questo punto funzionerà:</p>
+<pre><code>man std::vector
+man std::string
+</code></pre>
+<h2 id="creating-linux-man-pages" tabindex="-1">Creating Linux Man Pages <a class="header-anchor" href="#creating-linux-man-pages" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://computerprogramming.suite101.com/article.cfm/creating_linux_man_pages">http://computerprogramming.suite101.com/article.cfm/creating_linux_man_pages</a></li>
+<li><a href="http://www.fnal.gov/docs/products/ups/ReferenceManual/html/manpages.html">http://www.fnal.gov/docs/products/ups/ReferenceManual/html/manpages.html</a></li>
+<li><a href="http://www.linuxjournal.com/article/1158">http://www.linuxjournal.com/article/1158</a></li>
+</ul>
+<p>Forty years ago the first port of call for any Unix user having problems with a program was the Man command, and today the first port of call for any Linux user having problems with a program is still the man command; and that's no wonder - it enables a vast amount of information to be available for both program developers and program users.
+On top of which, it's very easy for developers to add their own documentation - as this article will show.</p>
+<h2 id="the-linux-man-page-convention" tabindex="-1">The Linux Man Page Convention <a class="header-anchor" href="#the-linux-man-page-convention" aria-hidden="true">🔗</a></h2>
+<p>Man pages generally follow the same convention:</p>
+<ul>
+<li>Name</li>
+<li>Synopsis</li>
+<li>Configuration</li>
+<li>Description</li>
+<li>Options</li>
+<li>Exit Status</li>
+<li>Return Value</li>
+<li>Errors</li>
+<li>Environment</li>
+<li>Files</li>
+<li>Versions</li>
+<li>Conforming to</li>
+<li>Notes</li>
+<li>Bugs</li>
+<li>Example</li>
+<li>See also</li>
+</ul>
+<p>Although Man pages should follow the convention not all of the sections are mandatory, for example:</p>
+<ul>
+<li>the configuration section is usually only used when documenting devices</li>
+<li>options and the exit status are only needed when discussing commands (both for ordinary and root users)</li>
+<li>return values, errors and versions would only be expected for system calls and library functions (in C programs, for instance)</li>
+</ul>
+<h2 id="creating-a-man-page" tabindex="-1">Creating a Man Page <a class="header-anchor" href="#creating-a-man-page" aria-hidden="true">🔗</a></h2>
+<p>A developer does not need any special software to create a Man page - just a simple text editor and some formatting tags:</p>
+<ul>
+<li><code>.TH</code> - the man page title</li>
+<li><code>.SH</code> - section headers</li>
+<li><code>.SS</code> - sub-section headers</li>
+<li><code>.PP</code> - new paragraph</li>
+<li><code>.B</code> - bold text</li>
+<li><code>.I</code> - text in italics</li>
+</ul>
+<p>With these basic tags a Man page can be written quite quickly:</p>
+<pre><code>.&quot; Set the title
+.TH Yahoo Finance
+.&quot; Add a header for the name section
+.SH NAME
+Yahoo Finance Stock Quotes
+.SH SYNOPSIS
+wget -O [
+.&quot; put the key words into italics
+.I output file
+] [
+.I url
+] [
+.I company symbols
+] [
+.I fields
+]
+.SH DESCRIPTION
+Download Yahoo Finance stock quotes directly into a CSV file.
+.SH OPTIONS
+.&quot; Add a sub-section
+.SS FIELDS
+.&quot; use bold for the field values
+.B s
+the company symbol
+.PP
+.B l1
+latest stock quote
+.PP
+.B c1
+change in stock value
+.PP
+.B d1
+date of the stock quote
+.SH FILES
+http://download.finance.yahoo.com/d/quotes.csv
+.SH EXAMPLE
+.&quot;Add some formatted text
+.nf
+wget -O shares.csv \\
+http://download.finance.yahoo.com/d/quotes.csv?s=RHT,MSFT,NOVL\\
+&amp;f=sl1c1d1&amp;e=.csv
+.&quot; End the formatted text
+.fi
+</code></pre>
+<h2 id="testing-a-man-page" tabindex="-1">Testing a Man Page <a class="header-anchor" href="#testing-a-man-page" aria-hidden="true">🔗</a></h2>
+<p>There are two, very simple, ways to test this new man page:</p>
+<ul>
+<li>use the nroff command to view the formatted output, for example:
+nroff -man yahoo_finance.txt</li>
+<li>copy the text document to the correct area in the system and use the man command to view the result</li>
+</ul>
+<h2 id="linux-man-page-locations" tabindex="-1">Linux Man Page Locations <a class="header-anchor" href="#linux-man-page-locations" aria-hidden="true">🔗</a></h2>
+<p>The directories for storing the man pages will be found in one of two areas:</p>
+<ul>
+<li><code>/usr/share/man</code></li>
+<li><code>/usr/local/man</code></li>
+</ul>
+<p>In the two directories there will be one or more sub-directories, each one named man with a number or a letter for a suffix (for example man1); each of these sub-directories is for a particular type of man page, which may vary from system to system, but typically they are:</p>
+<ul>
+<li>0 - header files</li>
+<li>1 - standard commands</li>
+<li>2 - Linux kernel system calls</li>
+<li>3 - standard c library functions</li>
+<li>4 - special devices</li>
+<li>5 - file formats and conventions</li>
+<li>6 - games and toys</li>
+<li>7 - miscellaneous , for example standards (for example SQL and ISO)</li>
+<li>8 - root commands</li>
+<li>9 - kernel details</li>
+<li>n - Tcl/Tk functionality</li>
+</ul>
+<p>Sometimes a letter p may be used as an additional prefix (for example man3p) in which case the sub-directory will contain POSIX versions of the man pages.</p>
+<p>Not only must the file be placed in the correct directory but it must also be given the correct suffix,
+for example all files placed in the man1 directory must have a suffix of 1:</p>
+<pre><code>sudo cp yahoo.txt /usr/local/man/man1/yahoo.1
+</code></pre>
+<p>The new Man page can now be called from the command line just like any other Man page:
+man yahoo</p>
+<h2 id="tldr" tabindex="-1">tldr <a class="header-anchor" href="#tldr" aria-hidden="true">🔗</a></h2>
+<p><a href="https://github.com/tldr-pages/tldr">https://github.com/tldr-pages/tldr</a></p>
+</body></html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.222" />
+        <title>cgroups</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="cgroups" tabindex="-1">cgroups <a class="header-anchor" href="#cgroups" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.222</p>
+<nav class="table-of-contents"><ol><li><a href="#identify-the-cgroup-version-on-linux">Identify the cgroup version on Linux </a></li><li><a href="#enable-cgroup-v2">Enable cgroup v2 </a></li><li><a href="#problema%3A-compose-up---systemd-non-parte-e-d%C3%A0-errore">PROBLEMA: compose up - systemd non parte e dà errore </a><ol><li><a href="#soluzione">SOLUZIONE </a><ol><li><a href="#parte-1---abilitare-cgroups-v2-nell'host">Parte 1 - Abilitare cgroups v2 nell&#39;host </a></li><li><a href="#parte-2---parametri-di-avvio-di-docker">Parte 2 - parametri di avvio di Docker </a></li></ol></li></ol></li></ol></nav><h1 id="cgroups-1" tabindex="-1">cgroups <a class="header-anchor" href="#cgroups-1" aria-hidden="true">🔗</a></h1>
+<p><a href="https://wiki.archlinux.org/title/cgroups">https://wiki.archlinux.org/title/cgroups</a></p>
+<p>Control groups (or cgroups as they are commonly known) are a feature provided by the Linux kernel to manage, restrict, and audit groups of processes.</p>
+<h2 id="identify-the-cgroup-version-on-linux" tabindex="-1">Identify the cgroup version on Linux <a class="header-anchor" href="#identify-the-cgroup-version-on-linux" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://kubernetes.io/docs/concepts/architecture/cgroups/#check-cgroup-version">https://kubernetes.io/docs/concepts/architecture/cgroups/#check-cgroup-version</a></li>
+<li><a href="https://stackoverflow.com/questions/69575241/test-what-cgroup-version-a-docker-container-is-running-with">https://stackoverflow.com/questions/69575241/test-what-cgroup-version-a-docker-container-is-running-with</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">stat</span> -<span class="hljs-built_in">fc</span> %T /sys/fs/cgroup/
+  cgroup2fs per cgroup v2
+  tmpfs     per cgroup v1
+$ docker info | grep <span class="hljs-string">&#x27;Cgroup Version&#x27;</span>
+
+<span class="hljs-comment"># Per v1:</span>
+$ <span class="hljs-built_in">cat</span> /sys/fs/cgroup/cgroup.controllers
+<span class="hljs-built_in">cat</span>: /sys/fs/cgroup/cgroup.controllers: File o directory non esistente
+</code></pre>
+<ul>
+<li>For <code>cgroup v2</code>, the output is <code>cgroup2fs</code>.</li>
+<li>For <code>cgroup v1</code>, the output is <code>tmpfs</code>.</li>
+</ul>
+<h2 id="enable-cgroup-v2" tabindex="-1">Enable cgroup v2 <a class="header-anchor" href="#enable-cgroup-v2" aria-hidden="true">🔗</a></h2>
+<p><a href="https://sleeplessbeastie.eu/2021/09/10/how-to-enable-control-group-v2/">https://sleeplessbeastie.eu/2021/09/10/how-to-enable-control-group-v2/</a></p>
+<p>Se abbiamo abilitato cgroups v1 risulterà:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> /sys/fs/cgroup/cgroup.controllers
+<span class="hljs-built_in">cat</span>: /sys/fs/cgroup/cgroup.controllers: No such file or directory
+$ <span class="hljs-built_in">stat</span> -c %T -f /sys/fs/cgroup
+tmpfs
+</code></pre>
+<p>Per abilitare cgroup v2:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># To enable Control Group v2 alter boot options to append systemd.unified_cgroup_hierarchy=1 parameter.</span>
+$ <span class="hljs-built_in">cat</span> /etc/default/grub | grep GRUB_CMDLINE_LINUX=
+GRUB_CMDLINE_LINUX=<span class="hljs-string">&quot;&quot;</span>
+
+$ <span class="hljs-built_in">sudo</span> sed -i /GRUB_CMDLINE_LINUX=/<span class="hljs-string">&#x27;c\GRUB_CMDLINE_LINUX=&quot;systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all&quot;&#x27;</span> /etc/default/grub
+<span class="hljs-comment"># In alternativa:</span>
+$ <span class="hljs-built_in">sudo</span> sed -i -e <span class="hljs-string">&#x27;s/^GRUB_CMDLINE_LINUX=&quot;&quot;/GRUB_CMDLINE_LINUX=&quot;systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all&quot;/&#x27;</span> /etc/default/grub
+
+$ <span class="hljs-built_in">sudo</span> update-grub
+$ <span class="hljs-built_in">sudo</span> reboot
+<span class="hljs-comment"># Verifica che sia abilitato v2</span>
+$ <span class="hljs-built_in">stat</span> -<span class="hljs-built_in">fc</span> %T /sys/fs/cgroup
+cgroup2fs
+$ <span class="hljs-built_in">cat</span> /sys/fs/cgroup/cgroup.controllers
+cpuset cpu io memory hugetlb pids rdma misc
+</code></pre>
+<h2 id="problema%3A-compose-up---systemd-non-parte-e-d%C3%A0-errore" tabindex="-1">PROBLEMA: compose up - systemd non parte e dà errore <a class="header-anchor" href="#problema%3A-compose-up---systemd-non-parte-e-d%C3%A0-errore" aria-hidden="true">🔗</a></h2>
+<p><a href="https://gist.github.com/pinkeen/bba0a6790fec96d6c8de84bd824ad933">https://gist.github.com/pinkeen/bba0a6790fec96d6c8de84bd824ad933</a> Run a systemd container using cgroupv2
+<a href="https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva/1054414#1054414">https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva/1054414#1054414</a>
+<a href="https://github.com/compose-spec/compose-spec/issues/148">https://github.com/compose-spec/compose-spec/issues/148</a> Missing composer specification equivalent for --cgroupns=[host|private]
+<a href="https://github.com/compose-spec/compose-spec/pull/292">https://github.com/compose-spec/compose-spec/pull/292</a> introduce support for cgroup=host|private</p>
+<pre><code class="language-bash">$ docker compose up
+  manjaro_ansible  | Failed to create /init.scope control group: Read-only file system
+  manjaro_ansible  | Failed to allocate manager object: Read-only file system
+  manjaro_ansible  | [!!!!!!] Failed to allocate manager object.
+  manjaro_ansible  | Exiting PID 1...
+</code></pre>
+<p>You can tell systemd to use cgroupv2 via kernel cmdline parameter:</p>
+<p><code>systemd.unified_cgroup_hierarchy=1</code></p>
+<p>It might also be needed to explictly disable hybrid cgroupv1 support to avoid problems using: <code>systemd.legacy_systemd_cgroup_controller=0</code>
+Or completely disable cgroupv1 in the kernel with: <code>cgroup_no_v1=all</code></p>
+<p>You can view your host systemd environment with:</p>
+<pre><code class="language-bash">$ systemctl show -all | grep default-hierarchy
+$ ps -p 1 -o <span class="hljs-built_in">comm</span>=
+</code></pre>
+<p>Per vedere l'attuale configurazione dei cgroup</p>
+<pre><code class="language-bash">$ grep GRUB_CMDLINE_LINUX /etc/default/grub
+$ <span class="hljs-built_in">stat</span> -<span class="hljs-built_in">fc</span> %T /sys/fs/cgroup/
+  cgroup2fs per cgroup v2
+  tmpfs     per cgroup v1
+$ docker info | grep <span class="hljs-string">&#x27;Cgroup Version&#x27;</span>
+</code></pre>
+<h3 id="soluzione" tabindex="-1">SOLUZIONE <a class="header-anchor" href="#soluzione" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/GRUB#Additional_arguments">https://wiki.archlinux.org/title/GRUB#Additional_arguments</a></li>
+<li><a href="https://dangibbs.uk/blog/running-systemd-docker-containers-archlinux/">https://dangibbs.uk/blog/running-systemd-docker-containers-archlinux/</a></li>
+</ul>
+<h4 id="parte-1---abilitare-cgroups-v2-nell'host" tabindex="-1">Parte 1 - Abilitare cgroups v2 nell'host <a class="header-anchor" href="#parte-1---abilitare-cgroups-v2-nell'host" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> sed -i /GRUB_CMDLINE_LINUX=/<span class="hljs-string">&#x27;c\GRUB_CMDLINE_LINUX=&quot;systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all&quot;&#x27;</span> /etc/default/grub
+
+<span class="hljs-built_in">sudo</span> code --no-sandbox --user-data-dir=/root/.config/Code /etc/default/grub
+  GRUB_CMDLINE_LINUX=<span class="hljs-string">&quot;systemd.unified_cgroup_hierarchy=1 cgroup_no_v1=all&quot;</span>
+
+<span class="hljs-built_in">sudo</span> update-grub
+<span class="hljs-comment"># oppure: sudo grub-mkconfig -o /boot/grub/grub.cfg</span>
+$ reboot
+</code></pre>
+<p><code>update-grub</code> non fà altro che richiamare <code>grub-mkconfig</code> piu qualche fix:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> /usr/bin/update-grub
+  <span class="hljs-comment">#! /bin/sh</span>
+  <span class="hljs-built_in">set</span> -e
+  grub-mkconfig -o /boot/grub/grub.cfg <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>
+
+  <span class="hljs-comment"># workaround for https://git.savannah.gnu.org/cgit/grub.git/commit/?id=3cf2e848bc03c44d30bb87e583d12efe7e7ccf75</span>
+  <span class="hljs-comment"># if grub is not updated in MBR/EFI dashes still won&#x27;t work, hence we remove them</span>
+  sed -i -e <span class="hljs-string">&#x27;/cryptomount -u/ {s/-//g;s/ u/ -u/g}&#x27;</span> /boot/grub/grub.cfg
+</code></pre>
+<h4 id="parte-2---parametri-di-avvio-di-docker" tabindex="-1">Parte 2 - parametri di avvio di Docker <a class="header-anchor" href="#parte-2---parametri-di-avvio-di-docker" aria-hidden="true">🔗</a></h4>
+<ul>
+<li>
+<p><a href="https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva/1054414#1054414">https://serverfault.com/questions/1053187/systemd-fails-to-run-in-a-docker-container-when-using-cgroupv2-cgroupns-priva/1054414#1054414</a></p>
+<p>Note: you MUST use Docker 20.10 or above, and your system enabled cgroupv2 (check if /sys/fs/cgroup/cgroup.controllers) exists.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#cap_add-cap_drop">https://docs.docker.com/compose/compose-file/compose-file-v3/#cap_add-cap_drop</a></p>
+<pre><code class="language-bash">man 7 capabilities
+</code></pre>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#security_opt">https://docs.docker.com/compose/compose-file/compose-file-v3/#security_opt</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/compose-file-v3/#cgroup_parent">https://docs.docker.com/compose/compose-file/compose-file-v3/#cgroup_parent</a></p>
+</li>
+<li>
+<p><a href="https://github.com/compose-spec/compose-spec/issues/148">https://github.com/compose-spec/compose-spec/issues/148</a> cgroupns</p>
+</li>
+</ul>
+<pre><code class="language-yml"><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">manjaro_ansible:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">manjaro_ansible</span>
+    <span class="hljs-attr">container_name:</span> <span class="hljs-string">manjaro_ansible</span>
+    <span class="hljs-attr">build:</span>
+      <span class="hljs-attr">context:</span> <span class="hljs-string">.</span>
+      <span class="hljs-attr">args:</span>                               <span class="hljs-comment"># Parametri Build-Time non registrati nell&#x27;immagine come avviene per gli env</span>
+        <span class="hljs-attr">USER_ADMIN:</span> <span class="hljs-string">&quot;${USER}&quot;</span>
+        <span class="hljs-attr">USER_PWD:</span> <span class="hljs-string">cdp</span>
+    <span class="hljs-attr">stdin_open:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">tty:</span> <span class="hljs-literal">true</span>
+    <span class="hljs-attr">ports:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;2222:22&quot;</span>                         <span class="hljs-comment"># HOST:CONTAINER SSHD La porta 22 del container viene esposta all&#x27;esterno come porta 2222</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">&quot;7681:7681&quot;</span>                       <span class="hljs-comment"># HOST:CONTAINER TTYD</span>
+    <span class="hljs-attr">restart:</span> <span class="hljs-string">&quot;no&quot;</span>
+    <span class="hljs-attr">cgroup:</span> <span class="hljs-string">private</span>                       <span class="hljs-comment"># per Systemd</span>
+    <span class="hljs-attr">cgroup_parent:</span> <span class="hljs-string">docker.slice</span>           <span class="hljs-comment"># per Systemd</span>
+    <span class="hljs-attr">privileged:</span> <span class="hljs-literal">true</span>                      <span class="hljs-comment"># per Systemd</span>
+    <span class="hljs-attr">cap_add:</span>                              <span class="hljs-comment"># per Systemd</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">SYS_ADMIN</span>
+    <span class="hljs-attr">security_opt:</span>                         <span class="hljs-comment"># per Systemd</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">seccomp=unconfined</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/opt/backup:/opt/backup</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">.:/opt/ansible_playbook</span>
+      <span class="hljs-comment"># - /var/lib/mysql:/var/lib/mysql</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/tmp/.X11-unix:/tmp/.X11-unix</span>     <span class="hljs-comment"># X Server</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/sys/fs/cgroup:/sys/fs/cgroup:rw</span>  <span class="hljs-comment"># Per systemd</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">VERSION=1.0.0</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">DISPLAY</span>                           <span class="hljs-comment"># X Server</span>
+                                          <span class="hljs-comment"># In questa forma il valore viene preso dall&#x27;env della shell che lancia docker compose</span>
+    <span class="hljs-attr">tmpfs:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/tmp</span>                              <span class="hljs-comment"># Per systemd</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/run</span>                              <span class="hljs-comment"># Per systemd</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/run/lock</span>                         <span class="hljs-comment"># Per systemd</span>
+<span class="hljs-string">...</span>
+</code></pre>
+</body></html>

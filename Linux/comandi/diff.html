@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.158" />
+        <title>diff</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="diff" tabindex="-1">diff <a class="header-anchor" href="#diff" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.158</p>
+<nav class="table-of-contents"><ol><li><a href="#confrontare-file-con-nomi-uguali-in-directory-diverse">Confrontare file con nomi uguali in directory diverse </a></li><li><a href="#unified-diff-format">Unified diff format </a></li><li><a href="#patch">patch </a></li></ol></nav><h1 id="diff-1" tabindex="-1">diff <a class="header-anchor" href="#diff-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://man.archlinux.org/man/diff.1">https://man.archlinux.org/man/diff.1</a></p>
+<p>-i, --ignore-case ignore case differences in file contents
+-E, --ignore-tab-expansion ignore changes due to tab expansion
+-b, --ignore-space-change ignore changes in the amount of white space
+-w, --ignore-all-space ignore all white space
+-B, --ignore-blank-lines ignore changes where lines are all blank
+-y, --side-by-side output in two columns</p>
+</li>
+</ul>
+<h2 id="confrontare-file-con-nomi-uguali-in-directory-diverse" tabindex="-1">Confrontare file con nomi uguali in directory diverse <a class="header-anchor" href="#confrontare-file-con-nomi-uguali-in-directory-diverse" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ diff -qr dir_one dir_two | <span class="hljs-built_in">sort</span>
+</code></pre>
+<h2 id="unified-diff-format" tabindex="-1">Unified diff format <a class="header-anchor" href="#unified-diff-format" aria-hidden="true">🔗</a></h2>
+<pre><code>diff -u
+</code></pre>
+<p>The header lines look like this:</p>
+<pre><code>indicator ' ' filename '\t' date ' ' time ' ' timezone
+</code></pre>
+<p>where:</p>
+<ul>
+<li>indicator is <code>---</code> for the old file and <code>+++</code> for the new</li>
+<li><code>date</code> has the form <code>YYYY-MM-DD</code></li>
+<li><code>time</code> has the form <code>hh:mm:ss.nnnnnnnnn</code> on a 24-hour clock</li>
+<li><code>timezone</code> is has the form <code>('+'|'-') hhmm</code> where <code>hhmm</code> is hours and minutes east (if the sign is <code>+</code>) or west (if the sign is <code>-</code>) of GMT/UTC</li>
+</ul>
+<p>Each chunk starts with a line that looks like this:</p>
+<pre><code>'@@ -' range ' +' range ' @@'
+</code></pre>
+<p>where range is either one unsigned decimal number or two separated by a comma.
+The <strong>first number</strong> is the <strong>start line of the chunk</strong> in the old or new file.
+The <strong>second number</strong> is <strong>chunk size</strong> in that file; it and the comma are omitted if the chunk size is 1.
+(Email from a reader suggests that this omission is optional and may be phased out.)
+If the chunk size is 0, the first number is one lower than one would expect
+(it is the line number after which the chunk should be inserted or deleted; in all other cases it gives the first line number or the replaced range of lines).</p>
+<p>A chunk then continues with lines starting with ' ' (<strong>common line</strong>), <code>-</code> (only in <strong>old file</strong>), or <code>+</code> (only in <strong>new file</strong>).
+If the last line of a file doesn't end in a newline character, it is displayed with a newline characer,
+and the following line in the chunk has the literal text (starting in the first column):</p>
+<pre><code>'\ No newline at end of file'
+</code></pre>
+<h2 id="patch" tabindex="-1">patch <a class="header-anchor" href="#patch" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://man.archlinux.org/man/patch.1">https://man.archlinux.org/man/patch.1</a></li>
+<li><a href="https://opensource.com/article/21/11/linux-diff-patch">https://opensource.com/article/21/11/linux-diff-patch</a></li>
+</ul>
+<p><a href="http://tea.md">tea.md</a></p>
+<pre><code class="language-md">Boil water.
+Warm the teapot.
+Add tea and water to the teapot.
+Place a tea cosy over the teapot.
+Steep for 6 minutes.
+Pour tea into cup.
+Add milk.
+</code></pre>
+<p><a href="http://tea-revision.md">tea-revision.md</a></p>
+<pre><code class="language-md">Warm a teapot in the proving drawer of your oven.
+Boil water.
+Add tea leaves to a tea strainer.
+Add strainer and water to teapot.
+Steep for 6 minutes. Keep it warm with a tea cosy.
+Pour tea into cup.
+Optionally, add warm milk.
+</code></pre>
+<pre><code class="language-bash">$ diff --unified tea.md tea-revised.md
+--- tea.md      2021-11-13 10:26:25.082110219 +1300
++++ tea-revised.md      2021-11-13 10:26:32.049110664 +1300
+@@ -1,7 +1,7 @@
++Warm a teapot <span class="hljs-keyword">in</span> the proving drawer of your oven.
+ Boil water.
+-Warm the teapot.
+-Add tea and water to the teapot.
+-Place a tea cosy over the teapot.
+-Steep <span class="hljs-keyword">for</span> 6 minutes.
++Add tea leaves to a tea strainer.
++Add strainer and water to teapot.
++Steep <span class="hljs-keyword">for</span> 6 minutes. Keep it warm with a tea cosy.
+ Pour tea into cup.
+-Add milk.
++Optionally, add warm milk.
+</code></pre>
+<pre><code class="language-bash">$ diff -u tea.md tea-revised.md &gt; tea.patch
+
+$ patch tea.md tea.patch
+</code></pre>
+</body></html>

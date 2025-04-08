@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.856" />
+        <title>parallel</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="parallel" tabindex="-1">parallel <a class="header-anchor" href="#parallel" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.856</p>
+<nav class="table-of-contents"><ol><li><a href="#running-shell-commands-in-parallel%2C-via-gnu-parallel">Running shell commands in parallel, via GNU Parallel </a><ol><li><a href="#using-bash-built-in-commands">Using Bash built-in commands </a><ol><li><a href="#conclusion">Conclusion </a></li></ol></li><li><a href="#enter-the-stage%3A-gnu-parallel">Enter the stage: GNU Parallel </a><ol><li><a href="#important-to-know%3A-cpu-count%2C-from-a-linux-perspective">Important to know: CPU count, from a Linux perspective </a></li><li><a href="#base-example%3A-untarring-multiple-archives-in-parallel">Base example: untarring multiple archives in parallel </a></li><li><a href="#using-positional-parameters">Using positional parameters </a></li><li><a href="#running-multiple-commands-from-a-file">Running multiple commands from a file </a></li><li><a href="#escaping-strings-in-bash">Escaping strings in Bash </a></li><li><a href="#sending-the-content-of-a-file-to-a-process">Sending the content of a file to a process </a></li><li><a href="#%24xdg_runtime_dir">$XDG_RUNTIME_DIR </a></li></ol></li></ol></li></ol></nav><h1 id="esecuzione-di-processi-in-parallelo-in-bash" tabindex="-1">Esecuzione di processi in parallelo in bash <a class="header-anchor" href="#esecuzione-di-processi-in-parallelo-in-bash" aria-hidden="true">🔗</a></h1>
+<p><a href="https://saveriomiroddi.github.io/Running-shell-commands-in-parallel-via-gnu-parallel/">https://saveriomiroddi.github.io/Running-shell-commands-in-parallel-via-gnu-parallel/</a></p>
+<pre><code class="language-bash">    apt install parallel
+</code></pre>
+<h2 id="running-shell-commands-in-parallel%2C-via-gnu-parallel" tabindex="-1">Running shell commands in parallel, via GNU Parallel <a class="header-anchor" href="#running-shell-commands-in-parallel%2C-via-gnu-parallel" aria-hidden="true">🔗</a></h2>
+<p>Sometimes, either in scripts or direct commands, there is a series of repetitive, similar, commands, which could be executed in parallel.</p>
+<p>Bash offers means for very basic parallelization (&amp; and wait), however, they’re not very practical for generic solutions.</p>
+<p>In this article, I’ll explain how to use GNU Parallel, which makes parallelization trivial, and, as usual, introduce some other useful shell concepts</p>
+<h3 id="using-bash-built-in-commands" tabindex="-1">Using Bash built-in commands <a class="header-anchor" href="#using-bash-built-in-commands" aria-hidden="true">🔗</a></h3>
+<p>Bash allows commands to be run in the background, by appending <code>&amp;</code> to the end of the command:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sleep</span> 60 &amp;
+$ <span class="hljs-built_in">sleep</span> 60 &amp;
+$ <span class="hljs-built_in">sleep</span> 60 &amp;
+</code></pre>
+<p>The above command will launch three sleeping processes in the background. We can observer them via jobs:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">jobs</span>
+[1]   Running                 <span class="hljs-built_in">sleep</span> 60 &amp;
+[2]-  Running                 <span class="hljs-built_in">sleep</span> 60 &amp;
+[3]+  Running                 <span class="hljs-built_in">sleep</span> 60 &amp;
+</code></pre>
+<p>There are special symbols:</p>
+<ul>
+<li><code>+</code>: default job (to whom the commands <code>fg</code> and <code>bg</code> apply to)</li>
+<li><code>-</code>: job that becomes the new default job in case the current one terminates</li>
+</ul>
+<p>They are not relevant to this context, but it’s always good to know 😉</p>
+<p>In the context of parallelization, what we typically need is a mean to wait on all commands to complete. In Bash, we accomplish this via <code>wait</code>.</p>
+<p>In the simplest form, without any parameters, wait waits for all the commands to complete:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">wait</span>
+[1]   Done                    <span class="hljs-built_in">sleep</span> 60
+</code></pre>
+<p>As you see, when the queue is consumed, the last job is printed.</p>
+<p>The <code>&amp;</code> operator makes it relatively easy to process value lists, for example, filenames.</p>
+<p>Let’s say you want to compress the WAV files from a CD you’ve ripped:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> f <span class="hljs-keyword">in</span> *.wav; <span class="hljs-keyword">do</span>
+  <span class="hljs-comment"># `${f%.wav}`: strip the `.wav` suffix from $f.</span>
+  <span class="hljs-comment">#</span>
+  ffmpeg -i <span class="hljs-string">&quot;<span class="hljs-variable">$f</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${f%.wav}</span>.m4a&quot;</span> &amp;
+<span class="hljs-keyword">done</span>
+<span class="hljs-built_in">wait</span>
+</code></pre>
+<p>That’s pretty much it!</p>
+<h4 id="conclusion" tabindex="-1">Conclusion <a class="header-anchor" href="#conclusion" aria-hidden="true">🔗</a></h4>
+<p>The <code>&amp;/wait</code> solution actually works nicely. However, there are two problems:</p>
+<ul>
+<li>there is no built-in control over the amount of processes run;</li>
+<li>when using a list of values (e.g. filenames as in the example above), we could do with a more compact syntax.</li>
+</ul>
+<p>This is where GNU Parallel comes into play 😉</p>
+<h3 id="enter-the-stage%3A-gnu-parallel" tabindex="-1">Enter the stage: GNU Parallel <a class="header-anchor" href="#enter-the-stage%3A-gnu-parallel" aria-hidden="true">🔗</a></h3>
+<p>GNU Parallel works, in the base form, with a trivial syntax: it receives the list of values/command via stdin, and executes them via a queue size equal to the number of “CPU”.</p>
+<h4 id="important-to-know%3A-cpu-count%2C-from-a-linux-perspective" tabindex="-1">Important to know: CPU count, from a Linux perspective <a class="header-anchor" href="#important-to-know%3A-cpu-count%2C-from-a-linux-perspective" aria-hidden="true">🔗</a></h4>
+<p>A catch that it’s important to know, and this is a general Linux concept, is that with CPU, Linux generally intends the minimal processing unit available.</p>
+<p>A part of the CPUs nowadays (typically, but not necessarily, the midrange/high-end) employ Simultaneous multithreading, whose a simplistic definition is that it “allows two threads to run in parallel on a single core”.</p>
+<p>Therefore, on the machine I’m running:</p>
+<pre><code class="language-bash">$ lscpu
+CPU(s):              16
+Thread(s) per core:  2
+Core(s) per socket:  8
+Model name:          AMD Ryzen 7 3800X 8-Core Processor
+</code></pre>
+<p>Linux lists 16 CPUs, as a result of 8 core x 2 threads.</p>
+<p>Since the cores are still 8 (again, this is a simplistic view), some tasks benefit from SMT, but some don’t.</p>
+<p><strong>Parallel will, by default, use all the threads available</strong>, so keep it in mind if something else is running in the system.</p>
+<p>(Interestingly, the manual says run one job per CPU core on each machine, which is not technically correct.)</p>
+<h4 id="base-example%3A-untarring-multiple-archives-in-parallel" tabindex="-1">Base example: untarring multiple archives in parallel <a class="header-anchor" href="#base-example%3A-untarring-multiple-archives-in-parallel" aria-hidden="true">🔗</a></h4>
+<p>Let’s simulate the case where a user wants to download and unpack multiple MySQL releases, in order to test them. No core should be wasted!</p>
+<pre><code class="language-bash"><span class="hljs-comment"># We put the MySQL versions under `~/local/&lt;mysql_version_dir&gt;`.</span>
+
+$ <span class="hljs-built_in">mkdir</span> ~/local
+$ <span class="hljs-built_in">cd</span> ~/local
+
+<span class="hljs-comment"># Let&#x27;s use `&amp;`/`wait` to download, because why not!</span>
+
+$ wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz &amp;
+Redirecting output to ‘wget-log’.
+$ wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz &amp;
+Redirecting output to ‘wget-log.1’.
+$ <span class="hljs-built_in">wait</span>
+[1]-  Done                    wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz
+[2]+  Done                    wget https://dev.mysql.com/get/Downloads/MySQL-8.0/mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+
+<span class="hljs-comment"># The download will generate the following files:</span>
+
+$ <span class="hljs-built_in">ls</span> 1 *.tar.*
+mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz
+mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+</code></pre>
+<p>In the simplest form, Parallel takes a list of arguments (<strong>separated by newline</strong>) via stdin, and appends them to the command passed, creating one process for each concatenation of command and argument:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">ls</span> -1 *.tar.* | parallel tar xvf
+</code></pre>
+<p>will translate to:</p>
+<pre><code class="language-bash">$ tar xvf mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz
+$ tar xvf mysql-8.0.19-linux-glibc2.12-x86_64.tar.xz
+</code></pre>
+<p>running in parallel!</p>
+<h4 id="using-positional-parameters" tabindex="-1">Using positional parameters <a class="header-anchor" href="#using-positional-parameters" aria-hidden="true">🔗</a></h4>
+<p>In case the arguments are not the last, Parallel has a very simple syntax.</p>
+<p>Let’s suppose we want to do the reverse - zipping the directories!:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> -ld mysql*/
+<span class="hljs-comment"># drwxrwxr-x 1 saverio saverio 1760 Jan 14 17:14 mysql-5.7.29-linux-glibc2.12-x86_64/</span>
+<span class="hljs-comment"># drwxrwxr-x 1 saverio saverio 1680 Jan 25 21:30 mysql-8.0.19-linux-glibc2.12-x86_64/</span>
+</code></pre>
+<p>(note the trick: we can list exclusively the directories by using the <code>d</code> option of <code>ls</code>, along with a glob pattern terminating with <code>/</code>.)</p>
+<p>The general form of the command we want to run is:</p>
+<pre><code class="language-bash">$ zip -r <span class="hljs-string">&quot;&lt;directory_name&gt;.zip&quot;</span> <span class="hljs-string">&quot;&lt;directory_name&gt;&quot;</span>
+</code></pre>
+<p>so that for each <code>&lt;directory_name&gt;</code>, we create a corresponding zip file.</p>
+<p>We can easily use Parallel’s positional parameters:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">ls</span> -1d mysql*/ | <span class="hljs-built_in">tr</span> -d / | parallel zip -r {1}.zip {1}
+</code></pre>
+<p>(here we need some cleanup: <code>ls -d &lt;pattern&gt;*/</code> appends a slash, which we don’t want, so we use <code>tr -d</code> to remove it.)</p>
+<p>While we run this command, we can check what happens from another terminal; let’s search all the zip processes:</p>
+<pre><code class="language-bash">$ pgrep -a zip
+30146 zip -r mysql-5.7.29-linux-glibc2.12-x86_64/.zip mysql-5.7.29-linux-glibc2.12-x86_64/
+30147 zip -r mysql-8.0.19-linux-glibc2.12-x86_64/.zip mysql-8.0.19-linux-glibc2.12-x86_64/
+</code></pre>
+<p>Task accomplished 🙂</p>
+<h4 id="running-multiple-commands-from-a-file" tabindex="-1">Running multiple commands from a file <a class="header-anchor" href="#running-multiple-commands-from-a-file" aria-hidden="true">🔗</a></h4>
+<p>Until now, we based Parallel usage on a certain structure:</p>
+<ol>
+<li>we set up the command base part (e.g. tar xvf) as parameter to the parallel command, and pass the parameters from stdin;</li>
+<li>we pass the command parameters directly.</li>
+</ol>
+<p>Let’s get more sophisticated.</p>
+<p>Regarding point 1., Parallel builds each command invocation from the command base part (tar xvf) and each line of the data received via stdin (mysql-5.7.29-linux-glibc2.12-x86_64.tar.gz).
+<strong>If we don’t pass anything, parallel just runs each line received as standalone command</strong>.</p>
+<p>Regarding point 2., nobody prevents us from <strong>creating a file with commands, and sending it to Parallel</strong> 🙂</p>
+<p>Let’s suppose we build a script for mass-encoding CD rips.</p>
+<p>Now, what we can do is:</p>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> input_file <span class="hljs-keyword">in</span> <span class="hljs-string">&quot;<span class="hljs-variable">$input_directory</span>&quot;</span>/*.wav; <span class="hljs-keyword">do</span>
+  <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ffmpeg -i <span class="hljs-subst">$(printf <span class="hljs-string">&quot;%q&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$input_file</span>&quot;</span>)</span> <span class="hljs-subst">$(printf <span class="hljs-string">&quot;%q&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">${input_file%.wav}</span>.m4a&quot;</span>)</span>&quot;</span> &gt;&gt; <span class="hljs-string">&quot;<span class="hljs-variable">$XDG_RUNTIME_DIR</span>/parallel_commands_list.sh&quot;</span>
+<span class="hljs-keyword">done</span>
+
+parallel &lt; <span class="hljs-string">&quot;<span class="hljs-variable">$XDG_RUNTIME_DIR</span>/parallel_commands_list.sh&quot;</span>
+
+</code></pre>
+<p><code>printf &quot;%q&quot;</code> è un trucco per quotare le stringhe con doppi apici</p>
+<p>There you go! The base motivation for using Parallel here is <strong>queue limiting</strong>:<br>
+using <code>&amp;/wait</code> would simultaneously run a number of processes equal to the number of files,<br>
+which, in case of large directories, would be undesirable.</p>
+<p>I’ll point out a few interesting shell concepts in the following sections.</p>
+<h4 id="escaping-strings-in-bash" tabindex="-1">Escaping strings in Bash <a class="header-anchor" href="#escaping-strings-in-bash" aria-hidden="true">🔗</a></h4>
+<p>We need to escape the commands in the list! In this we use a bash built-in command:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;%q&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$input_file</span>&quot;</span>
+</code></pre>
+<p>Let’s suppose that the commands file contains:</p>
+<pre><code class="language-bash">ffmpeg -i 01 - Track 01.wav 01 - Track 01.m4a
+ffmpeg -i 01 - Track 01.wav 01 - Track 01.m4a
+</code></pre>
+<p>Where does the filenames end and start?<br>
+We could use quotes:</p>
+<pre><code class="language-bash">ffmpeg -i <span class="hljs-string">&quot;01 - Track 01.wav&quot;</span> <span class="hljs-string">&quot;01 - Track 01.m4a&quot;</span>
+ffmpeg -i <span class="hljs-string">&quot;01 - Track 01.wav&quot;</span> <span class="hljs-string">&quot;01 - Track 01.m4a&quot;</span>
+</code></pre>
+<p>This solution works. The generating command is:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ffmpeg -i \&quot;<span class="hljs-variable">$input_file</span>\&quot; \&quot;<span class="hljs-variable">${input_file%.wav}</span>.m4a\&quot;&quot;</span> <span class="hljs-comment"># [...]</span>
+
+</code></pre>
+<p>however, on a general basis, quotes nesting becomes quite confusing. Additionally, what if the input contains double quotes?<br>
+The built-in <code>printf</code> improves <strong>cases where there is nesting</strong>, and also handles input including quotes; the commands list becomes:</p>
+<pre><code class="language-bash">ffmpeg -i 01\ -\ Track\ 01.wav 01\ -\ Track\ 01.m4a
+ffmpeg -i 02\ -\ Track\ 02.wav 02\ -\ Track\ 02.m4a
+</code></pre>
+<h4 id="sending-the-content-of-a-file-to-a-process" tabindex="-1">Sending the content of a file to a process <a class="header-anchor" href="#sending-the-content-of-a-file-to-a-process" aria-hidden="true">🔗</a></h4>
+<p>A typical pattern to send the content of a file to a process is:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> <span class="hljs-string">&quot;&lt;filename&gt;&quot;</span> | parallel
+</code></pre>
+<p>In Bash, the operator &lt; can do this more succinctly:</p>
+<pre><code class="language-bash">$ parallel &lt; <span class="hljs-string">&quot;&lt;filename&gt;&quot;</span>
+</code></pre>
+<p>Of course, usage of this construct is up to the judgment of the developer, but it’s always good to know</p>
+<h4 id="%24xdg_runtime_dir" tabindex="-1"><code>$XDG_RUNTIME_DIR</code> <a class="header-anchor" href="#%24xdg_runtime_dir" aria-hidden="true">🔗</a></h4>
+<p>The legacy, but still typical, way of storing temporary files is to use <code>/tmp</code>.</p>
+<p>The modern way is to use the user-specific directory provided by <code>systemd</code>:</p>
+<pre><code class="language-bash">$ man pam_systemd
+       <span class="hljs-variable">$XDG_RUNTIME_DIR</span>
+           Path to a user-private user-writable directory that is bound to the user login time on
+           the machine. It is automatically created the first time a user logs <span class="hljs-keyword">in</span> and removed on
+           the user<span class="hljs-string">&#x27;s final logout. [...]
+</span></code></pre>
+<p>It generally translates to:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$XDG_RUNTIME_DIR</span>
+/run/user/1000
+</code></pre>
+<p>In this case (that is, for single-user environments), <code>1000</code> is the id of the first user.</p>
+<p>The common tool <code>mktemp</code> does not use this directory, so modern invocations should consider this:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Legacy invocation</span>
+<span class="hljs-comment">#</span>
+$ <span class="hljs-built_in">mktemp</span>
+/tmp/tmp.RfJec8pjGd
+
+<span class="hljs-comment"># Modernized invocation</span>
+<span class="hljs-comment">#</span>
+$ <span class="hljs-built_in">mktemp</span> <span class="hljs-string">&quot;<span class="hljs-variable">$XDG_RUNTIME_DIR</span>/tmp.XXXXXXXXXX&quot;</span>
+/run/user/1000/tmp.AcSjj8BAmc
+</code></pre>
+</body></html>

@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.309" />
+        <title>notepad++</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../inc/js/hljs/styles/default.css" />
+        <script src="../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="notepad%2B%2B" tabindex="-1">notepad++ <a class="header-anchor" href="#notepad%2B%2B" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.309</p>
+<nav class="table-of-contents"><ol><li><a href="#wine">Wine </a></li><li><a href="#configurazione-notepad%2B%2B">Configurazione Notepad++ </a></li><li><a href="#goto-last-edit-location">Goto Last Edit Location </a><ol><li><a href="#backup-della-configurazione-su-file%3A-shortcuts.xml">Backup della configurazione su file: shortcuts.xml </a></li></ol></li><li><a href="#riabilitazione-di-firefox-nel-menu-run">Riabilitazione di firefox nel menu Run </a></li><li><a href="#plugin-utilizzati">Plugin Utilizzati </a></li><li><a href="#nppexec">NPPExec </a><ol><li><a href="#file-di-configurazione">File di configurazione </a></li><li><a href="#examples">Examples </a></li><li><a href="#running-a-command">Running a command </a></li><li><a href="#esempio-di-script-di-filtraggio-del-testo-con-comando-esterno">Esempio di script di filtraggio del testo con comando esterno </a></li><li><a href="#build-di-un-file-.md-da-notepad%2B%2B-con-nodejs%2Fmarkdownit">Build di un file .md da Notepad++ con Nodejs/Markdownit </a></li><li><a href="#build-di-un-file-.md-da-notepad%2B%2B-con-pandoc">Build di un file .md da Notepad++ con Pandoc </a></li><li><a href="#nppexec-grep---apertura-di-un-nuovo-tab-contenente-il-risultato">NppExec Grep - Apertura di un nuovo tab contenente il risultato </a></li><li><a href="#ricerca-di-directory-node_modules">Ricerca di directory node_modules </a></li></ol></li><li><a href="#html-tag">HTML Tag </a></li><li><a href="#inserimento-di-caratteri-tramite-codice">Inserimento di caratteri tramite codice </a><ol><li><a href="#la-tilde">La tilde </a></li><li><a href="#il-grave-accent%2C-backtick">Il grave accent, backtick </a></li></ol></li></ol></nav><h1 id="notepad%2B%2B-1" tabindex="-1">Notepad++ <a class="header-anchor" href="#notepad%2B%2B-1" aria-hidden="true">🔗</a></h1>
+<h2 id="wine" tabindex="-1">Wine <a class="header-anchor" href="#wine" aria-hidden="true">🔗</a></h2>
+<p>Funziona perfettamente con wine.</p>
+<p>Link per il menu:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">env</span> WINEPREFIX=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>/.wine&quot;</span> wine C:\\windows\\<span class="hljs-built_in">command</span>\\start.exe /Unix /home/<span class="hljs-variable">$USER</span>/.wine/dosdevices/c:/ProgramData/Microsoft/Windows/Start\ Menu/Programs/Notepad++.lnk
+</code></pre>
+<h2 id="configurazione-notepad%2B%2B" tabindex="-1">Configurazione Notepad++ <a class="header-anchor" href="#configurazione-notepad%2B%2B" aria-hidden="true">🔗</a></h2>
+<pre><code>%APPDATA%\Notepad++\
+</code></pre>
+<h2 id="goto-last-edit-location" tabindex="-1">Goto Last Edit Location <a class="header-anchor" href="#goto-last-edit-location" aria-hidden="true">🔗</a></h2>
+<p>Vogliamo avere il <code>CTRL+Q</code> di Eclipse</p>
+<ol>
+<li>
+<p>Rimuovere l'associazione a CTRL+Q del Toggle Single Line Comment:
+/Settings/Shortcut Mapper/ cercare <code>Toggle Single Line Comment</code>
+Main menu  |  53   Toggle Single Line Comment  ( Ctrl+Q )</p>
+</li>
+<li>
+<p>Registrare una macro che comprenda la pressione dei tasti della toolbar, prima <code>UNDO</code>, poi <code>REDO</code>
+(Attenzione non <code>CTRL+Z</code> perchè non è registrabile dal macro recorder)</p>
+<p>/Macro/Start Recording
+UNDO
+REDO
+/Macro/Stop Recording
+/Macro/Save Current Recorded Macro:
+Goto Last Edit Location
+Assegnare la macro a <code>CTRL+Q</code></p>
+</li>
+</ol>
+<h3 id="backup-della-configurazione-su-file%3A-shortcuts.xml" tabindex="-1">Backup della configurazione su file: shortcuts.xml <a class="header-anchor" href="#backup-della-configurazione-su-file%3A-shortcuts.xml" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="file:///%25APPDATA%25%5CNotepad++%5Cshortcuts.xml">file:///%APPDATA%\Notepad++\shortcuts.xml</a></li>
+</ul>
+<p><code>CTRL+U</code> per andare all'ultima modifica effettuata:</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">NotepadPlus</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">InternalCommands</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">Macros</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Macro</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Trim Trailing Space and Save&quot;</span> <span class="hljs-attr">Ctrl</span>=<span class="hljs-string">&quot;no&quot;</span> <span class="hljs-attr">Alt</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Shift</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Key</span>=<span class="hljs-string">&quot;83&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Action</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">wParam</span>=<span class="hljs-string">&quot;42024&quot;</span> <span class="hljs-attr">lParam</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">sParam</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Action</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">wParam</span>=<span class="hljs-string">&quot;41006&quot;</span> <span class="hljs-attr">lParam</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">sParam</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Macro</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Macro</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;GotoLastEditLocation&quot;</span> <span class="hljs-attr">Ctrl</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Alt</span>=<span class="hljs-string">&quot;no&quot;</span> <span class="hljs-attr">Shift</span>=<span class="hljs-string">&quot;no&quot;</span> <span class="hljs-attr">Key</span>=<span class="hljs-string">&quot;81&quot;</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Action</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">wParam</span>=<span class="hljs-string">&quot;42003&quot;</span> <span class="hljs-attr">lParam</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">sParam</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-name">Action</span> <span class="hljs-attr">type</span>=<span class="hljs-string">&quot;2&quot;</span> <span class="hljs-attr">message</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">wParam</span>=<span class="hljs-string">&quot;42004&quot;</span> <span class="hljs-attr">lParam</span>=<span class="hljs-string">&quot;0&quot;</span> <span class="hljs-attr">sParam</span>=<span class="hljs-string">&quot;&quot;</span> /&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">Macro</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">Macros</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">UserDefinedCommands</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">Command</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Launch in Firefox&quot;</span> <span class="hljs-attr">Ctrl</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Alt</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Shift</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Key</span>=<span class="hljs-string">&quot;88&quot;</span>&gt;</span>firefox <span class="hljs-symbol">&amp;quot;</span>$(FULL_CURRENT_PATH)<span class="hljs-symbol">&amp;quot;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Command</span>&gt;</span>
+        <span class="hljs-comment">&lt;!--
+		The following shortcuts are dangerous if your computer is compromised.
+		(But if your computer is compromised, EVERYTHING IS DANGEROUS!)
+		Remove the comment and use them at your own risk!!!
+
+        &lt;Command name=&quot;Launch in IE&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;73&quot;&gt;iexplore &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+        &lt;Command name=&quot;Launch in Chrome&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;82&quot;&gt;chrome &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+        &lt;Command name=&quot;Launch in Safari&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;65&quot;&gt;safari &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+        &lt;Command name=&quot;Send via Outlook&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;79&quot;&gt;outlook /a &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+        &lt;Command name=&quot;Get PHP help&quot; Ctrl=&quot;no&quot; Alt=&quot;yes&quot; Shift=&quot;no&quot; Key=&quot;112&quot;&gt;http://www.php.net/$(CURRENT_WORD)&lt;/Command&gt;
+        &lt;Command name=&quot;Wikipedia Search&quot; Ctrl=&quot;no&quot; Alt=&quot;yes&quot; Shift=&quot;no&quot; Key=&quot;114&quot;&gt;https://en.wikipedia.org/wiki/Special:Search?search=$(CURRENT_WORD)&lt;/Command&gt;
+        &lt;Command name=&quot;Open file in another instance&quot; Ctrl=&quot;no&quot; Alt=&quot;yes&quot; Shift=&quot;no&quot; Key=&quot;117&quot;&gt;$(NPP_FULL_FILE_PATH) $(CURRENT_WORD) -nosession -multiInst&lt;/Command&gt;
+		--&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">UserDefinedCommands</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">PluginCommands</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">ScintillaKeys</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">NotepadPlus</span>&gt;</span>
+</code></pre>
+<h2 id="riabilitazione-di-firefox-nel-menu-run" tabindex="-1">Riabilitazione di firefox nel menu Run <a class="header-anchor" href="#riabilitazione-di-firefox-nel-menu-run" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">UserDefinedCommands</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">Command</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;Launch in Firefox&quot;</span> <span class="hljs-attr">Ctrl</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Alt</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Shift</span>=<span class="hljs-string">&quot;yes&quot;</span> <span class="hljs-attr">Key</span>=<span class="hljs-string">&quot;88&quot;</span>&gt;</span>firefox <span class="hljs-symbol">&amp;quot;</span>$(FULL_CURRENT_PATH)<span class="hljs-symbol">&amp;quot;</span><span class="hljs-tag">&lt;/<span class="hljs-name">Command</span>&gt;</span>
+<span class="hljs-comment">&lt;!--
+The following shortcuts are dangerous if your computer is compromised.
+(But if your computer is compromised, EVERYTHING IS DANGEROUS!)
+Remove the comment and use them at your own risk!!!
+
+&lt;Command name=&quot;Launch in IE&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;73&quot;&gt;iexplore &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+&lt;Command name=&quot;Launch in Chrome&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;82&quot;&gt;chrome &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+&lt;Command name=&quot;Launch in Safari&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;65&quot;&gt;safari &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+&lt;Command name=&quot;Send via Outlook&quot; Ctrl=&quot;yes&quot; Alt=&quot;yes&quot; Shift=&quot;yes&quot; Key=&quot;79&quot;&gt;outlook /a &amp;quot;$(FULL_CURRENT_PATH)&amp;quot;&lt;/Command&gt;
+&lt;Command name=&quot;Get PHP help&quot; Ctrl=&quot;no&quot; Alt=&quot;yes&quot; Shift=&quot;no&quot; Key=&quot;112&quot;&gt;http://www.php.net/$(CURRENT_WORD)&lt;/Command&gt;
+&lt;Command name=&quot;Wikipedia Search&quot; Ctrl=&quot;no&quot; Alt=&quot;yes&quot; Shift=&quot;no&quot; Key=&quot;114&quot;&gt;https://en.wikipedia.org/wiki/Special:Search?search=$(CURRENT_WORD)&lt;/Command&gt;
+&lt;Command name=&quot;Open file in another instance&quot; Ctrl=&quot;no&quot; Alt=&quot;yes&quot; Shift=&quot;no&quot; Key=&quot;117&quot;&gt;$(NPP_FULL_FILE_PATH) $(CURRENT_WORD) -nosession -multiInst&lt;/Command&gt;
+--&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">UserDefinedCommands</span>&gt;</span>
+</code></pre>
+<p>Vedere: [GoTo Last Edit Location]</p>
+<h2 id="plugin-utilizzati" tabindex="-1">Plugin Utilizzati <a class="header-anchor" href="#plugin-utilizzati" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>Plugin Manager</li>
+<li>Compare</li>
+<li>XML Tools</li>
+<li>MIME Tools</li>
+<li>NPPExec</li>
+<li>NPPExport</li>
+<li>LineFilter2</li>
+<li>TextFX</li>
+<li>Converter</li>
+<li>SQLinForm</li>
+<li>JSON Viewer</li>
+<li>MarkdownViewer++</li>
+<li>Regex Trainer</li>
+<li>Document Monitor</li>
+<li>Hex Editor</li>
+<li>HTMLTag</li>
+</ul>
+<h2 id="nppexec" tabindex="-1">NPPExec <a class="header-anchor" href="#nppexec" aria-hidden="true">🔗</a></h2>
+<p><a href="http://docs.notepad-plus-plus.org/index.php/External_Programs">http://docs.notepad-plus-plus.org/index.php/External_Programs</a></p>
+<p>Say the current file you edit in Notepad++ is:</p>
+<pre><code>E:\my Web\main\welcome.html
+</code></pre>
+<p>There are more environment variables containing information on the current session:</p>
+<pre><code>FULL_CURRENT_PATH  : E:\my Web\main\welcome.html  
+CURRENT_DIRECTORY  : E:\my Web\main\  
+FILE_NAME  : welcome.html  
+NAME_PART  : welcome  
+EXT_PART  : html  
+SYS.&lt;var&gt; :  system environment variable, e.g. $(SYS.PATH)
+</code></pre>
+<p>Note that you should put the double quote around the path environment variables :</p>
+<pre><code>&quot;$(ENVIRONMENT_VARIABLE)&quot; 
+</code></pre>
+<p>since they may contain some white space.</p>
+<h3 id="file-di-configurazione" tabindex="-1">File di configurazione <a class="header-anchor" href="#file-di-configurazione" aria-hidden="true">🔗</a></h3>
+<pre><code>%USERPROFILE%\AppData\Roaming\Notepad++\plugins\Config\npes_saved.txt
+%USERPROFILE%\app\npp\plugins\Config\npes_saved.txt
+</code></pre>
+<h3 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h3>
+<pre><code>start &quot;$(FULL_CURRENT_PATH)&quot; 
+firefox &quot;$(FULL_CURRENT_PATH)&quot; 
+iexplore &quot;$(FULL_CURRENT_PATH)&quot; 
+</code></pre>
+<h3 id="running-a-command" tabindex="-1">Running a command <a class="header-anchor" href="#running-a-command" aria-hidden="true">🔗</a></h3>
+<p>When you use NppExec to run a command, the following variables are set for the command to use, before it is actually issued:</p>
+<pre><code>CWD :  current working directory of NppExec (use &quot;cd&quot; to change it)
+ARGC :  number of arguments passed to the NPP_EXEC command
+ARGV :  all arguments passed to the NPP_EXEC command after the script name
+ARGV[0] :  script name - first parameter of the NPP_EXEC command
+ARGV[N] :  Nth argument (N=1,2,3...)
+RARGV :  all arguments in reverse order (except the script name)
+RARGV[N] :  Nth argument in reverse order (N=1,2,3...)
+INPUT :  this value is set by the 'inputbox' command
+INPUT[N] :  Nth field of the $(INPUT) value (N=1,2,3...)
+</code></pre>
+<p>The external process, if aware of NppExec, can set some variables as well (new in v0.3.1):</p>
+<pre><code>OUTPUT :  this value can be set by the child process, see npe_console v+
+OUTPUT1 :  first line in $(OUTPUT)
+OUTPUTL :  last line in $(OUTPUT)
+</code></pre>
+<h3 id="esempio-di-script-di-filtraggio-del-testo-con-comando-esterno" tabindex="-1">Esempio di script di filtraggio del testo con comando esterno <a class="header-anchor" href="#esempio-di-script-di-filtraggio-del-testo-con-comando-esterno" aria-hidden="true">🔗</a></h3>
+<p><a href="https://superuser.com/questions/411071/grep-like-functionality-for-notepad">https://superuser.com/questions/411071/grep-like-functionality-for-notepad</a></p>
+<pre><code>SET local OUTFILE = &quot;c:\temp\$(FILE_NAME).temp&quot;
+INPUTBOX &quot;Input filter string&quot;
+cmd /c findstr $(INPUT) &quot;$(FULL_CURRENT_PATH)&quot; &gt; $(OUTFILE)
+NPP_OPEN $(OUTFILE)
+</code></pre>
+<h3 id="build-di-un-file-.md-da-notepad%2B%2B-con-nodejs%2Fmarkdownit" tabindex="-1">Build di un file .md da Notepad++ con Nodejs/Markdownit <a class="header-anchor" href="#build-di-un-file-.md-da-notepad%2B%2B-con-nodejs%2Fmarkdownit" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>Comando DOS per la compilazione di un unico file .md <code>md_to_firefox.cmd</code>:</li>
+</ol>
+<pre><code class="language-bat">:: 
+:: Richiamato da Visual Studio Code mediante il task:
+::         {
+::             &quot;<span class="hljs-built_in">type</span>&quot;: &quot;shell&quot;,
+::             &quot;<span class="hljs-built_in">label</span>&quot;: &quot;Markdown&quot;,
+::             &quot;command&quot;: &quot;D:\\Dati\\Profili\\$USER\\workspace\\WebWorkspace\\Web\\Script\\Nodejs\\markdown-it\\md_to_firefox.<span class="hljs-built_in">cmd</span>&quot;,
+::             &quot;args&quot;: [
+::                 &quot;${file}&quot;
+::             ],
+::             &quot;group&quot;: {
+::                 &quot;kind&quot;: &quot;build&quot;,
+::                 &quot;isDefault&quot;: true
+::             },
+::             &quot;problemMatcher&quot;: []
+::         }
+::
+:: Richiamato da notepad++ <span class="hljs-built_in">con</span> NPPExec dal seguente script:
+::
+:: <span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+:: D:\Dati\Profili\$USER\workspace\WebWorkspace\Web\Script\Nodejs\markdown-it\md_to_firefox.<span class="hljs-built_in">cmd</span> $(FULL_CURRENT_PATH)
+:: <span class="hljs-built_in">echo</span> creato il file $(CURRENT_DIRECTORY)\..\html\$(NAME_PART).html
+:: <span class="hljs-built_in">cmd</span> /c <span class="hljs-built_in">start</span> firefox $(CURRENT_DIRECTORY)\..\html\$(NAME_PART).html
+::
+:: <span class="hljs-variable">%%~</span>nf  nome <span class="hljs-built_in">del</span> file senza estensione
+:: <span class="hljs-variable">%%~</span>dpf full <span class="hljs-built_in">path</span> della directory che contiene il file
+:: <span class="hljs-variable">%%~</span>dpnf full <span class="hljs-built_in">path</span> <span class="hljs-built_in">del</span> file senza estensione
+@<span class="hljs-built_in">echo</span> off
+<span class="hljs-built_in">cd</span> /d %~dp0
+node markdown-it.js %<span class="hljs-number">1</span> md_html\html
+<span class="hljs-built_in">start</span> firefox md_html\html\%~n1.html
+</code></pre>
+<ol start="2">
+<li>Script Notepad++ NPPExec che richiama il comando DOS</li>
+</ol>
+<p><code>Plugins/NppExec/Execute...</code></p>
+<pre><code class="language-bat"><span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+&quot;D:\Dati\Profili\$USER\workspace\WebWorkspace\Web\Script\Nodejs\markdown-it\md_to_firefox.<span class="hljs-built_in">cmd</span>&quot; $(FULL_CURRENT_PATH)	
+</code></pre>
+<p>Vacchio modo per lanciare firefox: <code>&quot;C:\Program Files (x86)\Mozilla Firefox\firefox.exe&quot; $(CURRENT_DIRECTORY)\..\html\$(NAME_PART).html</code></p>
+<h3 id="build-di-un-file-.md-da-notepad%2B%2B-con-pandoc" tabindex="-1">Build di un file .md da Notepad++ con Pandoc <a class="header-anchor" href="#build-di-un-file-.md-da-notepad%2B%2B-con-pandoc" aria-hidden="true">🔗</a></h3>
+<ol>
+<li>Comando DOS per la compilazione di un unico file .md</li>
+</ol>
+<pre><code class="language-bat">make_pandoc.<span class="hljs-built_in">cmd</span>
+:: Richiamato da notepad++ <span class="hljs-built_in">con</span> NPPExec dal seguente script:
+::
+:: <span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+:: D:\Dati\Profili\$USER\workspaceBI\WebWorkspaceBI\prjdoc\markdown\make_pandoc.<span class="hljs-built_in">cmd</span> $(FULL_CURRENT_PATH)
+:: <span class="hljs-built_in">echo</span> creato il file $(CURRENT_DIRECTORY)\html\$(NAME_PART).html
+:: &quot;C:\Program Files (x86)\Mozilla Firefox\firefox.exe&quot; $(CURRENT_DIRECTORY)\html\$(NAME_PART).html
+::
+pandoc --from=markdown-tex_math_dollars --to=html5 --syntax-definition=syntax\dosbat.xml --highlight-style=kate --css=css\cdp.css --css=css\bootstrap.css --standalone --table-of-contents --number-sections -Mdate=<span class="hljs-variable">%DATE:~6,4%</span>-<span class="hljs-variable">%DATE:~3,2%</span>-<span class="hljs-variable">%DATE:~0,2%</span> -Mtitle=%~n1 --output=<span class="hljs-variable">%~dp1..\src\main\webapp\%</span>~n1.html %<span class="hljs-number">1</span> metadata.yaml
+::@<span class="hljs-built_in">pause</span>
+</code></pre>
+<ol start="2">
+<li>Script Notepad++ NPPExec che richiama il comando DOS</li>
+</ol>
+<p><code>Plugins/NppExec/Execute...</code></p>
+<pre><code class="language-bat"><span class="hljs-built_in">cd</span> $(CURRENT_DIRECTORY)
+<span class="hljs-function">D:\<span class="hljs-title">Dati</span>\<span class="hljs-title">Profili</span>\$<span class="hljs-title">USER</span>\<span class="hljs-title">workspaceBI</span>\<span class="hljs-title">WebWorkspaceBI</span>\<span class="hljs-title">prjdoc</span>\<span class="hljs-title">markdown</span>\<span class="hljs-title">make_pandoc.cmd</span> $(<span class="hljs-title">FULL_CURRENT_PATH</span>)	
+<span class="hljs-title">echo</span> <span class="hljs-title">creato</span> <span class="hljs-title">il</span> <span class="hljs-title">file</span> $(<span class="hljs-title">CURRENT_DIRECTORY</span>)\..\<span class="hljs-title">src</span>\<span class="hljs-title">main</span>\<span class="hljs-title">webapp</span>\$(<span class="hljs-title">NAME_PART</span>).<span class="hljs-title">html</span>
+&quot;<span class="hljs-title">C</span>:\<span class="hljs-title">Program</span> <span class="hljs-title">Files</span> (<span class="hljs-title">x86</span>)\<span class="hljs-title">Mozilla</span> <span class="hljs-title">Firefox</span>\<span class="hljs-title">firefox.exe</span>&quot; $(<span class="hljs-title">CURRENT_DIRECTORY</span>)\..\<span class="hljs-title">src</span>\<span class="hljs-title">main</span>\<span class="hljs-title">webapp</span>\$(<span class="hljs-title">NAME_PART</span>).<span class="hljs-title">html</span>
+</span></code></pre>
+<h3 id="nppexec-grep---apertura-di-un-nuovo-tab-contenente-il-risultato" tabindex="-1">NppExec Grep - Apertura di un nuovo tab contenente il risultato <a class="header-anchor" href="#nppexec-grep---apertura-di-un-nuovo-tab-contenente-il-risultato" aria-hidden="true">🔗</a></h3>
+<p>Send console output to NPP editor pane</p>
+<ul>
+<li><a href="https://sourceforge.net/p/npp-plugins/discussion/672146/thread/b5728d11/">https://sourceforge.net/p/npp-plugins/discussion/672146/thread/b5728d11/</a></li>
+</ul>
+<p>NppExec Manual section 4.6.3 - notice the usage of &quot;NPE_CONSOLE v+&quot; and &quot;SEL_SETTEXT $(OUTPUT)&quot;.</p>
+<pre><code>// enable the $(OUTPUT) variable
+NPE_CONSOLE v+
+// your command here… for example, let it be &quot;cmd /?&quot;
+grep &quot;\!\[\]&quot; $(FULL_CURRENT_PATH) 
+// open new tab
+NPP_SENDMSG WM_COMMAND IDM_FILE_NEW
+// set the text in the new tab
+SEL_SETTEXT $(OUTPUT)
+// finally, disable $(OUTPUT) variable
+NPE_CONSOLE v-
+</code></pre>
+<h3 id="ricerca-di-directory-node_modules" tabindex="-1">Ricerca di directory node_modules <a class="header-anchor" href="#ricerca-di-directory-node_modules" aria-hidden="true">🔗</a></h3>
+<pre><code>// enable the $(OUTPUT) variable
+NPE_CONSOLE v+
+cd D:\Dati\Profili\$USER\workspace\WebWorkspace
+cmd /c &quot;dir node_modules /S /A:D /B&quot;
+// open new tab
+NPP_SENDMSG WM_COMMAND IDM_FILE_NEW
+// set the text in the new tab
+SEL_SETTEXT $(OUTPUT)
+// finally, disable $(OUTPUT) variable
+NPE_CONSOLE v-
+</code></pre>
+<h2 id="html-tag" tabindex="-1">HTML Tag <a class="header-anchor" href="#html-tag" aria-hidden="true">🔗</a></h2>
+<table class="table"><thead>
+<tr>
+<th>Tasti</th>
+<th>Funzione</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong class="k">CTRL</strong>+<strong class="k">T</strong></td>
+<td>Va al tag corrispondente</td>
+</tr>
+<tr>
+<td><strong class="k">CTRL</strong>+<strong class="k">SHIFT</strong>+<strong class="k">T</strong></td>
+<td>Seleziona fino al tag corrispondente</td>
+</tr>
+</tbody>
+</table>
+<p>Purtroppo <strong class="k">CTRL</strong>+<strong class="k">SHIFT</strong>+<strong class="k">T</strong> è già assegnato in Notepad++ alla funzione <code>Restore Recent Closed File</code>,
+bisogna rimuovere il binding di default per avere a disposizione quello di HTML Tag</p>
+<pre><code>/Settings/Shortcut Mapper/Restore Recent Closed File/Clear/Close
+</code></pre>
+<h2 id="inserimento-di-caratteri-tramite-codice" tabindex="-1">Inserimento di caratteri tramite codice <a class="header-anchor" href="#inserimento-di-caratteri-tramite-codice" aria-hidden="true">🔗</a></h2>
+<p class="mrb">Nota: Ricordarsi di utilizzare solo il tastierino numerico e di avere BlocNum attivo</p>
+<h3 id="la-tilde" tabindex="-1">La tilde <a class="header-anchor" href="#la-tilde" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>SO</th>
+<th>Tasti</th>
+<th>Carattere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>ALT+126</code></td>
+<td><strong class="big_code">~</strong></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>AltGr+ì</code></td>
+<td><strong class="big_code">~</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="il-grave-accent%2C-backtick" tabindex="-1">Il grave accent, backtick <a class="header-anchor" href="#il-grave-accent%2C-backtick" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>SO</th>
+<th>Tasti</th>
+<th>Carattere</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>ALT+96</code></td>
+<td><strong class="big_code">`</strong></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>AltGr+'</code></td>
+<td><strong class="big_code">`</strong></td>
+</tr>
+</tbody>
+</table>
+</body></html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.299" />
+        <title>xorg</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="xorg" tabindex="-1">xorg <a class="header-anchor" href="#xorg" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.299</p>
+<nav class="table-of-contents"><ol><li><a href="#scoprire-il-processo-di-una-finestra">Scoprire il processo di una finestra </a></li><li><a href="#riconfigurare">Riconfigurare </a></li><li><a href="#scoprire-il-processo-di-una-finestra-1">Scoprire il processo di una finestra </a></li><li><a href="#avere-informazioni-sulle-finestre">Avere informazioni sulle finestre </a></li><li><a href="#logitech-performance-mouse-mx%3A-zoom-button">Logitech Performance Mouse MX: Zoom button </a></li></ol></nav><h1 id="x" tabindex="-1">X <a class="header-anchor" href="#x" aria-hidden="true">🔗</a></h1>
+<h2 id="scoprire-il-processo-di-una-finestra" tabindex="-1">Scoprire il processo di una finestra <a class="header-anchor" href="#scoprire-il-processo-di-una-finestra" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Per conoscere il processo di una finestra</span>
+<span class="hljs-built_in">alias</span> winproc=<span class="hljs-string">&#x27;xprop _NET_WM_PID | sed &#x27;</span>\&#x27;<span class="hljs-string">&#x27;s/_NET_WM_PID(CARDINAL) = //&#x27;</span>\&#x27;<span class="hljs-string">&#x27; | xargs ps -fp&#x27;</span>
+
+$ xprop _NET_WM_PID | sed <span class="hljs-string">&#x27;s/_NET_WM_PID(CARDINAL) = //&#x27;</span> | ps `<span class="hljs-built_in">cat</span>`
+    PID TTY      STAT   TIME COMMAND
+  51526 ?        SLsl   0:04 /opt/visual-studio-code/code
+$ xprop _NET_WM_PID | sed <span class="hljs-string">&#x27;s/_NET_WM_PID(CARDINAL) = //&#x27;</span> | xargs ps -fp
+UID          PID    PPID  C STIME TTY          TIME CMD
+    51526    4988  0 18:46 ?        00:00:04 /opt/visual-studio-code/code
+</code></pre>
+<h2 id="riconfigurare" tabindex="-1">Riconfigurare <a class="header-anchor" href="#riconfigurare" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Reconfigure the X server.</span>
+<span class="hljs-built_in">sudo</span> dpkg-reconfigure xserver-xorg
+
+<span class="hljs-comment"># Riconfigurare la tastiera da console</span>
+<span class="hljs-built_in">sudo</span> dpkg-reconfigure console-data
+
+<span class="hljs-comment"># Riconfigurare il display manager</span>
+<span class="hljs-built_in">sudo</span> dpkg-reconfigure some_installed_display_manager <span class="hljs-comment"># some_installed_display_manager:  gdm3, lightdm, sddm, lxdm</span>
+
+<span class="hljs-comment"># Riconfigurare X</span>
+<span class="hljs-built_in">sudo</span> dpkg-reconfigure xserver-xorg
+grep EE /var/log/Xorg.0.<span class="hljs-built_in">log</span>
+</code></pre>
+<h2 id="scoprire-il-processo-di-una-finestra-1" tabindex="-1">Scoprire il processo di una finestra <a class="header-anchor" href="#scoprire-il-processo-di-una-finestra-1" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ xprop _NET_WM_PID | sed <span class="hljs-string">&#x27;s/_NET_WM_PID(CARDINAL) = //&#x27;</span> | xargs ps -fp
+$ pacman -Qo xprop
+/usr/bin/xprop è contenuto <span class="hljs-keyword">in</span> xorg-xprop 1.2.5-1
+$ pacman -Ss xwininfo
+extra/xorg-xwininfo 1.1.5-2 (xorg-apps xorg)
+    Command-line utility to <span class="hljs-built_in">print</span> information about windows on an X server
+$ pacman -Sg xorg-apps
+
+        xwininfo
+
+</code></pre>
+<p><a href="https://github.com/jordansissel/xdotool">https://github.com/jordansissel/xdotool</a></p>
+<p>Conoscere il processo cui appartiene una finestra</p>
+<p><a href="https://askubuntu.com/questions/137875/tell-a-process-pid-by-its-window">https://askubuntu.com/questions/137875/tell-a-process-pid-by-its-window</a></p>
+<ol>
+<li><code>xdotool getactivewindow getwindowname</code></li>
+<li><code>cat /proc/$(xdotool getwindowpid $(xdotool getwindowfocus))/comm</code></li>
+<li><code>echo $(cat /proc/$(xdotool getwindowpid $(xdotool getwindowfocus))/comm)</code></li>
+</ol>
+<h2 id="avere-informazioni-sulle-finestre" tabindex="-1">Avere informazioni sulle finestre <a class="header-anchor" href="#avere-informazioni-sulle-finestre" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">xwininfo <span class="hljs-comment"># restituisce informazione su una finestra</span>
+xprop
+xkill
+wininfo http://www.freedesktop.org/wiki/Software/wininfo
+xdpyinfo
+xev <span class="hljs-comment"># restituisce informazioni sull&#x27;input</span>
+xrandr
+</code></pre>
+<h2 id="logitech-performance-mouse-mx%3A-zoom-button" tabindex="-1">Logitech Performance Mouse MX: Zoom button <a class="header-anchor" href="#logitech-performance-mouse-mx%3A-zoom-button" aria-hidden="true">🔗</a></h2>
+<p>With the Windows software the zoom button enables a zoom mode where the mouse wheel can be used for zooming until the zoom button is pressed again. For most applications this is the same behaviour as holding down the control button on your keyboard and using the mouse wheel in the meantime. So my approach is to turn the zoom mouse button into button that toggles the control button. This works very well for most use cases. To accomplish that xbindkeys and xautomation can be used:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt-get install xbindkeys xautomation
+</code></pre>
+<p>Then create the file <code>.xbindkeysrc</code> with the following content in your home folder:</p>
+<pre><code class="language-bash"><span class="hljs-string">&quot;/usr/bin/xte &#x27;keydown Control_L&#x27; &amp;&quot;</span>
+b:13
+<span class="hljs-string">&quot;/usr/bin/xte &#x27;keyup Control_L&#x27; &amp;&quot;</span>
+Control + b:13
+</code></pre>
+<p>The configuration can be tested with:</p>
+<p><code>xbindkeys -n -v</code></p>
+<p>Xbindkeys has to be started after every login to work permanently. On Ubuntu you can add a Startup Applicationin the menu on the upper right to do that. With xbindkeys you can also do all kinds other customizations. Feel free to experiment with it!</p>
+<pre><code class="language-bash">xvinfo
+glxgears -info
+glxinfo -i | grep render
+or
+glxinfo -i | grep direct
+or
+glxinfo -i | grep openGL
+
+fglrxinfo
+or
+fgl_glxgears
+
+</code></pre>
+</body></html>

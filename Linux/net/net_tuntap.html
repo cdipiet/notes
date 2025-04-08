@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.999" />
+        <title>net_tuntap</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="net_tuntap" tabindex="-1">net_tuntap <a class="header-anchor" href="#net_tuntap" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.999</p>
+<nav class="table-of-contents"><ol><li><a href="#creare-interfacce-virtuali-tap-con-bridge">Creare interfacce virtuali TAP con Bridge </a></li><li><a href="#rendere-la-configurazione-persistente-con-network-manager">Rendere la configurazione persistente con Network Manager </a></li></ol></nav><h1 id="tuntap-interface" tabindex="-1">tuntap interface <a class="header-anchor" href="#tuntap-interface" aria-hidden="true">🔗</a></h1>
+<p>Tun/tap interfaces are software-only interfaces, meaning that they exist only in the kernel and, unlike regular network interfaces, they have no physical hardware component (and so there's no physical &quot;wire&quot; connected to them). You can think of a tun/tap interface as a regular network interface that, when the kernel decides that the moment has come to send data &quot;on the wire&quot;, instead sends data to some userspace program that is attached to the interface (using a specific procedure, see below). When the program attaches to the tun/tap interface, it gets a special file descriptor, reading from which gives it the data that the interface is sending out. In a similar fashion, the program can write to this special descriptor, and the data (which must be properly formatted, as we'll see) will appear as input to the tun/tap interface. To the kernel, it would look like the tun/tap interface is receiving data &quot;from the wire&quot;.</p>
+<p>The difference between a tap interface and a tun interface is that a <strong>tap</strong> interface outputs (and must be given) <strong>full ethernet frames</strong>,<br>
+while a <strong>tun</strong> interface outputs (and must be given) <strong>raw IP packets</strong> (and no ethernet headers are added by the kernel). Whether an interface functions like a tun interface or like a tap interface is specified with a flag when the interface is created.</p>
+<h2 id="creare-interfacce-virtuali-tap-con-bridge" tabindex="-1">Creare interfacce virtuali TAP con Bridge <a class="header-anchor" href="#creare-interfacce-virtuali-tap-con-bridge" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.qemu.org/Documentation/Networking#Setting_up_taps_on_Linux">https://wiki.qemu.org/Documentation/Networking#Setting_up_taps_on_Linux</a></li>
+<li><a href="https://serverfault.com/questions/1085267/how-to-enable-external-access-to-the-virtual-machine-on-private-link">https://serverfault.com/questions/1085267/how-to-enable-external-access-to-the-virtual-machine-on-private-link</a></li>
+</ul>
+<p>Creaiamo una interfaccia TAP e la inseriamo assieme al NIC fisico in un bridge.<br>
+Per non perdere l'accesso ad internet, bisogna annotare la configurazione di rete(ip, subnetmask, gateway) del NIC fisico:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># IP e Subnet Mask</span>
+$ ip a show dev enp5s0
+2: enp5s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    inet 192.168.1.2/24 brd 192.168.1.255 scope global dynamic noprefixroute enp5s0
+       valid_lft 18097sec preferred_lft 18097sec
+<span class="hljs-comment"># Gateway</span>
+$ ip r
+default via 192.168.1.1 dev enp5s0 proto dhcp metric 100 
+192.168.1.0/24 dev enp5s0 proto kernel scope <span class="hljs-built_in">link</span> src 192.168.1.2 metric 100 
+</code></pre>
+<p>ed applicarla al bridge.<br>
+<strong>il bridge diverrà il nuovo NIC fisico dopo che il NIC fisico del PC sarà stato inserito nel bridge</strong>.
+Inserire il NIC fisico nel bridge farà perdere l'accesso ad internet in quanto il NIC fisico non sarà più visibile dal sistema.
+Una volta inserito il NIC fisico nel bridge per poter accedere nuovamente ad internet bisognerà impostare la default route al bridge, il quale si occuperà di reindirizzare il traffico al NIC fisico.
+Per riottenere l'accesso ad internet bisognerà effettuare la configurazione di rete del bridge come quella del NIC fisico annotata in precedenza.
+Ora il bridge diviene così il nuovo NIC fisico.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> modprobe tun tap                             <span class="hljs-comment"># unnecessary if tun/tap is built-in</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> add br0 <span class="hljs-built_in">type</span> bridge                  <span class="hljs-comment"># Creazione del bridge</span>
+$ <span class="hljs-built_in">sudo</span> ip <span class="hljs-built_in">link</span> <span class="hljs-built_in">set</span> dev br0 up                       <span class="hljs-comment"># il bridge deve essere attivato per potervi aggiungere dei nodi</span>
+$ <span class="hljs-built_in">sudo</span> ip tuntap add dev tap0 mode tap user &lt;utente&gt;# creazione dell<span class="hljs-string">&#x27;interfaccia virtuale tap(livello 2)
+$ sudo ip link set dev tap0 up                      # i NIC da inserire nel bridge devono essere attivi
+$ sudo ip link set dev enp5s0 up 
+$ sudo ip link set dev tap0 master br0              # Aggiunta dei nodi al bridge, NIC fisico e TAP(per la connessione ad una VM QEMU)
+$ sudo ip link set dev enp5s0 master br0            # Aggiungere il NIC fisico al bridge, nasconde il NIC fisico al sistema
+                                                    # da ora il NIC fisico può ricevere solamente dal bridge.
+
+# A questo punto il bridge funziona, ma non è utilizzabile perchè non ha una configurazione di rete(ip, subnet mask, gateway)
+# Riportiamo sul bridge la configurazione di rete del NIC fisico:
+$ ip addr flush dev enp5s0
+$ sudo dhclient -v br0                              # si usa il dhcp per assegnare un IP ed il routing al bridge
+                                                    # oppure si possono assegnare manualmente ip e route al default gateway
+$ sudo ip addr add 192.168.1.2/24 dev br0
+$ sudo ip route add default via 192.168.1.1 dev br0
+</span></code></pre>
+<h2 id="rendere-la-configurazione-persistente-con-network-manager" tabindex="-1">Rendere la configurazione persistente con Network Manager <a class="header-anchor" href="#rendere-la-configurazione-persistente-con-network-manager" aria-hidden="true">🔗</a></h2>
+<p><code>/etc/NetworkManager/system-connections/</code></p>
+<pre><code class="language-bash">$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap0 con-name nmtap0 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.56.1/24
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap1 con-name nmtap1 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.57.1/24
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap2 con-name nmtap2 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.58.1/24
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap3 con-name nmtap3 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.59.1/24
+
+$ nmcli connection del nmtap0
+$ nmcli connection del nmtap1
+$ nmcli connection del nmtap2
+$ nmcli connection del nmtap3
+
+
+$ nmcli connection show
+$ nmcli connection show --active
+$ nmcli d
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap0 con-name nmtap0 \
+                        mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.56.1/24
+<span class="hljs-comment"># The connection will have autoconnect=yes by default and so the device</span>
+<span class="hljs-comment"># will be created automatically every time NM starts. You can manually</span>
+<span class="hljs-comment"># enable or disable the connection with:</span>
+$ nmcli connection up mytap0
+$ nmcli connection down mytap0
+$ nmcli connection add <span class="hljs-built_in">type</span> tun ifname tap0 con-name nmtap0 mode tap owner `<span class="hljs-built_in">id</span> -u` ip4 192.168.56.1/24
+$ <span class="hljs-comment"># sudo ip route add 192.168.56.0/24 dev tap0 metric 10</span>
+</code></pre>
+</body></html>

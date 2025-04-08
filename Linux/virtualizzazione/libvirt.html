@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.155" />
+        <title>libvirt</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="libvirt" tabindex="-1">libvirt <a class="header-anchor" href="#libvirt" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.155</p>
+<nav class="table-of-contents"><ol><li><a href="#problema-della-default-network-non-esistente-che-impedisce-l'avvio-della-vm">Problema della default network non esistente che impedisce l&#39;avvio della VM </a></li><li><a href="#virsh">virsh </a></li><li><a href="#libguestfs">libguestfs </a></li><li><a href="#virt-manager-windows-10">virt-manager windows 10 </a><ol><li><a href="#share-samba-nell'host">Share samba nell&#39;host </a><ol><li><a href="#impostare-un-ip-statico-per-windows-10-da-virt-manager-utilizzando-la-configurazione-del-dhcp-per-la-rete-default%3A">impostare un ip statico per windows 10 da virt-manager utilizzando la configurazione del dhcp per la rete default: </a></li><li><a href="#configurazione-di-una-directory-condivisa-samba-nell'host">Configurazione di una directory condivisa Samba nell&#39;host </a></li><li><a href="#connessione-da-windows-10-alla-share-sull'host">Connessione da Windows 10 alla Share sull&#39;host </a></li><li><a href="#stampante">stampante </a></li><li><a href="#spice---video">spice - video </a></li></ol></li></ol></li></ol></nav><h1 id="libvirt-1" tabindex="-1">libvirt <a class="header-anchor" href="#libvirt-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://virt-manager.org/">https://virt-manager.org/</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/title/Virt-Manager">https://wiki.archlinux.org/title/Virt-Manager</a></p>
+<p>$ sudo vim /etc/libvirt/libvirtd.conf
+unix_sock_group = 'libvirt'
+...
+unix_sock_rw_perms = '0770'</p>
+</li>
+<li>
+<p>&lt;/etc/libvirt/libvirtd.conf&gt;</p>
+</li>
+</ul>
+<h2 id="problema-della-default-network-non-esistente-che-impedisce-l'avvio-della-vm" tabindex="-1">Problema della default network non esistente che impedisce l'avvio della VM <a class="header-anchor" href="#problema-della-default-network-non-esistente-che-impedisce-l'avvio-della-vm" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> virsh list --all <span class="hljs-comment"># Elenco delle VM</span>
+$ <span class="hljs-built_in">sudo</span> virsh net-list --all
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /etc/libvirt/qemu/networks/default.xml
+&lt;!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh net-edit default
+or other application using the libvirt API.
+--&gt;
+</code></pre>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">network</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>default<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">uuid</span>&gt;</span>fc0097b1-86ba-4138-9b1a-069cca17149e<span class="hljs-tag">&lt;/<span class="hljs-name">uuid</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">forward</span> <span class="hljs-attr">mode</span>=<span class="hljs-string">&#x27;nat&#x27;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">bridge</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&#x27;virbr0&#x27;</span> <span class="hljs-attr">stp</span>=<span class="hljs-string">&#x27;on&#x27;</span> <span class="hljs-attr">delay</span>=<span class="hljs-string">&#x27;0&#x27;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">mac</span> <span class="hljs-attr">address</span>=<span class="hljs-string">&#x27;52:54:00:7d:68:47&#x27;</span>/&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">ip</span> <span class="hljs-attr">address</span>=<span class="hljs-string">&#x27;192.168.122.1&#x27;</span> <span class="hljs-attr">netmask</span>=<span class="hljs-string">&#x27;255.255.255.0&#x27;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">dhcp</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">range</span> <span class="hljs-attr">start</span>=<span class="hljs-string">&#x27;192.168.122.2&#x27;</span> <span class="hljs-attr">end</span>=<span class="hljs-string">&#x27;192.168.122.254&#x27;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">dhcp</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">ip</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">network</span>&gt;</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> virsh net-define /etc/libvirt/qemu/networks/default.xml
+$ <span class="hljs-built_in">sudo</span> virsh net-autostart default
+$ <span class="hljs-built_in">sudo</span> virsh net-start default
+
+$ sysctl net.ipv4.ip_forward
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/61-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+$ sysctl -p
+</code></pre>
+<h2 id="virsh" tabindex="-1">virsh <a class="header-anchor" href="#virsh" aria-hidden="true">🔗</a></h2>
+<p><a href="https://computingforgeeks.com/virsh-commands-cheatsheet/">https://computingforgeeks.com/virsh-commands-cheatsheet/</a></p>
+<pre><code class="language-bash">virsh connect qemu:///system
+
+    $ <span class="hljs-built_in">sudo</span> virsh list --all
+    $ <span class="hljs-built_in">sudo</span> virsh start ubuntu20.04
+    $ <span class="hljs-built_in">sudo</span> virsh dominfo ubuntu20.04
+    $ <span class="hljs-built_in">sudo</span> virsh dumpxml  ubuntu20.04 | grep <span class="hljs-string">&#x27;mac address&#x27;</span>
+    $ <span class="hljs-built_in">sudo</span> virsh domiflist ubuntu20.04
+        52:54:00:a1:97:42
+
+    <span class="hljs-comment"># Impostazione IP Statico</span>
+    $ <span class="hljs-built_in">sudo</span> virsh net-list --all
+    $ <span class="hljs-built_in">sudo</span> virsh net-edit default
+        &lt;range start=<span class="hljs-string">&#x27;192.168.122.3&#x27;</span> end=<span class="hljs-string">&#x27;192.168.122.254&#x27;</span>/&gt;
+        &lt;host mac=<span class="hljs-string">&#x27;52:54:00:a1:97:42&#x27;</span> name=<span class="hljs-string">&#x27;vm1&#x27;</span> ip=<span class="hljs-string">&#x27;192.168.122.2&#x27;</span>/&gt;
+
+    $ <span class="hljs-built_in">sudo</span> virsh net-destroy default
+    $ <span class="hljs-built_in">sudo</span> virsh net-autostart default
+    $ <span class="hljs-built_in">sudo</span> virsh net-start   default  
+    $ <span class="hljs-built_in">sudo</span> virsh net-dumpxml default
+
+
+$ <span class="hljs-built_in">sudo</span> virsh nodeinfo
+$ osinfo-query os
+$ <span class="hljs-built_in">sudo</span> virsh list --all
+$ <span class="hljs-built_in">sudo</span> virsh domrename centos-8.2 apacheserver01
+$ <span class="hljs-built_in">sudo</span> virsh start <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh autostart <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh autostart --<span class="hljs-built_in">disable</span> <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh shutdown <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh destroy <span class="hljs-built_in">test</span>
+$ <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> `<span class="hljs-built_in">sudo</span> virsh list | grep running | awk <span class="hljs-string">&#x27;{print $2}&#x27;</span>` <span class="hljs-keyword">do</span>
+    <span class="hljs-built_in">sudo</span> virsh shutdown <span class="hljs-variable">$i</span>
+<span class="hljs-keyword">done</span>
+$ <span class="hljs-built_in">sudo</span> virsh reboot <span class="hljs-built_in">test</span>
+
+<span class="hljs-comment"># Remove VM</span>
+$ <span class="hljs-built_in">sudo</span> virsh destroy <span class="hljs-built_in">test</span> 2&gt; /dev/null
+$ <span class="hljs-built_in">sudo</span> virsh undefine  <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh pool-refresh default
+$ <span class="hljs-built_in">sudo</span> virsh vol-delete --pool default test.qcow2
+
+$ <span class="hljs-built_in">sudo</span> virsh undefine <span class="hljs-built_in">test</span> --remove-all-storage
+
+$ <span class="hljs-built_in">sudo</span> virt-install \
+  --name centos7 \
+  --description <span class="hljs-string">&quot;Test VM with CentOS 7&quot;</span> \
+  --ram=1024 \
+  --vcpus=2 \
+  --os-type=Linux \
+  --os-variant=rhel7 \
+  --disk path=/var/lib/libvirt/images/centos7.qcow2,bus=virtio,size=10 \
+  --graphics none \
+  --location <span class="hljs-variable">$HOME</span>/iso/CentOS-7-x86_64-Everything-1611.iso \
+  --network bridge:virbr0 \
+  --console pty,target_type=serial -x <span class="hljs-string">&#x27;console=ttyS0,115200n8 serial&#x27;</span>
+
+$ <span class="hljs-built_in">sudo</span> virsh console <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh console <span class="hljs-built_in">test</span> --force
+
+$ <span class="hljs-built_in">export</span> EDITOR=vim
+$ <span class="hljs-built_in">sudo</span> virsh edit <span class="hljs-built_in">test</span>
+
+$ <span class="hljs-built_in">sudo</span> virsh <span class="hljs-built_in">suspend</span> <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh resume <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh save <span class="hljs-built_in">test</span> test.saved
+$ <span class="hljs-built_in">sudo</span> virsh restore test.save 
+
+$ <span class="hljs-built_in">sudo</span> virsh vol-create-as default test_vol2.qcow2 2G
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">du</span> -sh /var/lib/libvirt/images/test_vol2.qcow2
+$ <span class="hljs-built_in">sudo</span> virsh vol-list --pool default
+$ <span class="hljs-built_in">sudo</span> virsh vol-list --pool images
+
+$ <span class="hljs-built_in">sudo</span> virsh attach-disk --domain <span class="hljs-built_in">test</span> \
+  --<span class="hljs-built_in">source</span> /var/lib/libvirt/images/test_vol2.qcow2 \
+  --persistent --target vdb
+<span class="hljs-comment">#    --persistent: Make live change persistent</span>
+<span class="hljs-comment">#    --target vdb: Target of a disk device</span>
+
+$ <span class="hljs-built_in">export</span> VM=test-vm
+$ <span class="hljs-built_in">sudo</span> qemu-img create -f qcow2 /var/lib/libvirt/images/<span class="hljs-variable">${VM}</span>-disk2.qcow2 20g
+$ <span class="hljs-built_in">sudo</span> virsh attach-disk  \
+  --<span class="hljs-built_in">source</span> /var/lib/libvirt/images/<span class="hljs-variable">${VM}</span>-disk2.qcow2 \
+  --target vdb \
+  --persistent \
+  --subdriver qcow2 \
+  --driver qemu \
+  --<span class="hljs-built_in">type</span> disk
+
+$ <span class="hljs-built_in">sudo</span> virsh detach-disk --domain <span class="hljs-built_in">test</span> --persistent --live --target vdb
+
+$ <span class="hljs-built_in">sudo</span> qemu-img resize /var/lib/libvirt/images/test.qcow2 +1G
+
+$ <span class="hljs-built_in">sudo</span> virsh pool-list
+$ <span class="hljs-built_in">sudo</span> virsh vol-list --pool default
+$ <span class="hljs-built_in">sudo</span> virsh vol-delete test_vol2.qcow2 --pool default
+$ <span class="hljs-built_in">sudo</span> virsh pool-refresh default
+$ <span class="hljs-built_in">sudo</span> virsh vol-list default
+
+
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-create-as \
+  --domain <span class="hljs-built_in">test</span> \
+  --name <span class="hljs-string">&quot;test_vm_snapshot1&quot;</span> \
+  --description <span class="hljs-string">&quot;test vm snapshot 1-working&quot;</span>
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-list <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-info --domain <span class="hljs-built_in">test</span> --snapshotname test_vm_snapshot1
+
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-create-as \
+  --domain <span class="hljs-built_in">test</span> --name <span class="hljs-string">&quot;test_vm_snapshot2&quot;</span> \
+  --description <span class="hljs-string">&quot;test vm snapshot 2-working&quot;</span>
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-list <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-revert --domain <span class="hljs-built_in">test</span>  --snapshotname test_vm_snapshot1  --running
+$ <span class="hljs-built_in">sudo</span>  virsh snapshot-delete --domain <span class="hljs-built_in">test</span> --snapshotname test_vm_snapshot2
+$ <span class="hljs-built_in">sudo</span>  virsh snapshot-delete --domain <span class="hljs-built_in">test</span> --snapshotname  test_vm_snapshot1
+$ <span class="hljs-built_in">sudo</span> virsh snapshot-list <span class="hljs-built_in">test</span>
+
+<span class="hljs-comment"># Clone a VM</span>
+$ <span class="hljs-built_in">sudo</span> virsh destroy <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virt-clone --connect qemu:///system \
+--original <span class="hljs-built_in">test</span> \
+--name test_clone \
+--file /var/lib/libvirt/images/test_clone.qcow2 
+$ <span class="hljs-built_in">sudo</span> virsh dominfo test_clone
+
+<span class="hljs-comment"># Manage CPUs</span>
+$ <span class="hljs-built_in">sudo</span> virsh setvcpus --domain <span class="hljs-built_in">test</span> --maximum 2 --config
+$ <span class="hljs-built_in">sudo</span> virsh setvcpus --domain <span class="hljs-built_in">test</span> --count 2 --config
+$ <span class="hljs-built_in">sudo</span> virsh shutdown <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh start <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh dominfo <span class="hljs-built_in">test</span>
+
+
+<span class="hljs-comment"># Manage Memory</span>
+<span class="hljs-comment"># In MB</span>
+$ <span class="hljs-built_in">sudo</span> virsh setmaxmem <span class="hljs-built_in">test</span> 2048 --config
+$ <span class="hljs-built_in">sudo</span> virsh setmem <span class="hljs-built_in">test</span> 2048 --config
+$ <span class="hljs-built_in">sudo</span> virsh shutdown <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh start <span class="hljs-built_in">test</span>
+<span class="hljs-comment"># Same in GB</span>
+$ <span class="hljs-built_in">sudo</span> virsh setmaxmem <span class="hljs-built_in">test</span> 16G --config
+$ <span class="hljs-built_in">sudo</span> virsh setmem <span class="hljs-built_in">test</span> 16G --config
+$ <span class="hljs-built_in">sudo</span> virsh shutdown <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh start <span class="hljs-built_in">test</span>
+$ <span class="hljs-built_in">sudo</span> virsh dominfo <span class="hljs-built_in">test</span>    
+
+$ <span class="hljs-built_in">sudo</span> virt-ls -l -d allot_netxplorer_01 /root
+$ <span class="hljs-built_in">sudo</span> virt-cat -d sg-ve-01 /etc/redhat-release
+$ <span class="hljs-built_in">sudo</span> virt-edit -d sg-ve-01 /etc/hosts
+$ <span class="hljs-built_in">sudo</span> virt-df -d sg-ve-01
+$ <span class="hljs-built_in">sudo</span> virt-filesystems -l -d sg-ve-01
+$ <span class="hljs-built_in">sudo</span> virt-filesystems -l -h -d sg-ve-01 --partitions
+$ <span class="hljs-built_in">sudo</span> virt-filesystems -d sg-ve-01 --all --long --uuid -h
+
+$ virt-top
+$ <span class="hljs-built_in">sudo</span> virt-top --csv file.csv
+
+
+&lt;https://wiki.libvirt.org/page/Networking&gt;
+
+$ <span class="hljs-built_in">sudo</span> virsh list --all <span class="hljs-comment"># Elenco delle VM</span>
+$ <span class="hljs-built_in">sudo</span> virsh net-list --all
+$ 
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cat</span> /etc/libvirt/qemu/networks/default.xml
+&lt;!--
+WARNING: THIS IS AN AUTO-GENERATED FILE. CHANGES TO IT ARE LIKELY TO BE
+OVERWRITTEN AND LOST. Changes to this xml configuration should be made using:
+  virsh net-edit default
+or other application using the libvirt API.
+--&gt;
+
+&lt;network&gt;
+  &lt;name&gt;default&lt;/name&gt;
+  &lt;uuid&gt;fc0097b1-86ba-4138-9b1a-069cca17149e&lt;/uuid&gt;
+  &lt;forward mode=<span class="hljs-string">&#x27;nat&#x27;</span>/&gt;
+  &lt;bridge name=<span class="hljs-string">&#x27;virbr0&#x27;</span> stp=<span class="hljs-string">&#x27;on&#x27;</span> delay=<span class="hljs-string">&#x27;0&#x27;</span>/&gt;
+  &lt;mac address=<span class="hljs-string">&#x27;52:54:00:7d:68:47&#x27;</span>/&gt;
+  &lt;ip address=<span class="hljs-string">&#x27;192.168.122.1&#x27;</span> netmask=<span class="hljs-string">&#x27;255.255.255.0&#x27;</span>&gt;
+    &lt;dhcp&gt;
+      &lt;range start=<span class="hljs-string">&#x27;192.168.122.2&#x27;</span> end=<span class="hljs-string">&#x27;192.168.122.254&#x27;</span>/&gt;
+    &lt;/dhcp&gt;
+  &lt;/ip&gt;
+&lt;/network&gt;
+
+$ <span class="hljs-built_in">sudo</span> virsh net-define /etc/libvirt/qemu/networks/default.xml
+$ <span class="hljs-built_in">sudo</span> virsh net-autostart default
+$ <span class="hljs-built_in">sudo</span> virsh net-start default
+
+$ sysctl net.ipv4.ip_forward
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/sysctl.d/61-ip_forward.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+net.ipv4.ip_forward = 1
+EOF
+$ sysctl -p
+
+</code></pre>
+<h2 id="libguestfs" tabindex="-1">libguestfs <a class="header-anchor" href="#libguestfs" aria-hidden="true">🔗</a></h2>
+<p><a href="https://documentation.suse.com/sles/15-SP1/html/SLES-all/chap-guestfs.html#">https://documentation.suse.com/sles/15-SP1/html/SLES-all/chap-guestfs.html#</a></p>
+<p>libguestfs C library has been designed to safely and securely create, access and modify virtual machine (VM Guest) disk images</p>
+<ul>
+<li>guestfish</li>
+<li>virt-rescue</li>
+<li>virt-resize</li>
+<li>virt-filesystems</li>
+<li>virt-ls</li>
+<li>virt-cat</li>
+<li>virt-df</li>
+<li>virt-edit</li>
+<li>virt-tar-in/out</li>
+<li>virt-copy-in/out</li>
+<li>virt-log</li>
+</ul>
+<h2 id="virt-manager-windows-10" tabindex="-1">virt-manager windows 10 <a class="header-anchor" href="#virt-manager-windows-10" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-function">C:\&gt; <span class="hljs-title">powercfg</span> -<span class="hljs-title">h</span> <span class="hljs-title">off</span>
+</span></code></pre>
+<h3 id="share-samba-nell'host" tabindex="-1">Share samba nell'host <a class="header-anchor" href="#share-samba-nell'host" aria-hidden="true">🔗</a></h3>
+<p>Per condividere una directory tra host e guest windows 10<br>
+bisogna attivare samba sull'host, configurare una directory condivisa (es. &quot;Share&quot;),<br>
+ed accedere alla share nell'host da windows 10 mediante percorso samba <code>\\192.168.1.2\Share</code>
+Per prima cosa impostiamo un ip statico per Windows 10 in modo da facilitare la configurazione di samba nell'host,
+impostiamo l'ip statico senza toccare windows 10, configurando la rete <code>default</code> di libvirt.</p>
+<h4 id="impostare-un-ip-statico-per-windows-10-da-virt-manager-utilizzando-la-configurazione-del-dhcp-per-la-rete-default%3A" tabindex="-1">impostare un ip statico per windows 10 da virt-manager utilizzando la configurazione del dhcp per la rete default: <a class="header-anchor" href="#impostare-un-ip-statico-per-windows-10-da-virt-manager-utilizzando-la-configurazione-del-dhcp-per-la-rete-default%3A" aria-hidden="true">🔗</a></h4>
+<p>configuriamo il DHCP della rete <code>default</code> di libvirt in modo che al MAC address della macchina windows 10 corrisponda sempre lo stesso indirizzo IP.</p>
+<p>ip statico per win10: <code>192.168.122.10</code></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> virsh  dumpxml  win10 | grep <span class="hljs-string">&#x27;mac address&#x27;</span>
+      &lt;mac address=<span class="hljs-string">&#x27;52:54:00:f8:e7:60&#x27;</span>/&gt;
+
+$ <span class="hljs-built_in">sudo</span> virsh net-list
+$ <span class="hljs-built_in">sudo</span> virsh net-edit default
+
+<span class="hljs-comment"># Find the &lt;dhcp&gt; section, restrict the dynamic range and add host entries for your VMs</span>
+
+    &lt;dhcp&gt;
+    &lt;range start=<span class="hljs-string">&#x27;192.168.122.100&#x27;</span> end=<span class="hljs-string">&#x27;192.168.122.254&#x27;</span>/&gt;
+    &lt;host mac=<span class="hljs-string">&#x27;52:54:00:f8:e7:60&#x27;</span> name=<span class="hljs-string">&#x27;win10&#x27;</span> ip=<span class="hljs-string">&#x27;192.168.122.10&#x27;</span>/&gt;
+    &lt;/dhcp&gt;
+
+$ <span class="hljs-built_in">sudo</span> virsh net-destroy default
+$ <span class="hljs-built_in">sudo</span> virsh net-autostart default
+$ <span class="hljs-built_in">sudo</span> virsh net-start default  
+$ <span class="hljs-built_in">sudo</span> virsh net-dumpxml default
+
+<span class="hljs-comment"># Then, reboot your VM</span>
+</code></pre>
+<h4 id="configurazione-di-una-directory-condivisa-samba-nell'host" tabindex="-1">Configurazione di una directory condivisa Samba nell'host <a class="header-anchor" href="#configurazione-di-una-directory-condivisa-samba-nell'host" aria-hidden="true">🔗</a></h4>
+<p><code>smb.conf</code> nell'host configurato con l'ip statico della vm windows 10.</p>
+<p>Assegneremo l'ip statico <code>192.168.122.10</code> alla vm windows 10,<br>
+configuriamo la protezione della share in modo da accettare le connessioni alla share anche dall'ip <code>192.168.122.10</code>:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> vim /etc/samba/smb.conf
+
+    <span class="hljs-comment"># A private directory, usable only by $USER. Note that $USER requires write</span>
+    <span class="hljs-comment"># access to the directory.</span>
+    [Share]
+    comment = <span class="hljs-variable">$USER</span><span class="hljs-string">&#x27;s Service
+    path = /home/$USER/Share
+    valid users = $USER
+    hosts allow = 192.168.1.4 127.0.0.1 localhost 192.168.122.10
+    public = no
+    writable = yes
+    printable = no
+
+$ sudo testparm
+# Rilettura del smb.conf
+$ sudo systemctl restart smb.service
+$ sudo smbcontrol smbd reload-config
+</span></code></pre>
+<h4 id="connessione-da-windows-10-alla-share-sull'host" tabindex="-1">Connessione da Windows 10 alla Share sull'host <a class="header-anchor" href="#connessione-da-windows-10-alla-share-sull'host" aria-hidden="true">🔗</a></h4>
+<p>per testare la share da gnome files:</p>
+<pre><code>smb://192.168.1.2/
+</code></pre>
+<p>In Windows 10:
+tasto destro su &quot;questo PC&quot;, aggiungi percorso di rete:</p>
+<pre><code>\\192.168.1.2\Share
+</code></pre>
+<h4 id="stampante" tabindex="-1">stampante <a class="header-anchor" href="#stampante" aria-hidden="true">🔗</a></h4>
+<p><a href="https://www.hpdrivers.net/driver-hp-m283fdw/">https://www.hpdrivers.net/driver-hp-m283fdw/</a></p>
+<p>HP Color LaserJet Pro M283fdw
+Ho configurato per la stampante <code>NPIB06D32</code> nel router <code>192.168.1.1</code> un IP Statico: <code>192.168.1.3</code> per il MAC Address: <code>e8:d8:d1:b0:6d:32</code></p>
+<p>Idirizzo IP statico della stampante(non usare il nome simoblico, in DNS può non funzionare):
+<code>192.168.1.3</code></p>
+<h4 id="spice---video" tabindex="-1">spice - video <a class="header-anchor" href="#spice---video" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe">https://www.spice-space.org/download/windows/spice-guest-tools/spice-guest-tools-latest.exe</a></li>
+</ul>
+<p>Bisogna installare sia i driver <strong>virtio</strong> sia i driver <strong>SPICE</strong> per avere i driver video <code>qxl</code>.</p>
+<p>The recommended way of getting all the needed drivers installed is to use the all-in-one Spice guest tools installer which can be found on <a href="http://spice-space.org">spice-space.org</a>.
+<a href="https://spice-space.org/download/windows/spice-guest-tools/">https://spice-space.org/download/windows/spice-guest-tools/</a></p>
+<ul>
+<li>
+<p><a href="https://www.spice-space.org/spice-user-manual.html">https://www.spice-space.org/spice-user-manual.html</a></p>
+<p>Double-click on the virtual machine you are interested in, go to &quot;View/Details&quot;. If the left pane has a &quot;Display Spice&quot; entry, then the virtual machine already has Spice support, and you can check the connection details (port number) by clicking on it. If it has no Spice entry, click on &quot;Add Hardware&quot;, and add a &quot;Graphics&quot; element of type &quot;Spice server&quot;. If the host and the client are not the same machine, you should check the &quot;Listen on all public network interfaces&quot; checkbox, otherwise you don’t need to make any changes.</p>
+<p>You should also add a QXL video device. It can be done by double-clicking on a virtual machine, then by going to View/Details, and by clicking on &quot;Add Hardware&quot; if the virtual machine does not have a &quot;Video QXL&quot; item in its left pane. From the &quot;Add hardware&quot; dialog, you should then create a &quot;Video&quot; device whose model is &quot;QXL&quot;.</p>
+</li>
+</ul>
+</body></html>

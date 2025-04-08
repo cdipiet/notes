@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.507" />
+        <title>login</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="login" tabindex="-1">login <a class="header-anchor" href="#login" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.507</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22login%22description%3A-%22the-login-command-description-and-usage%22keywords%3A-%22registry%2C-login%2C-image%22">title: &quot;login&quot;description: &quot;The login command description and usage&quot;keywords: &quot;registry, login, image&quot; </a></li><li><a href="#description">Description </a></li><li><a href="#examples">Examples </a><ol><li><a href="#login-to-a-self-hosted-registry">Login to a self-hosted registry </a></li><li><a href="#provide-a-password-using-stdin">Provide a password using STDIN </a></li><li><a href="#privileged-user-requirement">Privileged user requirement </a></li><li><a href="#credentials-store">Credentials store </a><ol><li><a href="#configure-the-credentials-store">Configure the credentials store </a></li><li><a href="#default-behavior">Default behavior </a></li><li><a href="#credential-helper-protocol">Credential helper protocol </a></li></ol></li><li><a href="#credential-helpers">Credential helpers </a><ol><li><a href="#configure-credential-helpers">Configure credential helpers </a></li></ol></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22login%22description%3A-%22the-login-command-description-and-usage%22keywords%3A-%22registry%2C-login%2C-image%22" tabindex="-1">title: &quot;login&quot;
+description: &quot;The login command description and usage&quot;
+keywords: &quot;registry, login, image&quot; <a class="header-anchor" href="#title%3A-%22login%22description%3A-%22the-login-command-description-and-usage%22keywords%3A-%22registry%2C-login%2C-image%22" aria-hidden="true">🔗</a></h2>
+<h1 id="login-1" tabindex="-1">login <a class="header-anchor" href="#login-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker login [OPTIONS] [SERVER]
+
+Log in to a Docker registry.
+If no server is specified, the default is defined by the daemon.
+
+Options:
+<span class="hljs-code">      --help                    Print usage
+  -p, --password       string   Password
+      --password-stdin          Read password from stdin
+  -u, --username       string   Username
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Login to a registry.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="login-to-a-self-hosted-registry" tabindex="-1">Login to a self-hosted registry <a class="header-anchor" href="#login-to-a-self-hosted-registry" aria-hidden="true">🔗</a></h3>
+<p>If you want to login to a self-hosted registry you can specify this by
+adding the server name.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker login localhost:8080</span>
+</code></pre>
+<h3 id="provide-a-password-using-stdin" tabindex="-1">Provide a password using STDIN <a class="header-anchor" href="#provide-a-password-using-stdin" aria-hidden="true">🔗</a></h3>
+<p>To run the <code>docker login</code> command non-interactively, you can set the
+<code>--password-stdin</code> flag to provide a password through <code>STDIN</code>. Using
+<code>STDIN</code> prevents the password from ending up in the shell's history,
+or log-files.</p>
+<p>The following example reads a password from a file, and passes it to the
+<code>docker login</code> command using <code>STDIN</code>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cat</span> ~/my_password.txt | docker login --username foo --password-stdin</span>
+</code></pre>
+<h3 id="privileged-user-requirement" tabindex="-1">Privileged user requirement <a class="header-anchor" href="#privileged-user-requirement" aria-hidden="true">🔗</a></h3>
+<p><code>docker login</code> requires user to use <code>sudo</code> or be <code>root</code>, except when:</p>
+<ol>
+<li>connecting to a remote daemon, such as a <code>docker-machine</code> provisioned <code>docker engine</code>.</li>
+<li>user is added to the <code>docker</code> group.  This will impact the security of your system; the <code>docker</code> group is <code>root</code> equivalent.  See <a href="https://docs.docker.com/engine/security/#docker-daemon-attack-surface">Docker Daemon Attack Surface</a> for details.</li>
+</ol>
+<p>You can log into any public or private repository for which you have
+credentials.  When you log in, the command stores credentials in
+<code>$HOME/.docker/config.json</code> on Linux or <code>%USERPROFILE%/.docker/config.json</code> on
+Windows, via the procedure described below.</p>
+<h3 id="credentials-store" tabindex="-1">Credentials store <a class="header-anchor" href="#credentials-store" aria-hidden="true">🔗</a></h3>
+<p>The Docker Engine can keep user credentials in an external credentials store,
+such as the native keychain of the operating system. Using an external store
+is more secure than storing credentials in the Docker configuration file.</p>
+<p>To use a credentials store, you need an external helper program to interact
+with a specific keychain or external store. Docker requires the helper
+program to be in the client's host <code>$PATH</code>.</p>
+<p>This is the list of currently available credentials helpers and where
+you can download them from:</p>
+<ul>
+<li>D-Bus Secret Service: <a href="https://github.com/docker/docker-credential-helpers/releases">https://github.com/docker/docker-credential-helpers/releases</a></li>
+<li>Apple macOS keychain: <a href="https://github.com/docker/docker-credential-helpers/releases">https://github.com/docker/docker-credential-helpers/releases</a></li>
+<li>Microsoft Windows Credential Manager: <a href="https://github.com/docker/docker-credential-helpers/releases">https://github.com/docker/docker-credential-helpers/releases</a></li>
+<li><a href="https://www.passwordstore.org/">pass</a>: <a href="https://github.com/docker/docker-credential-helpers/releases">https://github.com/docker/docker-credential-helpers/releases</a></li>
+</ul>
+<h4 id="configure-the-credentials-store" tabindex="-1">Configure the credentials store <a class="header-anchor" href="#configure-the-credentials-store" aria-hidden="true">🔗</a></h4>
+<p>You need to specify the credentials store in <code>$HOME/.docker/config.json</code>
+to tell the docker engine to use it. The value of the config property should be
+the suffix of the program to use (i.e. everything after <code>docker-credential-</code>).
+For example, to use <code>docker-credential-osxkeychain</code>:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;credsStore&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;osxkeychain&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>If you are currently logged in, run <code>docker logout</code> to remove
+the credentials from the file and run <code>docker login</code> again.</p>
+<h4 id="default-behavior" tabindex="-1">Default behavior <a class="header-anchor" href="#default-behavior" aria-hidden="true">🔗</a></h4>
+<p>By default, Docker looks for the native binary on each of the platforms, i.e.
+&quot;osxkeychain&quot; on macOS, &quot;wincred&quot; on windows, and &quot;pass&quot; on Linux. A special
+case is that on Linux, Docker will fall back to the &quot;secretservice&quot; binary if
+it cannot find the &quot;pass&quot; binary. If none of these binaries are present, it
+stores the credentials (i.e. password) in base64 encoding in the config files
+described above.</p>
+<h4 id="credential-helper-protocol" tabindex="-1">Credential helper protocol <a class="header-anchor" href="#credential-helper-protocol" aria-hidden="true">🔗</a></h4>
+<p>Credential helpers can be any program or script that follows a very simple protocol.
+This protocol is heavily inspired by Git, but it differs in the information shared.</p>
+<p>The helpers always use the first argument in the command to identify the action.
+There are only three possible values for that argument: <code>store</code>, <code>get</code>, and <code>erase</code>.</p>
+<p>The <code>store</code> command takes a JSON payload from the standard input. That payload carries
+the server address, to identify the credential, the user name, and either a password
+or an identity token.</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;ServerURL&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;https://index.docker.io/v1&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;Username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;david&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;Secret&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;passw0rd1&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>If the secret being stored is an identity token, the Username should be set to
+<code>&lt;token&gt;</code>.</p>
+<p>The <code>store</code> command can write error messages to <code>STDOUT</code> that the docker engine
+will show if there was an issue.</p>
+<p>The <code>get</code> command takes a string payload from the standard input. That payload carries
+the server address that the docker engine needs credentials for. This is
+an example of that payload: <code>https://index.docker.io/v1</code>.</p>
+<p>The <code>get</code> command writes a JSON payload to <code>STDOUT</code>. Docker reads the user name
+and password from this payload:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;Username&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;david&quot;</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">&quot;Secret&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;passw0rd1&quot;</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<p>The <code>erase</code> command takes a string payload from <code>STDIN</code>. That payload carries
+the server address that the docker engine wants to remove credentials for. This is
+an example of that payload: <code>https://index.docker.io/v1</code>.</p>
+<p>The <code>erase</code> command can write error messages to <code>STDOUT</code> that the docker engine
+will show if there was an issue.</p>
+<h3 id="credential-helpers" tabindex="-1">Credential helpers <a class="header-anchor" href="#credential-helpers" aria-hidden="true">🔗</a></h3>
+<p>Credential helpers are similar to the credential store above, but act as the
+designated programs to handle credentials for <em>specific registries</em>. The default
+credential store (<code>credsStore</code> or the config file itself) will not be used for
+operations concerning credentials of the specified registries.</p>
+<h4 id="configure-credential-helpers" tabindex="-1">Configure credential helpers <a class="header-anchor" href="#configure-credential-helpers" aria-hidden="true">🔗</a></h4>
+<p>If you are currently logged in, run <code>docker logout</code> to remove
+the credentials from the default store.</p>
+<p>Credential helpers are specified in a similar way to <code>credsStore</code>, but
+allow for multiple helpers to be configured at a time. Keys specify the
+registry domain, and values specify the suffix of the program to use
+(i.e. everything after <code>docker-credential-</code>).
+For example:</p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">&quot;credHelpers&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;registry.example.com&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;registryhelper&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;awesomereg.example.org&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;hip-star&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;unicorn.example.io&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vcbait&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="logout.html">logout</a></li>
+</ul>
+</body></html>

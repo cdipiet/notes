@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.176" />
+        <title>grep</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="grep" tabindex="-1">grep <a class="header-anchor" href="#grep" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.176</p>
+<nav class="table-of-contents"><ol><li><a href="#sintassi">Sintassi </a><ol><li><a href="#anchoring">Anchoring </a></li><li><a href="#singolo-carattere">Singolo carattere </a></li><li><a href="#bracket-expressions">Bracket Expressions </a></li><li><a href="#quantifiers">Quantifiers </a></li><li><a href="#alternation">Alternation </a></li><li><a href="#grouping">Grouping </a></li><li><a href="#special-backslash-expressions">Special Backslash Expressions </a></li></ol></li><li><a href="#spostare-i-soli-file-che-non-contengono-una-stringa">Spostare i soli file che non contengono una stringa </a></li><li><a href="#grep-come-sed">grep come sed </a></li><li><a href="#ricerca-di-file-di-un-certo-tipo-contenenti-una-stringa">Ricerca di file di un certo tipo contenenti una stringa </a></li><li><a href="#grep-a-colori">grep a colori </a></li><li><a href="#phone-numbers">Phone Numbers </a></li><li><a href="#estrarre-solamente-un-gruppo-regex-di-cattura">Estrarre solamente un gruppo regex di cattura </a></li></ol></nav><h1 id="grep-1" tabindex="-1">grep <a class="header-anchor" href="#grep-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>BRE basic regular expression</li>
+<li>ERE extended regular expression</li>
+</ul>
+<p>Nel GNU Grep nelle <strong>BRE</strong> i caratteri <code>? + { | ( )</code> sono interpretati come letterali. <br>
+Per attribuirgli il significato speciale delle regex devono essere escaped con un backslash <code>\</code></p>
+<pre><code>-E, --extended-regexp
+            Interpret PATTERNS as extended regular expressions (EREs, see below).
+
+-P, --perl-regexp
+            Interpret I&lt;PATTERNS&gt; as Perl-compatible regular expressions (PCREs). 
+
+-o, --only-matching
+            Print only the matched (non-empty) parts of a matching line, with each such part on a separate output line.
+
+-v, --invert-match
+            Invert the sense of matching, to select non-matching lines.
+
+-l, --files-with-matches
+            Suppress normal output; instead print the name of each input file from which output would normally have been printed.  Scanning each input file stops upon first match.
+-i, --ignore-case
+            Ignore case distinctions in patterns and input data, so that characters that differ only in case match each other.
+-Z, --null
+            Output a zero byte (the ASCII NUL character) instead of the character that normally follows a file name.  For example, grep -lZ outputs a zero byte after each file name instead of  the  usual
+            newline.   This  option makes the output unambiguous, even in the presence of file names containing unusual characters like newlines.  This option can be used with commands like find -print0,
+            perl -0, sort -z, and xargs -0 to process arbitrary file names, even those that contain newline characters.
+</code></pre>
+<h2 id="sintassi" tabindex="-1">Sintassi <a class="header-anchor" href="#sintassi" aria-hidden="true">🔗</a></h2>
+<h3 id="anchoring" tabindex="-1">Anchoring <a class="header-anchor" href="#anchoring" aria-hidden="true">🔗</a></h3>
+<p><code>^</code> <code>$</code></p>
+<p>The <code>^</code> (caret) symbol matches the empty string at the beginning of a line.<br>
+The <code>$</code> (dollar) symbol matches the empty string at the beginning of a line.</p>
+<pre><code class="language-bash">$ grep <span class="hljs-string">&#x27;^linux&#x27;</span> file.txt
+$ grep <span class="hljs-string">&#x27;linux$&#x27;</span> file.txt
+$ grep <span class="hljs-string">&#x27;^linux$&#x27;</span> file.txt
+</code></pre>
+<h3 id="singolo-carattere" tabindex="-1">Singolo carattere <a class="header-anchor" href="#singolo-carattere" aria-hidden="true">🔗</a></h3>
+<p><code>.</code></p>
+<p>The <code>.</code> (period) symbol is a meta-character that matches any single character.</p>
+<pre><code class="language-bash">$ grep <span class="hljs-string">&#x27;kan..roo&#x27;</span> file.txt
+</code></pre>
+<h3 id="bracket-expressions" tabindex="-1">Bracket Expressions <a class="header-anchor" href="#bracket-expressions" aria-hidden="true">🔗</a></h3>
+<p><code>[]</code></p>
+<p>Bracket expressions allows match a group of characters by enclosing them in brackets <code>[]</code>.<br>
+If the first character inside the brackets is the caret ~, then it matches any single character not enclosed in the brackets.</p>
+<p><a href="https://www.gnu.org/software/grep/manual/grep.html#Character-Classes-and-Bracket-Expressions">https://www.gnu.org/software/grep/manual/grep.html#Character-Classes-and-Bracket-Expressions</a></p>
+<pre><code class="language-bash">$ grep <span class="hljs-string">&#x27;acce[np]t&#x27;</span> file.txt
+$ grep <span class="hljs-string">&#x27;co[^l]a&#x27;</span> file.txt
+$ grep <span class="hljs-string">&#x27;^[A-Z]&#x27;</span> file.txt
+</code></pre>
+<pre><code>[:alnum:]	Alphanumeric characters.
+[:alpha:]	Alphabetic characters.
+[:blank:]	Space and tab.
+[:digit:]	Digits.
+[:lower:]	Lowercase letters.
+[:upper:]	Uppercase letters.
+</code></pre>
+<h3 id="quantifiers" tabindex="-1">Quantifiers <a class="header-anchor" href="#quantifiers" aria-hidden="true">🔗</a></h3>
+<p><code>* ? + {}</code></p>
+<table class="table"><thead>
+<tr>
+<th>Quantifier</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>*</code></td>
+<td>Match the preceding item zero or more times.</td>
+</tr>
+<tr>
+<td><code>?</code></td>
+<td>Match the preceding item zero or one time.</td>
+</tr>
+<tr>
+<td><code>+</code></td>
+<td>Match the preceding item one or more times.</td>
+</tr>
+<tr>
+<td><code>{n}</code></td>
+<td>Match the preceding item exactly n times.</td>
+</tr>
+<tr>
+<td><code>{n,}</code></td>
+<td>Match the preceding item at least n times.</td>
+</tr>
+<tr>
+<td><code>{,m}</code></td>
+<td>Match the preceding item at most m times.</td>
+</tr>
+<tr>
+<td><code>{n,m}</code></td>
+<td>Match the preceding item from n to m times.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">$ grep <span class="hljs-string">&#x27;s*right&#x27;</span>
+$ grep -E <span class="hljs-string">&#x27;^[A-Z].*[.,]$&#x27;</span> file.txt
+$ grep <span class="hljs-string">&#x27;b\?right&#x27;</span> file.txt
+$ grep -E <span class="hljs-string">&#x27;b?right&#x27;</span> file.txt
+$ grep -E <span class="hljs-string">&#x27;s+right&#x27;</span> file.txt
+$ grep -E <span class="hljs-string">&#x27;[[:digit:]]{3,9}&#x27;</span> file.txt
+$ 
+</code></pre>
+<h3 id="alternation" tabindex="-1">Alternation <a class="header-anchor" href="#alternation" aria-hidden="true">🔗</a></h3>
+<p><code>|</code></p>
+<p>The alternation operator <code>|</code> (pipe) allows you to specify different possible matches that can be literal strings or expression sets.</p>
+<pre><code class="language-bash">$ grep <span class="hljs-string">&#x27;fatal\|error\|critical&#x27;</span> /var/log/nginx/error.log
+$ grep -E <span class="hljs-string">&#x27;fatal|error|critical&#x27;</span> /var/log/nginx/error.log
+</code></pre>
+<h3 id="grouping" tabindex="-1">Grouping <a class="header-anchor" href="#grouping" aria-hidden="true">🔗</a></h3>
+<p><code>()</code></p>
+<p>Groups are created using parenthesis <code>()</code>.<br>
+When using basic regular expressions, the parenthesis must be escaped with a backslash (<code>\</code>).</p>
+<pre><code class="language-bash">$ grep -E <span class="hljs-string">&#x27;(fear)?less&#x27;</span> file.txt <span class="hljs-comment"># The ? quantifier makes the (fear) group optional:</span>
+</code></pre>
+<h3 id="special-backslash-expressions" tabindex="-1">Special Backslash Expressions <a class="header-anchor" href="#special-backslash-expressions" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>Expression</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>\b</code></td>
+<td>Match a word boundary.</td>
+</tr>
+<tr>
+<td><code>\&lt;</code></td>
+<td>Match an empty string at the beginning of a word.</td>
+</tr>
+<tr>
+<td><code>\&gt;</code></td>
+<td>Match an empty string at the end of a word.</td>
+</tr>
+<tr>
+<td><code>\w</code></td>
+<td>Match a word.</td>
+</tr>
+<tr>
+<td><code>\s</code></td>
+<td>Match a space.</td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-bash">$ grep <span class="hljs-string">&#x27;\b[ao]bject\b&#x27;</span> file.txt
+</code></pre>
+<h2 id="spostare-i-soli-file-che-non-contengono-una-stringa" tabindex="-1">Spostare i soli file che non contengono una stringa <a class="header-anchor" href="#spostare-i-soli-file-che-non-contengono-una-stringa" aria-hidden="true">🔗</a></h2>
+<p>Vogliamo spostare i soli file che non contengono <code>require('expect')</code>:</p>
+<pre><code class="language-bash">grep -LZ <span class="hljs-string">&quot;require(&#x27;expect&#x27;)&quot;</span> * | xargs -I{} -0 <span class="hljs-built_in">mv</span> {} ../../../hello_world/
+</code></pre>
+<pre><code>grep -L per ottenere in output i nomi dei file che non corrispondono alla stringa di ricerca
+grep -Z per utilizzare \0 come separatore dei nomi dei file prodotti in output, utile per gestire file i cui nomi possono contenere \n o spazi
+xargs -0 per ricevere una lista di elementi separati dal carattere \0
+</code></pre>
+<h2 id="grep-come-sed" tabindex="-1">grep come sed <a class="header-anchor" href="#grep-come-sed" aria-hidden="true">🔗</a></h2>
+<p>puo essere usato al posto di sed con estrazione dei gruppi,<br>
+perche stampa in output la sola parte di espressione regolare corrisposta</p>
+<pre><code class="language-bash"><span class="hljs-built_in">tail</span> /var/log/syslog –F | grep --line-buffered “iptables denied:” | grep –o “DST=[0-9\.]*[[:space:]]”
+</code></pre>
+<h2 id="ricerca-di-file-di-un-certo-tipo-contenenti-una-stringa" tabindex="-1">Ricerca di file di un certo tipo contenenti una stringa <a class="header-anchor" href="#ricerca-di-file-di-un-certo-tipo-contenenti-una-stringa" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">grep -r --include=<span class="hljs-string">&#x27;*.h&#x27;</span> <span class="hljs-string">&#x27;the string&#x27;</span> .
+</code></pre>
+<h2 id="grep-a-colori" tabindex="-1">grep a colori <a class="header-anchor" href="#grep-a-colori" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">alias</span> grep=<span class="hljs-string">&#x27;grep --colour=auto&#x27;</span>
+
+[0-3] is the same as [0123]
+[a-k] is the same as [abcdefghijk]
+[A-C] is the same as [ABC]
+[A-Ca-k] is the same as
+[ABCabcdefghijk]
+</code></pre>
+<p>There are also some alternate forms:</p>
+<pre><code class="language-bash">[[:alpha:]] is the same as [a-zA-Z]
+[[:upper:]] is the same as [A-Z]
+[[:lower:]] is the same as [a-z]
+[[:digit:]] is the same as [0-9]
+[[:alnum:]] is the same as [0-9a-zA-Z]
+[[:space:]] matches any white space including tabs
+</code></pre>
+<p>Esempio</p>
+<pre><code class="language-bash">grep <span class="hljs-string">&quot;([^()]*)a&quot;</span> file 
+</code></pre>
+<p>returns any line containing a pair of parentheses that are innermost and are followed by the letter &quot;a&quot;. So it matches these lines:\</p>
+<pre><code>(hello)a
+(aksjdhaksj d ka)a
+</code></pre>
+<p>But not this</p>
+<pre><code>x=(y+2(x+1))a
+</code></pre>
+<h2 id="phone-numbers" tabindex="-1">Phone Numbers <a class="header-anchor" href="#phone-numbers" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">grep <span class="hljs-string">&quot;[[:digit:]]\{3\}[ -]\?[[:digit:]]\{4\}&quot;</span>file
+</code></pre>
+<p>This matches phone numbers, possibly containing a dash or whitespace in the middle.</p>
+<pre><code class="language-bash">grep <span class="hljs-string">&#x27;&lt;query &#x27;</span> query_full.xml|<span class="hljs-built_in">cut</span> -d \&quot; -f 2|<span class="hljs-built_in">sort</span>&gt;mappedClassesCH.txt
+grep <span class="hljs-string">&#x27;hello\.gif&#x27;</span> file
+
+<span class="hljs-built_in">cat</span> ACCOUNT_SUBSCRIBER.RATING_9.1301398903278-0.0.data|grep -E <span class="hljs-string">&#x27;target_account_no \[[0-9]+\]&#x27;</span>
+target_account_no [1000247771]
+target_account_no [1000247771]
+
+<span class="hljs-built_in">cat</span> ACCOUNT_SUBSCRIBER.RATING_9.1301398903278-0.0.data|grep -E <span class="hljs-string">&#x27;balance[0-9]+_target_bal_id \[[0-9]+\]&#x27;</span>
+balance10_target_bal_id [742]
+balance10_target_bal_id [744]
+</code></pre>
+<h2 id="estrarre-solamente-un-gruppo-regex-di-cattura" tabindex="-1">Estrarre solamente un gruppo regex di cattura <a class="header-anchor" href="#estrarre-solamente-un-gruppo-regex-di-cattura" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ grep -oP <span class="hljs-string">&#x27;foobar \K\w+&#x27;</span> test.txt
+<span class="hljs-comment"># The \K is the short-form (and more efficient form) of (?&lt;=pattern) which you use as a zero-width look-behind assertion before the text you want to output. (?=pattern) can be used as a zero-width look-ahead assertion after the text you want to output.</span>
+
+
+$ grep -oP <span class="hljs-string">&#x27;foo \K\w+(?= bar)&#x27;</span> test.txt
+$ grep -oP <span class="hljs-string">&#x27;(?&lt;=foo )\w+(?= bar)&#x27;</span> test.txt
+
+$ sed -n <span class="hljs-string">&quot;s/^.*foobar\s*\(\S*\).*$/\1/p&quot;</span>
+    -n     suppress printing
+    s      substitute
+    ^.*    anything before foobar
+    foobar initial search match
+    \s*    any white space character (space)
+    \(     start capture group
+    \S*    capture any non-white space character (word)
+    \)     end capture group
+    .*$    anything after the capture group
+    \1     substitute everything with the 1st capture group
+    p      <span class="hljs-built_in">print</span> it
+
+$ string=<span class="hljs-string">&#x27;This is a sample 123 text and some 987 numbers&#x27;</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$string</span>&quot;</span> | sed -rn <span class="hljs-string">&#x27;s/[^[:digit:]]*([[:digit:]]+)[^[:digit:]]+([[:digit:]]+)[^[:digit:]]*/\1 \2/p&#x27;</span>
+    -E, -r, --regexp-extended use extended regular expressions <span class="hljs-keyword">in</span> the script (<span class="hljs-keyword">for</span> portability use POSIX -E).
+    
+</code></pre>
+</body></html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.868" />
+        <title>shell_shebang</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="shell_shebang" tabindex="-1">shell_shebang <a class="header-anchor" href="#shell_shebang" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.868</p>
+<nav class="table-of-contents"><ol><li><a href="#help">help </a></li><li><a href="#intestazione---shebang">Intestazione - shebang </a></li><li><a href="#shell-disponibili-nel-sistema">Shell disponibili nel sistema </a></li><li><a href="#shell-attuale">Shell attuale </a></li><li><a href="#cambiare-la-shell-utente">Cambiare la shell utente </a></li><li><a href="#basi">Basi </a></li><li><a href="#per-inviare-con-echo-il-carattere-esc">Per inviare con echo il carattere ESC </a></li><li><a href="#interazioni-con-x">Interazioni con X </a><ol><li><a href="#aprire-applicazioni-associate-ad-un-file">Aprire applicazioni associate ad un file </a></li><li><a href="#reisuo---cercare-il-tasto-rsysq">REISUO - Cercare il tasto RsysQ </a></li><li><a href="#shutdown">Shutdown </a></li><li><a href="#effettuare-pipe-da-shell-alla-clipboard-x">Effettuare pipe da shell alla clipboard X </a></li></ol></li><li><a href="#test-shell-interattiva-(nel-caso-di-connessioni-ssh-non-debbono-essere-eseguiti-comandi-stty)">Test Shell Interattiva (nel caso di connessioni SSH non debbono essere eseguiti comandi stty) </a></li><li><a href="#conditional-pipes">Conditional pipes </a></li></ol></nav><h1 id="shell-linux" tabindex="-1">Shell Linux <a class="header-anchor" href="#shell-linux" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="http://tldp.org/LDP/abs/html/">http://tldp.org/LDP/abs/html/</a></li>
+<li><a href="https://bash.cyberciti.biz/guide/Main_Page">https://bash.cyberciti.biz/guide/Main_Page</a></li>
+<li><a href="https://en.wikibooks.org/wiki/Bash_Shell_Scripting">https://en.wikibooks.org/wiki/Bash_Shell_Scripting</a></li>
+<li><a href="https://wiki.bash-hackers.org/start">https://wiki.bash-hackers.org/start</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/">https://www.gnu.org/software/bash/manual/</a></li>
+<li><a href="https://www.gnu.org/software/coreutils/manual/html_node/index.html">https://www.gnu.org/software/coreutils/manual/html_node/index.html</a></li>
+<li><a href="https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html">https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html</a></li>
+</ul>
+<h2 id="help" tabindex="-1">help <a class="header-anchor" href="#help" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">man bash
+man bash-builtins
+man -k <span class="hljs-built_in">wait</span>
+info bash
+<span class="hljs-built_in">help</span>
+<span class="hljs-built_in">help</span> <span class="hljs-built_in">declare</span>
+<span class="hljs-built_in">help</span> [
+<span class="hljs-built_in">help</span> [[ espressione ]]
+<span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span>
+<span class="hljs-built_in">help</span> <span class="hljs-built_in">test</span>
+<span class="hljs-built_in">help</span> <span class="hljs-built_in">wait</span>
+<span class="hljs-built_in">help</span> variables
+<span class="hljs-built_in">help</span> <span class="hljs-built_in">read</span>
+<span class="hljs-built_in">help</span> <span class="hljs-built_in">trap</span>
+</code></pre>
+<h2 id="intestazione---shebang" tabindex="-1">Intestazione - shebang <a class="header-anchor" href="#intestazione---shebang" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html">https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html</a></li>
+</ul>
+<pre><code class="language-bash">    <span class="hljs-comment">#!/usr/bin/env bash # lends you some flexibility on different systems, non si possono passare parametri a bash in maniera portabile</span>
+    
+    <span class="hljs-comment">#!/bin/bash     # gives you explicit control on a given system of what executable is called, si possono passare parametri a bash</span>
+</code></pre>
+<p>Per utilizzare la maniera <code>env</code> passando anche i parametri è possibile utilizzare il nuovo parametro <code>-S</code>
+che però non è molto portabile:</p>
+<p><a href="https://stackoverflow.com/questions/4303128/how-to-use-multiple-arguments-for-awk-with-a-shebang-i-e">https://stackoverflow.com/questions/4303128/how-to-use-multiple-arguments-for-awk-with-a-shebang-i-e</a></p>
+<p>starting with coreutils 8.30 and according to its documentation:</p>
+<p><a href="https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html#g_t_002dS_002f_002d_002dsplit_002dstring-usage-in-scripts">https://www.gnu.org/software/coreutils/manual/html_node/env-invocation.html#g_t_002dS_002f_002d_002dsplit_002dstring-usage-in-scripts</a></p>
+<p>you will be able to use:</p>
+<pre><code>#!/usr/bin/env -S command arg1 arg2 ...
+</code></pre>
+<p>Most operating systems (e.g. GNU/Linux, BSDs) treat all text after the first space as a single argument. When using env in a script it is thus not possible to specify multiple arguments.</p>
+<p>The <code>-S/--split-string</code> options enable using multiple arguments on the first one of scripts (<code>**shebang**</code> line, <code>#!</code>).</p>
+<p>When a script’s interpreter is in a known location, scripts typically contain the absolute file name in their first line:</p>
+<pre><code>#!/bin/sh
+echo hello
+</code></pre>
+<p>When a script’s interpreter is in a non-standard location in the <code>PATH</code> environment variable, it is recommended to use <code>env</code> on the first line of the script to find the executable and run it:</p>
+<pre><code>#!/usr/bin/env bash
+echo hello
+</code></pre>
+<p>Esempio:</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env -S bash -x</span>
+IFS=<span class="hljs-string">&quot; &quot;</span>
+FS_NUM=1
+<span class="hljs-comment">#grep -v \# /etc/fstab | grep ntfs-3g | while read FS MP REST</span>
+grep ntfs-3g /etc/fstab | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> FS MP REST
+<span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">if</span> [[ ! <span class="hljs-variable">$FS</span> == \#* ]]
+    <span class="hljs-keyword">then</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${FS_NUM}</span>: file system: <span class="hljs-variable">${FS}</span>&quot;</span>
+        <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">${FS_NUM}</span>: mount point: <span class="hljs-variable">${MP}</span>&quot;</span>
+        ((FS_NUM++))
+    <span class="hljs-keyword">fi</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="shell-disponibili-nel-sistema" tabindex="-1">Shell disponibili nel sistema <a class="header-anchor" href="#shell-disponibili-nel-sistema" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /etc/shells
+</code></pre>
+<h2 id="shell-attuale" tabindex="-1">Shell attuale <a class="header-anchor" href="#shell-attuale" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span>
+$ <span class="hljs-built_in">cat</span> /etc/passwd|grep <span class="hljs-variable">$USER</span> 
+</code></pre>
+<h2 id="cambiare-la-shell-utente" tabindex="-1">Cambiare la shell utente <a class="header-anchor" href="#cambiare-la-shell-utente" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Command-line_shell">https://wiki.archlinux.org/title/Command-line_shell</a></li>
+</ul>
+<pre><code class="language-bash">$ chsh -l
+$ chsh -s /bin/bash
+$ grep <span class="hljs-variable">$USER</span> /etc/passwd   
+</code></pre>
+<h2 id="basi" tabindex="-1">Basi <a class="header-anchor" href="#basi" aria-hidden="true">🔗</a></h2>
+<p><code>POSIX</code>: Portable Operating System Interface</p>
+<p><code>$-</code>contiene l'insieme dei flag impostati per la shell corrente</p>
+<p><code>cat -v -t -e</code> per stampare i caratteri non stampabili e $ a fine linea<br>
+<code>ls -Q</code> per racchiudere i nomi tra &quot; utile per copiare i nomi complicati<br>
+<code>ls -b</code> quota i caratteri non stampabili</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$SHELL</span>  
+/bin/bash  
+$ <span class="hljs-built_in">type</span> mc  
+mc è /usr/bin/mc  
+$ file /usr/bin/mc  
+/usr/bin/mc: PE32+ executable (console) x86-64 (stripped to external PDB), <span class="hljs-keyword">for</span> MS Windows  
+$ whereis <span class="hljs-built_in">mv</span>  
+<span class="hljs-built_in">mv</span>: /usr/bin/mv.exe /usr/share/man/man1/mv.1.gz /usr/share/man/man1p/mv.1p.gz  
+$ locate <span class="hljs-built_in">mv</span>  
+</code></pre>
+<h2 id="per-inviare-con-echo-il-carattere-esc" tabindex="-1">Per inviare con echo il carattere <code>ESC</code> <a class="header-anchor" href="#per-inviare-con-echo-il-carattere-esc" aria-hidden="true">🔗</a></h2>
+<p>bisogna usare il seguente workaround:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">export</span> e=<span class="hljs-string">&quot;`echo x|tr x &#x27;\033&#x27;`&quot;</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$e</span>[1mciao&quot;</span>
+</code></pre>
+<h2 id="interazioni-con-x" tabindex="-1">Interazioni con X <a class="header-anchor" href="#interazioni-con-x" aria-hidden="true">🔗</a></h2>
+<h3 id="aprire-applicazioni-associate-ad-un-file" tabindex="-1">Aprire applicazioni associate ad un file <a class="header-anchor" href="#aprire-applicazioni-associate-ad-un-file" aria-hidden="true">🔗</a></h3>
+<pre><code>xdg-open - opens a file or URL in the user's preferred application
+
+xdg-open /usr/share/doc/git/html/user-manual.html
+</code></pre>
+<h3 id="reisuo---cercare-il-tasto-rsysq" tabindex="-1">REISUO - Cercare il tasto <code>RsysQ</code> <a class="header-anchor" href="#reisuo---cercare-il-tasto-rsysq" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> showkey -k
+</code></pre>
+<p>premendo <code>Stamp</code> si ottiene <code>99</code>, è lui!</p>
+<h3 id="shutdown" tabindex="-1">Shutdown <a class="header-anchor" href="#shutdown" aria-hidden="true">🔗</a></h3>
+<p><code>ALT+Stamp</code> e mantenendoli sempre premuti: <code>REISUO</code></p>
+<h3 id="effettuare-pipe-da-shell-alla-clipboard-x" tabindex="-1">Effettuare pipe da shell alla clipboard X <a class="header-anchor" href="#effettuare-pipe-da-shell-alla-clipboard-x" aria-hidden="true">🔗</a></h3>
+<pre><code>uptime | xclip
+</code></pre>
+<h2 id="test-shell-interattiva-(nel-caso-di-connessioni-ssh-non-debbono-essere-eseguiti-comandi-stty)" tabindex="-1">Test Shell Interattiva (nel caso di connessioni SSH non debbono essere eseguiti comandi stty) <a class="header-anchor" href="#test-shell-interattiva-(nel-caso-di-connessioni-ssh-non-debbono-essere-eseguiti-comandi-stty)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">if</span> [ -z <span class="hljs-variable">$PS1</span> ] <span class="hljs-comment"># no prompt?</span>
+<span class="hljs-keyword">then</span>
+<span class="hljs-comment"># non-interactive</span>
+...
+<span class="hljs-keyword">else</span>
+<span class="hljs-comment"># interactive</span>
+...
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-keyword">case</span> $- <span class="hljs-keyword">in</span>
+*i*) <span class="hljs-comment"># interactive shell</span>
+;;
+*) <span class="hljs-comment"># non-interactive shell</span>
+;;
+
+<span class="hljs-keyword">if</span> [[ -t <span class="hljs-string">&quot;<span class="hljs-variable">$fd</span>&quot;</span> || -S /dev/stdin ]]
+<span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> interactive
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> non-interactive
+<span class="hljs-keyword">fi</span>
+</code></pre>
+<h2 id="conditional-pipes" tabindex="-1">Conditional pipes <a class="header-anchor" href="#conditional-pipes" aria-hidden="true">🔗</a></h2>
+<p>In using Debian/Ubuntu, I often find myself doing an <code>apt-cache search &lt;foo&gt;</code> - i.e., searching the package database. Unfortunately, the copious return from the search often overruns my screen, r
+equiring paging up - or, if I do remember to pipe the output to 'less',
+turns out to be annoyingly short (and now requires quitting out of the pager.) So, a little while ago,
+I decided to be lazy^Wefficient and write a script... actually, a function - a script wouldn't do, since the variable I'm looking for only exists in the current shell environment.</p>
+<p>From my <code>~/.bashrc</code>:</p>
+<pre><code class="language-bash"><span class="hljs-function"><span class="hljs-title">ac</span></span> ()
+{
+out=$(/usr/bin/apt-cache search <span class="hljs-string">&quot;<span class="hljs-variable">$@</span>&quot;</span>)
+<span class="hljs-keyword">if</span> [ $(($(echo &quot;<span class="hljs-variable">$out</span>&quot;|/usr/bin/wc -l)+<span class="hljs-number">2</span>)) -ge <span class="hljs-variable">$LINES</span> ]
+<span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$out</span>&quot;</span> | /usr/bin/less
+<span class="hljs-keyword">else</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$out</span>&quot;</span>
+<span class="hljs-keyword">fi</span>
+}
+<span class="hljs-built_in">export</span> -f ac
+</code></pre>
+<p>Using the $LINES Bash variable, which tells us how many lines our current terminal is capable of displaying, makes it relatively simple to decide whether to use a pipe or not. I also adjust the comparison a bit to account for the prompt.</p>
+</body></html>

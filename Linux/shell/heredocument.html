@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.829" />
+        <title>heredocument</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="heredocument" tabindex="-1">heredocument <a class="header-anchor" href="#heredocument" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.829</p>
+<nav class="table-of-contents"><ol><li><a href="#file-literals">File literals </a><ol><li><a href="#unix-shells">Unix shells </a><ol><li><a href="#here-strings">Here strings </a></li></ol></li><li><a href="#python">Python </a></li><li><a href="#c%2B%2B">C++ </a></li><li><a href="#yaml">YAML </a></li></ol></li><li><a href="#see-also">See also </a></li><li><a href="#references">References </a><ol><li><a href="#general">General </a></li></ol></li><li><a href="#external-links">External links </a></li></ol></nav><h1 id="here-document" tabindex="-1">Here Document <a class="header-anchor" href="#here-document" aria-hidden="true">🔗</a></h1>
+<p><a href="https://en.wikipedia.org/wiki/Here_document">https://en.wikipedia.org/wiki/Here_document</a></p>
+<p>In <a href="computing" title="wikilink">computing</a>, a <strong>here document</strong>
+(<strong>here-document</strong>, <strong>here-text</strong>, <strong>heredoc</strong>, <strong>hereis</strong>,
+<strong>here-string</strong> or <strong>here-script</strong>) is a file
+<a href="literal_(computer_programming)" title="wikilink">literal</a> or <a href="input_stream" title="wikilink">input
+stream</a> literal: it is a section of a <a href="source_code" title="wikilink">source
+code</a> file that is treated as if it were a
+separate <a href="Computer_file" title="wikilink">file</a>. The term is also used for a
+form of multiline <a href="string_literal" title="wikilink">string literals</a> that use
+similar syntax, preserving line breaks and other whitespace (including
+indentation) in the text.</p>
+<p>Here documents originate in the <a href="Unix_shell" title="wikilink">Unix shell</a>,[1]
+and are found in the <a href="Bourne_shell" title="wikilink">Bourne shell</a> (<code>sh</code>), <a href="C_shell" title="wikilink">C
+shell</a> (<code>csh</code>),[2] <a href="tcsh" title="wikilink">tcsh</a>
+(<code>tcsh</code>),[3] <a href="KornShell" title="wikilink">KornShell</a> (<code>ksh</code>), <a href="Bash_(Unix_shell)" title="wikilink">Bourne Again
+Shell</a> (<code>bash</code>), and <a href="Z_shell" title="wikilink">Z
+shell</a> (<code>zsh</code>), among others. Here document-style
+string literals are found in various <a href="high-level_language" title="wikilink">high-level
+languages</a>, notably the <a href="Perl" title="wikilink">Perl
+programming language</a> (syntax inspired by Unix shell)
+and languages influenced by Perl, such as <a href="PHP" title="wikilink">PHP</a> and
+<a href="Ruby_(programming_language)" title="wikilink">Ruby</a>.
+<a href="JavaScript" title="wikilink">JavaScript</a> also supports this functionality via
+<a href="String_interpolation#JavaScript" title="wikilink">template literals</a>, a
+feature added in its 6th revision
+(<a href="ECMAScript#6th_Edition_%E2%80%93_ECMAScript_2015" title="wikilink">ES6</a>). Other
+high-level languages such as
+<a href="Python_(programming_language)" title="wikilink">Python</a>,
+<a href="Julia_(programming_language)" title="wikilink">Julia</a> and
+<a href="Tcl" title="wikilink">Tcl</a> have other facilities for multiline strings.</p>
+<p>Here documents can be treated either as files or strings. Some shells
+treat them as a <a href="format_string" title="wikilink">format string</a> literal,
+allowing <a href="variable_(programming)#Interpolation" title="wikilink">variable
+substitution</a> and
+<a href="command_substitution" title="wikilink">command substitution</a> inside the
+literal.</p>
+<p>The most common syntax for here documents, originating in Unix shells,
+is <code>&lt;&lt;</code> followed by a <a href="Delimiter" title="wikilink">delimiting</a>
+<a href="identifier" title="wikilink">identifier</a> (often the word <em>EOF</em> or <em>END</em>[4]),
+followed, starting on the next line, by the text to be quoted, and then
+closed by the same delimiting identifier on its own line. This syntax is
+because here documents are formally stream literals, and the content of
+the document is redirected to <a href="stdin" title="wikilink">stdin</a> (standard input)
+of the preceding command; the here document syntax is by analogy with
+the syntax for input <a href="Redirection_(computing)" title="wikilink">redirection</a>,
+which is <code>&lt;</code> “take input from the following file”.</p>
+<p>Other languages often use substantially similar syntax, but details of
+syntax and actual functionality can vary significantly. When used simply
+for string literals, the <code>&lt;&lt;</code> does not indicate indirection, but is
+simply a starting delimiter convention. In some languages, such as Ruby,
+<code>&lt;&lt;</code> is also used for input redirection, thus resulting in <code>&lt;&lt;</code> being
+used twice if one wishes to redirect from a here document string
+literal.</p>
+<h2 id="file-literals" tabindex="-1">File literals <a class="header-anchor" href="#file-literals" aria-hidden="true">🔗</a></h2>
+<p>Narrowly speaking, here documents are file literals or stream literals.
+These originate in the Unix shell, though similar facilities are
+available in some other languages.</p>
+<h3 id="unix-shells" tabindex="-1">Unix shells <a class="header-anchor" href="#unix-shells" aria-hidden="true">🔗</a></h3>
+<p>Here documents are available in many Unix shells.[5] In the following
+example, text is passed to the <a href="tr_(Unix)" title="wikilink"><code>tr</code></a> command
+(transliterating lower to upper-case) using a here document. This could
+be in a shell file, or entered interactively at a prompt.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt; <span class="hljs-string">END</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">one two three</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">four five six</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">END</span></span>
+ONE TWO THREE
+FOUR FIVE SIX
+</code></pre>
+<p><code>END</code> was used as the delimiting identifier. It specified the start and
+end of the here document. The redirect and the delimiting identifier do
+not need to be separated by a space: <code>&lt;&lt;END</code> or <code>&lt;&lt; END</code> both work
+equally well.</p>
+<p>By default, behavior is largely identical to the contents of double
+quotes: variable names are replaced by their values, commands within
+backticks are evaluated, etc.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">EOF</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">\$ Working dir &quot;$PWD&quot; `pwd`</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">EOF</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">Working <span class="hljs-built_in">dir</span> <span class="hljs-string">&quot;/home/user&quot;</span> /home/user</span>
+</code></pre>
+<p>This can be disabled by quoting any part of the label, which is then
+ended by the unquoted value; the behavior is essentially identical to
+that if the contents were enclosed in single quotes. Thus for example by
+setting it in single quotes:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash">\$ Working <span class="hljs-built_in">dir</span> <span class="hljs-string">&quot;<span class="hljs-variable">$PWD</span>&quot;</span> `<span class="hljs-built_in">pwd</span>`</span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash">EOF</span>
+\$ Working dir &quot;$PWD&quot; `pwd`
+</code></pre>
+<p>Double quotes may also be used, but this is subject to confusion,
+because expansion <em>does</em> occur in a double-quoted string, but does <em>not</em>
+occur in a here document with double-quoted delimiter.[6] Single- and
+double-quoted delimiters are distinguished in some other languages,
+notably <a href="#Perl" title="wikilink">Perl</a> (see below), where behavior parallels
+the corresponding string quoting.</p>
+<p>In <a href="POSIX_shell" title="wikilink">POSIX shell</a> but not csh/tcsh, appending a
+minus sign to the <code>&lt;&lt;</code> (i.e. <code>&lt;&lt;-</code>) has the effect that leading tabs are
+ignored.[7] This allows indenting here documents in shell scripts
+(primarily for alignment with existing indentation) without changing
+their value:</p>
+<p>A script containing:</p>
+<pre><code class="language-sh">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt;- <span class="hljs-string">END_TEXT
+Here doc with &lt;&lt;-
+ A single space character (i.e. 0x20 )  is at the beginning of this line
+ This line begins with a single TAB character i.e 0x09  as does the next line
+ END_TEXT</span>
+
+<span class="hljs-built_in">echo</span> The intended end was before this line 
+<span class="hljs-built_in">echo</span> and these were not processed by <span class="hljs-built_in">tr</span>
+<span class="hljs-built_in">echo</span> +++++++++++++++
+
+LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt; <span class="hljs-string">END_TEXT
+Here doc with &lt;&lt;
+ A single space character (i.e. 0x20 )  is at the beginning of this line
+ This line begins with a single TAB character i.e 0x09 as does the next line
+ END_TEXT</span>
+
+<span class="hljs-built_in">echo</span> The intended end was before this line, 
+<span class="hljs-built_in">echo</span> but because the line with the delimiting Identifier began with a TAB it was NOT recognized and
+<span class="hljs-built_in">echo</span> the <span class="hljs-built_in">tr</span> <span class="hljs-built_in">command</span> continued processing.
+</code></pre>
+<p>produces:</p>
+<pre><code class="language-text">HERE DOC WITH &lt;&lt;-
+ A SINGLE SPACE CHARACTER (I.E. 0X20 )  IS AT THE BEGINNING OF THIS LINE
+THIS LINE BEGINS WITH A SINGLE TAB CHARACTER I.E 0X09  AS DOES THE NEXT LINE
+The intended end was before this line
+and these were not processed by tr
++++++++++++++++
+HERE DOC WITH &lt;&lt;
+ A SINGLE SPACE CHARACTER (I.E. 0X20 )  IS AT THE BEGINNING OF THIS LINE
+ THIS LINE BEGINS WITH A SINGLE TAB CHARACTER I.E 0X09 AS DOES THE NEXT LINE
+ END_TEXT
+
+ECHO THE INTENDED END WAS BEFORE THIS LINE, 
+ECHO BUT BECAUSE THE LINE WITH THE DELIMITING IDENTIFIER BEGAN WITH A TAB IT WAS NOT RECOGNIZED AND
+ECHO THE TR COMMAND CONTINUED PROCESSING.
+</code></pre>
+<p>Another use is to output to a file:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">EOF &gt; ~/testFile001</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">  3 spaces precede this text.</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">A single tab character is at the beginning of this line.</span></span>
+<span class="hljs-meta prompt_">&gt;</span><span class="language-bash"><span class="hljs-string">Nothing precedes this text</span></span>
+EOF
+</code></pre>
+<h4 id="here-strings" tabindex="-1">Here strings <a class="header-anchor" href="#here-strings" aria-hidden="true">🔗</a></h4>
+<p>A <strong>here string</strong> (available in <a href="bash_(Unix_shell)" title="wikilink">bash</a>,
+<a href="KornShell" title="wikilink">ksh</a>, or <a href="zsh" title="wikilink">zsh</a>) is syntactically
+similar, consisting of <code>&lt;&lt;&lt;</code>, and effects input redirection from a
+<em>word</em> (a sequence treated as a unit by the shell, in this context
+generally a string literal). In this case the usual shell syntax is used
+for the word (“here string syntax”), with the only syntax being the
+redirection: a here string is an ordinary string used for input
+redirection, not a special kind of string.</p>
+<p>A single word need not be quoted:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt;&lt; <span class="hljs-string">one</span></span>
+ONE
+</code></pre>
+<p>In case of a string with spaces, it must be quoted:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt;&lt; <span class="hljs-string">&#x27;one two three&#x27;</span></span>
+ONE TWO THREE
+</code></pre>
+<p>This could also be written as:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">foo=<span class="hljs-string">&#x27;one two three&#x27;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt;&lt; <span class="hljs-string">&quot;<span class="hljs-variable">$foo</span>&quot;</span></span>
+ONE TWO THREE
+</code></pre>
+<p>Multiline strings are acceptable, yielding:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt;&lt; <span class="hljs-string">&#x27;one</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">two three&#x27;</span></span>
+ONE
+TWO THREE
+</code></pre>
+<p>Note that leading and trailing newlines, if present, are included:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">LANG=C <span class="hljs-built_in">tr</span> a-z A-Z &lt;&lt;&lt; <span class="hljs-string">&#x27;</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">one</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">two three</span></span>
+<span class="hljs-meta prompt_">&gt; </span><span class="language-bash"><span class="hljs-string">&#x27;</span></span>
+
+ONE
+TWO THREE
+<span class="hljs-meta prompt_">
+$</span><span class="language-bash">
+</span></code></pre>
+<p>The key difference from here documents is that, in here documents, the
+delimiters are on separate lines; the leading and trailing newlines are
+stripped. Unlike here documents, here strings do not use delimiters.</p>
+<p>Here strings are particularly useful for commands that often take short
+input, such as the calculator
+<a href="bc_(programming_language)" title="wikilink"><code>bc</code></a>:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">bc &lt;&lt;&lt; <span class="hljs-string">2^10</span></span>
+1024
+</code></pre>
+<p>Note that here string behavior can also be accomplished (reversing the
+order) via piping and the <a href="echo_(command)" title="wikilink"><code>echo</code></a> command,
+as in:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;one two three&#x27;</span> | LANG=C <span class="hljs-built_in">tr</span> a-z A-Z</span>
+ONE TWO THREE
+</code></pre>
+<p>however here strings are particularly useful when the last command needs
+to run in the current process, as is the case with the
+<a href="read_(Unix)" title="wikilink"><code>read</code></a> builtin:</p>
+<pre><code class="language-console">echo &#x27;one two three&#x27; | read -r a b c
+echo &quot;$a $b $c&quot;
+</code></pre>
+<p>yields nothing, while</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">read</span> -r a b c &lt;&lt;&lt; <span class="hljs-string">&#x27;one two three&#x27;</span></span>
+<span class="hljs-meta prompt_">$ </span><span class="language-bash"><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$a</span> <span class="hljs-variable">$b</span> <span class="hljs-variable">$c</span>&quot;</span></span>
+one two three
+</code></pre>
+<p>This happens because in the previous example piping causes <code>read</code> to run
+in a subprocess, and as such can not affect the environment of the
+parent process.</p>
+<h3 id="python" tabindex="-1">Python <a class="header-anchor" href="#python" aria-hidden="true">🔗</a></h3>
+<p><a href="Python_(programming_language)" title="wikilink">Python</a> supports multi-line
+strings as a &quot;verbatim&quot; string. They may be enclosed in 3 single (') or
+double (&quot;) quotation marks, the latter is shown in the examples below.</p>
+<pre><code class="language-python"><span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;&quot;&quot;
+Customer: Not much of a cheese shop is it?
+Shopkeeper: Finest in the district , sir.
+&quot;&quot;&quot;</span>)
+</code></pre>
+<p>From Python 3.6 onwards, verbatim f-strings support variable and
+expression interpolation.</p>
+<pre><code class="language-python">shop_type = <span class="hljs-string">&quot;CHEESE&quot;</span>
+accolade = <span class="hljs-string">&quot;finest&quot;</span>
+<span class="hljs-built_in">print</span>(<span class="hljs-string">f&quot;&quot;&quot;
+Customer: Not much of a <span class="hljs-subst">{shop_type.lower()}</span> shop is it?
+Shopkeeper: <span class="hljs-subst">{accolade.capitalize()}</span> in the district , sir.
+&quot;&quot;&quot;</span>)
+</code></pre>
+<h3 id="c%2B%2B" tabindex="-1">C++ <a class="header-anchor" href="#c%2B%2B" aria-hidden="true">🔗</a></h3>
+<p>Since <a href="C++11" title="wikilink">C++11</a>, C++ supports string literals with
+custom delimiter (&quot;my_delimiter&quot; in this example):</p>
+<pre><code class="language-cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;ostream&gt;</span></span>
+
+<span class="hljs-type">const</span> <span class="hljs-type">char</span>* str = <span class="hljs-string">R&quot;my_delimiter(Start of string. New line
+slash \ quote &quot; &#x27; parens ) ( End of string)my_delimiter&quot;</span>;
+std::cout &lt;&lt; str &lt;&lt; std::endl;
+</code></pre>
+<p>will print out</p>
+<pre><code>Start of string. New line
+slash \ quote &quot; ' parens ) ( End of string
+</code></pre>
+<h3 id="yaml" tabindex="-1">YAML <a class="header-anchor" href="#yaml" aria-hidden="true">🔗</a></h3>
+<p>YAML primarily relies on whitespace indentation for structure, making it
+resistant to <a href="delimiter_collision" title="wikilink">delimiter collision</a> and
+capable representing multi-line strings with folded string literals:</p>
+<pre><code class="language-yaml"><span class="hljs-meta">---</span>
+<span class="hljs-attr">caption:</span> <span class="hljs-string">&quot;Example of heredoc-style functionality using YAML&quot;</span>
+<span class="hljs-attr">date:</span>    <span class="hljs-string">&quot;2007-06-01&quot;</span>
+<span class="hljs-attr">example:</span> <span class="hljs-string">&gt;
+        HTML goes into YAML without modification
+</span><span class="hljs-attr">message:</span> <span class="hljs-string">|</span>
+
+        <span class="hljs-string">&lt;blockquote</span> <span class="hljs-string">style=&quot;font:</span> <span class="hljs-string">italic</span> <span class="hljs-string">12pt</span> <span class="hljs-string">Times&quot;&gt;</span>
+        <span class="hljs-string">&lt;p&gt;&quot;Three</span> <span class="hljs-string">is</span> <span class="hljs-string">always</span> <span class="hljs-string">greater</span> <span class="hljs-string">than</span> <span class="hljs-string">two,</span>
+           <span class="hljs-string">even</span> <span class="hljs-string">for</span> <span class="hljs-string">large</span> <span class="hljs-string">values</span> <span class="hljs-string">of</span> <span class="hljs-string">two&quot;&lt;/p&gt;</span>
+        <span class="hljs-string">&lt;p&gt;--Author</span> <span class="hljs-string">Unknown&lt;/p&gt;</span>
+        <span class="hljs-string">&lt;/blockquote&gt;</span>
+</code></pre>
+<h2 id="see-also" tabindex="-1">See also <a class="header-anchor" href="#see-also" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="CDATA" title="wikilink">CDATA</a></li>
+<li><a href="Pipeline_(Unix)" title="wikilink">Pipeline (Unix)</a></li>
+</ul>
+<h2 id="references" tabindex="-1">References <a class="header-anchor" href="#references" aria-hidden="true">🔗</a></h2>
+<h3 id="general" tabindex="-1">General <a class="header-anchor" href="#general" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><em><a href="https://www.gnu.org/software/bash/manual/bashref.html">Bash Reference
+Manual</a></em>
+<ul>
+<li><a href="https://www.gnu.org/software/bash/manual/bashref.html#Here-Documents">3.6.6 Here
+Documents</a></li>
+<li><a href="https://www.gnu.org/software/bash/manual/bashref.html#Here-Strings">3.6.7 Here
+Strings</a></li>
+</ul>
+</li>
+<li><em><a href="http://www.tldp.org/LDP/abs/html/index.html">Advanced Bash-Scripting
+Guide</a>,</em> Mendel Cooper
+<ul>
+<li><a href="http://www.tldp.org/LDP/abs/html/here-docs.html">Chapter 19. Here
+Documents</a></li>
+<li><a href="http://www.tldp.org/LDP/abs/html/x17837.html">19.1. Here
+Strings</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="external-links" tabindex="-1">External links <a class="header-anchor" href="#external-links" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://rosettacode.org/wiki/Here_document">Here document</a>. Link to
+<a href="Rosetta_Code" title="wikilink">Rosetta Code</a> task with examples of here
+documents in over 15 languages.</li>
+</ul>
+<p><a href="Category:Programming_constructs" title="wikilink">Category:Programming
+constructs</a> <a href="Category:String_(computer_science)" title="wikilink">Category:String
+(computer science)</a></p>
+<p>[1]</p>
+<p>[2]</p>
+<p>[3]</p>
+<p>[4]</p>
+<p>[5]</p>
+<p>[6] See for example <a href="https://stackoverflow.com/questions/4937792/using-variables-inside-a-bash-heredoc">Using variables inside a bash
+heredoc</a></p>
+</body></html>

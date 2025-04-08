@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.101" />
+        <title>archlinux</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="archlinux" tabindex="-1">archlinux <a class="header-anchor" href="#archlinux" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.101</p>
+<nav class="table-of-contents"><ol><li><a href="#comandi-utilizzati">Comandi Utilizzati </a></li><li><a href="#procedura">Procedura </a></li></ol></nav><h1 id="installazione-archlinux" tabindex="-1">Installazione ArchLinux <a class="header-anchor" href="#installazione-archlinux" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://archlinux.org/">https://archlinux.org/</a></li>
+<li><a href="https://wiki.archlinux.org/title/installation_guide">https://wiki.archlinux.org/title/installation_guide</a></li>
+<li><a href="https://www.youtube.com/watch?v=hdJX27g0z14&amp;list=RDCMUCX_WM2O-X96URC5n66G-hvw&amp;start_radio=1">https://www.youtube.com/watch?v=hdJX27g0z14&amp;list=RDCMUCX_WM2O-X96URC5n66G-hvw&amp;start_radio=1</a></li>
+<li><a href="https://wiki.archlinux.org/title/GRUB">https://wiki.archlinux.org/title/GRUB</a></li>
+</ul>
+<h2 id="comandi-utilizzati" tabindex="-1">Comandi Utilizzati <a class="header-anchor" href="#comandi-utilizzati" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/GRUB">https://wiki.archlinux.org/title/GRUB</a></li>
+<li><a href="https://wiki.archlinux.org/title/locale">https://wiki.archlinux.org/title/locale</a></li>
+<li><a href="https://man.archlinux.org/man/locale.conf.5">https://man.archlinux.org/man/locale.conf.5</a></li>
+<li><a href="https://man.archlinux.org/man/localectl.1">https://man.archlinux.org/man/localectl.1</a></li>
+<li><a href="https://man.archlinux.org/man/loadkeys.1">https://man.archlinux.org/man/loadkeys.1</a></li>
+<li><a href="https://man.archlinux.org/man/iwctl.1">https://man.archlinux.org/man/iwctl.1</a></li>
+<li><a href="https://man.archlinux.org/man/ip.8">https://man.archlinux.org/man/ip.8</a></li>
+<li><a href="https://man.archlinux.org/man/ping.8">https://man.archlinux.org/man/ping.8</a></li>
+<li><a href="https://man.archlinux.org/man/passwd.1">https://man.archlinux.org/man/passwd.1</a></li>
+<li><a href="https://man.archlinux.org/man/ssh.1">https://man.archlinux.org/man/ssh.1</a></li>
+<li><a href="https://man.archlinux.org/man/timedatectl.1">https://man.archlinux.org/man/timedatectl.1</a></li>
+<li><a href="https://man.archlinux.org/man/lsblk.8">https://man.archlinux.org/man/lsblk.8</a></li>
+<li><a href="https://man.archlinux.org/man/blkid.8">https://man.archlinux.org/man/blkid.8</a></li>
+<li><a href="https://man.archlinux.org/man/gdisk.8">https://man.archlinux.org/man/gdisk.8</a></li>
+<li><a href="https://man.archlinux.org/man/lsblk.8">https://man.archlinux.org/man/lsblk.8</a></li>
+<li><a href="https://man.archlinux.org/man/mkfs.btrfs.8">https://man.archlinux.org/man/mkfs.btrfs.8</a></li>
+<li><a href="https://man.archlinux.org/man/mount.8">https://man.archlinux.org/man/mount.8</a></li>
+<li><a href="https://man.archlinux.org/man/mkdir.1">https://man.archlinux.org/man/mkdir.1</a></li>
+<li><a href="https://man.archlinux.org/man/btrfs.8">https://man.archlinux.org/man/btrfs.8</a></li>
+<li><a href="https://man.archlinux.org/man/mkfs.fat.8">https://man.archlinux.org/man/mkfs.fat.8</a></li>
+<li><a href="https://man.archlinux.org/man/reflector.1">https://man.archlinux.org/man/reflector.1</a></li>
+<li><a href="https://man.archlinux.org/man/pacman.8">https://man.archlinux.org/man/pacman.8</a></li>
+<li><a href="https://man.archlinux.org/man/pacstrap.8">https://man.archlinux.org/man/pacstrap.8</a></li>
+<li><a href="https://man.archlinux.org/man/genfstab.8">https://man.archlinux.org/man/genfstab.8</a></li>
+<li><a href="https://man.archlinux.org/man/arch-chroot.8">https://man.archlinux.org/man/arch-chroot.8</a></li>
+<li><a href="https://man.archlinux.org/man/hwclock.8">https://man.archlinux.org/man/hwclock.8</a></li>
+<li><a href="https://man.archlinux.org/man/ln.1">https://man.archlinux.org/man/ln.1</a></li>
+<li><a href="https://man.archlinux.org/man/cat.1">https://man.archlinux.org/man/cat.1</a></li>
+<li><a href="https://man.archlinux.org/man/vim.1">https://man.archlinux.org/man/vim.1</a></li>
+<li><a href="https://man.archlinux.org/man/core/grub/grub-install.8.en">https://man.archlinux.org/man/core/grub/grub-install.8.en</a></li>
+<li><a href="https://man.archlinux.org/man/grub-mkconfig.8">https://man.archlinux.org/man/grub-mkconfig.8</a></li>
+<li><a href="https://man.archlinux.org/man/useradd.8">https://man.archlinux.org/man/useradd.8</a></li>
+<li><a href="https://man.archlinux.org/man/usermod.8">https://man.archlinux.org/man/usermod.8</a></li>
+<li><a href="https://man.archlinux.org/man/nmtui.1">https://man.archlinux.org/man/nmtui.1</a></li>
+<li><a href="https://man.archlinux.org/man/git.1">https://man.archlinux.org/man/git.1</a></li>
+<li><a href="https://linuxhint.com/use-btrfs-snapshots/">https://linuxhint.com/use-btrfs-snapshots/</a></li>
+</ul>
+<h2 id="procedura" tabindex="-1">Procedura <a class="header-anchor" href="#procedura" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">localectl
+localectl list-keymaps | grep IT
+loadkeys it_IT-latin1
+iwctl
+    device list
+    station wlan0 get-networks
+    station wlan0 connect MyWlanNetwork
+ip a
+ping -c 5 archlinux.org
+<span class="hljs-comment"># impostazione pwd root, serve per connessione SSH</span>
+passwd
+ssh root@192.168.x.x
+timedatectl
+timedatectl list-timezones | grep Rome
+timedatectl set-timezone Europe/Rome
+timedatectl
+
+lsblk
+<span class="hljs-comment"># Per vedere se siamo in un sistema UEFI</span>
+<span class="hljs-built_in">ls</span> /sys/firmware/efi/efivars
+blkid /dev/sda1 <span class="hljs-comment"># per cercare la partizione UEFI</span>
+
+<span class="hljs-comment"># Per resettare e creare partizioni GPT UEFI:</span>
+gdisk /dev/sda
+    o       <span class="hljs-comment"># reset tabella delle partizioni</span>
+    n       <span class="hljs-comment"># nuova partizione</span>
+    1       <span class="hljs-comment"># partition number</span>
+    invio   <span class="hljs-comment"># settore iniziale</span>
+    200M    <span class="hljs-comment"># per creare una nuova partizione UEFI</span>
+    ef00    <span class="hljs-comment"># per creare una nuova partizione UEFI, L per cercare i codici delle partizioni   </span>
+            <span class="hljs-comment"># 8300 per creare una partizione Linux</span>
+    w       <span class="hljs-comment"># write</span>
+lsblk
+
+mkfs.fat -F32 /dev/sda1 <span class="hljs-comment"># per creare una nuova partizione UEFI</span>
+
+<span class="hljs-comment"># Creare un btrfs per /root</span>
+mkfs.btrfs -f /dev/sda2
+blkid /dev/sda2
+mount /dev/sda2 /mnt
+<span class="hljs-built_in">cd</span> /mnt
+brtfs subvolume create @        <span class="hljs-comment"># crea il subvolume per root</span>
+brtfs subvolume create @home
+<span class="hljs-built_in">cd</span>
+umount /mnt
+mount -o noatime,ssd,space_cache=v2,compress=zstd,discard=async,subvol=@ /dev/sda2 /mnt
+<span class="hljs-built_in">mkdir</span> /mnt/home
+mount -o noatime,ssd,space_cache=v2,compress=zstd,discard=async,subvol=@home /dev/sda2 /mnt/home
+
+<span class="hljs-comment"># montiamo anche la partizione efi, che può anche già esistere perchè creata da windows:</span>
+<span class="hljs-built_in">mkdir</span> -p /mnt/boot/efi 
+mount /dev/sda1 /mnt/boot/efi
+
+<span class="hljs-comment"># Per vedere anche la partizione windows, es. /dev/sdb1</span>
+<span class="hljs-built_in">mkdir</span> /mnt/windows
+lsblk
+mount /dev/sdb1 /mnt/windows
+
+<span class="hljs-comment"># per cercare i mirror più veloci, 6 ore di anzianità</span>
+reflector --country Italy --age 6 --<span class="hljs-built_in">sort</span> rate --save &amp;etc/pacman.d/mirrorlist
+pacman -Sy
+
+<span class="hljs-comment"># utilizzato per le nuove installazioni, -K installa anche un keyring</span>
+<span class="hljs-comment"># per amd c&#x27;e&#x27; un altro microcode invece di intel-ucode</span>
+pacstrap -K /mnt base linux linux-firmware intel-ucode btrfs-progs vim
+
+<span class="hljs-comment"># Per generare in automatico /etc/fstab c&#x27;e&#x27; una utility che prende le info dalle partizioni che abbiamo appena montato</span>
+genfstab -U /mnt &gt;&gt; /mnt/etc/fstab
+<span class="hljs-built_in">cat</span> /mnt/etc/fstab
+
+<span class="hljs-comment"># Spostiamoci ora nella nuova installazione</span>
+arch-chroot /mnt
+<span class="hljs-built_in">ln</span> -sf /usr/share/zoneinfo/Europe/Rome /etc/localtime
+<span class="hljs-comment"># sincronizziamo l&#x27;hardware clock con il system clock</span>
+hwclock --systohc
+vim /etc/locale.gen
+    /it_IT
+    i  e rimuovere il commento
+locale-gen
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;LANG=it_IT.UTF-8&quot;</span> &gt;&gt; /etc/locale.conf
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;KEYMAP=it_IT-latin1&quot;</span> &gt;&gt; /etc/vconsole.conf
+vim /etc/hostname
+        <span class="hljs-built_in">arch</span>
+passwd <span class="hljs-comment"># cambiare la password di root del nuovo sistema(non di quello in cui siamo entrati tramite ssh)</span>
+pacman -S grub efibootmgr networkmanager network-manager-applet dialog wpa-supplicant mtools dosfstools reflector
+base-devel linux-headers bluez bluez-utils cups hplip alsa-utils pipewire pipewire-alsa pipewire-pulse pipewire-jack
+bash-completion openssh rsync acpi acpi_call tlp sof-firmware acpid os-prober ntfs-3g nvidia
+nvidia-utils nvidia-settings
+
+pacman -S grub-btrfs
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+vim /etc/default/grub
+    uncomment:
+    GRUB_DISABLE_OS_PROBER=<span class="hljs-literal">false</span>
+grub-mkconfig -o /boot/grub/grub.cfg <span class="hljs-comment"># windows non viene rilevato, lo rieseguiremo in seguito</span>
+
+systemctl <span class="hljs-built_in">enable</span> NetworkManager
+systemctl <span class="hljs-built_in">enable</span> bluetooth
+systemctl <span class="hljs-built_in">enable</span> cups.service
+systemctl <span class="hljs-built_in">enable</span> sshd
+systemctl <span class="hljs-built_in">enable</span> tlp
+systemctl <span class="hljs-built_in">enable</span> reflector.timer
+systemctl <span class="hljs-built_in">enable</span> fstrim.timer  <span class="hljs-comment"># per l&#x27;SSD</span>
+systemctl <span class="hljs-built_in">enable</span> acpid
+
+useradd -m ermanno
+passwd ermanno
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;ermanno ALL=(ALL) ALL&quot;</span> &gt;&gt; /etc/sudoers.d/ermanno
+usermod -c <span class="hljs-string">&#x27;Airton Senna&#x27;</span> ermanno
+pacman -S man
+man usermod
+<span class="hljs-built_in">exit</span>
+umount -R /mnt
+reboot
+
+nmtui 
+ip -c a
+
+<span class="hljs-built_in">sudo</span> grub-mkconfig -o /boot/grub/grub.cfg <span class="hljs-comment"># questa volta windows dovrebbe essere rilevato</span>
+
+<span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm git
+git <span class="hljs-built_in">clone</span> https://aur.archlinux.org/yay-bin
+per i binari
+git <span class="hljs-built_in">clone</span> https://aur.archlinux.org/yay
+per la compilazione da sorgenti
+
+<span class="hljs-built_in">cd</span> yay-bin
+makepkg -si
+<span class="hljs-built_in">cd</span>
+yay
+yay -S timeshift-bin timeshift-autosnap
+
+<span class="hljs-built_in">sudo</span> timeshift --list-devices
+<span class="hljs-built_in">sudo</span> timeshift --snapshot-device /dev/sda2
+<span class="hljs-built_in">sudo</span> timeshift --create --comments <span class="hljs-string">&quot;First Backup&quot;</span> --tags D
+
+grub-mkconfig -o /boot/grub/grub.cfg
+si vede ora anche lo snapshot nel menu generato
+
+</code></pre>
+</body></html>

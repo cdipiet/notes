@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.415" />
+        <title>README_07_JSF</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="readme_07_jsf" tabindex="-1">README_07_JSF <a class="header-anchor" href="#readme_07_jsf" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.415</p>
+<nav class="table-of-contents"><ol><li><a href="#primefaces">PrimeFaces </a></li><li><a href="#butterfaces">ButterFaces </a></li><li><a href="#omnifaces">OmniFaces </a></li><li><a href="#urlrewritefilter">UrlRewriteFilter </a></li><li><a href="#fontawesome-free-5.2.0-web">fontawesome-free-5.2.0-web </a></li><li><a href="#download-librerie-con-maven">Download librerie con Maven </a></li><li><a href="#weld-con-wildfly">Weld con WildFly </a></li><li><a href="#weld-con-tomcat">Weld con Tomcat </a></li><li><a href="#abilitazione-della-cdi2.0-con-le-jsf-2.3">Abilitazione della CDI2.0 con le JSF 2.3 </a></li><li><a href="#viewscoped">ViewScoped </a></li><li><a href="#possibilit%C3%A0-di-iniezione-in-weld-jsf-2.3">Possibilità di iniezione in weld jsf 2.3 </a></li><li><a href="#http%2F2">HTTP/2 </a></li><li><a href="#metadata-complete">metadata-complete </a></li><li><a href="#primefaces%2Fbutterfaces-e-jquery%2Fbootstrap">Primefaces/Butterfaces e jQuery/Bootstrap </a></li><li><a href="#soluzione">Soluzione </a></li></ol></nav><h1 id="riferimenti-jsf" tabindex="-1">Riferimenti JSF <a class="header-anchor" href="#riferimenti-jsf" aria-hidden="true">🔗</a></h1>
+<p><img src="../../inc/img/java/jsf.png" alt="JSF" style="display:block; margin: 0 auto; width:30%"></p>
+<ul>
+<li><a href="https://jakarta.ee/">https://jakarta.ee/</a></li>
+<li><a href="https://arjan-tijms.omnifaces.org/p/jsf-23.html">https://arjan-tijms.omnifaces.org/p/jsf-23.html</a></li>
+<li><a href="https://javaserverfaces.github.io/whats-new-in-jsf23.html">https://javaserverfaces.github.io/whats-new-in-jsf23.html</a></li>
+<li><a href="https://javaee.github.io/tutorial/toc.html">https://javaee.github.io/tutorial/toc.html</a></li>
+<li><a href="https://javaee.github.io/javaserverfaces-spec/">https://javaee.github.io/javaserverfaces-spec/</a></li>
+<li><a href="https://javaee.github.io/javaee-spec/javadocs/javax/faces/webapp/FacesServlet.html">https://javaee.github.io/javaee-spec/javadocs/javax/faces/webapp/FacesServlet.html</a></li>
+<li><a href="https://dzone.com/articles/javaserver-faces-23-1">https://dzone.com/articles/javaserver-faces-23-1</a></li>
+</ul>
+<h1 id="librerie" tabindex="-1">Librerie <a class="header-anchor" href="#librerie" aria-hidden="true">🔗</a></h1>
+<h2 id="primefaces" tabindex="-1">PrimeFaces <a class="header-anchor" href="#primefaces" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.primefaces.org/">https://www.primefaces.org/</a></li>
+<li><a href="https://github.com/primefaces/primefaces">https://github.com/primefaces/primefaces</a></li>
+<li><a href="https://github.com/primefaces/showcase-facelift">https://github.com/primefaces/showcase-facelift</a></li>
+</ul>
+<p><a href="https://www.primefaces.org/showcase/ui/misc/fa.xhtml">https://www.primefaces.org/showcase/ui/misc/fa.xhtml</a>
+PrimeFaces 6.2 contiene  Font Awesome 4.7.0</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">repository</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">id</span>&gt;</span>prime-repo<span class="hljs-tag">&lt;/<span class="hljs-name">id</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">name</span>&gt;</span>PrimeFaces Maven Repository<span class="hljs-tag">&lt;/<span class="hljs-name">name</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">url</span>&gt;</span>http://repository.primefaces.org/<span class="hljs-tag">&lt;/<span class="hljs-name">url</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">repository</span>&gt;</span>
+<span class="hljs-comment">&lt;!-- https://www.primefaces.org/showcase/getstarted.xhtml --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.primefaces<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>primefaces<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>6.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.primefaces.themes<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>all-themes<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>1.0.10<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="butterfaces" tabindex="-1">ButterFaces <a class="header-anchor" href="#butterfaces" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://butterfaces.org/">http://butterfaces.org/</a></li>
+<li><a href="https://github.com/ButterFaces/ButterFaces">https://github.com/ButterFaces/ButterFaces</a></li>
+</ul>
+<pre><code class="language-xml"><span class="hljs-comment">&lt;!-- http://butterfaces.org	Bootstrap 4.0, JQuery 3.3.1 --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.butterfaces<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>components<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+   <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.2<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="omnifaces" tabindex="-1">OmniFaces <a class="header-anchor" href="#omnifaces" aria-hidden="true">🔗</a></h2>
+<p>OmniFaces 3.1 (12 Apr 2018)
+Required: Java 1.8, JSF 2.3, EL 3.0, Servlet 3.1, CDI 2.0, WS 1.1
+Optional: BV 2.0</p>
+<ul>
+<li><a href="http://omnifaces.org/">http://omnifaces.org/</a></li>
+<li><a href="https://github.com/omnifaces/omnifaces">https://github.com/omnifaces/omnifaces</a></li>
+<li><a href="https://github.com/omnifaces/showcase">https://github.com/omnifaces/showcase</a></li>
+<li><a href="http://showcase.omnifaces.org/">http://showcase.omnifaces.org/</a></li>
+</ul>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.omnifaces<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>omnifaces<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.1<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="urlrewritefilter" tabindex="-1">UrlRewriteFilter <a class="header-anchor" href="#urlrewritefilter" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://tuckey.org/urlrewrite">http://tuckey.org/urlrewrite</a></li>
+<li><a href="http://cdn.rawgit.com/paultuckey/urlrewritefilter/master/src/doc/manual/4.0/index.html">http://cdn.rawgit.com/paultuckey/urlrewritefilter/master/src/doc/manual/4.0/index.html</a></li>
+<li><a href="https://github.com/paultuckey/urlrewritefilter/">https://github.com/paultuckey/urlrewritefilter/</a></li>
+</ul>
+<h2 id="fontawesome-free-5.2.0-web" tabindex="-1">fontawesome-free-5.2.0-web <a class="header-anchor" href="#fontawesome-free-5.2.0-web" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<p>Per rendere compatibile i file .css di fontawesome con le resources di JSF, ho dovuto sostituire i link relativi come:</p>
+<pre><code> url(&quot;../webfonts/fa-brands-400.woff2&quot;)
+</code></pre>
+</li>
+</ol>
+<p>con espressioni EL di JSF:</p>
+<pre><code>    url(#{resource['fontawesome/webfonts/fa-brands-400.woff2']})
+</code></pre>
+<ol start="2">
+<li>
+<p>\fontawesome-free-5.2.0-web\css\v4-shims.css</p>
+<p>definisce le classi che erano presenti nella versione 4 e che sono state rimosse nella versione 5,
+importarlo se serve la compatibilità con la versione 4.</p>
+</li>
+</ol>
+<h2 id="download-librerie-con-maven" tabindex="-1">Download librerie con Maven <a class="header-anchor" href="#download-librerie-con-maven" aria-hidden="true">🔗</a></h2>
+<p><a href="D:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clib%5Cjavax.faces">Download con Maven</a>
+<a href="D:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clib%5Cjavax.json">Download con Maven</a>
+<a href="D:%5CDati%5CProfili%5C$USER%5Cworkspace%5CJavaWorkspace%5Clib%5Cjavax.servlet">Download con Maven</a></p>
+<h1 id="jsf-2.3-e-weld-cdi" tabindex="-1">JSF 2.3 e Weld CDI <a class="header-anchor" href="#jsf-2.3-e-weld-cdi" aria-hidden="true">🔗</a></h1>
+<p><a href="http://docs.jboss.org/weld/reference/latest/en-US/html/">http://docs.jboss.org/weld/reference/latest/en-US/html/</a></p>
+<p>JSF 2.3 utilizza la <span class="mbb">Context Dependency Injection</span>, la cui implementazione di riferimento è <strong>Weld</strong><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>.</p>
+<p>La Context Dependency Injection  della versione JSF 2.2 è stata sostituita in JSF 2.3 dalla specifica <strong>CDI</strong>, implementata dal progetto JBoss  Weld.</p>
+<p><a href="http://cdi-spec.org/">http://cdi-spec.org/</a></p>
+<p>Weld is the reference implementation of CDI: Contexts and Dependency Injection
+for the Java EE Platform - a JCP standard for dependency injection and contextual lifecycle management.</p>
+<p><a href="https://stackoverflow.com/questions/18995951/how-to-install-and-use-cdi-on-tomcat">https://stackoverflow.com/questions/18995951/how-to-install-and-use-cdi-on-tomcat</a></p>
+<pre><code>* Affinchè le annotation EJB come @Singleton, @Stateful, @Stateless, @Local funzionino insiame alla @Inject della CDI 2.0
+* è fondamentale che il WEB-INF/web.xml non contenga l'attributo metadata-complete.
+</code></pre>
+<h2 id="weld-con-wildfly" tabindex="-1">Weld con WildFly <a class="header-anchor" href="#weld-con-wildfly" aria-hidden="true">🔗</a></h2>
+<p>Weld è già presente in WildFly, non c'e' bisogno di fare nulla</p>
+<h2 id="weld-con-tomcat" tabindex="-1">Weld con Tomcat <a class="header-anchor" href="#weld-con-tomcat" aria-hidden="true">🔗</a></h2>
+<p>CDI: Contexts and Dependency Injection for the Java EE platform</p>
+<p>Drop the weld-servlet-shaded.jar in webapp's <code>/war/WEB-INF/lib/weld-servlet-shaded.jar</code>. In case you're using Maven, use this coordinate:
+<code>pom.xml</code>:</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.jboss.weld.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>weld-servlet-shaded<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.4.Final<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+</code></pre>
+<h2 id="abilitazione-della-cdi2.0-con-le-jsf-2.3" tabindex="-1">Abilitazione della CDI2.0 con le JSF 2.3 <a class="header-anchor" href="#abilitazione-della-cdi2.0-con-le-jsf-2.3" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>Create <code>/war/META-INF/context.xml</code> file in webapp with following content:</li>
+</ol>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
+	<span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;BeanManager&quot;</span>
+		<span class="hljs-attr">auth</span>=<span class="hljs-string">&quot;Container&quot;</span>
+		<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;javax.enterprise.inject.spi.BeanManager&quot;</span>
+		<span class="hljs-attr">factory</span>=<span class="hljs-string">&quot;org.jboss.weld.resources.ManagerObjectFactory&quot;</span>/&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">Context</span>&gt;</span>
+</code></pre>
+<p>This will register Weld's BeanManager factory in Tomcat's JNDI.
+This cannot be performed programmatically by Weld because Tomcat's JNDI is strictly read-only.
+This step is not necessary if you're targeting at least Mojarra 2.2.11 and/or OmniFaces 2.4 or newer.
+Both are able to find it in ServletContext instead. However,
+there may be other libraries which still expect to find BeanManager in JNDI,
+you'd then best keep this configuration file anyway for those libraries.
+Note that this step is not strictly necessary when you're using Mojarra 2.2.11 or newer
+as it will be able to find it via ServletContext when absent in JNDI.</p>
+<ol start="2">
+<li>Create an empty <code>/war/WEB-INF/beans.xml</code> file in webapp.</li>
+</ol>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">beans</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+   <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+   <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/beans_2_0.xsd&quot;</span>
+   <span class="hljs-attr">bean-discovery-mode</span>=<span class="hljs-string">&quot;all&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;2.0&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">beans</span>&gt;</span>
+</code></pre>
+<ol start="3">
+<li>Creare il <code>/war/WEB-INF/faces-config.xml</code>:</li>
+</ol>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27;?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">faces-config</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;2.3&quot;</span>
+		  <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+		  <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+		  <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">faces-config</span>&gt;</span>
+</code></pre>
+<ol start="4">
+<li>Creare un bean che sia annotato con <span class="mbb">@FacesConfig(version = FacesConfig.Version.JSF_2_3)</span>
+per abilitare weld 3.0.4 alla versione JSF 2.3 con CDI.</li>
+</ol>
+<p><a href="https://github.com/javaee/glassfish/issues/22094">https://github.com/javaee/glassfish/issues/22094</a></p>
+<p>Unable to inject FacesContext against GlassFish 5 (JSF 2.3, CDI 2.0)</p>
+<p><a href="http://docs.jboss.org/weld/reference/latest-master/en-US/html/">http://docs.jboss.org/weld/reference/latest-master/en-US/html/</a></p>
+<pre><code class="language-java"><span class="hljs-keyword">import</span> javax.faces.annotation.FacesConfig;
+<span class="hljs-meta">@FacesConfig(version = FacesConfig.Version.JSF_2_3)</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">JSF23Activator</span> {
+}
+</code></pre>
+<ol start="5">
+<li>Verificare che:</li>
+</ol>
+<p><strong>L'attributo <code>metadata-complete</code> nel <code>WEB-INF/web.xml</code> deve essere <code>false</code> oppure non comparire affatto.</strong></p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+            <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+            <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span>
+            <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span>
+            <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3.1&quot;</span>&gt;</span> 
+
+Diversamente si ottengono errori quando si tenta di utilizzare la @Inject di EJB.            
+            
+Nuove import per le JSF 2.3 e CDI
+---------------------------------
+
+	/*
+	 * JSF 2.3 + CDI
+	 * =============
+	 *
+	 * http://docs.jboss.org/weld/reference/latest-master/en-US/html/
+	 *
+	 *
+	 * Vecchie annotation JSF 2.2:
+     *
+	 * import javax.faces.bean.ApplicationScoped;
+	 * import javax.faces.bean.ManagedBean;
+	 * @ManagedBean
+	 * @ApplicationScoped
+	 *
+	 *
+	 *
+	 * La Context Dependency Injection  della versione JSF 2.2, in JSF 2.3 è stata sostituita
+	 * dalla specifica CDI, implementata dal progetto JBoss  Weld.
+	 *
+	 * http://cdi-spec.org/
+	 * 		weld-servlet-shaded-3.0.4.Final.jar ==&gt; CDI 2.0
+	 *
+	 *
+	 * Weld is the reference implementation of CDI: Contexts and Dependency Injection for the Java EE Platform - a JCP standard for dependency injection and contextual lifecycle management.
+	 *
+	 * 	https://stackoverflow.com/questions/18995951/how-to-install-and-use-cdi-on-tomcat
+		How to install and use CDI on Tomcat
+		CDI: Contexts and Dependency Injection for the Java EE platform
+
+		1- Drop the weld-servlet-shaded.jar in webapp&#x27;s /WEB-INF/lib. In case you&#x27;re using Maven, use this coordinate:
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.jboss.weld.servlet<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>weld-servlet-shaded<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">version</span>&gt;</span>3.0.3.Final<span class="hljs-tag">&lt;/<span class="hljs-name">version</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span>
+
+		2- Create /META-INF/context.xml file in webapp with following content:
+
+		<span class="hljs-tag">&lt;<span class="hljs-name">Context</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">Resource</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;BeanManager&quot;</span>
+				<span class="hljs-attr">auth</span>=<span class="hljs-string">&quot;Container&quot;</span>
+				<span class="hljs-attr">type</span>=<span class="hljs-string">&quot;javax.enterprise.inject.spi.BeanManager&quot;</span>
+				<span class="hljs-attr">factory</span>=<span class="hljs-string">&quot;org.jboss.weld.resources.ManagerObjectFactory&quot;</span>/&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Context</span>&gt;</span>
+
+		Note that this step is not strictly necessary when you&#x27;re using Mojarra 2.2.11 or newer as it will be able to find it via ServletContext when absent in JNDI.
+
+		3- Create an empty /META-INF/beans.xml file in webapp.
+
+
+		Con la nuova CDI:
+
+			import javax.faces.bean.ApplicationScoped;
+			import javax.faces.bean.ManagedBean;
+
+			diventano ==&gt;
+
+			import javax.enterprise.context.ApplicationScoped;
+			import javax.inject.Inject;
+			import javax.inject.Named;
+
+
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			diventa ==&gt;
+
+				@Inject
+				FacesContext facesContext;
+
+
+			// 2.2
+			ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+			// 2.3
+			@Inject
+			private ExternalContext externalContext;
+
+
+
+	 * Nuove annotation CDI per JSF 2.3 contenute in weld-servlet-shaded-3.0.4.Final.jar
+	 *
+	 * In JSF 2.3 l&#x27;annotation javax.faces.bean.ManagedBean è deprecata
+	 * https://javaee.github.io/tutorial/jsf-configure002.html
+	 *
+	 * In JSF 2.3 una annotation javax.inject.Named assieme ad una annotation di scope come ad es. javax.enterprise.context.ApplicationScoped
+	 * registrano automaticamente la classe come un bean CDI.
+	 *
+	 * https://javaee.github.io/tutorial/
+	 *
+	 *
+	 * 	org.jboss.weld.exceptions.DeploymentException: WELD-001408: Unsatisfied dependencies for type ExternalContext with qualifiers @Default
+		a bean class requires a scope annotation to be discovered as CDI bean.
+		@Named is not a scope annotation. Try @Dependent instead.
+	*/
+
+Esempio di come iniettare un bean con JSF2.3 e CDI
+--------------------------------------------------
+
+&lt;https://arjan-tijms.omnifaces.org/p/jsf-23.html#1418&gt;
+
+&lt;https://java.net/jira/browse/JAVASERVERFACES_SPEC_PUBLIC-1417&gt;
+
+&lt;https://dzone.com/articles/javaserver-faces-23-1&gt;
+
+---
+
+`javax.faces.bean.ManagedProperty` è deprecata:
+
+&lt;https://javaee.github.io/javaee-spec/javadocs/javax/faces/bean/ManagedProperty.html&gt;
+
+Bisogna utilizzare ora al suo posto:
+
+`javax.faces.annotation.ManagedProperty`
+&lt;https://javaee.github.io/javaee-spec/javadocs/javax/faces/annotation/ManagedProperty.html&gt;
+
+Assieme ad:
+
+`javax.inject.Inject`
+&lt;https://javaee.github.io/javaee-spec/javadocs/javax/inject/Inject.html&gt;
+
+```java
+@Inject @ManagedProperty(&quot;#{sourceBean.source}&quot;)
+private String source;
+</code></pre>
+<h2 id="viewscoped" tabindex="-1">ViewScoped <a class="header-anchor" href="#viewscoped" aria-hidden="true">🔗</a></h2>
+<p>In CDI <strong>non</strong> esiste una classe <code>javax.enterprise.context.ViewScoped</code>.</p>
+<p><a href="https://stackoverflow.com/questions/14384369/how-to-replace-managedbean-viewscope-by-cdi-in-jsf-2-0-2-1">https://stackoverflow.com/questions/14384369/how-to-replace-managedbean-viewscope-by-cdi-in-jsf-2-0-2-1</a></p>
+<p>Da JSF 2.2/CDI non bisogna piu utilizzare <a href="https://javaee.github.io/javaee-spec/javadocs/javax/faces/bean/ViewScoped.html">javax.faces.bean.ViewScoped</a> perchè è deprecata.</p>
+<p>Essa è stata sostituita da <a href="https://javaee.github.io/javaee-spec/javadocs/javax/faces/bean/ViewScoped.html">javax.faces.view.ViewScoped</a></p>
+<p>Che però a causa di un bug sul <code>@PreDestroy</code> rende preferibile l'utilizzo di <a href="http://omnifaces.org/">Omnifaces</a></p>
+<p><a href="http://showcase.omnifaces.org/cdi/ViewScoped">org.omnifaces.cdi.ViewScoped</a></p>
+<h2 id="possibilit%C3%A0-di-iniezione-in-weld-jsf-2.3" tabindex="-1">Possibilità di iniezione in weld jsf 2.3 <a class="header-anchor" href="#possibilit%C3%A0-di-iniezione-in-weld-jsf-2.3" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-java"><span class="hljs-comment">/* ATTENZIONE: WELD non è in grado di iniettare il FacesContext o gli altri oggetti Java EE
+ * ========================================================================================
+ *
+ * https://docs.jboss.org/weld/reference/latest/en-US/html/ee.html
+ * The FacesContext is not injectable. You can get at it by calling FacesContext.getCurrentInstance().
+ * Alternatively you may define the following producer method:
+ * &lt;pre&gt;{@code
+ * import javax.enterprise.inject.Produces;
+ * class FacesContextProducer {
+ * 		@Produces @RequestScoped FacesContext getFacesContext() {
+ * 			return FacesContext.getCurrentInstance();
+ * 		}
+ * }
+ * }
+ * &lt;/pre&gt;
+ * */</span>
+
+<span class="hljs-comment">// #{facesContext}</span>
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// FacesContext facesContext = FacesContext.getCurrentInstance();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// private FacesContext facesContext;</span>
+
+<span class="hljs-comment">// #{externalContext}</span>
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// private ExternalContext externalContext;</span>
+
+<span class="hljs-comment">// #{view}</span>
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// UIViewRoot viewRoot = FacesContext.getCurrentInstance().getViewRoot();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// private UIViewRoot viewRoot;</span>
+
+<span class="hljs-comment">// #{application}</span>
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// ServletContext servletContext = (ServletContext) FacesContext.getCurrentInstance().getExternalContext().getContext();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// private ServletContext servletContext;</span>
+
+<span class="hljs-comment">// #{applicationScope}</span>
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// Map&lt;String, Object&gt; applicationMap = FacesContext.getCurrentInstance(). getExternalContext().getApplicationMap();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// @ApplicationMap</span>
+<span class="hljs-comment">// private Map&lt;String, Object&gt; applicationMap;</span>
+
+<span class="hljs-comment">// #{sessionScope}</span>
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// Map&lt;String, Object&gt; sessionMap = FacesContext.getCurrentInstance(). getExternalContext().getSessionMap();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// @SessionMap</span>
+<span class="hljs-comment">// private Map&lt;String, Object&gt; sessionMap;</span>
+
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// Map&lt;String, Object&gt; requestMap = FacesContext.getCurrentInstance(). getExternalContext().getRequestMap();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// @RequestMap</span>
+<span class="hljs-comment">// private Map&lt;String, Object&gt; requestMap;</span>
+
+<span class="hljs-comment">// 2.2</span>
+<span class="hljs-comment">// Map&lt;String, String&gt; headerMap = FacesContext.getCurrentInstance().getExternalContext().getRequestHeaderMap();</span>
+<span class="hljs-comment">// 2.3</span>
+<span class="hljs-comment">// @Inject</span>
+<span class="hljs-comment">// @HeaderMap</span>
+<span class="hljs-comment">// private Map&lt;String, String&gt; headerMap;</span>
+</code></pre>
+<h1 id="web.xml" tabindex="-1">web.xml <a class="header-anchor" href="#web.xml" aria-hidden="true">🔗</a></h1>
+<p><a href="http://xmlns.jcp.org/xml/ns/javaee">http://xmlns.jcp.org/xml/ns/javaee</a></p>
+<h2 id="http%2F2" tabindex="-1">HTTP/2 <a class="header-anchor" href="#http%2F2" aria-hidden="true">🔗</a></h2>
+<p>Per il <code>web.xml</code> utilizziamo la versione <code>3.1</code>, non la 4.0, allo scopo di disabilitare HTTP/2,
+che è utilizzato automaticamente da JSF2.3, ma che ha dato problemi,
+utilizzando la versione 3.1 di disabilita l'utilizzo di HTTP/2 di JSF2.3.
+HTTP/2 lo disabilitiamo in WildFly anche editando <code>%USERPROFILE%\app\wildfly-14.0.1.Final\standalone\configuration\standalone.xml</code>,
+ed impostando <code>enable-http2=&quot;false&quot;</code></p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">server</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;default-server&quot;</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">http-listener</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;default&quot;</span> <span class="hljs-attr">socket-binding</span>=<span class="hljs-string">&quot;http&quot;</span> <span class="hljs-attr">redirect-socket</span>=<span class="hljs-string">&quot;https&quot;</span> <span class="hljs-attr">enable-http2</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">https-listener</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;https&quot;</span> <span class="hljs-attr">socket-binding</span>=<span class="hljs-string">&quot;https&quot;</span> <span class="hljs-attr">security-realm</span>=<span class="hljs-string">&quot;ApplicationRealm&quot;</span> <span class="hljs-attr">enable-http2</span>=<span class="hljs-string">&quot;false&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">host</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;default-host&quot;</span> <span class="hljs-attr">alias</span>=<span class="hljs-string">&quot;localhost&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">location</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;/&quot;</span> <span class="hljs-attr">handler</span>=<span class="hljs-string">&quot;welcome-content&quot;</span>/&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">http-invoker</span> <span class="hljs-attr">security-realm</span>=<span class="hljs-string">&quot;ApplicationRealm&quot;</span>/&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">host</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">server</span>&gt;</span>
+</code></pre>
+<h2 id="metadata-complete" tabindex="-1">metadata-complete <a class="header-anchor" href="#metadata-complete" aria-hidden="true">🔗</a></h2>
+<p><strong>L'attributo <code>metadata-complete</code> nel <code>WEB-INF/web.xml</code> deve essere <code>false</code> oppure non comparire affatto.</strong></p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+            <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+            <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span>
+            <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span>
+            <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3.1&quot;</span>&gt;</span>
+</code></pre>
+<p>Vedi: [Errore di partenza in Tomcat]</p>
+<p>Questo perchè se presente ed uguale a true causa dei malfunzionamenti a Weld impedendogli
+di effettuare correttamente le @Inject degli EJB all'interno dei managed bean.</p>
+<h1 id="note-di-sviluppo" tabindex="-1">Note di sviluppo <a class="header-anchor" href="#note-di-sviluppo" aria-hidden="true">🔗</a></h1>
+<h2 id="primefaces%2Fbutterfaces-e-jquery%2Fbootstrap" tabindex="-1">Primefaces/Butterfaces e jQuery/Bootstrap <a class="header-anchor" href="#primefaces%2Fbutterfaces-e-jquery%2Fbootstrap" aria-hidden="true">🔗</a></h2>
+<p>PrimeFaces contiene una sua versione di jquery, che volendo è possibile utilizzare nella pagina html inserendo nell'header:</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h:head</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h:outputScript</span> <span class="hljs-attr">library</span>=<span class="hljs-string">&quot;primefaces&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;jquery/jquery.js&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;head&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h:outputScript</span> <span class="hljs-attr">library</span>=<span class="hljs-string">&quot;primefaces&quot;</span> <span class="hljs-attr">name</span>=<span class="hljs-string">&quot;jquery/jquery-plugins.js&quot;</span> <span class="hljs-attr">target</span>=<span class="hljs-string">&quot;head&quot;</span> /&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">h:head</span>&gt;</span>
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/16166039/adding-jquery-to-primefaces-results-in-uncaught-typeerror-over-all-place">https://stackoverflow.com/questions/16166039/adding-jquery-to-primefaces-results-in-uncaught-typeerror-over-all-place</a></p>
+<p>Per utilizzare una versione di jquery più aggiornata ci sono due possibilità:</p>
+<ol>
+<li>Creare un <code>/war/resources/primefaces/jquery/jquery.js</code> che avrà la priorità su quello presente nel <code>primefaces-6.2.jar</code></li>
+<li>Esplodere e ricreare il <code>primefaces-6.2.jar</code> sostituendo <code>/META-INF/resources/primefaces/jquery/jquery.js</code></li>
+<li>Rimuovere eventuali <code>&lt;h:outputScript&gt;</code> che dovessero puntare a versioni utente di jquery</li>
+</ol>
+<p>E' meglio invece utilizzare le versioni aggiornate di bootstrap e jquery presenti in butter faces,
+abilitabili nella pagina html con <a href="http://www.butterfaces.org/activateLibraries.jsf">http://www.butterfaces.org/activateLibraries.jsf</a>:</p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.w3.org/1999/xhtml&quot;</span>
+      <span class="hljs-attr">xmlns:h</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/html&quot;</span>
+      <span class="hljs-attr">xmlns:f</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/core&quot;</span>
+      <span class="hljs-attr">xmlns:b</span>=<span class="hljs-string">&quot;http://butterfaces.org/components&quot;</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">h:head</span> /&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">b:activateLibraries</span> <span class="hljs-attr">id</span>=<span class="hljs-string">&quot;input&quot;</span>
+                             <span class="hljs-attr">rendered</span>=<span class="hljs-string">&quot;true&quot;</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-name">b:activateLibraries</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<pre><code>b:activateLibraries Adds bootstrap css and js, jQuery and pretty print to head part to activate libraries
+for sites not containing any other ButterFaces component.
+In addition to that all butterfaces css, js and jQuery pluging will be added to head part.
+If `web.xml` parameter `org.butterfaces.useCompressedResources` is set (default is true) a compressed version of all resources are added instead of each resource.
+</code></pre>
+<h1 id="intestazione-pagina-xhtml" tabindex="-1">Intestazione pagina XHTML <a class="header-anchor" href="#intestazione-pagina-xhtml" aria-hidden="true">🔗</a></h1>
+<p>Snippet da copiare ed incollare con tutti i namespaces:</p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=&#x27;1.0&#x27; encoding=&#x27;UTF-8&#x27;?&gt;</span>
+<span class="hljs-comment">&lt;!-- Nell&#x27;XHTML delle JSF c&#x27;e&#x27; bisogno di dichiarare le entity, anche se l&#x27;HTML5 le prevede tutte --&gt;</span>
+<span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-keyword">html</span> [
+    <span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">nbsp</span> <span class="hljs-string">&quot;&amp;#xA0;&quot;</span>&gt;</span>
+    <span class="hljs-meta">&lt;!ENTITY <span class="hljs-keyword">times</span> <span class="hljs-string">&quot;&amp;#215;&quot;</span>&gt;</span>
+]&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">&quot;it&quot;</span>
+      <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.w3.org/1999/xhtml&quot;</span>
+      <span class="hljs-attr">xmlns:c</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsp/jstl/core&quot;</span>
+      <span class="hljs-attr">xmlns:fn</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsp/jstl/functions&quot;</span>
+      <span class="hljs-attr">xmlns:f</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/core&quot;</span>
+      <span class="hljs-attr">xmlns:h</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/html&quot;</span>
+      <span class="hljs-attr">xmlns:ui</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/facelets&quot;</span>
+      <span class="hljs-attr">xmlns:pt</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/passthrough&quot;</span>
+      <span class="hljs-attr">xmlns:jsf</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf&quot;</span>
+      <span class="hljs-attr">xmlns:common</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/composite/common&quot;</span>
+      <span class="hljs-attr">xmlns:composite</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/composite&quot;</span>
+      <span class="hljs-attr">xmlns:b</span>=<span class="hljs-string">&quot;http://butterfaces.org/components&quot;</span>
+      <span class="hljs-attr">xmlns:p</span>=<span class="hljs-string">&quot;http://primefaces.org/ui&quot;</span>
+      <span class="hljs-attr">xmlns:of</span>=<span class="hljs-string">&quot;http://omnifaces.org/functions&quot;</span>
+      <span class="hljs-attr">xmlns:a</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/jsf/composite/components/about&quot;</span>
+</span></code></pre>
+<h1 id="errore-di-partenza-in-tomcat" tabindex="-1">Errore di partenza in Tomcat <a class="header-anchor" href="#errore-di-partenza-in-tomcat" aria-hidden="true">🔗</a></h1>
+<p><a href="http://alibassam.com/deploying-jsf-2-3-application-tomcat-9/">http://alibassam.com/deploying-jsf-2-3-application-tomcat-9/</a>
+<a href="http://balusc.omnifaces.org/2013/10/how-to-install-cdi-in-tomcat.html">http://balusc.omnifaces.org/2013/10/how-to-install-cdi-in-tomcat.html</a></p>
+<p>[com.sun.faces.config.ConfigurationException: Factory 'javax.faces.lifecycle.ClientWindowFactory' was not configured properly.].{mbr}
+<span class="mrb">javax.faces.FacesException: Unable to find CDI BeanManager</span></p>
+<pre><code>Caused by: javax.faces.FacesException: Unable to find CDI BeanManager
+        at com.sun.faces.application.ApplicationImpl.isJsf23(ApplicationImpl.java:2714)
+        at com.sun.faces.application.ApplicationImpl.addELResolver(ApplicationImpl.java:549)
+</code></pre>
+<p><a href="https://github.com/javaserverfaces/mojarra/blob/master/impl/src/main/java/com/sun/faces/el/ELUtils.java">https://github.com/javaserverfaces/mojarra/blob/master/impl/src/main/java/com/sun/faces/el/ELUtils.java</a></p>
+<pre><code class="language-java">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-type">boolean</span> <span class="hljs-title function_">tryAddCDIELResolver</span><span class="hljs-params">(FacesCompositeELResolver composite)</span> {
+        <span class="hljs-type">FacesContext</span> <span class="hljs-variable">facesContext</span> <span class="hljs-operator">=</span> FacesContext.getCurrentInstance();
+
+        javax.enterprise.inject.spi.<span class="hljs-type">BeanManager</span> <span class="hljs-variable">beanManager</span> <span class="hljs-operator">=</span> getCdiBeanManager(facesContext);
+
+        <span class="hljs-keyword">if</span> (beanManager == <span class="hljs-literal">null</span>) {
+            <span class="hljs-comment">// <span class="hljs-doctag">TODO:</span> use version enum and &gt;=</span>
+            <span class="hljs-keyword">if</span> (getFacesConfigXmlVersion(facesContext).equals(<span class="hljs-string">&quot;2.3&quot;</span>) || getWebXmlVersion(facesContext).equals(<span class="hljs-string">&quot;4.0&quot;</span>)) {
+                <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">FacesException</span>(<span class="hljs-string">&quot;Unable to find CDI BeanManager&quot;</span>);
+            }
+        } <span class="hljs-keyword">else</span> {
+            <span class="hljs-type">CdiExtension</span> <span class="hljs-variable">cdiExtension</span> <span class="hljs-operator">=</span> getBeanReference(beanManager, CdiExtension.class);
+            <span class="hljs-keyword">if</span> (cdiExtension.isAddBeansForJSFImplicitObjects()) {
+                composite.add(beanManager.getELResolver());
+                <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;
+            }
+        }
+
+        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+</code></pre>
+<p>Dipende dal fatto che si stà utilizzando Mojarra 2.3 e un web.xml 4.0.</p>
+<pre><code class="language-xml"><span class="hljs-meta">&lt;?xml version=<span class="hljs-string">&quot;1.0&quot;</span> encoding=<span class="hljs-string">&quot;UTF-8&quot;</span>?&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">web-app</span> <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+	<span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+	<span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span>
+	<span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span> <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;4.0&quot;</span>&gt;</span>
+</code></pre>
+<p><a href="https://github.com/javaserverfaces/mojarra">https://github.com/javaserverfaces/mojarra</a></p>
+<blockquote>
+<p>Servlet 4.0 will enable JSF 2.3 to serve resources via HTTP/2 push.
+CDI is explicitly required because since JSF 2.3 the javax.faces.bean.* annotations such as
+@ManagedBean are deprecated, and several implicit EL objects are produced via CDI producers,
+and &lt;f:websocket&gt; manages the WS sessions and events via CDI.</p>
+</blockquote>
+<p>Riportiamo il web.xml alla versione 3.1, disabilitando così HTTP/2:</p>
+<pre><code class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">web-app</span>    <span class="hljs-attr">xmlns:xsi</span>=<span class="hljs-string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+            <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span>
+            <span class="hljs-attr">xsi:schemaLocation</span>=<span class="hljs-string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd&quot;</span>
+            <span class="hljs-attr">metadata-complete</span>=<span class="hljs-string">&quot;false&quot;</span>
+            <span class="hljs-attr">version</span>=<span class="hljs-string">&quot;3.1&quot;</span>&gt;</span>
+</code></pre>
+<h2 id="soluzione" tabindex="-1">Soluzione <a class="header-anchor" href="#soluzione" aria-hidden="true">🔗</a></h2>
+<pre><code>Rimuovere la directory tomcat_lib_ext e spostare tutti i jar in essa contenuta nella directory war/WEB-INF/lib
+</code></pre>
+<h1 id="jsf-2.3-using-the-standard-converters" tabindex="-1">JSF 2.3 Using the standard Converters <a class="header-anchor" href="#jsf-2.3-using-the-standard-converters" aria-hidden="true">🔗</a></h1>
+<p><a href="https://javaee.github.io/tutorial/jsf-page-core001.html#BNAST">https://javaee.github.io/tutorial/jsf-page-core001.html#BNAST</a></p>
+<p>Class in the javax.faces.convert Package Converter ID</p>
+<hr>
+<p>BigDecimalConverter                      javax.faces.BigDecimal
+BigIntegerConverter                      javax.faces.BigInteger
+BooleanConverter                         javax.faces.Boolean
+ByteConverter                            javax.faces.Byte
+CharacterConverter                       javax.faces.Character
+DateTimeConverter                        javax.faces.DateTime
+DoubleConverter                          javax.faces.Double
+EnumConverter                            javax.faces.Enum
+FloatConverter                           javax.faces.Float
+IntegerConverter                         javax.faces.Integer
+LongConverter                            javax.faces.Long
+NumberConverter                          javax.faces.Number
+ShortConverter                           javax.faces.Short</p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>Weld <a href="http://docs.jboss.org/weld/reference/latest/en-US/html/">http://docs.jboss.org/weld/reference/latest/en-US/html/</a>. <a href="#fnref1" class="footnote-backref">↩︎</a></p>
+</li>
+</ol>
+</section>
+</body></html>

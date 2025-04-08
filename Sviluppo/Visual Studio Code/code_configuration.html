@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.451" />
+        <title>code_configuration</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="code_configuration" tabindex="-1">code_configuration <a class="header-anchor" href="#code_configuration" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.451</p>
+<nav class="table-of-contents"><ol><li><a href="#settings.json">settings.json </a></li><li><a href="#ctrl%2Bclick---go-to-definition">Ctrl+Click - Go to Definition </a></li><li><a href="#terminal-in-windows">Terminal in Windows </a></li><li><a href="#editor">Editor </a></li><li><a href="#editor-auto-save">Editor Auto Save </a></li><li><a href="#zoom-con-la-rotella-del-mouse">Zoom con la rotella del mouse </a></li><li><a href="#disabilitare-la-minimap">Disabilitare la Minimap </a></li><li><a href="#titolo-della-finestra-con-path-completo">Titolo della finestra con path completo </a></li><li><a href="#keyboard-shortcuts">Keyboard Shortcuts </a></li><li><a href="#.vscode%2Ftasks.json">.vscode/tasks.json </a></li><li><a href="#settings.json---cambiare-il-colore-del-testo-evidenziato">settings.json - Cambiare il colore del testo evidenziato </a></li><li><a href="#settings.json---impostazione-colori-tema">settings.json - Impostazione colori tema </a></li><li><a href="#reset-windows">Reset Windows </a></li><li><a href="#reset-linux">Reset Linux </a></li></ol></nav><h1 id="visual-studio-code-configuration" tabindex="-1">Visual Studio Code Configuration <a class="header-anchor" href="#visual-studio-code-configuration" aria-hidden="true">🔗</a></h1>
+<h2 id="settings.json" tabindex="-1">settings.json <a class="header-anchor" href="#settings.json" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-sh">~/.config/Code/User/settings.json
+</code></pre>
+<pre><code class="language-bat"><span class="hljs-variable">%APPDATA%</span>\Code\User\settings.json
+</code></pre>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;workbench.colorTheme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Default Light Modern&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.iconTheme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vscode-icons&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;git.enableSmartCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.minimap.enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;vsicons.dontShowNewVersionMessage&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files.eol&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;\n&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.mouseWheelZoom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.multiCursorModifier&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;alt&quot;</span>
+    <span class="hljs-attr">&quot;terminal.integrated.mouseWheelZoom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;window.title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${dirty}${activeEditorLong}&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.detectIndentation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;[markdown]&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editor.defaultFormatter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;yzhang.markdown-all-in-one&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files.autoSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;afterDelay&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;explorer.confirmDragAndDrop&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;terminal.integrated.defaultProfile.windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Command Prompt&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="ctrl%2Bclick---go-to-definition" tabindex="-1">Ctrl+Click - Go to Definition <a class="header-anchor" href="#ctrl%2Bclick---go-to-definition" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition">https://code.visualstudio.com/docs/editor/editingevolved#_go-to-definition</a>
+<ul>
+<li>you can go to the definition of a symbol by pressing <code>F12</code></li>
+<li>You can jump to the definition with <code>Ctrl+Click</code></li>
+</ul>
+</li>
+<li><a href="https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier">https://code.visualstudio.com/docs/editor/codebasics#_multicursor-modifier</a>
+The <code>Go to Definition</code> and Open Link gestures will also respect this setting and adapt such that they do not conflict. For example, when the setting is <code>ctrlCmd</code>, multiple cursors can be added with <code>Ctrl/Cmd+Click</code>, and opening links or going to definition can be invoked with <code>Alt+Click</code>. ==&gt; <strong>Se succede questo bisogna invertire l'impostazione</strong>.</li>
+<li><a href="https://stackoverflow.com/questions/52081768/how-i-can-make-ctrl-click-to-go-to-definition-in-visual-studio-code-editor-f">https://stackoverflow.com/questions/52081768/how-i-can-make-ctrl-click-to-go-to-definition-in-visual-studio-code-editor-f</a></li>
+</ul>
+<p>Se la funzione <code>Go to Definiton</code> funziona solo con <code>F12</code> e non anche con <code>Ctrl+Click</code> <br>
+allora il tasto <code>Control</code> è associato alla funzione <code>Multi Cursor Modifier</code>, bisogna associargli invece il tasto <code>Alt</code>:</p>
+<pre><code>/File/Preferences/Settings/Text Editor/Multi Cursor Modifier: Alt
+
+settings.json:
+&quot;editor.multiCursorModifier&quot;: &quot;alt&quot;
+</code></pre>
+<p>Grazie a questa impostazione la combinazione <code>Ctrl+Click</code> torna ad invocare la funzione <code>Go to Definiton</code>.</p>
+<h2 id="terminal-in-windows" tabindex="-1">Terminal in Windows <a class="header-anchor" href="#terminal-in-windows" aria-hidden="true">🔗</a></h2>
+<p>Per sistemi Windows 10 che hanno poweshell disabilitato bisogna impostare il terminale di default a <code>cmd.exe</code></p>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;terminal.integrated.defaultProfile.windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Command Prompt&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="editor" tabindex="-1">Editor <a class="header-anchor" href="#editor" aria-hidden="true">🔗</a></h2>
+<pre><code>/File/Preferences/Settings/Text Editor/Tab Size: 4
+/File/Preferences/Settings/Text Editor/Detect Indentation: No
+/File/Preferences/Settings/Text Editor/Insert Spaces: Yes
+/File/Preferences/Settings/Text Editor/Files/Eol: \n
+/File/Preferences/Settings/Text Editor/Files/Autosave: afterDelay
+</code></pre>
+<h2 id="editor-auto-save" tabindex="-1">Editor Auto Save <a class="header-anchor" href="#editor-auto-save" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;files.autoSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;afterDelay&quot;</span><span class="hljs-punctuation">,</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="zoom-con-la-rotella-del-mouse" tabindex="-1">Zoom con la rotella del mouse <a class="header-anchor" href="#zoom-con-la-rotella-del-mouse" aria-hidden="true">🔗</a></h2>
+<pre><code>/File/Preferences/Settings/Text Editor/Mouse Wheel Zoom
+</code></pre>
+<h2 id="disabilitare-la-minimap" tabindex="-1">Disabilitare la Minimap <a class="header-anchor" href="#disabilitare-la-minimap" aria-hidden="true">🔗</a></h2>
+<pre><code>/File/Preferences/Settings/Text Editor/Minimap
+</code></pre>
+<h2 id="titolo-della-finestra-con-path-completo" tabindex="-1">Titolo della finestra con path completo <a class="header-anchor" href="#titolo-della-finestra-con-path-completo" aria-hidden="true">🔗</a></h2>
+<pre><code>/File/Preferences/Settings/Window/Title
+
+    ${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}
+    ${dirty}${activeEditorShort}${separator}${rootName}${separator}${profileName}${separator}${appName}
+    ${dirty}${activeEditorLong}
+</code></pre>
+<h2 id="keyboard-shortcuts" tabindex="-1">Keyboard Shortcuts <a class="header-anchor" href="#keyboard-shortcuts" aria-hidden="true">🔗</a></h2>
+<p>Per editarlo da Visual Studio Code bisogna prima aprire il menu <code>/File/Preferences/Keyboard Shortcuts</code> <br>
+e poi premere il pulsante in alto a destra &quot;Open Keyboard Shortcuts&quot;</p>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf">https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf">https://code.visualstudio.com/shortcuts/keyboard-shortcuts-windows.pdf</a></p>
+</li>
+<li>
+<p><a href="file:///%25APPDATA%25/Code/User/keybindings.json">file:///%APPDATA%/Code/User/keybindings.json</a></p>
+</li>
+<li>
+<p><a href="file:///~/.config/Code/User/keybindings.json">file:///~/.config/Code/User/keybindings.json</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/docs/getstarted/keybindings#_advanced-customization">https://code.visualstudio.com/docs/getstarted/keybindings#_advanced-customization</a>
+Non ci sono keybindings a livello di workspace: <a href="https://github.com/Microsoft/vscode/issues/4504">https://github.com/Microsoft/vscode/issues/4504</a> Allow keybindings.json on .vscode folder. it is actually very easy to create a VS Code extension that contributes only keybindings, making it super easy to share a list of keybindings. See for example <a href="https://github.com/Microsoft/vscode-sublime-keybindings">https://github.com/Microsoft/vscode-sublime-keybindings</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks">https://code.visualstudio.com/docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts">https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/docs/languages/identifiers">https://code.visualstudio.com/docs/languages/identifiers</a></p>
+</li>
+</ul>
+<p><code>~/.config/Code/User/keybindings.json</code></p>
+<pre><code class="language-json"><span class="hljs-comment">// Inserire in questo file i tasti di scelta rapida per eseguire l&#x27;override di quelli predefinitiauto[]</span>
+<span class="hljs-comment">// https://code.visualstudio.com/docs/getstarted/keybindings#_advanced-customization</span>
+<span class="hljs-comment">// https://code.visualstudio.com/docs/editor/tasks#_binding-keyboard-shortcuts-to-tasks</span>
+<span class="hljs-comment">// https://code.visualstudio.com/docs/getstarted/keybindings#_when-clause-contexts</span>
+<span class="hljs-comment">// https://code.visualstudio.com/docs/languages/identifiers</span>
+<span class="hljs-punctuation">[</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+s&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.files.save&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Salvataggio di tutti i file modificati</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+s&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workbench.action.files.saveFiles&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+shift+up&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-cursorUpSelect&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;textInputFocus&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Aggiungi cursore sopra</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+shift+up&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor.action.insertCursorAbove&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+shift+down&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-cursorDownSelect&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;textInputFocus&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Aggiungi cursore sotto</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+shift+down&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor.action.insertCursorBelow&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+k ctrl+q&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.navigateToLastEditLocation&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+q&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.quickOpenView&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+q&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.quickOpenNavigateNextInViewPicker&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;inQuickOpen &amp;&amp; inViewsPicker&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+q&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.quit&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Spostamento alla posizione dove è stata effettuata l&#x27;ultima modifica</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+q&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workbench.action.navigateToLastEditLocation&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;f4&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-search.action.focusNextSearchResult&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;hasSearchResult || inSearchEditor&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;f4&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-references-view.next&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;reference-list.hasResult &amp;&amp; references-view.canNavigate&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;f4&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-goToNextReference&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;inReferenceSearchEditor || referenceSearchVisible&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Visualizza Console di Debug</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;f4&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workbench.debug.action.toggleRepl&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workbench.panel.repl.view.active&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+d&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-editor.action.addSelectionToNextFindMatch&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editorFocus&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Compare Selected</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+d&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;compareSelected&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+l&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-notebook.centerActiveCell&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;notebookEditorFocused&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+l&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-expandLineSelection&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;textInputFocus&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Lowercase</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+l&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor.action.transformToLowercase&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+u&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-cursorUndo&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;textInputFocus&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Uppercase</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+u&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor.action.transformToUppercase&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.focusFirstEditorGroup&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// MarkdownToHtml, tasks.json</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+1&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workbench.action.tasks.runTask&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MarkdownToHtml&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editorFocus &amp;&amp; editorLangId == markdown&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+7&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-workbench.action.focusSeventhEditorGroup&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Commuta commenti di riga</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+7&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor.action.commentLine&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editorTextFocus &amp;&amp; !editorReadonly&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+oem_2&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;-editor.action.commentLine&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editorTextFocus &amp;&amp; !editorReadonly&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// Commuta commenti di riga</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+oem_2&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editor.action.commentLine&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;when&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;editorTextFocus &amp;&amp; !editorReadonly&quot;</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;key&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrl+[Equal]&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;workbench.action.terminal.new&quot;</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">]</span>
+</code></pre>
+<h2 id=".vscode%2Ftasks.json" tabindex="-1">.vscode/tasks.json <a class="header-anchor" href="#.vscode%2Ftasks.json" aria-hidden="true">🔗</a></h2>
+<p>La powershell non funziona, nelle opzioni di Visual Studio Code
+l'ho dovuta sostituire con <code>C:\WINDOWS\System32\cmd.exe</code></p>
+<ul>
+<li><a href="file:///workspaces/workspace/WebWorkspace/Web/.vscode/tasks.json">file:///workspaces/workspace/WebWorkspace/Web/.vscode/tasks.json</a></li>
+<li><a href="file:///~/.config/Code/User/settings.json">file:///~/.config/Code/User/settings.json</a></li>
+</ul>
+<pre><code class="language-json"><span class="hljs-punctuation">{</span>
+    <span class="hljs-comment">// for the documentation about the tasks.json format</span>
+    <span class="hljs-comment">// https://code.visualstudio.com/docs/editor/tasks</span>
+    <span class="hljs-attr">&quot;version&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;2.0.0&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;tasks&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;echo&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;@echo ${workspaceFolder} &amp;&amp; @echo ${file}&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>   <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gulp_default&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gulp&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;task&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;default&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;$eslint-compact&quot;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;typescript&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;TypeScript Compiler current file&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;tsconfig&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${fileDirname}/tsconfig.json&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-string">&quot;$tsc&quot;</span>
+            <span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;MarkdownToHtml&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;process&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// process al posto di shell permette in funzionamento anche in Windows 10 con antivirus</span>
+            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;./firefox_md_html.sh&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;.\\firefox_md_html.cmd&quot;</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;args&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+                <span class="hljs-comment">// https://code.visualstudio.com/docs/editor/tasks#_variable-substitution</span>
+                <span class="hljs-comment">// https://code.visualstudio.com/docs/editor/variables-reference</span>
+                <span class="hljs-string">&quot;${file}&quot;</span>
+            <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-comment">// Definendo come build di default non c&#x27;e&#x27; bisogno di assegnare un keyboard shortcut</span>
+                <span class="hljs-comment">// si può usare il default CTRL+SHIFT+B</span>
+                <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;presentation&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;reveal&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;always&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// https://code.visualstudio.com/docs/editor/tasks#_output-behavior</span>
+                <span class="hljs-attr">&quot;panel&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shared&quot;</span>
+            <span class="hljs-punctuation">}</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Sass Compile&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;sass ${fileDirname}/${fileBasenameNoExtension}.scss ${fileDirname}/${fileBasenameNoExtension}.css&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;label&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gulp&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;shell&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;command&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;gulp&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;options&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;cwd&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${fileDirname}&quot;</span>
+            <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+            <span class="hljs-punctuation">}</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npm&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;script&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;type&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;npm&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;script&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;webpack_dev&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;problemMatcher&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;group&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+                <span class="hljs-attr">&quot;kind&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;build&quot;</span><span class="hljs-punctuation">,</span>
+                <span class="hljs-attr">&quot;isDefault&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+            <span class="hljs-punctuation">}</span>
+        <span class="hljs-punctuation">}</span>
+
+    <span class="hljs-punctuation">]</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="settings.json---cambiare-il-colore-del-testo-evidenziato" tabindex="-1">settings.json - Cambiare il colore del testo evidenziato <a class="header-anchor" href="#settings.json---cambiare-il-colore-del-testo-evidenziato" aria-hidden="true">🔗</a></h2>
+<p>Per aprire il file <code>setting.json</code> da dentro Visual Studio Code:</p>
+<pre><code>File/Preferences/Settings tasto 'Open Settings(JSON)' in alto a destra
+</code></pre>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme">https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/api/references/theme-color">https://code.visualstudio.com/api/references/theme-color</a></p>
+</li>
+<li>
+<p><a href="https://code.visualstudio.com/api/references/theme-color#editor-colors">https://code.visualstudio.com/api/references/theme-color#editor-colors</a></p>
+<p>~/.config/Code/User/settings.json
+%APPDATA%\Code\User\settings.json</p>
+</li>
+</ul>
+<pre><code class="language-json"><span class="hljs-comment">// Inserire le impostazioni in questo file per sovrascrivere quelle predefinite</span>
+<span class="hljs-punctuation">{</span>
+    ...<span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.colorCustomizations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editor.selectionBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c6c9bb69&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;editor.selectionHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#e9e78969&quot;</span>
+      <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="settings.json---impostazione-colori-tema" tabindex="-1">settings.json - Impostazione colori tema <a class="header-anchor" href="#settings.json---impostazione-colori-tema" aria-hidden="true">🔗</a></h2>
+<p>Per aprire il file <code>setting.json</code> da dentro Visual Studio Code:</p>
+<pre><code>File/Preferences/Settings tasto 'Open Settings(JSON)' in alto a destra
+</code></pre>
+<ul>
+<li><a href="https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme">https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme</a></li>
+<li><a href="https://code.visualstudio.com/api/references/theme-color">https://code.visualstudio.com/api/references/theme-color</a></li>
+<li><a href="file:///home/$USER/.config/Code/User/settings.json">file:///home/$USER/.config/Code/User/settings.json</a></li>
+</ul>
+<pre><code class="language-bash">~/.config/Code/User/settings.json
+</code></pre>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/docs/getstarted/settings">https://code.visualstudio.com/docs/getstarted/settings</a></p>
+</li>
+<li>
+<p><a href="file:///C:/Users/$USER/AppData/Roaming/Code/User/settings.json">file:///C:/Users/$USER/AppData/Roaming/Code/User/settings.json</a></p>
+</li>
+</ul>
+<pre><code class="language-bat"><span class="hljs-variable">%APPDATA%</span>\Code\User\settings.json
+.vscode\settings.json
+</code></pre>
+<pre><code class="language-json"><span class="hljs-comment">// Versione Linux:</span>
+<span class="hljs-comment">// ~/.config/Code/User/settings.json</span>
+<span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;telemetry.enableCrashReporter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;telemetry.enableTelemetry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;peacock.favoriteColors&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Angular Red&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#b52e31&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Auth0 Orange&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#eb5424&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Azure Blue&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#007fff&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C# Purple&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#68217A&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Gatsby Purple&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#639&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Go Cyan&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#5dc9e2&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Java Blue-Gray&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#557c9b&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;JavaScript Yellow&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#f9e64f&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Mandalorian Blue&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#1857a4&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Node Green&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#215732&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;React Blue&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#00b3e6&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Something Different&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#832561&quot;</span>
+        <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-punctuation">{</span>
+            <span class="hljs-attr">&quot;name&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Vue Green&quot;</span><span class="hljs-punctuation">,</span>
+            <span class="hljs-attr">&quot;value&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#42b883&quot;</span>
+        <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.colorTheme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Default Light+&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.minimap.enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;terminal.integrated.rendererType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;dom&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.folding&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.wordWrapColumn&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">180</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.multiCursorModifier&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;ctrlCmd&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;open-in-browser.default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;firefox&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.activityBar.visible&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;explorer.confirmDelete&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;explorer.confirmDragAndDrop&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.iconTheme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;material-icon-theme&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;window.zoomLevel&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;[html]&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editor.defaultFormatter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;vscode.html-language-features&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.fontSize&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;debug.console.fontSize&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;markdown.preview.fontSize&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;terminal.integrated.fontSize&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">16</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;[scss]&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editor.defaultFormatter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HookyQR.beautify&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;task.problemMatchers.neverPrompt&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;npm&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;[javascript]&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editor.defaultFormatter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;HookyQR.beautify&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.mouseWheelZoom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files.autoSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;off&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files.associations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-comment">// https://code.visualstudio.com/docs/languages/identifiers</span>
+        <span class="hljs-attr">&quot;*.html_lodash&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;html&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;*.html_lodashx&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;html&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;*.js_snippet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;javascript&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-comment">// https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme</span>
+    <span class="hljs-comment">// https://code.visualstudio.com/api/references/theme-color</span>
+    <span class="hljs-comment">// Tema base scelot: Light+</span>
+    <span class="hljs-attr">&quot;workbench.colorCustomizations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editorBracketMatch.background&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#00ff40f6&quot;</span><span class="hljs-punctuation">,</span>       <span class="hljs-comment">// Background color behind matching brackets</span>
+        <span class="hljs-attr">&quot;editorBracketMatch.border&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ffff00&quot;</span><span class="hljs-punctuation">,</span>             <span class="hljs-comment">// Color for matching brackets boxes</span>
+        <span class="hljs-attr">&quot;editor.selectionBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c5e60794&quot;</span><span class="hljs-punctuation">,</span>          <span class="hljs-comment">// Color of the editor selection.</span>
+        <span class="hljs-attr">&quot;editor.selectionHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c7f12c69&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Color for regions with the same content as the selection.</span>
+        <span class="hljs-attr">&quot;editor.findMatchBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c6f12ce0&quot;</span><span class="hljs-punctuation">,</span>          <span class="hljs-comment">// Color of the current search match.</span>
+        <span class="hljs-attr">&quot;editor.findMatchHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c5e60763&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Color of the other search matches.</span>
+        <span class="hljs-attr">&quot;editor.wordHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#00ff736e&quot;</span><span class="hljs-punctuation">,</span>      <span class="hljs-comment">// Background color of a symbol during read-access, like reading a variable. The color must not be opaque so as not to hide underlying decorations.</span>
+        <span class="hljs-attr">&quot;editor.wordHighlightStrongBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ffae00&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// Background color of a symbol during write-access, like writing to a variable. The color must not be opaque so as not to hide underlying decorations.</span>
+       
+    <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">,</span>
+
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<pre><code class="language-json"><span class="hljs-comment">// Versione Windows: Inserire le impostazioni in questo file per sovrascrivere quelle predefinite</span>
+<span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">&quot;terminal.integrated.shell.windows&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\WINDOWS\\System32\\cmd.exe&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;update.enableWindowsBackgroundUpdates&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;update.showReleaseNotes&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;window.zoomLevel&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-number">1</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;explorer.confirmDragAndDrop&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;breadcrumbs.enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.minimap.enabled&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;window.title&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;${dirty}${activeEditorLong}&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;open-in-browser.default&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;firefox&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;explorer.confirmDelete&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;terminal.integrated.rendererType&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;dom&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;typescript.tsdk&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;C:\\Users\\$USER\\AppData\\Roaming\\npm\\node_modules\\typescript\\lib&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.enableExperiments&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;update.mode&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;none&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;telemetry.enableCrashReporter&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;telemetry.enableTelemetry&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.settings.enableNaturalLanguageSearch&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">false</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;task.slowProviderWarning&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-string">&quot;gulp&quot;</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files.autoSave&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;off&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;editor.mouseWheelZoom&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span><span class="hljs-punctuation">,</span>
+    <span class="hljs-comment">// https://code.visualstudio.com/docs/getstarted/themes#_customizing-a-color-theme</span>
+    <span class="hljs-comment">// https://code.visualstudio.com/api/references/theme-color</span>
+    <span class="hljs-comment">// Tema base scelot: Light+</span>
+    <span class="hljs-attr">&quot;workbench.colorCustomizations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">&quot;editorBracketMatch.background&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#00ff40f6&quot;</span><span class="hljs-punctuation">,</span>       <span class="hljs-comment">// Background color behind matching brackets</span>
+        <span class="hljs-attr">&quot;editorBracketMatch.border&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ffff00&quot;</span><span class="hljs-punctuation">,</span>             <span class="hljs-comment">// Color for matching brackets boxes</span>
+        <span class="hljs-attr">&quot;editor.selectionBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c5e60794&quot;</span><span class="hljs-punctuation">,</span>          <span class="hljs-comment">// Color of the editor selection.</span>
+        <span class="hljs-attr">&quot;editor.selectionHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c7f12c69&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Color for regions with the same content as the selection.</span>
+        <span class="hljs-attr">&quot;editor.findMatchBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c6f12ce0&quot;</span><span class="hljs-punctuation">,</span>          <span class="hljs-comment">// Color of the current search match.</span>
+        <span class="hljs-attr">&quot;editor.findMatchHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#c5e60763&quot;</span><span class="hljs-punctuation">,</span> <span class="hljs-comment">// Color of the other search matches.</span>
+        <span class="hljs-attr">&quot;editor.wordHighlightBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#00ff736e&quot;</span><span class="hljs-punctuation">,</span>      <span class="hljs-comment">// Background color of a symbol during read-access, like reading a variable. The color must not be opaque so as not to hide underlying decorations.</span>
+        <span class="hljs-attr">&quot;editor.wordHighlightStrongBackground&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;#ff0000&quot;</span><span class="hljs-punctuation">,</span>  <span class="hljs-comment">// Background color of a symbol during write-access, like writing to a variable. The color must not be opaque so as not to hide underlying decorations.</span>
+        
+    <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;workbench.colorTheme&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;Default Light+&quot;</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;files.associations&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-comment">// https://code.visualstudio.com/docs/languages/identifiers</span>
+        <span class="hljs-attr">&quot;*.html_lodash&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;html&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;*.html_lodashx&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;html&quot;</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">&quot;*.js_snippet&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-string">&quot;javascript&quot;</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">&quot;git.enableSmartCommit&quot;</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span>
+   
+<span class="hljs-punctuation">}</span>
+</code></pre>
+<h2 id="reset-windows" tabindex="-1">Reset Windows <a class="header-anchor" href="#reset-windows" aria-hidden="true">🔗</a></h2>
+<p>Cancellare il contenuto delle directory:</p>
+<ul>
+<li></li>
+</ul>
+<pre><code>```bat
+%APPDATA%\Code
+```
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>```bat
+%USERPROFILE%\.vscode
+```
+</code></pre>
+<h2 id="reset-linux" tabindex="-1">Reset Linux <a class="header-anchor" href="#reset-linux" aria-hidden="true">🔗</a></h2>
+<p>Cancellare il contenuto delle directory:</p>
+<ul>
+<li></li>
+</ul>
+<pre><code>```bash
+$HOME/.config/Code
+```
+</code></pre>
+<ul>
+<li></li>
+</ul>
+<pre><code>```bash
+~/.vscode
+```
+</code></pre>
+</body></html>

@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.319" />
+        <title>conky</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="conky" tabindex="-1">conky <a class="header-anchor" href="#conky" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.319</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione">Installazione </a></li><li><a href="#always-foreground">Always foreground </a></li><li><a href="#always-background">Always background </a></li><li><a href="#autostart">Autostart </a></li><li><a href="#configurazione">Configurazione </a></li><li><a href="#conky-manager">Conky Manager </a><ol><li><a href="#tema-conky-lua">Tema Conky Lua </a></li><li><a href="#tema-infinity">Tema Infinity </a></li></ol></li></ol></nav><h1 id="conky-1" tabindex="-1">Conky <a class="header-anchor" href="#conky-1" aria-hidden="true">🔗</a></h1>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install conky-all lm-sensors hddtemp
+<span class="hljs-built_in">cp</span> /etc/conky/conky.conf ~/.conkyrc
+<span class="hljs-built_in">sudo</span> sensors-detect
+sensors
+
+conky
+</code></pre>
+<pre><code class="language-bash">-- vim: ts=4 sw=4 noet ai cindent syntax=lua
+--[[
+Conky, a system monitor, based on torsmo
+
+Any original torsmo code is licensed under the BSD license
+
+All code written since the fork of torsmo is licensed under the GPL
+
+Please see COPYING <span class="hljs-keyword">for</span> details
+
+Copyright (c) 2004, Hannu Saransaari and Lauri Hakkarainen
+Copyright (c) 2005-2012 Brenden Matthews, Philip Kovacs, et. al. (see AUTHORS)
+All rights reserved.
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed <span class="hljs-keyword">in</span> the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License <span class="hljs-keyword">for</span> more details.
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see &lt;http://www.gnu.org/licenses/&gt;.
+]]
+
+conky.config = {
+	double_buffer= <span class="hljs-literal">true</span>,
+    alignment = <span class="hljs-string">&#x27;middle_right&#x27;</span>,
+    background = <span class="hljs-literal">false</span>,
+    border_width = 1,
+    cpu_avg_samples = 2,
+	default_color = <span class="hljs-string">&#x27;white&#x27;</span>,
+    default_outline_color = <span class="hljs-string">&#x27;white&#x27;</span>,
+    default_shade_color = <span class="hljs-string">&#x27;white&#x27;</span>,
+    draw_borders = <span class="hljs-literal">false</span>,
+    draw_graph_borders = <span class="hljs-literal">true</span>,
+    draw_outline = <span class="hljs-literal">false</span>,
+    draw_shades = <span class="hljs-literal">false</span>,
+    use_xft = <span class="hljs-literal">true</span>,
+    font = <span class="hljs-string">&#x27;DejaVu Sans Mono:size=12&#x27;</span>,
+    gap_x = 5,
+    gap_y = 60,
+    minimum_height = 5,
+	minimum_width = 5,
+    net_avg_samples = 2,
+    no_buffers = <span class="hljs-literal">true</span>,
+    out_to_console = <span class="hljs-literal">false</span>,
+    out_to_stderr = <span class="hljs-literal">false</span>,
+    extra_newline = <span class="hljs-literal">false</span>,
+    own_window = <span class="hljs-literal">true</span>,
+    own_window_class = <span class="hljs-string">&#x27;Conky&#x27;</span>,
+    own_window_type = <span class="hljs-string">&#x27;desktop&#x27;</span>,
+    stippled_borders = 0,
+    update_interval = 1.0,
+    uppercase = <span class="hljs-literal">false</span>,
+    use_spacer = <span class="hljs-string">&#x27;none&#x27;</span>,
+    show_graph_scale = <span class="hljs-literal">false</span>,
+    show_graph_range = <span class="hljs-literal">false</span>
+}
+
+conky.text = [[
+<span class="hljs-variable">${scroll 16 $nodename - $sysname $kernel on $machine | }</span>
+<span class="hljs-variable">$hr</span>
+<span class="hljs-variable">${color grey}</span>Uptime:<span class="hljs-variable">$color</span> <span class="hljs-variable">$uptime</span>
+<span class="hljs-variable">${color grey}</span>Frequency (<span class="hljs-keyword">in</span> MHz):<span class="hljs-variable">$color</span> <span class="hljs-variable">$freq</span>
+<span class="hljs-variable">${color grey}</span>Frequency (<span class="hljs-keyword">in</span> GHz):<span class="hljs-variable">$color</span> <span class="hljs-variable">$freq_g</span>
+<span class="hljs-variable">${color grey}</span>RAM Usage:<span class="hljs-variable">$color</span> <span class="hljs-variable">$mem</span>/<span class="hljs-variable">$memmax</span> - <span class="hljs-variable">$memperc</span>% <span class="hljs-variable">${membar 4}</span>
+<span class="hljs-variable">${color grey}</span>Swap Usage:<span class="hljs-variable">$color</span> <span class="hljs-variable">$swap</span>/<span class="hljs-variable">$swapmax</span> - <span class="hljs-variable">$swapperc</span>% <span class="hljs-variable">${swapbar 4}</span>
+<span class="hljs-variable">${color grey}</span>CPU Usage:<span class="hljs-variable">$color</span> <span class="hljs-variable">$cpu</span>% <span class="hljs-variable">${cpubar 4}</span>
+<span class="hljs-variable">${color grey}</span>Processes:<span class="hljs-variable">$color</span> <span class="hljs-variable">$processes</span>  <span class="hljs-variable">${color grey}</span>Running:<span class="hljs-variable">$color</span> <span class="hljs-variable">$running_processes</span>
+<span class="hljs-variable">$hr</span>
+<span class="hljs-variable">${color grey}</span>File systems:
+ / $color<span class="hljs-variable">${fs_used /}</span>/<span class="hljs-variable">${fs_size /}</span> <span class="hljs-variable">${fs_bar 6 /}</span>
+<span class="hljs-variable">${color grey}</span>Networking:
+Up:<span class="hljs-variable">$color</span> <span class="hljs-variable">${upspeed eth0}</span> <span class="hljs-variable">${color grey}</span> - Down:<span class="hljs-variable">$color</span> <span class="hljs-variable">${downspeed eth0}</span>
+<span class="hljs-variable">$hr</span>
+<span class="hljs-variable">${color grey}</span>Name              PID   CPU%   MEM%
+<span class="hljs-variable">${color lightgrey}</span> <span class="hljs-variable">${top name 1}</span> <span class="hljs-variable">${top pid 1}</span> <span class="hljs-variable">${top cpu 1}</span> <span class="hljs-variable">${top mem 1}</span>
+<span class="hljs-variable">${color lightgrey}</span> <span class="hljs-variable">${top name 2}</span> <span class="hljs-variable">${top pid 2}</span> <span class="hljs-variable">${top cpu 2}</span> <span class="hljs-variable">${top mem 2}</span>
+<span class="hljs-variable">${color lightgrey}</span> <span class="hljs-variable">${top name 3}</span> <span class="hljs-variable">${top pid 3}</span> <span class="hljs-variable">${top cpu 3}</span> <span class="hljs-variable">${top mem 3}</span>
+<span class="hljs-variable">${color lightgrey}</span> <span class="hljs-variable">${top name 4}</span> <span class="hljs-variable">${top pid 4}</span> <span class="hljs-variable">${top cpu 4}</span> <span class="hljs-variable">${top mem 4}</span>
+]]
+</code></pre>
+<h2 id="always-foreground" tabindex="-1">Always foreground <a class="header-anchor" href="#always-foreground" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">export</span> NETWORK_INTERFACE=ens3
+$ <span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.conkyrc
+conky.config = {
+  use_spacer = <span class="hljs-string">&#x27;left&#x27;</span>,
+  pad_percents = 3,
+  background = <span class="hljs-literal">true</span>,
+  double_buffer = <span class="hljs-literal">true</span>,
+  font = <span class="hljs-string">&#x27;DejaVu Sans Mono:size=10&#x27;</span>,
+  use_xft = <span class="hljs-literal">true</span>,
+  alignment = <span class="hljs-string">&#x27;top_right&#x27;</span>,
+  gap_x = 10,
+  gap_y = 40,
+  own_window_argb_visual = <span class="hljs-literal">true</span>,
+  own_window_argb_value = 100,
+  own_window_type = <span class="hljs-string">&#x27;dock&#x27;</span>,
+  own_window = <span class="hljs-literal">true</span>,
+  update_interval = 5.0,
+}
+
+conky.text = [[
+\<span class="hljs-variable">${color orange}</span>Hostname: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${nodename}</span>
+\<span class="hljs-variable">${color orange}</span>Kernel:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${sysname}</span> \<span class="hljs-variable">${kernel}</span> on \<span class="hljs-variable">${machine}</span>
+\<span class="hljs-variable">${color orange}</span>Uptime:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${uptime}</span>
+\<span class="hljs-variable">${exec /usr/lib/update-notifier/apt-check --human-readable}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>CPU:\<span class="hljs-variable">${color}</span> \<span class="hljs-variable">${freq_g}</span> GHz
+\<span class="hljs-variable">${color orange}</span>0:\<span class="hljs-variable">${color}</span> \<span class="hljs-variable">${cpu cpu1}</span>% \<span class="hljs-variable">${cpubar cpu1}</span>
+\<span class="hljs-variable">${cpugraph}</span>
+\<span class="hljs-variable">${color orange}</span>Name              PID   CPU%   MEM%
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 1}</span> \<span class="hljs-variable">${top pid 1}</span> \<span class="hljs-variable">${top cpu 1}</span> \<span class="hljs-variable">${top mem 1}</span>
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 2}</span> \<span class="hljs-variable">${top pid 2}</span> \<span class="hljs-variable">${top cpu 2}</span> \<span class="hljs-variable">${top mem 2}</span>
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 3}</span> \<span class="hljs-variable">${top pid 3}</span> \<span class="hljs-variable">${top cpu 3}</span> \<span class="hljs-variable">${top mem 3}</span>
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 4}</span> \<span class="hljs-variable">${top pid 4}</span> \<span class="hljs-variable">${top cpu 4}</span> \<span class="hljs-variable">${top mem 4}</span>
+\<span class="hljs-variable">${color orange}</span>Load average: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${loadavg}</span>
+\<span class="hljs-variable">${color orange}</span>Processes: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${processes}</span> \\
+\<span class="hljs-variable">${color orange}</span>Running:\<span class="hljs-variable">${color}</span> \<span class="hljs-variable">${running_processes}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>RAM:  \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${mem}</span>/\<span class="hljs-variable">${memmax}</span>
+\<span class="hljs-variable">${memperc}</span>% \<span class="hljs-variable">${membar 4}</span>
+\<span class="hljs-variable">${color orange}</span>Swap: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${swap}</span>/\<span class="hljs-variable">${swapmax}</span>
+\<span class="hljs-variable">${swapperc}</span>% \<span class="hljs-variable">${swapbar 4}</span>
+\<span class="hljs-variable">${memgraph}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>/ \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${fs_used /}</span>/\<span class="hljs-variable">${fs_size /}</span> \<span class="hljs-variable">${fs_bar 6 /}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>IP:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${addr ens3}</span>
+\<span class="hljs-variable">${color orange}</span>Up:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${upspeed ens3}</span>
+\<span class="hljs-variable">${color orange}</span>Down: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${downspeed ens3}</span>
+]]
+EOF
+</code></pre>
+<h2 id="always-background" tabindex="-1">Always background <a class="header-anchor" href="#always-background" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">export</span> NETWORK_INTERFACE=ens3
+$ <span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.conkyrc
+conky.config = {
+  use_spacer = <span class="hljs-string">&#x27;left&#x27;</span>,
+  pad_percents = 3,
+  background = <span class="hljs-literal">false</span>,
+  double_buffer = <span class="hljs-literal">true</span>,
+  font = <span class="hljs-string">&#x27;DejaVu Sans Mono:size=10&#x27;</span>,
+  use_xft = <span class="hljs-literal">true</span>,
+  alignment = <span class="hljs-string">&#x27;top_right&#x27;</span>,
+  gap_x = 10,
+  gap_y = 40,
+  own_window_argb_visual = <span class="hljs-literal">true</span>,
+  own_window_argb_value = 0,
+  own_window_type = <span class="hljs-string">&#x27;normal&#x27;</span>,
+  own_window_hints = <span class="hljs-string">&#x27;undecorated,below,skip_taskbar,skip_pager,sticky&#x27;</span>,
+  own_window = <span class="hljs-literal">true</span>,
+  update_interval = 5.0,
+}
+
+conky.text = [[
+\<span class="hljs-variable">${color orange}</span>Hostname: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${nodename}</span>
+\<span class="hljs-variable">${color orange}</span>Kernel:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${sysname}</span> \<span class="hljs-variable">${kernel}</span> on \<span class="hljs-variable">${machine}</span>
+\<span class="hljs-variable">${color orange}</span>Uptime:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${uptime}</span>
+\<span class="hljs-variable">${exec /usr/lib/update-notifier/apt-check --human-readable}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>CPU:\<span class="hljs-variable">${color}</span> \<span class="hljs-variable">${freq_g}</span> GHz
+\<span class="hljs-variable">${color orange}</span>1:\<span class="hljs-variable">${color}</span> \<span class="hljs-variable">${cpu cpu1}</span>% \<span class="hljs-variable">${cpubar cpu1}</span>
+\<span class="hljs-variable">${cpugraph}</span>
+\<span class="hljs-variable">${color orange}</span>Name              PID   CPU%   MEM%
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 1}</span> \<span class="hljs-variable">${top pid 1}</span> \<span class="hljs-variable">${top cpu 1}</span> \<span class="hljs-variable">${top mem 1}</span>
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 2}</span> \<span class="hljs-variable">${top pid 2}</span> \<span class="hljs-variable">${top cpu 2}</span> \<span class="hljs-variable">${top mem 2}</span>
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 3}</span> \<span class="hljs-variable">${top pid 3}</span> \<span class="hljs-variable">${top cpu 3}</span> \<span class="hljs-variable">${top mem 3}</span>
+\<span class="hljs-variable">${color lightgrey}</span> \<span class="hljs-variable">${top name 4}</span> \<span class="hljs-variable">${top pid 4}</span> \<span class="hljs-variable">${top cpu 4}</span> \<span class="hljs-variable">${top mem 4}</span>
+\<span class="hljs-variable">${color orange}</span>Load average: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${loadavg}</span>
+\<span class="hljs-variable">${color orange}</span>Processes: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${processes}</span> \\
+\<span class="hljs-variable">${color orange}</span>Running:\<span class="hljs-variable">${color}</span> \<span class="hljs-variable">${running_processes}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>RAM:  \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${mem}</span>/\<span class="hljs-variable">${memmax}</span>
+\<span class="hljs-variable">${memperc}</span>% \<span class="hljs-variable">${membar 4}</span>
+\<span class="hljs-variable">${color orange}</span>Swap: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${swap}</span>/\<span class="hljs-variable">${swapmax}</span>
+\<span class="hljs-variable">${swapperc}</span>% \<span class="hljs-variable">${swapbar 4}</span>
+\<span class="hljs-variable">${memgraph}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>/ \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${fs_used /}</span>/\<span class="hljs-variable">${fs_size /}</span> \<span class="hljs-variable">${fs_bar 6 /}</span>
+\<span class="hljs-variable">${hr}</span>
+\<span class="hljs-variable">${color orange}</span>IP:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${addr <span class="hljs-variable">${NETWORK_INTERFACE}</span>}</span>
+\<span class="hljs-variable">${color orange}</span>Up:   \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${upspeed <span class="hljs-variable">${NETWORK_INTERFACE}</span>}</span>
+\<span class="hljs-variable">${color orange}</span>Down: \<span class="hljs-variable">${color}</span>\<span class="hljs-variable">${downspeed <span class="hljs-variable">${NETWORK_INTERFACE}</span>}</span>
+]]
+EOF
+</code></pre>
+<h2 id="autostart" tabindex="-1">Autostart <a class="header-anchor" href="#autostart" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p ~/.config/autostart
+$ <span class="hljs-built_in">cat</span> &lt;&lt;<span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.config/autostart/conky.desktop
+[Desktop Entry]
+Type=Application
+Exec=/usr/bin/conky
+Hidden=<span class="hljs-literal">false</span>
+NoDisplay=<span class="hljs-literal">false</span>
+X-GNOME-Autostart-enabled=<span class="hljs-literal">true</span>
+Name=conky
+Comment=
+EOF
+</code></pre>
+<h2 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p>Installare il font: X11/DigitalClockFont</p>
+</li>
+<li>
+<p>Per rimuovere le ombre dalla finestra di Conky sotto Compiz(Unity):</p>
+<p>ccsm/Windows Decorations/Shadow Windows=(any) &amp; !(class=Conky)</p>
+</li>
+<li>
+<p>Configurazione da provare per evitare che la finestra di Conky si sovrapponga alle altre:</p>
+</li>
+</ul>
+<ol>
+<li>
+<pre><code> own_window_colour black
+ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+ own_window_transparent yes
+ own_window_type root
+ own_window yes
+</code></pre>
+</li>
+<li>
+<pre><code> own_window_type desktop
+ own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
+</code></pre>
+</li>
+<li>
+<pre><code> own_window_argb_visual yes
+ own_window_transparent yes
+</code></pre>
+</li>
+<li>
+<p>Find the following line in config file:
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager
+change it to:
+own_window_hints undecorated,sticky,skip_taskbar,skip_pager,below</p>
+</li>
+</ol>
+<p>Script di avvio</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">sleep</span> 30 &amp;&amp; conky
+
+<span class="hljs-comment">#!/usr/bin/env bash</span>
+<span class="hljs-built_in">sleep</span> 20
+conky -d -c ~/.conkyrc
+<span class="hljs-built_in">exit</span>
+</code></pre>
+<p><a href="http://compiz-themes.org/content/show.php/Conky+HTC+style+clock+%2B+detailed+weather?content=156485">http://compiz-themes.org/content/show.php/Conky+HTC+style+clock+%2B+detailed+weather?content=156485</a></p>
+<p>When own_window_type override is used the distortion is caused. Now to clear the distortion one may use own_window_type desktop in the .conkyrc instead of own_window_type override . But this causes other problems like disappearance of conky when trying to work in the desktop(i.e right clicking, opening a menu from panel etc.). Therefore instead of own_window_type override one may use own_window_type dock . This won't let the conky to disappear when working on the desktop. Also to solve transparency issue one may remove the line own_window_transparent yes and then include the following lines in its place:</p>
+<pre><code>own_window_argb_visual yes
+own_window_argb_value 0
+</code></pre>
+<p>Actually ARGB visual can be used for real transparency to avoid the default pseudo transparency. Therefore even if there are icons in the desktop, they will be visible. Note that ARGB visual can take values 0-255 and a higher value means a greater opacity. Thus distortions can be removed and transparency can be adjusted. Thus the problem is solved. Note that the boxes after the fonts issue(mentioned and seen in the above screen shot)can be removed by removing new lines but new lines may be required for other formatting. Therefore one has no other go but to live with the boxes. Also note that the problem with the boxes is only prevalent in unity. Other desktop environments like Cinnamon don't seem to have the issue.</p>
+<h2 id="conky-manager" tabindex="-1">Conky Manager <a class="header-anchor" href="#conky-manager" aria-hidden="true">🔗</a></h2>
+<p><a href="https://teejeetech.in/conky-manager/">https://teejeetech.in/conky-manager/</a></p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt-add-repository ppa:teejee2008/ppa
+<span class="hljs-built_in">sudo</span> apt update
+<span class="hljs-built_in">sudo</span> apt install conky-manager
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt remove conky-manager
+<span class="hljs-built_in">sudo</span> apt-add-repository -r ppa:teejee2008/ppa
+<span class="hljs-built_in">sudo</span> apt update
+</code></pre>
+<p>Themes are kept in the ~/conky-manager/themes directory. Each folder in this location is displayed as a separate theme. Selecting a theme from the top list will display the conkyrc files in the bottom list. Click the checkboxes in the top list or the bottom list to start or stop a theme.
+The Options tab has an option to start Conky on system startup.
+It creates an autostart entry in <code>~./.config/autostart</code> when checked, and removes the file when un-checked.
+The actual startup script is written to <code>~/conky-manager/conky-startup.sh</code>. The script is updated when the app exits.</p>
+<h3 id="tema-conky-lua" tabindex="-1">Tema Conky Lua <a class="header-anchor" href="#tema-conky-lua" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="http://gnome-look.org/content/show.php/Conky+lua?content=139024">http://gnome-look.org/content/show.php/Conky+lua?content=139024</a></li>
+<li>Extract, then rename the file called conkyrc to .conkyrc, then move it to your home directory.</li>
+<li>create a new folder called ~/.conky and copy clock_rings.lua, new-ubuntu-logo.png</li>
+<li>gedit .conkyrc e cambiare /~.lua/scripts/clock_rings.lua in ~/.conky/clock_rings.lua</li>
+<li>If you are using wireless, and you want to have Net working on conky, edit .conkyrc and change eth0 with wlan0</li>
+</ul>
+<h3 id="tema-infinity" tabindex="-1">Tema Infinity <a class="header-anchor" href="#tema-infinity" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>&lt;<a href="http://gnome-look.org/content/show.php?content=151516">http://gnome-look.org/content/show.php?content=151516</a>, <a href="http://harshit1990.deviantart.com/art/Infinity-306921086">http://harshit1990.deviantart.com/art/Infinity-306921086</a>&gt;</li>
+<li>sudo apt-get install unace unrar zip unzip p7zip-full p7zip-rar sharutils rar uudeview mpack lha arj cabextract file-roller</li>
+<li>creare i files come per il tema Conky Lua</li>
+</ul>
+<p>Change name of conkyrc to .conkyrc
+Change name of lua to .lua
+Change name of conky to .conky
+Copy these 3 files .conkyrc, .lua and .conky files to your /home directory.
+Open .conkyrc and adjust the screen resolution according to your desktop, to see your resolution go to Applications –&gt; Displays:
+And change the resolution in the .conkyrc file, if your resolution is 1366X768 then you don`t have to do anything.
+Also adjust haunted.lua in .lua directory according to screen resolution (Go to next step if your resolution is : 1366 X 768).</p>
+<ul>
+<li>
+<p>Now you are ready to run Conky. Open terminal and type:</p>
+<p>$chmod a+x ~/.conky/startconky.sh
+$sh ~/.conky/startconky.sh</p>
+</li>
+</ul>
+<p>It will start after a delay of 15.</p>
+<ul>
+<li>
+<p>Start Conky with startup:
+If you want Conky to load with startup, go to startup applications:
+and add this command to startup application as described below:</p>
+<p>sh ~/.conky/startconky.sh</p>
+</li>
+</ul>
+</body></html>

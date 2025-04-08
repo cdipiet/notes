@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.515" />
+        <title>network_create</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="network_create" tabindex="-1">network_create <a class="header-anchor" href="#network_create" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.515</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22network-create%22description%3A-%22the-network-create-command-description-and-usage%22keywords%3A-%22network%2C-create%22">title: &quot;network create&quot;description: &quot;The network create command description and usage&quot;keywords: &quot;network, create&quot; </a></li><li><a href="#description">Description </a><ol><li><a href="#overlay-network-limitations">Overlay network limitations </a></li></ol></li><li><a href="#examples">Examples </a><ol><li><a href="#connect-containers">Connect containers </a></li><li><a href="#specify-advanced-options">Specify advanced options </a></li><li><a href="#bridge-driver-options">Bridge driver options </a></li><li><a href="#network-internal-mode">Network internal mode </a></li><li><a href="#network-ingress-mode">Network ingress mode </a></li></ol></li><li><a href="#related-commands">Related commands </a></li></ol></nav><hr>
+<h2 id="title%3A-%22network-create%22description%3A-%22the-network-create-command-description-and-usage%22keywords%3A-%22network%2C-create%22" tabindex="-1">title: &quot;network create&quot;
+description: &quot;The network create command description and usage&quot;
+keywords: &quot;network, create&quot; <a class="header-anchor" href="#title%3A-%22network-create%22description%3A-%22the-network-create-command-description-and-usage%22keywords%3A-%22network%2C-create%22" aria-hidden="true">🔗</a></h2>
+<h1 id="network-create" tabindex="-1">network create <a class="header-anchor" href="#network-create" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker network create [OPTIONS] NETWORK
+
+Create a network
+
+Options:
+<span class="hljs-code">      --attachable           Enable manual container attachment
+      --ingress              Specify the network provides the routing-mesh
+      --aux-address value    Auxiliary IPv4 or IPv6 addresses used by Network
+                             driver (default map[])
+  -d, --driver string        Driver to manage the Network (default &quot;bridge&quot;)
+      --gateway value        IPv4 or IPv6 Gateway for the master subnet (default [])
+      --help                 Print usage
+      --internal             Restrict external access to the network
+      --ip-range value       Allocate container ip from a sub-range (default [])
+      --ipam-driver string   IP Address Management Driver (default &quot;default&quot;)
+      --ipam-opt value       Set IPAM driver specific options (default map[])
+      --ipv6                 Enable IPv6 networking
+      --label value          Set metadata on a network (default [])
+  -o, --opt value            Set driver specific options (default map[])
+      --subnet value         Subnet in CIDR format that represents a
+                             network segment (default [])
+      --scope value          Promote a network to swarm scope (value = [ local | swarm ])
+      --config-only          Creates a configuration only network
+      --config-from          The name of the network from which to copy the configuration
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Creates a new network. The <code>DRIVER</code> accepts <code>bridge</code> or <code>overlay</code> which are the
+built-in network drivers. If you have installed a third party or your own custom
+network driver you can specify that <code>DRIVER</code> here also. If you don't specify the
+<code>--driver</code> option, the command automatically creates a <code>bridge</code> network for you.
+When you install Docker Engine it creates a <code>bridge</code> network automatically. This
+network corresponds to the <code>docker0</code> bridge that Engine has traditionally relied
+on. When you launch a new container with  <code>docker run</code> it automatically connects to
+this bridge network. You cannot remove this default bridge network, but you can
+create new ones using the <code>network create</code> command.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create -d bridge my-bridge-network</span>
+</code></pre>
+<p>Bridge networks are isolated networks on a single Engine installation. If you
+want to create a network that spans multiple Docker hosts each running an
+Engine, you must create an <code>overlay</code> network. Unlike <code>bridge</code> networks, overlay
+networks require some pre-existing conditions before you can create one. These
+conditions are:</p>
+<ul>
+<li>Access to a key-value store. Engine supports Consul, Etcd, and ZooKeeper (Distributed store) key-value stores.</li>
+<li>A cluster of hosts with connectivity to the key-value store.</li>
+<li>A properly configured Engine <code>daemon</code> on each host in the cluster.</li>
+</ul>
+<p>The <code>dockerd</code> options that support the <code>overlay</code> network are:</p>
+<ul>
+<li><code>--cluster-store</code></li>
+<li><code>--cluster-store-opt</code></li>
+<li><code>--cluster-advertise</code></li>
+</ul>
+<p>To read more about these options and how to configure them, see <a href="https://docs.docker.com/engine/userguide/networking/get-started-overlay">&quot;<em>Get started
+with multi-host network</em>&quot;</a>.</p>
+<p>While not required, it is a good idea to install Docker Swarm to
+manage the cluster that makes up your network. Swarm provides sophisticated
+discovery and server management tools that can assist your implementation.</p>
+<p>Once you have prepared the <code>overlay</code> network prerequisites you simply choose a
+Docker host in the cluster and issue the following to create the network:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create -d overlay my-multihost-network</span>
+</code></pre>
+<p>Network names must be unique. The Docker daemon attempts to identify naming
+conflicts but this is not guaranteed. It is the user's responsibility to avoid
+name conflicts.</p>
+<h3 id="overlay-network-limitations" tabindex="-1">Overlay network limitations <a class="header-anchor" href="#overlay-network-limitations" aria-hidden="true">🔗</a></h3>
+<p>You should create overlay networks with <code>/24</code> blocks (the default), which limits
+you to 256 IP addresses, when you create networks using the default VIP-based
+endpoint-mode. This recommendation addresses
+<a href="https://github.com/moby/moby/issues/30820">limitations with swarm mode</a>. If you
+need more than 256 IP addresses, do not increase the IP block size. You can
+either use <code>dnsrr</code> endpoint mode with an external load balancer, or use multiple
+smaller overlay networks. See
+<a href="https://docs.docker.com/engine/swarm/networking/#configure-service-discovery">Configure service discovery</a>
+for more information about different endpoint modes.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="connect-containers" tabindex="-1">Connect containers <a class="header-anchor" href="#connect-containers" aria-hidden="true">🔗</a></h3>
+<p>When you start a container, use the <code>--network</code> flag to connect it to a network.
+This example adds the <code>busybox</code> container to the <code>mynet</code> network:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker run -itd --network=mynet busybox</span>
+</code></pre>
+<p>If you want to add a container to a network after the container is already
+running, use the <code>docker network connect</code> subcommand.</p>
+<p>You can connect multiple containers to the same network. Once connected, the
+containers can communicate using only another container's IP address or name.
+For <code>overlay</code> networks or custom plugins that support multi-host connectivity,
+containers connected to the same multi-host network but launched from different
+Engines can also communicate in this way.</p>
+<p>You can disconnect a container from a network using the <code>docker network disconnect</code> command.</p>
+<h3 id="specify-advanced-options" tabindex="-1">Specify advanced options <a class="header-anchor" href="#specify-advanced-options" aria-hidden="true">🔗</a></h3>
+<p>When you create a network, Engine creates a non-overlapping subnetwork for the
+network by default. This subnetwork is not a subdivision of an existing
+network. It is purely for ip-addressing purposes. You can override this default
+and specify subnetwork values directly using the <code>--subnet</code> option. On a
+<code>bridge</code> network you can only create a single subnet:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create --driver=bridge --subnet=192.168.0.0/16 br0</span>
+</code></pre>
+<p>Additionally, you also specify the <code>--gateway</code> <code>--ip-range</code> and <code>--aux-address</code>
+options.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create \
+  --driver=bridge \
+  --subnet=172.28.0.0/16 \
+  --ip-range=172.28.5.0/24 \
+  --gateway=172.28.5.254 \
+  br0</span>
+</code></pre>
+<p>If you omit the <code>--gateway</code> flag the Engine selects one for you from inside a
+preferred pool. For <code>overlay</code> networks and for network driver plugins that
+support it you can create multiple subnetworks. This example uses two <code>/25</code>
+subnet mask to adhere to the current guidance of not having more than 256 IPs in
+a single overlay network. Each of the subnetworks has 126 usable addresses.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create -d overlay \
+  --subnet=192.168.10.0/25 \
+  --subnet=192.168.20.0/25 \
+  --gateway=192.168.10.100 \
+  --gateway=192.168.20.100 \
+  --aux-address=<span class="hljs-string">&quot;my-router=192.168.10.5&quot;</span> --aux-address=<span class="hljs-string">&quot;my-switch=192.168.10.6&quot;</span> \
+  --aux-address=<span class="hljs-string">&quot;my-printer=192.168.20.5&quot;</span> --aux-address=<span class="hljs-string">&quot;my-nas=192.168.20.6&quot;</span> \
+  my-multihost-network</span>
+</code></pre>
+<p>Be sure that your subnetworks do not overlap. If they do, the network create
+fails and Engine returns an error.</p>
+<h3 id="bridge-driver-options" tabindex="-1">Bridge driver options <a class="header-anchor" href="#bridge-driver-options" aria-hidden="true">🔗</a></h3>
+<p>When creating a custom network, the default network driver (i.e. <code>bridge</code>) has
+additional options that can be passed. The following are those options and the
+equivalent docker daemon flags used for docker0 bridge:</p>
+<table class="table"><thead>
+<tr>
+<th>Option</th>
+<th>Equivalent</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>com.docker.network.bridge.name</code></td>
+<td>-</td>
+<td>Bridge name to be used when creating the Linux bridge</td>
+</tr>
+<tr>
+<td><code>com.docker.network.bridge.enable_ip_masquerade</code></td>
+<td><code>--ip-masq</code></td>
+<td>Enable IP masquerading</td>
+</tr>
+<tr>
+<td><code>com.docker.network.bridge.enable_icc</code></td>
+<td><code>--icc</code></td>
+<td>Enable or Disable Inter Container Connectivity</td>
+</tr>
+<tr>
+<td><code>com.docker.network.bridge.host_binding_ipv4</code></td>
+<td><code>--ip</code></td>
+<td>Default IP when binding container ports</td>
+</tr>
+<tr>
+<td><code>com.docker.network.driver.mtu</code></td>
+<td><code>--mtu</code></td>
+<td>Set the containers network MTU</td>
+</tr>
+<tr>
+<td><code>com.docker.network.container_iface_prefix</code></td>
+<td>-</td>
+<td>Set a custom prefix for container interfaces</td>
+</tr>
+</tbody>
+</table>
+<p>The following arguments can be passed to <code>docker network create</code> for any
+network driver, again with their approximate equivalents to <code>docker daemon</code>.</p>
+<table class="table"><thead>
+<tr>
+<th>Argument</th>
+<th>Equivalent</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--gateway</code></td>
+<td>-</td>
+<td>IPv4 or IPv6 Gateway for the master subnet</td>
+</tr>
+<tr>
+<td><code>--ip-range</code></td>
+<td><code>--fixed-cidr</code></td>
+<td>Allocate IPs from a range</td>
+</tr>
+<tr>
+<td><code>--internal</code></td>
+<td>-</td>
+<td>Restrict external access to the network</td>
+</tr>
+<tr>
+<td><code>--ipv6</code></td>
+<td><code>--ipv6</code></td>
+<td>Enable IPv6 networking</td>
+</tr>
+<tr>
+<td><code>--subnet</code></td>
+<td><code>--bip</code></td>
+<td>Subnet for network</td>
+</tr>
+</tbody>
+</table>
+<p>For example, let's use <code>-o</code> or <code>--opt</code> options to specify an IP address binding
+when publishing ports:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create \
+    -o <span class="hljs-string">&quot;com.docker.network.bridge.host_binding_ipv4&quot;</span>=<span class="hljs-string">&quot;172.19.0.1&quot;</span> \
+    simple-network</span>
+</code></pre>
+<h3 id="network-internal-mode" tabindex="-1">Network internal mode <a class="header-anchor" href="#network-internal-mode" aria-hidden="true">🔗</a></h3>
+<p>By default, when you connect a container to an <code>overlay</code> network, Docker also
+connects a bridge network to it to provide external connectivity. If you want
+to create an externally isolated <code>overlay</code> network, you can specify the
+<code>--internal</code> option.</p>
+<h3 id="network-ingress-mode" tabindex="-1">Network ingress mode <a class="header-anchor" href="#network-ingress-mode" aria-hidden="true">🔗</a></h3>
+<p>You can create the network which will be used to provide the routing-mesh in the
+swarm cluster. You do so by specifying <code>--ingress</code> when creating the network. Only
+one ingress network can be created at the time. The network can be removed only
+if no services depend on it. Any option available when creating an overlay network
+is also available when creating the ingress network, besides the <code>--attachable</code> option.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker network create -d overlay \
+  --subnet=10.11.0.0/16 \
+  --ingress \
+  --opt com.docker.network.driver.mtu=9216 \
+  --opt encrypted=<span class="hljs-literal">true</span> \
+  my-ingress-network</span>
+</code></pre>
+<h2 id="related-commands" tabindex="-1">Related commands <a class="header-anchor" href="#related-commands" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="network_inspect.html">network inspect</a></li>
+<li><a href="network_connect.html">network connect</a></li>
+<li><a href="network_disconnect.html">network disconnect</a></li>
+<li><a href="network_ls.html">network ls</a></li>
+<li><a href="network_rm.html">network rm</a></li>
+<li><a href="network_prune.html">network prune</a></li>
+<li><a href="https://docs.docker.com/engine/userguide/networking/">Understand Docker container networks</a></li>
+</ul>
+</body></html>

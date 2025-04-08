@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.744" />
+        <title>nodejs_lib</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nodejs_lib" tabindex="-1">nodejs_lib <a class="header-anchor" href="#nodejs_lib" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.744</p>
+<nav class="table-of-contents"><ol><li><a href="#librerie">Librerie </a><ol><li><a href="#utilit%C3%A0-generale">Utilità Generale </a><ol><li><a href="#https%3A%2F%2Flodash.com%2F">https://lodash.com/ </a></li><li><a href="#https%3A%2F%2Fcaolan.github.io%2Fasync%2F">https://caolan.github.io/async/ </a></li><li><a href="#moment-date-library">moment date library </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fuuidjs%2Fuuid">https://github.com/uuidjs/uuid </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fvisionmedia%2Fdebug">https://github.com/visionmedia/debug </a></li></ol></li><li><a href="#stack-trace-v8">Stack Trace V8 </a><ol><li><a href="#api-https%3A%2F%2Fv8.dev%2Fdocs%2Fstack-trace-api%23customizing-stack-traces">API https://v8.dev/docs/stack-trace-api#customizing-stack-traces </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Ffelixge%2Fnode-stack-trace">https://github.com/felixge/node-stack-trace </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fcallsites">https://github.com/sindresorhus/callsites </a></li></ol></li><li><a href="#file-system">File System </a><ol><li><a href="#node-fs-extra">node-fs-extra </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fopen">https://github.com/sindresorhus/open </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fpaulmillr%2Freaddirp">https://github.com/paulmillr/readdirp </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-mkdirp">https://github.com/isaacs/node-mkdirp </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-glob">https://github.com/isaacs/node-glob </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fshelljs%2Fshelljs">https://github.com/shelljs/shelljs </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fdel">https://github.com/sindresorhus/del </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fpaulmillr%2Fchokidar">https://github.com/paulmillr/chokidar </a></li></ol></li><li><a href="#console-terminal">Console-Terminal </a><ol><li><a href="#http%3A%2F%2Fyargs.js.org%2F">http://yargs.js.org/ </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsboudrias%2Finquirer.js">https://github.com/SBoudrias/Inquirer.js </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fchalk%2Fchalk">https://github.com/chalk/chalk </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Flitomore%2Fchalk-pipe">https://github.com/LitoMore/chalk-pipe </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fgajus%2Ftable">https://github.com/gajus/table </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fvisionmedia%2Fnode-progress">https://github.com/visionmedia/node-progress </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fkhrome%2Fascii-art">https://github.com/khrome/ascii-art </a></li></ol></li><li><a href="#net">Net </a><ol><li><a href="#http%3A%2F%2Fexpressjs.com%2F">http://expressjs.com/ </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fexpressjs%2Fmorgan">https://github.com/expressjs/morgan </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fgot">https://github.com/sindresorhus/got </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Faxios%2Faxios">https://github.com/axios/axios </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fwebsockets%2Fws">https://github.com/websockets/ws </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fsocketio%2Fsocket.io">https://github.com/socketio/socket.io </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Findutny%2Fnode-ip">https://github.com/indutny/node-ip </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fxtermjs%2Fxterm.js">https://github.com/xtermjs/xterm.js </a></li></ol></li><li><a href="#database">Database </a><ol><li><a href="#https%3A%2F%2Fgithub.com%2Fmongodb%2Fnode-mongodb-native">https://github.com/mongodb/node-mongodb-native </a></li><li><a href="#https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fmoongoose">https://www.npmjs.com/package/moongoose </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fmapbox%2Fnode-sqlite3">https://github.com/mapbox/node-sqlite3 </a></li></ol></li><li><a href="#xml%2Fhtml">XML/HTML </a><ol><li><a href="#https%3A%2F%2Fcheerio.js.org%2F">https://cheerio.js.org/ </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Foozcitak%2Fxmlbuilder2">https://github.com/oozcitak/xmlbuilder2 </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fleonidas-from-xiv%2Fnode-xml2js">https://github.com/Leonidas-from-XIV/node-xml2js </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fjsdom%2Fjsdom">https://github.com/jsdom/jsdom </a></li><li><a href="#https%3A%2F%2Fgithub.com%2Fmathiasbynens%2Fhe">https://github.com/mathiasbynens/he </a></li></ol></li></ol></li><li><a href="#pacchetti-installati">Pacchetti installati </a><ol><li><a href="#tool-di-sviluppo">Tool di Sviluppo </a></li><li><a href="#librerie-per-lo-sviluppo">Librerie per lo sviluppo </a><ol><li><a href="#utilit%C3%A0-generale-1">Utilità generale </a></li><li><a href="#logging">Logging </a></li><li><a href="#configuration">Configuration </a></li><li><a href="#strack-trace-v8">Strack Trace V8 </a></li><li><a href="#file-system-1">File system </a></li><li><a href="#console-terminale">Console-Terminale </a></li><li><a href="#networking">Networking </a></li><li><a href="#db">DB </a></li><li><a href="#xml-html">XML-HTML </a></li></ol></li><li><a href="#electron">Electron </a></li><li><a href="#react">React </a></li><li><a href="#strumenti-di-build">Strumenti di Build </a></li><li><a href="#unit-testing">Unit testing </a></li><li><a href="#watch-dogs">Watch Dogs </a></li><li><a href="#librerie-per-lo-sviluppo-web">Librerie per lo sviluppo Web </a><ol><li><a href="#processatori-css">Processatori CSS </a></li><li><a href="#librerie-con-componenti-grafici">Librerie con componenti grafici </a></li></ol></li></ol></li></ol></nav><h1 id="node.js-librerie" tabindex="-1">Node.js Librerie <a class="header-anchor" href="#node.js-librerie" aria-hidden="true">🔗</a></h1>
+<h2 id="librerie" tabindex="-1">Librerie <a class="header-anchor" href="#librerie" aria-hidden="true">🔗</a></h2>
+<h3 id="utilit%C3%A0-generale" tabindex="-1">Utilità Generale <a class="header-anchor" href="#utilit%C3%A0-generale" aria-hidden="true">🔗</a></h3>
+<h4 id="https%3A%2F%2Flodash.com%2F" tabindex="-1"><a href="https://lodash.com/">https://lodash.com/</a> <a class="header-anchor" href="#https%3A%2F%2Flodash.com%2F" aria-hidden="true">🔗</a></h4>
+<p>A modern JavaScript utility library delivering modularity, performance &amp; extras.</p>
+<h4 id="https%3A%2F%2Fcaolan.github.io%2Fasync%2F" tabindex="-1"><a href="https://caolan.github.io/async/">https://caolan.github.io/async/</a> <a class="header-anchor" href="#https%3A%2F%2Fcaolan.github.io%2Fasync%2F" aria-hidden="true">🔗</a></h4>
+<p>Async is a utility module which provides straight-forward, powerful functions for working with asynchronous JavaScript.</p>
+<h4 id="moment-date-library" tabindex="-1">moment date library <a class="header-anchor" href="#moment-date-library" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="https://www.npmjs.com/package/moment">https://www.npmjs.com/package/moment</a> A lightweight JavaScript date library for parsing, validating, manipulating, and formatting dates.</li>
+<li><a href="https://github.com/moment/moment">https://github.com/moment/moment</a></li>
+</ul>
+<h4 id="https%3A%2F%2Fgithub.com%2Fuuidjs%2Fuuid" tabindex="-1"><a href="https://github.com/uuidjs/uuid">https://github.com/uuidjs/uuid</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fuuidjs%2Fuuid" aria-hidden="true">🔗</a></h4>
+<p>For the creation of RFC4122 UUIDs</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fvisionmedia%2Fdebug" tabindex="-1"><a href="https://github.com/visionmedia/debug">https://github.com/visionmedia/debug</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fvisionmedia%2Fdebug" aria-hidden="true">🔗</a></h4>
+<p>A tiny JavaScript debugging utility modelled after Node.js core's debugging technique. Works in Node.js and web browsers.</p>
+<h3 id="stack-trace-v8" tabindex="-1">Stack Trace V8 <a class="header-anchor" href="#stack-trace-v8" aria-hidden="true">🔗</a></h3>
+<h4 id="api-https%3A%2F%2Fv8.dev%2Fdocs%2Fstack-trace-api%23customizing-stack-traces" tabindex="-1">API <a href="https://v8.dev/docs/stack-trace-api#customizing-stack-traces">https://v8.dev/docs/stack-trace-api#customizing-stack-traces</a> <a class="header-anchor" href="#api-https%3A%2F%2Fv8.dev%2Fdocs%2Fstack-trace-api%23customizing-stack-traces" aria-hidden="true">🔗</a></h4>
+<p>Come ottenere un array di oggetti invece di una stringa come stack trace(Node.js utilizza V8)</p>
+<p>Returns an array of callsite objects with the following methods:</p>
+<ul>
+<li><code>getThis</code>: Returns the value of <code>this</code>.</li>
+<li><code>getTypeName</code>: Returns the type of <code>this</code> as a string. This is the name of the function stored in the constructor field of <code>this</code>, if available, otherwise the object's <code>[[Class]]</code> internal property.</li>
+<li><code>getFunction</code>: Returns the current function.</li>
+<li><code>getFunctionName</code>: Returns the name of the current function, typically its <code>name</code> property. If a name property is not available an attempt will be made to try to infer a name from the function's context.</li>
+<li><code>getMethodName</code>: Returns the name of the property of <code>this</code> or one of its prototypes that holds the current function.</li>
+<li><code>getFileName</code>: If this function was defined in a script returns the name of the script.</li>
+<li><code>getLineNumber</code>: If this function was defined in a script returns the current line number.</li>
+<li><code>getColumnNumber</code>: If this function was defined in a script returns the current column number</li>
+<li><code>getEvalOrigin</code>: If this function was created using a call to <code>eval</code> returns a string representing the location where <code>eval</code> was called.</li>
+<li><code>isToplevel</code>: Is this a top-level invocation, that is, is this the global object?</li>
+<li><code>isEval</code>: Does this call take place in code defined by a call to <code>eval</code>?</li>
+<li><code>isNative</code>: Is this call in native V8 code?</li>
+<li><code>isConstructor</code>: Is this a constructor call?</li>
+</ul>
+<h4 id="https%3A%2F%2Fgithub.com%2Ffelixge%2Fnode-stack-trace" tabindex="-1"><a href="https://github.com/felixge/node-stack-trace">https://github.com/felixge/node-stack-trace</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Ffelixge%2Fnode-stack-trace" aria-hidden="true">🔗</a></h4>
+<p>Get v8 stack traces as an array of CallSite objects.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fcallsites" tabindex="-1"><a href="https://github.com/sindresorhus/callsites">https://github.com/sindresorhus/callsites</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fcallsites" aria-hidden="true">🔗</a></h4>
+<p>Get callsites from the V8 stack trace API</p>
+<h3 id="file-system" tabindex="-1">File System <a class="header-anchor" href="#file-system" aria-hidden="true">🔗</a></h3>
+<h4 id="node-fs-extra" tabindex="-1">node-fs-extra <a class="header-anchor" href="#node-fs-extra" aria-hidden="true">🔗</a></h4>
+<p>Adds file system methods that aren't included in the native fs module and adds promise support to the fs methods.</p>
+<ul>
+<li><a href="https://www.npmjs.com/package/fs-extra">https://www.npmjs.com/package/fs-extra</a></li>
+<li><a href="https://github.com/jprichardson/node-fs-extra">https://github.com/jprichardson/node-fs-extra</a></li>
+</ul>
+<h4 id="https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fopen" tabindex="-1"><a href="https://github.com/sindresorhus/open">https://github.com/sindresorhus/open</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fopen" aria-hidden="true">🔗</a></h4>
+<p>Open stuff like URLs, files, executables. Cross-platform</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fpaulmillr%2Freaddirp" tabindex="-1"><a href="https://github.com/paulmillr/readdirp">https://github.com/paulmillr/readdirp</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fpaulmillr%2Freaddirp" aria-hidden="true">🔗</a></h4>
+<p>Recursive version of fs.readdir. Exposes a stream API and a promise API.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-mkdirp" tabindex="-1"><a href="https://github.com/isaacs/node-mkdirp">https://github.com/isaacs/node-mkdirp</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-mkdirp" aria-hidden="true">🔗</a></h4>
+<p>Like <code>mkdir -p</code>, but in Node.js!</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-glob" tabindex="-1"><a href="https://github.com/isaacs/node-glob">https://github.com/isaacs/node-glob</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fisaacs%2Fnode-glob" aria-hidden="true">🔗</a></h4>
+<p>Match files using the patterns the shell uses, like stars and stuff.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fshelljs%2Fshelljs" tabindex="-1"><a href="https://github.com/shelljs/shelljs">https://github.com/shelljs/shelljs</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fshelljs%2Fshelljs" aria-hidden="true">🔗</a></h4>
+<p>ShellJS is a portable (Windows/Linux/macOS) implementation of Unix shell commands on top of the Node.js API. You can use it to eliminate your shell script's dependency on Unix while still keeping its familiar and powerful commands. You can also install it globally so you can run it from outside Node projects - say goodbye to those gnarly Bash scripts!</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fdel" tabindex="-1"><a href="https://github.com/sindresorhus/del">https://github.com/sindresorhus/del</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fdel" aria-hidden="true">🔗</a></h4>
+<p>Delete files and directories using globs</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fpaulmillr%2Fchokidar" tabindex="-1"><a href="https://github.com/paulmillr/chokidar">https://github.com/paulmillr/chokidar</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fpaulmillr%2Fchokidar" aria-hidden="true">🔗</a></h4>
+<p>File system watcher</p>
+<h3 id="console-terminal" tabindex="-1">Console-Terminal <a class="header-anchor" href="#console-terminal" aria-hidden="true">🔗</a></h3>
+<h4 id="http%3A%2F%2Fyargs.js.org%2F" tabindex="-1"><a href="http://yargs.js.org/">http://yargs.js.org/</a> <a class="header-anchor" href="#http%3A%2F%2Fyargs.js.org%2F" aria-hidden="true">🔗</a></h4>
+<p>Yargs helps you build interactive command line tools by parsing arguments and generating an elegant user interface.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fsboudrias%2Finquirer.js" tabindex="-1"><a href="https://github.com/SBoudrias/Inquirer.js">https://github.com/SBoudrias/Inquirer.js</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsboudrias%2Finquirer.js" aria-hidden="true">🔗</a></h4>
+<p>Inquirer.js should ease the process of</p>
+<ul>
+<li>providing error feedback</li>
+<li>asking questions</li>
+<li>parsing input</li>
+<li>validating answers</li>
+<li>managing hierarchical prompts</li>
+</ul>
+<p><a href="https://github.com/SBoudrias/Inquirer.js/tree/master/packages/inquirer/examples">https://github.com/SBoudrias/Inquirer.js/tree/master/packages/inquirer/examples</a></p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fchalk%2Fchalk" tabindex="-1"><a href="https://github.com/chalk/chalk">https://github.com/chalk/chalk</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fchalk%2Fchalk" aria-hidden="true">🔗</a></h4>
+<p>Terminal string styling done right.
+Utilizza CommonJS fino alla versione 4. Per usare la versione 5 bisogna scrivere il progetto come moduli ESM.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Flitomore%2Fchalk-pipe" tabindex="-1"><a href="https://github.com/LitoMore/chalk-pipe">https://github.com/LitoMore/chalk-pipe</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Flitomore%2Fchalk-pipe" aria-hidden="true">🔗</a></h4>
+<p>Create chalk style schemes with simpler style strings</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fgajus%2Ftable" tabindex="-1"><a href="https://github.com/gajus/table">https://github.com/gajus/table</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fgajus%2Ftable" aria-hidden="true">🔗</a></h4>
+<p>Produces a string that represents array data in a text table.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fvisionmedia%2Fnode-progress" tabindex="-1"><a href="https://github.com/visionmedia/node-progress">https://github.com/visionmedia/node-progress</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fvisionmedia%2Fnode-progress" aria-hidden="true">🔗</a></h4>
+<p>Flexible ascii progress bar.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fkhrome%2Fascii-art" tabindex="-1"><a href="https://github.com/khrome/ascii-art">https://github.com/khrome/ascii-art</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fkhrome%2Fascii-art" aria-hidden="true">🔗</a></h4>
+<p>Images, fonts, tables, ansi styles and compositing in Node.js &amp; the browser. 100% JS.</p>
+<h3 id="net" tabindex="-1">Net <a class="header-anchor" href="#net" aria-hidden="true">🔗</a></h3>
+<h4 id="http%3A%2F%2Fexpressjs.com%2F" tabindex="-1"><a href="http://expressjs.com/">http://expressjs.com/</a> <a class="header-anchor" href="#http%3A%2F%2Fexpressjs.com%2F" aria-hidden="true">🔗</a></h4>
+<ul>
+<li><a href="http://expressjs.com/">http://expressjs.com/</a></li>
+<li><a href="https://github.com/senchalabs/connect#middleware">https://github.com/senchalabs/connect#middleware</a></li>
+<li><a href="https://expressjs.com/it/guide/using-middleware.html#middleware.built-in">https://expressjs.com/it/guide/using-middleware.html#middleware.built-in</a></li>
+<li><a href="https://github.com/expressjs/serve-index">https://github.com/expressjs/serve-index</a></li>
+</ul>
+<pre><code class="language-js"><span class="hljs-keyword">var</span> options = {
+  <span class="hljs-attr">dotfiles</span>: <span class="hljs-string">&#x27;ignore&#x27;</span>,
+  <span class="hljs-attr">etag</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">extensions</span>: [<span class="hljs-string">&#x27;htm&#x27;</span>, <span class="hljs-string">&#x27;html&#x27;</span>],
+  <span class="hljs-attr">index</span>: <span class="hljs-literal">true</span>,
+  <span class="hljs-attr">maxAge</span>: <span class="hljs-string">&#x27;1d&#x27;</span>,
+  <span class="hljs-attr">redirect</span>: <span class="hljs-literal">false</span>,
+  <span class="hljs-attr">setHeaders</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params">res, path, stat</span>) {
+    res.<span class="hljs-title function_">set</span>(<span class="hljs-string">&#x27;x-timestamp&#x27;</span>, <span class="hljs-title class_">Date</span>.<span class="hljs-title function_">now</span>());
+  }
+}
+
+app.<span class="hljs-title function_">use</span>(express.<span class="hljs-title function_">static</span>(<span class="hljs-string">&#x27;/public&#x27;</span>, options));
+</code></pre>
+<h4 id="https%3A%2F%2Fgithub.com%2Fexpressjs%2Fmorgan" tabindex="-1"><a href="https://github.com/expressjs/morgan">https://github.com/expressjs/morgan</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fexpressjs%2Fmorgan" aria-hidden="true">🔗</a></h4>
+<p>HTTP request logger middleware for node.js</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fgot" tabindex="-1"><a href="https://github.com/sindresorhus/got">https://github.com/sindresorhus/got</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsindresorhus%2Fgot" aria-hidden="true">🔗</a></h4>
+<p>Human-friendly and powerful HTTP request library for Node.js</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Faxios%2Faxios" tabindex="-1"><a href="https://github.com/axios/axios">https://github.com/axios/axios</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Faxios%2Faxios" aria-hidden="true">🔗</a></h4>
+<p>Promise based HTTP client for the browser and node.js</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fwebsockets%2Fws" tabindex="-1"><a href="https://github.com/websockets/ws">https://github.com/websockets/ws</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fwebsockets%2Fws" aria-hidden="true">🔗</a></h4>
+<p>ws is a simple to use, blazing fast, and thoroughly tested WebSocket client and server implementation.
+Note: This module does not work in the browser.Browser clients must use the native WebSocket object.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fsocketio%2Fsocket.io" tabindex="-1"><a href="https://github.com/socketio/socket.io">https://github.com/socketio/socket.io</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fsocketio%2Fsocket.io" aria-hidden="true">🔗</a></h4>
+<p><a href="http://Socket.IO">Socket.IO</a> è una libreria Javascript per applicazioni web in tempo reale. Comprende una comunicazione bidirezionale realtime tra i web client e i server. È formata da due parti: una libreria lato client che gira sul browser e una libreria lato server per Node.js. Entrambi i componenti hanno la stessa struttura API. Come Node.js, è orientata agli eventi.</p>
+<p><a href="http://Socket.IO">Socket.IO</a> usa principalmente il protocollo WebSocket.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Findutny%2Fnode-ip" tabindex="-1"><a href="https://github.com/indutny/node-ip">https://github.com/indutny/node-ip</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Findutny%2Fnode-ip" aria-hidden="true">🔗</a></h4>
+<p>IP address utilities for node.js</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fxtermjs%2Fxterm.js" tabindex="-1"><a href="https://github.com/xtermjs/xterm.js">https://github.com/xtermjs/xterm.js</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fxtermjs%2Fxterm.js" aria-hidden="true">🔗</a></h4>
+<p>Xterm.js is a front-end component written in TypeScript that lets applications bring fully-featured terminals to their users in the browser.</p>
+<h3 id="database" tabindex="-1">Database <a class="header-anchor" href="#database" aria-hidden="true">🔗</a></h3>
+<h4 id="https%3A%2F%2Fgithub.com%2Fmongodb%2Fnode-mongodb-native" tabindex="-1"><a href="https://github.com/mongodb/node-mongodb-native">https://github.com/mongodb/node-mongodb-native</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fmongodb%2Fnode-mongodb-native" aria-hidden="true">🔗</a></h4>
+<p>The official MongoDB driver for Node.js.</p>
+<h4 id="https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fmoongoose" tabindex="-1"><a href="https://www.npmjs.com/package/moongoose">https://www.npmjs.com/package/moongoose</a> <a class="header-anchor" href="#https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fmoongoose" aria-hidden="true">🔗</a></h4>
+<p>Mongoose is a MongoDB object modeling tool designed to work in an asynchronous environment. Mongoose supports both promises and callbacks.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fmapbox%2Fnode-sqlite3" tabindex="-1"><a href="https://github.com/mapbox/node-sqlite3">https://github.com/mapbox/node-sqlite3</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fmapbox%2Fnode-sqlite3" aria-hidden="true">🔗</a></h4>
+<p>Asynchronous, non-blocking SQLite3 bindings for Node.js.</p>
+<h3 id="xml%2Fhtml" tabindex="-1">XML/HTML <a class="header-anchor" href="#xml%2Fhtml" aria-hidden="true">🔗</a></h3>
+<h4 id="https%3A%2F%2Fcheerio.js.org%2F" tabindex="-1"><a href="https://cheerio.js.org/">https://cheerio.js.org/</a> <a class="header-anchor" href="#https%3A%2F%2Fcheerio.js.org%2F" aria-hidden="true">🔗</a></h4>
+<p>Fast, flexible, and lean implementation of core jQuery designed specifically for the server.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Foozcitak%2Fxmlbuilder2" tabindex="-1"><a href="https://github.com/oozcitak/xmlbuilder2">https://github.com/oozcitak/xmlbuilder2</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Foozcitak%2Fxmlbuilder2" aria-hidden="true">🔗</a></h4>
+<p>xmlbuilder2 is a wrapper around DOM nodes which adds chainable functions to make it easier to create and work with XML documents.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fleonidas-from-xiv%2Fnode-xml2js" tabindex="-1"><a href="https://github.com/Leonidas-from-XIV/node-xml2js">https://github.com/Leonidas-from-XIV/node-xml2js</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fleonidas-from-xiv%2Fnode-xml2js" aria-hidden="true">🔗</a></h4>
+<p>Simple XML to JavaScript object converter. It supports bi-directional conversion. Uses sax-js and xmlbuilder-js.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fjsdom%2Fjsdom" tabindex="-1"><a href="https://github.com/jsdom/jsdom">https://github.com/jsdom/jsdom</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fjsdom%2Fjsdom" aria-hidden="true">🔗</a></h4>
+<p>jsdom is a pure-JavaScript implementation of many web standards, notably the WHATWG DOM and HTML Standards, for use with Node.js.</p>
+<h4 id="https%3A%2F%2Fgithub.com%2Fmathiasbynens%2Fhe" tabindex="-1"><a href="https://github.com/mathiasbynens/he">https://github.com/mathiasbynens/he</a> <a class="header-anchor" href="#https%3A%2F%2Fgithub.com%2Fmathiasbynens%2Fhe" aria-hidden="true">🔗</a></h4>
+<p>he (for “HTML entities”) is a robust HTML entity encoder/decoder written in JavaScript</p>
+<h2 id="pacchetti-installati" tabindex="-1">Pacchetti installati <a class="header-anchor" href="#pacchetti-installati" aria-hidden="true">🔗</a></h2>
+<h3 id="tool-di-sviluppo" tabindex="-1">Tool di Sviluppo <a class="header-anchor" href="#tool-di-sviluppo" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/mysticatea/npm-run-all">https://github.com/mysticatea/npm-run-all</a></td>
+<td><code>npm install -g npm-run-all</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/raineorshine/npm-check-updates">https://github.com/raineorshine/npm-check-updates</a></td>
+<td><code>npm install –D npm-check-updates</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/kimmobrunfeldt/concurrently">https://github.com/kimmobrunfeldt/concurrently</a></td>
+<td><code>npm install -D concurrently</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/jeffbski/wait-on">https://github.com/jeffbski/wait-on</a></td>
+<td><code>npm install wait-on --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://eslint.org/">https://eslint.org/</a></td>
+<td><code>npm install -D eslint</code> @typescript-eslint/eslint-plugin@latest @typescript-eslint/parser@latest eslint@latest</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jsdoc/jsdoc">https://github.com/jsdoc/jsdoc</a></td>
+<td><code>npm install -D jsdoc</code></td>
+</tr>
+<tr>
+<td><a href="https://www.npmjs.com/">https://www.npmjs.com/</a></td>
+<td><code>npm install -D npm</code></td>
+</tr>
+<tr>
+<td><a href="https://jestjs.io">https://jestjs.io</a></td>
+<td><code>npm install -D jest</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/dylang/npm-check">https://github.com/dylang/npm-check</a></td>
+<td><code>npm install -D npm-check</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/domenic/opener">https://github.com/domenic/opener</a></td>
+<td><code>npm install -D opener</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/arfeo/npm-add-dependencies">https://github.com/arfeo/npm-add-dependencies</a></td>
+<td><code>npm install –D npm-add-dependencies</code></td>
+</tr>
+<tr>
+<td><a href="https://gulpjs.com/">https://gulpjs.com/</a> <a href="https://www.typescriptlang.org/docs/handbook/gulp.html">https://www.typescriptlang.org/docs/handbook/gulp.html</a></td>
+<td><code>npm install -D gulp-cli</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/shelljs/shelljs">https://github.com/shelljs/shelljs</a></td>
+<td><code>npm install -D shx</code></td>
+</tr>
+<tr>
+<td><a href="https://browsersync.io">https://browsersync.io</a></td>
+<td><code>npm install -D  browser-sync</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/indexzero/http-server">https://github.com/indexzero/http-server</a></td>
+<td><code>npm install -D http-server</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/johnpapa/lite-server">https://github.com/johnpapa/lite-server</a></td>
+<td><code>npm install -D lite-server</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></td>
+<td><code>npm install -D json-server</code></td>
+</tr>
+<tr>
+<td><a href="https://jshint.com/">https://jshint.com/</a></td>
+<td><code>npm install -D jshint</code></td>
+</tr>
+<tr>
+<td><a href="http://sass-lang.com/">http://sass-lang.com/</a></td>
+<td><code>npm install -D sass</code></td>
+</tr>
+<tr>
+<td><a href="https://angular.io">https://angular.io</a></td>
+<td><code>npm install -D @angular/cli</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="librerie-per-lo-sviluppo" tabindex="-1">Librerie per lo sviluppo <a class="header-anchor" href="#librerie-per-lo-sviluppo" aria-hidden="true">🔗</a></h3>
+<h4 id="utilit%C3%A0-generale-1" tabindex="-1">Utilità generale <a class="header-anchor" href="#utilit%C3%A0-generale-1" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://lodash.com/">https://lodash.com/</a></td>
+<td><code>npm install lodash</code></td>
+</tr>
+<tr>
+<td><a href="https://caolan.github.io/async/">https://caolan.github.io/async/</a></td>
+<td><code>npm install async</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/moment/moment">https://github.com/moment/moment</a></td>
+<td><code>npm install moment</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/uuidjs/uuid">https://github.com/uuidjs/uuid</a></td>
+<td><code>npm install uuid</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/simov/slugify">https://github.com/simov/slugify</a></td>
+<td><code>npm install slugify</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="logging" tabindex="-1">Logging <a class="header-anchor" href="#logging" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/visionmedia/debug">https://github.com/visionmedia/debug</a></td>
+<td><code>npm install debug</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/winstonjs/winston">https://github.com/winstonjs/winston</a></td>
+<td><code>npm install winston</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/log4js-node/log4js-node">https://github.com/log4js-node/log4js-node</a></td>
+<td><code>npm install log4js</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="configuration" tabindex="-1">Configuration <a class="header-anchor" href="#configuration" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/sindresorhus/pkg-conf">https://github.com/sindresorhus/pkg-conf</a></td>
+<td><code>npm install pkg-conf</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/npm/read-package-json">https://github.com/npm/read-package-json</a></td>
+<td><code>npm install read-package-json</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/indexzero/node-pkginfo">https://github.com/indexzero/node-pkginfo</a></td>
+<td><code>npm install pkginfo</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/motdotla/dotenv">https://github.com/motdotla/dotenv</a></td>
+<td><code>npm install dotenv</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/yahoo/serialize-javascript">https://github.com/yahoo/serialize-javascript</a></td>
+<td><code>npm install serialize-javascript</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="strack-trace-v8" tabindex="-1">Strack Trace V8 <a class="header-anchor" href="#strack-trace-v8" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/felixge/node-stack-trace">https://github.com/felixge/node-stack-trace</a></td>
+<td><code>npm install stack-trace</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/callsites">https://github.com/sindresorhus/callsites</a></td>
+<td><code>npm install callsites</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="file-system-1" tabindex="-1">File system <a class="header-anchor" href="#file-system-1" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/jprichardson/node-fs-extra">https://github.com/jprichardson/node-fs-extra</a></td>
+<td><code>npm install fs-extra</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/paulmillr/readdirp">https://github.com/paulmillr/readdirp</a></td>
+<td><code>npm install readdirp</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/filenamify">https://github.com/sindresorhus/filenamify</a></td>
+<td><code>npm install filenamify</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/valid-filename">https://github.com/sindresorhus/valid-filename</a></td>
+<td><code>npm install valid-filename</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/filename-reserved-regex">https://github.com/sindresorhus/filename-reserved-regex</a></td>
+<td><code>npm install filename-reserved-regex</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/filenamify-url">https://github.com/sindresorhus/filenamify-url</a></td>
+<td><code>npm install filenamify-url</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/open">https://github.com/sindresorhus/open</a></td>
+<td><code>npm install open</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/isaacs/node-mkdirp">https://github.com/isaacs/node-mkdirp</a></td>
+<td><code>npm install mkdirp</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/isaacs/node-glob">https://github.com/isaacs/node-glob</a></td>
+<td><code>npm install glob</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/shelljs/shelljs">https://github.com/shelljs/shelljs</a></td>
+<td><code>npm install shelljs</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/del">https://github.com/sindresorhus/del</a></td>
+<td><code>npm install del</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/paulmillr/chokidar">https://github.com/paulmillr/chokidar</a></td>
+<td><code>npm install chokidar</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/raszi/node-tmp">https://github.com/raszi/node-tmp</a></td>
+<td><code>npm install tmp</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="console-terminale" tabindex="-1">Console-Terminale <a class="header-anchor" href="#console-terminale" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://yargs.js.org">http://yargs.js.org</a></td>
+<td><code>npm install yargs</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/SBoudrias/Inquirer.js">https://github.com/SBoudrias/Inquirer.js</a></td>
+<td><code>npm install inquirer</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/chalk/chalk">https://github.com/chalk/chalk</a></td>
+<td><code>npm install chalk</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/LitoMore/chalk-pipe">https://github.com/LitoMore/chalk-pipe</a></td>
+<td><code>npm install chalk-pipe</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/gajus/table">https://github.com/gajus/table</a></td>
+<td><code>npm install table</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/visionmedia/node-progress">https://github.com/visionmedia/node-progress</a></td>
+<td><code>npm install progress</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/khrome/ascii-art">https://github.com/khrome/ascii-art</a></td>
+<td><code>npm install ascii-art</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="networking" tabindex="-1">Networking <a class="header-anchor" href="#networking" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://expressjs.com/">http://expressjs.com/</a></td>
+<td><code>npm install express</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/expressjs/morgan">https://github.com/expressjs/morgan</a></td>
+<td><code>npm install morgan</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/got">https://github.com/sindresorhus/got</a></td>
+<td><code>npm install got</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/axios/axios">https://github.com/axios/axios</a></td>
+<td><code>npm install axios</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/websockets/ws">https://github.com/websockets/ws</a></td>
+<td><code>npm install ws</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/socketio/socket.io">https://github.com/socketio/socket.io</a></td>
+<td><code>npm install socket.io</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/expressjs/serve-index">https://github.com/expressjs/serve-index</a></td>
+<td><code>npm install serve-index</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/expressjs/body-parser">https://github.com/expressjs/body-parser</a></td>
+<td><code>npm install body-parser</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/indutny/node-ip">https://github.com/indutny/node-ip</a></td>
+<td><code>npm install ip</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/xtermjs/xterm.js">https://github.com/xtermjs/xterm.js</a></td>
+<td><code>npm install xterm</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="db" tabindex="-1">DB <a class="header-anchor" href="#db" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.npmjs.com/package/mongodb">https://www.npmjs.com/package/mongodb</a>    <a href="https://github.com/mongodb/node-mongodb-native">https://github.com/mongodb/node-mongodb-native</a></td>
+<td><code>npm install mongodb</code></td>
+</tr>
+<tr>
+<td><a href="https://www.npmjs.com/package/moongoose">https://www.npmjs.com/package/moongoose</a></td>
+<td><code>npm install moongoose</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mapbox/node-sqlite3">https://github.com/mapbox/node-sqlite3</a></td>
+<td><code>npm install sqlite3</code></td>
+</tr>
+<tr>
+<td><a href="https://oracle.github.io/node-oracledb/">https://oracle.github.io/node-oracledb/</a></td>
+<td><code>npm install oracledb</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="xml-html" tabindex="-1">XML-HTML <a class="header-anchor" href="#xml-html" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://cheerio.js.org/">https://cheerio.js.org/</a></td>
+<td><code>npm install cheerio</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/oozcitak/xmlbuilder2">https://github.com/oozcitak/xmlbuilder2</a></td>
+<td><code>npm install xmlbuilder2</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/Leonidas-from-XIV/node-xml2js">https://github.com/Leonidas-from-XIV/node-xml2js</a></td>
+<td><code>npm install xml2js</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/jsdom/jsdom">https://github.com/jsdom/jsdom</a></td>
+<td><code>npm install jsdom</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/mathiasbynens/he">https://github.com/mathiasbynens/he</a></td>
+<td><code>npm install he</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="electron" tabindex="-1">Electron <a class="header-anchor" href="#electron" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.electronjs.org/">https://www.electronjs.org/</a></td>
+<td><code>npm install electron</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/electron-is-dev/">https://github.com/sindresorhus/electron-is-dev/</a></td>
+<td><code>npm install electron-is-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/electron-util">https://github.com/sindresorhus/electron-util</a></td>
+<td><code>npm install electron-util</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/electron-store">https://github.com/sindresorhus/electron-store</a></td>
+<td><code>npm install electron-store</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/megahertz/electron-log">https://github.com/megahertz/electron-log</a></td>
+<td><code>npm install electron-log</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/electron-unhandled">https://github.com/sindresorhus/electron-unhandled</a></td>
+<td><code>npm install electron-unhandled</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/yan-foto/electron-reload">https://github.com/yan-foto/electron-reload</a></td>
+<td><code>npm install electron-reload</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/electron-dl">https://github.com/sindresorhus/electron-dl</a></td>
+<td><code>npm install electron-dl</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/sindresorhus/electron-context-menu">https://github.com/sindresorhus/electron-context-menu</a></td>
+<td><code>npm install electron-context-menu</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/electron-userland/electron-builder">https://github.com/electron-userland/electron-builder</a></td>
+<td><code>npm install electron-builder</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="react" tabindex="-1">React <a class="header-anchor" href="#react" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+</table>
+<h3 id="strumenti-di-build" tabindex="-1">Strumenti di Build <a class="header-anchor" href="#strumenti-di-build" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://webpack.js.org">https://webpack.js.org</a></td>
+<td><code>npm install webpack webpack-cli ts-loader --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://gulpjs.com/">https://gulpjs.com/</a> <a href="https://www.typescriptlang.org/docs/handbook/gulp.html">https://www.typescriptlang.org/docs/handbook/gulp.html</a></td>
+<td><code>npm install gulp-cli --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://www.typescriptlang.org">https://www.typescriptlang.org</a></td>
+<td><code>npm install typescript</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/rollup/rollup">https://github.com/rollup/rollup</a></td>
+<td><code>npm install rollup rollup-plugin-babel rollup-plugin-commonjs rollup-plugin-node-resolve --save-dev</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="unit-testing" tabindex="-1">Unit testing <a class="header-anchor" href="#unit-testing" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://jestjs.io">https://jestjs.io</a></td>
+<td><code>npm install jest --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://mochajs.org/#assertions">https://mochajs.org/#assertions</a></td>
+<td><code>npm install mocha --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://www.chaijs.com/">https://www.chaijs.com/</a></td>
+<td><code>npm install chai</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/yuffster/describe">https://github.com/yuffster/describe</a></td>
+<td><code>npm install describe</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/angular/in-memory-web-api">https://github.com/angular/in-memory-web-api</a></td>
+<td><code>npm install angular-in-memory-web-api</code></td>
+</tr>
+<tr>
+<td><a href="https://sinonjs.org/">https://sinonjs.org/</a></td>
+<td><code>npm install sinon --save-dev</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="watch-dogs" tabindex="-1">Watch Dogs <a class="header-anchor" href="#watch-dogs" aria-hidden="true">🔗</a></h3>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://pm2.keymetrics.io/">https://pm2.keymetrics.io/</a> <a href="https://github.com/Unitech/pm2">https://github.com/Unitech/pm2</a></td>
+<td><code>npm install -g pm2</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/foreversd/forever">https://github.com/foreversd/forever</a></td>
+<td><code>npm install -g forever</code></td>
+</tr>
+<tr>
+<td><a href="https://nodemon.io/">https://nodemon.io/</a> <a href="https://github.com/remy/nodemon/">https://github.com/remy/nodemon/</a></td>
+<td><code>npm install -g nodemon</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="librerie-per-lo-sviluppo-web" tabindex="-1">Librerie per lo sviluppo Web <a class="header-anchor" href="#librerie-per-lo-sviluppo-web" aria-hidden="true">🔗</a></h3>
+<h4 id="processatori-css" tabindex="-1">Processatori CSS <a class="header-anchor" href="#processatori-css" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/jakubpawlowicz/clean-css">https://github.com/jakubpawlowicz/clean-css</a></td>
+<td><code>npm install clean-css --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://www.npmjs.com/search?q=keywords:postcss">https://www.npmjs.com/search?q=keywords:postcss</a></td>
+<td><code>npm install postcss postcss-cli --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="http://lesscss.org">http://lesscss.org</a></td>
+<td><code>npm install less</code></td>
+</tr>
+<tr>
+<td><a href="http://stylus-lang.com/">http://stylus-lang.com/</a></td>
+<td><code>npm install stylus</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/necolas/normalize.css/">https://github.com/necolas/normalize.css/</a></td>
+<td><code>npm install normalize.css</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="librerie-con-componenti-grafici" tabindex="-1">Librerie con componenti grafici <a class="header-anchor" href="#librerie-con-componenti-grafici" aria-hidden="true">🔗</a></h4>
+<table class="table"><thead>
+<tr>
+<th>URL</th>
+<th>Package</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://getbootstrap.com/">https://getbootstrap.com/</a></td>
+<td><code>npm install bootstrap</code></td>
+</tr>
+<tr>
+<td><a href="http://jquery.com/">http://jquery.com/</a></td>
+<td><code>npm install jquery</code></td>
+</tr>
+<tr>
+<td><a href="https://jqueryui.com/">https://jqueryui.com/</a></td>
+<td><code>npm install jquery-ui</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery">https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types/jquery</a></td>
+<td><code>npm install @types/jquery --save-dev</code></td>
+</tr>
+<tr>
+<td><a href="https://popper.js.org/">https://popper.js.org/</a></td>
+<td><code>npm install popper.js</code></td>
+</tr>
+<tr>
+<td><a href="https://popper.js.org/tooltip-examples.html">https://popper.js.org/tooltip-examples.html</a></td>
+<td><code>npm install tooltip.js</code></td>
+</tr>
+<tr>
+<td><a href="https://fontawesome.com/">https://fontawesome.com/</a></td>
+<td><code>npm install font-awesome</code></td>
+</tr>
+<tr>
+<td><a href="https://highlightjs.org/">https://highlightjs.org/</a></td>
+<td><code>npm install highlight.js</code></td>
+</tr>
+<tr>
+<td><a href="https://github.com/chartjs/Chart.js">https://github.com/chartjs/Chart.js</a></td>
+<td><code>npm install chart.js</code></td>
+</tr>
+<tr>
+<td><a href="http://holderjs.com/">http://holderjs.com/</a></td>
+<td><code>npm install holderjs</code></td>
+</tr>
+</tbody>
+</table>
+</body></html>

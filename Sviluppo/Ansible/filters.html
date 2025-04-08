@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.052" />
+        <title>filters</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="filters" tabindex="-1">filters <a class="header-anchor" href="#filters" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.052</p>
+<nav class="table-of-contents"><ol></ol></nav><h1 id="filters-1" tabindex="-1">Filters <a class="header-anchor" href="#filters-1" aria-hidden="true">🔗</a></h1>
+<p>I filter eseguono trasformazioni sui dati.<br>
+vengono eseguito solo nel control node non nei managed node, trasformando i dati localmente.<br>
+I filtri possono essere:</p>
+<ul>
+<li>Filtri definiti in Ansible:
+<ul>
+<li>
+<p><a href="https://docs.ansible.com/ansible/devel/collections/index_filter.html">https://docs.ansible.com/ansible/devel/collections/index_filter.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.ansible.com/ansible/latest/plugins/filter.html">https://docs.ansible.com/ansible/latest/plugins/filter.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.ansible.com/ansible/devel/playbook_guide/playbooks_filters.html">https://docs.ansible.com/ansible/devel/playbook_guide/playbooks_filters.html</a></p>
+</li>
+<li>
+<p><a href="https://docs.ansible.com/ansible/devel/playbook_guide/complex_data_manipulation.html">https://docs.ansible.com/ansible/devel/playbook_guide/complex_data_manipulation.html</a></p>
+</li>
+<li>
+<p>Filtri Plugin Ansible</p>
+<ul>
+<li><a href="https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html#developing-filter-plugins">https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html#developing-filter-plugins</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/tips_tricks/sample_setup.html#sample-directory-layout">https://docs.ansible.com/ansible/latest/tips_tricks/sample_setup.html#sample-directory-layout</a></li>
+<li><a href="https://github.com/ansible/ansible/tree/devel/lib/ansible/plugins/filter">https://github.com/ansible/ansible/tree/devel/lib/ansible/plugins/filter</a></li>
+<li><a href="https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py">https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/collections/community/general/docsite/filter_guide.html">https://docs.ansible.com/ansible/latest/collections/community/general/docsite/filter_guide.html</a></li>
+<li><a href="https://docs.ansible.com/ansible/latest/dev_guide/developing_locally.html#adding-a-plugin-locally">https://docs.ansible.com/ansible/latest/dev_guide/developing_locally.html#adding-a-plugin-locally</a></li>
+<li><a href="https://www.ansible.com/blog/how-to-extend-ansible-through-plugins">https://www.ansible.com/blog/how-to-extend-ansible-through-plugins</a></li>
+</ul>
+<p>You can add a custom filter plugin by dropping it into a <code>filter_plugins</code> directory adjacent to your play or inside a role</p>
+</li>
+</ul>
+</li>
+<li>Filtri Jinja:
+<ul>
+<li><a href="https://jinja.palletsprojects.com/en/3.0.x/templates/#builtin-filters">https://jinja.palletsprojects.com/en/3.0.x/templates/#builtin-filters</a></li>
+<li><a href="https://github.com/pallets/jinja/blob/main/src/jinja2/filters.py">https://github.com/pallets/jinja/blob/main/src/jinja2/filters.py</a></li>
+<li>Filtri Python: <a href="https://jinja.palletsprojects.com/en/3.0.x/templates/#python-methods">https://jinja.palletsprojects.com/en/3.0.x/templates/#python-methods</a>
+You can also use to transform data.<br>
+You use any of the methods defined on a variable’s type.</li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-bash">$ ansible-doc -t filter -l | <span class="hljs-built_in">cat</span>
+$ ansible-doc -t filter &lt;plugin name&gt;
+</code></pre>
+<pre><code class="language-yml"><span class="hljs-comment"># Ansible Filters</span>
+<span class="hljs-comment"># ---------------</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/devel/collections/index_filter.html</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/latest/plugins/filter.html</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/devel/playbook_guide/playbooks_filters.html</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/devel/playbook_guide/complex_data_manipulation.html</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/latest/dev_guide/developing_plugins.html#filter-plugins</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/latest/tips_tricks/sample_setup.html#sample-directory-layout</span>
+<span class="hljs-comment"># https://github.com/ansible/ansible/tree/devel/lib/ansible/plugins/filter</span>
+<span class="hljs-comment"># https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/latest/collections/community/general/docsite/filter_guide.html</span>
+<span class="hljs-comment"># https://docs.ansible.com/ansible/latest/dev_guide/developing_locally.html#adding-a-plugin-locally</span>
+<span class="hljs-comment"># https://www.ansible.com/blog/how-to-extend-ansible-through-plugins</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Jinja2 Filters</span>
+<span class="hljs-comment"># --------------</span>
+<span class="hljs-comment"># https://jinja.palletsprojects.com/en/3.0.x/templates/#list-of-builtin-filters</span>
+<span class="hljs-comment"># https://jinja.palletsprojects.com/en/3.0.x/templates/#python-methods</span>
+<span class="hljs-comment"># https://github.com/pallets/jinja/blob/main/src/jinja2/filters.py</span>
+</code></pre>
+<p>Esempi di filter:</p>
+<ul>
+<li>
+<p><a href="https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py#L562">https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/core.py#L562</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/mathstuff.py#L222">https://github.com/ansible/ansible/blob/devel/lib/ansible/plugins/filter/mathstuff.py#L222</a></p>
+</li>
+<li>
+<p><a href="https://jinja.palletsprojects.com/en/3.0.x/templates/#jinja-filters.map">https://jinja.palletsprojects.com/en/3.0.x/templates/#jinja-filters.map</a></p>
+</li>
+<li>
+<p>Applies a filter on a sequence of objects or looks up an attribute.</p>
+<pre><code class="language-python">Users on this page: {{ users|<span class="hljs-built_in">map</span>(attribute=<span class="hljs-string">&#x27;username&#x27;</span>)|join(<span class="hljs-string">&#x27;, &#x27;</span>) }}
+</code></pre>
+<pre><code class="language-python">Users on this page: {{ titles|<span class="hljs-built_in">map</span>(<span class="hljs-string">&#x27;lower&#x27;</span>)|join(<span class="hljs-string">&#x27;, &#x27;</span>) }}
+</code></pre>
+</li>
+<li>
+<p><a href="https://jinja.palletsprojects.com/en/3.0.x/templates/#jinja-filters.selectattr">https://jinja.palletsprojects.com/en/3.0.x/templates/#jinja-filters.selectattr</a></p>
+<p>Filters a sequence of objects by applying a test to the specified attribute of each object.<br>
+If no test is specified, the attribute’s value will be evaluated as a boolean.</p>
+<pre><code class="language-python">{{ users | selectattr(<span class="hljs-string">&#x27;password&#x27;</span>, <span class="hljs-string">&#x27;undefined&#x27;</span>) | <span class="hljs-built_in">map</span>(attribute=<span class="hljs-string">&#x27;email&#x27;</span>) | <span class="hljs-built_in">list</span> }}
+{{ network.addresses.private_man | selectattr(<span class="hljs-string">&quot;type&quot;</span>, <span class="hljs-string">&quot;match&quot;</span>, <span class="hljs-string">&quot;^floating$&quot;</span>) | <span class="hljs-built_in">map</span>(attribute=<span class="hljs-string">&#x27;addr&#x27;</span>) | <span class="hljs-built_in">list</span> }}
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-yaml">{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">default(5)</span> }}
+{{ <span class="hljs-string">lookup(&#x27;env&#x27;</span>, <span class="hljs-string">&#x27;MY_USER&#x27;</span><span class="hljs-string">)</span> <span class="hljs-string">|</span> <span class="hljs-string">default(&#x27;admin&#x27;</span>, <span class="hljs-literal">true</span><span class="hljs-string">)</span> }}
+{{ <span class="hljs-string">item.mode</span> <span class="hljs-string">|</span> <span class="hljs-string">default(omit)</span> }}
+{{ <span class="hljs-string">variable</span> <span class="hljs-string">|</span> <span class="hljs-string">mandatory</span> }}
+<span class="hljs-attr">var1:</span> {{ <span class="hljs-string">undef(hint=&quot;You</span> <span class="hljs-string">must</span> <span class="hljs-string">specify</span> <span class="hljs-string">your</span> <span class="hljs-string">Galaxy</span> <span class="hljs-string">API</span> <span class="hljs-string">key&quot;)</span> }}
+
+{{ <span class="hljs-string">(status</span> <span class="hljs-string">==</span> <span class="hljs-string">&#x27;needs_restart&#x27;</span><span class="hljs-string">)</span> <span class="hljs-string">|</span> <span class="hljs-string">ternary(&#x27;restart&#x27;</span>, <span class="hljs-string">&#x27;continue&#x27;</span><span class="hljs-string">)</span> }}
+{{ <span class="hljs-string">enabled</span> <span class="hljs-string">|</span> <span class="hljs-string">ternary(&#x27;no</span> <span class="hljs-string">shutdown&#x27;</span>, <span class="hljs-string">&#x27;shutdown&#x27;</span>, <span class="hljs-string">omit)</span> }}
+
+{{ <span class="hljs-string">myvar</span> <span class="hljs-string">|</span> <span class="hljs-string">type_debug</span> }}
+{{ <span class="hljs-string">dict</span> <span class="hljs-string">|</span> <span class="hljs-string">dict2items</span> }}
+{{ <span class="hljs-string">files</span> <span class="hljs-string">|</span> <span class="hljs-string">dict2items(key_name=&#x27;file&#x27;</span>, <span class="hljs-string">value_name=&#x27;path&#x27;)</span> }}
+{{ <span class="hljs-string">tags</span> <span class="hljs-string">|</span> <span class="hljs-string">items2dict</span> }}
+{{ <span class="hljs-string">tags</span> <span class="hljs-string">|</span> <span class="hljs-string">items2dict(key_name=&#x27;fruit&#x27;</span>, <span class="hljs-string">value_name=&#x27;color&#x27;)</span> }}
+
+<span class="hljs-attr">when:</span> <span class="hljs-string">some_string_value</span> <span class="hljs-string">|</span> <span class="hljs-string">bool</span>
+<span class="hljs-attr">when:</span> <span class="hljs-string">ansible_facts[&#x27;os_family&#x27;]</span> <span class="hljs-string">==</span> <span class="hljs-string">&quot;RedHat&quot;</span> <span class="hljs-string">and</span> <span class="hljs-string">ansible_facts[&#x27;lsb&#x27;][&#x27;major_release&#x27;]</span> <span class="hljs-string">|</span> <span class="hljs-string">int</span> <span class="hljs-string">&gt;=</span> <span class="hljs-number">6</span>
+
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">to_json</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">to_yaml</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">to_nice_json(indent=2)</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">to_nice_yaml(indent=8)</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">to_yaml(indent=8</span>, <span class="hljs-string">width=1337)</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">to_nice_yaml(indent=8</span>, <span class="hljs-string">width=1337)</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">from_json</span> }}
+{{ <span class="hljs-string">some_variable</span> <span class="hljs-string">|</span> <span class="hljs-string">from_yaml</span> }}
+{{ <span class="hljs-string">&#x27;München&#x27;</span><span class="hljs-string">|</span> <span class="hljs-string">to_json(ensure_ascii=False)</span> }}
+<span class="hljs-attr">loop:</span> <span class="hljs-string">&#x27;<span class="hljs-template-variable">{{ result.stdout | from_yaml_all | list }}</span>&#x27;</span>
+
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [1,2,3,4,5,6] | zip([&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;e&#x27;,&#x27;f&#x27;]) | list }}</span>&quot;</span>
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [1,2,3] | zip_longest([&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;,&#x27;d&#x27;,&#x27;e&#x27;,&#x27;f&#x27;], [21, 22, 23], fillvalue=&#x27;X&#x27;) | list }}</span>&quot;</span>
+{{ <span class="hljs-string">dict(keys_list</span> <span class="hljs-string">|</span> <span class="hljs-string">zip(values_list))</span> }}
+{{ <span class="hljs-string">users</span> <span class="hljs-string">|</span> <span class="hljs-string">subelements(&#x27;groups&#x27;</span>, <span class="hljs-string">skip_missing=True)</span> }}
+{{ {<span class="hljs-string">&#x27;a&#x27;</span><span class="hljs-string">:1</span>, <span class="hljs-string">&#x27;b&#x27;</span><span class="hljs-string">:2</span>} <span class="hljs-string">|</span> <span class="hljs-string">combine(</span>{<span class="hljs-string">&#x27;b&#x27;</span><span class="hljs-string">:3</span>}<span class="hljs-string">)</span> }}
+{{ [<span class="hljs-number">0</span>,<span class="hljs-number">2</span>] <span class="hljs-string">|</span> <span class="hljs-string">map(&#x27;extract&#x27;</span>, [<span class="hljs-string">&#x27;x&#x27;</span>,<span class="hljs-string">&#x27;y&#x27;</span>,<span class="hljs-string">&#x27;z&#x27;</span>]<span class="hljs-string">)</span> <span class="hljs-string">|</span> <span class="hljs-string">list</span> }}
+{{ [<span class="hljs-string">&#x27;x&#x27;</span>,<span class="hljs-string">&#x27;y&#x27;</span>] <span class="hljs-string">|</span> <span class="hljs-string">map(&#x27;extract&#x27;</span>, {<span class="hljs-attr">&#x27;x&#x27;:</span> <span class="hljs-number">42</span>, <span class="hljs-attr">&#x27;y&#x27;:</span> <span class="hljs-number">31</span>}<span class="hljs-string">)</span> <span class="hljs-string">|</span> <span class="hljs-string">list</span> }}
+{{ <span class="hljs-string">groups</span>[<span class="hljs-string">&#x27;x&#x27;</span>] <span class="hljs-string">|</span> <span class="hljs-string">map(&#x27;extract&#x27;</span>, <span class="hljs-string">hostvars</span>, <span class="hljs-string">&#x27;ec2_ip_address&#x27;</span><span class="hljs-string">)</span> <span class="hljs-string">|</span> <span class="hljs-string">list</span> }}
+{{ [<span class="hljs-string">&#x27;a&#x27;</span>] <span class="hljs-string">|</span> <span class="hljs-string">map(&#x27;extract&#x27;</span>, <span class="hljs-string">b</span>, [<span class="hljs-string">&#x27;x&#x27;</span>,<span class="hljs-string">&#x27;y&#x27;</span>]<span class="hljs-string">)</span> <span class="hljs-string">|</span> <span class="hljs-string">list</span> }}
+
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [1,2,3,4,5] | ansible.builtin.permutations | list }}</span>&quot;</span>
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [1,2,3,4,5] | ansible.builtin.permutations(3) | list }}</span>&quot;</span>
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [1,2,3,4,5] | ansible.builtin.combinations(2) | list }}</span>&quot;</span>
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [&#x27;foo&#x27;, &#x27;bar&#x27;] | product([&#x27;com&#x27;]) | map(&#x27;join&#x27;, &#x27;.&#x27;) | join(&#x27;,&#x27;) }}</span>&quot;</span>
+
+<span class="hljs-attr">loop:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ domain_definition | community.general.json_query(&#x27;domain.cluster[*].name&#x27;) }}</span>&quot;</span>
+<span class="hljs-attr">loop:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ domain_definition | community.general.json_query(&#x27;domain.server[*].name&#x27;) }}</span>&quot;</span>
+<span class="hljs-attr">msg:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ domain_definition | community.general.json_query(&#x27;domain.server[?cluster==`cluster1`].port&#x27;) | join(&#x27;, &#x27;) }}</span>&quot;</span>
+<span class="hljs-comment"># In the example above, quoting literals using backticks avoids escaping quotes and maintains readability.</span>
+<span class="hljs-attr">loop:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ domain_definition | community.general.json_query(&#x27;domain.server[?cluster==&#x27;&#x27;cluster1&#x27;&#x27;].port&#x27;) }}</span>&quot;</span>
+
+<span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Display</span> <span class="hljs-string">all</span> <span class="hljs-string">server</span> <span class="hljs-string">ports</span> <span class="hljs-string">and</span> <span class="hljs-string">names</span> <span class="hljs-string">from</span> <span class="hljs-string">cluster1</span>
+  <span class="hljs-attr">ansible.builtin.debug:</span>
+    <span class="hljs-attr">var:</span> <span class="hljs-string">item</span>
+  <span class="hljs-attr">loop:</span> <span class="hljs-string">&quot;<span class="hljs-template-variable">{{ domain_definition | community.general.json_query(server_name_cluster1_query) }}</span>&quot;</span>
+  <span class="hljs-attr">vars:</span>
+    <span class="hljs-attr">server_name_cluster1_query:</span> <span class="hljs-string">&quot;domain.server[?cluster==&#x27;cluster2&#x27;].{name: name, port: port}&quot;</span>
+
+<span class="hljs-string">&quot;<span class="hljs-template-variable">{{ &#x27;52:54:00&#x27; | community.general.random_mac }}</span>&quot;</span>
+<span class="hljs-string">&quot;<span class="hljs-template-variable">{{ &#x27;52:54:00&#x27; | community.general.random_mac(seed=inventory_hostname) }}</span>&quot;</span>
+<span class="hljs-string">&quot;<span class="hljs-template-variable">{{ [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;] | random }}</span>&quot;</span>
+<span class="hljs-string">&quot;<span class="hljs-template-variable">{{ 60 | random }}</span> 
+<span class="hljs-template-variable">{{ 101 | random(step=10) }}</span>
+<span class="hljs-template-variable">{{ 101 | random(1, 10) }}</span>
+<span class="hljs-template-variable">{{ 101 | random(start=1, step=10) }}</span>
+<span class="hljs-template-variable">{{ [&#x27;a&#x27;,&#x27;b&#x27;,&#x27;c&#x27;] | shuffle }}</span>
+
+<span class="hljs-template-variable">{{ list1 | min }}</span>
+<span class="hljs-template-variable">{{ [{&#x27;val&#x27;: 1}, {&#x27;val&#x27;: 2}] | min(attribute=&#x27;val&#x27;) }}</span>
+<span class="hljs-template-variable">{{ [3, 4, 2] | max }}</span>
+<span class="hljs-template-variable">{{ [{&#x27;val&#x27;: 1}, {&#x27;val&#x27;: 2}] | max(attribute=&#x27;val&#x27;) }}</span>
+
+<span class="hljs-template-variable">{{ [3, [4, 2] ] | flatten }}</span>
+<span class="hljs-template-variable">{{ [3, [4, [2]] ] | flatten(levels=1) }}</span>
+<span class="hljs-template-variable">{{ [3, None, [4, [2]] ] | flatten(levels=1, skip_nulls=False) }}</span>
+
+<span class="hljs-template-variable">{{ list1 | unique }}</span>
+<span class="hljs-template-variable">{{ list1 | union(list2) }}</span>
+<span class="hljs-template-variable">{{ list1 | intersect(list2) }}</span>
+<span class="hljs-template-variable">{{ list1 | difference(list2) }}</span>
+<span class="hljs-template-variable">{{ list1 | symmetric_difference(list2) }}</span>
+
+<span class="hljs-template-variable">{{ 8 | log }}</span>
+<span class="hljs-template-variable">{{ 8 | log(10) }}</span>
+<span class="hljs-template-variable">{{ 8 | pow(5) }}</span>
+<span class="hljs-template-variable">{{ 8 | root }}</span>
+
+<span class="hljs-template-variable">{{ myvar | ansible.netcommon.ipaddr }}</span>
+<span class="hljs-template-variable">{{ myvar | ansible.netcommon.ipv4 }}</span>
+<span class="hljs-template-variable">{{ myvar | ansible.netcommon.ipv6 }}</span>
+<span class="hljs-template-variable">{{ &#x27;192.0.2.1/24&#x27; | ansible.netcommon.ipaddr(&#x27;address&#x27;) }}</span>
+
+<span class="hljs-template-variable">{{ output | ansible.netcommon.parse_xml(&#x27;path/to/spec&#x27;) }}</span>
+
+<span class="hljs-template-variable">{{ &#x27;test1&#x27; | hash(&#x27;md5&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;passwordsaresecret&#x27; | password_hash(&#x27;sha512&#x27;) }}</span>
+
+<span class="hljs-template-variable">{{ &#x27;secretpassword&#x27; | password_hash(&#x27;sha256&#x27;, &#x27;mysecretsalt&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;secretpassword&#x27; | password_hash(&#x27;sha512&#x27;, 65534 | random(seed=inventory_hostname) | string) }}</span>
+<span class="hljs-template-variable">{{ &#x27;secretpassword&#x27; | password_hash(&#x27;sha256&#x27;, &#x27;mysecretsalt&#x27;, rounds=10000) }}</span>
+<span class="hljs-template-variable">{{ &#x27;secretpassword&#x27; | password_hash(&#x27;blowfish&#x27;, &#x27;1234567890123456789012&#x27;, ident=&#x27;2b&#x27;) }}</span>
+
+vars:
+  mysalt: &#x27;<span class="hljs-template-variable">{{ 2**256|random(seed=inventory_hostname) }}</span>&#x27;
+  template_data: &#x27;<span class="hljs-template-variable">{{ secretdata|vault(vaultsecret, salt=mysalt) }}</span>&#x27;
+  myvaultedkey: &quot;</span>{{ <span class="hljs-string">keyrawdata|vault(passphrase)</span> }}<span class="hljs-string">&quot;
+  mykey: &quot;</span>{{ <span class="hljs-string">myvaultedkey|unvault(passphrase)</span> }}<span class="hljs-string">&quot;
+
+<span class="hljs-template-variable">{{ &quot;Plain style (default)&quot; | comment }}</span>
+<span class="hljs-template-variable">{{ &quot;My Special Case&quot; | comment(decoration=&quot;! &quot;) }}</span>
+<span class="hljs-template-variable">{{ &quot;C style&quot; | comment(&#x27;c&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &quot;C block style&quot; | comment(&#x27;cblock&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &quot;XML style&quot; | comment(&#x27;xml&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &quot;Custom style&quot; | comment(&#x27;plain&#x27;, prefix=&#x27;#######\n#&#x27;, postfix=&#x27;#\n#######\n   ###\n    #&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;Trollhättan&#x27; | urlencode }}</span>
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;hostname&#x27;) }}</span>
+# =&gt; &#x27;www.acme.com&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;netloc&#x27;) }}</span>
+# =&gt; &#x27;user:password@www.acme.com:9000&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;username&#x27;) }}</span>
+# =&gt; &#x27;user&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;password&#x27;) }}</span>
+# =&gt; &#x27;password&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;path&#x27;) }}</span>
+# =&gt; &#x27;/dir/index.html&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;port&#x27;) }}</span>
+# =&gt; &#x27;9000&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;scheme&#x27;) }}</span>
+# =&gt; &#x27;http&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;query&#x27;) }}</span>
+# =&gt; &#x27;query=term&#x27;
+
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit(&#x27;fragment&#x27;) }}</span>
+# =&gt; &#x27;fragment&#x27;
+<span class="hljs-template-variable">{{ &quot;http://user:password@www.acme.com:9000/dir/index.html?query=term#fragment&quot; | urlsplit }}</span>
+
+<span class="hljs-template-variable">{{ &#x27;server1/database42&#x27; | regex_search(&#x27;database[0-9]+&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;foo\nBAR&#x27; | regex_search(&#x27;^bar&#x27;, multiline=True, ignorecase=True) }}</span>
+<span class="hljs-template-variable">{{ &#x27;server1/database42&#x27; | regex_search(&#x27;server([0-9]+)/database([0-9]+)&#x27;, &#x27;\\1&#x27;, &#x27;\\2&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;21/42&#x27; | regex_search(&#x27;(?P&lt;dividend&gt;[0-9]+)/(?P&lt;divisor&gt;[0-9]+)&#x27;, &#x27;\\g&lt;dividend&gt;&#x27;, &#x27;\\g&lt;divisor&gt;&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;Some DNS servers are 8.8.8.8 and 8.8.4.4&#x27; | regex_findall(&#x27;\\b(?:[0-9]{1,3}\\.){3}[0-9]{1,3}\\b&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;CAR\ntar\nfoo\nbar\n&#x27; | regex_findall(&#x27;^.ar$&#x27;, multiline=True, ignorecase=True) }}</span>
+<span class="hljs-template-variable">{{ &#x27;ansible&#x27; | regex_replace(&#x27;^a.*i(.*)$&#x27;, &#x27;a\\1&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;foobar&#x27; | regex_replace(&#x27;^f.*o(.*)$&#x27;, &#x27;\\1&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;localhost:80&#x27; | regex_replace(&#x27;^(?P&lt;host&gt;.+):(?P&lt;port&gt;\\d+)$&#x27;, &#x27;\\g&lt;host&gt;, \\g&lt;port&gt;&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;localhost:80&#x27; | regex_replace(&#x27;:80&#x27;) }}</span>
+<span class="hljs-template-variable">{{ &#x27;CAR\ntar\nfoo\nbar\n&#x27; | regex_replace(&#x27;^(.ar)$&#x27;, &#x27;#\\1&#x27;, multiline=True, ignorecase=True) }}</span>
+<span class="hljs-template-variable">{{ hosts | map(&#x27;regex_replace&#x27;, &#x27;^(.*)$&#x27;, &#x27;https://\\1&#x27;) | list }}</span>
+<span class="hljs-template-variable">{{ hosts | map(&#x27;regex_replace&#x27;, &#x27;^(.*)$&#x27;, &#x27;\\1:80&#x27;) | list }}</span>
+
+# convert &#x27;^f.*o(.*)$&#x27; to &#x27;\^f\.\*o\(\.\*\)\$&#x27;
+<span class="hljs-template-variable">{{ &#x27;^f.*o(.*)$&#x27; | regex_escape() }}</span>
+# convert &#x27;^f.*o(.*)$&#x27; to &#x27;\^f\.\*o(\.\*)\$&#x27;
+<span class="hljs-template-variable">{{ &#x27;^f.*o(.*)$&#x27; | regex_escape(&#x27;posix_basic&#x27;) }}</span>
+
+<span class="hljs-template-variable">{{ path | basename }}</span>
+<span class="hljs-template-variable">{{ path | win_basename }}</span>
+<span class="hljs-template-variable">{{ path | win_splitdrive }}</span>
+{ path | win_splitdrive | first }}
+<span class="hljs-template-variable">{{ path | win_splitdrive | last }}</span>
+<span class="hljs-template-variable">{{ path | dirname }}</span>
+<span class="hljs-template-variable">{{ path | win_dirname }}</span>
+<span class="hljs-template-variable">{{ path | expanduser }}</span>
+<span class="hljs-template-variable">{{ path | expandvars }}</span>
+<span class="hljs-template-variable">{{ path | realpath }}</span>
+<span class="hljs-template-variable">{{ path | relpath(&#x27;/etc&#x27;) }}</span>
+<span class="hljs-template-variable">{{ path | splitext }}</span>
+<span class="hljs-template-variable">{{ path | splitext | first }}</span>
+<span class="hljs-template-variable">{{ path | splitext | last }}</span>
+<span class="hljs-template-variable">{{ (&#x27;/etc&#x27;, path, &#x27;subdir&#x27;, file) | path_join }}</span>
+
+ansible.builtin.shell: echo <span class="hljs-template-variable">{{ string_value | quote }}</span>
+<span class="hljs-template-variable">{{ list | join(&quot; &quot;) }}</span>
+<span class="hljs-template-variable">{{ csv_string | split(&quot;,&quot;) }}</span>
+<span class="hljs-template-variable">{{ encoded | b64decode }}</span>
+<span class="hljs-template-variable">{{ decoded | string | b64encode }}</span>
+<span class="hljs-template-variable">{{ encoded | b64decode(encoding=&#x27;utf-16-le&#x27;) }}</span>
+<span class="hljs-template-variable">{{ decoded | string | b64encode(encoding=&#x27;utf-16-le&#x27;) }}</span>
+<span class="hljs-template-variable">{{ string | to_uuid(namespace=&#x27;11111111-2222-3333-4444-555555555555&#x27;) }}</span>
+<span class="hljs-template-variable">{{ string | to_uuid }}</span>
+<span class="hljs-template-variable">{{ ansible_mounts | map(attribute=&#x27;mount&#x27;) | join(&#x27;,&#x27;) }}</span>
+
+# Get total amount of seconds between two dates. Default date format is %Y-%m-%d %H:%M:%S but you can pass your own format
+<span class="hljs-template-variable">{{ ((&quot;2016-08-14 20:00:12&quot; | to_datetime) - (&quot;2015-12-25&quot; | to_datetime(&#x27;%Y-%m-%d&#x27;))).total_seconds()  }}</span>
+# Get remaining seconds after delta has been calculated. NOTE: This does NOT convert years, days, hours, and so on to seconds. For that, use total_seconds()
+<span class="hljs-template-variable">{{ ((&quot;2016-08-14 20:00:12&quot; | to_datetime) - (&quot;2016-08-14 18:00:00&quot; | to_datetime)).seconds  }}</span>
+# This expression evaluates to &quot;</span><span class="hljs-number">12</span><span class="hljs-string">&quot; and not &quot;</span><span class="hljs-number">132</span><span class="hljs-string">&quot;. Delta is 2 hours, 12 seconds
+# get amount of days between two dates. This returns only number of days and discards remaining hours, minutes, and seconds
+<span class="hljs-template-variable">{{ ((&quot;2016-08-14 20:00:12&quot; | to_datetime) - (&quot;2015-12-25&quot; | to_datetime(&#x27;%Y-%m-%d&#x27;))).days  }}</span>
+<span class="hljs-template-variable">{{ &#x27;%Y-%m-%d&#x27; | strftime }}</span>
+<span class="hljs-template-variable">{{ &#x27;%H:%M:%S&#x27; | strftime }}</span>
+<span class="hljs-template-variable">{{ &#x27;%Y-%m-%d %H:%M:%S&#x27; | strftime(ansible_date_time.epoch) }}</span>
+<span class="hljs-template-variable">{{ &#x27;%Y-%m-%d&#x27; | strftime(0) }}</span>          # =&gt; 1970-01-01
+<span class="hljs-template-variable">{{ &#x27;%Y-%m-%d&#x27; | strftime(1441357287) }}</span> # =&gt; 2015-09-04
+</span></code></pre>
+</body></html>

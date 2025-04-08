@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.199" />
+        <title>xargs</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="xargs" tabindex="-1">xargs <a class="header-anchor" href="#xargs" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.199</p>
+<nav class="table-of-contents"><ol><li><a href="#come-xargs-consuma-gli-argomenti">Come xargs consuma gli argomenti </a></li><li><a href="#spostare-i-soli-file-che-non-contengono-una-stringa">Spostare i soli file che non contengono una stringa </a></li><li><a href="#copiare-solo-alcuni-file-in-una-directory-di-backup">Copiare solo alcuni file in una directory di backup </a></li><li><a href="#xargs-debug">xargs Debug </a></li><li><a href="#tecnica-alternativa-ad-xargs--l1-per-elaborare-il-risultato-di-find">Tecnica alternativa ad xargs -L1 per elaborare il risultato di find </a></li></ol></nav><h1 id="xargs-1" tabindex="-1">xargs <a class="header-anchor" href="#xargs-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://man.archlinux.org/man/xargs.1">https://man.archlinux.org/man/xargs.1</a></li>
+</ul>
+<h2 id="come-xargs-consuma-gli-argomenti" tabindex="-1">Come xargs consuma gli argomenti <a class="header-anchor" href="#come-xargs-consuma-gli-argomenti" aria-hidden="true">🔗</a></h2>
+<p>xargs richiama il comando con il maggior numero di argomenti possibile per volta, numero di argomenti massimo dipendente da dei limiti fissati:</p>
+<p><a href="https://www.gnu.org/software/findutils/manual/html_node/find_html/Limiting-Command-Size.html">https://www.gnu.org/software/findutils/manual/html_node/find_html/Limiting-Command-Size.html</a></p>
+<p>xargs gives you control over how many arguments it passes to the command each time it executes it. By default, it uses up to <code>ARG_MAX - 2k</code>, or <code>128k</code>, whichever is smaller, characters per command. It uses as many lines and arguments as fit within that limit.</p>
+<p>Nel caso di comando come<code>rm</code> non è un problema fornire più parametri, perchè rm può essere eseguito con un numero arbitrario di nomi di files. A volte però bisogna eseguire il comando con un solo parametro per volta,
+In queste situazioni è possibile utilizzare il parametro <code>L</code> oppure il parametro <code>I</code>:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> a b c | xargs -I {} <span class="hljs-built_in">echo</span> x {} y
+x a b c y
+</code></pre>
+<p>Attenzione perchè <code>-I</code> implica <code>-L 1</code>, ovvero massimo una intera riga per volta(separatore il <code>newline</code>),<br>
+ma la riga prodotta è già una nell'esempio, ed una riga può comunque contenere molti argomenti,<br>
+di conseguenza in questo esempio xargs utilizza tutti gli argomenti a disposizione per invocare il comando nonostante <code>-I ==&gt; (-L1)</code>.<br>
+Se invece di una riga contenente tanti parametri, avessimo più righe ciascuna contenente un solo parametro,
+allora il comando verrebbe eseguito correttamente più volte e con un solo parametro come desiderato:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">printf</span> <span class="hljs-string">&#x27;%s\n&#x27;</span> a b c | xargs --replace=<span class="hljs-string">&quot;{}&quot;</span> <span class="hljs-built_in">echo</span> x <span class="hljs-string">&quot;{}&quot;</span> y
+x a y
+x b y
+x c y
+</code></pre>
+<p>il <code>-L 1</code> ovvero <code>max-lines=1</code> implicato da <code>-I --replace</code> fà eseguire xargs con un solo argomento per volta se l'input contiene l'elenco dei parametri separati da <code>newline</code>.</p>
+<p>Se invece non vogliamo produrre più linee tanti quanti sono i parametri con i quali vogliamo richiamiare il comando,<br>
+possiamo utilizzare il parametro <code>-n --max-args</code> ed utilizzare xargs due volte in pipe:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> a b c | xargs -n1 | xargs -I {} <span class="hljs-built_in">echo</span> x {} y
+x a y
+x b y
+x c y
+</code></pre>
+<p>Questa soluzione funziona perchè il comando di default eseguito da xargs è <code>echo</code>, quindi:<br>
+<code>xargs -n1 ==&gt; xargs -n1 echo</code>, questo comando separa gli argomenti in un elenco di 1 argomento per volta.<br>
+In questo modo l'xargs finale viene richiamato tante volte tante quanti sono gli argomenti da processare con un argomento per volta.</p>
+<h2 id="spostare-i-soli-file-che-non-contengono-una-stringa" tabindex="-1">Spostare i soli file che non contengono una stringa <a class="header-anchor" href="#spostare-i-soli-file-che-non-contengono-una-stringa" aria-hidden="true">🔗</a></h2>
+<p>Vogliamo spostare i soli file che non contengono <code>require('expect')</code>:</p>
+<pre><code class="language-bash">grep -LZ <span class="hljs-string">&quot;require(&#x27;expect&#x27;)&quot;</span> * | xargs -I{} -0 <span class="hljs-built_in">mv</span> {} ../../../hello_world/
+</code></pre>
+<pre><code>grep -L per ottenere in output i nomi dei file che non corrispondono alla stringa di ricerca
+grep -Z per utilizzare \0 come separatore dei nomi dei file prodotti in output, utile per gestire file i cui nomi possono contenere \n o spazi
+xargs -0 per ricevere una lista di elementi separati dal carattere \0
+</code></pre>
+<h2 id="copiare-solo-alcuni-file-in-una-directory-di-backup" tabindex="-1">Copiare solo alcuni file in una directory di backup <a class="header-anchor" href="#copiare-solo-alcuni-file-in-una-directory-di-backup" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">grep -l SUBENTRO * |xargs -L 1 -i <span class="hljs-built_in">cp</span> {}/servizio/export/home/user/corrado/subtxt/
+</code></pre>
+<h2 id="xargs-debug" tabindex="-1">xargs Debug <a class="header-anchor" href="#xargs-debug" aria-hidden="true">🔗</a></h2>
+<p>aggiungere l'opzione <code>-p</code> per far stampare la riga di comando</p>
+<pre><code class="language-bash">grep -l SUBENTRO * |xargs -p -L 1 -i <span class="hljs-built_in">cp</span> {} /servizio/export/home/user/corrado/subtxt/
+</code></pre>
+<p><code>-i</code> serve ad inserire il parametro <code>{}</code> in qualunque punto della commandline</p>
+<h2 id="tecnica-alternativa-ad-xargs--l1-per-elaborare-il-risultato-di-find" tabindex="-1">Tecnica alternativa ad xargs -L1 per elaborare il risultato di find <a class="header-anchor" href="#tecnica-alternativa-ad-xargs--l1-per-elaborare-il-risultato-di-find" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find . -<span class="hljs-built_in">type</span> l | (<span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> FN ; <span class="hljs-keyword">do</span> <span class="hljs-built_in">test</span> -e <span class="hljs-string">&quot;<span class="hljs-variable">$FN</span>&quot;</span> || <span class="hljs-built_in">ls</span> -ld <span class="hljs-string">&quot;<span class="hljs-variable">$FN</span>&quot;</span>; <span class="hljs-keyword">done</span>)
+</code></pre>
+</body></html>

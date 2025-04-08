@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.818" />
+        <title>02_Apache_PHP</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="02_apache_php" tabindex="-1">02_Apache_PHP <a class="header-anchor" href="#02_apache_php" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.818</p>
+<nav class="table-of-contents"><ol><li><a href="#install-apache-httpd-and-php">Install Apache httpd and PHP </a></li><li><a href="#configure-httpd">Configure httpd </a></li><li><a href="#test-installation">Test Installation </a></li><li><a href="#configurazione-php---abilitazione-estensioni">Configurazione PHP - Abilitazione estensioni </a></li><li><a href="#phpmyadmin">PHPMyAdmin </a><ol><li><a href="#aggiunta-ad-apache">Aggiunta ad Apache </a></li></ol></li><li><a href="#configurazione-php---accesso">Configurazione PHP - Accesso </a></li><li><a href="#quick-install-script">Quick install script </a></li><li><a href="#ssl">SSL </a><ol><li><a href="#creare-una-ca-in-manjaro">Creare una CA in Manjaro </a></li><li><a href="#apache-tls-archlinux">Apache TLS ArchLinux </a></li><li><a href="#configurazione-di-apache-generata-dal-sito-mozilla">Configurazione di Apache generata dal sito Mozilla </a></li></ol></li></ol></nav><h1 id="apache-http-server" tabindex="-1">Apache HTTP Server <a class="header-anchor" href="#apache-http-server" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/Apache_HTTP_Server">https://wiki.archlinux.org/title/Apache_HTTP_Server</a></li>
+<li><a href="https://forum.manjaro.org/t/howto-install-apache-mariadb-mysql-php-lamp/13000">https://forum.manjaro.org/t/howto-install-apache-mariadb-mysql-php-lamp/13000</a></li>
+<li><a href="https://httpd.apache.org/">https://httpd.apache.org/</a></li>
+<li><a href="https://httpd.apache.org/docs/2.4/mod/mod_unique_id.html">https://httpd.apache.org/docs/2.4/mod/mod_unique_id.html</a></li>
+<li><a href="https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions">https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl start mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl start httpd
+</code></pre>
+<h2 id="install-apache-httpd-and-php" tabindex="-1">Install Apache httpd and PHP <a class="header-anchor" href="#install-apache-httpd-and-php" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syuu --noconfirm
+$ pacman -Ss php-
+$ <span class="hljs-built_in">sudo</span> pacman -Sy --needed --noconfirm  apache php php-{cgi,gd,pgsql,fpm,apache,imagick} imagemagick libexif gd phpmyadmin
+<span class="hljs-comment"># imagemagick libexif gd servono a PHP/Wordpress</span>
+</code></pre>
+<h2 id="configure-httpd" tabindex="-1">Configure httpd <a class="header-anchor" href="#configure-httpd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> code --no-sandbox --user-data-dir=/root/.config/Code /etc/httpd/conf/httpd.conf
+$ <span class="hljs-built_in">sudo</span> gedit /etc/httpd/conf/httpd.conf
+
+    <span class="hljs-comment">#LoadModule unique_id_module modules/mod_unique_id.so ==&gt;</span>
+    LoadModule unique_id_module modules/mod_unique_id.so
+
+    ServerName localhost:80
+
+    <span class="hljs-comment"># Per PHP:</span>
+    <span class="hljs-comment"># LoadModule mpm_event_module modules/mod_mpm_event.so</span>
+    LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+
+    <span class="hljs-comment"># PHP - aggiungere alla fine del file</span>
+    LoadModule php_module modules/libphp.so
+    AddHandler php-script .php
+    Include conf/extra/php_module.conf
+    Include conf/extra/phpmyadmin.conf
+
+$ apachectl configtest
+
+$ grep Listen /etc/httpd/conf/httpd.conf
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> --now httpd
+$ <span class="hljs-built_in">sudo</span> systemctl start httpd
+$ systemctl status httpd
+$ journalctl -u httpd -f
+</code></pre>
+<p><a href="https://wiki.archlinux.org/title/Apache_HTTP_Server#User_directories">https://wiki.archlinux.org/title/Apache_HTTP_Server#User_directories</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">chmod</span> o+x ~
+$ <span class="hljs-built_in">mkdir</span> ~/public_html
+$ <span class="hljs-built_in">chmod</span> o+x ~/public_html
+$ <span class="hljs-built_in">chmod</span> -R o+r ~/public_html
+</code></pre>
+<h2 id="test-installation" tabindex="-1">Test Installation <a class="header-anchor" href="#test-installation" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /srv/http/index.html&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;My First Heading&lt;/h1&gt;
+&lt;p&gt;My first paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /srv/http/info.php&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+&lt;?php phpinfo(); ?&gt;
+EOF
+
+```bash
+$ <span class="hljs-built_in">cat</span> &gt; ~/public_html/index.html &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;body&gt;
+&lt;h1&gt;Test User Directory&lt;/h1&gt;
+&lt;a href=<span class="hljs-string">&quot;https://wiki.archlinux.org/title/Apache_HTTP_Server#User_directories&quot;</span>&gt;http://localhost/~<span class="hljs-variable">$USER</span>/index.html&lt;/a&gt;
+&lt;p&gt;My first paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+EOF
+
+$ xdg-open http://localhost:80
+$ xdg-open http://127.0.1.1:80
+$ xdg-open http://localhost/info.php
+$ xdg-open http://localhost/~<span class="hljs-variable">$USER</span>
+</code></pre>
+<h2 id="configurazione-php---abilitazione-estensioni" tabindex="-1">Configurazione PHP - Abilitazione estensioni <a class="header-anchor" href="#configurazione-php---abilitazione-estensioni" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/PHP">https://wiki.archlinux.org/title/PHP</a></li>
+<li><a href="https://www.php.net/manual/en/install.unix.apache2.php">https://www.php.net/manual/en/install.unix.apache2.php</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> code --no-sandbox --user-data-dir=/root/.config/Code /etc/php/php.ini
+$ <span class="hljs-built_in">sudo</span> gedit /etc/php/php.ini
+    date.timezone = Europe/Rome
+    <span class="hljs-comment"># Uncomment the following lines in `/etc/php/php.ini` to MySQL/MariaDB extensions:</span>
+    extension=pdo_mysql <span class="hljs-comment"># per wordpress</span>
+    extension=mysqli    <span class="hljs-comment"># per wordpress</span>
+    extension=exif  <span class="hljs-comment"># per wordpress</span>
+    extension=ftp   <span class="hljs-comment"># per wordpress</span>
+    extension=gd    <span class="hljs-comment"># per wordpress</span>
+    extension=iconv <span class="hljs-comment"># per wordpress</span>
+    extension=bz2 <span class="hljs-comment"># per phpmyadmin</span>
+    extension=zip <span class="hljs-comment"># per phpmyadmin</span>
+</code></pre>
+<p>php-imagick:</p>
+<ul>
+<li><code>/usr/lib/php/modules/imagick.so</code></li>
+<li><code>/etc/php/conf.d/imagick.ini</code></li>
+</ul>
+<pre><code class="language-bash">$ sed <span class="hljs-string">&quot;s/;\sextension\s=\simagick/extension = imagick/&quot;</span> /etc/php/conf.d/imagick.ini
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Per verificare la validità del file di configurazione</span>
+$ php --ini
+</code></pre>
+<p>Una volta partito Wordpress, dalla Dashboard/Site Healt Status si vede che mancano ancora alcune estensioni da abilitare per PHP:</p>
+<ul>
+<li>
+<p><a href="https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions">https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions</a></p>
+</li>
+<li>
+<p>exif – Works with metadata stored in images.</p>
+</li>
+<li>
+<p>imagick – Provides better image quality for media uploads.</p>
+</li>
+<li>
+<p>gd – If Imagick isn’t installed, the GD Graphics Library is used as a functionally limited fallback for image manipulation.</p>
+</li>
+<li>
+<p>iconv – Used to convert between character sets.</p>
+</li>
+</ul>
+<h2 id="phpmyadmin" tabindex="-1">PHPMyAdmin <a class="header-anchor" href="#phpmyadmin" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a></li>
+<li><a href="https://wiki.archlinux.org/title/phpMyAdmin">https://wiki.archlinux.org/title/phpMyAdmin</a></li>
+<li><a href="https://docs.phpmyadmin.net/en/latest/">https://docs.phpmyadmin.net/en/latest/</a></li>
+</ul>
+<p>Make sure the PHP <code>mariadb</code> and <code>iconv</code> extensions have been enabled. Optionally you can enable <code>extension=bz2</code> and <code>extension=zip</code> for compression support.</p>
+<h3 id="aggiunta-ad-apache" tabindex="-1">Aggiunta ad Apache <a class="header-anchor" href="#aggiunta-ad-apache" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Configurazione PHPMyAdmin</span>
+$ <span class="hljs-comment"># sudo code --no-sandbox --user-data-dir=/root/.config/Code /etc/httpd/conf/extra/phpmyadmin.conf</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/httpd/conf/httpd.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+Include conf/extra/phpmyadmin.conf
+EOF
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/httpd/conf/extra/phpmyadmin.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+Alias /phpmyadmin <span class="hljs-string">&quot;/usr/share/webapps/phpMyAdmin&quot;</span>
+&lt;Directory <span class="hljs-string">&quot;/usr/share/webapps/phpMyAdmin&quot;</span>&gt;
+    DirectoryIndex index.php
+    AllowOverride All
+    Options FollowSymlinks
+    Require all granted
+&lt;/Directory&gt;
+EOF
+$ apachectl configtest
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd
+
+<span class="hljs-comment"># /usr/share/webapps/phpMyAdmin/config.inc.php -&gt; /etc/webapps/phpmyadmin/config.inc.php</span>
+$ <span class="hljs-built_in">sudo</span> sed -i -e <span class="hljs-string">&quot;/blowfish/s/&#x27;&#x27;/&#x27;<span class="hljs-subst">$(openssl rand -hex 16)</span>&#x27;/gi&quot;</span> /etc/webapps/phpmyadmin/config.inc.php
+$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$cfg[&#x27;TempDir&#x27;] = &#x27;/tmp&#x27;;&quot;</span> &gt;&gt; /etc/webapps/phpmyadmin/config.inc.php
+
+$ xdg-open http://localhost/phpmyadmin
+</code></pre>
+<h2 id="configurazione-php---accesso" tabindex="-1">Configurazione PHP - Accesso <a class="header-anchor" href="#configurazione-php---accesso" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># /usr/share/webapps/phpMyAdmin/config.inc.php -&gt; /etc/webapps/phpmyadmin/config.inc.php</span>
+$ <span class="hljs-comment"># sudo code --no-sandbox --user-data-dir=/root/.config/Code /etc/webapps/phpmyadmin/config.inc.php</span>
+$ <span class="hljs-built_in">sudo</span> sed -i -e <span class="hljs-string">&quot;/blowfish/s/&#x27;&#x27;/&#x27;<span class="hljs-subst">$(openssl rand -hex 16)</span>&#x27;/gi&quot;</span> /etc/webapps/phpmyadmin/config.inc.php
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$cfg[&#x27;TempDir&#x27;] = &#x27;/tmp&#x27;;&quot;</span> &gt;&gt; /etc/webapps/phpmyadmin/config.inc.php
+$ <span class="hljs-built_in">sudo</span> sed -i <span class="hljs-string">&quot;/AllowNoPassword/s/false/true/gi&quot;</span> /etc/webapps/phpmyadmin/config.inc.php
+
+$ sed -n <span class="hljs-string">&quot;/AllowNoPassword/p&quot;</span> config.inc.php
+
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd
+$ xdg-open http://localhost/phpmyadmin
+</code></pre>
+<p><a href="https://wiki.archlinux.org/title/phpMyAdmin#Enabling_Configuration_Storage">https://wiki.archlinux.org/title/phpMyAdmin#Enabling_Configuration_Storage</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt; <span class="hljs-string">EOF
+DROP USER IF EXISTS &#x27;pma&#x27;@&#x27;localhost&#x27;;
+CREATE USER &#x27;pma&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;pmapass&#x27;;
+GRANT ALL ON phpmyadmin.* TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT USAGE ON mysql.* TO &#x27;pma&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;pmapass&#x27;;
+GRANT SELECT (
+    Host, User, Select_priv, Insert_priv, Update_priv, Delete_priv,
+    Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv,
+    File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,
+    Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv,
+    Execute_priv, Repl_slave_priv, Repl_client_priv
+    ) ON mysql.user TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT SELECT ON mysql.db TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT SELECT (Host, Db, User, Table_name, Table_priv, Column_priv)
+    ON mysql.tables_priv TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+FLUSH PRIVILEGES;
+EOF</span>
+$ <span class="hljs-comment"># sudo code --no-sandbox --user-data-dir=/root/.config/Code /usr/share/webapps/phpMyAdmin/sql/create_tables.sql</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt; /usr/share/webapps/phpMyAdmin/sql/create_tables.sql
+<span class="hljs-comment"># scommentare tutte le $cfg[&#x27;Servers&#x27;][$i]</span>
+$ <span class="hljs-built_in">sudo</span> code --no-sandbox --user-data-dir=/root/.config/Code /etc/webapps/phpmyadmin/config.inc.php
+
+$ <span class="hljs-built_in">sudo</span> systemctl restart httpd
+</code></pre>
+<h2 id="quick-install-script" tabindex="-1">Quick install script <a class="header-anchor" href="#quick-install-script" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syuu --noconfirm
+$ pacman -Ss php-
+$ <span class="hljs-built_in">sudo</span> pacman -Sy --needed apache php php-{cgi,gd,pgsql,fpm,apache,imagick} imagemagick libexif gd phpmyadmin
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/httpd/conf/extra/phpmyadmin.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+Alias /phpmyadmin <span class="hljs-string">&quot;/usr/share/webapps/phpMyAdmin&quot;</span>
+&lt;Directory <span class="hljs-string">&quot;/usr/share/webapps/phpMyAdmin&quot;</span>&gt;
+    DirectoryIndex index.php
+    AllowOverride All
+    Options FollowSymlinks
+    Require all granted
+&lt;/Directory&gt;
+EOF
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/httpd/conf/httpd.conf&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+    <span class="hljs-comment">#LoadModule unique_id_module modules/mod_unique_id.so ==&gt;</span>
+    LoadModule unique_id_module modules/mod_unique_id.so
+    ServerName localhost:80
+    <span class="hljs-comment"># Per PHP:</span>
+    <span class="hljs-comment"># LoadModule mpm_event_module modules/mod_mpm_event.so</span>
+    LoadModule mpm_prefork_module modules/mod_mpm_prefork.so
+    <span class="hljs-comment"># PHP - aggiungere alla fine del file</span>
+    LoadModule php_module modules/libphp.so
+    AddHandler php-script .php
+    Include conf/extra/php_module.conf
+    Include conf/extra/phpmyadmin.conf
+EOF
+
+$ <span class="hljs-built_in">chmod</span> o+x ~
+$ <span class="hljs-built_in">mkdir</span> ~/public_html
+$ <span class="hljs-built_in">chmod</span> o+x ~/public_html
+$ <span class="hljs-built_in">chmod</span> -R o+r ~/public_html
+
+<span class="hljs-comment"># https://make.wordpress.org/hosting/handbook/server-environment/#php-extensions</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt;&gt; /etc/php/php.ini&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+date.timezone = Europe/Rome
+<span class="hljs-comment"># Uncomment the following lines in `/etc/php/php.ini` to MySQL/MariaDB extensions:</span>
+extension=pdo_mysql <span class="hljs-comment"># per wordpress</span>
+extension=mysqli    <span class="hljs-comment"># per wordpress</span>
+extension=exif  <span class="hljs-comment"># per wordpress</span>
+extension=ftp   <span class="hljs-comment"># per wordpress</span>
+extension=gd    <span class="hljs-comment"># per wordpress</span>
+extension=iconv <span class="hljs-comment"># per wordpress</span>
+extension=bz2 <span class="hljs-comment"># per phpmyadmin</span>
+extension=zip <span class="hljs-comment"># per phpmyadmin</span>
+EOF
+
+$ <span class="hljs-built_in">sudo</span> sed -i -e <span class="hljs-string">&quot;/blowfish/s/&#x27;&#x27;/&#x27;<span class="hljs-subst">$(openssl rand -hex 16)</span>&#x27;/gi&quot;</span> /etc/webapps/phpmyadmin/config.inc.php
+$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;\$cfg[&#x27;TempDir&#x27;] = &#x27;/tmp&#x27;;&quot;</span> &gt;&gt; /etc/webapps/phpmyadmin/config.inc.php
+
+  <span class="hljs-variable">$cfg</span>[<span class="hljs-string">&#x27;blowfish_secret&#x27;</span>] = <span class="hljs-string">&#x27;&#x27;</span>; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+  <span class="hljs-variable">$cfg</span>[<span class="hljs-string">&#x27;blowfish_secret&#x27;</span>] = <span class="hljs-string">&#x27;778c7dec093ea2f83b2cd27281b0da0b&#x27;</span>; /* YOU MUST FILL IN THIS FOR COOKIE AUTH! */
+
+  <span class="hljs-comment"># PHPMyAdmin utilizza direttamente utenze/password di MariaDB non ha una propria gestione delle utenze</span>
+  <span class="hljs-variable">$cfg</span>[<span class="hljs-string">&#x27;Servers&#x27;</span>][<span class="hljs-variable">$i</span>][<span class="hljs-string">&#x27;AllowNoPassword&#x27;</span>] = <span class="hljs-literal">false</span>;
+  <span class="hljs-variable">$cfg</span>[<span class="hljs-string">&#x27;Servers&#x27;</span>][<span class="hljs-variable">$i</span>][<span class="hljs-string">&#x27;AllowNoPassword&#x27;</span>] = <span class="hljs-literal">true</span>;
+
+  <span class="hljs-variable">$cfg</span>[<span class="hljs-string">&#x27;TempDir&#x27;</span>] = <span class="hljs-string">&#x27;/tmp&#x27;</span>;
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt;&lt; <span class="hljs-string">EOF
+DROP USER IF EXISTS &#x27;pma&#x27;@&#x27;localhost&#x27;;
+CREATE USER &#x27;pma&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;pmapass&#x27;;
+GRANT ALL ON phpmyadmin.* TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT USAGE ON mysql.* TO &#x27;pma&#x27;@&#x27;localhost&#x27; IDENTIFIED BY &#x27;pmapass&#x27;;
+GRANT SELECT (
+    Host, User, Select_priv, Insert_priv, Update_priv, Delete_priv,
+    Create_priv, Drop_priv, Reload_priv, Shutdown_priv, Process_priv,
+    File_priv, Grant_priv, References_priv, Index_priv, Alter_priv,
+    Show_db_priv, Super_priv, Create_tmp_table_priv, Lock_tables_priv,
+    Execute_priv, Repl_slave_priv, Repl_client_priv
+    ) ON mysql.user TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT SELECT ON mysql.db TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+GRANT SELECT (Host, Db, User, Table_name, Table_priv, Column_priv)
+    ON mysql.tables_priv TO &#x27;pma&#x27;@&#x27;localhost&#x27;;
+FLUSH PRIVILEGES;
+EOF</span>
+$ <span class="hljs-comment"># sudo code --no-sandbox --user-data-dir=/root/.config/Code /usr/share/webapps/phpMyAdmin/sql/create_tables.sql</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;mariadb -u root -p&quot;</span> &lt; /usr/share/webapps/phpMyAdmin/sql/create_tables.sql
+<span class="hljs-comment"># scommentare tutte le $cfg[&#x27;Servers&#x27;][$i]</span>
+$ <span class="hljs-built_in">sudo</span> code --no-sandbox --user-data-dir=/root/.config/Code /etc/webapps/phpmyadmin/config.inc.php
+
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /srv/http/info.php&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+&lt;?php phpinfo(); ?&gt;
+EOF
+
+$ apachectl configtest
+$ php --ini
+
+$ <span class="hljs-built_in">sudo</span> systemctl start mariadb
+$ <span class="hljs-built_in">sudo</span> systemctl start httpd
+</code></pre>
+<h2 id="ssl" tabindex="-1">SSL <a class="header-anchor" href="#ssl" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://httpd.apache.org/docs/2.4/ssl/ssl_howto.html">https://httpd.apache.org/docs/2.4/ssl/ssl_howto.html</a></li>
+<li><a href="https://httpd.apache.org/docs/2.4/ssl/ssl_intro.html">https://httpd.apache.org/docs/2.4/ssl/ssl_intro.html</a></li>
+<li><a href="https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html">https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html</a></li>
+<li><a href="https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html#ownca">https://httpd.apache.org/docs/2.4/ssl/ssl_faq.html#ownca</a></li>
+</ul>
+<h3 id="creare-una-ca-in-manjaro" tabindex="-1">Creare una CA in Manjaro <a class="header-anchor" href="#creare-una-ca-in-manjaro" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="../../Linux/sicurezza/openssl.html">OpenSSL</a></li>
+</ul>
+<h3 id="apache-tls-archlinux" tabindex="-1">Apache TLS ArchLinux <a class="header-anchor" href="#apache-tls-archlinux" aria-hidden="true">🔗</a></h3>
+<p><a href="https://wiki.archlinux.org/title/Apache_HTTP_Server#TLS">https://wiki.archlinux.org/title/Apache_HTTP_Server#TLS</a></p>
+<p>/etc/httpd/conf/httpd.conf</p>
+<p>LoadModule ssl_module modules/mod_ssl.so
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+Include conf/extra/httpd-ssl.conf</p>
+<p>/etc/httpd/conf/extra/httpd-ssl.conf
+SSLCertificateFile
+SSLCertificateKeyFile
+SSLCertificateChainFile</p>
+<h3 id="configurazione-di-apache-generata-dal-sito-mozilla" tabindex="-1">Configurazione di Apache generata dal sito Mozilla <a class="header-anchor" href="#configurazione-di-apache-generata-dal-sito-mozilla" aria-hidden="true">🔗</a></h3>
+<p><a href="https://ssl-config.mozilla.org/#server=apache&amp;version=2.4.41&amp;config=modern&amp;openssl=1.1.1k&amp;guideline=5.7">https://ssl-config.mozilla.org/#server=apache&amp;version=2.4.41&amp;config=modern&amp;openssl=1.1.1k&amp;guideline=5.7</a></p>
+<pre><code class="language-ini"><span class="hljs-comment"># generated 2023-05-20, Mozilla Guideline v5.7, Apache 2.4.41, OpenSSL 1.1.1k, modern configuration</span>
+<span class="hljs-comment"># https://ssl-config.mozilla.org/#server=apache&amp;version=2.4.41&amp;config=modern&amp;openssl=1.1.1k&amp;guideline=5.7</span>
+
+<span class="hljs-comment"># this configuration requires mod_ssl, mod_socache_shmcb, mod_rewrite, and mod_headers</span>
+&lt;VirtualHost *:80&gt;
+    RewriteEngine On
+    RewriteCond %{REQUEST_URI} !^/\.well\-known/acme\-challenge/
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}$1 <span class="hljs-section">[R=301,L]</span>
+&lt;/VirtualHost&gt;
+
+&lt;VirtualHost *:443&gt;
+    SSLEngine on
+    SSLCertificateFile      /path/to/signed_cert_and_intermediate_certs
+    SSLCertificateKeyFile   /path/to/private_key
+
+    <span class="hljs-comment"># enable HTTP/2, if available</span>
+    Protocols h2 http/1.1
+
+    <span class="hljs-comment"># HTTP Strict Transport Security (mod_headers is required) (63072000 seconds)</span>
+    Header always set Strict-Transport-Security &quot;<span class="hljs-attr">max-age</span>=<span class="hljs-number">63072000</span><span class="hljs-string">&quot;
+&lt;/VirtualHost&gt;
+
+# modern configuration
+SSLProtocol             all -SSLv3 -TLSv1 -TLSv1.1 -TLSv1.2
+SSLHonorCipherOrder     off
+SSLSessionTickets       off
+
+SSLUseStapling On
+SSLStaplingCache &quot;</span>shmcb:logs/ssl_stapling(<span class="hljs-number">32768</span>)<span class="hljs-string">&quot;
+
+</span></code></pre>
+<p><a href="https://httpd.apache.org/docs/2.4/mod/mod_socache_shmcb.html">https://httpd.apache.org/docs/2.4/mod/mod_socache_shmcb.html</a>
+<a href="https://httpd.apache.org/docs/2.4/mod/mod_ssl.html">https://httpd.apache.org/docs/2.4/mod/mod_ssl.html</a></p>
+<p>/etc/httpd/conf/httpd.conf
+LoadModule ssl_module modules/mod_ssl.so
+LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+Include conf/extra/httpd-ssl.conf</p>
+<pre><code>#LoadModule ssl_module modules/mod_ssl.so
+#LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
+#Include conf/extra/httpd-ssl.conf
+</code></pre>
+<p>/etc/httpd/conf/extra/httpd-ssl.conf
+SSLCertificateFile &quot;/etc/httpd/conf/server.crt&quot;
+SSLCertificateKeyFile &quot;/etc/httpd/conf/server.key&quot;</p>
+<pre><code>&lt;VirtualHost _default_:443&gt;
+    #   General setup for the virtual host
+    DocumentRoot &quot;/srv/http&quot;
+    ServerName www.example.com:443
+    ServerAdmin you@example.com
+    ErrorLog &quot;/var/log/httpd/error_log&quot;
+    TransferLog &quot;/var/log/httpd/access_log&quot;
+</code></pre>
+</body></html>

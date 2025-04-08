@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.221" />
+        <title>wine</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="wine" tabindex="-1">wine <a class="header-anchor" href="#wine" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.221</p>
+<nav class="table-of-contents"><ol><li><a href="#aumentare-la-qualit%C3%A0-della-grafica">Aumentare la qualità della grafica </a></li><li><a href="#screen-resolution-(dpi-setting)">Screen Resolution (DPI Setting) </a></li><li><a href="#installare-notepad%2B%2B-ed-mp3tag">Installare notepad++ ed mp3tag </a></li></ol></nav><h1 id="wine-1" tabindex="-1">wine <a class="header-anchor" href="#wine-1" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/wine">https://wiki.archlinux.org/title/wine</a></p>
+</li>
+<li>
+<p><a href="https://wiki.winehq.org/Wine_User%27s_Guide">https://wiki.winehq.org/Wine_User's_Guide</a></p>
+</li>
+<li>
+<p><a href="https://wiki.winehq.org/Winecfg">https://wiki.winehq.org/Winecfg</a> winecfg altro non fa che editare il registry,</p>
+<p>quindi da riga di comando si possono effettuare le medesime impostazioni tramite <code>wine regedit</code></p>
+<pre><code>  HKEY_LOCAL_MACHINE\System\CurrentControlSet\Hardware Profiles\Current\Software\Fonts LogPixels 96
+  HKEY_CURRENT_USER\Control Panel\Desktop\WindowMetrics
+</code></pre>
+<p><a href="https://superuser.com/questions/1051754/hidpi-support-with-wine-applications">https://superuser.com/questions/1051754/hidpi-support-with-wine-applications</a></p>
+</li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed wine wine-mono wine_gecko winetricks playonlinux
+$ winetricks allfonts
+$ ~/bin/winefontsmooting.sh <span class="hljs-comment"># --&gt; Selezionare l&#x27;opziope 3</span>
+$ winecfg
+    --&gt; /Applicazioni/Versione di Windows: Windows 10
+    --&gt; /Graphics/Screen Resolution --&gt; impostare i dpi a 336, aumentando così la risoluzione
+    --&gt; /Desktop/Dimensione: Large Fonts (se non lo si imposta il plugin manager di notepad++ mostra dei caratteri enormi)
+    --&gt; /Desktop/Tema installare il tema aero <span class="hljs-keyword">in</span> /workspaces/Risorse/wine/luna.msstyles oppure
+    --&gt; /Desktop/Tema Windows Xp
+    --&gt; /Desktop/Colore Blue
+$ wine control
+$ wine taskmgr
+$ wine uninstaller
+$ wineconsole cmd
+$ wine explorer
+$ wine regedit
+</code></pre>
+<h2 id="aumentare-la-qualit%C3%A0-della-grafica" tabindex="-1">Aumentare la qualità della grafica <a class="header-anchor" href="#aumentare-la-qualit%C3%A0-della-grafica" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    winecfg --&gt; /Graphics/Screen Resolution --&gt; impostare i dpi a 336, aumentando così la risoluzione
+    winecfg --&gt; /Desktop Dimensione: Large Fonts (se non lo si imposta il plugin manager di notepad++ mostra dei caratteri enormi)
+    winecfg ---&gt; /Desktop installare il tema aero <span class="hljs-keyword">in</span> /workspaces/Risorse/wine/luna.msstyles
+    winetricks allfonts
+    Attivare il font smoothing:
+        ~/bin/winefontsmooting.sh --&gt; Selezionare l<span class="hljs-string">&#x27;opziope 3
+    #!/usr/bin/env bash
+    # Quick and dirty script for configuring wine font smoothing
+    # winefontsmooting.sh
+    # Author: Igor Tarasov &lt;tarasov.igor@gmail.com&gt;
+    WINE=${WINE:-wine}
+    WINEPREFIX=${WINEPREFIX:-$HOME/.wine}
+    DIALOG=whiptail
+    if [ ! -x &quot;`which &quot;$WINE&quot;`&quot; ]
+    then
+    echo &quot;Wine was not found. Is it really installed? ($WINE)&quot;
+    exit 1
+    fi
+    if [ ! -x &quot;`which &quot;$DIALOG&quot;`&quot; ]
+    then
+    DIALOG=dialog
+    fi
+    TMPFILE=`mktemp` || exit 1
+    $DIALOG --menu \
+    &quot;Please select font smoothing mode for wine programs:&quot; 13 51\
+    4\
+    1 &quot;Smoothing disabled&quot;\
+    2 &quot;Grayscale smoothing&quot;\
+    3 &quot;Subpixel smoothing (ClearType) RGB&quot;\
+    4 &quot;Subpixel smoothing (ClearType) BGR&quot; 2&gt; $TMPFILE
+    STATUS=$?
+    ANSWER=`cat $TMPFILE`
+    if [ $STATUS != 0 ]
+    then
+    rm -f $TMPFILE
+    exit 1
+    fi
+    MODE=0 # 0 = disabled; 2 = enabled
+    TYPE=0 # 1 = regular; 2 = subpixel
+    ORIENTATION=1 # 0 = BGR; 1 = RGB
+    case $ANSWER in
+    1) # disable
+    ;;
+    2) # enable
+    MODE=2
+    TYPE=1
+    ;;
+    3) # enable cleartype rgb
+    MODE=2
+    TYPE=2
+    ;;
+    4) # enable cleartype bgr
+    MODE=2
+    TYPE=2
+    ORIENTATION=0
+    ;;
+    *)
+    rm -f $TMPFILE
+    echo Unexpected option: $ANSWER
+    exit 1
+    ;;
+    esac
+    echo &quot;REGEDIT4
+    [HKEY_CURRENT_USER\Control Panel\Desktop]
+    \&quot;FontSmoothing\&quot;=\&quot;$MODE\&quot;
+    \&quot;FontSmoothingOrientation\&quot;=dword:0000000$ORIENTATION
+    \&quot;FontSmoothingType\&quot;=dword:0000000$TYPE
+    \&quot;FontSmoothingGamma\&quot;=dword:00000578&quot; &gt; $TMPFILE
+    echo -n &quot;Updating configuration... &quot;
+    $WINE regedit $TMPFILE 2&gt; /dev/null
+    rm -f $TMPFILE
+    echo ok
+</span></code></pre>
+<h2 id="screen-resolution-(dpi-setting)" tabindex="-1">Screen Resolution (DPI Setting) <a class="header-anchor" href="#screen-resolution-(dpi-setting)" aria-hidden="true">🔗</a></h2>
+<p>It is possible to set this value too high which results in <code>winecfg</code> (amongst other things) being too large to be usable. To edit this value manually create a file named logpixels.reg with the following contents:</p>
+<pre><code>REGEDIT4
+
+[HKEY_LOCAL_MACHINE\System\CurrentControlSet\Hardware Profiles\Current\Software\Fonts]
+&quot;LogPixels&quot;=dword:00000060
+</code></pre>
+<p>Next, import it into the registry with:</p>
+<pre><code>regedit logpixels.reg
+</code></pre>
+<p>Restart <code>winecfg</code> and note the value is now 96.</p>
+<h2 id="installare-notepad%2B%2B-ed-mp3tag" tabindex="-1">Installare notepad++ ed mp3tag <a class="header-anchor" href="#installare-notepad%2B%2B-ed-mp3tag" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/wine#Desktop_launcher_menus">https://wiki.archlinux.org/title/wine#Desktop_launcher_menus</a></li>
+</ul>
+<p>Installando Notepad++ selezionando &quot;Crea Icona Desktop&quot; si otterrà il file:</p>
+<p><code>~/Scrivania/Notepad++.desktop</code> che per essere visto dal sistema deve essere copiato in:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cp</span> ~/Scrivania/Notepad++.desktop  ~/.local/share/applications/
+
+<span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span> &gt; ~/.local/share/applications/Notepad++.desktop
+[Desktop Entry]
+Name=Notepad++
+Exec=<span class="hljs-built_in">env</span> WINEPREFIX=<span class="hljs-string">&quot;/home/<span class="hljs-variable">$USER</span>/.wine&quot;</span> wine C:\\\\windows\\\\<span class="hljs-built_in">command</span>\\\\start.exe /Unix /home/<span class="hljs-variable">$USER</span>/.wine/dosdevices/c:/users/Public/Desktop/Notepad++.lnk
+Type=Application
+StartupNotify=<span class="hljs-literal">true</span>
+Path=/home/<span class="hljs-variable">$USER</span>/.wine/dosdevices/c:/Program Files/Notepad++
+Icon=33E8_notepad++.0
+StartupWMClass=notepad++.exe
+EOF
+</code></pre>
+</body></html>

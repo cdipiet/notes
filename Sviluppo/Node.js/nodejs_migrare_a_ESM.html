@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.775" />
+        <title>nodejs_migrare_a_ESM</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="nodejs_migrare_a_esm" tabindex="-1">nodejs_migrare_a_ESM <a class="header-anchor" href="#nodejs_migrare_a_esm" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.775</p>
+<nav class="table-of-contents"><ol><li><a href="#import-esm">import ESM </a></li><li><a href="#__dirname-e-__filename-esistono-solo-in-commonjs">__dirname e __filename esistono solo in CommonJS </a></li><li><a href="#importare-un-file-json">Importare un file JSON </a></li><li><a href="#un-modulo-esm-pu%C3%B2-importare-un-modulo-commonjs">Un modulo ESM può importare un modulo CommonJS </a></li><li><a href="#un-modulo-commonjs-pu%C3%B2-importare-un-modulo-esm-mediante-la-import-dinamica">Un modulo CommonJS può importare un modulo ESM mediante la import dinamica </a></li><li><a href="#package-exports">package exports </a></li><li><a href="#appunti-di-migrazione-da-commonjs-a-esm">Appunti di migrazione da CommonJS a ESM </a></li><li><a href="#import-dinamica">Import Dinamica </a></li></ol></nav><h1 id="node.js---migrazione-ai-moduli-esm" tabindex="-1">Node.js - Migrazione ai moduli ESM <a class="header-anchor" href="#node.js---migrazione-ai-moduli-esm" aria-hidden="true">🔗</a></h1>
+<p>Moduli CommonJS ed ESM</p>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules</a></li>
+<li><a href="https://tc39.es/ecma262/#sec-modules">https://tc39.es/ecma262/#sec-modules</a></li>
+<li><a href="https://nodejs.org/api/modules.html">https://nodejs.org/api/modules.html</a></li>
+<li><a href="https://nodejs.org/api/esm.html">https://nodejs.org/api/esm.html</a></li>
+</ul>
+<p>Moduli ESM</p>
+<ul>
+<li><a href="https://nodejs.org/api/esm.html#differences-between-es-modules-and-commonjs">https://nodejs.org/api/esm.html#differences-between-es-modules-and-commonjs</a></li>
+<li><a href="https://nodejs.org/api/esm.html#esm_modules_ecmascript_modules">https://nodejs.org/api/esm.html#esm_modules_ecmascript_modules</a></li>
+<li><a href="https://nodejs.org/api/packages.html#packages_dual_commonjs_es_module_packages">https://nodejs.org/api/packages.html#packages_dual_commonjs_es_module_packages</a></li>
+<li><a href="https://nodejs.org/api/esm.html#importmetaurl">https://nodejs.org/api/esm.html#importmetaurl</a></li>
+<li><a href="https://nodejs.org/api/esm.html#esm_node_imports">https://nodejs.org/api/esm.html#esm_node_imports</a></li>
+<li><a href="https://nodejs.org/api/module.html#modulecreaterequirefilename">https://nodejs.org/api/module.html#modulecreaterequirefilename</a></li>
+</ul>
+<p>Migrare da CommonJS ad ESM</p>
+<ul>
+<li><a href="https://pawelgrzybek.com/all-you-need-to-know-to-move-from-commonjs-to-ecmascript-modules-esm-in-node-js/">https://pawelgrzybek.com/all-you-need-to-know-to-move-from-commonjs-to-ecmascript-modules-esm-in-node-js/</a></li>
+<li><a href="https://formidable.com/blog/2021/node-esm-and-exports/">https://formidable.com/blog/2021/node-esm-and-exports/</a></li>
+<li><a href="https://notificare.com/blog/2021/12/10/Migrate-Your-NodeJS-App-To-ES-Modules/">https://notificare.com/blog/2021/12/10/Migrate-Your-NodeJS-App-To-ES-Modules/</a></li>
+<li><a href="https://dmitripavlutin.com/ecmascript-modules-nodejs/">https://dmitripavlutin.com/ecmascript-modules-nodejs/</a></li>
+</ul>
+<p>Node.js supporta completamente i moduli ESM, è dunque possibile migrare, a patto che tutte le librerie utilizzate dal progetto offrano una interfaccia di tipo ESM.</p>
+<p><a href="https://nodejs.org/de/blog/release/v12.17.0/">https://nodejs.org/de/blog/release/v12.17.0/</a></p>
+<p>As of Node.js <code>12.17.0</code>, the <code>--experimental-modules</code> flag is no longer necessary to use ECMAScript modules (ESM).</p>
+<pre><code class="language-js"><span class="hljs-comment">// Layer di compatilibilità con CommonJS</span>
+<span class="hljs-comment">// =======================================================</span>
+<span class="hljs-comment">// https://nodejs.org/api/modules.html#modules_filename</span>
+<span class="hljs-comment">// https://nodejs.org/api/modules.html#modules_dirname</span>
+<span class="hljs-keyword">import</span> {fileURLToPath} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;
+<span class="hljs-keyword">import</span> { dirname } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;
+<span class="hljs-keyword">const</span> __filename = <span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>);
+<span class="hljs-keyword">const</span> __dirname =  <span class="hljs-title function_">dirname</span>(__filename);
+<span class="hljs-comment">// https://nodejs.org/api/module.html#modulecreaterequirefilename</span>
+<span class="hljs-keyword">import</span> { createRequire } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;module&#x27;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">require</span> = <span class="hljs-title function_">createRequire</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>); <span class="hljs-comment">// utile per utilizzare require.resolve</span>
+<span class="hljs-comment">// Permette di testare se il modulo è eseguito come main al posto di if (require.main===module) {}</span>
+<span class="hljs-comment">// https://nodejs.org/api/modules.html#modules_accessing_the_main_module</span>
+<span class="hljs-comment">// https://nodejs.org/api/modules.html#modules_require_main</span>
+<span class="hljs-keyword">import</span> esMain <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;es-main&#x27;</span>; <span class="hljs-comment">// if (esMain(import.meta)) {}</span>
+</code></pre>
+<h2 id="import-esm" tabindex="-1">import ESM <a class="header-anchor" href="#import-esm" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> {<span class="hljs-keyword">default</span> <span class="hljs-keyword">as</span> path, dirname, sep} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;path&#x27;</span>;
+</code></pre>
+<p>corrisponde alla versione CommonJS:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> path = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;path&#x27;</span>);
+<span class="hljs-keyword">const</span> sep = path.<span class="hljs-property">sep</span>;
+</code></pre>
+<h2 id="__dirname-e-__filename-esistono-solo-in-commonjs" tabindex="-1"><code>__dirname</code> e <code>__filename</code> esistono solo in CommonJS <a class="header-anchor" href="#__dirname-e-__filename-esistono-solo-in-commonjs" aria-hidden="true">🔗</a></h2>
+<p>E' possibile ridefinirle in ESM</p>
+<pre><code class="language-js"><span class="hljs-comment">// An ES module at path &quot;/usr/opt/module.mjs&quot;</span>
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>); <span class="hljs-comment">// &quot;file:///usr/opt/module.mjs&quot;</span>
+
+<span class="hljs-keyword">import</span> {fileURLToPath} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;
+<span class="hljs-keyword">import</span> path <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:path&#x27;</span>;
+
+<span class="hljs-keyword">const</span> __filename = <span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>);
+<span class="hljs-keyword">const</span> __dirname = path.<span class="hljs-title function_">dirname</span>(<span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));
+</code></pre>
+<p>However, in most cases, this is better:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> {fileURLToPath} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:url&#x27;</span>;
+
+<span class="hljs-keyword">const</span> foo = <span class="hljs-title function_">fileURLToPath</span>(<span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(<span class="hljs-string">&#x27;foo.js&#x27;</span>, <span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>));
+</code></pre>
+<p>And many Node.js APIs accept URL directly, so you can just do this:</p>
+<pre><code class="language-js"><span class="hljs-keyword">const</span> foo = <span class="hljs-keyword">new</span> <span class="hljs-title function_">URL</span>(<span class="hljs-string">&#x27;foo.js&#x27;</span>, <span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>);
+</code></pre>
+<h2 id="importare-un-file-json" tabindex="-1">Importare un file JSON <a class="header-anchor" href="#importare-un-file-json" aria-hidden="true">🔗</a></h2>
+<p>In CommonJS un file JSON si può caricare con createRequire: <code>const json = require('./package.json');</code>.</p>
+<p>JavaScript Modules will eventually get <a href="https://github.com/tc39/proposal-json-modules">native support for JSON</a>, but for now, you can do this:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> {promises <span class="hljs-keyword">as</span> fs} <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:fs&#x27;</span>;
+<span class="hljs-keyword">const</span> packageJson = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;package.json&#x27;</span>));
+
+<span class="hljs-keyword">import</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;node:fs/promises&#x27;</span>;
+<span class="hljs-keyword">const</span> packageJson = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&#x27;package.json&#x27;</span>));
+
+<span class="hljs-keyword">import</span> { readFileSync } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fs&#x27;</span>
+<span class="hljs-keyword">const</span> metaData = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-title function_">readFileSync</span>(<span class="hljs-string">&#x27;./package.json&#x27;</span>, <span class="hljs-string">&#x27;utf8&#x27;</span>))
+
+<span class="hljs-keyword">import</span> fs <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;fs-extra&#x27;</span>; <span class="hljs-comment">// https://github.com/jprichardson/node-fs-extra</span>
+<span class="hljs-keyword">const</span> { version, <span class="hljs-attr">mdtohtml</span>: {version_date} } = <span class="hljs-title class_">JSON</span>.<span class="hljs-title function_">parse</span>(<span class="hljs-keyword">await</span> fs.<span class="hljs-title function_">readFile</span>(<span class="hljs-string">&quot;./package.json&quot;</span>))
+
+</code></pre>
+<p>If you target Node.js 14 or later, you can import it using <code>import fs from 'node:fs/promises';</code> instead.</p>
+<h2 id="un-modulo-esm-pu%C3%B2-importare-un-modulo-commonjs" tabindex="-1">Un modulo ESM può importare un modulo CommonJS <a class="header-anchor" href="#un-modulo-esm-pu%C3%B2-importare-un-modulo-commonjs" aria-hidden="true">🔗</a></h2>
+<p><strong>La import di un modulo CommonJS funziona normalmente.</strong></p>
+<ul>
+<li>
+<p><a href="https://nodejs.org/api/esm.html#interoperability-with-commonjs">https://nodejs.org/api/esm.html#interoperability-with-commonjs</a></p>
+<p>An <code>import</code> statement can reference an ES module or a CommonJS module.<br>
+<code>import</code> statements are permitted only in ES modules, <strong>but dynamic <code>import()</code> expressions are supported in CommonJS for loading ES modules</strong>.<br>
+When importing CommonJS modules, the <code>module.exports</code> object is provided as the <code>default</code> export.</p>
+</li>
+<li>
+<p><a href="https://formidable.com/blog/2021/node-esm-and-exports/">https://formidable.com/blog/2021/node-esm-and-exports/</a></p>
+</li>
+</ul>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { <span class="hljs-keyword">default</span> <span class="hljs-keyword">as</span> cjs } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;cjs&#x27;</span>;
+<span class="hljs-comment">// The following import statement is &quot;syntax sugar&quot; (equivalent but sweeter)</span>
+<span class="hljs-comment">// for `{ default as cjsSugar }` in the above import statement:</span>
+<span class="hljs-keyword">import</span> cjsSugar <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;cjs&#x27;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(cjs === cjsSugar);
+
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> m <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;cjs&#x27;</span>;
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(m);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(m === <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;cjs&#x27;</span>)); <span class="hljs-comment">// dynamic import</span>
+</code></pre>
+<pre><code class="language-js"><span class="hljs-comment">// node_modules/colors/index.cjs</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">red</span>: <span class="hljs-string">&quot;red&quot;</span>,
+  <span class="hljs-attr">blue</span>: <span class="hljs-string">&quot;blue&quot;</span>
+};
+
+<span class="hljs-comment">// my-app.mjs</span>
+<span class="hljs-keyword">import</span> colors <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;colors&quot;</span>;
+<span class="hljs-comment">// WON&#x27;T WORK: `import { red, blue } from &quot;colors&quot;;`</span>
+<span class="hljs-comment">// CAVEAT: We can&#x27;t do named import, but can expand later.</span>
+<span class="hljs-keyword">const</span> { red, blue } = colors;
+</code></pre>
+<h2 id="un-modulo-commonjs-pu%C3%B2-importare-un-modulo-esm-mediante-la-import-dinamica" tabindex="-1">Un modulo CommonJS può importare un modulo ESM mediante la import dinamica <a class="header-anchor" href="#un-modulo-commonjs-pu%C3%B2-importare-un-modulo-esm-mediante-la-import-dinamica" aria-hidden="true">🔗</a></h2>
+<p><strong>La require di un modulo ESM non funziona, bisogna utilizzare la import dinamica che è disponibile anche nei moduli CommonJS.</strong></p>
+<ul>
+<li><a href="https://nodejs.org/api/esm.html#import-expressions">https://nodejs.org/api/esm.html#import-expressions</a></li>
+<li><a href="https://formidable.com/blog/2021/node-esm-and-exports/">https://formidable.com/blog/2021/node-esm-and-exports/</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports</a></li>
+</ul>
+<p>La import dinamica è supportata sia nei moduli CommonJS che nei moduli ESM.<br>
+Un modulo ESM può importare normalmente un modulo CommonJS.
+Un modulo CommonJS può importare un modulo ESM utilizzando la import dinamica inserita in una funzione async(non può farlo come istruzione al di fuori di una funzione).</p>
+<pre><code class="language-js"><span class="hljs-comment">// node_modules/colors/index.cjs</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">red</span>: <span class="hljs-string">&quot;red&quot;</span>,
+  <span class="hljs-attr">blue</span>: <span class="hljs-string">&quot;blue&quot;</span>
+};
+
+
+<span class="hljs-comment">// use_colors.cjs, just works!</span>
+<span class="hljs-keyword">const</span> { red } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&quot;colors&quot;</span>); <span class="hljs-comment">// colors is CJS</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">logRed</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(red)
+};
+
+
+<span class="hljs-comment">// DOES NOT ACTUALLY WORK!!! Non è possibile utilizzare await al livello più esterno del modulo</span>
+<span class="hljs-keyword">const</span> { red } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;colors&quot;</span>); <span class="hljs-comment">// colors is now ESM</span>
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-attr">logRed</span>: <span class="hljs-function">() =&gt;</span> <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(red)
+};
+
+<span class="hljs-variable language_">module</span>.<span class="hljs-property">exports</span> = {
+  <span class="hljs-comment">// Breaking API change: logRed is now async.</span>
+  <span class="hljs-attr">logRed</span>: <span class="hljs-title function_">async</span> () =&gt; {
+    <span class="hljs-comment">// Dynamic import() works in function awaits or promises</span>
+    <span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> Could memoize the `import()` to cache after 1st call.</span>
+    <span class="hljs-keyword">const</span> { red } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&quot;colors&quot;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(red);
+  }
+};
+
+</code></pre>
+<h2 id="package-exports" tabindex="-1">package exports <a class="header-anchor" href="#package-exports" aria-hidden="true">🔗</a></h2>
+<p>E' possibile ora indicare due entry point per il  package al posto della chiave <code>main</code>,<br>
+si utilizza la chiave <code>exports</code>, contenente un entry point <code>import</code> per la versione ESM ed un entry point <code>require</code> per la versione CommonJS.</p>
+<ul>
+<li><a href="https://nodejs.org/api/packages.html#packages_exports">https://nodejs.org/api/packages.html#packages_exports</a></li>
+<li><a href="https://www.the-guild.dev/blog/support-nodejs-esm">https://www.the-guild.dev/blog/support-nodejs-esm</a></li>
+<li><a href="https://formidable.com/blog/2021/node-esm-and-exports/">https://formidable.com/blog/2021/node-esm-and-exports/</a></li>
+</ul>
+<pre><code class="language-js">{
+  <span class="hljs-comment">// package.json</span>
+  <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;foo&quot;</span>,
+  <span class="hljs-string">&quot;exports&quot;</span>: {
+    <span class="hljs-string">&quot;require&quot;</span>: <span class="hljs-string">&quot;./main.cjs&quot;</span>,
+    <span class="hljs-string">&quot;import&quot;</span>: <span class="hljs-string">&quot;./main.mjs&quot;</span>
+  }
+}
+
+
+<span class="hljs-string">&quot;main&quot;</span>: <span class="hljs-string">&quot;./one.js&quot;</span>,          <span class="hljs-comment">// Node CJS &lt;  12.17.0</span>
+<span class="hljs-string">&quot;exports&quot;</span>: {
+  <span class="hljs-string">&quot;.&quot;</span>: {
+    <span class="hljs-string">&quot;require&quot;</span>: <span class="hljs-string">&quot;./two.cjs&quot;</span>   <span class="hljs-comment">// Node CJS &gt;= 12.17.0</span>
+    <span class="hljs-string">&quot;import&quot;</span>: <span class="hljs-string">&quot;./three.mjs&quot;</span>, <span class="hljs-comment">// Node ESM &gt;= 12.17.0</span>
+  }
+}
+</code></pre>
+<h2 id="appunti-di-migrazione-da-commonjs-a-esm" tabindex="-1">Appunti di migrazione da CommonJS a ESM <a class="header-anchor" href="#appunti-di-migrazione-da-commonjs-a-esm" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>impostare <code>&quot;type&quot;: &quot;module&quot;</code> nel <code>package.json</code>, in questo modo tutti i <code>.js</code> vengono considerati dei <code>.mjs</code>.</li>
+<li>Replace <code>&quot;main&quot;: &quot;index.js&quot;</code> with <code>&quot;exports&quot;: &quot;./index.js&quot;</code> in your package.json.</li>
+<li>Update the <code>&quot;engines&quot;</code> field in package.json to Node.js 12: <code>&quot;node&quot;: &quot;^12.20.0 || ^14.13.1 || &gt;=16.0.0&quot;</code>.</li>
+<li>Replace all <code>require()</code>/<code>module.exports</code> with <code>import</code>/<code>export</code>.</li>
+<li>Use only full relative file paths for imports: <code>import x from '.';</code> → <code>import x from './index.js';</code>.<br>
+<strong>Con le import relative l'estensione del file è obbligatoria.</strong></li>
+<li>Rimuovere <code>'use strict';</code> da tutti i .js.</li>
+<li>Nelle import dei moduli utente utilizzare il nome completo del file compresa l'estensione <code>.js</code></li>
+<li>Nelle import dei moduli builtin utilizzare preferibilmente il protocollo <code>node:</code></li>
+<li>Optional but recommended, use the <a href="https://nodejs.org/api/esm.html#esm_node_imports"><code>node:</code> protocol</a> for imports.</li>
+</ul>
+<table class="table"><thead>
+<tr>
+<th>CommonJS</th>
+<th>ESM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>const os = require('os');</code></td>
+<td><code>import os from 'os';</code></td>
+</tr>
+<tr>
+<td><code>const assert = require('assert').strict;</code></td>
+<td><code>import { strict as assert } from 'assert';</code></td>
+</tr>
+<tr>
+<td><code>const { getLogger, printSystemInfo } = require('./lib/util');</code></td>
+<td><code>import { getLogger, printSystemInfo } from './lib/util.js';</code></td>
+</tr>
+<tr>
+<td><code>const { version, mdtohtml: {version_date} } = require('./package.json');</code></td>
+<td><code>const { version, mdtohtml: {version_date} } = JSON.parse(await fs.readFile(&quot;./package.json&quot;));</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>import { createRequire } from 'module';</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>const require = createRequire(import.meta.url);</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>const { version, mdtohtml: {version_date} } = require('./package.json');</code></td>
+</tr>
+<tr>
+<td><code>const {fileURLToPath} = require('url');</code></td>
+<td><code>import {fileURLToPath} from 'node:url';</code></td>
+</tr>
+<tr>
+<td><code>const {dirname} = require('path');</code></td>
+<td><code>import { dirname } from 'node:path';</code></td>
+</tr>
+<tr>
+<td><code>__filename</code></td>
+<td><code>const __filename = fileURLToPath(import.meta.url);</code></td>
+</tr>
+<tr>
+<td><code>__dirname</code></td>
+<td><code>const __dirname =  dirname(__filename);</code></td>
+</tr>
+<tr>
+<td><code>if (require.main === module) {</code></td>
+<td><code>if (esMain(import.meta)) {</code></td>
+</tr>
+<tr>
+<td><code>module.exports = range_split;</code></td>
+<td><code>export default range_split;</code></td>
+</tr>
+<tr>
+<td><code>module.exports = { init, findMarkdownFiles, markdownToHtml };</code></td>
+<td><code>export { init, findMarkdownFiles, markdownToHtml };</code></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><a href="https://nodejs.org/api/module.html#modulecreaterequirefilename">https://nodejs.org/api/module.html#modulecreaterequirefilename</a></li>
+<li><a href="https://nodejs.org/api/modules.html#requireid">https://nodejs.org/api/modules.html#requireid</a></li>
+</ul>
+<p>Aggiungere la require ad un modulo ESM:</p>
+<pre><code class="language-js"><span class="hljs-keyword">import</span> { createRequire } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;module&#x27;</span>;
+<span class="hljs-keyword">const</span> <span class="hljs-built_in">require</span> = <span class="hljs-title function_">createRequire</span>(<span class="hljs-keyword">import</span>.<span class="hljs-property">meta</span>.<span class="hljs-property">url</span>);
+<span class="hljs-keyword">const</span> siblingModule = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./sibling-module&#x27;</span>);
+</code></pre>
+<p><code>if (require.main === module) {</code>  ==&gt; <a href="https://github.com/tschaub/es-main">https://github.com/tschaub/es-main</a></p>
+<h2 id="import-dinamica" tabindex="-1">Import Dinamica <a class="header-anchor" href="#import-dinamica" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#dynamic_imports</a></li>
+<li><a href="https://dmitripavlutin.com/ecmascript-modules-nodejs/">https://dmitripavlutin.com/ecmascript-modules-nodejs/</a></li>
+<li><a href="https://ar.al/2021/01/27/commonjs-to-esm-in-node.js/">https://ar.al/2021/01/27/commonjs-to-esm-in-node.js/</a></li>
+</ul>
+<p>Un modulo ESM può importare staticamente un modulo CommonJS:</p>
+<pre><code class="language-js"><span class="hljs-comment">// ES module</span>
+<span class="hljs-keyword">import</span> defaultComponent <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./module.commonjs.js&#x27;</span>;
+<span class="hljs-comment">// use `defaultComponent`...</span>
+</code></pre>
+<p>Un modulo CommonJS non può invece importare staticamente un modulo ESM con la require, deve usare una import dinamica, che è una funzione async<br>
+La import dinamica è una funzione async:</p>
+<pre><code class="language-js"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">loadModule</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">const</span> { 
+    <span class="hljs-attr">default</span>: defaultComponent, 
+    component1 
+  } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./path-to-module&#x27;</span>);
+  <span class="hljs-comment">// ...</span>
+}
+<span class="hljs-title function_">loadModule</span>();
+
+<span class="hljs-keyword">const</span> dateString = process.<span class="hljs-property">argv</span>[<span class="hljs-number">2</span>] ?? <span class="hljs-literal">null</span>;
+<span class="hljs-keyword">if</span> (dateString === <span class="hljs-literal">null</span>) {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;Please indicate date argument&#x27;</span>);
+} <span class="hljs-keyword">else</span> {
+  (<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">const</span> { monthFromDate } = <span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(<span class="hljs-string">&#x27;./month-from-date.js&#x27;</span>);
+    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">monthFromDate</span>(dateString));
+  })();
+}
+</code></pre>
+<p>Le funzioni async utilizzano le promise:</p>
+<pre><code class="language-js"><span class="hljs-comment">// Versione Sync</span>
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">a</span> (<span class="hljs-params"></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-title function_">b</span>()) }
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">b</span> (<span class="hljs-params"></span>) { <span class="hljs-keyword">return</span> <span class="hljs-title function_">c</span>() }
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">c</span> (<span class="hljs-params"></span>) { <span class="hljs-keyword">return</span> <span class="hljs-string">&#x27;Hello&#x27;</span> }
+<span class="hljs-title function_">a</span>()
+
+<span class="hljs-comment">// Versione Async</span>
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">a</span> (<span class="hljs-params"></span>) { <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-keyword">await</span> <span class="hljs-title function_">b</span>()) }
+<span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">b</span> (<span class="hljs-params"></span>) { <span class="hljs-keyword">await</span> <span class="hljs-title function_">c</span>() }
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">c</span> (<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span> (<span class="hljs-function"><span class="hljs-params">resolve</span> =&gt;</span> <span class="hljs-built_in">setTimeout</span>(resolve, <span class="hljs-number">3000</span>)
+}
+<span class="hljs-keyword">await</span> <span class="hljs-title function_">a</span>()
+</code></pre>
+<p>La import dinamica è una funzione async per cui una require che è una funzione sync ha il suo corrispondente come:</p>
+<pre><code class="language-js"><span class="hljs-built_in">require</span>(filePath)(args)
+</code></pre>
+<p>in:</p>
+<pre><code class="language-js">;(<span class="hljs-keyword">await</span> <span class="hljs-keyword">import</span>(filePath)).<span class="hljs-title function_">default</span>(args)
+</code></pre>
+</body></html>

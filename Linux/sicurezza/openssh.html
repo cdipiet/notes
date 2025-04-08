@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.734" />
+        <title>openssh</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="openssh" tabindex="-1">openssh <a class="header-anchor" href="#openssh" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.734</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione">Installazione </a><ol><li><a href="#installazione-dei-pacchetti">Installazione dei pacchetti </a></li><li><a href="#configurazione-del-server">Configurazione del server </a></li><li><a href="#abilitazione-systemd">Abilitazione systemd </a></li></ol></li><li><a href="#configurazione-e-test-del-client">Configurazione e test del client </a><ol><li><a href="#configurazione-iniziale">Configurazione iniziale </a></li><li><a href="#autenticazione-con-chiave-pubblica">Autenticazione con chiave pubblica </a><ol><li><a href="#copy-public-key-to-the-server">Copy public key to the server </a></li></ol></li></ol></li><li><a href="#mettere-in-sicurezza-il-server-ssh">Mettere in sicurezza il server SSH </a><ol><li><a href="#disable-password-login">Disable password login </a></li><li><a href="#change-port">Change port </a></li></ol></li><li><a href="#problema%2C-avevo-cancellato-per-sbaglio-le-host-keys-in-%2Fetc%2Fssh%2F">Problema, avevo cancellato per sbaglio le host keys in /etc/ssh/ </a></li><li><a href="#configurazione-client-ssh-linux-per-github">Configurazione Client SSH Linux per Github </a></li><li><a href="#windows">Windows </a></li></ol></nav><h1 id="ssh" tabindex="-1">SSH <a class="header-anchor" href="#ssh" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p><a href="https://wiki.archlinux.org/title/OpenSSH">https://wiki.archlinux.org/title/OpenSSH</a></p>
+</li>
+<li>
+<p><a href="https://manpages.org/sshd_config/5">https://manpages.org/sshd_config/5</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/sshd_config.5">https://man.archlinux.org/man/sshd_config.5</a></p>
+</li>
+<li>
+<p><a href="https://manpages.org/ssh_config/5">https://manpages.org/ssh_config/5</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/ssh_config.5.en">https://man.archlinux.org/man/ssh_config.5.en</a></p>
+</li>
+<li>
+<p><a href="https://manpages.org/ssh-keygen">https://manpages.org/ssh-keygen</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/ssh-keygen.1">https://man.archlinux.org/man/ssh-keygen.1</a></p>
+</li>
+<li>
+<p><a href="https://manpages.org/sshd/8">https://manpages.org/sshd/8</a></p>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/sshd.8.en">https://man.archlinux.org/man/sshd.8.en</a></p>
+<ul>
+<li><code>~/.ssh/environment</code><br>
+This file is read into the environment at login (if it exists).<br>
+Environment processing is disabled by default and is controlled via the <code>PermitUserEnvironment</code> option.</li>
+<li><code>~/.ssh/authorized_keys</code><br>
+Lists the public keys that can be used for logging in as this user.<br>
+If this file, the <code>~/.ssh</code> directory, or the user's home directory are writable by other users<br>
+<strong>sshd will not allow it to be used</strong> unless the StrictModes option has been set to “no”.</li>
+<li><code>~/.ssh/known_hosts</code> <br>
+Contains a list of host keys for all hosts the user has logged into.</li>
+<li><code>/etc/ssh/sshd_config</code><br>
+Contains configuration data for sshd.</li>
+<li><code>/etc/ssh/ssh_host_ecdsa_key</code><br>
+<code>/etc/ssh/ssh_host_ed25519_key</code>
+<code>/etc/ssh/ssh_host_rsa_key</code><br>
+These files contain the <strong>private</strong> parts of the <strong>host keys</strong>. Note that <strong>sshd does not start if these files are group/world-accessible</strong>.</li>
+<li><code>/etc/ssh/ssh_host_ecdsa_key.pub</code><br>
+<code>/etc/ssh/ssh_host_ed25519_key.pub</code><br>
+<code>/etc/ssh/ssh_host_rsa_key.pub</code><br>
+These files contain the <strong>public</strong> parts of the <strong>host keys</strong>. These files are created using ssh-keygen(1).These files are not really used for anything; they are provided for the convenience of the user so their contents can be copied to known hosts files.</li>
+</ul>
+</li>
+</ul>
+<h2 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h2>
+<h3 id="installazione-dei-pacchetti" tabindex="-1">Installazione dei pacchetti <a class="header-anchor" href="#installazione-dei-pacchetti" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ pacman -Syyu --noconfirm --needed openssh ca-certificates ca-certificates-mozilla ca-certificates-utils
+$ whereis sshd
+    sshd: /usr/bin/sshd /usr/share/man/man8/sshd.8.gz
+
+$ ssh-keygen -A <span class="hljs-comment"># Generazione delle host keys, di solito non serve perchè viene eseguito dal package manager come post installation hook,</span>
+</code></pre>
+<h3 id="configurazione-del-server" tabindex="-1">Configurazione del server <a class="header-anchor" href="#configurazione-del-server" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ vim /etc/ssh/sshd_config
+<span class="hljs-comment"># Test Mode, controlla la validità dei file di configurazione</span>
+$ <span class="hljs-built_in">sudo</span> sshd -t -f /etc/ssh/sshd_config
+<span class="hljs-comment"># Lancio di test, esecuzione in foreground (utilizzata per realizzare container Docker oltre che a scopo di test)</span>
+<span class="hljs-comment"># -D      When this option is specified, sshd will not detach and does not become a daemon.  This allows easy monitoring of sshd.</span>
+<span class="hljs-comment"># -e      Write debug logs to standard error instead of the system log.</span>
+$ /bin/sshd -D -e
+</code></pre>
+<p>Alcune chiavi che ho utilizzato in <code>/etc/ssh/sshd_config</code> per un accesso semplificato a container docker:</p>
+<pre><code>PubkeyAuthentication yes
+PermitRootLogin yes
+PasswordAuthentication yes
+PermitEmptyPasswords yes
+KbdInteractiveAuthentication yes # Specifies whether to allow keyboard-interactive authentication.
+PermitUserEnvironment yes # Connessione X Server - Serve per impostare la variabile di ambiente DISPLAY
+</code></pre>
+<h3 id="abilitazione-systemd" tabindex="-1">Abilitazione systemd <a class="header-anchor" href="#abilitazione-systemd" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl status sshd.service
+$ <span class="hljs-built_in">sudo</span> nano /etc/ssh/sshd_config
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> sshd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start sshd.service
+
+<span class="hljs-comment"># Configurazione autenticazione con chiave pubblica verso un sever ssh</span>
+<span class="hljs-comment">#$ chmod 751 $HOME;chmod 700 ~/.ssh</span>
+$ ssh-copy-id -p 2222 <span class="hljs-variable">$USER</span>@localhost
+$ <span class="hljs-built_in">chmod</span> 600 .ssh/authorized_keys
+$ ssh -p 2222 <span class="hljs-variable">$USER</span>@localhost
+
+</code></pre>
+<h2 id="configurazione-e-test-del-client" tabindex="-1">Configurazione e test del client <a class="header-anchor" href="#configurazione-e-test-del-client" aria-hidden="true">🔗</a></h2>
+<h3 id="configurazione-iniziale" tabindex="-1">Configurazione iniziale <a class="header-anchor" href="#configurazione-iniziale" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cp</span> -a /etc/ssh/ssh_config ~/.ssh/config
+</code></pre>
+<pre><code class="language-bash">$ ssh <span class="hljs-variable">$USER</span>@localhost
+</code></pre>
+<h3 id="autenticazione-con-chiave-pubblica" tabindex="-1">Autenticazione con chiave pubblica <a class="header-anchor" href="#autenticazione-con-chiave-pubblica" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># la chiave deve essere generata con ed25519</span>
+:: https://docs.gitlab.com/ee/user/ssh.html
+C:\&gt; git config --global user.name nome_cognome
+C:\&gt; git config --global user.email nome.cognome@mail.com
+$ ssh-keygen -t ed25519 -C <span class="hljs-string">&quot;nome.cognome@email.it&quot;</span>
+$ xclip -sel clip &lt; ~/.ssh/id_ed25519.pub <span class="hljs-comment"># Copies the contents of the id_rsa.pub file to your clipboard</span>
+C:\&gt; clip &lt; %USERPROFILE%\.ssh\id_ed25519.pub
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Esempio di abilitazione autenticazione con chiave pubblica</span>
+$ <span class="hljs-built_in">yes</span>|ssh-keygen -t rsa -b 4096 -N <span class="hljs-string">&#x27;&#x27;</span> -C <span class="hljs-string">&quot;username@hostname&quot;</span>
+$ ssh-copy-id vagrant@linux-vm
+</code></pre>
+<p>L'algoritmo migliore da utilizzare ad oggi nel 2022 è <code>ED25519</code> che essendo nuovo non garantisce che il server lo supporti.
+<code>ED25519</code> offre la stessa sicurezza di RSA 4096 ma è più veloce ed utilizza chiavi molto più piccole di 4096.</p>
+<p><code>ED25519</code> – This is one of the new algorithms added in OpenSSH. Support for it in clients is not yet universal. You need to check the documentation of the SSH clients and servers, if they support this algorithm.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">yes</span>|ssh-keygen -t ed25519 -a 100 -f ~/.ssh/github_ed -N <span class="hljs-string">&#x27;&#x27;</span> -C <span class="hljs-string">&quot;username@hostname&quot;</span>
+$ <span class="hljs-built_in">yes</span>|ssh-keygen -t rsa -b 4096 -a 100 -f ~/.ssh/github_ed -N <span class="hljs-string">&#x27;&#x27;</span> -C <span class="hljs-string">&quot;username@hostname&quot;</span>
+</code></pre>
+<pre><code>-q      Silence ssh-keygen
+-N      new_passphrase
+-C      comment
+</code></pre>
+<p>lo <code>yes</code> serve ad eseguire l'overwrite senza fermare l'esecuzione con la domanda al prompt.</p>
+<p><a href="https://goteleport.com/blog/comparing-ssh-keys/">https://goteleport.com/blog/comparing-ssh-keys/</a></p>
+<p>RSA is universally supported among SSH clients while EdDSA performs much faster and provides the same level of security with significantly smaller keys.<br>
+Just don’t use ECDSA/DSA!</p>
+<p>Al posto di <code>yes</code> si possono utilizzare le herestrings per evitare la domanda di overwrite:</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/43235179/how-to-execute-ssh-keygen-without-prompt">https://stackoverflow.com/questions/43235179/how-to-execute-ssh-keygen-without-prompt</a></li>
+<li><a href="https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings">https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#Here-Strings</a></li>
+<li><a href="../shell/strings_and_parameters/heredoc_herestring.html">herestring</a></li>
+</ul>
+<pre><code class="language-bash">$ ssh-keygen -t ed25519 -a 100 -f ~/.ssh/github_ed -N <span class="hljs-string">&#x27;&#x27;</span> -C <span class="hljs-string">&quot;username@hostname&quot;</span> &lt;&lt;&lt;<span class="hljs-string">y &gt;/dev/null 2&gt;&amp;1
+</span></code></pre>
+<p>By default the public key is saved in the file <code>~/.ssh/id_rsa.pub</code>, while <code>~/.ssh/id_rsa</code> is the <strong>private key</strong>.<br>
+Now copy the <code>id_rsa.pub</code> file to the remote host and append it to <code>~/.ssh/authorized_keys</code> by entering:</p>
+<h4 id="copy-public-key-to-the-server" tabindex="-1">Copy public key to the server <a class="header-anchor" href="#copy-public-key-to-the-server" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash"><span class="hljs-variable">$1</span> ssh-copy-id username@remotehost
+<span class="hljs-comment"># oppure:</span>
+<span class="hljs-variable">$1</span> ssh-copy-id  -i ~/.ssh/id_rsa.pub username@remotehost
+<span class="hljs-variable">$2</span> <span class="hljs-built_in">chmod</span> 600 .ssh/authorized_keys
+<span class="hljs-comment"># oppure:</span>
+<span class="hljs-variable">$1</span> <span class="hljs-built_in">cat</span> ~/.ssh/id_rsa.pub | ssh cbsuser@10.64.11.52 <span class="hljs-string">&quot;cat - &gt;&gt; ~/.ssh/authorized_keys;chmod 751 <span class="hljs-variable">$HOME</span>;chmod 700 ~/.ssh;chmod 644 ~/.ssh/authorized_keys&quot;</span>
+</code></pre>
+<p>Altro esempio <a href="https://forum.manjaro.org/t/root-tip-set-up-your-own-ssh-service/60665">https://forum.manjaro.org/t/root-tip-set-up-your-own-ssh-service/60665</a>:</p>
+<pre><code class="language-bash"><span class="hljs-variable">$1</span> ssh-keygen -f ~/.ssh/linode-server.ppk
+<span class="hljs-variable">$1</span> scp ~/.ssh/linode-server.ppk.pub root@server.domain.tld:/root
+<span class="hljs-variable">$1</span> ssh root@server.domain.tld
+<span class="hljs-variable">$2</span> <span class="hljs-built_in">cat</span> linode-server.ppk.pub &gt;&gt; ~/.ssh/authorized_keys
+<span class="hljs-comment"># oppure:</span>
+<span class="hljs-variable">$1</span> ssh-copy-id -i ~/.ssh/mykey user@host
+<span class="hljs-built_in">test</span> connection:
+<span class="hljs-variable">$1</span> ssh root@server.domain.tld -i ~/.ssh/linode-server.ppk
+</code></pre>
+<h2 id="mettere-in-sicurezza-il-server-ssh" tabindex="-1">Mettere in sicurezza il server SSH <a class="header-anchor" href="#mettere-in-sicurezza-il-server-ssh" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /etc/ssh/sshd_config /etc/ssh/sshd_config.original
+<span class="hljs-comment"># check the configuration after changing it and before restarting the server:</span>
+$ <span class="hljs-built_in">sudo</span> sshd -t -f /etc/ssh/sshd_config
+$ <span class="hljs-built_in">sudo</span> systemctl restart sshd.service
+</code></pre>
+<h3 id="disable-password-login" tabindex="-1">Disable password login <a class="header-anchor" href="#disable-password-login" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> nano /etc/ssh/sshd_config
+</code></pre>
+<p>Scroll down to the lines reading:</p>
+<pre><code># To disable tunneled clear text passwords, change to no here!
+PasswordAuthentication no
+#PermitEmptyPasswords no
+</code></pre>
+<p>And change them to:</p>
+<pre><code>PasswordAuthentication no
+</code></pre>
+<h3 id="change-port" tabindex="-1">Change port <a class="header-anchor" href="#change-port" aria-hidden="true">🔗</a></h3>
+<p>While you are logged in - seriously consider changing the port from the default 22 to something else! Consult <code>/etc/services</code> to avoid a collision with known services - but in reality any port over 10000 can be used.</p>
+<p>The port is located at the top of the configuration</p>
+<pre><code class="language-bash">    $ nano /etc/ssh/sshd_config
+</code></pre>
+<pre><code>Port 2222
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+</code></pre>
+<p>Uncomment the line and change the port number</p>
+<pre><code>Port 33000
+</code></pre>
+<p>Save the changes and restart the sshd daemon</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> sshd -t -f /etc/ssh/sshd_config
+$ <span class="hljs-built_in">sudo</span> systemctl restart sshd.service
+</code></pre>
+<h2 id="problema%2C-avevo-cancellato-per-sbaglio-le-host-keys-in-%2Fetc%2Fssh%2F" tabindex="-1">Problema, avevo cancellato per sbaglio le host keys in /etc/ssh/ <a class="header-anchor" href="#problema%2C-avevo-cancellato-per-sbaglio-le-host-keys-in-%2Fetc%2Fssh%2F" aria-hidden="true">🔗</a></h2>
+<p><strong><code>ssh-keygen -A</code></strong></p>
+<pre><code class="language-bash">$ systemctl status sshd
+ago 01 20:26:22 linux systemd[1]: Failed to start OpenSSH Daemon.
+<span class="hljs-variable">$1</span> journalctl -xfu sshd
+<span class="hljs-variable">$2</span> <span class="hljs-built_in">sudo</span> systemctl start sshd.service
+ago 01 20:26:21 linux sshd[313576]: sshd: no hostkeys available -- exiting.
+ago 01 20:26:21 linux systemd[1]: sshd.service: Main process exited, code=exited, status=1/FAILURE
+<span class="hljs-comment"># SOLUZIONE - rigenerare le chiavi del server:</span>
+$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">cd</span> /etc/ssh
+$ ssh-keygen -A
+ssh-keygen: generating new host keys: RSA DSA ECDSA ED25519 
+$ <span class="hljs-built_in">sudo</span> systemctl start sshd.service
+$ systemctl status sshd.service
+$ journalctl -xeu sshd.service
+</code></pre>
+<h2 id="configurazione-client-ssh-linux-per-github" tabindex="-1">Configurazione Client SSH Linux per Github <a class="header-anchor" href="#configurazione-client-ssh-linux-per-github" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<p>Verificare se gia esiste una configurazione</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ls</span> -al ~/.ssh
+</code></pre>
+<p>e verificare che la directory esista e che contenga le chiavi, uno dei file:</p>
+<ul>
+<li>id_rsa.pub</li>
+<li>id_ecdsa.pub</li>
+<li>id_ed25519.pub</li>
+</ul>
+</li>
+<li>
+<p>se non presenti le chiavi vanno generate</p>
+<pre><code class="language-bash">$ ssh-keygen -t rsa -b 4096 -C <span class="hljs-string">&quot;corrado.dipietro@gmail.com&quot;</span>
+    <span class="hljs-comment"># -C è un comment</span>
+    Created directory <span class="hljs-string">&#x27;/home/$USER/.ssh&#x27;</span>.
+    Your identification has been saved <span class="hljs-keyword">in</span> /home/<span class="hljs-variable">$USER</span>/.ssh/id_rsa
+    Your public key has been saved <span class="hljs-keyword">in</span> /home/<span class="hljs-variable">$USER</span>/.ssh/id_rsa.pub
+    The key fingerprint is:
+    SHA256:U54p7X4v8zufVNW0WO2DwR5WE4Iw3e3HMLVj0vdSAJ4 corrado.dipietro@gmail.com
+</code></pre>
+</li>
+<li>
+<p>avvio dell'ssh-agent</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">eval</span> <span class="hljs-string">&quot;<span class="hljs-subst">$(ssh-agent -s)</span>&quot;</span>
+</code></pre>
+</li>
+<li>
+<p>aggiunta della chiave privata all'ssh-agent</p>
+<pre><code class="language-bash">$ ssh-add ~/.ssh/id_rsa
+Identity added: /home/<span class="hljs-variable">$USER</span>/.ssh/id_rsa (corrado.dipietro@gmail.com)
+</code></pre>
+</li>
+<li>
+<p>aggiunta della chiave pubblica SSH all'account github</p>
+<pre><code class="language-bash">$ xclip -sel clip &lt; ~/.ssh/id_rsa.pub <span class="hljs-comment"># Copies the contents of the id_rsa.pub file to your clipboard</span>
+</code></pre>
+<p>In github, dalla pagina di configurazione dell'account andare in <code>/Settings/SSH and GPG keys</code> ed aggiungere la chiave SSH presente nella clipboard</p>
+</li>
+<li>
+<p>Test della connessione SSH a github</p>
+<pre><code class="language-bash">$ ssh -T git@github.com
+</code></pre>
+</li>
+</ol>
+<h2 id="windows" tabindex="-1">Windows <a class="header-anchor" href="#windows" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bat"><span class="hljs-comment">rem generiamo le chiavi ssh se già non presenti:</span>
+<span class="hljs-function">C:\&gt; <span class="hljs-title">ssh</span>-<span class="hljs-title">keygen</span> -<span class="hljs-title">t</span> <span class="hljs-title">rsa</span> -<span class="hljs-title">b</span> 4096 -<span class="hljs-title">C</span> &quot;<span class="hljs-title">nome.cognome</span>@<span class="hljs-title">miamail.it</span>&quot;
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">cd</span> /<span class="hljs-title">d</span> %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">copiamo</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">pubblica</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">clip</span> &lt; %<span class="hljs-title">USERPROFILE</span>%\.<span class="hljs-title">ssh</span>\<span class="hljs-title">id_rsa.pub</span> 
+<span class="hljs-title">rem</span> <span class="hljs-title">apriamo</span> <span class="hljs-title">la</span> <span class="hljs-title">pagina</span> <span class="hljs-title">git</span> <span class="hljs-title">ed</span> <span class="hljs-title">inseriamo</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">pubblica</span> <span class="hljs-title">presente</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">start</span> <span class="hljs-title">https</span>://<span class="hljs-title">github.com</span>/<span class="hljs-title">settings</span>/<span class="hljs-title">keys</span>
+<span class="hljs-title">In</span> <span class="hljs-title">github</span>, <span class="hljs-title">dall</span>&#x27;<span class="hljs-title">account</span> <span class="hljs-title">andare</span> <span class="hljs-title">in</span> `<span class="hljs-title">Profile</span>/<span class="hljs-title">Settings</span>/<span class="hljs-title">SSH</span> <span class="hljs-title">and</span> <span class="hljs-title">GPG</span> <span class="hljs-title">keys</span>` <span class="hljs-title">ed</span> <span class="hljs-title">aggiungere</span> <span class="hljs-title">la</span> <span class="hljs-title">chiave</span> <span class="hljs-title">SSH</span> <span class="hljs-title">presente</span> <span class="hljs-title">nella</span> <span class="hljs-title">clipboard</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">Add</span> <span class="hljs-title">an</span> <span class="hljs-title">SSH</span> <span class="hljs-title">key</span> ... <span class="hljs-title">e</span> <span class="hljs-title">poi</span> <span class="hljs-title">CTRL</span>+<span class="hljs-title">V</span>
+<span class="hljs-title">rem</span> <span class="hljs-title">testiamo</span> <span class="hljs-title">la</span> <span class="hljs-title">connessione</span> <span class="hljs-title">SSH</span> <span class="hljs-title">a</span> <span class="hljs-title">gitlab</span> <span class="hljs-title">da</span> <span class="hljs-title">riga</span> <span class="hljs-title">di</span> <span class="hljs-title">comando</span>:
+<span class="hljs-title">C</span>:\&gt; <span class="hljs-title">ssh</span> -<span class="hljs-title">T</span> <span class="hljs-title">git</span>@<span class="hljs-title">github.com</span>
+</span></code></pre>
+</body></html>

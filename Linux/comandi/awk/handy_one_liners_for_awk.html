@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.255" />
+        <title>handy_one_liners_for_awk</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="handy_one_liners_for_awk" tabindex="-1">handy_one_liners_for_awk <a class="header-anchor" href="#handy_one_liners_for_awk" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.255</p>
+<nav class="table-of-contents"><ol><li><a href="#file-spacing">FILE SPACING </a></li><li><a href="#numbering-and-calculations">NUMBERING AND CALCULATIONS </a></li><li><a href="#string-creation">STRING CREATION </a></li><li><a href="#array-creation">ARRAY CREATION </a></li><li><a href="#text-conversion-and-substitution%3A">TEXT CONVERSION AND SUBSTITUTION: </a></li><li><a href="#selective-printing-of-certain-lines">SELECTIVE PRINTING OF CERTAIN LINES </a></li><li><a href="#selective-deletion-of-certain-lines">SELECTIVE DELETION OF CERTAIN LINES </a></li></ol></nav><h1 id="handy-one-line-scripts-for-awk" tabindex="-1">HANDY ONE-LINE SCRIPTS FOR AWK <a class="header-anchor" href="#handy-one-line-scripts-for-awk" aria-hidden="true">🔗</a></h1>
+<p>HANDY ONE-LINE SCRIPTS FOR AWK                             21 August 2019
+Compiled by Eric Pement                                      version 0.28</p>
+<p>Latest version of this file (in English) is usually at:</p>
+<p><a href="http://www.pement.org/awk/awk1line.txt">http://www.pement.org/awk/awk1line.txt</a></p>
+<pre><code>USAGE:
+
+Unix: awk '/pattern/ {print &quot;$1&quot;}'    # standard Unix shells
+DOS/Win: awk '/pattern/ {print &quot;$1&quot;}'    # compiled with DJGPP, Cygwin
+        awk &quot;/pattern/ {print \&quot;$1\&quot;}&quot;  # GnuWin32, UnxUtils, Mingw
+</code></pre>
+<p>Notice to Windows users: The examples in this file use 'single quotes'
+and are intended for use with a shell like bash or ksh. If you use a
+command interpreter such as CMD.EXE or TCC.EXE, single quotes will not
+work. You must use &quot;double quotes&quot; instead. Furthermore, Microsoft
+Windows uses the percent sign (%) to mark environment variables, so
+this symbol must be doubled (%%) to yield a single percent sign visible
+to awk compiled for Windows or MS-DOS. (Again, this warning does not
+apply if your shell is bash, ksh, or a standard Unix shell.)</p>
+<p>I learned awk in a DOS environment, so some of the notes warn of DOS
+and Unix newline issues. &quot;\n&quot; represents a newline (LF) in awk.</p>
+<p>There are 4 versions of awk in common use: original awk (1977), new awk
+or nawk (1985), mawk (a variant of new awk), and GNU awk or gawk (still
+actively maintained). These scripts will run under nawk, the most common
+version in the Unix world.</p>
+<p>If an example runs only on GNU awk, the command 'gawk' will be used. I
+consider a one-line script to be 65 characters or less. Shorter scripts
+usually appear first. Finally, I normally use '1' instead of '{print}'
+to print a line of output. Let me know of any errors you find.</p>
+<h2 id="file-spacing" tabindex="-1">FILE SPACING <a class="header-anchor" href="#file-spacing" aria-hidden="true">🔗</a></h2>
+<pre><code># double space a file
+awk '1;{print &quot;&quot;}' 	# equivale a awk '{ print } { print &quot;&quot; }' ossia a awk '{ print $0} { print &quot;&quot; }'
+awk 'BEGIN{ORS=&quot;\n\n&quot;};1' # equivale a awk 'BEGIN{ ORS=&quot;\n\n&quot; }; { print $0 }'
+
+# double space a file which already has blank lines in it. Output file
+# should contain no more than one blank line between lines of text.
+# NOTE: On Unix systems, DOS lines which have only CRLF (\r\n) are
+# often treated as non-blank, and thus 'NF' alone will return TRUE.
+awk 'NF{print $0 &quot;\n&quot;}'
+
+# triple space a file
+awk '1;{print &quot;\n&quot;}'
+# equivale a:
+awk '{ print; print &quot;\n&quot; }'
+</code></pre>
+<p>Il pattern di default e' <code>1</code> ossia <code>vero</code>,<code print="">\ l'azione di default e' </code><code print="" $0="">che equivale a</code>` ossia stampa tutta la riga di input<br>
+sia l'azione che il pattern possono mancare, in tal caso vengono sostituiti dal default.</p>
+<p><strong><code>1;</code> corrisponde a <code>{ print $0 }</code></strong></p>
+<p>Every print statement in Awk is silently followed by an <strong>ORS - Output Record Separator</strong> variable,
+which is a newline by default.</p>
+<p><strong>NF - Number of Fields</strong>. It contains the number of fields the current line was split into.</p>
+<h2 id="numbering-and-calculations" tabindex="-1">NUMBERING AND CALCULATIONS <a class="header-anchor" href="#numbering-and-calculations" aria-hidden="true">🔗</a></h2>
+<pre><code># precede each line by its line number FOR THAT FILE (left alignment).
+# Using a tab (\t) instead of space will preserve margins.
+awk '{print FNR &quot;\t&quot; $0}' files*
+
+# precede each line by its line number FOR ALL FILES TOGETHER, with tab.
+awk '{print NR &quot;\t&quot; $0}' files*
+
+# number each line of a file (number on left, right-aligned)
+# Double the percent signs if typing from the DOS command prompt.
+awk '{printf(&quot;%5d : %s\n&quot;, NR,$0)}'
+
+# number each line of file, but only print numbers if line is not blank
+# Remember caveats about Unix treatment of \r (mentioned above)
+awk 'NF{$0=++a &quot; :&quot; $0};1'
+awk '{print (NF? ++a &quot; :&quot; :&quot;&quot;) $0}'
+
+# count lines (emulates &quot;wc -l&quot;)
+awk 'END{print NR}'
+
+# print the sums of the fields of every line
+awk '{s=0; for (i=1; i&lt;=NF; i++) s=s+$i; print s}'
+
+# add all fields in all lines and print the sum
+awk '{for (i=1; i&lt;=NF; i++) s=s+$i}; END{print s}'
+
+# print every line after replacing each field with its absolute value
+awk '{for (i=1; i&lt;=NF; i++) if ($i &lt; 0) $i = -$i; print }'
+awk '{for (i=1; i&lt;=NF; i++) $i = ($i &lt; 0) ? -$i : $i; print }'
+
+# print the total number of fields (&quot;words&quot;) in all lines
+awk '{ total = total + NF }; END {print total}' file
+
+# print the total number of lines that contain &quot;Beth&quot;
+awk '/Beth/{n++}; END {print n+0}' file
+
+# print the largest first field and the line that contains it
+# Intended for finding the longest string in field #1
+awk '$1 &gt; max {max=$1; maxline=$0}; END{ print max, maxline}'
+
+# print the number of fields in each line, followed by the line
+awk '{ print NF &quot;:&quot; $0 } '
+
+# print the last field of each line
+awk '{ print $NF }'
+
+# print the last field of the last line
+awk '{ field = $NF }; END{ print field }'
+
+# print every line with more than 4 fields
+awk 'NF &gt; 4'
+
+# print every line where the value of the last field is &gt; 4
+awk '$NF &gt; 4'
+</code></pre>
+<h2 id="string-creation" tabindex="-1">STRING CREATION <a class="header-anchor" href="#string-creation" aria-hidden="true">🔗</a></h2>
+<pre><code># create a string of a specific length (e.g., generate 513 spaces)
+awk 'BEGIN{while (a++&lt;513) s=s &quot; &quot;; print s}'
+
+# insert a string of specific length at a certain character position
+# Example: insert 49 spaces after column #6 of each input line.
+gawk --re-interval 'BEGIN{while(a++&lt;49)s=s &quot; &quot;};{sub(/^.{6}/,&quot;&amp;&quot; s)};1'
+</code></pre>
+<p>This one-liner uses the <code>BEGIN { }</code> special block that gets executed before anything else in an Awk program. In this block a while loop appends character <code>x</code> to variable <code>s</code> 513 times. After it has looped, the <code>s</code> variable gets printed out. As this Awk program does not have a body, it quits after executing the BEGIN block.
+This one-liner printed the 513 x's out, but you could have used it for anything you wish in BEGIN, main program or END blocks.
+Unfortunately this is not the most effective way to do it. It?s a linear time solution.
+A solution that?s logarithmic time (based on idea of recursive squaring):</p>
+<ul>
+<li>
+<p><a href="http://awk.freeshell.org/RepeatAString">http://awk.freeshell.org/RepeatAString</a></p>
+</li>
+<li>
+<p><a href="http://www.catonmat.net/blog/mit-introduction-to-algorithms-part-two/">http://www.catonmat.net/blog/mit-introduction-to-algorithms-part-two/</a></p>
+<p>function rep(str, num, remain, result) {
+if (num &lt; 2) {
+remain = (num == 1)
+} else {
+remain = (num % 2 == 1)
+result = rep(str, (num - remain) / 2)
+}
+return result result (remain ? str : &quot;&quot;)
+}</p>
+</li>
+</ul>
+<p>This function can be used as following:</p>
+<pre><code>awk 'BEGIN { s = rep(&quot;x&quot;, 513) }'
+</code></pre>
+<h2 id="array-creation" tabindex="-1">ARRAY CREATION <a class="header-anchor" href="#array-creation" aria-hidden="true">🔗</a></h2>
+<pre><code># These next 2 entries are not one-line scripts, but the technique
+# is so handy that it merits inclusion here.
+
+# create an array named &quot;month&quot;, indexed by numbers, so that month[1]
+# is 'Jan', month[2] is 'Feb', month[3] is 'Mar' and so on.
+split(&quot;Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec&quot;, month, &quot; &quot;)
+
+# create an array named &quot;mdigit&quot;, indexed by strings, so that
+# mdigit[&quot;Jan&quot;] is 1, mdigit[&quot;Feb&quot;] is 2, etc. Requires &quot;month&quot; array
+for (i=1; i&lt;=12; i++) mdigit[month[i]] = i
+</code></pre>
+<h2 id="text-conversion-and-substitution%3A" tabindex="-1">TEXT CONVERSION AND SUBSTITUTION: <a class="header-anchor" href="#text-conversion-and-substitution%3A" aria-hidden="true">🔗</a></h2>
+<pre><code># IN UNIX ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format
+awk '{sub(/\r$/,&quot;&quot;)};1'   # assumes EACH line ends with Ctrl-M
+
+# IN UNIX ENVIRONMENT: convert Unix newlines (LF) to DOS format
+awk '{sub(/$/,&quot;\r&quot;)};1'
+
+# IN DOS ENVIRONMENT: convert Unix newlines (LF) to DOS format
+awk 1
+
+# IN DOS ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format
+# Cannot be done with DOS versions of awk, other than gawk:
+gawk -v BINMODE=&quot;w&quot; '1' infile &gt;outfile
+
+# Use &quot;tr&quot; instead.
+tr -d \r &lt;infile &gt;outfile            # GNU tr version 1.22 or higher
+
+# delete leading whitespace (spaces, tabs) from front of each line
+# aligns all text flush left
+awk '{sub(/^[ \t]+/, &quot;&quot;)};1'
+
+# delete trailing whitespace (spaces, tabs) from end of each line
+awk '{sub(/[ \t]+$/, &quot;&quot;)};1'
+
+# delete BOTH leading and trailing whitespace from each line
+awk '{gsub(/^[ \t]+|[ \t]+$/,&quot;&quot;)};1'
+awk '{$1=$1};1'           # also removes extra space between fields
+
+# insert 5 blank spaces at beginning of each line (make page offset)
+awk '{sub(/^/, &quot;     &quot;)};1'
+
+# align all text flush right on a 79-column width
+awk '{printf &quot;%79s\n&quot;, $0}' file*
+
+# center all text on a 79-character width
+awk '{l=length();s=int((79-l)/2); printf &quot;%&quot;(s+l)&quot;s\n&quot;,$0}' file*
+
+# substitute (find and replace) &quot;foo&quot; with &quot;bar&quot; on each line
+awk '{sub(/foo/,&quot;bar&quot;)}; 1'           # replace only 1st instance
+gawk '{$0=gensub(/foo/,&quot;bar&quot;,4)}; 1'  # replace only 4th instance
+awk '{gsub(/foo/,&quot;bar&quot;)}; 1'          # replace ALL instances in a line
+
+# substitute &quot;foo&quot; with &quot;bar&quot; ONLY for lines which contain &quot;baz&quot;
+awk '/baz/{gsub(/foo/, &quot;bar&quot;)}; 1'
+
+# substitute &quot;foo&quot; with &quot;bar&quot; EXCEPT for lines which contain &quot;baz&quot;
+awk '!/baz/{gsub(/foo/, &quot;bar&quot;)}; 1'
+
+# change &quot;scarlet&quot; or &quot;ruby&quot; or &quot;puce&quot; to &quot;red&quot;
+awk '{gsub(/scarlet|ruby|puce/, &quot;red&quot;)}; 1'
+
+# reverse order of lines (emulates &quot;tac&quot;)
+awk '{a[i++]=$0} END {for (j=i-1; j&gt;=0;) print a[j--] }' file*
+
+# if a line ends with a backslash, append the next line to it (fails if
+# there are multiple lines ending with backslash...)
+awk '/\\$/ {sub(/\\$/,&quot;&quot;); getline t; print $0 t; next}; 1' file*
+
+# print and sort the login names of all users
+awk -F &quot;:&quot; '{print $1 | &quot;sort&quot; }' /etc/passwd
+
+# print the first 2 fields, in opposite order, of every line
+awk '{print $2, $1}' file
+
+# switch the first 2 fields of every line
+awk '{temp = $1; $1 = $2; $2 = temp}' file
+
+# print every line, deleting the second field of that line
+awk '{ $2 = &quot;&quot;; print }'
+
+# print in reverse order the fields of every line
+awk '{for (i=NF; i&gt;0; i--) printf(&quot;%s &quot;,$i);print &quot;&quot;}' file
+
+# concatenate every 5 lines of input, using a comma separator
+# between fields
+awk 'ORS=NR%5?&quot;,&quot;:&quot;\n&quot;' file
+</code></pre>
+<h2 id="selective-printing-of-certain-lines" tabindex="-1">SELECTIVE PRINTING OF CERTAIN LINES <a class="header-anchor" href="#selective-printing-of-certain-lines" aria-hidden="true">🔗</a></h2>
+<pre><code># print first 10 lines of file (emulates behavior of &quot;head&quot;)
+awk 'NR &lt; 11'
+
+# print first line of file (emulates &quot;head -1&quot;)
+awk 'NR&gt;1{exit};1'
+
+# print the last 2 lines of a file (emulates &quot;tail -2&quot;)
+awk '{y=x &quot;\n&quot; $0; x=$0};END{print y}'
+
+# print the last line of a file (emulates &quot;tail -1&quot;)
+awk 'END{print}'
+
+# print only lines which match regular expression (emulates &quot;grep&quot;)
+awk '/regex/'
+
+# print only lines which do NOT match regex (emulates &quot;grep -v&quot;)
+awk '!/regex/'
+
+# print any line where field #5 is equal to &quot;abc123&quot;
+awk '$5 == &quot;abc123&quot;'
+
+# print only those lines where field #5 is NOT equal to &quot;abc123&quot;
+# This will also print lines which have less than 5 fields.
+awk '$5 != &quot;abc123&quot;'
+awk '!($5 == &quot;abc123&quot;)'
+
+# matching a field against a regular expression
+awk '$7  ~ /^[a-f]/'    # print line if field #7 matches regex
+awk '$7 !~ /^[a-f]/'    # print line if field #7 does NOT match regex
+
+# print the line immediately before a regex, but not the line
+# containing the regex
+awk '/regex/{print x};{x=$0}'
+awk '/regex/{print (NR==1 ? &quot;match on line 1&quot; : x)};{x=$0}'
+
+# print the line immediately after a regex, but not the line
+# containing the regex
+awk '/regex/{getline;print}'
+
+# grep for AAA and BBB and CCC (in any order on the same line)
+awk '/AAA/ &amp;&amp; /BBB/ &amp;&amp; /CCC/'
+
+# grep for AAA and BBB and CCC (in that order)
+awk '/AAA.*BBB.*CCC/'
+
+# print only lines of 65 characters or longer
+awk 'length &gt; 64'
+
+# print only lines of less than 65 characters
+awk 'length &lt; 64'
+
+# print section of file from regular expression to end of file
+awk '/regex/,0'
+awk '/regex/,EOF'
+
+# print section of file based on line numbers (lines 8-12, inclusive)
+awk 'NR==8,NR==12'
+
+# print line number 52
+awk 'NR==52'
+awk 'NR==52 {print;exit}'          # more efficient on large files
+
+# print section of file between two regular expressions (inclusive)
+awk '/Iowa/,/Montana/'             # case sensitive
+</code></pre>
+<h2 id="selective-deletion-of-certain-lines" tabindex="-1">SELECTIVE DELETION OF CERTAIN LINES <a class="header-anchor" href="#selective-deletion-of-certain-lines" aria-hidden="true">🔗</a></h2>
+<pre><code># delete ALL blank lines from a file (same as &quot;grep '.' &quot;)
+awk NF
+awk '/./'
+
+# remove duplicate, consecutive lines (emulates &quot;uniq&quot;)
+awk 'a !~ $0; {a=$0}'
+
+# remove duplicate, nonconsecutive lines
+awk '!a[$0]++'                     # most concise script
+awk '!($0 in a){a[$0];print}'      # most efficient script
+</code></pre>
+<p>The info and manual (&quot;man&quot;) pages on Unix systems may be helpful (try
+&quot;man awk&quot;, &quot;man nawk&quot;, &quot;man gawk&quot;, &quot;man regexp&quot;, or the section on
+regular expressions in &quot;man ed&quot;).</p>
+<p>USE OF '\t' IN awk SCRIPTS: For clarity in documentation, I have used
+'\t' to indicate a tab character (0x09) in the scripts.  All versions of
+awk should recognize this abbreviation.</p>
+</body></html>

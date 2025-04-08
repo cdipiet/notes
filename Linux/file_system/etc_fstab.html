@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.063" />
+        <title>etc_fstab</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="etc_fstab" tabindex="-1">etc_fstab <a class="header-anchor" href="#etc_fstab" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.063</p>
+<nav class="table-of-contents"><ol><li><a href="#get-info">Get Info </a></li><li><a href="#fstab-(file-system-table)">fstab (File System Table) </a><ol><li><a href="#file-example">File example </a></li><li><a href="#field-definitions">Field definitions </a></li></ol></li><li><a href="#identifying-filesystems">Identifying filesystems </a><ol><li><a href="#kernel-name">Kernel name </a></li><li><a href="#label">Label </a></li><li><a href="#uuid">UUID </a></li></ol></li><li><a href="#tips-and-tricks-automount-with-systemd">Tips and tricks Automount with systemd </a></li><li><a href="#filepath-spaces">Filepath spaces </a></li><li><a href="#external-devices---nofail">External devices - nofail </a></li><li><a href="#atime-options">atime options </a></li><li><a href="#tmpfs">tmpfs </a></li><li><a href="#findmnt">findmnt </a></li><li><a href="#writing-to-fat32-as-normal-user">Writing to FAT32 as Normal User </a></li><li><a href="#remounting-the-root-partition">Remounting the root partition </a></li><li><a href="#sudo-vim-%2Fetc%2Ffstab">sudo vim /etc/fstab </a></li></ol></nav><h1 id="%2Fetc%2Ffstab" tabindex="-1">/etc/fstab <a class="header-anchor" href="#%2Fetc%2Ffstab" aria-hidden="true">🔗</a></h1>
+<p><code>noatime</code> e <code>discard</code> vanno bene per le memorie SSD</p>
+<h2 id="get-info" tabindex="-1">Get Info <a class="header-anchor" href="#get-info" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> fdisk -l
+$ findmnt
+$ lsblk -f
+$ lsblk -S
+$ <span class="hljs-built_in">df</span> -h
+
+<span class="hljs-comment"># Ricavare UUID delle partizioni windows:</span>
+$ blkid -o value -s UUID /dev/sda2
+$ <span class="hljs-built_in">ls</span> -l /dev/disk/by-uuid/ | grep /dev/sda2
+
+$ <span class="hljs-built_in">sudo</span> su
+$ <span class="hljs-built_in">mkdir</span> -p /mnt/sda4
+$ <span class="hljs-built_in">mkdir</span> -p /mnt/sda4
+$ <span class="hljs-built_in">chmod</span> 777 /mnt/sda4
+$ <span class="hljs-built_in">chmod</span> 777 /mnt/sda4
+
+$ blkid|grep ntfs
+/dev/sda1: LABEL=<span class="hljs-string">&quot;Recovery&quot;</span> UUID=<span class="hljs-string">&quot;B43461DA34619FDA&quot;</span> TYPE=<span class="hljs-string">&quot;ntfs&quot;</span> PARTLABEL=<span class="hljs-string">&quot;Basic data partition&quot;</span> PARTUUID=<span class="hljs-string">&quot;2b6c4b49-5c29-46bf-a3c4-1c62af979796&quot;</span>
+/dev/sda4: UUID=<span class="hljs-string">&quot;1680643C80642509&quot;</span> TYPE=<span class="hljs-string">&quot;ntfs&quot;</span> PARTLABEL=<span class="hljs-string">&quot;Basic data partition&quot;</span> PARTUUID=<span class="hljs-string">&quot;c764130c-f696-468f-9dcb-db5908291845&quot;</span>
+/dev/sda5: LABEL=<span class="hljs-string">&quot;Dati&quot;</span> UUID=<span class="hljs-string">&quot;16DA3DD3DA3DAFBB&quot;</span> TYPE=<span class="hljs-string">&quot;ntfs&quot;</span> PARTLABEL=<span class="hljs-string">&quot;Basic data partition&quot;</span> PARTUUID=<span class="hljs-string">&quot;75ccf395-3e37-4ab7-879c-8e2378704048&quot;</span>
+</code></pre>
+<h2 id="fstab-(file-system-table)" tabindex="-1">fstab (File System Table) <a class="header-anchor" href="#fstab-(file-system-table)" aria-hidden="true">🔗</a></h2>
+<p>Nei sistemi GNU/Linux è un file di configurazione che si trova all'interno della cartella <code>/etc</code> (secondo lo standard FHS) ed il cui proprietario è l'utente root. L'fstab indica i dispositivi che devono essere montati con le rispettive opzioni.</p>
+<p>Si vede quindi che ogni linea è composta da 6 campi:</p>
+<ol>
+<li>il dispositivo che contiene un file system (tra cui il file system virtuale <code>proc</code> che permette di riassumere le informazioni generali del sistema)</li>
+<li>la directory, chiamata <strong>punto di mount</strong>, da cui sarà possibile accedere al contenuto dei dispositivi (da notare che per la swap non è richiesto il mount point)</li>
+<li>il tipo di file system (i file system supportati si possono vedere nella man page di fstab)</li>
+<li>le opzioni che regolano l'accesso al dispositivo (le opzioni si possono vedere nella man page di mount)</li>
+<li>indica se il dispositivo deve essere usato dal comando <code>dump</code> per farne dei backup (<code>0 disattivato</code>, <code>1 attivato</code>), l'opzione è obsoleta</li>
+<li>indica se il dispositivo deve essere controllato dal comando <code>fsck</code>, nell'ordine da 1 in poi (0 indica non controllare)</li>
+</ol>
+<p>To list all your partitions, mounted or not:</p>
+<pre><code>sudo fdisk -l
+</code></pre>
+<p>To list all your partitions by UUID, First connect all your devices, then:</p>
+<pre><code>ls /dev/disk/by-uuid -alh
+sudo blkid
+</code></pre>
+<p>To list your devices, first put connect your USB device (it does not need to be mounted). By volume label:</p>
+<pre><code>ls /dev/disk/by-label -lah
+</code></pre>
+<p>By id:</p>
+<pre><code>ls /dev/disk/by-id -lah
+</code></pre>
+<p>By uuid:</p>
+<pre><code>ls /dev/disk/by-uuid -lah
+</code></pre>
+<p>The <code>/etc/fstab</code> file can be used to define how disk partitions, various other block devices, or remote filesystems should be mounted into the filesystem.
+Each filesystem is described in a separate line. These definitions will be converted into systemd mount units dynamically at boot, and when the configuration of the system manager is reloaded. The default setup will automatically fsck and mount filesystems before starting services that need them to be mounted. For example, <code>systemd</code> automatically makes sure that remote filesystem mounts like <code>NFS</code> or <code>Samba</code> are only started after the network has been set up. Therefore, local and remote filesystem mounts specified in /etc/fstab should work out of the box. See man 5 systemd.mount for details.
+The <strong>mount</strong> command will use fstab, if just one of either directory or device is given, to fill in the value for the other parameter. When doing so, mount options which are listed in fstab will also be used.</p>
+<h3 id="file-example" tabindex="-1">File example <a class="header-anchor" href="#file-example" aria-hidden="true">🔗</a></h3>
+<p>A simple <code>/etc/fstab</code>, using kernel name descriptors:</p>
+<pre><code>#&lt;file system&gt; &lt;dir&gt;  &lt;type&gt; &lt;options&gt;        &lt;dump&gt; &lt;pass&gt;
+/dev/sda1      /      ext4   defaults,noatime 0      1
+/dev/sda2      none   swap   defaults         0      0
+/dev/sda3      /home  ext4   defaults,noatime 0      2 
+</code></pre>
+<h3 id="field-definitions" tabindex="-1">Field definitions <a class="header-anchor" href="#field-definitions" aria-hidden="true">🔗</a></h3>
+<p>The <code>/etc/fstab</code> file contains the following fields separated by a space or tab:</p>
+<pre><code>&lt;file system&gt; &lt;dir&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;  
+</code></pre>
+<ul>
+<li>
+<p><code>&lt;file system&gt;</code> - the partition or storage device to be mounted.</p>
+</li>
+<li>
+<p><code>&lt;dir&gt;</code> - the mountpoint where <file system> is mounted to.</p>
+</li>
+<li>
+<p><code>&lt;type&gt;</code> - the file system type of the partition or storage device to be mounted. Many different file systems are supported: ext2, ext3, ext4, btrfs, reiserfs, xfs, jfs, smbfs, iso9660, vfat, ntfs, swap and auto. The auto type lets the mount command guess what type of file system is used. This is useful for optical media (CD/DVD).</p>
+</li>
+<li>
+<p><code>&lt;options&gt;</code> - mount options of the filesystem to be used. Note that some mount options are filesystem specific. Some of the most common options are:</p>
+<ul>
+<li>auto - Mount automatically at boot, or when the command mount -a is issued.</li>
+<li>noauto - Mount only when you tell it to.</li>
+<li>exec - Allow execution of binaries on the filesystem.</li>
+<li>noexec - Disallow execution of binaries on the filesystem.</li>
+<li>ro - Mount the filesystem read-only.</li>
+<li>rw - Mount the filesystem read-write.</li>
+<li>user - Allow any user to mount the filesystem. This automatically implies noexec, nosuid, nodev, unless overridden.</li>
+<li>users - Allow any user in the users group to mount the filesystem.</li>
+<li>nouser - Allow only root to mount the filesystem.</li>
+<li>owner - Allow the owner of device to mount.</li>
+<li>sync - I/O should be done synchronously.</li>
+<li>async - I/O should be done asynchronously.</li>
+<li>dev - Interpret block special devices on the filesystem.</li>
+<li>nodev - Don't interpret block special devices on the filesystem.</li>
+<li>suid - Allow the operation of suid, and sgid bits. They are mostly used to allow users on a computer system to execute binary - executables with temporarily elevated privileges in order to perform a specific task.</li>
+<li>nosuid - Block the operation of suid, and sgid bits.</li>
+<li><code>noatime</code> - Don't update inode access times on the filesystem. Can help performance (<a href="https://wiki.manjaro.org/index.php?title=Fstab#atime_options">see atime options</a>).</li>
+<li>nodiratime - Do not update directory inode access times on the filesystem. Can help performance (<a href="https://wiki.manjaro.org/index.php?title=Fstab#atime_options">see atime options</a>).</li>
+<li>relatime - Update inode access times relative to modify or change time. Access time is only updated if the previous access time was earlier than the current modify or change time. (Similar to noatime, but doesn't break mutt or other applications that need to know if a file has been read since the last time it was modified.) Can help performance (<a href="https://wiki.manjaro.org/index.php?title=Fstab#atime_options">see atime options</a>).</li>
+<li><code>discard</code> - Issue <a href="https://wiki.archlinux.org/index.php/Solid_state_drive">TRIM</a> commands to the underlying block device when blocks are freed. Recommended to use if the filesystem is located on an SSD.</li>
+<li>flush - The vfat option to flush data more often, thus making copy dialogs or progress bars to stay up until all data is written.</li>
+<li>nofail - Mount device when present but ignore if absent. This prevents errors being reported at boot for removable media.</li>
+<li>defaults - the default mount options for the filesystem to be used. The default options for ext4 are: rw, suid, dev, exec, auto, nouser, async.</li>
+</ul>
+</li>
+<li>
+<p><code>&lt;dump&gt;</code> - used by the dump utility to decide when to make a backup. Dump checks the entry and uses the number to decide if a file system should be backed up. Possible entries are 0 and 1. If 0, dump will ignore the file system; if 1, dump will make a backup. Most users will not have dump installed, so they should put 0 for the <dump> entry.</p>
+</li>
+<li>
+<p><code>&lt;pass&gt;</code> - used by fsck to decide which order filesystems are to be checked. Possible entries are 0, 1 and 2. The root file system should have the highest priority 1 (unless its type is btrfs, in which case this field should be 0) - all other file systems you want to have checked should have a 2. File systems with a value 0 will not be checked by the fsck utility.</p>
+</li>
+</ul>
+<h2 id="identifying-filesystems" tabindex="-1">Identifying filesystems <a class="header-anchor" href="#identifying-filesystems" aria-hidden="true">🔗</a></h2>
+<p>There are three ways to identify a partition or storage device in <code>/etc/fstab</code>: by its kernel name descriptor, <code>label</code> or <code>UUID</code>. The advantage of using UUIDs or labels is that they are not dependent on the order in which the drives are (physically) connected to the machine. <span class="u">This is useful if the storage device order in the BIOS is changed</span>, or if you switch the storage device cabling. Also, the BIOS may occasionally change the order of storage devices. Read more about this in the Persistent block device naming article.
+To list basic information about the partitions, run:</p>
+<pre><code class="language-bash">$ lsblk
+$ lsblk -S
+$ lsblk -f
+NAME FSTYPE LABEL UUID MOUNTPOINT
+sda
+├─sda1 ext4 Arch_Linux 978e3e81-8048-4ae1-8a06-aa727458e8ff /
+├─sda2 ntfs Windows 6C1093E61093B594
+└─sda3 ext4 Storage f838b24e-3a66-4d02-86f4-a2e73e454336 /media/Storage
+sdb
+├─sdb1 ntfs Games 9E68F00568EFD9D3
+└─sdb2 ext4 Backup 14d50a6c-e083-42f2-b9c4-bc8bae38d274 /media/Backup
+sdc
+└─sdc1 vfat Camera 47FA-4071 /media/Camera 
+</code></pre>
+<h3 id="kernel-name" tabindex="-1">Kernel name <a class="header-anchor" href="#kernel-name" aria-hidden="true">🔗</a></h3>
+<p>Run <code>lsblk -f</code> to list the partitions, and prefix them with <code>/dev</code>.</p>
+<h3 id="label" tabindex="-1">Label <a class="header-anchor" href="#label" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># sudo lsblk -o name,mountpoint,label,size,uuid  </span>
+</code></pre>
+<p>note: Each label should be unique, to prevent any possible conflicts.
+For detailed information on how to label a device or partition, see Persistent block device naming#by-label. Renaming the root partition has to be done from a &quot;live&quot; Linux distribution because the partition needs to be unmounted first.
+Run <code>lsblk -f</code> to list the partitions, and prefix them with <code>LABEL=</code> :</p>
+<pre><code class="language-bash"><span class="hljs-comment"># /etc/fstab</span>
+<span class="hljs-comment"># &lt;file system&gt; &lt;dir&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;</span>
+LABEL=Arch_Linux / ext4 defaults,noatime 0 1
+LABEL=Arch_Swap none swap defaults 0 0
+</code></pre>
+<h3 id="uuid" tabindex="-1">UUID <a class="header-anchor" href="#uuid" aria-hidden="true">🔗</a></h3>
+<p>All partitions and devices have a unique UUID. They are generated by filesystem utilities (e.g. mkfs.*) when you create or format a partition. See Persistent block device naming#by-uuid for details.<br>
+Run <code>lsblk -f</code> to list the partitions, and prefix them with <code>UUID=</code> : Tip: If you would like to return just the UUID of a specific partition:</p>
+<pre><code class="language-bash">$ lsblk -no UUID /dev/sda2
+<span class="hljs-comment"># /etc/fstab</span>
+<span class="hljs-comment"># &lt;file system&gt; &lt;dir&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;</span>
+UUID=24f28fc6-717e-4bcd-a5f7-32b959024e26 / ext4 defaults,noatime 0 1
+UUID=03ec5dd3-45c0-4f95-a363-61ff321a09ff /home ext4 defaults,noatime 0 2
+UUID=4209c845-f495-4c43-8a03-5363dd433153 none swap defaults 0 0 
+</code></pre>
+<h2 id="tips-and-tricks-automount-with-systemd" tabindex="-1">Tips and tricks Automount with systemd <a class="header-anchor" href="#tips-and-tricks-automount-with-systemd" aria-hidden="true">🔗</a></h2>
+<p>If you have a large <code>/home</code> partition, it might be better to allow services that do not depend on <code>/home</code> to start while <code>/home</code> is checked by <code>fsck</code>. This can be achieved by adding the following options to the <code>/etc/fstab</code> entry of your <code>/home</code> partition:</p>
+<pre><code>noauto,x-systemd.automount  
+</code></pre>
+<p>This will <code>fsck</code> and mount <code>/home</code> when it is first accessed, and the kernel will buffer all file access to <code>/home</code> until it is ready.
+note: This will make your <code>/home</code> filesystem type <code>autofs</code>, which is ignored by <code>mlocate</code> by default. The speedup of automounting /home may not be more than a second or two, depending on your system, so this trick may not be worth it.
+The same applies to remote filesystem mounts. If you want them to be mounted only upon access, you will need to use the <code>noauto,x-systemd.automount</code> parameters. In addition, you can use the <code>x-systemd.device-timeout=#</code> option to specify a timeout in case the network resource is not available.
+If you have encrypted filesystems with keyfiles, you can also add the noauto parameter to the corresponding entries in <code>/etc/crypttab</code>. systemd will then not open the encrypted device on boot, but instead wait until it is actually accessed and then automatically open it with the specified keyfile before mounting it. This might save a few seconds on boot if you are using an encrypted RAID device for example, because systemd does not have to wait for the device to become available. For example:</p>
+<pre><code>/etc/crypttab data /dev/md0 /root/key noauto
+</code></pre>
+<h2 id="filepath-spaces" tabindex="-1">Filepath spaces <a class="header-anchor" href="#filepath-spaces" aria-hidden="true">🔗</a></h2>
+<p>If any mountpoint contains spaces, use the escape character <code>\</code> followed by the 3 digit octal code <code>040</code> to emulate them:</p>
+<pre><code>/etc/fstab
+UUID=47FA-4071 /home/username/Camera\040Pictures vfat defaults,noatime 0 0
+/dev/sda7 /media/100\040GB\040(Storage) ext4 defaults,noatime,user 0 2 
+</code></pre>
+<h2 id="external-devices---nofail" tabindex="-1">External devices - nofail <a class="header-anchor" href="#external-devices---nofail" aria-hidden="true">🔗</a></h2>
+<p>External devices that are to be mounted when present but ignored if absent may require the <code>nofail</code> option. This prevents errors being reported at boot.</p>
+<p class="m">/etc/fstab<br>
+/dev/sdg1 /media/backup jfs defaults,<span class="mbb">nofail</span> 0 2</p>
+<h2 id="atime-options" tabindex="-1">atime options <a class="header-anchor" href="#atime-options" aria-hidden="true">🔗</a></h2>
+<p>The use of <code>noatime</code>, <code>nodiratime</code> or <code>relatime</code> can improve drive performance. Linux by default uses <code>atime</code>, which keeps a record <strong>(writes to the drive) every time it reads anything</strong>. This is more purposeful when Linux is used for servers; it doesn't have much value for desktop use. The worst thing about the default atime option is that even reading a file from the page cache (reading from memory instead of the drive) will still result in a write!<br>
+Using the <code>noatime</code> option fully disables writing file access times to the drive every time you read a file. This works well for almost all applications, except for a rare few like Mutt that need the such information. For mutt, you should only use the relatime option.\ Using the <code>relatime</code> option enables the writing of file access times only when the file is being modified (unlike noatime where the file access time will never be changed and will be older than the modification time).<br>
+The <code>nodiratime</code> option disables the writing of file access times only for directories while other files still get access times written. The best compromise might be the use of relatime in which case programs like Mutt will continue to work, but you'll still have a performance boost because files will not get access times updated unless they are modified.<br>
+note: noatime already includes nodiratime. You do not need to specify both.</p>
+<h2 id="tmpfs" tabindex="-1">tmpfs <a class="header-anchor" href="#tmpfs" aria-hidden="true">🔗</a></h2>
+<p>tmpfs is a temporary filesystem that resides in memory and/or your swap partition(s), depending on how much you fill it up. Mounting directories as tmpfs can be an effective way of speeding up accesses to their files, or to ensure that their contents are automatically cleared upon reboot.
+Some directories where tmpfs is commonly used are <code>/tmp</code>, <code>/var/lock</code> and <code>/var/run</code>. Do NOT use it on /var/tmp, because that folder is meant for temporary files that are preserved across reboots. Arch uses a tmpfs /run directory, with /var/run and /var/lock simply existing as symlinks for compatibility. It is also used for /tmp in the default <code>/etc/fstab</code>.<br>
+note: When using systemd, temporary files in tmpfs directories can be recreated at boot by using <code>tmpfiles.d</code>.
+By default, a tmpfs partition has its maximum size set to half your total RAM, but this can be customized. Note that the actual memory/swap consumption depends on how much you fill it up, as tmpfs partitions do not consume any memory until it is actually needed.
+To use tmpfs for /tmp, add this line to <code>/etc/fstab</code>:</p>
+<pre><code># /etc/fstab 
+tmpfs /tmp tmpfs nodev,nosuid 0 0
+</code></pre>
+<p>You may or may not want to specify the size here, but you should leave the mode option alone in these cases to ensure that they have the correct permissions (<code>1777</code>). In the example above, <code>/tmp</code> will be set to use up to half of your total RAM. To explicitly set a maximum size, use the size mount option:</p>
+<pre><code># /etc/fstab
+tmpfs /tmp tmpfs nodev,nosuid,size=2G 0 0
+</code></pre>
+<p>Here is a more advanced example showing how to add tmpfs mounts for users. This is useful for websites, mysql tmp files, <code>~/.vim/</code>, and more. It's important to try and get the ideal mount options for what you are trying to accomplish. The goal is to have as secure settings as possible to prevent abuse. Limiting the size, and specifying uid and gid + mode is very secure. For more information on this subject, follow the links listed in the #See also section.</p>
+<pre><code># /etc/fstab
+tmpfs /www/cache tmpfs rw,size=1G,nr_inodes=5k,noexec,nodev,nosuid,uid=648,gid=648,mode=1700 0 0
+</code></pre>
+<p>See the mount command man page for more information. One useful mount option in the man page is the default option. At least understand that.
+Reboot for the changes to take effect. Note that although it may be tempting to simply run mount -a to make the changes effective immediately, this will make any files currently residing in these directories inaccessible (this is especially problematic for running programs with lockfiles, for example). However, if all of them are empty, it should be safe to run mount -a instead of rebooting (or mount them individually).
+After applying changes, you may want to verify that they took effect by looking at /proc/mounts and using</p>
+<h2 id="findmnt" tabindex="-1">findmnt <a class="header-anchor" href="#findmnt" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ findmnt --target /tmp 
+TARGET SOURCE FSTYPE OPTIONS
+/tmp tmpfs tmpfs rw,nosuid,nodev,relatime Usage 
+</code></pre>
+<h2 id="writing-to-fat32-as-normal-user" tabindex="-1">Writing to FAT32 as Normal User <a class="header-anchor" href="#writing-to-fat32-as-normal-user" aria-hidden="true">🔗</a></h2>
+<p>To write on a FAT32 partition, you must make a few changes to your /etc/fstab file.</p>
+<pre><code>/etc/fstab
+/dev/sdxY /mnt/some_folder vfat user,rw,umask=000 0 0
+</code></pre>
+<p>The user flag means that any user (even non-root) can mount and unmount the partition <code>/dev/sdX</code>. <code>rw</code> gives read-write access; <code>umask</code> option removes selected rights - for example <code>umask=111</code> remove executable rights. The problem is that this entry removes executable rights from directories too, so we must correct it by <code>dmask=000</code>. See also Umask.
+Without these options, all files will be executable. You can use the option showexec instead of the umask and dmask options, which shows all Windows executables (com, exe, bat) in executable colours.
+For example, if your FAT32 partition is on <code>/dev/sda9</code>, and you wish to mount it to <code>/mnt/fat32</code>, then you would use:</p>
+<pre><code>/etc/fstab
+/dev/sda9 /mnt/fat32 vfat user,rw,umask=111,dmask=000 0 0
+</code></pre>
+<h2 id="remounting-the-root-partition" tabindex="-1">Remounting the root partition <a class="header-anchor" href="#remounting-the-root-partition" aria-hidden="true">🔗</a></h2>
+<p>If for some reason the root partition has been improperly mounted read only, remount the root partition with read-write access with the following command:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># mount -o remount,rw /</span>
+</code></pre>
+<h2 id="sudo-vim-%2Fetc%2Ffstab" tabindex="-1"><code>sudo vim /etc/fstab</code> <a class="header-anchor" href="#sudo-vim-%2Fetc%2Ffstab" aria-hidden="true">🔗</a></h2>
+<p>Un esempio di fstab, che si può vedere con <code>cat /etc/fstab</code>, è</p>
+<pre><code class="language-bash"><span class="hljs-comment"># /etc/fstab: static file system information.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Use &#x27;blkid&#x27; to print the universally unique identifier for a device; this may</span>
+<span class="hljs-comment"># be used with UUID= as a more robust way to name devices that works even if</span>
+<span class="hljs-comment"># disks are added and removed. See fstab(5).</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># &lt;file system&gt;             &lt;mount point&gt;  &lt;type&gt;  &lt;options&gt;  &lt;dump&gt;  &lt;pass&gt;</span>
+UUID=1061-E00E                            /boot/efi      vfat    <span class="hljs-built_in">umask</span>=0077 0 2
+UUID=4f9332f1-859f-4ef3-aca0-2ffe49a7d8c6 /              ext4    defaults,noatime 0 1
+UUID=687a2ec5-689b-4c51-8e4a-350685b2bfce /home          ext4    defaults,noatime 0 2
+tmpfs                                     /tmp           tmpfs   defaults,noatime,mode=1777 0 0
+<span class="hljs-comment"># Partizioni aggiuntive:</span>
+UUID=d3906971-bc5c-4b36-92a0-e6f55fccab4f /mnt/CDPBackup256 ext4           defaults,noatime,discard          0       2
+UUID=1680643C80642509                     /mnt/sda4         ntfs-3g        defaults,locale=it_IT.UTF-8       0       0
+UUID=16DA3DD3DA3DAFBB                     /mnt/sda5         ntfs-3g        defaults,locale=it_IT.UTF-8       0       0
+UUID=BA24EF8624EF444B                     /mnt/CDPBackup    ntfs-3g        defaults,locale=it_IT.UTF-8       0       0
+/dev/bitlocker                            /mnt/bl           fuse.dislocker user-password=xxxxxxxx,nofail     0       0
+/mnt/bl/dislocker-file                    /mnt/bitlocker    auto           nofail                            0       0
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#    FILE SYSTEM    #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Indica il tipo di supporto utilizzato</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># proc - File System virtuale che permette di riassumere le informazioni generali sui processi del sistema</span>
+<span class="hljs-comment"># hdax - Primary Master</span>
+<span class="hljs-comment"># hdbx - Primary Slave</span>
+<span class="hljs-comment"># hdcx - Secondary Master</span>
+<span class="hljs-comment"># hddx - Secondary Slave</span>
+<span class="hljs-comment"># fdx - Floppy Disk</span>
+<span class="hljs-comment"># cdrom - CD/DVD-RW</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#   MOUNT POINT     #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># E&#x27; la Directory dove viene montato e visualizzato il contenuto della partizione.</span>
+<span class="hljs-comment"># Deve esistere già come directory ed è a discrezione dell&#x27;user (a parte alcune restrizioni di root)</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#       TYPE        #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Rappresenta il tipo di formattazione della partizione</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># auto - riconosce automaticamente il File System della partizione (boot più lento ma è una garanzia)</span>
+<span class="hljs-comment"># ext2 - Filesystem standard di GNU/Linux (non è più utilizzata dalle nuove distribuzioni)</span>
+<span class="hljs-comment"># ext3 - Filesystem standard di GNU/Linux con supporto al journaling (che consente un parziale recupero dei dati</span>
+<span class="hljs-comment">#        in seguito ad un arresto improvviso della macchina)</span>
+<span class="hljs-comment"># ext4 - Filesystem standard di GNU/Linux (non ancora supportato da tutte le distribuzioni)</span>
+<span class="hljs-comment"># ffs - File System di UNIX</span>
+<span class="hljs-comment"># iso9660 - File System di supporti CD</span>
+<span class="hljs-comment"># msdos - FAT di MS-DOS</span>
+<span class="hljs-comment"># nfs - Network File System della Sun Microsystems</span>
+<span class="hljs-comment"># ntfs - NTFS di Windows</span>
+<span class="hljs-comment"># ntfs-3g - NTFS open source retro compatibile con NTFS di Windows</span>
+<span class="hljs-comment"># proc - File System Virtuale con le informazioni dei processi</span>
+<span class="hljs-comment"># reiserfs - File System di Linux (come la ext3 ma più efficace. Utilizzata da SuSE)</span>
+<span class="hljs-comment"># swap - Formattazione usata per il SWAP di Linux</span>
+<span class="hljs-comment"># udf - File System di supporti DVD</span>
+<span class="hljs-comment"># vfat - FAT32 di Windows</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#     OPTIONS       #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Sono le opzioni di montaggio delle partizioni</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># discard - L&#x27;opzione discard abilita i benefici del comando TRIM purchè si utilizzi una versione del kernel &gt;=2.6.33. Questa impostazione non funzione con ext3, l&#x27;utilizzo dell&#x27;opzione discard con una partizione di root con filesystem ext3 ne determinerà l&#x27;accesso in sola lettura.</span>
+<span class="hljs-comment"># async - Tutte le operazioni di input/output vengono eseguite in modo asincrono</span>
+<span class="hljs-comment"># atime - Aggiorna la data di accesso all&#x27;inode ad ogni accesso</span>
+<span class="hljs-comment"># auto - Il filesystem può essere montato passando &quot;-a&quot; a mount. Solo i filesystem che contengono questa</span>
+<span class="hljs-comment">#        opzione vengono resi disponibili ad ogni avvio del pc</span>
+<span class="hljs-comment"># defaults - Usa le opzioni di default: rw,suid,dev,exec,auto,nouser,async</span>
+<span class="hljs-comment"># dev - Interpreta i device speciali presenti nel filesystem</span>
+<span class="hljs-comment"># dirsync - Tutti gli aggiornamenti delle directory presenti nel filesystem vengono in modo sincrono</span>
+<span class="hljs-comment"># exec - Permette di eseguire i programmi</span>
+<span class="hljs-comment"># _netdev - Il filesystem risiede su un device disponibile via rete. Evita che il sistema cerchi di montarlo</span>
+<span class="hljs-comment">#           prima che sia disponibile l accesso alla rete</span>
+<span class="hljs-comment"># noatime - Non aggiorna la data di accesso all&#x27;inode ad ogni accesso. Aumenta la velocità di accesso ai dati</span>
+<span class="hljs-comment"># noauto - Il filesystem non viene montato in modo automatico l&#x27; opzione &quot;-a&quot; di mount non influisce</span>
+<span class="hljs-comment"># nodev - Non interpreta i device speciali presenti nel filesystem</span>
+<span class="hljs-comment"># noexec - Non permette l&#x27; esecuzione dei programmi presenti nel filesystem</span>
+<span class="hljs-comment"># nosuid - I bit di setuid e setgid non vengono presi in considerazione</span>
+<span class="hljs-comment"># nouser - Impedisce ai normali user di montare il filesystem</span>
+<span class="hljs-comment"># quiet - Tralascia gli errori sull&#x27;impossibilità di preservare i permessi durante la copia e lo spostamento da </span>
+<span class="hljs-comment">#         partizioni Linux</span>
+<span class="hljs-comment"># remount - Cerca di rieseguire il mount del filesystem già montato. Si usa per modificare le opzioni dello</span>
+<span class="hljs-comment">#           stesso</span>
+<span class="hljs-comment"># ro - Il filesystem viene montato in ReadOnly </span>
+<span class="hljs-comment"># rw - Il filesystem viene montato in ReadWrite (vedere anche &quot;captive&quot;)</span>
+<span class="hljs-comment"># showexec - Setta l&#x27;eseguibilità in fat32</span>
+<span class="hljs-comment"># suid - I bit di setuid e setgid vengono presi in considerazione</span>
+<span class="hljs-comment"># sw - Indica che si tratta di una partizione dedicata allo swap di Linux</span>
+<span class="hljs-comment"># sync - Tutte le operazioni di input e output vengono eseguite in modo sincrono</span>
+<span class="hljs-comment"># user - Permette a un utente comune di montare il filesystem. Il nome dell&#x27;utente è scritto in mtab in modo</span>
+<span class="hljs-comment">#        che egli possa smontare il filesystem nuovamente. Questa opzione implica le opzioni: noexec, nosuid e</span>
+<span class="hljs-comment">#        nodev ( a meno che sia scavalcata da altre opzioni come exec, dev, suid ).</span>
+<span class="hljs-comment"># users - Questa opzione permette ad ogni utente comune di montare e smontare il filesystem. Questa opzione</span>
+<span class="hljs-comment">#         implica le opzioni: noexec, nosuid, nodev a meno di opzioni diverse (leggi sopra)</span>
+<span class="hljs-comment"># utf8 - Indica il tipo di rappresentazione dei caratteri, che in questo caso è proprio quello dell&#x27;alfabeto</span>
+<span class="hljs-comment">#        europeo (simbolo rappresentato dal codice numerico. es: gib5 rappresentazione cinese)</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># Opzioni sui permessi</span>
+<span class="hljs-comment"># gid=GID - Indica, tramite il Group ID, il gruppo proprietario del filesystem montato</span>
+<span class="hljs-comment"># uid=UID - Indica, tramite lo User ID, l&#x27;utente proprietario del filesystem montato</span>
+<span class="hljs-comment"># umask=xxx - Imposta i permessi di filesystem DA SOTTRARRE A QUELLI DI SISTEMA (con la logica chmod), metto per </span>
+<span class="hljs-comment">#             esempio umask=777 neanche root può cambiare permessi a nessun file</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#       DUMP        #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Setta la risposta della partizione al comando &#x27;&#x27;&#x27;dump&#x27;&#x27;&#x27; (solo per filesystem ext2) da </span>
+<span class="hljs-comment"># &#x27;&#x27;&#x27;Shell&#x27;&#x27;&#x27; per i back-up (vedi &quot;man dump&quot;).</span>
+<span class="hljs-comment"># DUMP è un comando che controlla i file importanti che necessitano di Back-Up e con questo settaggio si decide </span>
+<span class="hljs-comment"># che partizione accetta il comando. </span>
+<span class="hljs-comment"># ANCHE SE OBSOLETO MEGLIO NON TOCCARE ;)</span>
+<span class="hljs-comment"># </span>
+<span class="hljs-comment"># 0 - Non effettuerà back-up in questa partizione</span>
+<span class="hljs-comment"># 1 - Effettuerà back-up in questa partizione</span>
+
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment">#       PASS        #</span>
+<span class="hljs-comment">#####################</span>
+<span class="hljs-comment"># Determina la priorità secondo cui i file system vengono controllati dal comando &#x27;&#x27;&#x27;fsck&#x27;&#x27;&#x27; da &#x27;&#x27;&#x27;Shell&#x27;&#x27;&#x27;</span>
+<span class="hljs-comment"># IL FILESYSTEM DI BOOT DEVE ESSERE CONTROLLABILE SEMPRE E VA SETTATO A 1!!!</span>
+<span class="hljs-comment"># Se più partizioni hanno il PASS uguale verrà effettuato un controllo in parallelo.</span>
+<span class="hljs-comment"># Partizioni secondarie (dati) non necessitano del controllo ma il Filesystem di boot è meglio lasciarlo a</span>
+<span class="hljs-comment"># 1 per permettere interagibilità del &#x27;&#x27;&#x27;fsck&#x27;&#x27;&#x27; in caso di controlli di emergenza.</span>
+<span class="hljs-comment">#</span>
+<span class="hljs-comment"># 0 - Non viene permesso il controllo a pass</span>
+<span class="hljs-comment"># 1 - Viene controllato con alta priorità</span>
+<span class="hljs-comment"># 2 - Viene controllato con priorità secondaria</span>
+
+</code></pre>
+</body></html>

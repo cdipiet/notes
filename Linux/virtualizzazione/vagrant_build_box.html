@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.204" />
+        <title>vagrant_build_box</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vagrant_build_box" tabindex="-1">vagrant_build_box <a class="header-anchor" href="#vagrant_build_box" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.204</p>
+<nav class="table-of-contents"><ol><li><a href="#so%2C-why-build-a-box%3F">So, Why Build a Box? </a></li><li><a href="#definitions">Definitions </a></li><li><a href="#getting-prepared">Getting Prepared </a></li><li><a href="#build-a-box">Build a Box </a><ol><li><a href="#configure-the-virtual-hardware">CONFIGURE THE VIRTUAL HARDWARE </a></li><li><a href="#install-the-operating-system">INSTALL THE OPERATING SYSTEM </a></li><li><a href="#set-root-password">SET ROOT PASSWORD </a></li><li><a href="#set-up-the-super-user">SET UP THE SUPER USER </a></li><li><a href="#updating-the-operating-system">UPDATING THE OPERATING SYSTEM </a></li><li><a href="#install-the-vagrant-key">INSTALL THE VAGRANT KEY </a></li><li><a href="#install-and-configure-openssh-server">INSTALL AND CONFIGURE OPENSSH SERVER </a></li><li><a href="#installing-guest-tools">INSTALLING GUEST TOOLS </a></li><li><a href="#package-the-box">PACKAGE THE BOX </a></li><li><a href="#test-your-box">TEST YOUR BOX </a></li></ol></li><li><a href="#packer">Packer </a></li></ol></nav><h1 id="building-a-vagrant-box-from-start-to-finish" tabindex="-1">Building a Vagrant Box from Start to Finish <a class="header-anchor" href="#building-a-vagrant-box-from-start-to-finish" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.engineyard.com/blog/building-a-vagrant-box-from-start-to-finish/">https://www.engineyard.com/blog/building-a-vagrant-box-from-start-to-finish/</a></li>
+</ul>
+<p>Note: This article was originally published at <a href="http://tylerbird.org">tylerbird.org</a>. It was recently updated for publication on the Engine Yard blog.</p>
+<p>The goal of Vagrant is to make it simple to create a local development environment so that you’d never want to do it another way again. You can quickly set up your first Vagrant environment with two simple commands. And with a third, you’re connected to your first Vagrant box—all in under a few minutes.</p>
+<pre><code class="language-bash">$ vagrant init precise32 http://files.vagrantup.com/precise32.box
+$ vagrant up
+$ vagrant ssh <span class="hljs-comment"># you’re in!</span>
+</code></pre>
+<p>This power is amazing and applicable for freelancers who work on many different projects—or companies that need to onboard new members of a team as quickly as possible. With Vagrant, the configuration of development and the production environment can be mirrored as closely as possible. Errors like “works on my machine” become a thing of the past.</p>
+<p>Already a fan of Vagrant? Well, I’m preaching to the choir. For more about what Vagrant can do, check out the amazing documentation. Or do what I did and pick up Vagrant: Up and Running by Vagrant’s creator, Mitchell Hashimoto. It’s a short review, but it’s jam-packed with the details you need to get to know Vagrant.</p>
+<p>Creating a Custom Box from Scratch, a blog written by Ryan Skoblenick, is another fantastic resource—but it only got me 90% of the way there. I had problems getting the Guest Tools installed and configuring the SSH User for the operating system. Thus, it’s my hope that this article improves upon that process and adds a voice of sanity to those who need some help getting a box built by hand.</p>
+<h2 id="so%2C-why-build-a-box%3F" tabindex="-1">So, Why Build a Box? <a class="header-anchor" href="#so%2C-why-build-a-box%3F" aria-hidden="true">🔗</a></h2>
+<p>There are a bunch of amazing boxes out there available on sites like <a href="http://vagrantbox.es">vagrantbox.es</a> and Vagrant Cloud. Why would you want to build your own box?</p>
+<p>Maybe you want to add a few extra things to your base and then start this as your new “base.” Maybe you want your box to have more RAM. Or perhaps you need boxes to more closely mirror production, and you are building a RAM-enriched, multiple-server cluster with multiple provisioners.</p>
+<p>We get it…you’ve got a mountain to climb.</p>
+<h2 id="definitions" tabindex="-1">Definitions <a class="header-anchor" href="#definitions" aria-hidden="true">🔗</a></h2>
+<p>What’s a package.box file? When using the VirtualBox provider, it’s a tarred, gzip file that contains the following:</p>
+<ul>
+<li>Vagrantfile</li>
+<li>box-disk.vmdk</li>
+<li>box.ovf</li>
+<li>metadata.json</li>
+</ul>
+<p>The Vagrantfile has some information that will be merged into your Vagrantfile that’s created when you run vagrant init boxname in a folder.</p>
+<ul>
+<li>The box-disk.vmdk is the virtual hard disk drive.</li>
+<li>The box.ovf defines the virtual hardware for the box.</li>
+<li>The metadata.json tells Vagrant what provider the box works with.</li>
+</ul>
+<p>These contents would be different for the VMWare provider, etc. For more about this, refer to the Vagrant docs on boxes.</p>
+<h2 id="getting-prepared" tabindex="-1">Getting Prepared <a class="header-anchor" href="#getting-prepared" aria-hidden="true">🔗</a></h2>
+<p>If you don’t already have Vagrant and VirtualBox, grab those.</p>
+<ul>
+<li>Download Vagrant installer for your operating system.</li>
+<li>Download VirtualBox installer for your operating system.</li>
+</ul>
+<p>Be sure to grab VirtualBox extension packs as well. For more about the functionality that these provide, read here.</p>
+<pre><code>“Prior to the installation packages, Vagrant was distributed as a RubyGem. Installation packages are now the preferred way to install Vagrant, so you should uninstall the RubyGem version and follow the instructions for your platform. The RubyGem-based installation is still supported for Vagrant 1.0.x, but is deprecated and will not be supported in any future versions.”
+
+Page 8, Vagrant: Up and Running by Mitchell Hashimoto (O’Reilly). Copyright 2013 Mitchell Hashimoto, 978-1-449-33583-0.
+</code></pre>
+<p>RUBY USERS: If you had Vagrant installed as a RubyGem, uninstall it before you install Vagrant:</p>
+<pre><code>gem uninstall vagrant
+</code></pre>
+<p>Run the Vagrant installer and the VirtualBox and VirtualBox extension pack installers; once they are installed, if you feel like a reboot would help, go ahead.</p>
+<p>Download Ubuntu Server. The rest of the instructions will be for Ubuntu, but if you’re choosing another distro, you’re probably fine to adapt the commands that follow.</p>
+<h2 id="build-a-box" tabindex="-1">Build a Box <a class="header-anchor" href="#build-a-box" aria-hidden="true">🔗</a></h2>
+<p>We’re going to use VirtualBox to build an Ubuntu server from scratch. The reason for this is because Vagrant has native support for VirtualBox. There are more plug-ins out there for other providers like VMWare, Parallels, and Vagrant-LXC. We’ll stick to VirtualBox for this guide.</p>
+<p>When we set up our Ubuntu server, it prompts us to set up a default user. We’re going to name that user vagrant so it’s the default user as well. This will make it the default SSH user and streamline the process.
+You might also like:   Setting up your ELB Healthcheck</p>
+<h3 id="configure-the-virtual-hardware" tabindex="-1">CONFIGURE THE VIRTUAL HARDWARE <a class="header-anchor" href="#configure-the-virtual-hardware" aria-hidden="true">🔗</a></h3>
+<p>Create a new virtual machine with the following settings:</p>
+<ul>
+<li>Name: vagrant-ubuntu64</li>
+<li>Type: Linux</li>
+<li>Version: Ubuntu64</li>
+<li>Memory Size: 512MB (to taste)</li>
+<li>New Virtual Disk: [Type: VMDK, Size: 40 GB]</li>
+</ul>
+<p>Modify the hardware settings of the virtual machine for performance and because SSH needs port-forwarding enabled for the Vagrant user:</p>
+<ul>
+<li>Disable audio</li>
+<li>Disable USB</li>
+<li>Ensure <strong>Network Adapter 1</strong> is set to <code>NAT</code></li>
+<li>Add this <strong>port-forwarding rule</strong>: [Name: SSH, Protocol: TCP, Host IP: blank, Host Port: <code>2222</code>, Guest IP: blank, Guest Port: <code>22</code>]</li>
+</ul>
+<p>Mount the Linux Distro ISO and boot up the server.</p>
+<h3 id="install-the-operating-system" tabindex="-1">INSTALL THE OPERATING SYSTEM <a class="header-anchor" href="#install-the-operating-system" aria-hidden="true">🔗</a></h3>
+<p>Setting up Ubuntu is simple. Follow the on-screen prompts, and when prompted to set up a user, set the user to vagrant and the password to vagrant. It will respond with a passive-aggressive comment about it being a weak password. Don’t let that shake you. Be strong and soldier through.</p>
+<h3 id="set-root-password" tabindex="-1">SET ROOT PASSWORD <a class="header-anchor" href="#set-root-password" aria-hidden="true">🔗</a></h3>
+<p>To set up the super user—aka root user—you’ll need to be able to sign in as that user. Because I asked you to make vagrant the default user while installing the operating system in the last step, these commands should help you set the root password and then sign in as root to make the next configuration changes below.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> passwd root
+</code></pre>
+<p>This will prompt you to type the password twice—where I’d suggest the password <code>vagrant</code>. Sign in as the root user to set up the super user next.</p>
+<pre><code class="language-bash">$ su –
+</code></pre>
+<h3 id="set-up-the-super-user" tabindex="-1">SET UP THE SUPER USER <a class="header-anchor" href="#set-up-the-super-user" aria-hidden="true">🔗</a></h3>
+<p><strong>Vagrant must be able to run sudo commands without a password prompt</strong>, and if you’re not configuring Ubuntu at this point, just make sure that requiretty is disabled for the Vagrant user.</p>
+<p>The most efficient way to set up the Vagrant user so that it’s able to use sudo without being prompted for a password is to add it to the sudoers list like this:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> visudo -f /etc/sudoers.d/vagrant
+</code></pre>
+<p>Anything in the <code>/etc/sudoers.d/*</code> folder is included in the sudoers privileges when created by the root user. That’s why we created this as the root user and in that folder.</p>
+<p>With that file open, add this to the file and then save it and exit.</p>
+<pre><code># add vagrant user
+vagrant ALL=(ALL) NOPASSWD:ALL
+</code></pre>
+<p>You can now test that it works by running a simple command:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">pwd</span>
+</code></pre>
+<p>It will return the home folder without prompting you for a password if everything is set up. If you’re prompted for a password, something is wrong. And things won’t work right. This step was CRUCIAL for me, so please ensure that this test passes for you.</p>
+<h3 id="updating-the-operating-system" tabindex="-1">UPDATING THE OPERATING SYSTEM <a class="header-anchor" href="#updating-the-operating-system" aria-hidden="true">🔗</a></h3>
+<p>One of the reasons we are building this box is so that we can save time by already being as up to date as when the box was built. Let’s get up to date first.</p>
+<pre><code>sudo apt-get update -y
+sudo apt-get upgrade -y
+</code></pre>
+<p>Usually if there are kernel updates, you’ll want to reboot the server. So, do that.</p>
+<pre><code>sudo shutdown -r now
+</code></pre>
+<h3 id="install-the-vagrant-key" tabindex="-1">INSTALL THE VAGRANT KEY <a class="header-anchor" href="#install-the-vagrant-key" aria-hidden="true">🔗</a></h3>
+<p>The only way that all the Vagrant commands can communicate over SSH from the host machine to the guest server is if the guest server has this “insecure Vagrant key” installed. It’s called “insecure” because essentially everyone has this same key, and anyone can hack into everyone’s Vagrant box if you use it.</p>
+<p>At the same time, we’re hoping you’re not running around with all your most valuable company data on your Vagrant boxes, right?</p>
+<p>RIGHT? OK. Good.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> -p /home/vagrant/.ssh
+$ <span class="hljs-built_in">chmod</span> 0700 /home/vagrant/.ssh
+$ wget –no-check-certificate \
+$         https://raw.github.com/mitchellh/vagrant/master/keys/vagrant.pub \
+$         -O /home/vagrant/.ssh/authorized_keys
+$ <span class="hljs-built_in">chmod</span> 0600 /home/vagrant/.ssh/authorized_keys
+$ <span class="hljs-built_in">chown</span> -R vagrant /home/vagrant/.ssh
+</code></pre>
+<h3 id="install-and-configure-openssh-server" tabindex="-1">INSTALL AND CONFIGURE OPENSSH SERVER <a class="header-anchor" href="#install-and-configure-openssh-server" aria-hidden="true">🔗</a></h3>
+<p>If you didn’t install SSH while installing the operating system, you can do it now: sudo apt-get install -y openssh-server</p>
+<p>We need to edit the /etc/ssh/sshd_config file:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> nano /etc/ssh/sshd_config
+</code></pre>
+<p>Find and uncomment the following line because we added the Vagrant key above to the authorized_keys file:
+You might also like:   A Discussion with Clare Liguori from AWS Container Services</p>
+<p><code>AuthorizedKeysFile %h/.ssh/authorized_keys</code></p>
+<p>Then restart SSH:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> service ssh restart
+</code></pre>
+<h3 id="installing-guest-tools" tabindex="-1">INSTALLING GUEST TOOLS <a class="header-anchor" href="#installing-guest-tools" aria-hidden="true">🔗</a></h3>
+<p>Guest Tools help the operating system handle shared folders and, according to the manual, “optimize the guest operating system for better performance and usability.”</p>
+<p>A compiler is required to install the Guest Tools. Use this command:</p>
+<pre><code>sudo apt-get install -y gcc build-essential linux-headers-server
+</code></pre>
+<p>In VirtualBox, browse to the Devices menu at the top and then in the drop-down list at the bottom, click on Insert Guest Additions CD Image.</p>
+<p>This will add an ISO image to the virtual CD-ROM running in your server. Run these commands to mount your CD-ROM and then run the script.</p>
+<p>NOTE: The message about the CD-ROM being read-only is fine.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> mount /dev/cdrom /mnt
+$ <span class="hljs-built_in">cd</span> /mnt
+$ <span class="hljs-built_in">sudo</span> ./VBoxLinuxAdditions.run
+</code></pre>
+<h3 id="package-the-box" tabindex="-1">PACKAGE THE BOX <a class="header-anchor" href="#package-the-box" aria-hidden="true">🔗</a></h3>
+<p>Before you package the box, you’ll want to “zero out” the drive. According to Vagrant: Up and Running: “This fixes fragmentation issues with the underlying disk, which allows it to compress much more efficiently later.”</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">dd</span> <span class="hljs-keyword">if</span>=/dev/zero of=/EMPTY bs=1M
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">rm</span> -f /EMPTY
+</code></pre>
+<p>Now we’re ready to package the box. I usually make a folder to hold my boxes—like so:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">mkdir</span> ~/code/personal/vagrant_boxes
+$ <span class="hljs-built_in">cd</span> ~/code/personal/vagrant_boxes
+</code></pre>
+<p>This command finally packages up the box for you, as we defined above, into the compressed gzip tarball file. It also generates and includes the Vagrantfile and the metadata.json file.</p>
+<pre><code class="language-bash">$ vagrant package -–base vagrant-ubuntu64
+</code></pre>
+<p>Vagrant will then check VirtualBox for any instances of the name vagrant-ubuntu64 and attempt to SSH into them and control them.</p>
+<pre><code class="language-bash">$ vagrant package -–base vagrant-ubuntu64
+[vagrant-ubuntu64] Attempting graceful shutdown of VM…
+[vagrant-ubuntu64] Forcing shutdown of VM…
+[vagrant-ubuntu64] Clearing any previously <span class="hljs-built_in">set</span> forwarded ports…
+[vagrant-ubuntu64] Exporting VM…
+[vagrant-ubuntu64] Compressing package to: /Users/tbird/code/personal/virtual_boxes/package.box
+</code></pre>
+<p>You are left with the package.box file in your ~/code/personal/vagrant_boxes folder.</p>
+<h3 id="test-your-box" tabindex="-1">TEST YOUR BOX <a class="header-anchor" href="#test-your-box" aria-hidden="true">🔗</a></h3>
+<p>From your same vagrant_boxes folder, you can run these final test commands. All the heavy lifting is done at this point—and if you’ve screwed up, it’s probably in a step up above.</p>
+<p>You should be in <code>~/code/personal/vagrant_boxes/</code> and type:</p>
+<pre><code class="language-bash">$ vagrant box add ubuntu64 package.box
+$ vagrant init ubuntu64
+$ vagrant up
+</code></pre>
+<p>Connect to the server you created from start to finish!</p>
+<pre><code class="language-bash">$ vagrant ssh
+</code></pre>
+<p>You’ve won. You deserve a high-five.</p>
+<h2 id="packer" tabindex="-1">Packer <a class="header-anchor" href="#packer" aria-hidden="true">🔗</a></h2>
+<p>Just when you thought it was safe to do things manually at the beginning… in comes Packer. What is Packer, you ask?</p>
+<p>Well, Packer automates everything we just did</p>
+<p>Anyway… once you have Vagrant, VirtualBox, and Packer installed, you can define a <code>quick-start.json</code> file like:</p>
+<pre><code>{
+    ‘builders‘: [{
+    ‘type‘: ‘amazon-ebs’,
+    ‘access_key‘: ‘YOUR KEY HERE’,
+    ‘secret_key‘: ‘YOUR SECRET KEY HERE’,
+    ‘region‘: ‘us-east-1’,
+    ‘source_ami‘: ‘ami-de0d9eb7’,
+        ‘instance_type‘: ‘t1.micro’,
+    ‘ssh_username‘: ‘ubuntu’,
+    ‘ami_name‘: ‘packer-example ‘
+    }]
+}
+</code></pre>
+<p>After changing the Access and Secret Key, you can run the Packer command with the quick-start.json file:</p>
+<pre><code class="language-bash">$ packer build quick-start.json
+</code></pre>
+<p>Packer will then automate the creation of that quick-start.json machine</p>
+<p>image for Amazon EC2. That can optionally include the creation of a Vagrant box.</p>
+<p>What Packer aims to do is to make its images compatible with all these providers: Amazon EC2 (AMI), DigitalOcean, Docker, Google Compute Engine, OpenStack, QEMU for KVM or Xen instances, or even VirtualBox or VMWare software. (See platforms for the entire list.)
+What Have We Learned?</p>
+<p>What have we learned from this process of building boxes for Vagrant?</p>
+<p>The process of automation is the process of taking yourself out of the equation. If we think of the job of automating your development environment or production environment so that it runs without your intervention, then your actions are doing it right!</p>
+<p>Even if we want to do it by hand—or use Packer—knowing how things work is a lot better than guessing how they work. Plus, I like to experience things a few times before I start to automate those boring parts so that I can focus on new, more interesting challenges.</p>
+<p>/etc/sudoers
+#vagrant ALL=(ALL) NOPASSWD: ALL
+Defaults:vagrant !authenticate</p>
+</body></html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.477" />
+        <title>code_plugins</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="code_plugins" tabindex="-1">code_plugins <a class="header-anchor" href="#code_plugins" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.477</p>
+<nav class="table-of-contents"><ol><li><a href="#generali">Generali </a></li><li><a href="#markdown">Markdown </a></li><li><a href="#git">Git </a></li><li><a href="#python">Python </a></li><li><a href="#ansible">Ansible </a></li><li><a href="#yaml">YAML </a></li><li><a href="#docker">Docker </a></li><li><a href="#xml">XML </a></li><li><a href="#sqlite">SQLite </a></li><li><a href="#rust">Rust </a></li><li><a href="#.env">.env </a></li><li><a href="#node.js---javascript">Node.js - Javascript </a></li><li><a href="#ai">AI </a></li><li><a href="#html---css">HTML - CSS </a></li></ol></nav><h1 id="plugins" tabindex="-1">Plugins <a class="header-anchor" href="#plugins" aria-hidden="true">🔗</a></h1>
+<h2 id="generali" tabindex="-1">Generali <a class="header-anchor" href="#generali" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode">https://marketplace.visualstudio.com/items?itemName=VisualStudioExptTeam.vscodeintellicode</a> IntelliCode
+<ul>
+<li><a href="https://github.com/MicrosoftDocs/intellicode">https://github.com/MicrosoftDocs/intellicode</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=qcz.text-power-tools">https://marketplace.visualstudio.com/items?itemName=qcz.text-power-tools</a> Text Power Tools
+<ul>
+<li><a href="https://github.com/qcz/vscode-text-power-tools">https://github.com/qcz/vscode-text-power-tools</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense">https://marketplace.visualstudio.com/items?itemName=christian-kohler.path-intellisense</a> Path Intellisense
+<ul>
+<li><a href="https://github.com/ChristianKohler/PathIntellisense">https://github.com/ChristianKohler/PathIntellisense</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons">https://marketplace.visualstudio.com/items?itemName=vscode-icons-team.vscode-icons</a>
+<ul>
+<li><a href="https://github.com/vscode-icons/vscode-icons">https://github.com/vscode-icons/vscode-icons</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vs-publisher-1448185.keyoti-changeallendoflinesequence">https://marketplace.visualstudio.com/items?itemName=vs-publisher-1448185.keyoti-changeallendoflinesequence</a>
+<ul>
+<li><a href="https://github.com/keyoti/VSCode-ChangeAllEOL">https://github.com/keyoti/VSCode-ChangeAllEOL</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders">https://marketplace.visualstudio.com/items?itemName=moshfeu.compare-folders</a>
+<ul>
+<li><a href="https://github.com/moshfeu/vscode-compare-folders">https://github.com/moshfeu/vscode-compare-folders</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="markdown" tabindex="-1">Markdown <a class="header-anchor" href="#markdown" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one">https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one</a>
+<ul>
+<li><a href="https://github.com/yzhang-gh/vscode-markdown">https://github.com/yzhang-gh/vscode-markdown</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint">https://marketplace.visualstudio.com/items?itemName=DavidAnson.vscode-markdownlint</a>
+<ul>
+<li><a href="https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md">https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md</a></li>
+<li><a href="https://github.com/DavidAnson/markdownlint/blob/main/schema/markdownlint-config-schema.json">https://github.com/DavidAnson/markdownlint/blob/main/schema/markdownlint-config-schema.json</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced">https://marketplace.visualstudio.com/items?itemName=shd101wyy.markdown-preview-enhanced</a>
+<ul>
+<li><a href="https://shd101wyy.github.io/markdown-preview-enhanced/">https://shd101wyy.github.io/markdown-preview-enhanced/</a></li>
+<li><a href="https://github.com/mjbvz/vscode-github-markdown-preview-style">https://github.com/mjbvz/vscode-github-markdown-preview-style</a></li>
+<li><a href="https://github.com/mjbvz/vscode-markdown-mermaid">https://github.com/mjbvz/vscode-markdown-mermaid</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="git" tabindex="-1">Git <a class="header-anchor" href="#git" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens">https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens</a></p>
+<ul>
+<li><a href="https://github.com/gitkraken/vscode-gitlens">https://github.com/gitkraken/vscode-gitlens</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory">https://marketplace.visualstudio.com/items?itemName=donjayamanne.githistory</a>
+<code>CTRL+SHIFT+P</code> Git: View History</p>
+</li>
+</ul>
+<h2 id="python" tabindex="-1">Python <a class="header-anchor" href="#python" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.isort">https://marketplace.visualstudio.com/items?itemName=ms-python.isort</a>
+-<a href="https://github.com/microsoft/vscode-isort.git">https://github.com/microsoft/vscode-isort.git</a></p>
+<p><code>SHIFT+ALT+O</code></p>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.python">https://marketplace.visualstudio.com/items?itemName=ms-python.python</a></p>
+<ul>
+<li><a href="https://github.com/Microsoft/vscode-python.git">https://github.com/Microsoft/vscode-python.git</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance">https://marketplace.visualstudio.com/items?itemName=ms-python.vscode-pylance</a></p>
+<ul>
+<li><a href="https://github.com/microsoft/pylance-release.git">https://github.com/microsoft/pylance-release.git</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="ansible" tabindex="-1">Ansible <a class="header-anchor" href="#ansible" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.ansible">https://marketplace.visualstudio.com/items?itemName=redhat.ansible</a>
+<ul>
+<li><a href="https://github.com/ansible/vscode-ansible">https://github.com/ansible/vscode-ansible</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="yaml" tabindex="-1">YAML <a class="header-anchor" href="#yaml" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml">https://marketplace.visualstudio.com/items?itemName=redhat.vscode-yaml</a>
+<ul>
+<li><a href="https://github.com/redhat-developer/vscode-yaml">https://github.com/redhat-developer/vscode-yaml</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="docker" tabindex="-1">Docker <a class="header-anchor" href="#docker" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker">https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker</a>
+<ul>
+<li><a href="https://github.com/microsoft/vscode-docker">https://github.com/microsoft/vscode-docker</a>
+``</li>
+</ul>
+</li>
+</ul>
+<h2 id="xml" tabindex="-1">XML <a class="header-anchor" href="#xml" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml">https://marketplace.visualstudio.com/items?itemName=DotJoshJohnson.xml</a> XML Tools</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag">https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-close-tag</a></li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag">https://marketplace.visualstudio.com/items?itemName=formulahendry.auto-rename-tag</a></li>
+</ul>
+<h2 id="sqlite" tabindex="-1">SQLite <a class="header-anchor" href="#sqlite" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=yy0931.vscode-sqlite3-editor">https://marketplace.visualstudio.com/items?itemName=yy0931.vscode-sqlite3-editor</a>
+<ul>
+<li><a href="https://github.com/yy0931/sqlite3-editor">https://github.com/yy0931/sqlite3-editor</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="rust" tabindex="-1">Rust <a class="header-anchor" href="#rust" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer</a>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer">https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer</a></li>
+</ul>
+</li>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb">https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb</a>
+<ul>
+<li><a href="https://github.com/vadimcn/codelldb">https://github.com/vadimcn/codelldb</a></li>
+</ul>
+</li>
+</ul>
+<h2 id=".env" tabindex="-1">.env <a class="header-anchor" href="#.env" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv">https://marketplace.visualstudio.com/items?itemName=mikestead.dotenv</a></li>
+<li><a href="https://github.com/mikestead/vscode-dotenv">https://github.com/mikestead/vscode-dotenv</a></li>
+</ul>
+<h2 id="node.js---javascript" tabindex="-1">Node.js - Javascript <a class="header-anchor" href="#node.js---javascript" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense">https://marketplace.visualstudio.com/items?itemName=christian-kohler.npm-intellisense</a> npm intellisense</p>
+<ul>
+<li><a href="https://github.com/ChristianKohler/NpmIntellisense">https://github.com/ChristianKohler/NpmIntellisense</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint">https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint</a> ESLint</p>
+<ul>
+<li><a href="https://github.com/Microsoft/vscode-eslint">https://github.com/Microsoft/vscode-eslint</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode">https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode</a> Prettier</p>
+<ul>
+<li><a href="https://github.com/prettier/prettier-vscode">https://github.com/prettier/prettier-vscode</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ronnidc.nunjucks">https://marketplace.visualstudio.com/items?itemName=ronnidc.nunjucks</a></p>
+<ul>
+<li><a href="https://github.com/ronnidc/vscode-nunjucks">https://github.com/ronnidc/vscode-nunjucks</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="ai" tabindex="-1">AI <a class="header-anchor" href="#ai" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://marketplace.visualstudio.com/items?itemName=GitHub.copilot">https://marketplace.visualstudio.com/items?itemName=GitHub.copilot</a>
+<ul>
+<li><a href="https://github.com/features/copilot?editor=vscode">https://github.com/features/copilot?editor=vscode</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="html---css" tabindex="-1">HTML - CSS <a class="header-anchor" href="#html---css" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser">https://marketplace.visualstudio.com/items?itemName=techer.open-in-browser</a></p>
+<ul>
+<li><a href="https://github.com/SudoKillMe/vscode-extensions-open-in-browser">https://github.com/SudoKillMe/vscode-extensions-open-in-browser</a></li>
+</ul>
+<p>Impostare <strong class="k">ALT+B</strong> per aprire il file corrente nel browser</p>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=HTMLHint.vscode-htmlhint">https://marketplace.visualstudio.com/items?itemName=HTMLHint.vscode-htmlhint</a></p>
+<ul>
+<li><a href="https://github.com/htmlhint/vscode-htmlhint">https://github.com/htmlhint/vscode-htmlhint</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css">https://marketplace.visualstudio.com/items?itemName=ecmel.vscode-html-css</a></p>
+<ul>
+<li><a href="https://github.com/ecmel/vscode-html-css">https://github.com/ecmel/vscode-html-css</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer">https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer</a></p>
+<ul>
+<li><a href="https://github.com/ritwickdey/vscode-live-server">https://github.com/ritwickdey/vscode-live-server</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion">https://marketplace.visualstudio.com/items?itemName=Zignd.html-css-class-completion</a></p>
+<ul>
+<li><a href="https://github.com/Zignd/HTML-CSS-Class-Completion">https://github.com/Zignd/HTML-CSS-Class-Completion</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss">https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss</a></p>
+<ul>
+<li><a href="https://github.com/tailwindlabs/tailwindcss-intellisense">https://github.com/tailwindlabs/tailwindcss-intellisense</a></li>
+</ul>
+</li>
+</ul>
+</body></html>

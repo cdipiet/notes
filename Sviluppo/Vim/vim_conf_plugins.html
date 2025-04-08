@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:18.533" />
+        <title>vim_conf_plugins</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="vim_conf_plugins" tabindex="-1">vim_conf_plugins <a class="header-anchor" href="#vim_conf_plugins" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:18.533</p>
+<nav class="table-of-contents"><ol><li><a href="#plugins">Plugins </a><ol><li><a href="#vim-packages-(since-vim-7.4.1528)">Vim packages (since Vim 7.4.1528) </a></li><li><a href="#vim-plug">vim-plug </a><ol><li><a href="#installazione">Installazione </a></li><li><a href="#configurazione">Configurazione </a></li><li><a href="#aggiornare-i-plugin">Aggiornare i plugin </a></li><li><a href="#stato-dei-plugin">Stato dei plugin </a></li></ol></li><li><a href="#sensible">Sensible </a></li><li><a href="#ale---asynchronous-lint-engine">ALE - Asynchronous Lint Engine </a></li><li><a href="#prettier---code-formatter">prettier - code formatter </a><ol><li><a href="#installazione-prettier">Installazione Prettier </a></li><li><a href="#esecuzione">Esecuzione </a></li></ol></li><li><a href="#conquer-of-completion">Conquer Of Completion </a></li><li><a href="#vim-polyglot---syntax-highlighting">vim-polyglot - syntax highlighting </a></li><li><a href="#vim-rainbow">vim-rainbow </a></li><li><a href="#lightline">lightline </a></li><li><a href="#fugitive">fugitive </a></li><li><a href="#nerdtree">NERDTree </a><ol><li><a href="#aprire-nerdtree">Aprire NERDTree </a></li><li><a href="#aprire-nerdtree-quando-si-lancia-vim-senza-file">Aprire NERDTree quando si lancia vim senza file </a></li></ol></li><li><a href="#easy-align">Easy Align </a></li><li><a href="#file-search">File Search </a></li></ol></li></ol></nav><h1 id="vim-plugins" tabindex="-1">VIM Plugins <a class="header-anchor" href="#vim-plugins" aria-hidden="true">🔗</a></h1>
+<h2 id="plugins" tabindex="-1">Plugins <a class="header-anchor" href="#plugins" aria-hidden="true">🔗</a></h2>
+<p><a href="https://superuser.com/questions/404686/installing-plugins-in-vim">https://superuser.com/questions/404686/installing-plugins-in-vim</a></p>
+<p>On Mac OS X (or any UNIX derivative) you must put your plugins/colorschemes/scripts in a <code>~/.vim</code> directory <br>
+and your custom settings in a <code>~/.vimrc</code> file. <br>
+None of these are there by default: you'll have to create them yourself as well as any needed sub-directories.</p>
+<p>Some plugins consist of only one file, <code>pluginname.vim</code> that you should put in <code>~/.vim/plugin</code>.</p>
+<h3 id="vim-packages-(since-vim-7.4.1528)" tabindex="-1">Vim packages (since Vim 7.4.1528) <a class="header-anchor" href="#vim-packages-(since-vim-7.4.1528)" aria-hidden="true">🔗</a></h3>
+<p><a href="https://vimhelp.org/repeat.txt.html#packages">https://vimhelp.org/repeat.txt.html#packages</a></p>
+<pre><code class="language-vim">:<span class="hljs-keyword">help</span> packages
+</code></pre>
+<pre><code>Es. git clone https://github.com/itchyny/lightline.vim ~/.vim/pack/plugins/start/lightline
+</code></pre>
+<h3 id="vim-plug" tabindex="-1">vim-plug <a class="header-anchor" href="#vim-plug" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/junegunn/vim-plug">https://github.com/junegunn/vim-plug</a></li>
+<li><a href="https://github.com/junegunn/vim-plug/wiki/tutorial">https://github.com/junegunn/vim-plug/wiki/tutorial</a></li>
+</ul>
+<h4 id="installazione" tabindex="-1">Installazione <a class="header-anchor" href="#installazione" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+</code></pre>
+<h4 id="configurazione" tabindex="-1">Configurazione <a class="header-anchor" href="#configurazione" aria-hidden="true">🔗</a></h4>
+<p>Aggiungere al <code>~/.vimrc</code> la configurazione per vim-plug:</p>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim"><span class="hljs-comment">&quot; Plugins will be downloaded under the specified directory.</span>
+<span class="hljs-keyword">call</span> plug#begin(<span class="hljs-string">&#x27;~/.vim/plugged&#x27;</span>)
+
+<span class="hljs-comment">&quot; Declare the list of plugins.</span>
+Plug <span class="hljs-string">&#x27;tpope/vim-sensible&#x27;</span>
+Plug <span class="hljs-string">&#x27;junegunn/vim-easy-align&#x27;</span>
+
+<span class="hljs-comment">&quot; List ends here. Plugins become visible to Vim after this call.</span>
+<span class="hljs-keyword">call</span> plug#end()
+</code></pre>
+<p>Ricaricare la configurazione:</p>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h4 id="aggiornare-i-plugin" tabindex="-1">Aggiornare i plugin <a class="header-anchor" href="#aggiornare-i-plugin" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-vim">:PlugUpdate
+</code></pre>
+<h4 id="stato-dei-plugin" tabindex="-1">Stato dei plugin <a class="header-anchor" href="#stato-dei-plugin" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-vim">:PlugStatus
+</code></pre>
+<h3 id="sensible" tabindex="-1">Sensible <a class="header-anchor" href="#sensible" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/tpope/vim-sensible">https://github.com/tpope/vim-sensible</a></p>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;tpope/vim-sensible&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h3 id="ale---asynchronous-lint-engine" tabindex="-1">ALE - Asynchronous Lint Engine <a class="header-anchor" href="#ale---asynchronous-lint-engine" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/dense-analysis/ale">https://github.com/dense-analysis/ale</a></li>
+</ul>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;dense-analysis/ale&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+:ALEInfo
+:<span class="hljs-keyword">help</span> ale
+</code></pre>
+<h3 id="prettier---code-formatter" tabindex="-1">prettier - code formatter <a class="header-anchor" href="#prettier---code-formatter" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/prettier/vim-prettier">https://github.com/prettier/vim-prettier</a></li>
+<li><a href="https://prettier.io/docs/en/configuration.html">https://prettier.io/docs/en/configuration.html</a></li>
+<li><a href="https://prettier.io/docs/en/options.html">https://prettier.io/docs/en/options.html</a></li>
+</ul>
+<h4 id="installazione-prettier" tabindex="-1">Installazione Prettier <a class="header-anchor" href="#installazione-prettier" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-bash">$ npm install -g prettier
+</code></pre>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim"><span class="hljs-comment">&quot; post install (npm install) then load plugin only for editing supported files</span>
+<span class="hljs-comment">&quot; When installed via vim-plug, a default prettier executable is installed inside vim-prettier.</span>
+Plug <span class="hljs-string">&#x27;prettier/vim-prettier&#x27;</span>, { <span class="hljs-string">&#x27;do&#x27;</span>: <span class="hljs-string">&#x27;npm install&#x27;</span> }
+
+<span class="hljs-comment">&quot; Prettier</span>
+<span class="hljs-comment">&quot; number of spaces per indentation level: a number or &#x27;auto&#x27; (use</span>
+<span class="hljs-comment">&quot; softtabstop)</span>
+<span class="hljs-comment">&quot; default: &#x27;auto&#x27;</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:prettier</span>#config#tab_width = <span class="hljs-number">4</span>
+<span class="hljs-comment">&quot; use tabs instead of spaces: true, false, or auto (use the expandtab setting).</span>
+<span class="hljs-comment">&quot; default: &#x27;auto&#x27;</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:prettier</span>#config#use_tabs = <span class="hljs-string">&#x27;false&#x27;</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:prettier</span>#config#single_quote = <span class="hljs-string">&#x27;true&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h4 id="esecuzione" tabindex="-1">Esecuzione <a class="header-anchor" href="#esecuzione" aria-hidden="true">🔗</a></h4>
+<p>di default Prettier viene eseguito al save, ma può essere invocato con <span class="k">\</span> <span class="k">p</span>:</p>
+<pre><code class="language-vim"><span class="hljs-symbol">&lt;Leader&gt;</span><span class="hljs-keyword">p</span>
+<span class="hljs-keyword">o</span>
+:Prettier
+<span class="hljs-keyword">o</span>
+:PrettierAsync
+:<span class="hljs-keyword">help</span> leader
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file">https://stackoverflow.com/questions/1764263/what-is-the-leader-in-a-vimrc-file</a></p>
+<p>Il tasto <code>&lt;Leader&gt;</code> è mappato di default in <span class="k">\</span></p>
+<h3 id="conquer-of-completion" tabindex="-1">Conquer Of Completion <a class="header-anchor" href="#conquer-of-completion" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/neoclide/coc.nvim">https://github.com/neoclide/coc.nvim</a></li>
+<li><a href="https://stackoverflow.com/questions/635770/jump-to-function-definition-in-vim">https://stackoverflow.com/questions/635770/jump-to-function-definition-in-vim</a></li>
+<li><a href="https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions">https://github.com/neoclide/coc.nvim/wiki/Using-coc-extensions</a>
+:CocInstall coc-json coc-css
+Plug 'neoclide/coc-tsserver', {'do': 'yarn install --frozen-lockfile'}
+:CocList extensions
+Supported actions (hit <Tab> to activate action menu)</li>
+<li><a href="https://github.com/fannheyward/coc-marketplace">https://github.com/fannheyward/coc-marketplace</a></li>
+<li><a href="https://github.com/neoclide/coc-tsserver">https://github.com/neoclide/coc-tsserver</a></li>
+<li><a href="https://github.com/neoclide/coc-json">https://github.com/neoclide/coc-json</a></li>
+<li><a href="https://github.com/neoclide/coc-css">https://github.com/neoclide/coc-css</a></li>
+<li><a href="https://github.com/neoclide/coc-html">https://github.com/neoclide/coc-html</a></li>
+<li><a href="https://github.com/fannheyward/coc-markdownlint">https://github.com/fannheyward/coc-markdownlint</a></li>
+<li><a href="https://github.com/josa42/coc-sh">https://github.com/josa42/coc-sh</a></li>
+</ul>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim"><span class="hljs-comment">&quot; Use release branch (recommend)</span>
+Plug <span class="hljs-string">&#x27;neoclide/coc.nvim&#x27;</span>, {<span class="hljs-string">&#x27;branch&#x27;</span>: <span class="hljs-string">&#x27;release&#x27;</span>}
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> .vimrc | PlugInstall
+:CocList extensions
+:CocInstall coc-marketplace coc-json coc-tsserver coc-css coc-html coc-markdownlint coc-<span class="hljs-keyword">sh</span>
+
+:CocList marketplace
+</code></pre>
+<h3 id="vim-polyglot---syntax-highlighting" tabindex="-1">vim-polyglot - syntax highlighting <a class="header-anchor" href="#vim-polyglot---syntax-highlighting" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/sheerun/vim-polyglot">https://github.com/sheerun/vim-polyglot</a></li>
+</ul>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;sheerun/vim-polyglot&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h3 id="vim-rainbow" tabindex="-1">vim-rainbow <a class="header-anchor" href="#vim-rainbow" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/frazrepo/vim-rainbow">https://github.com/frazrepo/vim-rainbow</a></p>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;frazrepo/vim-rainbow&#x27;</span>
+<span class="hljs-comment">&quot; attivazione vim-rainbow</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:rainbow_active</span> = <span class="hljs-number">1</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h3 id="lightline" tabindex="-1">lightline <a class="header-anchor" href="#lightline" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/itchyny/lightline.vim">https://github.com/itchyny/lightline.vim</a></li>
+<li><a href="https://github.com/itchyny/lightline.vim/blob/master/doc/lightline.txt">https://github.com/itchyny/lightline.vim/blob/master/doc/lightline.txt</a></li>
+</ul>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">:h lightline
+:h <span class="hljs-variable">g:lightline</span>.<span class="hljs-keyword">colorscheme</span>
+:h statusline
+
+</code></pre>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;itchyny/lightline.vim&#x27;</span>
+
+<span class="hljs-keyword">set</span> laststatus=<span class="hljs-number">2</span>
+<span class="hljs-keyword">let</span> <span class="hljs-variable">g:lightline</span> = {<span class="hljs-string">&#x27;colorscheme&#x27;</span>:<span class="hljs-string">&#x27;one&#x27;</span>}
+
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h3 id="fugitive" tabindex="-1">fugitive <a class="header-anchor" href="#fugitive" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/tpope/vim-fugitive">https://github.com/tpope/vim-fugitive</a></p>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;tpope/vim-fugitive&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">help</span> fugitive
+</code></pre>
+<h3 id="nerdtree" tabindex="-1">NERDTree <a class="header-anchor" href="#nerdtree" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/preservim/nerdtree">https://github.com/preservim/nerdtree</a></p>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;preservim/nerdtree&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h4 id="aprire-nerdtree" tabindex="-1">Aprire NERDTree <a class="header-anchor" href="#aprire-nerdtree" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-vim">:NERDTree
+</code></pre>
+<h4 id="aprire-nerdtree-quando-si-lancia-vim-senza-file" tabindex="-1">Aprire NERDTree quando si lancia vim senza file <a class="header-anchor" href="#aprire-nerdtree-quando-si-lancia-vim-senza-file" aria-hidden="true">🔗</a></h4>
+<pre><code class="language-vim"><span class="hljs-keyword">autocmd</span> StdinReadPre * <span class="hljs-keyword">let</span> <span class="hljs-variable">s:std_in</span>=<span class="hljs-number">1</span>
+<span class="hljs-keyword">autocmd</span> VimEnter * <span class="hljs-keyword">if</span> <span class="hljs-built_in">argc</span>() == <span class="hljs-number">0</span> &amp;&amp; !exists(<span class="hljs-string">&quot;s:std_in&quot;</span>) | NERDTree | <span class="hljs-keyword">endif</span>
+</code></pre>
+<h3 id="easy-align" tabindex="-1">Easy Align <a class="header-anchor" href="#easy-align" aria-hidden="true">🔗</a></h3>
+<p><a href="https://github.com/junegunn/vim-easy-align">https://github.com/junegunn/vim-easy-align</a></p>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;junegunn/vim-easy-align&#x27;</span>
+
+<span class="hljs-comment">&quot; Start interactive EasyAlign in visual mode (e.g. vipga)</span>
+<span class="hljs-keyword">xmap</span> ga <span class="hljs-symbol">&lt;Plug&gt;</span>(EasyAlign)
+
+<span class="hljs-comment">&quot; Start interactive EasyAlign for a motion/text object (e.g. gaip)</span>
+<span class="hljs-keyword">nmap</span> ga <span class="hljs-symbol">&lt;Plug&gt;</span>(EasyAlign)
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<h3 id="file-search" tabindex="-1">File Search <a class="header-anchor" href="#file-search" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://github.com/junegunn/fzf">https://github.com/junegunn/fzf</a></li>
+<li><a href="https://github.com/junegunn/fzf.vim">https://github.com/junegunn/fzf.vim</a></li>
+<li><a href="https://github.com/BurntSushi/ripgrep">https://github.com/BurntSushi/ripgrep</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> apt install fzf ripgrep
+</code></pre>
+<p><code>~/.vimrc</code></p>
+<pre><code class="language-vim">Plug <span class="hljs-string">&#x27;junegunn/fzf&#x27;</span>, { <span class="hljs-string">&#x27;do&#x27;</span>: { -&gt; fzf#install() } }
+Plug <span class="hljs-string">&#x27;junegunn/fzf.vim&#x27;</span>
+</code></pre>
+<pre><code class="language-vim">:<span class="hljs-keyword">source</span> ~/.vimrc
+:PlugInstall
+</code></pre>
+<p><code>:Files [PATH]</code> Files (runs <code>$FZF_DEFAULT_COMMAND</code> if defined)
+<code>:Rg [PATTERN]</code> rg search result (<code>ALT-A</code> to select all, <code>ALT-D</code> to deselect all) (Rg requires ripgrep (rg))</p>
+<p>Bang-versions of the commands (e.g. <code>Ag!</code>) will open fzf in fullscreen</p>
+</body></html>

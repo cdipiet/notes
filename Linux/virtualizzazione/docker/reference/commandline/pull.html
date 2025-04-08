@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.562" />
+        <title>pull</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="pull" tabindex="-1">pull <a class="header-anchor" href="#pull" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.562</p>
+<nav class="table-of-contents"><ol><li><a href="#title%3A-%22pull%22description%3A-%22the-pull-command-description-and-usage%22keywords%3A-%22pull%2C-image%2C-hub%2C-docker%22">title: &quot;pull&quot;description: &quot;The pull command description and usage&quot;keywords: &quot;pull, image, hub, docker&quot; </a></li><li><a href="#description">Description </a><ol><li><a href="#proxy-configuration">Proxy configuration </a></li><li><a href="#concurrent-downloads">Concurrent downloads </a></li></ol></li><li><a href="#examples">Examples </a><ol><li><a href="#pull-an-image-from-docker-hub">Pull an image from Docker Hub </a></li><li><a href="#pull-an-image-by-digest-(immutable-identifier)">Pull an image by digest (immutable identifier) </a></li><li><a href="#pull-from-a-different-registry">Pull from a different registry </a></li><li><a href="#pull-a-repository-with-multiple-images">Pull a repository with multiple images </a></li><li><a href="#cancel-a-pull">Cancel a pull </a></li></ol></li></ol></nav><hr>
+<h2 id="title%3A-%22pull%22description%3A-%22the-pull-command-description-and-usage%22keywords%3A-%22pull%2C-image%2C-hub%2C-docker%22" tabindex="-1">title: &quot;pull&quot;
+description: &quot;The pull command description and usage&quot;
+keywords: &quot;pull, image, hub, docker&quot; <a class="header-anchor" href="#title%3A-%22pull%22description%3A-%22the-pull-command-description-and-usage%22keywords%3A-%22pull%2C-image%2C-hub%2C-docker%22" aria-hidden="true">🔗</a></h2>
+<h1 id="pull-1" tabindex="-1">pull <a class="header-anchor" href="#pull-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-markdown">Usage:  docker pull [OPTIONS] NAME[:TAG|@DIGEST]
+
+Pull an image or a repository from a registry
+
+Options:
+  -a, --all-tags                Download all tagged images in the repository
+<span class="hljs-code">      --disable-content-trust   Skip image verification (default true)
+      --help                    Print usage
+  -q, --quiet                   Suppress verbose output
+</span></code></pre>
+<h2 id="description" tabindex="-1">Description <a class="header-anchor" href="#description" aria-hidden="true">🔗</a></h2>
+<p>Most of your images will be created on top of a base image from the
+<a href="https://hub.docker.com">Docker Hub</a> registry.</p>
+<p><a href="https://hub.docker.com">Docker Hub</a> contains many pre-built images that you
+can <code>pull</code> and try without needing to define and configure your own.</p>
+<p>To download a particular image, or set of images (i.e., a repository),
+use <code>docker pull</code>.</p>
+<h3 id="proxy-configuration" tabindex="-1">Proxy configuration <a class="header-anchor" href="#proxy-configuration" aria-hidden="true">🔗</a></h3>
+<p>If you are behind an HTTP proxy server, for example in corporate settings,
+before open a connect to registry, you may need to configure the Docker
+daemon's proxy settings, using the <code>HTTP_PROXY</code>, <code>HTTPS_PROXY</code>, and <code>NO_PROXY</code>
+environment variables. To set these environment variables on a host using
+<code>systemd</code>, refer to the <a href="https://docs.docker.com/config/daemon/systemd/#httphttps-proxy">control and configure Docker with systemd</a>
+for variables configuration.</p>
+<h3 id="concurrent-downloads" tabindex="-1">Concurrent downloads <a class="header-anchor" href="#concurrent-downloads" aria-hidden="true">🔗</a></h3>
+<p>By default the Docker daemon will pull three layers of an image at a time.
+If you are on a low bandwidth connection this may cause timeout issues and you may want to lower
+this via the <code>--max-concurrent-downloads</code> daemon option. See the
+<a href="dockerd.html">daemon documentation</a> for more details.</p>
+<h2 id="examples" tabindex="-1">Examples <a class="header-anchor" href="#examples" aria-hidden="true">🔗</a></h2>
+<h3 id="pull-an-image-from-docker-hub" tabindex="-1">Pull an image from Docker Hub <a class="header-anchor" href="#pull-an-image-from-docker-hub" aria-hidden="true">🔗</a></h3>
+<p>To download a particular image, or set of images (i.e., a repository), use
+<code>docker pull</code>. If no tag is provided, Docker Engine uses the <code>:latest</code> tag as a
+default. This command pulls the <code>debian:latest</code> image:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull debian</span>
+
+Using default tag: latest
+latest: Pulling from library/debian
+fdd5d7827f33: Pull complete
+a3ed95caeb02: Pull complete
+Digest: sha256:e7d38b3517548a1c71e41bffe9c8ae6d6d29546ce46bf62159837aad072c90aa
+Status: Downloaded newer image for debian:latest
+</code></pre>
+<p>Docker images can consist of multiple layers. In the example above, the image
+consists of two layers; <code>fdd5d7827f33</code> and <code>a3ed95caeb02</code>.</p>
+<p>Layers can be reused by images. For example, the <code>debian:jessie</code> image shares
+both layers with <code>debian:latest</code>. Pulling the <code>debian:jessie</code> image therefore
+only pulls its metadata, but not its layers, because all layers are already
+present locally:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull debian:jessie</span>
+
+jessie: Pulling from library/debian
+fdd5d7827f33: Already exists
+a3ed95caeb02: Already exists
+Digest: sha256:a9c958be96d7d40df920e7041608f2f017af81800ca5ad23e327bc402626b58e
+Status: Downloaded newer image for debian:jessie
+</code></pre>
+<p>To see which images are present locally, use the <a href="images.html"><code>docker images</code></a>
+command:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker images</span>
+
+REPOSITORY   TAG      IMAGE ID        CREATED      SIZE
+debian       jessie   f50f9524513f    5 days ago   125.1 MB
+debian       latest   f50f9524513f    5 days ago   125.1 MB
+</code></pre>
+<p>Docker uses a content-addressable image store, and the image ID is a SHA256
+digest covering the image's configuration and layers. In the example above,
+<code>debian:jessie</code> and <code>debian:latest</code> have the same image ID because they are
+actually the <em>same</em> image tagged with different names. Because they are the
+same image, their layers are stored only once and do not consume extra disk
+space.</p>
+<p>For more information about images, layers, and the content-addressable store,
+refer to <a href="https://docs.docker.com/storage/storagedriver/">understand images, containers, and storage drivers</a>.</p>
+<h3 id="pull-an-image-by-digest-(immutable-identifier)" tabindex="-1">Pull an image by digest (immutable identifier) <a class="header-anchor" href="#pull-an-image-by-digest-(immutable-identifier)" aria-hidden="true">🔗</a></h3>
+<p>So far, you've pulled images by their name (and &quot;tag&quot;). Using names and tags is
+a convenient way to work with images. When using tags, you can <code>docker pull</code> an
+image again to make sure you have the most up-to-date version of that image.
+For example, <code>docker pull ubuntu:20.04</code> pulls the latest version of the Ubuntu
+20.04 image.</p>
+<p>In some cases you don't want images to be updated to newer versions, but prefer
+to use a fixed version of an image. Docker enables you to pull an image by its
+<em>digest</em>. When pulling an image by digest, you specify <em>exactly</em> which version
+of an image to pull. Doing so, allows you to &quot;pin&quot; an image to that version,
+and guarantee that the image you're using is always the same.</p>
+<p>To know the digest of an image, pull the image first. Let's pull the latest
+<code>ubuntu:20.04</code> image from Docker Hub:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull ubuntu:20.04</span>
+
+20.04: Pulling from library/ubuntu
+16ec32c2132b: Pull complete
+Digest: sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+Status: Downloaded newer image for ubuntu:20.04
+docker.io/library/ubuntu:20.04
+</code></pre>
+<p>Docker prints the digest of the image after the pull has finished. In the example
+above, the digest of the image is:</p>
+<pre><code class="language-console">sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+</code></pre>
+<p>Docker also prints the digest of an image when <em>pushing</em> to a registry. This
+may be useful if you want to pin to a version of the image you just pushed.</p>
+<p>A digest takes the place of the tag when pulling an image, for example, to
+pull the above image by digest, run the following command:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3</span>
+
+docker.io/library/ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3: Pulling from library/ubuntu
+Digest: sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+Status: Image is up to date for ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+docker.io/library/ubuntu@sha256:82becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+</code></pre>
+<p>Digest can also be used in the <code>FROM</code> of a Dockerfile, for example:</p>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">FROM</span> ubuntu@sha256:<span class="hljs-number">82</span>becede498899ec668628e7cb0ad87b6e1c371cb8a1e597d83a47fac21d6af3
+<span class="hljs-keyword">LABEL</span><span class="language-bash"> org.opencontainers.image.authors=<span class="hljs-string">&quot;some maintainer &lt;maintainer@example.com&gt;&quot;</span></span>
+</code></pre>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>Using this feature &quot;pins&quot; an image to a specific version in time.
+Docker will therefore not pull updated versions of an image, which may include
+security updates. If you want to pull an updated image, you need to change the
+digest accordingly.</p>
+</blockquote>
+<h3 id="pull-from-a-different-registry" tabindex="-1">Pull from a different registry <a class="header-anchor" href="#pull-from-a-different-registry" aria-hidden="true">🔗</a></h3>
+<p>By default, <code>docker pull</code> pulls images from <a href="https://hub.docker.com">Docker Hub</a>. It is also possible to
+manually specify the path of a registry to pull from. For example, if you have
+set up a local registry, you can specify its path to pull from it. A registry
+path is similar to a URL, but does not contain a protocol specifier (<code>https://</code>).</p>
+<p>The following command pulls the <code>testing/test-image</code> image from a local registry
+listening on port 5000 (<code>myregistry.local:5000</code>):</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull myregistry.local:5000/testing/test-image</span>
+</code></pre>
+<p>Registry credentials are managed by <a href="login.html">docker login</a>.</p>
+<p>Docker uses the <code>https://</code> protocol to communicate with a registry, unless the
+registry is allowed to be accessed over an insecure connection. Refer to the
+<a href="dockerd.md#insecure-registries">insecure registries</a> section for more information.</p>
+<h3 id="pull-a-repository-with-multiple-images" tabindex="-1">Pull a repository with multiple images <a class="header-anchor" href="#pull-a-repository-with-multiple-images" aria-hidden="true">🔗</a></h3>
+<p>By default, <code>docker pull</code> pulls a <em>single</em> image from the registry. A repository
+can contain multiple images. To pull all images from a repository, provide the
+<code>-a</code> (or <code>--all-tags</code>) option when using <code>docker pull</code>.</p>
+<p>This command pulls all images from the <code>fedora</code> repository:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull --all-tags fedora</span>
+
+Pulling repository fedora
+ad57ef8d78d7: Download complete
+105182bb5e8b: Download complete
+511136ea3c5a: Download complete
+73bd853d2ea5: Download complete
+....
+
+Status: Downloaded newer image for fedora
+</code></pre>
+<p>After the pull has completed use the <code>docker images</code> command to see the
+images that were pulled. The example below shows all the <code>fedora</code> images
+that are present locally:</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker images fedora</span>
+
+REPOSITORY   TAG         IMAGE ID        CREATED      SIZE
+fedora       rawhide     ad57ef8d78d7    5 days ago   359.3 MB
+fedora       20          105182bb5e8b    5 days ago   372.7 MB
+fedora       heisenbug   105182bb5e8b    5 days ago   372.7 MB
+fedora       latest      105182bb5e8b    5 days ago   372.7 MB
+</code></pre>
+<h3 id="cancel-a-pull" tabindex="-1">Cancel a pull <a class="header-anchor" href="#cancel-a-pull" aria-hidden="true">🔗</a></h3>
+<p>Killing the <code>docker pull</code> process, for example by pressing <code>CTRL-c</code> while it is
+running in a terminal, will terminate the pull operation.</p>
+<pre><code class="language-console"><span class="hljs-meta prompt_">$ </span><span class="language-bash">docker pull fedora</span>
+
+Using default tag: latest
+latest: Pulling from library/fedora
+a3ed95caeb02: Pulling fs layer
+236608c7b546: Pulling fs layer
+^C
+</code></pre>
+<blockquote>
+<p><strong>Note</strong></p>
+<p>The Engine terminates a pull operation when the connection between the Docker
+Engine daemon and the Docker Engine client initiating the pull is lost. If the
+connection with the Engine daemon is lost for other reasons than a manual
+interaction, the pull is also aborted.</p>
+</blockquote>
+</body></html>

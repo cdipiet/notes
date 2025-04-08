@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.082" />
+        <title>inotify</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="inotify" tabindex="-1">inotify <a class="header-anchor" href="#inotify" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.082</p>
+<nav class="table-of-contents"><ol><li><a href="#https%3A%2F%2Fwww.baeldung.com%2Flinux%2Fmonitor-changes-directory-tree">https://www.baeldung.com/linux/monitor-changes-directory-tree </a></li></ol></nav><h1 id="inotify-1" tabindex="-1">inotify <a class="header-anchor" href="#inotify-1" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash">$ pamac install inotify-tools
+$ inotifywait -qmr --timefmt <span class="hljs-string">&#x27;%F %T&#x27;</span> --format <span class="hljs-string">&#x27;%T %w%f - %e&#x27;</span> -e close_write /tmp
+2023-02-06 18:56:55 /tmp/piipèpa - CLOSE_WRITE,CLOSE
+</code></pre>
+<ul>
+<li><a href="https://man.archlinux.org/man/inotifywait.1">https://man.archlinux.org/man/inotifywait.1</a></li>
+<li><a href="https://man.archlinux.org/man/strftime.3">https://man.archlinux.org/man/strftime.3</a></li>
+<li><a href="https://man.archlinux.org/man/date.1">https://man.archlinux.org/man/date.1</a></li>
+<li><a href="https://linuxaria.com/article/introduction-inotify?lang=it">https://linuxaria.com/article/introduction-inotify?lang=it</a></li>
+</ul>
+<p><code>-m, --monitor</code> Instead of exiting after receiving a single event, execute indefinitely. The default behaviour is to exit after the first event occurs.</p>
+<p><code>-r, --recursive</code> Watch all subdirectories of any directories passed as arguments. Watches will be set up recursively to an unlimited depth. Symbolic links are not traversed. Newly created subdirectories will also be watched.</p>
+<p><code>-q, --quiet</code> If specified once, the program will be less verbose. Specifically, it will not state when it has completed establishing all inotify watches.<br>
+If specified twice, the program will output nothing at all, except in the case of fatal errors.</p>
+<p><code>-e &lt;event&gt;, --event &lt;event&gt;</code> Listen for specific event(s) only.</p>
+<p><code>modify</code> A watched file or a file within a watched directory was written to.
+<code>close_write</code> A watched file or a file within a watched directory was closed, after being opened in writable mode. This does not necessarily imply the file was written to.
+<code>open</code> A watched file or a file within a watched directory was opened.
+<code>move</code> A file or directory was moved from or to a watched directory. Note that this is actually implemented simply by listening for both moved_to and moved_from,
+<code>create</code> A file or directory was created within a watched directory.
+<code>delete</code> A file or directory within a watched directory was deleted.</p>
+<p><code>--timefmt &lt;fmt&gt;</code> Set a time format string as accepted by <code>strftime</code> for use with the <code>%T</code> conversion in the <code>--format</code> option.</p>
+<pre><code>%Y The year as a decimal number including the century.
+%m The month as a decimal number (range 01 to 12). (Calculated from tm_mon.)
+%d The day of the month as a decimal number (range 01 to 31)
+%F Equivalent to %Y-%m-%d (the ISO 8601 date format). (C99)
+%H The hour as a decimal number using a 24-hour clock (range 00 to 23)
+%M The minute as a decimal number (range 00 to 59). (Calculated from tm_min.)
+%S The second as a decimal number (range 00 to 60)
+%T The time in 24-hour notation (%H:%M:%S). (SU)
+</code></pre>
+<p><code>--format &lt;fmt&gt;</code>  Output in a user-specified format, using printf-like syntax. The event strings output are limited to around 4000 characters and will be truncated to this length. The following conversions are supported:</p>
+<pre><code>%T Replaced with the current Time in the format specified by the --timefmt option, which should be a format string suitable for passing to strftime(3). 
+%w directory
+%f file
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/sh</span>
+<span class="hljs-comment"># get the current path</span>
+CURPATH=`<span class="hljs-built_in">pwd</span>`
+inotifywait -mr --timefmt <span class="hljs-string">&#x27;%d/%m/%y %H:%M&#x27;</span> --format <span class="hljs-string">&#x27;%T %w %f&#x27;</span> -e close_write /tmp/test | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> <span class="hljs-built_in">date</span> time <span class="hljs-built_in">dir</span> file; <span class="hljs-keyword">do</span>
+    FILECHANGE=<span class="hljs-variable">${dir}</span><span class="hljs-variable">${file}</span>
+    <span class="hljs-comment"># convert absolute path to relative</span>
+    FILECHANGEREL=`<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$FILECHANGE</span>&quot;</span> | sed <span class="hljs-string">&#x27;s_&#x27;</span><span class="hljs-variable">$CURPATH</span><span class="hljs-string">&#x27;/__&#x27;</span>`
+    rsync --progress --relative -vrae <span class="hljs-string">&#x27;ssh -p 22&#x27;</span> <span class="hljs-variable">$FILECHANGEREL</span> usernam@example.com:/backup/root/dir &amp;&amp;
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;At <span class="hljs-variable">${time}</span> on <span class="hljs-variable">${date}</span>, file <span class="hljs-variable">$FILECHANGE</span> was backed up via rsync&quot;</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<h2 id="https%3A%2F%2Fwww.baeldung.com%2Flinux%2Fmonitor-changes-directory-tree" tabindex="-1"><a href="https://www.baeldung.com/linux/monitor-changes-directory-tree">https://www.baeldung.com/linux/monitor-changes-directory-tree</a> <a class="header-anchor" href="#https%3A%2F%2Fwww.baeldung.com%2Flinux%2Fmonitor-changes-directory-tree" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-function"><span class="hljs-title">file_removed</span></span>() {
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;<span class="hljs-variable">$2</span> was removed from <span class="hljs-variable">$1</span>&quot;</span> &amp;
+}
+
+<span class="hljs-function"><span class="hljs-title">file_modified</span></span>() {
+    TIMESTAMP=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[<span class="hljs-variable">$TIMESTAMP</span>]: The file $1<span class="hljs-variable">$2</span> was modified&quot;</span> &gt;&gt; monitor_log
+}
+
+<span class="hljs-function"><span class="hljs-title">file_created</span></span>() {
+    TIMESTAMP=$(<span class="hljs-built_in">date</span> +<span class="hljs-string">&quot;%Y-%m-%d %H:%M:%S&quot;</span>)
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[<span class="hljs-variable">$TIMESTAMP</span>]: The file $1<span class="hljs-variable">$2</span> was created&quot;</span> &gt;&gt; monitor_log
+}
+
+inotifywait -q -m -r -e modify,delete,create <span class="hljs-variable">$1</span> | <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> DIRECTORY EVENT FILE; <span class="hljs-keyword">do</span>
+    <span class="hljs-keyword">case</span> <span class="hljs-variable">$EVENT</span> <span class="hljs-keyword">in</span>
+        MODIFY*)
+            file_modified <span class="hljs-string">&quot;<span class="hljs-variable">$DIRECTORY</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$FILE</span>&quot;</span>
+            ;;
+        CREATE*)
+            file_created <span class="hljs-string">&quot;<span class="hljs-variable">$DIRECTORY</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$FILE</span>&quot;</span>
+            ;;
+        DELETE*)
+            file_removed <span class="hljs-string">&quot;<span class="hljs-variable">$DIRECTORY</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$FILE</span>&quot;</span>
+            ;;
+    <span class="hljs-keyword">esac</span>
+<span class="hljs-keyword">done</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">tail</span> -f monitor.log
+
+$ ./monitor_directory_tree.sh main &amp;
+[1] 4800
+$ <span class="hljs-built_in">rm</span> -r main/3/2/1
+$ <span class="hljs-built_in">echo</span> example &gt;&gt; main/1/2/file1
+$ <span class="hljs-built_in">echo</span> example &gt;&gt; main/file1
+
+$ <span class="hljs-built_in">cat</span> monitor_log
+[Tue Sep 21 21:49:31 -03 2021]: The file main/1/2/file1 was modified
+[Wed Sep 21 21:49:34 -03 2021]: The file main/file1 was created
+[Wed Sep 21 21:49:34 -03 2021]: The file main/file1 was modified
+</code></pre>
+<p><a href="https://stackoverflow.com/questions/8699293/how-to-monitor-a-complete-directory-tree-for-changes-in-linux">https://stackoverflow.com/questions/8699293/how-to-monitor-a-complete-directory-tree-for-changes-in-linux</a></p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-keyword">while</span> <span class="hljs-literal">true</span>; <span class="hljs-keyword">do</span>
+
+inotifywait -e modify,create,delete -r /path/to/your/dir &amp;&amp; \
+&lt;some <span class="hljs-built_in">command</span> to execute when a file event is recorded&gt;
+
+<span class="hljs-keyword">done</span>
+</code></pre>
+<pre><code class="language-bash">$ inotifywait -m -r /path/to/your/directory
+</code></pre>
+<p><a href="https://unix.stackexchange.com/questions/323901/how-to-use-inotifywait-to-watch-a-directory-for-creation-of-files-of-a-specific">https://unix.stackexchange.com/questions/323901/how-to-use-inotifywait-to-watch-a-directory-for-creation-of-files-of-a-specific</a></p>
+<pre><code class="language-bash">inotifywait -m /path -e create -e moved_to |
+    <span class="hljs-keyword">while</span> <span class="hljs-built_in">read</span> directory action file; <span class="hljs-keyword">do</span>
+        <span class="hljs-keyword">if</span> [[ <span class="hljs-string">&quot;<span class="hljs-variable">$file</span>&quot;</span> =~ .*xml$ ]]; <span class="hljs-keyword">then</span> <span class="hljs-comment"># Does the file end with .xml?</span>
+            <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;xml file&quot;</span> <span class="hljs-comment"># If so, do your thing here!</span>
+        <span class="hljs-keyword">fi</span>
+    <span class="hljs-keyword">done</span>
+</code></pre>
+</body></html>

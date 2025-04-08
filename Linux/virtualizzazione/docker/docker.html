@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:19.236" />
+        <title>docker</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="docker" tabindex="-1">docker <a class="header-anchor" href="#docker" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:19.236</p>
+<nav class="table-of-contents"><ol><li><a href="#installazione-in-manjaro">Installazione in Manjaro </a><ol><li><a href="#images-location">Images Location </a></li><li><a href="#manage-docker-as-a-non-root-user---usare-docker-senza-sudo">Manage Docker as a non-root user - Usare docker senza sudo </a></li></ol></li><li><a href="#restart-policy">Restart Policy </a></li><li><a href="#utilizzo">Utilizzo </a><ol><li><a href="#eliminazione-dei-container">Eliminazione dei container </a></li><li><a href="#eliminazione-delle-immagini">Eliminazione delle immagini </a></li></ol></li><li><a href="#immagini">Immagini </a></li><li><a href="#container">Container </a></li><li><a href="#logging">logging </a><ol><li><a href="#log-applicativo%2C-directory-log-in-bind-mount-su-%2Fopt%2Fdns-monitor%2F">log applicativo, directory log in bind mount su /opt/dns-monitor/ </a></li><li><a href="#log-docker-su-stdout">log docker su stdout </a></li></ol></li><li><a href="#debug">Debug </a></li><li><a href="#problema-apt-get%3A-cache-busting">Problema apt-get: cache busting </a></li><li><a href="#configurazione-delle-porte">Configurazione delle porte </a><ol><li><a href="#problema---uvicorn-di-default-parte-sull'indirizzo-127.0.0.1">Problema - uvicorn di default parte sull&#39;indirizzo 127.0.0.1 </a></li><li><a href="#soluzione---configuriamo-uvicorn-sull'indirizzo-0.0.0.0">Soluzione - configuriamo uvicorn sull&#39;indirizzo 0.0.0.0 </a></li></ol></li><li><a href="#timezone-(serve-a-stampare-in-formato-locale-i-timestamp-dei-log)">Timezone (serve a stampare in formato locale i timestamp dei log) </a><ol><li><a href="#soluzione-1---impostare-la-timezone-dal-comando-run">Soluzione 1 - impostare la timezone dal comando run </a></li><li><a href="#soluzione-2---impostare-la-timezone-dal-dockerfile">Soluzione 2 - impostare la timezone dal dockerfile </a></li></ol></li><li><a href="#esperimento-debian">Esperimento Debian </a></li><li><a href="#per-scaricare-gli-md-docker-della-reference">Per scaricare gli md Docker della reference </a></li><li><a href="#extract-file-from-docker-image">Extract file from docker image </a></li><li><a href="#job-scheduler">Job Scheduler </a></li><li><a href="#manjaro-image">Manjaro Image </a></li><li><a href="#init-semplice-per-gestire-i-segnali-inviati-al-container-docker">init semplice per gestire i segnali inviati al container docker </a></li><li><a href="#supervisor---gestore-di-processi-supervisor-per-avere-un-container-che-esegue-piu-processi-invece-di-uno">supervisor - Gestore di processi supervisor per avere un container che esegue piu processi invece di uno </a></li><li><a href="#lavorare-nell'immagine-come-utente-non-root">Lavorare nell&#39;immagine come utente non root </a></li><li><a href="#bind-mount-ed-id-utente">Bind Mount ed id utente </a></li><li><a href="#x-server">X Server </a></li><li><a href="#come-verificare-se-l'applicazione-%C3%A8-in-esecuzione-all'interno-di-un-container-docker">Come verificare se l&#39;applicazione è in esecuzione all&#39;interno di un Container Docker </a></li></ol></nav><h1 id="docker-1" tabindex="-1">Docker <a class="header-anchor" href="#docker-1" aria-hidden="true">🔗</a></h1>
+<p>Versioni Correnti:</p>
+<ul>
+<li><a href="https://docs.docker.com/engine/release-notes/">https://docs.docker.com/engine/release-notes/</a></li>
+<li><a href="https://docs.docker.com/compose/release-notes/">https://docs.docker.com/compose/release-notes/</a></li>
+</ul>
+<p>Installazione:</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/docker">https://wiki.archlinux.org/title/docker</a></li>
+<li><a href="https://docs.docker.com/desktop/linux/install/archlinux/">https://docs.docker.com/desktop/linux/install/archlinux/</a></li>
+<li><a href="https://linuxconfig.org/manjaro-linux-docker-installation">https://linuxconfig.org/manjaro-linux-docker-installation</a></li>
+</ul>
+<p>Variable interpolation:</p>
+<ul>
+<li><a href="https://docs.docker.com/compose/compose-file/#interpolation">https://docs.docker.com/compose/compose-file/#interpolation</a></li>
+<li><a href="https://docs.docker.com/reference/dockerfile/#environment-replacement">https://docs.docker.com/reference/dockerfile/#environment-replacement</a></li>
+</ul>
+<p>Multi Stage Builds</p>
+<ul>
+<li><a href="https://docs.docker.com/build/building/multi-stage/">https://docs.docker.com/build/building/multi-stage/</a></li>
+</ul>
+<p>Docker Buildkit</p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/build/buildkit/">https://docs.docker.com/build/buildkit/</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/build/buildkit/dockerfile-frontend/">https://docs.docker.com/build/buildkit/dockerfile-frontend/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/containers/buildah/issues/3474">https://github.com/containers/buildah/issues/3474</a> Heredoc notation doesn't work</p>
+<pre><code>  ❯ cat Dockerfile
+  # syntax=docker/dockerfile:1.4
+  ❯ DOCKER_BUILDKIT=1 docker build .
+</code></pre>
+</li>
+</ul>
+<p>Per far funzionare gli heredoc <a href="https://docs.docker.com/reference/dockerfile/#here-documents">https://docs.docker.com/reference/dockerfile/#here-documents</a> <br>
+bisogna abilitare il buildkit e specificare la versione minima 1.4 della sintassi nel Dockerfile.</p>
+<p>Docker Compose</p>
+<ul>
+<li><a href="https://docs.docker.com/compose/features-uses/">https://docs.docker.com/compose/features-uses/</a></li>
+<li><a href="https://docs.docker.com/compose/compose-file/">https://docs.docker.com/compose/compose-file/</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/compose_run/">https://docs.docker.com/engine/reference/commandline/compose_run/</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/compose_up/">https://docs.docker.com/engine/reference/commandline/compose_up/</a></li>
+</ul>
+<p>Documentazione</p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/get-started/">Get Started</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/">Dockerfile reference</a></p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#from">https://docs.docker.com/reference/dockerfile/#from</a> <code>FROM [--platform=&lt;platform&gt;] &lt;image&gt;[:&lt;tag&gt;] [AS &lt;name&gt;]</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#workdir">https://docs.docker.com/reference/dockerfile/#workdir</a> <code>WORKDIR /path/to/workdir</code></p>
+<p>sets the working directory for any <code>RUN</code>, <code>CMD</code>, <code>ENTRYPOINT</code>, <code>COPY</code> and <code>ADD</code> instructions that follow it in the Dockerfile.<br>
+. If the <code>WORKDIR</code> doesn’t exist, it will be created.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#run">https://docs.docker.com/reference/dockerfile/#run</a> <code>RUN [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code> (exec form)</p>
+<p><strong>La cache si invalida solo se il testo del comando cambia.</strong> <br>
+The cache for RUN instructions can be invalidated by using the <code>--no-cache</code> flag</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#copy">https://docs.docker.com/reference/dockerfile/#copy</a> <code>COPY [--chown=&lt;user&gt;:&lt;group&gt;] &lt;src&gt;... &lt;dest&gt;</code></p>
+<p>La cache si invalida se il contenuto o gli attributi dei files cambiano. \</p>
+<ul>
+<li>The <code>&lt;dest&gt;</code> is an absolute path, or a path relative to <code>WORKDIR</code></li>
+<li>The first encountered <code>COPY</code> instruction will invalidate the cache for all following instructions from the Dockerfile if the contents of <code>&lt;src&gt;</code> have changed. This includes invalidating the cache for <code>RUN</code> instructions.</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#entrypoint">https://docs.docker.com/reference/dockerfile/#entrypoint</a> <code>ENTRYPOINT [&quot;executable&quot;, &quot;param1&quot;, &quot;param2&quot;]</code></p>
+<p>Parametri di esecuzione del container non sovrascrivibili, non possono essere sovrascritti da <code>docker run</code>
+Comando non sovrascrivibile, come accade con <code>CMD</code>. <br>
+Command line arguments to <code>docker run &lt;image&gt;</code> will be appended after all elements in an exec form <code>ENTRYPOINT</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#cmd">https://docs.docker.com/reference/dockerfile/#cmd</a> <code>CMD [&quot;executable&quot;,&quot;param1&quot;,&quot;param2&quot;]</code> (exec form, this is the preferred form)</p>
+<p>Parametri di esecuzione di default del container, possono essere sovrascritti da <code>docker run</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#label">https://docs.docker.com/reference/dockerfile/#label</a> <code>LABEL &lt;key&gt;=&lt;value&gt;</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#env">https://docs.docker.com/reference/dockerfile/#env</a> <code>ENV &lt;key&gt;=&lt;value&gt;</code></p>
+<p>la variabile di ambiente risulta <strong>impostata sia per la build che per l'esecuzione del container</strong> \</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#expose">https://docs.docker.com/reference/dockerfile/#expose</a> <code>EXPOSE &lt;port&gt; [&lt;port&gt;/&lt;protocol&gt;...]</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#volume">https://docs.docker.com/reference/dockerfile/#volume</a> <code>VOLUME [&quot;/data&quot;]</code></p>
+<p>The docker run command initializes the newly created volume with any data that exists at the specified location within the base image. <br>
+I files contenuti nell'immagine vengono copiati nell'host alla partenza del container. <br>
+<strong>The host directory is declared at container run-time.</strong></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#user">https://docs.docker.com/reference/dockerfile/#user</a> <code>USER &lt;user&gt;[:&lt;group&gt;]</code></p>
+<p>The <code>USER</code> instruction sets the user name (or UID) and optionally the user group (or GID) to use when running the image <br>
+and for any <code>RUN</code>, <code>CMD</code> and <code>ENTRYPOINT</code> instructions that follow it in the Dockerfile.</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#here-documents">https://docs.docker.com/reference/dockerfile/#here-documents</a> <a href="https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_07_04">https://pubs.opengroup.org/onlinepubs/9699919799/utilities/V3_chap02.html#tag_18_07_04</a></p>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># syntax=docker/dockerfile:1</span>
+<span class="hljs-keyword">FROM</span> debian
+<span class="hljs-keyword">RUN</span><span class="language-bash"> &lt;&lt;<span class="hljs-string">EOT bash</span></span>
+apt-get update
+apt-get install -y vim
+EOT
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> debian
+<span class="hljs-keyword">RUN</span><span class="language-bash"> &lt;&lt;<span class="hljs-string">EOT</span></span>
+mkdir -p foo/bar
+EOT
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> python:<span class="hljs-number">3.6</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> &lt;&lt;<span class="hljs-string">EOT</span></span>
+<span class="hljs-comment">#!/usr/bin/env python</span>
+print(<span class="hljs-string">&quot;hello world&quot;</span>)
+EOT        
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> alpine
+<span class="hljs-keyword">RUN</span><span class="language-bash"> &lt;&lt;<span class="hljs-string">FILE1 cat &gt; file1 &amp;&amp; &lt;&lt;FILE2 cat &gt; file2</span></span>
+I am
+first
+FILE1
+I am
+second
+FILE2
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># Qui EOT non è racchiuso tra virgolette, quindi il parametro viene sostituito ed il file /app/foo contiene: &quot;hello bar&quot;</span>
+<span class="hljs-keyword">FROM</span> alpine
+<span class="hljs-keyword">ARG</span> FOO=bar
+<span class="hljs-keyword">COPY</span><span class="language-bash"> &lt;&lt;-<span class="hljs-string">EOT /app/foo</span></span>
+    hello ${FOO}
+EOT
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># Qui EOT è racchiuso tra virgolette e quindi il parametro non viene sostituito nel file /app/script.sh il contenuto è: &quot;echo hello ${FOO}&quot;</span>
+<span class="hljs-keyword">FROM</span> alpine
+<span class="hljs-keyword">COPY</span><span class="language-bash"> &lt;&lt;-<span class="hljs-string">&quot;EOT&quot;</span> /app/script.sh</span>
+    echo hello ${FOO}
+EOT
+<span class="hljs-keyword">RUN</span><span class="language-bash"> FOO=abc ash /app/script.sh</span>
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/run/">https://docs.docker.com/engine/reference/run/</a> <code>$ docker run [OPTIONS] IMAGE[:TAG|@DIGEST] [COMMAND] [ARG...]</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/storage/bind-mounts/">https://docs.docker.com/storage/bind-mounts/</a> <code>--mount type=bind,source=&quot;$(pwd)&quot;/target,target=/app</code></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/config/containers/start-containers-automatically/">https://docs.docker.com/config/containers/start-containers-automatically/</a> <code> docker run -d --restart unless-stopped redis</code></p>
+</li>
+</ul>
+<p><code>.dockerignore</code></p>
+<ul>
+<li><a href="https://docs.docker.com/reference/dockerfile/#dockerignore-file">https://docs.docker.com/reference/dockerfile/#dockerignore-file</a> <code>.dockerignore</code></li>
+<li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#exclude-with-dockerignore">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#exclude-with-dockerignore</a></li>
+<li><a href="https://docs.docker.com/engine/reference/commandline/build/#use-a-dockerignore-file">https://docs.docker.com/engine/reference/commandline/build/#use-a-dockerignore-file</a></li>
+</ul>
+<p>Articoli:</p>
+<ul>
+<li><a href="https://www.docker.com/blog/the-magic-of-docker-desktop-is-now-available-on-linux/">https://www.docker.com/blog/the-magic-of-docker-desktop-is-now-available-on-linux/</a></li>
+<li><a href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504</a></li>
+<li><a href="https://sourcery.ai/blog/python-docker/">https://sourcery.ai/blog/python-docker/</a></li>
+<li><a href="https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86">https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86</a></li>
+<li><a href="https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504">https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504</a></li>
+<li><a href="https://medium.com/devplanet/part-3-introduction-to-docker-volumes-2ccec8effc98">https://medium.com/devplanet/part-3-introduction-to-docker-volumes-2ccec8effc98</a></li>
+<li><a href="https://github.com/nicolaka/netshoot">https://github.com/nicolaka/netshoot</a></li>
+<li><a href="https://stackoverflow.com/questions/20813486/exploring-docker-containers-file-system">https://stackoverflow.com/questions/20813486/exploring-docker-containers-file-system</a></li>
+<li><a href="https://freecontent.manning.com/writing-and-managing-application-logs-with-docker/">https://freecontent.manning.com/writing-and-managing-application-logs-with-docker/</a></li>
+<li><a href="https://nodejs.org/en/docs/guides/nodejs-docker-webapp/">https://nodejs.org/en/docs/guides/nodejs-docker-webapp/</a></li>
+<li><a href="https://stackoverflow.com/questions/19104847/how-to-generate-a-dockerfile-from-an-image">https://stackoverflow.com/questions/19104847/how-to-generate-a-dockerfile-from-an-image</a></li>
+<li><a href="https://stackoverflow.com/questions/45395390/see-cron-output-via-docker-logs-without-using-an-extra-file">https://stackoverflow.com/questions/45395390/see-cron-output-via-docker-logs-without-using-an-extra-file</a></li>
+</ul>
+<p>Immagini disponibili:</p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/">https://hub.docker.com/</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/hello-world/">https://hub.docker.com/_/hello-world/</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/alpine">https://hub.docker.com/_/alpine</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/python">https://hub.docker.com/_/python</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/node">https://hub.docker.com/_/node</a></p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/manjarolinux/base">https://hub.docker.com/r/manjarolinux/base</a> <a href="https://github.com/manjaro/manjaro-docker">https://github.com/manjaro/manjaro-docker</a></p>
+<pre><code class="language-bash">$ docker pull manjarolinux/base
+</code></pre>
+</li>
+</ul>
+<p>The <strong>storage driver</strong> controls how images and containers are stored and managed on your Docker host. <br>
+The default <strong><code>overlay2</code></strong> driver has good performance and is a good choice for all modern Linux kernels and filesystems.</p>
+<h2 id="installazione-in-manjaro" tabindex="-1">Installazione in Manjaro <a class="header-anchor" href="#installazione-in-manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.docker.com/engine/install/linux-postinstall/">https://docs.docker.com/engine/install/linux-postinstall/</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Installazione</span>
+$ <span class="hljs-built_in">sudo</span> pamac checkupdates -a
+$ <span class="hljs-built_in">sudo</span> pamac upgrade -a
+$ <span class="hljs-built_in">sudo</span> pamac install docker docker-compose
+$ <span class="hljs-comment">#sudo pacman -Syu</span>
+$ <span class="hljs-comment">#sudo pacman -S --needed --noconfirm docker</span>
+
+<span class="hljs-comment"># Avvio ed abilitazione alla partenza</span>
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> docker.service
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> containerd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start containerd.service
+$ <span class="hljs-built_in">sudo</span> systemctl start docker.service
+
+<span class="hljs-comment"># Eseguire docker come utente comune </span>
+$ <span class="hljs-built_in">sudo</span> usermod -aG docker <span class="hljs-variable">$USER</span> <span class="hljs-comment"># Run Docker without root</span>
+$ <span class="hljs-comment"># cat /etc/group|grep docker # vedere se il gruppo docker esiste</span>
+$ <span class="hljs-comment"># getent group|grep docker   # vedere se il gruppo docker esiste</span>
+$ <span class="hljs-comment"># sudo groupadd docker</span>
+$ <span class="hljs-comment"># newgrp docker              # per segnalare la presenza del gruppo senza fare reboot</span>
+$ <span class="hljs-comment"># groups # vedere i gruppi cui l&#x27;utente corrente appartiene</span>
+$ <span class="hljs-comment"># id -nG # vedere i gruppi cui l&#x27;utente corrente appartiene</span>
+
+<span class="hljs-comment"># Spostamento della directory dati</span>
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /opt/docker
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/docker/daemon.json&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+{
+    <span class="hljs-string">&quot;data-root&quot;</span>: <span class="hljs-string">&quot;/opt/docker&quot;</span>
+}
+EOF
+<span class="hljs-comment"># Verifica installazione</span>
+$ docker version
+$ docker info    <span class="hljs-comment"># way to see how many Docker containers are currently running</span>
+$ docker system prune  -af --volumes <span class="hljs-comment"># Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes.</span>
+$ docker images
+$ docker container <span class="hljs-built_in">ls</span>
+</code></pre>
+<h3 id="images-location" tabindex="-1">Images Location <a class="header-anchor" href="#images-location" aria-hidden="true">🔗</a></h3>
+<p>Per cambiare la Docker Daemon Directory</p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/config/daemon/systemd/">https://docs.docker.com/config/daemon/systemd/</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine">https://stackoverflow.com/questions/19234831/where-are-docker-images-stored-on-the-host-machine</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/commandline/dockerd/">https://docs.docker.com/engine/reference/commandline/dockerd/</a></p>
+<pre><code>  --data-root string Root directory of persistent Docker state (default &quot;/var/lib/docker&quot;)
+</code></pre>
+</li>
+</ul>
+<p>Di default le immagini si trovano in <code>/var/lib/docker</code>.
+Per spostarle ad es. in <code>/opt/docker</code>:</p>
+<pre><code class="language-bash">$ docker info|grep Root <span class="hljs-comment"># Mostra la docker root corrente</span>
+$ <span class="hljs-built_in">sudo</span> systemctl stop docker.service
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /opt/docker
+</code></pre>
+<p>In caso di immagini già scaricate, vanno trasferite:</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cp</span> -r /var/lib/docker /opt/docker
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># https://docs.docker.com/engine/reference/commandline/dockerd/</span>
+$ <span class="hljs-built_in">sudo</span> bash -c <span class="hljs-string">&quot;cat &gt; /etc/docker/daemon.json&quot;</span> &lt;&lt; <span class="hljs-string">&#x27;EOF&#x27;</span>
+{
+    <span class="hljs-string">&quot;data-root&quot;</span>: <span class="hljs-string">&quot;/opt/docker&quot;</span>
+}
+EOF
+$ <span class="hljs-built_in">cat</span> /etc/docker/daemon.json
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> systemctl start docker.service
+$ journalctl -xeu docker.service <span class="hljs-comment"># in caso di errore in partenza</span>
+$ docker info|grep Root <span class="hljs-comment"># Mostra la docker root corrente</span>
+$ <span class="hljs-built_in">sudo</span> systemctl show --property=Environment docker
+</code></pre>
+<ul>
+<li><a href="https://docs.docker.com/storage/storagedriver/select-storage-driver/">https://docs.docker.com/storage/storagedriver/select-storage-driver/</a></li>
+</ul>
+<p><strong><code>overlay2</code></strong> is the preferred storage driver, for all currently supported Linux distributions, and requires no extra configuration.</p>
+<h3 id="manage-docker-as-a-non-root-user---usare-docker-senza-sudo" tabindex="-1">Manage Docker as a non-root user - Usare docker senza sudo <a class="header-anchor" href="#manage-docker-as-a-non-root-user---usare-docker-senza-sudo" aria-hidden="true">🔗</a></h3>
+<p>If you don’t want to preface the docker command with sudo, create a Unix group called <code>docker</code> and add users to it. When the Docker daemon starts, it creates a Unix socket accessible by members of the docker group.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> groupadd docker
+$ <span class="hljs-built_in">sudo</span> usermod -aG docker <span class="hljs-variable">$USER</span>
+$ docker run hello-world
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> <span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span>:<span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span> /home/<span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span>/.docker -R
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> g+rwx <span class="hljs-string">&quot;<span class="hljs-variable">$HOME</span>/.docker&quot;</span> -R
+</code></pre>
+<h2 id="restart-policy" tabindex="-1">Restart Policy <a class="header-anchor" href="#restart-policy" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.docker.com/config/containers/start-containers-automatically/">https://docs.docker.com/config/containers/start-containers-automatically/</a></li>
+</ul>
+<p>To configure the restart policy for a container, use the <code>--restart</code> flag when using the docker <code>run</code> command</p>
+<ul>
+<li><code>no</code>  Do not automatically restart the container. (the default)</li>
+<li><code>on-failure</code>  Restart the container if it exits due to an error, which manifests as a non-zero exit code.</li>
+<li><code>always</code>  Always restart the container if it stops. If it is manually stopped, it is restarted only when Docker daemon restarts or the container itself is manually restarted. (See the second bullet listed in restart policy details)</li>
+<li><code>unless-stopped</code>  Similar to always, except that when the container is stopped (manually or otherwise), it is not restarted even after Docker daemon restarts.</li>
+</ul>
+<pre><code class="language-bash">$ docker run -d --restart unless-stopped redis
+$ docker update --restart unless-stopped redis
+$ docker update --restart unless-stopped $(docker ps -q)
+
+<span class="hljs-comment"># Visualizzare la restart policy di un container</span>
+$ docker inspect dnsmonitor_web_1|grep -i -A 3 restartpolicy
+$ docker inspect -f <span class="hljs-string">&quot;{{ .HostConfig.RestartPolicy }}&quot;</span> dnsmonitor_web_1
+$ docker inspect -f <span class="hljs-string">&quot;{{ .HostConfig.RestartPolicy.Name }}&quot;</span> dnsmonitor_web_1
+</code></pre>
+<h2 id="utilizzo" tabindex="-1">Utilizzo <a class="header-anchor" href="#utilizzo" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/run/#name---name">https://docs.docker.com/engine/reference/run/#name---name</a> <code>docker run</code></p>
+<p>conviene sempre dare un nome simbolico al container, anzichè lavorare con il id</p>
+<pre><code class="language-bash">docker run --name=ssh_server -d -p 2222:22 alpine_ssh_ansible
+</code></pre>
+<p>ovviamente non serve dare un nome al container nei casi <code>-it --rm</code> dove ci si aspetta che il container termini subito dopo l'esecuzione del comando.</p>
+</li>
+</ul>
+<pre><code class="language-bash">$ docker info
+$ docker ps           <span class="hljs-comment"># Per avere l&#x27;id del container</span>
+$ docker container <span class="hljs-built_in">ls</span> <span class="hljs-comment"># Per avere l&#x27;id del container</span>
+$ docker <span class="hljs-built_in">rm</span> -f &lt;<span class="hljs-built_in">id</span>&gt;   <span class="hljs-comment"># Per rimuovere il container</span>
+$ docker images       <span class="hljs-comment"># To see a list of all the Docker images installed</span>
+
+<span class="hljs-comment"># https://docs.docker.com/engine/reference/commandline/system_prune/</span>
+$ docker system prune -af --volumes <span class="hljs-comment"># Remove all unused containers, networks, images (both dangling and unreferenced), and optionally, volumes.</span>
+
+$ docker search [image name] <span class="hljs-comment"># cerca nel docker hub una immagine</span>
+
+$ <span class="hljs-comment"># docker pull hello-world # non serve - docker run esegue il pull</span>
+$ docker run hello-world
+<span class="hljs-comment">#The following command downloads the latest Arch Linux image and uses it to run a Hello World program within a container:</span>
+<span class="hljs-comment"># -it serve per agganciare la console del client al processo eseguito</span>
+<span class="hljs-comment"># -i, --interactive                    Keep STDIN open even if not attached</span>
+<span class="hljs-comment"># -t, --tty                            Allocate a pseudo-TTY</span>
+<span class="hljs-comment"># -d, --detach                         Run container in background and print container ID</span>
+<span class="hljs-comment"># --rm                                 Automatically remove the container when it exits</span>
+$ docker run -it ubuntu bash
+$ docker run -it --<span class="hljs-built_in">rm</span> archlinux bash -c <span class="hljs-string">&quot;echo hello world&quot;</span>
+$ docker compose run --<span class="hljs-built_in">rm</span> -v /opt/elastic_search_pwned:/home/node/app/elastic_search_pwned --entrypoint bash loader
+$ docker run -it --<span class="hljs-built_in">rm</span> --entrypoint /bin/bash nginx -c <span class="hljs-string">&#x27;ls -lah&#x27;</span>
+$ docker run -it --<span class="hljs-built_in">rm</span> --entrypoint /bin/bash nginx -c <span class="hljs-string">&#x27;cat /etc/nginx/nginx.conf&#x27;</span>
+
+
+$ docker stats  <span class="hljs-comment"># top</span>
+$ docker network <span class="hljs-built_in">ls</span>
+<span class="hljs-comment"># https://docs.docker.com/engine/reference/commandline/system_df/</span>
+$ docker system <span class="hljs-built_in">df</span>        <span class="hljs-comment"># Utilizzo del disco</span>
+$ docker system <span class="hljs-built_in">df</span> -v     <span class="hljs-comment"># Utilizzo del disco</span>
+
+$ docker <span class="hljs-built_in">exec</span> -t -i mycontainer /bin/bash <span class="hljs-comment"># Exploring Docker container&#x27;s file system</span>
+
+<span class="hljs-comment"># Rimozione di tutti i container e delle imagini - i container vanno rimossi per primi</span>
+$ docker <span class="hljs-built_in">rm</span> -vf $(docker ps -aq)
+$ docker rmi -f $(docker images -aq)
+
+<span class="hljs-comment"># Vedere i Bind Volume</span>
+$ docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS     NAMES
+e8a7dd4a4101   dirsync-dirsync   <span class="hljs-string">&quot;docker-entrypoint.s…&quot;</span>   3 seconds ago   Up 3 seconds             dirsync_dirsync_run_ef7c5533043a
+$ docker inspect -f <span class="hljs-string">&#x27;{{ .Mounts }}&#x27;</span> e8a7dd4a4101
+[{<span class="hljs-built_in">bind</span>  /opt/test_dirsync/log /log  rw <span class="hljs-literal">true</span> rprivate} 
+ {<span class="hljs-built_in">bind</span>  /opt/test_dirsync/src /src  rw <span class="hljs-literal">true</span> rprivate} 
+ {<span class="hljs-built_in">bind</span>  /opt/test_dirsync/dst /dst  rw <span class="hljs-literal">true</span> rprivate}]
+</code></pre>
+<h3 id="eliminazione-dei-container" tabindex="-1">Eliminazione dei container <a class="header-anchor" href="#eliminazione-dei-container" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Rimozione di tutti i container</span>
+$ docker stop $(docker ps -a -q)
+$ docker <span class="hljs-built_in">rm</span> -f -v $(docker ps -a -q)
+$ docker rmi $(docker images -q) <span class="hljs-comment"># per rimuovere anche le immagini</span>
+
+$ docker ps -a | grep <span class="hljs-string">&quot;pattern&quot;</span> | awk <span class="hljs-string">&#x27;{print $1}&#x27;</span> | xargs docker <span class="hljs-built_in">rm</span>
+$ docker <span class="hljs-built_in">rm</span> $(docker ps -a -f status=exited -f status=created -q)
+</code></pre>
+<h3 id="eliminazione-delle-immagini" tabindex="-1">Eliminazione delle immagini <a class="header-anchor" href="#eliminazione-delle-immagini" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://docs.docker.com/config/pruning/">https://docs.docker.com/config/pruning/</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Eliminazione di tutte le immagini</span>
+$ docker rmi -f $(docker images -a -q)
+
+$ docker images -a | grep <span class="hljs-string">&quot;pattern&quot;</span> | awk <span class="hljs-string">&#x27;{print $3}&#x27;</span> | xargs docker rmi
+
+<span class="hljs-comment"># Il prune elimina le sole immagini non utilizzate</span>
+$ docker stop $(docker ps -a -q) 
+$ docker system prune -af --volumes
+$ docker container <span class="hljs-built_in">ls</span> -a
+$ docker image <span class="hljs-built_in">ls</span> -a
+$ docker image prune -a -f
+$ docker ps -a
+</code></pre>
+<h2 id="immagini" tabindex="-1">Immagini <a class="header-anchor" href="#immagini" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://github.com/archlinux/archlinux-docker/blob/master/README.md">https://github.com/archlinux/archlinux-docker/blob/master/README.md</a></p>
+<pre><code class="language-bash">docker pull archlinux
+</code></pre>
+</li>
+<li>
+<p><a href="https://www.alpinelinux.org/">https://www.alpinelinux.org/</a></p>
+<pre><code class="language-bash">docker pull alpine
+</code></pre>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/debian">https://hub.docker.com/_/debian</a></p>
+<pre><code class="language-bash">docker pull debian
+</code></pre>
+</li>
+</ul>
+<p><a href="https://github.com/GoogleContainerTools/distroless">https://github.com/GoogleContainerTools/distroless</a>
+<a href="https://github.com/GoogleContainerTools/distroless/blob/main/examples/python3/Dockerfile">https://github.com/GoogleContainerTools/distroless/blob/main/examples/python3/Dockerfile</a>
+<a href="https://github.com/GoogleContainerTools/distroless/blob/main/examples/nodejs/Dockerfile">https://github.com/GoogleContainerTools/distroless/blob/main/examples/nodejs/Dockerfile</a></p>
+<h2 id="container" tabindex="-1">Container <a class="header-anchor" href="#container" aria-hidden="true">🔗</a></h2>
+<p>I container non sono persistenti, alla loro uscita perdono lo stato del file system e ripartono dall'immagine che li definisce:</p>
+<ul>
+<li><a href="https://docs.docker.com/get-started/05_persisting_data/#container-volumes">https://docs.docker.com/get-started/05_persisting_data/#container-volumes</a></li>
+<li><a href="https://docs.docker.com/storage/">https://docs.docker.com/storage/</a></li>
+</ul>
+<p>Per risolvere il problema si utilizzano i <code>volume</code> ed i <code>bind mount</code>:</p>
+<ul>
+<li><a href="https://docs.docker.com/storage/volumes/">https://docs.docker.com/storage/volumes/</a></li>
+<li><a href="https://docs.docker.com/storage/bind-mounts/">https://docs.docker.com/storage/bind-mounts/</a></li>
+</ul>
+<h2 id="logging" tabindex="-1">logging <a class="header-anchor" href="#logging" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://docs.docker.com/engine/reference/commandline/logs/">https://docs.docker.com/engine/reference/commandline/logs/</a></li>
+</ul>
+<p>I processi eseguiti nel container devono stampare su stdout che viene poi intercettato da docker.</p>
+<pre><code class="language-bash"><span class="hljs-variable">$1</span> docker ps <span class="hljs-comment"># prendere l&#x27;id del container</span>
+<span class="hljs-variable">$1</span> docker logs --timestamps -f fastapi-server <span class="hljs-comment"># follow</span>
+<span class="hljs-variable">$1</span> docker container inspect --format=<span class="hljs-string">&#x27;{{.LogPath}}&#x27;</span> fastapi-server <span class="hljs-comment"># posizione del file di log </span>
+<span class="hljs-variable">$1</span> <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">truncate</span> -s 0  ...
+<span class="hljs-variable">$2</span> curl 0.0.0.0:8000
+</code></pre>
+<h3 id="log-applicativo%2C-directory-log-in-bind-mount-su-%2Fopt%2Fdns-monitor%2F" tabindex="-1">log applicativo, directory log in bind mount su /opt/dns-monitor/ <a class="header-anchor" href="#log-applicativo%2C-directory-log-in-bind-mount-su-%2Fopt%2Fdns-monitor%2F" aria-hidden="true">🔗</a></h3>
+<pre><code>cat /opt/dns-monitor
+</code></pre>
+<h3 id="log-docker-su-stdout" tabindex="-1">log docker su stdout <a class="header-anchor" href="#log-docker-su-stdout" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-comment"># Visualizzazione log - non uso --timestamps perchè è sempre in formato UTC - ho impostato la timezone nella build e faccio stampare i timestamp in formato locale dalle api di logging</span>
+$ docker logs fastapi-server
+<span class="hljs-comment"># Follow</span>
+$ docker logs -f fastapi-server
+
+<span class="hljs-comment"># Truncate</span>
+<span class="hljs-built_in">log</span>=$(docker container inspect --format=<span class="hljs-string">&#x27;{{.LogPath}}&#x27;</span> fastapi-server)
+<span class="hljs-built_in">sudo</span> <span class="hljs-built_in">truncate</span> -s 0  <span class="hljs-built_in">log</span>
+</code></pre>
+<h2 id="debug" tabindex="-1">Debug <a class="header-anchor" href="#debug" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-comment"># DEBUG: docker run -it -p 8000:8000 python-fastapi-server</span>
+<span class="hljs-comment"># Eseguire l&#x27;immagine tenendo la console collegata e rimuovendo il container all&#x27;uscita</span>
+$ docker stop  fastapi-server
+$ docker run -it --<span class="hljs-built_in">rm</span> fastapi-server    
+    
+Per fare debug di una build prima committiamo l<span class="hljs-string">&#x27;immagine nella quale si è verificato l&#x27;</span>errore e poi apriamo una shell:
+Step 9/10 : RUN <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Current directory: &quot;</span> $(<span class="hljs-built_in">pwd</span>) &amp;&amp; trust anchor --store ssl/rootCACert.pem
+ ---&gt; Running <span class="hljs-keyword">in</span> 12ec30db84ef
+Current directory:  /app
+The <span class="hljs-built_in">command</span> <span class="hljs-string">&#x27;/bin/sh -c echo &quot;Current directory: &quot; $(pwd) &amp;&amp; trust anchor --store ssl/rootCACert.pem&#x27;</span> returned a non-zero code: 1
+==&gt;
+docker commit 12ec30db84ef tempimagename
+docker run -it --<span class="hljs-built_in">rm</span> tempimagename bash
+$ rust anchor --store ssl/rootCACert.pem
+$ <span class="hljs-built_in">echo</span> $?
+1
+
+$ docker run -it --<span class="hljs-built_in">rm</span> python-fastapi-server bash -c <span class="hljs-string">&quot;echo hello world&quot;</span>
+
+<span class="hljs-comment"># Ottenere informazioni sul container</span>
+$ docker ps -aqf <span class="hljs-string">&quot;name=^fastapi-server$&quot;</span> <span class="hljs-comment"># ottiene l&#x27;id del container</span>
+    -q <span class="hljs-keyword">for</span> quiet. output only the ID
+    -a <span class="hljs-keyword">for</span> all. works even <span class="hljs-keyword">if</span> your container is not running
+    -f <span class="hljs-keyword">for</span> filter.
+    ^ container name must start with this string
+    $ container name must end with this string
+$ docker inspect fastapi-server  
+</code></pre>
+<h2 id="problema-apt-get%3A-cache-busting" tabindex="-1">Problema apt-get: <code>cache busting</code> <a class="header-anchor" href="#problema-apt-get%3A-cache-busting" aria-hidden="true">🔗</a></h2>
+<p>Layer e Cache</p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/get-started/09_image_best/#layer-caching">https://docs.docker.com/get-started/09_image_best/#layer-caching</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache</a>
+For the <code>ADD</code> and <code>COPY</code> instructions If anything has changed in the file(s), such as the contents and metadata, then the cache is invalidated.<br>
+<strong>cache busting</strong></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/reference/dockerfile/#run">https://docs.docker.com/reference/dockerfile/#run</a></p>
+<p>The <code>RUN</code> instruction will execute any commands in a new layer on top of the current image and commit the results. <br>
+<strong>The cache for <code>RUN</code> instructions isn’t invalidated automatically during the next build.</strong> <br>
+The cache for an instruction like <code>RUN apt-get dist-upgrade -y</code> will be reused during the next build. <br>
+The cache for <code>RUN</code> instructions can be invalidated by using the <code>--no-cache</code> flag, for example <code>docker build --no-cache</code>.</p>
+</li>
+</ul>
+<p><strong>Always combine RUN apt-get update with apt-get install in the same RUN statement.</strong></p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run</a></p>
+<p>Always combine <code>RUN apt-get update</code> with <code>apt-get install</code> in the same RUN statement.
+Using <code>apt-get update</code> alone in a RUN statement causes caching issues and subsequent <code>apt-get install</code> instructions fail.
+Questo perchè il layer creato da <code>apt-get update</code> viene messo in cache e non cambia mai perchè l'istruzione <code>apt-get update</code> non cambia,
+la install seguente vedrà dunque sempre i pacchetti vecchi.
+Using <code>RUN apt-get update &amp;&amp; apt-get install -y</code> ensures your Dockerfile installs the latest package versions with no further coding or manual intervention. This technique is known as <strong><code>cache busting</code></strong>.
+Usando una unica istruzione contenente anche i nomi dei pacchetti, se un pacchetto cambia la riga <code>RUN</code> cambia e la cache viene invalidata, ricreando il layer.</p>
+</li>
+</ul>
+<p>Usare <code>apt-get update</code> da sola in una istruzione <code>RUN</code> causa un grave problema di cache <br>
+ogni istruzione <code>RUN</code> crea un layer, dopo una prima build, rieseguendola,
+il layer <code>RUN apt-get update</code> verrà ripreso dalla cache invece che ricrearlo.</p>
+<p>Unire le istruzioni update ed install in una unica per risolvere il problema:</p>
+<ul>
+<li><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#run</a></li>
+</ul>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y \
+    package-bar \
+    package-baz \
+    package-foo  \
+    &amp;&amp; <span class="hljs-built_in">rm</span> -rf /var/lib/apt/lists/*</span>
+</code></pre>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#sort-multi-line-arguments">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#sort-multi-line-arguments</a></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/61990329/dockerfile-benefits-of-repeated-apt-cache-cleans">https://stackoverflow.com/questions/61990329/dockerfile-benefits-of-repeated-apt-cache-cleans</a></p>
+<p>Avere tutto in un unica riga non solo crea un solo layer, ma lo mantiene di dimensioni ridotte a causa della rimozione dei file non utili.</p>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y \
+bzr \
+cvs \
+git \
+mercurial \
+subversion \
+&amp;&amp; <span class="hljs-built_in">rm</span> -rf /var/lib/apt/lists/*</span>
+</code></pre>
+</li>
+</ul>
+<p><strong>Cambiando la lista dei pacchetti, essendo ora un unica istruzione l'intera istruzione cambierà e non verrà ripresa dalla cache.</strong></p>
+<p><strong>Official Debian and Ubuntu images automatically <code>run apt-get clean</code>, so explicit invocation is not required.</strong></p>
+<h2 id="configurazione-delle-porte" tabindex="-1">Configurazione delle porte <a class="header-anchor" href="#configurazione-delle-porte" aria-hidden="true">🔗</a></h2>
+<p>Se si imposta il server ospitato nel container sull'indirizzo <code>127.0.0.1</code>, <br>
+questo  - essendo per definizione un indirizzo locale - non sarà poi raggiungibile dall'esterno, <br>
+bisogna invece impostare l'indirizzo del server python a <code>0.0.0.0</code>, <br>
+che è l'indirizzo automaticamente impostato da docker al run del container. <br>
+Per risolvere il problema impostiamo dunque <code>uvicorn</code> in modo che si imposti in ascolto <br>
+sull'indirizzo <code>0.0.0.0</code>.</p>
+<h3 id="problema---uvicorn-di-default-parte-sull'indirizzo-127.0.0.1" tabindex="-1">Problema - uvicorn di default parte sull'indirizzo 127.0.0.1 <a class="header-anchor" href="#problema---uvicorn-di-default-parte-sull'indirizzo-127.0.0.1" aria-hidden="true">🔗</a></h3>
+<p><code>127.0.0.1</code> è un indirizzo locale non raggiungibile dall'esterno del container, <br>
+docker di default mappa le porte del container sull'indirizzo <code>0.0.0.0</code>,
+che andrebbe dunque configurato in uvicorn per far si che possa essere raggiunto dall'esterno del container.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Problema, se si configura uvicorn sull&#x27;indirizzo 127.0.0.1 si ottiene una mancata connessione:</span>
+$ curl http://127.0.0.1:8000/schedule/get_schedules/
+<span class="hljs-variable">$curl</span>: (56) Recv failure: Connessione interrotta dal corrispondente
+<span class="hljs-comment"># Da qui si vede l&#x27;indirizzo, lo 0.0.0.0, sul quale di default docker mappa la porta</span>
+$ docker ps
+$ docker port fastapi-server
+    8000/tcp -&gt; 0.0.0.0:8000
+    8000/tcp -&gt; :::8000
+</code></pre>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/config/containers/container-networking/">https://docs.docker.com/config/containers/container-networking/</a></p>
+<pre><code>  -p 8080:80 Map TCP port 80 in the container to port 8080 on the Docker host.
+  Connection Refused: The reason could be because the application inside the container 
+  is not running as expected. for example you need to ensure that 
+  the application bind to 0.0.0.0 and not 127.0.0.1
+  That was my problem. The default port for the application (Apache Tika Server) was localhost, 
+  so I had to use --host=0.0.0.0 to fix it in docker.
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-bash">docker network <span class="hljs-built_in">ls</span>
+docker network inspect a7803d11fe85
+docker network prune
+docker network inspect bridge
+</code></pre>
+<h3 id="soluzione---configuriamo-uvicorn-sull'indirizzo-0.0.0.0" tabindex="-1">Soluzione - configuriamo uvicorn sull'indirizzo <code>0.0.0.0</code> <a class="header-anchor" href="#soluzione---configuriamo-uvicorn-sull'indirizzo-0.0.0.0" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><a href="https://forums.docker.com/t/can-i-change-the-default-ip-from-0-0-0-0-when-binding/30358/3">https://forums.docker.com/t/can-i-change-the-default-ip-from-0-0-0-0-when-binding/30358/3</a></p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/run/#network-settings">https://docs.docker.com/engine/reference/run/#network-settings</a>
+<code>127.0.0.1</code> non è un indirizzo raggiungibile dall'esterno,
+per cui docker di default imposta per il sistema guest <code>0.0.0.0</code>
+che volendo può essere cambiato:
+--ip=&quot;&quot;            : Sets the container's Ethernet device's IPv4 address</p>
+<p>invece di cambiare l'indirizzo <code>0.0.0.0</code> di default del comando run, <br>
+impostiamo nel container l'indirizzo sul quale si mette in ascolto uvicorn:</p>
+<ul>
+<li><a href="https://www.uvicorn.org/settings/">https://www.uvicorn.org/settings/</a></li>
+</ul>
+</li>
+</ul>
+<pre><code class="language-python">    uvicorn.run(
+        app_module,
+        reload=<span class="hljs-literal">True</span>,
+        host=<span class="hljs-string">&quot;0.0.0.0&quot;</span>,
+        port=<span class="hljs-number">8000</span>
+    )
+</code></pre>
+<h2 id="timezone-(serve-a-stampare-in-formato-locale-i-timestamp-dei-log)" tabindex="-1">Timezone (serve a stampare in formato locale i timestamp dei log) <a class="header-anchor" href="#timezone-(serve-a-stampare-in-formato-locale-i-timestamp-dei-log)" aria-hidden="true">🔗</a></h2>
+<p>Se non si fà nulla i log docker conterranno i timestamp in <code>UTC</code>,<br>
+bisogna impostare la timezone</p>
+<h3 id="soluzione-1---impostare-la-timezone-dal-comando-run" tabindex="-1">Soluzione 1 - impostare la timezone dal comando run <a class="header-anchor" href="#soluzione-1---impostare-la-timezone-dal-comando-run" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> /etc/timezone 
+Europe/Rome
+
+$ docker run -it --<span class="hljs-built_in">rm</span> python-fastapi-server <span class="hljs-built_in">date</span>
+Sat Jun 19 07:00:02 UTC 2021
+$ docker run -it --<span class="hljs-built_in">rm</span> -e TZ=Europe/Rome python-fastapi-server <span class="hljs-built_in">date</span>
+Sat Jun 19 09:00:16 CEST 2021
+</code></pre>
+<h3 id="soluzione-2---impostare-la-timezone-dal-dockerfile" tabindex="-1">Soluzione 2 - impostare la timezone dal dockerfile <a class="header-anchor" href="#soluzione-2---impostare-la-timezone-dal-dockerfile" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">ENV</span> TZ=Europe/Rome
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">ln</span> -snf /usr/share/zoneinfo/<span class="hljs-variable">$TZ</span> /etc/localtime &amp;&amp; <span class="hljs-built_in">echo</span> <span class="hljs-variable">$TZ</span> &gt; /etc/timezone</span>
+</code></pre>
+<h2 id="esperimento-debian" tabindex="-1">Esperimento Debian <a class="header-anchor" href="#esperimento-debian" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ docker pull debian:latest
+  docker run -it --<span class="hljs-built_in">rm</span> debian bash
+  apt-get update
+  apt-get install python3 python3-pip
+  apt-get install apt-file
+  apt-file update
+  apt-file search /usr/bin/trust
+  apt-get install p11-kit ca-certificates
+</code></pre>
+<h2 id="per-scaricare-gli-md-docker-della-reference" tabindex="-1">Per scaricare gli md Docker della reference <a class="header-anchor" href="#per-scaricare-gli-md-docker-della-reference" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://github.com/docker/cli">https://github.com/docker/cli</a></li>
+<li><a href="https://github.com/docker/cli/tree/master/docs/reference">https://github.com/docker/cli/tree/master/docs/reference</a></li>
+<li><a href="https://github.com/docker/cli/tree/master/docs/reference/commandline">https://github.com/docker/cli/tree/master/docs/reference/commandline</a></li>
+<li><a href="https://github.com/docker/docker.github.io/tree/master/compose/reference">https://github.com/docker/docker.github.io/tree/master/compose/reference</a></li>
+<li><a href="https://github.com/compose-spec/compose-spec">https://github.com/compose-spec/compose-spec</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-built_in">cd</span> /tmp
+git <span class="hljs-built_in">clone</span> git@github.com:docker/cli.git
+<span class="hljs-built_in">cd</span> cli/docs
+<span class="hljs-built_in">mv</span> reference ~/workspaces/Nodejs/Applications/Notes/md_html/md/Linux/virtualizzazione/docker/
+
+<span class="hljs-built_in">cd</span> /tmp
+git <span class="hljs-built_in">clone</span> git@github.com:compose-spec/compose-spec.git
+<span class="hljs-built_in">mv</span> compose-spec/spec.md ~/workspaces/Nodejs/Applications/Notes/md_html/md/Linux/virtualizzazione/docker/reference/compose_spec.md
+</code></pre>
+<h2 id="extract-file-from-docker-image" tabindex="-1">Extract file from docker image <a class="header-anchor" href="#extract-file-from-docker-image" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://unix.stackexchange.com/questions/331645/extract-file-from-docker-image">https://unix.stackexchange.com/questions/331645/extract-file-from-docker-image</a></p>
+<p><a href="https://docs.docker.com/engine/reference/commandline/create/#extended-description">According to the docker create documentation, this doesn't run the container</a></p>
+<pre><code class="language-bash">container_id=$(docker create <span class="hljs-string">&quot;<span class="hljs-variable">$image</span>&quot;</span>)
+docker <span class="hljs-built_in">cp</span> <span class="hljs-string">&quot;<span class="hljs-variable">$container_id</span>:<span class="hljs-variable">$source_path</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$destination_path</span>&quot;</span>
+docker <span class="hljs-built_in">rm</span> <span class="hljs-string">&quot;<span class="hljs-variable">$container_id</span>&quot;</span>    
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Meno efficiente ma funziona</span>
+$ docker run -it --<span class="hljs-built_in">rm</span> --entrypoint /bin/bash image_name -c <span class="hljs-string">&#x27;cat /etc/nginx/nginx.conf&#x27;</span> &gt; nginx.conf
+</code></pre>
+</li>
+<li>
+<p><a href="https://hub.docker.com/_/bash">https://hub.docker.com/_/bash</a></p>
+<pre><code class="language-bash">docker run -it --<span class="hljs-built_in">rm</span> bash:4.4
+</code></pre>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">FROM</span> bash:<span class="hljs-number">4.4</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> script.sh /</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;bash&quot;</span>, <span class="hljs-string">&quot;/script.sh&quot;</span>]</span>
+</code></pre>
+<pre><code class="language-bash">$ docker build --no-cache -t my-bash-app .
+...
+$ docker run -it --<span class="hljs-built_in">rm</span> --name my-running-app my-bash-app    
+</code></pre>
+</li>
+<li>
+<p><a href="https://serverfault.com/questions/806812/docker-run-bash-script-then-remove-container">https://serverfault.com/questions/806812/docker-run-bash-script-then-remove-container</a></p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> &lt;&lt; <span class="hljs-string">EOF &gt; sample_script.sh
+echo &#x27;Hello, world&#x27;
+EOF</span>    
+$ docker run -v /path/to/sample_script.sh:/sample_script.sh --<span class="hljs-built_in">rm</span> ubuntu bash sample_script.sh
+</code></pre>
+</li>
+</ul>
+<h2 id="job-scheduler" tabindex="-1">Job Scheduler <a class="header-anchor" href="#job-scheduler" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://github.com/kageurufu/systemd-docker">https://github.com/kageurufu/systemd-docker</a> Eseguire un container da systemd</p>
+</li>
+<li>
+<p><a href="https://github.com/mcuadros/ofelia">https://github.com/mcuadros/ofelia</a></p>
+</li>
+<li>
+<p><a href="https://viktorsapozhok.github.io/docker-python-ofelia/">https://viktorsapozhok.github.io/docker-python-ofelia/</a></p>
+</li>
+<li>
+<p><a href="https://crontab.guru">https://crontab.guru</a></p>
+</li>
+<li>
+<p><a href="https://docs.alpinelinux.org/user-handbook/0.1a/Working/openrc.html#_on_boot_service_manipulation">https://docs.alpinelinux.org/user-handbook/0.1a/Working/openrc.html#_on_boot_service_manipulation</a></p>
+</li>
+<li>
+<p><a href="https://wiki.alpinelinux.org/wiki/Alpine_Linux:FAQ#Why_don't_my_cron_jobs_run?">https://wiki.alpinelinux.org/wiki/Alpine_Linux:FAQ#Why_don't_my_cron_jobs_run?</a></p>
+<pre><code class="language-bash">$ rc-service crond start &amp;&amp; rc-update add crond
+$ run-parts --<span class="hljs-built_in">test</span> /etc/periodic/15min
+$ <span class="hljs-built_in">chmod</span> a+x /etc/periodic/[path/scriptname]
+<span class="hljs-comment"># Make sure the first line of your script is #!/bin/sh</span>
+<span class="hljs-comment"># Do not use periods on your script file names - this stops them from working; for example: /etc/periodic/daily/myscript will run, but /etc/periodic/daily/myscript.sh won&#x27;t.</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://levelup.gitconnected.com/cron-docker-the-easiest-job-scheduler-youll-ever-create-e1753eb5ea44">https://levelup.gitconnected.com/cron-docker-the-easiest-job-scheduler-youll-ever-create-e1753eb5ea44</a></p>
+<pre><code class="language-ruby"><span class="hljs-comment"># Dockerfile</span>
+<span class="hljs-variable constant_">FROM</span> <span class="hljs-symbol">alpine:</span><span class="hljs-number">3.15</span>
+<span class="hljs-comment"># Per abilitare il servizio crond se non lo è:</span>
+<span class="hljs-variable constant_">RUN</span> rc-service crond start &amp;&amp; rc-update add crond
+</code></pre>
+<pre><code class="language-ruby"><span class="hljs-comment"># Dockerfile</span>
+<span class="hljs-variable constant_">FROM</span> <span class="hljs-symbol">alpine:</span><span class="hljs-number">3.15</span>
+
+<span class="hljs-comment"># Install required packages</span>
+<span class="hljs-variable constant_">RUN</span> apk add --update --no-cache bash dos2unix
+
+<span class="hljs-comment"># Install python/pip</span>
+<span class="hljs-variable constant_">RUN</span> apk add --update --no-cache python3 &amp;&amp; ln -sf python3 /usr/bin/python
+<span class="hljs-variable constant_">RUN</span> python3 -m ensurepip --upgrade
+<span class="hljs-variable constant_">ENV</span> <span class="hljs-variable constant_">PYTHONUNBUFFERED</span>=<span class="hljs-number">1</span>
+<span class="hljs-comment"># install any Python requirements used by the jobs</span>
+<span class="hljs-variable constant_">RUN</span> pip3 install colorama
+
+<span class="hljs-variable constant_">WORKDIR</span> /usr/scheduler
+
+<span class="hljs-comment"># Copy files</span>
+<span class="hljs-variable constant_">COPY</span> jobs/*.* ./jobs/
+<span class="hljs-variable constant_">COPY</span> crontab.* ./
+<span class="hljs-variable constant_">COPY</span> start.sh .
+
+<span class="hljs-comment"># Fix line endings &amp;&amp; execute permissions</span>
+<span class="hljs-variable constant_">RUN</span> dos2unix crontab.* *.sh jobs/*.* \
+    &amp;&amp; \
+    find . -type f -iname <span class="hljs-string">&quot;*.sh&quot;</span> -exec chmod +x {} \
+    &amp;&amp; \
+    find . -type f -iname <span class="hljs-string">&quot;*.py&quot;</span> -exec chmod +x {} \;
+
+<span class="hljs-comment"># create cron.log file</span>
+<span class="hljs-variable constant_">RUN</span> touch /var/log/cron.log
+
+<span class="hljs-comment"># Run cron on container startup</span>
+<span class="hljs-variable constant_">CMD</span> [<span class="hljs-string">&quot;./start.sh&quot;</span>]
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># start.sh</span>
+<span class="hljs-keyword">if</span> [ -z <span class="hljs-string">&quot;<span class="hljs-variable">$SCHEDULER_ENVIRONMENT</span>&quot;</span> ]; <span class="hljs-keyword">then</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;SCHEDULER_ENVIRONMENT not set, assuming Development&quot;</span>
+SCHEDULER_ENVIRONMENT=<span class="hljs-string">&quot;Development&quot;</span>
+<span class="hljs-keyword">fi</span>
+
+<span class="hljs-comment"># Select the crontab file based on the environment</span>
+CRON_FILE=<span class="hljs-string">&quot;crontab.<span class="hljs-variable">$SCHEDULER_ENVIRONMENT</span>&quot;</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Loading crontab file: <span class="hljs-variable">$CRON_FILE</span>&quot;</span>
+
+<span class="hljs-comment"># Load the crontab file</span>
+crontab <span class="hljs-variable">$CRON_FILE</span>
+
+<span class="hljs-comment"># Start cron</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Starting cron...&quot;</span>
+crond -f
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># hello.sh</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&#x27;hello world (from a job)&#x27;</span>
+</code></pre>
+<p><code>crontab.Development</code></p>
+<pre><code class="language-sh">* * * * * /usr/scheduler/jobs/hello.sh
+</code></pre>
+<pre><code class="language-bash">$ docker build --no-cache  -t scheduler .
+$ docker run -it scheduler
+$ docker run -it scheduler /bin/bash
+    <span class="hljs-comment"># crontab -l</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="manjaro-image" tabindex="-1">Manjaro Image <a class="header-anchor" href="#manjaro-image" aria-hidden="true">🔗</a></h2>
+<p><a href="https://hub.docker.com/r/manjarolinux/base">https://hub.docker.com/r/manjarolinux/base</a></p>
+<pre><code class="language-bash">$ docker pull manjarolinux/base
+$ docker run -ti --<span class="hljs-built_in">rm</span> manjarolinux/base /bin/bash
+
+<span class="hljs-comment"># systemd è installato, ma non serve</span>
+<span class="hljs-comment"># pacman -Qs systemd</span>
+<span class="hljs-built_in">local</span>/systemd 252.5-1
+    system and service manager
+<span class="hljs-comment"># pacman -S mc</span>
+</code></pre>
+<h2 id="init-semplice-per-gestire-i-segnali-inviati-al-container-docker" tabindex="-1">init semplice per gestire i segnali inviati al container docker <a class="header-anchor" href="#init-semplice-per-gestire-i-segnali-inviati-al-container-docker" aria-hidden="true">🔗</a></h2>
+<p><strong>tini</strong> permette di lanciare il processo del container con la garanzia che tutti i segnali siano correttamente gestiti.</p>
+<ul>
+<li><a href="https://aur.archlinux.org/packages/tini">https://aur.archlinux.org/packages/tini</a></li>
+<li><a href="https://github.com/krallin/tini">https://github.com/krallin/tini</a></li>
+</ul>
+<p>tini è già integrato ed attivabile in docker sia con il run che con il compose:</p>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/engine/reference/run/#specify-an-init-process">https://docs.docker.com/engine/reference/run/#specify-an-init-process</a> <code>--init</code> flag</p>
+</li>
+<li>
+<p><a href="https://docs.docker.com/compose/compose-file/#init">https://docs.docker.com/compose/compose-file/#init</a></p>
+<pre><code class="language-yml"><span class="hljs-attr">services:</span>
+<span class="hljs-attr">web:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">alpine:latest</span>
+    <span class="hljs-attr">init:</span> <span class="hljs-literal">true</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86">https://medium.com/@gchudnov/trapping-signals-in-docker-containers-7a57fdda7d86</a></p>
+<pre><code>  Usage: docker kill [OPTIONS] CONTAINER [CONTAINER...]
+  Kill a running container using SIGKILL or a specified signal
+  -s, --signal=&quot;KILL&quot;    Signal to send to the container
+</code></pre>
+<pre><code class="language-js"><span class="hljs-meta">&#x27;use strict&#x27;</span>;
+<span class="hljs-keyword">var</span> http = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;http&#x27;</span>);
+<span class="hljs-keyword">var</span> server = http.<span class="hljs-title function_">createServer</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">req, res</span>) {
+    res.<span class="hljs-title function_">writeHead</span>(<span class="hljs-number">200</span>, {<span class="hljs-string">&#x27;Content-Type&#x27;</span>: <span class="hljs-string">&#x27;text/plain&#x27;</span>});
+    res.<span class="hljs-title function_">end</span>(<span class="hljs-string">&#x27;Hello World\n&#x27;</span>);
+}).<span class="hljs-title function_">listen</span>(<span class="hljs-number">3000</span>, <span class="hljs-string">&#x27;0.0.0.0&#x27;</span>);
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;server started&#x27;</span>);
+<span class="hljs-keyword">var</span> signals = {
+    <span class="hljs-string">&#x27;SIGINT&#x27;</span>: <span class="hljs-number">2</span>,
+    <span class="hljs-string">&#x27;SIGTERM&#x27;</span>: <span class="hljs-number">15</span>
+};
+<span class="hljs-keyword">function</span> <span class="hljs-title function_">shutdown</span>(<span class="hljs-params">signal, value</span>) {
+    server.<span class="hljs-title function_">close</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;server stopped by &#x27;</span> + signal);
+        process.<span class="hljs-title function_">exit</span>(<span class="hljs-number">128</span> + value);
+    });
+}
+<span class="hljs-title class_">Object</span>.<span class="hljs-title function_">keys</span>(signals).<span class="hljs-title function_">forEach</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">signal</span>) {
+    process.<span class="hljs-title function_">on</span>(signal, <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) {
+        <span class="hljs-title function_">shutdown</span>(signal, signals[signal]);
+    });
+});
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> iojs:<span class="hljs-keyword">onbuild</span>
+
+<span class="hljs-keyword">COPY</span><span class="language-bash"> ./program.js ./program.js</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> ./package.json ./package.json</span>
+
+<span class="hljs-keyword">EXPOSE</span> <span class="hljs-number">3000</span>
+
+<span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;node&quot;</span>, <span class="hljs-string">&quot;program&quot;</span>]</span>
+</code></pre>
+<pre><code class="language-bash">$ docker build --no-cache  -t signal-fg-app .
+$ docker run -it --<span class="hljs-built_in">rm</span> -p 3000:3000 --name=<span class="hljs-string">&quot;signal-fg-app&quot;</span> signal-fg-app
+$ docker <span class="hljs-built_in">kill</span> --signal=<span class="hljs-string">&quot;SIGTERM&quot;</span> signal-fg-app
+$ docker stop signal-fg-app
+</code></pre>
+</li>
+</ul>
+<h2 id="supervisor---gestore-di-processi-supervisor-per-avere-un-container-che-esegue-piu-processi-invece-di-uno" tabindex="-1">supervisor - Gestore di processi supervisor per avere un container che esegue piu processi invece di uno <a class="header-anchor" href="#supervisor---gestore-di-processi-supervisor-per-avere-un-container-che-esegue-piu-processi-invece-di-uno" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="http://supervisord.org/installing.html#creating-a-configuration-file">http://supervisord.org/installing.html#creating-a-configuration-file</a></li>
+<li><a href="https://gdevillele.github.io/engine/admin/using_supervisord/">https://gdevillele.github.io/engine/admin/using_supervisord/</a></li>
+</ul>
+<p>Un container Docker puo eseguire <strong>un solo</strong> processo, <strong>che deve essere in foreground - non un demone</strong>,<br>
+per poterne eseguire piu di uno bisogna effettuare un fork,
+ad esempio con uno script <code>.sh</code> che lancia piu comandi utilizzando l'ampersand <code>&amp;</code>.</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Generazione di un file di configurazione di default</span>
+$ echo_supervisord_conf
+</code></pre>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/config/containers/multi-service_container/">https://docs.docker.com/config/containers/multi-service_container/</a></p>
+<p>Esempio 1: lancio di piu processi</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># my_wrapper_script.sh</span>
+<span class="hljs-comment"># Start the first process</span>
+./my_first_process &amp;
+<span class="hljs-comment"># Start the second process</span>
+./my_second_process &amp;
+<span class="hljs-comment"># Wait for any process to exit</span>
+<span class="hljs-built_in">wait</span> -n
+<span class="hljs-comment"># Exit with status of process that exited first</span>
+<span class="hljs-built_in">exit</span> $?    
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># syntax=docker/dockerfile:1</span>
+<span class="hljs-keyword">FROM</span> ubuntu:latest
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_first_process my_first_process</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_second_process my_second_process</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_wrapper_script.sh my_wrapper_script.sh</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> ./my_wrapper_script.sh</span>
+</code></pre>
+<p>Esempio 2: lancio di un processo in background e di uno principale in foreground</p>
+<pre><code class="language-bash"><span class="hljs-meta">#!/bin/bash</span>
+<span class="hljs-comment"># my_wrapper_script.sh</span>
+<span class="hljs-comment"># turn on bash&#x27;s job control</span>
+<span class="hljs-built_in">set</span> -m
+<span class="hljs-comment"># Start the primary process and put it in the background</span>
+./my_main_process &amp;
+<span class="hljs-comment"># Start the helper process</span>
+./my_helper_process
+<span class="hljs-comment"># the my_helper_process might need to know how to wait on the</span>
+<span class="hljs-comment"># primary process to start before it does its work and returns</span>
+<span class="hljs-comment"># now we bring the primary process back into the foreground</span>
+<span class="hljs-comment"># and leave it there</span>
+<span class="hljs-built_in">fg</span> %1
+</code></pre>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># syntax=docker/dockerfile:1</span>
+<span class="hljs-keyword">FROM</span> ubuntu:latest
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_main_process my_main_process</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_helper_process my_helper_process</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_wrapper_script.sh my_wrapper_script.sh</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> ./my_wrapper_script.sh</span>
+</code></pre>
+<p>Esempio 3: lancio di piu processi in foreground con <strong>supervisord</strong></p>
+<pre><code class="language-Dockerfile"><span class="hljs-comment"># syntax=docker/dockerfile:1</span>
+<span class="hljs-keyword">FROM</span> ubuntu:latest
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y supervisor</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">mkdir</span> -p /var/log/supervisor</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> supervisord.conf /etc/supervisor/conf.d/supervisord.conf</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_first_process my_first_process</span>
+<span class="hljs-keyword">COPY</span><span class="language-bash"> my_second_process my_second_process</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;/usr/bin/supervisord&quot;</span>] <span class="hljs-comment"># in supervisord.conf deve esserci &#x27;nodaemon=true&#x27; altrimenti aggiungere &quot;--nodaemon&quot;</span></span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://github.com/dimovnike/alpine-supervisord">https://github.com/dimovnike/alpine-supervisord</a></p>
+</li>
+</ul>
+<pre><code class="language-Dockerfile">    <span class="hljs-keyword">FROM</span> alpine
+    <span class="hljs-keyword">RUN</span><span class="language-bash"> apk add --update supervisor &amp;&amp; <span class="hljs-built_in">rm</span>  -rf /tmp/* /var/cache/apk/*</span>
+    <span class="hljs-keyword">ADD</span><span class="language-bash"> supervisord.conf /etc/</span>
+    <span class="hljs-keyword">ENTRYPOINT</span><span class="language-bash"> [<span class="hljs-string">&quot;supervisord&quot;</span>, <span class="hljs-string">&quot;--nodaemon&quot;</span>, <span class="hljs-string">&quot;--configuration&quot;</span>, <span class="hljs-string">&quot;/etc/supervisord.conf&quot;</span>]</span>
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-comment"># supervisord.conf</span>
+<span class="hljs-section">[supervisord]</span>
+<span class="hljs-attr">nodaemon</span>=<span class="hljs-literal">true</span> <span class="hljs-comment"># Fondamentale per l&#x27;utilizzo con Docker</span>
+
+<span class="hljs-section">[include]</span>
+<span class="hljs-attr">files</span> = /etc/supervisor/conf.d/*.conf
+</code></pre>
+<p>supervisord-example.conf: <strong>impostare <code>nodaemon=true</code> per l'utilizzo con Docker</strong></p>
+<ul>
+<li>
+<p><a href="https://gist.github.com/didip/802561">https://gist.github.com/didip/802561</a></p>
+<pre><code class="language-ini"><span class="hljs-section">[unix_http_server]</span>
+<span class="hljs-attr">file</span>=/tmp/supervisor.sock                       <span class="hljs-comment">; path to your socket file</span>
+
+<span class="hljs-section">[supervisord]</span>
+<span class="hljs-attr">logfile</span>=/var/log/supervisord/supervisord.log    <span class="hljs-comment">; supervisord log file</span>
+<span class="hljs-attr">logfile_maxbytes</span>=<span class="hljs-number">50</span>MB                           <span class="hljs-comment">; maximum size of logfile before rotation</span>
+<span class="hljs-attr">logfile_backups</span>=<span class="hljs-number">10</span>                              <span class="hljs-comment">; number of backed up logfiles</span>
+<span class="hljs-attr">loglevel</span>=error                                  <span class="hljs-comment">; info, debug, warn, trace</span>
+<span class="hljs-attr">pidfile</span>=/var/run/supervisord.pid                <span class="hljs-comment">; pidfile location</span>
+<span class="hljs-attr">nodaemon</span>=<span class="hljs-literal">false</span>                                  <span class="hljs-comment">; run supervisord as a daemon</span>
+<span class="hljs-attr">minfds</span>=<span class="hljs-number">1024</span>                                     <span class="hljs-comment">; number of startup file descriptors</span>
+<span class="hljs-attr">minprocs</span>=<span class="hljs-number">200</span>                                    <span class="hljs-comment">; number of process descriptors</span>
+<span class="hljs-attr">user</span>=root                                       <span class="hljs-comment">; default user</span>
+<span class="hljs-attr">childlogdir</span>=/var/log/supervisord/               <span class="hljs-comment">; where child log files will live</span>
+
+<span class="hljs-section">[rpcinterface:supervisor]</span>
+<span class="hljs-attr">supervisor.rpcinterface_factory</span> = supervisor.rpcinterface:make_main_rpcinterface
+
+<span class="hljs-section">[supervisorctl]</span>
+<span class="hljs-attr">serverurl</span>=unix:///tmp/supervisor.sock         <span class="hljs-comment">; use a unix:// URL  for a unix socket</span>
+
+<span class="hljs-comment">; This is where you run individual Tornado instances.</span>
+<span class="hljs-comment">; We run four; one per processor core.</span>
+<span class="hljs-comment">; In development, we ran as many as four per core with no issues.</span>
+<span class="hljs-comment">; If you&#x27;re looking to minimize cpu load, run fewer processes.</span>
+<span class="hljs-comment">; BTW, Tornado processes are single threaded.</span>
+<span class="hljs-comment">; To take advantage of multiple cores, you&#x27;ll need multiple processes.</span>
+
+<span class="hljs-section">[program:tornado-8000]</span>
+<span class="hljs-attr">command</span>=/path/to/app.py --port=<span class="hljs-number">8000</span>
+<span class="hljs-attr">stderr_logfile</span> = /var/log/supervisord/tornado-stderr.log
+<span class="hljs-attr">stdout_logfile</span> = /var/log/supervisord/tornado-stdout.log
+
+<span class="hljs-section">[program:tornado-8001]</span>
+<span class="hljs-attr">command</span>=/path/to/app.py --port=<span class="hljs-number">8001</span>
+<span class="hljs-attr">stderr_logfile</span> = /var/log/supervisord/tornado-stderr.log
+<span class="hljs-attr">stdout_logfile</span> = /var/log/supervisord/tornado-stdout.log
+
+<span class="hljs-section">[program:tornado-8002]</span>
+<span class="hljs-attr">command</span>=/path/to/app.py --port=<span class="hljs-number">8002</span>
+<span class="hljs-attr">stderr_logfile</span> = /var/log/supervisord/tornado-stderr.log
+<span class="hljs-attr">stdout_logfile</span> = /var/log/supervisord/tornado-stdout.log
+
+<span class="hljs-section">[program:tornado-8003]</span>
+<span class="hljs-attr">command</span>=/path/to/app.py --port=<span class="hljs-number">8003</span>
+<span class="hljs-attr">stderr_logfile</span> = /var/log/supervisord/tornado-stderr.log
+<span class="hljs-attr">stdout_logfile</span> = /var/log/supervisord/tornado-stdout.log
+</code></pre>
+</li>
+<li>
+<p><a href="https://gist.github.com/jasonamyers/5025011">https://gist.github.com/jasonamyers/5025011</a> <strong>impostare <code>nodaemon=true</code> per l'utilizzo con Docker</strong></p>
+<pre><code class="language-ini"><span class="hljs-comment">; Sample supervisor config file.</span>
+<span class="hljs-comment">;</span>
+<span class="hljs-comment">; For more information on the config file, please see:</span>
+<span class="hljs-comment">; http://supervisord.org/configuration.html</span>
+<span class="hljs-comment">;</span>
+<span class="hljs-comment">; <span class="hljs-doctag">Note:</span> shell expansion (&quot;~&quot; or &quot;$HOME&quot;) is not supported. Environment</span>
+<span class="hljs-comment">; variables can be expanded using this syntax: &quot;%(ENV_HOME)s&quot;.</span>
+
+<span class="hljs-section">[unix_http_server]</span>
+<span class="hljs-attr">file</span>=/tmp/supervisor.sock <span class="hljs-comment">; (the path to the socket file)</span>
+
+<span class="hljs-section">[supervisord]</span>
+<span class="hljs-attr">logfile</span>=/tmp/supervisord.log <span class="hljs-comment">; (main log file;default $CWD/supervisord.log)</span>
+<span class="hljs-attr">logfile_maxbytes</span>=<span class="hljs-number">50</span>MB <span class="hljs-comment">; (max main logfile bytes b4 rotation;default 50MB)</span>
+<span class="hljs-attr">logfile_backups</span>=<span class="hljs-number">10</span> <span class="hljs-comment">; (num of main logfile rotation backups;default 10)</span>
+<span class="hljs-attr">loglevel</span>=info <span class="hljs-comment">; (log level;default info; others: debug,warn,trace)</span>
+<span class="hljs-attr">pidfile</span>=/var/run/supervisord.pid <span class="hljs-comment">; (supervisord pidfile;default supervisord.pid)</span>
+<span class="hljs-attr">nodaemon</span>=<span class="hljs-literal">false</span> <span class="hljs-comment">; (start in foreground if true;default false)</span>
+<span class="hljs-attr">minfds</span>=<span class="hljs-number">1024</span> <span class="hljs-comment">; (min. avail startup file descriptors;default 1024)</span>
+<span class="hljs-attr">minprocs</span>=<span class="hljs-number">200</span> <span class="hljs-comment">; (min. avail process descriptors;default 200)</span>
+
+<span class="hljs-comment">; the below section must remain in the config file for RPC</span>
+<span class="hljs-comment">; (supervisorctl/web interface) to work, additional interfaces may be</span>
+<span class="hljs-comment">; added by defining them in separate rpcinterface: sections</span>
+<span class="hljs-section">[rpcinterface:supervisor]</span>
+<span class="hljs-attr">supervisor.rpcinterface_factory</span> = supervisor.rpcinterface:make_main_rpcinterface
+
+<span class="hljs-section">[supervisorctl]</span>
+<span class="hljs-attr">serverurl</span>=unix:///tmp/supervisor.sock <span class="hljs-comment">; use a unix:// URL for a unix socket</span>
+
+<span class="hljs-comment">; The below sample program section shows all possible program subsection values,</span>
+<span class="hljs-comment">; create one or more &#x27;real&#x27; program: sections to be able to control them under</span>
+<span class="hljs-comment">; supervisor.</span>
+
+<span class="hljs-section">[program:watchmedo]</span>
+<span class="hljs-attr">command</span>=/usr/local/bin/watchmedo shell-command --patterns <span class="hljs-string">&quot;*.py;*.txt&quot;</span> --recursive --command=<span class="hljs-string">&#x27;/
+usr/local/bin/supervisorctl restart gunicorn&#x27;</span> /var/www/html
+<span class="hljs-attr">process_name</span>=%(program_name)s
+<span class="hljs-attr">directory</span>=/var/www/html
+<span class="hljs-attr">autostart</span>=<span class="hljs-literal">true</span>
+<span class="hljs-attr">autorestart</span>=<span class="hljs-literal">true</span>
+<span class="hljs-attr">redirect_stderr</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-section">[program:gunicorn]</span>
+<span class="hljs-attr">command</span>=/usr/local/bin/gunicorn appname:app -c /opt/appname/gunicorn.conf.py
+<span class="hljs-attr">process_name</span>=%(program_name)s
+<span class="hljs-attr">directory</span>=/var/www/html
+<span class="hljs-attr">user</span>=ubuntu
+<span class="hljs-attr">autostart</span>=<span class="hljs-literal">true</span>
+<span class="hljs-attr">autorestart</span>=<span class="hljs-literal">true</span>
+<span class="hljs-attr">redirect_stderr</span>=<span class="hljs-literal">true</span>
+<span class="hljs-attr">environment</span>=DATABASE_URL=<span class="hljs-string">&#x27;mysql://user:password@appname.crrk2qi8kbp
+v.us-east-1.rds.amazonaws.com/appname&#x27;</span>,ANOTHER_ENV_VARL=<span class="hljs-string">&#x27;http://api.url.com&#x27;</span>
+</code></pre>
+</li>
+</ul>
+<h2 id="lavorare-nell'immagine-come-utente-non-root" tabindex="-1">Lavorare nell'immagine come utente non root <a class="header-anchor" href="#lavorare-nell'immagine-come-utente-non-root" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user">https://github.com/nodejs/docker-node/blob/main/docs/BestPractices.md#non-root-user</a>
+<a href="https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user">https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#user</a></p>
+<p>By default, Docker runs commands inside the container as root which violates the <strong>Principle of Least Privilege (PoLP)</strong><br>
+when superuser permissions are not strictly required. <strong>You want to run the container as an unprivileged user whenever possible</strong>. <br>
+For example the node images provide the <code>node</code> user for such purpose.</p>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">FROM</span> node:<span class="hljs-number">16</span>
+...
+<span class="hljs-comment"># At the end, set the user to use when running this image</span>
+<span class="hljs-keyword">USER</span> node
+</code></pre>
+<p>If you need to change the uid/gid of the user you can use:</p>
+<pre><code class="language-dockerfile"><span class="hljs-keyword">RUN</span><span class="language-bash"> groupmod -g 999 node &amp;&amp; usermod -u 999 -g 999 node</span>
+</code></pre>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/27701930/how-to-add-users-to-docker-container">https://stackoverflow.com/questions/27701930/how-to-add-users-to-docker-container</a></p>
+<pre><code>  RUN useradd -ms /bin/bash newuser
+  USER newuser
+  WORKDIR /home/newuser
+
+  RUN useradd -rm -d /home/ubuntu -s /bin/bash -g root -G sudo -u 1001 ubuntu
+  USER ubuntu
+  WORKDIR /home/ubuntu
+</code></pre>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/login.defs.5">https://man.archlinux.org/man/login.defs.5</a></p>
+<pre><code>  L'id del primo utente creato nel Dockerfile dovrebbe essere `1000`, questo serve per dare i diritti
+  sulle directory dell'host montate in bind mount.
+
+  UID_MAX (number), UID_MIN (number)
+  Range of user IDs used for the creation of regular users by useradd or newusers.
+  The default value for UID_MIN (resp. UID_MAX) is 1000 
+</code></pre>
+</li>
+<li>
+<p><a href="https://man.archlinux.org/man/useradd.8">https://man.archlinux.org/man/useradd.8</a> per creare utenti nel Dockerfile</p>
+<pre><code>  -u, --uid UID The numerical value of the user's ID. The default is to use the smallest ID value greater than or equal to UID_MIN and greater than every other user.
+  -g, --gid GROUP The group name or number of the user's initial login group.
+  -G, --groups GROUP1[,GROUP2,...[,GROUPN]]] A list of supplementary groups which the user is also a member of.
+  -s, --shell SHELL The name of the user's login shell.
+  -m, --create-home Create the user's home directory if it does not exist. 
+  -d, --home-dir HOME_DIR The new user will be created using HOME_DIR as the value for the user's login directory. The default is to append the LOGIN name to BASE_DIR and use that as the login directory name.
+  -r, --system Create a system account.
+  -f, --inactive INACTIVE The number of days after a password expires until the account is permanently disabled.
+</code></pre>
+</li>
+</ul>
+<h2 id="bind-mount-ed-id-utente" tabindex="-1">Bind Mount ed id utente <a class="header-anchor" href="#bind-mount-ed-id-utente" aria-hidden="true">🔗</a></h2>
+<ul>
+<li>
+<p><a href="https://docs.docker.com/storage/bind-mounts/">https://docs.docker.com/storage/bind-mounts/</a> <code>--mount type=bind,source=&quot;$(pwd)&quot;/target,target=/app</code></p>
+<p>Utilizzando nel Dockerfile un <strong>utente non root</strong>, se si montano delle directory dell'host in bind mount, debbono essere dati su tali directories
+gli opportuni diritti di accesso allo stesso UID del container.</p>
+<pre><code class="language-dockerfile">    <span class="hljs-keyword">RUN</span><span class="language-bash"> useradd -<span class="hljs-built_in">rm</span> -d /home/ubuntu -s /bin/bash -g root -G <span class="hljs-built_in">sudo</span> -u 1000 ubuntu</span>
+    <span class="hljs-keyword">USER</span> ubuntu
+    <span class="hljs-keyword">WORKDIR</span><span class="language-bash"> /home/ubuntu</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">mkdir</span> -p /opt/elastic_search_pwned/data
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R 1000:0 /opt/elastic_search_pwned/
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> -R :0 /opt/elastic_search_pwned/
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chmod</span> -R g+rwx /opt/elastic_search_pwned
+<span class="hljs-comment"># Ensure all future content in the folder will inherit group ownership</span>
+$ <span class="hljs-built_in">chmod</span> -R g+s /opt/elastic_search_pwned/
+
+$ <span class="hljs-comment">#sudo chgrp 0 /opt/elastic_search_pwned/data</span>
+$ <span class="hljs-built_in">sudo</span> usermod -aG 0 <span class="hljs-variable">$USER</span> <span class="hljs-comment"># aggiungo l&#x27;utente host al gruppo root</span>
+</code></pre>
+</li>
+</ul>
+<p><a href="https://docs.docker.com/storage/bind-mounts/#mount-into-a-non-empty-directory-on-the-container">https://docs.docker.com/storage/bind-mounts/#mount-into-a-non-empty-directory-on-the-container</a></p>
+<p>If you bind-mount a directory into a non-empty directory on the container,<br>
+<strong>the container directory’s existing contents are obscured by the bind mount</strong>.<br>
+This can be beneficial, such as when you want to test a new version of your application without building a new image.<br>
+<strong>Il contenuto della directory del container viene mascherato dal contenuto della directory dell'host.</strong></p>
+<p><a href="https://stackoverflow.com/questions/30140911/can-i-control-the-owner-of-a-bind-mounted-volume-in-a-docker-image">https://stackoverflow.com/questions/30140911/can-i-control-the-owner-of-a-bind-mounted-volume-in-a-docker-image</a></p>
+<p>Match UID and GID of the owner/user in the host and container.<br>
+Use the file access control list command <code>getfacl</code> - get the uid/gid of the workspace directory owner on the container, and use <code>setfacl</code> command to grant this id read/write permission at the host. You have to run <code>setfacl</code> on the host.</p>
+<p><a href="https://stackoverflow.com/questions/56844746/how-to-set-uid-and-gid-in-docker-compose">https://stackoverflow.com/questions/56844746/how-to-set-uid-and-gid-in-docker-compose</a></p>
+<pre><code>`docker-compose.yml`
+```yml
+user: &quot;${UID}:${GID}&quot;
+```
+</code></pre>
+<p>in your docker compose and provide UID and GID as docker-compose parameter</p>
+<pre><code class="language-bash">$ UID=<span class="hljs-variable">${UID}</span> GID=<span class="hljs-variable">${GID}</span> docker-compose up
+</code></pre>
+<p><a href="https://devcoops.com/docker-compose-uid-gid/">https://devcoops.com/docker-compose-uid-gid/</a></p>
+<h2 id="x-server" tabindex="-1">X Server <a class="header-anchor" href="#x-server" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://leimao.github.io/blog/Docker-Container-GUI-Display/">https://leimao.github.io/blog/Docker-Container-GUI-Display/</a></li>
+<li><a href="https://gursimarsm.medium.com/run-gui-applications-in-a-docker-container-ca625bad4638">https://gursimarsm.medium.com/run-gui-applications-in-a-docker-container-ca625bad4638</a></li>
+</ul>
+<p>docker-compose.yml</p>
+<pre><code class="language-yml"><span class="hljs-attr">version:</span> <span class="hljs-string">&quot;3&quot;</span><span class="hljs-attr">services:</span>
+  <span class="hljs-attr">app:</span>
+    <span class="hljs-attr">image:</span> <span class="hljs-string">my-app:latest</span>
+    <span class="hljs-attr">build:</span> <span class="hljs-string">.</span>
+    <span class="hljs-attr">environment:</span>
+      <span class="hljs-comment"># - DISPLAY=${DISPLAY}</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">DISPLAY</span>           <span class="hljs-comment"># In questa forma il valore viene preso dall&#x27;env della shell che lancia docker compose</span>
+    <span class="hljs-attr">volumes:</span>
+      <span class="hljs-bullet">-</span> <span class="hljs-string">/tmp/.X11-unix:/tmp/.X11-unix</span>
+    <span class="hljs-attr">network_mode:</span> <span class="hljs-string">host</span>
+</code></pre>
+<p>Dockerfile</p>
+<pre><code class="language-yml"><span class="hljs-string">FROM</span> <span class="hljs-string">ubuntu:latest</span>
+<span class="hljs-string">RUN</span> <span class="hljs-string">apt-get</span> <span class="hljs-string">update</span> <span class="hljs-string">&amp;&amp;</span> <span class="hljs-string">apt-get</span> <span class="hljs-string">install</span> <span class="hljs-string">-y</span> <span class="hljs-string">firefox</span>
+<span class="hljs-string">CMD</span> [<span class="hljs-string">&quot;/usr/bin/firefox&quot;</span>]
+</code></pre>
+<pre><code class="language-bash">docker-compose build
+docker-compose up
+</code></pre>
+<p>Potrebbe servire l'autenticazione:</p>
+<pre><code class="language-bash">HOST$ xauth list
+linux/unix:0  MIT-MAGIC-COOKIE-1  5da2cbad2495af3ff772db3df49c6139
+<span class="hljs-comment"># Ora che abbiamo il token installiamolo nel container</span>
+CONATINER$ apt install -y xauth 
+CONATINER$ xauth add &lt;token&gt;
+CONATINER$ xauth add <span class="hljs-string">&quot;linux/unix:0  MIT-MAGIC-COOKIE-1  5da2cbad2495af3ff772db3df49c6139&quot;</span>
+CONATINER$ xauth list
+</code></pre>
+<p>Oppure utilizzare VNC:</p>
+<pre><code class="language-Dockerfile"><span class="hljs-keyword">FROM</span> ubuntu:latest
+<span class="hljs-keyword">RUN</span><span class="language-bash"> apt-get update &amp;&amp; apt-get install -y firefox x11vnc xvfb</span>
+<span class="hljs-keyword">RUN</span><span class="language-bash"> <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;exec firefox&quot;</span> &gt; ~/.xinitrc &amp;&amp; <span class="hljs-built_in">chmod</span> +x ~/.xinitrc</span>
+<span class="hljs-keyword">CMD</span><span class="language-bash"> [<span class="hljs-string">&quot;v11vnc&quot;</span>, <span class="hljs-string">&quot;-create&quot;</span>, <span class="hljs-string">&quot;-forever&quot;</span>]</span>
+</code></pre>
+<p>You must bind a host port to the container’s port <code>5900</code> — this is the port the VNC server will be exposed on.
+To connect to the server, you’ll need a VNC client on your host.<br>
+<strong>Find the IP address of your container</strong> by running <code>docker ps</code>,<br>
+noting down the container ID and passing it to <code>docker inspect &lt;container&gt;</code>:</p>
+<pre><code class="language-bash">$ docker ps
+CONTAINER ID   IMAGE             COMMAND                  CREATED       STATUS          PORTS     NAMES
+d4933974843f   dirsync-dirsync   <span class="hljs-string">&quot;docker-entrypoint.s…&quot;</span>   5 weeks ago   Up 53 minutes             dirsync-dirsync-1
+$ docker inspect d4933974843f| grep -w IPAddress
+            <span class="hljs-string">&quot;IPAddress&quot;</span>: <span class="hljs-string">&quot;&quot;</span>,
+                    <span class="hljs-string">&quot;IPAddress&quot;</span>: <span class="hljs-string">&quot;172.20.0.2&quot;</span>,
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$DISPLAY</span>
+:0
+</code></pre>
+<p>Use the container’s IP address with your VNC client. Connect on port <code>5900</code> without authentication.</p>
+<ul>
+<li>
+<p><a href="https://unix.stackexchange.com/questions/196677/what-is-tmp-x11-unix">https://unix.stackexchange.com/questions/196677/what-is-tmp-x11-unix</a></p>
+<p><code>/tmp/.X11-unix/X0</code></p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/59258434/how-does-a-program-communicate-with-the-x11-server-on-linux">https://stackoverflow.com/questions/59258434/how-does-a-program-communicate-with-the-x11-server-on-linux</a></p>
+<p><code>/tmp/.X11-unix/X${DISPLAYNUMBER}</code></p>
+</li>
+</ul>
+<p>-<a href="https://xwindow.angelfire.com/page22.html">https://xwindow.angelfire.com/page22.html</a></p>
+<h2 id="come-verificare-se-l'applicazione-%C3%A8-in-esecuzione-all'interno-di-un-container-docker" tabindex="-1">Come verificare se l'applicazione è in esecuzione all'interno di un Container Docker <a class="header-anchor" href="#come-verificare-se-l'applicazione-%C3%A8-in-esecuzione-all'interno-di-un-container-docker" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://www.baeldung.com/linux/is-process-running-inside-container">https://www.baeldung.com/linux/is-process-running-inside-container</a></li>
+</ul>
+<pre><code class="language-bash"><span class="hljs-comment"># Come verificare se l&#x27;applicazione è in esecuzione all&#x27;interno di un Container Docker</span>
+$ docker run -it --<span class="hljs-built_in">rm</span> manjaro_systemd /bin/bash
+  <span class="hljs-comment"># Esiste il file /.dockerenv in un immagine Docker</span>
+  <span class="hljs-comment"># Ma il file .dockerenv potrebbe essere rimosso in futuro</span>
+  <span class="hljs-keyword">if</span> ! [ -f /.dockerenv ] ; <span class="hljs-keyword">then</span>
+    <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;Not running inside docker, exiting to avoid data damage.&quot;</span> &gt;&amp;2
+    <span class="hljs-built_in">exit</span> 1
+  <span class="hljs-keyword">fi</span>
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-comment"># Come verificare se l&#x27;applicazione è in esecuzione all&#x27;interno di un Container Docker</span>
+
+<span class="hljs-comment"># This command extracts the first line of the scheduling overview for the process with PID 1. </span>
+<span class="hljs-comment"># For the Linux containers, it displays the command of the main process. it’s bash.</span>
+<span class="hljs-comment"># However, if the process isn’t in a container, it displays init or systemd</span>
+
+<span class="hljs-comment"># Nell&#x27;Host questo comando ritorna systemd oppure init</span>
+$ <span class="hljs-built_in">cat</span> /proc/1/sched | <span class="hljs-built_in">head</span> -n 1
+systemd (1, <span class="hljs-comment">#threads: 1)</span>
+
+<span class="hljs-comment"># Nel container invece il comando ritorna bash</span>
+$ docker run -it --<span class="hljs-built_in">rm</span> manjaro_systemd /bin/bash
+  [8604d6171772 opt]# <span class="hljs-built_in">cat</span> /proc/1/sched | <span class="hljs-built_in">head</span> -n 1
+  bash (1, <span class="hljs-comment">#threads: 1)</span>
+</code></pre>
+</body></html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.045" />
+        <title>kernel</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../inc/js/hljs/styles/default.css" />
+        <script src="../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="kernel" tabindex="-1">kernel <a class="header-anchor" href="#kernel" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.045</p>
+<nav class="table-of-contents"><ol><li><a href="#manjaro">Manjaro </a></li><li><a href="#kon-kolivas">Kon Kolivas </a></li><li><a href="#compilazione-kernel">Compilazione Kernel </a></li><li><a href="#recuperare-la-configurazione-del-kernel-precedente">Recuperare la configurazione del kernel precedente </a></li><li><a href="#controlli-da-eseguire">Controlli da eseguire </a></li><li><a href="#compilazione">Compilazione </a></li><li><a href="#defaul-kernel-config-from-scratch">Defaul Kernel Config From Scratch </a></li><li><a href="#installare-il-kernel-2.6.32.*-su-ubuntu-9.10">Installare il kernel 2.6.32.* su UBUNTU 9.10 </a></li><li><a href="#kernel-2.6.38-automatic-process-group-scheduling">Kernel 2.6.38 Automatic process group scheduling </a></li><li><a href="#limits">Limits </a><ol><li><a href="#per-shell%2Fscript">Per shell/script </a></li><li><a href="#per-user%2Fprocess">Per user/process </a></li><li><a href="#system-wide">System wide </a></li></ol></li></ol></nav><h1 id="kernel-1" tabindex="-1">Kernel <a class="header-anchor" href="#kernel-1" aria-hidden="true">🔗</a></h1>
+<h2 id="manjaro" tabindex="-1">Manjaro <a class="header-anchor" href="#manjaro" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php/Manjaro_Kernels">https://wiki.manjaro.org/index.php/Manjaro_Kernels</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu linux-headers
+$ mhwd-kernel -li
+$ <span class="hljs-built_in">sudo</span> mhwd-kernel -r linux419 <span class="hljs-comment"># rimozione del kernel 419</span>
+$ mhwd-kernel -li   
+Currently running: 5.12.2-1-MANJARO (linux512)
+The following kernels are installed <span class="hljs-keyword">in</span> your system:
+   * linux512
+
+<span class="hljs-comment"># the following command will install a new kernel (5.10) to replace the existing kernel, which will be deleted:</span>
+$ <span class="hljs-built_in">sudo</span> mhwd-kernel -i linux510 rmc
+</code></pre>
+<p>Installare gli header del kernel</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> pacman -Syu --needed --noconfirm linux-headers
+$ <span class="hljs-built_in">sudo</span> pacman -Syu $(pacman -Qsq <span class="hljs-string">&quot;^linux&quot;</span> | grep <span class="hljs-string">&quot;^linux[0-9]*[-rt]*$&quot;</span> | awk <span class="hljs-string">&#x27;{print $1&quot;-headers&quot;}&#x27;</span> ORS=<span class="hljs-string">&#x27; &#x27;</span>)
+</code></pre>
+<h2 id="kon-kolivas" tabindex="-1">Kon Kolivas <a class="header-anchor" href="#kon-kolivas" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    <span class="hljs-built_in">cd</span> /tmp
+    wget --no-check-certificate https://raw.github.com/chilicuil/learn/master/sh/is/kernel-ck-ubuntu
+    <span class="hljs-built_in">chmod</span> +x kernel-ck-ubuntu
+    ./kernel-ck-ubuntu
+    <span class="hljs-built_in">sudo</span> dpkg -i ./linux-*.deb
+</code></pre>
+<h2 id="compilazione-kernel" tabindex="-1">Compilazione Kernel <a class="header-anchor" href="#compilazione-kernel" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    <span class="hljs-built_in">cd</span> /usr/src
+    apt-get install build-essential kernel-package fakeroot module-init-tools initrd-tools procps
+
+    wget http://www.kernel.org/pub/linux/kernel/v2.6/linux-2.6.26.tar.bz2
+    tar xjf linux-2.6.26.tar.bz2
+    <span class="hljs-built_in">ln</span> -s linux-source-2.6.26 linux
+</code></pre>
+<h2 id="recuperare-la-configurazione-del-kernel-precedente" tabindex="-1">Recuperare la configurazione del kernel precedente <a class="header-anchor" href="#recuperare-la-configurazione-del-kernel-precedente" aria-hidden="true">🔗</a></h2>
+<p>It is normally a good idea to take the configuration of your existing (working!) kernel 2.6 as a starting point for the configuration of your new kernel.
+Usually the current kernel configuration is saved in a file under <code>/boot</code>, e.g. <code>/boot/config-2.6.3</code>. We will load this configuration and then do the changes we desire</p>
+<pre><code>cd linux
+</code></pre>
+<h2 id="controlli-da-eseguire" tabindex="-1">Controlli da eseguire <a class="header-anchor" href="#controlli-da-eseguire" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    /usr/src/kernel-source-2.4.18/Documentation/Changes
+    bash:/usr/src/linux/Documentation$ <span class="hljs-built_in">cd</span> ../scripts
+    bash:/usr/src/linux/scripts$ <span class="hljs-built_in">chmod</span> +x ver_linux
+    bash:/usr/src/linux/scripts$ ./ver_linux
+    make menuconfig
+    make xconfig
+    make gconfig
+</code></pre>
+<p>Select Load an Alternate Configuration File and enter the location of the configuration file of your current kernel
+The configuration of your current kernel will be loaded, and you can now browse through the menu and change the configuration to suit your needs.
+When you are finished, save your new kernel configuration.</p>
+<p>Then run the following commands (please note that make dep is not needed any more for kernel 2.6):</p>
+<pre><code>make-kpkg clean
+</code></pre>
+<p>Usare sudo o fakeroot se non si e' root:</p>
+<pre><code>--append-to-version diventa parte del nome del kernel e potra essere visto con uname -a
+--revision viene aggiunto al nome del package
+--initrd se il file sistem root e' stato configurato come modulo serve il ram disk,
+</code></pre>
+<p>se invece il file system <code>/</code> ad es. ext4 e' stato configurato come built-in</p>
+<pre><code>Debian kernel-image file names have the form
+kernel-image-(kernel-version)(--append-to-version)_(--revision)_(architecture).deb
+</code></pre>
+<h2 id="compilazione" tabindex="-1">Compilazione <a class="header-anchor" href="#compilazione" aria-hidden="true">🔗</a></h2>
+<p>to speedup the compilation:</p>
+<pre><code>export CONCURRENCY_LEVEL=4
+</code></pre>
+<p>The general rule is 1 + the number of processor cores.
+corriponde all'opzione j di make, <code>make -j3</code></p>
+<pre><code class="language-bash">    fakeroot | <span class="hljs-built_in">sudo</span> su -| su -
+    <span class="hljs-built_in">env</span> CONCURRENCY_LEVEL=4 make-kpkg --initrd --append-to-version .cdp --revision=1.1 kernel_image
+    make-kpkg kernel_headers
+</code></pre>
+<p>If the compilation stops with an error, run</p>
+<pre><code>make clean
+</code></pre>
+<p>and then re-run the previous commands starting with</p>
+<pre><code>make menuconfig
+</code></pre>
+<p>Install your new kernel:</p>
+<pre><code class="language-bash">    dpkg -ikernel-image-2.6.8.1_custom.1.0_i386.deb
+    dpkg -i linuxkernel.deb
+</code></pre>
+<h2 id="defaul-kernel-config-from-scratch" tabindex="-1">Defaul Kernel Config From Scratch <a class="header-anchor" href="#defaul-kernel-config-from-scratch" aria-hidden="true">🔗</a></h2>
+<pre><code>make defconfig
+</code></pre>
+<p>Per vedere i moduli del kernel utilizzati dal nostro hardware:</p>
+<pre><code>sudo lspci -k
+</code></pre>
+<p>quelli mancanti si caricano conmodprobe
+in Ubuntu basta aggiungere una riga ad /etc/modules per caricare un modulo all'avvio</p>
+<h2 id="installare-il-kernel-2.6.32.*-su-ubuntu-9.10" tabindex="-1">Installare il kernel 2.6.32.* su UBUNTU 9.10 <a class="header-anchor" href="#installare-il-kernel-2.6.32.*-su-ubuntu-9.10" aria-hidden="true">🔗</a></h2>
+<p>La prima cosa da fare e' aggiungere il repository apw/green.
+Per farlo, basta aggiungere al file <code>/etc/apt/sources.list</code> la seguente riga:</p>
+<pre><code>deb http://ppa.launchpad.net/apw/green/ubuntu karmic main
+</code></pre>
+<p>Per farlo, basta digitare da terminale:</p>
+<pre><code>sudo -s
+</code></pre>
+<p>successivamente:</p>
+<pre><code>echo &quot;deb http://ppa.launchpad.net/apw/green/ubuntu karmic main&quot; &gt;&gt; /etc/apt/sources.list
+</code></pre>
+<p>Ok ora, digitiamo:</p>
+<pre><code>sudo apt-get update
+</code></pre>
+<p>Adesso dovremo installare i pacchetti, potete farlo da terminale o con Synaptics, linux-image e linux-headers della versione aggiornata (al momento è la 2.6.32-3).</p>
+<p>Dopo l'installazione riavviate e digitate da terminale:</p>
+<pre><code>uname -r
+</code></pre>
+<p>per verificare il corretto funzionamento del kernel</p>
+<h2 id="kernel-2.6.38-automatic-process-group-scheduling" tabindex="-1">Kernel 2.6.38 Automatic process group scheduling <a class="header-anchor" href="#kernel-2.6.38-automatic-process-group-scheduling" aria-hidden="true">🔗</a></h2>
+<pre><code>CONFIG_SCHED_AUTOGROUP:
+</code></pre>
+<p>This option optimizes the scheduler for common desktop workloads by
+automatically creating and populating task groups. This separation
+of workloads isolates aggressive CPU burners (like build jobs) from
+desktop applications. Task group autogeneration is currently based
+upon task session.</p>
+<pre><code>Symbol: SCHED_AUTOGROUP [=n]
+Type : boolean
+Prompt: Automatic process group scheduling
+Defined at init/Kconfig:800
+Location:
+-&gt; General setup
+Selects: EVENTFD [=y] &amp;&amp; CGROUPS [=y] &amp;&amp; CGROUP_SCHED [=y] &amp;&amp; FAIR_GROUP_SCHED [=y]
+</code></pre>
+<h2 id="limits" tabindex="-1">Limits <a class="header-anchor" href="#limits" aria-hidden="true">🔗</a></h2>
+<h3 id="per-shell%2Fscript" tabindex="-1">Per shell/script <a class="header-anchor" href="#per-shell%2Fscript" aria-hidden="true">🔗</a></h3>
+<p>The shell limits are governed by ulimit. The status is checked with ulimit -a. For example to
+change the open files limit from 1024 to 10240 do:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">ulimit</span> -n 10240 <span class="hljs-comment"># This is only valid within the shell</span>
+<span class="hljs-built_in">ulimit</span> -s 32768 1&gt;/dev/null 2&gt;&amp;1
+</code></pre>
+<p>The ulimit command can be used in a script to change the limits for the script only.</p>
+<h3 id="per-user%2Fprocess" tabindex="-1">Per user/process <a class="header-anchor" href="#per-user%2Fprocess" aria-hidden="true">🔗</a></h3>
+<p>Login users and applications can be configured in /etc/security/limits.conf. For example:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /etc/security/limits.conf
+</code></pre>
+<ul>
+<li>hard nproc 250 # Limit user processes
+asterisk hard nofile 409600 # Limit application open files</li>
+</ul>
+<h3 id="system-wide" tabindex="-1">System wide <a class="header-anchor" href="#system-wide" aria-hidden="true">🔗</a></h3>
+<p><a href="sysctl.html">sysctl</a></p>
+<p>Kernel limits are set with sysctl. Permanent limits are set in /etc/sysctl.d/99-sysctl.conf.</p>
+<pre><code class="language-bash">sysctl -a <span class="hljs-comment"># View all system limits</span>
+sysctl fs.file-max <span class="hljs-comment"># View max open files limit</span>
+sysctl fs.file-max=102400 <span class="hljs-comment"># Change max open files limit</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1024 50000&quot;</span> &gt; /proc/sys/net/ipv4/ip_local_port_range <span class="hljs-comment"># port range</span>
+
+sysctl -a | grep file-max
+    fs.file-max=102400 <span class="hljs-comment"># Permanent entry in sysctl.conf</span>
+<span class="hljs-built_in">cat</span> /proc/sys/fs/file-nr <span class="hljs-comment"># How many file descriptors are in use</span>
+</code></pre>
+</body></html>

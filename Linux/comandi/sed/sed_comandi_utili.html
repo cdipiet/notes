@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.352" />
+        <title>sed_comandi_utili</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="sed_comandi_utili" tabindex="-1">sed_comandi_utili <a class="header-anchor" href="#sed_comandi_utili" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.352</p>
+<nav class="table-of-contents"><ol><li><a href="#scommentare-una-riga-di-fuse.config">Scommentare una riga di fuse.config </a></li><li><a href="#search-and-replace-in-files">Search and Replace in files </a></li><li><a href="#abilitazione-multilib-in-pacman">Abilitazione multilib in pacman </a></li><li><a href="#esempio-di-comandi-multipli%2C-punto-e-virgola-e-parentesi-graffe">Esempio di comandi multipli, punto e virgola e parentesi graffe </a></li><li><a href="#comandi-utili">Comandi Utili </a></li><li><a href="#estrarre-stringhe-con-sed">Estrarre stringhe con sed </a></li><li><a href="#some-basic-regular-expression-useful-for-sed-too">Some basic regular expression useful for sed too </a></li><li><a href="#rimuove-commenti-e-linee-vuote%2C-esempio-di-comandi-multipli-con-il-%3B">Rimuove commenti e linee vuote, esempio di comandi multipli con il ; </a></li><li><a href="#elimina-interi-paragrafi-html">Elimina interi paragrafi HTML </a></li><li><a href="#cerca-gli-xml-in-cui-il-fillfactor-non-sia-stato-definito-per-gli-startindex-e-lo-porta-a-100(crea-files-di-backup)">Cerca gli xml in cui il fillfactor non sia stato definito per gli startindex e lo porta a 100(crea files di backup) </a></li><li><a href="#usare-sed-per-scommentare-una-riga-di-uno-script-shell%3A">Usare sed per scommentare una riga di uno script shell: </a></li><li><a href="#eliminare-gli-zeri-in-testa-ad-un-numero">Eliminare gli zeri in testa ad un numero </a></li><li><a href="#visualizzare-i-caratteri-non-stampabili">Visualizzare i caratteri non stampabili </a></li><li><a href="#search-%26-replace-con-gruppi">Search &amp; Replace con Gruppi </a><ol><li><a href="#estrarre-il-cos_id-ed-il-pkg_id-e-produrli-separati-da-pipe">Estrarre il cos_id ed il pkg_id e produrli separati da pipe </a></li><li><a href="#estrarre-il-param_id">estrarre il param_id </a></li></ol></li><li><a href="#stampare-la-riga-n.-40-di-un-file">Stampare la riga n. 40 di un file </a></li><li><a href="#eliminare-i-cr-dai-file-dos-con-sed">Eliminare i CR dai file DOS con SED </a></li><li><a href="#estrarre-tutti-i-titoli-delle-pagine-html">Estrarre tutti i titoli delle pagine HTML </a></li><li><a href="#ip-address">IP address </a></li><li><a href="#rinomina-i-files-html-in-base-al-loro-tag">Rinomina i files HTML in base al loro tag  </a><ol><li><a href="#oppure-per-eseguire-direttamente-il-rename">Oppure per eseguire direttamente il rename </a></li></ol></li><li><a href="#grep">grep </a></li><li><a href="#grep--v">grep -v </a></li><li><a href="#sostiture-il-prefisso-di-un-link-in-file-md">Sostiture il prefisso di un link in file md </a><ol><li><a href="#test">Test </a></li><li><a href="#esecuzione">Esecuzione </a></li></ol></li></ol></nav><h1 id="some-useful-sed-commands" tabindex="-1">Some useful sed commands <a class="header-anchor" href="#some-useful-sed-commands" aria-hidden="true">🔗</a></h1>
+<h2 id="scommentare-una-riga-di-fuse.config" tabindex="-1">Scommentare una riga di fuse.config <a class="header-anchor" href="#scommentare-una-riga-di-fuse.config" aria-hidden="true">🔗</a></h2>
+<p><a href="https://wiki.archlinux.org/title/Media_Transfer_Protocol#MTPfs">https://wiki.archlinux.org/title/Media_Transfer_Protocol#MTPfs</a></p>
+<pre><code class="language-bash">$ pamac install mtpfs
+
+$ <span class="hljs-built_in">cp</span> /etc/fuse.conf /tmp
+$ sed -n <span class="hljs-string">&quot;/#user_allow_other$/p&quot;</span> fuse.conf 
+<span class="hljs-comment">#user_allow_other</span>
+$ sed -i.bak <span class="hljs-string">&quot;/#user_allow_other$/&quot;</span><span class="hljs-string">&#x27;s/^#//&#x27;</span> fuse.conf
+$ diff fuse.conf fuse.conf.bak 
+10c10
+&lt; user_allow_other
+---
+&gt; <span class="hljs-comment">#user_allow_other</span>
+
+$ <span class="hljs-built_in">sudo</span> sed -i <span class="hljs-string">&quot;/#user_allow_other$/&quot;</span><span class="hljs-string">&#x27;s/^#//&#x27;</span> /etc/fuse.conf
+
+<span class="hljs-comment"># To disable automount of MTP devices with gvfs you will need to change value true to false </span>
+<span class="hljs-comment"># for variable AutoMount that is located in /usr/share/gvfs/mounts/mtp.mount. </span>
+
+$ <span class="hljs-built_in">mkdir</span> /tmp/gt6
+$ mtpfs -o allow_other /tmp/gt6
+</code></pre>
+<h2 id="search-and-replace-in-files" tabindex="-1">Search and Replace in files <a class="header-anchor" href="#search-and-replace-in-files" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Reimposta alla data corrente le linee contenenti __date__ nei file .py e .md</span>
+DATE=$(<span class="hljs-built_in">date</span> -Iminutes)
+grep -rlZIE --include=\*.{py,md}  <span class="hljs-string">&#x27;^__date__&#x27;</span> . | xargs -r0 sed -i -r <span class="hljs-string">&quot;/^__date__/c\__date__=&#x27;<span class="hljs-variable">$DATE</span>&#x27;&quot;</span>
+</code></pre>
+<h2 id="abilitazione-multilib-in-pacman" tabindex="-1">Abilitazione multilib in pacman <a class="header-anchor" href="#abilitazione-multilib-in-pacman" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Abilitazione multilib</span>
+$ sed -i <span class="hljs-string">&quot;/\[multilib\]/,/Include/&quot;</span><span class="hljs-string">&#x27;s/^#//&#x27;</span> /etc/pacman.conf
+<span class="hljs-comment">#[multilib]</span>
+<span class="hljs-comment">#Include = /etc/pacman.d/mirrorlist</span>
+</code></pre>
+<h2 id="esempio-di-comandi-multipli%2C-punto-e-virgola-e-parentesi-graffe" tabindex="-1">Esempio di comandi multipli, punto e virgola e parentesi graffe <a class="header-anchor" href="#esempio-di-comandi-multipli%2C-punto-e-virgola-e-parentesi-graffe" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /etc/issue
+Linux Mint 19.2 Tina \n \l
+
+<span class="hljs-built_in">cat</span> /etc/issue|<span class="hljs-built_in">head</span> -n 1|<span class="hljs-built_in">cut</span> --delimiter=<span class="hljs-string">&#x27; &#x27;</span> -f1,2
+Linux Mint
+
+<span class="hljs-built_in">cat</span> /etc/issue|awk <span class="hljs-string">&#x27;/\\n/ {print $1,$2}&#x27;</span>
+Linux Mint
+</code></pre>
+<p>Con sed si può ottenere lo stesso risultato usando il comando:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> /etc/issue|sed <span class="hljs-string">&#x27;{s/\\n// ; s/\\l// ; /^$/d}&#x27;</span>
+</code></pre>
+<p>Ci sono due espressioni, separate dal ;<br>
+<code>&quot;\\n//&quot;</code> fa si che sed sostituisca <code>&quot;\n&quot;</code> rimuovendo questi caratteri dall'output.<br>
+<code>&quot;\\l//&quot;</code> fa si che sed sostituisca <code>&quot;\n&quot;</code> rimuovendo questi caratteri dall'output.<br>
+<code>&quot;/^$d&quot;</code> è un comando che dice a sed di cancellare ogni linea vuota (<code>&quot;^$&quot;</code> è l'espressione regolare per indicare una riga che inizia con uno spazio e finisce con uno spazio senza avere niente in mezzo).<br>
+Quindi <code>'s/\\n//'</code> è semplicemente l'opzione da passare per far sì che sed sostituisca (<code>&quot;s/&quot;</code>) il carattere <code>&quot;\n&quot;</code> (<code>&quot;\\n&quot;</code>) con la stringa vuota <code>&quot;&quot;</code> (<code>&quot;//&quot;</code>). Il comando è racchiuso nelle <strong>parentesi graffe</strong> perché stiamo applicando tre espressioni regolari sull'output, ma vogliamo ottenere un solo risultato e non tre consecutivi, quindi è necessario includere le tre espressioni nella <code>{}</code> e separarle con il <code>;</code>.</p>
+<h2 id="comandi-utili" tabindex="-1">Comandi Utili <a class="header-anchor" href="#comandi-utili" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/string1/string2/g&#x27;</span>                   <span class="hljs-comment"># Replace string1 with string2</span>
+sed -i <span class="hljs-string">&#x27;s/wroong/wrong/g&#x27;</span> *.txt             <span class="hljs-comment"># Replace a recurring word with g</span>
+sed <span class="hljs-string">&#x27;s/\(.*\)1/\12/g&#x27;</span>                       <span class="hljs-comment"># Modify anystring1 to anystring2</span>
+sed = file | sed <span class="hljs-string">&#x27;N;s/\n/\t/&#x27;</span> &gt; file.num    <span class="hljs-comment"># Number lines on a file</span>
+sed <span class="hljs-string">&#x27;s/[^*]/[&amp;]/&#x27;</span>                           <span class="hljs-comment"># Enclose first char with [] top-&gt;[t]op</span>
+sed <span class="hljs-string">&#x27;s/^[ \t]*//;s/[ \t]*$//&#x27;</span>               <span class="hljs-comment"># Remove leading and trailing spaces</span>
+sed <span class="hljs-string">&#x27;s/[ \t]*$//&#x27;</span>                           <span class="hljs-comment"># Remove trailing spaces (use tab as \t)</span>
+</code></pre>
+<h2 id="estrarre-stringhe-con-sed" tabindex="-1">Estrarre stringhe con sed <a class="header-anchor" href="#estrarre-stringhe-con-sed" aria-hidden="true">🔗</a></h2>
+<p>Utilizzando i gruppi di cattura delle espressioni regolari
+e' possibile estrarre una parte di stringa.</p>
+<pre><code class="language-bash">$ <span class="hljs-built_in">who</span> am i
+cdipiet pts/0 Feb 28 17:11 (:0.0)
+
+<span class="hljs-built_in">who</span> am i | sed -n <span class="hljs-string">&#x27;s/.*(\(.*\))/\1/p&#x27;</span>
+:0.0
+</code></pre>
+<ul>
+<li>-n disabilita la stampa delle righe corrispondenti al criterio di ricerca</li>
+<li>p significa print del gruppo trovato</li>
+</ul>
+<h2 id="some-basic-regular-expression-useful-for-sed-too" tabindex="-1">Some basic regular expression useful for sed too <a class="header-anchor" href="#some-basic-regular-expression-useful-for-sed-too" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">[\^$.|?*+() <span class="hljs-comment"># special characters any other will match themselves</span>
+\           <span class="hljs-comment"># escapes special characters and treat as literal</span>
+*           <span class="hljs-comment"># repeat the previous item zero or more times</span>
+.           <span class="hljs-comment"># single character except line break characters</span>
+.*          <span class="hljs-comment"># match zero or more characters</span>
+^           <span class="hljs-comment"># match at the start of a line/string</span>
+$           <span class="hljs-comment"># match at the end of a line/string</span>
+.$          <span class="hljs-comment"># match a single character at the end of line/string</span>
+^ $         <span class="hljs-comment"># match line with a single space</span>
+[^A-Z]      <span class="hljs-comment"># match any line beginning with any char from A to Z</span>
+</code></pre>
+<h2 id="rimuove-commenti-e-linee-vuote%2C-esempio-di-comandi-multipli-con-il-%3B" tabindex="-1">Rimuove commenti e linee vuote, esempio di comandi multipli con il <code>;</code> <a class="header-anchor" href="#rimuove-commenti-e-linee-vuote%2C-esempio-di-comandi-multipli-con-il-%3B" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/ *#/d; /^ *$/d&#x27;</span> <span class="hljs-comment"># Remove comments and blank lines</span>
+</code></pre>
+<h2 id="elimina-interi-paragrafi-html" tabindex="-1">Elimina interi paragrafi HTML <a class="header-anchor" href="#elimina-interi-paragrafi-html" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;/&lt;p&gt;/,/&lt;\/p&gt;/d&#x27;</span> t.xhtml <span class="hljs-comment"># Delete lines that start with &lt;p&gt; and end with &lt;/p&gt;</span>
+</code></pre>
+<h2 id="cerca-gli-xml-in-cui-il-fillfactor-non-sia-stato-definito-per-gli-startindex-e-lo-porta-a-100(crea-files-di-backup)" tabindex="-1">Cerca gli xml in cui il fillfactor non sia stato definito per gli startindex e lo porta a 100(crea files di backup) <a class="header-anchor" href="#cerca-gli-xml-in-cui-il-fillfactor-non-sia-stato-definito-per-gli-startindex-e-lo-porta-a-100(crea-files-di-backup)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find . -name <span class="hljs-string">&quot;*.xml&quot;</span> | xargs -l1 sed <span class="hljs-string">&#x27;s#&lt;starindex *fillfactor *= *&quot;&quot;#&lt;starindex fillfactor=&quot;100&quot;#g&#x27;</span> -ibackup
+</code></pre>
+<h2 id="usare-sed-per-scommentare-una-riga-di-uno-script-shell%3A" tabindex="-1">Usare sed per scommentare una riga di uno script shell: <a class="header-anchor" href="#usare-sed-per-scommentare-una-riga-di-uno-script-shell%3A" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed -r <span class="hljs-string">&#x27;s/#(.*)CUSTOM_PROPERTY_DIR/\1 CUSTOM_PROPERTY_DIR/g&#x27;</span> antEnv.csh -i antEnv.csh.backup
+</code></pre>
+<ul>
+<li>\1 e' il primo gruppo (.*)</li>
+<li>-r e' per le espressioni regolari estese</li>
+</ul>
+<h2 id="eliminare-gli-zeri-in-testa-ad-un-numero" tabindex="-1">Eliminare gli zeri in testa ad un numero <a class="header-anchor" href="#eliminare-gli-zeri-in-testa-ad-un-numero" aria-hidden="true">🔗</a></h2>
+<p>Un numero con gli zeri in testa viene interpretato come un numero ottale dalla shell</p>
+<pre><code class="language-bash">I=092  
+I=$(<span class="hljs-built_in">echo</span> <span class="hljs-variable">$I</span> | sed -e <span class="hljs-string">&#x27;s:^0::&#x27;</span>) <span class="hljs-comment"># Si rimuove lo 0 iniziale per non avere un numero ottale  </span>
+</code></pre>
+<h2 id="visualizzare-i-caratteri-non-stampabili" tabindex="-1">Visualizzare i caratteri non stampabili <a class="header-anchor" href="#visualizzare-i-caratteri-non-stampabili" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># SP  &#x27; &#x27;  0x20 = · U+00B7 Middle Dot</span>
+<span class="hljs-comment"># TAB &#x27;\t&#x27; 0x09 = ￫ U+FFEB Halfwidth Rightwards Arrow</span>
+<span class="hljs-comment"># CR  &#x27;\r&#x27; 0x0D = § U+00A7 Section Sign (⏎ U+23CE also works fine)</span>
+<span class="hljs-comment"># LF  &#x27;\n&#x27; 0x0A = ¶ U+00B6 Pilcrow Sign (was &quot;Paragraph Sign&quot;)</span>
+<span class="hljs-built_in">alias</span> whitespace=<span class="hljs-string">&quot;sed &#x27;s/ /·/g;s/\t/￫/g;s/\r/§/g;s/$/¶/g&#x27;&quot;</span>
+<span class="hljs-comment"># bash --help|whitespace</span>
+</code></pre>
+<h2 id="search-%26-replace-con-gruppi" tabindex="-1">Search &amp; Replace con Gruppi <a class="header-anchor" href="#search-%26-replace-con-gruppi" aria-hidden="true">🔗</a></h2>
+<h3 id="estrarre-il-cos_id-ed-il-pkg_id-e-produrli-separati-da-pipe" tabindex="-1">Estrarre il cos_id ed il pkg_id e produrli separati da pipe <a class="header-anchor" href="#estrarre-il-cos_id-ed-il-pkg_id-e-produrli-separati-da-pipe" aria-hidden="true">🔗</a></h3>
+<p><em class="mb">sed -n 's</em><em class="mrby">/</em><em class="mb">^.*legacy_cos_id\=\[\</em><em class="mrb">(</em>.*\<em class="mrb">)</em><em class="mb">\].legacy_pkg_id\=\[\</em><em class="mrb">(</em><em class="mb">.*\</em><em class="mrb">)</em><em class="mb">\]&lt;$</em><em class="mrby">/</em><em class="mrb">\1</em><em class="mb">|</em><em class="mrb">\2</em><em class="mbry">/</em><em class="mb">p' $LCUHOME/data/convert/error_logs/OFFER.LCUERR.invalid_legacy_cos_id_or_legacy_pkg_id*|sort -u</em></p>
+<ul>
+<li>-n : suppress automatic printing of pattern space</li>
+<li>p   : Print the current pattern space.</li>
+</ul>
+<h3 id="estrarre-il-param_id" tabindex="-1">estrarre il param_id <a class="header-anchor" href="#estrarre-il-param_id" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/^.*param_id\=\[\(.*\)\].Offer:.\([0-9]*\).*$/\1|\2/p&#x27;</span> <span class="hljs-variable">$LCUHOME</span>/data/convert/error_logs/OFFER.LCUERR.invalid_param_id.*|<span class="hljs-built_in">sort</span> -u
+
+<span class="hljs-built_in">cat</span> config.convert.txt | sed s/company_LOGGING=.*/company_LOGGING=\<span class="hljs-variable">$off</span>/g &gt; config.convert.tmp ; <span class="hljs-built_in">mv</span> config.convert.tmp config.convert.txt
+</code></pre>
+<h2 id="stampare-la-riga-n.-40-di-un-file" tabindex="-1">Stampare la riga n. 40 di un file <a class="header-anchor" href="#stampare-la-riga-n.-40-di-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;40q;d&#x27;</span> file
+</code></pre>
+<h2 id="eliminare-i-cr-dai-file-dos-con-sed" tabindex="-1">Eliminare i CR dai file DOS con SED <a class="header-anchor" href="#eliminare-i-cr-dai-file-dos-con-sed" aria-hidden="true">🔗</a></h2>
+<p>IN UNIX ENVIRONMENT: convert DOS newlines (CR/LF) to Unix format</p>
+<p><em class="mb">sed 's/</em><em class="mbb">\x0D</em><em class="mb">//g'# sed v1.5 only</em></p>
+<p>Per produrre il <code>^M</code> (<code>CHR(13)</code>,  <code>\x0D</code>, <code>CR</code>) si utilizza la combinazione di tasti:  <span class="k">CTRL</span>+<span class="k">V</span> <span class="k">CTRL</span>+<span class="k">M</span></p>
+<pre><code class="language-bash">sed <span class="hljs-string">&#x27;s/.$//&#x27;</span> <span class="hljs-comment"># assumes that all lines end with CR/LF</span>
+sed <span class="hljs-string">&#x27;s/^M$//&#x27;</span> <span class="hljs-comment"># in bash/tcsh, press Ctrl-V then Ctrl-M</span>
+</code></pre>
+<h2 id="estrarre-tutti-i-titoli-delle-pagine-html" tabindex="-1">Estrarre tutti i titoli delle pagine HTML <a class="header-anchor" href="#estrarre-tutti-i-titoli-delle-pagine-html" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;s/&lt;title&gt;\(.*\)&lt;\/title&gt;/\1/p&#x27;</span>*.html
+</code></pre>
+<h2 id="ip-address" tabindex="-1">IP address <a class="header-anchor" href="#ip-address" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">/sbin/ifconfig `/sbin/route |grep def|<span class="hljs-built_in">tr</span> -s <span class="hljs-string">&quot; &quot;</span>|<span class="hljs-built_in">cut</span> -d <span class="hljs-string">&quot; &quot;</span> -f 8`|grep inet|sed <span class="hljs-string">&#x27;s/.*addr:\([^ ]*\).*/\1/&#x27;</span>
+</code></pre>
+<h2 id="rinomina-i-files-html-in-base-al-loro-tag" tabindex="-1">Rinomina i files HTML in base al loro tag <title> <a class="header-anchor" href="#rinomina-i-files-html-in-base-al-loro-tag" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.html;<span class="hljs-keyword">do</span> j=$(sed -n <span class="hljs-string">&#x27;s/\s*&lt;title&gt;\(.*\)&lt;\/title&gt;/\1/p&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>).html;[[ <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span> != <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> ]] &amp;&amp; <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;mv \&quot;%s\&quot; \&quot;%s\&quot;\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span>;<span class="hljs-keyword">done</span> &gt; rename.sh
+</code></pre>
+<h3 id="oppure-per-eseguire-direttamente-il-rename" tabindex="-1">Oppure per eseguire direttamente il rename <a class="header-anchor" href="#oppure-per-eseguire-direttamente-il-rename" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash"><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> *.html;<span class="hljs-keyword">do</span> j=$(sed -n <span class="hljs-string">&#x27;s/\s*&lt;title&gt;\(.*\)&lt;\/title&gt;/\1/p&#x27;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span>).html;[[ <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span> != <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> ]] &amp;&amp; <span class="hljs-built_in">printf</span> <span class="hljs-string">&quot;mv \&quot;%s\&quot; \&quot;%s\&quot;\n&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$i</span>&quot;</span> <span class="hljs-string">&quot;<span class="hljs-variable">$j</span>&quot;</span>;<span class="hljs-keyword">done</span> | sh
+</code></pre>
+<h2 id="grep" tabindex="-1">grep <a class="header-anchor" href="#grep" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/match/ p&#x27;</span>  
+</code></pre>
+<h2 id="grep--v" tabindex="-1">grep -v <a class="header-anchor" href="#grep--v" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">sed -n <span class="hljs-string">&#x27;/match/ !p&#x27;</span> &lt;/tmp/b  
+curl --silent <span class="hljs-string">&quot;FEED ADDRESS&quot;</span> |sed -e <span class="hljs-string">&#x27;s/&lt;\/[^&gt;]*&gt;/\n/g&#x27;</span> -e <span class="hljs-string">&#x27;s/&lt;[^&gt;]*&gt;//g
+</span></code></pre>
+<h2 id="sostiture-il-prefisso-di-un-link-in-file-md" tabindex="-1">Sostiture il prefisso di un link in file md <a class="header-anchor" href="#sostiture-il-prefisso-di-un-link-in-file-md" aria-hidden="true">🔗</a></h2>
+<p>Vogliamo aggiungere <code>inc/</code> davanti ad ogni URL di immagini(senza testo alternativo) in tutti i file .md della directory corrente.</p>
+<h3 id="test" tabindex="-1">Test <a class="header-anchor" href="#test" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">grep -l <span class="hljs-string">&#x27;!\[\]&#x27;</span> *.md| xargs sed <span class="hljs-string">&#x27;s/!\[\](/!\[\](inc\//&#x27;</span> {} | grep <span class="hljs-string">&#x27;!\[\]&#x27;</span>
+</code></pre>
+<h3 id="esecuzione" tabindex="-1">Esecuzione <a class="header-anchor" href="#esecuzione" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">grep -l <span class="hljs-string">&#x27;!\[\]&#x27;</span> *.md| xargs sed -i <span class="hljs-string">&#x27;s/!\[\](/!\[\](inc\//&#x27;</span> {}
+</code></pre>
+</body></html>

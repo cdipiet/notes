@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.248" />
+        <title>esempi_awk</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="esempi_awk" tabindex="-1">esempi_awk <a class="header-anchor" href="#esempi_awk" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.248</p>
+<nav class="table-of-contents"><ol><li><a href="#sorted-du--h">Sorted du -h </a></li><li><a href="#estrae-tag-da-un-file">Estrae Tag da un file </a></li><li><a href="#battery(mah)">Battery(mAh) </a></li><li><a href="#extract-the-last-column-from-a-text-file%2C-whitespace-separated">Extract the last column from a text file, whitespace-separated </a></li><li><a href="#list-counts-of-files-owned-by-each-user-in-the-current-directory">List counts of files owned by each user in the current directory </a></li><li><a href="#kill-your-processes(one-use-is-to-kill-a-hung-login-if-you-can-remotely-log-in-to-the-workstation-from-another-machine)">Kill your processes(one use is to kill a hung login if you can remotely log in to the workstation from another machine) </a></li><li><a href="#disk-usage-of-all-subdirectories-and-files-including-hidden-files-within-the-current-directory-(sorted-by-filesize)">disk usage of all subdirectories and files including hidden files within the current directory (sorted by filesize) </a></li><li><a href="#stampare-la-riga-n.-40-di-un-file">Stampare la riga n. 40 di un file </a></li><li><a href="#stampare-la-dimensione-delle-righe-di-un-file">Stampare la dimensione delle righe di un file </a></li><li><a href="#creare-un-script-che-rinomina-un-insieme-di-file">Creare un script che rinomina un insieme di file </a></li><li><a href="#rinominare-un-insieme-di-file-*.svgz.svg-in-*.svg">Rinominare un insieme di file *.svgz.svg in *.svg </a></li><li><a href="#cercare-le-classi-piu-popolate-in-un-db-versant">Cercare le classi piu popolate in un DB Versant </a></li><li><a href="#contare-il-numero-di-oggetti-processati-dal-crc">Contare il numero di oggetti processati dal CRC </a></li></ol></nav><h1 id="awk" tabindex="-1">awk <a class="header-anchor" href="#awk" aria-hidden="true">🔗</a></h1>
+<h2 id="sorted-du--h" tabindex="-1">Sorted du -h <a class="header-anchor" href="#sorted-du--h" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-awk">du -sk * | sort -nr | awk <span class="hljs-string">&#x27;
+BEGIN {
+split(&quot;KB,MB,GB,TB&quot;, Units, &quot;,&quot;);
+}
+{
+u = 1;
+while ($1 &gt;= 1024) {
+$1 = $1 / 1024;
+u += 1
+}
+$1 = sprintf(&quot;%.1f %s&quot;, $1, Units[u]);
+print $0;
+}
+&#x27;</span>
+</code></pre>
+<h2 id="estrae-tag-da-un-file" tabindex="-1">Estrae Tag da un file <a class="header-anchor" href="#estrae-tag-da-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-awk">awk -vRS=<span class="hljs-string">&quot;&lt;/Tag2&gt;&quot;</span> <span class="hljs-string">&#x27;/&lt;Tag2&gt;/{gsub(/.*&lt;Tag2&gt;/,&quot;&quot;);print}&#x27;</span> file
+</code></pre>
+<h2 id="battery(mah)" tabindex="-1">Battery(mAh) <a class="header-anchor" href="#battery(mah)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">hal-device | grep battery.reporting | awk -F. <span class="hljs-string">&#x27;{print $3}&#x27;</span> | <span class="hljs-built_in">sort</span> | awk <span class="hljs-string">&#x27;$1 == &quot;current&quot; { current = $3}; $1== &quot;design&quot; {print current &quot;/&quot; $3}&#x27;</span>
+</code></pre>
+<h2 id="extract-the-last-column-from-a-text-file%2C-whitespace-separated" tabindex="-1">Extract the last column from a text file, whitespace-separated <a class="header-anchor" href="#extract-the-last-column-from-a-text-file%2C-whitespace-separated" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">cat</span> myfile | gawk <span class="hljs-string">&#x27;{print $NF}&#x27;</span>
+<span class="hljs-comment"># or:</span>
+gawk <span class="hljs-string">&#x27;{print $NF}&#x27;</span> myfile
+</code></pre>
+<h2 id="list-counts-of-files-owned-by-each-user-in-the-current-directory" tabindex="-1">List counts of files owned by each user in the current directory <a class="header-anchor" href="#list-counts-of-files-owned-by-each-user-in-the-current-directory" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">/bin/ls -l | \
+gawk <span class="hljs-string">&#x27;NR &gt; 1 {counts[$3]++;}
+END {for (s in counts) {
+printf(&quot; %-15s : % 5d\n&quot;,
+s, counts[s]);}}&#x27;</span> | \
+<span class="hljs-built_in">sort</span>
+</code></pre>
+<h2 id="kill-your-processes(one-use-is-to-kill-a-hung-login-if-you-can-remotely-log-in-to-the-workstation-from-another-machine)" tabindex="-1">Kill your processes(one use is to kill a hung login if you can remotely log in to the workstation from another machine) <a class="header-anchor" href="#kill-your-processes(one-use-is-to-kill-a-hung-login-if-you-can-remotely-log-in-to-the-workstation-from-another-machine)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">ps -elf | \
+gawk -v me=<span class="hljs-string">&quot;<span class="hljs-variable">$USER</span>&quot;</span> <span class="hljs-string">&#x27;$3 == me {print $4}&#x27;</span> | \
+egrep -v $$ | \
+xargs -i@@ <span class="hljs-built_in">kill</span> -9 @@; <span class="hljs-built_in">kill</span> -9 $$
+</code></pre>
+<h2 id="disk-usage-of-all-subdirectories-and-files-including-hidden-files-within-the-current-directory-(sorted-by-filesize)" tabindex="-1">disk usage of all subdirectories and files including hidden files within the current directory (sorted by filesize) <a class="header-anchor" href="#disk-usage-of-all-subdirectories-and-files-including-hidden-files-within-the-current-directory-(sorted-by-filesize)" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-awk">$ du -sk .[!.]* *|sort-n
+
+du -sk * | sort -nr | awk <span class="hljs-string">&#x27;
+BEGIN {
+split(&quot;KB,MB,GB,TB&quot;, Units, &quot;,&quot;);
+}
+{
+u = 1;
+while ($1 &gt;= 1024) {
+$1 = $1 / 1024;
+u += 1
+}
+$1 = sprintf(&quot;%.1f %s&quot;, $1, Units[u]);
+print $0;
+}
+&#x27;</span>
+</code></pre>
+<h2 id="stampare-la-riga-n.-40-di-un-file" tabindex="-1">Stampare la riga n. 40 di un file <a class="header-anchor" href="#stampare-la-riga-n.-40-di-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-awk">awk <span class="hljs-string">&#x27;NR==40 {print;exit}&#x27;</span>
+</code></pre>
+<h2 id="stampare-la-dimensione-delle-righe-di-un-file" tabindex="-1">Stampare la dimensione delle righe di un file <a class="header-anchor" href="#stampare-la-dimensione-delle-righe-di-un-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-awk">awk <span class="hljs-string">&#x27;{print length}&#x27;</span> TEST.P090515.<span class="hljs-number">18520.3</span>
+</code></pre>
+<h2 id="creare-un-script-che-rinomina-un-insieme-di-file" tabindex="-1">Creare un script che rinomina un insieme di file <a class="header-anchor" href="#creare-un-script-che-rinomina-un-insieme-di-file" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find . -<span class="hljs-built_in">type</span> f | sed <span class="hljs-string">&#x27;s#./##g&#x27;</span> | awk -F\- <span class="hljs-string">&#x27;{ print &quot;mv &quot;$0&quot; &quot;$2&quot;-&quot;$3&quot;-&quot;$1&quot;.txt&quot;}&#x27;</span> &gt; filedicomandi.sh
+</code></pre>
+<h2 id="rinominare-un-insieme-di-file-*.svgz.svg-in-*.svg" tabindex="-1">Rinominare un insieme di file *.svgz.svg in *.svg <a class="header-anchor" href="#rinominare-un-insieme-di-file-*.svgz.svg-in-*.svg" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">find . -name <span class="hljs-string">&quot;*.svgz.svg&quot;</span>|awk <span class="hljs-string">&#x27;{print &quot;mv &quot; $0 &quot; &quot; gensub(&quot;.svgz&quot;,&quot;&quot;,&quot;g&quot;)}&#x27;</span> &gt; dorename.sh
+</code></pre>
+<h2 id="cercare-le-classi-piu-popolate-in-un-db-versant" tabindex="-1">Cercare le classi piu popolate in un DB Versant <a class="header-anchor" href="#cercare-le-classi-piu-popolate-in-un-db-versant" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">db2tty -D orderprocessing_reporting@nl0208 -a &gt; Opdb2ttyreport.txt
+awk <span class="hljs-string">&#x27;/ Total/ {if ($3 &gt; 200000) print $3 &quot; &quot; $7}&#x27;</span> OPdb2ttyreport.txt |<span class="hljs-built_in">sort</span> -n -k1
+
+cdipiet@cdipiet-laptop:~$ <span class="hljs-built_in">date</span> +%s -d<span class="hljs-string">&quot;2008-02-24 21:07:08.149124&quot;</span>
+1203883628
+%s seconds since 1970-01-01 00:00:00 UTC
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[2008-02-24 21:07:08.149124]6451642 196612 547 0 6839170&quot;</span> |
+awk -F <span class="hljs-string">&quot;[].[]+&quot;</span> <span class="hljs-string">&#x27;{dt_cmd=&quot;date +%s -d \&quot;&quot;$2&quot;\&quot;&quot;;dt_cmd|getline secs;close(dt_cmd);print secs}&#x27;</span>
+
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[2008-02-24 21:07:08.149124] 6451642 196612 547 0 6839170&quot;</span> | egrep <span class="hljs-string">&quot;[].[]+&quot;</span> --color=<span class="hljs-built_in">yes</span>
+<span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;[2008-02-24 21:07:08.149124] 6451642 196612 547 0 6839170&quot;</span> |pyregex.py -<span class="hljs-string">&quot;[].[]+&quot;</span>
+mostra che l<span class="hljs-string">&#x27;espressione regolare [].[]+ rileva i caratteri: ] . [ ripetuti una o piu volte,
+e&#x27;</span> un range [] . [ ]
+</code></pre>
+<h2 id="contare-il-numero-di-oggetti-processati-dal-crc" tabindex="-1">Contare il numero di oggetti processati dal CRC <a class="header-anchor" href="#contare-il-numero-di-oggetti-processati-dal-crc" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-built_in">wc</span> -l CRCOutput-20050729-190521.xml (Numero totale di righe)
+grep -c <span class="hljs-string">&#x27;&lt;LOID&gt;&#x27;</span> CRCOutput-20050729-190521.xml (Numero di ID trovati nel file)
+<span class="hljs-keyword">for</span> fn <span class="hljs-keyword">in</span> *.xml; <span class="hljs-keyword">do</span> grep -c <span class="hljs-string">&#x27;&lt;LOID&gt;&#x27;</span> <span class="hljs-variable">$fn</span>; <span class="hljs-keyword">done</span>|awk <span class="hljs-string">&#x27;{tot+=$1} END {print tot}&#x27;</span>
+(count di tutti gli ID di tutti i file CRC della directory)
+</code></pre>
+</body></html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.105" />
+        <title>grub_manjaro</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="grub_manjaro" tabindex="-1">grub_manjaro <a class="header-anchor" href="#grub_manjaro" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.105</p>
+<nav class="table-of-contents"><ol><li><a href="#attivare-fschk-su-%2F-e-%2Fhome-%3D%3D%3E-impostare-%2F-in-ro-per-il-servizio-systemd-fsck-root.service">Attivare fschk su / e /home ==&gt; impostare / in ro per il servizio systemd-fsck-root.service </a></li><li><a href="#problema-fsck-su-%2F-non-viene-eseguito%2C-last-checked-e-mount-count-non-vengono-aggiornati">Problema fsck su / non viene eseguito, Last checked e Mount count non vengono aggiornati </a><ol><li><a href="#soluzione---impostare-grub-a-ro">Soluzione - impostare grub a ro </a></li><li><a href="#fsck-viene-eseguito-da-systemd">fsck viene eseguito da systemd </a></li><li><a href="#soluzione%3A-impostare-ro-il-file-system-di-root-perch%C3%A8-ora-fsck-%C3%A8-controllato-da-systemd">Soluzione: impostare ro il file system di root perchè ora fsck è controllato da systemd </a></li></ol></li><li><a href="#problema%3A-grub-pci%3Dnoaer">Problema: GRUB pci=noaer </a><ol><li><a href="#bug-che-satura-la-cpu-ed-i-file-di-log">Bug che satura la CPU ed i file di log </a></li><li><a href="#svuotare-i-file-di-log">Svuotare i file di log </a></li></ol></li><li><a href="#recuperare-grub">Recuperare Grub </a></li><li><a href="#cambiare-il-sistema-operativo-di-default">Cambiare il sistema operativo di default </a></li><li><a href="#grafica">Grafica </a></li><li><a href="#impostare-un-font">Impostare un font </a></li><li><a href="#come-ho-configurato-grub2-per-la-risoluzione-4k">Come ho configurato GRUB2 per la risoluzione 4K </a></li></ol></nav><h1 id="grub-manjaro" tabindex="-1">GRUB Manjaro <a class="header-anchor" href="#grub-manjaro" aria-hidden="true">🔗</a></h1>
+<ul>
+<li><a href="https://www.gnu.org/software/grub/manual/grub/grub.html">https://www.gnu.org/software/grub/manual/grub/grub.html</a></li>
+</ul>
+<h2 id="attivare-fschk-su-%2F-e-%2Fhome-%3D%3D%3E-impostare-%2F-in-ro-per-il-servizio-systemd-fsck-root.service" tabindex="-1">Attivare fschk su / e /home ==&gt; impostare / in ro per il servizio systemd-fsck-root.service <a class="header-anchor" href="#attivare-fschk-su-%2F-e-%2Fhome-%3D%3D%3E-impostare-%2F-in-ro-per-il-servizio-systemd-fsck-root.service" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://forum.manjaro.org/t/how-to-enforce-boot-time-file-system-check/28363/24">https://forum.manjaro.org/t/how-to-enforce-boot-time-file-system-check/28363/24</a></li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> su
+$ lsblk
+$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda2|grep -iE <span class="hljs-string">&#x27;mount count&#x27;</span> <span class="hljs-comment"># root</span>
+$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda3|grep -iE <span class="hljs-string">&#x27;mount count&#x27;</span> <span class="hljs-comment"># home</span>
+$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda4|grep -iE <span class="hljs-string">&#x27;mount count&#x27;</span> <span class="hljs-comment"># opt</span>
+$ <span class="hljs-built_in">sudo</span> tune2fs -c 30 /dev/sda2
+$ <span class="hljs-built_in">sudo</span> tune2fs -c 30 /dev/sda3
+$ <span class="hljs-built_in">sudo</span> tune2fs -c 30 /dev/sda4
+
+<span class="hljs-comment"># Forzare il check del file system di root</span>
+$ <span class="hljs-built_in">sudo</span> tune2fs -C 40 /dev/sda2
+$ <span class="hljs-built_in">sudo</span> tune2fs -C 40 /dev/sda3
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">touch</span> /forcefsck <span class="hljs-comment"># controllare sempre che PASS=1 in /etc/fstab</span>
+</code></pre>
+<p><code>/etc/default/grub</code></p>
+<pre><code class="language-ini"><span class="hljs-comment"># Uncomment to ensure that the root filesystem is mounted read-only so that</span>
+<span class="hljs-comment"># systemd-fsck can run the check automatically. We use &#x27;fsck&#x27; by default, which</span>
+<span class="hljs-comment"># needs &#x27;rw&#x27; as boot parameter, to avoid delay in boot-time. &#x27;fsck&#x27; needs to be</span>
+<span class="hljs-comment"># removed from &#x27;mkinitcpio.conf&#x27; to make &#x27;systemd-fsck&#x27; work.</span>
+<span class="hljs-comment"># See also Arch-Wiki: https://wiki.archlinux.org/index.php/Fsck#Boot_time_checking</span>
+<span class="hljs-attr">GRUB_ROOT_FS_RO</span>=<span class="hljs-literal">true</span>
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> update-grub
+</code></pre>
+<p>Vecchio modo piu rozzo:</p>
+<pre><code>  - Impostare root a ro in grub `/etc/grub.d/10_linux` [GRUB](./grub_manjaro.html)
+
+  ```bash
+  $ grep -n grub_root_fs_mode 10_linux
+  $ sudo gedit/etc/grub.d/10_linux
+  ```
+
+      #linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ${grub_root_fs_mode} ${args}q
+      linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+</code></pre>
+<p>Per vedere se fsck non stà venendo eseguito si utilizzano i seguenti comandi:</p>
+<pre><code class="language-bash"><span class="hljs-comment"># Ecco come si vede che fsck su root non è eseguito:</span>
+$ systemctl status systemd-fsck-root.service 
+$ <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda2 | grep -i last
+$ dumpe2fs -h /dev/sda2
+</code></pre>
+<h2 id="problema-fsck-su-%2F-non-viene-eseguito%2C-last-checked-e-mount-count-non-vengono-aggiornati" tabindex="-1">Problema fsck su / non viene eseguito, Last checked e Mount count non vengono aggiornati <a class="header-anchor" href="#problema-fsck-su-%2F-non-viene-eseguito%2C-last-checked-e-mount-count-non-vengono-aggiornati" aria-hidden="true">🔗</a></h2>
+<h3 id="soluzione---impostare-grub-a-ro" tabindex="-1">Soluzione - impostare grub a ro <a class="header-anchor" href="#soluzione---impostare-grub-a-ro" aria-hidden="true">🔗</a></h3>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> gedit/etc/grub.d/10_linux
+</code></pre>
+<pre><code># linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ${grub_root_fs_mode} ${args}
+linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+</code></pre>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> update-grub
+</code></pre>
+<p>Per vedere se fsck non stà venendo eseguito si utilizzano i seguenti comandi:</p>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> tune2fs -l /dev/sda2 | grep -i last
+    dumpe2fs -h /dev/sda2
+</code></pre>
+<h3 id="fsck-viene-eseguito-da-systemd" tabindex="-1">fsck viene eseguito da systemd <a class="header-anchor" href="#fsck-viene-eseguito-da-systemd" aria-hidden="true">🔗</a></h3>
+<p>fsck viene eseguito da un servizio systemd e non ad esempio dal cronttab.</p>
+<p>Il problema è un 'conflitto' tra grub e systemd, il servizio systemd che dovrebbe eseguire fsck non lo fa<br>
+perchè vede che la root partition al boot con grub era rw mentre lui la vorrebbe ro.</p>
+<pre><code class="language-bash">$ man systemd-fsck-root.service
+$ systemctl <span class="hljs-built_in">help</span> systemd-fsck-root.service
+$ systemd-analyze blame |grep fsck
+$ systemctl list-unit-files --<span class="hljs-built_in">type</span>=service |grep fsck
+<span class="hljs-comment"># Static significa che è un servizio che non può essere manualmente abilitato/disabilitato: Manca infatti nel file di unità la parte [Install] che definisce il comportamento quando si invoca systemctl enable/disable. Questo tipo di servizi parte solo se un&#x27; altra unità dipende da esso o se viene manualmente avviato. E&#x27; comunque possibile rimuoverne il link simbolico, oppure mascherarlo per evitare che parta.</span>
+systemctl list-dependencies graphical.target
+$ systemctl <span class="hljs-built_in">cat</span> --no-pager systemd-fsck-root.service
+$ systemctl <span class="hljs-built_in">help</span> systemd-fsck-root.service
+<span class="hljs-comment"># cat /usr/lib/systemd/system/systemd-fsck@.service</span>
+<span class="hljs-comment"># cat /usr/lib/systemd/system/systemd-fsck-root.service</span>
+journalctl -b --no-pager -t systemd-fsck
+
+<span class="hljs-comment"># Ecco come si vede che fsck su root non è eseguito:</span>
+$ systemctl status systemd-fsck-root.service 
+
+</code></pre>
+<h3 id="soluzione%3A-impostare-ro-il-file-system-di-root-perch%C3%A8-ora-fsck-%C3%A8-controllato-da-systemd" tabindex="-1">Soluzione: impostare ro il file system di root perchè ora fsck è controllato da systemd <a class="header-anchor" href="#soluzione%3A-impostare-ro-il-file-system-di-root-perch%C3%A8-ora-fsck-%C3%A8-controllato-da-systemd" aria-hidden="true">🔗</a></h3>
+<ul>
+<li><a href="https://forum.manjaro.org/t/how-to-enforce-boot-time-file-system-check/28363/5">https://forum.manjaro.org/t/how-to-enforce-boot-time-file-system-check/28363/5</a></li>
+<li><a href="https://wiki.archlinux.org/index.php/Fsck">https://wiki.archlinux.org/index.php/Fsck</a></li>
+<li><a href="https://gitlab.manjaro.org/packages/core/grub/-/issues/4#note_c527e572a21cbc024b58cff4ca719c8e462b960b">https://gitlab.manjaro.org/packages/core/grub/-/issues/4#note_c527e572a21cbc024b58cff4ca719c8e462b960b</a></li>
+</ul>
+<p>Da questo link:</p>
+<ul>
+<li><a href="https://forum.manjaro.org/t/how-to-enforce-boot-time-file-system-check/28363/5">https://forum.manjaro.org/t/how-to-enforce-boot-time-file-system-check/28363/5</a></li>
+</ul>
+<p>si vede che ora <strong>fsck</strong> su <strong>root</strong> è gestito da <strong>systemd</strong>, <br>
+mediante <code>systemd-fsck-root.service</code> <br>
+il quale però non lo stà eseguendo perchè si aspetta che root sia montato <code>ro</code>:</p>
+<p><strong><code>ConditionPathIsReadWrite=!/ was not met</code></strong></p>
+<pre><code class="language-bash">$ systemctl status systemd-fsck-root.service
+● systemd-fsck-root.service - File System Check on Root Device
+     Loaded: loaded (/usr/lib/systemd/system/systemd-fsck-root.service; enabled-runtime; vendor preset: disabled)
+     Active: inactive (dead)
+  Condition: start condition failed at Tue 2020-11-24 14:58:43 CET; 21min ago
+             └─ ConditionPathIsReadWrite=!/ was not met
+       Docs: man:systemd-fsck-root.service(8)
+</code></pre>
+<p><code>nov 24 14:58:43 cdphome systemd[1]: Condition check resulted in File System Check on Root Device being skipped.</code></p>
+<p>il fatto che la riga di avvio del kernel non contenga <code>ro</code> è un bug/inconsistenza con systemd:</p>
+<ul>
+<li>
+<p><a href="https://gitlab.manjaro.org/packages/core/grub/-/issues/4">https://gitlab.manjaro.org/packages/core/grub/-/issues/4</a> Don't prevent boot time file system check of root</p>
+<p>Manjaro's grub configuration loads <code>/</code> as <code>rw</code>. This prevents <code>/</code> to be checked by fsck at boot time. <br>
+<code>systemd-fsck-root.service</code> may check root at boot time if required, but only if it's mounted with <code>ro</code>.</p>
+</li>
+</ul>
+<p>Soluzione:</p>
+<p>1a. <code>sudo vim /etc/default/grub</code></p>
+<pre><code>```ini
+# Uncomment to ensure that the root filesystem is mounted read-only so that
+# systemd-fsck can run the check automatically. We use 'fsck' by default, which
+# needs 'rw' as boot parameter, to avoid delay in boot-time. 'fsck' needs to be
+# removed from 'mkinitcpio.conf' to make 'systemd-fsck' work.
+# See also Arch-Wiki: https://wiki.archlinux.org/index.php/Fsck#Boot_time_checking
+GRUB_ROOT_FS_RO=true
+```
+
+```bash
+$ sudo update-grub
+```
+</code></pre>
+<p>1b. vecchio modo piu rozzo di 1a: edit <code>/etc/grub.d/10_linux</code> and change <code>ro</code> to <code>rw</code></p>
+<pre><code>    158c152
+    &lt; 	linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ${grub_root_fs_mode} ${args}
+    ---
+    &gt; 	linux	${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+</code></pre>
+<ol start="2">
+<li>
+<p>then run <code>sudo update-grub</code>. This regenerates the file <code>/boot/grub/grub.cfg</code> which is used at boot time.</p>
+</li>
+<li>
+<p>A questo punto:</p>
+<pre><code class="language-bash">tune2fs -l /dev/sda7 
+systemctl status systemd-fsck-root.service
+journalctl -b --no-pager -t systemd-fsck
+</code></pre>
+<p>dovrebbero mostrare che fsck è stato eseguito.</p>
+</li>
+</ol>
+<h2 id="problema%3A-grub-pci%3Dnoaer" tabindex="-1">Problema: GRUB pci=noaer <a class="header-anchor" href="#problema%3A-grub-pci%3Dnoaer" aria-hidden="true">🔗</a></h2>
+<ol>
+<li><strong>restore</strong> <code>/etc/default/grub</code> per aggiungere l'opzione <code>pci=noaer</code> che evita la saturazione dei file di log e la cpu al 100%</li>
+<li><strong>restore</strong> <code>/etc/grub.d/10_linux</code> per sostituire <code>rw</code> con <code>ro</code> permettendo così a <code>systemd-fsck-root.service</code> di eseguire fsck sul file sistem di root.</li>
+</ol>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> update-grub
+</code></pre>
+<p><code>/etc/default/grub</code></p>
+<pre><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet apparmor=1 security=apparmor udev.log_priority=3&quot;
+GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet apparmor=1 security=apparmor udev.log_priority=3 pci=noaer&quot;
+</code></pre>
+<p><code>/etc/grub.d/10_linux</code></p>
+<pre><code>linux   ${rel_dirname}/${basename} root=${linux_root_device_thisversion} rw ${args}
+linux   ${rel_dirname}/${basename} root=${linux_root_device_thisversion} ro ${args}
+</code></pre>
+<h3 id="bug-che-satura-la-cpu-ed-i-file-di-log" tabindex="-1">Bug che satura la CPU ed i file di log <a class="header-anchor" href="#bug-che-satura-la-cpu-ed-i-file-di-log" aria-hidden="true">🔗</a></h3>
+<p>correzione errore:</p>
+<pre><code class="language-bash">journalctl|grep pcieport
+</code></pre>
+<pre><code>pcieport 0000:00:1c.7: AER: PCIe Bus Error: severity=Corrected, type=Physical Layer, (Receiver ID)
+</code></pre>
+<pre><code class="language-bash">grep GRUB_CMDLINE_LINUX_DEFAULT /etc/default/grub
+<span class="hljs-built_in">sudo</span> vim /etc/default/grub
+</code></pre>
+<p>Aggiungere <code>pci=noaer</code> alla fine del GRUB_CMDLINE_LINUX_DEFAULT. Esempio:</p>
+<pre><code>GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet apparmor=1 security=apparmor udev.log_priority=3 pci=noaer&quot;
+</code></pre>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> update-grub
+<span class="hljs-built_in">sudo</span> reboot
+</code></pre>
+<h3 id="svuotare-i-file-di-log" tabindex="-1">Svuotare i file di log <a class="header-anchor" href="#svuotare-i-file-di-log" aria-hidden="true">🔗</a></h3>
+<p>Modo per svuotare i file di log senza cancellarli, bisogna effettuare il reboot in recovery mode quando il file system di root è saturo:</p>
+<pre><code class="language-bash"><span class="hljs-built_in">rm</span> -rf /var/log/journal
+</code></pre>
+<h2 id="recuperare-grub" tabindex="-1">Recuperare Grub <a class="header-anchor" href="#recuperare-grub" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php?title=Ripristino_del_bootloader_GRUB">https://wiki.manjaro.org/index.php?title=Ripristino_del_bootloader_GRUB</a></li>
+<li><a href="https://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader">https://wiki.manjaro.org/index.php/Restore_the_GRUB_Bootloader</a></li>
+</ul>
+<ol>
+<li>
+<p>Boot da Live-CD
+Abilitare il wifi, per poter utilizzare pacman</p>
+</li>
+<li>
+<p>Entrare nel Terminale
+Da GUI-Terminale:sudo su
+Da avvio in modalità testo: root/manjaro</p>
+</li>
+<li>
+<p>Effettuare il chroot sull'installazione Manjaro</p>
+<ul>
+<li>
+<h1 id="chroot-semplice-in-modo-manjaro%3A" tabindex="-1">chroot semplice in modo manjaro: <a class="header-anchor" href="#chroot-semplice-in-modo-manjaro%3A" aria-hidden="true">🔗</a></h1>
+<pre><code>  $ lsblk -f # Per vedere le partizioni
+  Esempio partizioni tipo da identificare:
+  /dev/sda1: Boot partition
+  /dev/sda2: Swap partition
+  /dev/sda3: Manjaro system
+  /dev/sda4: Space for personal files.
+  $manjaro-chroot -a	# --&gt; choose the root partition of your existing Manjaro installation.
+</code></pre>
+</li>
+<li>
+<h1 id="chroot-con-i-comandi-di-base-unix%3A" tabindex="-1">chroot con i comandi di base Unix: <a class="header-anchor" href="#chroot-con-i-comandi-di-base-unix%3A" aria-hidden="true">🔗</a></h1>
+<ul>
+<li>
+<p>Montare la partizione root di installazione di Manjaro:</p>
+<pre><code>  mount /dev/[partition used for Manjaro system]/mnt
+  $mount /dev/sda3 /mnt
+</code></pre>
+</li>
+<li>
+<p>Montare la partizione grub, se questa è stata creata:</p>
+<pre><code>  mount /dev/[partition used for GRUB] /mnt/boot
+  $mount /dev/sda1 /mnt/boot
+  $mount -t proc /proc /mnt/proc
+  $mount --rbind -t sysfs /sys /mnt/sys
+  $mount --rbind /dev /mnt/dev
+  $mount --rbind /run /mnt/run
+  $mount -t devpts pts /mnt/dev/pts/
+  $chroot /mnt
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Installare GRUB:</p>
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/grub/manual/grub/html_node/Installing-GRUB-using-grub_002dinstall.html">https://www.gnu.org/software/grub/manual/grub/html_node/Installing-GRUB-using-grub_002dinstall.html</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/GRUB_(Italiano)">https://wiki.archlinux.org/index.php/GRUB_(Italiano)</a></p>
+<pre><code>  $ sudo yu mtools os-prober
+  $ grub-install /dev/sda
+  $ grub-install --recheck /dev/sda
+  $ update-grub
+  Se grub.cfg non è stato generato nella posizione corretta:
+  # grub-mkconfig -o /boot/grub/grub.cfg
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Reinstallare i drivers della scheda grafica</p>
+<pre><code> sudo mhwd -r pci video-nvidia
+ sudo mhwd -a pci nonfree 0300
+</code></pre>
+</li>
+</ol>
+<h2 id="cambiare-il-sistema-operativo-di-default" tabindex="-1">Cambiare il sistema operativo di default <a class="header-anchor" href="#cambiare-il-sistema-operativo-di-default" aria-hidden="true">🔗</a></h2>
+<pre><code>sudo gedit/etc/default/grub
+
+then edit the line:
+
+    GRUB_DEFAULT=0
+
+to:
+
+    GRUB_DEFAULT=4
+
+
+save the file, then run
+
+    sudo update-grub
+</code></pre>
+<h2 id="grafica" tabindex="-1">Grafica <a class="header-anchor" href="#grafica" aria-hidden="true">🔗</a></h2>
+<p>Impostare la risoluzione del framebuffer
+GRUB può impostare il framebuffer sia per sé stesso che per il kernel. Il vecchio parametro vga= è deprecato. Il metodo consigliato è modificare <code>/etc/default/grub</code> come segue:</p>
+<pre><code>GRUB_GFXMODE=1024x768x32, auto
+GRUB_GFXPAYLOAD_LINUX=keep
+GRUB_GFXMODE=&lt;risoluzione desiderata&gt;,&lt;fallback, ad esempio 1024x768&gt;,auto
+</code></pre>
+<p>VBE: VESA BIOS Extensions
+Nota: È possibile utilizzare solamente le risoluzioni che la scheda grafica supporta tramite le estensioni VESA BIOS. Per ottenere un elenco delle risoluzioni supportate, si installi hwinfoe si esegua</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> hwinfo --framebuffer
+</code></pre>
+<pre><code>02: None 00.0: 11001 VESA Framebuffer
+[Created at bios.459]
+Unique ID: rdCR.XCOohx2LF9A
+Hardware Class: framebuffer
+Model: &quot;NVIDIA GP104 Board&quot;
+Vendor: &quot;NVIDIA Corporation&quot;
+Device: &quot;GP104 Board&quot;
+SubVendor: &quot;NVIDIA&quot;
+SubDevice:
+Revision: &quot;Chip Rev&quot;
+Memory Size: 16 MB
+Memory Range: 0xd1000000-0xd1ffffff (rw)
+Mode 0x0301: 640x480 (+640), 8 bits
+Mode 0x0303: 800x600 (+800), 8 bits
+Mode 0x0305: 1024x768 (+1024), 8 bits
+Mode 0x0307: 1280x1024 (+1280), 8 bits
+Mode 0x0311: 640x480 (+1280), 16 bits
+Mode 0x0312: 640x480 (+2560), 24 bits
+Mode 0x0314: 800x600 (+1600), 16 bits
+Mode 0x0315: 800x600 (+3200), 24 bits
+Mode 0x0317: 1024x768 (+2048), 16 bits
+Mode 0x0318: 1024x768 (+4096), 24 bits
+Mode 0x031a: 1280x1024 (+2560), 16 bits
+Mode 0x031b: 1280x1024 (+5120), 24 bits
+Mode 0x0345: 1600x1200 (+1600), 8 bits
+Mode 0x0346: 1600x1200 (+3200), 16 bits
+Mode 0x034a: 1600x1200 (+6400), 24 bits
+Mode 0x034b: 3840x2160 (+3840), 8 bits
+Mode 0x034c: 3840x2160 (+7680), 16 bits
+Config Status: cfg=new, avail=yes, need=no, active=unknown
+</code></pre>
+<p>come utente root. In alternativa, si entri nella riga di comando di GRUB e si esegua <strong>vbeinfo</strong>.
+Se quanto sopra non funziona, è possibile utilizzare il vecchio parametro vga=. Lo si aggiunga semplicemente alla variabile &quot;GRUB_CMDLINE_LINUX_DEFAULT=&quot; in <code>/etc/default/grub</code>: ad esempio: <code>&quot;GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet splash vga=792&quot;</code> imposterà una risoluzione di 1024x768.</p>
+<p>Immagine di sfondo:
+Si modifichi quindi il file /etc/default/grub come segue:
+<code>GRUB_BACKGROUND=&quot;/boot/grub/miaimmagine&quot;</code></p>
+<p>Effettuare un backup dei dati importanti
+In genere, l'installazione di grub dovrebbe andare a buon fine, ma è consigliabile conservare i files di GRUB-legacy prima di installare grub-bios.
+mv /boot/grub /boot/grub-backup
+Effettuare il backup del MBR che contiene il boot code e la tabella partizioni (Si sostituisca /dev/sdX con l'identificativo del proprio disco):</p>
+<pre><code># dd if=/dev/sdX of=/path/to/backup/mbr_backup bs=512count=1
+</code></pre>
+<p>Solamente i primi 446bytes del MBR contengono il boot code, mentre i restanti 64sono dedicati alla tabella delle partizioni. Se non si desidera sovrascriverla durante un eventuale ripristino, è fortemente consigliato effettuare il backup del solo boot code:</p>
+<pre><code># dd if=/dev/sdX of=/path/to/backup/bootcode_backup bs=446count=1
+# If you change this file, run 'update-grub' afterwards to update
+# /boot/grub/grub.cfg.
+GRUB_DEFAULT=0
+GRUB_TIMEOUT=5
+GRUB_DISTRIBUTOR=`lsb_release -i -s 2&gt; /dev/null || echo Manjaro`
+GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet&quot;
+GRUB_CMDLINE_LINUX=&quot;&quot;
+GRUB_BACKGROUND=&quot;/usr/share/images/desktop-base/moreblue-orbit-splash.png&quot;
+</code></pre>
+<h2 id="impostare-un-font" tabindex="-1">Impostare un font <a class="header-anchor" href="#impostare-un-font" aria-hidden="true">🔗</a></h2>
+<pre><code>- Choose a font, in this example I chose DejaVuSansMono.ttf
+- Convert the font in a format GRUB understands:
+- sudo grub2-mkfont-s 68 -o /boot/grub2/DejaVuSansMono.pf2 /usr/share/fonts/dejavu/DejaVuSansMono.ttf
+- Edit the /etc/default/grub file adding a line:
+    GRUB_FONT=/boot/grub2/DejaVuSansMono.pf2
+- Update GRUB configuration with:
+sudo grub2-mkconfig -o /boot/grub2/grub.cfg
+- reboot.
+</code></pre>
+<h2 id="come-ho-configurato-grub2-per-la-risoluzione-4k" tabindex="-1">Come ho configurato GRUB2 per la risoluzione 4K <a class="header-anchor" href="#come-ho-configurato-grub2-per-la-risoluzione-4k" aria-hidden="true">🔗</a></h2>
+<p><a href="https://launchpad.net/grub-customizer">https://launchpad.net/grub-customizer</a></p>
+<pre><code>grub-customizer
+
+Font:
+    Ho selezionato il font: Bitstream Vera Sans Mono Roman 68 (la dimensione 68 và bene per uno schermo 4K 3840x2160)
+    --&gt; grub-customizer crea il file /boot/grub/unicode.pf2
+Immagine:
+    Creo un png 3840x2160 profondità di colore 16 bit:
+    # sudo convert -resize '3840x2160!' circuit_electronic_5000x3533.jpg /boot/grub/circuit_electronic_3840x2160.png
+    # identify circuit_electronic_3840x2160.png
+    circuit_electronic_3840x2160.png PNG 3840x2160 3840x2160+0+0 8-bit sRGB 4.6279MiB 0.000u 0:00.000
+    # convert -resize '3840x2160!'-depth 16 earth_space_12000x6000.jpg earth_space_3840x2160.png
+    # sudo cp earth_space_3840x2160.png /boot/grub/
+File /etc/default/grub creato da grub-customizer:
+    GRUB_DEFAULT=&quot;saved&quot;
+    GRUB_TIMEOUT=&quot;3&quot;
+    GRUB_DISTRIBUTOR=&quot;Manjaro&quot;
+    GRUB_CMDLINE_LINUX_DEFAULT=&quot;quiet&quot;
+    GRUB_CMDLINE_LINUX=&quot;&quot;
+    GRUB_SAVEDEFAULT=&quot;true&quot;
+    GRUB_PRELOAD_MODULES=&quot;part_gpt part_msdos&quot;
+    GRUB_TERMINAL_INPUT=&quot;console&quot;
+    GRUB_GFXMODE=&quot;3840x2160x16&quot;
+    GRUB_GFXPAYLOAD_LINUX=&quot;keep&quot;
+    GRUB_DISABLE_RECOVERY=&quot;true&quot;
+    export GRUB_COLOR_NORMAL=&quot;yellow/black&quot;
+    export GRUB_COLOR_HIGHLIGHT=&quot;green/black&quot;
+    GRUB_BACKGROUND=&quot;/boot/grub/circuit_electronic_3840x2160.png&quot;
+    GRUB_FONT=&quot;/boot/grub/unicode.pf2&quot;
+</code></pre>
+</body></html>

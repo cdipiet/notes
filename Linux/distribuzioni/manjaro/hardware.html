@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.108" />
+        <title>hardware</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="hardware" tabindex="-1">hardware <a class="header-anchor" href="#hardware" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.108</p>
+<nav class="table-of-contents"><ol><li><a href="#scheda-grafica">Scheda grafica </a></li><li><a href="#reinstallazione-da-distro-live">Reinstallazione da distro-live </a></li><li><a href="#stampanti">Stampanti </a></li><li><a href="#trim-hard-disk-ssd">Trim Hard Disk SSD </a></li><li><a href="#scheda-wireless-broadcom---su-scheda-madre-asus-az97-deluxe">Scheda Wireless Broadcom - Su scheda madre ASUS AZ97 Deluxe </a></li></ol></nav><h1 id="informazioni-sistema" tabindex="-1">Informazioni Sistema <a class="header-anchor" href="#informazioni-sistema" aria-hidden="true">🔗</a></h1>
+<pre><code class="language-bash">$ inxi -F
+$ inxi -Fxz
+$ lshw -X
+$ hwinfo --short
+$ lsb_release -a
+$ <span class="hljs-built_in">uname</span> -a
+$ <span class="hljs-built_in">cat</span> /proc/version
+<span class="hljs-comment"># Bios details</span>
+$ <span class="hljs-built_in">sudo</span> dmidecode -t bios
+<span class="hljs-comment"># Display information about the processor/cpu</span>
+$ <span class="hljs-built_in">sudo</span> dmidecode -t processor
+$ lscpu
+$ <span class="hljs-built_in">cat</span> /proc/cpuinfo
+<span class="hljs-comment"># Memory/ram information:</span>
+$ <span class="hljs-built_in">sudo</span> dmidecode -t memory
+$ lsmem
+$ <span class="hljs-built_in">cat</span> /proc/meminfo
+$ free -m
+<span class="hljs-comment"># Info Scheda Madre</span>
+$ <span class="hljs-built_in">sudo</span> dmidecode -t baseboard | grep -i <span class="hljs-string">&#x27;Product&#x27;</span>
+$ inxi -M
+<span class="hljs-comment"># Info Hard Disk</span>
+$ <span class="hljs-built_in">sudo</span> su
+$ blkid
+$ lsusb
+$ lsblk
+$ lsblk -f
+$ topmount | column -t
+$ <span class="hljs-built_in">df</span> -h
+$ fdisk -l
+$ <span class="hljs-built_in">cat</span> /proc/partitions
+$ <span class="hljs-built_in">sudo</span> hdparm -i /dev/sda
+$ mount | column -t
+<span class="hljs-comment"># Informazioni sul DVD ROM Writer</span>
+$ lsscsi
+$ <span class="hljs-built_in">cat</span> /proc/scsi/scsi
+$ lsblk
+$ dmesg | egrep -i --color <span class="hljs-string">&#x27;cdrom|dvd|cd/rw|writer&#x27;</span>
+$ less /proc/sys/dev/cdrom/info
+$ cd-drive
+<span class="hljs-comment"># Informazioni Scheda Grafica</span>
+$ <span class="hljs-built_in">sudo</span> lspci -vnn | grep VGA -A 12
+$ sudolspci -k | grep -A 2 -E <span class="hljs-string">&quot;(VGA|3D)&quot;</span>
+$ lshw -class display
+$ lshw -numeric -C display
+$ nvidia-settings
+$ <span class="hljs-built_in">cat</span> /proc/driver/nvidia/version
+$ mhwd-gpu --check
+$ mhwd-gpu --status
+<span class="hljs-comment"># Risoluzione corrente:</span>
+$ inxi -G
+$ xdpyinfo | grep -B2 resolution
+$ xrandr
+<span class="hljs-comment"># Estensioni VESA Supportate - Risoluzioni utilizzabili da GRUB:</span>
+$ <span class="hljs-built_in">sudo</span> hwinfo --framebuffer
+<span class="hljs-comment"># Verificare Accelerazione 3D:</span>
+$ glxinfo | grep OpenGL
+<span class="hljs-comment"># Vedere i Driver installati:</span>
+$ inxi -G
+$ mhwd -li -d --pci
+$ <span class="hljs-built_in">sudo</span> lshw -c video | grep configuration ==&gt; driver=i915
+</code></pre>
+<h2 id="scheda-grafica" tabindex="-1">Scheda grafica <a class="header-anchor" href="#scheda-grafica" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://wiki.manjaro.org/index.php?title=Manjaro_Hardware_Detection">https://wiki.manjaro.org/index.php?title=Manjaro_Hardware_Detection</a></li>
+<li><a href="https://wiki.manjaro.org/index.php/Configure_Graphics_Cards">https://wiki.manjaro.org/index.php/Configure_Graphics_Cards</a></li>
+<li><a href="https://wiki.manjaro.org/index.php?title=Configure_NVIDIA_(non-free)_settings_and_load_them_on_Startup">https://wiki.manjaro.org/index.php?title=Configure_NVIDIA_(non-free)_settings_and_load_them_on_Startup</a></li>
+<li><a href="https://github.com/manjaro/mhwd">https://github.com/manjaro/mhwd</a></li>
+</ul>
+<h2 id="reinstallazione-da-distro-live" tabindex="-1">Reinstallazione da distro-live <a class="header-anchor" href="#reinstallazione-da-distro-live" aria-hidden="true">🔗</a></h2>
+<ol>
+<li>
+<p>Attivare il wifi e connettersi</p>
+</li>
+<li>
+<p>Disinstallare e reinstallare i driver nvidia</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> su (root/manjaro)
+<span class="hljs-built_in">sudo</span> manjaro-chroot -a (Selezionare l installazione Manjaro)
+<span class="hljs-built_in">sudo</span> mhwd -r pci video-nvidia
+<span class="hljs-built_in">sudo</span> mhwd -a pci nonfree 0300
+</code></pre>
+</li>
+</ol>
+<p>Configure X Screen settings (OpenGL Settings, Antialiasing, X Server XVideo)</p>
+<ol>
+<li>Open your terminal and enter the following command:
+nvidia-settings</li>
+<li>Change settings in X Server XVideo Settings, OpenGL and Antialiasing, in the 'X Screen' tab.</li>
+<li>Click on 'nvidia-settings configuration' tab and click on the 'Save Current Configuration' button.</li>
+<li>Save the .nvidia-settings-rcto the default location specified (/home/[your account name])</li>
+<li>Edit the .xinitrcfile. To do so, enter the following into your terminal:
+sudo gedit ~/.xinitrc</li>
+<li>Once opened, add the following line into the configuration file:
+exec nvidia-settings --load-config-only</li>
+<li>Save and exit.</li>
+</ol>
+<h2 id="stampanti" tabindex="-1">Stampanti <a class="header-anchor" href="#stampanti" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> pacman -S --needed --noconfirm lib32-libcups cups gutenprint libpaper foomatic-db-engine ghostscript gsfonts foomatic-db foomatic-filters cups-pdf system-config-printer hplip
+    <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> org.cups.cupsd.service
+    <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> cups-browsed.service
+    <span class="hljs-built_in">sudo</span> systemctl start org.cups.cupsd.service
+    <span class="hljs-built_in">sudo</span> systemctl start cups-browsed.service
+</code></pre>
+<pre><code>Dalle opzioni di gnome aggiungere la stampante cups-pdf
+
+HPLIP:
+sudo pacman -S --needed --noconfirm hplip:
+    Impostare la stampante dall'applicazione di gestione HP Device Manager
+    /usr/bin/hp-toolbox
+    /usr/share/ppd/HP/hp-color_laserjet_cp1215-hpijs.ppd.gz
+
+CUPS-PDF
+Per la stampa su stampante virtuale pdf:
+    sudo pacman -S --needed --noconfirm cups-pdf
+http://localhost:631/printers/CUPS-PDF-Printer
+File di configurazione:
+    sudoedit /etc/cups/cups-pdf.conf
+        ### Key: Out (config)
+        ## CUPS-PDF output directory
+        ## special qualifiers:
+        ## ${HOME} will be expanded to the user's home directory
+        ## ${USER} will be expanded to the user name
+        ## in case it is an NFS export make sure it is exported without
+        ## root_squash!
+        ### Default: /var/spool/cups-pdf/${USER}
+        #Out /var/spool/cups-pdf/${USER}
+        Out /var/spool/cups-pdf/${HOME}/PDF
+
+CUPS:
+http://localhost:631/
+HP Color Laserject CP1215
+http://www.openprinting.org/printer/HP/HP-Color_LaserJet_CP1215
+http://www.openprinting.org/driver/foo2hp/
+HP Color LaserJet CP1215
+Consumables/Refills:
+    Q6000A HP Color LaserJet black print cartridge
+    Q6001A HP Color LaserJet cyan print cartridge
+    Q6002A HP Color LaserJet yellow print cartridge
+    Q6003A HP Color LaserJet magenta print cartridge
+    Part numbers: Q6000A, Q6001A, Q6002A, Q6003A
+    foo2hp
+    This is a driver developed for the HP Color LaserJet 2600n printer.
+    The driver supports 1-bit or 2-bit per pixel monochrome and color output, but none of these have been tuned for grayscale or color correction.
+    PPD files (and the Foomatic XML files to generate them) come with the driver, therefore we do not supply PPDs here on the OpenPrinting site.
+</code></pre>
+<h2 id="trim-hard-disk-ssd" tabindex="-1">Trim Hard Disk SSD <a class="header-anchor" href="#trim-hard-disk-ssd" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> fstrim.timer
+</code></pre>
+<h2 id="scheda-wireless-broadcom---su-scheda-madre-asus-az97-deluxe" tabindex="-1">Scheda Wireless Broadcom - Su scheda madre ASUS AZ97 Deluxe <a class="header-anchor" href="#scheda-wireless-broadcom---su-scheda-madre-asus-az97-deluxe" aria-hidden="true">🔗</a></h2>
+<pre><code>sudo pacman -S --needed --noconfirm linux49-broadcom-wl
+
+https://wiki.archlinux.org/index.php/broadcom_wireless
+
+    Dettagli sul controller Broadcom 4352:
+    http://www.broadcom.com/support/802.11/linux_sta.php
+    http://www.broadcom.com/products/Wireless-LAN/802.11-Wireless-LAN-Solutions/BCM4352
+    5G WiFi 2-Stream 802.11ac Transceiver
+    The BCM4352 implements the 2-stream 802.11ac specification to enable speeds up to 867 Mbps in access points, routers, DSL/cable gateways and PC products. The single-chip dual-band transceiver integrates all the major functional blocks needed to implement a complete 802.11ac wireless sub-system, including radio, baseband and MAC. This highly integrated solution provides the increased coverage and throughput performance required for high quality video and media applications in the home and enterprise.
+        80 MHz wide bandwidth that is 2x wider than current 802.11n solutions
+        Dual-band operation compatible with legacy 802.11n networks
+        256-QAM, a higher modulation scheme that increases data transfer efficiency
+        802.11ac-compliant transmit and receive beamforming for extended coverage for 802.11ac and legacy devices
+        Low Density Parity Check (LDPC) Codes for increased rate at range
+        PCI Express® 2.0 host interface
+        Enhanced Bluetooth® coexistence interface support for seamless BT + 5G WiFi operation
+
+
+Informazioni:
+    $ sudo lspci -vnn | grep Network
+    $ sudo lspci -vnn -d 14e4:
+    $ sudo iwconfig
+    $ sudo lshw -C network
+    $ sudo lspci | grep -i wireless
+    $ sudo lspci -k
+    $ sudo lsusb -v
+    $ sudo lspci -vnn | grep -i net
+    $ sudo ip link
+    Per il chipset Broadcom 4352 il driver è il broadcom-wl
+    $ sudo pacman -S --needed --noconfirm broadcom-wl-dkms
+    Hardware PCI installato:
+        mhwd -lh -d --pci
+    Drivers installati:
+        mhwd -li -d --pci
+    La scheda Wi-Fi ha un chipsetBroadcom
+    http://www.broadcom.com/products/Wireless-LAN/802.11-Wireless-LAN-Solutions/BCM4352
+        Network controller [0280]: Broadcom Corporation BCM4352802.11ac Wireless Network Adapter [14e4:43b1] (rev 03)
+        Che corrisponde al driver:wl
+    Le schede prodotte da Broadcom sono supportate da driver che variano a secondo del modello, è quindi necessario identificare correttamente la scheda presente nel proprio computer digitando in una finestra di terminale il seguente comando:
+    lspci -vvnn | grep 14e4
+    Avendo applicato il filtro 14e4 al comando lspci la ricerca verrà limitata alle sole schede PCI Broadcom. Un tipico output del terminale potrebbe essere ad esempio questo:
+    03:00.0 Network controller [0280]: Broadcom Corporation BCM4322 802.11a/b/g/n Wireless LAN Controller [14e4:432b] (rev 01)
+    I dati che interessano sono:
+    Card/Model - BCM4352
+    PCI-ID - [14e4:43b1]
+    Per verificare quali driver sono in uso e verificare il buon esito delle varie procedure d'istallazione si può fare ricorso a questo comando:
+    lspci -vvnn | grep -A 9 Network
+    Che restituisce informazioni dettagliate della scheda di rete wifi e mostra i driver utilizzati dal sistema per gestirla.
+</code></pre>
+</body></html>

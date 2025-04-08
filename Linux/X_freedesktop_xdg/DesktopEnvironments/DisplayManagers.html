@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="generator" content="markdown-it" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+        <meta name="author" content="runner" />
+        <meta name="dcterms.date" content="2025-04-08 13:38:20.300" />
+        <title>DisplayManagers</title>
+        <style type="text/css">
+            code {
+                white-space: pre-wrap;
+            }
+            span.smallcaps {
+                font-variant: small-caps;
+            }
+            span.underline {
+                text-decoration: underline;
+            }
+            div.column {
+                display: inline-block;
+                vertical-align: top;
+                width: 50%;
+            }
+        </style>
+        <style type="text/css">
+            a.sourceLine {
+                display: inline-block;
+                line-height: 1.25;
+            }
+            a.sourceLine {
+                pointer-events: none;
+                color: inherit;
+                text-decoration: inherit;
+            }
+            a.sourceLine:empty {
+                height: 1.2em;
+            }
+            .sourceCode {
+                overflow: visible;
+            }
+            code.sourceCode {
+                white-space: pre;
+                position: relative;
+            }
+            div.sourceCode {
+                margin: 1em 0;
+            }
+            pre.sourceCode {
+                margin: 0;
+            }
+            @media screen {
+                div.sourceCode {
+                    overflow: auto;
+                }
+            }
+            @media print {
+                code.sourceCode {
+                    white-space: pre-wrap;
+                }
+                a.sourceLine {
+                    text-indent: -1em;
+                    padding-left: 1em;
+                }
+            }
+            pre.numberSource a.sourceLine {
+                position: relative;
+                left: -4em;
+            }
+            pre.numberSource a.sourceLine::before {
+                content: attr(title);
+                position: relative;
+                left: -1em;
+                text-align: right;
+                vertical-align: baseline;
+                border: none;
+                pointer-events: all;
+                display: inline-block;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                padding: 0 4px;
+                width: 4em;
+                background-color: #ffffff;
+                color: #a0a0a0;
+            }
+            pre.numberSource {
+                margin-left: 3em;
+                border-left: 1px solid #a0a0a0;
+                padding-left: 4px;
+            }
+            div.sourceCode {
+                color: #1f1c1b;
+                background-color: #ffffff;
+            }
+            @media screen {
+                a.sourceLine::before {
+                    text-decoration: underline;
+                }
+            }
+            code span {
+                color: #1f1c1b;
+            } /* Normal */
+            code span.al {
+                color: #bf0303;
+                background-color: #f7e6e6;
+                font-weight: bold;
+            } /* Alert */
+            code span.an {
+                color: #ca60ca;
+            } /* Annotation */
+            code span.at {
+                color: #0057ae;
+            } /* Attribute */
+            code span.bn {
+                color: #b08000;
+            } /* BaseN */
+            code span.bu {
+                color: #644a9b;
+                font-weight: bold;
+            } /* BuiltIn */
+            code span.cf {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* ControlFlow */
+            code span.ch {
+                color: #924c9d;
+            } /* Char */
+            code span.cn {
+                color: #aa5500;
+            } /* Constant */
+            code span.co {
+                color: #898887;
+            } /* Comment */
+            code span.cv {
+                color: #0095ff;
+            } /* CommentVar */
+            code span.do {
+                color: #607880;
+            } /* Documentation */
+            code span.dt {
+                color: #0057ae;
+            } /* DataType */
+            code span.dv {
+                color: #b08000;
+            } /* DecVal */
+            code span.er {
+                color: #bf0303;
+                text-decoration: underline;
+            } /* Error */
+            code span.ex {
+                color: #0095ff;
+                font-weight: bold;
+            } /* Extension */
+            code span.fl {
+                color: #b08000;
+            } /* Float */
+            code span.fu {
+                color: #644a9b;
+            } /* Function */
+            code span.im {
+                color: #ff5500;
+            } /* Import */
+            code span.in {
+                color: #b08000;
+            } /* Information */
+            code span.kw {
+                color: #1f1c1b;
+                font-weight: bold;
+            } /* Keyword */
+            code span.op {
+                color: #1f1c1b;
+            } /* Operator */
+            code span.ot {
+                color: #006e28;
+            } /* Other */
+            code span.pp {
+                color: #006e28;
+            } /* Preprocessor */
+            code span.re {
+                color: #0057ae;
+                background-color: #e0e9f8;
+            } /* RegionMarker */
+            code span.sc {
+                color: #3daee9;
+            } /* SpecialChar */
+            code span.ss {
+                color: #ff5500;
+            } /* SpecialString */
+            code span.st {
+                color: #bf0303;
+            } /* String */
+            code span.va {
+                color: #0057ae;
+            } /* Variable */
+            code span.vs {
+                color: #bf0303;
+            } /* VerbatimString */
+            code span.wa {
+                color: #bf0303;
+            } /* Warning */
+        </style>
+        <!--
+  Firefox non carica font da locale quindi il font può non essere visibile
+  quando di carica la pagina da locale.
+  Bisogna impostare about:config
+    security.fileuri.strict_origin_policy = false
+  -->
+        <link rel="stylesheet" href="../../../inc/css/katex.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/fonts/google_fonts.css" />
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"> -->
+        <link rel="stylesheet" href="../../../inc/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="../../../inc/css/cdp.css" />
+        <!--[if lt IE 9]>
+            <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+        <![endif]-->
+        <meta name="keywords" content="Appunti,Note" />
+        <meta name="description" content="Appunti di runner" />
+        <link rel="icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+        <link rel="shortcut icon" type="image/x-icon" href="../../../inc/img/favicon.ico" />
+
+        <link rel="stylesheet" href="../../../inc/js/hljs/styles/default.css" />
+        <script src="../../../inc/js/hljs/lib/highlight.js"></script>
+        <script src="../../../inc/js/bootstrap/bootstrap.bundle.min.js"></script>
+        <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script> -->
+        <script>
+            hljs.initHighlightingOnLoad();
+        </script>
+        <script type="module">
+            import mermaid from '../../../inc/js/mermaid/dist/mermaid.esm.min.mjs';
+            // import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+            mermaid.initialize({ startOnLoad: true });
+        </script>
+    </head>
+    <body></body>
+</html>
+<h1 id="displaymanagers" tabindex="-1">DisplayManagers <a class="header-anchor" href="#displaymanagers" aria-hidden="true">🔗</a></h1>
+<p class="code">2025-04-08 13:38:20.300</p>
+<nav class="table-of-contents"><ol><li><a href="#wayland-o-x11">Wayland o X11 </a></li><li><a href="#sddm">SDDM </a><ol><li><a href="#unlock-gnome-keyring">Unlock Gnome Keyring </a></li><li><a href="#custom-dpi">Custom DPI </a></li><li><a href="#hidpi-in-kde">HiDPI in KDE </a></li></ol></li><li><a href="#gdm">GDM </a></li><li><a href="#hipdi">HiPDI </a><ol><li><a href="#problema-wayland---xorg">Problema Wayland - Xorg </a></li></ol></li><li><a href="#default-sddm-conf">Default SDDM conf </a></li></ol></nav><h1 id="display-manager" tabindex="-1">Display Manager <a class="header-anchor" href="#display-manager" aria-hidden="true">🔗</a></h1>
+<p><a href="https://wiki.manjaro.org/index.php/Install_Display_Managers">https://wiki.manjaro.org/index.php/Install_Display_Managers</a></p>
+<h2 id="wayland-o-x11" tabindex="-1">Wayland o X11 <a class="header-anchor" href="#wayland-o-x11" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash"><span class="hljs-comment"># Vedere se ci troviamo in una sessione X11 oppure Wayland</span>
+
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$XDG_SESSION_TYPE</span> 
+    x11
+    Wayland
+$ <span class="hljs-built_in">echo</span> <span class="hljs-variable">$DESKTOP_SESSION</span>
+    gnome
+    gnome-wayland
+
+$ loginctl <span class="hljs-comment"># per avere un id di sessione, es. 2</span>
+$ loginctl show-session 2 -p Type
+        X11
+
+$ ps aux | grep gnome-shell|grep wayland
+</code></pre>
+<h2 id="sddm" tabindex="-1">SDDM <a class="header-anchor" href="#sddm" aria-hidden="true">🔗</a></h2>
+<ul>
+<li><a href="https://github.com/sddm/sddm">https://github.com/sddm/sddm</a></li>
+<li><a href="https://wiki.archlinux.org/title/SDDM">https://wiki.archlinux.org/title/SDDM</a></li>
+</ul>
+<p>SDDM is a modern display manager for X11 and Wayland aiming to be fast, simple and beautiful. It uses modern technologies like QtQuick, which in turn gives the designer the ability to create smooth, animated user interfaces.</p>
+<pre><code class="language-bash"><span class="hljs-comment">#To install SDDM, enter the command:</span>
+$ pamac install sddm
+<span class="hljs-comment"># To enable SDDM enter the command:</span>
+$ <span class="hljs-built_in">sudo</span> systemctl <span class="hljs-built_in">enable</span> sddm.service --force
+
+$ locate sddm.conf
+    /usr/lib/sddm/sddm.conf.d/default.conf
+$ locate maldives
+    /usr/share/sddm/themes/maldives
+
+<span class="hljs-comment"># Note that SDDM requires these subdirectory names to be the same as the theme names</span>
+
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> /usr/lib/sddm/sddm.conf.d/default.conf /etc/sddm.conf
+$ <span class="hljs-built_in">sudo</span> gedit /etc/sddm.conf
+
+    [Theme]
+    <span class="hljs-comment"># Current theme name</span>
+    Current=maldives
+    
+    [X11]
+    ...
+    ServerArguments=-nolisten tcp -dpi 250
+
+</code></pre>
+<pre><code>    SDDM
+    https://wiki.archlinux.org/index.php/SDDM
+    https://github.com/sddm/sddm
+    sudo pacman -S sddm
+    sudo systemctl enable sddm.service -f
+    Edit /etc/sddm.conf, go to the X11 section and change ServerArguments like this:
+        ServerArguments=-nolisten tcp -dpi 250
+    to set DPI to 192.
+    In alternativa, se il comando precedente non funziona:
+    sudo systemctl stop gdm
+    sudo systemctl disable gdm
+    sudo systemctl enable sddm.service
+    sudo systemctl start sddm
+</code></pre>
+<ul>
+<li>
+<p><a href="https://bugs.launchpad.net/ubuntu/+source/sddm/+bug/1929840">https://bugs.launchpad.net/ubuntu/+source/sddm/+bug/1929840</a>
+Socket error: &quot;QLocalSocket::connectToServer: Invalid name&quot;</p>
+<pre><code class="language-bash">$ sddm-greeter --test-mode --theme /usr/share/sddm/themes/maldives
+</code></pre>
+</li>
+</ul>
+<h3 id="unlock-gnome-keyring" tabindex="-1">Unlock Gnome Keyring <a class="header-anchor" href="#unlock-gnome-keyring" aria-hidden="true">🔗</a></h3>
+<p><a href="https://wiki.archlinux.org/title/GNOME/Keyring#With_a_display_manager">https://wiki.archlinux.org/title/GNOME/Keyring#With_a_display_manager</a></p>
+<p>SDDM non fà partire il Gnome Keyring, per correggere il problema</p>
+<pre><code class="language-bash"><span class="hljs-built_in">sudo</span> vim /etc/pam.d/sddm
+<span class="hljs-comment">#edit /etc/pam.d/sddm and add</span>
+auth      optional    pam_gnome_keyring.so
+<span class="hljs-comment">#to the very end of the auth section and</span>
+session   optional    pam_gnome_keyring.so auto_start
+<span class="hljs-comment">#to the end of the session section.</span>
+</code></pre>
+<h3 id="custom-dpi" tabindex="-1">Custom DPI <a class="header-anchor" href="#custom-dpi" aria-hidden="true">🔗</a></h3>
+<p>In order to set custom DPI for high resolution screens you should configure Xorg yourself. An easy way is to pass an additional argument to Xorg.</p>
+<p>Edit <code>/etc/sddm.conf</code>, go to the X11 section and change ServerArguments like this:</p>
+<pre><code>ServerArguments=-nolisten tcp -dpi 250
+</code></pre>
+<p>to set DPI to 250.</p>
+<h3 id="hidpi-in-kde" tabindex="-1">HiDPI in KDE <a class="header-anchor" href="#hidpi-in-kde" aria-hidden="true">🔗</a></h3>
+<ul>
+<li>
+<p><strong>restore</strong> <code>/etc/sddm.conf.d/kde_settings.conf</code></p>
+</li>
+<li>
+<p><a href="https://github.com/lxqt/sddm-config-editor">https://github.com/lxqt/sddm-config-editor</a></p>
+</li>
+<li>
+<p><a href="https://github.com/sddm/sddm/issues/894">https://github.com/sddm/sddm/issues/894</a>  sddm login dialog is super small on my HiDPI display</p>
+</li>
+<li>
+<p><a href="https://github.com/KDE/sddm-kcm">https://github.com/KDE/sddm-kcm</a></p>
+</li>
+</ul>
+<ol>
+<li>
+<p>Ripristinare il file <code>/etc/sddm.conf.d/kde_settings.conf</code></p>
+</li>
+<li>
+<p>Quando si cambiano i DPI in KDE risincronizzare tale file con <code>System Settings &gt; Startup and Shutdown &gt; Login Screen (SDDM) &gt; Advanced &gt; Sync [button]</code></p>
+</li>
+<li>
+<p>Installare <code>sddm-kcm</code> da AUR.</p>
+<p>The <a href="https://www.archlinux.org/packages/?name=sddm-kcm">sddm-kcm package</a> (included in the plasma group) provides a GUI to configure SDDM in Plasma's system settings. There is also a Qt-based <a href="https://aur.archlinux.org/packages/sddm-config-editor-git/">sddm-config-editor-git</a> AUR available in the <a href="https://wiki.archlinux.org/index.php/AUR">AUR</a>.</p>
+</li>
+</ol>
+<pre><code class="language-bash">man ssdm.conf
+man sddm
+
+xdpyinfo <span class="hljs-comment"># per vedere i dpi della sessione KDE</span>
+sddm --example-config  <span class="hljs-comment"># Print the complete current configuration to stdout</span>
+
+<span class="hljs-built_in">sudo</span> vim /usr/lib/sddm/sddm.conf.d/default.conf
+
+Per trasferire la configurazione KDE a SDDM:
+System Settings &gt; Startup and Shutdown &gt; Login Screen (SDDM) &gt; Advanced &gt; Sync [button]
+il <span class="hljs-built_in">sync</span> crea il file:
+/etc/sddm.conf.d/kde_settings.conf
+    [X11]
+    ServerArguments=-dpi 250
+
+
+<span class="hljs-built_in">sudo</span> vim /etc/sddm.conf.d/hidpi.conf
+</code></pre>
+<pre><code># /etc/sddm.conf.d/hidpi.conf
+[Wayland]
+EnableHiDPI=true
+
+[X11]
+EnableHiDPI=true
+ServerArguments=-nolisten tcp -dpi 250
+</code></pre>
+<h2 id="gdm" tabindex="-1">GDM <a class="header-anchor" href="#gdm" aria-hidden="true">🔗</a></h2>
+<p>Optional: Install and use GDM, the recommended display manager for gnome
+GDM is installed as a dependency of gnome, to enable it</p>
+<pre><code class="language-bash"><span class="hljs-comment"># GDM can be installed by entering the following command:</span>
+user $ pamac install gdm
+<span class="hljs-comment"># To enable GDM as your default display manager use the command:</span>
+user $ systemctl <span class="hljs-built_in">enable</span> gdm.service --force
+<span class="hljs-comment"># To install the Manjaro specific theming for GDM you can use the command:</span>
+user $ pamac install manjaro-gdm-theme
+</code></pre>
+<p>Optional: Install the Manjaro configuration and theming for gnome</p>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> pacman -S manjaro-gnome-assets manjaro-gdm-theme manjaro-settings-manager
+</code></pre>
+<p>Create a new user for the new desktop environment</p>
+<pre><code class="language-bash">    <span class="hljs-built_in">sudo</span> useradd -mG lp,network,power,sys,wheel &lt;username&gt;
+    <span class="hljs-built_in">sudo</span> passwd &lt;username&gt;
+</code></pre>
+<h2 id="hipdi" tabindex="-1">HiPDI <a class="header-anchor" href="#hipdi" aria-hidden="true">🔗</a></h2>
+<p>Impostare GDM per un monitor 4K</p>
+<ul>
+<li><a href="https://wiki.archlinux.org/title/GDM#Setup_default_monitor_settings">https://wiki.archlinux.org/title/GDM#Setup_default_monitor_settings</a></li>
+<li><a href="https://discussion.fedoraproject.org/t/hidpi-scale-does-not-apply-to-login-screen/73574">https://discussion.fedoraproject.org/t/hidpi-scale-does-not-apply-to-login-screen/73574</a> HiDPI scale does not apply to login screen?</li>
+</ul>
+<pre><code class="language-bash">$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">cp</span> ~/.config/monitors.xml /var/lib/gdm/.config/
+$ <span class="hljs-built_in">sudo</span> <span class="hljs-built_in">chown</span> gdm:gdm /var/lib/gdm/.config/monitors.xml
+</code></pre>
+<h3 id="problema-wayland---xorg" tabindex="-1">Problema Wayland - Xorg <a class="header-anchor" href="#problema-wayland---xorg" aria-hidden="true">🔗</a></h3>
+<p>Di default GDM abilita Wayland al posto di Xorg, ma Wayland è ancora instabile,
+applicazioni come Guake non funzionano ancora con Wayland.</p>
+<ul>
+<li>
+<p><a href="https://github.com/Guake/guake/issues/1583">guake centered on screen under Gnome Wayland</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/GNOME_(Italiano)#GNOME_Sessioni">GNOME è l'impostazione predefinita che utilizza Wayland. Le applicazioni X tradizionali vengono eseguite attraverso Xwayland</a></p>
+</li>
+<li>
+<p><a href="https://wiki.archlinux.org/index.php/GDM#Use_Xorg_backend">https://wiki.archlinux.org/index.php/GDM#Use_Xorg_backend</a></p>
+<p>The Wayland backend is used by default, and the Xorg backend is used only if the Wayland backend cannot be started. You may wish to use the Xorg backend instead:<br>
+To use the Xorg backend by default, uncomment the following line in <code>/etc/gdm/custom.conf</code>:</p>
+<pre><code>  #WaylandEnable=false
+</code></pre>
+</li>
+</ul>
+<pre><code class="language-bash">/etc/gdm/custom.conf
+
+[daemon]
+<span class="hljs-comment"># Uncomment the line below to force the login screen to use Xorg</span>
+WaylandEnable=<span class="hljs-literal">false</span>
+
+</code></pre>
+<h2 id="default-sddm-conf" tabindex="-1">Default SDDM conf <a class="header-anchor" href="#default-sddm-conf" aria-hidden="true">🔗</a></h2>
+<pre><code class="language-bash">$ <span class="hljs-built_in">cat</span> /usr/lib/sddm/sddm.conf.d/default.conf
+</code></pre>
+<pre><code class="language-ini"><span class="hljs-section">[Autologin]</span>
+<span class="hljs-comment"># Whether sddm should automatically log back into sessions when they exit</span>
+<span class="hljs-attr">Relogin</span>=<span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># Name of session file for autologin session (if empty try last logged in)</span>
+Session=
+
+<span class="hljs-comment"># Username for autologin session</span>
+<span class="hljs-attr">User</span>=
+
+
+<span class="hljs-section">[General]</span>
+<span class="hljs-comment"># Halt command</span>
+<span class="hljs-attr">HaltCommand</span>=/usr/bin/systemctl power<span class="hljs-literal">off</span>
+
+<span class="hljs-comment"># Input method module</span>
+InputMethod=
+
+<span class="hljs-comment"># Comma-separated list of Linux namespaces for user session to enter</span>
+Namespaces=
+
+<span class="hljs-comment"># Initial NumLock state. Can be on, off or none.</span>
+<span class="hljs-comment"># If property is set to none, numlock won&#x27;t be changed</span>
+<span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> Currently ignored if autologin is enabled.</span>
+<span class="hljs-attr">Numlock</span>=none
+
+<span class="hljs-comment"># Reboot command</span>
+<span class="hljs-attr">RebootCommand</span>=/usr/bin/systemctl reboot
+
+
+<span class="hljs-section">[Theme]</span>
+<span class="hljs-comment"># Current theme name</span>
+Current=
+
+<span class="hljs-comment"># Cursor theme used in the greeter</span>
+CursorTheme=
+
+<span class="hljs-comment"># Number of users to use as threshold</span>
+<span class="hljs-comment"># above which avatars are disabled</span>
+<span class="hljs-comment"># unless explicitly enabled with EnableAvatars</span>
+<span class="hljs-attr">DisableAvatarsThreshold</span>=<span class="hljs-number">7</span>
+
+<span class="hljs-comment"># Enable display of custom user avatars</span>
+<span class="hljs-attr">EnableAvatars</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-comment"># Global directory for user avatars</span>
+<span class="hljs-comment"># The files should be named &lt;username&gt;.face.icon</span>
+<span class="hljs-attr">FacesDir</span>=/usr/share/sddm/faces
+
+<span class="hljs-comment"># Font used in the greeter</span>
+Font=
+
+<span class="hljs-comment"># Theme directory path</span>
+<span class="hljs-attr">ThemeDir</span>=/usr/share/sddm/themes
+
+
+<span class="hljs-section">[Users]</span>
+<span class="hljs-comment"># Default $PATH for logged in users</span>
+<span class="hljs-attr">DefaultPath</span>=/usr/local/sbin:/usr/local/bin:/usr/bin
+
+<span class="hljs-comment"># Comma-separated list of shells.</span>
+<span class="hljs-comment"># Users with these shells as their default won&#x27;t be listed</span>
+HideShells=
+
+<span class="hljs-comment"># Comma-separated list of users that should not be listed</span>
+HideUsers=
+
+<span class="hljs-comment"># Maximum user id for displayed users</span>
+<span class="hljs-attr">MaximumUid</span>=<span class="hljs-number">60000</span>
+
+<span class="hljs-comment"># Minimum user id for displayed users</span>
+<span class="hljs-attr">MinimumUid</span>=<span class="hljs-number">1000</span>
+
+<span class="hljs-comment"># Remember the session of the last successfully logged in user</span>
+<span class="hljs-attr">RememberLastSession</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-comment"># Remember the last successfully logged in user</span>
+<span class="hljs-attr">RememberLastUser</span>=<span class="hljs-literal">true</span>
+
+<span class="hljs-comment"># When logging in as the same user twice, restore the original session, rather than create a new one</span>
+<span class="hljs-attr">ReuseSession</span>=<span class="hljs-literal">true</span>
+
+
+<span class="hljs-section">[Wayland]</span>
+<span class="hljs-comment"># Enable Qt&#x27;s automatic high-DPI scaling</span>
+<span class="hljs-attr">EnableHiDPI</span>=<span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># Path to a script to execute when starting the desktop session</span>
+<span class="hljs-attr">SessionCommand</span>=/usr/share/sddm/scripts/wayland-session
+
+<span class="hljs-comment"># Directory containing available Wayland sessions</span>
+<span class="hljs-attr">SessionDir</span>=/usr/share/wayland-sessions
+
+<span class="hljs-comment"># Path to the user session log file</span>
+<span class="hljs-attr">SessionLogFile</span>=.local/share/sddm/wayland-session.log
+
+
+<span class="hljs-section">[X11]</span>
+<span class="hljs-comment"># Path to a script to execute when starting the display server</span>
+<span class="hljs-attr">DisplayCommand</span>=/usr/share/sddm/scripts/Xsetup
+
+<span class="hljs-comment"># Path to a script to execute when stopping the display server</span>
+<span class="hljs-attr">DisplayStopCommand</span>=/usr/share/sddm/scripts/Xstop
+
+<span class="hljs-comment"># Enable Qt&#x27;s automatic high-DPI scaling</span>
+<span class="hljs-attr">EnableHiDPI</span>=<span class="hljs-literal">false</span>
+
+<span class="hljs-comment"># The lowest virtual terminal number that will be used.</span>
+<span class="hljs-attr">MinimumVT</span>=<span class="hljs-number">1</span>
+
+<span class="hljs-comment"># Arguments passed to the X server invocation</span>
+<span class="hljs-attr">ServerArguments</span>=-nolisten tcp
+
+<span class="hljs-comment"># Path to X server binary</span>
+<span class="hljs-attr">ServerPath</span>=/usr/bin/X
+
+<span class="hljs-comment"># Path to a script to execute when starting the desktop session</span>
+<span class="hljs-attr">SessionCommand</span>=/usr/share/sddm/scripts/Xsession
+
+<span class="hljs-comment"># Directory containing available X sessions</span>
+<span class="hljs-attr">SessionDir</span>=/usr/share/xsessions
+
+<span class="hljs-comment"># Path to the user session log file</span>
+<span class="hljs-attr">SessionLogFile</span>=.local/share/sddm/xorg-session.log
+
+<span class="hljs-comment"># Path to the Xauthority file</span>
+<span class="hljs-attr">UserAuthFile</span>=.Xauthority
+
+<span class="hljs-comment"># Path to xauth binary</span>
+<span class="hljs-attr">XauthPath</span>=/usr/bin/xauth
+
+<span class="hljs-comment"># Path to Xephyr binary</span>
+<span class="hljs-attr">XephyrPath</span>=/usr/bin/Xephyr
+</code></pre>
+</body></html>
